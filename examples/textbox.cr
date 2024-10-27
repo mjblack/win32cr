@@ -1,8 +1,8 @@
 require "../src/win32cr"
-require "../src/win32cr/ui/windowsandmessaging"
+require "../src/win32cr/ui/windows_and_messaging"
 require "../src/win32cr/ui/shell"
-require "../src/win32cr/ui/input/keyboardandmouse"
-require "../src/win32cr/system/libraryloader"
+require "../src/win32cr/ui/input/keyboard_and_mouse"
+require "../src/win32cr/system/library_loader"
 
 
 module Crystal
@@ -12,7 +12,7 @@ module Crystal
     if exception
       title = "Unhandled Exception".to_utf16
       message = exception.inspect_with_backtrace.to_utf16
-      LibWin32.MessageBoxW(nil, message, title, LibWin32::MESSAGEBOX_STYLE::MB_OK)
+      Win32cr::UI::WindowsAndMessaging::C.MessageBoxW(nil, message, title, Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE::MB_OK)
     end
 
     status
@@ -20,12 +20,12 @@ module Crystal
 end
 
 module AppData
-  class_property hInstance : LibWin32::HINSTANCE = 0_i64
+  class_property hInstance : Win32cr::Foundation::HINSTANCE = Pointer(Void).null
   class_property hPrevInstance : Void*?
-  class_property hwnd : LibWin32::HWND  = Pointer(Void).new(sizeof(LibWin32::HWND))
-  class_property hwndEdit : LibWin32::HWND = Pointer(Void).new(sizeof(LibWin32::HWND))
+  class_property hwnd : Win32cr::Foundation::HWND  = Pointer(Win32cr::Foundation::HWND).new(sizeof(Win32cr::Foundation::HWND))
+  class_property hwndEdit : Win32cr::Foundation::HWND = Pointer(Win32cr::Foundation::HWND).new(sizeof(Win32cr::Foundation::HWND))
 
-  def self.hwdEdit : LibWin32::HWND
+  def self.hwdEdit : Win32cr::Foundation::HWND
     if @@hwndEdit.nil?
       raise Exception.new("hwndEdit was nil!")
     end
@@ -74,8 +74,8 @@ nARGV = Array.new(ARGC_UNSAFE) do |i|
 end
 pARGV = (PROGRAM_NAME + " " + nARGV.join(" ") + "\0").to_utf16
 
-winARGV = LibWin32.CommandLineToArgvW(pARGV, out winARGC)
-hInstance = LibWin32.GetModuleHandleW(nil)
+winARGV = Win32cr::UI::Shell::C.CommandLineToArgvW(pARGV, out winARGC)
+hInstance = Win32cr::System::LibraryLoader::C.GetModuleHandleW(nil)
 G_HINSTANCE = hInstance
 hPrevInstance = Pointer(Void).null
 AppData.hInstance = hInstance
@@ -84,39 +84,38 @@ CLASS_NAME = "WIN_CLASS1".to_utf16
 MENU_NAME = "ExampleWindow".to_utf16
 APP_NAME = "Simple Window".to_utf16
 
-def winproc(hwnd : LibWin32::HWND, uMsg : UInt32, wParam : LibWin32::WPARAM, lParam : LibWin32::LPARAM) : LibWin32::LRESULT
+def winproc(hwnd : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
   lresult = 0_i64
   case uMsg
-  when LibWin32::WM_CREATE
-    hMenu = LibWin32.CreateMenu
-    hFileMenu = LibWin32.CreatePopupMenu
+  when Win32cr::UI::WindowsAndMessaging::WM_CREATE
+    hMenu = Win32cr::UI::WindowsAndMessaging::C.CreateMenu
+    hFileMenu = Win32cr::UI::WindowsAndMessaging::C.CreatePopupMenu
 
-    LibWin32.AppendMenuW(hFileMenu, LibWin32::MENU_ITEM_FLAGS::MF_STRING, MNU_ITEM_FILE_QUIT, "E&xit".to_utf16)
-    LibWin32.AppendMenuW(hMenu, LibWin32::MENU_ITEM_FLAGS::MF_POPUP, hFileMenu.unsafe_as(LibC::UINT_PTR), "&File".to_utf16)
+    Win32cr::UI::WindowsAndMessaging::C.AppendMenuW(hFileMenu, Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS::MF_STRING, MNU_ITEM_FILE_QUIT, "E&xit".to_utf16)
+    Win32cr::UI::WindowsAndMessaging::C.AppendMenuW(hMenu, Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS::MF_POPUP, hFileMenu.unsafe_as(LibC::UINT_PTR), "&File".to_utf16)
 
-    if LibWin32.SetMenu(hwnd, hMenu) == 0
+    if Win32cr::UI::WindowsAndMessaging::C.SetMenu(hwnd, hMenu) == 0
       if (err = LibC.GetLastError) > 0
-        LibWin32.MessageBoxW(nil, "Got error #{err}".to_utf16, "winapp log".to_utf16, LibWin32::MESSAGEBOX_STYLE::MB_OK)
+        Win32cr::UI::WindowsAndMessaging::C.MessageBoxW(nil, "Got error #{err}".to_utf16, "winapp log".to_utf16, Win32cr::UI::WindowsAndMessaging::C::MESSAGEBOX_STYLE::MB_OK)
       end
     end
 
-    if LibWin32.SetMenu(hwnd, hMenu) == 0
+    if Win32cr::UI::WindowsAndMessaging::C.SetMenu(hwnd, hMenu) == 0
       if (err = LibC.GetLastError) > 0
-        LibWin32.MessageBoxW(nil, "Got error #{err}".to_utf16, "winapp log".to_utf16, LibWin32::MESSAGEBOX_STYLE::MB_OK)
+        Win32cr::UI::WindowsAndMessaging::C.MessageBoxW(nil, "Got error #{err}".to_utf16, "winapp log".to_utf16, Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE::MB_OK)
       end
     end
 
-    hwndEdit = LibWin32.CreateWindowExW(
-      LibWin32::WINDOW_EX_STYLE::WS_EX_LEFT,                                # Optional window styles
+    hwndEdit = Win32cr::UI::WindowsAndMessaging::C.CreateWindowExW(
+      Win32cr::UI::WindowsAndMessaging::WINDOW_EX_STYLE::WS_EX_LEFT,                                # Optional window styles
       "EDIT".to_utf16,                                                      # Window class
       nil,                                                                  # Application Name
-      LibWin32::WINDOW_STYLE::WS_CHILD |
-        LibWin32::WINDOW_STYLE::WS_VISIBLE |
-        LibWin32::WINDOW_STYLE::WS_BORDER |
-        LibWin32::WINDOW_STYLE::WS_HSCROLL |
-        LibWin32::WINDOW_STYLE::WS_VSCROLL |
-        LibWin32::WINDOW_STYLE::WS_CHILDWINDOW,# |
-        #LibWin32::WINDOW_STYLE::ES_MULTILINE,
+      Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE::WS_CHILD |
+      Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE::WS_VISIBLE |
+      Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE::WS_BORDER |
+      Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE::WS_HSCROLL |
+      Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE::WS_VSCROLL |
+      Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE::WS_CHILDWINDOW,
     # Size and position
       10,
       10,
@@ -124,37 +123,37 @@ def winproc(hwnd : LibWin32::HWND, uMsg : UInt32, wParam : LibWin32::WPARAM, lPa
       50,
       hwnd,                                                                 # Parent window
       nil,                                                                  # Menu
-      lParam.unsafe_as(Pointer(LibWin32::CREATESTRUCTW)).value.h_instance,  # Instance handle
+      lParam.unsafe_as(Pointer(Win32cr::UI::WindowsAndMessaging::CREATESTRUCTW)).value.h_instance,  # Instance handle
       nil                                                                   # Additional application data
     )
 
     if (err = LibC.GetLastError) > 0
-      LibWin32.MessageBoxW(nil, "Got error #{err}".to_utf16, "winapp log".to_utf16, LibWin32::MESSAGEBOX_STYLE::MB_OK)
+      Win32cr::UI::WindowsAndMessaging::C.MessageBoxW(nil, "Got error #{err}".to_utf16, "winapp log".to_utf16, LibWin32::MESSAGEBOX_STYLE::MB_OK)
     end
     AppData.hwndEdit = hwndEdit
-  when LibWin32::WM_SETFOCUS
-    LibWin32.SetFocus(AppData.hwndEdit.not_nil!)
-  when LibWin32::WM_SIZE
-    LibWin32.MoveWindow(AppData.hwndEdit.unsafe_as(LibWin32::HWND), 0, 0, loword(lParam), hiword(pointerof(lParam)), 1)
-  when LibWin32::WM_COMMAND
+  when Win32cr::UI::WindowsAndMessaging::WM_SETFOCUS
+    Win32cr::UI::WindowsAndMessaging::C.SetFocus(AppData.hwndEdit.not_nil!)
+  when Win32cr::UI::WindowsAndMessaging::WM_SIZE
+    Win32cr::UI::WindowsAndMessaging::C.MoveWindow(AppData.hwndEdit.unsafe_as(Win32cr::Foundation::HWND), 0, 0, loword(lParam), hiword(pointerof(lParam)), 1)
+  when Win32cr::UI::WindowsAndMessaging::WM_COMMAND
     case loword(wParam)
     when MNU_ITEM_FILE_QUIT
-      LibWin32.PostMessageW(hwnd, LibWin32::WM_CLOSE, 0_u64, 0_i64)
+      Win32cr::UI::WindowsAndMessaging::C.PostMessageW(hwnd, Win32cr::UI::WindowsAndMessaging::WM_CLOSE, 0_u64, 0_i64)
     end
-  when LibWin32::WM_CLOSE, LibWin32::WM_QUIT
-    LibWin32.DestroyWindow(hwnd)
-    LibWin32.PostQuitMessage(0)
-  when LibWin32::WM_DESTROY
-    LibWin32.PostQuitMessage(0)
-  when LibWin32::WM_PAINT
-    ps = LibWin32::PAINTSTRUCT.new
-    hdc = LibWin32.BeginPaint(hwnd, pointerof(ps))
+  when Win32cr::UI::WindowsAndMessaging::WM_CLOSE, Win32cr::UI::WindowsAndMessaging::WM_QUIT
+    Win32cr::UI::WindowsAndMessaging::C.DestroyWindow(hwnd)
+    Win32cr::UI::WindowsAndMessaging::C.PostQuitMessage(0)
+  when Win32cr::UI::WindowsAndMessaging::WM_DESTROY
+    Win32cr::UI::WindowsAndMessaging::C.PostQuitMessage(0)
+  when Win32cr::UI::WindowsAndMessaging::WM_PAINT
+    ps = Win32cr::Graphics::Gdi::PAINTSTRUCT.new
+    hdc = Win32cr::Graphics::Gdi::C.BeginPaint(hwnd, pointerof(ps))
     psrcPaint = ps.rc_paint
-    LibWin32.FillRect(hdc, pointerof(psrcPaint), (LibWin32::SYS_COLOR_INDEX::COLOR_WINDOW + 1).unsafe_as(LibWin32::HBRUSH))
+    Win32cr::Graphics::Gdi::C.FillRect(hdc, pointerof(psrcPaint), (Win32cr::UI::WindowsAndMessaging::SYS_COLOR_INDEX::COLOR_WINDOW + 1).unsafe_as(Win32cr::Graphics::Gdi::HBRUSH))
     ps.rc_paint = psrcPaint
-    LibWin32.EndPaint(hwnd, pointerof(ps))
+    Win32cr::Graphics::Gdi::C.EndPaint(hwnd, pointerof(ps))
   else
-    return LibWin32.DefWindowProcW(hwnd, uMsg, wParam, lParam)
+    return Win32cr::UI::WindowsAndMessaging::C.DefWindowProcW(hwnd, uMsg, wParam, lParam)
   end
   return lresult
 end
@@ -164,35 +163,35 @@ end
 icon = nil
 cursor = nil
 
-funptr =->winproc(LibWin32::HWND, UInt32, LibWin32::WPARAM, LibWin32::LPARAM)
-wc = LibWin32::WNDCLASSEXW.new
-wc.cb_size = sizeof(LibWin32::WNDCLASSEXW)
+funptr =->winproc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM)
+wc = Win32cr::UI::WindowsAndMessaging::WNDCLASSEXW.new
+wc.cb_size = sizeof(Win32cr::UI::WindowsAndMessaging::WNDCLASSEXW)
 wc.lpfn_wnd_proc = funptr
 wc.lpsz_class_name = CLASS_NAME
 #wc.lpszMenuName = to_lpcwstr("MNU_MAIN")
-wc.style = LibWin32::WNDCLASS_STYLES::CS_HREDRAW | LibWin32::WNDCLASS_STYLES::CS_VREDRAW
+wc.style = Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES::CS_HREDRAW | Win32cr::UI::WindowsAndMessaging::WNDCLASS_STYLES::CS_VREDRAW
 wc.cb_cls_extra = 0
 wc.cb_wnd_extra = 0
 wc.h_instance = hInstance
 wc.h_icon = icon
 
-if LibWin32.RegisterClassExW(pointerof(wc)) == 0
+if Win32cr::UI::WindowsAndMessaging::C.RegisterClassExW(pointerof(wc)) == 0
   err = LibC.GetLastError
   raise "window class register failed because #{err}"
   exit 1
 end
 
-hwnd = LibWin32.CreateWindowExW(
-LibWin32::WINDOW_EX_STYLE::WS_EX_LEFT,       # Optional window styles
+hwnd = Win32cr::UI::WindowsAndMessaging::C.CreateWindowExW(
+  Win32cr::UI::WindowsAndMessaging::WINDOW_EX_STYLE::WS_EX_LEFT,       # Optional window styles
 CLASS_NAME,                                  # Window class
 APP_NAME,                                    # Application Name
 LibWin32::WINDOW_STYLE::WS_OVERLAPPEDWINDOW, # Window style
 
 # Size and position
-LibWin32::CW_USEDEFAULT,
-LibWin32::CW_USEDEFAULT,
-LibWin32::CW_USEDEFAULT,
-LibWin32::CW_USEDEFAULT,
+Win32cr::UI::WindowsAndMessaging::CW_USEDEFAULT,
+Win32cr::UI::WindowsAndMessaging::CW_USEDEFAULT,
+Win32cr::UI::WindowsAndMessaging::CW_USEDEFAULT,
+Win32cr::UI::WindowsAndMessaging::CW_USEDEFAULT,
 nil,                                  # Parent window
 nil,                                  # Menu
 hInstance,                            # Instance handle
@@ -201,22 +200,22 @@ nil                                   # Additional application data
 
 AppData.hwnd = hwnd
 
-LibWin32.ShowWindow(hwnd, LibWin32::SHOW_WINDOW_CMD::SW_NORMAL)
-LibWin32.DrawMenuBar(hwnd)
-LibWin32.UpdateWindow(hwnd)
+Win32cr::UI::WindowsAndMessaging::C.ShowWindow(hwnd, Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD::SW_NORMAL)
+Win32cr::UI::WindowsAndMessaging::C.DrawMenuBar(hwnd)
+Win32cr::UI::WindowsAndMessaging::C.UpdateWindow(hwnd)
 
-while (LibWin32.GetMessageW(out msg, nil, 0, 0) > 0)
+while (Win32cr::UI::WindowsAndMessaging::C.GetMessageW(out msg, nil, 0, 0) > 0)
   pmsg = pointerof(msg)
-  LibWin32.TranslateMessage(pmsg)
-  LibWin32.DispatchMessageW(pmsg)
-  if msg.message == LibWin32::WM_QUIT
-    LibWin32.MessageBoxW(nil, "Quit called".to_utf16, "Event".to_utf16, LibWin32::MESSAGEBOX_STYLE::MB_OK)
+  Win32cr::UI::WindowsAndMessaging::C.TranslateMessage(pmsg)
+  Win32cr::UI::WindowsAndMessaging::C.DispatchMessageW(pmsg)
+  if msg.message == Win32cr::UI::WindowsAndMessaging::WM_QUIT
+    Win32cr::UI::WindowsAndMessaging::C.MessageBoxW(nil, "Quit called".to_utf16, "Event".to_utf16, Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE::MB_OK)
     break
   end
 end
 
 if (err = LibC.GetLastError) > 0
-  if !err == LibWin32::WIN32_ERROR::ERROR_INVALID_WINDOW_HANDLE
-    LibWin32.MessageBoxW(nil, "Error code: #{err}".to_utf16, "Exit Error".to_utf16, LibWin32::MESSAGEBOX_STYLE::MB_ICONERROR)
+  if !err == Win32cr::Foundation::WIN32_ERROR::ERROR_INVALID_WINDOW_HANDLE
+    Win32cr::UI::WindowsAndMessaging::C.MessageBoxW(nil, "Error code: #{err}".to_utf16, "Exit Error".to_utf16, Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE::MB_ICONERROR)
   end
 end

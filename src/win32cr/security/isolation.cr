@@ -1,88 +1,70 @@
-require "../foundation.cr"
-require "../system/com.cr"
-require "../security.cr"
-require "../system/registry.cr"
+require "./../foundation.cr"
+require "./../system/com.cr"
+require "./../security.cr"
+require "./../system/registry.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:shcore.dll")]
-@[Link(ldflags: "/DELAYLOAD:isolatedwindowsenvironmentutils.dll")]
-@[Link(ldflags: "/DELAYLOAD:userenv.dll")]
-{% else %}
-@[Link("shcore")]
-@[Link("isolatedwindowsenvironmentutils")]
-@[Link("userenv")]
-{% end %}
-lib LibWin32
+module Win32cr::Security::Isolation
+
   CLSID_IsolatedAppLauncher = LibC::GUID.new(0xbc812430_u32, 0xe75e_u16, 0x4fd1_u16, StaticArray[0x96_u8, 0x41_u8, 0x1f_u8, 0x9f_u8, 0x1e_u8, 0x2d_u8, 0x9a_u8, 0x1f_u8])
 
-  struct IsolatedAppLauncherTelemetryParameters
-    enable_for_launch : LibC::BOOL
-    correlation_guid : Guid
+
+  @[Extern]
+  record IsolatedAppLauncherTelemetryParameters,
+    enable_for_launch : Win32cr::Foundation::BOOL,
+    correlation_guid : LibC::GUID
+
+  @[Extern]
+  record IIsolatedAppLauncherVtbl,
+    query_interface : Proc(IIsolatedAppLauncher*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IIsolatedAppLauncher*, UInt32),
+    release : Proc(IIsolatedAppLauncher*, UInt32),
+    launch : Proc(IIsolatedAppLauncher*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Isolation::IsolatedAppLauncherTelemetryParameters*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f686878f-7b42-4cc4-96fb-f4f3b6e3d24d")]
+  record IIsolatedAppLauncher, lpVtbl : IIsolatedAppLauncherVtbl* do
+    GUID = LibC::GUID.new(0xf686878f_u32, 0x7b42_u16, 0x4cc4_u16, StaticArray[0x96_u8, 0xfb_u8, 0xf4_u8, 0xf3_u8, 0xb6_u8, 0xe3_u8, 0xd2_u8, 0x4d_u8])
+    def query_interface(this : IIsolatedAppLauncher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IIsolatedAppLauncher*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IIsolatedAppLauncher*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def launch(this : IIsolatedAppLauncher*, appUserModelId : Win32cr::Foundation::PWSTR, arguments : Win32cr::Foundation::PWSTR, telemetryParameters : Win32cr::Security::Isolation::IsolatedAppLauncherTelemetryParameters*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.launch.call(this, appUserModelId, arguments, telemetryParameters)
+    end
+
   end
 
+  @[Link("kernel32")]
+  @[Link("api-ms-win-security-isolatedcontainer-l1-1-1")]
+  @[Link("api-ms-win-security-isolatedcontainer-l1-1-0")]
+  @[Link("isolatedwindowsenvironmentutils")]
+  @[Link("userenv")]
+  lib C
+    fun GetAppContainerNamedObjectPath(token : Win32cr::Foundation::HANDLE, app_container_sid : Win32cr::Foundation::PSID, object_path_length : UInt32, object_path : UInt16*, return_length : UInt32*) : Win32cr::Foundation::BOOL
 
-  struct IIsolatedAppLauncherVTbl
-    query_interface : Proc(IIsolatedAppLauncher*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IIsolatedAppLauncher*, UInt32)
-    release : Proc(IIsolatedAppLauncher*, UInt32)
-    launch : Proc(IIsolatedAppLauncher*, LibC::LPWSTR, LibC::LPWSTR, IsolatedAppLauncherTelemetryParameters*, HRESULT)
-  end
+    fun IsProcessInWDAGContainer(reserved : Void*, isProcessInWDAGContainer : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
-  IIsolatedAppLauncher_GUID = "f686878f-7b42-4cc4-96fb-f4f3b6e3d24d"
-  IID_IIsolatedAppLauncher = LibC::GUID.new(0xf686878f_u32, 0x7b42_u16, 0x4cc4_u16, StaticArray[0x96_u8, 0xfb_u8, 0xf4_u8, 0xf3_u8, 0xb6_u8, 0xe3_u8, 0xd2_u8, 0x4d_u8])
-  struct IIsolatedAppLauncher
-    lpVtbl : IIsolatedAppLauncherVTbl*
-  end
+    fun IsProcessInIsolatedContainer(isProcessInIsolatedContainer : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
+    fun IsProcessInIsolatedWindowsEnvironment(isProcessInIsolatedWindowsEnvironment : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
-  # Params # token : LibC::HANDLE [In],appcontainersid : PSID [In],objectpathlength : UInt32 [In],objectpath : Char* [In],returnlength : UInt32* [In]
-  fun GetAppContainerNamedObjectPath(token : LibC::HANDLE, appcontainersid : PSID, objectpathlength : UInt32, objectpath : Char*, returnlength : UInt32*) : LibC::BOOL
+    fun CreateAppContainerProfile(pszAppContainerName : Win32cr::Foundation::PWSTR, pszDisplayName : Win32cr::Foundation::PWSTR, pszDescription : Win32cr::Foundation::PWSTR, pCapabilities : Win32cr::Security::SID_AND_ATTRIBUTES*, dwCapabilityCount : UInt32, ppSidAppContainerSid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::HRESULT
 
-  # Params # reserved : Void* [In],isprocessinwdagcontainer : LibC::BOOL* [In]
-  fun IsProcessInWDAGContainer(reserved : Void*, isprocessinwdagcontainer : LibC::BOOL*) : HRESULT
+    fun DeleteAppContainerProfile(pszAppContainerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
-  # Params # isprocessinisolatedcontainer : LibC::BOOL* [In]
-  fun IsProcessInIsolatedContainer(isprocessinisolatedcontainer : LibC::BOOL*) : HRESULT
+    fun GetAppContainerRegistryLocation(desiredAccess : UInt32, phAppContainerKey : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::HRESULT
 
-  # Params # isprocessinisolatedwindowsenvironment : LibC::BOOL* [In]
-  fun IsProcessInIsolatedWindowsEnvironment(isprocessinisolatedwindowsenvironment : LibC::BOOL*) : HRESULT
+    fun GetAppContainerFolderPath(pszAppContainerSid : Win32cr::Foundation::PWSTR, ppszPath : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
-  # Params # pszappcontainername : LibC::LPWSTR [In],pszdisplayname : LibC::LPWSTR [In],pszdescription : LibC::LPWSTR [In],pcapabilities : SID_AND_ATTRIBUTES* [In],dwcapabilitycount : UInt32 [In],ppsidappcontainersid : PSID* [In]
-  fun CreateAppContainerProfile(pszappcontainername : LibC::LPWSTR, pszdisplayname : LibC::LPWSTR, pszdescription : LibC::LPWSTR, pcapabilities : SID_AND_ATTRIBUTES*, dwcapabilitycount : UInt32, ppsidappcontainersid : PSID*) : HRESULT
+    fun DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName(psidAppContainerSid : Win32cr::Foundation::PSID, pszRestrictedAppContainerName : Win32cr::Foundation::PWSTR, ppsidRestrictedAppContainerSid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::HRESULT
 
-  # Params # pszappcontainername : LibC::LPWSTR [In]
-  fun DeleteAppContainerProfile(pszappcontainername : LibC::LPWSTR) : HRESULT
+    fun DeriveAppContainerSidFromAppContainerName(pszAppContainerName : Win32cr::Foundation::PWSTR, ppsidAppContainerSid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::HRESULT
 
-  # Params # desiredaccess : UInt32 [In],phappcontainerkey : HKEY* [In]
-  fun GetAppContainerRegistryLocation(desiredaccess : UInt32, phappcontainerkey : HKEY*) : HRESULT
-
-  # Params # pszappcontainersid : LibC::LPWSTR [In],ppszpath : LibC::LPWSTR* [In]
-  fun GetAppContainerFolderPath(pszappcontainersid : LibC::LPWSTR, ppszpath : LibC::LPWSTR*) : HRESULT
-
-  # Params # psidappcontainersid : PSID [In],pszrestrictedappcontainername : LibC::LPWSTR [In],ppsidrestrictedappcontainersid : PSID* [In]
-  fun DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName(psidappcontainersid : PSID, pszrestrictedappcontainername : LibC::LPWSTR, ppsidrestrictedappcontainersid : PSID*) : HRESULT
-
-  # Params # pszappcontainername : LibC::LPWSTR [In],ppsidappcontainersid : PSID* [In]
-  fun DeriveAppContainerSidFromAppContainerName(pszappcontainername : LibC::LPWSTR, ppsidappcontainersid : PSID*) : HRESULT
-end
-struct LibWin32::IIsolatedAppLauncher
-  def query_interface(this : IIsolatedAppLauncher*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IIsolatedAppLauncher*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IIsolatedAppLauncher*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def launch(this : IIsolatedAppLauncher*, appusermodelid : LibC::LPWSTR, arguments : LibC::LPWSTR, telemetryparameters : IsolatedAppLauncherTelemetryParameters*) : HRESULT
-    @lpVtbl.value.launch.call(this, appusermodelid, arguments, telemetryparameters)
   end
 end

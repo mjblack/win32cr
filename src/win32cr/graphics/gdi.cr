@@ -1,28 +1,6 @@
-require "../foundation.cr"
+require "./../foundation.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:gdi32.dll")]
-@[Link(ldflags: "/DELAYLOAD:msimg32.dll")]
-@[Link(ldflags: "/DELAYLOAD:opengl32.dll")]
-@[Link(ldflags: "/DELAYLOAD:fontsub.dll")]
-@[Link(ldflags: "/DELAYLOAD:t2embed.dll")]
-@[Link(ldflags: "/DELAYLOAD:user32.dll")]
-{% else %}
-@[Link("gdi32")]
-@[Link("msimg32")]
-@[Link("opengl32")]
-@[Link("fontsub")]
-@[Link("t2embed")]
-@[Link("user32")]
-{% end %}
-lib LibWin32
+module Win32cr::Graphics::Gdi
   alias HDC = LibC::IntPtrT
   alias CreatedHDC = LibC::IntPtrT
   alias HBITMAP = LibC::IntPtrT
@@ -37,6 +15,37 @@ lib LibWin32
   alias HdcMetdataEnhFileHandle = LibC::IntPtrT
   alias HGDIOBJ = LibC::IntPtrT
   alias HMONITOR = LibC::IntPtrT
+  alias FONTENUMPROCA = Proc(Win32cr::Graphics::Gdi::LOGFONTA*, Win32cr::Graphics::Gdi::TEXTMETRICA*, UInt32, Win32cr::Foundation::LPARAM, Int32)*
+
+  alias FONTENUMPROCW = Proc(Win32cr::Graphics::Gdi::LOGFONTW*, Win32cr::Graphics::Gdi::TEXTMETRICW*, UInt32, Win32cr::Foundation::LPARAM, Int32)*
+
+  alias GOBJENUMPROC = Proc(Void*, Win32cr::Foundation::LPARAM, Int32)*
+
+  alias LINEDDAPROC = Proc(Int32, Int32, Win32cr::Foundation::LPARAM, Void)*
+
+  alias LPFNDEVMODE = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::HINSTANCE, Win32cr::Graphics::Gdi::DEVMODEA*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Graphics::Gdi::DEVMODEA*, Win32cr::Foundation::PSTR, UInt32, UInt32)*
+
+  alias LPFNDEVCAPS = Proc(Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, Win32cr::Graphics::Gdi::DEVMODEA*, UInt32)*
+
+  alias MFENUMPROC = Proc(Win32cr::Graphics::Gdi::HDC, Win32cr::Graphics::Gdi::HANDLETABLE*, Win32cr::Graphics::Gdi::METARECORD*, Int32, Win32cr::Foundation::LPARAM, Int32)*
+
+  alias ENHMFENUMPROC = Proc(Win32cr::Graphics::Gdi::HDC, Win32cr::Graphics::Gdi::HANDLETABLE*, Win32cr::Graphics::Gdi::ENHMETARECORD*, Int32, Win32cr::Foundation::LPARAM, Int32)*
+
+  alias CFP_ALLOCPROC = Proc(LibC::UIntPtrT, Void*)*
+
+  alias CFP_REALLOCPROC = Proc(Void*, LibC::UIntPtrT, Void*)*
+
+  alias CFP_FREEPROC = Proc(Void*, Void)*
+
+  alias READEMBEDPROC = Proc(Void*, Void*, UInt32, UInt32)*
+
+  alias WRITEEMBEDPROC = Proc(Void*, Void*, UInt32, UInt32)*
+
+  alias GRAYSTRINGPROC = Proc(Win32cr::Graphics::Gdi::HDC, Win32cr::Foundation::LPARAM, Int32, Win32cr::Foundation::BOOL)*
+
+  alias DRAWSTATEPROC = Proc(Win32cr::Graphics::Gdi::HDC, Win32cr::Foundation::LPARAM, Win32cr::Foundation::WPARAM, Int32, Int32, Win32cr::Foundation::BOOL)*
+
+  alias MONITORENUMPROC = Proc(Win32cr::Graphics::Gdi::HMONITOR, Win32cr::Graphics::Gdi::HDC, Win32cr::Foundation::RECT*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::BOOL)*
 
   GDI_ERROR = -1_i32
   ERROR = 0_u32
@@ -843,30 +852,6 @@ lib LibWin32
   GCPGLYPH_LINKAFTER = 16384_u32
   TT_AVAILABLE = 1_u32
   TT_ENABLED = 2_u32
-  PFD_TYPE_RGBA = 0_u32
-  PFD_TYPE_COLORINDEX = 1_u32
-  PFD_MAIN_PLANE = 0_u32
-  PFD_OVERLAY_PLANE = 1_u32
-  PFD_UNDERLAY_PLANE = -1_i32
-  PFD_DOUBLEBUFFER = 1_u32
-  PFD_STEREO = 2_u32
-  PFD_DRAW_TO_WINDOW = 4_u32
-  PFD_DRAW_TO_BITMAP = 8_u32
-  PFD_SUPPORT_GDI = 16_u32
-  PFD_SUPPORT_OPENGL = 32_u32
-  PFD_GENERIC_FORMAT = 64_u32
-  PFD_NEED_PALETTE = 128_u32
-  PFD_NEED_SYSTEM_PALETTE = 256_u32
-  PFD_SWAP_EXCHANGE = 512_u32
-  PFD_SWAP_COPY = 1024_u32
-  PFD_SWAP_LAYER_BUFFERS = 2048_u32
-  PFD_GENERIC_ACCELERATED = 4096_u32
-  PFD_SUPPORT_DIRECTDRAW = 8192_u32
-  PFD_DIRECT3D_ACCELERATED = 16384_u32
-  PFD_SUPPORT_COMPOSITION = 32768_u32
-  PFD_DEPTH_DONTCARE = 536870912_u32
-  PFD_DOUBLEBUFFER_DONTCARE = 1073741824_u32
-  PFD_STEREO_DONTCARE = 2147483648_u32
   DC_BINADJUST = 19_u32
   DC_EMF_COMPLIANT = 20_u32
   DC_DATATYPE_PRODUCED = 21_u32
@@ -915,10 +900,6 @@ lib LibWin32
   DI_APPBANDING = 1_u32
   DI_ROPS_READ_DESTINATION = 2_u32
   FONTMAPPER_MAX = 10_u32
-  ICM_OFF = 1_u32
-  ICM_ON = 2_u32
-  ICM_QUERY = 3_u32
-  ICM_DONE_OUTSIDEDC = 4_u32
   ENHMETA_SIGNATURE = 1179469088_u32
   ENHMETA_STOCK_OBJECT = 2147483648_u32
   EMR_HEADER = 1_u32
@@ -1261,3154 +1242,2896 @@ lib LibWin32
   E_EXCEPTIONINDECOMPRESSION = 521_i32
   E_EXCEPTIONINCOMPRESSION = 522_i32
 
-  alias FONTENUMPROCA = Proc(LOGFONTA*, TEXTMETRICA*, UInt32, LPARAM, Int32)
-  alias FONTENUMPROCW = Proc(LOGFONTW*, TEXTMETRICW*, UInt32, LPARAM, Int32)
-  alias GOBJENUMPROC = Proc(Void*, LPARAM, Int32)
-  alias LINEDDAPROC = Proc(Int32, Int32, LPARAM, Void)
-  alias LPFNDEVMODE = Proc(LibC::HANDLE, HINSTANCE, DEVMODEA*, PSTR, PSTR, DEVMODEA*, PSTR, UInt32, UInt32)
-  alias LPFNDEVCAPS = Proc(PSTR, PSTR, UInt32, PSTR, DEVMODEA*, UInt32)
-  alias MFENUMPROC = Proc(HDC, HANDLETABLE*, METARECORD*, Int32, LPARAM, Int32)
-  alias ENHMFENUMPROC = Proc(HDC, HANDLETABLE*, ENHMETARECORD*, Int32, LPARAM, Int32)
-  alias CFP_ALLOCPROC = Proc(LibC::UINT_PTR, Void*)
-  alias CFP_REALLOCPROC = Proc(Void*, LibC::UINT_PTR, Void*)
-  alias CFP_FREEPROC = Proc(Void*, Void)
-  alias READEMBEDPROC = Proc(Void*, Void*, UInt32, UInt32)
-  alias WRITEEMBEDPROC = Proc(Void*, Void*, UInt32, UInt32)
-  alias GRAYSTRINGPROC = Proc(HDC, LPARAM, Int32, LibC::BOOL)
-  alias DRAWSTATEPROC = Proc(HDC, LPARAM, LibC::UINT_PTR, Int32, Int32, LibC::BOOL)
-  alias MONITORENUMPROC = Proc(HMONITOR, HDC, RECT*, LPARAM, LibC::BOOL)
-
-
-  enum R2_MODE : Int32
-    R2_BLACK = 1
-    R2_NOTMERGEPEN = 2
-    R2_MASKNOTPEN = 3
-    R2_NOTCOPYPEN = 4
-    R2_MASKPENNOT = 5
-    R2_NOT = 6
-    R2_XORPEN = 7
-    R2_NOTMASKPEN = 8
-    R2_MASKPEN = 9
-    R2_NOTXORPEN = 10
-    R2_NOP = 11
-    R2_MERGENOTPEN = 12
-    R2_COPYPEN = 13
-    R2_MERGEPENNOT = 14
-    R2_MERGEPEN = 15
-    R2_WHITE = 16
-    R2_LAST = 16
+  enum R2_MODE
+    R2_BLACK = 1_i32
+    R2_NOTMERGEPEN = 2_i32
+    R2_MASKNOTPEN = 3_i32
+    R2_NOTCOPYPEN = 4_i32
+    R2_MASKPENNOT = 5_i32
+    R2_NOT = 6_i32
+    R2_XORPEN = 7_i32
+    R2_NOTMASKPEN = 8_i32
+    R2_MASKPEN = 9_i32
+    R2_NOTXORPEN = 10_i32
+    R2_NOP = 11_i32
+    R2_MERGENOTPEN = 12_i32
+    R2_COPYPEN = 13_i32
+    R2_MERGEPENNOT = 14_i32
+    R2_MERGEPEN = 15_i32
+    R2_WHITE = 16_i32
+    R2_LAST = 16_i32
   end
-
-  enum RGN_COMBINE_MODE : Int32
-    RGN_AND = 1
-    RGN_OR = 2
-    RGN_XOR = 3
-    RGN_DIFF = 4
-    RGN_COPY = 5
-    RGN_MIN = 1
-    RGN_MAX = 5
+  enum RGN_COMBINE_MODE
+    RGN_AND = 1_i32
+    RGN_OR = 2_i32
+    RGN_XOR = 3_i32
+    RGN_DIFF = 4_i32
+    RGN_COPY = 5_i32
+    RGN_MIN = 1_i32
+    RGN_MAX = 5_i32
   end
-
+  @[Flags]
   enum ETO_OPTIONS : UInt32
-    ETO_OPAQUE = 2
-    ETO_CLIPPED = 4
-    ETO_GLYPH_INDEX = 16
-    ETO_RTLREADING = 128
-    ETO_NUMERICSLOCAL = 1024
-    ETO_NUMERICSLATIN = 2048
-    ETO_IGNORELANGUAGE = 4096
-    ETO_PDY = 8192
-    ETO_REVERSE_INDEX_MAP = 65536
+    ETO_OPAQUE = 2_u32
+    ETO_CLIPPED = 4_u32
+    ETO_GLYPH_INDEX = 16_u32
+    ETO_RTLREADING = 128_u32
+    ETO_NUMERICSLOCAL = 1024_u32
+    ETO_NUMERICSLATIN = 2048_u32
+    ETO_IGNORELANGUAGE = 4096_u32
+    ETO_PDY = 8192_u32
+    ETO_REVERSE_INDEX_MAP = 65536_u32
   end
-
-  enum OBJ_TYPE : Int32
-    OBJ_PEN = 1
-    OBJ_BRUSH = 2
-    OBJ_DC = 3
-    OBJ_METADC = 4
-    OBJ_PAL = 5
-    OBJ_FONT = 6
-    OBJ_BITMAP = 7
-    OBJ_REGION = 8
-    OBJ_METAFILE = 9
-    OBJ_MEMDC = 10
-    OBJ_EXTPEN = 11
-    OBJ_ENHMETADC = 12
-    OBJ_ENHMETAFILE = 13
-    OBJ_COLORSPACE = 14
+  enum OBJ_TYPE
+    OBJ_PEN = 1_i32
+    OBJ_BRUSH = 2_i32
+    OBJ_DC = 3_i32
+    OBJ_METADC = 4_i32
+    OBJ_PAL = 5_i32
+    OBJ_FONT = 6_i32
+    OBJ_BITMAP = 7_i32
+    OBJ_REGION = 8_i32
+    OBJ_METAFILE = 9_i32
+    OBJ_MEMDC = 10_i32
+    OBJ_EXTPEN = 11_i32
+    OBJ_ENHMETADC = 12_i32
+    OBJ_ENHMETAFILE = 13_i32
+    OBJ_COLORSPACE = 14_i32
   end
-
   enum ROP_CODE : UInt32
-    SRCCOPY = 13369376
-    SRCPAINT = 15597702
-    SRCAND = 8913094
-    SRCINVERT = 6684742
-    SRCERASE = 4457256
-    NOTSRCCOPY = 3342344
-    NOTSRCERASE = 1114278
-    MERGECOPY = 12583114
-    MERGEPAINT = 12255782
-    PATCOPY = 15728673
-    PATPAINT = 16452105
-    PATINVERT = 5898313
-    DSTINVERT = 5570569
-    BLACKNESS = 66
-    WHITENESS = 16711778
-    NOMIRRORBITMAP = 2147483648
-    CAPTUREBLT = 1073741824
+    SRCCOPY = 13369376_u32
+    SRCPAINT = 15597702_u32
+    SRCAND = 8913094_u32
+    SRCINVERT = 6684742_u32
+    SRCERASE = 4457256_u32
+    NOTSRCCOPY = 3342344_u32
+    NOTSRCERASE = 1114278_u32
+    MERGECOPY = 12583114_u32
+    MERGEPAINT = 12255782_u32
+    PATCOPY = 15728673_u32
+    PATPAINT = 16452105_u32
+    PATINVERT = 5898313_u32
+    DSTINVERT = 5570569_u32
+    BLACKNESS = 66_u32
+    WHITENESS = 16711778_u32
+    NOMIRRORBITMAP = 2147483648_u32
+    CAPTUREBLT = 1073741824_u32
   end
-
   enum DIB_USAGE : UInt32
-    DIB_RGB_COLORS = 0
-    DIB_PAL_COLORS = 1
+    DIB_RGB_COLORS = 0_u32
+    DIB_PAL_COLORS = 1_u32
   end
-
+  @[Flags]
   enum DRAWEDGE_FLAGS : UInt32
-    BDR_RAISEDOUTER = 1
-    BDR_SUNKENOUTER = 2
-    BDR_RAISEDINNER = 4
-    BDR_SUNKENINNER = 8
-    BDR_OUTER = 3
-    BDR_INNER = 12
-    BDR_RAISED = 5
-    BDR_SUNKEN = 10
-    EDGE_RAISED = 5
-    EDGE_SUNKEN = 10
-    EDGE_ETCHED = 6
-    EDGE_BUMP = 9
+    BDR_RAISEDOUTER = 1_u32
+    BDR_SUNKENOUTER = 2_u32
+    BDR_RAISEDINNER = 4_u32
+    BDR_SUNKENINNER = 8_u32
+    BDR_OUTER = 3_u32
+    BDR_INNER = 12_u32
+    BDR_RAISED = 5_u32
+    BDR_SUNKEN = 10_u32
+    EDGE_RAISED = 5_u32
+    EDGE_SUNKEN = 10_u32
+    EDGE_ETCHED = 6_u32
+    EDGE_BUMP = 9_u32
   end
-
   enum DFC_TYPE : UInt32
-    DFC_CAPTION = 1
-    DFC_MENU = 2
-    DFC_SCROLL = 3
-    DFC_BUTTON = 4
-    DFC_POPUPMENU = 5
+    DFC_CAPTION = 1_u32
+    DFC_MENU = 2_u32
+    DFC_SCROLL = 3_u32
+    DFC_BUTTON = 4_u32
+    DFC_POPUPMENU = 5_u32
   end
-
+  @[Flags]
   enum DFCS_STATE : UInt32
-    DFCS_CAPTIONCLOSE = 0
-    DFCS_CAPTIONMIN = 1
-    DFCS_CAPTIONMAX = 2
-    DFCS_CAPTIONRESTORE = 3
-    DFCS_CAPTIONHELP = 4
-    DFCS_MENUARROW = 0
-    DFCS_MENUCHECK = 1
-    DFCS_MENUBULLET = 2
-    DFCS_MENUARROWRIGHT = 4
-    DFCS_SCROLLUP = 0
-    DFCS_SCROLLDOWN = 1
-    DFCS_SCROLLLEFT = 2
-    DFCS_SCROLLRIGHT = 3
-    DFCS_SCROLLCOMBOBOX = 5
-    DFCS_SCROLLSIZEGRIP = 8
-    DFCS_SCROLLSIZEGRIPRIGHT = 16
-    DFCS_BUTTONCHECK = 0
-    DFCS_BUTTONRADIOIMAGE = 1
-    DFCS_BUTTONRADIOMASK = 2
-    DFCS_BUTTONRADIO = 4
-    DFCS_BUTTON3STATE = 8
-    DFCS_BUTTONPUSH = 16
-    DFCS_INACTIVE = 256
-    DFCS_PUSHED = 512
-    DFCS_CHECKED = 1024
-    DFCS_TRANSPARENT = 2048
-    DFCS_HOT = 4096
-    DFCS_ADJUSTRECT = 8192
-    DFCS_FLAT = 16384
-    DFCS_MONO = 32768
+    DFCS_CAPTIONCLOSE = 0_u32
+    DFCS_CAPTIONMIN = 1_u32
+    DFCS_CAPTIONMAX = 2_u32
+    DFCS_CAPTIONRESTORE = 3_u32
+    DFCS_CAPTIONHELP = 4_u32
+    DFCS_MENUARROW = 0_u32
+    DFCS_MENUCHECK = 1_u32
+    DFCS_MENUBULLET = 2_u32
+    DFCS_MENUARROWRIGHT = 4_u32
+    DFCS_SCROLLUP = 0_u32
+    DFCS_SCROLLDOWN = 1_u32
+    DFCS_SCROLLLEFT = 2_u32
+    DFCS_SCROLLRIGHT = 3_u32
+    DFCS_SCROLLCOMBOBOX = 5_u32
+    DFCS_SCROLLSIZEGRIP = 8_u32
+    DFCS_SCROLLSIZEGRIPRIGHT = 16_u32
+    DFCS_BUTTONCHECK = 0_u32
+    DFCS_BUTTONRADIOIMAGE = 1_u32
+    DFCS_BUTTONRADIOMASK = 2_u32
+    DFCS_BUTTONRADIO = 4_u32
+    DFCS_BUTTON3STATE = 8_u32
+    DFCS_BUTTONPUSH = 16_u32
+    DFCS_INACTIVE = 256_u32
+    DFCS_PUSHED = 512_u32
+    DFCS_CHECKED = 1024_u32
+    DFCS_TRANSPARENT = 2048_u32
+    DFCS_HOT = 4096_u32
+    DFCS_ADJUSTRECT = 8192_u32
+    DFCS_FLAT = 16384_u32
+    DFCS_MONO = 32768_u32
   end
-
+  @[Flags]
   enum CDS_TYPE : UInt32
-    CDS_FULLSCREEN = 4
-    CDS_GLOBAL = 8
-    CDS_NORESET = 268435456
-    CDS_RESET = 1073741824
-    CDS_SET_PRIMARY = 16
-    CDS_TEST = 2
-    CDS_UPDATEREGISTRY = 1
-    CDS_VIDEOPARAMETERS = 32
-    CDS_ENABLE_UNSAFE_MODES = 256
-    CDS_DISABLE_UNSAFE_MODES = 512
-    CDS_RESET_EX = 536870912
+    CDS_FULLSCREEN = 4_u32
+    CDS_GLOBAL = 8_u32
+    CDS_NORESET = 268435456_u32
+    CDS_RESET = 1073741824_u32
+    CDS_SET_PRIMARY = 16_u32
+    CDS_TEST = 2_u32
+    CDS_UPDATEREGISTRY = 1_u32
+    CDS_VIDEOPARAMETERS = 32_u32
+    CDS_ENABLE_UNSAFE_MODES = 256_u32
+    CDS_DISABLE_UNSAFE_MODES = 512_u32
+    CDS_RESET_EX = 536870912_u32
   end
-
-  enum DISP_CHANGE : Int32
-    DISP_CHANGE_SUCCESSFUL = 0
-    DISP_CHANGE_RESTART = 1
-    DISP_CHANGE_FAILED = -1
-    DISP_CHANGE_BADMODE = -2
-    DISP_CHANGE_NOTUPDATED = -3
-    DISP_CHANGE_BADFLAGS = -4
-    DISP_CHANGE_BADPARAM = -5
-    DISP_CHANGE_BADDUALVIEW = -6
+  enum DISP_CHANGE
+    DISP_CHANGE_SUCCESSFUL = 0_i32
+    DISP_CHANGE_RESTART = 1_i32
+    DISP_CHANGE_FAILED = -1_i32
+    DISP_CHANGE_BADMODE = -2_i32
+    DISP_CHANGE_NOTUPDATED = -3_i32
+    DISP_CHANGE_BADFLAGS = -4_i32
+    DISP_CHANGE_BADPARAM = -5_i32
+    DISP_CHANGE_BADDUALVIEW = -6_i32
   end
-
+  @[Flags]
   enum DRAWSTATE_FLAGS : UInt32
-    DST_COMPLEX = 0
-    DST_TEXT = 1
-    DST_PREFIXTEXT = 2
-    DST_ICON = 3
-    DST_BITMAP = 4
-    DSS_NORMAL = 0
-    DSS_UNION = 16
-    DSS_DISABLED = 32
-    DSS_MONO = 128
-    DSS_HIDEPREFIX = 512
-    DSS_PREFIXONLY = 1024
-    DSS_RIGHT = 32768
+    DST_COMPLEX = 0_u32
+    DST_TEXT = 1_u32
+    DST_PREFIXTEXT = 2_u32
+    DST_ICON = 3_u32
+    DST_BITMAP = 4_u32
+    DSS_NORMAL = 0_u32
+    DSS_UNION = 16_u32
+    DSS_DISABLED = 32_u32
+    DSS_MONO = 128_u32
+    DSS_HIDEPREFIX = 512_u32
+    DSS_PREFIXONLY = 1024_u32
+    DSS_RIGHT = 32768_u32
   end
-
+  @[Flags]
   enum REDRAW_WINDOW_FLAGS : UInt32
-    RDW_INVALIDATE = 1
-    RDW_INTERNALPAINT = 2
-    RDW_ERASE = 4
-    RDW_VALIDATE = 8
-    RDW_NOINTERNALPAINT = 16
-    RDW_NOERASE = 32
-    RDW_NOCHILDREN = 64
-    RDW_ALLCHILDREN = 128
-    RDW_UPDATENOW = 256
-    RDW_ERASENOW = 512
-    RDW_FRAME = 1024
-    RDW_NOFRAME = 2048
+    RDW_INVALIDATE = 1_u32
+    RDW_INTERNALPAINT = 2_u32
+    RDW_ERASE = 4_u32
+    RDW_VALIDATE = 8_u32
+    RDW_NOINTERNALPAINT = 16_u32
+    RDW_NOERASE = 32_u32
+    RDW_NOCHILDREN = 64_u32
+    RDW_ALLCHILDREN = 128_u32
+    RDW_UPDATENOW = 256_u32
+    RDW_ERASENOW = 512_u32
+    RDW_FRAME = 1024_u32
+    RDW_NOFRAME = 2048_u32
   end
-
   enum ENUM_DISPLAY_SETTINGS_MODE : UInt32
-    ENUM_CURRENT_SETTINGS = 4294967295
-    ENUM_REGISTRY_SETTINGS = 4294967294
+    ENUM_CURRENT_SETTINGS = 4294967295_u32
+    ENUM_REGISTRY_SETTINGS = 4294967294_u32
   end
-
   enum TEXT_ALIGN_OPTIONS : UInt32
-    TA_NOUPDATECP = 0
-    TA_UPDATECP = 1
-    TA_LEFT = 0
-    TA_RIGHT = 2
-    TA_CENTER = 6
-    TA_TOP = 0
-    TA_BOTTOM = 8
-    TA_BASELINE = 24
-    TA_RTLREADING = 256
-    TA_MASK = 287
-    VTA_BASELINE = 24
-    VTA_LEFT = 8
-    VTA_RIGHT = 0
-    VTA_CENTER = 6
-    VTA_BOTTOM = 2
-    VTA_TOP = 0
+    TA_NOUPDATECP = 0_u32
+    TA_UPDATECP = 1_u32
+    TA_LEFT = 0_u32
+    TA_RIGHT = 2_u32
+    TA_CENTER = 6_u32
+    TA_TOP = 0_u32
+    TA_BOTTOM = 8_u32
+    TA_BASELINE = 24_u32
+    TA_RTLREADING = 256_u32
+    TA_MASK = 287_u32
+    VTA_BASELINE = 24_u32
+    VTA_LEFT = 8_u32
+    VTA_RIGHT = 0_u32
+    VTA_CENTER = 6_u32
+    VTA_BOTTOM = 2_u32
+    VTA_TOP = 0_u32
   end
-
+  @[Flags]
   enum PEN_STYLE : UInt32
-    PS_GEOMETRIC = 65536
-    PS_COSMETIC = 0
-    PS_SOLID = 0
-    PS_DASH = 1
-    PS_DOT = 2
-    PS_DASHDOT = 3
-    PS_DASHDOTDOT = 4
-    PS_NULL = 5
-    PS_INSIDEFRAME = 6
-    PS_USERSTYLE = 7
-    PS_ALTERNATE = 8
-    PS_STYLE_MASK = 15
-    PS_ENDCAP_ROUND = 0
-    PS_ENDCAP_SQUARE = 256
-    PS_ENDCAP_FLAT = 512
-    PS_ENDCAP_MASK = 3840
-    PS_JOIN_ROUND = 0
-    PS_JOIN_BEVEL = 4096
-    PS_JOIN_MITER = 8192
-    PS_JOIN_MASK = 61440
-    PS_TYPE_MASK = 983040
+    PS_GEOMETRIC = 65536_u32
+    PS_COSMETIC = 0_u32
+    PS_SOLID = 0_u32
+    PS_DASH = 1_u32
+    PS_DOT = 2_u32
+    PS_DASHDOT = 3_u32
+    PS_DASHDOTDOT = 4_u32
+    PS_NULL = 5_u32
+    PS_INSIDEFRAME = 6_u32
+    PS_USERSTYLE = 7_u32
+    PS_ALTERNATE = 8_u32
+    PS_STYLE_MASK = 15_u32
+    PS_ENDCAP_ROUND = 0_u32
+    PS_ENDCAP_SQUARE = 256_u32
+    PS_ENDCAP_FLAT = 512_u32
+    PS_ENDCAP_MASK = 3840_u32
+    PS_JOIN_ROUND = 0_u32
+    PS_JOIN_BEVEL = 4096_u32
+    PS_JOIN_MITER = 8192_u32
+    PS_JOIN_MASK = 61440_u32
+    PS_TYPE_MASK = 983040_u32
   end
-
+  @[Flags]
   enum TTEMBED_FLAGS : UInt32
-    TTEMBED_EMBEDEUDC = 32
-    TTEMBED_RAW = 0
-    TTEMBED_SUBSET = 1
-    TTEMBED_TTCOMPRESSED = 4
+    TTEMBED_EMBEDEUDC = 32_u32
+    TTEMBED_RAW = 0_u32
+    TTEMBED_SUBSET = 1_u32
+    TTEMBED_TTCOMPRESSED = 4_u32
   end
-
+  @[Flags]
   enum DRAW_TEXT_FORMAT : UInt32
-    DT_BOTTOM = 8
-    DT_CALCRECT = 1024
-    DT_CENTER = 1
-    DT_EDITCONTROL = 8192
-    DT_END_ELLIPSIS = 32768
-    DT_EXPANDTABS = 64
-    DT_EXTERNALLEADING = 512
-    DT_HIDEPREFIX = 1048576
-    DT_INTERNAL = 4096
-    DT_LEFT = 0
-    DT_MODIFYSTRING = 65536
-    DT_NOCLIP = 256
-    DT_NOFULLWIDTHCHARBREAK = 524288
-    DT_NOPREFIX = 2048
-    DT_PATH_ELLIPSIS = 16384
-    DT_PREFIXONLY = 2097152
-    DT_RIGHT = 2
-    DT_RTLREADING = 131072
-    DT_SINGLELINE = 32
-    DT_TABSTOP = 128
-    DT_TOP = 0
-    DT_VCENTER = 4
-    DT_WORDBREAK = 16
-    DT_WORD_ELLIPSIS = 262144
+    DT_BOTTOM = 8_u32
+    DT_CALCRECT = 1024_u32
+    DT_CENTER = 1_u32
+    DT_EDITCONTROL = 8192_u32
+    DT_END_ELLIPSIS = 32768_u32
+    DT_EXPANDTABS = 64_u32
+    DT_EXTERNALLEADING = 512_u32
+    DT_HIDEPREFIX = 1048576_u32
+    DT_INTERNAL = 4096_u32
+    DT_LEFT = 0_u32
+    DT_MODIFYSTRING = 65536_u32
+    DT_NOCLIP = 256_u32
+    DT_NOFULLWIDTHCHARBREAK = 524288_u32
+    DT_NOPREFIX = 2048_u32
+    DT_PATH_ELLIPSIS = 16384_u32
+    DT_PREFIXONLY = 2097152_u32
+    DT_RIGHT = 2_u32
+    DT_RTLREADING = 131072_u32
+    DT_SINGLELINE = 32_u32
+    DT_TABSTOP = 128_u32
+    DT_TOP = 0_u32
+    DT_VCENTER = 4_u32
+    DT_WORDBREAK = 16_u32
+    DT_WORD_ELLIPSIS = 262144_u32
   end
-
   enum EMBED_FONT_CHARSET : UInt32
-    CHARSET_UNICODE = 1
-    CHARSET_SYMBOL = 2
+    CHARSET_UNICODE = 1_u32
+    CHARSET_SYMBOL = 2_u32
   end
-
+  @[Flags]
   enum GET_DCX_FLAGS : UInt32
-    DCX_WINDOW = 1
-    DCX_CACHE = 2
-    DCX_PARENTCLIP = 32
-    DCX_CLIPSIBLINGS = 16
-    DCX_CLIPCHILDREN = 8
-    DCX_NORESETATTRS = 4
-    DCX_LOCKWINDOWUPDATE = 1024
-    DCX_EXCLUDERGN = 64
-    DCX_INTERSECTRGN = 128
-    DCX_INTERSECTUPDATE = 512
-    DCX_VALIDATE = 2097152
+    DCX_WINDOW = 1_u32
+    DCX_CACHE = 2_u32
+    DCX_PARENTCLIP = 32_u32
+    DCX_CLIPSIBLINGS = 16_u32
+    DCX_CLIPCHILDREN = 8_u32
+    DCX_NORESETATTRS = 4_u32
+    DCX_LOCKWINDOWUPDATE = 1024_u32
+    DCX_EXCLUDERGN = 64_u32
+    DCX_INTERSECTRGN = 128_u32
+    DCX_INTERSECTUPDATE = 512_u32
+    DCX_VALIDATE = 2097152_u32
   end
-
   enum GET_GLYPH_OUTLINE_FORMAT : UInt32
-    GGO_BEZIER = 3
-    GGO_BITMAP = 1
-    GGO_GLYPH_INDEX = 128
-    GGO_GRAY2_BITMAP = 4
-    GGO_GRAY4_BITMAP = 5
-    GGO_GRAY8_BITMAP = 6
-    GGO_METRICS = 0
-    GGO_NATIVE = 2
-    GGO_UNHINTED = 256
+    GGO_BEZIER = 3_u32
+    GGO_BITMAP = 1_u32
+    GGO_GLYPH_INDEX = 128_u32
+    GGO_GRAY2_BITMAP = 4_u32
+    GGO_GRAY4_BITMAP = 5_u32
+    GGO_GRAY8_BITMAP = 6_u32
+    GGO_METRICS = 0_u32
+    GGO_NATIVE = 2_u32
+    GGO_UNHINTED = 256_u32
   end
-
   enum SET_BOUNDS_RECT_FLAGS : UInt32
-    DCB_ACCUMULATE = 2
-    DCB_DISABLE = 8
-    DCB_ENABLE = 4
-    DCB_RESET = 1
+    DCB_ACCUMULATE = 2_u32
+    DCB_DISABLE = 8_u32
+    DCB_ENABLE = 4_u32
+    DCB_RESET = 1_u32
   end
-
   enum GET_STOCK_OBJECT_FLAGS : UInt32
-    BLACK_BRUSH = 4
-    DKGRAY_BRUSH = 3
-    DC_BRUSH = 18
-    GRAY_BRUSH = 2
-    HOLLOW_BRUSH = 5
-    LTGRAY_BRUSH = 1
-    NULL_BRUSH = 5
-    WHITE_BRUSH = 0
-    BLACK_PEN = 7
-    DC_PEN = 19
-    NULL_PEN = 8
-    WHITE_PEN = 6
-    ANSI_FIXED_FONT = 11
-    ANSI_VAR_FONT = 12
-    DEVICE_DEFAULT_FONT = 14
-    DEFAULT_GUI_FONT = 17
-    OEM_FIXED_FONT = 10
-    SYSTEM_FONT = 13
-    SYSTEM_FIXED_FONT = 16
-    DEFAULT_PALETTE = 15
+    BLACK_BRUSH = 4_u32
+    DKGRAY_BRUSH = 3_u32
+    DC_BRUSH = 18_u32
+    GRAY_BRUSH = 2_u32
+    HOLLOW_BRUSH = 5_u32
+    LTGRAY_BRUSH = 1_u32
+    NULL_BRUSH = 5_u32
+    WHITE_BRUSH = 0_u32
+    BLACK_PEN = 7_u32
+    DC_PEN = 19_u32
+    NULL_PEN = 8_u32
+    WHITE_PEN = 6_u32
+    ANSI_FIXED_FONT = 11_u32
+    ANSI_VAR_FONT = 12_u32
+    DEVICE_DEFAULT_FONT = 14_u32
+    DEFAULT_GUI_FONT = 17_u32
+    OEM_FIXED_FONT = 10_u32
+    SYSTEM_FONT = 13_u32
+    SYSTEM_FIXED_FONT = 16_u32
+    DEFAULT_PALETTE = 15_u32
   end
-
   enum MODIFY_WORLD_TRANSFORM_MODE : UInt32
-    MWT_IDENTITY = 1
-    MWT_LEFTMULTIPLY = 2
-    MWT_RIGHTMULTIPLY = 3
+    MWT_IDENTITY = 1_u32
+    MWT_LEFTMULTIPLY = 2_u32
+    MWT_RIGHTMULTIPLY = 3_u32
   end
-
+  @[Flags]
   enum FONT_CLIP_PRECISION : UInt32
-    CLIP_CHARACTER_PRECIS = 1
-    CLIP_DEFAULT_PRECIS = 0
-    CLIP_DFA_DISABLE = 64
-    CLIP_EMBEDDED = 128
-    CLIP_LH_ANGLES = 16
-    CLIP_MASK = 15
-    CLIP_STROKE_PRECIS = 2
-    CLIP_TT_ALWAYS = 32
+    CLIP_CHARACTER_PRECIS = 1_u32
+    CLIP_DEFAULT_PRECIS = 0_u32
+    CLIP_DFA_DISABLE = 64_u32
+    CLIP_EMBEDDED = 128_u32
+    CLIP_LH_ANGLES = 16_u32
+    CLIP_MASK = 15_u32
+    CLIP_STROKE_PRECIS = 2_u32
+    CLIP_TT_ALWAYS = 32_u32
   end
-
   enum CREATE_POLYGON_RGN_MODE : UInt32
-    ALTERNATE = 1
-    WINDING = 2
+    ALTERNATE = 1_u32
+    WINDING = 2_u32
   end
-
   enum EMBEDDED_FONT_PRIV_STATUS : UInt32
-    EMBED_PREVIEWPRINT = 1
-    EMBED_EDITABLE = 2
-    EMBED_INSTALLABLE = 3
-    EMBED_NOEMBEDDING = 4
+    EMBED_PREVIEWPRINT = 1_u32
+    EMBED_EDITABLE = 2_u32
+    EMBED_INSTALLABLE = 3_u32
+    EMBED_NOEMBEDDING = 4_u32
   end
-
   enum MONITOR_FROM_FLAGS : UInt32
-    MONITOR_DEFAULTTONEAREST = 2
-    MONITOR_DEFAULTTONULL = 0
-    MONITOR_DEFAULTTOPRIMARY = 1
+    MONITOR_DEFAULTTONEAREST = 2_u32
+    MONITOR_DEFAULTTONULL = 0_u32
+    MONITOR_DEFAULTTOPRIMARY = 1_u32
   end
-
   enum FONT_RESOURCE_CHARACTERISTICS : UInt32
-    FR_PRIVATE = 16
-    FR_NOT_ENUM = 32
+    FR_PRIVATE = 16_u32
+    FR_NOT_ENUM = 32_u32
   end
-
+  @[Flags]
   enum DC_LAYOUT : UInt32
-    LAYOUT_BITMAPORIENTATIONPRESERVED = 8
-    LAYOUT_RTL = 1
+    LAYOUT_BITMAPORIENTATIONPRESERVED = 8_u32
+    LAYOUT_RTL = 1_u32
   end
-
   enum GET_DEVICE_CAPS_INDEX : UInt32
-    DRIVERVERSION = 0
-    TECHNOLOGY = 2
-    HORZSIZE = 4
-    VERTSIZE = 6
-    HORZRES = 8
-    VERTRES = 10
-    BITSPIXEL = 12
-    PLANES = 14
-    NUMBRUSHES = 16
-    NUMPENS = 18
-    NUMMARKERS = 20
-    NUMFONTS = 22
-    NUMCOLORS = 24
-    PDEVICESIZE = 26
-    CURVECAPS = 28
-    LINECAPS = 30
-    POLYGONALCAPS = 32
-    TEXTCAPS = 34
-    CLIPCAPS = 36
-    RASTERCAPS = 38
-    ASPECTX = 40
-    ASPECTY = 42
-    ASPECTXY = 44
-    LOGPIXELSX = 88
-    LOGPIXELSY = 90
-    SIZEPALETTE = 104
-    NUMRESERVED = 106
-    COLORRES = 108
-    PHYSICALWIDTH = 110
-    PHYSICALHEIGHT = 111
-    PHYSICALOFFSETX = 112
-    PHYSICALOFFSETY = 113
-    SCALINGFACTORX = 114
-    SCALINGFACTORY = 115
-    VREFRESH = 116
-    DESKTOPVERTRES = 117
-    DESKTOPHORZRES = 118
-    BLTALIGNMENT = 119
-    SHADEBLENDCAPS = 120
-    COLORMGMTCAPS = 121
+    DRIVERVERSION = 0_u32
+    TECHNOLOGY = 2_u32
+    HORZSIZE = 4_u32
+    VERTSIZE = 6_u32
+    HORZRES = 8_u32
+    VERTRES = 10_u32
+    BITSPIXEL = 12_u32
+    PLANES = 14_u32
+    NUMBRUSHES = 16_u32
+    NUMPENS = 18_u32
+    NUMMARKERS = 20_u32
+    NUMFONTS = 22_u32
+    NUMCOLORS = 24_u32
+    PDEVICESIZE = 26_u32
+    CURVECAPS = 28_u32
+    LINECAPS = 30_u32
+    POLYGONALCAPS = 32_u32
+    TEXTCAPS = 34_u32
+    CLIPCAPS = 36_u32
+    RASTERCAPS = 38_u32
+    ASPECTX = 40_u32
+    ASPECTY = 42_u32
+    ASPECTXY = 44_u32
+    LOGPIXELSX = 88_u32
+    LOGPIXELSY = 90_u32
+    SIZEPALETTE = 104_u32
+    NUMRESERVED = 106_u32
+    COLORRES = 108_u32
+    PHYSICALWIDTH = 110_u32
+    PHYSICALHEIGHT = 111_u32
+    PHYSICALOFFSETX = 112_u32
+    PHYSICALOFFSETY = 113_u32
+    SCALINGFACTORX = 114_u32
+    SCALINGFACTORY = 115_u32
+    VREFRESH = 116_u32
+    DESKTOPVERTRES = 117_u32
+    DESKTOPHORZRES = 118_u32
+    BLTALIGNMENT = 119_u32
+    SHADEBLENDCAPS = 120_u32
+    COLORMGMTCAPS = 121_u32
   end
-
   enum FONT_OUTPUT_PRECISION : UInt32
-    OUT_CHARACTER_PRECIS = 2
-    OUT_DEFAULT_PRECIS = 0
-    OUT_DEVICE_PRECIS = 5
-    OUT_OUTLINE_PRECIS = 8
-    OUT_PS_ONLY_PRECIS = 10
-    OUT_RASTER_PRECIS = 6
-    OUT_STRING_PRECIS = 1
-    OUT_STROKE_PRECIS = 3
-    OUT_TT_ONLY_PRECIS = 7
-    OUT_TT_PRECIS = 4
+    OUT_CHARACTER_PRECIS = 2_u32
+    OUT_DEFAULT_PRECIS = 0_u32
+    OUT_DEVICE_PRECIS = 5_u32
+    OUT_OUTLINE_PRECIS = 8_u32
+    OUT_PS_ONLY_PRECIS = 10_u32
+    OUT_RASTER_PRECIS = 6_u32
+    OUT_STRING_PRECIS = 1_u32
+    OUT_STROKE_PRECIS = 3_u32
+    OUT_TT_ONLY_PRECIS = 7_u32
+    OUT_TT_PRECIS = 4_u32
   end
-
   enum ARC_DIRECTION : UInt32
-    AD_COUNTERCLOCKWISE = 1
-    AD_CLOCKWISE = 2
+    AD_COUNTERCLOCKWISE = 1_u32
+    AD_CLOCKWISE = 2_u32
   end
-
+  @[Flags]
   enum TTLOAD_EMBEDDED_FONT_STATUS : UInt32
-    TTLOAD_FONT_SUBSETTED = 1
-    TTLOAD_FONT_IN_SYSSTARTUP = 2
+    TTLOAD_FONT_SUBSETTED = 1_u32
+    TTLOAD_FONT_IN_SYSSTARTUP = 2_u32
   end
-
   enum STRETCH_BLT_MODE : UInt32
-    BLACKONWHITE = 1
-    COLORONCOLOR = 3
-    HALFTONE = 4
-    STRETCH_ANDSCANS = 1
-    STRETCH_DELETESCANS = 3
-    STRETCH_HALFTONE = 4
-    STRETCH_ORSCANS = 2
-    WHITEONBLACK = 2
+    BLACKONWHITE = 1_u32
+    COLORONCOLOR = 3_u32
+    HALFTONE = 4_u32
+    STRETCH_ANDSCANS = 1_u32
+    STRETCH_DELETESCANS = 3_u32
+    STRETCH_HALFTONE = 4_u32
+    STRETCH_ORSCANS = 2_u32
+    WHITEONBLACK = 2_u32
   end
-
   enum FONT_QUALITY : UInt32
-    ANTIALIASED_QUALITY = 4
-    CLEARTYPE_QUALITY = 5
-    DEFAULT_QUALITY = 0
-    DRAFT_QUALITY = 1
-    NONANTIALIASED_QUALITY = 3
-    PROOF_QUALITY = 2
+    ANTIALIASED_QUALITY = 4_u32
+    CLEARTYPE_QUALITY = 5_u32
+    DEFAULT_QUALITY = 0_u32
+    DRAFT_QUALITY = 1_u32
+    NONANTIALIASED_QUALITY = 3_u32
+    PROOF_QUALITY = 2_u32
   end
-
   enum BACKGROUND_MODE : UInt32
-    OPAQUE = 2
-    TRANSPARENT = 1
+    OPAQUE = 2_u32
+    TRANSPARENT = 1_u32
   end
-
+  @[Flags]
   enum GET_CHARACTER_PLACEMENT_FLAGS : UInt32
-    GCP_CLASSIN = 524288
-    GCP_DIACRITIC = 256
-    GCP_DISPLAYZWG = 4194304
-    GCP_GLYPHSHAPE = 16
-    GCP_JUSTIFY = 65536
-    GCP_KASHIDA = 1024
-    GCP_LIGATE = 32
-    GCP_MAXEXTENT = 1048576
-    GCP_NEUTRALOVERRIDE = 33554432
-    GCP_NUMERICOVERRIDE = 16777216
-    GCP_NUMERICSLATIN = 67108864
-    GCP_NUMERICSLOCAL = 134217728
-    GCP_REORDER = 2
-    GCP_SYMSWAPOFF = 8388608
-    GCP_USEKERNING = 8
+    GCP_CLASSIN = 524288_u32
+    GCP_DIACRITIC = 256_u32
+    GCP_DISPLAYZWG = 4194304_u32
+    GCP_GLYPHSHAPE = 16_u32
+    GCP_JUSTIFY = 65536_u32
+    GCP_KASHIDA = 1024_u32
+    GCP_LIGATE = 32_u32
+    GCP_MAXEXTENT = 1048576_u32
+    GCP_NEUTRALOVERRIDE = 33554432_u32
+    GCP_NUMERICOVERRIDE = 16777216_u32
+    GCP_NUMERICSLATIN = 67108864_u32
+    GCP_NUMERICSLOCAL = 134217728_u32
+    GCP_REORDER = 2_u32
+    GCP_SYMSWAPOFF = 8388608_u32
+    GCP_USEKERNING = 8_u32
   end
-
+  @[Flags]
   enum DRAW_EDGE_FLAGS : UInt32
-    BF_ADJUST = 8192
-    BF_BOTTOM = 8
-    BF_BOTTOMLEFT = 9
-    BF_BOTTOMRIGHT = 12
-    BF_DIAGONAL = 16
-    BF_DIAGONAL_ENDBOTTOMLEFT = 25
-    BF_DIAGONAL_ENDBOTTOMRIGHT = 28
-    BF_DIAGONAL_ENDTOPLEFT = 19
-    BF_DIAGONAL_ENDTOPRIGHT = 22
-    BF_FLAT = 16384
-    BF_LEFT = 1
-    BF_MIDDLE = 2048
-    BF_MONO = 32768
-    BF_RECT = 15
-    BF_RIGHT = 4
-    BF_SOFT = 4096
-    BF_TOP = 2
-    BF_TOPLEFT = 3
-    BF_TOPRIGHT = 6
+    BF_ADJUST = 8192_u32
+    BF_BOTTOM = 8_u32
+    BF_BOTTOMLEFT = 9_u32
+    BF_BOTTOMRIGHT = 12_u32
+    BF_DIAGONAL = 16_u32
+    BF_DIAGONAL_ENDBOTTOMLEFT = 25_u32
+    BF_DIAGONAL_ENDBOTTOMRIGHT = 28_u32
+    BF_DIAGONAL_ENDTOPLEFT = 19_u32
+    BF_DIAGONAL_ENDTOPRIGHT = 22_u32
+    BF_FLAT = 16384_u32
+    BF_LEFT = 1_u32
+    BF_MIDDLE = 2048_u32
+    BF_MONO = 32768_u32
+    BF_RECT = 15_u32
+    BF_RIGHT = 4_u32
+    BF_SOFT = 4096_u32
+    BF_TOP = 2_u32
+    BF_TOPLEFT = 3_u32
+    BF_TOPRIGHT = 6_u32
   end
-
   enum FONT_LICENSE_PRIVS : UInt32
-    LICENSE_PREVIEWPRINT = 4
-    LICENSE_EDITABLE = 8
-    LICENSE_INSTALLABLE = 0
-    LICENSE_NOEMBEDDING = 2
-    LICENSE_DEFAULT = 0
+    LICENSE_PREVIEWPRINT = 4_u32
+    LICENSE_EDITABLE = 8_u32
+    LICENSE_INSTALLABLE = 0_u32
+    LICENSE_NOEMBEDDING = 2_u32
+    LICENSE_DEFAULT = 0_u32
   end
-
   enum GRADIENT_FILL : UInt32
-    GRADIENT_FILL_RECT_H = 0
-    GRADIENT_FILL_RECT_V = 1
-    GRADIENT_FILL_TRIANGLE = 2
+    GRADIENT_FILL_RECT_H = 0_u32
+    GRADIENT_FILL_RECT_V = 1_u32
+    GRADIENT_FILL_TRIANGLE = 2_u32
   end
-
   enum CREATE_FONT_PACKAGE_SUBSET_ENCODING : UInt32
-    TTFCFP_STD_MAC_CHAR_SET = 0
-    TTFCFP_SYMBOL_CHAR_SET = 0
-    TTFCFP_UNICODE_CHAR_SET = 1
+    TTFCFP_STD_MAC_CHAR_SET = 0_u32
+    TTFCFP_SYMBOL_CHAR_SET = 0_u32
+    TTFCFP_UNICODE_CHAR_SET = 1_u32
   end
-
   enum EXT_FLOOD_FILL_TYPE : UInt32
-    FLOODFILLBORDER = 0
-    FLOODFILLSURFACE = 1
+    FLOODFILLBORDER = 0_u32
+    FLOODFILLSURFACE = 1_u32
   end
-
   enum HATCH_BRUSH_STYLE : UInt32
-    HS_BDIAGONAL = 3
-    HS_CROSS = 4
-    HS_DIAGCROSS = 5
-    HS_FDIAGONAL = 2
-    HS_HORIZONTAL = 0
-    HS_VERTICAL = 1
+    HS_BDIAGONAL = 3_u32
+    HS_CROSS = 4_u32
+    HS_DIAGCROSS = 5_u32
+    HS_FDIAGONAL = 2_u32
+    HS_HORIZONTAL = 0_u32
+    HS_VERTICAL = 1_u32
   end
-
+  @[Flags]
   enum DRAW_CAPTION_FLAGS : UInt32
-    DC_ACTIVE = 1
-    DC_BUTTONS = 4096
-    DC_GRADIENT = 32
-    DC_ICON = 4
-    DC_INBUTTON = 16
-    DC_SMALLCAP = 2
-    DC_TEXT = 8
+    DC_ACTIVE = 1_u32
+    DC_BUTTONS = 4096_u32
+    DC_GRADIENT = 32_u32
+    DC_ICON = 4_u32
+    DC_INBUTTON = 16_u32
+    DC_SMALLCAP = 2_u32
+    DC_TEXT = 8_u32
   end
-
   enum SYSTEM_PALETTE_USE : UInt32
-    SYSPAL_NOSTATIC = 2
-    SYSPAL_NOSTATIC256 = 3
-    SYSPAL_STATIC = 1
+    SYSPAL_NOSTATIC = 2_u32
+    SYSPAL_NOSTATIC256 = 3_u32
+    SYSPAL_STATIC = 1_u32
   end
-
   enum GRAPHICS_MODE : UInt32
-    GM_COMPATIBLE = 1
-    GM_ADVANCED = 2
+    GM_COMPATIBLE = 1_u32
+    GM_ADVANCED = 2_u32
   end
-
   enum FONT_PITCH_AND_FAMILY : UInt32
-    FF_DECORATIVE = 80
-    FF_DONTCARE = 0
-    FF_MODERN = 48
-    FF_ROMAN = 16
-    FF_SCRIPT = 64
-    FF_SWISS = 32
+    FF_DECORATIVE = 80_u32
+    FF_DONTCARE = 0_u32
+    FF_MODERN = 48_u32
+    FF_ROMAN = 16_u32
+    FF_SCRIPT = 64_u32
+    FF_SWISS = 32_u32
   end
-
   enum CREATE_FONT_PACKAGE_SUBSET_PLATFORM : UInt32
-    TTFCFP_UNICODE_PLATFORMID = 0
-    TTFCFP_ISO_PLATFORMID = 2
+    TTFCFP_UNICODE_PLATFORMID = 0_u32
+    TTFCFP_ISO_PLATFORMID = 2_u32
   end
-
   enum HDC_MAP_MODE : UInt32
-    MM_ANISOTROPIC = 8
-    MM_HIENGLISH = 5
-    MM_HIMETRIC = 3
-    MM_ISOTROPIC = 7
-    MM_LOENGLISH = 4
-    MM_LOMETRIC = 2
-    MM_TEXT = 1
-    MM_TWIPS = 6
+    MM_ANISOTROPIC = 8_u32
+    MM_HIENGLISH = 5_u32
+    MM_HIMETRIC = 3_u32
+    MM_ISOTROPIC = 7_u32
+    MM_LOENGLISH = 4_u32
+    MM_LOMETRIC = 2_u32
+    MM_TEXT = 1_u32
+    MM_TWIPS = 6_u32
+  end
+  enum DISPLAYCONFIG_COLOR_ENCODING
+    DISPLAYCONFIG_COLOR_ENCODING_RGB = 0_i32
+    DISPLAYCONFIG_COLOR_ENCODING_YCBCR444 = 1_i32
+    DISPLAYCONFIG_COLOR_ENCODING_YCBCR422 = 2_i32
+    DISPLAYCONFIG_COLOR_ENCODING_YCBCR420 = 3_i32
+    DISPLAYCONFIG_COLOR_ENCODING_INTENSITY = 4_i32
+    DISPLAYCONFIG_COLOR_ENCODING_FORCE_UINT32 = -1_i32
   end
 
-  enum DISPLAYCONFIG_COLOR_ENCODING : Int32
-    DISPLAYCONFIG_COLOR_ENCODING_RGB = 0
-    DISPLAYCONFIG_COLOR_ENCODING_YCBCR444 = 1
-    DISPLAYCONFIG_COLOR_ENCODING_YCBCR422 = 2
-    DISPLAYCONFIG_COLOR_ENCODING_YCBCR420 = 3
-    DISPLAYCONFIG_COLOR_ENCODING_INTENSITY = 4
-    DISPLAYCONFIG_COLOR_ENCODING_FORCE_UINT32 = -1
+  @[Extern]
+  record MONITORINFOEXA,
+    monitorInfo : Win32cr::Graphics::Gdi::MONITORINFO,
+    szDevice : Win32cr::Foundation::CHAR[32]
+
+  @[Extern]
+  record MONITORINFOEXW,
+    monitorInfo : Win32cr::Graphics::Gdi::MONITORINFO,
+    szDevice : UInt16[32]
+
+  @[Extern]
+  record XFORM,
+    eM11 : Float32,
+    eM12 : Float32,
+    eM21 : Float32,
+    eM22 : Float32,
+    eDx : Float32,
+    eDy : Float32
+
+  @[Extern]
+  record BITMAP,
+    bmType : Int32,
+    bmWidth : Int32,
+    bmHeight : Int32,
+    bmWidthBytes : Int32,
+    bmPlanes : UInt16,
+    bmBitsPixel : UInt16,
+    bmBits : Void*
+
+  @[Extern]
+  record RGBTRIPLE,
+    rgbtBlue : UInt8,
+    rgbtGreen : UInt8,
+    rgbtRed : UInt8
+
+  @[Extern]
+  record RGBQUAD,
+    rgbBlue : UInt8,
+    rgbGreen : UInt8,
+    rgbRed : UInt8,
+    rgbReserved : UInt8
+
+  @[Extern]
+  record CIEXYZ,
+    ciexyzX : Int32,
+    ciexyzY : Int32,
+    ciexyzZ : Int32
+
+  @[Extern]
+  record CIEXYZTRIPLE,
+    ciexyzRed : Win32cr::Graphics::Gdi::CIEXYZ,
+    ciexyzGreen : Win32cr::Graphics::Gdi::CIEXYZ,
+    ciexyzBlue : Win32cr::Graphics::Gdi::CIEXYZ
+
+  @[Extern]
+  record BITMAPCOREHEADER,
+    bcSize : UInt32,
+    bcWidth : UInt16,
+    bcHeight : UInt16,
+    bcPlanes : UInt16,
+    bcBitCount : UInt16
+
+  @[Extern]
+  record BITMAPINFOHEADER,
+    biSize : UInt32,
+    biWidth : Int32,
+    biHeight : Int32,
+    biPlanes : UInt16,
+    biBitCount : UInt16,
+    biCompression : UInt32,
+    biSizeImage : UInt32,
+    biXPelsPerMeter : Int32,
+    biYPelsPerMeter : Int32,
+    biClrUsed : UInt32,
+    biClrImportant : UInt32
+
+  @[Extern]
+  record BITMAPV4HEADER,
+    bV4Size : UInt32,
+    bV4Width : Int32,
+    bV4Height : Int32,
+    bV4Planes : UInt16,
+    bV4BitCount : UInt16,
+    bV4V4Compression : UInt32,
+    bV4SizeImage : UInt32,
+    bV4XPelsPerMeter : Int32,
+    bV4YPelsPerMeter : Int32,
+    bV4ClrUsed : UInt32,
+    bV4ClrImportant : UInt32,
+    bV4RedMask : UInt32,
+    bV4GreenMask : UInt32,
+    bV4BlueMask : UInt32,
+    bV4AlphaMask : UInt32,
+    bV4CSType : UInt32,
+    bV4Endpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE,
+    bV4GammaRed : UInt32,
+    bV4GammaGreen : UInt32,
+    bV4GammaBlue : UInt32
+
+  @[Extern]
+  record BITMAPV5HEADER,
+    bV5Size : UInt32,
+    bV5Width : Int32,
+    bV5Height : Int32,
+    bV5Planes : UInt16,
+    bV5BitCount : UInt16,
+    bV5Compression : UInt32,
+    bV5SizeImage : UInt32,
+    bV5XPelsPerMeter : Int32,
+    bV5YPelsPerMeter : Int32,
+    bV5ClrUsed : UInt32,
+    bV5ClrImportant : UInt32,
+    bV5RedMask : UInt32,
+    bV5GreenMask : UInt32,
+    bV5BlueMask : UInt32,
+    bV5AlphaMask : UInt32,
+    bV5CSType : UInt32,
+    bV5Endpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE,
+    bV5GammaRed : UInt32,
+    bV5GammaGreen : UInt32,
+    bV5GammaBlue : UInt32,
+    bV5Intent : UInt32,
+    bV5ProfileData : UInt32,
+    bV5ProfileSize : UInt32,
+    bV5Reserved : UInt32
+
+  @[Extern]
+  record BITMAPINFO,
+    bmiHeader : Win32cr::Graphics::Gdi::BITMAPINFOHEADER,
+    bmiColors : Win32cr::Graphics::Gdi::RGBQUAD*
+
+  @[Extern]
+  record BITMAPCOREINFO,
+    bmciHeader : Win32cr::Graphics::Gdi::BITMAPCOREHEADER,
+    bmciColors : Win32cr::Graphics::Gdi::RGBTRIPLE*
+
+  @[Extern]
+  record BITMAPFILEHEADER,
+    bfType : UInt16,
+    bfSize : UInt32,
+    bfReserved1 : UInt16,
+    bfReserved2 : UInt16,
+    bfOffBits : UInt32
+
+  @[Extern]
+  record HANDLETABLE,
+    objectHandle : Win32cr::Graphics::Gdi::HGDIOBJ*
+
+  @[Extern]
+  record METARECORD,
+    rdSize : UInt32,
+    rdFunction : UInt16,
+    rdParm : UInt16*
+
+  @[Extern]
+  record METAHEADER,
+    mtType : UInt16,
+    mtHeaderSize : UInt16,
+    mtVersion : UInt16,
+    mtSize : UInt32,
+    mtNoObjects : UInt16,
+    mtMaxRecord : UInt32,
+    mtNoParameters : UInt16
+
+  @[Extern]
+  record ENHMETARECORD,
+    iType : UInt32,
+    nSize : UInt32,
+    dParm : UInt32*
+
+  @[Extern]
+  record ENHMETAHEADER,
+    iType : UInt32,
+    nSize : UInt32,
+    rclBounds : Win32cr::Foundation::RECTL,
+    rclFrame : Win32cr::Foundation::RECTL,
+    dSignature : UInt32,
+    nVersion : UInt32,
+    nBytes : UInt32,
+    nRecords : UInt32,
+    nHandles : UInt16,
+    sReserved : UInt16,
+    nDescription : UInt32,
+    offDescription : UInt32,
+    nPalEntries : UInt32,
+    szlDevice : Win32cr::Foundation::SIZE,
+    szlMillimeters : Win32cr::Foundation::SIZE,
+    cbPixelFormat : UInt32,
+    offPixelFormat : UInt32,
+    bOpenGL : UInt32,
+    szlMicrometers : Win32cr::Foundation::SIZE
+
+  @[Extern]
+  record TEXTMETRICA,
+    tmHeight : Int32,
+    tmAscent : Int32,
+    tmDescent : Int32,
+    tmInternalLeading : Int32,
+    tmExternalLeading : Int32,
+    tmAveCharWidth : Int32,
+    tmMaxCharWidth : Int32,
+    tmWeight : Int32,
+    tmOverhang : Int32,
+    tmDigitizedAspectX : Int32,
+    tmDigitizedAspectY : Int32,
+    tmFirstChar : UInt8,
+    tmLastChar : UInt8,
+    tmDefaultChar : UInt8,
+    tmBreakChar : UInt8,
+    tmItalic : UInt8,
+    tmUnderlined : UInt8,
+    tmStruckOut : UInt8,
+    tmPitchAndFamily : UInt8,
+    tmCharSet : UInt8
+
+  @[Extern]
+  record TEXTMETRICW,
+    tmHeight : Int32,
+    tmAscent : Int32,
+    tmDescent : Int32,
+    tmInternalLeading : Int32,
+    tmExternalLeading : Int32,
+    tmAveCharWidth : Int32,
+    tmMaxCharWidth : Int32,
+    tmWeight : Int32,
+    tmOverhang : Int32,
+    tmDigitizedAspectX : Int32,
+    tmDigitizedAspectY : Int32,
+    tmFirstChar : UInt16,
+    tmLastChar : UInt16,
+    tmDefaultChar : UInt16,
+    tmBreakChar : UInt16,
+    tmItalic : UInt8,
+    tmUnderlined : UInt8,
+    tmStruckOut : UInt8,
+    tmPitchAndFamily : UInt8,
+    tmCharSet : UInt8
+
+  @[Extern]
+  record NEWTEXTMETRICA,
+    tmHeight : Int32,
+    tmAscent : Int32,
+    tmDescent : Int32,
+    tmInternalLeading : Int32,
+    tmExternalLeading : Int32,
+    tmAveCharWidth : Int32,
+    tmMaxCharWidth : Int32,
+    tmWeight : Int32,
+    tmOverhang : Int32,
+    tmDigitizedAspectX : Int32,
+    tmDigitizedAspectY : Int32,
+    tmFirstChar : UInt8,
+    tmLastChar : UInt8,
+    tmDefaultChar : UInt8,
+    tmBreakChar : UInt8,
+    tmItalic : UInt8,
+    tmUnderlined : UInt8,
+    tmStruckOut : UInt8,
+    tmPitchAndFamily : UInt8,
+    tmCharSet : UInt8,
+    ntmFlags : UInt32,
+    ntmSizeEM : UInt32,
+    ntmCellHeight : UInt32,
+    ntmAvgWidth : UInt32
+
+  @[Extern]
+  record NEWTEXTMETRICW,
+    tmHeight : Int32,
+    tmAscent : Int32,
+    tmDescent : Int32,
+    tmInternalLeading : Int32,
+    tmExternalLeading : Int32,
+    tmAveCharWidth : Int32,
+    tmMaxCharWidth : Int32,
+    tmWeight : Int32,
+    tmOverhang : Int32,
+    tmDigitizedAspectX : Int32,
+    tmDigitizedAspectY : Int32,
+    tmFirstChar : UInt16,
+    tmLastChar : UInt16,
+    tmDefaultChar : UInt16,
+    tmBreakChar : UInt16,
+    tmItalic : UInt8,
+    tmUnderlined : UInt8,
+    tmStruckOut : UInt8,
+    tmPitchAndFamily : UInt8,
+    tmCharSet : UInt8,
+    ntmFlags : UInt32,
+    ntmSizeEM : UInt32,
+    ntmCellHeight : UInt32,
+    ntmAvgWidth : UInt32
+
+  @[Extern]
+  record PELARRAY,
+    paXCount : Int32,
+    paYCount : Int32,
+    paXExt : Int32,
+    paYExt : Int32,
+    paRGBs : UInt8
+
+  @[Extern]
+  record LOGBRUSH,
+    lbStyle : UInt32,
+    lbColor : UInt32,
+    lbHatch : LibC::UIntPtrT
+
+  @[Extern]
+  record LOGBRUSH32,
+    lbStyle : UInt32,
+    lbColor : UInt32,
+    lbHatch : UInt32
+
+  @[Extern]
+  record LOGPEN,
+    lopnStyle : UInt32,
+    lopnWidth : Win32cr::Foundation::POINT,
+    lopnColor : UInt32
+
+  @[Extern]
+  record EXTLOGPEN,
+    elpPenStyle : UInt32,
+    elpWidth : UInt32,
+    elpBrushStyle : UInt32,
+    elpColor : UInt32,
+    elpHatch : LibC::UIntPtrT,
+    elpNumEntries : UInt32,
+    elpStyleEntry : UInt32*
+
+  @[Extern]
+  record EXTLOGPEN32,
+    elpPenStyle : UInt32,
+    elpWidth : UInt32,
+    elpBrushStyle : UInt32,
+    elpColor : UInt32,
+    elpHatch : UInt32,
+    elpNumEntries : UInt32,
+    elpStyleEntry : UInt32*
+
+  @[Extern]
+  record PALETTEENTRY,
+    peRed : UInt8,
+    peGreen : UInt8,
+    peBlue : UInt8,
+    peFlags : UInt8
+
+  @[Extern]
+  record LOGPALETTE,
+    palVersion : UInt16,
+    palNumEntries : UInt16,
+    palPalEntry : Win32cr::Graphics::Gdi::PALETTEENTRY*
+
+  @[Extern]
+  record LOGFONTA,
+    lfHeight : Int32,
+    lfWidth : Int32,
+    lfEscapement : Int32,
+    lfOrientation : Int32,
+    lfWeight : Int32,
+    lfItalic : UInt8,
+    lfUnderline : UInt8,
+    lfStrikeOut : UInt8,
+    lfCharSet : UInt8,
+    lfOutPrecision : UInt8,
+    lfClipPrecision : UInt8,
+    lfQuality : UInt8,
+    lfPitchAndFamily : UInt8,
+    lfFaceName : Win32cr::Foundation::CHAR[32]
+
+  @[Extern]
+  record LOGFONTW,
+    lfHeight : Int32,
+    lfWidth : Int32,
+    lfEscapement : Int32,
+    lfOrientation : Int32,
+    lfWeight : Int32,
+    lfItalic : UInt8,
+    lfUnderline : UInt8,
+    lfStrikeOut : UInt8,
+    lfCharSet : UInt8,
+    lfOutPrecision : UInt8,
+    lfClipPrecision : UInt8,
+    lfQuality : UInt8,
+    lfPitchAndFamily : UInt8,
+    lfFaceName : UInt16[32]
+
+  @[Extern]
+  record ENUMLOGFONTA,
+    elfLogFont : Win32cr::Graphics::Gdi::LOGFONTA,
+    elfFullName : UInt8[64],
+    elfStyle : UInt8[32]
+
+  @[Extern]
+  record ENUMLOGFONTW,
+    elfLogFont : Win32cr::Graphics::Gdi::LOGFONTW,
+    elfFullName : UInt16[64],
+    elfStyle : UInt16[32]
+
+  @[Extern]
+  record ENUMLOGFONTEXA,
+    elfLogFont : Win32cr::Graphics::Gdi::LOGFONTA,
+    elfFullName : UInt8[64],
+    elfStyle : UInt8[32],
+    elfScript : UInt8[32]
+
+  @[Extern]
+  record ENUMLOGFONTEXW,
+    elfLogFont : Win32cr::Graphics::Gdi::LOGFONTW,
+    elfFullName : UInt16[64],
+    elfStyle : UInt16[32],
+    elfScript : UInt16[32]
+
+  @[Extern]
+  record PANOSE,
+    bFamilyType : UInt8,
+    bSerifStyle : UInt8,
+    bWeight : UInt8,
+    bProportion : UInt8,
+    bContrast : UInt8,
+    bStrokeVariation : UInt8,
+    bArmStyle : UInt8,
+    bLetterform : UInt8,
+    bMidline : UInt8,
+    bXHeight : UInt8
+
+  @[Extern]
+  record EXTLOGFONTA,
+    elfLogFont : Win32cr::Graphics::Gdi::LOGFONTA,
+    elfFullName : UInt8[64],
+    elfStyle : UInt8[32],
+    elfVersion : UInt32,
+    elfStyleSize : UInt32,
+    elfMatch : UInt32,
+    elfReserved : UInt32,
+    elfVendorId : UInt8[4],
+    elfCulture : UInt32,
+    elfPanose : Win32cr::Graphics::Gdi::PANOSE
+
+  @[Extern]
+  record EXTLOGFONTW,
+    elfLogFont : Win32cr::Graphics::Gdi::LOGFONTW,
+    elfFullName : UInt16[64],
+    elfStyle : UInt16[32],
+    elfVersion : UInt32,
+    elfStyleSize : UInt32,
+    elfMatch : UInt32,
+    elfReserved : UInt32,
+    elfVendorId : UInt8[4],
+    elfCulture : UInt32,
+    elfPanose : Win32cr::Graphics::Gdi::PANOSE
+
+  @[Extern]
+  record DEVMODEA,
+    dmDeviceName : UInt8[32],
+    dmSpecVersion : UInt16,
+    dmDriverVersion : UInt16,
+    dmSize : UInt16,
+    dmDriverExtra : UInt16,
+    dmFields : UInt32,
+    anonymous1 : Anonymous1_e__Union,
+    dmColor : Int16,
+    dmDuplex : Int16,
+    dmYResolution : Int16,
+    dmTTOption : Int16,
+    dmCollate : Int16,
+    dmFormName : UInt8[32],
+    dmLogPixels : UInt16,
+    dmBitsPerPel : UInt32,
+    dmPelsWidth : UInt32,
+    dmPelsHeight : UInt32,
+    anonymous2 : Anonymous2_e__Union,
+    dmDisplayFrequency : UInt32,
+    dmICMMethod : UInt32,
+    dmICMIntent : UInt32,
+    dmMediaType : UInt32,
+    dmDitherType : UInt32,
+    dmReserved1 : UInt32,
+    dmReserved2 : UInt32,
+    dmPanningWidth : UInt32,
+    dmPanningHeight : UInt32 do
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      anonymous1 : Anonymous1_e__Struct,
+      anonymous2 : Anonymous2_e__Struct do
+
+      # Nested Type Anonymous2_e__Struct
+      @[Extern]
+      record Anonymous2_e__Struct,
+        dmPosition : Win32cr::Foundation::POINTL,
+        dmDisplayOrientation : UInt32,
+        dmDisplayFixedOutput : UInt32
+
+
+      # Nested Type Anonymous1_e__Struct
+      @[Extern]
+      record Anonymous1_e__Struct,
+        dmOrientation : Int16,
+        dmPaperSize : Int16,
+        dmPaperLength : Int16,
+        dmPaperWidth : Int16,
+        dmScale : Int16,
+        dmCopies : Int16,
+        dmDefaultSource : Int16,
+        dmPrintQuality : Int16
+
+    end
+
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      dmDisplayFlags : UInt32,
+      dmNup : UInt32
+
   end
 
-  union DEVMODEA_Anonymous1_e__Union
-    anonymous1 : DEVMODEA_Anonymous1_e__Union_Anonymous1_e__Struct
-    anonymous2 : DEVMODEA_Anonymous1_e__Union_Anonymous2_e__Struct
-  end
-  union DEVMODEA_Anonymous2_e__Union
-    dm_display_flags : UInt32
-    dm_nup : UInt32
-  end
-  union DEVMODEW_Anonymous1_e__Union
-    anonymous1 : DEVMODEW_Anonymous1_e__Union_Anonymous1_e__Struct
-    anonymous2 : DEVMODEW_Anonymous1_e__Union_Anonymous2_e__Struct
-  end
-  union DEVMODEW_Anonymous2_e__Union
-    dm_display_flags : UInt32
-    dm_nup : UInt32
+  @[Extern]
+  record DEVMODEW,
+    dmDeviceName : UInt16[32],
+    dmSpecVersion : UInt16,
+    dmDriverVersion : UInt16,
+    dmSize : UInt16,
+    dmDriverExtra : UInt16,
+    dmFields : UInt32,
+    anonymous1 : Anonymous1_e__Union,
+    dmColor : Int16,
+    dmDuplex : Int16,
+    dmYResolution : Int16,
+    dmTTOption : Int16,
+    dmCollate : Int16,
+    dmFormName : UInt16[32],
+    dmLogPixels : UInt16,
+    dmBitsPerPel : UInt32,
+    dmPelsWidth : UInt32,
+    dmPelsHeight : UInt32,
+    anonymous2 : Anonymous2_e__Union,
+    dmDisplayFrequency : UInt32,
+    dmICMMethod : UInt32,
+    dmICMIntent : UInt32,
+    dmMediaType : UInt32,
+    dmDitherType : UInt32,
+    dmReserved1 : UInt32,
+    dmReserved2 : UInt32,
+    dmPanningWidth : UInt32,
+    dmPanningHeight : UInt32 do
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      anonymous1 : Anonymous1_e__Struct,
+      anonymous2 : Anonymous2_e__Struct do
+
+      # Nested Type Anonymous1_e__Struct
+      @[Extern]
+      record Anonymous1_e__Struct,
+        dmOrientation : Int16,
+        dmPaperSize : Int16,
+        dmPaperLength : Int16,
+        dmPaperWidth : Int16,
+        dmScale : Int16,
+        dmCopies : Int16,
+        dmDefaultSource : Int16,
+        dmPrintQuality : Int16
+
+
+      # Nested Type Anonymous2_e__Struct
+      @[Extern]
+      record Anonymous2_e__Struct,
+        dmPosition : Win32cr::Foundation::POINTL,
+        dmDisplayOrientation : UInt32,
+        dmDisplayFixedOutput : UInt32
+
+    end
+
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      dmDisplayFlags : UInt32,
+      dmNup : UInt32
+
   end
 
-  struct XFORM
-    e_m11 : Float32
-    e_m12 : Float32
-    e_m21 : Float32
-    e_m22 : Float32
-    e_dx : Float32
-    e_dy : Float32
-  end
-  struct BITMAP
-    bm_type : Int32
-    bm_width : Int32
-    bm_height : Int32
-    bm_width_bytes : Int32
-    bm_planes : UInt16
-    bm_bits_pixel : UInt16
-    bm_bits : Void*
-  end
-  struct RGBTRIPLE
-    rgbt_blue : UInt8
-    rgbt_green : UInt8
-    rgbt_red : UInt8
-  end
-  struct RGBQUAD
-    rgb_blue : UInt8
-    rgb_green : UInt8
-    rgb_red : UInt8
-    rgb_reserved : UInt8
-  end
-  struct CIEXYZ
-    ciexyz_x : Int32
-    ciexyz_y : Int32
-    ciexyz_z : Int32
-  end
-  struct CIEXYZTRIPLE
-    ciexyz_red : CIEXYZ
-    ciexyz_green : CIEXYZ
-    ciexyz_blue : CIEXYZ
-  end
-  struct BITMAPCOREHEADER
-    bc_size : UInt32
-    bc_width : UInt16
-    bc_height : UInt16
-    bc_planes : UInt16
-    bc_bit_count : UInt16
-  end
-  struct BITMAPINFOHEADER
-    bi_size : UInt32
-    bi_width : Int32
-    bi_height : Int32
-    bi_planes : UInt16
-    bi_bit_count : UInt16
-    bi_compression : UInt32
-    bi_size_image : UInt32
-    bi_x_pels_per_meter : Int32
-    bi_y_pels_per_meter : Int32
-    bi_clr_used : UInt32
-    bi_clr_important : UInt32
-  end
-  struct BITMAPV4HEADER
-    b_v4_size : UInt32
-    b_v4_width : Int32
-    b_v4_height : Int32
-    b_v4_planes : UInt16
-    b_v4_bit_count : UInt16
-    b_v4_v4_compression : UInt32
-    b_v4_size_image : UInt32
-    b_v4_x_pels_per_meter : Int32
-    b_v4_y_pels_per_meter : Int32
-    b_v4_clr_used : UInt32
-    b_v4_clr_important : UInt32
-    b_v4_red_mask : UInt32
-    b_v4_green_mask : UInt32
-    b_v4_blue_mask : UInt32
-    b_v4_alpha_mask : UInt32
-    b_v4_cs_type : UInt32
-    b_v4_endpoints : CIEXYZTRIPLE
-    b_v4_gamma_red : UInt32
-    b_v4_gamma_green : UInt32
-    b_v4_gamma_blue : UInt32
-  end
-  struct BITMAPV5HEADER
-    b_v5_size : UInt32
-    b_v5_width : Int32
-    b_v5_height : Int32
-    b_v5_planes : UInt16
-    b_v5_bit_count : UInt16
-    b_v5_compression : UInt32
-    b_v5_size_image : UInt32
-    b_v5_x_pels_per_meter : Int32
-    b_v5_y_pels_per_meter : Int32
-    b_v5_clr_used : UInt32
-    b_v5_clr_important : UInt32
-    b_v5_red_mask : UInt32
-    b_v5_green_mask : UInt32
-    b_v5_blue_mask : UInt32
-    b_v5_alpha_mask : UInt32
-    b_v5_cs_type : UInt32
-    b_v5_endpoints : CIEXYZTRIPLE
-    b_v5_gamma_red : UInt32
-    b_v5_gamma_green : UInt32
-    b_v5_gamma_blue : UInt32
-    b_v5_intent : UInt32
-    b_v5_profile_data : UInt32
-    b_v5_profile_size : UInt32
-    b_v5_reserved : UInt32
-  end
-  struct BITMAPINFO
-    bmi_header : BITMAPINFOHEADER
-    bmi_colors : RGBQUAD[0]*
-  end
-  struct BITMAPCOREINFO
-    bmci_header : BITMAPCOREHEADER
-    bmci_colors : RGBTRIPLE[0]*
-  end
-  struct BITMAPFILEHEADER
-    bf_type : UInt16
-    bf_size : UInt32
-    bf_reserved1 : UInt16
-    bf_reserved2 : UInt16
-    bf_off_bits : UInt32
-  end
-  struct HANDLETABLE
-    object_handle : HGDIOBJ[0]*
-  end
-  struct METARECORD
-    rd_size : UInt32
-    rd_function : UInt16
-    rd_parm : UInt16[0]*
-  end
-  struct METAHEADER
-    mt_type : UInt16
-    mt_header_size : UInt16
-    mt_version : UInt16
-    mt_size : UInt32
-    mt_no_objects : UInt16
-    mt_max_record : UInt32
-    mt_no_parameters : UInt16
-  end
-  struct ENHMETARECORD
-    i_type : UInt32
-    n_size : UInt32
-    d_parm : UInt32[0]*
-  end
-  struct ENHMETAHEADER
-    i_type : UInt32
-    n_size : UInt32
-    rcl_bounds : RECTL
-    rcl_frame : RECTL
-    d_signature : UInt32
-    n_version : UInt32
-    n_bytes : UInt32
-    n_records : UInt32
-    n_handles : UInt16
-    s_reserved : UInt16
-    n_description : UInt32
-    off_description : UInt32
-    n_pal_entries : UInt32
-    szl_device : SIZE
-    szl_millimeters : SIZE
-    cb_pixel_format : UInt32
-    off_pixel_format : UInt32
-    b_open_gl : UInt32
-    szl_micrometers : SIZE
-  end
-  struct TEXTMETRICA
-    tm_height : Int32
-    tm_ascent : Int32
-    tm_descent : Int32
-    tm_internal_leading : Int32
-    tm_external_leading : Int32
-    tm_ave_char_width : Int32
-    tm_max_char_width : Int32
-    tm_weight : Int32
-    tm_overhang : Int32
-    tm_digitized_aspect_x : Int32
-    tm_digitized_aspect_y : Int32
-    tm_first_char : UInt8
-    tm_last_char : UInt8
-    tm_default_char : UInt8
-    tm_break_char : UInt8
-    tm_italic : UInt8
-    tm_underlined : UInt8
-    tm_struck_out : UInt8
-    tm_pitch_and_family : UInt8
-    tm_char_set : UInt8
-  end
-  struct TEXTMETRICW
-    tm_height : Int32
-    tm_ascent : Int32
-    tm_descent : Int32
-    tm_internal_leading : Int32
-    tm_external_leading : Int32
-    tm_ave_char_width : Int32
-    tm_max_char_width : Int32
-    tm_weight : Int32
-    tm_overhang : Int32
-    tm_digitized_aspect_x : Int32
-    tm_digitized_aspect_y : Int32
-    tm_first_char : Char
-    tm_last_char : Char
-    tm_default_char : Char
-    tm_break_char : Char
-    tm_italic : UInt8
-    tm_underlined : UInt8
-    tm_struck_out : UInt8
-    tm_pitch_and_family : UInt8
-    tm_char_set : UInt8
-  end
-  struct NEWTEXTMETRICA
-    tm_height : Int32
-    tm_ascent : Int32
-    tm_descent : Int32
-    tm_internal_leading : Int32
-    tm_external_leading : Int32
-    tm_ave_char_width : Int32
-    tm_max_char_width : Int32
-    tm_weight : Int32
-    tm_overhang : Int32
-    tm_digitized_aspect_x : Int32
-    tm_digitized_aspect_y : Int32
-    tm_first_char : UInt8
-    tm_last_char : UInt8
-    tm_default_char : UInt8
-    tm_break_char : UInt8
-    tm_italic : UInt8
-    tm_underlined : UInt8
-    tm_struck_out : UInt8
-    tm_pitch_and_family : UInt8
-    tm_char_set : UInt8
-    ntm_flags : UInt32
-    ntm_size_em : UInt32
-    ntm_cell_height : UInt32
-    ntm_avg_width : UInt32
-  end
-  struct NEWTEXTMETRICW
-    tm_height : Int32
-    tm_ascent : Int32
-    tm_descent : Int32
-    tm_internal_leading : Int32
-    tm_external_leading : Int32
-    tm_ave_char_width : Int32
-    tm_max_char_width : Int32
-    tm_weight : Int32
-    tm_overhang : Int32
-    tm_digitized_aspect_x : Int32
-    tm_digitized_aspect_y : Int32
-    tm_first_char : Char
-    tm_last_char : Char
-    tm_default_char : Char
-    tm_break_char : Char
-    tm_italic : UInt8
-    tm_underlined : UInt8
-    tm_struck_out : UInt8
-    tm_pitch_and_family : UInt8
-    tm_char_set : UInt8
-    ntm_flags : UInt32
-    ntm_size_em : UInt32
-    ntm_cell_height : UInt32
-    ntm_avg_width : UInt32
-  end
-  struct PELARRAY
-    pa_x_count : Int32
-    pa_y_count : Int32
-    pa_x_ext : Int32
-    pa_y_ext : Int32
-    pa_rg_bs : UInt8
-  end
-  struct LOGBRUSH
-    lb_style : UInt32
-    lb_color : UInt32
-    lb_hatch : LibC::UINT_PTR
-  end
-  struct LOGBRUSH32
-    lb_style : UInt32
-    lb_color : UInt32
-    lb_hatch : UInt32
-  end
-  struct LOGPEN
-    lopn_style : UInt32
-    lopn_width : POINT
-    lopn_color : UInt32
-  end
-  struct EXTLOGPEN
-    elp_pen_style : UInt32
-    elp_width : UInt32
-    elp_brush_style : UInt32
-    elp_color : UInt32
-    elp_hatch : LibC::UINT_PTR
-    elp_num_entries : UInt32
-    elp_style_entry : UInt32[0]*
-  end
-  struct EXTLOGPEN32
-    elp_pen_style : UInt32
-    elp_width : UInt32
-    elp_brush_style : UInt32
-    elp_color : UInt32
-    elp_hatch : UInt32
-    elp_num_entries : UInt32
-    elp_style_entry : UInt32[0]*
-  end
-  struct PALETTEENTRY
-    pe_red : UInt8
-    pe_green : UInt8
-    pe_blue : UInt8
-    pe_flags : UInt8
-  end
-  struct LOGPALETTE
-    pal_version : UInt16
-    pal_num_entries : UInt16
-    pal_pal_entry : PALETTEENTRY[0]*
-  end
-  struct LOGFONTA
-    lf_height : Int32
-    lf_width : Int32
-    lf_escapement : Int32
-    lf_orientation : Int32
-    lf_weight : Int32
-    lf_italic : UInt8
-    lf_underline : UInt8
-    lf_strike_out : UInt8
-    lf_char_set : UInt8
-    lf_out_precision : UInt8
-    lf_clip_precision : UInt8
-    lf_quality : UInt8
-    lf_pitch_and_family : UInt8
-    lf_face_name : CHAR[32]*
-  end
-  struct LOGFONTW
-    lf_height : Int32
-    lf_width : Int32
-    lf_escapement : Int32
-    lf_orientation : Int32
-    lf_weight : Int32
-    lf_italic : UInt8
-    lf_underline : UInt8
-    lf_strike_out : UInt8
-    lf_char_set : UInt8
-    lf_out_precision : UInt8
-    lf_clip_precision : UInt8
-    lf_quality : UInt8
-    lf_pitch_and_family : UInt8
-    lf_face_name : Char[32]*
-  end
-  struct ENUMLOGFONTA
-    elf_log_font : LOGFONTA
-    elf_full_name : UInt8[64]*
-    elf_style : UInt8[32]*
-  end
-  struct ENUMLOGFONTW
-    elf_log_font : LOGFONTW
-    elf_full_name : Char[64]*
-    elf_style : Char[32]*
-  end
-  struct ENUMLOGFONTEXA
-    elf_log_font : LOGFONTA
-    elf_full_name : UInt8[64]*
-    elf_style : UInt8[32]*
-    elf_script : UInt8[32]*
-  end
-  struct ENUMLOGFONTEXW
-    elf_log_font : LOGFONTW
-    elf_full_name : Char[64]*
-    elf_style : Char[32]*
-    elf_script : Char[32]*
-  end
-  struct PANOSE
-    b_family_type : UInt8
-    b_serif_style : UInt8
-    b_weight : UInt8
-    b_proportion : UInt8
-    b_contrast : UInt8
-    b_stroke_variation : UInt8
-    b_arm_style : UInt8
-    b_letterform : UInt8
-    b_midline : UInt8
-    b_x_height : UInt8
-  end
-  struct EXTLOGFONTA
-    elf_log_font : LOGFONTA
-    elf_full_name : UInt8[64]*
-    elf_style : UInt8[32]*
-    elf_version : UInt32
-    elf_style_size : UInt32
-    elf_match : UInt32
-    elf_reserved : UInt32
-    elf_vendor_id : UInt8[4]*
-    elf_culture : UInt32
-    elf_panose : PANOSE
-  end
-  struct EXTLOGFONTW
-    elf_log_font : LOGFONTW
-    elf_full_name : Char[64]*
-    elf_style : Char[32]*
-    elf_version : UInt32
-    elf_style_size : UInt32
-    elf_match : UInt32
-    elf_reserved : UInt32
-    elf_vendor_id : UInt8[4]*
-    elf_culture : UInt32
-    elf_panose : PANOSE
-  end
-  struct DEVMODEA
-    dm_device_name : UInt8[32]*
-    dm_spec_version : UInt16
-    dm_driver_version : UInt16
-    dm_size : UInt16
-    dm_driver_extra : UInt16
-    dm_fields : UInt32
-    anonymous1 : DEVMODEA_Anonymous1_e__Union
-    dm_color : Int16
-    dm_duplex : Int16
-    dm_y_resolution : Int16
-    dm_tt_option : Int16
-    dm_collate : Int16
-    dm_form_name : UInt8[32]*
-    dm_log_pixels : UInt16
-    dm_bits_per_pel : UInt32
-    dm_pels_width : UInt32
-    dm_pels_height : UInt32
-    anonymous2 : DEVMODEA_Anonymous2_e__Union
-    dm_display_frequency : UInt32
-    dm_icm_method : UInt32
-    dm_icm_intent : UInt32
-    dm_media_type : UInt32
-    dm_dither_type : UInt32
-    dm_reserved1 : UInt32
-    dm_reserved2 : UInt32
-    dm_panning_width : UInt32
-    dm_panning_height : UInt32
-  end
-  struct DEVMODEA_Anonymous1_e__Union_Anonymous2_e__Struct
-    dm_position : POINTL
-    dm_display_orientation : UInt32
-    dm_display_fixed_output : UInt32
-  end
-  struct DEVMODEA_Anonymous1_e__Union_Anonymous1_e__Struct
-    dm_orientation : Int16
-    dm_paper_size : Int16
-    dm_paper_length : Int16
-    dm_paper_width : Int16
-    dm_scale : Int16
-    dm_copies : Int16
-    dm_default_source : Int16
-    dm_print_quality : Int16
-  end
-  struct DEVMODEW
-    dm_device_name : Char[32]*
-    dm_spec_version : UInt16
-    dm_driver_version : UInt16
-    dm_size : UInt16
-    dm_driver_extra : UInt16
-    dm_fields : UInt32
-    anonymous1 : DEVMODEW_Anonymous1_e__Union
-    dm_color : Int16
-    dm_duplex : Int16
-    dm_y_resolution : Int16
-    dm_tt_option : Int16
-    dm_collate : Int16
-    dm_form_name : Char[32]*
-    dm_log_pixels : UInt16
-    dm_bits_per_pel : UInt32
-    dm_pels_width : UInt32
-    dm_pels_height : UInt32
-    anonymous2 : DEVMODEW_Anonymous2_e__Union
-    dm_display_frequency : UInt32
-    dm_icm_method : UInt32
-    dm_icm_intent : UInt32
-    dm_media_type : UInt32
-    dm_dither_type : UInt32
-    dm_reserved1 : UInt32
-    dm_reserved2 : UInt32
-    dm_panning_width : UInt32
-    dm_panning_height : UInt32
-  end
-  struct DEVMODEW_Anonymous1_e__Union_Anonymous1_e__Struct
-    dm_orientation : Int16
-    dm_paper_size : Int16
-    dm_paper_length : Int16
-    dm_paper_width : Int16
-    dm_scale : Int16
-    dm_copies : Int16
-    dm_default_source : Int16
-    dm_print_quality : Int16
-  end
-  struct DEVMODEW_Anonymous1_e__Union_Anonymous2_e__Struct
-    dm_position : POINTL
-    dm_display_orientation : UInt32
-    dm_display_fixed_output : UInt32
-  end
-  struct DISPLAY_DEVICEA
-    cb : UInt32
-    device_name : CHAR[32]*
-    device_string : CHAR[128]*
-    state_flags : UInt32
-    device_id : CHAR[128]*
-    device_key : CHAR[128]*
-  end
-  struct DISPLAY_DEVICEW
-    cb : UInt32
-    device_name : Char[32]*
-    device_string : Char[128]*
-    state_flags : UInt32
-    device_id : Char[128]*
-    device_key : Char[128]*
-  end
-  struct RGNDATAHEADER
-    dw_size : UInt32
-    i_type : UInt32
-    n_count : UInt32
-    n_rgn_size : UInt32
-    rc_bound : RECT
-  end
-  struct RGNDATA
-    rdh : RGNDATAHEADER
-    buffer : CHAR[0]*
-  end
-  struct ABC
-    abc_a : Int32
-    abc_b : UInt32
-    abc_c : Int32
-  end
-  struct ABCFLOAT
-    abcf_a : Float32
-    abcf_b : Float32
-    abcf_c : Float32
-  end
-  struct OUTLINETEXTMETRICA
-    otm_size : UInt32
-    otm_text_metrics : TEXTMETRICA
-    otm_filler : UInt8
-    otm_panose_number : PANOSE
-    otmfs_selection : UInt32
-    otmfs_type : UInt32
-    otms_char_slope_rise : Int32
-    otms_char_slope_run : Int32
-    otm_italic_angle : Int32
-    otm_em_square : UInt32
-    otm_ascent : Int32
-    otm_descent : Int32
-    otm_line_gap : UInt32
-    otms_cap_em_height : UInt32
-    otms_x_height : UInt32
-    otmrc_font_box : RECT
-    otm_mac_ascent : Int32
-    otm_mac_descent : Int32
-    otm_mac_line_gap : UInt32
-    otmus_minimum_ppem : UInt32
-    otmpt_subscript_size : POINT
-    otmpt_subscript_offset : POINT
-    otmpt_superscript_size : POINT
-    otmpt_superscript_offset : POINT
-    otms_strikeout_size : UInt32
-    otms_strikeout_position : Int32
-    otms_underscore_size : Int32
-    otms_underscore_position : Int32
-    otmp_family_name : PSTR
-    otmp_face_name : PSTR
-    otmp_style_name : PSTR
-    otmp_full_name : PSTR
-  end
-  struct OUTLINETEXTMETRICW
-    otm_size : UInt32
-    otm_text_metrics : TEXTMETRICW
-    otm_filler : UInt8
-    otm_panose_number : PANOSE
-    otmfs_selection : UInt32
-    otmfs_type : UInt32
-    otms_char_slope_rise : Int32
-    otms_char_slope_run : Int32
-    otm_italic_angle : Int32
-    otm_em_square : UInt32
-    otm_ascent : Int32
-    otm_descent : Int32
-    otm_line_gap : UInt32
-    otms_cap_em_height : UInt32
-    otms_x_height : UInt32
-    otmrc_font_box : RECT
-    otm_mac_ascent : Int32
-    otm_mac_descent : Int32
-    otm_mac_line_gap : UInt32
-    otmus_minimum_ppem : UInt32
-    otmpt_subscript_size : POINT
-    otmpt_subscript_offset : POINT
-    otmpt_superscript_size : POINT
-    otmpt_superscript_offset : POINT
-    otms_strikeout_size : UInt32
-    otms_strikeout_position : Int32
-    otms_underscore_size : Int32
-    otms_underscore_position : Int32
-    otmp_family_name : PSTR
-    otmp_face_name : PSTR
-    otmp_style_name : PSTR
-    otmp_full_name : PSTR
-  end
-  struct POLYTEXTA
-    x : Int32
-    y : Int32
-    n : UInt32
-    lpstr : PSTR
-    ui_flags : UInt32
-    rcl : RECT
+  @[Extern]
+  record DISPLAY_DEVICEA,
+    cb : UInt32,
+    device_name : Win32cr::Foundation::CHAR[32],
+    device_string : Win32cr::Foundation::CHAR[128],
+    state_flags : UInt32,
+    device_id : Win32cr::Foundation::CHAR[128],
+    device_key : Win32cr::Foundation::CHAR[128]
+
+  @[Extern]
+  record DISPLAY_DEVICEW,
+    cb : UInt32,
+    device_name : UInt16[32],
+    device_string : UInt16[128],
+    state_flags : UInt32,
+    device_id : UInt16[128],
+    device_key : UInt16[128]
+
+  @[Extern]
+  record RGNDATAHEADER,
+    dwSize : UInt32,
+    iType : UInt32,
+    nCount : UInt32,
+    nRgnSize : UInt32,
+    rcBound : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record RGNDATA,
+    rdh : Win32cr::Graphics::Gdi::RGNDATAHEADER,
+    buffer : Win32cr::Foundation::CHAR*
+
+  @[Extern]
+  record ABC,
+    abcA : Int32,
+    abcB : UInt32,
+    abcC : Int32
+
+  @[Extern]
+  record ABCFLOAT,
+    abcfA : Float32,
+    abcfB : Float32,
+    abcfC : Float32
+
+  @[Extern]
+  record OUTLINETEXTMETRICA,
+    otmSize : UInt32,
+    otmTextMetrics : Win32cr::Graphics::Gdi::TEXTMETRICA,
+    otmFiller : UInt8,
+    otmPanoseNumber : Win32cr::Graphics::Gdi::PANOSE,
+    otmfsSelection : UInt32,
+    otmfsType : UInt32,
+    otmsCharSlopeRise : Int32,
+    otmsCharSlopeRun : Int32,
+    otmItalicAngle : Int32,
+    otmEMSquare : UInt32,
+    otmAscent : Int32,
+    otmDescent : Int32,
+    otmLineGap : UInt32,
+    otmsCapEmHeight : UInt32,
+    otmsXHeight : UInt32,
+    otmrcFontBox : Win32cr::Foundation::RECT,
+    otmMacAscent : Int32,
+    otmMacDescent : Int32,
+    otmMacLineGap : UInt32,
+    otmusMinimumPPEM : UInt32,
+    otmptSubscriptSize : Win32cr::Foundation::POINT,
+    otmptSubscriptOffset : Win32cr::Foundation::POINT,
+    otmptSuperscriptSize : Win32cr::Foundation::POINT,
+    otmptSuperscriptOffset : Win32cr::Foundation::POINT,
+    otmsStrikeoutSize : UInt32,
+    otmsStrikeoutPosition : Int32,
+    otmsUnderscoreSize : Int32,
+    otmsUnderscorePosition : Int32,
+    otmpFamilyName : Win32cr::Foundation::PSTR,
+    otmpFaceName : Win32cr::Foundation::PSTR,
+    otmpStyleName : Win32cr::Foundation::PSTR,
+    otmpFullName : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record OUTLINETEXTMETRICW,
+    otmSize : UInt32,
+    otmTextMetrics : Win32cr::Graphics::Gdi::TEXTMETRICW,
+    otmFiller : UInt8,
+    otmPanoseNumber : Win32cr::Graphics::Gdi::PANOSE,
+    otmfsSelection : UInt32,
+    otmfsType : UInt32,
+    otmsCharSlopeRise : Int32,
+    otmsCharSlopeRun : Int32,
+    otmItalicAngle : Int32,
+    otmEMSquare : UInt32,
+    otmAscent : Int32,
+    otmDescent : Int32,
+    otmLineGap : UInt32,
+    otmsCapEmHeight : UInt32,
+    otmsXHeight : UInt32,
+    otmrcFontBox : Win32cr::Foundation::RECT,
+    otmMacAscent : Int32,
+    otmMacDescent : Int32,
+    otmMacLineGap : UInt32,
+    otmusMinimumPPEM : UInt32,
+    otmptSubscriptSize : Win32cr::Foundation::POINT,
+    otmptSubscriptOffset : Win32cr::Foundation::POINT,
+    otmptSuperscriptSize : Win32cr::Foundation::POINT,
+    otmptSuperscriptOffset : Win32cr::Foundation::POINT,
+    otmsStrikeoutSize : UInt32,
+    otmsStrikeoutPosition : Int32,
+    otmsUnderscoreSize : Int32,
+    otmsUnderscorePosition : Int32,
+    otmpFamilyName : Win32cr::Foundation::PSTR,
+    otmpFaceName : Win32cr::Foundation::PSTR,
+    otmpStyleName : Win32cr::Foundation::PSTR,
+    otmpFullName : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record POLYTEXTA,
+    x : Int32,
+    y : Int32,
+    n : UInt32,
+    lpstr : Win32cr::Foundation::PSTR,
+    uiFlags : UInt32,
+    rcl : Win32cr::Foundation::RECT,
     pdx : Int32*
-  end
-  struct POLYTEXTW
-    x : Int32
-    y : Int32
-    n : UInt32
-    lpstr : LibC::LPWSTR
-    ui_flags : UInt32
-    rcl : RECT
+
+  @[Extern]
+  record POLYTEXTW,
+    x : Int32,
+    y : Int32,
+    n : UInt32,
+    lpstr : Win32cr::Foundation::PWSTR,
+    uiFlags : UInt32,
+    rcl : Win32cr::Foundation::RECT,
     pdx : Int32*
-  end
-  struct FIXED
-    fract : UInt16
+
+  @[Extern]
+  record FIXED,
+    fract : UInt16,
     value : Int16
-  end
-  struct MAT2
-    e_m11 : FIXED
-    e_m12 : FIXED
-    e_m21 : FIXED
-    e_m22 : FIXED
-  end
-  struct GLYPHMETRICS
-    gm_black_box_x : UInt32
-    gm_black_box_y : UInt32
-    gmpt_glyph_origin : POINT
-    gm_cell_inc_x : Int16
-    gm_cell_inc_y : Int16
-  end
-  struct POINTFX
-    x : FIXED
-    y : FIXED
-  end
-  struct TTPOLYCURVE
-    w_type : UInt16
-    cpfx : UInt16
-    apfx : POINTFX[0]*
-  end
-  struct TTPOLYGONHEADER
-    cb : UInt32
-    dw_type : UInt32
-    pfx_start : POINTFX
-  end
-  struct GCP_RESULTSA
-    l_struct_size : UInt32
-    lp_out_string : PSTR
-    lp_order : UInt32*
-    lp_dx : Int32*
-    lp_caret_pos : Int32*
-    lp_class : PSTR
-    lp_glyphs : LibC::LPWSTR
-    n_glyphs : UInt32
-    n_max_fit : Int32
-  end
-  struct GCP_RESULTSW
-    l_struct_size : UInt32
-    lp_out_string : LibC::LPWSTR
-    lp_order : UInt32*
-    lp_dx : Int32*
-    lp_caret_pos : Int32*
-    lp_class : PSTR
-    lp_glyphs : LibC::LPWSTR
-    n_glyphs : UInt32
-    n_max_fit : Int32
-  end
-  struct RASTERIZER_STATUS
-    n_size : Int16
-    w_flags : Int16
-    n_language_id : Int16
-  end
-  struct WCRANGE
-    wc_low : Char
-    c_glyphs : UInt16
-  end
-  struct GLYPHSET
-    cb_this : UInt32
-    fl_accel : UInt32
-    c_glyphs_supported : UInt32
-    c_ranges : UInt32
-    ranges : WCRANGE[0]*
-  end
-  struct DESIGNVECTOR
-    dv_reserved : UInt32
-    dv_num_axes : UInt32
-    dv_values : Int32[16]*
-  end
-  struct AXISINFOA
-    ax_min_value : Int32
-    ax_max_value : Int32
-    ax_axis_name : UInt8[16]*
-  end
-  struct AXISINFOW
-    ax_min_value : Int32
-    ax_max_value : Int32
-    ax_axis_name : Char[16]*
-  end
-  struct AXESLISTA
-    axl_reserved : UInt32
-    axl_num_axes : UInt32
-    axl_axis_info : AXISINFOA[16]*
-  end
-  struct AXESLISTW
-    axl_reserved : UInt32
-    axl_num_axes : UInt32
-    axl_axis_info : AXISINFOW[16]*
-  end
-  struct ENUMLOGFONTEXDVA
-    elf_enum_logfont_ex : ENUMLOGFONTEXA
-    elf_design_vector : DESIGNVECTOR
-  end
-  struct ENUMLOGFONTEXDVW
-    elf_enum_logfont_ex : ENUMLOGFONTEXW
-    elf_design_vector : DESIGNVECTOR
-  end
-  struct TRIVERTEX
-    x : Int32
-    y : Int32
-    red : UInt16
-    green : UInt16
-    blue : UInt16
+
+  @[Extern]
+  record MAT2,
+    eM11 : Win32cr::Graphics::Gdi::FIXED,
+    eM12 : Win32cr::Graphics::Gdi::FIXED,
+    eM21 : Win32cr::Graphics::Gdi::FIXED,
+    eM22 : Win32cr::Graphics::Gdi::FIXED
+
+  @[Extern]
+  record GLYPHMETRICS,
+    gmBlackBoxX : UInt32,
+    gmBlackBoxY : UInt32,
+    gmptGlyphOrigin : Win32cr::Foundation::POINT,
+    gmCellIncX : Int16,
+    gmCellIncY : Int16
+
+  @[Extern]
+  record POINTFX,
+    x : Win32cr::Graphics::Gdi::FIXED,
+    y : Win32cr::Graphics::Gdi::FIXED
+
+  @[Extern]
+  record TTPOLYCURVE,
+    wType : UInt16,
+    cpfx : UInt16,
+    apfx : Win32cr::Graphics::Gdi::POINTFX*
+
+  @[Extern]
+  record TTPOLYGONHEADER,
+    cb : UInt32,
+    dwType : UInt32,
+    pfxStart : Win32cr::Graphics::Gdi::POINTFX
+
+  @[Extern]
+  record GCP_RESULTSA,
+    lStructSize : UInt32,
+    lpOutString : Win32cr::Foundation::PSTR,
+    lpOrder : UInt32*,
+    lpDx : Int32*,
+    lpCaretPos : Int32*,
+    lpClass : Win32cr::Foundation::PSTR,
+    lpGlyphs : Win32cr::Foundation::PWSTR,
+    nGlyphs : UInt32,
+    nMaxFit : Int32
+
+  @[Extern]
+  record GCP_RESULTSW,
+    lStructSize : UInt32,
+    lpOutString : Win32cr::Foundation::PWSTR,
+    lpOrder : UInt32*,
+    lpDx : Int32*,
+    lpCaretPos : Int32*,
+    lpClass : Win32cr::Foundation::PSTR,
+    lpGlyphs : Win32cr::Foundation::PWSTR,
+    nGlyphs : UInt32,
+    nMaxFit : Int32
+
+  @[Extern]
+  record RASTERIZER_STATUS,
+    nSize : Int16,
+    wFlags : Int16,
+    nLanguageID : Int16
+
+  @[Extern]
+  record WCRANGE,
+    wcLow : UInt16,
+    cGlyphs : UInt16
+
+  @[Extern]
+  record GLYPHSET,
+    cbThis : UInt32,
+    flAccel : UInt32,
+    cGlyphsSupported : UInt32,
+    cRanges : UInt32,
+    ranges : Win32cr::Graphics::Gdi::WCRANGE*
+
+  @[Extern]
+  record DESIGNVECTOR,
+    dvReserved : UInt32,
+    dvNumAxes : UInt32,
+    dvValues : Int32[16]
+
+  @[Extern]
+  record AXISINFOA,
+    axMinValue : Int32,
+    axMaxValue : Int32,
+    axAxisName : UInt8[16]
+
+  @[Extern]
+  record AXISINFOW,
+    axMinValue : Int32,
+    axMaxValue : Int32,
+    axAxisName : UInt16[16]
+
+  @[Extern]
+  record AXESLISTA,
+    axlReserved : UInt32,
+    axlNumAxes : UInt32,
+    axlAxisInfo : Win32cr::Graphics::Gdi::AXISINFOA[16]
+
+  @[Extern]
+  record AXESLISTW,
+    axlReserved : UInt32,
+    axlNumAxes : UInt32,
+    axlAxisInfo : Win32cr::Graphics::Gdi::AXISINFOW[16]
+
+  @[Extern]
+  record ENUMLOGFONTEXDVA,
+    elfEnumLogfontEx : Win32cr::Graphics::Gdi::ENUMLOGFONTEXA,
+    elfDesignVector : Win32cr::Graphics::Gdi::DESIGNVECTOR
+
+  @[Extern]
+  record ENUMLOGFONTEXDVW,
+    elfEnumLogfontEx : Win32cr::Graphics::Gdi::ENUMLOGFONTEXW,
+    elfDesignVector : Win32cr::Graphics::Gdi::DESIGNVECTOR
+
+  @[Extern]
+  record TRIVERTEX,
+    x : Int32,
+    y : Int32,
+    red : UInt16,
+    green : UInt16,
+    blue : UInt16,
     alpha : UInt16
-  end
-  struct GRADIENT_TRIANGLE
-    vertex1 : UInt32
-    vertex2 : UInt32
+
+  @[Extern]
+  record GRADIENT_TRIANGLE,
+    vertex1 : UInt32,
+    vertex2 : UInt32,
     vertex3 : UInt32
-  end
-  struct GRADIENT_RECT
-    upper_left : UInt32
+
+  @[Extern]
+  record GRADIENT_RECT,
+    upper_left : UInt32,
     lower_right : UInt32
-  end
-  struct BLENDFUNCTION
-    blend_op : UInt8
-    blend_flags : UInt8
-    source_constant_alpha : UInt8
+
+  @[Extern]
+  record BLENDFUNCTION,
+    blend_op : UInt8,
+    blend_flags : UInt8,
+    source_constant_alpha : UInt8,
     alpha_format : UInt8
-  end
-  struct DIBSECTION
-    ds_bm : BITMAP
-    ds_bmih : BITMAPINFOHEADER
-    ds_bitfields : UInt32[3]*
-    dsh_section : LibC::HANDLE
-    ds_offset : UInt32
-  end
-  struct COLORADJUSTMENT
-    ca_size : UInt16
-    ca_flags : UInt16
-    ca_illuminant_index : UInt16
-    ca_red_gamma : UInt16
-    ca_green_gamma : UInt16
-    ca_blue_gamma : UInt16
-    ca_reference_black : UInt16
-    ca_reference_white : UInt16
-    ca_contrast : Int16
-    ca_brightness : Int16
-    ca_colorfulness : Int16
-    ca_red_green_tint : Int16
-  end
-  struct KERNINGPAIR
-    w_first : UInt16
-    w_second : UInt16
-    i_kern_amount : Int32
-  end
-  struct EMR
-    i_type : UInt32
-    n_size : UInt32
-  end
-  struct EMRTEXT
-    ptl_reference : POINTL
-    n_chars : UInt32
-    off_string : UInt32
-    f_options : UInt32
-    rcl : RECTL
-    off_dx : UInt32
-  end
-  struct ABORTPATH
-    emr : EMR
-  end
-  struct EMRSELECTCLIPPATH
-    emr : EMR
-    i_mode : UInt32
-  end
-  struct EMRSETMITERLIMIT
-    emr : EMR
-    e_miter_limit : Float32
-  end
-  struct EMRRESTOREDC
-    emr : EMR
-    i_relative : Int32
-  end
-  struct EMRSETARCDIRECTION
-    emr : EMR
-    i_arc_direction : UInt32
-  end
-  struct EMRSETMAPPERFLAGS
-    emr : EMR
-    dw_flags : UInt32
-  end
-  struct EMRSETTEXTCOLOR
-    emr : EMR
-    cr_color : UInt32
-  end
-  struct EMRSELECTOBJECT
-    emr : EMR
-    ih_object : UInt32
-  end
-  struct EMRSELECTPALETTE
-    emr : EMR
-    ih_pal : UInt32
-  end
-  struct EMRRESIZEPALETTE
-    emr : EMR
-    ih_pal : UInt32
-    c_entries : UInt32
-  end
-  struct EMRSETPALETTEENTRIES
-    emr : EMR
-    ih_pal : UInt32
-    i_start : UInt32
-    c_entries : UInt32
-    a_pal_entries : PALETTEENTRY[0]*
-  end
-  struct EMRSETCOLORADJUSTMENT
-    emr : EMR
-    color_adjustment : COLORADJUSTMENT
-  end
-  struct EMRGDICOMMENT
-    emr : EMR
-    cb_data : UInt32
-    data : UInt8[0]*
-  end
-  struct EMREOF
-    emr : EMR
-    n_pal_entries : UInt32
-    off_pal_entries : UInt32
-    n_size_last : UInt32
-  end
-  struct EMRLINETO
-    emr : EMR
-    ptl : POINTL
-  end
-  struct EMROFFSETCLIPRGN
-    emr : EMR
-    ptl_offset : POINTL
-  end
-  struct EMRFILLPATH
-    emr : EMR
-    rcl_bounds : RECTL
-  end
-  struct EMREXCLUDECLIPRECT
-    emr : EMR
-    rcl_clip : RECTL
-  end
-  struct EMRSETVIEWPORTORGEX
-    emr : EMR
-    ptl_origin : POINTL
-  end
-  struct EMRSETVIEWPORTEXTEX
-    emr : EMR
-    szl_extent : SIZE
-  end
-  struct EMRSCALEVIEWPORTEXTEX
-    emr : EMR
-    x_num : Int32
-    x_denom : Int32
-    y_num : Int32
-    y_denom : Int32
-  end
-  struct EMRSETWORLDTRANSFORM
-    emr : EMR
-    xform : XFORM
-  end
-  struct EMRMODIFYWORLDTRANSFORM
-    emr : EMR
-    xform : XFORM
-    i_mode : UInt32
-  end
-  struct EMRSETPIXELV
-    emr : EMR
-    ptl_pixel : POINTL
-    cr_color : UInt32
-  end
-  struct EMREXTFLOODFILL
-    emr : EMR
-    ptl_start : POINTL
-    cr_color : UInt32
-    i_mode : UInt32
-  end
-  struct EMRELLIPSE
-    emr : EMR
-    rcl_box : RECTL
-  end
-  struct EMRROUNDRECT
-    emr : EMR
-    rcl_box : RECTL
-    szl_corner : SIZE
-  end
-  struct EMRARC
-    emr : EMR
-    rcl_box : RECTL
-    ptl_start : POINTL
-    ptl_end : POINTL
-  end
-  struct EMRANGLEARC
-    emr : EMR
-    ptl_center : POINTL
-    n_radius : UInt32
-    e_start_angle : Float32
-    e_sweep_angle : Float32
-  end
-  struct EMRPOLYLINE
-    emr : EMR
-    rcl_bounds : RECTL
-    cptl : UInt32
-    aptl : POINTL[0]*
-  end
-  struct EMRPOLYLINE16
-    emr : EMR
-    rcl_bounds : RECTL
-    cpts : UInt32
-    apts : POINTS[0]*
-  end
-  struct EMRPOLYDRAW
-    emr : EMR
-    rcl_bounds : RECTL
-    cptl : UInt32
-    aptl : POINTL[0]*
-    ab_types : UInt8[0]*
-  end
-  struct EMRPOLYDRAW16
-    emr : EMR
-    rcl_bounds : RECTL
-    cpts : UInt32
-    apts : POINTS[0]*
-    ab_types : UInt8[0]*
-  end
-  struct EMRPOLYPOLYLINE
-    emr : EMR
-    rcl_bounds : RECTL
-    n_polys : UInt32
-    cptl : UInt32
-    a_poly_counts : UInt32[0]*
-    aptl : POINTL[0]*
-  end
-  struct EMRPOLYPOLYLINE16
-    emr : EMR
-    rcl_bounds : RECTL
-    n_polys : UInt32
-    cpts : UInt32
-    a_poly_counts : UInt32[0]*
-    apts : POINTS[0]*
-  end
-  struct EMRINVERTRGN
-    emr : EMR
-    rcl_bounds : RECTL
-    cb_rgn_data : UInt32
-    rgn_data : UInt8[0]*
-  end
-  struct EMRFILLRGN
-    emr : EMR
-    rcl_bounds : RECTL
-    cb_rgn_data : UInt32
-    ih_brush : UInt32
-    rgn_data : UInt8[0]*
-  end
-  struct EMRFRAMERGN
-    emr : EMR
-    rcl_bounds : RECTL
-    cb_rgn_data : UInt32
-    ih_brush : UInt32
-    szl_stroke : SIZE
-    rgn_data : UInt8[0]*
-  end
-  struct EMREXTSELECTCLIPRGN
-    emr : EMR
-    cb_rgn_data : UInt32
-    i_mode : UInt32
-    rgn_data : UInt8[0]*
-  end
-  struct EMREXTTEXTOUTA
-    emr : EMR
-    rcl_bounds : RECTL
-    i_graphics_mode : UInt32
-    ex_scale : Float32
-    ey_scale : Float32
-    emrtext : EMRTEXT
-  end
-  struct EMRPOLYTEXTOUTA
-    emr : EMR
-    rcl_bounds : RECTL
-    i_graphics_mode : UInt32
-    ex_scale : Float32
-    ey_scale : Float32
-    c_strings : Int32
-    aemrtext : EMRTEXT[0]*
-  end
-  struct EMRBITBLT
-    emr : EMR
-    rcl_bounds : RECTL
-    x_dest : Int32
-    y_dest : Int32
-    cx_dest : Int32
-    cy_dest : Int32
-    dw_rop : UInt32
-    x_src : Int32
-    y_src : Int32
-    xform_src : XFORM
-    cr_bk_color_src : UInt32
-    i_usage_src : UInt32
-    off_bmi_src : UInt32
-    cb_bmi_src : UInt32
-    off_bits_src : UInt32
-    cb_bits_src : UInt32
-  end
-  struct EMRSTRETCHBLT
-    emr : EMR
-    rcl_bounds : RECTL
-    x_dest : Int32
-    y_dest : Int32
-    cx_dest : Int32
-    cy_dest : Int32
-    dw_rop : UInt32
-    x_src : Int32
-    y_src : Int32
-    xform_src : XFORM
-    cr_bk_color_src : UInt32
-    i_usage_src : UInt32
-    off_bmi_src : UInt32
-    cb_bmi_src : UInt32
-    off_bits_src : UInt32
-    cb_bits_src : UInt32
-    cx_src : Int32
-    cy_src : Int32
-  end
-  struct EMRMASKBLT
-    emr : EMR
-    rcl_bounds : RECTL
-    x_dest : Int32
-    y_dest : Int32
-    cx_dest : Int32
-    cy_dest : Int32
-    dw_rop : UInt32
-    x_src : Int32
-    y_src : Int32
-    xform_src : XFORM
-    cr_bk_color_src : UInt32
-    i_usage_src : UInt32
-    off_bmi_src : UInt32
-    cb_bmi_src : UInt32
-    off_bits_src : UInt32
-    cb_bits_src : UInt32
-    x_mask : Int32
-    y_mask : Int32
-    i_usage_mask : UInt32
-    off_bmi_mask : UInt32
-    cb_bmi_mask : UInt32
-    off_bits_mask : UInt32
-    cb_bits_mask : UInt32
-  end
-  struct EMRPLGBLT
-    emr : EMR
-    rcl_bounds : RECTL
-    aptl_dest : POINTL[3]*
-    x_src : Int32
-    y_src : Int32
-    cx_src : Int32
-    cy_src : Int32
-    xform_src : XFORM
-    cr_bk_color_src : UInt32
-    i_usage_src : UInt32
-    off_bmi_src : UInt32
-    cb_bmi_src : UInt32
-    off_bits_src : UInt32
-    cb_bits_src : UInt32
-    x_mask : Int32
-    y_mask : Int32
-    i_usage_mask : UInt32
-    off_bmi_mask : UInt32
-    cb_bmi_mask : UInt32
-    off_bits_mask : UInt32
-    cb_bits_mask : UInt32
-  end
-  struct EMRSETDIBITSTODEVICE
-    emr : EMR
-    rcl_bounds : RECTL
-    x_dest : Int32
-    y_dest : Int32
-    x_src : Int32
-    y_src : Int32
-    cx_src : Int32
-    cy_src : Int32
-    off_bmi_src : UInt32
-    cb_bmi_src : UInt32
-    off_bits_src : UInt32
-    cb_bits_src : UInt32
-    i_usage_src : UInt32
-    i_start_scan : UInt32
-    c_scans : UInt32
-  end
-  struct EMRSTRETCHDIBITS
-    emr : EMR
-    rcl_bounds : RECTL
-    x_dest : Int32
-    y_dest : Int32
-    x_src : Int32
-    y_src : Int32
-    cx_src : Int32
-    cy_src : Int32
-    off_bmi_src : UInt32
-    cb_bmi_src : UInt32
-    off_bits_src : UInt32
-    cb_bits_src : UInt32
-    i_usage_src : UInt32
-    dw_rop : UInt32
-    cx_dest : Int32
-    cy_dest : Int32
-  end
-  struct EMREXTCREATEFONTINDIRECTW
-    emr : EMR
-    ih_font : UInt32
-    elfw : EXTLOGFONTW
-  end
-  struct EMRCREATEPALETTE
-    emr : EMR
-    ih_pal : UInt32
-    lgpl : LOGPALETTE
-  end
-  struct EMRCREATEPEN
-    emr : EMR
-    ih_pen : UInt32
-    lopn : LOGPEN
-  end
-  struct EMREXTCREATEPEN
-    emr : EMR
-    ih_pen : UInt32
-    off_bmi : UInt32
-    cb_bmi : UInt32
-    off_bits : UInt32
-    cb_bits : UInt32
-    elp : EXTLOGPEN32
-  end
-  struct EMRCREATEBRUSHINDIRECT
-    emr : EMR
-    ih_brush : UInt32
-    lb : LOGBRUSH32
-  end
-  struct EMRCREATEMONOBRUSH
-    emr : EMR
-    ih_brush : UInt32
-    i_usage : UInt32
-    off_bmi : UInt32
-    cb_bmi : UInt32
-    off_bits : UInt32
-    cb_bits : UInt32
-  end
-  struct EMRCREATEDIBPATTERNBRUSHPT
-    emr : EMR
-    ih_brush : UInt32
-    i_usage : UInt32
-    off_bmi : UInt32
-    cb_bmi : UInt32
-    off_bits : UInt32
-    cb_bits : UInt32
-  end
-  struct EMRFORMAT
-    d_signature : UInt32
-    n_version : UInt32
-    cb_data : UInt32
-    off_data : UInt32
-  end
-  struct EMRGLSRECORD
-    emr : EMR
-    cb_data : UInt32
-    data : UInt8[0]*
-  end
-  struct EMRGLSBOUNDEDRECORD
-    emr : EMR
-    rcl_bounds : RECTL
-    cb_data : UInt32
-    data : UInt8[0]*
-  end
-  struct EMRSETCOLORSPACE
-    emr : EMR
-    ih_cs : UInt32
-  end
-  struct EMREXTESCAPE
-    emr : EMR
-    i_escape : Int32
-    cb_esc_data : Int32
-    esc_data : UInt8[0]*
-  end
-  struct EMRNAMEDESCAPE
-    emr : EMR
-    i_escape : Int32
-    cb_driver : Int32
-    cb_esc_data : Int32
-    esc_data : UInt8[0]*
-  end
-  struct EMRSETICMPROFILE
-    emr : EMR
-    dw_flags : UInt32
-    cb_name : UInt32
-    cb_data : UInt32
-    data : UInt8[0]*
-  end
-  struct COLORMATCHTOTARGET
-    emr : EMR
-    dw_action : UInt32
-    dw_flags : UInt32
-    cb_name : UInt32
-    cb_data : UInt32
-    data : UInt8[0]*
-  end
-  struct COLORCORRECTPALETTE
-    emr : EMR
-    ih_palette : UInt32
-    n_first_entry : UInt32
-    n_pal_entries : UInt32
-    n_reserved : UInt32
-  end
-  struct EMRALPHABLEND
-    emr : EMR
-    rcl_bounds : RECTL
-    x_dest : Int32
-    y_dest : Int32
-    cx_dest : Int32
-    cy_dest : Int32
-    dw_rop : UInt32
-    x_src : Int32
-    y_src : Int32
-    xform_src : XFORM
-    cr_bk_color_src : UInt32
-    i_usage_src : UInt32
-    off_bmi_src : UInt32
-    cb_bmi_src : UInt32
-    off_bits_src : UInt32
-    cb_bits_src : UInt32
-    cx_src : Int32
-    cy_src : Int32
-  end
-  struct EMRGRADIENTFILL
-    emr : EMR
-    rcl_bounds : RECTL
-    n_ver : UInt32
-    n_tri : UInt32
-    ul_mode : GRADIENT_FILL
-    ver : TRIVERTEX[0]*
-  end
-  struct EMRTRANSPARENTBLT
-    emr : EMR
-    rcl_bounds : RECTL
-    x_dest : Int32
-    y_dest : Int32
-    cx_dest : Int32
-    cy_dest : Int32
-    dw_rop : UInt32
-    x_src : Int32
-    y_src : Int32
-    xform_src : XFORM
-    cr_bk_color_src : UInt32
-    i_usage_src : UInt32
-    off_bmi_src : UInt32
-    cb_bmi_src : UInt32
-    off_bits_src : UInt32
-    cb_bits_src : UInt32
-    cx_src : Int32
-    cy_src : Int32
-  end
-  struct WGLSWAP
-    hdc : HDC
-    ui_flags : UInt32
-  end
-  struct TTLOADINFO
-    us_struct_size : UInt16
-    us_ref_str_size : UInt16
-    pus_ref_str : UInt16*
-  end
-  struct TTEMBEDINFO
-    us_struct_size : UInt16
-    us_root_str_size : UInt16
-    pus_root_str : UInt16*
-  end
-  struct TTVALIDATIONTESTSPARAMS
-    ul_struct_size : UInt32
-    l_test_from_size : Int32
-    l_test_to_size : Int32
-    ul_char_set : UInt32
-    us_reserved1 : UInt16
-    us_char_code_count : UInt16
-    pus_char_code_set : UInt16*
-  end
-  struct TTVALIDATIONTESTSPARAMSEX
-    ul_struct_size : UInt32
-    l_test_from_size : Int32
-    l_test_to_size : Int32
-    ul_char_set : UInt32
-    us_reserved1 : UInt16
-    us_char_code_count : UInt16
-    pul_char_code_set : UInt32*
-  end
-  struct PAINTSTRUCT
-    hdc : HDC
-    f_erase : LibC::BOOL
-    rc_paint : RECT
-    f_restore : LibC::BOOL
-    f_inc_update : LibC::BOOL
-    rgb_reserved : UInt8[32]*
-  end
-  struct DRAWTEXTPARAMS
-    cb_size : UInt32
-    i_tab_length : Int32
-    i_left_margin : Int32
-    i_right_margin : Int32
-    ui_length_drawn : UInt32
-  end
-  struct MONITORINFO
-    cb_size : UInt32
-    rc_monitor : RECT
-    rc_work : RECT
-    dw_flags : UInt32
-  end
-  struct MONITORINFOEXA
-    __anonymous_base_winuser_l13567_c43 : MONITORINFO
-    sz_device : CHAR[32]*
-  end
-  struct MONITORINFOEXW
-    __anonymous_base_winuser_l13571_c43 : MONITORINFO
-    sz_device : Char[32]*
-  end
-
-
-  # Params # h : HGDIOBJ [In],c : Int32 [In],pv : Void* [In]
-  fun GetObjectA(h : HGDIOBJ, c : Int32, pv : Void*) : Int32
-
-  # Params # param0 : PSTR [In]
-  fun AddFontResourceA(param0 : PSTR) : Int32
-
-  # Params # param0 : LibC::LPWSTR [In]
-  fun AddFontResourceW(param0 : LibC::LPWSTR) : Int32
-
-  # Params # hpal : HPALETTE [In],istartindex : UInt32 [In],centries : UInt32 [In],ppe : PALETTEENTRY* [In]
-  fun AnimatePalette(hpal : HPALETTE, istartindex : UInt32, centries : UInt32, ppe : PALETTEENTRY*) : LibC::BOOL
-
-  # Params # hdc : HDC [In],x1 : Int32 [In],y1 : Int32 [In],x2 : Int32 [In],y2 : Int32 [In],x3 : Int32 [In],y3 : Int32 [In],x4 : Int32 [In],y4 : Int32 [In]
-  fun Arc(hdc : HDC, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, x3 : Int32, y3 : Int32, x4 : Int32, y4 : Int32) : LibC::BOOL
-
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],cx : Int32 [In],cy : Int32 [In],hdcsrc : HDC [In],x1 : Int32 [In],y1 : Int32 [In],rop : ROP_CODE [In]
-  fun BitBlt(hdc : HDC, x : Int32, y : Int32, cx : Int32, cy : Int32, hdcsrc : HDC, x1 : Int32, y1 : Int32, rop : ROP_CODE) : LibC::BOOL
-
-  # Params # hdc : HDC [In]
-  fun CancelDC(hdc : HDC) : LibC::BOOL
-
-  # Params # hdc : HDC [In],x1 : Int32 [In],y1 : Int32 [In],x2 : Int32 [In],y2 : Int32 [In],x3 : Int32 [In],y3 : Int32 [In],x4 : Int32 [In],y4 : Int32 [In]
-  fun Chord(hdc : HDC, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, x3 : Int32, y3 : Int32, x4 : Int32, y4 : Int32) : LibC::BOOL
-
-  # Params # hdc : HDC [In]
-  fun CloseMetaFile(hdc : HDC) : HMETAFILE
-
-  # Params # hrgndst : HRGN [In],hrgnsrc1 : HRGN [In],hrgnsrc2 : HRGN [In],imode : RGN_COMBINE_MODE [In]
-  fun CombineRgn(hrgndst : HRGN, hrgnsrc1 : HRGN, hrgnsrc2 : HRGN, imode : RGN_COMBINE_MODE) : Int32
-
-  # Params # param0 : HMETAFILE [In],param1 : PSTR [In]
-  fun CopyMetaFileA(param0 : HMETAFILE, param1 : PSTR) : HMETAFILE
-
-  # Params # param0 : HMETAFILE [In],param1 : LibC::LPWSTR [In]
-  fun CopyMetaFileW(param0 : HMETAFILE, param1 : LibC::LPWSTR) : HMETAFILE
 
-  # Params # nwidth : Int32 [In],nheight : Int32 [In],nplanes : UInt32 [In],nbitcount : UInt32 [In],lpbits : Void* [In]
-  fun CreateBitmap(nwidth : Int32, nheight : Int32, nplanes : UInt32, nbitcount : UInt32, lpbits : Void*) : HBITMAP
+  @[Extern]
+  record DIBSECTION,
+    dsBm : Win32cr::Graphics::Gdi::BITMAP,
+    dsBmih : Win32cr::Graphics::Gdi::BITMAPINFOHEADER,
+    dsBitfields : UInt32[3],
+    dshSection : Win32cr::Foundation::HANDLE,
+    dsOffset : UInt32
+
+  @[Extern]
+  record COLORADJUSTMENT,
+    caSize : UInt16,
+    caFlags : UInt16,
+    caIlluminantIndex : UInt16,
+    caRedGamma : UInt16,
+    caGreenGamma : UInt16,
+    caBlueGamma : UInt16,
+    caReferenceBlack : UInt16,
+    caReferenceWhite : UInt16,
+    caContrast : Int16,
+    caBrightness : Int16,
+    caColorfulness : Int16,
+    caRedGreenTint : Int16
+
+  @[Extern]
+  record KERNINGPAIR,
+    wFirst : UInt16,
+    wSecond : UInt16,
+    iKernAmount : Int32
+
+  @[Extern]
+  record EMR,
+    iType : UInt32,
+    nSize : UInt32
+
+  @[Extern]
+  record EMRTEXT,
+    ptlReference : Win32cr::Foundation::POINTL,
+    nChars : UInt32,
+    offString : UInt32,
+    fOptions : UInt32,
+    rcl : Win32cr::Foundation::RECTL,
+    offDx : UInt32
+
+  @[Extern]
+  record ABORTPATH,
+    emr : Win32cr::Graphics::Gdi::EMR
+
+  @[Extern]
+  record EMRSELECTCLIPPATH,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    iMode : UInt32
+
+  @[Extern]
+  record EMRSETMITERLIMIT,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    eMiterLimit : Float32
+
+  @[Extern]
+  record EMRRESTOREDC,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    iRelative : Int32
+
+  @[Extern]
+  record EMRSETARCDIRECTION,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    iArcDirection : UInt32
+
+  @[Extern]
+  record EMRSETMAPPERFLAGS,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    dwFlags : UInt32
+
+  @[Extern]
+  record EMRSETTEXTCOLOR,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    crColor : UInt32
+
+  @[Extern]
+  record EMRSELECTOBJECT,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ihObject : UInt32
+
+  @[Extern]
+  record EMRSELECTPALETTE,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ihPal : UInt32
+
+  @[Extern]
+  record EMRRESIZEPALETTE,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ihPal : UInt32,
+    cEntries : UInt32
+
+  @[Extern]
+  record EMRSETPALETTEENTRIES,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ihPal : UInt32,
+    iStart : UInt32,
+    cEntries : UInt32,
+    aPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*
+
+  @[Extern]
+  record EMRSETCOLORADJUSTMENT,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    color_adjustment : Win32cr::Graphics::Gdi::COLORADJUSTMENT
+
+  @[Extern]
+  record EMRGDICOMMENT,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    cbData : UInt32,
+    data : UInt8*
+
+  @[Extern]
+  record EMREOF,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    nPalEntries : UInt32,
+    offPalEntries : UInt32,
+    nSizeLast : UInt32
+
+  @[Extern]
+  record EMRLINETO,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ptl : Win32cr::Foundation::POINTL
+
+  @[Extern]
+  record EMROFFSETCLIPRGN,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ptlOffset : Win32cr::Foundation::POINTL
+
+  @[Extern]
+  record EMRFILLPATH,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL
+
+  @[Extern]
+  record EMREXCLUDECLIPRECT,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclClip : Win32cr::Foundation::RECTL
+
+  @[Extern]
+  record EMRSETVIEWPORTORGEX,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ptlOrigin : Win32cr::Foundation::POINTL
+
+  @[Extern]
+  record EMRSETVIEWPORTEXTEX,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    szlExtent : Win32cr::Foundation::SIZE
+
+  @[Extern]
+  record EMRSCALEVIEWPORTEXTEX,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    xNum : Int32,
+    xDenom : Int32,
+    yNum : Int32,
+    yDenom : Int32
+
+  @[Extern]
+  record EMRSETWORLDTRANSFORM,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    xform : Win32cr::Graphics::Gdi::XFORM
+
+  @[Extern]
+  record EMRMODIFYWORLDTRANSFORM,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    xform : Win32cr::Graphics::Gdi::XFORM,
+    iMode : UInt32
+
+  @[Extern]
+  record EMRSETPIXELV,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ptlPixel : Win32cr::Foundation::POINTL,
+    crColor : UInt32
+
+  @[Extern]
+  record EMREXTFLOODFILL,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ptlStart : Win32cr::Foundation::POINTL,
+    crColor : UInt32,
+    iMode : UInt32
+
+  @[Extern]
+  record EMRELLIPSE,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBox : Win32cr::Foundation::RECTL
+
+  @[Extern]
+  record EMRROUNDRECT,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBox : Win32cr::Foundation::RECTL,
+    szlCorner : Win32cr::Foundation::SIZE
+
+  @[Extern]
+  record EMRARC,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBox : Win32cr::Foundation::RECTL,
+    ptlStart : Win32cr::Foundation::POINTL,
+    ptlEnd : Win32cr::Foundation::POINTL
+
+  @[Extern]
+  record EMRANGLEARC,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ptlCenter : Win32cr::Foundation::POINTL,
+    nRadius : UInt32,
+    eStartAngle : Float32,
+    eSweepAngle : Float32
+
+  @[Extern]
+  record EMRPOLYLINE,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    cptl : UInt32,
+    aptl : Win32cr::Foundation::POINTL*
+
+  @[Extern]
+  record EMRPOLYLINE16,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    cpts : UInt32,
+    apts : Win32cr::Foundation::POINTS*
+
+  @[Extern]
+  record EMRPOLYDRAW,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    cptl : UInt32,
+    aptl : Win32cr::Foundation::POINTL*,
+    abTypes : UInt8*
+
+  @[Extern]
+  record EMRPOLYDRAW16,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    cpts : UInt32,
+    apts : Win32cr::Foundation::POINTS*,
+    abTypes : UInt8*
+
+  @[Extern]
+  record EMRPOLYPOLYLINE,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    nPolys : UInt32,
+    cptl : UInt32,
+    aPolyCounts : UInt32*,
+    aptl : Win32cr::Foundation::POINTL*
+
+  @[Extern]
+  record EMRPOLYPOLYLINE16,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    nPolys : UInt32,
+    cpts : UInt32,
+    aPolyCounts : UInt32*,
+    apts : Win32cr::Foundation::POINTS*
+
+  @[Extern]
+  record EMRINVERTRGN,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    cbRgnData : UInt32,
+    rgn_data : UInt8*
+
+  @[Extern]
+  record EMRFILLRGN,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    cbRgnData : UInt32,
+    ihBrush : UInt32,
+    rgn_data : UInt8*
+
+  @[Extern]
+  record EMRFRAMERGN,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    cbRgnData : UInt32,
+    ihBrush : UInt32,
+    szlStroke : Win32cr::Foundation::SIZE,
+    rgn_data : UInt8*
+
+  @[Extern]
+  record EMREXTSELECTCLIPRGN,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    cbRgnData : UInt32,
+    iMode : UInt32,
+    rgn_data : UInt8*
+
+  @[Extern]
+  record EMREXTTEXTOUTA,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    iGraphicsMode : UInt32,
+    exScale : Float32,
+    eyScale : Float32,
+    emrtext : Win32cr::Graphics::Gdi::EMRTEXT
+
+  @[Extern]
+  record EMRPOLYTEXTOUTA,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    iGraphicsMode : UInt32,
+    exScale : Float32,
+    eyScale : Float32,
+    cStrings : Int32,
+    aemrtext : Win32cr::Graphics::Gdi::EMRTEXT*
+
+  @[Extern]
+  record EMRBITBLT,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    xDest : Int32,
+    yDest : Int32,
+    cxDest : Int32,
+    cyDest : Int32,
+    dwRop : UInt32,
+    xSrc : Int32,
+    ySrc : Int32,
+    xformSrc : Win32cr::Graphics::Gdi::XFORM,
+    crBkColorSrc : UInt32,
+    iUsageSrc : UInt32,
+    offBmiSrc : UInt32,
+    cbBmiSrc : UInt32,
+    offBitsSrc : UInt32,
+    cbBitsSrc : UInt32
+
+  @[Extern]
+  record EMRSTRETCHBLT,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    xDest : Int32,
+    yDest : Int32,
+    cxDest : Int32,
+    cyDest : Int32,
+    dwRop : UInt32,
+    xSrc : Int32,
+    ySrc : Int32,
+    xformSrc : Win32cr::Graphics::Gdi::XFORM,
+    crBkColorSrc : UInt32,
+    iUsageSrc : UInt32,
+    offBmiSrc : UInt32,
+    cbBmiSrc : UInt32,
+    offBitsSrc : UInt32,
+    cbBitsSrc : UInt32,
+    cxSrc : Int32,
+    cySrc : Int32
+
+  @[Extern]
+  record EMRMASKBLT,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    xDest : Int32,
+    yDest : Int32,
+    cxDest : Int32,
+    cyDest : Int32,
+    dwRop : UInt32,
+    xSrc : Int32,
+    ySrc : Int32,
+    xformSrc : Win32cr::Graphics::Gdi::XFORM,
+    crBkColorSrc : UInt32,
+    iUsageSrc : UInt32,
+    offBmiSrc : UInt32,
+    cbBmiSrc : UInt32,
+    offBitsSrc : UInt32,
+    cbBitsSrc : UInt32,
+    xMask : Int32,
+    yMask : Int32,
+    iUsageMask : UInt32,
+    offBmiMask : UInt32,
+    cbBmiMask : UInt32,
+    offBitsMask : UInt32,
+    cbBitsMask : UInt32
+
+  @[Extern]
+  record EMRPLGBLT,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    aptlDest : Win32cr::Foundation::POINTL[3],
+    xSrc : Int32,
+    ySrc : Int32,
+    cxSrc : Int32,
+    cySrc : Int32,
+    xformSrc : Win32cr::Graphics::Gdi::XFORM,
+    crBkColorSrc : UInt32,
+    iUsageSrc : UInt32,
+    offBmiSrc : UInt32,
+    cbBmiSrc : UInt32,
+    offBitsSrc : UInt32,
+    cbBitsSrc : UInt32,
+    xMask : Int32,
+    yMask : Int32,
+    iUsageMask : UInt32,
+    offBmiMask : UInt32,
+    cbBmiMask : UInt32,
+    offBitsMask : UInt32,
+    cbBitsMask : UInt32
+
+  @[Extern]
+  record EMRSETDIBITSTODEVICE,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    xDest : Int32,
+    yDest : Int32,
+    xSrc : Int32,
+    ySrc : Int32,
+    cxSrc : Int32,
+    cySrc : Int32,
+    offBmiSrc : UInt32,
+    cbBmiSrc : UInt32,
+    offBitsSrc : UInt32,
+    cbBitsSrc : UInt32,
+    iUsageSrc : UInt32,
+    iStartScan : UInt32,
+    cScans : UInt32
+
+  @[Extern]
+  record EMRSTRETCHDIBITS,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    xDest : Int32,
+    yDest : Int32,
+    xSrc : Int32,
+    ySrc : Int32,
+    cxSrc : Int32,
+    cySrc : Int32,
+    offBmiSrc : UInt32,
+    cbBmiSrc : UInt32,
+    offBitsSrc : UInt32,
+    cbBitsSrc : UInt32,
+    iUsageSrc : UInt32,
+    dwRop : UInt32,
+    cxDest : Int32,
+    cyDest : Int32
+
+  @[Extern]
+  record EMREXTCREATEFONTINDIRECTW,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ihFont : UInt32,
+    elfw : Win32cr::Graphics::Gdi::EXTLOGFONTW
+
+  @[Extern]
+  record EMRCREATEPALETTE,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ihPal : UInt32,
+    lgpl : Win32cr::Graphics::Gdi::LOGPALETTE
+
+  @[Extern]
+  record EMRCREATEPEN,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ihPen : UInt32,
+    lopn : Win32cr::Graphics::Gdi::LOGPEN
+
+  @[Extern]
+  record EMREXTCREATEPEN,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ihPen : UInt32,
+    offBmi : UInt32,
+    cbBmi : UInt32,
+    offBits : UInt32,
+    cbBits : UInt32,
+    elp : Win32cr::Graphics::Gdi::EXTLOGPEN32
+
+  @[Extern]
+  record EMRCREATEBRUSHINDIRECT,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ihBrush : UInt32,
+    lb : Win32cr::Graphics::Gdi::LOGBRUSH32
+
+  @[Extern]
+  record EMRCREATEMONOBRUSH,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ihBrush : UInt32,
+    iUsage : UInt32,
+    offBmi : UInt32,
+    cbBmi : UInt32,
+    offBits : UInt32,
+    cbBits : UInt32
+
+  @[Extern]
+  record EMRCREATEDIBPATTERNBRUSHPT,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ihBrush : UInt32,
+    iUsage : UInt32,
+    offBmi : UInt32,
+    cbBmi : UInt32,
+    offBits : UInt32,
+    cbBits : UInt32
+
+  @[Extern]
+  record EMRFORMAT,
+    dSignature : UInt32,
+    nVersion : UInt32,
+    cbData : UInt32,
+    offData : UInt32
+
+  @[Extern]
+  record EMRGLSRECORD,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    cbData : UInt32,
+    data : UInt8*
+
+  @[Extern]
+  record EMRGLSBOUNDEDRECORD,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    cbData : UInt32,
+    data : UInt8*
+
+  @[Extern]
+  record EMRSETCOLORSPACE,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ihCS : UInt32
+
+  @[Extern]
+  record EMREXTESCAPE,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    iEscape : Int32,
+    cbEscData : Int32,
+    esc_data : UInt8*
+
+  @[Extern]
+  record EMRNAMEDESCAPE,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    iEscape : Int32,
+    cbDriver : Int32,
+    cbEscData : Int32,
+    esc_data : UInt8*
+
+  @[Extern]
+  record EMRSETICMPROFILE,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    dwFlags : UInt32,
+    cbName : UInt32,
+    cbData : UInt32,
+    data : UInt8*
+
+  @[Extern]
+  record COLORMATCHTOTARGET,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    dwAction : UInt32,
+    dwFlags : UInt32,
+    cbName : UInt32,
+    cbData : UInt32,
+    data : UInt8*
+
+  @[Extern]
+  record COLORCORRECTPALETTE,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    ihPalette : UInt32,
+    nFirstEntry : UInt32,
+    nPalEntries : UInt32,
+    nReserved : UInt32
+
+  @[Extern]
+  record EMRALPHABLEND,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    xDest : Int32,
+    yDest : Int32,
+    cxDest : Int32,
+    cyDest : Int32,
+    dwRop : UInt32,
+    xSrc : Int32,
+    ySrc : Int32,
+    xformSrc : Win32cr::Graphics::Gdi::XFORM,
+    crBkColorSrc : UInt32,
+    iUsageSrc : UInt32,
+    offBmiSrc : UInt32,
+    cbBmiSrc : UInt32,
+    offBitsSrc : UInt32,
+    cbBitsSrc : UInt32,
+    cxSrc : Int32,
+    cySrc : Int32
+
+  @[Extern]
+  record EMRGRADIENTFILL,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    nVer : UInt32,
+    nTri : UInt32,
+    ulMode : Win32cr::Graphics::Gdi::GRADIENT_FILL,
+    ver : Win32cr::Graphics::Gdi::TRIVERTEX*
+
+  @[Extern]
+  record EMRTRANSPARENTBLT,
+    emr : Win32cr::Graphics::Gdi::EMR,
+    rclBounds : Win32cr::Foundation::RECTL,
+    xDest : Int32,
+    yDest : Int32,
+    cxDest : Int32,
+    cyDest : Int32,
+    dwRop : UInt32,
+    xSrc : Int32,
+    ySrc : Int32,
+    xformSrc : Win32cr::Graphics::Gdi::XFORM,
+    crBkColorSrc : UInt32,
+    iUsageSrc : UInt32,
+    offBmiSrc : UInt32,
+    cbBmiSrc : UInt32,
+    offBitsSrc : UInt32,
+    cbBitsSrc : UInt32,
+    cxSrc : Int32,
+    cySrc : Int32
+
+  @[Extern]
+  record WGLSWAP,
+    hdc : Win32cr::Graphics::Gdi::HDC,
+    uiFlags : UInt32
+
+  @[Extern]
+  record TTLOADINFO,
+    usStructSize : UInt16,
+    usRefStrSize : UInt16,
+    pusRefStr : UInt16*
+
+  @[Extern]
+  record TTEMBEDINFO,
+    usStructSize : UInt16,
+    usRootStrSize : UInt16,
+    pusRootStr : UInt16*
+
+  @[Extern]
+  record TTVALIDATIONTESTSPARAMS,
+    ulStructSize : UInt32,
+    lTestFromSize : Int32,
+    lTestToSize : Int32,
+    ulCharSet : UInt32,
+    usReserved1 : UInt16,
+    usCharCodeCount : UInt16,
+    pusCharCodeSet : UInt16*
+
+  @[Extern]
+  record TTVALIDATIONTESTSPARAMSEX,
+    ulStructSize : UInt32,
+    lTestFromSize : Int32,
+    lTestToSize : Int32,
+    ulCharSet : UInt32,
+    usReserved1 : UInt16,
+    usCharCodeCount : UInt16,
+    pulCharCodeSet : UInt32*
+
+  @[Extern]
+  record PAINTSTRUCT,
+    hdc : Win32cr::Graphics::Gdi::HDC,
+    fErase : Win32cr::Foundation::BOOL,
+    rcPaint : Win32cr::Foundation::RECT,
+    fRestore : Win32cr::Foundation::BOOL,
+    fIncUpdate : Win32cr::Foundation::BOOL,
+    rgbReserved : UInt8[32]
+
+  @[Extern]
+  record DRAWTEXTPARAMS,
+    cbSize : UInt32,
+    iTabLength : Int32,
+    iLeftMargin : Int32,
+    iRightMargin : Int32,
+    uiLengthDrawn : UInt32
+
+  @[Extern]
+  record MONITORINFO,
+    cbSize : UInt32,
+    rcMonitor : Win32cr::Foundation::RECT,
+    rcWork : Win32cr::Foundation::RECT,
+    dwFlags : UInt32
+
+  @[Link("gdi32")]
+  @[Link("msimg32")]
+  @[Link("opengl32")]
+  @[Link("fontsub")]
+  @[Link("t2embed")]
+  @[Link("user32")]
+  lib C
+    fun GetObjectA(h : Win32cr::Graphics::Gdi::HGDIOBJ, c : Int32, pv : Void*) : Int32
+
+    fun AddFontResourceA(param0 : Win32cr::Foundation::PSTR) : Int32
+
+    fun AddFontResourceW(param0 : Win32cr::Foundation::PWSTR) : Int32
+
+    fun AnimatePalette(hPal : Win32cr::Graphics::Gdi::HPALETTE, iStartIndex : UInt32, cEntries : UInt32, ppe : Win32cr::Graphics::Gdi::PALETTEENTRY*) : Win32cr::Foundation::BOOL
+
+    fun Arc(hdc : Win32cr::Graphics::Gdi::HDC, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, x3 : Int32, y3 : Int32, x4 : Int32, y4 : Int32) : Win32cr::Foundation::BOOL
+
+    fun BitBlt(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, cx : Int32, cy : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, x1 : Int32, y1 : Int32, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Win32cr::Foundation::BOOL
+
+    fun CancelDC(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+
+    fun Chord(hdc : Win32cr::Graphics::Gdi::HDC, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, x3 : Int32, y3 : Int32, x4 : Int32, y4 : Int32) : Win32cr::Foundation::BOOL
+
+    fun CloseMetaFile(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HMETAFILE
+
+    fun CombineRgn(hrgnDst : Win32cr::Graphics::Gdi::HRGN, hrgnSrc1 : Win32cr::Graphics::Gdi::HRGN, hrgnSrc2 : Win32cr::Graphics::Gdi::HRGN, iMode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE) : Int32
+
+    fun CopyMetaFileA(param0 : Win32cr::Graphics::Gdi::HMETAFILE, param1 : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HMETAFILE
+
+    fun CopyMetaFileW(param0 : Win32cr::Graphics::Gdi::HMETAFILE, param1 : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HMETAFILE
+
+    fun CreateBitmap(nWidth : Int32, nHeight : Int32, nPlanes : UInt32, nBitCount : UInt32, lpBits : Void*) : Win32cr::Graphics::Gdi::HBITMAP
+
+    fun CreateBitmapIndirect(pbm : Win32cr::Graphics::Gdi::BITMAP*) : Win32cr::Graphics::Gdi::HBITMAP
+
+    fun CreateBrushIndirect(plbrush : Win32cr::Graphics::Gdi::LOGBRUSH*) : Win32cr::Graphics::Gdi::HBRUSH
+
+    fun CreateCompatibleBitmap(hdc : Win32cr::Graphics::Gdi::HDC, cx : Int32, cy : Int32) : Win32cr::Graphics::Gdi::HBITMAP
+
+    fun CreateDiscardableBitmap(hdc : Win32cr::Graphics::Gdi::HDC, cx : Int32, cy : Int32) : Win32cr::Graphics::Gdi::HBITMAP
+
+    fun CreateCompatibleDC(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::CreatedHDC
+
+    fun CreateDCA(pwszDriver : Win32cr::Foundation::PSTR, pwszDevice : Win32cr::Foundation::PSTR, pszPort : Win32cr::Foundation::PSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Graphics::Gdi::CreatedHDC
+
+    fun CreateDCW(pwszDriver : Win32cr::Foundation::PWSTR, pwszDevice : Win32cr::Foundation::PWSTR, pszPort : Win32cr::Foundation::PWSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Graphics::Gdi::CreatedHDC
+
+    fun CreateDIBitmap(hdc : Win32cr::Graphics::Gdi::HDC, pbmih : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, flInit : UInt32, pjBits : Void*, pbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE) : Win32cr::Graphics::Gdi::HBITMAP
+
+    fun CreateDIBPatternBrush(h : LibC::IntPtrT, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE) : Win32cr::Graphics::Gdi::HBRUSH
+
+    fun CreateDIBPatternBrushPt(lpPackedDIB : Void*, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE) : Win32cr::Graphics::Gdi::HBRUSH
+
+    fun CreateEllipticRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32) : Win32cr::Graphics::Gdi::HRGN
+
+    fun CreateEllipticRgnIndirect(lprect : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::HRGN
+
+    fun CreateFontIndirectA(lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Graphics::Gdi::HFONT
+
+    fun CreateFontIndirectW(lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Graphics::Gdi::HFONT
+
+    fun CreateFontA(cHeight : Int32, cWidth : Int32, cEscapement : Int32, cOrientation : Int32, cWeight : Int32, bItalic : UInt32, bUnderline : UInt32, bStrikeOut : UInt32, iCharSet : UInt32, iOutPrecision : Win32cr::Graphics::Gdi::FONT_OUTPUT_PRECISION, iClipPrecision : Win32cr::Graphics::Gdi::FONT_CLIP_PRECISION, iQuality : Win32cr::Graphics::Gdi::FONT_QUALITY, iPitchAndFamily : Win32cr::Graphics::Gdi::FONT_PITCH_AND_FAMILY, pszFaceName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HFONT
+
+    fun CreateFontW(cHeight : Int32, cWidth : Int32, cEscapement : Int32, cOrientation : Int32, cWeight : Int32, bItalic : UInt32, bUnderline : UInt32, bStrikeOut : UInt32, iCharSet : UInt32, iOutPrecision : Win32cr::Graphics::Gdi::FONT_OUTPUT_PRECISION, iClipPrecision : Win32cr::Graphics::Gdi::FONT_CLIP_PRECISION, iQuality : Win32cr::Graphics::Gdi::FONT_QUALITY, iPitchAndFamily : Win32cr::Graphics::Gdi::FONT_PITCH_AND_FAMILY, pszFaceName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HFONT
+
+    fun CreateHatchBrush(iHatch : Win32cr::Graphics::Gdi::HATCH_BRUSH_STYLE, color : UInt32) : Win32cr::Graphics::Gdi::HBRUSH
+
+    fun CreateICA(pszDriver : Win32cr::Foundation::PSTR, pszDevice : Win32cr::Foundation::PSTR, pszPort : Win32cr::Foundation::PSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Graphics::Gdi::CreatedHDC
+
+    fun CreateICW(pszDriver : Win32cr::Foundation::PWSTR, pszDevice : Win32cr::Foundation::PWSTR, pszPort : Win32cr::Foundation::PWSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Graphics::Gdi::CreatedHDC
+
+    fun CreateMetaFileA(pszFile : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HdcMetdataFileHandle
+
+    fun CreateMetaFileW(pszFile : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HdcMetdataFileHandle
+
+    fun CreatePalette(plpal : Win32cr::Graphics::Gdi::LOGPALETTE*) : Win32cr::Graphics::Gdi::HPALETTE
+
+    fun CreatePen(iStyle : Win32cr::Graphics::Gdi::PEN_STYLE, cWidth : Int32, color : UInt32) : Win32cr::Graphics::Gdi::HPEN
+
+    fun CreatePenIndirect(plpen : Win32cr::Graphics::Gdi::LOGPEN*) : Win32cr::Graphics::Gdi::HPEN
+
+    fun CreatePolyPolygonRgn(pptl : Win32cr::Foundation::POINT*, pc : Int32*, cPoly : Int32, iMode : Win32cr::Graphics::Gdi::CREATE_POLYGON_RGN_MODE) : Win32cr::Graphics::Gdi::HRGN
+
+    fun CreatePatternBrush(hbm : Win32cr::Graphics::Gdi::HBITMAP) : Win32cr::Graphics::Gdi::HBRUSH
+
+    fun CreateRectRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32) : Win32cr::Graphics::Gdi::HRGN
+
+    fun CreateRectRgnIndirect(lprect : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::HRGN
+
+    fun CreateRoundRectRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, w : Int32, h : Int32) : Win32cr::Graphics::Gdi::HRGN
+
+    fun CreateScalableFontResourceA(fdwHidden : UInt32, lpszFont : Win32cr::Foundation::PSTR, lpszFile : Win32cr::Foundation::PSTR, lpszPath : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+
+    fun CreateScalableFontResourceW(fdwHidden : UInt32, lpszFont : Win32cr::Foundation::PWSTR, lpszFile : Win32cr::Foundation::PWSTR, lpszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+
+    fun CreateSolidBrush(color : UInt32) : Win32cr::Graphics::Gdi::HBRUSH
+
+    fun DeleteDC(hdc : Win32cr::Graphics::Gdi::CreatedHDC) : Win32cr::Foundation::BOOL
+
+    fun DeleteMetaFile(hmf : Win32cr::Graphics::Gdi::HMETAFILE) : Win32cr::Foundation::BOOL
+
+    fun DeleteObject(ho : Win32cr::Graphics::Gdi::HGDIOBJ) : Win32cr::Foundation::BOOL
+
+    fun DrawEscape(hdc : Win32cr::Graphics::Gdi::HDC, iEscape : Int32, cjIn : Int32, lpIn : Win32cr::Foundation::PSTR) : Int32
+
+    fun Ellipse(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Foundation::BOOL
+
+    fun EnumFontFamiliesExA(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Graphics::Gdi::LOGFONTA*, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCA, lParam : Win32cr::Foundation::LPARAM, dwFlags : UInt32) : Int32
+
+    fun EnumFontFamiliesExW(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Graphics::Gdi::LOGFONTW*, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCW, lParam : Win32cr::Foundation::LPARAM, dwFlags : UInt32) : Int32
+
+    fun EnumFontFamiliesA(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCA, lParam : Win32cr::Foundation::LPARAM) : Int32
+
+    fun EnumFontFamiliesW(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PWSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCW, lParam : Win32cr::Foundation::LPARAM) : Int32
+
+    fun EnumFontsA(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCA, lParam : Win32cr::Foundation::LPARAM) : Int32
+
+    fun EnumFontsW(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PWSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCW, lParam : Win32cr::Foundation::LPARAM) : Int32
+
+    fun EnumObjects(hdc : Win32cr::Graphics::Gdi::HDC, nType : Win32cr::Graphics::Gdi::OBJ_TYPE, lpFunc : Win32cr::Graphics::Gdi::GOBJENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Int32
+
+    fun EqualRgn(hrgn1 : Win32cr::Graphics::Gdi::HRGN, hrgn2 : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
+
+    fun ExcludeClipRect(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Int32
+
+    fun ExtCreateRegion(lpx : Win32cr::Graphics::Gdi::XFORM*, nCount : UInt32, lpData : Win32cr::Graphics::Gdi::RGNDATA*) : Win32cr::Graphics::Gdi::HRGN
+
+    fun ExtFloodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32, type__ : Win32cr::Graphics::Gdi::EXT_FLOOD_FILL_TYPE) : Win32cr::Foundation::BOOL
+
+    fun FillRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, hbr : Win32cr::Graphics::Gdi::HBRUSH) : Win32cr::Foundation::BOOL
+
+    fun FloodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : Win32cr::Foundation::BOOL
+
+    fun FrameRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, hbr : Win32cr::Graphics::Gdi::HBRUSH, w : Int32, h : Int32) : Win32cr::Foundation::BOOL
+
+    fun GetROP2(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+
+    fun GetAspectRatioFilterEx(hdc : Win32cr::Graphics::Gdi::HDC, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+
+    fun GetBkColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+
+    fun GetDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+
+    fun GetDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+
+    fun GetBkMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+
+    fun GetBitmapBits(hbit : Win32cr::Graphics::Gdi::HBITMAP, cb : Int32, lpvBits : Void*) : Int32
+
+    fun GetBitmapDimensionEx(hbit : Win32cr::Graphics::Gdi::HBITMAP, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+
+    fun GetBoundsRect(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*, flags : UInt32) : UInt32
+
+    fun GetBrushOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+
+    fun GetCharWidthA(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
+
+    fun GetCharWidthW(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
+
+    fun GetCharWidth32A(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
+
+    fun GetCharWidth32W(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
+
+    fun GetCharWidthFloatA(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Float32*) : Win32cr::Foundation::BOOL
+
+    fun GetCharWidthFloatW(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Float32*) : Win32cr::Foundation::BOOL
+
+    fun GetCharABCWidthsA(hdc : Win32cr::Graphics::Gdi::HDC, wFirst : UInt32, wLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::BOOL
+
+    fun GetCharABCWidthsW(hdc : Win32cr::Graphics::Gdi::HDC, wFirst : UInt32, wLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::BOOL
+
+    fun GetCharABCWidthsFloatA(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABCFLOAT*) : Win32cr::Foundation::BOOL
+
+    fun GetCharABCWidthsFloatW(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABCFLOAT*) : Win32cr::Foundation::BOOL
+
+    fun GetClipBox(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*) : Int32
+
+    fun GetClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Int32
+
+    fun GetMetaRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Int32
+
+    fun GetCurrentObject(hdc : Win32cr::Graphics::Gdi::HDC, type__ : Win32cr::Graphics::Gdi::OBJ_TYPE) : Win32cr::Graphics::Gdi::HGDIOBJ
+
+    fun GetCurrentPositionEx(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+
+    fun GetDeviceCaps(hdc : Win32cr::Graphics::Gdi::HDC, index : Win32cr::Graphics::Gdi::GET_DEVICE_CAPS_INDEX) : Int32
+
+    fun GetDIBits(hdc : Win32cr::Graphics::Gdi::HDC, hbm : Win32cr::Graphics::Gdi::HBITMAP, start : UInt32, cLines : UInt32, lpvBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, usage : Win32cr::Graphics::Gdi::DIB_USAGE) : Int32
+
+    fun GetFontData(hdc : Win32cr::Graphics::Gdi::HDC, dwTable : UInt32, dwOffset : UInt32, pvBuffer : Void*, cjBuffer : UInt32) : UInt32
+
+    fun GetGlyphOutlineA(hdc : Win32cr::Graphics::Gdi::HDC, uChar : UInt32, fuFormat : Win32cr::Graphics::Gdi::GET_GLYPH_OUTLINE_FORMAT, lpgm : Win32cr::Graphics::Gdi::GLYPHMETRICS*, cjBuffer : UInt32, pvBuffer : Void*, lpmat2 : Win32cr::Graphics::Gdi::MAT2*) : UInt32
+
+    fun GetGlyphOutlineW(hdc : Win32cr::Graphics::Gdi::HDC, uChar : UInt32, fuFormat : Win32cr::Graphics::Gdi::GET_GLYPH_OUTLINE_FORMAT, lpgm : Win32cr::Graphics::Gdi::GLYPHMETRICS*, cjBuffer : UInt32, pvBuffer : Void*, lpmat2 : Win32cr::Graphics::Gdi::MAT2*) : UInt32
+
+    fun GetGraphicsMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+
+    fun GetMapMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+
+    fun GetMetaFileBitsEx(hMF : Win32cr::Graphics::Gdi::HMETAFILE, cbBuffer : UInt32, lpData : Void*) : UInt32
+
+    fun GetMetaFileA(lpName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HMETAFILE
+
+    fun GetMetaFileW(lpName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HMETAFILE
+
+    fun GetNearestColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+
+    fun GetNearestPaletteIndex(h : Win32cr::Graphics::Gdi::HPALETTE, color : UInt32) : UInt32
+
+    fun GetObjectType(h : Win32cr::Graphics::Gdi::HGDIOBJ) : UInt32
+
+    fun GetOutlineTextMetricsA(hdc : Win32cr::Graphics::Gdi::HDC, cjCopy : UInt32, potm : Win32cr::Graphics::Gdi::OUTLINETEXTMETRICA*) : UInt32
+
+    fun GetOutlineTextMetricsW(hdc : Win32cr::Graphics::Gdi::HDC, cjCopy : UInt32, potm : Win32cr::Graphics::Gdi::OUTLINETEXTMETRICW*) : UInt32
+
+    fun GetPaletteEntries(hpal : Win32cr::Graphics::Gdi::HPALETTE, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
+
+    fun GetPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : UInt32
+
+    fun GetPolyFillMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+
+    fun GetRasterizerCaps(lpraststat : Win32cr::Graphics::Gdi::RASTERIZER_STATUS*, cjBytes : UInt32) : Win32cr::Foundation::BOOL
+
+    fun GetRandomRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, i : Int32) : Int32
 
-  # Params # pbm : BITMAP* [In]
-  fun CreateBitmapIndirect(pbm : BITMAP*) : HBITMAP
+    fun GetRegionData(hrgn : Win32cr::Graphics::Gdi::HRGN, nCount : UInt32, lpRgnData : Win32cr::Graphics::Gdi::RGNDATA*) : UInt32
 
-  # Params # plbrush : LOGBRUSH* [In]
-  fun CreateBrushIndirect(plbrush : LOGBRUSH*) : HBRUSH
+    fun GetRgnBox(hrgn : Win32cr::Graphics::Gdi::HRGN, lprc : Win32cr::Foundation::RECT*) : Int32
 
-  # Params # hdc : HDC [In],cx : Int32 [In],cy : Int32 [In]
-  fun CreateCompatibleBitmap(hdc : HDC, cx : Int32, cy : Int32) : HBITMAP
+    fun GetStockObject(i : Win32cr::Graphics::Gdi::GET_STOCK_OBJECT_FLAGS) : Win32cr::Graphics::Gdi::HGDIOBJ
 
-  # Params # hdc : HDC [In],cx : Int32 [In],cy : Int32 [In]
-  fun CreateDiscardableBitmap(hdc : HDC, cx : Int32, cy : Int32) : HBITMAP
+    fun GetStretchBltMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
-  # Params # hdc : HDC [In]
-  fun CreateCompatibleDC(hdc : HDC) : CreatedHDC
+    fun GetSystemPaletteEntries(hdc : Win32cr::Graphics::Gdi::HDC, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
 
-  # Params # pwszdriver : PSTR [In],pwszdevice : PSTR [In],pszport : PSTR [In],pdm : DEVMODEA* [In]
-  fun CreateDCA(pwszdriver : PSTR, pwszdevice : PSTR, pszport : PSTR, pdm : DEVMODEA*) : CreatedHDC
+    fun GetSystemPaletteUse(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
-  # Params # pwszdriver : LibC::LPWSTR [In],pwszdevice : LibC::LPWSTR [In],pszport : LibC::LPWSTR [In],pdm : DEVMODEW* [In]
-  fun CreateDCW(pwszdriver : LibC::LPWSTR, pwszdevice : LibC::LPWSTR, pszport : LibC::LPWSTR, pdm : DEVMODEW*) : CreatedHDC
+    fun GetTextCharacterExtra(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
-  # Params # hdc : HDC [In],pbmih : BITMAPINFOHEADER* [In],flinit : UInt32 [In],pjbits : Void* [In],pbmi : BITMAPINFO* [In],iusage : DIB_USAGE [In]
-  fun CreateDIBitmap(hdc : HDC, pbmih : BITMAPINFOHEADER*, flinit : UInt32, pjbits : Void*, pbmi : BITMAPINFO*, iusage : DIB_USAGE) : HBITMAP
+    fun GetTextAlign(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
-  # Params # h : LibC::IntPtrT [In],iusage : DIB_USAGE [In]
-  fun CreateDIBPatternBrush(h : LibC::IntPtrT, iusage : DIB_USAGE) : HBRUSH
+    fun GetTextColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
-  # Params # lppackeddib : Void* [In],iusage : DIB_USAGE [In]
-  fun CreateDIBPatternBrushPt(lppackeddib : Void*, iusage : DIB_USAGE) : HBRUSH
+    fun GetTextExtentPointA(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, c : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # x1 : Int32 [In],y1 : Int32 [In],x2 : Int32 [In],y2 : Int32 [In]
-  fun CreateEllipticRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32) : HRGN
+    fun GetTextExtentPointW(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, c : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # lprect : RECT* [In]
-  fun CreateEllipticRgnIndirect(lprect : RECT*) : HRGN
+    fun GetTextExtentPoint32A(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, c : Int32, psizl : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # lplf : LOGFONTA* [In]
-  fun CreateFontIndirectA(lplf : LOGFONTA*) : HFONT
+    fun GetTextExtentPoint32W(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, c : Int32, psizl : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # lplf : LOGFONTW* [In]
-  fun CreateFontIndirectW(lplf : LOGFONTW*) : HFONT
+    fun GetTextExtentExPointA(hdc : Win32cr::Graphics::Gdi::HDC, lpszString : UInt8*, cchString : Int32, nMaxExtent : Int32, lpnFit : Int32*, lpnDx : Int32*, lpSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # cheight : Int32 [In],cwidth : Int32 [In],cescapement : Int32 [In],corientation : Int32 [In],cweight : Int32 [In],bitalic : UInt32 [In],bunderline : UInt32 [In],bstrikeout : UInt32 [In],icharset : UInt32 [In],ioutprecision : FONT_OUTPUT_PRECISION [In],iclipprecision : FONT_CLIP_PRECISION [In],iquality : FONT_QUALITY [In],ipitchandfamily : FONT_PITCH_AND_FAMILY [In],pszfacename : PSTR [In]
-  fun CreateFontA(cheight : Int32, cwidth : Int32, cescapement : Int32, corientation : Int32, cweight : Int32, bitalic : UInt32, bunderline : UInt32, bstrikeout : UInt32, icharset : UInt32, ioutprecision : FONT_OUTPUT_PRECISION, iclipprecision : FONT_CLIP_PRECISION, iquality : FONT_QUALITY, ipitchandfamily : FONT_PITCH_AND_FAMILY, pszfacename : PSTR) : HFONT
+    fun GetTextExtentExPointW(hdc : Win32cr::Graphics::Gdi::HDC, lpszString : UInt16*, cchString : Int32, nMaxExtent : Int32, lpnFit : Int32*, lpnDx : Int32*, lpSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # cheight : Int32 [In],cwidth : Int32 [In],cescapement : Int32 [In],corientation : Int32 [In],cweight : Int32 [In],bitalic : UInt32 [In],bunderline : UInt32 [In],bstrikeout : UInt32 [In],icharset : UInt32 [In],ioutprecision : FONT_OUTPUT_PRECISION [In],iclipprecision : FONT_CLIP_PRECISION [In],iquality : FONT_QUALITY [In],ipitchandfamily : FONT_PITCH_AND_FAMILY [In],pszfacename : LibC::LPWSTR [In]
-  fun CreateFontW(cheight : Int32, cwidth : Int32, cescapement : Int32, corientation : Int32, cweight : Int32, bitalic : UInt32, bunderline : UInt32, bstrikeout : UInt32, icharset : UInt32, ioutprecision : FONT_OUTPUT_PRECISION, iclipprecision : FONT_CLIP_PRECISION, iquality : FONT_QUALITY, ipitchandfamily : FONT_PITCH_AND_FAMILY, pszfacename : LibC::LPWSTR) : HFONT
+    fun GetFontLanguageInfo(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
-  # Params # ihatch : HATCH_BRUSH_STYLE [In],color : UInt32 [In]
-  fun CreateHatchBrush(ihatch : HATCH_BRUSH_STYLE, color : UInt32) : HBRUSH
+    fun GetCharacterPlacementA(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, nCount : Int32, nMexExtent : Int32, lpResults : Win32cr::Graphics::Gdi::GCP_RESULTSA*, dwFlags : Win32cr::Graphics::Gdi::GET_CHARACTER_PLACEMENT_FLAGS) : UInt32
 
-  # Params # pszdriver : PSTR [In],pszdevice : PSTR [In],pszport : PSTR [In],pdm : DEVMODEA* [In]
-  fun CreateICA(pszdriver : PSTR, pszdevice : PSTR, pszport : PSTR, pdm : DEVMODEA*) : CreatedHDC
+    fun GetCharacterPlacementW(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, nCount : Int32, nMexExtent : Int32, lpResults : Win32cr::Graphics::Gdi::GCP_RESULTSW*, dwFlags : Win32cr::Graphics::Gdi::GET_CHARACTER_PLACEMENT_FLAGS) : UInt32
 
-  # Params # pszdriver : LibC::LPWSTR [In],pszdevice : LibC::LPWSTR [In],pszport : LibC::LPWSTR [In],pdm : DEVMODEW* [In]
-  fun CreateICW(pszdriver : LibC::LPWSTR, pszdevice : LibC::LPWSTR, pszport : LibC::LPWSTR, pdm : DEVMODEW*) : CreatedHDC
+    fun GetFontUnicodeRanges(hdc : Win32cr::Graphics::Gdi::HDC, lpgs : Win32cr::Graphics::Gdi::GLYPHSET*) : UInt32
 
-  # Params # pszfile : PSTR [In]
-  fun CreateMetaFileA(pszfile : PSTR) : HdcMetdataFileHandle
+    fun GetGlyphIndicesA(hdc : Win32cr::Graphics::Gdi::HDC, lpstr : UInt8*, c : Int32, pgi : UInt16*, fl : UInt32) : UInt32
 
-  # Params # pszfile : LibC::LPWSTR [In]
-  fun CreateMetaFileW(pszfile : LibC::LPWSTR) : HdcMetdataFileHandle
+    fun GetGlyphIndicesW(hdc : Win32cr::Graphics::Gdi::HDC, lpstr : UInt16*, c : Int32, pgi : UInt16*, fl : UInt32) : UInt32
 
-  # Params # plpal : LOGPALETTE* [In]
-  fun CreatePalette(plpal : LOGPALETTE*) : HPALETTE
+    fun GetTextExtentPointI(hdc : Win32cr::Graphics::Gdi::HDC, pgiIn : UInt16*, cgi : Int32, psize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # istyle : PEN_STYLE [In],cwidth : Int32 [In],color : UInt32 [In]
-  fun CreatePen(istyle : PEN_STYLE, cwidth : Int32, color : UInt32) : HPEN
+    fun GetTextExtentExPointI(hdc : Win32cr::Graphics::Gdi::HDC, lpwszString : UInt16*, cwchString : Int32, nMaxExtent : Int32, lpnFit : Int32*, lpnDx : Int32*, lpSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # plpen : LOGPEN* [In]
-  fun CreatePenIndirect(plpen : LOGPEN*) : HPEN
+    fun GetCharWidthI(hdc : Win32cr::Graphics::Gdi::HDC, giFirst : UInt32, cgi : UInt32, pgi : UInt16*, piWidths : Int32*) : Win32cr::Foundation::BOOL
 
-  # Params # pptl : POINT* [In],pc : Int32* [In],cpoly : Int32 [In],imode : CREATE_POLYGON_RGN_MODE [In]
-  fun CreatePolyPolygonRgn(pptl : POINT*, pc : Int32*, cpoly : Int32, imode : CREATE_POLYGON_RGN_MODE) : HRGN
+    fun GetCharABCWidthsI(hdc : Win32cr::Graphics::Gdi::HDC, giFirst : UInt32, cgi : UInt32, pgi : UInt16*, pabc : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::BOOL
 
-  # Params # hbm : HBITMAP [In]
-  fun CreatePatternBrush(hbm : HBITMAP) : HBRUSH
+    fun AddFontResourceExA(name : Win32cr::Foundation::PSTR, fl : Win32cr::Graphics::Gdi::FONT_RESOURCE_CHARACTERISTICS, res : Void*) : Int32
 
-  # Params # x1 : Int32 [In],y1 : Int32 [In],x2 : Int32 [In],y2 : Int32 [In]
-  fun CreateRectRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32) : HRGN
+    fun AddFontResourceExW(name : Win32cr::Foundation::PWSTR, fl : Win32cr::Graphics::Gdi::FONT_RESOURCE_CHARACTERISTICS, res : Void*) : Int32
 
-  # Params # lprect : RECT* [In]
-  fun CreateRectRgnIndirect(lprect : RECT*) : HRGN
+    fun RemoveFontResourceExA(name : Win32cr::Foundation::PSTR, fl : UInt32, pdv : Void*) : Win32cr::Foundation::BOOL
 
-  # Params # x1 : Int32 [In],y1 : Int32 [In],x2 : Int32 [In],y2 : Int32 [In],w : Int32 [In],h : Int32 [In]
-  fun CreateRoundRectRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, w : Int32, h : Int32) : HRGN
+    fun RemoveFontResourceExW(name : Win32cr::Foundation::PWSTR, fl : UInt32, pdv : Void*) : Win32cr::Foundation::BOOL
 
-  # Params # fdwhidden : UInt32 [In],lpszfont : PSTR [In],lpszfile : PSTR [In],lpszpath : PSTR [In]
-  fun CreateScalableFontResourceA(fdwhidden : UInt32, lpszfont : PSTR, lpszfile : PSTR, lpszpath : PSTR) : LibC::BOOL
+    fun AddFontMemResourceEx(pFileView : Void*, cjSize : UInt32, pvResrved : Void*, pNumFonts : UInt32*) : Win32cr::Foundation::HANDLE
 
-  # Params # fdwhidden : UInt32 [In],lpszfont : LibC::LPWSTR [In],lpszfile : LibC::LPWSTR [In],lpszpath : LibC::LPWSTR [In]
-  fun CreateScalableFontResourceW(fdwhidden : UInt32, lpszfont : LibC::LPWSTR, lpszfile : LibC::LPWSTR, lpszpath : LibC::LPWSTR) : LibC::BOOL
+    fun RemoveFontMemResourceEx(h : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
-  # Params # color : UInt32 [In]
-  fun CreateSolidBrush(color : UInt32) : HBRUSH
+    fun CreateFontIndirectExA(param0 : Win32cr::Graphics::Gdi::ENUMLOGFONTEXDVA*) : Win32cr::Graphics::Gdi::HFONT
 
-  # Params # hdc : CreatedHDC [In]
-  fun DeleteDC(hdc : CreatedHDC) : LibC::BOOL
+    fun CreateFontIndirectExW(param0 : Win32cr::Graphics::Gdi::ENUMLOGFONTEXDVW*) : Win32cr::Graphics::Gdi::HFONT
 
-  # Params # hmf : HMETAFILE [In]
-  fun DeleteMetaFile(hmf : HMETAFILE) : LibC::BOOL
+    fun GetViewportExtEx(hdc : Win32cr::Graphics::Gdi::HDC, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # ho : HGDIOBJ [In]
-  fun DeleteObject(ho : HGDIOBJ) : LibC::BOOL
+    fun GetViewportOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],iescape : Int32 [In],cjin : Int32 [In],lpin : PSTR [In]
-  fun DrawEscape(hdc : HDC, iescape : Int32, cjin : Int32, lpin : PSTR) : Int32
+    fun GetWindowExtEx(hdc : Win32cr::Graphics::Gdi::HDC, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],left : Int32 [In],top : Int32 [In],right : Int32 [In],bottom : Int32 [In]
-  fun Ellipse(hdc : HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : LibC::BOOL
+    fun GetWindowOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lplogfont : LOGFONTA* [In],lpproc : FONTENUMPROCA [In],lparam : LPARAM [In],dwflags : UInt32 [In]
-  fun EnumFontFamiliesExA(hdc : HDC, lplogfont : LOGFONTA*, lpproc : FONTENUMPROCA, lparam : LPARAM, dwflags : UInt32) : Int32
+    fun IntersectClipRect(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Int32
 
-  # Params # hdc : HDC [In],lplogfont : LOGFONTW* [In],lpproc : FONTENUMPROCW [In],lparam : LPARAM [In],dwflags : UInt32 [In]
-  fun EnumFontFamiliesExW(hdc : HDC, lplogfont : LOGFONTW*, lpproc : FONTENUMPROCW, lparam : LPARAM, dwflags : UInt32) : Int32
+    fun InvertRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lplogfont : PSTR [In],lpproc : FONTENUMPROCA [In],lparam : LPARAM [In]
-  fun EnumFontFamiliesA(hdc : HDC, lplogfont : PSTR, lpproc : FONTENUMPROCA, lparam : LPARAM) : Int32
+    fun LineDDA(xStart : Int32, yStart : Int32, xEnd : Int32, yEnd : Int32, lpProc : Win32cr::Graphics::Gdi::LINEDDAPROC, data : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lplogfont : LibC::LPWSTR [In],lpproc : FONTENUMPROCW [In],lparam : LPARAM [In]
-  fun EnumFontFamiliesW(hdc : HDC, lplogfont : LibC::LPWSTR, lpproc : FONTENUMPROCW, lparam : LPARAM) : Int32
+    fun LineTo(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lplogfont : PSTR [In],lpproc : FONTENUMPROCA [In],lparam : LPARAM [In]
-  fun EnumFontsA(hdc : HDC, lplogfont : PSTR, lpproc : FONTENUMPROCA, lparam : LPARAM) : Int32
+    fun MaskBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, width : Int32, height : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xSrc : Int32, ySrc : Int32, hbmMask : Win32cr::Graphics::Gdi::HBITMAP, xMask : Int32, yMask : Int32, rop : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lplogfont : LibC::LPWSTR [In],lpproc : FONTENUMPROCW [In],lparam : LPARAM [In]
-  fun EnumFontsW(hdc : HDC, lplogfont : LibC::LPWSTR, lpproc : FONTENUMPROCW, lparam : LPARAM) : Int32
+    fun PlgBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, lpPoint : Win32cr::Foundation::POINT*, hdcSrc : Win32cr::Graphics::Gdi::HDC, xSrc : Int32, ySrc : Int32, width : Int32, height : Int32, hbmMask : Win32cr::Graphics::Gdi::HBITMAP, xMask : Int32, yMask : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],ntype : OBJ_TYPE [In],lpfunc : GOBJENUMPROC [In],lparam : LPARAM [In]
-  fun EnumObjects(hdc : HDC, ntype : OBJ_TYPE, lpfunc : GOBJENUMPROC, lparam : LPARAM) : Int32
+    fun OffsetClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Int32
 
-  # Params # hrgn1 : HRGN [In],hrgn2 : HRGN [In]
-  fun EqualRgn(hrgn1 : HRGN, hrgn2 : HRGN) : LibC::BOOL
+    fun OffsetRgn(hrgn : Win32cr::Graphics::Gdi::HRGN, x : Int32, y : Int32) : Int32
 
-  # Params # hdc : HDC [In],left : Int32 [In],top : Int32 [In],right : Int32 [In],bottom : Int32 [In]
-  fun ExcludeClipRect(hdc : HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Int32
+    fun PatBlt(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, w : Int32, h : Int32, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Win32cr::Foundation::BOOL
 
-  # Params # lpx : XFORM* [In],ncount : UInt32 [In],lpdata : RGNDATA* [In]
-  fun ExtCreateRegion(lpx : XFORM*, ncount : UInt32, lpdata : RGNDATA*) : HRGN
+    fun Pie(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, xr1 : Int32, yr1 : Int32, xr2 : Int32, yr2 : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],color : UInt32 [In],type : EXT_FLOOD_FILL_TYPE [In]
-  fun ExtFloodFill(hdc : HDC, x : Int32, y : Int32, color : UInt32, type : EXT_FLOOD_FILL_TYPE) : LibC::BOOL
+    fun PlayMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HMETAFILE) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],hrgn : HRGN [In],hbr : HBRUSH [In]
-  fun FillRgn(hdc : HDC, hrgn : HRGN, hbr : HBRUSH) : LibC::BOOL
+    fun PaintRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],color : UInt32 [In]
-  fun FloodFill(hdc : HDC, x : Int32, y : Int32, color : UInt32) : LibC::BOOL
+    fun PolyPolygon(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, asz : Int32*, csz : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],hrgn : HRGN [In],hbr : HBRUSH [In],w : Int32 [In],h : Int32 [In]
-  fun FrameRgn(hdc : HDC, hrgn : HRGN, hbr : HBRUSH, w : Int32, h : Int32) : LibC::BOOL
+    fun PtInRegion(hrgn : Win32cr::Graphics::Gdi::HRGN, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun GetROP2(hdc : HDC) : Int32
+    fun PtVisible(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lpsize : SIZE* [In]
-  fun GetAspectRatioFilterEx(hdc : HDC, lpsize : SIZE*) : LibC::BOOL
+    fun RectInRegion(hrgn : Win32cr::Graphics::Gdi::HRGN, lprect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun GetBkColor(hdc : HDC) : UInt32
+    fun RectVisible(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun GetDCBrushColor(hdc : HDC) : UInt32
+    fun Rectangle(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun GetDCPenColor(hdc : HDC) : UInt32
+    fun RestoreDC(hdc : Win32cr::Graphics::Gdi::HDC, nSavedDC : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun GetBkMode(hdc : HDC) : Int32
+    fun ResetDCA(hdc : Win32cr::Graphics::Gdi::HDC, lpdm : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Graphics::Gdi::HDC
 
-  # Params # hbit : HBITMAP [In],cb : Int32 [In],lpvbits : Void* [In]
-  fun GetBitmapBits(hbit : HBITMAP, cb : Int32, lpvbits : Void*) : Int32
+    fun ResetDCW(hdc : Win32cr::Graphics::Gdi::HDC, lpdm : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Graphics::Gdi::HDC
 
-  # Params # hbit : HBITMAP [In],lpsize : SIZE* [In]
-  fun GetBitmapDimensionEx(hbit : HBITMAP, lpsize : SIZE*) : LibC::BOOL
+    fun RealizePalette(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
-  # Params # hdc : HDC [In],lprect : RECT* [In],flags : UInt32 [In]
-  fun GetBoundsRect(hdc : HDC, lprect : RECT*, flags : UInt32) : UInt32
+    fun RemoveFontResourceA(lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lppt : POINT* [In]
-  fun GetBrushOrgEx(hdc : HDC, lppt : POINT*) : LibC::BOOL
+    fun RemoveFontResourceW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],ifirst : UInt32 [In],ilast : UInt32 [In],lpbuffer : Int32* [In]
-  fun GetCharWidthA(hdc : HDC, ifirst : UInt32, ilast : UInt32, lpbuffer : Int32*) : LibC::BOOL
+    fun RoundRect(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, width : Int32, height : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],ifirst : UInt32 [In],ilast : UInt32 [In],lpbuffer : Int32* [In]
-  fun GetCharWidthW(hdc : HDC, ifirst : UInt32, ilast : UInt32, lpbuffer : Int32*) : LibC::BOOL
+    fun ResizePalette(hpal : Win32cr::Graphics::Gdi::HPALETTE, n : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],ifirst : UInt32 [In],ilast : UInt32 [In],lpbuffer : Int32* [In]
-  fun GetCharWidth32A(hdc : HDC, ifirst : UInt32, ilast : UInt32, lpbuffer : Int32*) : LibC::BOOL
+    fun SaveDC(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
-  # Params # hdc : HDC [In],ifirst : UInt32 [In],ilast : UInt32 [In],lpbuffer : Int32* [In]
-  fun GetCharWidth32W(hdc : HDC, ifirst : UInt32, ilast : UInt32, lpbuffer : Int32*) : LibC::BOOL
+    fun SelectClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Int32
 
-  # Params # hdc : HDC [In],ifirst : UInt32 [In],ilast : UInt32 [In],lpbuffer : Float32* [In]
-  fun GetCharWidthFloatA(hdc : HDC, ifirst : UInt32, ilast : UInt32, lpbuffer : Float32*) : LibC::BOOL
+    fun ExtSelectClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, mode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE) : Int32
 
-  # Params # hdc : HDC [In],ifirst : UInt32 [In],ilast : UInt32 [In],lpbuffer : Float32* [In]
-  fun GetCharWidthFloatW(hdc : HDC, ifirst : UInt32, ilast : UInt32, lpbuffer : Float32*) : LibC::BOOL
+    fun SetMetaRgn(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
-  # Params # hdc : HDC [In],wfirst : UInt32 [In],wlast : UInt32 [In],lpabc : ABC* [In]
-  fun GetCharABCWidthsA(hdc : HDC, wfirst : UInt32, wlast : UInt32, lpabc : ABC*) : LibC::BOOL
+    fun SelectObject(hdc : Win32cr::Graphics::Gdi::HDC, h : Win32cr::Graphics::Gdi::HGDIOBJ) : Win32cr::Graphics::Gdi::HGDIOBJ
 
-  # Params # hdc : HDC [In],wfirst : UInt32 [In],wlast : UInt32 [In],lpabc : ABC* [In]
-  fun GetCharABCWidthsW(hdc : HDC, wfirst : UInt32, wlast : UInt32, lpabc : ABC*) : LibC::BOOL
+    fun SelectPalette(hdc : Win32cr::Graphics::Gdi::HDC, hPal : Win32cr::Graphics::Gdi::HPALETTE, bForceBkgd : Win32cr::Foundation::BOOL) : Win32cr::Graphics::Gdi::HPALETTE
 
-  # Params # hdc : HDC [In],ifirst : UInt32 [In],ilast : UInt32 [In],lpabc : ABCFLOAT* [In]
-  fun GetCharABCWidthsFloatA(hdc : HDC, ifirst : UInt32, ilast : UInt32, lpabc : ABCFLOAT*) : LibC::BOOL
+    fun SetBkColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
 
-  # Params # hdc : HDC [In],ifirst : UInt32 [In],ilast : UInt32 [In],lpabc : ABCFLOAT* [In]
-  fun GetCharABCWidthsFloatW(hdc : HDC, ifirst : UInt32, ilast : UInt32, lpabc : ABCFLOAT*) : LibC::BOOL
+    fun SetDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
 
-  # Params # hdc : HDC [In],lprect : RECT* [In]
-  fun GetClipBox(hdc : HDC, lprect : RECT*) : Int32
+    fun SetDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
 
-  # Params # hdc : HDC [In],hrgn : HRGN [In]
-  fun GetClipRgn(hdc : HDC, hrgn : HRGN) : Int32
+    fun SetBkMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::BACKGROUND_MODE) : Int32
 
-  # Params # hdc : HDC [In],hrgn : HRGN [In]
-  fun GetMetaRgn(hdc : HDC, hrgn : HRGN) : Int32
+    fun SetBitmapBits(hbm : Win32cr::Graphics::Gdi::HBITMAP, cb : UInt32, pvBits : Void*) : Int32
 
-  # Params # hdc : HDC [In],type : OBJ_TYPE [In]
-  fun GetCurrentObject(hdc : HDC, type : OBJ_TYPE) : HGDIOBJ
+    fun SetBoundsRect(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*, flags : Win32cr::Graphics::Gdi::SET_BOUNDS_RECT_FLAGS) : UInt32
 
-  # Params # hdc : HDC [In],lppt : POINT* [In]
-  fun GetCurrentPositionEx(hdc : HDC, lppt : POINT*) : LibC::BOOL
+    fun SetDIBits(hdc : Win32cr::Graphics::Gdi::HDC, hbm : Win32cr::Graphics::Gdi::HBITMAP, start : UInt32, cLines : UInt32, lpBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, color_use : Win32cr::Graphics::Gdi::DIB_USAGE) : Int32
 
-  # Params # hdc : HDC [In],index : GET_DEVICE_CAPS_INDEX [In]
-  fun GetDeviceCaps(hdc : HDC, index : GET_DEVICE_CAPS_INDEX) : Int32
+    fun SetDIBitsToDevice(hdc : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, w : UInt32, h : UInt32, xSrc : Int32, ySrc : Int32, start_scan : UInt32, cLines : UInt32, lpvBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, color_use : Win32cr::Graphics::Gdi::DIB_USAGE) : Int32
 
-  # Params # hdc : HDC [In],hbm : HBITMAP [In],start : UInt32 [In],clines : UInt32 [In],lpvbits : Void* [In],lpbmi : BITMAPINFO* [In],usage : DIB_USAGE [In]
-  fun GetDIBits(hdc : HDC, hbm : HBITMAP, start : UInt32, clines : UInt32, lpvbits : Void*, lpbmi : BITMAPINFO*, usage : DIB_USAGE) : Int32
+    fun SetMapperFlags(hdc : Win32cr::Graphics::Gdi::HDC, flags : UInt32) : UInt32
 
-  # Params # hdc : HDC [In],dwtable : UInt32 [In],dwoffset : UInt32 [In],pvbuffer : Void* [In],cjbuffer : UInt32 [In]
-  fun GetFontData(hdc : HDC, dwtable : UInt32, dwoffset : UInt32, pvbuffer : Void*, cjbuffer : UInt32) : UInt32
+    fun SetGraphicsMode(hdc : Win32cr::Graphics::Gdi::HDC, iMode : Win32cr::Graphics::Gdi::GRAPHICS_MODE) : Int32
 
-  # Params # hdc : HDC [In],uchar : UInt32 [In],fuformat : GET_GLYPH_OUTLINE_FORMAT [In],lpgm : GLYPHMETRICS* [In],cjbuffer : UInt32 [In],pvbuffer : Void* [In],lpmat2 : MAT2* [In]
-  fun GetGlyphOutlineA(hdc : HDC, uchar : UInt32, fuformat : GET_GLYPH_OUTLINE_FORMAT, lpgm : GLYPHMETRICS*, cjbuffer : UInt32, pvbuffer : Void*, lpmat2 : MAT2*) : UInt32
+    fun SetMapMode(hdc : Win32cr::Graphics::Gdi::HDC, iMode : Win32cr::Graphics::Gdi::HDC_MAP_MODE) : Int32
 
-  # Params # hdc : HDC [In],uchar : UInt32 [In],fuformat : GET_GLYPH_OUTLINE_FORMAT [In],lpgm : GLYPHMETRICS* [In],cjbuffer : UInt32 [In],pvbuffer : Void* [In],lpmat2 : MAT2* [In]
-  fun GetGlyphOutlineW(hdc : HDC, uchar : UInt32, fuformat : GET_GLYPH_OUTLINE_FORMAT, lpgm : GLYPHMETRICS*, cjbuffer : UInt32, pvbuffer : Void*, lpmat2 : MAT2*) : UInt32
+    fun SetLayout(hdc : Win32cr::Graphics::Gdi::HDC, l : Win32cr::Graphics::Gdi::DC_LAYOUT) : UInt32
 
-  # Params # hdc : HDC [In]
-  fun GetGraphicsMode(hdc : HDC) : Int32
+    fun GetLayout(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
 
-  # Params # hdc : HDC [In]
-  fun GetMapMode(hdc : HDC) : Int32
+    fun SetMetaFileBitsEx(cbBuffer : UInt32, lpData : UInt8*) : Win32cr::Graphics::Gdi::HMETAFILE
 
-  # Params # hmf : HMETAFILE [In],cbbuffer : UInt32 [In],lpdata : Void* [In]
-  fun GetMetaFileBitsEx(hmf : HMETAFILE, cbbuffer : UInt32, lpdata : Void*) : UInt32
+    fun SetPaletteEntries(hpal : Win32cr::Graphics::Gdi::HPALETTE, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
 
-  # Params # lpname : PSTR [In]
-  fun GetMetaFileA(lpname : PSTR) : HMETAFILE
+    fun SetPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : UInt32
 
-  # Params # lpname : LibC::LPWSTR [In]
-  fun GetMetaFileW(lpname : LibC::LPWSTR) : HMETAFILE
+    fun SetPixelV(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],color : UInt32 [In]
-  fun GetNearestColor(hdc : HDC, color : UInt32) : UInt32
+    fun SetPolyFillMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::CREATE_POLYGON_RGN_MODE) : Int32
 
-  # Params # h : HPALETTE [In],color : UInt32 [In]
-  fun GetNearestPaletteIndex(h : HPALETTE, color : UInt32) : UInt32
+    fun StretchBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xSrc : Int32, ySrc : Int32, wSrc : Int32, hSrc : Int32, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Win32cr::Foundation::BOOL
 
-  # Params # h : HGDIOBJ [In]
-  fun GetObjectType(h : HGDIOBJ) : UInt32
+    fun SetRectRgn(hrgn : Win32cr::Graphics::Gdi::HRGN, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],cjcopy : UInt32 [In],potm : OUTLINETEXTMETRICA* [In]
-  fun GetOutlineTextMetricsA(hdc : HDC, cjcopy : UInt32, potm : OUTLINETEXTMETRICA*) : UInt32
+    fun StretchDIBits(hdc : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, dest_width : Int32, dest_height : Int32, xSrc : Int32, ySrc : Int32, src_width : Int32, src_height : Int32, lpBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Int32
 
-  # Params # hdc : HDC [In],cjcopy : UInt32 [In],potm : OUTLINETEXTMETRICW* [In]
-  fun GetOutlineTextMetricsW(hdc : HDC, cjcopy : UInt32, potm : OUTLINETEXTMETRICW*) : UInt32
+    fun SetROP2(hdc : Win32cr::Graphics::Gdi::HDC, rop2 : Win32cr::Graphics::Gdi::R2_MODE) : Int32
 
-  # Params # hpal : HPALETTE [In],istart : UInt32 [In],centries : UInt32 [In],ppalentries : PALETTEENTRY* [In]
-  fun GetPaletteEntries(hpal : HPALETTE, istart : UInt32, centries : UInt32, ppalentries : PALETTEENTRY*) : UInt32
+    fun SetStretchBltMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::STRETCH_BLT_MODE) : Int32
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In]
-  fun GetPixel(hdc : HDC, x : Int32, y : Int32) : UInt32
+    fun SetSystemPaletteUse(hdc : Win32cr::Graphics::Gdi::HDC, use : Win32cr::Graphics::Gdi::SYSTEM_PALETTE_USE) : UInt32
 
-  # Params # hdc : HDC [In]
-  fun GetPolyFillMode(hdc : HDC) : Int32
+    fun SetTextCharacterExtra(hdc : Win32cr::Graphics::Gdi::HDC, extra : Int32) : Int32
 
-  # Params # lpraststat : RASTERIZER_STATUS* [In],cjbytes : UInt32 [In]
-  fun GetRasterizerCaps(lpraststat : RASTERIZER_STATUS*, cjbytes : UInt32) : LibC::BOOL
+    fun SetTextColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
 
-  # Params # hdc : HDC [In],hrgn : HRGN [In],i : Int32 [In]
-  fun GetRandomRgn(hdc : HDC, hrgn : HRGN, i : Int32) : Int32
+    fun SetTextAlign(hdc : Win32cr::Graphics::Gdi::HDC, align : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS) : UInt32
 
-  # Params # hrgn : HRGN [In],ncount : UInt32 [In],lprgndata : RGNDATA* [In]
-  fun GetRegionData(hrgn : HRGN, ncount : UInt32, lprgndata : RGNDATA*) : UInt32
+    fun SetTextJustification(hdc : Win32cr::Graphics::Gdi::HDC, extra : Int32, count : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hrgn : HRGN [In],lprc : RECT* [In]
-  fun GetRgnBox(hrgn : HRGN, lprc : RECT*) : Int32
+    fun UpdateColors(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
-  # Params # i : GET_STOCK_OBJECT_FLAGS [In]
-  fun GetStockObject(i : GET_STOCK_OBJECT_FLAGS) : HGDIOBJ
+    fun AlphaBlend(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, ftn : Win32cr::Graphics::Gdi::BLENDFUNCTION) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun GetStretchBltMode(hdc : HDC) : Int32
+    fun TransparentBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, crTransparent : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],istart : UInt32 [In],centries : UInt32 [In],ppalentries : PALETTEENTRY* [In]
-  fun GetSystemPaletteEntries(hdc : HDC, istart : UInt32, centries : UInt32, ppalentries : PALETTEENTRY*) : UInt32
+    fun GradientFill(hdc : Win32cr::Graphics::Gdi::HDC, pVertex : Win32cr::Graphics::Gdi::TRIVERTEX*, nVertex : UInt32, pMesh : Void*, nMesh : UInt32, ulMode : Win32cr::Graphics::Gdi::GRADIENT_FILL) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun GetSystemPaletteUse(hdc : HDC) : UInt32
+    fun GdiAlphaBlend(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, ftn : Win32cr::Graphics::Gdi::BLENDFUNCTION) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun GetTextCharacterExtra(hdc : HDC) : Int32
+    fun GdiTransparentBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, crTransparent : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun GetTextAlign(hdc : HDC) : UInt32
+    fun GdiGradientFill(hdc : Win32cr::Graphics::Gdi::HDC, pVertex : Win32cr::Graphics::Gdi::TRIVERTEX*, nVertex : UInt32, pMesh : Void*, nCount : UInt32, ulMode : Win32cr::Graphics::Gdi::GRADIENT_FILL) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun GetTextColor(hdc : HDC) : UInt32
+    fun PlayMetaFileRecord(hdc : Win32cr::Graphics::Gdi::HDC, lpHandleTable : Win32cr::Graphics::Gdi::HANDLETABLE*, lpMR : Win32cr::Graphics::Gdi::METARECORD*, noObjs : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lpstring : UInt8* [In],c : Int32 [In],lpsz : SIZE* [In]
-  fun GetTextExtentPointA(hdc : HDC, lpstring : UInt8*, c : Int32, lpsz : SIZE*) : LibC::BOOL
+    fun EnumMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HMETAFILE, proc : Win32cr::Graphics::Gdi::MFENUMPROC, param3 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lpstring : Char* [In],c : Int32 [In],lpsz : SIZE* [In]
-  fun GetTextExtentPointW(hdc : HDC, lpstring : Char*, c : Int32, lpsz : SIZE*) : LibC::BOOL
+    fun CloseEnhMetaFile(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HENHMETAFILE
 
-  # Params # hdc : HDC [In],lpstring : UInt8* [In],c : Int32 [In],psizl : SIZE* [In]
-  fun GetTextExtentPoint32A(hdc : HDC, lpstring : UInt8*, c : Int32, psizl : SIZE*) : LibC::BOOL
+    fun CopyEnhMetaFileA(hEnh : Win32cr::Graphics::Gdi::HENHMETAFILE, lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
 
-  # Params # hdc : HDC [In],lpstring : Char* [In],c : Int32 [In],psizl : SIZE* [In]
-  fun GetTextExtentPoint32W(hdc : HDC, lpstring : Char*, c : Int32, psizl : SIZE*) : LibC::BOOL
+    fun CopyEnhMetaFileW(hEnh : Win32cr::Graphics::Gdi::HENHMETAFILE, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
 
-  # Params # hdc : HDC [In],lpszstring : UInt8* [In],cchstring : Int32 [In],nmaxextent : Int32 [In],lpnfit : Int32* [In],lpndx : Int32* [In],lpsize : SIZE* [In]
-  fun GetTextExtentExPointA(hdc : HDC, lpszstring : UInt8*, cchstring : Int32, nmaxextent : Int32, lpnfit : Int32*, lpndx : Int32*, lpsize : SIZE*) : LibC::BOOL
+    fun CreateEnhMetaFileA(hdc : Win32cr::Graphics::Gdi::HDC, lpFilename : Win32cr::Foundation::PSTR, lprc : Win32cr::Foundation::RECT*, lpDesc : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HdcMetdataEnhFileHandle
 
-  # Params # hdc : HDC [In],lpszstring : Char* [In],cchstring : Int32 [In],nmaxextent : Int32 [In],lpnfit : Int32* [In],lpndx : Int32* [In],lpsize : SIZE* [In]
-  fun GetTextExtentExPointW(hdc : HDC, lpszstring : Char*, cchstring : Int32, nmaxextent : Int32, lpnfit : Int32*, lpndx : Int32*, lpsize : SIZE*) : LibC::BOOL
+    fun CreateEnhMetaFileW(hdc : Win32cr::Graphics::Gdi::HDC, lpFilename : Win32cr::Foundation::PWSTR, lprc : Win32cr::Foundation::RECT*, lpDesc : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HdcMetdataEnhFileHandle
 
-  # Params # hdc : HDC [In]
-  fun GetFontLanguageInfo(hdc : HDC) : UInt32
+    fun DeleteEnhMetaFile(hmf : Win32cr::Graphics::Gdi::HENHMETAFILE) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lpstring : UInt8* [In],ncount : Int32 [In],nmexextent : Int32 [In],lpresults : GCP_RESULTSA* [In],dwflags : GET_CHARACTER_PLACEMENT_FLAGS [In]
-  fun GetCharacterPlacementA(hdc : HDC, lpstring : UInt8*, ncount : Int32, nmexextent : Int32, lpresults : GCP_RESULTSA*, dwflags : GET_CHARACTER_PLACEMENT_FLAGS) : UInt32
+    fun EnumEnhMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HENHMETAFILE, proc : Win32cr::Graphics::Gdi::ENHMFENUMPROC, param3 : Void*, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lpstring : Char* [In],ncount : Int32 [In],nmexextent : Int32 [In],lpresults : GCP_RESULTSW* [In],dwflags : GET_CHARACTER_PLACEMENT_FLAGS [In]
-  fun GetCharacterPlacementW(hdc : HDC, lpstring : Char*, ncount : Int32, nmexextent : Int32, lpresults : GCP_RESULTSW*, dwflags : GET_CHARACTER_PLACEMENT_FLAGS) : UInt32
+    fun GetEnhMetaFileA(lpName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
 
-  # Params # hdc : HDC [In],lpgs : GLYPHSET* [In]
-  fun GetFontUnicodeRanges(hdc : HDC, lpgs : GLYPHSET*) : UInt32
+    fun GetEnhMetaFileW(lpName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
 
-  # Params # hdc : HDC [In],lpstr : UInt8* [In],c : Int32 [In],pgi : UInt16* [In],fl : UInt32 [In]
-  fun GetGlyphIndicesA(hdc : HDC, lpstr : UInt8*, c : Int32, pgi : UInt16*, fl : UInt32) : UInt32
+    fun GetEnhMetaFileBits(hEMF : Win32cr::Graphics::Gdi::HENHMETAFILE, nSize : UInt32, lpData : UInt8*) : UInt32
 
-  # Params # hdc : HDC [In],lpstr : Char* [In],c : Int32 [In],pgi : UInt16* [In],fl : UInt32 [In]
-  fun GetGlyphIndicesW(hdc : HDC, lpstr : Char*, c : Int32, pgi : UInt16*, fl : UInt32) : UInt32
+    fun GetEnhMetaFileDescriptionA(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, cchBuffer : UInt32, lpDescription : UInt8*) : UInt32
 
-  # Params # hdc : HDC [In],pgiin : UInt16* [In],cgi : Int32 [In],psize : SIZE* [In]
-  fun GetTextExtentPointI(hdc : HDC, pgiin : UInt16*, cgi : Int32, psize : SIZE*) : LibC::BOOL
+    fun GetEnhMetaFileDescriptionW(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, cchBuffer : UInt32, lpDescription : UInt16*) : UInt32
 
-  # Params # hdc : HDC [In],lpwszstring : UInt16* [In],cwchstring : Int32 [In],nmaxextent : Int32 [In],lpnfit : Int32* [In],lpndx : Int32* [In],lpsize : SIZE* [In]
-  fun GetTextExtentExPointI(hdc : HDC, lpwszstring : UInt16*, cwchstring : Int32, nmaxextent : Int32, lpnfit : Int32*, lpndx : Int32*, lpsize : SIZE*) : LibC::BOOL
+    fun GetEnhMetaFileHeader(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, nSize : UInt32, lpEnhMetaHeader : Win32cr::Graphics::Gdi::ENHMETAHEADER*) : UInt32
 
-  # Params # hdc : HDC [In],gifirst : UInt32 [In],cgi : UInt32 [In],pgi : UInt16* [In],piwidths : Int32* [In]
-  fun GetCharWidthI(hdc : HDC, gifirst : UInt32, cgi : UInt32, pgi : UInt16*, piwidths : Int32*) : LibC::BOOL
+    fun GetEnhMetaFilePaletteEntries(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, nNumEntries : UInt32, lpPaletteEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
 
-  # Params # hdc : HDC [In],gifirst : UInt32 [In],cgi : UInt32 [In],pgi : UInt16* [In],pabc : ABC* [In]
-  fun GetCharABCWidthsI(hdc : HDC, gifirst : UInt32, cgi : UInt32, pgi : UInt16*, pabc : ABC*) : LibC::BOOL
+    fun GetWinMetaFileBits(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, cbData16 : UInt32, pData16 : UInt8*, iMapMode : Int32, hdcRef : Win32cr::Graphics::Gdi::HDC) : UInt32
 
-  # Params # name : PSTR [In],fl : FONT_RESOURCE_CHARACTERISTICS [In],res : Void* [In]
-  fun AddFontResourceExA(name : PSTR, fl : FONT_RESOURCE_CHARACTERISTICS, res : Void*) : Int32
+    fun PlayEnhMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HENHMETAFILE, lprect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # name : LibC::LPWSTR [In],fl : FONT_RESOURCE_CHARACTERISTICS [In],res : Void* [In]
-  fun AddFontResourceExW(name : LibC::LPWSTR, fl : FONT_RESOURCE_CHARACTERISTICS, res : Void*) : Int32
+    fun PlayEnhMetaFileRecord(hdc : Win32cr::Graphics::Gdi::HDC, pht : Win32cr::Graphics::Gdi::HANDLETABLE*, pmr : Win32cr::Graphics::Gdi::ENHMETARECORD*, cht : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # name : PSTR [In],fl : UInt32 [In],pdv : Void* [In]
-  fun RemoveFontResourceExA(name : PSTR, fl : UInt32, pdv : Void*) : LibC::BOOL
+    fun SetEnhMetaFileBits(nSize : UInt32, pb : UInt8*) : Win32cr::Graphics::Gdi::HENHMETAFILE
 
-  # Params # name : LibC::LPWSTR [In],fl : UInt32 [In],pdv : Void* [In]
-  fun RemoveFontResourceExW(name : LibC::LPWSTR, fl : UInt32, pdv : Void*) : LibC::BOOL
+    fun GdiComment(hdc : Win32cr::Graphics::Gdi::HDC, nSize : UInt32, lpData : UInt8*) : Win32cr::Foundation::BOOL
 
-  # Params # pfileview : Void* [In],cjsize : UInt32 [In],pvresrved : Void* [In],pnumfonts : UInt32* [In]
-  fun AddFontMemResourceEx(pfileview : Void*, cjsize : UInt32, pvresrved : Void*, pnumfonts : UInt32*) : LibC::HANDLE
+    fun GetTextMetricsA(hdc : Win32cr::Graphics::Gdi::HDC, lptm : Win32cr::Graphics::Gdi::TEXTMETRICA*) : Win32cr::Foundation::BOOL
 
-  # Params # h : LibC::HANDLE [In]
-  fun RemoveFontMemResourceEx(h : LibC::HANDLE) : LibC::BOOL
+    fun GetTextMetricsW(hdc : Win32cr::Graphics::Gdi::HDC, lptm : Win32cr::Graphics::Gdi::TEXTMETRICW*) : Win32cr::Foundation::BOOL
 
-  # Params # param0 : ENUMLOGFONTEXDVA* [In]
-  fun CreateFontIndirectExA(param0 : ENUMLOGFONTEXDVA*) : HFONT
+    fun AngleArc(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, r : UInt32, start_angle : Float32, sweep_angle : Float32) : Win32cr::Foundation::BOOL
 
-  # Params # param0 : ENUMLOGFONTEXDVW* [In]
-  fun CreateFontIndirectExW(param0 : ENUMLOGFONTEXDVW*) : HFONT
+    fun PolyPolyline(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, asz : UInt32*, csz : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lpsize : SIZE* [In]
-  fun GetViewportExtEx(hdc : HDC, lpsize : SIZE*) : LibC::BOOL
+    fun GetWorldTransform(hdc : Win32cr::Graphics::Gdi::HDC, lpxf : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lppoint : POINT* [In]
-  fun GetViewportOrgEx(hdc : HDC, lppoint : POINT*) : LibC::BOOL
+    fun SetWorldTransform(hdc : Win32cr::Graphics::Gdi::HDC, lpxf : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lpsize : SIZE* [In]
-  fun GetWindowExtEx(hdc : HDC, lpsize : SIZE*) : LibC::BOOL
+    fun ModifyWorldTransform(hdc : Win32cr::Graphics::Gdi::HDC, lpxf : Win32cr::Graphics::Gdi::XFORM*, mode : Win32cr::Graphics::Gdi::MODIFY_WORLD_TRANSFORM_MODE) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lppoint : POINT* [In]
-  fun GetWindowOrgEx(hdc : HDC, lppoint : POINT*) : LibC::BOOL
+    fun CombineTransform(lpxfOut : Win32cr::Graphics::Gdi::XFORM*, lpxf1 : Win32cr::Graphics::Gdi::XFORM*, lpxf2 : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],left : Int32 [In],top : Int32 [In],right : Int32 [In],bottom : Int32 [In]
-  fun IntersectClipRect(hdc : HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Int32
+    fun CreateDIBSection(hdc : Win32cr::Graphics::Gdi::HDC, pbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, usage : Win32cr::Graphics::Gdi::DIB_USAGE, ppvBits : Void**, hSection : Win32cr::Foundation::HANDLE, offset : UInt32) : Win32cr::Graphics::Gdi::HBITMAP
 
-  # Params # hdc : HDC [In],hrgn : HRGN [In]
-  fun InvertRgn(hdc : HDC, hrgn : HRGN) : LibC::BOOL
+    fun GetDIBColorTable(hdc : Win32cr::Graphics::Gdi::HDC, iStart : UInt32, cEntries : UInt32, prgbq : Win32cr::Graphics::Gdi::RGBQUAD*) : UInt32
 
-  # Params # xstart : Int32 [In],ystart : Int32 [In],xend : Int32 [In],yend : Int32 [In],lpproc : LINEDDAPROC [In],data : LPARAM [In]
-  fun LineDDA(xstart : Int32, ystart : Int32, xend : Int32, yend : Int32, lpproc : LINEDDAPROC, data : LPARAM) : LibC::BOOL
+    fun SetDIBColorTable(hdc : Win32cr::Graphics::Gdi::HDC, iStart : UInt32, cEntries : UInt32, prgbq : Win32cr::Graphics::Gdi::RGBQUAD*) : UInt32
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In]
-  fun LineTo(hdc : HDC, x : Int32, y : Int32) : LibC::BOOL
+    fun SetColorAdjustment(hdc : Win32cr::Graphics::Gdi::HDC, lpca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdcdest : HDC [In],xdest : Int32 [In],ydest : Int32 [In],width : Int32 [In],height : Int32 [In],hdcsrc : HDC [In],xsrc : Int32 [In],ysrc : Int32 [In],hbmmask : HBITMAP [In],xmask : Int32 [In],ymask : Int32 [In],rop : UInt32 [In]
-  fun MaskBlt(hdcdest : HDC, xdest : Int32, ydest : Int32, width : Int32, height : Int32, hdcsrc : HDC, xsrc : Int32, ysrc : Int32, hbmmask : HBITMAP, xmask : Int32, ymask : Int32, rop : UInt32) : LibC::BOOL
+    fun GetColorAdjustment(hdc : Win32cr::Graphics::Gdi::HDC, lpca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdcdest : HDC [In],lppoint : POINT* [In],hdcsrc : HDC [In],xsrc : Int32 [In],ysrc : Int32 [In],width : Int32 [In],height : Int32 [In],hbmmask : HBITMAP [In],xmask : Int32 [In],ymask : Int32 [In]
-  fun PlgBlt(hdcdest : HDC, lppoint : POINT*, hdcsrc : HDC, xsrc : Int32, ysrc : Int32, width : Int32, height : Int32, hbmmask : HBITMAP, xmask : Int32, ymask : Int32) : LibC::BOOL
+    fun CreateHalftonePalette(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HPALETTE
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In]
-  fun OffsetClipRgn(hdc : HDC, x : Int32, y : Int32) : Int32
+    fun AbortPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
-  # Params # hrgn : HRGN [In],x : Int32 [In],y : Int32 [In]
-  fun OffsetRgn(hrgn : HRGN, x : Int32, y : Int32) : Int32
+    fun ArcTo(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, xr1 : Int32, yr1 : Int32, xr2 : Int32, yr2 : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],w : Int32 [In],h : Int32 [In],rop : ROP_CODE [In]
-  fun PatBlt(hdc : HDC, x : Int32, y : Int32, w : Int32, h : Int32, rop : ROP_CODE) : LibC::BOOL
+    fun BeginPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],left : Int32 [In],top : Int32 [In],right : Int32 [In],bottom : Int32 [In],xr1 : Int32 [In],yr1 : Int32 [In],xr2 : Int32 [In],yr2 : Int32 [In]
-  fun Pie(hdc : HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, xr1 : Int32, yr1 : Int32, xr2 : Int32, yr2 : Int32) : LibC::BOOL
+    fun CloseFigure(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],hmf : HMETAFILE [In]
-  fun PlayMetaFile(hdc : HDC, hmf : HMETAFILE) : LibC::BOOL
+    fun EndPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],hrgn : HRGN [In]
-  fun PaintRgn(hdc : HDC, hrgn : HRGN) : LibC::BOOL
+    fun FillPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],apt : POINT* [In],asz : Int32* [In],csz : Int32 [In]
-  fun PolyPolygon(hdc : HDC, apt : POINT*, asz : Int32*, csz : Int32) : LibC::BOOL
+    fun FlattenPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
-  # Params # hrgn : HRGN [In],x : Int32 [In],y : Int32 [In]
-  fun PtInRegion(hrgn : HRGN, x : Int32, y : Int32) : LibC::BOOL
+    fun GetPath(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, aj : UInt8*, cpt : Int32) : Int32
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In]
-  fun PtVisible(hdc : HDC, x : Int32, y : Int32) : LibC::BOOL
+    fun PathToRegion(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HRGN
 
-  # Params # hrgn : HRGN [In],lprect : RECT* [In]
-  fun RectInRegion(hrgn : HRGN, lprect : RECT*) : LibC::BOOL
+    fun PolyDraw(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, aj : UInt8*, cpt : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lprect : RECT* [In]
-  fun RectVisible(hdc : HDC, lprect : RECT*) : LibC::BOOL
+    fun SelectClipPath(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],left : Int32 [In],top : Int32 [In],right : Int32 [In],bottom : Int32 [In]
-  fun Rectangle(hdc : HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : LibC::BOOL
+    fun SetArcDirection(hdc : Win32cr::Graphics::Gdi::HDC, dir : Win32cr::Graphics::Gdi::ARC_DIRECTION) : Int32
 
-  # Params # hdc : HDC [In],nsaveddc : Int32 [In]
-  fun RestoreDC(hdc : HDC, nsaveddc : Int32) : LibC::BOOL
+    fun SetMiterLimit(hdc : Win32cr::Graphics::Gdi::HDC, limit : Float32, old : Float32*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lpdm : DEVMODEA* [In]
-  fun ResetDCA(hdc : HDC, lpdm : DEVMODEA*) : HDC
+    fun StrokeAndFillPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lpdm : DEVMODEW* [In]
-  fun ResetDCW(hdc : HDC, lpdm : DEVMODEW*) : HDC
+    fun StrokePath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun RealizePalette(hdc : HDC) : UInt32
+    fun WidenPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
-  # Params # lpfilename : PSTR [In]
-  fun RemoveFontResourceA(lpfilename : PSTR) : LibC::BOOL
+    fun ExtCreatePen(iPenStyle : Win32cr::Graphics::Gdi::PEN_STYLE, cWidth : UInt32, plbrush : Win32cr::Graphics::Gdi::LOGBRUSH*, cStyle : UInt32, pstyle : UInt32*) : Win32cr::Graphics::Gdi::HPEN
 
-  # Params # lpfilename : LibC::LPWSTR [In]
-  fun RemoveFontResourceW(lpfilename : LibC::LPWSTR) : LibC::BOOL
+    fun GetMiterLimit(hdc : Win32cr::Graphics::Gdi::HDC, plimit : Float32*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],left : Int32 [In],top : Int32 [In],right : Int32 [In],bottom : Int32 [In],width : Int32 [In],height : Int32 [In]
-  fun RoundRect(hdc : HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, width : Int32, height : Int32) : LibC::BOOL
+    fun GetArcDirection(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
-  # Params # hpal : HPALETTE [In],n : UInt32 [In]
-  fun ResizePalette(hpal : HPALETTE, n : UInt32) : LibC::BOOL
+    fun GetObjectW(h : Win32cr::Graphics::Gdi::HGDIOBJ, c : Int32, pv : Void*) : Int32
 
-  # Params # hdc : HDC [In]
-  fun SaveDC(hdc : HDC) : Int32
+    fun MoveToEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],hrgn : HRGN [In]
-  fun SelectClipRgn(hdc : HDC, hrgn : HRGN) : Int32
+    fun TextOutA(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt8*, c : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],hrgn : HRGN [In],mode : RGN_COMBINE_MODE [In]
-  fun ExtSelectClipRgn(hdc : HDC, hrgn : HRGN, mode : RGN_COMBINE_MODE) : Int32
+    fun TextOutW(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt16*, c : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun SetMetaRgn(hdc : HDC) : Int32
+    fun ExtTextOutA(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, options : Win32cr::Graphics::Gdi::ETO_OPTIONS, lprect : Win32cr::Foundation::RECT*, lpString : UInt8*, c : UInt32, lpDx : Int32*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],h : HGDIOBJ [In]
-  fun SelectObject(hdc : HDC, h : HGDIOBJ) : HGDIOBJ
+    fun ExtTextOutW(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, options : Win32cr::Graphics::Gdi::ETO_OPTIONS, lprect : Win32cr::Foundation::RECT*, lpString : UInt16*, c : UInt32, lpDx : Int32*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],hpal : HPALETTE [In],bforcebkgd : LibC::BOOL [In]
-  fun SelectPalette(hdc : HDC, hpal : HPALETTE, bforcebkgd : LibC::BOOL) : HPALETTE
+    fun PolyTextOutA(hdc : Win32cr::Graphics::Gdi::HDC, ppt : Win32cr::Graphics::Gdi::POLYTEXTA*, nstrings : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],color : UInt32 [In]
-  fun SetBkColor(hdc : HDC, color : UInt32) : UInt32
+    fun PolyTextOutW(hdc : Win32cr::Graphics::Gdi::HDC, ppt : Win32cr::Graphics::Gdi::POLYTEXTW*, nstrings : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],color : UInt32 [In]
-  fun SetDCBrushColor(hdc : HDC, color : UInt32) : UInt32
+    fun CreatePolygonRgn(pptl : Win32cr::Foundation::POINT*, cPoint : Int32, iMode : Win32cr::Graphics::Gdi::CREATE_POLYGON_RGN_MODE) : Win32cr::Graphics::Gdi::HRGN
 
-  # Params # hdc : HDC [In],color : UInt32 [In]
-  fun SetDCPenColor(hdc : HDC, color : UInt32) : UInt32
+    fun DPtoLP(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*, c : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],mode : BACKGROUND_MODE [In]
-  fun SetBkMode(hdc : HDC, mode : BACKGROUND_MODE) : Int32
+    fun LPtoDP(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*, c : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hbm : HBITMAP [In],cb : UInt32 [In],pvbits : Void* [In]
-  fun SetBitmapBits(hbm : HBITMAP, cb : UInt32, pvbits : Void*) : Int32
+    fun Polygon(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lprect : RECT* [In],flags : SET_BOUNDS_RECT_FLAGS [In]
-  fun SetBoundsRect(hdc : HDC, lprect : RECT*, flags : SET_BOUNDS_RECT_FLAGS) : UInt32
+    fun Polyline(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],hbm : HBITMAP [In],start : UInt32 [In],clines : UInt32 [In],lpbits : Void* [In],lpbmi : BITMAPINFO* [In],coloruse : DIB_USAGE [In]
-  fun SetDIBits(hdc : HDC, hbm : HBITMAP, start : UInt32, clines : UInt32, lpbits : Void*, lpbmi : BITMAPINFO*, coloruse : DIB_USAGE) : Int32
+    fun PolyBezier(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],xdest : Int32 [In],ydest : Int32 [In],w : UInt32 [In],h : UInt32 [In],xsrc : Int32 [In],ysrc : Int32 [In],startscan : UInt32 [In],clines : UInt32 [In],lpvbits : Void* [In],lpbmi : BITMAPINFO* [In],coloruse : DIB_USAGE [In]
-  fun SetDIBitsToDevice(hdc : HDC, xdest : Int32, ydest : Int32, w : UInt32, h : UInt32, xsrc : Int32, ysrc : Int32, startscan : UInt32, clines : UInt32, lpvbits : Void*, lpbmi : BITMAPINFO*, coloruse : DIB_USAGE) : Int32
+    fun PolyBezierTo(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],flags : UInt32 [In]
-  fun SetMapperFlags(hdc : HDC, flags : UInt32) : UInt32
+    fun PolylineTo(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],imode : GRAPHICS_MODE [In]
-  fun SetGraphicsMode(hdc : HDC, imode : GRAPHICS_MODE) : Int32
+    fun SetViewportExtEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],imode : HDC_MAP_MODE [In]
-  fun SetMapMode(hdc : HDC, imode : HDC_MAP_MODE) : Int32
+    fun SetViewportOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],l : DC_LAYOUT [In]
-  fun SetLayout(hdc : HDC, l : DC_LAYOUT) : UInt32
+    fun SetWindowExtEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun GetLayout(hdc : HDC) : UInt32
+    fun SetWindowOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
-  # Params # cbbuffer : UInt32 [In],lpdata : UInt8* [In]
-  fun SetMetaFileBitsEx(cbbuffer : UInt32, lpdata : UInt8*) : HMETAFILE
+    fun OffsetViewportOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
-  # Params # hpal : HPALETTE [In],istart : UInt32 [In],centries : UInt32 [In],ppalentries : PALETTEENTRY* [In]
-  fun SetPaletteEntries(hpal : HPALETTE, istart : UInt32, centries : UInt32, ppalentries : PALETTEENTRY*) : UInt32
+    fun OffsetWindowOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],color : UInt32 [In]
-  fun SetPixel(hdc : HDC, x : Int32, y : Int32, color : UInt32) : UInt32
+    fun ScaleViewportExtEx(hdc : Win32cr::Graphics::Gdi::HDC, xn : Int32, dx : Int32, yn : Int32, yd : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],color : UInt32 [In]
-  fun SetPixelV(hdc : HDC, x : Int32, y : Int32, color : UInt32) : LibC::BOOL
+    fun ScaleWindowExtEx(hdc : Win32cr::Graphics::Gdi::HDC, xn : Int32, xd : Int32, yn : Int32, yd : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],mode : CREATE_POLYGON_RGN_MODE [In]
-  fun SetPolyFillMode(hdc : HDC, mode : CREATE_POLYGON_RGN_MODE) : Int32
+    fun SetBitmapDimensionEx(hbm : Win32cr::Graphics::Gdi::HBITMAP, w : Int32, h : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
-  # Params # hdcdest : HDC [In],xdest : Int32 [In],ydest : Int32 [In],wdest : Int32 [In],hdest : Int32 [In],hdcsrc : HDC [In],xsrc : Int32 [In],ysrc : Int32 [In],wsrc : Int32 [In],hsrc : Int32 [In],rop : ROP_CODE [In]
-  fun StretchBlt(hdcdest : HDC, xdest : Int32, ydest : Int32, wdest : Int32, hdest : Int32, hdcsrc : HDC, xsrc : Int32, ysrc : Int32, wsrc : Int32, hsrc : Int32, rop : ROP_CODE) : LibC::BOOL
+    fun SetBrushOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
-  # Params # hrgn : HRGN [In],left : Int32 [In],top : Int32 [In],right : Int32 [In],bottom : Int32 [In]
-  fun SetRectRgn(hrgn : HRGN, left : Int32, top : Int32, right : Int32, bottom : Int32) : LibC::BOOL
+    fun GetTextFaceA(hdc : Win32cr::Graphics::Gdi::HDC, c : Int32, lpName : UInt8*) : Int32
 
-  # Params # hdc : HDC [In],xdest : Int32 [In],ydest : Int32 [In],destwidth : Int32 [In],destheight : Int32 [In],xsrc : Int32 [In],ysrc : Int32 [In],srcwidth : Int32 [In],srcheight : Int32 [In],lpbits : Void* [In],lpbmi : BITMAPINFO* [In],iusage : DIB_USAGE [In],rop : ROP_CODE [In]
-  fun StretchDIBits(hdc : HDC, xdest : Int32, ydest : Int32, destwidth : Int32, destheight : Int32, xsrc : Int32, ysrc : Int32, srcwidth : Int32, srcheight : Int32, lpbits : Void*, lpbmi : BITMAPINFO*, iusage : DIB_USAGE, rop : ROP_CODE) : Int32
+    fun GetTextFaceW(hdc : Win32cr::Graphics::Gdi::HDC, c : Int32, lpName : UInt16*) : Int32
 
-  # Params # hdc : HDC [In],rop2 : R2_MODE [In]
-  fun SetROP2(hdc : HDC, rop2 : R2_MODE) : Int32
+    fun GetKerningPairsA(hdc : Win32cr::Graphics::Gdi::HDC, nPairs : UInt32, lpKernPair : Win32cr::Graphics::Gdi::KERNINGPAIR*) : UInt32
 
-  # Params # hdc : HDC [In],mode : STRETCH_BLT_MODE [In]
-  fun SetStretchBltMode(hdc : HDC, mode : STRETCH_BLT_MODE) : Int32
+    fun GetKerningPairsW(hdc : Win32cr::Graphics::Gdi::HDC, nPairs : UInt32, lpKernPair : Win32cr::Graphics::Gdi::KERNINGPAIR*) : UInt32
 
-  # Params # hdc : HDC [In],use : SYSTEM_PALETTE_USE [In]
-  fun SetSystemPaletteUse(hdc : HDC, use : SYSTEM_PALETTE_USE) : UInt32
+    fun GetDCOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],extra : Int32 [In]
-  fun SetTextCharacterExtra(hdc : HDC, extra : Int32) : Int32
+    fun FixBrushOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, ptl : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],color : UInt32 [In]
-  fun SetTextColor(hdc : HDC, color : UInt32) : UInt32
+    fun UnrealizeObject(h : Win32cr::Graphics::Gdi::HGDIOBJ) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],align : TEXT_ALIGN_OPTIONS [In]
-  fun SetTextAlign(hdc : HDC, align : TEXT_ALIGN_OPTIONS) : UInt32
+    fun GdiFlush : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],extra : Int32 [In],count : Int32 [In]
-  fun SetTextJustification(hdc : HDC, extra : Int32, count : Int32) : LibC::BOOL
+    fun GdiSetBatchLimit(dw : UInt32) : UInt32
 
-  # Params # hdc : HDC [In]
-  fun UpdateColors(hdc : HDC) : LibC::BOOL
+    fun GdiGetBatchLimit : UInt32
 
-  # Params # hdcdest : HDC [In],xorigindest : Int32 [In],yorigindest : Int32 [In],wdest : Int32 [In],hdest : Int32 [In],hdcsrc : HDC [In],xoriginsrc : Int32 [In],yoriginsrc : Int32 [In],wsrc : Int32 [In],hsrc : Int32 [In],ftn : BLENDFUNCTION [In]
-  fun AlphaBlend(hdcdest : HDC, xorigindest : Int32, yorigindest : Int32, wdest : Int32, hdest : Int32, hdcsrc : HDC, xoriginsrc : Int32, yoriginsrc : Int32, wsrc : Int32, hsrc : Int32, ftn : BLENDFUNCTION) : LibC::BOOL
+    fun wglSwapMultipleBuffers(param0 : UInt32, param1 : Win32cr::Graphics::Gdi::WGLSWAP*) : UInt32
 
-  # Params # hdcdest : HDC [In],xorigindest : Int32 [In],yorigindest : Int32 [In],wdest : Int32 [In],hdest : Int32 [In],hdcsrc : HDC [In],xoriginsrc : Int32 [In],yoriginsrc : Int32 [In],wsrc : Int32 [In],hsrc : Int32 [In],crtransparent : UInt32 [In]
-  fun TransparentBlt(hdcdest : HDC, xorigindest : Int32, yorigindest : Int32, wdest : Int32, hdest : Int32, hdcsrc : HDC, xoriginsrc : Int32, yoriginsrc : Int32, wsrc : Int32, hsrc : Int32, crtransparent : UInt32) : LibC::BOOL
+    fun CreateFontPackage(puchSrcBuffer : UInt8*, ulSrcBufferSize : UInt32, ppuchFontPackageBuffer : UInt8**, pulFontPackageBufferSize : UInt32*, pulBytesWritten : UInt32*, usFlag : UInt16, usTTCIndex : UInt16, usSubsetFormat : UInt16, usSubsetLanguage : UInt16, usSubsetPlatform : Win32cr::Graphics::Gdi::CREATE_FONT_PACKAGE_SUBSET_PLATFORM, usSubsetEncoding : Win32cr::Graphics::Gdi::CREATE_FONT_PACKAGE_SUBSET_ENCODING, pusSubsetKeepList : UInt16*, usSubsetListCount : UInt16, lpfnAllocate : Win32cr::Graphics::Gdi::CFP_ALLOCPROC, lpfnReAllocate : Win32cr::Graphics::Gdi::CFP_REALLOCPROC, lpfnFree : Win32cr::Graphics::Gdi::CFP_FREEPROC, lpvReserved : Void*) : UInt32
 
-  # Params # hdc : HDC [In],pvertex : TRIVERTEX* [In],nvertex : UInt32 [In],pmesh : Void* [In],nmesh : UInt32 [In],ulmode : GRADIENT_FILL [In]
-  fun GradientFill(hdc : HDC, pvertex : TRIVERTEX*, nvertex : UInt32, pmesh : Void*, nmesh : UInt32, ulmode : GRADIENT_FILL) : LibC::BOOL
+    fun MergeFontPackage(puchMergeFontBuffer : UInt8*, ulMergeFontBufferSize : UInt32, puchFontPackageBuffer : UInt8*, ulFontPackageBufferSize : UInt32, ppuchDestBuffer : UInt8**, pulDestBufferSize : UInt32*, pulBytesWritten : UInt32*, usMode : UInt16, lpfnAllocate : Win32cr::Graphics::Gdi::CFP_ALLOCPROC, lpfnReAllocate : Win32cr::Graphics::Gdi::CFP_REALLOCPROC, lpfnFree : Win32cr::Graphics::Gdi::CFP_FREEPROC, lpvReserved : Void*) : UInt32
 
-  # Params # hdcdest : HDC [In],xorigindest : Int32 [In],yorigindest : Int32 [In],wdest : Int32 [In],hdest : Int32 [In],hdcsrc : HDC [In],xoriginsrc : Int32 [In],yoriginsrc : Int32 [In],wsrc : Int32 [In],hsrc : Int32 [In],ftn : BLENDFUNCTION [In]
-  fun GdiAlphaBlend(hdcdest : HDC, xorigindest : Int32, yorigindest : Int32, wdest : Int32, hdest : Int32, hdcsrc : HDC, xoriginsrc : Int32, yoriginsrc : Int32, wsrc : Int32, hsrc : Int32, ftn : BLENDFUNCTION) : LibC::BOOL
+    fun TTEmbedFont(hDC : Win32cr::Graphics::Gdi::HDC, ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, ulCharSet : Win32cr::Graphics::Gdi::EMBED_FONT_CHARSET, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, pulStatus : UInt32*, lpfnWriteToStream : Win32cr::Graphics::Gdi::WRITEEMBEDPROC, lpvWriteStream : Void*, pusCharCodeSet : UInt16*, usCharCodeCount : UInt16, usLanguage : UInt16, pTTEmbedInfo : Win32cr::Graphics::Gdi::TTEMBEDINFO*) : Int32
 
-  # Params # hdcdest : HDC [In],xorigindest : Int32 [In],yorigindest : Int32 [In],wdest : Int32 [In],hdest : Int32 [In],hdcsrc : HDC [In],xoriginsrc : Int32 [In],yoriginsrc : Int32 [In],wsrc : Int32 [In],hsrc : Int32 [In],crtransparent : UInt32 [In]
-  fun GdiTransparentBlt(hdcdest : HDC, xorigindest : Int32, yorigindest : Int32, wdest : Int32, hdest : Int32, hdcsrc : HDC, xoriginsrc : Int32, yoriginsrc : Int32, wsrc : Int32, hsrc : Int32, crtransparent : UInt32) : LibC::BOOL
+    fun TTEmbedFontFromFileA(hDC : Win32cr::Graphics::Gdi::HDC, szFontFileName : Win32cr::Foundation::PSTR, usTTCIndex : UInt16, ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, ulCharSet : Win32cr::Graphics::Gdi::EMBED_FONT_CHARSET, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, pulStatus : UInt32*, lpfnWriteToStream : Win32cr::Graphics::Gdi::WRITEEMBEDPROC, lpvWriteStream : Void*, pusCharCodeSet : UInt16*, usCharCodeCount : UInt16, usLanguage : UInt16, pTTEmbedInfo : Win32cr::Graphics::Gdi::TTEMBEDINFO*) : Int32
 
-  # Params # hdc : HDC [In],pvertex : TRIVERTEX* [In],nvertex : UInt32 [In],pmesh : Void* [In],ncount : UInt32 [In],ulmode : GRADIENT_FILL [In]
-  fun GdiGradientFill(hdc : HDC, pvertex : TRIVERTEX*, nvertex : UInt32, pmesh : Void*, ncount : UInt32, ulmode : GRADIENT_FILL) : LibC::BOOL
+    fun TTLoadEmbeddedFont(phFontReference : Win32cr::Foundation::HANDLE*, ulFlags : UInt32, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, ulPrivs : Win32cr::Graphics::Gdi::FONT_LICENSE_PRIVS, pulStatus : Win32cr::Graphics::Gdi::TTLOAD_EMBEDDED_FONT_STATUS*, lpfnReadFromStream : Win32cr::Graphics::Gdi::READEMBEDPROC, lpvReadStream : Void*, szWinFamilyName : Win32cr::Foundation::PWSTR, szMacFamilyName : Win32cr::Foundation::PSTR, pTTLoadInfo : Win32cr::Graphics::Gdi::TTLOADINFO*) : Int32
 
-  # Params # hdc : HDC [In],lphandletable : HANDLETABLE* [In],lpmr : METARECORD* [In],noobjs : UInt32 [In]
-  fun PlayMetaFileRecord(hdc : HDC, lphandletable : HANDLETABLE*, lpmr : METARECORD*, noobjs : UInt32) : LibC::BOOL
+    fun TTGetEmbeddedFontInfo(ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, pulPrivStatus : UInt32*, ulPrivs : Win32cr::Graphics::Gdi::FONT_LICENSE_PRIVS, pulStatus : UInt32*, lpfnReadFromStream : Win32cr::Graphics::Gdi::READEMBEDPROC, lpvReadStream : Void*, pTTLoadInfo : Win32cr::Graphics::Gdi::TTLOADINFO*) : Int32
 
-  # Params # hdc : HDC [In],hmf : HMETAFILE [In],proc : MFENUMPROC [In],param3 : LPARAM [In]
-  fun EnumMetaFile(hdc : HDC, hmf : HMETAFILE, proc : MFENUMPROC, param3 : LPARAM) : LibC::BOOL
+    fun TTDeleteEmbeddedFont(hFontReference : Win32cr::Foundation::HANDLE, ulFlags : UInt32, pulStatus : UInt32*) : Int32
 
-  # Params # hdc : HDC [In]
-  fun CloseEnhMetaFile(hdc : HDC) : HENHMETAFILE
+    fun TTGetEmbeddingType(hDC : Win32cr::Graphics::Gdi::HDC, pulEmbedType : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*) : Int32
 
-  # Params # henh : HENHMETAFILE [In],lpfilename : PSTR [In]
-  fun CopyEnhMetaFileA(henh : HENHMETAFILE, lpfilename : PSTR) : HENHMETAFILE
+    fun TTCharToUnicode(hDC : Win32cr::Graphics::Gdi::HDC, pucCharCodes : UInt8*, ulCharCodeSize : UInt32, pusShortCodes : UInt16*, ulShortCodeSize : UInt32, ulFlags : UInt32) : Int32
 
-  # Params # henh : HENHMETAFILE [In],lpfilename : LibC::LPWSTR [In]
-  fun CopyEnhMetaFileW(henh : HENHMETAFILE, lpfilename : LibC::LPWSTR) : HENHMETAFILE
+    fun TTRunValidationTests(hDC : Win32cr::Graphics::Gdi::HDC, pTestParam : Win32cr::Graphics::Gdi::TTVALIDATIONTESTSPARAMS*) : Int32
 
-  # Params # hdc : HDC [In],lpfilename : PSTR [In],lprc : RECT* [In],lpdesc : PSTR [In]
-  fun CreateEnhMetaFileA(hdc : HDC, lpfilename : PSTR, lprc : RECT*, lpdesc : PSTR) : HdcMetdataEnhFileHandle
+    fun TTIsEmbeddingEnabled(hDC : Win32cr::Graphics::Gdi::HDC, pbEnabled : Win32cr::Foundation::BOOL*) : Int32
 
-  # Params # hdc : HDC [In],lpfilename : LibC::LPWSTR [In],lprc : RECT* [In],lpdesc : LibC::LPWSTR [In]
-  fun CreateEnhMetaFileW(hdc : HDC, lpfilename : LibC::LPWSTR, lprc : RECT*, lpdesc : LibC::LPWSTR) : HdcMetdataEnhFileHandle
+    fun TTIsEmbeddingEnabledForFacename(lpszFacename : Win32cr::Foundation::PSTR, pbEnabled : Win32cr::Foundation::BOOL*) : Int32
 
-  # Params # hmf : HENHMETAFILE [In]
-  fun DeleteEnhMetaFile(hmf : HENHMETAFILE) : LibC::BOOL
+    fun TTEnableEmbeddingForFacename(lpszFacename : Win32cr::Foundation::PSTR, bEnable : Win32cr::Foundation::BOOL) : Int32
 
-  # Params # hdc : HDC [In],hmf : HENHMETAFILE [In],proc : ENHMFENUMPROC [In],param3 : Void* [In],lprect : RECT* [In]
-  fun EnumEnhMetaFile(hdc : HDC, hmf : HENHMETAFILE, proc : ENHMFENUMPROC, param3 : Void*, lprect : RECT*) : LibC::BOOL
+    fun TTEmbedFontEx(hDC : Win32cr::Graphics::Gdi::HDC, ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, ulCharSet : Win32cr::Graphics::Gdi::EMBED_FONT_CHARSET, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, pulStatus : UInt32*, lpfnWriteToStream : Win32cr::Graphics::Gdi::WRITEEMBEDPROC, lpvWriteStream : Void*, pulCharCodeSet : UInt32*, usCharCodeCount : UInt16, usLanguage : UInt16, pTTEmbedInfo : Win32cr::Graphics::Gdi::TTEMBEDINFO*) : Int32
 
-  # Params # lpname : PSTR [In]
-  fun GetEnhMetaFileA(lpname : PSTR) : HENHMETAFILE
+    fun TTRunValidationTestsEx(hDC : Win32cr::Graphics::Gdi::HDC, pTestParam : Win32cr::Graphics::Gdi::TTVALIDATIONTESTSPARAMSEX*) : Int32
 
-  # Params # lpname : LibC::LPWSTR [In]
-  fun GetEnhMetaFileW(lpname : LibC::LPWSTR) : HENHMETAFILE
+    fun TTGetNewFontName(phFontReference : Win32cr::Foundation::HANDLE*, wzWinFamilyName : UInt16*, cchMaxWinName : Int32, szMacFamilyName : UInt8*, cchMaxMacName : Int32) : Int32
 
-  # Params # hemf : HENHMETAFILE [In],nsize : UInt32 [In],lpdata : UInt8* [In]
-  fun GetEnhMetaFileBits(hemf : HENHMETAFILE, nsize : UInt32, lpdata : UInt8*) : UInt32
+    fun DrawEdge(hdc : Win32cr::Graphics::Gdi::HDC, qrc : Win32cr::Foundation::RECT*, edge : Win32cr::Graphics::Gdi::DRAWEDGE_FLAGS, grfFlags : Win32cr::Graphics::Gdi::DRAW_EDGE_FLAGS) : Win32cr::Foundation::BOOL
 
-  # Params # hemf : HENHMETAFILE [In],cchbuffer : UInt32 [In],lpdescription : UInt8* [In]
-  fun GetEnhMetaFileDescriptionA(hemf : HENHMETAFILE, cchbuffer : UInt32, lpdescription : UInt8*) : UInt32
+    fun DrawFrameControl(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Win32cr::Foundation::RECT*, param2 : Win32cr::Graphics::Gdi::DFC_TYPE, param3 : Win32cr::Graphics::Gdi::DFCS_STATE) : Win32cr::Foundation::BOOL
 
-  # Params # hemf : HENHMETAFILE [In],cchbuffer : UInt32 [In],lpdescription : Char* [In]
-  fun GetEnhMetaFileDescriptionW(hemf : HENHMETAFILE, cchbuffer : UInt32, lpdescription : Char*) : UInt32
+    fun DrawCaption(hwnd : Win32cr::Foundation::HWND, hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*, flags : Win32cr::Graphics::Gdi::DRAW_CAPTION_FLAGS) : Win32cr::Foundation::BOOL
 
-  # Params # hemf : HENHMETAFILE [In],nsize : UInt32 [In],lpenhmetaheader : ENHMETAHEADER* [In]
-  fun GetEnhMetaFileHeader(hemf : HENHMETAFILE, nsize : UInt32, lpenhmetaheader : ENHMETAHEADER*) : UInt32
+    fun DrawAnimatedRects(hwnd : Win32cr::Foundation::HWND, idAni : Int32, lprcFrom : Win32cr::Foundation::RECT*, lprcTo : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hemf : HENHMETAFILE [In],nnumentries : UInt32 [In],lppaletteentries : PALETTEENTRY* [In]
-  fun GetEnhMetaFilePaletteEntries(hemf : HENHMETAFILE, nnumentries : UInt32, lppaletteentries : PALETTEENTRY*) : UInt32
+    fun DrawTextA(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt8*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT) : Int32
 
-  # Params # hemf : HENHMETAFILE [In],cbdata16 : UInt32 [In],pdata16 : UInt8* [In],imapmode : Int32 [In],hdcref : HDC [In]
-  fun GetWinMetaFileBits(hemf : HENHMETAFILE, cbdata16 : UInt32, pdata16 : UInt8*, imapmode : Int32, hdcref : HDC) : UInt32
+    fun DrawTextW(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt16*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT) : Int32
 
-  # Params # hdc : HDC [In],hmf : HENHMETAFILE [In],lprect : RECT* [In]
-  fun PlayEnhMetaFile(hdc : HDC, hmf : HENHMETAFILE, lprect : RECT*) : LibC::BOOL
+    fun DrawTextExA(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt8*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT, lpdtp : Win32cr::Graphics::Gdi::DRAWTEXTPARAMS*) : Int32
 
-  # Params # hdc : HDC [In],pht : HANDLETABLE* [In],pmr : ENHMETARECORD* [In],cht : UInt32 [In]
-  fun PlayEnhMetaFileRecord(hdc : HDC, pht : HANDLETABLE*, pmr : ENHMETARECORD*, cht : UInt32) : LibC::BOOL
+    fun DrawTextExW(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt16*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT, lpdtp : Win32cr::Graphics::Gdi::DRAWTEXTPARAMS*) : Int32
 
-  # Params # nsize : UInt32 [In],pb : UInt8* [In]
-  fun SetEnhMetaFileBits(nsize : UInt32, pb : UInt8*) : HENHMETAFILE
+    fun GrayStringA(hDC : Win32cr::Graphics::Gdi::HDC, hBrush : Win32cr::Graphics::Gdi::HBRUSH, lpOutputFunc : Win32cr::Graphics::Gdi::GRAYSTRINGPROC, lpData : Win32cr::Foundation::LPARAM, nCount : Int32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],nsize : UInt32 [In],lpdata : UInt8* [In]
-  fun GdiComment(hdc : HDC, nsize : UInt32, lpdata : UInt8*) : LibC::BOOL
+    fun GrayStringW(hDC : Win32cr::Graphics::Gdi::HDC, hBrush : Win32cr::Graphics::Gdi::HBRUSH, lpOutputFunc : Win32cr::Graphics::Gdi::GRAYSTRINGPROC, lpData : Win32cr::Foundation::LPARAM, nCount : Int32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lptm : TEXTMETRICA* [In]
-  fun GetTextMetricsA(hdc : HDC, lptm : TEXTMETRICA*) : LibC::BOOL
+    fun DrawStateA(hdc : Win32cr::Graphics::Gdi::HDC, hbrFore : Win32cr::Graphics::Gdi::HBRUSH, qfnCallBack : Win32cr::Graphics::Gdi::DRAWSTATEPROC, lData : Win32cr::Foundation::LPARAM, wData : Win32cr::Foundation::WPARAM, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::Graphics::Gdi::DRAWSTATE_FLAGS) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lptm : TEXTMETRICW* [In]
-  fun GetTextMetricsW(hdc : HDC, lptm : TEXTMETRICW*) : LibC::BOOL
+    fun DrawStateW(hdc : Win32cr::Graphics::Gdi::HDC, hbrFore : Win32cr::Graphics::Gdi::HBRUSH, qfnCallBack : Win32cr::Graphics::Gdi::DRAWSTATEPROC, lData : Win32cr::Foundation::LPARAM, wData : Win32cr::Foundation::WPARAM, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::Graphics::Gdi::DRAWSTATE_FLAGS) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],r : UInt32 [In],startangle : Float32 [In],sweepangle : Float32 [In]
-  fun AngleArc(hdc : HDC, x : Int32, y : Int32, r : UInt32, startangle : Float32, sweepangle : Float32) : LibC::BOOL
+    fun TabbedTextOutA(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt8*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*, nTabOrigin : Int32) : Int32
 
-  # Params # hdc : HDC [In],apt : POINT* [In],asz : UInt32* [In],csz : UInt32 [In]
-  fun PolyPolyline(hdc : HDC, apt : POINT*, asz : UInt32*, csz : UInt32) : LibC::BOOL
+    fun TabbedTextOutW(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt16*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*, nTabOrigin : Int32) : Int32
 
-  # Params # hdc : HDC [In],lpxf : XFORM* [In]
-  fun GetWorldTransform(hdc : HDC, lpxf : XFORM*) : LibC::BOOL
+    fun GetTabbedTextExtentA(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*) : UInt32
 
-  # Params # hdc : HDC [In],lpxf : XFORM* [In]
-  fun SetWorldTransform(hdc : HDC, lpxf : XFORM*) : LibC::BOOL
+    fun GetTabbedTextExtentW(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*) : UInt32
 
-  # Params # hdc : HDC [In],lpxf : XFORM* [In],mode : MODIFY_WORLD_TRANSFORM_MODE [In]
-  fun ModifyWorldTransform(hdc : HDC, lpxf : XFORM*, mode : MODIFY_WORLD_TRANSFORM_MODE) : LibC::BOOL
+    fun UpdateWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
-  # Params # lpxfout : XFORM* [In],lpxf1 : XFORM* [In],lpxf2 : XFORM* [In]
-  fun CombineTransform(lpxfout : XFORM*, lpxf1 : XFORM*, lpxf2 : XFORM*) : LibC::BOOL
+    fun PaintDesktop(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],pbmi : BITMAPINFO* [In],usage : DIB_USAGE [In],ppvbits : Void** [In],hsection : LibC::HANDLE [In],offset : UInt32 [In]
-  fun CreateDIBSection(hdc : HDC, pbmi : BITMAPINFO*, usage : DIB_USAGE, ppvbits : Void**, hsection : LibC::HANDLE, offset : UInt32) : HBITMAP
+    fun WindowFromDC(hDC : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::HWND
 
-  # Params # hdc : HDC [In],istart : UInt32 [In],centries : UInt32 [In],prgbq : RGBQUAD* [In]
-  fun GetDIBColorTable(hdc : HDC, istart : UInt32, centries : UInt32, prgbq : RGBQUAD*) : UInt32
+    fun GetDC(hWnd : Win32cr::Foundation::HWND) : Win32cr::Graphics::Gdi::HDC
 
-  # Params # hdc : HDC [In],istart : UInt32 [In],centries : UInt32 [In],prgbq : RGBQUAD* [In]
-  fun SetDIBColorTable(hdc : HDC, istart : UInt32, centries : UInt32, prgbq : RGBQUAD*) : UInt32
+    fun GetDCEx(hWnd : Win32cr::Foundation::HWND, hrgnClip : Win32cr::Graphics::Gdi::HRGN, flags : Win32cr::Graphics::Gdi::GET_DCX_FLAGS) : Win32cr::Graphics::Gdi::HDC
 
-  # Params # hdc : HDC [In],lpca : COLORADJUSTMENT* [In]
-  fun SetColorAdjustment(hdc : HDC, lpca : COLORADJUSTMENT*) : LibC::BOOL
+    fun GetWindowDC(hWnd : Win32cr::Foundation::HWND) : Win32cr::Graphics::Gdi::HDC
 
-  # Params # hdc : HDC [In],lpca : COLORADJUSTMENT* [In]
-  fun GetColorAdjustment(hdc : HDC, lpca : COLORADJUSTMENT*) : LibC::BOOL
+    fun ReleaseDC(hWnd : Win32cr::Foundation::HWND, hDC : Win32cr::Graphics::Gdi::HDC) : Int32
 
-  # Params # hdc : HDC [In]
-  fun CreateHalftonePalette(hdc : HDC) : HPALETTE
+    fun BeginPaint(hWnd : Win32cr::Foundation::HWND, lpPaint : Win32cr::Graphics::Gdi::PAINTSTRUCT*) : Win32cr::Graphics::Gdi::HDC
 
-  # Params # hdc : HDC [In]
-  fun AbortPath(hdc : HDC) : LibC::BOOL
+    fun EndPaint(hWnd : Win32cr::Foundation::HWND, lpPaint : Win32cr::Graphics::Gdi::PAINTSTRUCT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],left : Int32 [In],top : Int32 [In],right : Int32 [In],bottom : Int32 [In],xr1 : Int32 [In],yr1 : Int32 [In],xr2 : Int32 [In],yr2 : Int32 [In]
-  fun ArcTo(hdc : HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, xr1 : Int32, yr1 : Int32, xr2 : Int32, yr2 : Int32) : LibC::BOOL
+    fun GetUpdateRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*, bErase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun BeginPath(hdc : HDC) : LibC::BOOL
+    fun GetUpdateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bErase : Win32cr::Foundation::BOOL) : Int32
 
-  # Params # hdc : HDC [In]
-  fun CloseFigure(hdc : HDC) : LibC::BOOL
+    fun SetWindowRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bRedraw : Win32cr::Foundation::BOOL) : Int32
 
-  # Params # hdc : HDC [In]
-  fun EndPath(hdc : HDC) : LibC::BOOL
+    fun GetWindowRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN) : Int32
 
-  # Params # hdc : HDC [In]
-  fun FillPath(hdc : HDC) : LibC::BOOL
+    fun GetWindowRgnBox(hWnd : Win32cr::Foundation::HWND, lprc : Win32cr::Foundation::RECT*) : Int32
 
-  # Params # hdc : HDC [In]
-  fun FlattenPath(hdc : HDC) : LibC::BOOL
+    fun ExcludeUpdateRgn(hDC : Win32cr::Graphics::Gdi::HDC, hWnd : Win32cr::Foundation::HWND) : Int32
 
-  # Params # hdc : HDC [In],apt : POINT* [In],aj : UInt8* [In],cpt : Int32 [In]
-  fun GetPath(hdc : HDC, apt : POINT*, aj : UInt8*, cpt : Int32) : Int32
+    fun InvalidateRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*, bErase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun PathToRegion(hdc : HDC) : HRGN
+    fun ValidateRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],apt : POINT* [In],aj : UInt8* [In],cpt : Int32 [In]
-  fun PolyDraw(hdc : HDC, apt : POINT*, aj : UInt8*, cpt : Int32) : LibC::BOOL
+    fun InvalidateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bErase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],mode : RGN_COMBINE_MODE [In]
-  fun SelectClipPath(hdc : HDC, mode : RGN_COMBINE_MODE) : LibC::BOOL
+    fun ValidateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],dir : ARC_DIRECTION [In]
-  fun SetArcDirection(hdc : HDC, dir : ARC_DIRECTION) : Int32
+    fun RedrawWindow(hWnd : Win32cr::Foundation::HWND, lprcUpdate : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, flags : Win32cr::Graphics::Gdi::REDRAW_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],limit : Float32 [In],old : Float32* [In]
-  fun SetMiterLimit(hdc : HDC, limit : Float32, old : Float32*) : LibC::BOOL
+    fun LockWindowUpdate(hWndLock : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun StrokeAndFillPath(hdc : HDC) : LibC::BOOL
+    fun ClientToScreen(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun StrokePath(hdc : HDC) : LibC::BOOL
+    fun ScreenToClient(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun WidenPath(hdc : HDC) : LibC::BOOL
+    fun MapWindowPoints(hWndFrom : Win32cr::Foundation::HWND, hWndTo : Win32cr::Foundation::HWND, lpPoints : Win32cr::Foundation::POINT*, cPoints : UInt32) : Int32
 
-  # Params # ipenstyle : PEN_STYLE [In],cwidth : UInt32 [In],plbrush : LOGBRUSH* [In],cstyle : UInt32 [In],pstyle : UInt32* [In]
-  fun ExtCreatePen(ipenstyle : PEN_STYLE, cwidth : UInt32, plbrush : LOGBRUSH*, cstyle : UInt32, pstyle : UInt32*) : HPEN
+    fun GetSysColorBrush(nIndex : Int32) : Win32cr::Graphics::Gdi::HBRUSH
 
-  # Params # hdc : HDC [In],plimit : Float32* [In]
-  fun GetMiterLimit(hdc : HDC, plimit : Float32*) : LibC::BOOL
+    fun DrawFocusRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In]
-  fun GetArcDirection(hdc : HDC) : Int32
+    fun FillRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*, hbr : Win32cr::Graphics::Gdi::HBRUSH) : Int32
 
-  # Params # h : HGDIOBJ [In],c : Int32 [In],pv : Void* [In]
-  fun GetObjectW(h : HGDIOBJ, c : Int32, pv : Void*) : Int32
+    fun FrameRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*, hbr : Win32cr::Graphics::Gdi::HBRUSH) : Int32
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],lppt : POINT* [In]
-  fun MoveToEx(hdc : HDC, x : Int32, y : Int32, lppt : POINT*) : LibC::BOOL
+    fun InvertRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],lpstring : UInt8* [In],c : Int32 [In]
-  fun TextOutA(hdc : HDC, x : Int32, y : Int32, lpstring : UInt8*, c : Int32) : LibC::BOOL
+    fun SetRect(lprc : Win32cr::Foundation::RECT*, xLeft : Int32, yTop : Int32, xRight : Int32, yBottom : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],lpstring : Char* [In],c : Int32 [In]
-  fun TextOutW(hdc : HDC, x : Int32, y : Int32, lpstring : Char*, c : Int32) : LibC::BOOL
+    fun SetRectEmpty(lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],options : ETO_OPTIONS [In],lprect : RECT* [In],lpstring : UInt8* [In],c : UInt32 [In],lpdx : Int32* [In]
-  fun ExtTextOutA(hdc : HDC, x : Int32, y : Int32, options : ETO_OPTIONS, lprect : RECT*, lpstring : UInt8*, c : UInt32, lpdx : Int32*) : LibC::BOOL
+    fun CopyRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],options : ETO_OPTIONS [In],lprect : RECT* [In],lpstring : Char* [In],c : UInt32 [In],lpdx : Int32* [In]
-  fun ExtTextOutW(hdc : HDC, x : Int32, y : Int32, options : ETO_OPTIONS, lprect : RECT*, lpstring : Char*, c : UInt32, lpdx : Int32*) : LibC::BOOL
+    fun InflateRect(lprc : Win32cr::Foundation::RECT*, dx : Int32, dy : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],ppt : POLYTEXTA* [In],nstrings : Int32 [In]
-  fun PolyTextOutA(hdc : HDC, ppt : POLYTEXTA*, nstrings : Int32) : LibC::BOOL
+    fun IntersectRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc1 : Win32cr::Foundation::RECT*, lprcSrc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],ppt : POLYTEXTW* [In],nstrings : Int32 [In]
-  fun PolyTextOutW(hdc : HDC, ppt : POLYTEXTW*, nstrings : Int32) : LibC::BOOL
+    fun UnionRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc1 : Win32cr::Foundation::RECT*, lprcSrc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # pptl : POINT* [In],cpoint : Int32 [In],imode : CREATE_POLYGON_RGN_MODE [In]
-  fun CreatePolygonRgn(pptl : POINT*, cpoint : Int32, imode : CREATE_POLYGON_RGN_MODE) : HRGN
+    fun SubtractRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc1 : Win32cr::Foundation::RECT*, lprcSrc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lppt : POINT* [In],c : Int32 [In]
-  fun DPtoLP(hdc : HDC, lppt : POINT*, c : Int32) : LibC::BOOL
+    fun OffsetRect(lprc : Win32cr::Foundation::RECT*, dx : Int32, dy : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lppt : POINT* [In],c : Int32 [In]
-  fun LPtoDP(hdc : HDC, lppt : POINT*, c : Int32) : LibC::BOOL
+    fun IsRectEmpty(lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],apt : POINT* [In],cpt : Int32 [In]
-  fun Polygon(hdc : HDC, apt : POINT*, cpt : Int32) : LibC::BOOL
+    fun EqualRect(lprc1 : Win32cr::Foundation::RECT*, lprc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],apt : POINT* [In],cpt : Int32 [In]
-  fun Polyline(hdc : HDC, apt : POINT*, cpt : Int32) : LibC::BOOL
+    fun PtInRect(lprc : Win32cr::Foundation::RECT*, pt : Win32cr::Foundation::POINT) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],apt : POINT* [In],cpt : UInt32 [In]
-  fun PolyBezier(hdc : HDC, apt : POINT*, cpt : UInt32) : LibC::BOOL
+    fun LoadBitmapA(hInstance : Win32cr::Foundation::HINSTANCE, lpBitmapName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HBITMAP
 
-  # Params # hdc : HDC [In],apt : POINT* [In],cpt : UInt32 [In]
-  fun PolyBezierTo(hdc : HDC, apt : POINT*, cpt : UInt32) : LibC::BOOL
+    fun LoadBitmapW(hInstance : Win32cr::Foundation::HINSTANCE, lpBitmapName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HBITMAP
 
-  # Params # hdc : HDC [In],apt : POINT* [In],cpt : UInt32 [In]
-  fun PolylineTo(hdc : HDC, apt : POINT*, cpt : UInt32) : LibC::BOOL
+    fun ChangeDisplaySettingsA(lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : Win32cr::Graphics::Gdi::CDS_TYPE) : Win32cr::Graphics::Gdi::DISP_CHANGE
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],lpsz : SIZE* [In]
-  fun SetViewportExtEx(hdc : HDC, x : Int32, y : Int32, lpsz : SIZE*) : LibC::BOOL
+    fun ChangeDisplaySettingsW(lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : Win32cr::Graphics::Gdi::CDS_TYPE) : Win32cr::Graphics::Gdi::DISP_CHANGE
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],lppt : POINT* [In]
-  fun SetViewportOrgEx(hdc : HDC, x : Int32, y : Int32, lppt : POINT*) : LibC::BOOL
+    fun ChangeDisplaySettingsExA(lpszDeviceName : Win32cr::Foundation::PSTR, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, hwnd : Win32cr::Foundation::HWND, dwflags : Win32cr::Graphics::Gdi::CDS_TYPE, lParam : Void*) : Win32cr::Graphics::Gdi::DISP_CHANGE
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],lpsz : SIZE* [In]
-  fun SetWindowExtEx(hdc : HDC, x : Int32, y : Int32, lpsz : SIZE*) : LibC::BOOL
+    fun ChangeDisplaySettingsExW(lpszDeviceName : Win32cr::Foundation::PWSTR, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, hwnd : Win32cr::Foundation::HWND, dwflags : Win32cr::Graphics::Gdi::CDS_TYPE, lParam : Void*) : Win32cr::Graphics::Gdi::DISP_CHANGE
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],lppt : POINT* [In]
-  fun SetWindowOrgEx(hdc : HDC, x : Int32, y : Int32, lppt : POINT*) : LibC::BOOL
+    fun EnumDisplaySettingsA(lpszDeviceName : Win32cr::Foundation::PSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],lppt : POINT* [In]
-  fun OffsetViewportOrgEx(hdc : HDC, x : Int32, y : Int32, lppt : POINT*) : LibC::BOOL
+    fun EnumDisplaySettingsW(lpszDeviceName : Win32cr::Foundation::PWSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],lppt : POINT* [In]
-  fun OffsetWindowOrgEx(hdc : HDC, x : Int32, y : Int32, lppt : POINT*) : LibC::BOOL
+    fun EnumDisplaySettingsExA(lpszDeviceName : Win32cr::Foundation::PSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],xn : Int32 [In],dx : Int32 [In],yn : Int32 [In],yd : Int32 [In],lpsz : SIZE* [In]
-  fun ScaleViewportExtEx(hdc : HDC, xn : Int32, dx : Int32, yn : Int32, yd : Int32, lpsz : SIZE*) : LibC::BOOL
+    fun EnumDisplaySettingsExW(lpszDeviceName : Win32cr::Foundation::PWSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],xn : Int32 [In],xd : Int32 [In],yn : Int32 [In],yd : Int32 [In],lpsz : SIZE* [In]
-  fun ScaleWindowExtEx(hdc : HDC, xn : Int32, xd : Int32, yn : Int32, yd : Int32, lpsz : SIZE*) : LibC::BOOL
+    fun EnumDisplayDevicesA(lpDevice : Win32cr::Foundation::PSTR, iDevNum : UInt32, lpDisplayDevice : Win32cr::Graphics::Gdi::DISPLAY_DEVICEA*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hbm : HBITMAP [In],w : Int32 [In],h : Int32 [In],lpsz : SIZE* [In]
-  fun SetBitmapDimensionEx(hbm : HBITMAP, w : Int32, h : Int32, lpsz : SIZE*) : LibC::BOOL
+    fun EnumDisplayDevicesW(lpDevice : Win32cr::Foundation::PWSTR, iDevNum : UInt32, lpDisplayDevice : Win32cr::Graphics::Gdi::DISPLAY_DEVICEW*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],lppt : POINT* [In]
-  fun SetBrushOrgEx(hdc : HDC, x : Int32, y : Int32, lppt : POINT*) : LibC::BOOL
+    fun MonitorFromPoint(pt : Win32cr::Foundation::POINT, dwFlags : Win32cr::Graphics::Gdi::MONITOR_FROM_FLAGS) : Win32cr::Graphics::Gdi::HMONITOR
 
-  # Params # hdc : HDC [In],c : Int32 [In],lpname : UInt8* [In]
-  fun GetTextFaceA(hdc : HDC, c : Int32, lpname : UInt8*) : Int32
+    fun MonitorFromRect(lprc : Win32cr::Foundation::RECT*, dwFlags : Win32cr::Graphics::Gdi::MONITOR_FROM_FLAGS) : Win32cr::Graphics::Gdi::HMONITOR
 
-  # Params # hdc : HDC [In],c : Int32 [In],lpname : Char* [In]
-  fun GetTextFaceW(hdc : HDC, c : Int32, lpname : Char*) : Int32
+    fun MonitorFromWindow(hwnd : Win32cr::Foundation::HWND, dwFlags : Win32cr::Graphics::Gdi::MONITOR_FROM_FLAGS) : Win32cr::Graphics::Gdi::HMONITOR
 
-  # Params # hdc : HDC [In],npairs : UInt32 [In],lpkernpair : KERNINGPAIR* [In]
-  fun GetKerningPairsA(hdc : HDC, npairs : UInt32, lpkernpair : KERNINGPAIR*) : UInt32
+    fun GetMonitorInfoA(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, lpmi : Win32cr::Graphics::Gdi::MONITORINFO*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],npairs : UInt32 [In],lpkernpair : KERNINGPAIR* [In]
-  fun GetKerningPairsW(hdc : HDC, npairs : UInt32, lpkernpair : KERNINGPAIR*) : UInt32
+    fun GetMonitorInfoW(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, lpmi : Win32cr::Graphics::Gdi::MONITORINFO*) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],lppt : POINT* [In]
-  fun GetDCOrgEx(hdc : HDC, lppt : POINT*) : LibC::BOOL
+    fun EnumDisplayMonitors(hdc : Win32cr::Graphics::Gdi::HDC, lprcClip : Win32cr::Foundation::RECT*, lpfnEnum : Win32cr::Graphics::Gdi::MONITORENUMPROC, dwData : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],ptl : POINT* [In]
-  fun FixBrushOrgEx(hdc : HDC, x : Int32, y : Int32, ptl : POINT*) : LibC::BOOL
-
-  # Params # h : HGDIOBJ [In]
-  fun UnrealizeObject(h : HGDIOBJ) : LibC::BOOL
-
-  # Params # 
-  fun GdiFlush : LibC::BOOL
-
-  # Params # dw : UInt32 [In]
-  fun GdiSetBatchLimit(dw : UInt32) : UInt32
-
-  # Params # 
-  fun GdiGetBatchLimit : UInt32
-
-  # Params # param0 : UInt32 [In],param1 : WGLSWAP* [In]
-  fun wglSwapMultipleBuffers(param0 : UInt32, param1 : WGLSWAP*) : UInt32
-
-  # Params # puchsrcbuffer : UInt8* [In],ulsrcbuffersize : UInt32 [In],ppuchfontpackagebuffer : UInt8** [In],pulfontpackagebuffersize : UInt32* [In],pulbyteswritten : UInt32* [In],usflag : UInt16 [In],usttcindex : UInt16 [In],ussubsetformat : UInt16 [In],ussubsetlanguage : UInt16 [In],ussubsetplatform : CREATE_FONT_PACKAGE_SUBSET_PLATFORM [In],ussubsetencoding : CREATE_FONT_PACKAGE_SUBSET_ENCODING [In],pussubsetkeeplist : UInt16* [In],ussubsetlistcount : UInt16 [In],lpfnallocate : CFP_ALLOCPROC [In],lpfnreallocate : CFP_REALLOCPROC [In],lpfnfree : CFP_FREEPROC [In],lpvreserved : Void* [In]
-  fun CreateFontPackage(puchsrcbuffer : UInt8*, ulsrcbuffersize : UInt32, ppuchfontpackagebuffer : UInt8**, pulfontpackagebuffersize : UInt32*, pulbyteswritten : UInt32*, usflag : UInt16, usttcindex : UInt16, ussubsetformat : UInt16, ussubsetlanguage : UInt16, ussubsetplatform : CREATE_FONT_PACKAGE_SUBSET_PLATFORM, ussubsetencoding : CREATE_FONT_PACKAGE_SUBSET_ENCODING, pussubsetkeeplist : UInt16*, ussubsetlistcount : UInt16, lpfnallocate : CFP_ALLOCPROC, lpfnreallocate : CFP_REALLOCPROC, lpfnfree : CFP_FREEPROC, lpvreserved : Void*) : UInt32
-
-  # Params # puchmergefontbuffer : UInt8* [In],ulmergefontbuffersize : UInt32 [In],puchfontpackagebuffer : UInt8* [In],ulfontpackagebuffersize : UInt32 [In],ppuchdestbuffer : UInt8** [In],puldestbuffersize : UInt32* [In],pulbyteswritten : UInt32* [In],usmode : UInt16 [In],lpfnallocate : CFP_ALLOCPROC [In],lpfnreallocate : CFP_REALLOCPROC [In],lpfnfree : CFP_FREEPROC [In],lpvreserved : Void* [In]
-  fun MergeFontPackage(puchmergefontbuffer : UInt8*, ulmergefontbuffersize : UInt32, puchfontpackagebuffer : UInt8*, ulfontpackagebuffersize : UInt32, ppuchdestbuffer : UInt8**, puldestbuffersize : UInt32*, pulbyteswritten : UInt32*, usmode : UInt16, lpfnallocate : CFP_ALLOCPROC, lpfnreallocate : CFP_REALLOCPROC, lpfnfree : CFP_FREEPROC, lpvreserved : Void*) : UInt32
-
-  # Params # hdc : HDC [In],ulflags : TTEMBED_FLAGS [In],ulcharset : EMBED_FONT_CHARSET [In],pulprivstatus : EMBEDDED_FONT_PRIV_STATUS* [In],pulstatus : UInt32* [In],lpfnwritetostream : WRITEEMBEDPROC [In],lpvwritestream : Void* [In],puscharcodeset : UInt16* [In],uscharcodecount : UInt16 [In],uslanguage : UInt16 [In],pttembedinfo : TTEMBEDINFO* [In]
-  fun TTEmbedFont(hdc : HDC, ulflags : TTEMBED_FLAGS, ulcharset : EMBED_FONT_CHARSET, pulprivstatus : EMBEDDED_FONT_PRIV_STATUS*, pulstatus : UInt32*, lpfnwritetostream : WRITEEMBEDPROC, lpvwritestream : Void*, puscharcodeset : UInt16*, uscharcodecount : UInt16, uslanguage : UInt16, pttembedinfo : TTEMBEDINFO*) : Int32
-
-  # Params # hdc : HDC [In],szfontfilename : PSTR [In],usttcindex : UInt16 [In],ulflags : TTEMBED_FLAGS [In],ulcharset : EMBED_FONT_CHARSET [In],pulprivstatus : EMBEDDED_FONT_PRIV_STATUS* [In],pulstatus : UInt32* [In],lpfnwritetostream : WRITEEMBEDPROC [In],lpvwritestream : Void* [In],puscharcodeset : UInt16* [In],uscharcodecount : UInt16 [In],uslanguage : UInt16 [In],pttembedinfo : TTEMBEDINFO* [In]
-  fun TTEmbedFontFromFileA(hdc : HDC, szfontfilename : PSTR, usttcindex : UInt16, ulflags : TTEMBED_FLAGS, ulcharset : EMBED_FONT_CHARSET, pulprivstatus : EMBEDDED_FONT_PRIV_STATUS*, pulstatus : UInt32*, lpfnwritetostream : WRITEEMBEDPROC, lpvwritestream : Void*, puscharcodeset : UInt16*, uscharcodecount : UInt16, uslanguage : UInt16, pttembedinfo : TTEMBEDINFO*) : Int32
-
-  # Params # phfontreference : LibC::HANDLE* [In],ulflags : UInt32 [In],pulprivstatus : EMBEDDED_FONT_PRIV_STATUS* [In],ulprivs : FONT_LICENSE_PRIVS [In],pulstatus : TTLOAD_EMBEDDED_FONT_STATUS* [In],lpfnreadfromstream : READEMBEDPROC [In],lpvreadstream : Void* [In],szwinfamilyname : LibC::LPWSTR [In],szmacfamilyname : PSTR [In],pttloadinfo : TTLOADINFO* [In]
-  fun TTLoadEmbeddedFont(phfontreference : LibC::HANDLE*, ulflags : UInt32, pulprivstatus : EMBEDDED_FONT_PRIV_STATUS*, ulprivs : FONT_LICENSE_PRIVS, pulstatus : TTLOAD_EMBEDDED_FONT_STATUS*, lpfnreadfromstream : READEMBEDPROC, lpvreadstream : Void*, szwinfamilyname : LibC::LPWSTR, szmacfamilyname : PSTR, pttloadinfo : TTLOADINFO*) : Int32
-
-  # Params # ulflags : TTEMBED_FLAGS [In],pulprivstatus : UInt32* [In],ulprivs : FONT_LICENSE_PRIVS [In],pulstatus : UInt32* [In],lpfnreadfromstream : READEMBEDPROC [In],lpvreadstream : Void* [In],pttloadinfo : TTLOADINFO* [In]
-  fun TTGetEmbeddedFontInfo(ulflags : TTEMBED_FLAGS, pulprivstatus : UInt32*, ulprivs : FONT_LICENSE_PRIVS, pulstatus : UInt32*, lpfnreadfromstream : READEMBEDPROC, lpvreadstream : Void*, pttloadinfo : TTLOADINFO*) : Int32
-
-  # Params # hfontreference : LibC::HANDLE [In],ulflags : UInt32 [In],pulstatus : UInt32* [In]
-  fun TTDeleteEmbeddedFont(hfontreference : LibC::HANDLE, ulflags : UInt32, pulstatus : UInt32*) : Int32
-
-  # Params # hdc : HDC [In],pulembedtype : EMBEDDED_FONT_PRIV_STATUS* [In]
-  fun TTGetEmbeddingType(hdc : HDC, pulembedtype : EMBEDDED_FONT_PRIV_STATUS*) : Int32
-
-  # Params # hdc : HDC [In],puccharcodes : UInt8* [In],ulcharcodesize : UInt32 [In],pusshortcodes : UInt16* [In],ulshortcodesize : UInt32 [In],ulflags : UInt32 [In]
-  fun TTCharToUnicode(hdc : HDC, puccharcodes : UInt8*, ulcharcodesize : UInt32, pusshortcodes : UInt16*, ulshortcodesize : UInt32, ulflags : UInt32) : Int32
-
-  # Params # hdc : HDC [In],ptestparam : TTVALIDATIONTESTSPARAMS* [In]
-  fun TTRunValidationTests(hdc : HDC, ptestparam : TTVALIDATIONTESTSPARAMS*) : Int32
-
-  # Params # hdc : HDC [In],pbenabled : LibC::BOOL* [In]
-  fun TTIsEmbeddingEnabled(hdc : HDC, pbenabled : LibC::BOOL*) : Int32
-
-  # Params # lpszfacename : PSTR [In],pbenabled : LibC::BOOL* [In]
-  fun TTIsEmbeddingEnabledForFacename(lpszfacename : PSTR, pbenabled : LibC::BOOL*) : Int32
-
-  # Params # lpszfacename : PSTR [In],benable : LibC::BOOL [In]
-  fun TTEnableEmbeddingForFacename(lpszfacename : PSTR, benable : LibC::BOOL) : Int32
-
-  # Params # hdc : HDC [In],ulflags : TTEMBED_FLAGS [In],ulcharset : EMBED_FONT_CHARSET [In],pulprivstatus : EMBEDDED_FONT_PRIV_STATUS* [In],pulstatus : UInt32* [In],lpfnwritetostream : WRITEEMBEDPROC [In],lpvwritestream : Void* [In],pulcharcodeset : UInt32* [In],uscharcodecount : UInt16 [In],uslanguage : UInt16 [In],pttembedinfo : TTEMBEDINFO* [In]
-  fun TTEmbedFontEx(hdc : HDC, ulflags : TTEMBED_FLAGS, ulcharset : EMBED_FONT_CHARSET, pulprivstatus : EMBEDDED_FONT_PRIV_STATUS*, pulstatus : UInt32*, lpfnwritetostream : WRITEEMBEDPROC, lpvwritestream : Void*, pulcharcodeset : UInt32*, uscharcodecount : UInt16, uslanguage : UInt16, pttembedinfo : TTEMBEDINFO*) : Int32
-
-  # Params # hdc : HDC [In],ptestparam : TTVALIDATIONTESTSPARAMSEX* [In]
-  fun TTRunValidationTestsEx(hdc : HDC, ptestparam : TTVALIDATIONTESTSPARAMSEX*) : Int32
-
-  # Params # phfontreference : LibC::HANDLE* [In],wzwinfamilyname : Char* [In],cchmaxwinname : Int32 [In],szmacfamilyname : UInt8* [In],cchmaxmacname : Int32 [In]
-  fun TTGetNewFontName(phfontreference : LibC::HANDLE*, wzwinfamilyname : Char*, cchmaxwinname : Int32, szmacfamilyname : UInt8*, cchmaxmacname : Int32) : Int32
-
-  # Params # hdc : HDC [In],qrc : RECT* [In],edge : DRAWEDGE_FLAGS [In],grfflags : DRAW_EDGE_FLAGS [In]
-  fun DrawEdge(hdc : HDC, qrc : RECT*, edge : DRAWEDGE_FLAGS, grfflags : DRAW_EDGE_FLAGS) : LibC::BOOL
-
-  # Params # param0 : HDC [In],param1 : RECT* [In],param2 : DFC_TYPE [In],param3 : DFCS_STATE [In]
-  fun DrawFrameControl(param0 : HDC, param1 : RECT*, param2 : DFC_TYPE, param3 : DFCS_STATE) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],hdc : HDC [In],lprect : RECT* [In],flags : DRAW_CAPTION_FLAGS [In]
-  fun DrawCaption(hwnd : LibC::HANDLE, hdc : HDC, lprect : RECT*, flags : DRAW_CAPTION_FLAGS) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],idani : Int32 [In],lprcfrom : RECT* [In],lprcto : RECT* [In]
-  fun DrawAnimatedRects(hwnd : LibC::HANDLE, idani : Int32, lprcfrom : RECT*, lprcto : RECT*) : LibC::BOOL
-
-  # Params # hdc : HDC [In],lpchtext : UInt8* [In],cchtext : Int32 [In],lprc : RECT* [In],format : DRAW_TEXT_FORMAT [In]
-  fun DrawTextA(hdc : HDC, lpchtext : UInt8*, cchtext : Int32, lprc : RECT*, format : DRAW_TEXT_FORMAT) : Int32
-
-  # Params # hdc : HDC [In],lpchtext : Char* [In],cchtext : Int32 [In],lprc : RECT* [In],format : DRAW_TEXT_FORMAT [In]
-  fun DrawTextW(hdc : HDC, lpchtext : Char*, cchtext : Int32, lprc : RECT*, format : DRAW_TEXT_FORMAT) : Int32
-
-  # Params # hdc : HDC [In],lpchtext : UInt8* [In],cchtext : Int32 [In],lprc : RECT* [In],format : DRAW_TEXT_FORMAT [In],lpdtp : DRAWTEXTPARAMS* [In]
-  fun DrawTextExA(hdc : HDC, lpchtext : UInt8*, cchtext : Int32, lprc : RECT*, format : DRAW_TEXT_FORMAT, lpdtp : DRAWTEXTPARAMS*) : Int32
-
-  # Params # hdc : HDC [In],lpchtext : Char* [In],cchtext : Int32 [In],lprc : RECT* [In],format : DRAW_TEXT_FORMAT [In],lpdtp : DRAWTEXTPARAMS* [In]
-  fun DrawTextExW(hdc : HDC, lpchtext : Char*, cchtext : Int32, lprc : RECT*, format : DRAW_TEXT_FORMAT, lpdtp : DRAWTEXTPARAMS*) : Int32
-
-  # Params # hdc : HDC [In],hbrush : HBRUSH [In],lpoutputfunc : GRAYSTRINGPROC [In],lpdata : LPARAM [In],ncount : Int32 [In],x : Int32 [In],y : Int32 [In],nwidth : Int32 [In],nheight : Int32 [In]
-  fun GrayStringA(hdc : HDC, hbrush : HBRUSH, lpoutputfunc : GRAYSTRINGPROC, lpdata : LPARAM, ncount : Int32, x : Int32, y : Int32, nwidth : Int32, nheight : Int32) : LibC::BOOL
-
-  # Params # hdc : HDC [In],hbrush : HBRUSH [In],lpoutputfunc : GRAYSTRINGPROC [In],lpdata : LPARAM [In],ncount : Int32 [In],x : Int32 [In],y : Int32 [In],nwidth : Int32 [In],nheight : Int32 [In]
-  fun GrayStringW(hdc : HDC, hbrush : HBRUSH, lpoutputfunc : GRAYSTRINGPROC, lpdata : LPARAM, ncount : Int32, x : Int32, y : Int32, nwidth : Int32, nheight : Int32) : LibC::BOOL
-
-  # Params # hdc : HDC [In],hbrfore : HBRUSH [In],qfncallback : DRAWSTATEPROC [In],ldata : LPARAM [In],wdata : LibC::UINT_PTR [In],x : Int32 [In],y : Int32 [In],cx : Int32 [In],cy : Int32 [In],uflags : DRAWSTATE_FLAGS [In]
-  fun DrawStateA(hdc : HDC, hbrfore : HBRUSH, qfncallback : DRAWSTATEPROC, ldata : LPARAM, wdata : LibC::UINT_PTR, x : Int32, y : Int32, cx : Int32, cy : Int32, uflags : DRAWSTATE_FLAGS) : LibC::BOOL
-
-  # Params # hdc : HDC [In],hbrfore : HBRUSH [In],qfncallback : DRAWSTATEPROC [In],ldata : LPARAM [In],wdata : LibC::UINT_PTR [In],x : Int32 [In],y : Int32 [In],cx : Int32 [In],cy : Int32 [In],uflags : DRAWSTATE_FLAGS [In]
-  fun DrawStateW(hdc : HDC, hbrfore : HBRUSH, qfncallback : DRAWSTATEPROC, ldata : LPARAM, wdata : LibC::UINT_PTR, x : Int32, y : Int32, cx : Int32, cy : Int32, uflags : DRAWSTATE_FLAGS) : LibC::BOOL
-
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],lpstring : UInt8* [In],chcount : Int32 [In],ntabpositions : Int32 [In],lpntabstoppositions : Int32* [In],ntaborigin : Int32 [In]
-  fun TabbedTextOutA(hdc : HDC, x : Int32, y : Int32, lpstring : UInt8*, chcount : Int32, ntabpositions : Int32, lpntabstoppositions : Int32*, ntaborigin : Int32) : Int32
-
-  # Params # hdc : HDC [In],x : Int32 [In],y : Int32 [In],lpstring : Char* [In],chcount : Int32 [In],ntabpositions : Int32 [In],lpntabstoppositions : Int32* [In],ntaborigin : Int32 [In]
-  fun TabbedTextOutW(hdc : HDC, x : Int32, y : Int32, lpstring : Char*, chcount : Int32, ntabpositions : Int32, lpntabstoppositions : Int32*, ntaborigin : Int32) : Int32
-
-  # Params # hdc : HDC [In],lpstring : UInt8* [In],chcount : Int32 [In],ntabpositions : Int32 [In],lpntabstoppositions : Int32* [In]
-  fun GetTabbedTextExtentA(hdc : HDC, lpstring : UInt8*, chcount : Int32, ntabpositions : Int32, lpntabstoppositions : Int32*) : UInt32
-
-  # Params # hdc : HDC [In],lpstring : Char* [In],chcount : Int32 [In],ntabpositions : Int32 [In],lpntabstoppositions : Int32* [In]
-  fun GetTabbedTextExtentW(hdc : HDC, lpstring : Char*, chcount : Int32, ntabpositions : Int32, lpntabstoppositions : Int32*) : UInt32
-
-  # Params # hwnd : LibC::HANDLE [In]
-  fun UpdateWindow(hwnd : LibC::HANDLE) : LibC::BOOL
-
-  # Params # hdc : HDC [In]
-  fun PaintDesktop(hdc : HDC) : LibC::BOOL
-
-  # Params # hdc : HDC [In]
-  fun WindowFromDC(hdc : HDC) : HANDLE
-
-  # Params # hwnd : LibC::HANDLE [In]
-  fun GetDC(hwnd : LibC::HANDLE) : HDC
-
-  # Params # hwnd : LibC::HANDLE [In],hrgnclip : HRGN [In],flags : GET_DCX_FLAGS [In]
-  fun GetDCEx(hwnd : LibC::HANDLE, hrgnclip : HRGN, flags : GET_DCX_FLAGS) : HDC
-
-  # Params # hwnd : LibC::HANDLE [In]
-  fun GetWindowDC(hwnd : LibC::HANDLE) : HDC
-
-  # Params # hwnd : LibC::HANDLE [In],hdc : HDC [In]
-  fun ReleaseDC(hwnd : LibC::HANDLE, hdc : HDC) : Int32
-
-  # Params # hwnd : LibC::HANDLE [In],lppaint : PAINTSTRUCT* [In]
-  fun BeginPaint(hwnd : LibC::HANDLE, lppaint : PAINTSTRUCT*) : HDC
-
-  # Params # hwnd : LibC::HANDLE [In],lppaint : PAINTSTRUCT* [In]
-  fun EndPaint(hwnd : LibC::HANDLE, lppaint : PAINTSTRUCT*) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],lprect : RECT* [In],berase : LibC::BOOL [In]
-  fun GetUpdateRect(hwnd : LibC::HANDLE, lprect : RECT*, berase : LibC::BOOL) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],hrgn : HRGN [In],berase : LibC::BOOL [In]
-  fun GetUpdateRgn(hwnd : LibC::HANDLE, hrgn : HRGN, berase : LibC::BOOL) : Int32
-
-  # Params # hwnd : LibC::HANDLE [In],hrgn : HRGN [In],bredraw : LibC::BOOL [In]
-  fun SetWindowRgn(hwnd : LibC::HANDLE, hrgn : HRGN, bredraw : LibC::BOOL) : Int32
-
-  # Params # hwnd : LibC::HANDLE [In],hrgn : HRGN [In]
-  fun GetWindowRgn(hwnd : LibC::HANDLE, hrgn : HRGN) : Int32
-
-  # Params # hwnd : LibC::HANDLE [In],lprc : RECT* [In]
-  fun GetWindowRgnBox(hwnd : LibC::HANDLE, lprc : RECT*) : Int32
-
-  # Params # hdc : HDC [In],hwnd : LibC::HANDLE [In]
-  fun ExcludeUpdateRgn(hdc : HDC, hwnd : LibC::HANDLE) : Int32
-
-  # Params # hwnd : LibC::HANDLE [In],lprect : RECT* [In],berase : LibC::BOOL [In]
-  fun InvalidateRect(hwnd : LibC::HANDLE, lprect : RECT*, berase : LibC::BOOL) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],lprect : RECT* [In]
-  fun ValidateRect(hwnd : LibC::HANDLE, lprect : RECT*) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],hrgn : HRGN [In],berase : LibC::BOOL [In]
-  fun InvalidateRgn(hwnd : LibC::HANDLE, hrgn : HRGN, berase : LibC::BOOL) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],hrgn : HRGN [In]
-  fun ValidateRgn(hwnd : LibC::HANDLE, hrgn : HRGN) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],lprcupdate : RECT* [In],hrgnupdate : HRGN [In],flags : REDRAW_WINDOW_FLAGS [In]
-  fun RedrawWindow(hwnd : LibC::HANDLE, lprcupdate : RECT*, hrgnupdate : HRGN, flags : REDRAW_WINDOW_FLAGS) : LibC::BOOL
-
-  # Params # hwndlock : LibC::HANDLE [In]
-  fun LockWindowUpdate(hwndlock : LibC::HANDLE) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],lppoint : POINT* [In]
-  fun ClientToScreen(hwnd : LibC::HANDLE, lppoint : POINT*) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],lppoint : POINT* [In]
-  fun ScreenToClient(hwnd : LibC::HANDLE, lppoint : POINT*) : LibC::BOOL
-
-  # Params # hwndfrom : LibC::HANDLE [In],hwndto : LibC::HANDLE [In],lppoints : POINT* [In],cpoints : UInt32 [In]
-  fun MapWindowPoints(hwndfrom : LibC::HANDLE, hwndto : LibC::HANDLE, lppoints : POINT*, cpoints : UInt32) : Int32
-
-  # Params # nindex : Int32 [In]
-  fun GetSysColorBrush(nindex : Int32) : HBRUSH
-
-  # Params # hdc : HDC [In],lprc : RECT* [In]
-  fun DrawFocusRect(hdc : HDC, lprc : RECT*) : LibC::BOOL
-
-  # Params # hdc : HDC [In],lprc : RECT* [In],hbr : HBRUSH [In]
-  fun FillRect(hdc : HDC, lprc : RECT*, hbr : HBRUSH) : Int32
-
-  # Params # hdc : HDC [In],lprc : RECT* [In],hbr : HBRUSH [In]
-  fun FrameRect(hdc : HDC, lprc : RECT*, hbr : HBRUSH) : Int32
-
-  # Params # hdc : HDC [In],lprc : RECT* [In]
-  fun InvertRect(hdc : HDC, lprc : RECT*) : LibC::BOOL
-
-  # Params # lprc : RECT* [In],xleft : Int32 [In],ytop : Int32 [In],xright : Int32 [In],ybottom : Int32 [In]
-  fun SetRect(lprc : RECT*, xleft : Int32, ytop : Int32, xright : Int32, ybottom : Int32) : LibC::BOOL
-
-  # Params # lprc : RECT* [In]
-  fun SetRectEmpty(lprc : RECT*) : LibC::BOOL
-
-  # Params # lprcdst : RECT* [In],lprcsrc : RECT* [In]
-  fun CopyRect(lprcdst : RECT*, lprcsrc : RECT*) : LibC::BOOL
-
-  # Params # lprc : RECT* [In],dx : Int32 [In],dy : Int32 [In]
-  fun InflateRect(lprc : RECT*, dx : Int32, dy : Int32) : LibC::BOOL
-
-  # Params # lprcdst : RECT* [In],lprcsrc1 : RECT* [In],lprcsrc2 : RECT* [In]
-  fun IntersectRect(lprcdst : RECT*, lprcsrc1 : RECT*, lprcsrc2 : RECT*) : LibC::BOOL
-
-  # Params # lprcdst : RECT* [In],lprcsrc1 : RECT* [In],lprcsrc2 : RECT* [In]
-  fun UnionRect(lprcdst : RECT*, lprcsrc1 : RECT*, lprcsrc2 : RECT*) : LibC::BOOL
-
-  # Params # lprcdst : RECT* [In],lprcsrc1 : RECT* [In],lprcsrc2 : RECT* [In]
-  fun SubtractRect(lprcdst : RECT*, lprcsrc1 : RECT*, lprcsrc2 : RECT*) : LibC::BOOL
-
-  # Params # lprc : RECT* [In],dx : Int32 [In],dy : Int32 [In]
-  fun OffsetRect(lprc : RECT*, dx : Int32, dy : Int32) : LibC::BOOL
-
-  # Params # lprc : RECT* [In]
-  fun IsRectEmpty(lprc : RECT*) : LibC::BOOL
-
-  # Params # lprc1 : RECT* [In],lprc2 : RECT* [In]
-  fun EqualRect(lprc1 : RECT*, lprc2 : RECT*) : LibC::BOOL
-
-  # Params # lprc : RECT* [In],pt : POINT [In]
-  fun PtInRect(lprc : RECT*, pt : POINT) : LibC::BOOL
-
-  # Params # hinstance : HINSTANCE [In],lpbitmapname : PSTR [In]
-  fun LoadBitmapA(hinstance : HINSTANCE, lpbitmapname : PSTR) : HBITMAP
-
-  # Params # hinstance : HINSTANCE [In],lpbitmapname : LibC::LPWSTR [In]
-  fun LoadBitmapW(hinstance : HINSTANCE, lpbitmapname : LibC::LPWSTR) : HBITMAP
-
-  # Params # lpdevmode : DEVMODEA* [In],dwflags : CDS_TYPE [In]
-  fun ChangeDisplaySettingsA(lpdevmode : DEVMODEA*, dwflags : CDS_TYPE) : DISP_CHANGE
-
-  # Params # lpdevmode : DEVMODEW* [In],dwflags : CDS_TYPE [In]
-  fun ChangeDisplaySettingsW(lpdevmode : DEVMODEW*, dwflags : CDS_TYPE) : DISP_CHANGE
-
-  # Params # lpszdevicename : PSTR [In],lpdevmode : DEVMODEA* [In],hwnd : LibC::HANDLE [In],dwflags : CDS_TYPE [In],lparam : Void* [In]
-  fun ChangeDisplaySettingsExA(lpszdevicename : PSTR, lpdevmode : DEVMODEA*, hwnd : LibC::HANDLE, dwflags : CDS_TYPE, lparam : Void*) : DISP_CHANGE
-
-  # Params # lpszdevicename : LibC::LPWSTR [In],lpdevmode : DEVMODEW* [In],hwnd : LibC::HANDLE [In],dwflags : CDS_TYPE [In],lparam : Void* [In]
-  fun ChangeDisplaySettingsExW(lpszdevicename : LibC::LPWSTR, lpdevmode : DEVMODEW*, hwnd : LibC::HANDLE, dwflags : CDS_TYPE, lparam : Void*) : DISP_CHANGE
-
-  # Params # lpszdevicename : PSTR [In],imodenum : ENUM_DISPLAY_SETTINGS_MODE [In],lpdevmode : DEVMODEA* [In]
-  fun EnumDisplaySettingsA(lpszdevicename : PSTR, imodenum : ENUM_DISPLAY_SETTINGS_MODE, lpdevmode : DEVMODEA*) : LibC::BOOL
-
-  # Params # lpszdevicename : LibC::LPWSTR [In],imodenum : ENUM_DISPLAY_SETTINGS_MODE [In],lpdevmode : DEVMODEW* [In]
-  fun EnumDisplaySettingsW(lpszdevicename : LibC::LPWSTR, imodenum : ENUM_DISPLAY_SETTINGS_MODE, lpdevmode : DEVMODEW*) : LibC::BOOL
-
-  # Params # lpszdevicename : PSTR [In],imodenum : ENUM_DISPLAY_SETTINGS_MODE [In],lpdevmode : DEVMODEA* [In],dwflags : UInt32 [In]
-  fun EnumDisplaySettingsExA(lpszdevicename : PSTR, imodenum : ENUM_DISPLAY_SETTINGS_MODE, lpdevmode : DEVMODEA*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # lpszdevicename : LibC::LPWSTR [In],imodenum : ENUM_DISPLAY_SETTINGS_MODE [In],lpdevmode : DEVMODEW* [In],dwflags : UInt32 [In]
-  fun EnumDisplaySettingsExW(lpszdevicename : LibC::LPWSTR, imodenum : ENUM_DISPLAY_SETTINGS_MODE, lpdevmode : DEVMODEW*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # lpdevice : PSTR [In],idevnum : UInt32 [In],lpdisplaydevice : DISPLAY_DEVICEA* [In],dwflags : UInt32 [In]
-  fun EnumDisplayDevicesA(lpdevice : PSTR, idevnum : UInt32, lpdisplaydevice : DISPLAY_DEVICEA*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # lpdevice : LibC::LPWSTR [In],idevnum : UInt32 [In],lpdisplaydevice : DISPLAY_DEVICEW* [In],dwflags : UInt32 [In]
-  fun EnumDisplayDevicesW(lpdevice : LibC::LPWSTR, idevnum : UInt32, lpdisplaydevice : DISPLAY_DEVICEW*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # pt : POINT [In],dwflags : MONITOR_FROM_FLAGS [In]
-  fun MonitorFromPoint(pt : POINT, dwflags : MONITOR_FROM_FLAGS) : HMONITOR
-
-  # Params # lprc : RECT* [In],dwflags : MONITOR_FROM_FLAGS [In]
-  fun MonitorFromRect(lprc : RECT*, dwflags : MONITOR_FROM_FLAGS) : HMONITOR
-
-  # Params # hwnd : LibC::HANDLE [In],dwflags : MONITOR_FROM_FLAGS [In]
-  fun MonitorFromWindow(hwnd : LibC::HANDLE, dwflags : MONITOR_FROM_FLAGS) : HMONITOR
-
-  # Params # hmonitor : HMONITOR [In],lpmi : MONITORINFO* [In]
-  fun GetMonitorInfoA(hmonitor : HMONITOR, lpmi : MONITORINFO*) : LibC::BOOL
-
-  # Params # hmonitor : HMONITOR [In],lpmi : MONITORINFO* [In]
-  fun GetMonitorInfoW(hmonitor : HMONITOR, lpmi : MONITORINFO*) : LibC::BOOL
-
-  # Params # hdc : HDC [In],lprcclip : RECT* [In],lpfnenum : MONITORENUMPROC [In],dwdata : LPARAM [In]
-  fun EnumDisplayMonitors(hdc : HDC, lprcclip : RECT*, lpfnenum : MONITORENUMPROC, dwdata : LPARAM) : LibC::BOOL
+  end
 end

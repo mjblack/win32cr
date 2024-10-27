@@ -1,19 +1,7 @@
-require "../foundation.cr"
-require "../system/io.cr"
+require "./../foundation.cr"
+require "./../system/io.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:onecore.dll")]
-{% else %}
-@[Link("onecore")]
-{% end %}
-lib LibWin32
+module Win32cr::Devices::Communication
   MDM_COMPRESSION = 1_u32
   MDM_ERROR_CONTROL = 2_u32
   MDM_FORCED_EC = 4_u32
@@ -107,283 +95,273 @@ lib LibWin32
   MAXLENGTH_NAI = 72_u32
   MAXLENGTH_UICCDATASTORE = 10_u32
 
-
+  @[Flags]
   enum MODEM_STATUS_FLAGS : UInt32
-    MS_CTS_ON = 16
-    MS_DSR_ON = 32
-    MS_RING_ON = 64
-    MS_RLSD_ON = 128
+    MS_CTS_ON = 16_u32
+    MS_DSR_ON = 32_u32
+    MS_RING_ON = 64_u32
+    MS_RLSD_ON = 128_u32
   end
-
+  @[Flags]
   enum CLEAR_COMM_ERROR_FLAGS : UInt32
-    CE_BREAK = 16
-    CE_FRAME = 8
-    CE_OVERRUN = 2
-    CE_RXOVER = 1
-    CE_RXPARITY = 4
+    CE_BREAK = 16_u32
+    CE_FRAME = 8_u32
+    CE_OVERRUN = 2_u32
+    CE_RXOVER = 1_u32
+    CE_RXPARITY = 4_u32
   end
-
+  @[Flags]
   enum PURGE_COMM_FLAGS : UInt32
-    PURGE_RXABORT = 2
-    PURGE_RXCLEAR = 8
-    PURGE_TXABORT = 1
-    PURGE_TXCLEAR = 4
+    PURGE_RXABORT = 2_u32
+    PURGE_RXCLEAR = 8_u32
+    PURGE_TXABORT = 1_u32
+    PURGE_TXCLEAR = 4_u32
   end
-
+  @[Flags]
   enum COMM_EVENT_MASK : UInt32
-    EV_BREAK = 64
-    EV_CTS = 8
-    EV_DSR = 16
-    EV_ERR = 128
-    EV_EVENT1 = 2048
-    EV_EVENT2 = 4096
-    EV_PERR = 512
-    EV_RING = 256
-    EV_RLSD = 32
-    EV_RX80FULL = 1024
-    EV_RXCHAR = 1
-    EV_RXFLAG = 2
-    EV_TXEMPTY = 4
+    EV_BREAK = 64_u32
+    EV_CTS = 8_u32
+    EV_DSR = 16_u32
+    EV_ERR = 128_u32
+    EV_EVENT1 = 2048_u32
+    EV_EVENT2 = 4096_u32
+    EV_PERR = 512_u32
+    EV_RING = 256_u32
+    EV_RLSD = 32_u32
+    EV_RX80FULL = 1024_u32
+    EV_RXCHAR = 1_u32
+    EV_RXFLAG = 2_u32
+    EV_TXEMPTY = 4_u32
   end
-
   enum ESCAPE_COMM_FUNCTION : UInt32
-    CLRBREAK = 9
-    CLRDTR = 6
-    CLRRTS = 4
-    SETBREAK = 8
-    SETDTR = 5
-    SETRTS = 3
-    SETXOFF = 1
-    SETXON = 2
+    CLRBREAK = 9_u32
+    CLRDTR = 6_u32
+    CLRRTS = 4_u32
+    SETBREAK = 8_u32
+    SETDTR = 5_u32
+    SETRTS = 3_u32
+    SETXOFF = 1_u32
+    SETXON = 2_u32
   end
-
+  @[Flags]
   enum MODEMDEVCAPS_DIAL_OPTIONS : UInt32
-    DIALOPTION_BILLING = 64
-    DIALOPTION_DIALTONE = 256
-    DIALOPTION_QUIET = 128
+    DIALOPTION_BILLING = 64_u32
+    DIALOPTION_DIALTONE = 256_u32
+    DIALOPTION_QUIET = 128_u32
   end
-
   enum MODEMSETTINGS_SPEAKER_MODE : UInt32
-    MDMSPKR_CALLSETUP = 8
-    MDMSPKR_DIAL = 2
-    MDMSPKR_OFF = 1
-    MDMSPKR_ON = 4
+    MDMSPKR_CALLSETUP = 8_u32
+    MDMSPKR_DIAL = 2_u32
+    MDMSPKR_OFF = 1_u32
+    MDMSPKR_ON = 4_u32
   end
-
+  @[Flags]
   enum COMMPROP_STOP_PARITY : UInt16
-    STOPBITS_10 = 1
-    STOPBITS_15 = 2
-    STOPBITS_20 = 4
-    PARITY_NONE = 256
-    PARITY_ODD = 512
-    PARITY_EVEN = 1024
-    PARITY_MARK = 2048
-    PARITY_SPACE = 4096
+    STOPBITS_10 = 1_u16
+    STOPBITS_15 = 2_u16
+    STOPBITS_20 = 4_u16
+    PARITY_NONE = 256_u16
+    PARITY_ODD = 512_u16
+    PARITY_EVEN = 1024_u16
+    PARITY_MARK = 2048_u16
+    PARITY_SPACE = 4096_u16
   end
-
   enum MODEM_SPEAKER_VOLUME : UInt32
-    MDMVOL_HIGH = 2
-    MDMVOL_LOW = 0
-    MDMVOL_MEDIUM = 1
+    MDMVOL_HIGH = 2_u32
+    MDMVOL_LOW = 0_u32
+    MDMVOL_MEDIUM = 1_u32
   end
-
+  @[Flags]
   enum MODEMDEVCAPS_SPEAKER_VOLUME : UInt32
-    MDMVOLFLAG_HIGH = 4
-    MDMVOLFLAG_LOW = 1
-    MDMVOLFLAG_MEDIUM = 2
+    MDMVOLFLAG_HIGH = 4_u32
+    MDMVOLFLAG_LOW = 1_u32
+    MDMVOLFLAG_MEDIUM = 2_u32
   end
-
+  @[Flags]
   enum MODEMDEVCAPS_SPEAKER_MODE : UInt32
-    MDMSPKRFLAG_CALLSETUP = 8
-    MDMSPKRFLAG_DIAL = 2
-    MDMSPKRFLAG_OFF = 1
-    MDMSPKRFLAG_ON = 4
+    MDMSPKRFLAG_CALLSETUP = 8_u32
+    MDMSPKRFLAG_DIAL = 2_u32
+    MDMSPKRFLAG_OFF = 1_u32
+    MDMSPKRFLAG_ON = 4_u32
+  end
+  enum DCB_STOP_BITS : UInt8
+    ONESTOPBIT = 0_u8
+    ONE5STOPBITS = 1_u8
+    TWOSTOPBITS = 2_u8
+  end
+  enum DCB_PARITY : UInt8
+    EVENPARITY = 2_u8
+    MARKPARITY = 3_u8
+    NOPARITY = 0_u8
+    ODDPARITY = 1_u8
+    SPACEPARITY = 4_u8
   end
 
-  struct MODEMDEVCAPS
-    dw_actual_size : UInt32
-    dw_required_size : UInt32
-    dw_dev_specific_offset : UInt32
-    dw_dev_specific_size : UInt32
-    dw_modem_provider_version : UInt32
-    dw_modem_manufacturer_offset : UInt32
-    dw_modem_manufacturer_size : UInt32
-    dw_modem_model_offset : UInt32
-    dw_modem_model_size : UInt32
-    dw_modem_version_offset : UInt32
-    dw_modem_version_size : UInt32
-    dw_dial_options : MODEMDEVCAPS_DIAL_OPTIONS
-    dw_call_setup_fail_timer : UInt32
-    dw_inactivity_timeout : UInt32
-    dw_speaker_volume : MODEMDEVCAPS_SPEAKER_VOLUME
-    dw_speaker_mode : MODEMDEVCAPS_SPEAKER_MODE
-    dw_modem_options : UInt32
-    dw_max_dte_rate : UInt32
-    dw_max_dce_rate : UInt32
-    ab_variable_portion : UInt8[0]*
-  end
-  struct MODEMSETTINGS
-    dw_actual_size : UInt32
-    dw_required_size : UInt32
-    dw_dev_specific_offset : UInt32
-    dw_dev_specific_size : UInt32
-    dw_call_setup_fail_timer : UInt32
-    dw_inactivity_timeout : UInt32
-    dw_speaker_volume : MODEM_SPEAKER_VOLUME
-    dw_speaker_mode : MODEMSETTINGS_SPEAKER_MODE
-    dw_preferred_modem_options : UInt32
-    dw_negotiated_modem_options : UInt32
-    dw_negotiated_dce_rate : UInt32
-    ab_variable_portion : UInt8[0]*
-  end
-  struct COMMPROP
-    w_packet_length : UInt16
-    w_packet_version : UInt16
-    dw_service_mask : UInt32
-    dw_reserved1 : UInt32
-    dw_max_tx_queue : UInt32
-    dw_max_rx_queue : UInt32
-    dw_max_baud : UInt32
-    dw_prov_sub_type : UInt32
-    dw_prov_capabilities : UInt32
-    dw_settable_params : UInt32
-    dw_settable_baud : UInt32
-    w_settable_data : UInt16
-    w_settable_stop_parity : COMMPROP_STOP_PARITY
-    dw_current_tx_queue : UInt32
-    dw_current_rx_queue : UInt32
-    dw_prov_spec1 : UInt32
-    dw_prov_spec2 : UInt32
-    wc_prov_char : Char[0]*
-  end
-  struct COMSTAT
-    _bitfield : UInt32
-    cb_in_que : UInt32
-    cb_out_que : UInt32
-  end
-  struct DCB
-    dc_blength : UInt32
-    baud_rate : UInt32
-    _bitfield : UInt32
-    w_reserved : UInt16
-    xon_lim : UInt16
-    xoff_lim : UInt16
-    byte_size : UInt8
-    parity : UInt8
-    stop_bits : UInt8
-    xon_char : CHAR
-    xoff_char : CHAR
-    error_char : CHAR
-    eof_char : CHAR
-    evt_char : CHAR
-    w_reserved1 : UInt16
-  end
-  struct COMMTIMEOUTS
-    read_interval_timeout : UInt32
-    read_total_timeout_multiplier : UInt32
-    read_total_timeout_constant : UInt32
-    write_total_timeout_multiplier : UInt32
+  @[Extern]
+  record MODEMDEVCAPS,
+    dwActualSize : UInt32,
+    dwRequiredSize : UInt32,
+    dwDevSpecificOffset : UInt32,
+    dwDevSpecificSize : UInt32,
+    dwModemProviderVersion : UInt32,
+    dwModemManufacturerOffset : UInt32,
+    dwModemManufacturerSize : UInt32,
+    dwModemModelOffset : UInt32,
+    dwModemModelSize : UInt32,
+    dwModemVersionOffset : UInt32,
+    dwModemVersionSize : UInt32,
+    dwDialOptions : Win32cr::Devices::Communication::MODEMDEVCAPS_DIAL_OPTIONS,
+    dwCallSetupFailTimer : UInt32,
+    dwInactivityTimeout : UInt32,
+    dwSpeakerVolume : Win32cr::Devices::Communication::MODEMDEVCAPS_SPEAKER_VOLUME,
+    dwSpeakerMode : Win32cr::Devices::Communication::MODEMDEVCAPS_SPEAKER_MODE,
+    dwModemOptions : UInt32,
+    dwMaxDTERate : UInt32,
+    dwMaxDCERate : UInt32,
+    abVariablePortion : UInt8*
+
+  @[Extern]
+  record MODEMSETTINGS,
+    dwActualSize : UInt32,
+    dwRequiredSize : UInt32,
+    dwDevSpecificOffset : UInt32,
+    dwDevSpecificSize : UInt32,
+    dwCallSetupFailTimer : UInt32,
+    dwInactivityTimeout : UInt32,
+    dwSpeakerVolume : Win32cr::Devices::Communication::MODEM_SPEAKER_VOLUME,
+    dwSpeakerMode : Win32cr::Devices::Communication::MODEMSETTINGS_SPEAKER_MODE,
+    dwPreferredModemOptions : UInt32,
+    dwNegotiatedModemOptions : UInt32,
+    dwNegotiatedDCERate : UInt32,
+    abVariablePortion : UInt8*
+
+  @[Extern]
+  record COMMPROP,
+    wPacketLength : UInt16,
+    wPacketVersion : UInt16,
+    dwServiceMask : UInt32,
+    dwReserved1 : UInt32,
+    dwMaxTxQueue : UInt32,
+    dwMaxRxQueue : UInt32,
+    dwMaxBaud : UInt32,
+    dwProvSubType : UInt32,
+    dwProvCapabilities : UInt32,
+    dwSettableParams : UInt32,
+    dwSettableBaud : UInt32,
+    wSettableData : UInt16,
+    wSettableStopParity : Win32cr::Devices::Communication::COMMPROP_STOP_PARITY,
+    dwCurrentTxQueue : UInt32,
+    dwCurrentRxQueue : UInt32,
+    dwProvSpec1 : UInt32,
+    dwProvSpec2 : UInt32,
+    wcProvChar : UInt16*
+
+  @[Extern]
+  record COMSTAT,
+    _bitfield : UInt32,
+    cbInQue : UInt32,
+    cbOutQue : UInt32
+
+  @[Extern]
+  record DCB,
+    dc_blength : UInt32,
+    baud_rate : UInt32,
+    _bitfield : UInt32,
+    wReserved : UInt16,
+    xon_lim : UInt16,
+    xoff_lim : UInt16,
+    byte_size : UInt8,
+    parity : Win32cr::Devices::Communication::DCB_PARITY,
+    stop_bits : Win32cr::Devices::Communication::DCB_STOP_BITS,
+    xon_char : Win32cr::Foundation::CHAR,
+    xoff_char : Win32cr::Foundation::CHAR,
+    error_char : Win32cr::Foundation::CHAR,
+    eof_char : Win32cr::Foundation::CHAR,
+    evt_char : Win32cr::Foundation::CHAR,
+    wReserved1 : UInt16
+
+  @[Extern]
+  record COMMTIMEOUTS,
+    read_interval_timeout : UInt32,
+    read_total_timeout_multiplier : UInt32,
+    read_total_timeout_constant : UInt32,
+    write_total_timeout_multiplier : UInt32,
     write_total_timeout_constant : UInt32
+
+  @[Extern]
+  record COMMCONFIG,
+    dwSize : UInt32,
+    wVersion : UInt16,
+    wReserved : UInt16,
+    dcb : Win32cr::Devices::Communication::DCB,
+    dwProviderSubType : UInt32,
+    dwProviderOffset : UInt32,
+    dwProviderSize : UInt32,
+    wcProviderData : UInt16*
+
+  @[Link("kernel32")]
+  @[Link("api-ms-win-core-comm-l1-1-1")]
+  @[Link("api-ms-win-core-comm-l1-1-2")]
+  lib C
+    fun ClearCommBreak(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+
+    fun ClearCommError(hFile : Win32cr::Foundation::HANDLE, lpErrors : Win32cr::Devices::Communication::CLEAR_COMM_ERROR_FLAGS*, lpStat : Win32cr::Devices::Communication::COMSTAT*) : Win32cr::Foundation::BOOL
+
+    fun SetupComm(hFile : Win32cr::Foundation::HANDLE, dwInQueue : UInt32, dwOutQueue : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EscapeCommFunction(hFile : Win32cr::Foundation::HANDLE, dwFunc : Win32cr::Devices::Communication::ESCAPE_COMM_FUNCTION) : Win32cr::Foundation::BOOL
+
+    fun GetCommConfig(hCommDev : Win32cr::Foundation::HANDLE, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun GetCommMask(hFile : Win32cr::Foundation::HANDLE, lpEvtMask : Win32cr::Devices::Communication::COMM_EVENT_MASK*) : Win32cr::Foundation::BOOL
+
+    fun GetCommProperties(hFile : Win32cr::Foundation::HANDLE, lpCommProp : Win32cr::Devices::Communication::COMMPROP*) : Win32cr::Foundation::BOOL
+
+    fun GetCommModemStatus(hFile : Win32cr::Foundation::HANDLE, lpModemStat : Win32cr::Devices::Communication::MODEM_STATUS_FLAGS*) : Win32cr::Foundation::BOOL
+
+    fun GetCommState(hFile : Win32cr::Foundation::HANDLE, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
+
+    fun GetCommTimeouts(hFile : Win32cr::Foundation::HANDLE, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
+
+    fun PurgeComm(hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::Devices::Communication::PURGE_COMM_FLAGS) : Win32cr::Foundation::BOOL
+
+    fun SetCommBreak(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+
+    fun SetCommConfig(hCommDev : Win32cr::Foundation::HANDLE, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+
+    fun SetCommMask(hFile : Win32cr::Foundation::HANDLE, dwEvtMask : Win32cr::Devices::Communication::COMM_EVENT_MASK) : Win32cr::Foundation::BOOL
+
+    fun SetCommState(hFile : Win32cr::Foundation::HANDLE, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
+
+    fun SetCommTimeouts(hFile : Win32cr::Foundation::HANDLE, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
+
+    fun TransmitCommChar(hFile : Win32cr::Foundation::HANDLE, cChar : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
+
+    fun WaitCommEvent(hFile : Win32cr::Foundation::HANDLE, lpEvtMask : Win32cr::Devices::Communication::COMM_EVENT_MASK*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+
+    fun OpenCommPort(uPortNumber : UInt32, dwDesiredAccess : UInt32, dwFlagsAndAttributes : UInt32) : Win32cr::Foundation::HANDLE
+
+    fun GetCommPorts(lpPortNumbers : UInt32*, uPortNumbersCount : UInt32, puPortNumbersFound : UInt32*) : UInt32
+
+    fun BuildCommDCBA(lpDef : Win32cr::Foundation::PSTR, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
+
+    fun BuildCommDCBW(lpDef : Win32cr::Foundation::PWSTR, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
+
+    fun BuildCommDCBAndTimeoutsA(lpDef : Win32cr::Foundation::PSTR, lpDCB : Win32cr::Devices::Communication::DCB*, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
+
+    fun BuildCommDCBAndTimeoutsW(lpDef : Win32cr::Foundation::PWSTR, lpDCB : Win32cr::Devices::Communication::DCB*, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
+
+    fun CommConfigDialogA(lpszName : Win32cr::Foundation::PSTR, hWnd : Win32cr::Foundation::HWND, lpCC : Win32cr::Devices::Communication::COMMCONFIG*) : Win32cr::Foundation::BOOL
+
+    fun CommConfigDialogW(lpszName : Win32cr::Foundation::PWSTR, hWnd : Win32cr::Foundation::HWND, lpCC : Win32cr::Devices::Communication::COMMCONFIG*) : Win32cr::Foundation::BOOL
+
+    fun GetDefaultCommConfigA(lpszName : Win32cr::Foundation::PSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun GetDefaultCommConfigW(lpszName : Win32cr::Foundation::PWSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun SetDefaultCommConfigA(lpszName : Win32cr::Foundation::PSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+
+    fun SetDefaultCommConfigW(lpszName : Win32cr::Foundation::PWSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+
   end
-  struct COMMCONFIG
-    dw_size : UInt32
-    w_version : UInt16
-    w_reserved : UInt16
-    dcb : DCB
-    dw_provider_sub_type : UInt32
-    dw_provider_offset : UInt32
-    dw_provider_size : UInt32
-    wc_provider_data : Char[0]*
-  end
-
-
-  # Params # hfile : LibC::HANDLE [In]
-  fun ClearCommBreak(hfile : LibC::HANDLE) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],lperrors : CLEAR_COMM_ERROR_FLAGS* [In],lpstat : COMSTAT* [In]
-  fun ClearCommError(hfile : LibC::HANDLE, lperrors : CLEAR_COMM_ERROR_FLAGS*, lpstat : COMSTAT*) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],dwinqueue : UInt32 [In],dwoutqueue : UInt32 [In]
-  fun SetupComm(hfile : LibC::HANDLE, dwinqueue : UInt32, dwoutqueue : UInt32) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],dwfunc : ESCAPE_COMM_FUNCTION [In]
-  fun EscapeCommFunction(hfile : LibC::HANDLE, dwfunc : ESCAPE_COMM_FUNCTION) : LibC::BOOL
-
-  # Params # hcommdev : LibC::HANDLE [In],lpcc : COMMCONFIG* [In],lpdwsize : UInt32* [In]
-  fun GetCommConfig(hcommdev : LibC::HANDLE, lpcc : COMMCONFIG*, lpdwsize : UInt32*) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],lpevtmask : COMM_EVENT_MASK* [In]
-  fun GetCommMask(hfile : LibC::HANDLE, lpevtmask : COMM_EVENT_MASK*) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],lpcommprop : COMMPROP* [In]
-  fun GetCommProperties(hfile : LibC::HANDLE, lpcommprop : COMMPROP*) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],lpmodemstat : MODEM_STATUS_FLAGS* [In]
-  fun GetCommModemStatus(hfile : LibC::HANDLE, lpmodemstat : MODEM_STATUS_FLAGS*) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],lpdcb : DCB* [In]
-  fun GetCommState(hfile : LibC::HANDLE, lpdcb : DCB*) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],lpcommtimeouts : COMMTIMEOUTS* [In]
-  fun GetCommTimeouts(hfile : LibC::HANDLE, lpcommtimeouts : COMMTIMEOUTS*) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],dwflags : PURGE_COMM_FLAGS [In]
-  fun PurgeComm(hfile : LibC::HANDLE, dwflags : PURGE_COMM_FLAGS) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In]
-  fun SetCommBreak(hfile : LibC::HANDLE) : LibC::BOOL
-
-  # Params # hcommdev : LibC::HANDLE [In],lpcc : COMMCONFIG* [In],dwsize : UInt32 [In]
-  fun SetCommConfig(hcommdev : LibC::HANDLE, lpcc : COMMCONFIG*, dwsize : UInt32) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],dwevtmask : COMM_EVENT_MASK [In]
-  fun SetCommMask(hfile : LibC::HANDLE, dwevtmask : COMM_EVENT_MASK) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],lpdcb : DCB* [In]
-  fun SetCommState(hfile : LibC::HANDLE, lpdcb : DCB*) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],lpcommtimeouts : COMMTIMEOUTS* [In]
-  fun SetCommTimeouts(hfile : LibC::HANDLE, lpcommtimeouts : COMMTIMEOUTS*) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],cchar : CHAR [In]
-  fun TransmitCommChar(hfile : LibC::HANDLE, cchar : CHAR) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],lpevtmask : COMM_EVENT_MASK* [In],lpoverlapped : OVERLAPPED* [In]
-  fun WaitCommEvent(hfile : LibC::HANDLE, lpevtmask : COMM_EVENT_MASK*, lpoverlapped : OVERLAPPED*) : LibC::BOOL
-
-  # Params # uportnumber : UInt32 [In],dwdesiredaccess : UInt32 [In],dwflagsandattributes : UInt32 [In]
-  fun OpenCommPort(uportnumber : UInt32, dwdesiredaccess : UInt32, dwflagsandattributes : UInt32) : LibC::HANDLE
-
-  # Params # lpportnumbers : UInt32* [In],uportnumberscount : UInt32 [In],puportnumbersfound : UInt32* [In]
-  fun GetCommPorts(lpportnumbers : UInt32*, uportnumberscount : UInt32, puportnumbersfound : UInt32*) : UInt32
-
-  # Params # lpdef : PSTR [In],lpdcb : DCB* [In]
-  fun BuildCommDCBA(lpdef : PSTR, lpdcb : DCB*) : LibC::BOOL
-
-  # Params # lpdef : LibC::LPWSTR [In],lpdcb : DCB* [In]
-  fun BuildCommDCBW(lpdef : LibC::LPWSTR, lpdcb : DCB*) : LibC::BOOL
-
-  # Params # lpdef : PSTR [In],lpdcb : DCB* [In],lpcommtimeouts : COMMTIMEOUTS* [In]
-  fun BuildCommDCBAndTimeoutsA(lpdef : PSTR, lpdcb : DCB*, lpcommtimeouts : COMMTIMEOUTS*) : LibC::BOOL
-
-  # Params # lpdef : LibC::LPWSTR [In],lpdcb : DCB* [In],lpcommtimeouts : COMMTIMEOUTS* [In]
-  fun BuildCommDCBAndTimeoutsW(lpdef : LibC::LPWSTR, lpdcb : DCB*, lpcommtimeouts : COMMTIMEOUTS*) : LibC::BOOL
-
-  # Params # lpszname : PSTR [In],hwnd : LibC::HANDLE [In],lpcc : COMMCONFIG* [In]
-  fun CommConfigDialogA(lpszname : PSTR, hwnd : LibC::HANDLE, lpcc : COMMCONFIG*) : LibC::BOOL
-
-  # Params # lpszname : LibC::LPWSTR [In],hwnd : LibC::HANDLE [In],lpcc : COMMCONFIG* [In]
-  fun CommConfigDialogW(lpszname : LibC::LPWSTR, hwnd : LibC::HANDLE, lpcc : COMMCONFIG*) : LibC::BOOL
-
-  # Params # lpszname : PSTR [In],lpcc : COMMCONFIG* [In],lpdwsize : UInt32* [In]
-  fun GetDefaultCommConfigA(lpszname : PSTR, lpcc : COMMCONFIG*, lpdwsize : UInt32*) : LibC::BOOL
-
-  # Params # lpszname : LibC::LPWSTR [In],lpcc : COMMCONFIG* [In],lpdwsize : UInt32* [In]
-  fun GetDefaultCommConfigW(lpszname : LibC::LPWSTR, lpcc : COMMCONFIG*, lpdwsize : UInt32*) : LibC::BOOL
-
-  # Params # lpszname : PSTR [In],lpcc : COMMCONFIG* [In],dwsize : UInt32 [In]
-  fun SetDefaultCommConfigA(lpszname : PSTR, lpcc : COMMCONFIG*, dwsize : UInt32) : LibC::BOOL
-
-  # Params # lpszname : LibC::LPWSTR [In],lpcc : COMMCONFIG* [In],dwsize : UInt32 [In]
-  fun SetDefaultCommConfigW(lpszname : LibC::LPWSTR, lpcc : COMMCONFIG*, dwsize : UInt32) : LibC::BOOL
 end

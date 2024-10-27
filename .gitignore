@@ -4,3 +4,5 @@
 /.shards/
 *.dwarf
 /.idea/
+winmd.log
+/json/

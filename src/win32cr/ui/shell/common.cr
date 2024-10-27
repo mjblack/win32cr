@@ -1,14 +1,7 @@
-require "../../foundation.cr"
-require "../../system/com.cr"
+require "./../../foundation.cr"
+require "./../../system/com.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-lib LibWin32
+module Win32cr::UI::Shell::Common
   PERCEIVEDFLAG_UNDEFINED = 0_u32
   PERCEIVEDFLAG_SOFTCODED = 1_u32
   PERCEIVEDFLAG_HARDCODED = 2_u32
@@ -17,179 +10,181 @@ lib LibWin32
   PERCEIVEDFLAG_WMSDK = 32_u32
   PERCEIVEDFLAG_ZIPFOLDER = 64_u32
 
-
-  enum STRRET_TYPE : Int32
-    STRRET_WSTR = 0
-    STRRET_OFFSET = 1
-    STRRET_CSTR = 2
+  enum STRRET_TYPE
+    STRRET_WSTR = 0_i32
+    STRRET_OFFSET = 1_i32
+    STRRET_CSTR = 2_i32
+  end
+  enum PERCEIVED
+    PERCEIVED_TYPE_FIRST = -3_i32
+    PERCEIVED_TYPE_CUSTOM = -3_i32
+    PERCEIVED_TYPE_UNSPECIFIED = -2_i32
+    PERCEIVED_TYPE_FOLDER = -1_i32
+    PERCEIVED_TYPE_UNKNOWN = 0_i32
+    PERCEIVED_TYPE_TEXT = 1_i32
+    PERCEIVED_TYPE_IMAGE = 2_i32
+    PERCEIVED_TYPE_AUDIO = 3_i32
+    PERCEIVED_TYPE_VIDEO = 4_i32
+    PERCEIVED_TYPE_COMPRESSED = 5_i32
+    PERCEIVED_TYPE_DOCUMENT = 6_i32
+    PERCEIVED_TYPE_SYSTEM = 7_i32
+    PERCEIVED_TYPE_APPLICATION = 8_i32
+    PERCEIVED_TYPE_GAMEMEDIA = 9_i32
+    PERCEIVED_TYPE_CONTACTS = 10_i32
+    PERCEIVED_TYPE_LAST = 10_i32
+  end
+  enum SHCOLSTATE
+    SHCOLSTATE_DEFAULT = 0_i32
+    SHCOLSTATE_TYPE_STR = 1_i32
+    SHCOLSTATE_TYPE_INT = 2_i32
+    SHCOLSTATE_TYPE_DATE = 3_i32
+    SHCOLSTATE_TYPEMASK = 15_i32
+    SHCOLSTATE_ONBYDEFAULT = 16_i32
+    SHCOLSTATE_SLOW = 32_i32
+    SHCOLSTATE_EXTENDED = 64_i32
+    SHCOLSTATE_SECONDARYUI = 128_i32
+    SHCOLSTATE_HIDDEN = 256_i32
+    SHCOLSTATE_PREFER_VARCMP = 512_i32
+    SHCOLSTATE_PREFER_FMTCMP = 1024_i32
+    SHCOLSTATE_NOSORTBYFOLDERNESS = 2048_i32
+    SHCOLSTATE_VIEWONLY = 65536_i32
+    SHCOLSTATE_BATCHREAD = 131072_i32
+    SHCOLSTATE_NO_GROUPBY = 262144_i32
+    SHCOLSTATE_FIXED_WIDTH = 4096_i32
+    SHCOLSTATE_NODPISCALE = 8192_i32
+    SHCOLSTATE_FIXED_RATIO = 16384_i32
+    SHCOLSTATE_DISPLAYMASK = 61440_i32
+  end
+  enum DEVICE_SCALE_FACTOR
+    DEVICE_SCALE_FACTOR_INVALID = 0_i32
+    SCALE_100_PERCENT = 100_i32
+    SCALE_120_PERCENT = 120_i32
+    SCALE_125_PERCENT = 125_i32
+    SCALE_140_PERCENT = 140_i32
+    SCALE_150_PERCENT = 150_i32
+    SCALE_160_PERCENT = 160_i32
+    SCALE_175_PERCENT = 175_i32
+    SCALE_180_PERCENT = 180_i32
+    SCALE_200_PERCENT = 200_i32
+    SCALE_225_PERCENT = 225_i32
+    SCALE_250_PERCENT = 250_i32
+    SCALE_300_PERCENT = 300_i32
+    SCALE_350_PERCENT = 350_i32
+    SCALE_400_PERCENT = 400_i32
+    SCALE_450_PERCENT = 450_i32
+    SCALE_500_PERCENT = 500_i32
   end
 
-  enum PERCEIVED : Int32
-    PERCEIVED_TYPE_FIRST = -3
-    PERCEIVED_TYPE_CUSTOM = -3
-    PERCEIVED_TYPE_UNSPECIFIED = -2
-    PERCEIVED_TYPE_FOLDER = -1
-    PERCEIVED_TYPE_UNKNOWN = 0
-    PERCEIVED_TYPE_TEXT = 1
-    PERCEIVED_TYPE_IMAGE = 2
-    PERCEIVED_TYPE_AUDIO = 3
-    PERCEIVED_TYPE_VIDEO = 4
-    PERCEIVED_TYPE_COMPRESSED = 5
-    PERCEIVED_TYPE_DOCUMENT = 6
-    PERCEIVED_TYPE_SYSTEM = 7
-    PERCEIVED_TYPE_APPLICATION = 8
-    PERCEIVED_TYPE_GAMEMEDIA = 9
-    PERCEIVED_TYPE_CONTACTS = 10
-    PERCEIVED_TYPE_LAST = 10
+  @[Extern]
+  record SHITEMID,
+    cb : UInt16,
+    abID : UInt8*
+
+  @[Extern]
+  record ITEMIDLIST,
+    mkid : Win32cr::UI::Shell::Common::SHITEMID
+
+  @[Extern]
+  record STRRET,
+    uType : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      pOleStr : Win32cr::Foundation::PWSTR,
+      uOffset : UInt32,
+      cStr : UInt8[260]
+
   end
 
-  enum SHCOLSTATE : Int32
-    SHCOLSTATE_DEFAULT = 0
-    SHCOLSTATE_TYPE_STR = 1
-    SHCOLSTATE_TYPE_INT = 2
-    SHCOLSTATE_TYPE_DATE = 3
-    SHCOLSTATE_TYPEMASK = 15
-    SHCOLSTATE_ONBYDEFAULT = 16
-    SHCOLSTATE_SLOW = 32
-    SHCOLSTATE_EXTENDED = 64
-    SHCOLSTATE_SECONDARYUI = 128
-    SHCOLSTATE_HIDDEN = 256
-    SHCOLSTATE_PREFER_VARCMP = 512
-    SHCOLSTATE_PREFER_FMTCMP = 1024
-    SHCOLSTATE_NOSORTBYFOLDERNESS = 2048
-    SHCOLSTATE_VIEWONLY = 65536
-    SHCOLSTATE_BATCHREAD = 131072
-    SHCOLSTATE_NO_GROUPBY = 262144
-    SHCOLSTATE_FIXED_WIDTH = 4096
-    SHCOLSTATE_NODPISCALE = 8192
-    SHCOLSTATE_FIXED_RATIO = 16384
-    SHCOLSTATE_DISPLAYMASK = 61440
-  end
+  @[Extern]
+  record SHELLDETAILS,
+    fmt : Int32,
+    cxChar : Int32,
+    str : Win32cr::UI::Shell::Common::STRRET
 
-  enum DEVICE_SCALE_FACTOR : Int32
-    DEVICE_SCALE_FACTOR_INVALID = 0
-    SCALE_100_PERCENT = 100
-    SCALE_120_PERCENT = 120
-    SCALE_125_PERCENT = 125
-    SCALE_140_PERCENT = 140
-    SCALE_150_PERCENT = 150
-    SCALE_160_PERCENT = 160
-    SCALE_175_PERCENT = 175
-    SCALE_180_PERCENT = 180
-    SCALE_200_PERCENT = 200
-    SCALE_225_PERCENT = 225
-    SCALE_250_PERCENT = 250
-    SCALE_300_PERCENT = 300
-    SCALE_350_PERCENT = 350
-    SCALE_400_PERCENT = 400
-    SCALE_450_PERCENT = 450
-    SCALE_500_PERCENT = 500
-  end
+  @[Extern]
+  record COMDLG_FILTERSPEC,
+    pszName : Win32cr::Foundation::PWSTR,
+    pszSpec : Win32cr::Foundation::PWSTR
 
-  union STRRET_Anonymous_e__Union
-    p_ole_str : LibC::LPWSTR
-    u_offset : UInt32
-    c_str : UInt8[260]*
-  end
-
-  struct SHITEMID
-    cb : UInt16
-    ab_id : UInt8[0]*
-  end
-  struct ITEMIDLIST
-    mkid : SHITEMID
-  end
-  struct STRRET
-    u_type : UInt32
-    anonymous : STRRET_Anonymous_e__Union
-  end
-  struct SHELLDETAILS
-    fmt : Int32
-    cx_char : Int32
-    str : STRRET
-  end
-  struct COMDLG_FILTERSPEC
-    psz_name : LibC::LPWSTR
-    psz_spec : LibC::LPWSTR
-  end
+  @[Extern]
+  record IObjectArrayVtbl,
+    query_interface : Proc(IObjectArray*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IObjectArray*, UInt32),
+    release : Proc(IObjectArray*, UInt32),
+    get_count : Proc(IObjectArray*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_at : Proc(IObjectArray*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
 
 
-  struct IObjectArrayVTbl
-    query_interface : Proc(IObjectArray*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IObjectArray*, UInt32)
-    release : Proc(IObjectArray*, UInt32)
-    get_count : Proc(IObjectArray*, UInt32*, HRESULT)
-    get_at : Proc(IObjectArray*, UInt32, Guid*, Void**, HRESULT)
+  @[Extern]
+  #@[Com("92ca9dcd-5622-4bba-a805-5e9f541bd8c9")]
+  record IObjectArray, lpVtbl : IObjectArrayVtbl* do
+    GUID = LibC::GUID.new(0x92ca9dcd_u32, 0x5622_u16, 0x4bba_u16, StaticArray[0xa8_u8, 0x5_u8, 0x5e_u8, 0x9f_u8, 0x54_u8, 0x1b_u8, 0xd8_u8, 0xc9_u8])
+    def query_interface(this : IObjectArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IObjectArray*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IObjectArray*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_count(this : IObjectArray*, pcObjects : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_count.call(this, pcObjects)
+    end
+    def get_at(this : IObjectArray*, uiIndex : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_at.call(this, uiIndex, riid, ppv)
+    end
+
   end
 
-  IObjectArray_GUID = "92ca9dcd-5622-4bba-a805-5e9f541bd8c9"
-  IID_IObjectArray = LibC::GUID.new(0x92ca9dcd_u32, 0x5622_u16, 0x4bba_u16, StaticArray[0xa8_u8, 0x5_u8, 0x5e_u8, 0x9f_u8, 0x54_u8, 0x1b_u8, 0xd8_u8, 0xc9_u8])
-  struct IObjectArray
-    lpVtbl : IObjectArrayVTbl*
+  @[Extern]
+  record IObjectCollectionVtbl,
+    query_interface : Proc(IObjectCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IObjectCollection*, UInt32),
+    release : Proc(IObjectCollection*, UInt32),
+    get_count : Proc(IObjectCollection*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_at : Proc(IObjectCollection*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_object : Proc(IObjectCollection*, Void*, Win32cr::Foundation::HRESULT),
+    add_from_array : Proc(IObjectCollection*, Void*, Win32cr::Foundation::HRESULT),
+    remove_object_at : Proc(IObjectCollection*, UInt32, Win32cr::Foundation::HRESULT),
+    clear : Proc(IObjectCollection*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("5632b1a4-e38a-400a-928a-d4cd63230295")]
+  record IObjectCollection, lpVtbl : IObjectCollectionVtbl* do
+    GUID = LibC::GUID.new(0x5632b1a4_u32, 0xe38a_u16, 0x400a_u16, StaticArray[0x92_u8, 0x8a_u8, 0xd4_u8, 0xcd_u8, 0x63_u8, 0x23_u8, 0x2_u8, 0x95_u8])
+    def query_interface(this : IObjectCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IObjectCollection*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IObjectCollection*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_count(this : IObjectCollection*, pcObjects : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_count.call(this, pcObjects)
+    end
+    def get_at(this : IObjectCollection*, uiIndex : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_at.call(this, uiIndex, riid, ppv)
+    end
+    def add_object(this : IObjectCollection*, punk : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_object.call(this, punk)
+    end
+    def add_from_array(this : IObjectCollection*, poaSource : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_from_array.call(this, poaSource)
+    end
+    def remove_object_at(this : IObjectCollection*, uiIndex : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_object_at.call(this, uiIndex)
+    end
+    def clear(this : IObjectCollection*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear.call(this)
+    end
+
   end
 
-  struct IObjectCollectionVTbl
-    query_interface : Proc(IObjectCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IObjectCollection*, UInt32)
-    release : Proc(IObjectCollection*, UInt32)
-    get_count : Proc(IObjectCollection*, UInt32*, HRESULT)
-    get_at : Proc(IObjectCollection*, UInt32, Guid*, Void**, HRESULT)
-    add_object : Proc(IObjectCollection*, IUnknown, HRESULT)
-    add_from_array : Proc(IObjectCollection*, IObjectArray, HRESULT)
-    remove_object_at : Proc(IObjectCollection*, UInt32, HRESULT)
-    clear : Proc(IObjectCollection*, HRESULT)
-  end
-
-  IObjectCollection_GUID = "5632b1a4-e38a-400a-928a-d4cd63230295"
-  IID_IObjectCollection = LibC::GUID.new(0x5632b1a4_u32, 0xe38a_u16, 0x400a_u16, StaticArray[0x92_u8, 0x8a_u8, 0xd4_u8, 0xcd_u8, 0x63_u8, 0x23_u8, 0x2_u8, 0x95_u8])
-  struct IObjectCollection
-    lpVtbl : IObjectCollectionVTbl*
-  end
-
-end
-struct LibWin32::IObjectArray
-  def query_interface(this : IObjectArray*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IObjectArray*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IObjectArray*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_count(this : IObjectArray*, pcobjects : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, pcobjects)
-  end
-  def get_at(this : IObjectArray*, uiindex : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_at.call(this, uiindex, riid, ppv)
-  end
-end
-struct LibWin32::IObjectCollection
-  def query_interface(this : IObjectCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IObjectCollection*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IObjectCollection*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_count(this : IObjectCollection*, pcobjects : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, pcobjects)
-  end
-  def get_at(this : IObjectCollection*, uiindex : UInt32, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_at.call(this, uiindex, riid, ppv)
-  end
-  def add_object(this : IObjectCollection*, punk : IUnknown) : HRESULT
-    @lpVtbl.value.add_object.call(this, punk)
-  end
-  def add_from_array(this : IObjectCollection*, poasource : IObjectArray) : HRESULT
-    @lpVtbl.value.add_from_array.call(this, poasource)
-  end
-  def remove_object_at(this : IObjectCollection*, uiindex : UInt32) : HRESULT
-    @lpVtbl.value.remove_object_at.call(this, uiindex)
-  end
-  def clear(this : IObjectCollection*) : HRESULT
-    @lpVtbl.value.clear.call(this)
-  end
 end

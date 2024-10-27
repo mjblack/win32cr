@@ -1,89 +1,75 @@
-require "../foundation.cr"
+require "./../foundation.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
-{% else %}
-@[Link("advapi32")]
-{% end %}
-lib LibWin32
+module Win32cr::System::Time
+  Wszw32timeregkeytimeproviders = "System\\CurrentControlSet\\Services\\W32Time\\TimeProviders"
+  Wszw32timeregkeypolicytimeproviders = "Software\\Policies\\Microsoft\\W32Time\\TimeProviders"
+  Wszw32timeregvalueenabled = "Enabled"
+  Wszw32timeregvaluedllname = "DllName"
+  Wszw32timeregvalueinputprovider = "InputProvider"
+  Wszw32timeregvaluemetadataprovider = "MetaDataProvider"
   TSF_Hardware = 1_u32
   TSF_Authenticated = 2_u32
   TSF_IPv6 = 4_u32
   TSF_SignatureAuthenticated = 8_u32
 
-  struct TIME_ZONE_INFORMATION
-    bias : Int32
-    standard_name : Char[32]*
-    standard_date : SYSTEMTIME
-    standard_bias : Int32
-    daylight_name : Char[32]*
-    daylight_date : SYSTEMTIME
+
+  @[Extern]
+  record TIME_ZONE_INFORMATION,
+    bias : Int32,
+    standard_name : UInt16[32],
+    standard_date : Win32cr::Foundation::SYSTEMTIME,
+    standard_bias : Int32,
+    daylight_name : UInt16[32],
+    daylight_date : Win32cr::Foundation::SYSTEMTIME,
     daylight_bias : Int32
+
+  @[Extern]
+  record DYNAMIC_TIME_ZONE_INFORMATION,
+    bias : Int32,
+    standard_name : UInt16[32],
+    standard_date : Win32cr::Foundation::SYSTEMTIME,
+    standard_bias : Int32,
+    daylight_name : UInt16[32],
+    daylight_date : Win32cr::Foundation::SYSTEMTIME,
+    daylight_bias : Int32,
+    time_zone_key_name : UInt16[128],
+    dynamic_daylight_time_disabled : Win32cr::Foundation::BOOLEAN
+
+  @[Link("kernel32")]
+  @[Link("advapi32")]
+  lib C
+    fun SystemTimeToTzSpecificLocalTime(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*, lpUniversalTime : Win32cr::Foundation::SYSTEMTIME*, lpLocalTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+
+    fun TzSpecificLocalTimeToSystemTime(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*, lpLocalTime : Win32cr::Foundation::SYSTEMTIME*, lpUniversalTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+
+    fun FileTimeToSystemTime(lpFileTime : Win32cr::Foundation::FILETIME*, lpSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+
+    fun SystemTimeToFileTime(lpSystemTime : Win32cr::Foundation::SYSTEMTIME*, lpFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+
+    # Commented out due to being part of LibC
+    #fun GetTimeZoneInformation(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*) : UInt32
+
+    # Commented out due to being part of LibC
+    #fun SetTimeZoneInformation(lpTimeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*) : Win32cr::Foundation::BOOL
+
+    fun SetDynamicTimeZoneInformation(lpTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*) : Win32cr::Foundation::BOOL
+
+    # Commented out due to being part of LibC
+    #fun GetDynamicTimeZoneInformation(pTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*) : UInt32
+
+    fun GetTimeZoneInformationForYear(wYear : UInt16, pdtzi : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*, ptzi : Win32cr::System::Time::TIME_ZONE_INFORMATION*) : Win32cr::Foundation::BOOL
+
+    fun EnumDynamicTimeZoneInformation(dwIndex : UInt32, lpTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*) : UInt32
+
+    fun GetDynamicTimeZoneInformationEffectiveYears(lpTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*, first_year : UInt32*, last_year : UInt32*) : UInt32
+
+    fun SystemTimeToTzSpecificLocalTimeEx(lpTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*, lpUniversalTime : Win32cr::Foundation::SYSTEMTIME*, lpLocalTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+
+    fun TzSpecificLocalTimeToSystemTimeEx(lpTimeZoneInformation : Win32cr::System::Time::DYNAMIC_TIME_ZONE_INFORMATION*, lpLocalTime : Win32cr::Foundation::SYSTEMTIME*, lpUniversalTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+
+    fun LocalFileTimeToLocalSystemTime(timeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*, localFileTime : Win32cr::Foundation::FILETIME*, localSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+
+    fun LocalSystemTimeToLocalFileTime(timeZoneInformation : Win32cr::System::Time::TIME_ZONE_INFORMATION*, localSystemTime : Win32cr::Foundation::SYSTEMTIME*, localFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+
   end
-  struct DYNAMIC_TIME_ZONE_INFORMATION
-    bias : Int32
-    standard_name : Char[32]*
-    standard_date : SYSTEMTIME
-    standard_bias : Int32
-    daylight_name : Char[32]*
-    daylight_date : SYSTEMTIME
-    daylight_bias : Int32
-    time_zone_key_name : Char[128]*
-    dynamic_daylight_time_disabled : BOOLEAN
-  end
-
-
-  # Params # lptimezoneinformation : TIME_ZONE_INFORMATION* [In],lpuniversaltime : SYSTEMTIME* [In],lplocaltime : SYSTEMTIME* [In]
-  fun SystemTimeToTzSpecificLocalTime(lptimezoneinformation : TIME_ZONE_INFORMATION*, lpuniversaltime : SYSTEMTIME*, lplocaltime : SYSTEMTIME*) : LibC::BOOL
-
-  # Params # lptimezoneinformation : TIME_ZONE_INFORMATION* [In],lplocaltime : SYSTEMTIME* [In],lpuniversaltime : SYSTEMTIME* [In]
-  fun TzSpecificLocalTimeToSystemTime(lptimezoneinformation : TIME_ZONE_INFORMATION*, lplocaltime : SYSTEMTIME*, lpuniversaltime : SYSTEMTIME*) : LibC::BOOL
-
-  # Params # lpfiletime : FILETIME* [In],lpsystemtime : SYSTEMTIME* [In]
-  fun FileTimeToSystemTime(lpfiletime : FILETIME*, lpsystemtime : SYSTEMTIME*) : LibC::BOOL
-
-  # Params # lpsystemtime : SYSTEMTIME* [In],lpfiletime : FILETIME* [In]
-  fun SystemTimeToFileTime(lpsystemtime : SYSTEMTIME*, lpfiletime : FILETIME*) : LibC::BOOL
-
-  # Params # lptimezoneinformation : TIME_ZONE_INFORMATION* [In]
-  # Commented out because function is part of Lib C
-  #fun GetTimeZoneInformation(lptimezoneinformation : TIME_ZONE_INFORMATION*) : UInt32
-
-  # Params # lptimezoneinformation : TIME_ZONE_INFORMATION* [In]
-  # Commented out because function is part of Lib C
-  #fun SetTimeZoneInformation(lptimezoneinformation : TIME_ZONE_INFORMATION*) : LibC::BOOL
-
-  # Params # lptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION* [In]
-  fun SetDynamicTimeZoneInformation(lptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION*) : LibC::BOOL
-
-  # Params # ptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION* [In]
-  # fun GetDynamicTimeZoneInformation(ptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION*) : UInt32
-
-  # Params # wyear : UInt16 [In],pdtzi : DYNAMIC_TIME_ZONE_INFORMATION* [In],ptzi : TIME_ZONE_INFORMATION* [In]
-  fun GetTimeZoneInformationForYear(wyear : UInt16, pdtzi : DYNAMIC_TIME_ZONE_INFORMATION*, ptzi : TIME_ZONE_INFORMATION*) : LibC::BOOL
-
-  # Params # dwindex : UInt32 [In],lptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION* [In]
-  fun EnumDynamicTimeZoneInformation(dwindex : UInt32, lptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION*) : UInt32
-
-  # Params # lptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION* [In],firstyear : UInt32* [In],lastyear : UInt32* [In]
-  fun GetDynamicTimeZoneInformationEffectiveYears(lptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION*, firstyear : UInt32*, lastyear : UInt32*) : UInt32
-
-  # Params # lptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION* [In],lpuniversaltime : SYSTEMTIME* [In],lplocaltime : SYSTEMTIME* [In]
-  fun SystemTimeToTzSpecificLocalTimeEx(lptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION*, lpuniversaltime : SYSTEMTIME*, lplocaltime : SYSTEMTIME*) : LibC::BOOL
-
-  # Params # lptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION* [In],lplocaltime : SYSTEMTIME* [In],lpuniversaltime : SYSTEMTIME* [In]
-  fun TzSpecificLocalTimeToSystemTimeEx(lptimezoneinformation : DYNAMIC_TIME_ZONE_INFORMATION*, lplocaltime : SYSTEMTIME*, lpuniversaltime : SYSTEMTIME*) : LibC::BOOL
-
-  # Params # timezoneinformation : TIME_ZONE_INFORMATION* [In],localfiletime : FILETIME* [In],localsystemtime : SYSTEMTIME* [In]
-  fun LocalFileTimeToLocalSystemTime(timezoneinformation : TIME_ZONE_INFORMATION*, localfiletime : FILETIME*, localsystemtime : SYSTEMTIME*) : LibC::BOOL
-
-  # Params # timezoneinformation : TIME_ZONE_INFORMATION* [In],localsystemtime : SYSTEMTIME* [In],localfiletime : FILETIME* [In]
-  fun LocalSystemTimeToLocalFileTime(timezoneinformation : TIME_ZONE_INFORMATION*, localsystemtime : SYSTEMTIME*, localfiletime : FILETIME*) : LibC::BOOL
 end

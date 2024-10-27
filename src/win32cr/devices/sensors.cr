@@ -1,54 +1,42 @@
-require "../system/com.cr"
-require "../foundation.cr"
-require "../ui/shell/propertiessystem.cr"
-require "../system/com/structuredstorage.cr"
-require "../devices/portabledevices.cr"
+require "./../system/com.cr"
+require "./../foundation.cr"
+require "./../ui/shell/properties_system.cr"
+require "./../system/com/structured_storage.cr"
+require "./portable_devices.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:sensorsutilsv2.dll")]
-{% else %}
-@[Link("sensorsutilsv2")]
-{% end %}
-lib LibWin32
+module Win32cr::Devices::Sensors
   GUID_DEVINTERFACE_SENSOR = "ba1bb692-9b7a-4833-9a1e-525ed134e7e2"
   SENSOR_EVENT_STATE_CHANGED = "bfd96016-6bd7-4560-ad34-f2f6607e8f81"
   SENSOR_EVENT_DATA_UPDATED = "2ed0f2a4-0087-41d3-87db-6773370b3c88"
   SENSOR_EVENT_PROPERTY_CHANGED = "2358f099-84c9-4d3d-90df-c2421e2b2045"
   SENSOR_EVENT_ACCELEROMETER_SHAKE = "825f5a94-0f48-4396-9ca0-6ecb5c99d915"
   SENSOR_EVENT_PARAMETER_COMMON_GUID = "64346e30-8728-4b34-bdf6-4f52442c5c28"
-  SENSOR_EVENT_PARAMETER_EVENT_ID = PROPERTYKEY.new(LibC::GUID.new(0x64346e30_u32, 0x8728_u16, 0x4b34_u16, StaticArray[0xbd_u8, 0xf6_u8, 0x4f_u8, 0x52_u8, 0x44_u8, 0x2c_u8, 0x5c_u8, 0x28_u8]), 2_u32)
-  SENSOR_EVENT_PARAMETER_STATE = PROPERTYKEY.new(LibC::GUID.new(0x64346e30_u32, 0x8728_u16, 0x4b34_u16, StaticArray[0xbd_u8, 0xf6_u8, 0x4f_u8, 0x52_u8, 0x44_u8, 0x2c_u8, 0x5c_u8, 0x28_u8]), 3_u32)
+  SENSOR_EVENT_PARAMETER_EVENT_ID = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x64346e30_u32, 0x8728_u16, 0x4b34_u16, StaticArray[0xbd_u8, 0xf6_u8, 0x4f_u8, 0x52_u8, 0x44_u8, 0x2c_u8, 0x5c_u8, 0x28_u8]), 2_u32)
+  SENSOR_EVENT_PARAMETER_STATE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x64346e30_u32, 0x8728_u16, 0x4b34_u16, StaticArray[0xbd_u8, 0xf6_u8, 0x4f_u8, 0x52_u8, 0x44_u8, 0x2c_u8, 0x5c_u8, 0x28_u8]), 3_u32)
   SENSOR_ERROR_PARAMETER_COMMON_GUID = "77112bcd-fce1-4f43-b8b8-a88256adb4b3"
   SENSOR_PROPERTY_COMMON_GUID = "7f8383ec-d3ec-495c-a8cf-b8bbe85c2920"
-  SENSOR_PROPERTY_TYPE = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 2_u32)
-  SENSOR_PROPERTY_STATE = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 3_u32)
-  SENSOR_PROPERTY_PERSISTENT_UNIQUE_ID = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 5_u32)
-  SENSOR_PROPERTY_MANUFACTURER = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 6_u32)
-  SENSOR_PROPERTY_MODEL = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 7_u32)
-  SENSOR_PROPERTY_SERIAL_NUMBER = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 8_u32)
-  SENSOR_PROPERTY_FRIENDLY_NAME = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 9_u32)
-  SENSOR_PROPERTY_DESCRIPTION = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 10_u32)
-  SENSOR_PROPERTY_CONNECTION_TYPE = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 11_u32)
-  SENSOR_PROPERTY_MIN_REPORT_INTERVAL = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 12_u32)
-  SENSOR_PROPERTY_CURRENT_REPORT_INTERVAL = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 13_u32)
-  SENSOR_PROPERTY_CHANGE_SENSITIVITY = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 14_u32)
-  SENSOR_PROPERTY_DEVICE_PATH = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 15_u32)
-  SENSOR_PROPERTY_LIGHT_RESPONSE_CURVE = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 16_u32)
-  SENSOR_PROPERTY_ACCURACY = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 17_u32)
-  SENSOR_PROPERTY_RESOLUTION = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 18_u32)
-  SENSOR_PROPERTY_LOCATION_DESIRED_ACCURACY = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 19_u32)
-  SENSOR_PROPERTY_RANGE_MINIMUM = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 20_u32)
-  SENSOR_PROPERTY_RANGE_MAXIMUM = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 21_u32)
-  SENSOR_PROPERTY_HID_USAGE = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 22_u32)
-  SENSOR_PROPERTY_RADIO_STATE = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 23_u32)
-  SENSOR_PROPERTY_RADIO_STATE_PREVIOUS = PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 24_u32)
+  SENSOR_PROPERTY_TYPE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 2_u32)
+  SENSOR_PROPERTY_STATE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 3_u32)
+  SENSOR_PROPERTY_PERSISTENT_UNIQUE_ID = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 5_u32)
+  SENSOR_PROPERTY_MANUFACTURER = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 6_u32)
+  SENSOR_PROPERTY_MODEL = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 7_u32)
+  SENSOR_PROPERTY_SERIAL_NUMBER = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 8_u32)
+  SENSOR_PROPERTY_FRIENDLY_NAME = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 9_u32)
+  SENSOR_PROPERTY_DESCRIPTION = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 10_u32)
+  SENSOR_PROPERTY_CONNECTION_TYPE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 11_u32)
+  SENSOR_PROPERTY_MIN_REPORT_INTERVAL = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 12_u32)
+  SENSOR_PROPERTY_CURRENT_REPORT_INTERVAL = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 13_u32)
+  SENSOR_PROPERTY_CHANGE_SENSITIVITY = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 14_u32)
+  SENSOR_PROPERTY_DEVICE_PATH = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 15_u32)
+  SENSOR_PROPERTY_LIGHT_RESPONSE_CURVE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 16_u32)
+  SENSOR_PROPERTY_ACCURACY = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 17_u32)
+  SENSOR_PROPERTY_RESOLUTION = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 18_u32)
+  SENSOR_PROPERTY_LOCATION_DESIRED_ACCURACY = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 19_u32)
+  SENSOR_PROPERTY_RANGE_MINIMUM = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 20_u32)
+  SENSOR_PROPERTY_RANGE_MAXIMUM = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 21_u32)
+  SENSOR_PROPERTY_HID_USAGE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 22_u32)
+  SENSOR_PROPERTY_RADIO_STATE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 23_u32)
+  SENSOR_PROPERTY_RADIO_STATE_PREVIOUS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x7f8383ec_u32, 0xd3ec_u16, 0x495c_u16, StaticArray[0xa8_u8, 0xcf_u8, 0xb8_u8, 0xbb_u8, 0xe8_u8, 0x5c_u8, 0x29_u8, 0x20_u8]), 24_u32)
   SENSOR_CATEGORY_ALL = "c317c286-c468-4288-9975-d4c4587c442c"
   SENSOR_CATEGORY_LOCATION = "bfa794e4-f964-4fdb-90f6-51056bfe4b44"
   SENSOR_CATEGORY_ENVIRONMENTAL = "323439aa-7f66-492b-ba0c-73e9aa0a65d5"
@@ -117,150 +105,150 @@ lib LibWin32
   SENSOR_TYPE_CUSTOM = "e83af229-8640-4d18-a213-e22675ebb2c3"
   SENSOR_TYPE_UNKNOWN = "10ba83e3-ef4f-41ed-9885-a87d6435a8e1"
   SENSOR_DATA_TYPE_COMMON_GUID = "db5e0cf2-cf1f-4c18-b46c-d86011d62150"
-  SENSOR_DATA_TYPE_TIMESTAMP = PROPERTYKEY.new(LibC::GUID.new(0xdb5e0cf2_u32, 0xcf1f_u16, 0x4c18_u16, StaticArray[0xb4_u8, 0x6c_u8, 0xd8_u8, 0x60_u8, 0x11_u8, 0xd6_u8, 0x21_u8, 0x50_u8]), 2_u32)
+  SENSOR_DATA_TYPE_TIMESTAMP = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xdb5e0cf2_u32, 0xcf1f_u16, 0x4c18_u16, StaticArray[0xb4_u8, 0x6c_u8, 0xd8_u8, 0x60_u8, 0x11_u8, 0xd6_u8, 0x21_u8, 0x50_u8]), 2_u32)
   SENSOR_DATA_TYPE_LOCATION_GUID = "055c74d8-ca6f-47d6-95c6-1ed3637a0ff4"
-  SENSOR_DATA_TYPE_LATITUDE_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 2_u32)
-  SENSOR_DATA_TYPE_LONGITUDE_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 3_u32)
-  SENSOR_DATA_TYPE_ALTITUDE_SEALEVEL_METERS = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 4_u32)
-  SENSOR_DATA_TYPE_ALTITUDE_ELLIPSOID_METERS = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 5_u32)
-  SENSOR_DATA_TYPE_SPEED_KNOTS = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 6_u32)
-  SENSOR_DATA_TYPE_TRUE_HEADING_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 7_u32)
-  SENSOR_DATA_TYPE_MAGNETIC_HEADING_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 8_u32)
-  SENSOR_DATA_TYPE_MAGNETIC_VARIATION = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 9_u32)
-  SENSOR_DATA_TYPE_FIX_QUALITY = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 10_u32)
-  SENSOR_DATA_TYPE_FIX_TYPE = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 11_u32)
-  SENSOR_DATA_TYPE_POSITION_DILUTION_OF_PRECISION = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 12_u32)
-  SENSOR_DATA_TYPE_HORIZONAL_DILUTION_OF_PRECISION = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 13_u32)
-  SENSOR_DATA_TYPE_VERTICAL_DILUTION_OF_PRECISION = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 14_u32)
-  SENSOR_DATA_TYPE_SATELLITES_USED_COUNT = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 15_u32)
-  SENSOR_DATA_TYPE_SATELLITES_USED_PRNS = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 16_u32)
-  SENSOR_DATA_TYPE_SATELLITES_IN_VIEW = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 17_u32)
-  SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_PRNS = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 18_u32)
-  SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_ELEVATION = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 19_u32)
-  SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_AZIMUTH = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 20_u32)
-  SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_STN_RATIO = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 21_u32)
-  SENSOR_DATA_TYPE_ERROR_RADIUS_METERS = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 22_u32)
-  SENSOR_DATA_TYPE_ADDRESS1 = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 23_u32)
-  SENSOR_DATA_TYPE_ADDRESS2 = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 24_u32)
-  SENSOR_DATA_TYPE_CITY = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 25_u32)
-  SENSOR_DATA_TYPE_STATE_PROVINCE = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 26_u32)
-  SENSOR_DATA_TYPE_POSTALCODE = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 27_u32)
-  SENSOR_DATA_TYPE_COUNTRY_REGION = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 28_u32)
-  SENSOR_DATA_TYPE_ALTITUDE_ELLIPSOID_ERROR_METERS = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 29_u32)
-  SENSOR_DATA_TYPE_ALTITUDE_SEALEVEL_ERROR_METERS = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 30_u32)
-  SENSOR_DATA_TYPE_GPS_SELECTION_MODE = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 31_u32)
-  SENSOR_DATA_TYPE_GPS_OPERATION_MODE = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 32_u32)
-  SENSOR_DATA_TYPE_GPS_STATUS = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 33_u32)
-  SENSOR_DATA_TYPE_GEOIDAL_SEPARATION = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 34_u32)
-  SENSOR_DATA_TYPE_DGPS_DATA_AGE = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 35_u32)
-  SENSOR_DATA_TYPE_ALTITUDE_ANTENNA_SEALEVEL_METERS = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 36_u32)
-  SENSOR_DATA_TYPE_DIFFERENTIAL_REFERENCE_STATION_ID = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 37_u32)
-  SENSOR_DATA_TYPE_NMEA_SENTENCE = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 38_u32)
-  SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_ID = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 39_u32)
-  SENSOR_DATA_TYPE_LOCATION_SOURCE = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 40_u32)
-  SENSOR_DATA_TYPE_SATELLITES_USED_PRNS_AND_CONSTELLATIONS = PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 41_u32)
+  SENSOR_DATA_TYPE_LATITUDE_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 2_u32)
+  SENSOR_DATA_TYPE_LONGITUDE_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 3_u32)
+  SENSOR_DATA_TYPE_ALTITUDE_SEALEVEL_METERS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 4_u32)
+  SENSOR_DATA_TYPE_ALTITUDE_ELLIPSOID_METERS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 5_u32)
+  SENSOR_DATA_TYPE_SPEED_KNOTS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 6_u32)
+  SENSOR_DATA_TYPE_TRUE_HEADING_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 7_u32)
+  SENSOR_DATA_TYPE_MAGNETIC_HEADING_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 8_u32)
+  SENSOR_DATA_TYPE_MAGNETIC_VARIATION = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 9_u32)
+  SENSOR_DATA_TYPE_FIX_QUALITY = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 10_u32)
+  SENSOR_DATA_TYPE_FIX_TYPE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 11_u32)
+  SENSOR_DATA_TYPE_POSITION_DILUTION_OF_PRECISION = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 12_u32)
+  SENSOR_DATA_TYPE_HORIZONAL_DILUTION_OF_PRECISION = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 13_u32)
+  SENSOR_DATA_TYPE_VERTICAL_DILUTION_OF_PRECISION = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 14_u32)
+  SENSOR_DATA_TYPE_SATELLITES_USED_COUNT = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 15_u32)
+  SENSOR_DATA_TYPE_SATELLITES_USED_PRNS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 16_u32)
+  SENSOR_DATA_TYPE_SATELLITES_IN_VIEW = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 17_u32)
+  SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_PRNS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 18_u32)
+  SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_ELEVATION = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 19_u32)
+  SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_AZIMUTH = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 20_u32)
+  SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_STN_RATIO = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 21_u32)
+  SENSOR_DATA_TYPE_ERROR_RADIUS_METERS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 22_u32)
+  SENSOR_DATA_TYPE_ADDRESS1 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 23_u32)
+  SENSOR_DATA_TYPE_ADDRESS2 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 24_u32)
+  SENSOR_DATA_TYPE_CITY = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 25_u32)
+  SENSOR_DATA_TYPE_STATE_PROVINCE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 26_u32)
+  SENSOR_DATA_TYPE_POSTALCODE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 27_u32)
+  SENSOR_DATA_TYPE_COUNTRY_REGION = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 28_u32)
+  SENSOR_DATA_TYPE_ALTITUDE_ELLIPSOID_ERROR_METERS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 29_u32)
+  SENSOR_DATA_TYPE_ALTITUDE_SEALEVEL_ERROR_METERS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 30_u32)
+  SENSOR_DATA_TYPE_GPS_SELECTION_MODE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 31_u32)
+  SENSOR_DATA_TYPE_GPS_OPERATION_MODE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 32_u32)
+  SENSOR_DATA_TYPE_GPS_STATUS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 33_u32)
+  SENSOR_DATA_TYPE_GEOIDAL_SEPARATION = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 34_u32)
+  SENSOR_DATA_TYPE_DGPS_DATA_AGE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 35_u32)
+  SENSOR_DATA_TYPE_ALTITUDE_ANTENNA_SEALEVEL_METERS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 36_u32)
+  SENSOR_DATA_TYPE_DIFFERENTIAL_REFERENCE_STATION_ID = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 37_u32)
+  SENSOR_DATA_TYPE_NMEA_SENTENCE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 38_u32)
+  SENSOR_DATA_TYPE_SATELLITES_IN_VIEW_ID = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 39_u32)
+  SENSOR_DATA_TYPE_LOCATION_SOURCE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 40_u32)
+  SENSOR_DATA_TYPE_SATELLITES_USED_PRNS_AND_CONSTELLATIONS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x55c74d8_u32, 0xca6f_u16, 0x47d6_u16, StaticArray[0x95_u8, 0xc6_u8, 0x1e_u8, 0xd3_u8, 0x63_u8, 0x7a_u8, 0xf_u8, 0xf4_u8]), 41_u32)
   SENSOR_DATA_TYPE_ENVIRONMENTAL_GUID = "8b0aa2f1-2d57-42ee-8cc0-4d27622b46c4"
-  SENSOR_DATA_TYPE_TEMPERATURE_CELSIUS = PROPERTYKEY.new(LibC::GUID.new(0x8b0aa2f1_u32, 0x2d57_u16, 0x42ee_u16, StaticArray[0x8c_u8, 0xc0_u8, 0x4d_u8, 0x27_u8, 0x62_u8, 0x2b_u8, 0x46_u8, 0xc4_u8]), 2_u32)
-  SENSOR_DATA_TYPE_RELATIVE_HUMIDITY_PERCENT = PROPERTYKEY.new(LibC::GUID.new(0x8b0aa2f1_u32, 0x2d57_u16, 0x42ee_u16, StaticArray[0x8c_u8, 0xc0_u8, 0x4d_u8, 0x27_u8, 0x62_u8, 0x2b_u8, 0x46_u8, 0xc4_u8]), 3_u32)
-  SENSOR_DATA_TYPE_ATMOSPHERIC_PRESSURE_BAR = PROPERTYKEY.new(LibC::GUID.new(0x8b0aa2f1_u32, 0x2d57_u16, 0x42ee_u16, StaticArray[0x8c_u8, 0xc0_u8, 0x4d_u8, 0x27_u8, 0x62_u8, 0x2b_u8, 0x46_u8, 0xc4_u8]), 4_u32)
-  SENSOR_DATA_TYPE_WIND_DIRECTION_DEGREES_ANTICLOCKWISE = PROPERTYKEY.new(LibC::GUID.new(0x8b0aa2f1_u32, 0x2d57_u16, 0x42ee_u16, StaticArray[0x8c_u8, 0xc0_u8, 0x4d_u8, 0x27_u8, 0x62_u8, 0x2b_u8, 0x46_u8, 0xc4_u8]), 5_u32)
-  SENSOR_DATA_TYPE_WIND_SPEED_METERS_PER_SECOND = PROPERTYKEY.new(LibC::GUID.new(0x8b0aa2f1_u32, 0x2d57_u16, 0x42ee_u16, StaticArray[0x8c_u8, 0xc0_u8, 0x4d_u8, 0x27_u8, 0x62_u8, 0x2b_u8, 0x46_u8, 0xc4_u8]), 6_u32)
+  SENSOR_DATA_TYPE_TEMPERATURE_CELSIUS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x8b0aa2f1_u32, 0x2d57_u16, 0x42ee_u16, StaticArray[0x8c_u8, 0xc0_u8, 0x4d_u8, 0x27_u8, 0x62_u8, 0x2b_u8, 0x46_u8, 0xc4_u8]), 2_u32)
+  SENSOR_DATA_TYPE_RELATIVE_HUMIDITY_PERCENT = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x8b0aa2f1_u32, 0x2d57_u16, 0x42ee_u16, StaticArray[0x8c_u8, 0xc0_u8, 0x4d_u8, 0x27_u8, 0x62_u8, 0x2b_u8, 0x46_u8, 0xc4_u8]), 3_u32)
+  SENSOR_DATA_TYPE_ATMOSPHERIC_PRESSURE_BAR = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x8b0aa2f1_u32, 0x2d57_u16, 0x42ee_u16, StaticArray[0x8c_u8, 0xc0_u8, 0x4d_u8, 0x27_u8, 0x62_u8, 0x2b_u8, 0x46_u8, 0xc4_u8]), 4_u32)
+  SENSOR_DATA_TYPE_WIND_DIRECTION_DEGREES_ANTICLOCKWISE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x8b0aa2f1_u32, 0x2d57_u16, 0x42ee_u16, StaticArray[0x8c_u8, 0xc0_u8, 0x4d_u8, 0x27_u8, 0x62_u8, 0x2b_u8, 0x46_u8, 0xc4_u8]), 5_u32)
+  SENSOR_DATA_TYPE_WIND_SPEED_METERS_PER_SECOND = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x8b0aa2f1_u32, 0x2d57_u16, 0x42ee_u16, StaticArray[0x8c_u8, 0xc0_u8, 0x4d_u8, 0x27_u8, 0x62_u8, 0x2b_u8, 0x46_u8, 0xc4_u8]), 6_u32)
   SENSOR_DATA_TYPE_MOTION_GUID = "3f8a69a2-07c5-4e48-a965-cd797aab56d5"
-  SENSOR_DATA_TYPE_ACCELERATION_X_G = PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 2_u32)
-  SENSOR_DATA_TYPE_ACCELERATION_Y_G = PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 3_u32)
-  SENSOR_DATA_TYPE_ACCELERATION_Z_G = PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 4_u32)
-  SENSOR_DATA_TYPE_ANGULAR_ACCELERATION_X_DEGREES_PER_SECOND_SQUARED = PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 5_u32)
-  SENSOR_DATA_TYPE_ANGULAR_ACCELERATION_Y_DEGREES_PER_SECOND_SQUARED = PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 6_u32)
-  SENSOR_DATA_TYPE_ANGULAR_ACCELERATION_Z_DEGREES_PER_SECOND_SQUARED = PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 7_u32)
-  SENSOR_DATA_TYPE_SPEED_METERS_PER_SECOND = PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 8_u32)
-  SENSOR_DATA_TYPE_MOTION_STATE = PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 9_u32)
-  SENSOR_DATA_TYPE_ANGULAR_VELOCITY_X_DEGREES_PER_SECOND = PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 10_u32)
-  SENSOR_DATA_TYPE_ANGULAR_VELOCITY_Y_DEGREES_PER_SECOND = PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 11_u32)
-  SENSOR_DATA_TYPE_ANGULAR_VELOCITY_Z_DEGREES_PER_SECOND = PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 12_u32)
+  SENSOR_DATA_TYPE_ACCELERATION_X_G = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 2_u32)
+  SENSOR_DATA_TYPE_ACCELERATION_Y_G = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 3_u32)
+  SENSOR_DATA_TYPE_ACCELERATION_Z_G = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 4_u32)
+  SENSOR_DATA_TYPE_ANGULAR_ACCELERATION_X_DEGREES_PER_SECOND_SQUARED = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 5_u32)
+  SENSOR_DATA_TYPE_ANGULAR_ACCELERATION_Y_DEGREES_PER_SECOND_SQUARED = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 6_u32)
+  SENSOR_DATA_TYPE_ANGULAR_ACCELERATION_Z_DEGREES_PER_SECOND_SQUARED = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 7_u32)
+  SENSOR_DATA_TYPE_SPEED_METERS_PER_SECOND = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 8_u32)
+  SENSOR_DATA_TYPE_MOTION_STATE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 9_u32)
+  SENSOR_DATA_TYPE_ANGULAR_VELOCITY_X_DEGREES_PER_SECOND = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 10_u32)
+  SENSOR_DATA_TYPE_ANGULAR_VELOCITY_Y_DEGREES_PER_SECOND = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 11_u32)
+  SENSOR_DATA_TYPE_ANGULAR_VELOCITY_Z_DEGREES_PER_SECOND = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x3f8a69a2_u32, 0x7c5_u16, 0x4e48_u16, StaticArray[0xa9_u8, 0x65_u8, 0xcd_u8, 0x79_u8, 0x7a_u8, 0xab_u8, 0x56_u8, 0xd5_u8]), 12_u32)
   SENSOR_DATA_TYPE_ORIENTATION_GUID = "1637d8a2-4248-4275-865d-558de84aedfd"
-  SENSOR_DATA_TYPE_TILT_X_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 2_u32)
-  SENSOR_DATA_TYPE_TILT_Y_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 3_u32)
-  SENSOR_DATA_TYPE_TILT_Z_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 4_u32)
-  SENSOR_DATA_TYPE_MAGNETIC_HEADING_X_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 5_u32)
-  SENSOR_DATA_TYPE_MAGNETIC_HEADING_Y_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 6_u32)
-  SENSOR_DATA_TYPE_MAGNETIC_HEADING_Z_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 7_u32)
-  SENSOR_DATA_TYPE_DISTANCE_X_METERS = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 8_u32)
-  SENSOR_DATA_TYPE_DISTANCE_Y_METERS = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 9_u32)
-  SENSOR_DATA_TYPE_DISTANCE_Z_METERS = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 10_u32)
-  SENSOR_DATA_TYPE_MAGNETIC_HEADING_COMPENSATED_MAGNETIC_NORTH_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 11_u32)
-  SENSOR_DATA_TYPE_MAGNETIC_HEADING_COMPENSATED_TRUE_NORTH_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 12_u32)
-  SENSOR_DATA_TYPE_MAGNETIC_HEADING_MAGNETIC_NORTH_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 13_u32)
-  SENSOR_DATA_TYPE_MAGNETIC_HEADING_TRUE_NORTH_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 14_u32)
-  SENSOR_DATA_TYPE_QUADRANT_ANGLE_DEGREES = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 15_u32)
-  SENSOR_DATA_TYPE_ROTATION_MATRIX = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 16_u32)
-  SENSOR_DATA_TYPE_QUATERNION = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 17_u32)
-  SENSOR_DATA_TYPE_SIMPLE_DEVICE_ORIENTATION = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 18_u32)
-  SENSOR_DATA_TYPE_MAGNETIC_FIELD_STRENGTH_X_MILLIGAUSS = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 19_u32)
-  SENSOR_DATA_TYPE_MAGNETIC_FIELD_STRENGTH_Y_MILLIGAUSS = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 20_u32)
-  SENSOR_DATA_TYPE_MAGNETIC_FIELD_STRENGTH_Z_MILLIGAUSS = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 21_u32)
-  SENSOR_DATA_TYPE_MAGNETOMETER_ACCURACY = PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 22_u32)
+  SENSOR_DATA_TYPE_TILT_X_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 2_u32)
+  SENSOR_DATA_TYPE_TILT_Y_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 3_u32)
+  SENSOR_DATA_TYPE_TILT_Z_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 4_u32)
+  SENSOR_DATA_TYPE_MAGNETIC_HEADING_X_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 5_u32)
+  SENSOR_DATA_TYPE_MAGNETIC_HEADING_Y_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 6_u32)
+  SENSOR_DATA_TYPE_MAGNETIC_HEADING_Z_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 7_u32)
+  SENSOR_DATA_TYPE_DISTANCE_X_METERS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 8_u32)
+  SENSOR_DATA_TYPE_DISTANCE_Y_METERS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 9_u32)
+  SENSOR_DATA_TYPE_DISTANCE_Z_METERS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 10_u32)
+  SENSOR_DATA_TYPE_MAGNETIC_HEADING_COMPENSATED_MAGNETIC_NORTH_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 11_u32)
+  SENSOR_DATA_TYPE_MAGNETIC_HEADING_COMPENSATED_TRUE_NORTH_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 12_u32)
+  SENSOR_DATA_TYPE_MAGNETIC_HEADING_MAGNETIC_NORTH_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 13_u32)
+  SENSOR_DATA_TYPE_MAGNETIC_HEADING_TRUE_NORTH_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 14_u32)
+  SENSOR_DATA_TYPE_QUADRANT_ANGLE_DEGREES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 15_u32)
+  SENSOR_DATA_TYPE_ROTATION_MATRIX = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 16_u32)
+  SENSOR_DATA_TYPE_QUATERNION = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 17_u32)
+  SENSOR_DATA_TYPE_SIMPLE_DEVICE_ORIENTATION = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 18_u32)
+  SENSOR_DATA_TYPE_MAGNETIC_FIELD_STRENGTH_X_MILLIGAUSS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 19_u32)
+  SENSOR_DATA_TYPE_MAGNETIC_FIELD_STRENGTH_Y_MILLIGAUSS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 20_u32)
+  SENSOR_DATA_TYPE_MAGNETIC_FIELD_STRENGTH_Z_MILLIGAUSS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 21_u32)
+  SENSOR_DATA_TYPE_MAGNETOMETER_ACCURACY = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1637d8a2_u32, 0x4248_u16, 0x4275_u16, StaticArray[0x86_u8, 0x5d_u8, 0x55_u8, 0x8d_u8, 0xe8_u8, 0x4a_u8, 0xed_u8, 0xfd_u8]), 22_u32)
   SENSOR_DATA_TYPE_GUID_MECHANICAL_GUID = "38564a7c-f2f2-49bb-9b2b-ba60f66a58df"
-  SENSOR_DATA_TYPE_BOOLEAN_SWITCH_STATE = PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 2_u32)
-  SENSOR_DATA_TYPE_MULTIVALUE_SWITCH_STATE = PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 3_u32)
-  SENSOR_DATA_TYPE_FORCE_NEWTONS = PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 4_u32)
-  SENSOR_DATA_TYPE_ABSOLUTE_PRESSURE_PASCAL = PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 5_u32)
-  SENSOR_DATA_TYPE_GAUGE_PRESSURE_PASCAL = PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 6_u32)
-  SENSOR_DATA_TYPE_STRAIN = PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 7_u32)
-  SENSOR_DATA_TYPE_WEIGHT_KILOGRAMS = PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 8_u32)
-  SENSOR_DATA_TYPE_BOOLEAN_SWITCH_ARRAY_STATES = PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 10_u32)
+  SENSOR_DATA_TYPE_BOOLEAN_SWITCH_STATE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 2_u32)
+  SENSOR_DATA_TYPE_MULTIVALUE_SWITCH_STATE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 3_u32)
+  SENSOR_DATA_TYPE_FORCE_NEWTONS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 4_u32)
+  SENSOR_DATA_TYPE_ABSOLUTE_PRESSURE_PASCAL = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 5_u32)
+  SENSOR_DATA_TYPE_GAUGE_PRESSURE_PASCAL = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 6_u32)
+  SENSOR_DATA_TYPE_STRAIN = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 7_u32)
+  SENSOR_DATA_TYPE_WEIGHT_KILOGRAMS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 8_u32)
+  SENSOR_DATA_TYPE_BOOLEAN_SWITCH_ARRAY_STATES = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x38564a7c_u32, 0xf2f2_u16, 0x49bb_u16, StaticArray[0x9b_u8, 0x2b_u8, 0xba_u8, 0x60_u8, 0xf6_u8, 0x6a_u8, 0x58_u8, 0xdf_u8]), 10_u32)
   SENSOR_DATA_TYPE_BIOMETRIC_GUID = "2299288a-6d9e-4b0b-b7ec-3528f89e40af"
-  SENSOR_DATA_TYPE_HUMAN_PRESENCE = PROPERTYKEY.new(LibC::GUID.new(0x2299288a_u32, 0x6d9e_u16, 0x4b0b_u16, StaticArray[0xb7_u8, 0xec_u8, 0x35_u8, 0x28_u8, 0xf8_u8, 0x9e_u8, 0x40_u8, 0xaf_u8]), 2_u32)
-  SENSOR_DATA_TYPE_HUMAN_PROXIMITY_METERS = PROPERTYKEY.new(LibC::GUID.new(0x2299288a_u32, 0x6d9e_u16, 0x4b0b_u16, StaticArray[0xb7_u8, 0xec_u8, 0x35_u8, 0x28_u8, 0xf8_u8, 0x9e_u8, 0x40_u8, 0xaf_u8]), 3_u32)
-  SENSOR_DATA_TYPE_TOUCH_STATE = PROPERTYKEY.new(LibC::GUID.new(0x2299288a_u32, 0x6d9e_u16, 0x4b0b_u16, StaticArray[0xb7_u8, 0xec_u8, 0x35_u8, 0x28_u8, 0xf8_u8, 0x9e_u8, 0x40_u8, 0xaf_u8]), 4_u32)
+  SENSOR_DATA_TYPE_HUMAN_PRESENCE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x2299288a_u32, 0x6d9e_u16, 0x4b0b_u16, StaticArray[0xb7_u8, 0xec_u8, 0x35_u8, 0x28_u8, 0xf8_u8, 0x9e_u8, 0x40_u8, 0xaf_u8]), 2_u32)
+  SENSOR_DATA_TYPE_HUMAN_PROXIMITY_METERS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x2299288a_u32, 0x6d9e_u16, 0x4b0b_u16, StaticArray[0xb7_u8, 0xec_u8, 0x35_u8, 0x28_u8, 0xf8_u8, 0x9e_u8, 0x40_u8, 0xaf_u8]), 3_u32)
+  SENSOR_DATA_TYPE_TOUCH_STATE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x2299288a_u32, 0x6d9e_u16, 0x4b0b_u16, StaticArray[0xb7_u8, 0xec_u8, 0x35_u8, 0x28_u8, 0xf8_u8, 0x9e_u8, 0x40_u8, 0xaf_u8]), 4_u32)
   SENSOR_DATA_TYPE_LIGHT_GUID = "e4c77ce2-dcb7-46e9-8439-4fec548833a6"
-  SENSOR_DATA_TYPE_LIGHT_LEVEL_LUX = PROPERTYKEY.new(LibC::GUID.new(0xe4c77ce2_u32, 0xdcb7_u16, 0x46e9_u16, StaticArray[0x84_u8, 0x39_u8, 0x4f_u8, 0xec_u8, 0x54_u8, 0x88_u8, 0x33_u8, 0xa6_u8]), 2_u32)
-  SENSOR_DATA_TYPE_LIGHT_TEMPERATURE_KELVIN = PROPERTYKEY.new(LibC::GUID.new(0xe4c77ce2_u32, 0xdcb7_u16, 0x46e9_u16, StaticArray[0x84_u8, 0x39_u8, 0x4f_u8, 0xec_u8, 0x54_u8, 0x88_u8, 0x33_u8, 0xa6_u8]), 3_u32)
-  SENSOR_DATA_TYPE_LIGHT_CHROMACITY = PROPERTYKEY.new(LibC::GUID.new(0xe4c77ce2_u32, 0xdcb7_u16, 0x46e9_u16, StaticArray[0x84_u8, 0x39_u8, 0x4f_u8, 0xec_u8, 0x54_u8, 0x88_u8, 0x33_u8, 0xa6_u8]), 4_u32)
+  SENSOR_DATA_TYPE_LIGHT_LEVEL_LUX = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xe4c77ce2_u32, 0xdcb7_u16, 0x46e9_u16, StaticArray[0x84_u8, 0x39_u8, 0x4f_u8, 0xec_u8, 0x54_u8, 0x88_u8, 0x33_u8, 0xa6_u8]), 2_u32)
+  SENSOR_DATA_TYPE_LIGHT_TEMPERATURE_KELVIN = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xe4c77ce2_u32, 0xdcb7_u16, 0x46e9_u16, StaticArray[0x84_u8, 0x39_u8, 0x4f_u8, 0xec_u8, 0x54_u8, 0x88_u8, 0x33_u8, 0xa6_u8]), 3_u32)
+  SENSOR_DATA_TYPE_LIGHT_CHROMACITY = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xe4c77ce2_u32, 0xdcb7_u16, 0x46e9_u16, StaticArray[0x84_u8, 0x39_u8, 0x4f_u8, 0xec_u8, 0x54_u8, 0x88_u8, 0x33_u8, 0xa6_u8]), 4_u32)
   SENSOR_DATA_TYPE_SCANNER_GUID = "d7a59a3c-3421-44ab-8d3a-9de8ab6c4cae"
-  SENSOR_DATA_TYPE_RFID_TAG_40_BIT = PROPERTYKEY.new(LibC::GUID.new(0xd7a59a3c_u32, 0x3421_u16, 0x44ab_u16, StaticArray[0x8d_u8, 0x3a_u8, 0x9d_u8, 0xe8_u8, 0xab_u8, 0x6c_u8, 0x4c_u8, 0xae_u8]), 2_u32)
+  SENSOR_DATA_TYPE_RFID_TAG_40_BIT = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd7a59a3c_u32, 0x3421_u16, 0x44ab_u16, StaticArray[0x8d_u8, 0x3a_u8, 0x9d_u8, 0xe8_u8, 0xab_u8, 0x6c_u8, 0x4c_u8, 0xae_u8]), 2_u32)
   SENSOR_DATA_TYPE_ELECTRICAL_GUID = "bbb246d1-e242-4780-a2d3-cded84f35842"
-  SENSOR_DATA_TYPE_VOLTAGE_VOLTS = PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 2_u32)
-  SENSOR_DATA_TYPE_CURRENT_AMPS = PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 3_u32)
-  SENSOR_DATA_TYPE_CAPACITANCE_FARAD = PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 4_u32)
-  SENSOR_DATA_TYPE_RESISTANCE_OHMS = PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 5_u32)
-  SENSOR_DATA_TYPE_INDUCTANCE_HENRY = PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 6_u32)
-  SENSOR_DATA_TYPE_ELECTRICAL_POWER_WATTS = PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 7_u32)
-  SENSOR_DATA_TYPE_ELECTRICAL_PERCENT_OF_RANGE = PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 8_u32)
-  SENSOR_DATA_TYPE_ELECTRICAL_FREQUENCY_HERTZ = PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 9_u32)
+  SENSOR_DATA_TYPE_VOLTAGE_VOLTS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 2_u32)
+  SENSOR_DATA_TYPE_CURRENT_AMPS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 3_u32)
+  SENSOR_DATA_TYPE_CAPACITANCE_FARAD = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 4_u32)
+  SENSOR_DATA_TYPE_RESISTANCE_OHMS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 5_u32)
+  SENSOR_DATA_TYPE_INDUCTANCE_HENRY = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 6_u32)
+  SENSOR_DATA_TYPE_ELECTRICAL_POWER_WATTS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 7_u32)
+  SENSOR_DATA_TYPE_ELECTRICAL_PERCENT_OF_RANGE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 8_u32)
+  SENSOR_DATA_TYPE_ELECTRICAL_FREQUENCY_HERTZ = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xbbb246d1_u32, 0xe242_u16, 0x4780_u16, StaticArray[0xa2_u8, 0xd3_u8, 0xcd_u8, 0xed_u8, 0x84_u8, 0xf3_u8, 0x58_u8, 0x42_u8]), 9_u32)
   SENSOR_DATA_TYPE_CUSTOM_GUID = "b14c764f-07cf-41e8-9d82-ebe3d0776a6f"
-  SENSOR_DATA_TYPE_CUSTOM_USAGE = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 5_u32)
-  SENSOR_DATA_TYPE_CUSTOM_BOOLEAN_ARRAY = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 6_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE1 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 7_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE2 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 8_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE3 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 9_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE4 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 10_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE5 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 11_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE6 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 12_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE7 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 13_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE8 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 14_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE9 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 15_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE10 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 16_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE11 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 17_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE12 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 18_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE13 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 19_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE14 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 20_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE15 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 21_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE16 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 22_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE17 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 23_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE18 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 24_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE19 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 25_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE20 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 26_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE21 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 27_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE22 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 28_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE23 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 29_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE24 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 30_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE25 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 31_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE26 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 32_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE27 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 33_u32)
-  SENSOR_DATA_TYPE_CUSTOM_VALUE28 = PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 34_u32)
+  SENSOR_DATA_TYPE_CUSTOM_USAGE = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 5_u32)
+  SENSOR_DATA_TYPE_CUSTOM_BOOLEAN_ARRAY = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 6_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE1 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 7_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE2 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 8_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE3 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 9_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE4 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 10_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE5 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 11_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE6 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 12_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE7 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 13_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE8 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 14_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE9 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 15_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE10 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 16_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE11 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 17_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE12 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 18_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE13 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 19_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE14 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 20_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE15 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 21_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE16 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 22_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE17 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 23_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE18 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 24_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE19 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 25_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE20 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 26_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE21 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 27_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE22 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 28_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE23 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 29_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE24 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 30_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE25 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 31_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE26 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 32_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE27 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 33_u32)
+  SENSOR_DATA_TYPE_CUSTOM_VALUE28 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb14c764f_u32, 0x7cf_u16, 0x41e8_u16, StaticArray[0x9d_u8, 0x82_u8, 0xeb_u8, 0xe3_u8, 0xd0_u8, 0x77_u8, 0x6a_u8, 0x6f_u8]), 34_u32)
   SENSOR_PROPERTY_TEST_GUID = "e1e962f4-6e65-45f7-9c36-d487b7b1bd34"
-  SENSOR_PROPERTY_CLEAR_ASSISTANCE_DATA = PROPERTYKEY.new(LibC::GUID.new(0xe1e962f4_u32, 0x6e65_u16, 0x45f7_u16, StaticArray[0x9c_u8, 0x36_u8, 0xd4_u8, 0x87_u8, 0xb7_u8, 0xb1_u8, 0xbd_u8, 0x34_u8]), 2_u32)
-  SENSOR_PROPERTY_TURN_ON_OFF_NMEA = PROPERTYKEY.new(LibC::GUID.new(0xe1e962f4_u32, 0x6e65_u16, 0x45f7_u16, StaticArray[0x9c_u8, 0x36_u8, 0xd4_u8, 0x87_u8, 0xb7_u8, 0xb1_u8, 0xbd_u8, 0x34_u8]), 3_u32)
+  SENSOR_PROPERTY_CLEAR_ASSISTANCE_DATA = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xe1e962f4_u32, 0x6e65_u16, 0x45f7_u16, StaticArray[0x9c_u8, 0x36_u8, 0xd4_u8, 0x87_u8, 0xb7_u8, 0xb1_u8, 0xbd_u8, 0x34_u8]), 2_u32)
+  SENSOR_PROPERTY_TURN_ON_OFF_NMEA = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xe1e962f4_u32, 0x6e65_u16, 0x45f7_u16, StaticArray[0x9c_u8, 0x36_u8, 0xd4_u8, 0x87_u8, 0xb7_u8, 0xb1_u8, 0xbd_u8, 0x34_u8]), 3_u32)
   GNSS_CLEAR_ALL_ASSISTANCE_DATA = 1_u32
   GUID_SensorCategory_All = "c317c286-c468-4288-9975-d4c4587c442c"
   GUID_SensorCategory_Biometric = "ca19690f-a2c7-477d-a99e-99ec6e2b5648"
@@ -295,624 +283,586 @@ lib LibWin32
   GUID_SensorType_Temperature = "04fd0ec4-d5da-45fa-95a9-5db38ee19306"
   GUID_SensorType_HingeAngle = "82358065-f4c4-4da1-b272-13c23332a207"
   SENSOR_PROPERTY_LIST_HEADER_SIZE = 8_u32
+
   CLSID_SensorManager = LibC::GUID.new(0x77a1c827_u32, 0xfcd2_u16, 0x4689_u16, StaticArray[0x89_u8, 0x15_u8, 0x9d_u8, 0x61_u8, 0x3c_u8, 0xc5_u8, 0xfa_u8, 0x3e_u8])
+
   CLSID_SensorCollection = LibC::GUID.new(0x79c43adb_u32, 0xa429_u16, 0x469f_u16, StaticArray[0xaa_u8, 0x39_u8, 0x2f_u8, 0x2b_u8, 0x74_u8, 0xb7_u8, 0x59_u8, 0x37_u8])
+
   CLSID_Sensor = LibC::GUID.new(0xe97ced00_u32, 0x523a_u16, 0x4133_u16, StaticArray[0xbf_u8, 0x6f_u8, 0xd3_u8, 0xa2_u8, 0xda_u8, 0xe7_u8, 0xf6_u8, 0xba_u8])
+
   CLSID_SensorDataReport = LibC::GUID.new(0x4ea9d6ef_u32, 0x694b_u16, 0x4218_u16, StaticArray[0x88_u8, 0x16_u8, 0xcc_u8, 0xda_u8, 0x8d_u8, 0xa7_u8, 0x4b_u8, 0xba_u8])
 
-
-  enum SensorState : Int32
-    SENSOR_STATE_MIN = 0
-    SENSOR_STATE_READY = 0
-    SENSOR_STATE_NOT_AVAILABLE = 1
-    SENSOR_STATE_NO_DATA = 2
-    SENSOR_STATE_INITIALIZING = 3
-    SENSOR_STATE_ACCESS_DENIED = 4
-    SENSOR_STATE_ERROR = 5
-    SENSOR_STATE_MAX = 5
+  enum SensorState
+    SENSOR_STATE_MIN = 0_i32
+    SENSOR_STATE_READY = 0_i32
+    SENSOR_STATE_NOT_AVAILABLE = 1_i32
+    SENSOR_STATE_NO_DATA = 2_i32
+    SENSOR_STATE_INITIALIZING = 3_i32
+    SENSOR_STATE_ACCESS_DENIED = 4_i32
+    SENSOR_STATE_ERROR = 5_i32
+    SENSOR_STATE_MAX = 5_i32
+  end
+  enum SensorConnectionType
+    SENSOR_CONNECTION_TYPE_PC_INTEGRATED = 0_i32
+    SENSOR_CONNECTION_TYPE_PC_ATTACHED = 1_i32
+    SENSOR_CONNECTION_TYPE_PC_EXTERNAL = 2_i32
+  end
+  enum LOCATION_DESIRED_ACCURACY
+    LOCATION_DESIRED_ACCURACY_DEFAULT = 0_i32
+    LOCATION_DESIRED_ACCURACY_HIGH = 1_i32
+  end
+  enum LOCATION_POSITION_SOURCE
+    LOCATION_POSITION_SOURCE_CELLULAR = 0_i32
+    LOCATION_POSITION_SOURCE_SATELLITE = 1_i32
+    LOCATION_POSITION_SOURCE_WIFI = 2_i32
+    LOCATION_POSITION_SOURCE_IPADDRESS = 3_i32
+    LOCATION_POSITION_SOURCE_UNKNOWN = 4_i32
+  end
+  enum SimpleDeviceOrientation
+    SIMPLE_DEVICE_ORIENTATION_NOT_ROTATED = 0_i32
+    SIMPLE_DEVICE_ORIENTATION_ROTATED_90 = 1_i32
+    SIMPLE_DEVICE_ORIENTATION_ROTATED_180 = 2_i32
+    SIMPLE_DEVICE_ORIENTATION_ROTATED_270 = 3_i32
+    SIMPLE_DEVICE_ORIENTATION_ROTATED_FACE_UP = 4_i32
+    SIMPLE_DEVICE_ORIENTATION_ROTATED_FACE_DOWN = 5_i32
+  end
+  enum MagnetometerAccuracy
+    MAGNETOMETER_ACCURACY_UNKNOWN = 0_i32
+    MAGNETOMETER_ACCURACY_UNRELIABLE = 1_i32
+    MAGNETOMETER_ACCURACY_APPROXIMATE = 2_i32
+    MAGNETOMETER_ACCURACY_HIGH = 3_i32
+  end
+  enum ACTIVITY_STATE_COUNT
+    ActivityStateCount = 8_i32
+  end
+  enum ACTIVITY_STATE
+    ActivityState_Unknown = 1_i32
+    ActivityState_Stationary = 2_i32
+    ActivityState_Fidgeting = 4_i32
+    ActivityState_Walking = 8_i32
+    ActivityState_Running = 16_i32
+    ActivityState_InVehicle = 32_i32
+    ActivityState_Biking = 64_i32
+    ActivityState_Idle = 128_i32
+    ActivityState_Max = 256_i32
+    ActivityState_Force_Dword = -1_i32
+  end
+  enum ELEVATION_CHANGE_MODE
+    ElevationChangeMode_Unknown = 0_i32
+    ElevationChangeMode_Elevator = 1_i32
+    ElevationChangeMode_Stepping = 2_i32
+    ElevationChangeMode_Max = 3_i32
+    ElevationChangeMode_Force_Dword = -1_i32
+  end
+  enum MAGNETOMETER_ACCURACY
+    MagnetometerAccuracy_Unknown = 0_i32
+    MagnetometerAccuracy_Unreliable = 1_i32
+    MagnetometerAccuracy_Approximate = 2_i32
+    MagnetometerAccuracy_High = 3_i32
+  end
+  enum PEDOMETER_STEP_TYPE_COUNT
+    PedometerStepTypeCount = 3_i32
+  end
+  enum PEDOMETER_STEP_TYPE
+    PedometerStepType_Unknown = 1_i32
+    PedometerStepType_Walking = 2_i32
+    PedometerStepType_Running = 4_i32
+    PedometerStepType_Max = 8_i32
+    PedometerStepType_Force_Dword = -1_i32
+  end
+  enum PROXIMITY_TYPE
+    ProximityType_ObjectProximity = 0_i32
+    ProximityType_HumanProximity = 1_i32
+    ProximityType_Force_Dword = -1_i32
+  end
+  enum HUMAN_PRESENCE_DETECTION_TYPE_COUNT
+    HumanPresenceDetectionTypeCount = 4_i32
+  end
+  enum HUMAN_PRESENCE_DETECTION_TYPE
+    HumanPresenceDetectionType_VendorDefinedNonBiometric = 1_i32
+    HumanPresenceDetectionType_VendorDefinedBiometric = 2_i32
+    HumanPresenceDetectionType_FacialBiometric = 4_i32
+    HumanPresenceDetectionType_AudioBiometric = 8_i32
+    HumanPresenceDetectionType_Force_Dword = -1_i32
+  end
+  enum SIMPLE_DEVICE_ORIENTATION
+    SimpleDeviceOrientation_NotRotated = 0_i32
+    SimpleDeviceOrientation_Rotated90DegreesCounterclockwise = 1_i32
+    SimpleDeviceOrientation_Rotated180DegreesCounterclockwise = 2_i32
+    SimpleDeviceOrientation_Rotated270DegreesCounterclockwise = 3_i32
+    SimpleDeviceOrientation_Faceup = 4_i32
+    SimpleDeviceOrientation_Facedown = 5_i32
+  end
+  enum SENSOR_STATE
+    SensorState_Initializing = 0_i32
+    SensorState_Idle = 1_i32
+    SensorState_Active = 2_i32
+    SensorState_Error = 3_i32
+  end
+  enum SENSOR_CONNECTION_TYPES
+    SensorConnectionType_Integrated = 0_i32
+    SensorConnectionType_Attached = 1_i32
+    SensorConnectionType_External = 2_i32
+  end
+  enum AXIS
+    AXIS_X = 0_i32
+    AXIS_Y = 1_i32
+    AXIS_Z = 2_i32
+    AXIS_MAX = 3_i32
   end
 
-  enum SensorConnectionType : Int32
-    SENSOR_CONNECTION_TYPE_PC_INTEGRATED = 0
-    SENSOR_CONNECTION_TYPE_PC_ATTACHED = 1
-    SENSOR_CONNECTION_TYPE_PC_EXTERNAL = 2
-  end
+  @[Extern]
+  record SENSOR_VALUE_PAIR,
+    key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY,
+    value : Win32cr::System::Com::StructuredStorage::PROPVARIANT
 
-  enum LOCATION_DESIRED_ACCURACY : Int32
-    LOCATION_DESIRED_ACCURACY_DEFAULT = 0
-    LOCATION_DESIRED_ACCURACY_HIGH = 1
-  end
+  @[Extern]
+  record SENSOR_COLLECTION_LIST,
+    allocated_size_in_bytes : UInt32,
+    count : UInt32,
+    list : Win32cr::Devices::Sensors::SENSOR_VALUE_PAIR*
 
-  enum LOCATION_POSITION_SOURCE : Int32
-    LOCATION_POSITION_SOURCE_CELLULAR = 0
-    LOCATION_POSITION_SOURCE_SATELLITE = 1
-    LOCATION_POSITION_SOURCE_WIFI = 2
-    LOCATION_POSITION_SOURCE_IPADDRESS = 3
-    LOCATION_POSITION_SOURCE_UNKNOWN = 4
-  end
+  @[Extern]
+  record SENSOR_PROPERTY_LIST,
+    allocated_size_in_bytes : UInt32,
+    count : UInt32,
+    list : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*
 
-  enum SimpleDeviceOrientation : Int32
-    SIMPLE_DEVICE_ORIENTATION_NOT_ROTATED = 0
-    SIMPLE_DEVICE_ORIENTATION_ROTATED_90 = 1
-    SIMPLE_DEVICE_ORIENTATION_ROTATED_180 = 2
-    SIMPLE_DEVICE_ORIENTATION_ROTATED_270 = 3
-    SIMPLE_DEVICE_ORIENTATION_ROTATED_FACE_UP = 4
-    SIMPLE_DEVICE_ORIENTATION_ROTATED_FACE_DOWN = 5
-  end
-
-  enum MagnetometerAccuracy : Int32
-    MAGNETOMETER_ACCURACY_UNKNOWN = 0
-    MAGNETOMETER_ACCURACY_UNRELIABLE = 1
-    MAGNETOMETER_ACCURACY_APPROXIMATE = 2
-    MAGNETOMETER_ACCURACY_HIGH = 3
-  end
-
-  enum ACTIVITY_STATE_COUNT : Int32
-    ActivityStateCount = 8
-  end
-
-  enum ACTIVITY_STATE : Int32
-    ActivityState_Unknown = 1
-    ActivityState_Stationary = 2
-    ActivityState_Fidgeting = 4
-    ActivityState_Walking = 8
-    ActivityState_Running = 16
-    ActivityState_InVehicle = 32
-    ActivityState_Biking = 64
-    ActivityState_Idle = 128
-    ActivityState_Max = 256
-    ActivityState_Force_Dword = -1
-  end
-
-  enum ELEVATION_CHANGE_MODE : Int32
-    ElevationChangeMode_Unknown = 0
-    ElevationChangeMode_Elevator = 1
-    ElevationChangeMode_Stepping = 2
-    ElevationChangeMode_Max = 3
-    ElevationChangeMode_Force_Dword = -1
-  end
-
-  enum MAGNETOMETER_ACCURACY : Int32
-    MagnetometerAccuracy_Unknown = 0
-    MagnetometerAccuracy_Unreliable = 1
-    MagnetometerAccuracy_Approximate = 2
-    MagnetometerAccuracy_High = 3
-  end
-
-  enum PEDOMETER_STEP_TYPE_COUNT : Int32
-    PedometerStepTypeCount = 3
-  end
-
-  enum PEDOMETER_STEP_TYPE : Int32
-    PedometerStepType_Unknown = 1
-    PedometerStepType_Walking = 2
-    PedometerStepType_Running = 4
-    PedometerStepType_Max = 8
-    PedometerStepType_Force_Dword = -1
-  end
-
-  enum PROXIMITY_TYPE : Int32
-    ProximityType_ObjectProximity = 0
-    ProximityType_HumanProximity = 1
-    ProximityType_Force_Dword = -1
-  end
-
-  enum HUMAN_PRESENCE_DETECTION_TYPE_COUNT : Int32
-    HumanPresenceDetectionTypeCount = 4
-  end
-
-  enum HUMAN_PRESENCE_DETECTION_TYPE : Int32
-    HumanPresenceDetectionType_VendorDefinedNonBiometric = 1
-    HumanPresenceDetectionType_VendorDefinedBiometric = 2
-    HumanPresenceDetectionType_FacialBiometric = 4
-    HumanPresenceDetectionType_AudioBiometric = 8
-    HumanPresenceDetectionType_Force_Dword = -1
-  end
-
-  enum SIMPLE_DEVICE_ORIENTATION : Int32
-    SimpleDeviceOrientation_NotRotated = 0
-    SimpleDeviceOrientation_Rotated90DegreesCounterclockwise = 1
-    SimpleDeviceOrientation_Rotated180DegreesCounterclockwise = 2
-    SimpleDeviceOrientation_Rotated270DegreesCounterclockwise = 3
-    SimpleDeviceOrientation_Faceup = 4
-    SimpleDeviceOrientation_Facedown = 5
-  end
-
-  enum SENSOR_STATE : Int32
-    SensorState_Initializing = 0
-    SensorState_Idle = 1
-    SensorState_Active = 2
-    SensorState_Error = 3
-  end
-
-  enum SENSOR_CONNECTION_TYPES : Int32
-    SensorConnectionType_Integrated = 0
-    SensorConnectionType_Attached = 1
-    SensorConnectionType_External = 2
-  end
-
-  enum AXIS : Int32
-    AXIS_X = 0
-    AXIS_Y = 1
-    AXIS_Z = 2
-    AXIS_MAX = 3
-  end
-
-  union MATRIX3X3_Anonymous_e__Union
-    anonymous1 : MATRIX3X3_Anonymous_e__Union_Anonymous1_e__Struct
-    anonymous2 : MATRIX3X3_Anonymous_e__Union_Anonymous2_e__Struct
-    m : Float32[9]*
-  end
-
-  struct SENSOR_VALUE_PAIR
-    key : PROPERTYKEY
-    value : PROPVARIANT
-  end
-  struct SENSOR_COLLECTION_LIST
-    allocated_size_in_bytes : UInt32
-    count : UInt32
-    list : SENSOR_VALUE_PAIR[0]*
-  end
-  struct SENSOR_PROPERTY_LIST
-    allocated_size_in_bytes : UInt32
-    count : UInt32
-    list : PROPERTYKEY[0]*
-  end
-  struct VEC3D
-    x : Float32
-    y : Float32
+  @[Extern]
+  record VEC3D,
+    x : Float32,
+    y : Float32,
     z : Float32
+
+  @[Extern]
+  record MATRIX3X3,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous1 : Anonymous1_e__Struct,
+      anonymous2 : Anonymous2_e__Struct,
+      m : Float32[9] do
+
+      # Nested Type Anonymous1_e__Struct
+      @[Extern]
+      record Anonymous1_e__Struct,
+        a11 : Float32,
+        a12 : Float32,
+        a13 : Float32,
+        a21 : Float32,
+        a22 : Float32,
+        a23 : Float32,
+        a31 : Float32,
+        a32 : Float32,
+        a33 : Float32
+
+
+      # Nested Type Anonymous2_e__Struct
+      @[Extern]
+      record Anonymous2_e__Struct,
+        v1 : Win32cr::Devices::Sensors::VEC3D,
+        v2 : Win32cr::Devices::Sensors::VEC3D,
+        v3 : Win32cr::Devices::Sensors::VEC3D
+
+    end
+
   end
-  struct MATRIX3X3
-    anonymous : MATRIX3X3_Anonymous_e__Union
-  end
-  struct MATRIX3X3_Anonymous_e__Union_Anonymous1_e__Struct
-    a11 : Float32
-    a12 : Float32
-    a13 : Float32
-    a21 : Float32
-    a22 : Float32
-    a23 : Float32
-    a31 : Float32
-    a32 : Float32
-    a33 : Float32
-  end
-  struct MATRIX3X3_Anonymous_e__Union_Anonymous2_e__Struct
-    v1 : VEC3D
-    v2 : VEC3D
-    v3 : VEC3D
-  end
-  struct QUATERNION
-    x : Float32
-    y : Float32
-    z : Float32
+
+  @[Extern]
+  record QUATERNION,
+    x : Float32,
+    y : Float32,
+    z : Float32,
     w : Float32
-  end
+
+  @[Extern]
+  record ISensorManagerVtbl,
+    query_interface : Proc(ISensorManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISensorManager*, UInt32),
+    release : Proc(ISensorManager*, UInt32),
+    get_sensors_by_category : Proc(ISensorManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_sensors_by_type : Proc(ISensorManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_sensor_by_id : Proc(ISensorManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    set_event_sink : Proc(ISensorManager*, Void*, Win32cr::Foundation::HRESULT),
+    request_permissions : Proc(ISensorManager*, Win32cr::Foundation::HWND, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
 
 
-  struct ISensorManagerVTbl
-    query_interface : Proc(ISensorManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISensorManager*, UInt32)
-    release : Proc(ISensorManager*, UInt32)
-    get_sensors_by_category : Proc(ISensorManager*, Guid*, ISensorCollection*, HRESULT)
-    get_sensors_by_type : Proc(ISensorManager*, Guid*, ISensorCollection*, HRESULT)
-    get_sensor_by_id : Proc(ISensorManager*, Guid*, ISensor*, HRESULT)
-    set_event_sink : Proc(ISensorManager*, ISensorManagerEvents, HRESULT)
-    request_permissions : Proc(ISensorManager*, LibC::HANDLE, ISensorCollection, LibC::BOOL, HRESULT)
+  @[Extern]
+  #@[Com("bd77db67-45a8-42dc-8d00-6dcf15f8377a")]
+  record ISensorManager, lpVtbl : ISensorManagerVtbl* do
+    GUID = LibC::GUID.new(0xbd77db67_u32, 0x45a8_u16, 0x42dc_u16, StaticArray[0x8d_u8, 0x0_u8, 0x6d_u8, 0xcf_u8, 0x15_u8, 0xf8_u8, 0x37_u8, 0x7a_u8])
+    def query_interface(this : ISensorManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISensorManager*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISensorManager*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_sensors_by_category(this : ISensorManager*, sensorCategory : LibC::GUID*, ppSensorsFound : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_sensors_by_category.call(this, sensorCategory, ppSensorsFound)
+    end
+    def get_sensors_by_type(this : ISensorManager*, sensorType : LibC::GUID*, ppSensorsFound : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_sensors_by_type.call(this, sensorType, ppSensorsFound)
+    end
+    def get_sensor_by_id(this : ISensorManager*, sensorID : LibC::GUID*, ppSensor : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_sensor_by_id.call(this, sensorID, ppSensor)
+    end
+    def set_event_sink(this : ISensorManager*, pEvents : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_event_sink.call(this, pEvents)
+    end
+    def request_permissions(this : ISensorManager*, hParent : Win32cr::Foundation::HWND, pSensors : Void*, fModal : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.request_permissions.call(this, hParent, pSensors, fModal)
+    end
+
   end
 
-  ISensorManager_GUID = "bd77db67-45a8-42dc-8d00-6dcf15f8377a"
-  IID_ISensorManager = LibC::GUID.new(0xbd77db67_u32, 0x45a8_u16, 0x42dc_u16, StaticArray[0x8d_u8, 0x0_u8, 0x6d_u8, 0xcf_u8, 0x15_u8, 0xf8_u8, 0x37_u8, 0x7a_u8])
-  struct ISensorManager
-    lpVtbl : ISensorManagerVTbl*
-  end
-
-  struct ILocationPermissionsVTbl
-    query_interface : Proc(ILocationPermissions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILocationPermissions*, UInt32)
-    release : Proc(ILocationPermissions*, UInt32)
-    get_global_location_permission : Proc(ILocationPermissions*, LibC::BOOL*, HRESULT)
-    check_location_capability : Proc(ILocationPermissions*, UInt32, HRESULT)
-  end
-
-  ILocationPermissions_GUID = "d5fb0a7f-e74e-44f5-8e02-4806863a274f"
-  IID_ILocationPermissions = LibC::GUID.new(0xd5fb0a7f_u32, 0xe74e_u16, 0x44f5_u16, StaticArray[0x8e_u8, 0x2_u8, 0x48_u8, 0x6_u8, 0x86_u8, 0x3a_u8, 0x27_u8, 0x4f_u8])
-  struct ILocationPermissions
-    lpVtbl : ILocationPermissionsVTbl*
-  end
-
-  struct ISensorCollectionVTbl
-    query_interface : Proc(ISensorCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISensorCollection*, UInt32)
-    release : Proc(ISensorCollection*, UInt32)
-    get_at : Proc(ISensorCollection*, UInt32, ISensor*, HRESULT)
-    get_count : Proc(ISensorCollection*, UInt32*, HRESULT)
-    add : Proc(ISensorCollection*, ISensor, HRESULT)
-    remove : Proc(ISensorCollection*, ISensor, HRESULT)
-    remove_by_id : Proc(ISensorCollection*, Guid*, HRESULT)
-    clear : Proc(ISensorCollection*, HRESULT)
-  end
-
-  ISensorCollection_GUID = "23571e11-e545-4dd8-a337-b89bf44b10df"
-  IID_ISensorCollection = LibC::GUID.new(0x23571e11_u32, 0xe545_u16, 0x4dd8_u16, StaticArray[0xa3_u8, 0x37_u8, 0xb8_u8, 0x9b_u8, 0xf4_u8, 0x4b_u8, 0x10_u8, 0xdf_u8])
-  struct ISensorCollection
-    lpVtbl : ISensorCollectionVTbl*
-  end
-
-  struct ISensorVTbl
-    query_interface : Proc(ISensor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISensor*, UInt32)
-    release : Proc(ISensor*, UInt32)
-    get_id : Proc(ISensor*, Guid*, HRESULT)
-    get_category : Proc(ISensor*, Guid*, HRESULT)
-    get_type : Proc(ISensor*, Guid*, HRESULT)
-    get_friendly_name : Proc(ISensor*, UInt8**, HRESULT)
-    get_property : Proc(ISensor*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
-    get_properties : Proc(ISensor*, IPortableDeviceKeyCollection, IPortableDeviceValues*, HRESULT)
-    get_supported_data_fields : Proc(ISensor*, IPortableDeviceKeyCollection*, HRESULT)
-    set_properties : Proc(ISensor*, IPortableDeviceValues, IPortableDeviceValues*, HRESULT)
-    supports_data_field : Proc(ISensor*, PROPERTYKEY*, Int16*, HRESULT)
-    get_state : Proc(ISensor*, SensorState*, HRESULT)
-    get_data : Proc(ISensor*, ISensorDataReport*, HRESULT)
-    supports_event : Proc(ISensor*, Guid*, Int16*, HRESULT)
-    get_event_interest : Proc(ISensor*, Guid**, UInt32*, HRESULT)
-    set_event_interest : Proc(ISensor*, Guid*, UInt32, HRESULT)
-    set_event_sink : Proc(ISensor*, ISensorEvents, HRESULT)
-  end
-
-  ISensor_GUID = "5fa08f80-2657-458e-af75-46f73fa6ac5c"
-  IID_ISensor = LibC::GUID.new(0x5fa08f80_u32, 0x2657_u16, 0x458e_u16, StaticArray[0xaf_u8, 0x75_u8, 0x46_u8, 0xf7_u8, 0x3f_u8, 0xa6_u8, 0xac_u8, 0x5c_u8])
-  struct ISensor
-    lpVtbl : ISensorVTbl*
-  end
-
-  struct ISensorDataReportVTbl
-    query_interface : Proc(ISensorDataReport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISensorDataReport*, UInt32)
-    release : Proc(ISensorDataReport*, UInt32)
-    get_timestamp : Proc(ISensorDataReport*, SYSTEMTIME*, HRESULT)
-    get_sensor_value : Proc(ISensorDataReport*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
-    get_sensor_values : Proc(ISensorDataReport*, IPortableDeviceKeyCollection, IPortableDeviceValues*, HRESULT)
-  end
-
-  ISensorDataReport_GUID = "0ab9df9b-c4b5-4796-8898-0470706a2e1d"
-  IID_ISensorDataReport = LibC::GUID.new(0xab9df9b_u32, 0xc4b5_u16, 0x4796_u16, StaticArray[0x88_u8, 0x98_u8, 0x4_u8, 0x70_u8, 0x70_u8, 0x6a_u8, 0x2e_u8, 0x1d_u8])
-  struct ISensorDataReport
-    lpVtbl : ISensorDataReportVTbl*
-  end
-
-  struct ISensorManagerEventsVTbl
-    query_interface : Proc(ISensorManagerEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISensorManagerEvents*, UInt32)
-    release : Proc(ISensorManagerEvents*, UInt32)
-    on_sensor_enter : Proc(ISensorManagerEvents*, ISensor, SensorState, HRESULT)
-  end
-
-  ISensorManagerEvents_GUID = "9b3b0b86-266a-4aad-b21f-fde5501001b7"
-  IID_ISensorManagerEvents = LibC::GUID.new(0x9b3b0b86_u32, 0x266a_u16, 0x4aad_u16, StaticArray[0xb2_u8, 0x1f_u8, 0xfd_u8, 0xe5_u8, 0x50_u8, 0x10_u8, 0x1_u8, 0xb7_u8])
-  struct ISensorManagerEvents
-    lpVtbl : ISensorManagerEventsVTbl*
-  end
-
-  struct ISensorEventsVTbl
-    query_interface : Proc(ISensorEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISensorEvents*, UInt32)
-    release : Proc(ISensorEvents*, UInt32)
-    on_state_changed : Proc(ISensorEvents*, ISensor, SensorState, HRESULT)
-    on_data_updated : Proc(ISensorEvents*, ISensor, ISensorDataReport, HRESULT)
-    on_event : Proc(ISensorEvents*, ISensor, Guid*, IPortableDeviceValues, HRESULT)
-    on_leave : Proc(ISensorEvents*, Guid*, HRESULT)
-  end
-
-  ISensorEvents_GUID = "5d8dcc91-4641-47e7-b7c3-b74f48a6c391"
-  IID_ISensorEvents = LibC::GUID.new(0x5d8dcc91_u32, 0x4641_u16, 0x47e7_u16, StaticArray[0xb7_u8, 0xc3_u8, 0xb7_u8, 0x4f_u8, 0x48_u8, 0xa6_u8, 0xc3_u8, 0x91_u8])
-  struct ISensorEvents
-    lpVtbl : ISensorEventsVTbl*
-  end
+  @[Extern]
+  record ILocationPermissionsVtbl,
+    query_interface : Proc(ILocationPermissions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ILocationPermissions*, UInt32),
+    release : Proc(ILocationPermissions*, UInt32),
+    get_global_location_permission : Proc(ILocationPermissions*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    check_location_capability : Proc(ILocationPermissions*, UInt32, Win32cr::Foundation::HRESULT)
 
 
-  # Params # timems : UInt32* [In]
-  fun GetPerformanceTime(timems : UInt32*) : NTSTATUS
+  @[Extern]
+  #@[Com("d5fb0a7f-e74e-44f5-8e02-4806863a274f")]
+  record ILocationPermissions, lpVtbl : ILocationPermissionsVtbl* do
+    GUID = LibC::GUID.new(0xd5fb0a7f_u32, 0xe74e_u16, 0x44f5_u16, StaticArray[0x8e_u8, 0x2_u8, 0x48_u8, 0x6_u8, 0x86_u8, 0x3a_u8, 0x27_u8, 0x4f_u8])
+    def query_interface(this : ILocationPermissions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ILocationPermissions*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ILocationPermissions*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_global_location_permission(this : ILocationPermissions*, pfEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_global_location_permission.call(this, pfEnabled)
+    end
+    def check_location_capability(this : ILocationPermissions*, dwClientThreadId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.check_location_capability.call(this, dwClientThreadId)
+    end
 
-  # Params # fltval : Float32 [In],ppropvar : PROPVARIANT* [In]
-  fun InitPropVariantFromFloat(fltval : Float32, ppropvar : PROPVARIANT*) : HRESULT
+  end
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],typecheck : BOOLEAN [In],pvalue : PROPVARIANT* [In]
-  fun PropKeyFindKeyGetPropVariant(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, typecheck : BOOLEAN, pvalue : PROPVARIANT*) : NTSTATUS
+  @[Extern]
+  record ISensorCollectionVtbl,
+    query_interface : Proc(ISensorCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISensorCollection*, UInt32),
+    release : Proc(ISensorCollection*, UInt32),
+    get_at : Proc(ISensorCollection*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_count : Proc(ISensorCollection*, UInt32*, Win32cr::Foundation::HRESULT),
+    add : Proc(ISensorCollection*, Void*, Win32cr::Foundation::HRESULT),
+    remove : Proc(ISensorCollection*, Void*, Win32cr::Foundation::HRESULT),
+    remove_by_id : Proc(ISensorCollection*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    clear : Proc(ISensorCollection*, Win32cr::Foundation::HRESULT)
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],typecheck : BOOLEAN [In],pvalue : PROPVARIANT* [In]
-  fun PropKeyFindKeySetPropVariant(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, typecheck : BOOLEAN, pvalue : PROPVARIANT*) : NTSTATUS
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],pretvalue : FILETIME* [In]
-  fun PropKeyFindKeyGetFileTime(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, pretvalue : FILETIME*) : NTSTATUS
+  @[Extern]
+  #@[Com("23571e11-e545-4dd8-a337-b89bf44b10df")]
+  record ISensorCollection, lpVtbl : ISensorCollectionVtbl* do
+    GUID = LibC::GUID.new(0x23571e11_u32, 0xe545_u16, 0x4dd8_u16, StaticArray[0xa3_u8, 0x37_u8, 0xb8_u8, 0x9b_u8, 0xf4_u8, 0x4b_u8, 0x10_u8, 0xdf_u8])
+    def query_interface(this : ISensorCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISensorCollection*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISensorCollection*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_at(this : ISensorCollection*, ulIndex : UInt32, ppSensor : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_at.call(this, ulIndex, ppSensor)
+    end
+    def get_count(this : ISensorCollection*, pCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_count.call(this, pCount)
+    end
+    def add(this : ISensorCollection*, pSensor : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, pSensor)
+    end
+    def remove(this : ISensorCollection*, pSensor : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, pSensor)
+    end
+    def remove_by_id(this : ISensorCollection*, sensorID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_by_id.call(this, sensorID)
+    end
+    def clear(this : ISensorCollection*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear.call(this)
+    end
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],pretvalue : Guid* [In]
-  fun PropKeyFindKeyGetGuid(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, pretvalue : Guid*) : NTSTATUS
+  end
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],pretvalue : LibC::BOOL* [In]
-  fun PropKeyFindKeyGetBool(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, pretvalue : LibC::BOOL*) : NTSTATUS
+  @[Extern]
+  record ISensorVtbl,
+    query_interface : Proc(ISensor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISensor*, UInt32),
+    release : Proc(ISensor*, UInt32),
+    get_id : Proc(ISensor*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_category : Proc(ISensor*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_type : Proc(ISensor*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_friendly_name : Proc(ISensor*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(ISensor*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    get_properties : Proc(ISensor*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    get_supported_data_fields : Proc(ISensor*, Void**, Win32cr::Foundation::HRESULT),
+    set_properties : Proc(ISensor*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    supports_data_field : Proc(ISensor*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Int16*, Win32cr::Foundation::HRESULT),
+    get_state : Proc(ISensor*, Win32cr::Devices::Sensors::SensorState*, Win32cr::Foundation::HRESULT),
+    get_data : Proc(ISensor*, Void**, Win32cr::Foundation::HRESULT),
+    supports_event : Proc(ISensor*, LibC::GUID*, Int16*, Win32cr::Foundation::HRESULT),
+    get_event_interest : Proc(ISensor*, LibC::GUID**, UInt32*, Win32cr::Foundation::HRESULT),
+    set_event_interest : Proc(ISensor*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    set_event_sink : Proc(ISensor*, Void*, Win32cr::Foundation::HRESULT)
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],pretvalue : UInt32* [In]
-  fun PropKeyFindKeyGetUlong(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, pretvalue : UInt32*) : NTSTATUS
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],pretvalue : UInt16* [In]
-  fun PropKeyFindKeyGetUshort(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, pretvalue : UInt16*) : NTSTATUS
+  @[Extern]
+  #@[Com("5fa08f80-2657-458e-af75-46f73fa6ac5c")]
+  record ISensor, lpVtbl : ISensorVtbl* do
+    GUID = LibC::GUID.new(0x5fa08f80_u32, 0x2657_u16, 0x458e_u16, StaticArray[0xaf_u8, 0x75_u8, 0x46_u8, 0xf7_u8, 0x3f_u8, 0xa6_u8, 0xac_u8, 0x5c_u8])
+    def query_interface(this : ISensor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISensor*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISensor*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_id(this : ISensor*, pID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_id.call(this, pID)
+    end
+    def get_category(this : ISensor*, pSensorCategory : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_category.call(this, pSensorCategory)
+    end
+    def get_type(this : ISensor*, pSensorType : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type.call(this, pSensorType)
+    end
+    def get_friendly_name(this : ISensor*, pFriendlyName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_friendly_name.call(this, pFriendlyName)
+    end
+    def get_property(this : ISensor*, key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pProperty : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_property.call(this, key, pProperty)
+    end
+    def get_properties(this : ISensor*, pKeys : Void*, ppProperties : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_properties.call(this, pKeys, ppProperties)
+    end
+    def get_supported_data_fields(this : ISensor*, ppDataFields : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_supported_data_fields.call(this, ppDataFields)
+    end
+    def set_properties(this : ISensor*, pProperties : Void*, ppResults : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_properties.call(this, pProperties, ppResults)
+    end
+    def supports_data_field(this : ISensor*, key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pIsSupported : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.supports_data_field.call(this, key, pIsSupported)
+    end
+    def get_state(this : ISensor*, pState : Win32cr::Devices::Sensors::SensorState*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_state.call(this, pState)
+    end
+    def get_data(this : ISensor*, ppDataReport : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data.call(this, ppDataReport)
+    end
+    def supports_event(this : ISensor*, eventGuid : LibC::GUID*, pIsSupported : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.supports_event.call(this, eventGuid, pIsSupported)
+    end
+    def get_event_interest(this : ISensor*, ppValues : LibC::GUID**, pCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_event_interest.call(this, ppValues, pCount)
+    end
+    def set_event_interest(this : ISensor*, pValues : LibC::GUID*, count : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_event_interest.call(this, pValues, count)
+    end
+    def set_event_sink(this : ISensor*, pEvents : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_event_sink.call(this, pEvents)
+    end
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],pretvalue : Float32* [In]
-  fun PropKeyFindKeyGetFloat(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, pretvalue : Float32*) : NTSTATUS
+  end
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],pretvalue : Float64* [In]
-  fun PropKeyFindKeyGetDouble(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, pretvalue : Float64*) : NTSTATUS
+  @[Extern]
+  record ISensorDataReportVtbl,
+    query_interface : Proc(ISensorDataReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISensorDataReport*, UInt32),
+    release : Proc(ISensorDataReport*, UInt32),
+    get_timestamp : Proc(ISensorDataReport*, Win32cr::Foundation::SYSTEMTIME*, Win32cr::Foundation::HRESULT),
+    get_sensor_value : Proc(ISensorDataReport*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    get_sensor_values : Proc(ISensorDataReport*, Void*, Void**, Win32cr::Foundation::HRESULT)
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],pretvalue : Int32* [In]
-  fun PropKeyFindKeyGetInt32(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, pretvalue : Int32*) : NTSTATUS
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],pretvalue : Int64* [In]
-  fun PropKeyFindKeyGetInt64(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, pretvalue : Int64*) : NTSTATUS
+  @[Extern]
+  #@[Com("0ab9df9b-c4b5-4796-8898-0470706a2e1d")]
+  record ISensorDataReport, lpVtbl : ISensorDataReportVtbl* do
+    GUID = LibC::GUID.new(0xab9df9b_u32, 0xc4b5_u16, 0x4796_u16, StaticArray[0x88_u8, 0x98_u8, 0x4_u8, 0x70_u8, 0x70_u8, 0x6a_u8, 0x2e_u8, 0x1d_u8])
+    def query_interface(this : ISensorDataReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISensorDataReport*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISensorDataReport*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_timestamp(this : ISensorDataReport*, pTimeStamp : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_timestamp.call(this, pTimeStamp)
+    end
+    def get_sensor_value(this : ISensorDataReport*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_sensor_value.call(this, pKey, pValue)
+    end
+    def get_sensor_values(this : ISensorDataReport*, pKeys : Void*, ppValues : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_sensor_values.call(this, pKeys, ppValues)
+    end
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],occurrence : UInt32 [In],pretvalue : UInt32* [In]
-  fun PropKeyFindKeyGetNthUlong(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, occurrence : UInt32, pretvalue : UInt32*) : NTSTATUS
+  end
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],occurrence : UInt32 [In],pretvalue : UInt16* [In]
-  fun PropKeyFindKeyGetNthUshort(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, occurrence : UInt32, pretvalue : UInt16*) : NTSTATUS
+  @[Extern]
+  record ISensorManagerEventsVtbl,
+    query_interface : Proc(ISensorManagerEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISensorManagerEvents*, UInt32),
+    release : Proc(ISensorManagerEvents*, UInt32),
+    on_sensor_enter : Proc(ISensorManagerEvents*, Void*, Win32cr::Devices::Sensors::SensorState, Win32cr::Foundation::HRESULT)
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],occurrence : UInt32 [In],pretvalue : Int64* [In]
-  fun PropKeyFindKeyGetNthInt64(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, occurrence : UInt32, pretvalue : Int64*) : NTSTATUS
 
-  # Params # plist : SENSOR_PROPERTY_LIST* [In],pkey : PROPERTYKEY* [In]
-  fun IsKeyPresentInPropertyList(plist : SENSOR_PROPERTY_LIST*, pkey : PROPERTYKEY*) : BOOLEAN
+  @[Extern]
+  #@[Com("9b3b0b86-266a-4aad-b21f-fde5501001b7")]
+  record ISensorManagerEvents, lpVtbl : ISensorManagerEventsVtbl* do
+    GUID = LibC::GUID.new(0x9b3b0b86_u32, 0x266a_u16, 0x4aad_u16, StaticArray[0xb2_u8, 0x1f_u8, 0xfd_u8, 0xe5_u8, 0x50_u8, 0x10_u8, 0x1_u8, 0xb7_u8])
+    def query_interface(this : ISensorManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISensorManagerEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISensorManagerEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_sensor_enter(this : ISensorManagerEvents*, pSensor : Void*, state : Win32cr::Devices::Sensors::SensorState) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_sensor_enter.call(this, pSensor, state)
+    end
 
-  # Params # plist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In]
-  fun IsKeyPresentInCollectionList(plist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*) : BOOLEAN
+  end
 
-  # Params # lista : SENSOR_COLLECTION_LIST* [In],listb : SENSOR_COLLECTION_LIST* [In]
-  fun IsCollectionListSame(lista : SENSOR_COLLECTION_LIST*, listb : SENSOR_COLLECTION_LIST*) : BOOLEAN
+  @[Extern]
+  record ISensorEventsVtbl,
+    query_interface : Proc(ISensorEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISensorEvents*, UInt32),
+    release : Proc(ISensorEvents*, UInt32),
+    on_state_changed : Proc(ISensorEvents*, Void*, Win32cr::Devices::Sensors::SensorState, Win32cr::Foundation::HRESULT),
+    on_data_updated : Proc(ISensorEvents*, Void*, Void*, Win32cr::Foundation::HRESULT),
+    on_event : Proc(ISensorEvents*, Void*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
+    on_leave : Proc(ISensorEvents*, LibC::GUID*, Win32cr::Foundation::HRESULT)
 
-  # Params # propvariantvalue : PROPVARIANT* [In],propvariantoffset : UInt32* [In],propvariantsize : UInt32* [In],propvariantpointer : Void** [In],remappedtype : UInt32* [In]
-  fun PropVariantGetInformation(propvariantvalue : PROPVARIANT*, propvariantoffset : UInt32*, propvariantsize : UInt32*, propvariantpointer : Void**, remappedtype : UInt32*) : NTSTATUS
 
-  # Params # target : SENSOR_PROPERTY_LIST* [In],source : SENSOR_PROPERTY_LIST* [In]
-  fun PropertiesListCopy(target : SENSOR_PROPERTY_LIST*, source : SENSOR_PROPERTY_LIST*) : NTSTATUS
+  @[Extern]
+  #@[Com("5d8dcc91-4641-47e7-b7c3-b74f48a6c391")]
+  record ISensorEvents, lpVtbl : ISensorEventsVtbl* do
+    GUID = LibC::GUID.new(0x5d8dcc91_u32, 0x4641_u16, 0x47e7_u16, StaticArray[0xb7_u8, 0xc3_u8, 0xb7_u8, 0x4f_u8, 0x48_u8, 0xa6_u8, 0xc3_u8, 0x91_u8])
+    def query_interface(this : ISensorEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISensorEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISensorEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_state_changed(this : ISensorEvents*, pSensor : Void*, state : Win32cr::Devices::Sensors::SensorState) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_state_changed.call(this, pSensor, state)
+    end
+    def on_data_updated(this : ISensorEvents*, pSensor : Void*, pNewData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_data_updated.call(this, pSensor, pNewData)
+    end
+    def on_event(this : ISensorEvents*, pSensor : Void*, eventID : LibC::GUID*, pEventData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_event.call(this, pSensor, eventID, pEventData)
+    end
+    def on_leave(this : ISensorEvents*, id : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_leave.call(this, id)
+    end
 
-  # Params # buffersizebytes : UInt32 [In]
-  fun PropertiesListGetFillableCount(buffersizebytes : UInt32) : UInt32
+  end
 
-  # Params # collection : SENSOR_COLLECTION_LIST* [In]
-  fun CollectionsListGetMarshalledSize(collection : SENSOR_COLLECTION_LIST*) : UInt32
+  @[Link("sensorsutilsv2")]
+  lib C
+    fun GetPerformanceTime(time_ms : UInt32*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # target : SENSOR_COLLECTION_LIST* [In],source : SENSOR_COLLECTION_LIST* [In]
-  fun CollectionsListCopyAndMarshall(target : SENSOR_COLLECTION_LIST*, source : SENSOR_COLLECTION_LIST*) : NTSTATUS
+    fun InitPropVariantFromFloat(fltVal : Float32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
-  # Params # target : SENSOR_COLLECTION_LIST* [In]
-  fun CollectionsListMarshall(target : SENSOR_COLLECTION_LIST*) : NTSTATUS
+    fun PropKeyFindKeyGetPropVariant(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, type_check : Win32cr::Foundation::BOOLEAN, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # collection : SENSOR_COLLECTION_LIST* [In]
-  fun CollectionsListGetMarshalledSizeWithoutSerialization(collection : SENSOR_COLLECTION_LIST*) : UInt32
+    fun PropKeyFindKeySetPropVariant(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, type_check : Win32cr::Foundation::BOOLEAN, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # collection : SENSOR_COLLECTION_LIST* [In]
-  fun CollectionsListUpdateMarshalledPointer(collection : SENSOR_COLLECTION_LIST*) : NTSTATUS
+    fun PropKeyFindKeyGetFileTime(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # sizeinbytes : UInt32 [In],pbuffer : UInt8** [In]
-  fun SerializationBufferAllocate(sizeinbytes : UInt32, pbuffer : UInt8**) : NTSTATUS
+    fun PropKeyFindKeyGetGuid(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : LibC::GUID*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # buffer : UInt8* [In]
-  fun SerializationBufferFree(buffer : UInt8*) : Void
+    fun PropKeyFindKeyGetBool(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # collection : SENSOR_COLLECTION_LIST* [In]
-  fun CollectionsListGetSerializedSize(collection : SENSOR_COLLECTION_LIST*) : UInt32
+    fun PropKeyFindKeyGetUlong(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : UInt32*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # sourcecollection : SENSOR_COLLECTION_LIST* [In],targetbuffersizeinbytes : UInt32 [In],targetbuffer : UInt8* [In]
-  fun CollectionsListSerializeToBuffer(sourcecollection : SENSOR_COLLECTION_LIST*, targetbuffersizeinbytes : UInt32, targetbuffer : UInt8*) : NTSTATUS
+    fun PropKeyFindKeyGetUshort(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : UInt16*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # sourcecollection : SENSOR_COLLECTION_LIST* [In],ptargetbuffersizeinbytes : UInt32* [In],ptargetbuffer : UInt8** [In]
-  fun CollectionsListAllocateBufferAndSerialize(sourcecollection : SENSOR_COLLECTION_LIST*, ptargetbuffersizeinbytes : UInt32*, ptargetbuffer : UInt8**) : NTSTATUS
+    fun PropKeyFindKeyGetFloat(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Float32*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # sourcebuffersizeinbytes : UInt32 [In],sourcebuffer : UInt8* [In],targetcollection : SENSOR_COLLECTION_LIST* [In]
-  fun CollectionsListDeserializeFromBuffer(sourcebuffersizeinbytes : UInt32, sourcebuffer : UInt8*, targetcollection : SENSOR_COLLECTION_LIST*) : NTSTATUS
+    fun PropKeyFindKeyGetDouble(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Float64*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # index : UInt32 [In],psensorslist : SENSOR_COLLECTION_LIST* [In],pkey : PROPERTYKEY* [In],pvalue : PROPVARIANT* [In]
-  fun SensorCollectionGetAt(index : UInt32, psensorslist : SENSOR_COLLECTION_LIST*, pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : NTSTATUS
+    fun PropKeyFindKeyGetInt32(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Int32*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # buffersizebytes : UInt32 [In]
-  fun CollectionsListGetFillableCount(buffersizebytes : UInt32) : UInt32
+    fun PropKeyFindKeyGetInt64(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pRetValue : Int64*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # newsample : SENSOR_COLLECTION_LIST* [In],oldsample : SENSOR_COLLECTION_LIST* [In],thresholds : SENSOR_COLLECTION_LIST* [In]
-  fun EvaluateActivityThresholds(newsample : SENSOR_COLLECTION_LIST*, oldsample : SENSOR_COLLECTION_LIST*, thresholds : SENSOR_COLLECTION_LIST*) : BOOLEAN
+    fun PropKeyFindKeyGetNthUlong(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, occurrence : UInt32, pRetValue : UInt32*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # thresholds : SENSOR_COLLECTION_LIST* [In],pcollection : SENSOR_COLLECTION_LIST* [In]
-  fun CollectionsListSortSubscribedActivitiesByConfidence(thresholds : SENSOR_COLLECTION_LIST*, pcollection : SENSOR_COLLECTION_LIST*) : NTSTATUS
+    fun PropKeyFindKeyGetNthUshort(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, occurrence : UInt32, pRetValue : UInt16*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # members : Guid* [In],size : UInt32 [In],ppropvar : PROPVARIANT* [In]
-  fun InitPropVariantFromCLSIDArray(members : Guid*, size : UInt32, ppropvar : PROPVARIANT*) : HRESULT
+    fun PropKeyFindKeyGetNthInt64(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, occurrence : UInt32, pRetValue : Int64*) : Win32cr::Foundation::NTSTATUS
 
-  # Params # subscriptionlist : SENSOR_COLLECTION_LIST* [In],currenttype : Guid [In]
-  fun IsSensorSubscribed(subscriptionlist : SENSOR_COLLECTION_LIST*, currenttype : Guid) : BOOLEAN
+    fun IsKeyPresentInPropertyList(pList : Win32cr::Devices::Sensors::SENSOR_PROPERTY_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::BOOLEAN
 
-  # Params # guidarray : Guid* [In],arraylength : UInt32 [In],guidelem : Guid* [In]
-  fun IsGUIDPresentInList(guidarray : Guid*, arraylength : UInt32, guidelem : Guid*) : BOOLEAN
-end
-struct LibWin32::ISensorManager
-  def query_interface(this : ISensorManager*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISensorManager*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISensorManager*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_sensors_by_category(this : ISensorManager*, sensorcategory : Guid*, ppsensorsfound : ISensorCollection*) : HRESULT
-    @lpVtbl.value.get_sensors_by_category.call(this, sensorcategory, ppsensorsfound)
-  end
-  def get_sensors_by_type(this : ISensorManager*, sensortype : Guid*, ppsensorsfound : ISensorCollection*) : HRESULT
-    @lpVtbl.value.get_sensors_by_type.call(this, sensortype, ppsensorsfound)
-  end
-  def get_sensor_by_id(this : ISensorManager*, sensorid : Guid*, ppsensor : ISensor*) : HRESULT
-    @lpVtbl.value.get_sensor_by_id.call(this, sensorid, ppsensor)
-  end
-  def set_event_sink(this : ISensorManager*, pevents : ISensorManagerEvents) : HRESULT
-    @lpVtbl.value.set_event_sink.call(this, pevents)
-  end
-  def request_permissions(this : ISensorManager*, hparent : LibC::HANDLE, psensors : ISensorCollection, fmodal : LibC::BOOL) : HRESULT
-    @lpVtbl.value.request_permissions.call(this, hparent, psensors, fmodal)
-  end
-end
-struct LibWin32::ILocationPermissions
-  def query_interface(this : ILocationPermissions*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ILocationPermissions*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ILocationPermissions*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_global_location_permission(this : ILocationPermissions*, pfenabled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_global_location_permission.call(this, pfenabled)
-  end
-  def check_location_capability(this : ILocationPermissions*, dwclientthreadid : UInt32) : HRESULT
-    @lpVtbl.value.check_location_capability.call(this, dwclientthreadid)
-  end
-end
-struct LibWin32::ISensorCollection
-  def query_interface(this : ISensorCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISensorCollection*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISensorCollection*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_at(this : ISensorCollection*, ulindex : UInt32, ppsensor : ISensor*) : HRESULT
-    @lpVtbl.value.get_at.call(this, ulindex, ppsensor)
-  end
-  def get_count(this : ISensorCollection*, pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, pcount)
-  end
-  def add(this : ISensorCollection*, psensor : ISensor) : HRESULT
-    @lpVtbl.value.add.call(this, psensor)
-  end
-  def remove(this : ISensorCollection*, psensor : ISensor) : HRESULT
-    @lpVtbl.value.remove.call(this, psensor)
-  end
-  def remove_by_id(this : ISensorCollection*, sensorid : Guid*) : HRESULT
-    @lpVtbl.value.remove_by_id.call(this, sensorid)
-  end
-  def clear(this : ISensorCollection*) : HRESULT
-    @lpVtbl.value.clear.call(this)
-  end
-end
-struct LibWin32::ISensor
-  def query_interface(this : ISensor*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISensor*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISensor*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_id(this : ISensor*, pid : Guid*) : HRESULT
-    @lpVtbl.value.get_id.call(this, pid)
-  end
-  def get_category(this : ISensor*, psensorcategory : Guid*) : HRESULT
-    @lpVtbl.value.get_category.call(this, psensorcategory)
-  end
-  def get_type(this : ISensor*, psensortype : Guid*) : HRESULT
-    @lpVtbl.value.get_type.call(this, psensortype)
-  end
-  def get_friendly_name(this : ISensor*, pfriendlyname : UInt8**) : HRESULT
-    @lpVtbl.value.get_friendly_name.call(this, pfriendlyname)
-  end
-  def get_property(this : ISensor*, key : PROPERTYKEY*, pproperty : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_property.call(this, key, pproperty)
-  end
-  def get_properties(this : ISensor*, pkeys : IPortableDeviceKeyCollection, ppproperties : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_properties.call(this, pkeys, ppproperties)
-  end
-  def get_supported_data_fields(this : ISensor*, ppdatafields : IPortableDeviceKeyCollection*) : HRESULT
-    @lpVtbl.value.get_supported_data_fields.call(this, ppdatafields)
-  end
-  def set_properties(this : ISensor*, pproperties : IPortableDeviceValues, ppresults : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.set_properties.call(this, pproperties, ppresults)
-  end
-  def supports_data_field(this : ISensor*, key : PROPERTYKEY*, pissupported : Int16*) : HRESULT
-    @lpVtbl.value.supports_data_field.call(this, key, pissupported)
-  end
-  def get_state(this : ISensor*, pstate : SensorState*) : HRESULT
-    @lpVtbl.value.get_state.call(this, pstate)
-  end
-  def get_data(this : ISensor*, ppdatareport : ISensorDataReport*) : HRESULT
-    @lpVtbl.value.get_data.call(this, ppdatareport)
-  end
-  def supports_event(this : ISensor*, eventguid : Guid*, pissupported : Int16*) : HRESULT
-    @lpVtbl.value.supports_event.call(this, eventguid, pissupported)
-  end
-  def get_event_interest(this : ISensor*, ppvalues : Guid**, pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_event_interest.call(this, ppvalues, pcount)
-  end
-  def set_event_interest(this : ISensor*, pvalues : Guid*, count : UInt32) : HRESULT
-    @lpVtbl.value.set_event_interest.call(this, pvalues, count)
-  end
-  def set_event_sink(this : ISensor*, pevents : ISensorEvents) : HRESULT
-    @lpVtbl.value.set_event_sink.call(this, pevents)
-  end
-end
-struct LibWin32::ISensorDataReport
-  def query_interface(this : ISensorDataReport*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISensorDataReport*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISensorDataReport*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_timestamp(this : ISensorDataReport*, ptimestamp : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.get_timestamp.call(this, ptimestamp)
-  end
-  def get_sensor_value(this : ISensorDataReport*, pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_sensor_value.call(this, pkey, pvalue)
-  end
-  def get_sensor_values(this : ISensorDataReport*, pkeys : IPortableDeviceKeyCollection, ppvalues : IPortableDeviceValues*) : HRESULT
-    @lpVtbl.value.get_sensor_values.call(this, pkeys, ppvalues)
-  end
-end
-struct LibWin32::ISensorManagerEvents
-  def query_interface(this : ISensorManagerEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISensorManagerEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISensorManagerEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def on_sensor_enter(this : ISensorManagerEvents*, psensor : ISensor, state : SensorState) : HRESULT
-    @lpVtbl.value.on_sensor_enter.call(this, psensor, state)
-  end
-end
-struct LibWin32::ISensorEvents
-  def query_interface(this : ISensorEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISensorEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISensorEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def on_state_changed(this : ISensorEvents*, psensor : ISensor, state : SensorState) : HRESULT
-    @lpVtbl.value.on_state_changed.call(this, psensor, state)
-  end
-  def on_data_updated(this : ISensorEvents*, psensor : ISensor, pnewdata : ISensorDataReport) : HRESULT
-    @lpVtbl.value.on_data_updated.call(this, psensor, pnewdata)
-  end
-  def on_event(this : ISensorEvents*, psensor : ISensor, eventid : Guid*, peventdata : IPortableDeviceValues) : HRESULT
-    @lpVtbl.value.on_event.call(this, psensor, eventid, peventdata)
-  end
-  def on_leave(this : ISensorEvents*, id : Guid*) : HRESULT
-    @lpVtbl.value.on_leave.call(this, id)
+    fun IsKeyPresentInCollectionList(pList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::BOOLEAN
+
+    fun IsCollectionListSame(list_a : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, list_b : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::BOOLEAN
+
+    fun PropVariantGetInformation(prop_variant_value : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, prop_variant_offset : UInt32*, prop_variant_size : UInt32*, prop_variant_pointer : Void**, remapped_type : UInt32*) : Win32cr::Foundation::NTSTATUS
+
+    fun PropertiesListCopy(target : Win32cr::Devices::Sensors::SENSOR_PROPERTY_LIST*, source : Win32cr::Devices::Sensors::SENSOR_PROPERTY_LIST*) : Win32cr::Foundation::NTSTATUS
+
+    fun PropertiesListGetFillableCount(buffer_size_bytes : UInt32) : UInt32
+
+    fun CollectionsListGetMarshalledSize(collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : UInt32
+
+    fun CollectionsListCopyAndMarshall(target : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, source : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
+
+    fun CollectionsListMarshall(target : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
+
+    fun CollectionsListGetMarshalledSizeWithoutSerialization(collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : UInt32
+
+    fun CollectionsListUpdateMarshalledPointer(collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
+
+    fun SerializationBufferAllocate(size_in_bytes : UInt32, pBuffer : UInt8**) : Win32cr::Foundation::NTSTATUS
+
+    fun SerializationBufferFree(buffer : UInt8*) : Void
+
+    fun CollectionsListGetSerializedSize(collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : UInt32
+
+    fun CollectionsListSerializeToBuffer(source_collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, target_buffer_size_in_bytes : UInt32, target_buffer : UInt8*) : Win32cr::Foundation::NTSTATUS
+
+    fun CollectionsListAllocateBufferAndSerialize(source_collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pTargetBufferSizeInBytes : UInt32*, pTargetBuffer : UInt8**) : Win32cr::Foundation::NTSTATUS
+
+    fun CollectionsListDeserializeFromBuffer(source_buffer_size_in_bytes : UInt32, source_buffer : UInt8*, target_collection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
+
+    fun SensorCollectionGetAt(index : UInt32, pSensorsList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::NTSTATUS
+
+    fun CollectionsListGetFillableCount(buffer_size_bytes : UInt32) : UInt32
+
+    fun EvaluateActivityThresholds(newSample : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, oldSample : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, thresholds : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::BOOLEAN
+
+    fun CollectionsListSortSubscribedActivitiesByConfidence(thresholds : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, pCollection : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*) : Win32cr::Foundation::NTSTATUS
+
+    fun InitPropVariantFromCLSIDArray(members : LibC::GUID*, size : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+
+    fun IsSensorSubscribed(subscriptionList : Win32cr::Devices::Sensors::SENSOR_COLLECTION_LIST*, currentType : LibC::GUID) : Win32cr::Foundation::BOOLEAN
+
+    fun IsGUIDPresentInList(guidArray : LibC::GUID*, arrayLength : UInt32, guidElem : LibC::GUID*) : Win32cr::Foundation::BOOLEAN
+
   end
 end

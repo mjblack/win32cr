@@ -1,33 +1,48 @@
-require "../media/audio.cr"
-require "../foundation.cr"
-require "../graphics/gdi.cr"
-require "../media.cr"
-require "../system/com.cr"
-require "../ui/controls.cr"
-require "../system/io.cr"
-require "../ui/controls/dialogs.cr"
+require "./audio.cr"
+require "./../foundation.cr"
+require "./../graphics/gdi.cr"
+require "./../media.cr"
+require "./../system/com.cr"
+require "./../ui/controls.cr"
+require "./../system/io.cr"
+require "./../ui/controls/dialogs.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:winmm.dll")]
-@[Link(ldflags: "/DELAYLOAD:vfw32.dll")]
-@[Link(ldflags: "/DELAYLOAD:avifil32.dll")]
-{% else %}
-@[Link("winmm")]
-@[Link("vfw32")]
-@[Link("avifil32")]
-{% end %}
-lib LibWin32
+module Win32cr::Media::Multimedia
   alias HMMIO = LibC::IntPtrT
   alias HDRVR = LibC::IntPtrT
   alias HIC = LibC::IntPtrT
   alias HVIDEO = LibC::IntPtrT
+  alias YIELDPROC = Proc(UInt32, UInt32, UInt32)*
+
+  alias DRIVERPROC = Proc(LibC::UIntPtrT, Win32cr::Media::Multimedia::HDRVR, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT)*
+
+  alias DRIVERMSGPROC = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, UInt32)*
+
+  alias LPMMIOPROC = Proc(Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT)*
+
+  alias AVISAVECALLBACK = Proc(Int32, Win32cr::Foundation::BOOL)*
+
+  alias CAPYIELDCALLBACK = Proc(Win32cr::Foundation::HWND, Win32cr::Foundation::LRESULT)*
+
+  alias CAPSTATUSCALLBACKW = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::LRESULT)*
+
+  alias CAPERRORCALLBACKW = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::LRESULT)*
+
+  alias CAPSTATUSCALLBACKA = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::PSTR, Win32cr::Foundation::LRESULT)*
+
+  alias CAPERRORCALLBACKA = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::PSTR, Win32cr::Foundation::LRESULT)*
+
+  alias CAPVIDEOCALLBACK = Proc(Win32cr::Foundation::HWND, Win32cr::Media::Multimedia::VIDEOHDR*, Win32cr::Foundation::LRESULT)*
+
+  alias CAPWAVECALLBACK = Proc(Win32cr::Foundation::HWND, Win32cr::Media::Audio::WAVEHDR*, Win32cr::Foundation::LRESULT)*
+
+  alias CAPCONTROLCALLBACK = Proc(Win32cr::Foundation::HWND, Int32, Win32cr::Foundation::LRESULT)*
+
+  alias LPTASKCALLBACK = Proc(LibC::UIntPtrT, Void)*
+
+  alias VFWWDMExtensionProc = Proc(Void*, Win32cr::UI::Controls::LPFNSVADDPROPSHEETPAGE, Win32cr::Foundation::LPARAM, UInt32)*
+
+  alias LPFNEXTDEVIO = Proc(Win32cr::Foundation::LPARAM, UInt32, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Foundation::BOOL)*
 
   WM_CAP_START = 1024_u32
   MODM_USER = 16384_u32
@@ -2437,6 +2452,7 @@ lib LibWin32
   SEARCH_KEY = 16_i32
   SEARCH_ANY = 32_i32
   AVIERR_OK = 0_i32
+  MCIWND_WINDOW_CLASS = "MCIWndClass"
   MCIWNDOPENF_NEW = 1_u32
   MCIWNDF_NOAUTOSIZEWINDOW = 1_u32
   MCIWNDF_NOPLAYBAR = 2_u32
@@ -2858,6 +2874,8 @@ lib LibWin32
   DRV_REMOVE = 10_u32
   DRV_RESERVED = 2048_u32
   DRV_USER = 16384_u32
+  DRIVERS_SECTION = "DRIVERS32"
+  MCI_SECTION = "MCI32"
   DCB_NOSWITCH = 8_u32
   DCB_TYPEMASK = 7_u32
   DCB_NULL = 0_u32
@@ -2986,6 +3004,7 @@ lib LibWin32
   TDD_GETDEVCAPS = 2060_u32
   TDD_BEGINMINPERIOD = 2064_u32
   TDD_ENDMINPERIOD = 2068_u32
+  JOY_CONFIGCHANGED_MSGSTRING = "MSJSTICK_VJOYD_MSGSTR"
   JDD_GETNUMDEVS = 2049_u32
   JDD_GETDEVCAPS = 2050_u32
   JDD_GETPOS = 2305_u32
@@ -4355,6 +4374,8 @@ lib LibWin32
   VFW_USE_DEVICE_HANDLE = 1_u32
   VFW_USE_STREAM_HANDLE = 2_u32
   VFW_QUERY_DEV_CHANGED = 256_u32
+  TARGET_DEVICE_FRIENDLY_NAME = "TargetDeviceFriendlyName"
+  TARGET_DEVICE_OPEN_EXCLUSIVELY = "TargetDeviceOpenExclusively"
   MCIERR_INVALID_DEVICE_ID = 257_u32
   MCIERR_UNRECOGNIZED_KEYWORD = 259_u32
   MCIERR_UNRECOGNIZED_COMMAND = 261_u32
@@ -4671,2013 +4692,1996 @@ lib LibWin32
   MCI_OVLY_WHERE_DESTINATION = 262144_i32
   MCI_OVLY_WHERE_FRAME = 524288_i32
   MCI_OVLY_WHERE_VIDEO = 1048576_i32
+
   CLSID_KSDATAFORMAT_SUBTYPE_IEEE_FLOAT = LibC::GUID.new(0x3_u32, 0x0_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
 
-  alias YIELDPROC = Proc(UInt32, UInt32, UInt32)
-  alias DRIVERPROC = Proc(LibC::UINT_PTR, HDRVR, UInt32, LPARAM, LPARAM, LRESULT)
-  alias DRIVERMSGPROC = Proc(UInt32, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, UInt32)
-  alias LPMMIOPROC = Proc(PSTR, UInt32, LPARAM, LPARAM, LRESULT)
-  alias AVISAVECALLBACK = Proc(Int32, LibC::BOOL)
-  alias CAPYIELDCALLBACK = Proc(LibC::HANDLE, LRESULT)
-  alias CAPSTATUSCALLBACKW = Proc(LibC::HANDLE, Int32, LibC::LPWSTR, LRESULT)
-  alias CAPERRORCALLBACKW = Proc(LibC::HANDLE, Int32, LibC::LPWSTR, LRESULT)
-  alias CAPSTATUSCALLBACKA = Proc(LibC::HANDLE, Int32, PSTR, LRESULT)
-  alias CAPERRORCALLBACKA = Proc(LibC::HANDLE, Int32, PSTR, LRESULT)
-  alias CAPVIDEOCALLBACK = Proc(LibC::HANDLE, VIDEOHDR*, LRESULT)
-  alias CAPWAVECALLBACK = Proc(LibC::HANDLE, WAVEHDR*, LRESULT)
-  alias CAPCONTROLCALLBACK = Proc(LibC::HANDLE, Int32, LRESULT)
-  alias LPTASKCALLBACK = Proc(LibC::UINT_PTR, Void)
-  alias VFWWDMExtensionProc = Proc(Void*, LPFNSVADDPROPSHEETPAGE, LPARAM, UInt32)
-  alias LPFNEXTDEVIO = Proc(LPARAM, UInt32, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, OVERLAPPED*, LibC::BOOL)
 
-  struct ADPCMCOEFSET
-    i_coef1 : Int16
-    i_coef2 : Int16
-  end
-  struct ADPCMWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_samples_per_block : UInt16
-    w_num_coef : UInt16
-    a_coef : ADPCMCOEFSET[0]*
-  end
-  struct DRMWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_reserved : UInt16
-    ul_content_id : UInt32
-    wfx_secure : WAVEFORMATEX
-  end
-  struct DVIADPCMWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_samples_per_block : UInt16
-  end
-  struct IMAADPCMWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_samples_per_block : UInt16
-  end
-  struct MEDIASPACEADPCMWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_revision : UInt16
-  end
-  struct SIERRAADPCMWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_revision : UInt16
-  end
-  struct G723_ADPCMWAVEFORMAT
-    wfx : WAVEFORMATEX
-    cb_extra_size : UInt16
-    n_aux_block_size : UInt16
-  end
-  struct DIGISTDWAVEFORMAT
-    wfx : WAVEFORMATEX
-  end
-  struct DIGIFIXWAVEFORMAT
-    wfx : WAVEFORMATEX
-  end
-  struct DIALOGICOKIADPCMWAVEFORMAT
-    ewf : WAVEFORMATEX
-  end
-  struct YAMAHA_ADPCMWAVEFORMAT
-    wfx : WAVEFORMATEX
-  end
-  struct SONARCWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_comp_type : UInt16
-  end
-  struct TRUESPEECHWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_revision : UInt16
-    n_samples_per_block : UInt16
-    ab_reserved : UInt8[28]*
-  end
-  struct ECHOSC1WAVEFORMAT
-    wfx : WAVEFORMATEX
-  end
-  struct AUDIOFILE_AF36WAVEFORMAT
-    wfx : WAVEFORMATEX
-  end
-  struct APTXWAVEFORMAT
-    wfx : WAVEFORMATEX
-  end
-  struct AUDIOFILE_AF10WAVEFORMAT
-    wfx : WAVEFORMATEX
-  end
-  struct DOLBYAC2WAVEFORMAT
-    wfx : WAVEFORMATEX
-    n_aux_bits_code : UInt16
-  end
-  struct GSM610WAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_samples_per_block : UInt16
-  end
-  struct ADPCMEWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_samples_per_block : UInt16
-  end
-  struct CONTRESVQLPCWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_samples_per_block : UInt16
-  end
-  struct DIGIREALWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_samples_per_block : UInt16
-  end
-  struct DIGIADPCMWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_samples_per_block : UInt16
-  end
-  struct CONTRESCR10WAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_samples_per_block : UInt16
-  end
-  struct NMS_VBXADPCMWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_samples_per_block : UInt16
-  end
-  struct G721_ADPCMWAVEFORMAT
-    wfx : WAVEFORMATEX
-    n_aux_block_size : UInt16
-  end
-  struct MSAUDIO1WAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_samples_per_block : UInt16
-    w_encode_options : UInt16
-  end
-  struct WMAUDIO2WAVEFORMAT
-    wfx : WAVEFORMATEX
-    dw_samples_per_block : UInt32
-    w_encode_options : UInt16
-    dw_super_block_align : UInt32
-  end
-  struct WMAUDIO3WAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_valid_bits_per_sample : UInt16
-    dw_channel_mask : UInt32
-    dw_reserved1 : UInt32
-    dw_reserved2 : UInt32
-    w_encode_options : UInt16
-    w_reserved3 : UInt16
-  end
-  struct CREATIVEADPCMWAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_revision : UInt16
-  end
-  struct CREATIVEFASTSPEECH8WAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_revision : UInt16
-  end
-  struct CREATIVEFASTSPEECH10WAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_revision : UInt16
-  end
-  struct FMTOWNS_SND_WAVEFORMAT
-    wfx : WAVEFORMATEX
-    w_revision : UInt16
-  end
-  struct OLIGSMWAVEFORMAT
-    wfx : WAVEFORMATEX
-  end
-  struct OLIADPCMWAVEFORMAT
-    wfx : WAVEFORMATEX
-  end
-  struct OLICELPWAVEFORMAT
-    wfx : WAVEFORMATEX
-  end
-  struct OLISBCWAVEFORMAT
-    wfx : WAVEFORMATEX
-  end
-  struct OLIOPRWAVEFORMAT
-    wfx : WAVEFORMATEX
-  end
-  struct CSIMAADPCMWAVEFORMAT
-    wfx : WAVEFORMATEX
-  end
-  struct S_riffwave_inst
-    b_unshifted_note : UInt8
-    ch_fine_tune : CHAR
-    ch_gain : CHAR
-    b_low_note : UInt8
-    b_high_note : UInt8
-    b_low_velocity : UInt8
-    b_high_velocity : UInt8
-  end
-  struct EXBMINFOHEADER
-    bmi : BITMAPINFOHEADER
-    bi_ext_data_offset : UInt32
-  end
-  struct JPEGINFOHEADER
-    jpeg_size : UInt32
-    jpeg_process : UInt32
-    jpeg_color_space_id : UInt32
-    jpeg_bits_per_sample : UInt32
-    jpegh_sub_sampling : UInt32
+  @[Extern]
+  record ADPCMCOEFSET,
+    iCoef1 : Int16,
+    iCoef2 : Int16
+
+  @[Extern]
+  record ADPCMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wSamplesPerBlock : UInt16,
+    wNumCoef : UInt16,
+    aCoef : Win32cr::Media::Multimedia::ADPCMCOEFSET*
+
+  @[Extern]
+  record DRMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wReserved : UInt16,
+    ulContentId : UInt32,
+    wfxSecure : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record DVIADPCMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wSamplesPerBlock : UInt16
+
+  @[Extern]
+  record IMAADPCMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wSamplesPerBlock : UInt16
+
+  @[Extern]
+  record MEDIASPACEADPCMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wRevision : UInt16
+
+  @[Extern]
+  record SIERRAADPCMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wRevision : UInt16
+
+  @[Extern]
+  record G723_ADPCMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    cbExtraSize : UInt16,
+    nAuxBlockSize : UInt16
+
+  @[Extern]
+  record DIGISTDWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record DIGIFIXWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record DIALOGICOKIADPCMWAVEFORMAT,
+    ewf : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record YAMAHA_ADPCMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record SONARCWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wCompType : UInt16
+
+  @[Extern]
+  record TRUESPEECHWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wRevision : UInt16,
+    nSamplesPerBlock : UInt16,
+    abReserved : UInt8[28]
+
+  @[Extern]
+  record ECHOSC1WAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record AUDIOFILE_AF36WAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record APTXWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record AUDIOFILE_AF10WAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record DOLBYAC2WAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    nAuxBitsCode : UInt16
+
+  @[Extern]
+  record GSM610WAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wSamplesPerBlock : UInt16
+
+  @[Extern]
+  record ADPCMEWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wSamplesPerBlock : UInt16
+
+  @[Extern]
+  record CONTRESVQLPCWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wSamplesPerBlock : UInt16
+
+  @[Extern]
+  record DIGIREALWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wSamplesPerBlock : UInt16
+
+  @[Extern]
+  record DIGIADPCMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wSamplesPerBlock : UInt16
+
+  @[Extern]
+  record CONTRESCR10WAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wSamplesPerBlock : UInt16
+
+  @[Extern]
+  record NMS_VBXADPCMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wSamplesPerBlock : UInt16
+
+  @[Extern]
+  record G721_ADPCMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    nAuxBlockSize : UInt16
+
+  @[Extern]
+  record MSAUDIO1WAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wSamplesPerBlock : UInt16,
+    wEncodeOptions : UInt16
+
+  @[Extern]
+  record WMAUDIO2WAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    dwSamplesPerBlock : UInt32,
+    wEncodeOptions : UInt16,
+    dwSuperBlockAlign : UInt32
+
+  @[Extern]
+  record WMAUDIO3WAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wValidBitsPerSample : UInt16,
+    dwChannelMask : UInt32,
+    dwReserved1 : UInt32,
+    dwReserved2 : UInt32,
+    wEncodeOptions : UInt16,
+    wReserved3 : UInt16
+
+  @[Extern]
+  record CREATIVEADPCMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wRevision : UInt16
+
+  @[Extern]
+  record CREATIVEFASTSPEECH8WAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wRevision : UInt16
+
+  @[Extern]
+  record CREATIVEFASTSPEECH10WAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wRevision : UInt16
+
+  @[Extern]
+  record FMTOWNS_SND_WAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX,
+    wRevision : UInt16
+
+  @[Extern]
+  record OLIGSMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record OLIADPCMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record OLICELPWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record OLISBCWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record OLIOPRWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record CSIMAADPCMWAVEFORMAT,
+    wfx : Win32cr::Media::Audio::WAVEFORMATEX
+
+  @[Extern]
+  record S_riffwave_inst,
+    bUnshiftedNote : UInt8,
+    chFineTune : Win32cr::Foundation::CHAR,
+    chGain : Win32cr::Foundation::CHAR,
+    bLowNote : UInt8,
+    bHighNote : UInt8,
+    bLowVelocity : UInt8,
+    bHighVelocity : UInt8
+
+  @[Extern]
+  record EXBMINFOHEADER,
+    bmi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER,
+    biExtDataOffset : UInt32
+
+  @[Extern]
+  record JPEGINFOHEADER,
+    jpeg_size : UInt32,
+    jpeg_process : UInt32,
+    jpeg_color_space_id : UInt32,
+    jpeg_bits_per_sample : UInt32,
+    jpegh_sub_sampling : UInt32,
     jpegv_sub_sampling : UInt32
-  end
-  struct MCI_GENERIC_PARMS
-    dw_callback : LibC::UINT_PTR
-  end
-  struct MCI_OPEN_PARMSA
-    dw_callback : LibC::UINT_PTR
-    w_device_id : UInt32
-    lpstr_device_type : PSTR
-    lpstr_element_name : PSTR
-    lpstr_alias : PSTR
-  end
-  struct MCI_OPEN_PARMSW
-    dw_callback : LibC::UINT_PTR
-    w_device_id : UInt32
-    lpstr_device_type : LibC::LPWSTR
-    lpstr_element_name : LibC::LPWSTR
-    lpstr_alias : LibC::LPWSTR
-  end
-  struct MCI_PLAY_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_from : UInt32
-    dw_to : UInt32
-  end
-  struct MCI_SEEK_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_to : UInt32
-  end
-  struct MCI_STATUS_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_return : LibC::UINT_PTR
-    dw_item : UInt32
-    dw_track : UInt32
-  end
-  struct MCI_INFO_PARMSA
-    dw_callback : LibC::UINT_PTR
-    lpstr_return : PSTR
-    dw_ret_size : UInt32
-  end
-  struct MCI_INFO_PARMSW
-    dw_callback : LibC::UINT_PTR
-    lpstr_return : LibC::LPWSTR
-    dw_ret_size : UInt32
-  end
-  struct MCI_GETDEVCAPS_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_return : UInt32
-    dw_item : UInt32
-  end
-  struct MCI_SYSINFO_PARMSA
-    dw_callback : LibC::UINT_PTR
-    lpstr_return : PSTR
-    dw_ret_size : UInt32
-    dw_number : UInt32
-    w_device_type : UInt32
-  end
-  struct MCI_SYSINFO_PARMSW
-    dw_callback : LibC::UINT_PTR
-    lpstr_return : LibC::LPWSTR
-    dw_ret_size : UInt32
-    dw_number : UInt32
-    w_device_type : UInt32
-  end
-  struct MCI_SET_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_time_format : UInt32
-    dw_audio : UInt32
-  end
-  struct MCI_BREAK_PARMS
-    dw_callback : LibC::UINT_PTR
-    n_virt_key : Int32
-    hwnd_break : HANDLE
-  end
-  struct MCI_SAVE_PARMSA
-    dw_callback : LibC::UINT_PTR
-    lpfilename : PSTR
-  end
-  struct MCI_SAVE_PARMSW
-    dw_callback : LibC::UINT_PTR
-    lpfilename : LibC::LPWSTR
-  end
-  struct MCI_LOAD_PARMSA
-    dw_callback : LibC::UINT_PTR
-    lpfilename : PSTR
-  end
-  struct MCI_LOAD_PARMSW
-    dw_callback : LibC::UINT_PTR
-    lpfilename : LibC::LPWSTR
-  end
-  struct MCI_RECORD_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_from : UInt32
-    dw_to : UInt32
-  end
-  struct MCI_VD_PLAY_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_from : UInt32
-    dw_to : UInt32
-    dw_speed : UInt32
-  end
-  struct MCI_VD_STEP_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_frames : UInt32
-  end
-  struct MCI_VD_ESCAPE_PARMSA
-    dw_callback : LibC::UINT_PTR
-    lpstr_command : PSTR
-  end
-  struct MCI_VD_ESCAPE_PARMSW
-    dw_callback : LibC::UINT_PTR
-    lpstr_command : LibC::LPWSTR
-  end
-  struct MCI_WAVE_OPEN_PARMSA
-    dw_callback : LibC::UINT_PTR
-    w_device_id : UInt32
-    lpstr_device_type : PSTR
-    lpstr_element_name : PSTR
-    lpstr_alias : PSTR
-    dw_buffer_seconds : UInt32
-  end
-  struct MCI_WAVE_OPEN_PARMSW
-    dw_callback : LibC::UINT_PTR
-    w_device_id : UInt32
-    lpstr_device_type : LibC::LPWSTR
-    lpstr_element_name : LibC::LPWSTR
-    lpstr_alias : LibC::LPWSTR
-    dw_buffer_seconds : UInt32
-  end
-  struct MCI_WAVE_DELETE_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_from : UInt32
-    dw_to : UInt32
-  end
-  struct MCI_WAVE_SET_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_time_format : UInt32
-    dw_audio : UInt32
-    w_input : UInt32
-    w_output : UInt32
-    w_format_tag : UInt16
-    w_reserved2 : UInt16
-    n_channels : UInt16
-    w_reserved3 : UInt16
-    n_samples_per_sec : UInt32
-    n_avg_bytes_per_sec : UInt32
-    n_block_align : UInt16
-    w_reserved4 : UInt16
-    w_bits_per_sample : UInt16
-    w_reserved5 : UInt16
-  end
-  struct MCI_SEQ_SET_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_time_format : UInt32
-    dw_audio : UInt32
-    dw_tempo : UInt32
-    dw_port : UInt32
-    dw_slave : UInt32
-    dw_master : UInt32
-    dw_offset : UInt32
-  end
-  struct MCI_ANIM_OPEN_PARMSA
-    dw_callback : LibC::UINT_PTR
-    w_device_id : UInt32
-    lpstr_device_type : PSTR
-    lpstr_element_name : PSTR
-    lpstr_alias : PSTR
-    dw_style : UInt32
-    h_wnd_parent : HANDLE
-  end
-  struct MCI_ANIM_OPEN_PARMSW
-    dw_callback : LibC::UINT_PTR
-    w_device_id : UInt32
-    lpstr_device_type : LibC::LPWSTR
-    lpstr_element_name : LibC::LPWSTR
-    lpstr_alias : LibC::LPWSTR
-    dw_style : UInt32
-    h_wnd_parent : HANDLE
-  end
-  struct MCI_ANIM_PLAY_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_from : UInt32
-    dw_to : UInt32
-    dw_speed : UInt32
-  end
-  struct MCI_ANIM_STEP_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_frames : UInt32
-  end
-  struct MCI_ANIM_WINDOW_PARMSA
-    dw_callback : LibC::UINT_PTR
-    h_wnd : HANDLE
-    n_cmd_show : UInt32
-    lpstr_text : PSTR
-  end
-  struct MCI_ANIM_WINDOW_PARMSW
-    dw_callback : LibC::UINT_PTR
-    h_wnd : HANDLE
-    n_cmd_show : UInt32
-    lpstr_text : LibC::LPWSTR
-  end
-  struct MCI_ANIM_RECT_PARMS
-    dw_callback : LibC::UINT_PTR
-    rc : RECT
-  end
-  struct MCI_ANIM_UPDATE_PARMS
-    dw_callback : LibC::UINT_PTR
-    rc : RECT
-    h_dc : HDC
-  end
-  struct MCI_OVLY_OPEN_PARMSA
-    dw_callback : LibC::UINT_PTR
-    w_device_id : UInt32
-    lpstr_device_type : PSTR
-    lpstr_element_name : PSTR
-    lpstr_alias : PSTR
-    dw_style : UInt32
-    h_wnd_parent : HANDLE
-  end
-  struct MCI_OVLY_OPEN_PARMSW
-    dw_callback : LibC::UINT_PTR
-    w_device_id : UInt32
-    lpstr_device_type : LibC::LPWSTR
-    lpstr_element_name : LibC::LPWSTR
-    lpstr_alias : LibC::LPWSTR
-    dw_style : UInt32
-    h_wnd_parent : HANDLE
-  end
-  struct MCI_OVLY_WINDOW_PARMSA
-    dw_callback : LibC::UINT_PTR
-    h_wnd : HANDLE
-    n_cmd_show : UInt32
-    lpstr_text : PSTR
-  end
-  struct MCI_OVLY_WINDOW_PARMSW
-    dw_callback : LibC::UINT_PTR
-    h_wnd : HANDLE
-    n_cmd_show : UInt32
-    lpstr_text : LibC::LPWSTR
-  end
-  struct MCI_OVLY_RECT_PARMS
-    dw_callback : LibC::UINT_PTR
-    rc : RECT
-  end
-  struct MCI_OVLY_SAVE_PARMSA
-    dw_callback : LibC::UINT_PTR
-    lpfilename : PSTR
-    rc : RECT
-  end
-  struct MCI_OVLY_SAVE_PARMSW
-    dw_callback : LibC::UINT_PTR
-    lpfilename : LibC::LPWSTR
-    rc : RECT
-  end
-  struct MCI_OVLY_LOAD_PARMSA
-    dw_callback : LibC::UINT_PTR
-    lpfilename : PSTR
-    rc : RECT
-  end
-  struct MCI_OVLY_LOAD_PARMSW
-    dw_callback : LibC::UINT_PTR
-    lpfilename : LibC::LPWSTR
-    rc : RECT
-  end
-  struct DRVCONFIGINFOEX
-    dw_dci_size : UInt32
-    lpsz_dci_section_name : LibC::LPWSTR
-    lpsz_dci_alias_name : LibC::LPWSTR
-    dn_dev_node : UInt32
-  end
-  struct DRVCONFIGINFO
-    dw_dci_size : UInt32
-    lpsz_dci_section_name : LibC::LPWSTR
-    lpsz_dci_alias_name : LibC::LPWSTR
-  end
-  struct MMIOINFO
-    dw_flags : UInt32
-    fcc_io_proc : UInt32
-    p_io_proc : LPMMIOPROC
-    w_error_ret : UInt32
-    htask : HTASK
-    cch_buffer : Int32
-    pch_buffer : Int8*
-    pch_next : Int8*
-    pch_end_read : Int8*
-    pch_end_write : Int8*
-    l_buf_offset : Int32
-    l_disk_offset : Int32
-    adw_info : UInt32[3]*
-    dw_reserved1 : UInt32
-    dw_reserved2 : UInt32
-    hmmio : HMMIO
-  end
-  struct MMCKINFO
-    ckid : UInt32
-    cksize : UInt32
-    fcc_type : UInt32
-    dw_data_offset : UInt32
-    dw_flags : UInt32
-  end
-  struct JOYCAPSA
-    w_mid : UInt16
-    w_pid : UInt16
-    sz_pname : CHAR[32]*
-    w_xmin : UInt32
-    w_xmax : UInt32
-    w_ymin : UInt32
-    w_ymax : UInt32
-    w_zmin : UInt32
-    w_zmax : UInt32
-    w_num_buttons : UInt32
-    w_period_min : UInt32
-    w_period_max : UInt32
-    w_rmin : UInt32
-    w_rmax : UInt32
-    w_umin : UInt32
-    w_umax : UInt32
-    w_vmin : UInt32
-    w_vmax : UInt32
-    w_caps : UInt32
-    w_max_axes : UInt32
-    w_num_axes : UInt32
-    w_max_buttons : UInt32
-    sz_reg_key : CHAR[32]*
-    sz_oem_vx_d : CHAR[260]*
-  end
-  struct JOYCAPSW
-    w_mid : UInt16
-    w_pid : UInt16
-    sz_pname : Char[32]*
-    w_xmin : UInt32
-    w_xmax : UInt32
-    w_ymin : UInt32
-    w_ymax : UInt32
-    w_zmin : UInt32
-    w_zmax : UInt32
-    w_num_buttons : UInt32
-    w_period_min : UInt32
-    w_period_max : UInt32
-    w_rmin : UInt32
-    w_rmax : UInt32
-    w_umin : UInt32
-    w_umax : UInt32
-    w_vmin : UInt32
-    w_vmax : UInt32
-    w_caps : UInt32
-    w_max_axes : UInt32
-    w_num_axes : UInt32
-    w_max_buttons : UInt32
-    sz_reg_key : Char[32]*
-    sz_oem_vx_d : Char[260]*
-  end
-  struct JOYCAPS2A
-    w_mid : UInt16
-    w_pid : UInt16
-    sz_pname : CHAR[32]*
-    w_xmin : UInt32
-    w_xmax : UInt32
-    w_ymin : UInt32
-    w_ymax : UInt32
-    w_zmin : UInt32
-    w_zmax : UInt32
-    w_num_buttons : UInt32
-    w_period_min : UInt32
-    w_period_max : UInt32
-    w_rmin : UInt32
-    w_rmax : UInt32
-    w_umin : UInt32
-    w_umax : UInt32
-    w_vmin : UInt32
-    w_vmax : UInt32
-    w_caps : UInt32
-    w_max_axes : UInt32
-    w_num_axes : UInt32
-    w_max_buttons : UInt32
-    sz_reg_key : CHAR[32]*
-    sz_oem_vx_d : CHAR[260]*
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct JOYCAPS2W
-    w_mid : UInt16
-    w_pid : UInt16
-    sz_pname : Char[32]*
-    w_xmin : UInt32
-    w_xmax : UInt32
-    w_ymin : UInt32
-    w_ymax : UInt32
-    w_zmin : UInt32
-    w_zmax : UInt32
-    w_num_buttons : UInt32
-    w_period_min : UInt32
-    w_period_max : UInt32
-    w_rmin : UInt32
-    w_rmax : UInt32
-    w_umin : UInt32
-    w_umax : UInt32
-    w_vmin : UInt32
-    w_vmax : UInt32
-    w_caps : UInt32
-    w_max_axes : UInt32
-    w_num_axes : UInt32
-    w_max_buttons : UInt32
-    sz_reg_key : Char[32]*
-    sz_oem_vx_d : Char[260]*
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct JOYINFO
-    w_xpos : UInt32
-    w_ypos : UInt32
-    w_zpos : UInt32
-    w_buttons : UInt32
-  end
-  struct JOYINFOEX
-    dw_size : UInt32
-    dw_flags : UInt32
-    dw_xpos : UInt32
-    dw_ypos : UInt32
-    dw_zpos : UInt32
-    dw_rpos : UInt32
-    dw_upos : UInt32
-    dw_vpos : UInt32
-    dw_buttons : UInt32
-    dw_button_number : UInt32
-    dw_pov : UInt32
-    dw_reserved1 : UInt32
-    dw_reserved2 : UInt32
-  end
-  struct MCI_DGV_RECT_PARMS
-    dw_callback : LibC::UINT_PTR
-    rc : RECT
-  end
-  struct MCI_DGV_CAPTURE_PARMSA
-    dw_callback : LibC::UINT_PTR
-    lpstr_file_name : PSTR
-    rc : RECT
-  end
-  struct MCI_DGV_CAPTURE_PARMSW
-    dw_callback : LibC::UINT_PTR
-    lpstr_file_name : LibC::LPWSTR
-    rc : RECT
-  end
-  struct MCI_DGV_COPY_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_from : UInt32
-    dw_to : UInt32
-    rc : RECT
-    dw_audio_stream : UInt32
-    dw_video_stream : UInt32
-  end
-  struct MCI_DGV_CUE_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_to : UInt32
-  end
-  struct MCI_DGV_CUT_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_from : UInt32
-    dw_to : UInt32
-    rc : RECT
-    dw_audio_stream : UInt32
-    dw_video_stream : UInt32
-  end
-  struct MCI_DGV_DELETE_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_from : UInt32
-    dw_to : UInt32
-    rc : RECT
-    dw_audio_stream : UInt32
-    dw_video_stream : UInt32
-  end
-  struct MCI_DGV_INFO_PARMSA
-    dw_callback : LibC::UINT_PTR
-    lpstr_return : PSTR
-    dw_ret_size : UInt32
-    dw_item : UInt32
-  end
-  struct MCI_DGV_INFO_PARMSW
-    dw_callback : LibC::UINT_PTR
-    lpstr_return : LibC::LPWSTR
-    dw_ret_size : UInt32
-    dw_item : UInt32
-  end
-  struct MCI_DGV_LIST_PARMSA
-    dw_callback : LibC::UINT_PTR
-    lpstr_return : PSTR
-    dw_length : UInt32
-    dw_number : UInt32
-    dw_item : UInt32
-    lpstr_algorithm : PSTR
-  end
-  struct MCI_DGV_LIST_PARMSW
-    dw_callback : LibC::UINT_PTR
-    lpstr_return : LibC::LPWSTR
-    dw_length : UInt32
-    dw_number : UInt32
-    dw_item : UInt32
-    lpstr_algorithm : LibC::LPWSTR
-  end
-  struct MCI_DGV_MONITOR_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_source : UInt32
-    dw_method : UInt32
-  end
-  struct MCI_DGV_OPEN_PARMSA
-    dw_callback : LibC::UINT_PTR
-    w_device_id : UInt32
-    lpstr_device_type : PSTR
-    lpstr_element_name : PSTR
-    lpstr_alias : PSTR
-    dw_style : UInt32
-    h_wnd_parent : HANDLE
-  end
-  struct MCI_DGV_OPEN_PARMSW
-    dw_callback : LibC::UINT_PTR
-    w_device_id : UInt32
-    lpstr_device_type : LibC::LPWSTR
-    lpstr_element_name : LibC::LPWSTR
-    lpstr_alias : LibC::LPWSTR
-    dw_style : UInt32
-    h_wnd_parent : HANDLE
-  end
-  struct MCI_DGV_PASTE_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_to : UInt32
-    rc : RECT
-    dw_audio_stream : UInt32
-    dw_video_stream : UInt32
-  end
-  struct MCI_DGV_QUALITY_PARMSA
-    dw_callback : LibC::UINT_PTR
-    dw_item : UInt32
-    lpstr_name : PSTR
-    lpstr_algorithm : UInt32
-    dw_handle : UInt32
-  end
-  struct MCI_DGV_QUALITY_PARMSW
-    dw_callback : LibC::UINT_PTR
-    dw_item : UInt32
-    lpstr_name : LibC::LPWSTR
-    lpstr_algorithm : UInt32
-    dw_handle : UInt32
-  end
-  struct MCI_DGV_RECORD_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_from : UInt32
-    dw_to : UInt32
-    rc : RECT
-    dw_audio_stream : UInt32
-    dw_video_stream : UInt32
-  end
-  struct MCI_DGV_RESERVE_PARMSA
-    dw_callback : LibC::UINT_PTR
-    lpstr_path : PSTR
-    dw_size : UInt32
-  end
-  struct MCI_DGV_RESERVE_PARMSW
-    dw_callback : LibC::UINT_PTR
-    lpstr_path : LibC::LPWSTR
-    dw_size : UInt32
-  end
-  struct MCI_DGV_RESTORE_PARMSA
-    dw_callback : LibC::UINT_PTR
-    lpstr_file_name : PSTR
-    rc : RECT
-  end
-  struct MCI_DGV_RESTORE_PARMSW
-    dw_callback : LibC::UINT_PTR
-    lpstr_file_name : LibC::LPWSTR
-    rc : RECT
-  end
-  struct MCI_DGV_SAVE_PARMSA
-    dw_callback : LibC::UINT_PTR
-    lpstr_file_name : PSTR
-    rc : RECT
-  end
-  struct MCI_DGV_SAVE_PARMSW
-    dw_callback : LibC::UINT_PTR
-    lpstr_file_name : LibC::LPWSTR
-    rc : RECT
-  end
-  struct MCI_DGV_SET_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_time_format : UInt32
-    dw_audio : UInt32
-    dw_file_format : UInt32
-    dw_speed : UInt32
-  end
-  struct MCI_DGV_SETAUDIO_PARMSA
-    dw_callback : LibC::UINT_PTR
-    dw_item : UInt32
-    dw_value : UInt32
-    dw_over : UInt32
-    lpstr_algorithm : PSTR
-    lpstr_quality : PSTR
-  end
-  struct MCI_DGV_SETAUDIO_PARMSW
-    dw_callback : LibC::UINT_PTR
-    dw_item : UInt32
-    dw_value : UInt32
-    dw_over : UInt32
-    lpstr_algorithm : LibC::LPWSTR
-    lpstr_quality : LibC::LPWSTR
-  end
-  struct MCI_DGV_SIGNAL_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_position : UInt32
-    dw_period : UInt32
-    dw_user_parm : UInt32
-  end
-  struct MCI_DGV_SETVIDEO_PARMSA
-    dw_callback : LibC::UINT_PTR
-    dw_item : UInt32
-    dw_value : UInt32
-    dw_over : UInt32
-    lpstr_algorithm : PSTR
-    lpstr_quality : PSTR
-    dw_source_number : UInt32
-  end
-  struct MCI_DGV_SETVIDEO_PARMSW
-    dw_callback : LibC::UINT_PTR
-    dw_item : UInt32
-    dw_value : UInt32
-    dw_over : UInt32
-    lpstr_algorithm : LibC::LPWSTR
-    lpstr_quality : LibC::LPWSTR
-    dw_source_number : UInt32
-  end
-  struct MCI_DGV_STATUS_PARMSA
-    dw_callback : LibC::UINT_PTR
-    dw_return : LibC::UINT_PTR
-    dw_item : UInt32
-    dw_track : UInt32
-    lpstr_drive : PSTR
-    dw_reference : UInt32
-  end
-  struct MCI_DGV_STATUS_PARMSW
-    dw_callback : LibC::UINT_PTR
-    dw_return : LibC::UINT_PTR
-    dw_item : UInt32
-    dw_track : UInt32
-    lpstr_drive : LibC::LPWSTR
-    dw_reference : UInt32
-  end
-  struct MCI_DGV_STEP_PARMS
-    dw_callback : LibC::UINT_PTR
-    dw_frames : UInt32
-  end
-  struct MCI_DGV_UPDATE_PARMS
-    dw_callback : LibC::UINT_PTR
-    rc : RECT
-    h_dc : HDC
-  end
-  struct MCI_DGV_WINDOW_PARMSA
-    dw_callback : LibC::UINT_PTR
-    h_wnd : HANDLE
-    n_cmd_show : UInt32
-    lpstr_text : PSTR
-  end
-  struct MCI_DGV_WINDOW_PARMSW
-    dw_callback : LibC::UINT_PTR
-    h_wnd : HANDLE
-    n_cmd_show : UInt32
-    lpstr_text : LibC::LPWSTR
-  end
-  struct ICOPEN
-    dw_size : UInt32
-    fcc_type : UInt32
-    fcc_handler : UInt32
-    dw_version : UInt32
-    dw_flags : UInt32
-    dw_error : LRESULT
-    p_v1_reserved : Void*
-    p_v2_reserved : Void*
-    dn_dev_node : UInt32
-  end
-  struct ICINFO
-    dw_size : UInt32
-    fcc_type : UInt32
-    fcc_handler : UInt32
-    dw_flags : UInt32
-    dw_version : UInt32
-    dw_version_icm : UInt32
-    sz_name : Char[16]*
-    sz_description : Char[128]*
-    sz_driver : Char[128]*
-  end
-  struct ICCOMPRESS
-    dw_flags : UInt32
-    lpbi_output : BITMAPINFOHEADER*
-    lp_output : Void*
-    lpbi_input : BITMAPINFOHEADER*
-    lp_input : Void*
-    lpckid : UInt32*
-    lpdw_flags : UInt32*
-    l_frame_num : Int32
-    dw_frame_size : UInt32
-    dw_quality : UInt32
-    lpbi_prev : BITMAPINFOHEADER*
-    lp_prev : Void*
-  end
-  struct ICCOMPRESSFRAMES
-    dw_flags : UInt32
-    lpbi_output : BITMAPINFOHEADER*
-    l_output : LPARAM
-    lpbi_input : BITMAPINFOHEADER*
-    l_input : LPARAM
-    l_start_frame : Int32
-    l_frame_count : Int32
-    l_quality : Int32
-    l_data_rate : Int32
-    l_key_rate : Int32
-    dw_rate : UInt32
-    dw_scale : UInt32
-    dw_overhead_per_frame : UInt32
-    dw_reserved2 : UInt32
-    get_data : LibC::IntPtrT
+
+  @[Extern]
+  record MCI_GENERIC_PARMS,
+    dwCallback : LibC::UIntPtrT
+
+  @[Extern]
+  record MCI_OPEN_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    wDeviceID : UInt32,
+    lpstrDeviceType : Win32cr::Foundation::PSTR,
+    lpstrElementName : Win32cr::Foundation::PSTR,
+    lpstrAlias : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record MCI_OPEN_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    wDeviceID : UInt32,
+    lpstrDeviceType : Win32cr::Foundation::PWSTR,
+    lpstrElementName : Win32cr::Foundation::PWSTR,
+    lpstrAlias : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record MCI_PLAY_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwFrom : UInt32,
+    dwTo : UInt32
+
+  @[Extern]
+  record MCI_SEEK_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwTo : UInt32
+
+  @[Extern]
+  record MCI_STATUS_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwReturn : LibC::UIntPtrT,
+    dwItem : UInt32,
+    dwTrack : UInt32
+
+  @[Extern]
+  record MCI_INFO_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    lpstrReturn : Win32cr::Foundation::PSTR,
+    dwRetSize : UInt32
+
+  @[Extern]
+  record MCI_INFO_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    lpstrReturn : Win32cr::Foundation::PWSTR,
+    dwRetSize : UInt32
+
+  @[Extern]
+  record MCI_GETDEVCAPS_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwReturn : UInt32,
+    dwItem : UInt32
+
+  @[Extern]
+  record MCI_SYSINFO_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    lpstrReturn : Win32cr::Foundation::PSTR,
+    dwRetSize : UInt32,
+    dwNumber : UInt32,
+    wDeviceType : UInt32
+
+  @[Extern]
+  record MCI_SYSINFO_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    lpstrReturn : Win32cr::Foundation::PWSTR,
+    dwRetSize : UInt32,
+    dwNumber : UInt32,
+    wDeviceType : UInt32
+
+  @[Extern]
+  record MCI_SET_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwTimeFormat : UInt32,
+    dwAudio : UInt32
+
+  @[Extern]
+  record MCI_BREAK_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    nVirtKey : Int32,
+    hwndBreak : Win32cr::Foundation::HWND
+
+  @[Extern]
+  record MCI_SAVE_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    lpfilename : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record MCI_SAVE_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    lpfilename : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record MCI_LOAD_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    lpfilename : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record MCI_LOAD_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    lpfilename : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record MCI_RECORD_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwFrom : UInt32,
+    dwTo : UInt32
+
+  @[Extern]
+  record MCI_VD_PLAY_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwFrom : UInt32,
+    dwTo : UInt32,
+    dwSpeed : UInt32
+
+  @[Extern]
+  record MCI_VD_STEP_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwFrames : UInt32
+
+  @[Extern]
+  record MCI_VD_ESCAPE_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    lpstrCommand : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record MCI_VD_ESCAPE_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    lpstrCommand : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record MCI_WAVE_OPEN_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    wDeviceID : UInt32,
+    lpstrDeviceType : Win32cr::Foundation::PSTR,
+    lpstrElementName : Win32cr::Foundation::PSTR,
+    lpstrAlias : Win32cr::Foundation::PSTR,
+    dwBufferSeconds : UInt32
+
+  @[Extern]
+  record MCI_WAVE_OPEN_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    wDeviceID : UInt32,
+    lpstrDeviceType : Win32cr::Foundation::PWSTR,
+    lpstrElementName : Win32cr::Foundation::PWSTR,
+    lpstrAlias : Win32cr::Foundation::PWSTR,
+    dwBufferSeconds : UInt32
+
+  @[Extern]
+  record MCI_WAVE_DELETE_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwFrom : UInt32,
+    dwTo : UInt32
+
+  @[Extern]
+  record MCI_WAVE_SET_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwTimeFormat : UInt32,
+    dwAudio : UInt32,
+    wInput : UInt32,
+    wOutput : UInt32,
+    wFormatTag : UInt16,
+    wReserved2 : UInt16,
+    nChannels : UInt16,
+    wReserved3 : UInt16,
+    nSamplesPerSec : UInt32,
+    nAvgBytesPerSec : UInt32,
+    nBlockAlign : UInt16,
+    wReserved4 : UInt16,
+    wBitsPerSample : UInt16,
+    wReserved5 : UInt16
+
+  @[Extern]
+  record MCI_SEQ_SET_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwTimeFormat : UInt32,
+    dwAudio : UInt32,
+    dwTempo : UInt32,
+    dwPort : UInt32,
+    dwSlave : UInt32,
+    dwMaster : UInt32,
+    dwOffset : UInt32
+
+  @[Extern]
+  record MCI_ANIM_OPEN_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    wDeviceID : UInt32,
+    lpstrDeviceType : Win32cr::Foundation::PSTR,
+    lpstrElementName : Win32cr::Foundation::PSTR,
+    lpstrAlias : Win32cr::Foundation::PSTR,
+    dwStyle : UInt32,
+    hWndParent : Win32cr::Foundation::HWND
+
+  @[Extern]
+  record MCI_ANIM_OPEN_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    wDeviceID : UInt32,
+    lpstrDeviceType : Win32cr::Foundation::PWSTR,
+    lpstrElementName : Win32cr::Foundation::PWSTR,
+    lpstrAlias : Win32cr::Foundation::PWSTR,
+    dwStyle : UInt32,
+    hWndParent : Win32cr::Foundation::HWND
+
+  @[Extern]
+  record MCI_ANIM_PLAY_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwFrom : UInt32,
+    dwTo : UInt32,
+    dwSpeed : UInt32
+
+  @[Extern]
+  record MCI_ANIM_STEP_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwFrames : UInt32
+
+  @[Extern]
+  record MCI_ANIM_WINDOW_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    hWnd : Win32cr::Foundation::HWND,
+    nCmdShow : UInt32,
+    lpstrText : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record MCI_ANIM_WINDOW_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    hWnd : Win32cr::Foundation::HWND,
+    nCmdShow : UInt32,
+    lpstrText : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record MCI_ANIM_RECT_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    rc : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record MCI_ANIM_UPDATE_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    rc : Win32cr::Foundation::RECT,
+    hDC : Win32cr::Graphics::Gdi::HDC
+
+  @[Extern]
+  record MCI_OVLY_OPEN_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    wDeviceID : UInt32,
+    lpstrDeviceType : Win32cr::Foundation::PSTR,
+    lpstrElementName : Win32cr::Foundation::PSTR,
+    lpstrAlias : Win32cr::Foundation::PSTR,
+    dwStyle : UInt32,
+    hWndParent : Win32cr::Foundation::HWND
+
+  @[Extern]
+  record MCI_OVLY_OPEN_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    wDeviceID : UInt32,
+    lpstrDeviceType : Win32cr::Foundation::PWSTR,
+    lpstrElementName : Win32cr::Foundation::PWSTR,
+    lpstrAlias : Win32cr::Foundation::PWSTR,
+    dwStyle : UInt32,
+    hWndParent : Win32cr::Foundation::HWND
+
+  @[Extern]
+  record MCI_OVLY_WINDOW_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    hWnd : Win32cr::Foundation::HWND,
+    nCmdShow : UInt32,
+    lpstrText : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record MCI_OVLY_WINDOW_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    hWnd : Win32cr::Foundation::HWND,
+    nCmdShow : UInt32,
+    lpstrText : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record MCI_OVLY_RECT_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    rc : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record MCI_OVLY_SAVE_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    lpfilename : Win32cr::Foundation::PSTR,
+    rc : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record MCI_OVLY_SAVE_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    lpfilename : Win32cr::Foundation::PWSTR,
+    rc : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record MCI_OVLY_LOAD_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    lpfilename : Win32cr::Foundation::PSTR,
+    rc : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record MCI_OVLY_LOAD_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    lpfilename : Win32cr::Foundation::PWSTR,
+    rc : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record DRVCONFIGINFOEX,
+    dwDCISize : UInt32,
+    lpszDCISectionName : Win32cr::Foundation::PWSTR,
+    lpszDCIAliasName : Win32cr::Foundation::PWSTR,
+    dnDevNode : UInt32
+
+  @[Extern]
+  record DRVCONFIGINFO,
+    dwDCISize : UInt32,
+    lpszDCISectionName : Win32cr::Foundation::PWSTR,
+    lpszDCIAliasName : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record MMIOINFO,
+    dwFlags : UInt32,
+    fccIOProc : UInt32,
+    pIOProc : Win32cr::Media::Multimedia::LPMMIOPROC,
+    wErrorRet : UInt32,
+    htask : Win32cr::Media::HTASK,
+    cchBuffer : Int32,
+    pchBuffer : Int8*,
+    pchNext : Int8*,
+    pchEndRead : Int8*,
+    pchEndWrite : Int8*,
+    lBufOffset : Int32,
+    lDiskOffset : Int32,
+    adwInfo : UInt32[3],
+    dwReserved1 : UInt32,
+    dwReserved2 : UInt32,
+    hmmio : Win32cr::Media::Multimedia::HMMIO
+
+  @[Extern]
+  record MMCKINFO,
+    ckid : UInt32,
+    cksize : UInt32,
+    fccType : UInt32,
+    dwDataOffset : UInt32,
+    dwFlags : UInt32
+
+  @[Extern]
+  record JOYCAPSA,
+    wMid : UInt16,
+    wPid : UInt16,
+    szPname : Win32cr::Foundation::CHAR[32],
+    wXmin : UInt32,
+    wXmax : UInt32,
+    wYmin : UInt32,
+    wYmax : UInt32,
+    wZmin : UInt32,
+    wZmax : UInt32,
+    wNumButtons : UInt32,
+    wPeriodMin : UInt32,
+    wPeriodMax : UInt32,
+    wRmin : UInt32,
+    wRmax : UInt32,
+    wUmin : UInt32,
+    wUmax : UInt32,
+    wVmin : UInt32,
+    wVmax : UInt32,
+    wCaps : UInt32,
+    wMaxAxes : UInt32,
+    wNumAxes : UInt32,
+    wMaxButtons : UInt32,
+    szRegKey : Win32cr::Foundation::CHAR[32],
+    szOEMVxD : Win32cr::Foundation::CHAR[260]
+
+  @[Extern]
+  record JOYCAPSW,
+    wMid : UInt16,
+    wPid : UInt16,
+    szPname : UInt16[32],
+    wXmin : UInt32,
+    wXmax : UInt32,
+    wYmin : UInt32,
+    wYmax : UInt32,
+    wZmin : UInt32,
+    wZmax : UInt32,
+    wNumButtons : UInt32,
+    wPeriodMin : UInt32,
+    wPeriodMax : UInt32,
+    wRmin : UInt32,
+    wRmax : UInt32,
+    wUmin : UInt32,
+    wUmax : UInt32,
+    wVmin : UInt32,
+    wVmax : UInt32,
+    wCaps : UInt32,
+    wMaxAxes : UInt32,
+    wNumAxes : UInt32,
+    wMaxButtons : UInt32,
+    szRegKey : UInt16[32],
+    szOEMVxD : UInt16[260]
+
+  @[Extern]
+  record JOYCAPS2A,
+    wMid : UInt16,
+    wPid : UInt16,
+    szPname : Win32cr::Foundation::CHAR[32],
+    wXmin : UInt32,
+    wXmax : UInt32,
+    wYmin : UInt32,
+    wYmax : UInt32,
+    wZmin : UInt32,
+    wZmax : UInt32,
+    wNumButtons : UInt32,
+    wPeriodMin : UInt32,
+    wPeriodMax : UInt32,
+    wRmin : UInt32,
+    wRmax : UInt32,
+    wUmin : UInt32,
+    wUmax : UInt32,
+    wVmin : UInt32,
+    wVmax : UInt32,
+    wCaps : UInt32,
+    wMaxAxes : UInt32,
+    wNumAxes : UInt32,
+    wMaxButtons : UInt32,
+    szRegKey : Win32cr::Foundation::CHAR[32],
+    szOEMVxD : Win32cr::Foundation::CHAR[260],
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record JOYCAPS2W,
+    wMid : UInt16,
+    wPid : UInt16,
+    szPname : UInt16[32],
+    wXmin : UInt32,
+    wXmax : UInt32,
+    wYmin : UInt32,
+    wYmax : UInt32,
+    wZmin : UInt32,
+    wZmax : UInt32,
+    wNumButtons : UInt32,
+    wPeriodMin : UInt32,
+    wPeriodMax : UInt32,
+    wRmin : UInt32,
+    wRmax : UInt32,
+    wUmin : UInt32,
+    wUmax : UInt32,
+    wVmin : UInt32,
+    wVmax : UInt32,
+    wCaps : UInt32,
+    wMaxAxes : UInt32,
+    wNumAxes : UInt32,
+    wMaxButtons : UInt32,
+    szRegKey : UInt16[32],
+    szOEMVxD : UInt16[260],
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record JOYINFO,
+    wXpos : UInt32,
+    wYpos : UInt32,
+    wZpos : UInt32,
+    wButtons : UInt32
+
+  @[Extern]
+  record JOYINFOEX,
+    dwSize : UInt32,
+    dwFlags : UInt32,
+    dwXpos : UInt32,
+    dwYpos : UInt32,
+    dwZpos : UInt32,
+    dwRpos : UInt32,
+    dwUpos : UInt32,
+    dwVpos : UInt32,
+    dwButtons : UInt32,
+    dwButtonNumber : UInt32,
+    dwPOV : UInt32,
+    dwReserved1 : UInt32,
+    dwReserved2 : UInt32
+
+  @[Extern]
+  record MCI_DGV_RECT_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    rc : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record MCI_DGV_CAPTURE_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    lpstrFileName : Win32cr::Foundation::PSTR,
+    rc : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record MCI_DGV_CAPTURE_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    lpstrFileName : Win32cr::Foundation::PWSTR,
+    rc : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record MCI_DGV_COPY_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwFrom : UInt32,
+    dwTo : UInt32,
+    rc : Win32cr::Foundation::RECT,
+    dwAudioStream : UInt32,
+    dwVideoStream : UInt32
+
+  @[Extern]
+  record MCI_DGV_CUE_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwTo : UInt32
+
+  @[Extern]
+  record MCI_DGV_CUT_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwFrom : UInt32,
+    dwTo : UInt32,
+    rc : Win32cr::Foundation::RECT,
+    dwAudioStream : UInt32,
+    dwVideoStream : UInt32
+
+  @[Extern]
+  record MCI_DGV_DELETE_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwFrom : UInt32,
+    dwTo : UInt32,
+    rc : Win32cr::Foundation::RECT,
+    dwAudioStream : UInt32,
+    dwVideoStream : UInt32
+
+  @[Extern]
+  record MCI_DGV_INFO_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    lpstrReturn : Win32cr::Foundation::PSTR,
+    dwRetSize : UInt32,
+    dwItem : UInt32
+
+  @[Extern]
+  record MCI_DGV_INFO_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    lpstrReturn : Win32cr::Foundation::PWSTR,
+    dwRetSize : UInt32,
+    dwItem : UInt32
+
+  @[Extern]
+  record MCI_DGV_LIST_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    lpstrReturn : Win32cr::Foundation::PSTR,
+    dwLength : UInt32,
+    dwNumber : UInt32,
+    dwItem : UInt32,
+    lpstrAlgorithm : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record MCI_DGV_LIST_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    lpstrReturn : Win32cr::Foundation::PWSTR,
+    dwLength : UInt32,
+    dwNumber : UInt32,
+    dwItem : UInt32,
+    lpstrAlgorithm : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record MCI_DGV_MONITOR_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwSource : UInt32,
+    dwMethod : UInt32
+
+  @[Extern]
+  record MCI_DGV_OPEN_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    wDeviceID : UInt32,
+    lpstrDeviceType : Win32cr::Foundation::PSTR,
+    lpstrElementName : Win32cr::Foundation::PSTR,
+    lpstrAlias : Win32cr::Foundation::PSTR,
+    dwStyle : UInt32,
+    hWndParent : Win32cr::Foundation::HWND
+
+  @[Extern]
+  record MCI_DGV_OPEN_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    wDeviceID : UInt32,
+    lpstrDeviceType : Win32cr::Foundation::PWSTR,
+    lpstrElementName : Win32cr::Foundation::PWSTR,
+    lpstrAlias : Win32cr::Foundation::PWSTR,
+    dwStyle : UInt32,
+    hWndParent : Win32cr::Foundation::HWND
+
+  @[Extern]
+  record MCI_DGV_PASTE_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwTo : UInt32,
+    rc : Win32cr::Foundation::RECT,
+    dwAudioStream : UInt32,
+    dwVideoStream : UInt32
+
+  @[Extern]
+  record MCI_DGV_QUALITY_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    dwItem : UInt32,
+    lpstrName : Win32cr::Foundation::PSTR,
+    lpstrAlgorithm : UInt32,
+    dwHandle : UInt32
+
+  @[Extern]
+  record MCI_DGV_QUALITY_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    dwItem : UInt32,
+    lpstrName : Win32cr::Foundation::PWSTR,
+    lpstrAlgorithm : UInt32,
+    dwHandle : UInt32
+
+  @[Extern]
+  record MCI_DGV_RECORD_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwFrom : UInt32,
+    dwTo : UInt32,
+    rc : Win32cr::Foundation::RECT,
+    dwAudioStream : UInt32,
+    dwVideoStream : UInt32
+
+  @[Extern]
+  record MCI_DGV_RESERVE_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    lpstrPath : Win32cr::Foundation::PSTR,
+    dwSize : UInt32
+
+  @[Extern]
+  record MCI_DGV_RESERVE_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    lpstrPath : Win32cr::Foundation::PWSTR,
+    dwSize : UInt32
+
+  @[Extern]
+  record MCI_DGV_RESTORE_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    lpstrFileName : Win32cr::Foundation::PSTR,
+    rc : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record MCI_DGV_RESTORE_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    lpstrFileName : Win32cr::Foundation::PWSTR,
+    rc : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record MCI_DGV_SAVE_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    lpstrFileName : Win32cr::Foundation::PSTR,
+    rc : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record MCI_DGV_SAVE_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    lpstrFileName : Win32cr::Foundation::PWSTR,
+    rc : Win32cr::Foundation::RECT
+
+  @[Extern]
+  record MCI_DGV_SET_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwTimeFormat : UInt32,
+    dwAudio : UInt32,
+    dwFileFormat : UInt32,
+    dwSpeed : UInt32
+
+  @[Extern]
+  record MCI_DGV_SETAUDIO_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    dwItem : UInt32,
+    dwValue : UInt32,
+    dwOver : UInt32,
+    lpstrAlgorithm : Win32cr::Foundation::PSTR,
+    lpstrQuality : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record MCI_DGV_SETAUDIO_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    dwItem : UInt32,
+    dwValue : UInt32,
+    dwOver : UInt32,
+    lpstrAlgorithm : Win32cr::Foundation::PWSTR,
+    lpstrQuality : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record MCI_DGV_SIGNAL_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwPosition : UInt32,
+    dwPeriod : UInt32,
+    dwUserParm : UInt32
+
+  @[Extern]
+  record MCI_DGV_SETVIDEO_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    dwItem : UInt32,
+    dwValue : UInt32,
+    dwOver : UInt32,
+    lpstrAlgorithm : Win32cr::Foundation::PSTR,
+    lpstrQuality : Win32cr::Foundation::PSTR,
+    dwSourceNumber : UInt32
+
+  @[Extern]
+  record MCI_DGV_SETVIDEO_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    dwItem : UInt32,
+    dwValue : UInt32,
+    dwOver : UInt32,
+    lpstrAlgorithm : Win32cr::Foundation::PWSTR,
+    lpstrQuality : Win32cr::Foundation::PWSTR,
+    dwSourceNumber : UInt32
+
+  @[Extern]
+  record MCI_DGV_STATUS_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    dwReturn : LibC::UIntPtrT,
+    dwItem : UInt32,
+    dwTrack : UInt32,
+    lpstrDrive : Win32cr::Foundation::PSTR,
+    dwReference : UInt32
+
+  @[Extern]
+  record MCI_DGV_STATUS_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    dwReturn : LibC::UIntPtrT,
+    dwItem : UInt32,
+    dwTrack : UInt32,
+    lpstrDrive : Win32cr::Foundation::PWSTR,
+    dwReference : UInt32
+
+  @[Extern]
+  record MCI_DGV_STEP_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    dwFrames : UInt32
+
+  @[Extern]
+  record MCI_DGV_UPDATE_PARMS,
+    dwCallback : LibC::UIntPtrT,
+    rc : Win32cr::Foundation::RECT,
+    hDC : Win32cr::Graphics::Gdi::HDC
+
+  @[Extern]
+  record MCI_DGV_WINDOW_PARMSA,
+    dwCallback : LibC::UIntPtrT,
+    hWnd : Win32cr::Foundation::HWND,
+    nCmdShow : UInt32,
+    lpstrText : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record MCI_DGV_WINDOW_PARMSW,
+    dwCallback : LibC::UIntPtrT,
+    hWnd : Win32cr::Foundation::HWND,
+    nCmdShow : UInt32,
+    lpstrText : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record ICOPEN,
+    dwSize : UInt32,
+    fccType : UInt32,
+    fccHandler : UInt32,
+    dwVersion : UInt32,
+    dwFlags : UInt32,
+    dwError : Win32cr::Foundation::LRESULT,
+    pV1Reserved : Void*,
+    pV2Reserved : Void*,
+    dnDevNode : UInt32
+
+  @[Extern]
+  record ICINFO,
+    dwSize : UInt32,
+    fccType : UInt32,
+    fccHandler : UInt32,
+    dwFlags : UInt32,
+    dwVersion : UInt32,
+    dwVersionICM : UInt32,
+    szName : UInt16[16],
+    szDescription : UInt16[128],
+    szDriver : UInt16[128]
+
+  @[Extern]
+  record ICCOMPRESS,
+    dwFlags : UInt32,
+    lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
+    lpOutput : Void*,
+    lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
+    lpInput : Void*,
+    lpckid : UInt32*,
+    lpdwFlags : UInt32*,
+    lFrameNum : Int32,
+    dwFrameSize : UInt32,
+    dwQuality : UInt32,
+    lpbiPrev : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
+    lpPrev : Void*
+
+  @[Extern]
+  record ICCOMPRESSFRAMES,
+    dwFlags : UInt32,
+    lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
+    lOutput : Win32cr::Foundation::LPARAM,
+    lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
+    lInput : Win32cr::Foundation::LPARAM,
+    lStartFrame : Int32,
+    lFrameCount : Int32,
+    lQuality : Int32,
+    lDataRate : Int32,
+    lKeyRate : Int32,
+    dwRate : UInt32,
+    dwScale : UInt32,
+    dwOverheadPerFrame : UInt32,
+    dwReserved2 : UInt32,
+    get_data : LibC::IntPtrT,
     put_data : LibC::IntPtrT
-  end
-  struct ICSETSTATUSPROC
-    dw_flags : UInt32
-    l_param : LPARAM
+
+  @[Extern]
+  record ICSETSTATUSPROC,
+    dwFlags : UInt32,
+    lParam : Win32cr::Foundation::LPARAM,
     status : LibC::IntPtrT
-  end
-  struct ICDECOMPRESS
-    dw_flags : UInt32
-    lpbi_input : BITMAPINFOHEADER*
-    lp_input : Void*
-    lpbi_output : BITMAPINFOHEADER*
-    lp_output : Void*
+
+  @[Extern]
+  record ICDECOMPRESS,
+    dwFlags : UInt32,
+    lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
+    lpInput : Void*,
+    lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
+    lpOutput : Void*,
     ckid : UInt32
-  end
-  struct ICDECOMPRESSEX
-    dw_flags : UInt32
-    lpbi_src : BITMAPINFOHEADER*
-    lp_src : Void*
-    lpbi_dst : BITMAPINFOHEADER*
-    lp_dst : Void*
-    x_dst : Int32
-    y_dst : Int32
-    dx_dst : Int32
-    dy_dst : Int32
-    x_src : Int32
-    y_src : Int32
-    dx_src : Int32
-    dy_src : Int32
-  end
-  struct ICDRAWBEGIN
-    dw_flags : UInt32
-    hpal : HPALETTE
-    hwnd : HANDLE
-    hdc : HDC
-    x_dst : Int32
-    y_dst : Int32
-    dx_dst : Int32
-    dy_dst : Int32
-    lpbi : BITMAPINFOHEADER*
-    x_src : Int32
-    y_src : Int32
-    dx_src : Int32
-    dy_src : Int32
-    dw_rate : UInt32
-    dw_scale : UInt32
-  end
-  struct ICDRAW
-    dw_flags : UInt32
-    lp_format : Void*
-    lp_data : Void*
-    cb_data : UInt32
-    l_time : Int32
-  end
-  struct ICDRAWSUGGEST
-    lpbi_in : BITMAPINFOHEADER*
-    lpbi_suggest : BITMAPINFOHEADER*
-    dx_src : Int32
-    dy_src : Int32
-    dx_dst : Int32
-    dy_dst : Int32
-    hic_decompressor : HIC
-  end
-  struct ICPALETTE
-    dw_flags : UInt32
-    i_start : Int32
-    i_len : Int32
-    lppe : PALETTEENTRY*
-  end
-  struct COMPVARS
-    cb_size : Int32
-    dw_flags : UInt32
-    hic : HIC
-    fcc_type : UInt32
-    fcc_handler : UInt32
-    lpbi_in : BITMAPINFO*
-    lpbi_out : BITMAPINFO*
-    lp_bits_out : Void*
-    lp_bits_prev : Void*
-    l_frame : Int32
-    l_key : Int32
-    l_data_rate : Int32
-    l_q : Int32
-    l_key_count : Int32
-    lp_state : Void*
-    cb_state : Int32
-  end
-  struct DRAWDIBTIME
-    time_count : Int32
-    time_draw : Int32
-    time_decompress : Int32
-    time_dither : Int32
-    time_stretch : Int32
-    time_blt : Int32
-    time_set_di_bits : Int32
-  end
-  struct AVISTREAMINFOW
-    fcc_type : UInt32
-    fcc_handler : UInt32
-    dw_flags : UInt32
-    dw_caps : UInt32
-    w_priority : UInt16
-    w_language : UInt16
-    dw_scale : UInt32
-    dw_rate : UInt32
-    dw_start : UInt32
-    dw_length : UInt32
-    dw_initial_frames : UInt32
-    dw_suggested_buffer_size : UInt32
-    dw_quality : UInt32
-    dw_sample_size : UInt32
-    rc_frame : RECT
-    dw_edit_count : UInt32
-    dw_format_change_count : UInt32
-    sz_name : Char[64]*
-  end
-  struct AVISTREAMINFOA
-    fcc_type : UInt32
-    fcc_handler : UInt32
-    dw_flags : UInt32
-    dw_caps : UInt32
-    w_priority : UInt16
-    w_language : UInt16
-    dw_scale : UInt32
-    dw_rate : UInt32
-    dw_start : UInt32
-    dw_length : UInt32
-    dw_initial_frames : UInt32
-    dw_suggested_buffer_size : UInt32
-    dw_quality : UInt32
-    dw_sample_size : UInt32
-    rc_frame : RECT
-    dw_edit_count : UInt32
-    dw_format_change_count : UInt32
-    sz_name : CHAR[64]*
-  end
-  struct AVIFILEINFOW
-    dw_max_bytes_per_sec : UInt32
-    dw_flags : UInt32
-    dw_caps : UInt32
-    dw_streams : UInt32
-    dw_suggested_buffer_size : UInt32
-    dw_width : UInt32
-    dw_height : UInt32
-    dw_scale : UInt32
-    dw_rate : UInt32
-    dw_length : UInt32
-    dw_edit_count : UInt32
-    sz_file_type : Char[64]*
-  end
-  struct AVIFILEINFOA
-    dw_max_bytes_per_sec : UInt32
-    dw_flags : UInt32
-    dw_caps : UInt32
-    dw_streams : UInt32
-    dw_suggested_buffer_size : UInt32
-    dw_width : UInt32
-    dw_height : UInt32
-    dw_scale : UInt32
-    dw_rate : UInt32
-    dw_length : UInt32
-    dw_edit_count : UInt32
-    sz_file_type : CHAR[64]*
-  end
-  struct AVICOMPRESSOPTIONS
-    fcc_type : UInt32
-    fcc_handler : UInt32
-    dw_key_frame_every : UInt32
-    dw_quality : UInt32
-    dw_bytes_per_second : UInt32
-    dw_flags : UInt32
-    lp_format : Void*
-    cb_format : UInt32
-    lp_parms : Void*
-    cb_parms : UInt32
-    dw_interleave_every : UInt32
-  end
-  struct VIDEOHDR
-    lp_data : UInt8*
-    dw_buffer_length : UInt32
-    dw_bytes_used : UInt32
-    dw_time_captured : UInt32
-    dw_user : LibC::UINT_PTR
-    dw_flags : UInt32
-    dw_reserved : LibC::UINT_PTR[4]*
-  end
-  struct CHANNEL_CAPS
-    dw_flags : UInt32
-    dw_src_rect_x_mod : UInt32
-    dw_src_rect_y_mod : UInt32
-    dw_src_rect_width_mod : UInt32
-    dw_src_rect_height_mod : UInt32
-    dw_dst_rect_x_mod : UInt32
-    dw_dst_rect_y_mod : UInt32
-    dw_dst_rect_width_mod : UInt32
-    dw_dst_rect_height_mod : UInt32
-  end
-  struct CAPDRIVERCAPS
-    w_device_index : UInt32
-    f_has_overlay : LibC::BOOL
-    f_has_dlg_video_source : LibC::BOOL
-    f_has_dlg_video_format : LibC::BOOL
-    f_has_dlg_video_display : LibC::BOOL
-    f_capture_initialized : LibC::BOOL
-    f_driver_supplies_palettes : LibC::BOOL
-    h_video_in : LibC::HANDLE
-    h_video_out : LibC::HANDLE
-    h_video_ext_in : LibC::HANDLE
-    h_video_ext_out : LibC::HANDLE
-  end
-  struct CAPSTATUS
-    ui_image_width : UInt32
-    ui_image_height : UInt32
-    f_live_window : LibC::BOOL
-    f_overlay_window : LibC::BOOL
-    f_scale : LibC::BOOL
-    pt_scroll : POINT
-    f_using_default_palette : LibC::BOOL
-    f_audio_hardware : LibC::BOOL
-    f_cap_file_exists : LibC::BOOL
-    dw_current_video_frame : UInt32
-    dw_current_video_frames_dropped : UInt32
-    dw_current_wave_samples : UInt32
-    dw_current_time_elapsed_ms : UInt32
-    h_pal_current : HPALETTE
-    f_capturing_now : LibC::BOOL
-    dw_return : UInt32
-    w_num_video_allocated : UInt32
-    w_num_audio_allocated : UInt32
-  end
-  struct CAPTUREPARMS
-    dw_request_micro_sec_per_frame : UInt32
-    f_make_user_hit_ok_to_capture : LibC::BOOL
-    w_percent_drop_for_error : UInt32
-    f_yield : LibC::BOOL
-    dw_index_size : UInt32
-    w_chunk_granularity : UInt32
-    f_using_dos_memory : LibC::BOOL
-    w_num_video_requested : UInt32
-    f_capture_audio : LibC::BOOL
-    w_num_audio_requested : UInt32
-    v_key_abort : UInt32
-    f_abort_left_mouse : LibC::BOOL
-    f_abort_right_mouse : LibC::BOOL
-    f_limit_enabled : LibC::BOOL
-    w_time_limit : UInt32
-    f_mci_control : LibC::BOOL
-    f_step_mci_device : LibC::BOOL
-    dw_mci_start_time : UInt32
-    dw_mci_stop_time : UInt32
-    f_step_capture_at2x : LibC::BOOL
-    w_step_capture_average_frames : UInt32
-    dw_audio_buffer_size : UInt32
-    f_disable_write_cache : LibC::BOOL
+
+  @[Extern]
+  record ICDECOMPRESSEX,
+    dwFlags : UInt32,
+    lpbiSrc : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
+    lpSrc : Void*,
+    lpbiDst : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
+    lpDst : Void*,
+    xDst : Int32,
+    yDst : Int32,
+    dxDst : Int32,
+    dyDst : Int32,
+    xSrc : Int32,
+    ySrc : Int32,
+    dxSrc : Int32,
+    dySrc : Int32
+
+  @[Extern]
+  record ICDRAWBEGIN,
+    dwFlags : UInt32,
+    hpal : Win32cr::Graphics::Gdi::HPALETTE,
+    hwnd : Win32cr::Foundation::HWND,
+    hdc : Win32cr::Graphics::Gdi::HDC,
+    xDst : Int32,
+    yDst : Int32,
+    dxDst : Int32,
+    dyDst : Int32,
+    lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
+    xSrc : Int32,
+    ySrc : Int32,
+    dxSrc : Int32,
+    dySrc : Int32,
+    dwRate : UInt32,
+    dwScale : UInt32
+
+  @[Extern]
+  record ICDRAW,
+    dwFlags : UInt32,
+    lpFormat : Void*,
+    lpData : Void*,
+    cbData : UInt32,
+    lTime : Int32
+
+  @[Extern]
+  record ICDRAWSUGGEST,
+    lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
+    lpbiSuggest : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*,
+    dxSrc : Int32,
+    dySrc : Int32,
+    dxDst : Int32,
+    dyDst : Int32,
+    hicDecompressor : Win32cr::Media::Multimedia::HIC
+
+  @[Extern]
+  record ICPALETTE,
+    dwFlags : UInt32,
+    iStart : Int32,
+    iLen : Int32,
+    lppe : Win32cr::Graphics::Gdi::PALETTEENTRY*
+
+  @[Extern]
+  record COMPVARS,
+    cbSize : Int32,
+    dwFlags : UInt32,
+    hic : Win32cr::Media::Multimedia::HIC,
+    fccType : UInt32,
+    fccHandler : UInt32,
+    lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFO*,
+    lpbiOut : Win32cr::Graphics::Gdi::BITMAPINFO*,
+    lpBitsOut : Void*,
+    lpBitsPrev : Void*,
+    lFrame : Int32,
+    lKey : Int32,
+    lDataRate : Int32,
+    lQ : Int32,
+    lKeyCount : Int32,
+    lpState : Void*,
+    cbState : Int32
+
+  @[Extern]
+  record DRAWDIBTIME,
+    timeCount : Int32,
+    timeDraw : Int32,
+    timeDecompress : Int32,
+    timeDither : Int32,
+    timeStretch : Int32,
+    timeBlt : Int32,
+    timeSetDIBits : Int32
+
+  @[Extern]
+  record AVISTREAMINFOW,
+    fccType : UInt32,
+    fccHandler : UInt32,
+    dwFlags : UInt32,
+    dwCaps : UInt32,
+    wPriority : UInt16,
+    wLanguage : UInt16,
+    dwScale : UInt32,
+    dwRate : UInt32,
+    dwStart : UInt32,
+    dwLength : UInt32,
+    dwInitialFrames : UInt32,
+    dwSuggestedBufferSize : UInt32,
+    dwQuality : UInt32,
+    dwSampleSize : UInt32,
+    rcFrame : Win32cr::Foundation::RECT,
+    dwEditCount : UInt32,
+    dwFormatChangeCount : UInt32,
+    szName : UInt16[64]
+
+  @[Extern]
+  record AVISTREAMINFOA,
+    fccType : UInt32,
+    fccHandler : UInt32,
+    dwFlags : UInt32,
+    dwCaps : UInt32,
+    wPriority : UInt16,
+    wLanguage : UInt16,
+    dwScale : UInt32,
+    dwRate : UInt32,
+    dwStart : UInt32,
+    dwLength : UInt32,
+    dwInitialFrames : UInt32,
+    dwSuggestedBufferSize : UInt32,
+    dwQuality : UInt32,
+    dwSampleSize : UInt32,
+    rcFrame : Win32cr::Foundation::RECT,
+    dwEditCount : UInt32,
+    dwFormatChangeCount : UInt32,
+    szName : Win32cr::Foundation::CHAR[64]
+
+  @[Extern]
+  record AVIFILEINFOW,
+    dwMaxBytesPerSec : UInt32,
+    dwFlags : UInt32,
+    dwCaps : UInt32,
+    dwStreams : UInt32,
+    dwSuggestedBufferSize : UInt32,
+    dwWidth : UInt32,
+    dwHeight : UInt32,
+    dwScale : UInt32,
+    dwRate : UInt32,
+    dwLength : UInt32,
+    dwEditCount : UInt32,
+    szFileType : UInt16[64]
+
+  @[Extern]
+  record AVIFILEINFOA,
+    dwMaxBytesPerSec : UInt32,
+    dwFlags : UInt32,
+    dwCaps : UInt32,
+    dwStreams : UInt32,
+    dwSuggestedBufferSize : UInt32,
+    dwWidth : UInt32,
+    dwHeight : UInt32,
+    dwScale : UInt32,
+    dwRate : UInt32,
+    dwLength : UInt32,
+    dwEditCount : UInt32,
+    szFileType : Win32cr::Foundation::CHAR[64]
+
+  @[Extern]
+  record AVICOMPRESSOPTIONS,
+    fccType : UInt32,
+    fccHandler : UInt32,
+    dwKeyFrameEvery : UInt32,
+    dwQuality : UInt32,
+    dwBytesPerSecond : UInt32,
+    dwFlags : UInt32,
+    lpFormat : Void*,
+    cbFormat : UInt32,
+    lpParms : Void*,
+    cbParms : UInt32,
+    dwInterleaveEvery : UInt32
+
+  @[Extern]
+  record VIDEOHDR,
+    lpData : UInt8*,
+    dwBufferLength : UInt32,
+    dwBytesUsed : UInt32,
+    dwTimeCaptured : UInt32,
+    dwUser : LibC::UIntPtrT,
+    dwFlags : UInt32,
+    dwReserved : LibC::UIntPtrT[4]
+
+  @[Extern]
+  record CHANNEL_CAPS,
+    dwFlags : UInt32,
+    dwSrcRectXMod : UInt32,
+    dwSrcRectYMod : UInt32,
+    dwSrcRectWidthMod : UInt32,
+    dwSrcRectHeightMod : UInt32,
+    dwDstRectXMod : UInt32,
+    dwDstRectYMod : UInt32,
+    dwDstRectWidthMod : UInt32,
+    dwDstRectHeightMod : UInt32
+
+  @[Extern]
+  record CAPDRIVERCAPS,
+    wDeviceIndex : UInt32,
+    fHasOverlay : Win32cr::Foundation::BOOL,
+    fHasDlgVideoSource : Win32cr::Foundation::BOOL,
+    fHasDlgVideoFormat : Win32cr::Foundation::BOOL,
+    fHasDlgVideoDisplay : Win32cr::Foundation::BOOL,
+    fCaptureInitialized : Win32cr::Foundation::BOOL,
+    fDriverSuppliesPalettes : Win32cr::Foundation::BOOL,
+    hVideoIn : Win32cr::Foundation::HANDLE,
+    hVideoOut : Win32cr::Foundation::HANDLE,
+    hVideoExtIn : Win32cr::Foundation::HANDLE,
+    hVideoExtOut : Win32cr::Foundation::HANDLE
+
+  @[Extern]
+  record CAPSTATUS,
+    uiImageWidth : UInt32,
+    uiImageHeight : UInt32,
+    fLiveWindow : Win32cr::Foundation::BOOL,
+    fOverlayWindow : Win32cr::Foundation::BOOL,
+    fScale : Win32cr::Foundation::BOOL,
+    ptScroll : Win32cr::Foundation::POINT,
+    fUsingDefaultPalette : Win32cr::Foundation::BOOL,
+    fAudioHardware : Win32cr::Foundation::BOOL,
+    fCapFileExists : Win32cr::Foundation::BOOL,
+    dwCurrentVideoFrame : UInt32,
+    dwCurrentVideoFramesDropped : UInt32,
+    dwCurrentWaveSamples : UInt32,
+    dwCurrentTimeElapsedMS : UInt32,
+    hPalCurrent : Win32cr::Graphics::Gdi::HPALETTE,
+    fCapturingNow : Win32cr::Foundation::BOOL,
+    dwReturn : UInt32,
+    wNumVideoAllocated : UInt32,
+    wNumAudioAllocated : UInt32
+
+  @[Extern]
+  record CAPTUREPARMS,
+    dwRequestMicroSecPerFrame : UInt32,
+    fMakeUserHitOKToCapture : Win32cr::Foundation::BOOL,
+    wPercentDropForError : UInt32,
+    fYield : Win32cr::Foundation::BOOL,
+    dwIndexSize : UInt32,
+    wChunkGranularity : UInt32,
+    fUsingDOSMemory : Win32cr::Foundation::BOOL,
+    wNumVideoRequested : UInt32,
+    fCaptureAudio : Win32cr::Foundation::BOOL,
+    wNumAudioRequested : UInt32,
+    vKeyAbort : UInt32,
+    fAbortLeftMouse : Win32cr::Foundation::BOOL,
+    fAbortRightMouse : Win32cr::Foundation::BOOL,
+    fLimitEnabled : Win32cr::Foundation::BOOL,
+    wTimeLimit : UInt32,
+    fMCIControl : Win32cr::Foundation::BOOL,
+    fStepMCIDevice : Win32cr::Foundation::BOOL,
+    dwMCIStartTime : UInt32,
+    dwMCIStopTime : UInt32,
+    fStepCaptureAt2x : Win32cr::Foundation::BOOL,
+    wStepCaptureAverageFrames : UInt32,
+    dwAudioBufferSize : UInt32,
+    fDisableWriteCache : Win32cr::Foundation::BOOL,
     av_stream_master : UInt32
-  end
-  struct CAPINFOCHUNK
-    fcc_info_id : UInt32
-    lp_data : Void*
-    cb_data : Int32
-  end
-  struct DRVM_IOCTL_DATA
-    dw_size : UInt32
-    dw_cmd : UInt32
-  end
-  struct WAVEOPENDESC
-    h_wave : HWAVE
-    lp_format : WAVEFORMAT*
-    dw_callback : LibC::UINT_PTR
-    dw_instance : LibC::UINT_PTR
-    u_mapped_device_id : UInt32
-    dn_dev_node : LibC::UINT_PTR
-  end
-  struct MIDIOPENSTRMID
-    dw_stream_id : UInt32
-    u_device_id : UInt32
-  end
-  struct MIXEROPENDESC
-    hmx : HMIXER
-    p_reserved0 : Void*
-    dw_callback : LibC::UINT_PTR
-    dw_instance : LibC::UINT_PTR
-    dn_dev_node : LibC::UINT_PTR
-  end
-  struct TIMEREVENT
-    w_delay : UInt16
-    w_resolution : UInt16
-    lp_function : LPTIMECALLBACK
-    dw_user : UInt32
-    w_flags : UInt16
-    w_reserved1 : UInt16
-  end
-  struct MCI_OPEN_DRIVER_PARMS
-    w_device_id : UInt32
-    lpstr_params : LibC::LPWSTR
-    w_custom_command_table : UInt32
-    w_type : UInt32
-  end
-
-
-  struct IAVIStreamVTbl
-    query_interface : Proc(IAVIStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAVIStream*, UInt32)
-    release : Proc(IAVIStream*, UInt32)
-    create : Proc(IAVIStream*, LPARAM, LPARAM, HRESULT)
-    info : Proc(IAVIStream*, AVISTREAMINFOW*, Int32, HRESULT)
-    find_sample : Proc(IAVIStream*, Int32, Int32, Int32)
-    read_format : Proc(IAVIStream*, Int32, Void*, Int32*, HRESULT)
-    set_format : Proc(IAVIStream*, Int32, Void*, Int32, HRESULT)
-    read : Proc(IAVIStream*, Int32, Int32, Void*, Int32, Int32*, Int32*, HRESULT)
-    write : Proc(IAVIStream*, Int32, Int32, Void*, Int32, UInt32, Int32*, Int32*, HRESULT)
-    delete : Proc(IAVIStream*, Int32, Int32, HRESULT)
-    read_data : Proc(IAVIStream*, UInt32, Void*, Int32*, HRESULT)
-    write_data : Proc(IAVIStream*, UInt32, Void*, Int32, HRESULT)
-    set_info : Proc(IAVIStream*, AVISTREAMINFOW*, Int32, HRESULT)
-  end
-
-  IAVIStream_GUID = "00020021-0000-0000-c000-000000000046"
-  IID_IAVIStream = LibC::GUID.new(0x20021_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
-  struct IAVIStream
-    lpVtbl : IAVIStreamVTbl*
-  end
-
-  struct IAVIStreamingVTbl
-    query_interface : Proc(IAVIStreaming*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAVIStreaming*, UInt32)
-    release : Proc(IAVIStreaming*, UInt32)
-    begin_ : Proc(IAVIStreaming*, Int32, Int32, Int32, HRESULT)
-    end_ : Proc(IAVIStreaming*, HRESULT)
-  end
-
-  IAVIStreaming_GUID = "00020022-0000-0000-c000-000000000046"
-  IID_IAVIStreaming = LibC::GUID.new(0x20022_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
-  struct IAVIStreaming
-    lpVtbl : IAVIStreamingVTbl*
-  end
-
-  struct IAVIEditStreamVTbl
-    query_interface : Proc(IAVIEditStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAVIEditStream*, UInt32)
-    release : Proc(IAVIEditStream*, UInt32)
-    cut : Proc(IAVIEditStream*, Int32*, Int32*, IAVIStream*, HRESULT)
-    copy : Proc(IAVIEditStream*, Int32*, Int32*, IAVIStream*, HRESULT)
-    paste : Proc(IAVIEditStream*, Int32*, Int32*, IAVIStream, Int32, Int32, HRESULT)
-    clone : Proc(IAVIEditStream*, IAVIStream*, HRESULT)
-    set_info : Proc(IAVIEditStream*, AVISTREAMINFOW*, Int32, HRESULT)
-  end
-
-  IAVIEditStream_GUID = "00020024-0000-0000-c000-000000000046"
-  IID_IAVIEditStream = LibC::GUID.new(0x20024_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
-  struct IAVIEditStream
-    lpVtbl : IAVIEditStreamVTbl*
-  end
-
-  struct IAVIPersistFileVTbl
-    query_interface : Proc(IAVIPersistFile*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAVIPersistFile*, UInt32)
-    release : Proc(IAVIPersistFile*, UInt32)
-    get_class_id : Proc(IAVIPersistFile*, Guid*, HRESULT)
-    is_dirty : Proc(IAVIPersistFile*, HRESULT)
-    load : Proc(IAVIPersistFile*, LibC::LPWSTR, UInt32, HRESULT)
-    save : Proc(IAVIPersistFile*, LibC::LPWSTR, LibC::BOOL, HRESULT)
-    save_completed : Proc(IAVIPersistFile*, LibC::LPWSTR, HRESULT)
-    get_cur_file : Proc(IAVIPersistFile*, LibC::LPWSTR*, HRESULT)
-    reserved1 : Proc(IAVIPersistFile*, HRESULT)
-  end
-
-  IAVIPersistFile_GUID = "00020025-0000-0000-c000-000000000046"
-  IID_IAVIPersistFile = LibC::GUID.new(0x20025_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
-  struct IAVIPersistFile
-    lpVtbl : IAVIPersistFileVTbl*
-  end
 
-  struct IAVIFileVTbl
-    query_interface : Proc(IAVIFile*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAVIFile*, UInt32)
-    release : Proc(IAVIFile*, UInt32)
-    info : Proc(IAVIFile*, AVIFILEINFOW*, Int32, HRESULT)
-    get_stream : Proc(IAVIFile*, IAVIStream*, UInt32, Int32, HRESULT)
-    create_stream : Proc(IAVIFile*, IAVIStream*, AVISTREAMINFOW*, HRESULT)
-    write_data : Proc(IAVIFile*, UInt32, Void*, Int32, HRESULT)
-    read_data : Proc(IAVIFile*, UInt32, Void*, Int32*, HRESULT)
-    end_record : Proc(IAVIFile*, HRESULT)
-    delete_stream : Proc(IAVIFile*, UInt32, Int32, HRESULT)
-  end
-
-  IAVIFile_GUID = "00020020-0000-0000-c000-000000000046"
-  IID_IAVIFile = LibC::GUID.new(0x20020_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
-  struct IAVIFile
-    lpVtbl : IAVIFileVTbl*
-  end
-
-  struct IGetFrameVTbl
-    query_interface : Proc(IGetFrame*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IGetFrame*, UInt32)
-    release : Proc(IGetFrame*, UInt32)
-    get_frame : Proc(IGetFrame*, Int32, Void**)
-    begin_ : Proc(IGetFrame*, Int32, Int32, Int32, HRESULT)
-    end_ : Proc(IGetFrame*, HRESULT)
-    set_format : Proc(IGetFrame*, BITMAPINFOHEADER*, Void*, Int32, Int32, Int32, Int32, HRESULT)
-  end
-
-  IGetFrame_GUID = "00020023-0000-0000-c000-000000000046"
-  IID_IGetFrame = LibC::GUID.new(0x20023_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
-  struct IGetFrame
-    lpVtbl : IGetFrameVTbl*
-  end
-
-
-  # Params # mciid : UInt32 [In],umsg : UInt32 [In],dwparam1 : LibC::UINT_PTR [In],dwparam2 : LibC::UINT_PTR [In]
-  fun mciSendCommandA(mciid : UInt32, umsg : UInt32, dwparam1 : LibC::UINT_PTR, dwparam2 : LibC::UINT_PTR) : UInt32
-
-  # Params # mciid : UInt32 [In],umsg : UInt32 [In],dwparam1 : LibC::UINT_PTR [In],dwparam2 : LibC::UINT_PTR [In]
-  fun mciSendCommandW(mciid : UInt32, umsg : UInt32, dwparam1 : LibC::UINT_PTR, dwparam2 : LibC::UINT_PTR) : UInt32
-
-  # Params # lpstrcommand : PSTR [In],lpstrreturnstring : UInt8* [In],ureturnlength : UInt32 [In],hwndcallback : LibC::HANDLE [In]
-  fun mciSendStringA(lpstrcommand : PSTR, lpstrreturnstring : UInt8*, ureturnlength : UInt32, hwndcallback : LibC::HANDLE) : UInt32
-
-  # Params # lpstrcommand : LibC::LPWSTR [In],lpstrreturnstring : Char* [In],ureturnlength : UInt32 [In],hwndcallback : LibC::HANDLE [In]
-  fun mciSendStringW(lpstrcommand : LibC::LPWSTR, lpstrreturnstring : Char*, ureturnlength : UInt32, hwndcallback : LibC::HANDLE) : UInt32
+  @[Extern]
+  record CAPINFOCHUNK,
+    fccInfoID : UInt32,
+    lpData : Void*,
+    cbData : Int32
+
+  @[Extern]
+  record DRVM_IOCTL_DATA,
+    dwSize : UInt32,
+    dwCmd : UInt32
+
+  @[Extern]
+  record WAVEOPENDESC,
+    hWave : Win32cr::Media::Audio::HWAVE,
+    lpFormat : Win32cr::Media::Audio::WAVEFORMAT*,
+    dwCallback : LibC::UIntPtrT,
+    dwInstance : LibC::UIntPtrT,
+    uMappedDeviceID : UInt32,
+    dnDevNode : LibC::UIntPtrT
+
+  @[Extern]
+  record MIDIOPENSTRMID,
+    dwStreamID : UInt32,
+    uDeviceID : UInt32
+
+  @[Extern]
+  record MIXEROPENDESC,
+    hmx : Win32cr::Media::Audio::HMIXER,
+    pReserved0 : Void*,
+    dwCallback : LibC::UIntPtrT,
+    dwInstance : LibC::UIntPtrT,
+    dnDevNode : LibC::UIntPtrT
+
+  @[Extern]
+  record TIMEREVENT,
+    wDelay : UInt16,
+    wResolution : UInt16,
+    lpFunction : Win32cr::Media::LPTIMECALLBACK,
+    dwUser : UInt32,
+    wFlags : UInt16,
+    wReserved1 : UInt16
+
+  @[Extern]
+  record MCI_OPEN_DRIVER_PARMS,
+    wDeviceID : UInt32,
+    lpstrParams : Win32cr::Foundation::PWSTR,
+    wCustomCommandTable : UInt32,
+    wType : UInt32
+
+  @[Extern]
+  record IAVIStreamVtbl,
+    query_interface : Proc(IAVIStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAVIStream*, UInt32),
+    release : Proc(IAVIStream*, UInt32),
+    create : Proc(IAVIStream*, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    info : Proc(IAVIStream*, Win32cr::Media::Multimedia::AVISTREAMINFOW*, Int32, Win32cr::Foundation::HRESULT),
+    find_sample : Proc(IAVIStream*, Int32, Int32, Int32),
+    read_format : Proc(IAVIStream*, Int32, Void*, Int32*, Win32cr::Foundation::HRESULT),
+    set_format : Proc(IAVIStream*, Int32, Void*, Int32, Win32cr::Foundation::HRESULT),
+    read : Proc(IAVIStream*, Int32, Int32, Void*, Int32, Int32*, Int32*, Win32cr::Foundation::HRESULT),
+    write : Proc(IAVIStream*, Int32, Int32, Void*, Int32, UInt32, Int32*, Int32*, Win32cr::Foundation::HRESULT),
+    delete : Proc(IAVIStream*, Int32, Int32, Win32cr::Foundation::HRESULT),
+    read_data : Proc(IAVIStream*, UInt32, Void*, Int32*, Win32cr::Foundation::HRESULT),
+    write_data : Proc(IAVIStream*, UInt32, Void*, Int32, Win32cr::Foundation::HRESULT),
+    set_info : Proc(IAVIStream*, Win32cr::Media::Multimedia::AVISTREAMINFOW*, Int32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00020021-0000-0000-c000-000000000046")]
+  record IAVIStream, lpVtbl : IAVIStreamVtbl* do
+    GUID = LibC::GUID.new(0x20021_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
+    def query_interface(this : IAVIStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAVIStream*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAVIStream*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def create(this : IAVIStream*, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create.call(this, lParam1, lParam2)
+    end
+    def info(this : IAVIStream*, psi : Win32cr::Media::Multimedia::AVISTREAMINFOW*, lSize : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.info.call(this, psi, lSize)
+    end
+    def find_sample(this : IAVIStream*, lPos : Int32, lFlags : Int32) : Int32
+      @lpVtbl.try &.value.find_sample.call(this, lPos, lFlags)
+    end
+    def read_format(this : IAVIStream*, lPos : Int32, lpFormat : Void*, lpcbFormat : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read_format.call(this, lPos, lpFormat, lpcbFormat)
+    end
+    def set_format(this : IAVIStream*, lPos : Int32, lpFormat : Void*, cbFormat : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_format.call(this, lPos, lpFormat, cbFormat)
+    end
+    def read(this : IAVIStream*, lStart : Int32, lSamples : Int32, lpBuffer : Void*, cbBuffer : Int32, plBytes : Int32*, plSamples : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, lStart, lSamples, lpBuffer, cbBuffer, plBytes, plSamples)
+    end
+    def write(this : IAVIStream*, lStart : Int32, lSamples : Int32, lpBuffer : Void*, cbBuffer : Int32, dwFlags : UInt32, plSampWritten : Int32*, plBytesWritten : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, lStart, lSamples, lpBuffer, cbBuffer, dwFlags, plSampWritten, plBytesWritten)
+    end
+    def delete(this : IAVIStream*, lStart : Int32, lSamples : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete.call(this, lStart, lSamples)
+    end
+    def read_data(this : IAVIStream*, fcc : UInt32, lp : Void*, lpcb : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read_data.call(this, fcc, lp, lpcb)
+    end
+    def write_data(this : IAVIStream*, fcc : UInt32, lp : Void*, cb : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write_data.call(this, fcc, lp, cb)
+    end
+    def set_info(this : IAVIStream*, lpInfo : Win32cr::Media::Multimedia::AVISTREAMINFOW*, cbInfo : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_info.call(this, lpInfo, cbInfo)
+    end
+
+  end
+
+  @[Extern]
+  record IAVIStreamingVtbl,
+    query_interface : Proc(IAVIStreaming*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAVIStreaming*, UInt32),
+    release : Proc(IAVIStreaming*, UInt32),
+    begin__ : Proc(IAVIStreaming*, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
+    end__ : Proc(IAVIStreaming*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00020022-0000-0000-c000-000000000046")]
+  record IAVIStreaming, lpVtbl : IAVIStreamingVtbl* do
+    GUID = LibC::GUID.new(0x20022_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
+    def query_interface(this : IAVIStreaming*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAVIStreaming*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAVIStreaming*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def begin__(this : IAVIStreaming*, lStart : Int32, lEnd : Int32, lRate : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.begin__.call(this, lStart, lEnd, lRate)
+    end
+    def end__(this : IAVIStreaming*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.end__.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record IAVIEditStreamVtbl,
+    query_interface : Proc(IAVIEditStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAVIEditStream*, UInt32),
+    release : Proc(IAVIEditStream*, UInt32),
+    cut : Proc(IAVIEditStream*, Int32*, Int32*, Void**, Win32cr::Foundation::HRESULT),
+    copy : Proc(IAVIEditStream*, Int32*, Int32*, Void**, Win32cr::Foundation::HRESULT),
+    paste : Proc(IAVIEditStream*, Int32*, Int32*, Void*, Int32, Int32, Win32cr::Foundation::HRESULT),
+    clone : Proc(IAVIEditStream*, Void**, Win32cr::Foundation::HRESULT),
+    set_info : Proc(IAVIEditStream*, Win32cr::Media::Multimedia::AVISTREAMINFOW*, Int32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00020024-0000-0000-c000-000000000046")]
+  record IAVIEditStream, lpVtbl : IAVIEditStreamVtbl* do
+    GUID = LibC::GUID.new(0x20024_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
+    def query_interface(this : IAVIEditStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAVIEditStream*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAVIEditStream*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def cut(this : IAVIEditStream*, plStart : Int32*, plLength : Int32*, ppResult : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cut.call(this, plStart, plLength, ppResult)
+    end
+    def copy(this : IAVIEditStream*, plStart : Int32*, plLength : Int32*, ppResult : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy.call(this, plStart, plLength, ppResult)
+    end
+    def paste(this : IAVIEditStream*, plPos : Int32*, plLength : Int32*, pstream : Void*, lStart : Int32, lEnd : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.paste.call(this, plPos, plLength, pstream, lStart, lEnd)
+    end
+    def clone(this : IAVIEditStream*, ppResult : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppResult)
+    end
+    def set_info(this : IAVIEditStream*, lpInfo : Win32cr::Media::Multimedia::AVISTREAMINFOW*, cbInfo : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_info.call(this, lpInfo, cbInfo)
+    end
+
+  end
+
+  @[Extern]
+  record IAVIPersistFileVtbl,
+    query_interface : Proc(IAVIPersistFile*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAVIPersistFile*, UInt32),
+    release : Proc(IAVIPersistFile*, UInt32),
+    get_class_id : Proc(IAVIPersistFile*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    is_dirty : Proc(IAVIPersistFile*, Win32cr::Foundation::HRESULT),
+    load : Proc(IAVIPersistFile*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    save : Proc(IAVIPersistFile*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    save_completed : Proc(IAVIPersistFile*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    get_cur_file : Proc(IAVIPersistFile*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    reserved1 : Proc(IAVIPersistFile*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00020025-0000-0000-c000-000000000046")]
+  record IAVIPersistFile, lpVtbl : IAVIPersistFileVtbl* do
+    GUID = LibC::GUID.new(0x20025_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
+    def query_interface(this : IAVIPersistFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAVIPersistFile*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAVIPersistFile*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_class_id(this : IAVIPersistFile*, pClassID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_class_id.call(this, pClassID)
+    end
+    def is_dirty(this : IAVIPersistFile*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_dirty.call(this)
+    end
+    def load(this : IAVIPersistFile*, pszFileName : Win32cr::Foundation::PWSTR, dwMode : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load.call(this, pszFileName, dwMode)
+    end
+    def save(this : IAVIPersistFile*, pszFileName : Win32cr::Foundation::PWSTR, fRemember : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save.call(this, pszFileName, fRemember)
+    end
+    def save_completed(this : IAVIPersistFile*, pszFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_completed.call(this, pszFileName)
+    end
+    def get_cur_file(this : IAVIPersistFile*, ppszFileName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_cur_file.call(this, ppszFileName)
+    end
+    def reserved1(this : IAVIPersistFile*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reserved1.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record IAVIFileVtbl,
+    query_interface : Proc(IAVIFile*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAVIFile*, UInt32),
+    release : Proc(IAVIFile*, UInt32),
+    info : Proc(IAVIFile*, Win32cr::Media::Multimedia::AVIFILEINFOW*, Int32, Win32cr::Foundation::HRESULT),
+    get_stream : Proc(IAVIFile*, Void**, UInt32, Int32, Win32cr::Foundation::HRESULT),
+    create_stream : Proc(IAVIFile*, Void**, Win32cr::Media::Multimedia::AVISTREAMINFOW*, Win32cr::Foundation::HRESULT),
+    write_data : Proc(IAVIFile*, UInt32, Void*, Int32, Win32cr::Foundation::HRESULT),
+    read_data : Proc(IAVIFile*, UInt32, Void*, Int32*, Win32cr::Foundation::HRESULT),
+    end_record : Proc(IAVIFile*, Win32cr::Foundation::HRESULT),
+    delete_stream : Proc(IAVIFile*, UInt32, Int32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00020020-0000-0000-c000-000000000046")]
+  record IAVIFile, lpVtbl : IAVIFileVtbl* do
+    GUID = LibC::GUID.new(0x20020_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
+    def query_interface(this : IAVIFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAVIFile*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAVIFile*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def info(this : IAVIFile*, pfi : Win32cr::Media::Multimedia::AVIFILEINFOW*, lSize : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.info.call(this, pfi, lSize)
+    end
+    def get_stream(this : IAVIFile*, ppStream : Void**, fccType : UInt32, lParam : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_stream.call(this, ppStream, fccType, lParam)
+    end
+    def create_stream(this : IAVIFile*, ppStream : Void**, psi : Win32cr::Media::Multimedia::AVISTREAMINFOW*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_stream.call(this, ppStream, psi)
+    end
+    def write_data(this : IAVIFile*, ckid : UInt32, lpData : Void*, cbData : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write_data.call(this, ckid, lpData, cbData)
+    end
+    def read_data(this : IAVIFile*, ckid : UInt32, lpData : Void*, lpcbData : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read_data.call(this, ckid, lpData, lpcbData)
+    end
+    def end_record(this : IAVIFile*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.end_record.call(this)
+    end
+    def delete_stream(this : IAVIFile*, fccType : UInt32, lParam : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_stream.call(this, fccType, lParam)
+    end
+
+  end
+
+  @[Extern]
+  record IGetFrameVtbl,
+    query_interface : Proc(IGetFrame*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IGetFrame*, UInt32),
+    release : Proc(IGetFrame*, UInt32),
+    get_frame : Proc(IGetFrame*, Int32, Void*),
+    begin__ : Proc(IGetFrame*, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
+    end__ : Proc(IGetFrame*, Win32cr::Foundation::HRESULT),
+    set_format : Proc(IGetFrame*, Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, Void*, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00020023-0000-0000-c000-000000000046")]
+  record IGetFrame, lpVtbl : IGetFrameVtbl* do
+    GUID = LibC::GUID.new(0x20023_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
+    def query_interface(this : IGetFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IGetFrame*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IGetFrame*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_frame(this : IGetFrame*, lPos : Int32) : Void*
+      @lpVtbl.try &.value.get_frame.call(this, lPos)
+    end
+    def begin__(this : IGetFrame*, lStart : Int32, lEnd : Int32, lRate : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.begin__.call(this, lStart, lEnd, lRate)
+    end
+    def end__(this : IGetFrame*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.end__.call(this)
+    end
+    def set_format(this : IGetFrame*, lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpBits : Void*, x : Int32, y : Int32, dx : Int32, dy : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_format.call(this, lpbi, lpBits, x, y, dx, dy)
+    end
+
+  end
+
+  @[Link("winmm")]
+  @[Link("api-ms-win-mm-misc-l1-1-1")]
+  @[Link("msvfw32")]
+  @[Link("avifil32")]
+  @[Link("avicap32")]
+  lib C
+    fun mciSendCommandA(mciId : UInt32, uMsg : UInt32, dwParam1 : LibC::UIntPtrT, dwParam2 : LibC::UIntPtrT) : UInt32
+
+    fun mciSendCommandW(mciId : UInt32, uMsg : UInt32, dwParam1 : LibC::UIntPtrT, dwParam2 : LibC::UIntPtrT) : UInt32
+
+    fun mciSendStringA(lpstrCommand : Win32cr::Foundation::PSTR, lpstrReturnString : UInt8*, uReturnLength : UInt32, hwndCallback : Win32cr::Foundation::HWND) : UInt32
+
+    fun mciSendStringW(lpstrCommand : Win32cr::Foundation::PWSTR, lpstrReturnString : UInt16*, uReturnLength : UInt32, hwndCallback : Win32cr::Foundation::HWND) : UInt32
+
+    fun mciGetDeviceIDA(pszDevice : Win32cr::Foundation::PSTR) : UInt32
+
+    fun mciGetDeviceIDW(pszDevice : Win32cr::Foundation::PWSTR) : UInt32
+
+    fun mciGetDeviceIDFromElementIDA(dwElementID : UInt32, lpstrType : Win32cr::Foundation::PSTR) : UInt32
+
+    fun mciGetDeviceIDFromElementIDW(dwElementID : UInt32, lpstrType : Win32cr::Foundation::PWSTR) : UInt32
+
+    fun mciGetErrorStringA(mcierr : UInt32, pszText : UInt8*, cchText : UInt32) : Win32cr::Foundation::BOOL
+
+    fun mciGetErrorStringW(mcierr : UInt32, pszText : UInt16*, cchText : UInt32) : Win32cr::Foundation::BOOL
+
+    fun mciSetYieldProc(mciId : UInt32, fpYieldProc : Win32cr::Media::Multimedia::YIELDPROC, dwYieldData : UInt32) : Win32cr::Foundation::BOOL
+
+    fun mciGetCreatorTask(mciId : UInt32) : Win32cr::Media::HTASK
+
+    fun mciGetYieldProc(mciId : UInt32, pdwYieldData : UInt32*) : Win32cr::Media::Multimedia::YIELDPROC
+
+    fun mciGetDriverData(wDeviceID : UInt32) : LibC::UIntPtrT
+
+    fun mciLoadCommandResource(hInstance : Win32cr::Foundation::HANDLE, lpResName : Win32cr::Foundation::PWSTR, wType : UInt32) : UInt32
 
-  # Params # pszdevice : PSTR [In]
-  fun mciGetDeviceIDA(pszdevice : PSTR) : UInt32
+    fun mciSetDriverData(wDeviceID : UInt32, dwData : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
-  # Params # pszdevice : LibC::LPWSTR [In]
-  fun mciGetDeviceIDW(pszdevice : LibC::LPWSTR) : UInt32
+    fun mciDriverYield(wDeviceID : UInt32) : UInt32
 
-  # Params # dwelementid : UInt32 [In],lpstrtype : PSTR [In]
-  fun mciGetDeviceIDFromElementIDA(dwelementid : UInt32, lpstrtype : PSTR) : UInt32
+    fun mciDriverNotify(hwndCallback : Win32cr::Foundation::HANDLE, wDeviceID : UInt32, uStatus : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # dwelementid : UInt32 [In],lpstrtype : LibC::LPWSTR [In]
-  fun mciGetDeviceIDFromElementIDW(dwelementid : UInt32, lpstrtype : LibC::LPWSTR) : UInt32
+    fun mciFreeCommandResource(wTable : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # mcierr : UInt32 [In],psztext : UInt8* [In],cchtext : UInt32 [In]
-  fun mciGetErrorStringA(mcierr : UInt32, psztext : UInt8*, cchtext : UInt32) : LibC::BOOL
+    fun CloseDriver(hDriver : Win32cr::Media::Multimedia::HDRVR, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
-  # Params # mcierr : UInt32 [In],psztext : Char* [In],cchtext : UInt32 [In]
-  fun mciGetErrorStringW(mcierr : UInt32, psztext : Char*, cchtext : UInt32) : LibC::BOOL
+    fun OpenDriver(szDriverName : Win32cr::Foundation::PWSTR, szSectionName : Win32cr::Foundation::PWSTR, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Media::Multimedia::HDRVR
 
-  # Params # mciid : UInt32 [In],fpyieldproc : YIELDPROC [In],dwyielddata : UInt32 [In]
-  fun mciSetYieldProc(mciid : UInt32, fpyieldproc : YIELDPROC, dwyielddata : UInt32) : LibC::BOOL
+    fun SendDriverMessage(hDriver : Win32cr::Media::Multimedia::HDRVR, message : UInt32, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
-  # Params # mciid : UInt32 [In]
-  fun mciGetCreatorTask(mciid : UInt32) : HTASK
+    fun DrvGetModuleHandle(hDriver : Win32cr::Media::Multimedia::HDRVR) : Win32cr::Foundation::HINSTANCE
 
-  # Params # mciid : UInt32 [In],pdwyielddata : UInt32* [In]
-  fun mciGetYieldProc(mciid : UInt32, pdwyielddata : UInt32*) : YIELDPROC
+    fun GetDriverModuleHandle(hDriver : Win32cr::Media::Multimedia::HDRVR) : Win32cr::Foundation::HINSTANCE
 
-  # Params # wdeviceid : UInt32 [In]
-  fun mciGetDriverData(wdeviceid : UInt32) : LibC::UINT_PTR
+    fun DefDriverProc(dwDriverIdentifier : LibC::UIntPtrT, hdrvr : Win32cr::Media::Multimedia::HDRVR, uMsg : UInt32, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
-  # Params # hinstance : LibC::HANDLE [In],lpresname : LibC::LPWSTR [In],wtype : UInt32 [In]
-  fun mciLoadCommandResource(hinstance : LibC::HANDLE, lpresname : LibC::LPWSTR, wtype : UInt32) : UInt32
+    fun DriverCallback(dwCallback : LibC::UIntPtrT, dwFlags : UInt32, hDevice : Win32cr::Media::Multimedia::HDRVR, dwMsg : UInt32, dwUser : LibC::UIntPtrT, dwParam1 : LibC::UIntPtrT, dwParam2 : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
-  # Params # wdeviceid : UInt32 [In],dwdata : LibC::UINT_PTR [In]
-  fun mciSetDriverData(wdeviceid : UInt32, dwdata : LibC::UINT_PTR) : LibC::BOOL
+    fun sndOpenSound(event_name : Win32cr::Foundation::PWSTR, app_name : Win32cr::Foundation::PWSTR, flags : Int32, file_handle : Win32cr::Foundation::HANDLE*) : Int32
 
-  # Params # wdeviceid : UInt32 [In]
-  fun mciDriverYield(wdeviceid : UInt32) : UInt32
+    fun mmDrvInstall(hDriver : Win32cr::Media::Multimedia::HDRVR, wszDrvEntry : Win32cr::Foundation::PWSTR, drvMessage : Win32cr::Media::Multimedia::DRIVERMSGPROC, wFlags : UInt32) : UInt32
 
-  # Params # hwndcallback : LibC::HANDLE [In],wdeviceid : UInt32 [In],ustatus : UInt32 [In]
-  fun mciDriverNotify(hwndcallback : LibC::HANDLE, wdeviceid : UInt32, ustatus : UInt32) : LibC::BOOL
+    fun mmioStringToFOURCCA(sz : Win32cr::Foundation::PSTR, uFlags : UInt32) : UInt32
 
-  # Params # wtable : UInt32 [In]
-  fun mciFreeCommandResource(wtable : UInt32) : LibC::BOOL
+    fun mmioStringToFOURCCW(sz : Win32cr::Foundation::PWSTR, uFlags : UInt32) : UInt32
 
-  # Params # hdriver : HDRVR [In],lparam1 : LPARAM [In],lparam2 : LPARAM [In]
-  fun CloseDriver(hdriver : HDRVR, lparam1 : LPARAM, lparam2 : LPARAM) : LRESULT
+    fun mmioInstallIOProcA(fccIOProc : UInt32, pIOProc : Win32cr::Media::Multimedia::LPMMIOPROC, dwFlags : UInt32) : Win32cr::Media::Multimedia::LPMMIOPROC
 
-  # Params # szdrivername : LibC::LPWSTR [In],szsectionname : LibC::LPWSTR [In],lparam2 : LPARAM [In]
-  fun OpenDriver(szdrivername : LibC::LPWSTR, szsectionname : LibC::LPWSTR, lparam2 : LPARAM) : HDRVR
+    fun mmioInstallIOProcW(fccIOProc : UInt32, pIOProc : Win32cr::Media::Multimedia::LPMMIOPROC, dwFlags : UInt32) : Win32cr::Media::Multimedia::LPMMIOPROC
 
-  # Params # hdriver : HDRVR [In],message : UInt32 [In],lparam1 : LPARAM [In],lparam2 : LPARAM [In]
-  fun SendDriverMessage(hdriver : HDRVR, message : UInt32, lparam1 : LPARAM, lparam2 : LPARAM) : LRESULT
+    fun mmioOpenA(pszFileName : UInt8*, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fdwOpen : UInt32) : Win32cr::Media::Multimedia::HMMIO
 
-  # Params # hdriver : HDRVR [In]
-  fun DrvGetModuleHandle(hdriver : HDRVR) : HINSTANCE
+    fun mmioOpenW(pszFileName : UInt16*, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fdwOpen : UInt32) : Win32cr::Media::Multimedia::HMMIO
 
-  # Params # hdriver : HDRVR [In]
-  fun GetDriverModuleHandle(hdriver : HDRVR) : HINSTANCE
+    fun mmioRenameA(pszFileName : Win32cr::Foundation::PSTR, pszNewFileName : Win32cr::Foundation::PSTR, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fdwRename : UInt32) : UInt32
 
-  # Params # dwdriveridentifier : LibC::UINT_PTR [In],hdrvr : HDRVR [In],umsg : UInt32 [In],lparam1 : LPARAM [In],lparam2 : LPARAM [In]
-  fun DefDriverProc(dwdriveridentifier : LibC::UINT_PTR, hdrvr : HDRVR, umsg : UInt32, lparam1 : LPARAM, lparam2 : LPARAM) : LRESULT
+    fun mmioRenameW(pszFileName : Win32cr::Foundation::PWSTR, pszNewFileName : Win32cr::Foundation::PWSTR, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fdwRename : UInt32) : UInt32
 
-  # Params # dwcallback : LibC::UINT_PTR [In],dwflags : UInt32 [In],hdevice : HDRVR [In],dwmsg : UInt32 [In],dwuser : LibC::UINT_PTR [In],dwparam1 : LibC::UINT_PTR [In],dwparam2 : LibC::UINT_PTR [In]
-  fun DriverCallback(dwcallback : LibC::UINT_PTR, dwflags : UInt32, hdevice : HDRVR, dwmsg : UInt32, dwuser : LibC::UINT_PTR, dwparam1 : LibC::UINT_PTR, dwparam2 : LibC::UINT_PTR) : LibC::BOOL
+    fun mmioClose(hmmio : Win32cr::Media::Multimedia::HMMIO, fuClose : UInt32) : UInt32
 
-  # Params # eventname : LibC::LPWSTR [In],appname : LibC::LPWSTR [In],flags : Int32 [In],filehandle : LibC::HANDLE* [In]
-  fun sndOpenSound(eventname : LibC::LPWSTR, appname : LibC::LPWSTR, flags : Int32, filehandle : LibC::HANDLE*) : Int32
+    fun mmioRead(hmmio : Win32cr::Media::Multimedia::HMMIO, pch : Int8*, cch : Int32) : Int32
 
-  # Params # hdriver : HDRVR [In],wszdrventry : LibC::LPWSTR [In],drvmessage : DRIVERMSGPROC [In],wflags : UInt32 [In]
-  fun mmDrvInstall(hdriver : HDRVR, wszdrventry : LibC::LPWSTR, drvmessage : DRIVERMSGPROC, wflags : UInt32) : UInt32
+    fun mmioWrite(hmmio : Win32cr::Media::Multimedia::HMMIO, pch : Win32cr::Foundation::PSTR, cch : Int32) : Int32
 
-  # Params # sz : PSTR [In],uflags : UInt32 [In]
-  fun mmioStringToFOURCCA(sz : PSTR, uflags : UInt32) : UInt32
+    fun mmioSeek(hmmio : Win32cr::Media::Multimedia::HMMIO, lOffset : Int32, iOrigin : Int32) : Int32
 
-  # Params # sz : LibC::LPWSTR [In],uflags : UInt32 [In]
-  fun mmioStringToFOURCCW(sz : LibC::LPWSTR, uflags : UInt32) : UInt32
+    fun mmioGetInfo(hmmio : Win32cr::Media::Multimedia::HMMIO, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fuInfo : UInt32) : UInt32
 
-  # Params # fccioproc : UInt32 [In],pioproc : LPMMIOPROC [In],dwflags : UInt32 [In]
-  fun mmioInstallIOProcA(fccioproc : UInt32, pioproc : LPMMIOPROC, dwflags : UInt32) : LPMMIOPROC
+    fun mmioSetInfo(hmmio : Win32cr::Media::Multimedia::HMMIO, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fuInfo : UInt32) : UInt32
 
-  # Params # fccioproc : UInt32 [In],pioproc : LPMMIOPROC [In],dwflags : UInt32 [In]
-  fun mmioInstallIOProcW(fccioproc : UInt32, pioproc : LPMMIOPROC, dwflags : UInt32) : LPMMIOPROC
+    fun mmioSetBuffer(hmmio : Win32cr::Media::Multimedia::HMMIO, pchBuffer : UInt8*, cchBuffer : Int32, fuBuffer : UInt32) : UInt32
 
-  # Params # pszfilename : UInt8* [In],pmmioinfo : MMIOINFO* [In],fdwopen : UInt32 [In]
-  fun mmioOpenA(pszfilename : UInt8*, pmmioinfo : MMIOINFO*, fdwopen : UInt32) : HMMIO
+    fun mmioFlush(hmmio : Win32cr::Media::Multimedia::HMMIO, fuFlush : UInt32) : UInt32
 
-  # Params # pszfilename : Char* [In],pmmioinfo : MMIOINFO* [In],fdwopen : UInt32 [In]
-  fun mmioOpenW(pszfilename : Char*, pmmioinfo : MMIOINFO*, fdwopen : UInt32) : HMMIO
+    fun mmioAdvance(hmmio : Win32cr::Media::Multimedia::HMMIO, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fuAdvance : UInt32) : UInt32
 
-  # Params # pszfilename : PSTR [In],psznewfilename : PSTR [In],pmmioinfo : MMIOINFO* [In],fdwrename : UInt32 [In]
-  fun mmioRenameA(pszfilename : PSTR, psznewfilename : PSTR, pmmioinfo : MMIOINFO*, fdwrename : UInt32) : UInt32
+    fun mmioSendMessage(hmmio : Win32cr::Media::Multimedia::HMMIO, uMsg : UInt32, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
 
-  # Params # pszfilename : LibC::LPWSTR [In],psznewfilename : LibC::LPWSTR [In],pmmioinfo : MMIOINFO* [In],fdwrename : UInt32 [In]
-  fun mmioRenameW(pszfilename : LibC::LPWSTR, psznewfilename : LibC::LPWSTR, pmmioinfo : MMIOINFO*, fdwrename : UInt32) : UInt32
+    fun mmioDescend(hmmio : Win32cr::Media::Multimedia::HMMIO, pmmcki : Win32cr::Media::Multimedia::MMCKINFO*, pmmckiParent : Win32cr::Media::Multimedia::MMCKINFO*, fuDescend : UInt32) : UInt32
 
-  # Params # hmmio : HMMIO [In],fuclose : UInt32 [In]
-  fun mmioClose(hmmio : HMMIO, fuclose : UInt32) : UInt32
+    fun mmioAscend(hmmio : Win32cr::Media::Multimedia::HMMIO, pmmcki : Win32cr::Media::Multimedia::MMCKINFO*, fuAscend : UInt32) : UInt32
 
-  # Params # hmmio : HMMIO [In],pch : Int8* [In],cch : Int32 [In]
-  fun mmioRead(hmmio : HMMIO, pch : Int8*, cch : Int32) : Int32
+    fun mmioCreateChunk(hmmio : Win32cr::Media::Multimedia::HMMIO, pmmcki : Win32cr::Media::Multimedia::MMCKINFO*, fuCreate : UInt32) : UInt32
 
-  # Params # hmmio : HMMIO [In],pch : PSTR [In],cch : Int32 [In]
-  fun mmioWrite(hmmio : HMMIO, pch : PSTR, cch : Int32) : Int32
+    fun joyGetPosEx(uJoyID : UInt32, pji : Win32cr::Media::Multimedia::JOYINFOEX*) : UInt32
 
-  # Params # hmmio : HMMIO [In],loffset : Int32 [In],iorigin : Int32 [In]
-  fun mmioSeek(hmmio : HMMIO, loffset : Int32, iorigin : Int32) : Int32
+    fun joyGetNumDevs : UInt32
 
-  # Params # hmmio : HMMIO [In],pmmioinfo : MMIOINFO* [In],fuinfo : UInt32 [In]
-  fun mmioGetInfo(hmmio : HMMIO, pmmioinfo : MMIOINFO*, fuinfo : UInt32) : UInt32
+    fun joyGetDevCapsA(uJoyID : LibC::UIntPtrT, pjc : Win32cr::Media::Multimedia::JOYCAPSA*, cbjc : UInt32) : UInt32
 
-  # Params # hmmio : HMMIO [In],pmmioinfo : MMIOINFO* [In],fuinfo : UInt32 [In]
-  fun mmioSetInfo(hmmio : HMMIO, pmmioinfo : MMIOINFO*, fuinfo : UInt32) : UInt32
+    fun joyGetDevCapsW(uJoyID : LibC::UIntPtrT, pjc : Win32cr::Media::Multimedia::JOYCAPSW*, cbjc : UInt32) : UInt32
 
-  # Params # hmmio : HMMIO [In],pchbuffer : UInt8* [In],cchbuffer : Int32 [In],fubuffer : UInt32 [In]
-  fun mmioSetBuffer(hmmio : HMMIO, pchbuffer : UInt8*, cchbuffer : Int32, fubuffer : UInt32) : UInt32
+    fun joyGetPos(uJoyID : UInt32, pji : Win32cr::Media::Multimedia::JOYINFO*) : UInt32
 
-  # Params # hmmio : HMMIO [In],fuflush : UInt32 [In]
-  fun mmioFlush(hmmio : HMMIO, fuflush : UInt32) : UInt32
+    fun joyGetThreshold(uJoyID : UInt32, puThreshold : UInt32*) : UInt32
 
-  # Params # hmmio : HMMIO [In],pmmioinfo : MMIOINFO* [In],fuadvance : UInt32 [In]
-  fun mmioAdvance(hmmio : HMMIO, pmmioinfo : MMIOINFO*, fuadvance : UInt32) : UInt32
+    fun joyReleaseCapture(uJoyID : UInt32) : UInt32
 
-  # Params # hmmio : HMMIO [In],umsg : UInt32 [In],lparam1 : LPARAM [In],lparam2 : LPARAM [In]
-  fun mmioSendMessage(hmmio : HMMIO, umsg : UInt32, lparam1 : LPARAM, lparam2 : LPARAM) : LRESULT
+    fun joySetCapture(hwnd : Win32cr::Foundation::HWND, uJoyID : UInt32, uPeriod : UInt32, fChanged : Win32cr::Foundation::BOOL) : UInt32
 
-  # Params # hmmio : HMMIO [In],pmmcki : MMCKINFO* [In],pmmckiparent : MMCKINFO* [In],fudescend : UInt32 [In]
-  fun mmioDescend(hmmio : HMMIO, pmmcki : MMCKINFO*, pmmckiparent : MMCKINFO*, fudescend : UInt32) : UInt32
+    fun joySetThreshold(uJoyID : UInt32, uThreshold : UInt32) : UInt32
 
-  # Params # hmmio : HMMIO [In],pmmcki : MMCKINFO* [In],fuascend : UInt32 [In]
-  fun mmioAscend(hmmio : HMMIO, pmmcki : MMCKINFO*, fuascend : UInt32) : UInt32
+    fun VideoForWindowsVersion : UInt32
 
-  # Params # hmmio : HMMIO [In],pmmcki : MMCKINFO* [In],fucreate : UInt32 [In]
-  fun mmioCreateChunk(hmmio : HMMIO, pmmcki : MMCKINFO*, fucreate : UInt32) : UInt32
+    fun ICInfo(fccType : UInt32, fccHandler : UInt32, lpicinfo : Win32cr::Media::Multimedia::ICINFO*) : Win32cr::Foundation::BOOL
 
-  # Params # ujoyid : UInt32 [In],pji : JOYINFOEX* [In]
-  fun joyGetPosEx(ujoyid : UInt32, pji : JOYINFOEX*) : UInt32
+    fun ICInstall(fccType : UInt32, fccHandler : UInt32, lParam : Win32cr::Foundation::LPARAM, szDesc : Win32cr::Foundation::PSTR, wFlags : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # 
-  fun joyGetNumDevs : UInt32
+    fun ICRemove(fccType : UInt32, fccHandler : UInt32, wFlags : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # ujoyid : LibC::UINT_PTR [In],pjc : JOYCAPSA* [In],cbjc : UInt32 [In]
-  fun joyGetDevCapsA(ujoyid : LibC::UINT_PTR, pjc : JOYCAPSA*, cbjc : UInt32) : UInt32
+    fun ICGetInfo(hic : Win32cr::Media::Multimedia::HIC, picinfo : Win32cr::Media::Multimedia::ICINFO*, cb : UInt32) : Win32cr::Foundation::LRESULT
 
-  # Params # ujoyid : LibC::UINT_PTR [In],pjc : JOYCAPSW* [In],cbjc : UInt32 [In]
-  fun joyGetDevCapsW(ujoyid : LibC::UINT_PTR, pjc : JOYCAPSW*, cbjc : UInt32) : UInt32
+    fun ICOpen(fccType : UInt32, fccHandler : UInt32, wMode : UInt32) : Win32cr::Media::Multimedia::HIC
 
-  # Params # ujoyid : UInt32 [In],pji : JOYINFO* [In]
-  fun joyGetPos(ujoyid : UInt32, pji : JOYINFO*) : UInt32
+    fun ICOpenFunction(fccType : UInt32, fccHandler : UInt32, wMode : UInt32, lpfnHandler : Win32cr::Foundation::FARPROC) : Win32cr::Media::Multimedia::HIC
 
-  # Params # ujoyid : UInt32 [In],puthreshold : UInt32* [In]
-  fun joyGetThreshold(ujoyid : UInt32, puthreshold : UInt32*) : UInt32
+    fun ICClose(hic : Win32cr::Media::Multimedia::HIC) : Win32cr::Foundation::LRESULT
 
-  # Params # ujoyid : UInt32 [In]
-  fun joyReleaseCapture(ujoyid : UInt32) : UInt32
+    fun ICSendMessage(hic : Win32cr::Media::Multimedia::HIC, msg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : Win32cr::Foundation::LRESULT
 
-  # Params # hwnd : LibC::HANDLE [In],ujoyid : UInt32 [In],uperiod : UInt32 [In],fchanged : LibC::BOOL [In]
-  fun joySetCapture(hwnd : LibC::HANDLE, ujoyid : UInt32, uperiod : UInt32, fchanged : LibC::BOOL) : UInt32
+    fun ICCompress(hic : Win32cr::Media::Multimedia::HIC, dwFlags : UInt32, lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpData : Void*, lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpBits : Void*, lpckid : UInt32*, lpdwFlags : UInt32*, lFrameNum : Int32, dwFrameSize : UInt32, dwQuality : UInt32, lpbiPrev : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpPrev : Void*) : UInt32
 
-  # Params # ujoyid : UInt32 [In],uthreshold : UInt32 [In]
-  fun joySetThreshold(ujoyid : UInt32, uthreshold : UInt32) : UInt32
+    fun ICDecompress(hic : Win32cr::Media::Multimedia::HIC, dwFlags : UInt32, lpbiFormat : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpData : Void*, lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpBits : Void*) : UInt32
 
-  # Params # 
-  fun VideoForWindowsVersion : UInt32
+    fun ICDrawBegin(hic : Win32cr::Media::Multimedia::HIC, dwFlags : UInt32, hpal : Win32cr::Graphics::Gdi::HPALETTE, hwnd : Win32cr::Foundation::HWND, hdc : Win32cr::Graphics::Gdi::HDC, xDst : Int32, yDst : Int32, dxDst : Int32, dyDst : Int32, lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, xSrc : Int32, ySrc : Int32, dxSrc : Int32, dySrc : Int32, dwRate : UInt32, dwScale : UInt32) : UInt32
 
-  # Params # fcctype : UInt32 [In],fcchandler : UInt32 [In],lpicinfo : ICINFO* [In]
-  fun ICInfo(fcctype : UInt32, fcchandler : UInt32, lpicinfo : ICINFO*) : LibC::BOOL
+    fun ICDraw(hic : Win32cr::Media::Multimedia::HIC, dwFlags : UInt32, lpFormat : Void*, lpData : Void*, cbData : UInt32, lTime : Int32) : UInt32
 
-  # Params # fcctype : UInt32 [In],fcchandler : UInt32 [In],lparam : LPARAM [In],szdesc : PSTR [In],wflags : UInt32 [In]
-  fun ICInstall(fcctype : UInt32, fcchandler : UInt32, lparam : LPARAM, szdesc : PSTR, wflags : UInt32) : LibC::BOOL
+    fun ICLocate(fccType : UInt32, fccHandler : UInt32, lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpbiOut : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, wFlags : UInt16) : Win32cr::Media::Multimedia::HIC
 
-  # Params # fcctype : UInt32 [In],fcchandler : UInt32 [In],wflags : UInt32 [In]
-  fun ICRemove(fcctype : UInt32, fcchandler : UInt32, wflags : UInt32) : LibC::BOOL
+    fun ICGetDisplayFormat(hic : Win32cr::Media::Multimedia::HIC, lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpbiOut : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, bit_depth : Int32, dx : Int32, dy : Int32) : Win32cr::Media::Multimedia::HIC
 
-  # Params # hic : HIC [In],picinfo : ICINFO* [In],cb : UInt32 [In]
-  fun ICGetInfo(hic : HIC, picinfo : ICINFO*, cb : UInt32) : LRESULT
+    fun ICImageCompress(hic : Win32cr::Media::Multimedia::HIC, uiFlags : UInt32, lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFO*, lpBits : Void*, lpbiOut : Win32cr::Graphics::Gdi::BITMAPINFO*, lQuality : Int32, plSize : Int32*) : Win32cr::Foundation::HANDLE
 
-  # Params # fcctype : UInt32 [In],fcchandler : UInt32 [In],wmode : UInt32 [In]
-  fun ICOpen(fcctype : UInt32, fcchandler : UInt32, wmode : UInt32) : HIC
+    fun ICImageDecompress(hic : Win32cr::Media::Multimedia::HIC, uiFlags : UInt32, lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFO*, lpBits : Void*, lpbiOut : Win32cr::Graphics::Gdi::BITMAPINFO*) : Win32cr::Foundation::HANDLE
 
-  # Params # fcctype : UInt32 [In],fcchandler : UInt32 [In],wmode : UInt32 [In],lpfnhandler : FARPROC [In]
-  fun ICOpenFunction(fcctype : UInt32, fcchandler : UInt32, wmode : UInt32, lpfnhandler : FARPROC) : HIC
+    fun ICCompressorChoose(hwnd : Win32cr::Foundation::HWND, uiFlags : UInt32, pvIn : Void*, lpData : Void*, pc : Win32cr::Media::Multimedia::COMPVARS*, lpszTitle : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
-  # Params # hic : HIC [In]
-  fun ICClose(hic : HIC) : LRESULT
+    fun ICSeqCompressFrameStart(pc : Win32cr::Media::Multimedia::COMPVARS*, lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFO*) : Win32cr::Foundation::BOOL
 
-  # Params # hic : HIC [In],msg : UInt32 [In],dw1 : LibC::UINT_PTR [In],dw2 : LibC::UINT_PTR [In]
-  fun ICSendMessage(hic : HIC, msg : UInt32, dw1 : LibC::UINT_PTR, dw2 : LibC::UINT_PTR) : LRESULT
+    fun ICSeqCompressFrameEnd(pc : Win32cr::Media::Multimedia::COMPVARS*) : Void
 
-  # Params # hic : HIC [In],dwflags : UInt32 [In],lpbioutput : BITMAPINFOHEADER* [In],lpdata : Void* [In],lpbiinput : BITMAPINFOHEADER* [In],lpbits : Void* [In],lpckid : UInt32* [In],lpdwflags : UInt32* [In],lframenum : Int32 [In],dwframesize : UInt32 [In],dwquality : UInt32 [In],lpbiprev : BITMAPINFOHEADER* [In],lpprev : Void* [In]
-  fun ICCompress(hic : HIC, dwflags : UInt32, lpbioutput : BITMAPINFOHEADER*, lpdata : Void*, lpbiinput : BITMAPINFOHEADER*, lpbits : Void*, lpckid : UInt32*, lpdwflags : UInt32*, lframenum : Int32, dwframesize : UInt32, dwquality : UInt32, lpbiprev : BITMAPINFOHEADER*, lpprev : Void*) : UInt32
+    fun ICSeqCompressFrame(pc : Win32cr::Media::Multimedia::COMPVARS*, uiFlags : UInt32, lpBits : Void*, pfKey : Win32cr::Foundation::BOOL*, plSize : Int32*) : Void*
 
-  # Params # hic : HIC [In],dwflags : UInt32 [In],lpbiformat : BITMAPINFOHEADER* [In],lpdata : Void* [In],lpbi : BITMAPINFOHEADER* [In],lpbits : Void* [In]
-  fun ICDecompress(hic : HIC, dwflags : UInt32, lpbiformat : BITMAPINFOHEADER*, lpdata : Void*, lpbi : BITMAPINFOHEADER*, lpbits : Void*) : UInt32
+    fun ICCompressorFree(pc : Win32cr::Media::Multimedia::COMPVARS*) : Void
 
-  # Params # hic : HIC [In],dwflags : UInt32 [In],hpal : HPALETTE [In],hwnd : LibC::HANDLE [In],hdc : HDC [In],xdst : Int32 [In],ydst : Int32 [In],dxdst : Int32 [In],dydst : Int32 [In],lpbi : BITMAPINFOHEADER* [In],xsrc : Int32 [In],ysrc : Int32 [In],dxsrc : Int32 [In],dysrc : Int32 [In],dwrate : UInt32 [In],dwscale : UInt32 [In]
-  fun ICDrawBegin(hic : HIC, dwflags : UInt32, hpal : HPALETTE, hwnd : LibC::HANDLE, hdc : HDC, xdst : Int32, ydst : Int32, dxdst : Int32, dydst : Int32, lpbi : BITMAPINFOHEADER*, xsrc : Int32, ysrc : Int32, dxsrc : Int32, dysrc : Int32, dwrate : UInt32, dwscale : UInt32) : UInt32
+    fun DrawDibOpen : LibC::IntPtrT
 
-  # Params # hic : HIC [In],dwflags : UInt32 [In],lpformat : Void* [In],lpdata : Void* [In],cbdata : UInt32 [In],ltime : Int32 [In]
-  fun ICDraw(hic : HIC, dwflags : UInt32, lpformat : Void*, lpdata : Void*, cbdata : UInt32, ltime : Int32) : UInt32
+    fun DrawDibClose(hdd : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
-  # Params # fcctype : UInt32 [In],fcchandler : UInt32 [In],lpbiin : BITMAPINFOHEADER* [In],lpbiout : BITMAPINFOHEADER* [In],wflags : UInt16 [In]
-  fun ICLocate(fcctype : UInt32, fcchandler : UInt32, lpbiin : BITMAPINFOHEADER*, lpbiout : BITMAPINFOHEADER*, wflags : UInt16) : HIC
+    fun DrawDibGetBuffer(hdd : LibC::IntPtrT, lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, dwSize : UInt32, dwFlags : UInt32) : Void*
 
-  # Params # hic : HIC [In],lpbiin : BITMAPINFOHEADER* [In],lpbiout : BITMAPINFOHEADER* [In],bitdepth : Int32 [In],dx : Int32 [In],dy : Int32 [In]
-  fun ICGetDisplayFormat(hic : HIC, lpbiin : BITMAPINFOHEADER*, lpbiout : BITMAPINFOHEADER*, bitdepth : Int32, dx : Int32, dy : Int32) : HIC
+    fun DrawDibGetPalette(hdd : LibC::IntPtrT) : Win32cr::Graphics::Gdi::HPALETTE
 
-  # Params # hic : HIC [In],uiflags : UInt32 [In],lpbiin : BITMAPINFO* [In],lpbits : Void* [In],lpbiout : BITMAPINFO* [In],lquality : Int32 [In],plsize : Int32* [In]
-  fun ICImageCompress(hic : HIC, uiflags : UInt32, lpbiin : BITMAPINFO*, lpbits : Void*, lpbiout : BITMAPINFO*, lquality : Int32, plsize : Int32*) : LibC::HANDLE
+    fun DrawDibSetPalette(hdd : LibC::IntPtrT, hpal : Win32cr::Graphics::Gdi::HPALETTE) : Win32cr::Foundation::BOOL
 
-  # Params # hic : HIC [In],uiflags : UInt32 [In],lpbiin : BITMAPINFO* [In],lpbits : Void* [In],lpbiout : BITMAPINFO* [In]
-  fun ICImageDecompress(hic : HIC, uiflags : UInt32, lpbiin : BITMAPINFO*, lpbits : Void*, lpbiout : BITMAPINFO*) : LibC::HANDLE
+    fun DrawDibChangePalette(hdd : LibC::IntPtrT, iStart : Int32, iLen : Int32, lppe : Win32cr::Graphics::Gdi::PALETTEENTRY*) : Win32cr::Foundation::BOOL
 
-  # Params # hwnd : LibC::HANDLE [In],uiflags : UInt32 [In],pvin : Void* [In],lpdata : Void* [In],pc : COMPVARS* [In],lpsztitle : PSTR [In]
-  fun ICCompressorChoose(hwnd : LibC::HANDLE, uiflags : UInt32, pvin : Void*, lpdata : Void*, pc : COMPVARS*, lpsztitle : PSTR) : LibC::BOOL
+    fun DrawDibRealize(hdd : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, fBackground : Win32cr::Foundation::BOOL) : UInt32
 
-  # Params # pc : COMPVARS* [In],lpbiin : BITMAPINFO* [In]
-  fun ICSeqCompressFrameStart(pc : COMPVARS*, lpbiin : BITMAPINFO*) : LibC::BOOL
+    fun DrawDibStart(hdd : LibC::IntPtrT, rate : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # pc : COMPVARS* [In]
-  fun ICSeqCompressFrameEnd(pc : COMPVARS*) : Void
+    fun DrawDibStop(hdd : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
-  # Params # pc : COMPVARS* [In],uiflags : UInt32 [In],lpbits : Void* [In],pfkey : LibC::BOOL* [In],plsize : Int32* [In]
-  fun ICSeqCompressFrame(pc : COMPVARS*, uiflags : UInt32, lpbits : Void*, pfkey : LibC::BOOL*, plsize : Int32*) : Void*
+    fun DrawDibBegin(hdd : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, dxDst : Int32, dyDst : Int32, lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, dxSrc : Int32, dySrc : Int32, wFlags : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # pc : COMPVARS* [In]
-  fun ICCompressorFree(pc : COMPVARS*) : Void
+    fun DrawDibDraw(hdd : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, xDst : Int32, yDst : Int32, dxDst : Int32, dyDst : Int32, lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpBits : Void*, xSrc : Int32, ySrc : Int32, dxSrc : Int32, dySrc : Int32, wFlags : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # 
-  fun DrawDibOpen : LibC::IntPtrT
+    fun DrawDibEnd(hdd : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
-  # Params # hdd : LibC::IntPtrT [In]
-  fun DrawDibClose(hdd : LibC::IntPtrT) : LibC::BOOL
+    fun DrawDibTime(hdd : LibC::IntPtrT, lpddtime : Win32cr::Media::Multimedia::DRAWDIBTIME*) : Win32cr::Foundation::BOOL
 
-  # Params # hdd : LibC::IntPtrT [In],lpbi : BITMAPINFOHEADER* [In],dwsize : UInt32 [In],dwflags : UInt32 [In]
-  fun DrawDibGetBuffer(hdd : LibC::IntPtrT, lpbi : BITMAPINFOHEADER*, dwsize : UInt32, dwflags : UInt32) : Void*
+    fun DrawDibProfileDisplay(lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*) : Win32cr::Foundation::LRESULT
 
-  # Params # hdd : LibC::IntPtrT [In]
-  fun DrawDibGetPalette(hdd : LibC::IntPtrT) : HPALETTE
+    fun AVIFileInit : Void
 
-  # Params # hdd : LibC::IntPtrT [In],hpal : HPALETTE [In]
-  fun DrawDibSetPalette(hdd : LibC::IntPtrT, hpal : HPALETTE) : LibC::BOOL
+    fun AVIFileExit : Void
 
-  # Params # hdd : LibC::IntPtrT [In],istart : Int32 [In],ilen : Int32 [In],lppe : PALETTEENTRY* [In]
-  fun DrawDibChangePalette(hdd : LibC::IntPtrT, istart : Int32, ilen : Int32, lppe : PALETTEENTRY*) : LibC::BOOL
+    fun AVIFileAddRef(pfile : Void*) : UInt32
 
-  # Params # hdd : LibC::IntPtrT [In],hdc : HDC [In],fbackground : LibC::BOOL [In]
-  fun DrawDibRealize(hdd : LibC::IntPtrT, hdc : HDC, fbackground : LibC::BOOL) : UInt32
+    fun AVIFileRelease(pfile : Void*) : UInt32
 
-  # Params # hdd : LibC::IntPtrT [In],rate : UInt32 [In]
-  fun DrawDibStart(hdd : LibC::IntPtrT, rate : UInt32) : LibC::BOOL
+    fun AVIFileOpenA(ppfile : Void**, szFile : Win32cr::Foundation::PSTR, uMode : UInt32, lpHandler : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
-  # Params # hdd : LibC::IntPtrT [In]
-  fun DrawDibStop(hdd : LibC::IntPtrT) : LibC::BOOL
+    fun AVIFileOpenW(ppfile : Void**, szFile : Win32cr::Foundation::PWSTR, uMode : UInt32, lpHandler : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
-  # Params # hdd : LibC::IntPtrT [In],hdc : HDC [In],dxdst : Int32 [In],dydst : Int32 [In],lpbi : BITMAPINFOHEADER* [In],dxsrc : Int32 [In],dysrc : Int32 [In],wflags : UInt32 [In]
-  fun DrawDibBegin(hdd : LibC::IntPtrT, hdc : HDC, dxdst : Int32, dydst : Int32, lpbi : BITMAPINFOHEADER*, dxsrc : Int32, dysrc : Int32, wflags : UInt32) : LibC::BOOL
+    fun AVIFileInfoW(pfile : Void*, pfi : Win32cr::Media::Multimedia::AVIFILEINFOW*, lSize : Int32) : Win32cr::Foundation::HRESULT
 
-  # Params # hdd : LibC::IntPtrT [In],hdc : HDC [In],xdst : Int32 [In],ydst : Int32 [In],dxdst : Int32 [In],dydst : Int32 [In],lpbi : BITMAPINFOHEADER* [In],lpbits : Void* [In],xsrc : Int32 [In],ysrc : Int32 [In],dxsrc : Int32 [In],dysrc : Int32 [In],wflags : UInt32 [In]
-  fun DrawDibDraw(hdd : LibC::IntPtrT, hdc : HDC, xdst : Int32, ydst : Int32, dxdst : Int32, dydst : Int32, lpbi : BITMAPINFOHEADER*, lpbits : Void*, xsrc : Int32, ysrc : Int32, dxsrc : Int32, dysrc : Int32, wflags : UInt32) : LibC::BOOL
+    fun AVIFileInfoA(pfile : Void*, pfi : Win32cr::Media::Multimedia::AVIFILEINFOA*, lSize : Int32) : Win32cr::Foundation::HRESULT
 
-  # Params # hdd : LibC::IntPtrT [In]
-  fun DrawDibEnd(hdd : LibC::IntPtrT) : LibC::BOOL
+    fun AVIFileGetStream(pfile : Void*, ppavi : Void**, fccType : UInt32, lParam : Int32) : Win32cr::Foundation::HRESULT
 
-  # Params # hdd : LibC::IntPtrT [In],lpddtime : DRAWDIBTIME* [In]
-  fun DrawDibTime(hdd : LibC::IntPtrT, lpddtime : DRAWDIBTIME*) : LibC::BOOL
+    fun AVIFileCreateStreamW(pfile : Void*, ppavi : Void**, psi : Win32cr::Media::Multimedia::AVISTREAMINFOW*) : Win32cr::Foundation::HRESULT
 
-  # Params # lpbi : BITMAPINFOHEADER* [In]
-  fun DrawDibProfileDisplay(lpbi : BITMAPINFOHEADER*) : LRESULT
+    fun AVIFileCreateStreamA(pfile : Void*, ppavi : Void**, psi : Win32cr::Media::Multimedia::AVISTREAMINFOA*) : Win32cr::Foundation::HRESULT
 
-  # Params # 
-  fun AVIFileInit : Void
+    fun AVIFileWriteData(pfile : Void*, ckid : UInt32, lpData : Void*, cbData : Int32) : Win32cr::Foundation::HRESULT
 
-  # Params # 
-  fun AVIFileExit : Void
+    fun AVIFileReadData(pfile : Void*, ckid : UInt32, lpData : Void*, lpcbData : Int32*) : Win32cr::Foundation::HRESULT
 
-  # Params # pfile : IAVIFile [In]
-  fun AVIFileAddRef(pfile : IAVIFile) : UInt32
+    fun AVIFileEndRecord(pfile : Void*) : Win32cr::Foundation::HRESULT
 
-  # Params # pfile : IAVIFile [In]
-  fun AVIFileRelease(pfile : IAVIFile) : UInt32
+    fun AVIStreamAddRef(pavi : Void*) : UInt32
 
-  # Params # ppfile : IAVIFile* [In],szfile : PSTR [In],umode : UInt32 [In],lphandler : Guid* [In]
-  fun AVIFileOpenA(ppfile : IAVIFile*, szfile : PSTR, umode : UInt32, lphandler : Guid*) : HRESULT
+    fun AVIStreamRelease(pavi : Void*) : UInt32
 
-  # Params # ppfile : IAVIFile* [In],szfile : LibC::LPWSTR [In],umode : UInt32 [In],lphandler : Guid* [In]
-  fun AVIFileOpenW(ppfile : IAVIFile*, szfile : LibC::LPWSTR, umode : UInt32, lphandler : Guid*) : HRESULT
+    fun AVIStreamInfoW(pavi : Void*, psi : Win32cr::Media::Multimedia::AVISTREAMINFOW*, lSize : Int32) : Win32cr::Foundation::HRESULT
 
-  # Params # pfile : IAVIFile [In],pfi : AVIFILEINFOW* [In],lsize : Int32 [In]
-  fun AVIFileInfoW(pfile : IAVIFile, pfi : AVIFILEINFOW*, lsize : Int32) : HRESULT
+    fun AVIStreamInfoA(pavi : Void*, psi : Win32cr::Media::Multimedia::AVISTREAMINFOA*, lSize : Int32) : Win32cr::Foundation::HRESULT
 
-  # Params # pfile : IAVIFile [In],pfi : AVIFILEINFOA* [In],lsize : Int32 [In]
-  fun AVIFileInfoA(pfile : IAVIFile, pfi : AVIFILEINFOA*, lsize : Int32) : HRESULT
+    fun AVIStreamFindSample(pavi : Void*, lPos : Int32, lFlags : Int32) : Int32
 
-  # Params # pfile : IAVIFile [In],ppavi : IAVIStream* [In],fcctype : UInt32 [In],lparam : Int32 [In]
-  fun AVIFileGetStream(pfile : IAVIFile, ppavi : IAVIStream*, fcctype : UInt32, lparam : Int32) : HRESULT
+    fun AVIStreamReadFormat(pavi : Void*, lPos : Int32, lpFormat : Void*, lpcbFormat : Int32*) : Win32cr::Foundation::HRESULT
 
-  # Params # pfile : IAVIFile [In],ppavi : IAVIStream* [In],psi : AVISTREAMINFOW* [In]
-  fun AVIFileCreateStreamW(pfile : IAVIFile, ppavi : IAVIStream*, psi : AVISTREAMINFOW*) : HRESULT
+    fun AVIStreamSetFormat(pavi : Void*, lPos : Int32, lpFormat : Void*, cbFormat : Int32) : Win32cr::Foundation::HRESULT
 
-  # Params # pfile : IAVIFile [In],ppavi : IAVIStream* [In],psi : AVISTREAMINFOA* [In]
-  fun AVIFileCreateStreamA(pfile : IAVIFile, ppavi : IAVIStream*, psi : AVISTREAMINFOA*) : HRESULT
+    fun AVIStreamReadData(pavi : Void*, fcc : UInt32, lp : Void*, lpcb : Int32*) : Win32cr::Foundation::HRESULT
 
-  # Params # pfile : IAVIFile [In],ckid : UInt32 [In],lpdata : Void* [In],cbdata : Int32 [In]
-  fun AVIFileWriteData(pfile : IAVIFile, ckid : UInt32, lpdata : Void*, cbdata : Int32) : HRESULT
+    fun AVIStreamWriteData(pavi : Void*, fcc : UInt32, lp : Void*, cb : Int32) : Win32cr::Foundation::HRESULT
 
-  # Params # pfile : IAVIFile [In],ckid : UInt32 [In],lpdata : Void* [In],lpcbdata : Int32* [In]
-  fun AVIFileReadData(pfile : IAVIFile, ckid : UInt32, lpdata : Void*, lpcbdata : Int32*) : HRESULT
+    fun AVIStreamRead(pavi : Void*, lStart : Int32, lSamples : Int32, lpBuffer : Void*, cbBuffer : Int32, plBytes : Int32*, plSamples : Int32*) : Win32cr::Foundation::HRESULT
 
-  # Params # pfile : IAVIFile [In]
-  fun AVIFileEndRecord(pfile : IAVIFile) : HRESULT
+    fun AVIStreamWrite(pavi : Void*, lStart : Int32, lSamples : Int32, lpBuffer : Void*, cbBuffer : Int32, dwFlags : UInt32, plSampWritten : Int32*, plBytesWritten : Int32*) : Win32cr::Foundation::HRESULT
 
-  # Params # pavi : IAVIStream [In]
-  fun AVIStreamAddRef(pavi : IAVIStream) : UInt32
+    fun AVIStreamStart(pavi : Void*) : Int32
 
-  # Params # pavi : IAVIStream [In]
-  fun AVIStreamRelease(pavi : IAVIStream) : UInt32
+    fun AVIStreamLength(pavi : Void*) : Int32
 
-  # Params # pavi : IAVIStream [In],psi : AVISTREAMINFOW* [In],lsize : Int32 [In]
-  fun AVIStreamInfoW(pavi : IAVIStream, psi : AVISTREAMINFOW*, lsize : Int32) : HRESULT
+    fun AVIStreamTimeToSample(pavi : Void*, lTime : Int32) : Int32
 
-  # Params # pavi : IAVIStream [In],psi : AVISTREAMINFOA* [In],lsize : Int32 [In]
-  fun AVIStreamInfoA(pavi : IAVIStream, psi : AVISTREAMINFOA*, lsize : Int32) : HRESULT
+    fun AVIStreamSampleToTime(pavi : Void*, lSample : Int32) : Int32
 
-  # Params # pavi : IAVIStream [In],lpos : Int32 [In],lflags : Int32 [In]
-  fun AVIStreamFindSample(pavi : IAVIStream, lpos : Int32, lflags : Int32) : Int32
+    fun AVIStreamBeginStreaming(pavi : Void*, lStart : Int32, lEnd : Int32, lRate : Int32) : Win32cr::Foundation::HRESULT
 
-  # Params # pavi : IAVIStream [In],lpos : Int32 [In],lpformat : Void* [In],lpcbformat : Int32* [In]
-  fun AVIStreamReadFormat(pavi : IAVIStream, lpos : Int32, lpformat : Void*, lpcbformat : Int32*) : HRESULT
+    fun AVIStreamEndStreaming(pavi : Void*) : Win32cr::Foundation::HRESULT
 
-  # Params # pavi : IAVIStream [In],lpos : Int32 [In],lpformat : Void* [In],cbformat : Int32 [In]
-  fun AVIStreamSetFormat(pavi : IAVIStream, lpos : Int32, lpformat : Void*, cbformat : Int32) : HRESULT
+    fun AVIStreamGetFrameOpen(pavi : Void*, lpbiWanted : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*) : Void*
 
-  # Params # pavi : IAVIStream [In],fcc : UInt32 [In],lp : Void* [In],lpcb : Int32* [In]
-  fun AVIStreamReadData(pavi : IAVIStream, fcc : UInt32, lp : Void*, lpcb : Int32*) : HRESULT
+    fun AVIStreamGetFrame(pg : Void*, lPos : Int32) : Void*
 
-  # Params # pavi : IAVIStream [In],fcc : UInt32 [In],lp : Void* [In],cb : Int32 [In]
-  fun AVIStreamWriteData(pavi : IAVIStream, fcc : UInt32, lp : Void*, cb : Int32) : HRESULT
+    fun AVIStreamGetFrameClose(pg : Void*) : Win32cr::Foundation::HRESULT
 
-  # Params # pavi : IAVIStream [In],lstart : Int32 [In],lsamples : Int32 [In],lpbuffer : Void* [In],cbbuffer : Int32 [In],plbytes : Int32* [In],plsamples : Int32* [In]
-  fun AVIStreamRead(pavi : IAVIStream, lstart : Int32, lsamples : Int32, lpbuffer : Void*, cbbuffer : Int32, plbytes : Int32*, plsamples : Int32*) : HRESULT
+    fun AVIStreamOpenFromFileA(ppavi : Void**, szFile : Win32cr::Foundation::PSTR, fccType : UInt32, lParam : Int32, mode : UInt32, pclsidHandler : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
-  # Params # pavi : IAVIStream [In],lstart : Int32 [In],lsamples : Int32 [In],lpbuffer : Void* [In],cbbuffer : Int32 [In],dwflags : UInt32 [In],plsampwritten : Int32* [In],plbyteswritten : Int32* [In]
-  fun AVIStreamWrite(pavi : IAVIStream, lstart : Int32, lsamples : Int32, lpbuffer : Void*, cbbuffer : Int32, dwflags : UInt32, plsampwritten : Int32*, plbyteswritten : Int32*) : HRESULT
+    fun AVIStreamOpenFromFileW(ppavi : Void**, szFile : Win32cr::Foundation::PWSTR, fccType : UInt32, lParam : Int32, mode : UInt32, pclsidHandler : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
-  # Params # pavi : IAVIStream [In]
-  fun AVIStreamStart(pavi : IAVIStream) : Int32
+    fun AVIStreamCreate(ppavi : Void**, lParam1 : Int32, lParam2 : Int32, pclsidHandler : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
-  # Params # pavi : IAVIStream [In]
-  fun AVIStreamLength(pavi : IAVIStream) : Int32
+    fun AVIMakeCompressedStream(ppsCompressed : Void**, ppsSource : Void*, lpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS*, pclsidHandler : LibC::GUID*) : Win32cr::Foundation::HRESULT
 
-  # Params # pavi : IAVIStream [In],ltime : Int32 [In]
-  fun AVIStreamTimeToSample(pavi : IAVIStream, ltime : Int32) : Int32
+    fun AVISaveA(szFile : Win32cr::Foundation::PSTR, pclsidHandler : LibC::GUID*, lpfnCallback : Win32cr::Media::Multimedia::AVISAVECALLBACK, nStreams : Int32, pfile : Void*, lpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS*) : Win32cr::Foundation::HRESULT
 
-  # Params # pavi : IAVIStream [In],lsample : Int32 [In]
-  fun AVIStreamSampleToTime(pavi : IAVIStream, lsample : Int32) : Int32
+    fun AVISaveVA(szFile : Win32cr::Foundation::PSTR, pclsidHandler : LibC::GUID*, lpfnCallback : Win32cr::Media::Multimedia::AVISAVECALLBACK, nStreams : Int32, ppavi : Void**, plpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS**) : Win32cr::Foundation::HRESULT
 
-  # Params # pavi : IAVIStream [In],lstart : Int32 [In],lend : Int32 [In],lrate : Int32 [In]
-  fun AVIStreamBeginStreaming(pavi : IAVIStream, lstart : Int32, lend : Int32, lrate : Int32) : HRESULT
+    fun AVISaveW(szFile : Win32cr::Foundation::PWSTR, pclsidHandler : LibC::GUID*, lpfnCallback : Win32cr::Media::Multimedia::AVISAVECALLBACK, nStreams : Int32, pfile : Void*, lpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS*) : Win32cr::Foundation::HRESULT
 
-  # Params # pavi : IAVIStream [In]
-  fun AVIStreamEndStreaming(pavi : IAVIStream) : HRESULT
+    fun AVISaveVW(szFile : Win32cr::Foundation::PWSTR, pclsidHandler : LibC::GUID*, lpfnCallback : Win32cr::Media::Multimedia::AVISAVECALLBACK, nStreams : Int32, ppavi : Void**, plpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS**) : Win32cr::Foundation::HRESULT
 
-  # Params # pavi : IAVIStream [In],lpbiwanted : BITMAPINFOHEADER* [In]
-  fun AVIStreamGetFrameOpen(pavi : IAVIStream, lpbiwanted : BITMAPINFOHEADER*) : IGetFrame
+    fun AVISaveOptions(hwnd : Win32cr::Foundation::HWND, uiFlags : UInt32, nStreams : Int32, ppavi : Void**, plpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS**) : LibC::IntPtrT
 
-  # Params # pg : IGetFrame [In],lpos : Int32 [In]
-  fun AVIStreamGetFrame(pg : IGetFrame, lpos : Int32) : Void*
+    fun AVISaveOptionsFree(nStreams : Int32, plpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS**) : Win32cr::Foundation::HRESULT
 
-  # Params # pg : IGetFrame [In]
-  fun AVIStreamGetFrameClose(pg : IGetFrame) : HRESULT
+    fun AVIBuildFilterW(lpszFilter : UInt16*, cbFilter : Int32, fSaving : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
-  # Params # ppavi : IAVIStream* [In],szfile : PSTR [In],fcctype : UInt32 [In],lparam : Int32 [In],mode : UInt32 [In],pclsidhandler : Guid* [In]
-  fun AVIStreamOpenFromFileA(ppavi : IAVIStream*, szfile : PSTR, fcctype : UInt32, lparam : Int32, mode : UInt32, pclsidhandler : Guid*) : HRESULT
+    fun AVIBuildFilterA(lpszFilter : UInt8*, cbFilter : Int32, fSaving : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
-  # Params # ppavi : IAVIStream* [In],szfile : LibC::LPWSTR [In],fcctype : UInt32 [In],lparam : Int32 [In],mode : UInt32 [In],pclsidhandler : Guid* [In]
-  fun AVIStreamOpenFromFileW(ppavi : IAVIStream*, szfile : LibC::LPWSTR, fcctype : UInt32, lparam : Int32, mode : UInt32, pclsidhandler : Guid*) : HRESULT
+    fun AVIMakeFileFromStreams(ppfile : Void**, nStreams : Int32, papStreams : Void**) : Win32cr::Foundation::HRESULT
 
-  # Params # ppavi : IAVIStream* [In],lparam1 : Int32 [In],lparam2 : Int32 [In],pclsidhandler : Guid* [In]
-  fun AVIStreamCreate(ppavi : IAVIStream*, lparam1 : Int32, lparam2 : Int32, pclsidhandler : Guid*) : HRESULT
+    fun AVIMakeStreamFromClipboard(cfFormat : UInt32, hGlobal : Win32cr::Foundation::HANDLE, ppstream : Void**) : Win32cr::Foundation::HRESULT
 
-  # Params # ppscompressed : IAVIStream* [In],ppssource : IAVIStream [In],lpoptions : AVICOMPRESSOPTIONS* [In],pclsidhandler : Guid* [In]
-  fun AVIMakeCompressedStream(ppscompressed : IAVIStream*, ppssource : IAVIStream, lpoptions : AVICOMPRESSOPTIONS*, pclsidhandler : Guid*) : HRESULT
+    fun AVIPutFileOnClipboard(pf : Void*) : Win32cr::Foundation::HRESULT
 
-  # Params # szfile : PSTR [In],pclsidhandler : Guid* [In],lpfncallback : AVISAVECALLBACK [In],nstreams : Int32 [In],pfile : IAVIStream [In],lpoptions : AVICOMPRESSOPTIONS* [In]
-  fun AVISaveA(szfile : PSTR, pclsidhandler : Guid*, lpfncallback : AVISAVECALLBACK, nstreams : Int32, pfile : IAVIStream, lpoptions : AVICOMPRESSOPTIONS*) : HRESULT
+    fun AVIGetFromClipboard(lppf : Void**) : Win32cr::Foundation::HRESULT
 
-  # Params # szfile : PSTR [In],pclsidhandler : Guid* [In],lpfncallback : AVISAVECALLBACK [In],nstreams : Int32 [In],ppavi : IAVIStream* [In],plpoptions : AVICOMPRESSOPTIONS** [In]
-  fun AVISaveVA(szfile : PSTR, pclsidhandler : Guid*, lpfncallback : AVISAVECALLBACK, nstreams : Int32, ppavi : IAVIStream*, plpoptions : AVICOMPRESSOPTIONS**) : HRESULT
+    fun AVIClearClipboard : Win32cr::Foundation::HRESULT
 
-  # Params # szfile : LibC::LPWSTR [In],pclsidhandler : Guid* [In],lpfncallback : AVISAVECALLBACK [In],nstreams : Int32 [In],pfile : IAVIStream [In],lpoptions : AVICOMPRESSOPTIONS* [In]
-  fun AVISaveW(szfile : LibC::LPWSTR, pclsidhandler : Guid*, lpfncallback : AVISAVECALLBACK, nstreams : Int32, pfile : IAVIStream, lpoptions : AVICOMPRESSOPTIONS*) : HRESULT
+    fun CreateEditableStream(ppsEditable : Void**, psSource : Void*) : Win32cr::Foundation::HRESULT
 
-  # Params # szfile : LibC::LPWSTR [In],pclsidhandler : Guid* [In],lpfncallback : AVISAVECALLBACK [In],nstreams : Int32 [In],ppavi : IAVIStream* [In],plpoptions : AVICOMPRESSOPTIONS** [In]
-  fun AVISaveVW(szfile : LibC::LPWSTR, pclsidhandler : Guid*, lpfncallback : AVISAVECALLBACK, nstreams : Int32, ppavi : IAVIStream*, plpoptions : AVICOMPRESSOPTIONS**) : HRESULT
+    fun EditStreamCut(pavi : Void*, plStart : Int32*, plLength : Int32*, ppResult : Void**) : Win32cr::Foundation::HRESULT
 
-  # Params # hwnd : LibC::HANDLE [In],uiflags : UInt32 [In],nstreams : Int32 [In],ppavi : IAVIStream* [In],plpoptions : AVICOMPRESSOPTIONS** [In]
-  fun AVISaveOptions(hwnd : LibC::HANDLE, uiflags : UInt32, nstreams : Int32, ppavi : IAVIStream*, plpoptions : AVICOMPRESSOPTIONS**) : LibC::IntPtrT
+    fun EditStreamCopy(pavi : Void*, plStart : Int32*, plLength : Int32*, ppResult : Void**) : Win32cr::Foundation::HRESULT
 
-  # Params # nstreams : Int32 [In],plpoptions : AVICOMPRESSOPTIONS** [In]
-  fun AVISaveOptionsFree(nstreams : Int32, plpoptions : AVICOMPRESSOPTIONS**) : HRESULT
+    fun EditStreamPaste(pavi : Void*, plPos : Int32*, plLength : Int32*, pstream : Void*, lStart : Int32, lEnd : Int32) : Win32cr::Foundation::HRESULT
 
-  # Params # lpszfilter : Char* [In],cbfilter : Int32 [In],fsaving : LibC::BOOL [In]
-  fun AVIBuildFilterW(lpszfilter : Char*, cbfilter : Int32, fsaving : LibC::BOOL) : HRESULT
+    fun EditStreamClone(pavi : Void*, ppResult : Void**) : Win32cr::Foundation::HRESULT
 
-  # Params # lpszfilter : UInt8* [In],cbfilter : Int32 [In],fsaving : LibC::BOOL [In]
-  fun AVIBuildFilterA(lpszfilter : UInt8*, cbfilter : Int32, fsaving : LibC::BOOL) : HRESULT
+    fun EditStreamSetNameA(pavi : Void*, lpszName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
 
-  # Params # ppfile : IAVIFile* [In],nstreams : Int32 [In],papstreams : IAVIStream* [In]
-  fun AVIMakeFileFromStreams(ppfile : IAVIFile*, nstreams : Int32, papstreams : IAVIStream*) : HRESULT
+    fun EditStreamSetNameW(pavi : Void*, lpszName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
-  # Params # cfformat : UInt32 [In],hglobal : LibC::HANDLE [In],ppstream : IAVIStream* [In]
-  fun AVIMakeStreamFromClipboard(cfformat : UInt32, hglobal : LibC::HANDLE, ppstream : IAVIStream*) : HRESULT
+    fun EditStreamSetInfoW(pavi : Void*, lpInfo : Win32cr::Media::Multimedia::AVISTREAMINFOW*, cbInfo : Int32) : Win32cr::Foundation::HRESULT
 
-  # Params # pf : IAVIFile [In]
-  fun AVIPutFileOnClipboard(pf : IAVIFile) : HRESULT
+    fun EditStreamSetInfoA(pavi : Void*, lpInfo : Win32cr::Media::Multimedia::AVISTREAMINFOA*, cbInfo : Int32) : Win32cr::Foundation::HRESULT
 
-  # Params # lppf : IAVIFile* [In]
-  fun AVIGetFromClipboard(lppf : IAVIFile*) : HRESULT
+    fun MCIWndCreateA(hwndParent : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, dwStyle : UInt32, szFile : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HWND
 
-  # Params # 
-  fun AVIClearClipboard : HRESULT
+    fun MCIWndCreateW(hwndParent : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, dwStyle : UInt32, szFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HWND
 
-  # Params # ppseditable : IAVIStream* [In],pssource : IAVIStream [In]
-  fun CreateEditableStream(ppseditable : IAVIStream*, pssource : IAVIStream) : HRESULT
+    fun MCIWndRegisterClass : Win32cr::Foundation::BOOL
 
-  # Params # pavi : IAVIStream [In],plstart : Int32* [In],pllength : Int32* [In],ppresult : IAVIStream* [In]
-  fun EditStreamCut(pavi : IAVIStream, plstart : Int32*, pllength : Int32*, ppresult : IAVIStream*) : HRESULT
+    fun capCreateCaptureWindowA(lpszWindowName : Win32cr::Foundation::PSTR, dwStyle : UInt32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hwndParent : Win32cr::Foundation::HWND, nID : Int32) : Win32cr::Foundation::HWND
 
-  # Params # pavi : IAVIStream [In],plstart : Int32* [In],pllength : Int32* [In],ppresult : IAVIStream* [In]
-  fun EditStreamCopy(pavi : IAVIStream, plstart : Int32*, pllength : Int32*, ppresult : IAVIStream*) : HRESULT
+    fun capGetDriverDescriptionA(wDriverIndex : UInt32, lpszName : UInt8*, cbName : Int32, lpszVer : UInt8*, cbVer : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # pavi : IAVIStream [In],plpos : Int32* [In],pllength : Int32* [In],pstream : IAVIStream [In],lstart : Int32 [In],lend : Int32 [In]
-  fun EditStreamPaste(pavi : IAVIStream, plpos : Int32*, pllength : Int32*, pstream : IAVIStream, lstart : Int32, lend : Int32) : HRESULT
+    fun capCreateCaptureWindowW(lpszWindowName : Win32cr::Foundation::PWSTR, dwStyle : UInt32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hwndParent : Win32cr::Foundation::HWND, nID : Int32) : Win32cr::Foundation::HWND
 
-  # Params # pavi : IAVIStream [In],ppresult : IAVIStream* [In]
-  fun EditStreamClone(pavi : IAVIStream, ppresult : IAVIStream*) : HRESULT
+    fun capGetDriverDescriptionW(wDriverIndex : UInt32, lpszName : UInt16*, cbName : Int32, lpszVer : UInt16*, cbVer : Int32) : Win32cr::Foundation::BOOL
 
-  # Params # pavi : IAVIStream [In],lpszname : PSTR [In]
-  fun EditStreamSetNameA(pavi : IAVIStream, lpszname : PSTR) : HRESULT
+    fun GetOpenFileNamePreviewA(lpofn : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*) : Win32cr::Foundation::BOOL
 
-  # Params # pavi : IAVIStream [In],lpszname : LibC::LPWSTR [In]
-  fun EditStreamSetNameW(pavi : IAVIStream, lpszname : LibC::LPWSTR) : HRESULT
+    fun GetSaveFileNamePreviewA(lpofn : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*) : Win32cr::Foundation::BOOL
 
-  # Params # pavi : IAVIStream [In],lpinfo : AVISTREAMINFOW* [In],cbinfo : Int32 [In]
-  fun EditStreamSetInfoW(pavi : IAVIStream, lpinfo : AVISTREAMINFOW*, cbinfo : Int32) : HRESULT
+    fun GetOpenFileNamePreviewW(lpofn : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*) : Win32cr::Foundation::BOOL
 
-  # Params # pavi : IAVIStream [In],lpinfo : AVISTREAMINFOA* [In],cbinfo : Int32 [In]
-  fun EditStreamSetInfoA(pavi : IAVIStream, lpinfo : AVISTREAMINFOA*, cbinfo : Int32) : HRESULT
+    fun GetSaveFileNamePreviewW(lpofn : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*) : Win32cr::Foundation::BOOL
 
-  # Params # hwndparent : LibC::HANDLE [In],hinstance : HINSTANCE [In],dwstyle : UInt32 [In],szfile : PSTR [In]
-  fun MCIWndCreateA(hwndparent : LibC::HANDLE, hinstance : HINSTANCE, dwstyle : UInt32, szfile : PSTR) : HANDLE
+    fun mmTaskCreate(lpfn : Win32cr::Media::Multimedia::LPTASKCALLBACK, lph : Win32cr::Foundation::HANDLE*, dwInst : LibC::UIntPtrT) : UInt32
 
-  # Params # hwndparent : LibC::HANDLE [In],hinstance : HINSTANCE [In],dwstyle : UInt32 [In],szfile : LibC::LPWSTR [In]
-  fun MCIWndCreateW(hwndparent : LibC::HANDLE, hinstance : HINSTANCE, dwstyle : UInt32, szfile : LibC::LPWSTR) : HANDLE
+    fun mmTaskBlock(h : UInt32) : Void
 
-  # Params # 
-  fun MCIWndRegisterClass : LibC::BOOL
+    fun mmTaskSignal(h : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # lpszwindowname : PSTR [In],dwstyle : UInt32 [In],x : Int32 [In],y : Int32 [In],nwidth : Int32 [In],nheight : Int32 [In],hwndparent : LibC::HANDLE [In],nid : Int32 [In]
-  fun capCreateCaptureWindowA(lpszwindowname : PSTR, dwstyle : UInt32, x : Int32, y : Int32, nwidth : Int32, nheight : Int32, hwndparent : LibC::HANDLE, nid : Int32) : HANDLE
+    fun mmTaskYield : Void
 
-  # Params # wdriverindex : UInt32 [In],lpszname : UInt8* [In],cbname : Int32 [In],lpszver : UInt8* [In],cbver : Int32 [In]
-  fun capGetDriverDescriptionA(wdriverindex : UInt32, lpszname : UInt8*, cbname : Int32, lpszver : UInt8*, cbver : Int32) : LibC::BOOL
+    fun mmGetCurrentTask : UInt32
 
-  # Params # lpszwindowname : LibC::LPWSTR [In],dwstyle : UInt32 [In],x : Int32 [In],y : Int32 [In],nwidth : Int32 [In],nheight : Int32 [In],hwndparent : LibC::HANDLE [In],nid : Int32 [In]
-  fun capCreateCaptureWindowW(lpszwindowname : LibC::LPWSTR, dwstyle : UInt32, x : Int32, y : Int32, nwidth : Int32, nheight : Int32, hwndparent : LibC::HANDLE, nid : Int32) : HANDLE
-
-  # Params # wdriverindex : UInt32 [In],lpszname : Char* [In],cbname : Int32 [In],lpszver : Char* [In],cbver : Int32 [In]
-  fun capGetDriverDescriptionW(wdriverindex : UInt32, lpszname : Char*, cbname : Int32, lpszver : Char*, cbver : Int32) : LibC::BOOL
-
-  # Params # lpofn : OPENFILENAMEA* [In]
-  fun GetOpenFileNamePreviewA(lpofn : OPENFILENAMEA*) : LibC::BOOL
-
-  # Params # lpofn : OPENFILENAMEA* [In]
-  fun GetSaveFileNamePreviewA(lpofn : OPENFILENAMEA*) : LibC::BOOL
-
-  # Params # lpofn : OPENFILENAMEW* [In]
-  fun GetOpenFileNamePreviewW(lpofn : OPENFILENAMEW*) : LibC::BOOL
-
-  # Params # lpofn : OPENFILENAMEW* [In]
-  fun GetSaveFileNamePreviewW(lpofn : OPENFILENAMEW*) : LibC::BOOL
-
-  # Params # lpfn : LPTASKCALLBACK [In],lph : LibC::HANDLE* [In],dwinst : LibC::UINT_PTR [In]
-  fun mmTaskCreate(lpfn : LPTASKCALLBACK, lph : LibC::HANDLE*, dwinst : LibC::UINT_PTR) : UInt32
-
-  # Params # h : UInt32 [In]
-  fun mmTaskBlock(h : UInt32) : Void
-
-  # Params # h : UInt32 [In]
-  fun mmTaskSignal(h : UInt32) : LibC::BOOL
-
-  # Params # 
-  fun mmTaskYield : Void
-
-  # Params # 
-  fun mmGetCurrentTask : UInt32
-end
-struct LibWin32::IAVIStream
-  def query_interface(this : IAVIStream*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAVIStream*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAVIStream*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def create(this : IAVIStream*, lparam1 : LPARAM, lparam2 : LPARAM) : HRESULT
-    @lpVtbl.value.create.call(this, lparam1, lparam2)
-  end
-  def info(this : IAVIStream*, psi : AVISTREAMINFOW*, lsize : Int32) : HRESULT
-    @lpVtbl.value.info.call(this, psi, lsize)
-  end
-  def find_sample(this : IAVIStream*, lpos : Int32, lflags : Int32) : Int32
-    @lpVtbl.value.find_sample.call(this, lpos, lflags)
-  end
-  def read_format(this : IAVIStream*, lpos : Int32, lpformat : Void*, lpcbformat : Int32*) : HRESULT
-    @lpVtbl.value.read_format.call(this, lpos, lpformat, lpcbformat)
-  end
-  def set_format(this : IAVIStream*, lpos : Int32, lpformat : Void*, cbformat : Int32) : HRESULT
-    @lpVtbl.value.set_format.call(this, lpos, lpformat, cbformat)
-  end
-  def read(this : IAVIStream*, lstart : Int32, lsamples : Int32, lpbuffer : Void*, cbbuffer : Int32, plbytes : Int32*, plsamples : Int32*) : HRESULT
-    @lpVtbl.value.read.call(this, lstart, lsamples, lpbuffer, cbbuffer, plbytes, plsamples)
-  end
-  def write(this : IAVIStream*, lstart : Int32, lsamples : Int32, lpbuffer : Void*, cbbuffer : Int32, dwflags : UInt32, plsampwritten : Int32*, plbyteswritten : Int32*) : HRESULT
-    @lpVtbl.value.write.call(this, lstart, lsamples, lpbuffer, cbbuffer, dwflags, plsampwritten, plbyteswritten)
-  end
-  def delete(this : IAVIStream*, lstart : Int32, lsamples : Int32) : HRESULT
-    @lpVtbl.value.delete.call(this, lstart, lsamples)
-  end
-  def read_data(this : IAVIStream*, fcc : UInt32, lp : Void*, lpcb : Int32*) : HRESULT
-    @lpVtbl.value.read_data.call(this, fcc, lp, lpcb)
-  end
-  def write_data(this : IAVIStream*, fcc : UInt32, lp : Void*, cb : Int32) : HRESULT
-    @lpVtbl.value.write_data.call(this, fcc, lp, cb)
-  end
-  def set_info(this : IAVIStream*, lpinfo : AVISTREAMINFOW*, cbinfo : Int32) : HRESULT
-    @lpVtbl.value.set_info.call(this, lpinfo, cbinfo)
-  end
-end
-struct LibWin32::IAVIStreaming
-  def query_interface(this : IAVIStreaming*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAVIStreaming*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAVIStreaming*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def begin_(this : IAVIStreaming*, lstart : Int32, lend : Int32, lrate : Int32) : HRESULT
-    @lpVtbl.value.begin_.call(this, lstart, lend, lrate)
-  end
-  def end_(this : IAVIStreaming*) : HRESULT
-    @lpVtbl.value.end_.call(this)
-  end
-end
-struct LibWin32::IAVIEditStream
-  def query_interface(this : IAVIEditStream*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAVIEditStream*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAVIEditStream*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def cut(this : IAVIEditStream*, plstart : Int32*, pllength : Int32*, ppresult : IAVIStream*) : HRESULT
-    @lpVtbl.value.cut.call(this, plstart, pllength, ppresult)
-  end
-  def copy(this : IAVIEditStream*, plstart : Int32*, pllength : Int32*, ppresult : IAVIStream*) : HRESULT
-    @lpVtbl.value.copy.call(this, plstart, pllength, ppresult)
-  end
-  def paste(this : IAVIEditStream*, plpos : Int32*, pllength : Int32*, pstream : IAVIStream, lstart : Int32, lend : Int32) : HRESULT
-    @lpVtbl.value.paste.call(this, plpos, pllength, pstream, lstart, lend)
-  end
-  def clone(this : IAVIEditStream*, ppresult : IAVIStream*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppresult)
-  end
-  def set_info(this : IAVIEditStream*, lpinfo : AVISTREAMINFOW*, cbinfo : Int32) : HRESULT
-    @lpVtbl.value.set_info.call(this, lpinfo, cbinfo)
-  end
-end
-struct LibWin32::IAVIPersistFile
-  def query_interface(this : IAVIPersistFile*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAVIPersistFile*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAVIPersistFile*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_class_id(this : IAVIPersistFile*, pclassid : Guid*) : HRESULT
-    @lpVtbl.value.get_class_id.call(this, pclassid)
-  end
-  def is_dirty(this : IAVIPersistFile*) : HRESULT
-    @lpVtbl.value.is_dirty.call(this)
-  end
-  def load(this : IAVIPersistFile*, pszfilename : LibC::LPWSTR, dwmode : UInt32) : HRESULT
-    @lpVtbl.value.load.call(this, pszfilename, dwmode)
-  end
-  def save(this : IAVIPersistFile*, pszfilename : LibC::LPWSTR, fremember : LibC::BOOL) : HRESULT
-    @lpVtbl.value.save.call(this, pszfilename, fremember)
-  end
-  def save_completed(this : IAVIPersistFile*, pszfilename : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.save_completed.call(this, pszfilename)
-  end
-  def get_cur_file(this : IAVIPersistFile*, ppszfilename : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_cur_file.call(this, ppszfilename)
-  end
-  def reserved1(this : IAVIPersistFile*) : HRESULT
-    @lpVtbl.value.reserved1.call(this)
-  end
-end
-struct LibWin32::IAVIFile
-  def query_interface(this : IAVIFile*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAVIFile*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAVIFile*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def info(this : IAVIFile*, pfi : AVIFILEINFOW*, lsize : Int32) : HRESULT
-    @lpVtbl.value.info.call(this, pfi, lsize)
-  end
-  def get_stream(this : IAVIFile*, ppstream : IAVIStream*, fcctype : UInt32, lparam : Int32) : HRESULT
-    @lpVtbl.value.get_stream.call(this, ppstream, fcctype, lparam)
-  end
-  def create_stream(this : IAVIFile*, ppstream : IAVIStream*, psi : AVISTREAMINFOW*) : HRESULT
-    @lpVtbl.value.create_stream.call(this, ppstream, psi)
-  end
-  def write_data(this : IAVIFile*, ckid : UInt32, lpdata : Void*, cbdata : Int32) : HRESULT
-    @lpVtbl.value.write_data.call(this, ckid, lpdata, cbdata)
-  end
-  def read_data(this : IAVIFile*, ckid : UInt32, lpdata : Void*, lpcbdata : Int32*) : HRESULT
-    @lpVtbl.value.read_data.call(this, ckid, lpdata, lpcbdata)
-  end
-  def end_record(this : IAVIFile*) : HRESULT
-    @lpVtbl.value.end_record.call(this)
-  end
-  def delete_stream(this : IAVIFile*, fcctype : UInt32, lparam : Int32) : HRESULT
-    @lpVtbl.value.delete_stream.call(this, fcctype, lparam)
-  end
-end
-struct LibWin32::IGetFrame
-  def query_interface(this : IGetFrame*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IGetFrame*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IGetFrame*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_frame(this : IGetFrame*, lpos : Int32) : Void*
-    @lpVtbl.value.get_frame.call(this, lpos)
-  end
-  def begin_(this : IGetFrame*, lstart : Int32, lend : Int32, lrate : Int32) : HRESULT
-    @lpVtbl.value.begin_.call(this, lstart, lend, lrate)
-  end
-  def end_(this : IGetFrame*) : HRESULT
-    @lpVtbl.value.end_.call(this)
-  end
-  def set_format(this : IGetFrame*, lpbi : BITMAPINFOHEADER*, lpbits : Void*, x : Int32, y : Int32, dx : Int32, dy : Int32) : HRESULT
-    @lpVtbl.value.set_format.call(this, lpbi, lpbits, x, y, dx, dy)
   end
 end

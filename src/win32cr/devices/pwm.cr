@@ -1,14 +1,8 @@
-require "../foundation.cr"
+require "./../foundation.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-lib LibWin32
+module Win32cr::Devices::Pwm
   GUID_DEVINTERFACE_PWM_CONTROLLER = "60824b4c-eed1-4c9c-b49c-1b961461a819"
+  GUID_DEVINTERFACE_PWM_CONTROLLER_WSZ = "{60824B4C-EED1-4C9C-B49C-1B961461A819}"
   IOCTL_PWM_CONTROLLER_GET_INFO = 262144_u32
   IOCTL_PWM_CONTROLLER_GET_ACTUAL_PERIOD = 262148_u32
   IOCTL_PWM_CONTROLLER_SET_DESIRED_PERIOD = 294920_u32
@@ -30,41 +24,48 @@ lib LibWin32
   PWM_IOCTL_ID_PIN_STOP = 105_i32
   PWM_IOCTL_ID_PIN_IS_STARTED = 106_i32
 
-
-  enum PWM_POLARITY : Int32
-    PWM_ACTIVE_HIGH = 0
-    PWM_ACTIVE_LOW = 1
+  enum PWM_POLARITY
+    PWM_ACTIVE_HIGH = 0_i32
+    PWM_ACTIVE_LOW = 1_i32
   end
 
-  struct PWM_CONTROLLER_INFO
-    size : LibC::UINT_PTR
-    pin_count : UInt32
-    minimum_period : UInt64
+  @[Extern]
+  record PWM_CONTROLLER_INFO,
+    size : LibC::UIntPtrT,
+    pin_count : UInt32,
+    minimum_period : UInt64,
     maximum_period : UInt64
-  end
-  struct PWM_CONTROLLER_GET_ACTUAL_PERIOD_OUTPUT
+
+  @[Extern]
+  record PWM_CONTROLLER_GET_ACTUAL_PERIOD_OUTPUT,
     actual_period : UInt64
-  end
-  struct PWM_CONTROLLER_SET_DESIRED_PERIOD_INPUT
+
+  @[Extern]
+  record PWM_CONTROLLER_SET_DESIRED_PERIOD_INPUT,
     desired_period : UInt64
-  end
-  struct PWM_CONTROLLER_SET_DESIRED_PERIOD_OUTPUT
+
+  @[Extern]
+  record PWM_CONTROLLER_SET_DESIRED_PERIOD_OUTPUT,
     actual_period : UInt64
-  end
-  struct PWM_PIN_GET_ACTIVE_DUTY_CYCLE_PERCENTAGE_OUTPUT
+
+  @[Extern]
+  record PWM_PIN_GET_ACTIVE_DUTY_CYCLE_PERCENTAGE_OUTPUT,
     percentage : UInt64
-  end
-  struct PWM_PIN_SET_ACTIVE_DUTY_CYCLE_PERCENTAGE_INPUT
+
+  @[Extern]
+  record PWM_PIN_SET_ACTIVE_DUTY_CYCLE_PERCENTAGE_INPUT,
     percentage : UInt64
-  end
-  struct PWM_PIN_GET_POLARITY_OUTPUT
-    polarity : PWM_POLARITY
-  end
-  struct PWM_PIN_SET_POLARITY_INPUT
-    polarity : PWM_POLARITY
-  end
-  struct PWM_PIN_IS_STARTED_OUTPUT
-    is_started : BOOLEAN
-  end
+
+  @[Extern]
+  record PWM_PIN_GET_POLARITY_OUTPUT,
+    polarity : Win32cr::Devices::Pwm::PWM_POLARITY
+
+  @[Extern]
+  record PWM_PIN_SET_POLARITY_INPUT,
+    polarity : Win32cr::Devices::Pwm::PWM_POLARITY
+
+  @[Extern]
+  record PWM_PIN_IS_STARTED_OUTPUT,
+    is_started : Win32cr::Foundation::BOOLEAN
 
 end

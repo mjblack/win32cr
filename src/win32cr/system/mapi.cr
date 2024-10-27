@@ -1,18 +1,32 @@
-require "../foundation.cr"
+require "./../foundation.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:mapi32.dll")]
-{% else %}
-@[Link("mapi32")]
-{% end %}
-lib LibWin32
+module Win32cr::System::Mapi
+  alias LPMAPILOGON = Proc(LibC::UIntPtrT, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, UInt32, LibC::UIntPtrT*, UInt32)*
+
+  alias LPMAPILOGOFF = Proc(LibC::UIntPtrT, LibC::UIntPtrT, UInt32, UInt32, UInt32)*
+
+  alias LPMAPISENDMAIL = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::System::Mapi::MapiMessage*, UInt32, UInt32, UInt32)*
+
+  alias LPMAPISENDMAILW = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::System::Mapi::MapiMessageW*, UInt32, UInt32, UInt32)*
+
+  alias LPMAPISENDDOCUMENTS = Proc(LibC::UIntPtrT, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, UInt32)*
+
+  alias LPMAPIFINDNEXT = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, UInt32, Win32cr::Foundation::PSTR, UInt32)*
+
+  alias LPMAPIREADMAIL = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::Foundation::PSTR, UInt32, UInt32, Win32cr::System::Mapi::MapiMessage**, UInt32)*
+
+  alias LPMAPISAVEMAIL = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::System::Mapi::MapiMessage*, UInt32, UInt32, Win32cr::Foundation::PSTR, UInt32)*
+
+  alias LPMAPIDELETEMAIL = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::Foundation::PSTR, UInt32, UInt32, UInt32)*
+
+  alias LPMAPIFREEBUFFER = Proc(Void*, UInt32)*
+
+  alias LPMAPIADDRESS = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::Foundation::PSTR, UInt32, Win32cr::Foundation::PSTR, UInt32, Win32cr::System::Mapi::MapiRecipDesc*, UInt32, UInt32, UInt32*, Win32cr::System::Mapi::MapiRecipDesc**, UInt32)*
+
+  alias LPMAPIDETAILS = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::System::Mapi::MapiRecipDesc*, UInt32, UInt32, UInt32)*
+
+  alias LPMAPIRESOLVENAME = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::Foundation::PSTR, UInt32, UInt32, Win32cr::System::Mapi::MapiRecipDesc**, UInt32)*
+
   MAPI_OLE = 1_u32
   MAPI_OLE_STATIC = 2_u32
   MAPI_ORIG = 0_u32
@@ -69,89 +83,84 @@ lib LibWin32
   MAPI_E_UNICODE_NOT_SUPPORTED = 27_u32
   MAPI_E_ATTACHMENT_TOO_LARGE = 28_u32
 
-  alias LPMAPILOGON = Proc(LibC::UINT_PTR, PSTR, PSTR, UInt32, UInt32, LibC::UINT_PTR*, UInt32)
-  alias LPMAPILOGOFF = Proc(LibC::UINT_PTR, LibC::UINT_PTR, UInt32, UInt32, UInt32)
-  alias LPMAPISENDMAIL = Proc(LibC::UINT_PTR, LibC::UINT_PTR, MapiMessage*, UInt32, UInt32, UInt32)
-  alias LPMAPISENDMAILW = Proc(LibC::UINT_PTR, LibC::UINT_PTR, MapiMessageW*, UInt32, UInt32, UInt32)
-  alias LPMAPISENDDOCUMENTS = Proc(LibC::UINT_PTR, PSTR, PSTR, PSTR, UInt32, UInt32)
-  alias LPMAPIFINDNEXT = Proc(LibC::UINT_PTR, LibC::UINT_PTR, PSTR, PSTR, UInt32, UInt32, PSTR, UInt32)
-  alias LPMAPIREADMAIL = Proc(LibC::UINT_PTR, LibC::UINT_PTR, PSTR, UInt32, UInt32, MapiMessage**, UInt32)
-  alias LPMAPISAVEMAIL = Proc(LibC::UINT_PTR, LibC::UINT_PTR, MapiMessage*, UInt32, UInt32, PSTR, UInt32)
-  alias LPMAPIDELETEMAIL = Proc(LibC::UINT_PTR, LibC::UINT_PTR, PSTR, UInt32, UInt32, UInt32)
-  alias LPMAPIFREEBUFFER = Proc(Void*, UInt32)
-  alias LPMAPIADDRESS = Proc(LibC::UINT_PTR, LibC::UINT_PTR, PSTR, UInt32, PSTR, UInt32, MapiRecipDesc*, UInt32, UInt32, UInt32*, MapiRecipDesc**, UInt32)
-  alias LPMAPIDETAILS = Proc(LibC::UINT_PTR, LibC::UINT_PTR, MapiRecipDesc*, UInt32, UInt32, UInt32)
-  alias LPMAPIRESOLVENAME = Proc(LibC::UINT_PTR, LibC::UINT_PTR, PSTR, UInt32, UInt32, MapiRecipDesc**, UInt32)
 
-  struct MapiFileDesc
-    ul_reserved : UInt32
-    fl_flags : UInt32
-    n_position : UInt32
-    lpsz_path_name : PSTR
-    lpsz_file_name : PSTR
-    lp_file_type : Void*
-  end
-  struct MapiFileDescW
-    ul_reserved : UInt32
-    fl_flags : UInt32
-    n_position : UInt32
-    lpsz_path_name : LibC::LPWSTR
-    lpsz_file_name : LibC::LPWSTR
-    lp_file_type : Void*
-  end
-  struct MapiFileTagExt
-    ul_reserved : UInt32
-    cb_tag : UInt32
-    lp_tag : UInt8*
-    cb_encoding : UInt32
-    lp_encoding : UInt8*
-  end
-  struct MapiRecipDesc
-    ul_reserved : UInt32
-    ul_recip_class : UInt32
-    lpsz_name : PSTR
-    lpsz_address : PSTR
-    ul_eid_size : UInt32
-    lp_entry_id : Void*
-  end
-  struct MapiRecipDescW
-    ul_reserved : UInt32
-    ul_recip_class : UInt32
-    lpsz_name : LibC::LPWSTR
-    lpsz_address : LibC::LPWSTR
-    ul_eid_size : UInt32
-    lp_entry_id : Void*
-  end
-  struct MapiMessage
-    ul_reserved : UInt32
-    lpsz_subject : PSTR
-    lpsz_note_text : PSTR
-    lpsz_message_type : PSTR
-    lpsz_date_received : PSTR
-    lpsz_conversation_id : PSTR
-    fl_flags : UInt32
-    lp_originator : MapiRecipDesc*
-    n_recip_count : UInt32
-    lp_recips : MapiRecipDesc*
-    n_file_count : UInt32
-    lp_files : MapiFileDesc*
-  end
-  struct MapiMessageW
-    ul_reserved : UInt32
-    lpsz_subject : LibC::LPWSTR
-    lpsz_note_text : LibC::LPWSTR
-    lpsz_message_type : LibC::LPWSTR
-    lpsz_date_received : LibC::LPWSTR
-    lpsz_conversation_id : LibC::LPWSTR
-    fl_flags : UInt32
-    lp_originator : MapiRecipDescW*
-    n_recip_count : UInt32
-    lp_recips : MapiRecipDescW*
-    n_file_count : UInt32
-    lp_files : MapiFileDescW*
-  end
+  @[Extern]
+  record MapiFileDesc,
+    ulReserved : UInt32,
+    flFlags : UInt32,
+    nPosition : UInt32,
+    lpszPathName : Win32cr::Foundation::PSTR,
+    lpszFileName : Win32cr::Foundation::PSTR,
+    lpFileType : Void*
 
+  @[Extern]
+  record MapiFileDescW,
+    ulReserved : UInt32,
+    flFlags : UInt32,
+    nPosition : UInt32,
+    lpszPathName : Win32cr::Foundation::PWSTR,
+    lpszFileName : Win32cr::Foundation::PWSTR,
+    lpFileType : Void*
 
-  # Params # pv : Void* [In]
-  fun MAPIFreeBuffer(pv : Void*) : UInt32
+  @[Extern]
+  record MapiFileTagExt,
+    ulReserved : UInt32,
+    cbTag : UInt32,
+    lpTag : UInt8*,
+    cbEncoding : UInt32,
+    lpEncoding : UInt8*
+
+  @[Extern]
+  record MapiRecipDesc,
+    ulReserved : UInt32,
+    ulRecipClass : UInt32,
+    lpszName : Win32cr::Foundation::PSTR,
+    lpszAddress : Win32cr::Foundation::PSTR,
+    ulEIDSize : UInt32,
+    lpEntryID : Void*
+
+  @[Extern]
+  record MapiRecipDescW,
+    ulReserved : UInt32,
+    ulRecipClass : UInt32,
+    lpszName : Win32cr::Foundation::PWSTR,
+    lpszAddress : Win32cr::Foundation::PWSTR,
+    ulEIDSize : UInt32,
+    lpEntryID : Void*
+
+  @[Extern]
+  record MapiMessage,
+    ulReserved : UInt32,
+    lpszSubject : Win32cr::Foundation::PSTR,
+    lpszNoteText : Win32cr::Foundation::PSTR,
+    lpszMessageType : Win32cr::Foundation::PSTR,
+    lpszDateReceived : Win32cr::Foundation::PSTR,
+    lpszConversationID : Win32cr::Foundation::PSTR,
+    flFlags : UInt32,
+    lpOriginator : Win32cr::System::Mapi::MapiRecipDesc*,
+    nRecipCount : UInt32,
+    lpRecips : Win32cr::System::Mapi::MapiRecipDesc*,
+    nFileCount : UInt32,
+    lpFiles : Win32cr::System::Mapi::MapiFileDesc*
+
+  @[Extern]
+  record MapiMessageW,
+    ulReserved : UInt32,
+    lpszSubject : Win32cr::Foundation::PWSTR,
+    lpszNoteText : Win32cr::Foundation::PWSTR,
+    lpszMessageType : Win32cr::Foundation::PWSTR,
+    lpszDateReceived : Win32cr::Foundation::PWSTR,
+    lpszConversationID : Win32cr::Foundation::PWSTR,
+    flFlags : UInt32,
+    lpOriginator : Win32cr::System::Mapi::MapiRecipDescW*,
+    nRecipCount : UInt32,
+    lpRecips : Win32cr::System::Mapi::MapiRecipDescW*,
+    nFileCount : UInt32,
+    lpFiles : Win32cr::System::Mapi::MapiFileDescW*
+
+  @[Link("mapi32")]
+  lib C
+    fun MAPIFreeBuffer(pv : Void*) : UInt32
+
+  end
 end

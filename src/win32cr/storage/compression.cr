@@ -1,82 +1,59 @@
-require "../foundation.cr"
+require "./../foundation.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:cabinet.dll")]
-{% else %}
-@[Link("cabinet")]
-{% end %}
-lib LibWin32
+module Win32cr::Storage::Compression
   alias COMPRESSOR_HANDLE = LibC::IntPtrT
+  alias PFN_COMPRESS_ALLOCATE = Proc(Void*, LibC::UIntPtrT, Void*)*
+
+  alias PFN_COMPRESS_FREE = Proc(Void*, Void*, Void)*
 
   COMPRESS_ALGORITHM_INVALID = 0_u32
   COMPRESS_ALGORITHM_NULL = 1_u32
   COMPRESS_ALGORITHM_MAX = 6_u32
   COMPRESS_RAW = 536870912_u32
 
-  alias PFN_COMPRESS_ALLOCATE = Proc(Void*, LibC::UINT_PTR, Void*)
-  alias PFN_COMPRESS_FREE = Proc(Void*, Void*, Void)
-
-
   enum COMPRESS_ALGORITHM : UInt32
-    COMPRESS_ALGORITHM_MSZIP = 2
-    COMPRESS_ALGORITHM_XPRESS = 3
-    COMPRESS_ALGORITHM_XPRESS_HUFF = 4
-    COMPRESS_ALGORITHM_LZMS = 5
+    COMPRESS_ALGORITHM_MSZIP = 2_u32
+    COMPRESS_ALGORITHM_XPRESS = 3_u32
+    COMPRESS_ALGORITHM_XPRESS_HUFF = 4_u32
+    COMPRESS_ALGORITHM_LZMS = 5_u32
+  end
+  enum COMPRESS_INFORMATION_CLASS
+    COMPRESS_INFORMATION_CLASS_INVALID = 0_i32
+    COMPRESS_INFORMATION_CLASS_BLOCK_SIZE = 1_i32
+    COMPRESS_INFORMATION_CLASS_LEVEL = 2_i32
   end
 
-  enum COMPRESS_INFORMATION_CLASS : Int32
-    COMPRESS_INFORMATION_CLASS_INVALID = 0
-    COMPRESS_INFORMATION_CLASS_BLOCK_SIZE = 1
-    COMPRESS_INFORMATION_CLASS_LEVEL = 2
-  end
-
-  struct COMPRESS_ALLOCATION_ROUTINES
-    allocate : PFN_COMPRESS_ALLOCATE
-    free : PFN_COMPRESS_FREE
+  @[Extern]
+  record COMPRESS_ALLOCATION_ROUTINES,
+    allocate : Win32cr::Storage::Compression::PFN_COMPRESS_ALLOCATE,
+    free : Win32cr::Storage::Compression::PFN_COMPRESS_FREE,
     user_context : Void*
+
+  @[Link("cabinet")]
+  lib C
+    fun CreateCompressor(algorithm : Win32cr::Storage::Compression::COMPRESS_ALGORITHM, allocation_routines : Win32cr::Storage::Compression::COMPRESS_ALLOCATION_ROUTINES*, compressor_handle : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+
+    fun SetCompressorInformation(compressor_handle : Win32cr::Storage::Compression::COMPRESSOR_HANDLE, compress_information_class : Win32cr::Storage::Compression::COMPRESS_INFORMATION_CLASS, compress_information : Void*, compress_information_size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+
+    fun QueryCompressorInformation(compressor_handle : Win32cr::Storage::Compression::COMPRESSOR_HANDLE, compress_information_class : Win32cr::Storage::Compression::COMPRESS_INFORMATION_CLASS, compress_information : Void*, compress_information_size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+
+    fun Compress(compressor_handle : Win32cr::Storage::Compression::COMPRESSOR_HANDLE, uncompressed_data : Void*, uncompressed_data_size : LibC::UIntPtrT, compressed_buffer : Void*, compressed_buffer_size : LibC::UIntPtrT, compressed_data_size : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+
+    fun ResetCompressor(compressor_handle : Win32cr::Storage::Compression::COMPRESSOR_HANDLE) : Win32cr::Foundation::BOOL
+
+    fun CloseCompressor(compressor_handle : Win32cr::Storage::Compression::COMPRESSOR_HANDLE) : Win32cr::Foundation::BOOL
+
+    fun CreateDecompressor(algorithm : Win32cr::Storage::Compression::COMPRESS_ALGORITHM, allocation_routines : Win32cr::Storage::Compression::COMPRESS_ALLOCATION_ROUTINES*, decompressor_handle : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+
+    fun SetDecompressorInformation(decompressor_handle : LibC::IntPtrT, compress_information_class : Win32cr::Storage::Compression::COMPRESS_INFORMATION_CLASS, compress_information : Void*, compress_information_size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+
+    fun QueryDecompressorInformation(decompressor_handle : LibC::IntPtrT, compress_information_class : Win32cr::Storage::Compression::COMPRESS_INFORMATION_CLASS, compress_information : Void*, compress_information_size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+
+    fun Decompress(decompressor_handle : LibC::IntPtrT, compressed_data : Void*, compressed_data_size : LibC::UIntPtrT, uncompressed_buffer : Void*, uncompressed_buffer_size : LibC::UIntPtrT, uncompressed_data_size : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+
+    fun ResetDecompressor(decompressor_handle : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+
+    fun CloseDecompressor(decompressor_handle : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+
   end
-
-
-  # Params # algorithm : COMPRESS_ALGORITHM [In],allocationroutines : COMPRESS_ALLOCATION_ROUTINES* [In],compressorhandle : LibC::IntPtrT* [In]
-  fun CreateCompressor(algorithm : COMPRESS_ALGORITHM, allocationroutines : COMPRESS_ALLOCATION_ROUTINES*, compressorhandle : LibC::IntPtrT*) : LibC::BOOL
-
-  # Params # compressorhandle : COMPRESSOR_HANDLE [In],compressinformationclass : COMPRESS_INFORMATION_CLASS [In],compressinformation : Void* [In],compressinformationsize : LibC::UINT_PTR [In]
-  fun SetCompressorInformation(compressorhandle : COMPRESSOR_HANDLE, compressinformationclass : COMPRESS_INFORMATION_CLASS, compressinformation : Void*, compressinformationsize : LibC::UINT_PTR) : LibC::BOOL
-
-  # Params # compressorhandle : COMPRESSOR_HANDLE [In],compressinformationclass : COMPRESS_INFORMATION_CLASS [In],compressinformation : Void* [In],compressinformationsize : LibC::UINT_PTR [In]
-  fun QueryCompressorInformation(compressorhandle : COMPRESSOR_HANDLE, compressinformationclass : COMPRESS_INFORMATION_CLASS, compressinformation : Void*, compressinformationsize : LibC::UINT_PTR) : LibC::BOOL
-
-  # Params # compressorhandle : COMPRESSOR_HANDLE [In],uncompresseddata : Void* [In],uncompresseddatasize : LibC::UINT_PTR [In],compressedbuffer : Void* [In],compressedbuffersize : LibC::UINT_PTR [In],compresseddatasize : LibC::UINT_PTR* [In]
-  fun Compress(compressorhandle : COMPRESSOR_HANDLE, uncompresseddata : Void*, uncompresseddatasize : LibC::UINT_PTR, compressedbuffer : Void*, compressedbuffersize : LibC::UINT_PTR, compresseddatasize : LibC::UINT_PTR*) : LibC::BOOL
-
-  # Params # compressorhandle : COMPRESSOR_HANDLE [In]
-  fun ResetCompressor(compressorhandle : COMPRESSOR_HANDLE) : LibC::BOOL
-
-  # Params # compressorhandle : COMPRESSOR_HANDLE [In]
-  fun CloseCompressor(compressorhandle : COMPRESSOR_HANDLE) : LibC::BOOL
-
-  # Params # algorithm : COMPRESS_ALGORITHM [In],allocationroutines : COMPRESS_ALLOCATION_ROUTINES* [In],decompressorhandle : LibC::IntPtrT* [In]
-  fun CreateDecompressor(algorithm : COMPRESS_ALGORITHM, allocationroutines : COMPRESS_ALLOCATION_ROUTINES*, decompressorhandle : LibC::IntPtrT*) : LibC::BOOL
-
-  # Params # decompressorhandle : LibC::IntPtrT [In],compressinformationclass : COMPRESS_INFORMATION_CLASS [In],compressinformation : Void* [In],compressinformationsize : LibC::UINT_PTR [In]
-  fun SetDecompressorInformation(decompressorhandle : LibC::IntPtrT, compressinformationclass : COMPRESS_INFORMATION_CLASS, compressinformation : Void*, compressinformationsize : LibC::UINT_PTR) : LibC::BOOL
-
-  # Params # decompressorhandle : LibC::IntPtrT [In],compressinformationclass : COMPRESS_INFORMATION_CLASS [In],compressinformation : Void* [In],compressinformationsize : LibC::UINT_PTR [In]
-  fun QueryDecompressorInformation(decompressorhandle : LibC::IntPtrT, compressinformationclass : COMPRESS_INFORMATION_CLASS, compressinformation : Void*, compressinformationsize : LibC::UINT_PTR) : LibC::BOOL
-
-  # Params # decompressorhandle : LibC::IntPtrT [In],compresseddata : Void* [In],compresseddatasize : LibC::UINT_PTR [In],uncompressedbuffer : Void* [In],uncompressedbuffersize : LibC::UINT_PTR [In],uncompresseddatasize : LibC::UINT_PTR* [In]
-  fun Decompress(decompressorhandle : LibC::IntPtrT, compresseddata : Void*, compresseddatasize : LibC::UINT_PTR, uncompressedbuffer : Void*, uncompressedbuffersize : LibC::UINT_PTR, uncompresseddatasize : LibC::UINT_PTR*) : LibC::BOOL
-
-  # Params # decompressorhandle : LibC::IntPtrT [In]
-  fun ResetDecompressor(decompressorhandle : LibC::IntPtrT) : LibC::BOOL
-
-  # Params # decompressorhandle : LibC::IntPtrT [In]
-  fun CloseDecompressor(decompressorhandle : LibC::IntPtrT) : LibC::BOOL
 end

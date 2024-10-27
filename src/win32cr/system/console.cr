@@ -1,15 +1,9 @@
-require "../foundation.cr"
-require "../security.cr"
+require "./../foundation.cr"
+require "./../security.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-lib LibWin32
+module Win32cr::System::Console
   alias HPCON = LibC::IntPtrT
+  alias PHANDLER_ROUTINE = Proc(UInt32, Win32cr::Foundation::BOOL)*
 
   CONSOLE_TEXTMODE_BUFFER = 1_u32
   ATTACH_PARENT_PROCESS = 4294967295_u32
@@ -77,431 +71,364 @@ lib LibWin32
   MENU_EVENT = 8_u32
   FOCUS_EVENT = 16_u32
 
-  alias PHANDLER_ROUTINE = Proc(UInt32, LibC::BOOL)
-
-
+  @[Flags]
   enum CONSOLE_MODE : UInt32
-    ENABLE_PROCESSED_INPUT = 1
-    ENABLE_LINE_INPUT = 2
-    ENABLE_ECHO_INPUT = 4
-    ENABLE_WINDOW_INPUT = 8
-    ENABLE_MOUSE_INPUT = 16
-    ENABLE_INSERT_MODE = 32
-    ENABLE_QUICK_EDIT_MODE = 64
-    ENABLE_EXTENDED_FLAGS = 128
-    ENABLE_AUTO_POSITION = 256
-    ENABLE_VIRTUAL_TERMINAL_INPUT = 512
-    ENABLE_PROCESSED_OUTPUT = 1
-    ENABLE_WRAP_AT_EOL_OUTPUT = 2
-    ENABLE_VIRTUAL_TERMINAL_PROCESSING = 4
-    DISABLE_NEWLINE_AUTO_RETURN = 8
-    ENABLE_LVB_GRID_WORLDWIDE = 16
+    ENABLE_PROCESSED_INPUT = 1_u32
+    ENABLE_LINE_INPUT = 2_u32
+    ENABLE_ECHO_INPUT = 4_u32
+    ENABLE_WINDOW_INPUT = 8_u32
+    ENABLE_MOUSE_INPUT = 16_u32
+    ENABLE_INSERT_MODE = 32_u32
+    ENABLE_QUICK_EDIT_MODE = 64_u32
+    ENABLE_EXTENDED_FLAGS = 128_u32
+    ENABLE_AUTO_POSITION = 256_u32
+    ENABLE_VIRTUAL_TERMINAL_INPUT = 512_u32
+    ENABLE_PROCESSED_OUTPUT = 1_u32
+    ENABLE_WRAP_AT_EOL_OUTPUT = 2_u32
+    ENABLE_VIRTUAL_TERMINAL_PROCESSING = 4_u32
+    DISABLE_NEWLINE_AUTO_RETURN = 8_u32
+    ENABLE_LVB_GRID_WORLDWIDE = 16_u32
   end
-
   enum STD_HANDLE : UInt32
-    STD_INPUT_HANDLE = 4294967286
-    STD_OUTPUT_HANDLE = 4294967285
-    STD_ERROR_HANDLE = 4294967284
+    STD_INPUT_HANDLE = 4294967286_u32
+    STD_OUTPUT_HANDLE = 4294967285_u32
+    STD_ERROR_HANDLE = 4294967284_u32
   end
 
-  union KEY_EVENT_RECORD_uChar_e__Union
-    unicode_char : Char
-    ascii_char : CHAR
-  end
-  union INPUT_RECORD_Event_e__Union
-    key_event : KEY_EVENT_RECORD
-    mouse_event : MOUSE_EVENT_RECORD
-    window_buffer_size_event : WINDOW_BUFFER_SIZE_RECORD
-    menu_event : MENU_EVENT_RECORD
-    focus_event : FOCUS_EVENT_RECORD
-  end
-  union CHAR_INFO_Char_e__Union
-    unicode_char : Char
-    ascii_char : CHAR
-  end
-
-  struct COORD
-    x : Int16
+  @[Extern]
+  record COORD,
+    x : Int16,
     y : Int16
-  end
-  struct SMALL_RECT
-    left : Int16
-    top : Int16
-    right : Int16
+
+  @[Extern]
+  record SMALL_RECT,
+    left : Int16,
+    top : Int16,
+    right : Int16,
     bottom : Int16
-  end
-  struct KEY_EVENT_RECORD
-    b_key_down : LibC::BOOL
-    w_repeat_count : UInt16
-    w_virtual_key_code : UInt16
-    w_virtual_scan_code : UInt16
-    u_char : KEY_EVENT_RECORD_uChar_e__Union
-    dw_control_key_state : UInt32
-  end
-  struct MOUSE_EVENT_RECORD
-    dw_mouse_position : COORD
-    dw_button_state : UInt32
-    dw_control_key_state : UInt32
-    dw_event_flags : UInt32
-  end
-  struct WINDOW_BUFFER_SIZE_RECORD
-    dw_size : COORD
-  end
-  struct MENU_EVENT_RECORD
-    dw_command_id : UInt32
-  end
-  struct FOCUS_EVENT_RECORD
-    b_set_focus : LibC::BOOL
-  end
-  struct INPUT_RECORD
-    event_type : UInt16
-    event : INPUT_RECORD_Event_e__Union
-  end
-  struct CHAR_INFO
-    char : CHAR_INFO_Char_e__Union
-    attributes : UInt16
-  end
-  struct CONSOLE_FONT_INFO
-    n_font : UInt32
-    dw_font_size : COORD
-  end
-  struct CONSOLE_READCONSOLE_CONTROL
-    n_length : UInt32
-    n_initial_chars : UInt32
-    dw_ctrl_wakeup_mask : UInt32
-    dw_control_key_state : UInt32
-  end
-  struct CONSOLE_CURSOR_INFO
-    dw_size : UInt32
-    b_visible : LibC::BOOL
-  end
-  struct CONSOLE_SCREEN_BUFFER_INFO
-    dw_size : COORD
-    dw_cursor_position : COORD
-    w_attributes : UInt16
-    sr_window : SMALL_RECT
-    dw_maximum_window_size : COORD
-  end
-  struct CONSOLE_SCREEN_BUFFER_INFOEX
-    cb_size : UInt32
-    dw_size : COORD
-    dw_cursor_position : COORD
-    w_attributes : UInt16
-    sr_window : SMALL_RECT
-    dw_maximum_window_size : COORD
-    w_popup_attributes : UInt16
-    b_fullscreen_supported : LibC::BOOL
-    color_table : UInt32[16]*
-  end
-  struct CONSOLE_FONT_INFOEX
-    cb_size : UInt32
-    n_font : UInt32
-    dw_font_size : COORD
-    font_family : UInt32
-    font_weight : UInt32
-    face_name : Char[32]*
-  end
-  struct CONSOLE_SELECTION_INFO
-    dw_flags : UInt32
-    dw_selection_anchor : COORD
-    sr_selection : SMALL_RECT
-  end
-  struct CONSOLE_HISTORY_INFO
-    cb_size : UInt32
-    history_buffer_size : UInt32
-    number_of_history_buffers : UInt32
-    dw_flags : UInt32
+
+  @[Extern]
+  record KEY_EVENT_RECORD,
+    bKeyDown : Win32cr::Foundation::BOOL,
+    wRepeatCount : UInt16,
+    wVirtualKeyCode : UInt16,
+    wVirtualScanCode : UInt16,
+    uChar : Uchar_e__union,
+    dwControlKeyState : UInt32 do
+
+    # Nested Type Uchar_e__union
+    @[Extern(union: true)]
+    record Uchar_e__union,
+      unicode_char : UInt16,
+      ascii_char : Win32cr::Foundation::CHAR
+
   end
 
+  @[Extern]
+  record MOUSE_EVENT_RECORD,
+    dwMousePosition : Win32cr::System::Console::COORD,
+    dwButtonState : UInt32,
+    dwControlKeyState : UInt32,
+    dwEventFlags : UInt32
+
+  @[Extern]
+  record WINDOW_BUFFER_SIZE_RECORD,
+    dwSize : Win32cr::System::Console::COORD
+
+  @[Extern]
+  record MENU_EVENT_RECORD,
+    dwCommandId : UInt32
+
+  @[Extern]
+  record FOCUS_EVENT_RECORD,
+    bSetFocus : Win32cr::Foundation::BOOL
+
+  @[Extern]
+  record INPUT_RECORD,
+    event_type : UInt16,
+    event : Event_e__Union do
+
+    # Nested Type Event_e__Union
+    @[Extern(union: true)]
+    record Event_e__Union,
+      key_event : Win32cr::System::Console::KEY_EVENT_RECORD,
+      mouse_event : Win32cr::System::Console::MOUSE_EVENT_RECORD,
+      window_buffer_size_event : Win32cr::System::Console::WINDOW_BUFFER_SIZE_RECORD,
+      menu_event : Win32cr::System::Console::MENU_EVENT_RECORD,
+      focus_event : Win32cr::System::Console::FOCUS_EVENT_RECORD
+
+  end
+
+  @[Extern]
+  record CHAR_INFO,
+    char : Char_e__Union,
+    attributes : UInt16 do
+
+    # Nested Type Char_e__Union
+    @[Extern(union: true)]
+    record Char_e__Union,
+      unicode_char : UInt16,
+      ascii_char : Win32cr::Foundation::CHAR
+
+  end
+
+  @[Extern]
+  record CONSOLE_FONT_INFO,
+    nFont : UInt32,
+    dwFontSize : Win32cr::System::Console::COORD
+
+  @[Extern]
+  record CONSOLE_READCONSOLE_CONTROL,
+    nLength : UInt32,
+    nInitialChars : UInt32,
+    dwCtrlWakeupMask : UInt32,
+    dwControlKeyState : UInt32
 
-  # Params # 
-  fun AllocConsole : LibC::BOOL
+  @[Extern]
+  record CONSOLE_CURSOR_INFO,
+    dwSize : UInt32,
+    bVisible : Win32cr::Foundation::BOOL
 
-  # Params # 
-  fun FreeConsole : LibC::BOOL
+  @[Extern]
+  record CONSOLE_SCREEN_BUFFER_INFO,
+    dwSize : Win32cr::System::Console::COORD,
+    dwCursorPosition : Win32cr::System::Console::COORD,
+    wAttributes : UInt16,
+    srWindow : Win32cr::System::Console::SMALL_RECT,
+    dwMaximumWindowSize : Win32cr::System::Console::COORD
 
-  # Params # dwprocessid : UInt32 [In]
-  fun AttachConsole(dwprocessid : UInt32) : LibC::BOOL
+  @[Extern]
+  record CONSOLE_SCREEN_BUFFER_INFOEX,
+    cbSize : UInt32,
+    dwSize : Win32cr::System::Console::COORD,
+    dwCursorPosition : Win32cr::System::Console::COORD,
+    wAttributes : UInt16,
+    srWindow : Win32cr::System::Console::SMALL_RECT,
+    dwMaximumWindowSize : Win32cr::System::Console::COORD,
+    wPopupAttributes : UInt16,
+    bFullscreenSupported : Win32cr::Foundation::BOOL,
+    color_table : UInt32[16]
 
-  # Params # 
-  # Commented out because function is part of Lib C
-  #fun GetConsoleCP : UInt32
+  @[Extern]
+  record CONSOLE_FONT_INFOEX,
+    cbSize : UInt32,
+    nFont : UInt32,
+    dwFontSize : Win32cr::System::Console::COORD,
+    font_family : UInt32,
+    font_weight : UInt32,
+    face_name : UInt16[32]
 
-  # Params # 
-  # Commented out because function is part of Lib C
-  #fun GetConsoleOutputCP : UInt32
+  @[Extern]
+  record CONSOLE_SELECTION_INFO,
+    dwFlags : UInt32,
+    dwSelectionAnchor : Win32cr::System::Console::COORD,
+    srSelection : Win32cr::System::Console::SMALL_RECT
 
-  # Params # hconsolehandle : LibC::HANDLE [In],lpmode : CONSOLE_MODE* [In]
-  # Commented out because function is part of Lib C
-  #fun GetConsoleMode(hconsolehandle : LibC::HANDLE, lpmode : CONSOLE_MODE*) : LibC::BOOL
+  @[Extern]
+  record CONSOLE_HISTORY_INFO,
+    cbSize : UInt32,
+    history_buffer_size : UInt32,
+    number_of_history_buffers : UInt32,
+    dwFlags : UInt32
 
-  # Params # hconsolehandle : LibC::HANDLE [In],dwmode : CONSOLE_MODE [In]
-  # Commented out because function is part of Lib C
-  #fun SetConsoleMode(hconsolehandle : LibC::HANDLE, dwmode : CONSOLE_MODE) : LibC::BOOL
+  @[Link("kernel32")]
+  lib C
+    fun AllocConsole : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleinput : LibC::HANDLE [In],lpnumberofevents : UInt32* [In]
-  fun GetNumberOfConsoleInputEvents(hconsoleinput : LibC::HANDLE, lpnumberofevents : UInt32*) : LibC::BOOL
+    fun FreeConsole : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleinput : LibC::HANDLE [In],lpbuffer : INPUT_RECORD* [In],nlength : UInt32 [In],lpnumberofeventsread : UInt32* [In]
-  fun ReadConsoleInputA(hconsoleinput : LibC::HANDLE, lpbuffer : INPUT_RECORD*, nlength : UInt32, lpnumberofeventsread : UInt32*) : LibC::BOOL
+    fun AttachConsole(dwProcessId : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleinput : LibC::HANDLE [In],lpbuffer : INPUT_RECORD* [In],nlength : UInt32 [In],lpnumberofeventsread : UInt32* [In]
-  fun ReadConsoleInputW(hconsoleinput : LibC::HANDLE, lpbuffer : INPUT_RECORD*, nlength : UInt32, lpnumberofeventsread : UInt32*) : LibC::BOOL
+    # Commented out due to being part of LibC
+    #fun GetConsoleCP : UInt32
 
-  # Params # hconsoleinput : LibC::HANDLE [In],lpbuffer : INPUT_RECORD* [In],nlength : UInt32 [In],lpnumberofeventsread : UInt32* [In]
-  fun PeekConsoleInputA(hconsoleinput : LibC::HANDLE, lpbuffer : INPUT_RECORD*, nlength : UInt32, lpnumberofeventsread : UInt32*) : LibC::BOOL
+    # Commented out due to being part of LibC
+    #fun GetConsoleOutputCP : UInt32
 
-  # Params # hconsoleinput : LibC::HANDLE [In],lpbuffer : INPUT_RECORD* [In],nlength : UInt32 [In],lpnumberofeventsread : UInt32* [In]
-  fun PeekConsoleInputW(hconsoleinput : LibC::HANDLE, lpbuffer : INPUT_RECORD*, nlength : UInt32, lpnumberofeventsread : UInt32*) : LibC::BOOL
+    # Commented out due to being part of LibC
+    #fun GetConsoleMode(hConsoleHandle : Win32cr::Foundation::HANDLE, lpMode : Win32cr::System::Console::CONSOLE_MODE*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleinput : LibC::HANDLE [In],lpbuffer : Void* [In],nnumberofcharstoread : UInt32 [In],lpnumberofcharsread : UInt32* [In],pinputcontrol : CONSOLE_READCONSOLE_CONTROL* [In]
-  fun ReadConsoleA(hconsoleinput : LibC::HANDLE, lpbuffer : Void*, nnumberofcharstoread : UInt32, lpnumberofcharsread : UInt32*, pinputcontrol : CONSOLE_READCONSOLE_CONTROL*) : LibC::BOOL
+    # Commented out due to being part of LibC
+    #fun SetConsoleMode(hConsoleHandle : Win32cr::Foundation::HANDLE, dwMode : Win32cr::System::Console::CONSOLE_MODE) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleinput : LibC::HANDLE [In],lpbuffer : Void* [In],nnumberofcharstoread : UInt32 [In],lpnumberofcharsread : UInt32* [In],pinputcontrol : CONSOLE_READCONSOLE_CONTROL* [In]
-  # Commented out because function is part of Lib C
-  #fun ReadConsoleW(hconsoleinput : LibC::HANDLE, lpbuffer : Void*, nnumberofcharstoread : UInt32, lpnumberofcharsread : UInt32*, pinputcontrol : CONSOLE_READCONSOLE_CONTROL*) : LibC::BOOL
+    fun GetNumberOfConsoleInputEvents(hConsoleInput : Win32cr::Foundation::HANDLE, lpNumberOfEvents : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpbuffer : Void* [In],nnumberofcharstowrite : UInt32 [In],lpnumberofcharswritten : UInt32* [In],lpreserved : Void* [In]
-  fun WriteConsoleA(hconsoleoutput : LibC::HANDLE, lpbuffer : Void*, nnumberofcharstowrite : UInt32, lpnumberofcharswritten : UInt32*, lpreserved : Void*) : LibC::BOOL
+    fun ReadConsoleInputA(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::INPUT_RECORD*, nLength : UInt32, lpNumberOfEventsRead : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpbuffer : Void* [In],nnumberofcharstowrite : UInt32 [In],lpnumberofcharswritten : UInt32* [In],lpreserved : Void* [In]
-  fun WriteConsoleW(hconsoleoutput : LibC::HANDLE, lpbuffer : Void*, nnumberofcharstowrite : UInt32, lpnumberofcharswritten : UInt32*, lpreserved : Void*) : LibC::BOOL
+    fun ReadConsoleInputW(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::INPUT_RECORD*, nLength : UInt32, lpNumberOfEventsRead : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # handlerroutine : PHANDLER_ROUTINE [In],add : LibC::BOOL [In]
-  # Commented out because function is part of Lib C
-  #fun SetConsoleCtrlHandler(handlerroutine : PHANDLER_ROUTINE, add : LibC::BOOL) : LibC::BOOL
+    fun PeekConsoleInputA(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::INPUT_RECORD*, nLength : UInt32, lpNumberOfEventsRead : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # size : COORD [In],hinput : LibC::HANDLE [In],houtput : LibC::HANDLE [In],dwflags : UInt32 [In],phpc : HPCON* [In]
-  fun CreatePseudoConsole(size : COORD, hinput : LibC::HANDLE, houtput : LibC::HANDLE, dwflags : UInt32, phpc : HPCON*) : HRESULT
+    fun PeekConsoleInputW(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::INPUT_RECORD*, nLength : UInt32, lpNumberOfEventsRead : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # hpc : HPCON [In],size : COORD [In]
-  fun ResizePseudoConsole(hpc : HPCON, size : COORD) : HRESULT
+    fun ReadConsoleA(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfCharsToRead : UInt32, lpNumberOfCharsRead : UInt32*, pInputControl : Win32cr::System::Console::CONSOLE_READCONSOLE_CONTROL*) : Win32cr::Foundation::BOOL
 
-  # Params # hpc : HPCON [In]
-  fun ClosePseudoConsole(hpc : HPCON) : Void
+    # Commented out due to being part of LibC
+    #fun ReadConsoleW(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfCharsToRead : UInt32, lpNumberOfCharsRead : UInt32*, pInputControl : Win32cr::System::Console::CONSOLE_READCONSOLE_CONTROL*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],ccharacter : CHAR [In],nlength : UInt32 [In],dwwritecoord : COORD [In],lpnumberofcharswritten : UInt32* [In]
-  fun FillConsoleOutputCharacterA(hconsoleoutput : LibC::HANDLE, ccharacter : CHAR, nlength : UInt32, dwwritecoord : COORD, lpnumberofcharswritten : UInt32*) : LibC::BOOL
+    fun WriteConsoleA(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfCharsToWrite : UInt32, lpNumberOfCharsWritten : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],ccharacter : Char [In],nlength : UInt32 [In],dwwritecoord : COORD [In],lpnumberofcharswritten : UInt32* [In]
-  fun FillConsoleOutputCharacterW(hconsoleoutput : LibC::HANDLE, ccharacter : Char, nlength : UInt32, dwwritecoord : COORD, lpnumberofcharswritten : UInt32*) : LibC::BOOL
+    fun WriteConsoleW(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfCharsToWrite : UInt32, lpNumberOfCharsWritten : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],wattribute : UInt16 [In],nlength : UInt32 [In],dwwritecoord : COORD [In],lpnumberofattrswritten : UInt32* [In]
-  fun FillConsoleOutputAttribute(hconsoleoutput : LibC::HANDLE, wattribute : UInt16, nlength : UInt32, dwwritecoord : COORD, lpnumberofattrswritten : UInt32*) : LibC::BOOL
+    # Commented out due to being part of LibC
+    #fun SetConsoleCtrlHandler(handler_routine : Win32cr::System::Console::PHANDLER_ROUTINE, add : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
-  # Params # dwctrlevent : UInt32 [In],dwprocessgroupid : UInt32 [In]
-  fun GenerateConsoleCtrlEvent(dwctrlevent : UInt32, dwprocessgroupid : UInt32) : LibC::BOOL
+    fun CreatePseudoConsole(size : Win32cr::System::Console::COORD, hInput : Win32cr::Foundation::HANDLE, hOutput : Win32cr::Foundation::HANDLE, dwFlags : UInt32, phPC : Win32cr::System::Console::HPCON*) : Win32cr::Foundation::HRESULT
 
-  # Params # dwdesiredaccess : UInt32 [In],dwsharemode : UInt32 [In],lpsecurityattributes : SECURITY_ATTRIBUTES* [In],dwflags : UInt32 [In],lpscreenbufferdata : Void* [In]
-  fun CreateConsoleScreenBuffer(dwdesiredaccess : UInt32, dwsharemode : UInt32, lpsecurityattributes : SECURITY_ATTRIBUTES*, dwflags : UInt32, lpscreenbufferdata : Void*) : LibC::HANDLE
+    fun ResizePseudoConsole(hPC : Win32cr::System::Console::HPCON, size : Win32cr::System::Console::COORD) : Win32cr::Foundation::HRESULT
 
-  # Params # hconsoleoutput : LibC::HANDLE [In]
-  fun SetConsoleActiveScreenBuffer(hconsoleoutput : LibC::HANDLE) : LibC::BOOL
+    fun ClosePseudoConsole(hPC : Win32cr::System::Console::HPCON) : Void
 
-  # Params # hconsoleinput : LibC::HANDLE [In]
-  fun FlushConsoleInputBuffer(hconsoleinput : LibC::HANDLE) : LibC::BOOL
+    fun FillConsoleOutputCharacterA(hConsoleOutput : Win32cr::Foundation::HANDLE, cCharacter : Win32cr::Foundation::CHAR, nLength : UInt32, dwWriteCoord : Win32cr::System::Console::COORD, lpNumberOfCharsWritten : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # wcodepageid : UInt32 [In]
-  # Commented out because function is part of Lib C
-  #fun SetConsoleCP(wcodepageid : UInt32) : LibC::BOOL
+    fun FillConsoleOutputCharacterW(hConsoleOutput : Win32cr::Foundation::HANDLE, cCharacter : UInt16, nLength : UInt32, dwWriteCoord : Win32cr::System::Console::COORD, lpNumberOfCharsWritten : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # wcodepageid : UInt32 [In]
-  # Commented out because function is part of Lib C
-  #fun SetConsoleOutputCP(wcodepageid : UInt32) : LibC::BOOL
+    fun FillConsoleOutputAttribute(hConsoleOutput : Win32cr::Foundation::HANDLE, wAttribute : UInt16, nLength : UInt32, dwWriteCoord : Win32cr::System::Console::COORD, lpNumberOfAttrsWritten : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpconsolecursorinfo : CONSOLE_CURSOR_INFO* [In]
-  fun GetConsoleCursorInfo(hconsoleoutput : LibC::HANDLE, lpconsolecursorinfo : CONSOLE_CURSOR_INFO*) : LibC::BOOL
+    fun GenerateConsoleCtrlEvent(dwCtrlEvent : UInt32, dwProcessGroupId : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpconsolecursorinfo : CONSOLE_CURSOR_INFO* [In]
-  fun SetConsoleCursorInfo(hconsoleoutput : LibC::HANDLE, lpconsolecursorinfo : CONSOLE_CURSOR_INFO*) : LibC::BOOL
+    fun CreateConsoleScreenBuffer(dwDesiredAccess : UInt32, dwShareMode : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwFlags : UInt32, lpScreenBufferData : Void*) : Win32cr::Foundation::HANDLE
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpconsolescreenbufferinfo : CONSOLE_SCREEN_BUFFER_INFO* [In]
-  fun GetConsoleScreenBufferInfo(hconsoleoutput : LibC::HANDLE, lpconsolescreenbufferinfo : CONSOLE_SCREEN_BUFFER_INFO*) : LibC::BOOL
+    fun SetConsoleActiveScreenBuffer(hConsoleOutput : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpconsolescreenbufferinfoex : CONSOLE_SCREEN_BUFFER_INFOEX* [In]
-  fun GetConsoleScreenBufferInfoEx(hconsoleoutput : LibC::HANDLE, lpconsolescreenbufferinfoex : CONSOLE_SCREEN_BUFFER_INFOEX*) : LibC::BOOL
+    fun FlushConsoleInputBuffer(hConsoleInput : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpconsolescreenbufferinfoex : CONSOLE_SCREEN_BUFFER_INFOEX* [In]
-  fun SetConsoleScreenBufferInfoEx(hconsoleoutput : LibC::HANDLE, lpconsolescreenbufferinfoex : CONSOLE_SCREEN_BUFFER_INFOEX*) : LibC::BOOL
+    # Commented out due to being part of LibC
+    #fun SetConsoleCP(wCodePageID : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],dwsize : COORD [In]
-  fun SetConsoleScreenBufferSize(hconsoleoutput : LibC::HANDLE, dwsize : COORD) : LibC::BOOL
+    # Commented out due to being part of LibC
+    #fun SetConsoleOutputCP(wCodePageID : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],dwcursorposition : COORD [In]
-  fun SetConsoleCursorPosition(hconsoleoutput : LibC::HANDLE, dwcursorposition : COORD) : LibC::BOOL
+    fun GetConsoleCursorInfo(hConsoleOutput : Win32cr::Foundation::HANDLE, lpConsoleCursorInfo : Win32cr::System::Console::CONSOLE_CURSOR_INFO*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In]
-  fun GetLargestConsoleWindowSize(hconsoleoutput : LibC::HANDLE) : COORD
+    fun SetConsoleCursorInfo(hConsoleOutput : Win32cr::Foundation::HANDLE, lpConsoleCursorInfo : Win32cr::System::Console::CONSOLE_CURSOR_INFO*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],wattributes : UInt16 [In]
-  fun SetConsoleTextAttribute(hconsoleoutput : LibC::HANDLE, wattributes : UInt16) : LibC::BOOL
+    fun GetConsoleScreenBufferInfo(hConsoleOutput : Win32cr::Foundation::HANDLE, lpConsoleScreenBufferInfo : Win32cr::System::Console::CONSOLE_SCREEN_BUFFER_INFO*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],babsolute : LibC::BOOL [In],lpconsolewindow : SMALL_RECT* [In]
-  fun SetConsoleWindowInfo(hconsoleoutput : LibC::HANDLE, babsolute : LibC::BOOL, lpconsolewindow : SMALL_RECT*) : LibC::BOOL
+    fun GetConsoleScreenBufferInfoEx(hConsoleOutput : Win32cr::Foundation::HANDLE, lpConsoleScreenBufferInfoEx : Win32cr::System::Console::CONSOLE_SCREEN_BUFFER_INFOEX*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpcharacter : UInt8* [In],nlength : UInt32 [In],dwwritecoord : COORD [In],lpnumberofcharswritten : UInt32* [In]
-  fun WriteConsoleOutputCharacterA(hconsoleoutput : LibC::HANDLE, lpcharacter : UInt8*, nlength : UInt32, dwwritecoord : COORD, lpnumberofcharswritten : UInt32*) : LibC::BOOL
+    fun SetConsoleScreenBufferInfoEx(hConsoleOutput : Win32cr::Foundation::HANDLE, lpConsoleScreenBufferInfoEx : Win32cr::System::Console::CONSOLE_SCREEN_BUFFER_INFOEX*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpcharacter : Char* [In],nlength : UInt32 [In],dwwritecoord : COORD [In],lpnumberofcharswritten : UInt32* [In]
-  fun WriteConsoleOutputCharacterW(hconsoleoutput : LibC::HANDLE, lpcharacter : Char*, nlength : UInt32, dwwritecoord : COORD, lpnumberofcharswritten : UInt32*) : LibC::BOOL
+    fun SetConsoleScreenBufferSize(hConsoleOutput : Win32cr::Foundation::HANDLE, dwSize : Win32cr::System::Console::COORD) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpattribute : UInt16* [In],nlength : UInt32 [In],dwwritecoord : COORD [In],lpnumberofattrswritten : UInt32* [In]
-  fun WriteConsoleOutputAttribute(hconsoleoutput : LibC::HANDLE, lpattribute : UInt16*, nlength : UInt32, dwwritecoord : COORD, lpnumberofattrswritten : UInt32*) : LibC::BOOL
+    fun SetConsoleCursorPosition(hConsoleOutput : Win32cr::Foundation::HANDLE, dwCursorPosition : Win32cr::System::Console::COORD) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpcharacter : UInt8* [In],nlength : UInt32 [In],dwreadcoord : COORD [In],lpnumberofcharsread : UInt32* [In]
-  fun ReadConsoleOutputCharacterA(hconsoleoutput : LibC::HANDLE, lpcharacter : UInt8*, nlength : UInt32, dwreadcoord : COORD, lpnumberofcharsread : UInt32*) : LibC::BOOL
+    fun GetLargestConsoleWindowSize(hConsoleOutput : Win32cr::Foundation::HANDLE) : Win32cr::System::Console::COORD
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpcharacter : Char* [In],nlength : UInt32 [In],dwreadcoord : COORD [In],lpnumberofcharsread : UInt32* [In]
-  fun ReadConsoleOutputCharacterW(hconsoleoutput : LibC::HANDLE, lpcharacter : Char*, nlength : UInt32, dwreadcoord : COORD, lpnumberofcharsread : UInt32*) : LibC::BOOL
+    fun SetConsoleTextAttribute(hConsoleOutput : Win32cr::Foundation::HANDLE, wAttributes : UInt16) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpattribute : UInt16* [In],nlength : UInt32 [In],dwreadcoord : COORD [In],lpnumberofattrsread : UInt32* [In]
-  fun ReadConsoleOutputAttribute(hconsoleoutput : LibC::HANDLE, lpattribute : UInt16*, nlength : UInt32, dwreadcoord : COORD, lpnumberofattrsread : UInt32*) : LibC::BOOL
+    fun SetConsoleWindowInfo(hConsoleOutput : Win32cr::Foundation::HANDLE, bAbsolute : Win32cr::Foundation::BOOL, lpConsoleWindow : Win32cr::System::Console::SMALL_RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleinput : LibC::HANDLE [In],lpbuffer : INPUT_RECORD* [In],nlength : UInt32 [In],lpnumberofeventswritten : UInt32* [In]
-  fun WriteConsoleInputA(hconsoleinput : LibC::HANDLE, lpbuffer : INPUT_RECORD*, nlength : UInt32, lpnumberofeventswritten : UInt32*) : LibC::BOOL
+    fun WriteConsoleOutputCharacterA(hConsoleOutput : Win32cr::Foundation::HANDLE, lpCharacter : UInt8*, nLength : UInt32, dwWriteCoord : Win32cr::System::Console::COORD, lpNumberOfCharsWritten : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleinput : LibC::HANDLE [In],lpbuffer : INPUT_RECORD* [In],nlength : UInt32 [In],lpnumberofeventswritten : UInt32* [In]
-  fun WriteConsoleInputW(hconsoleinput : LibC::HANDLE, lpbuffer : INPUT_RECORD*, nlength : UInt32, lpnumberofeventswritten : UInt32*) : LibC::BOOL
+    fun WriteConsoleOutputCharacterW(hConsoleOutput : Win32cr::Foundation::HANDLE, lpCharacter : UInt16*, nLength : UInt32, dwWriteCoord : Win32cr::System::Console::COORD, lpNumberOfCharsWritten : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpscrollrectangle : SMALL_RECT* [In],lpcliprectangle : SMALL_RECT* [In],dwdestinationorigin : COORD [In],lpfill : CHAR_INFO* [In]
-  fun ScrollConsoleScreenBufferA(hconsoleoutput : LibC::HANDLE, lpscrollrectangle : SMALL_RECT*, lpcliprectangle : SMALL_RECT*, dwdestinationorigin : COORD, lpfill : CHAR_INFO*) : LibC::BOOL
+    fun WriteConsoleOutputAttribute(hConsoleOutput : Win32cr::Foundation::HANDLE, lpAttribute : UInt16*, nLength : UInt32, dwWriteCoord : Win32cr::System::Console::COORD, lpNumberOfAttrsWritten : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpscrollrectangle : SMALL_RECT* [In],lpcliprectangle : SMALL_RECT* [In],dwdestinationorigin : COORD [In],lpfill : CHAR_INFO* [In]
-  fun ScrollConsoleScreenBufferW(hconsoleoutput : LibC::HANDLE, lpscrollrectangle : SMALL_RECT*, lpcliprectangle : SMALL_RECT*, dwdestinationorigin : COORD, lpfill : CHAR_INFO*) : LibC::BOOL
+    fun ReadConsoleOutputCharacterA(hConsoleOutput : Win32cr::Foundation::HANDLE, lpCharacter : UInt8*, nLength : UInt32, dwReadCoord : Win32cr::System::Console::COORD, lpNumberOfCharsRead : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpbuffer : CHAR_INFO* [In],dwbuffersize : COORD [In],dwbuffercoord : COORD [In],lpwriteregion : SMALL_RECT* [In]
-  fun WriteConsoleOutputA(hconsoleoutput : LibC::HANDLE, lpbuffer : CHAR_INFO*, dwbuffersize : COORD, dwbuffercoord : COORD, lpwriteregion : SMALL_RECT*) : LibC::BOOL
+    fun ReadConsoleOutputCharacterW(hConsoleOutput : Win32cr::Foundation::HANDLE, lpCharacter : UInt16*, nLength : UInt32, dwReadCoord : Win32cr::System::Console::COORD, lpNumberOfCharsRead : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpbuffer : CHAR_INFO* [In],dwbuffersize : COORD [In],dwbuffercoord : COORD [In],lpwriteregion : SMALL_RECT* [In]
-  fun WriteConsoleOutputW(hconsoleoutput : LibC::HANDLE, lpbuffer : CHAR_INFO*, dwbuffersize : COORD, dwbuffercoord : COORD, lpwriteregion : SMALL_RECT*) : LibC::BOOL
+    fun ReadConsoleOutputAttribute(hConsoleOutput : Win32cr::Foundation::HANDLE, lpAttribute : UInt16*, nLength : UInt32, dwReadCoord : Win32cr::System::Console::COORD, lpNumberOfAttrsRead : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpbuffer : CHAR_INFO* [In],dwbuffersize : COORD [In],dwbuffercoord : COORD [In],lpreadregion : SMALL_RECT* [In]
-  fun ReadConsoleOutputA(hconsoleoutput : LibC::HANDLE, lpbuffer : CHAR_INFO*, dwbuffersize : COORD, dwbuffercoord : COORD, lpreadregion : SMALL_RECT*) : LibC::BOOL
+    fun WriteConsoleInputA(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::INPUT_RECORD*, nLength : UInt32, lpNumberOfEventsWritten : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],lpbuffer : CHAR_INFO* [In],dwbuffersize : COORD [In],dwbuffercoord : COORD [In],lpreadregion : SMALL_RECT* [In]
-  fun ReadConsoleOutputW(hconsoleoutput : LibC::HANDLE, lpbuffer : CHAR_INFO*, dwbuffersize : COORD, dwbuffercoord : COORD, lpreadregion : SMALL_RECT*) : LibC::BOOL
+    fun WriteConsoleInputW(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::INPUT_RECORD*, nLength : UInt32, lpNumberOfEventsWritten : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # lpconsoletitle : UInt8* [In],nsize : UInt32 [In]
-  fun GetConsoleTitleA(lpconsoletitle : UInt8*, nsize : UInt32) : UInt32
+    fun ScrollConsoleScreenBufferA(hConsoleOutput : Win32cr::Foundation::HANDLE, lpScrollRectangle : Win32cr::System::Console::SMALL_RECT*, lpClipRectangle : Win32cr::System::Console::SMALL_RECT*, dwDestinationOrigin : Win32cr::System::Console::COORD, lpFill : Win32cr::System::Console::CHAR_INFO*) : Win32cr::Foundation::BOOL
 
-  # Params # lpconsoletitle : Char* [In],nsize : UInt32 [In]
-  fun GetConsoleTitleW(lpconsoletitle : Char*, nsize : UInt32) : UInt32
+    fun ScrollConsoleScreenBufferW(hConsoleOutput : Win32cr::Foundation::HANDLE, lpScrollRectangle : Win32cr::System::Console::SMALL_RECT*, lpClipRectangle : Win32cr::System::Console::SMALL_RECT*, dwDestinationOrigin : Win32cr::System::Console::COORD, lpFill : Win32cr::System::Console::CHAR_INFO*) : Win32cr::Foundation::BOOL
 
-  # Params # lpconsoletitle : UInt8* [In],nsize : UInt32 [In]
-  fun GetConsoleOriginalTitleA(lpconsoletitle : UInt8*, nsize : UInt32) : UInt32
+    fun WriteConsoleOutputA(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::CHAR_INFO*, dwBufferSize : Win32cr::System::Console::COORD, dwBufferCoord : Win32cr::System::Console::COORD, lpWriteRegion : Win32cr::System::Console::SMALL_RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # lpconsoletitle : Char* [In],nsize : UInt32 [In]
-  fun GetConsoleOriginalTitleW(lpconsoletitle : Char*, nsize : UInt32) : UInt32
+    fun WriteConsoleOutputW(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::CHAR_INFO*, dwBufferSize : Win32cr::System::Console::COORD, dwBufferCoord : Win32cr::System::Console::COORD, lpWriteRegion : Win32cr::System::Console::SMALL_RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # lpconsoletitle : PSTR [In]
-  fun SetConsoleTitleA(lpconsoletitle : PSTR) : LibC::BOOL
+    fun ReadConsoleOutputA(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::CHAR_INFO*, dwBufferSize : Win32cr::System::Console::COORD, dwBufferCoord : Win32cr::System::Console::COORD, lpReadRegion : Win32cr::System::Console::SMALL_RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # lpconsoletitle : LibC::LPWSTR [In]
-  fun SetConsoleTitleW(lpconsoletitle : LibC::LPWSTR) : LibC::BOOL
+    fun ReadConsoleOutputW(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::CHAR_INFO*, dwBufferSize : Win32cr::System::Console::COORD, dwBufferCoord : Win32cr::System::Console::COORD, lpReadRegion : Win32cr::System::Console::SMALL_RECT*) : Win32cr::Foundation::BOOL
 
-  # Params # lpnumberofmousebuttons : UInt32* [In]
-  fun GetNumberOfConsoleMouseButtons(lpnumberofmousebuttons : UInt32*) : LibC::BOOL
+    fun GetConsoleTitleA(lpConsoleTitle : UInt8*, nSize : UInt32) : UInt32
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],nfont : UInt32 [In]
-  fun GetConsoleFontSize(hconsoleoutput : LibC::HANDLE, nfont : UInt32) : COORD
+    fun GetConsoleTitleW(lpConsoleTitle : UInt16*, nSize : UInt32) : UInt32
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],bmaximumwindow : LibC::BOOL [In],lpconsolecurrentfont : CONSOLE_FONT_INFO* [In]
-  fun GetCurrentConsoleFont(hconsoleoutput : LibC::HANDLE, bmaximumwindow : LibC::BOOL, lpconsolecurrentfont : CONSOLE_FONT_INFO*) : LibC::BOOL
+    fun GetConsoleOriginalTitleA(lpConsoleTitle : UInt8*, nSize : UInt32) : UInt32
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],bmaximumwindow : LibC::BOOL [In],lpconsolecurrentfontex : CONSOLE_FONT_INFOEX* [In]
-  fun GetCurrentConsoleFontEx(hconsoleoutput : LibC::HANDLE, bmaximumwindow : LibC::BOOL, lpconsolecurrentfontex : CONSOLE_FONT_INFOEX*) : LibC::BOOL
+    fun GetConsoleOriginalTitleW(lpConsoleTitle : UInt16*, nSize : UInt32) : UInt32
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],bmaximumwindow : LibC::BOOL [In],lpconsolecurrentfontex : CONSOLE_FONT_INFOEX* [In]
-  fun SetCurrentConsoleFontEx(hconsoleoutput : LibC::HANDLE, bmaximumwindow : LibC::BOOL, lpconsolecurrentfontex : CONSOLE_FONT_INFOEX*) : LibC::BOOL
+    fun SetConsoleTitleA(lpConsoleTitle : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
-  # Params # lpconsoleselectioninfo : CONSOLE_SELECTION_INFO* [In]
-  fun GetConsoleSelectionInfo(lpconsoleselectioninfo : CONSOLE_SELECTION_INFO*) : LibC::BOOL
+    fun SetConsoleTitleW(lpConsoleTitle : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
-  # Params # lpconsolehistoryinfo : CONSOLE_HISTORY_INFO* [In]
-  fun GetConsoleHistoryInfo(lpconsolehistoryinfo : CONSOLE_HISTORY_INFO*) : LibC::BOOL
+    fun GetNumberOfConsoleMouseButtons(lpNumberOfMouseButtons : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # lpconsolehistoryinfo : CONSOLE_HISTORY_INFO* [In]
-  fun SetConsoleHistoryInfo(lpconsolehistoryinfo : CONSOLE_HISTORY_INFO*) : LibC::BOOL
+    fun GetConsoleFontSize(hConsoleOutput : Win32cr::Foundation::HANDLE, nFont : UInt32) : Win32cr::System::Console::COORD
 
-  # Params # lpmodeflags : UInt32* [In]
-  fun GetConsoleDisplayMode(lpmodeflags : UInt32*) : LibC::BOOL
+    fun GetCurrentConsoleFont(hConsoleOutput : Win32cr::Foundation::HANDLE, bMaximumWindow : Win32cr::Foundation::BOOL, lpConsoleCurrentFont : Win32cr::System::Console::CONSOLE_FONT_INFO*) : Win32cr::Foundation::BOOL
 
-  # Params # hconsoleoutput : LibC::HANDLE [In],dwflags : UInt32 [In],lpnewscreenbufferdimensions : COORD* [In]
-  fun SetConsoleDisplayMode(hconsoleoutput : LibC::HANDLE, dwflags : UInt32, lpnewscreenbufferdimensions : COORD*) : LibC::BOOL
+    fun GetCurrentConsoleFontEx(hConsoleOutput : Win32cr::Foundation::HANDLE, bMaximumWindow : Win32cr::Foundation::BOOL, lpConsoleCurrentFontEx : Win32cr::System::Console::CONSOLE_FONT_INFOEX*) : Win32cr::Foundation::BOOL
 
-  # Params # 
-  fun GetConsoleWindow : HANDLE
+    fun SetCurrentConsoleFontEx(hConsoleOutput : Win32cr::Foundation::HANDLE, bMaximumWindow : Win32cr::Foundation::BOOL, lpConsoleCurrentFontEx : Win32cr::System::Console::CONSOLE_FONT_INFOEX*) : Win32cr::Foundation::BOOL
 
-  # Params # source : PSTR [In],target : PSTR [In],exename : PSTR [In]
-  fun AddConsoleAliasA(source : PSTR, target : PSTR, exename : PSTR) : LibC::BOOL
+    fun GetConsoleSelectionInfo(lpConsoleSelectionInfo : Win32cr::System::Console::CONSOLE_SELECTION_INFO*) : Win32cr::Foundation::BOOL
 
-  # Params # source : LibC::LPWSTR [In],target : LibC::LPWSTR [In],exename : LibC::LPWSTR [In]
-  fun AddConsoleAliasW(source : LibC::LPWSTR, target : LibC::LPWSTR, exename : LibC::LPWSTR) : LibC::BOOL
+    fun GetConsoleHistoryInfo(lpConsoleHistoryInfo : Win32cr::System::Console::CONSOLE_HISTORY_INFO*) : Win32cr::Foundation::BOOL
 
-  # Params # source : PSTR [In],targetbuffer : UInt8* [In],targetbufferlength : UInt32 [In],exename : PSTR [In]
-  fun GetConsoleAliasA(source : PSTR, targetbuffer : UInt8*, targetbufferlength : UInt32, exename : PSTR) : UInt32
+    fun SetConsoleHistoryInfo(lpConsoleHistoryInfo : Win32cr::System::Console::CONSOLE_HISTORY_INFO*) : Win32cr::Foundation::BOOL
 
-  # Params # source : LibC::LPWSTR [In],targetbuffer : Char* [In],targetbufferlength : UInt32 [In],exename : LibC::LPWSTR [In]
-  fun GetConsoleAliasW(source : LibC::LPWSTR, targetbuffer : Char*, targetbufferlength : UInt32, exename : LibC::LPWSTR) : UInt32
+    fun GetConsoleDisplayMode(lpModeFlags : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # exename : PSTR [In]
-  fun GetConsoleAliasesLengthA(exename : PSTR) : UInt32
+    fun SetConsoleDisplayMode(hConsoleOutput : Win32cr::Foundation::HANDLE, dwFlags : UInt32, lpNewScreenBufferDimensions : Win32cr::System::Console::COORD*) : Win32cr::Foundation::BOOL
 
-  # Params # exename : LibC::LPWSTR [In]
-  fun GetConsoleAliasesLengthW(exename : LibC::LPWSTR) : UInt32
+    fun GetConsoleWindow : Win32cr::Foundation::HWND
 
-  # Params # 
-  fun GetConsoleAliasExesLengthA : UInt32
+    fun AddConsoleAliasA(source : Win32cr::Foundation::PSTR, target : Win32cr::Foundation::PSTR, exe_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
-  # Params # 
-  fun GetConsoleAliasExesLengthW : UInt32
+    fun AddConsoleAliasW(source : Win32cr::Foundation::PWSTR, target : Win32cr::Foundation::PWSTR, exe_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
-  # Params # aliasbuffer : UInt8* [In],aliasbufferlength : UInt32 [In],exename : PSTR [In]
-  fun GetConsoleAliasesA(aliasbuffer : UInt8*, aliasbufferlength : UInt32, exename : PSTR) : UInt32
+    fun GetConsoleAliasA(source : Win32cr::Foundation::PSTR, target_buffer : UInt8*, target_buffer_length : UInt32, exe_name : Win32cr::Foundation::PSTR) : UInt32
 
-  # Params # aliasbuffer : Char* [In],aliasbufferlength : UInt32 [In],exename : LibC::LPWSTR [In]
-  fun GetConsoleAliasesW(aliasbuffer : Char*, aliasbufferlength : UInt32, exename : LibC::LPWSTR) : UInt32
+    fun GetConsoleAliasW(source : Win32cr::Foundation::PWSTR, target_buffer : UInt16*, target_buffer_length : UInt32, exe_name : Win32cr::Foundation::PWSTR) : UInt32
 
-  # Params # exenamebuffer : UInt8* [In],exenamebufferlength : UInt32 [In]
-  fun GetConsoleAliasExesA(exenamebuffer : UInt8*, exenamebufferlength : UInt32) : UInt32
+    fun GetConsoleAliasesLengthA(exe_name : Win32cr::Foundation::PSTR) : UInt32
 
-  # Params # exenamebuffer : Char* [In],exenamebufferlength : UInt32 [In]
-  fun GetConsoleAliasExesW(exenamebuffer : Char*, exenamebufferlength : UInt32) : UInt32
+    fun GetConsoleAliasesLengthW(exe_name : Win32cr::Foundation::PWSTR) : UInt32
 
-  # Params # exename : PSTR [In]
-  fun ExpungeConsoleCommandHistoryA(exename : PSTR) : Void
+    fun GetConsoleAliasExesLengthA : UInt32
 
-  # Params # exename : LibC::LPWSTR [In]
-  fun ExpungeConsoleCommandHistoryW(exename : LibC::LPWSTR) : Void
+    fun GetConsoleAliasExesLengthW : UInt32
 
-  # Params # number : UInt32 [In],exename : PSTR [In]
-  fun SetConsoleNumberOfCommandsA(number : UInt32, exename : PSTR) : LibC::BOOL
+    fun GetConsoleAliasesA(alias_buffer : UInt8*, alias_buffer_length : UInt32, exe_name : Win32cr::Foundation::PSTR) : UInt32
 
-  # Params # number : UInt32 [In],exename : LibC::LPWSTR [In]
-  fun SetConsoleNumberOfCommandsW(number : UInt32, exename : LibC::LPWSTR) : LibC::BOOL
+    fun GetConsoleAliasesW(alias_buffer : UInt16*, alias_buffer_length : UInt32, exe_name : Win32cr::Foundation::PWSTR) : UInt32
 
-  # Params # exename : PSTR [In]
-  fun GetConsoleCommandHistoryLengthA(exename : PSTR) : UInt32
+    fun GetConsoleAliasExesA(exe_name_buffer : UInt8*, exe_name_buffer_length : UInt32) : UInt32
 
-  # Params # exename : LibC::LPWSTR [In]
-  fun GetConsoleCommandHistoryLengthW(exename : LibC::LPWSTR) : UInt32
+    fun GetConsoleAliasExesW(exe_name_buffer : UInt16*, exe_name_buffer_length : UInt32) : UInt32
 
-  # Params # commands : PSTR [In],commandbufferlength : UInt32 [In],exename : PSTR [In]
-  fun GetConsoleCommandHistoryA(commands : PSTR, commandbufferlength : UInt32, exename : PSTR) : UInt32
+    fun ExpungeConsoleCommandHistoryA(exe_name : Win32cr::Foundation::PSTR) : Void
 
-  # Params # commands : LibC::LPWSTR [In],commandbufferlength : UInt32 [In],exename : LibC::LPWSTR [In]
-  fun GetConsoleCommandHistoryW(commands : LibC::LPWSTR, commandbufferlength : UInt32, exename : LibC::LPWSTR) : UInt32
+    fun ExpungeConsoleCommandHistoryW(exe_name : Win32cr::Foundation::PWSTR) : Void
 
-  # Params # lpdwprocesslist : UInt32* [In],dwprocesscount : UInt32 [In]
-  fun GetConsoleProcessList(lpdwprocesslist : UInt32*, dwprocesscount : UInt32) : UInt32
+    fun SetConsoleNumberOfCommandsA(number : UInt32, exe_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
-  # Params # nstdhandle : STD_HANDLE [In]
-  # Commented out because function is part of Lib C
-  #fun GetStdHandle(nstdhandle : STD_HANDLE) : LibC::HANDLE
+    fun SetConsoleNumberOfCommandsW(number : UInt32, exe_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
-  # Params # nstdhandle : STD_HANDLE [In],hhandle : LibC::HANDLE [In]
-  fun SetStdHandle(nstdhandle : STD_HANDLE, hhandle : LibC::HANDLE) : LibC::BOOL
+    fun GetConsoleCommandHistoryLengthA(exe_name : Win32cr::Foundation::PSTR) : UInt32
 
-  # Params # nstdhandle : STD_HANDLE [In],hhandle : LibC::HANDLE [In],phprevvalue : LibC::HANDLE* [In]
-  fun SetStdHandleEx(nstdhandle : STD_HANDLE, hhandle : LibC::HANDLE, phprevvalue : LibC::HANDLE*) : LibC::BOOL
+    fun GetConsoleCommandHistoryLengthW(exe_name : Win32cr::Foundation::PWSTR) : UInt32
+
+    fun GetConsoleCommandHistoryA(commands : Win32cr::Foundation::PSTR, command_buffer_length : UInt32, exe_name : Win32cr::Foundation::PSTR) : UInt32
+
+    fun GetConsoleCommandHistoryW(commands : Win32cr::Foundation::PWSTR, command_buffer_length : UInt32, exe_name : Win32cr::Foundation::PWSTR) : UInt32
+
+    fun GetConsoleProcessList(lpdwProcessList : UInt32*, dwProcessCount : UInt32) : UInt32
+
+    # Commented out due to being part of LibC
+    #fun GetStdHandle(nStdHandle : Win32cr::System::Console::STD_HANDLE) : Win32cr::Foundation::HANDLE
+
+    fun SetStdHandle(nStdHandle : Win32cr::System::Console::STD_HANDLE, hHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+
+    fun SetStdHandleEx(nStdHandle : Win32cr::System::Console::STD_HANDLE, hHandle : Win32cr::Foundation::HANDLE, phPrevValue : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+
+  end
 end

@@ -1,74 +1,70 @@
-require "../foundation.cr"
+require "./../foundation.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-lib LibWin32
-  alias LPOVERLAPPED_COMPLETION_ROUTINE = Proc(UInt32, UInt32, OVERLAPPED*, Void)
+module Win32cr::System::IO
+  alias LPOVERLAPPED_COMPLETION_ROUTINE = Proc(UInt32, UInt32, Win32cr::System::IO::OVERLAPPED*, Void)*
 
-  union OVERLAPPED_Anonymous_e__Union
-    anonymous : OVERLAPPED_Anonymous_e__Union_Anonymous_e__Struct
-    pointer : Void*
+
+
+  @[Extern]
+  record OVERLAPPED,
+    internal : LibC::UIntPtrT,
+    internal_high : LibC::UIntPtrT,
+    anonymous : Anonymous_e__Union,
+    hEvent : Win32cr::Foundation::HANDLE do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      pointer : Void* do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        offset : UInt32,
+        offset_high : UInt32
+
+    end
+
   end
 
-  struct OVERLAPPED
-    internal : LibC::UINT_PTR
-    internal_high : LibC::UINT_PTR
-    anonymous : OVERLAPPED_Anonymous_e__Union
-    h_event : LibC::HANDLE
+  @[Extern]
+  record OVERLAPPED_ENTRY,
+    lpCompletionKey : LibC::UIntPtrT,
+    lpOverlapped : Win32cr::System::IO::OVERLAPPED*,
+    internal : LibC::UIntPtrT,
+    dwNumberOfBytesTransferred : UInt32
+
+  @[Link("kernel32")]
+  lib C
+    # Commented out due to being part of LibC
+    #fun CreateIoCompletionPort(file_handle : Win32cr::Foundation::HANDLE, existing_completion_port : Win32cr::Foundation::HANDLE, completion_key : LibC::UIntPtrT, number_of_concurrent_threads : UInt32) : Win32cr::Foundation::HANDLE
+
+    fun GetQueuedCompletionStatus(completion_port : Win32cr::Foundation::HANDLE, lpNumberOfBytesTransferred : UInt32*, lpCompletionKey : LibC::UIntPtrT*, lpOverlapped : Win32cr::System::IO::OVERLAPPED**, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
+
+    # Commented out due to being part of LibC
+    #fun GetQueuedCompletionStatusEx(completion_port : Win32cr::Foundation::HANDLE, lpCompletionPortEntries : Win32cr::System::IO::OVERLAPPED_ENTRY*, ulCount : UInt32, ulNumEntriesRemoved : UInt32*, dwMilliseconds : UInt32, fAlertable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+
+    # Commented out due to being part of LibC
+    #fun PostQueuedCompletionStatus(completion_port : Win32cr::Foundation::HANDLE, dwNumberOfBytesTransferred : UInt32, dwCompletionKey : LibC::UIntPtrT, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+
+    # Commented out due to being part of LibC
+    #fun DeviceIoControl(hDevice : Win32cr::Foundation::HANDLE, dwIoControlCode : UInt32, lpInBuffer : Void*, nInBufferSize : UInt32, lpOutBuffer : Void*, nOutBufferSize : UInt32, lpBytesReturned : UInt32*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+
+    # Commented out due to being part of LibC
+    #fun GetOverlappedResult(hFile : Win32cr::Foundation::HANDLE, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpNumberOfBytesTransferred : UInt32*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+
+    # Commented out due to being part of LibC
+    #fun CancelIoEx(hFile : Win32cr::Foundation::HANDLE, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+
+    # Commented out due to being part of LibC
+    #fun CancelIo(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+
+    fun GetOverlappedResultEx(hFile : Win32cr::Foundation::HANDLE, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpNumberOfBytesTransferred : UInt32*, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+
+    fun CancelSynchronousIo(hThread : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+
+    fun BindIoCompletionCallback(file_handle : Win32cr::Foundation::HANDLE, function : Win32cr::System::IO::LPOVERLAPPED_COMPLETION_ROUTINE, flags : UInt32) : Win32cr::Foundation::BOOL
+
   end
-  struct OVERLAPPED_Anonymous_e__Union_Anonymous_e__Struct
-    offset : UInt32
-    offset_high : UInt32
-  end
-  struct OVERLAPPED_ENTRY
-    lp_completion_key : LibC::UINT_PTR
-    lp_overlapped : OVERLAPPED*
-    internal : LibC::UINT_PTR
-    dw_number_of_bytes_transferred : UInt32
-  end
-
-
-  # Params # filehandle : LibC::HANDLE [In],existingcompletionport : LibC::HANDLE [In],completionkey : LibC::UINT_PTR [In],numberofconcurrentthreads : UInt32 [In]
-  # Commented out because function is part of Lib C
-  #fun CreateIoCompletionPort(filehandle : LibC::HANDLE, existingcompletionport : LibC::HANDLE, completionkey : LibC::UINT_PTR, numberofconcurrentthreads : UInt32) : LibC::HANDLE
-
-  # Params # completionport : LibC::HANDLE [In],lpnumberofbytestransferred : UInt32* [In],lpcompletionkey : LibC::UINT_PTR* [In],lpoverlapped : OVERLAPPED** [In],dwmilliseconds : UInt32 [In]
-  fun GetQueuedCompletionStatus(completionport : LibC::HANDLE, lpnumberofbytestransferred : UInt32*, lpcompletionkey : LibC::UINT_PTR*, lpoverlapped : OVERLAPPED**, dwmilliseconds : UInt32) : LibC::BOOL
-
-  # Params # completionport : LibC::HANDLE [In],lpcompletionportentries : OVERLAPPED_ENTRY* [In],ulcount : UInt32 [In],ulnumentriesremoved : UInt32* [In],dwmilliseconds : UInt32 [In],falertable : LibC::BOOL [In]
-  # Commented out because function is part of Lib C
-  #fun GetQueuedCompletionStatusEx(completionport : LibC::HANDLE, lpcompletionportentries : OVERLAPPED_ENTRY*, ulcount : UInt32, ulnumentriesremoved : UInt32*, dwmilliseconds : UInt32, falertable : LibC::BOOL) : LibC::BOOL
-
-  # Params # completionport : LibC::HANDLE [In],dwnumberofbytestransferred : UInt32 [In],dwcompletionkey : LibC::UINT_PTR [In],lpoverlapped : OVERLAPPED* [In]
-  fun PostQueuedCompletionStatus(completionport : LibC::HANDLE, dwnumberofbytestransferred : UInt32, dwcompletionkey : LibC::UINT_PTR, lpoverlapped : OVERLAPPED*) : LibC::BOOL
-
-  # Params # hdevice : LibC::HANDLE [In],dwiocontrolcode : UInt32 [In],lpinbuffer : Void* [In],ninbuffersize : UInt32 [In],lpoutbuffer : Void* [In],noutbuffersize : UInt32 [In],lpbytesreturned : UInt32* [In],lpoverlapped : OVERLAPPED* [In]
-  # Commented out because function is part of Lib C
-  #fun DeviceIoControl(hdevice : LibC::HANDLE, dwiocontrolcode : UInt32, lpinbuffer : Void*, ninbuffersize : UInt32, lpoutbuffer : Void*, noutbuffersize : UInt32, lpbytesreturned : UInt32*, lpoverlapped : OVERLAPPED*) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],lpoverlapped : OVERLAPPED* [In],lpnumberofbytestransferred : UInt32* [In],bwait : LibC::BOOL [In]
-  # Commented out because function is part of Lib C
-  #fun GetOverlappedResult(hfile : LibC::HANDLE, lpoverlapped : OVERLAPPED*, lpnumberofbytestransferred : UInt32*, bwait : LibC::BOOL) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],lpoverlapped : OVERLAPPED* [In]
-  # Commented out because function is part of Lib C
-  #fun CancelIoEx(hfile : LibC::HANDLE, lpoverlapped : OVERLAPPED*) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In]
-  # Commented out because function is part of Lib C
-  #fun CancelIo(hfile : LibC::HANDLE) : LibC::BOOL
-
-  # Params # hfile : LibC::HANDLE [In],lpoverlapped : OVERLAPPED* [In],lpnumberofbytestransferred : UInt32* [In],dwmilliseconds : UInt32 [In],balertable : LibC::BOOL [In]
-  fun GetOverlappedResultEx(hfile : LibC::HANDLE, lpoverlapped : OVERLAPPED*, lpnumberofbytestransferred : UInt32*, dwmilliseconds : UInt32, balertable : LibC::BOOL) : LibC::BOOL
-
-  # Params # hthread : LibC::HANDLE [In]
-  fun CancelSynchronousIo(hthread : LibC::HANDLE) : LibC::BOOL
-
-  # Params # filehandle : LibC::HANDLE [In],function : LPOVERLAPPED_COMPLETION_ROUTINE [In],flags : UInt32 [In]
-  fun BindIoCompletionCallback(filehandle : LibC::HANDLE, function : LPOVERLAPPED_COMPLETION_ROUTINE, flags : UInt32) : LibC::BOOL
 end

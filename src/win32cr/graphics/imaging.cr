@@ -1,24 +1,14 @@
-require "../foundation.cr"
-require "../graphics/direct2d/common.cr"
-require "../system/com.cr"
-require "../system/com/structuredstorage.cr"
-require "../graphics/gdi.cr"
-require "../ui/windowsandmessaging.cr"
-require "../graphics/dxgi/common.cr"
+require "./../foundation.cr"
+require "./direct2_d/common.cr"
+require "./../system/com.cr"
+require "./../system/com/structured_storage.cr"
+require "./gdi.cr"
+require "./../ui/windows_and_messaging.cr"
+require "./dxgi/common.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:windowscodecs.dll")]
-{% else %}
-@[Link("windowscodecs")]
-{% end %}
-lib LibWin32
+module Win32cr::Graphics::Imaging
+  alias PFNProgressNotification = Proc(Void*, UInt32, Win32cr::Graphics::Imaging::WICProgressOperation, Float64, Win32cr::Foundation::HRESULT)*
+
   WINCODEC_SDK_VERSION1 = 566_u32
   WINCODEC_SDK_VERSION2 = 567_u32
   CLSID_WICImagingFactory = "cacaf262-9370-4615-a13b-9f5539da4c0a"
@@ -321,3676 +311,3623 @@ lib LibWin32
   CLSID_WICWebpAnimMetadataReader = "076f9911-a348-465c-a807-a252f3f2d3de"
   CLSID_WICWebpAnmfMetadataReader = "85a10b03-c9f6-439f-be5e-c0fbef67807c"
 
-  alias PFNProgressNotification = Proc(Void*, UInt32, WICProgressOperation, Float64, HRESULT)
-
-
-  enum WICColorContextType : Int32
-    WICColorContextUninitialized = 0
-    WICColorContextProfile = 1
-    WICColorContextExifColorSpace = 2
+  enum WICColorContextType
+    WICColorContextUninitialized = 0_i32
+    WICColorContextProfile = 1_i32
+    WICColorContextExifColorSpace = 2_i32
   end
-
-  enum WICBitmapCreateCacheOption : Int32
-    WICBitmapNoCache = 0
-    WICBitmapCacheOnDemand = 1
-    WICBitmapCacheOnLoad = 2
-    WICBITMAPCREATECACHEOPTION_FORCE_DWORD = 2147483647
+  enum WICBitmapCreateCacheOption
+    WICBitmapNoCache = 0_i32
+    WICBitmapCacheOnDemand = 1_i32
+    WICBitmapCacheOnLoad = 2_i32
+    WICBITMAPCREATECACHEOPTION_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICDecodeOptions : Int32
-    WICDecodeMetadataCacheOnDemand = 0
-    WICDecodeMetadataCacheOnLoad = 1
-    WICMETADATACACHEOPTION_FORCE_DWORD = 2147483647
+  enum WICDecodeOptions
+    WICDecodeMetadataCacheOnDemand = 0_i32
+    WICDecodeMetadataCacheOnLoad = 1_i32
+    WICMETADATACACHEOPTION_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICBitmapEncoderCacheOption : Int32
-    WICBitmapEncoderCacheInMemory = 0
-    WICBitmapEncoderCacheTempFile = 1
-    WICBitmapEncoderNoCache = 2
-    WICBITMAPENCODERCACHEOPTION_FORCE_DWORD = 2147483647
+  enum WICBitmapEncoderCacheOption
+    WICBitmapEncoderCacheInMemory = 0_i32
+    WICBitmapEncoderCacheTempFile = 1_i32
+    WICBitmapEncoderNoCache = 2_i32
+    WICBITMAPENCODERCACHEOPTION_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICComponentType : Int32
-    WICDecoder = 1
-    WICEncoder = 2
-    WICPixelFormatConverter = 4
-    WICMetadataReader = 8
-    WICMetadataWriter = 16
-    WICPixelFormat = 32
-    WICAllComponents = 63
-    WICCOMPONENTTYPE_FORCE_DWORD = 2147483647
+  enum WICComponentType
+    WICDecoder = 1_i32
+    WICEncoder = 2_i32
+    WICPixelFormatConverter = 4_i32
+    WICMetadataReader = 8_i32
+    WICMetadataWriter = 16_i32
+    WICPixelFormat = 32_i32
+    WICAllComponents = 63_i32
+    WICCOMPONENTTYPE_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICComponentEnumerateOptions : Int32
-    WICComponentEnumerateDefault = 0
-    WICComponentEnumerateRefresh = 1
-    WICComponentEnumerateDisabled = -2147483648
-    WICComponentEnumerateUnsigned = 1073741824
-    WICComponentEnumerateBuiltInOnly = 536870912
-    WICCOMPONENTENUMERATEOPTIONS_FORCE_DWORD = 2147483647
+  enum WICComponentEnumerateOptions
+    WICComponentEnumerateDefault = 0_i32
+    WICComponentEnumerateRefresh = 1_i32
+    WICComponentEnumerateDisabled = -2147483648_i32
+    WICComponentEnumerateUnsigned = 1073741824_i32
+    WICComponentEnumerateBuiltInOnly = 536870912_i32
+    WICCOMPONENTENUMERATEOPTIONS_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICBitmapInterpolationMode : Int32
-    WICBitmapInterpolationModeNearestNeighbor = 0
-    WICBitmapInterpolationModeLinear = 1
-    WICBitmapInterpolationModeCubic = 2
-    WICBitmapInterpolationModeFant = 3
-    WICBitmapInterpolationModeHighQualityCubic = 4
-    WICBITMAPINTERPOLATIONMODE_FORCE_DWORD = 2147483647
+  enum WICBitmapInterpolationMode
+    WICBitmapInterpolationModeNearestNeighbor = 0_i32
+    WICBitmapInterpolationModeLinear = 1_i32
+    WICBitmapInterpolationModeCubic = 2_i32
+    WICBitmapInterpolationModeFant = 3_i32
+    WICBitmapInterpolationModeHighQualityCubic = 4_i32
+    WICBITMAPINTERPOLATIONMODE_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICBitmapPaletteType : Int32
-    WICBitmapPaletteTypeCustom = 0
-    WICBitmapPaletteTypeMedianCut = 1
-    WICBitmapPaletteTypeFixedBW = 2
-    WICBitmapPaletteTypeFixedHalftone8 = 3
-    WICBitmapPaletteTypeFixedHalftone27 = 4
-    WICBitmapPaletteTypeFixedHalftone64 = 5
-    WICBitmapPaletteTypeFixedHalftone125 = 6
-    WICBitmapPaletteTypeFixedHalftone216 = 7
-    WICBitmapPaletteTypeFixedWebPalette = 7
-    WICBitmapPaletteTypeFixedHalftone252 = 8
-    WICBitmapPaletteTypeFixedHalftone256 = 9
-    WICBitmapPaletteTypeFixedGray4 = 10
-    WICBitmapPaletteTypeFixedGray16 = 11
-    WICBitmapPaletteTypeFixedGray256 = 12
-    WICBITMAPPALETTETYPE_FORCE_DWORD = 2147483647
+  enum WICBitmapPaletteType
+    WICBitmapPaletteTypeCustom = 0_i32
+    WICBitmapPaletteTypeMedianCut = 1_i32
+    WICBitmapPaletteTypeFixedBW = 2_i32
+    WICBitmapPaletteTypeFixedHalftone8 = 3_i32
+    WICBitmapPaletteTypeFixedHalftone27 = 4_i32
+    WICBitmapPaletteTypeFixedHalftone64 = 5_i32
+    WICBitmapPaletteTypeFixedHalftone125 = 6_i32
+    WICBitmapPaletteTypeFixedHalftone216 = 7_i32
+    WICBitmapPaletteTypeFixedWebPalette = 7_i32
+    WICBitmapPaletteTypeFixedHalftone252 = 8_i32
+    WICBitmapPaletteTypeFixedHalftone256 = 9_i32
+    WICBitmapPaletteTypeFixedGray4 = 10_i32
+    WICBitmapPaletteTypeFixedGray16 = 11_i32
+    WICBitmapPaletteTypeFixedGray256 = 12_i32
+    WICBITMAPPALETTETYPE_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICBitmapDitherType : Int32
-    WICBitmapDitherTypeNone = 0
-    WICBitmapDitherTypeSolid = 0
-    WICBitmapDitherTypeOrdered4x4 = 1
-    WICBitmapDitherTypeOrdered8x8 = 2
-    WICBitmapDitherTypeOrdered16x16 = 3
-    WICBitmapDitherTypeSpiral4x4 = 4
-    WICBitmapDitherTypeSpiral8x8 = 5
-    WICBitmapDitherTypeDualSpiral4x4 = 6
-    WICBitmapDitherTypeDualSpiral8x8 = 7
-    WICBitmapDitherTypeErrorDiffusion = 8
-    WICBITMAPDITHERTYPE_FORCE_DWORD = 2147483647
+  enum WICBitmapDitherType
+    WICBitmapDitherTypeNone = 0_i32
+    WICBitmapDitherTypeSolid = 0_i32
+    WICBitmapDitherTypeOrdered4x4 = 1_i32
+    WICBitmapDitherTypeOrdered8x8 = 2_i32
+    WICBitmapDitherTypeOrdered16x16 = 3_i32
+    WICBitmapDitherTypeSpiral4x4 = 4_i32
+    WICBitmapDitherTypeSpiral8x8 = 5_i32
+    WICBitmapDitherTypeDualSpiral4x4 = 6_i32
+    WICBitmapDitherTypeDualSpiral8x8 = 7_i32
+    WICBitmapDitherTypeErrorDiffusion = 8_i32
+    WICBITMAPDITHERTYPE_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICBitmapAlphaChannelOption : Int32
-    WICBitmapUseAlpha = 0
-    WICBitmapUsePremultipliedAlpha = 1
-    WICBitmapIgnoreAlpha = 2
-    WICBITMAPALPHACHANNELOPTIONS_FORCE_DWORD = 2147483647
+  enum WICBitmapAlphaChannelOption
+    WICBitmapUseAlpha = 0_i32
+    WICBitmapUsePremultipliedAlpha = 1_i32
+    WICBitmapIgnoreAlpha = 2_i32
+    WICBITMAPALPHACHANNELOPTIONS_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICBitmapTransformOptions : Int32
-    WICBitmapTransformRotate0 = 0
-    WICBitmapTransformRotate90 = 1
-    WICBitmapTransformRotate180 = 2
-    WICBitmapTransformRotate270 = 3
-    WICBitmapTransformFlipHorizontal = 8
-    WICBitmapTransformFlipVertical = 16
-    WICBITMAPTRANSFORMOPTIONS_FORCE_DWORD = 2147483647
+  enum WICBitmapTransformOptions
+    WICBitmapTransformRotate0 = 0_i32
+    WICBitmapTransformRotate90 = 1_i32
+    WICBitmapTransformRotate180 = 2_i32
+    WICBitmapTransformRotate270 = 3_i32
+    WICBitmapTransformFlipHorizontal = 8_i32
+    WICBitmapTransformFlipVertical = 16_i32
+    WICBITMAPTRANSFORMOPTIONS_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICBitmapLockFlags : Int32
-    WICBitmapLockRead = 1
-    WICBitmapLockWrite = 2
-    WICBITMAPLOCKFLAGS_FORCE_DWORD = 2147483647
+  enum WICBitmapLockFlags
+    WICBitmapLockRead = 1_i32
+    WICBitmapLockWrite = 2_i32
+    WICBITMAPLOCKFLAGS_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICBitmapDecoderCapabilities : Int32
-    WICBitmapDecoderCapabilitySameEncoder = 1
-    WICBitmapDecoderCapabilityCanDecodeAllImages = 2
-    WICBitmapDecoderCapabilityCanDecodeSomeImages = 4
-    WICBitmapDecoderCapabilityCanEnumerateMetadata = 8
-    WICBitmapDecoderCapabilityCanDecodeThumbnail = 16
-    WICBITMAPDECODERCAPABILITIES_FORCE_DWORD = 2147483647
+  enum WICBitmapDecoderCapabilities
+    WICBitmapDecoderCapabilitySameEncoder = 1_i32
+    WICBitmapDecoderCapabilityCanDecodeAllImages = 2_i32
+    WICBitmapDecoderCapabilityCanDecodeSomeImages = 4_i32
+    WICBitmapDecoderCapabilityCanEnumerateMetadata = 8_i32
+    WICBitmapDecoderCapabilityCanDecodeThumbnail = 16_i32
+    WICBITMAPDECODERCAPABILITIES_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICProgressOperation : Int32
-    WICProgressOperationCopyPixels = 1
-    WICProgressOperationWritePixels = 2
-    WICProgressOperationAll = 65535
-    WICPROGRESSOPERATION_FORCE_DWORD = 2147483647
+  enum WICProgressOperation
+    WICProgressOperationCopyPixels = 1_i32
+    WICProgressOperationWritePixels = 2_i32
+    WICProgressOperationAll = 65535_i32
+    WICPROGRESSOPERATION_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICProgressNotification : Int32
-    WICProgressNotificationBegin = 65536
-    WICProgressNotificationEnd = 131072
-    WICProgressNotificationFrequent = 262144
-    WICProgressNotificationAll = -65536
-    WICPROGRESSNOTIFICATION_FORCE_DWORD = 2147483647
+  enum WICProgressNotification
+    WICProgressNotificationBegin = 65536_i32
+    WICProgressNotificationEnd = 131072_i32
+    WICProgressNotificationFrequent = 262144_i32
+    WICProgressNotificationAll = -65536_i32
+    WICPROGRESSNOTIFICATION_FORCE_DWORD = 2147483647_i32
   end
-
-  enum WICComponentSigning : Int32
-    WICComponentSigned = 1
-    WICComponentUnsigned = 2
-    WICComponentSafe = 4
-    WICComponentDisabled = -2147483648
-    WICCOMPONENTSIGNING_FORCE_DWORD = 2147483647
+  enum WICComponentSigning
+    WICComponentSigned = 1_i32
+    WICComponentUnsigned = 2_i32
+    WICComponentSafe = 4_i32
+    WICComponentDisabled = -2147483648_i32
+    WICCOMPONENTSIGNING_FORCE_DWORD = 2147483647_i32
   end
-
   enum WICGifLogicalScreenDescriptorProperties : UInt32
-    WICGifLogicalScreenSignature = 1
-    WICGifLogicalScreenDescriptorWidth = 2
-    WICGifLogicalScreenDescriptorHeight = 3
-    WICGifLogicalScreenDescriptorGlobalColorTableFlag = 4
-    WICGifLogicalScreenDescriptorColorResolution = 5
-    WICGifLogicalScreenDescriptorSortFlag = 6
-    WICGifLogicalScreenDescriptorGlobalColorTableSize = 7
-    WICGifLogicalScreenDescriptorBackgroundColorIndex = 8
-    WICGifLogicalScreenDescriptorPixelAspectRatio = 9
-    WICGifLogicalScreenDescriptorProperties_FORCE_DWORD = 2147483647
+    WICGifLogicalScreenSignature = 1_u32
+    WICGifLogicalScreenDescriptorWidth = 2_u32
+    WICGifLogicalScreenDescriptorHeight = 3_u32
+    WICGifLogicalScreenDescriptorGlobalColorTableFlag = 4_u32
+    WICGifLogicalScreenDescriptorColorResolution = 5_u32
+    WICGifLogicalScreenDescriptorSortFlag = 6_u32
+    WICGifLogicalScreenDescriptorGlobalColorTableSize = 7_u32
+    WICGifLogicalScreenDescriptorBackgroundColorIndex = 8_u32
+    WICGifLogicalScreenDescriptorPixelAspectRatio = 9_u32
+    WICGifLogicalScreenDescriptorProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICGifImageDescriptorProperties : UInt32
-    WICGifImageDescriptorLeft = 1
-    WICGifImageDescriptorTop = 2
-    WICGifImageDescriptorWidth = 3
-    WICGifImageDescriptorHeight = 4
-    WICGifImageDescriptorLocalColorTableFlag = 5
-    WICGifImageDescriptorInterlaceFlag = 6
-    WICGifImageDescriptorSortFlag = 7
-    WICGifImageDescriptorLocalColorTableSize = 8
-    WICGifImageDescriptorProperties_FORCE_DWORD = 2147483647
+    WICGifImageDescriptorLeft = 1_u32
+    WICGifImageDescriptorTop = 2_u32
+    WICGifImageDescriptorWidth = 3_u32
+    WICGifImageDescriptorHeight = 4_u32
+    WICGifImageDescriptorLocalColorTableFlag = 5_u32
+    WICGifImageDescriptorInterlaceFlag = 6_u32
+    WICGifImageDescriptorSortFlag = 7_u32
+    WICGifImageDescriptorLocalColorTableSize = 8_u32
+    WICGifImageDescriptorProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICGifGraphicControlExtensionProperties : UInt32
-    WICGifGraphicControlExtensionDisposal = 1
-    WICGifGraphicControlExtensionUserInputFlag = 2
-    WICGifGraphicControlExtensionTransparencyFlag = 3
-    WICGifGraphicControlExtensionDelay = 4
-    WICGifGraphicControlExtensionTransparentColorIndex = 5
-    WICGifGraphicControlExtensionProperties_FORCE_DWORD = 2147483647
+    WICGifGraphicControlExtensionDisposal = 1_u32
+    WICGifGraphicControlExtensionUserInputFlag = 2_u32
+    WICGifGraphicControlExtensionTransparencyFlag = 3_u32
+    WICGifGraphicControlExtensionDelay = 4_u32
+    WICGifGraphicControlExtensionTransparentColorIndex = 5_u32
+    WICGifGraphicControlExtensionProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICGifApplicationExtensionProperties : UInt32
-    WICGifApplicationExtensionApplication = 1
-    WICGifApplicationExtensionData = 2
-    WICGifApplicationExtensionProperties_FORCE_DWORD = 2147483647
+    WICGifApplicationExtensionApplication = 1_u32
+    WICGifApplicationExtensionData = 2_u32
+    WICGifApplicationExtensionProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICGifCommentExtensionProperties : UInt32
-    WICGifCommentExtensionText = 1
-    WICGifCommentExtensionProperties_FORCE_DWORD = 2147483647
+    WICGifCommentExtensionText = 1_u32
+    WICGifCommentExtensionProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICJpegCommentProperties : UInt32
-    WICJpegCommentText = 1
-    WICJpegCommentProperties_FORCE_DWORD = 2147483647
+    WICJpegCommentText = 1_u32
+    WICJpegCommentProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICJpegLuminanceProperties : UInt32
-    WICJpegLuminanceTable = 1
-    WICJpegLuminanceProperties_FORCE_DWORD = 2147483647
+    WICJpegLuminanceTable = 1_u32
+    WICJpegLuminanceProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICJpegChrominanceProperties : UInt32
-    WICJpegChrominanceTable = 1
-    WICJpegChrominanceProperties_FORCE_DWORD = 2147483647
+    WICJpegChrominanceTable = 1_u32
+    WICJpegChrominanceProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WIC8BIMIptcProperties : UInt32
-    WIC8BIMIptcPString = 0
-    WIC8BIMIptcEmbeddedIPTC = 1
-    WIC8BIMIptcProperties_FORCE_DWORD = 2147483647
+    WIC8BIMIptcPString = 0_u32
+    WIC8BIMIptcEmbeddedIPTC = 1_u32
+    WIC8BIMIptcProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WIC8BIMResolutionInfoProperties : UInt32
-    WIC8BIMResolutionInfoPString = 1
-    WIC8BIMResolutionInfoHResolution = 2
-    WIC8BIMResolutionInfoHResolutionUnit = 3
-    WIC8BIMResolutionInfoWidthUnit = 4
-    WIC8BIMResolutionInfoVResolution = 5
-    WIC8BIMResolutionInfoVResolutionUnit = 6
-    WIC8BIMResolutionInfoHeightUnit = 7
-    WIC8BIMResolutionInfoProperties_FORCE_DWORD = 2147483647
+    WIC8BIMResolutionInfoPString = 1_u32
+    WIC8BIMResolutionInfoHResolution = 2_u32
+    WIC8BIMResolutionInfoHResolutionUnit = 3_u32
+    WIC8BIMResolutionInfoWidthUnit = 4_u32
+    WIC8BIMResolutionInfoVResolution = 5_u32
+    WIC8BIMResolutionInfoVResolutionUnit = 6_u32
+    WIC8BIMResolutionInfoHeightUnit = 7_u32
+    WIC8BIMResolutionInfoProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WIC8BIMIptcDigestProperties : UInt32
-    WIC8BIMIptcDigestPString = 1
-    WIC8BIMIptcDigestIptcDigest = 2
-    WIC8BIMIptcDigestProperties_FORCE_DWORD = 2147483647
+    WIC8BIMIptcDigestPString = 1_u32
+    WIC8BIMIptcDigestIptcDigest = 2_u32
+    WIC8BIMIptcDigestProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICPngGamaProperties : UInt32
-    WICPngGamaGamma = 1
-    WICPngGamaProperties_FORCE_DWORD = 2147483647
+    WICPngGamaGamma = 1_u32
+    WICPngGamaProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICPngBkgdProperties : UInt32
-    WICPngBkgdBackgroundColor = 1
-    WICPngBkgdProperties_FORCE_DWORD = 2147483647
+    WICPngBkgdBackgroundColor = 1_u32
+    WICPngBkgdProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICPngItxtProperties : UInt32
-    WICPngItxtKeyword = 1
-    WICPngItxtCompressionFlag = 2
-    WICPngItxtLanguageTag = 3
-    WICPngItxtTranslatedKeyword = 4
-    WICPngItxtText = 5
-    WICPngItxtProperties_FORCE_DWORD = 2147483647
+    WICPngItxtKeyword = 1_u32
+    WICPngItxtCompressionFlag = 2_u32
+    WICPngItxtLanguageTag = 3_u32
+    WICPngItxtTranslatedKeyword = 4_u32
+    WICPngItxtText = 5_u32
+    WICPngItxtProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICPngChrmProperties : UInt32
-    WICPngChrmWhitePointX = 1
-    WICPngChrmWhitePointY = 2
-    WICPngChrmRedX = 3
-    WICPngChrmRedY = 4
-    WICPngChrmGreenX = 5
-    WICPngChrmGreenY = 6
-    WICPngChrmBlueX = 7
-    WICPngChrmBlueY = 8
-    WICPngChrmProperties_FORCE_DWORD = 2147483647
+    WICPngChrmWhitePointX = 1_u32
+    WICPngChrmWhitePointY = 2_u32
+    WICPngChrmRedX = 3_u32
+    WICPngChrmRedY = 4_u32
+    WICPngChrmGreenX = 5_u32
+    WICPngChrmGreenY = 6_u32
+    WICPngChrmBlueX = 7_u32
+    WICPngChrmBlueY = 8_u32
+    WICPngChrmProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICPngHistProperties : UInt32
-    WICPngHistFrequencies = 1
-    WICPngHistProperties_FORCE_DWORD = 2147483647
+    WICPngHistFrequencies = 1_u32
+    WICPngHistProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICPngIccpProperties : UInt32
-    WICPngIccpProfileName = 1
-    WICPngIccpProfileData = 2
-    WICPngIccpProperties_FORCE_DWORD = 2147483647
+    WICPngIccpProfileName = 1_u32
+    WICPngIccpProfileData = 2_u32
+    WICPngIccpProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICPngSrgbProperties : UInt32
-    WICPngSrgbRenderingIntent = 1
-    WICPngSrgbProperties_FORCE_DWORD = 2147483647
+    WICPngSrgbRenderingIntent = 1_u32
+    WICPngSrgbProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICPngTimeProperties : UInt32
-    WICPngTimeYear = 1
-    WICPngTimeMonth = 2
-    WICPngTimeDay = 3
-    WICPngTimeHour = 4
-    WICPngTimeMinute = 5
-    WICPngTimeSecond = 6
-    WICPngTimeProperties_FORCE_DWORD = 2147483647
+    WICPngTimeYear = 1_u32
+    WICPngTimeMonth = 2_u32
+    WICPngTimeDay = 3_u32
+    WICPngTimeHour = 4_u32
+    WICPngTimeMinute = 5_u32
+    WICPngTimeSecond = 6_u32
+    WICPngTimeProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICHeifProperties : UInt32
-    WICHeifOrientation = 1
-    WICHeifProperties_FORCE_DWORD = 2147483647
+    WICHeifOrientation = 1_u32
+    WICHeifProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICHeifHdrProperties : UInt32
-    WICHeifHdrMaximumLuminanceLevel = 1
-    WICHeifHdrMaximumFrameAverageLuminanceLevel = 2
-    WICHeifHdrMinimumMasteringDisplayLuminanceLevel = 3
-    WICHeifHdrMaximumMasteringDisplayLuminanceLevel = 4
-    WICHeifHdrCustomVideoPrimaries = 5
-    WICHeifHdrProperties_FORCE_DWORD = 2147483647
+    WICHeifHdrMaximumLuminanceLevel = 1_u32
+    WICHeifHdrMaximumFrameAverageLuminanceLevel = 2_u32
+    WICHeifHdrMinimumMasteringDisplayLuminanceLevel = 3_u32
+    WICHeifHdrMaximumMasteringDisplayLuminanceLevel = 4_u32
+    WICHeifHdrCustomVideoPrimaries = 5_u32
+    WICHeifHdrProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICWebpAnimProperties : UInt32
-    WICWebpAnimLoopCount = 1
-    WICWebpAnimProperties_FORCE_DWORD = 2147483647
+    WICWebpAnimLoopCount = 1_u32
+    WICWebpAnimProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICWebpAnmfProperties : UInt32
-    WICWebpAnmfFrameDuration = 1
-    WICWebpAnmfProperties_FORCE_DWORD = 2147483647
+    WICWebpAnmfFrameDuration = 1_u32
+    WICWebpAnmfProperties_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICSectionAccessLevel : UInt32
-    WICSectionAccessLevelRead = 1
-    WICSectionAccessLevelReadWrite = 3
-    WICSectionAccessLevel_FORCE_DWORD = 2147483647
+    WICSectionAccessLevelRead = 1_u32
+    WICSectionAccessLevelReadWrite = 3_u32
+    WICSectionAccessLevel_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICPixelFormatNumericRepresentation : UInt32
-    WICPixelFormatNumericRepresentationUnspecified = 0
-    WICPixelFormatNumericRepresentationIndexed = 1
-    WICPixelFormatNumericRepresentationUnsignedInteger = 2
-    WICPixelFormatNumericRepresentationSignedInteger = 3
-    WICPixelFormatNumericRepresentationFixed = 4
-    WICPixelFormatNumericRepresentationFloat = 5
-    WICPixelFormatNumericRepresentation_FORCE_DWORD = 2147483647
+    WICPixelFormatNumericRepresentationUnspecified = 0_u32
+    WICPixelFormatNumericRepresentationIndexed = 1_u32
+    WICPixelFormatNumericRepresentationUnsignedInteger = 2_u32
+    WICPixelFormatNumericRepresentationSignedInteger = 3_u32
+    WICPixelFormatNumericRepresentationFixed = 4_u32
+    WICPixelFormatNumericRepresentationFloat = 5_u32
+    WICPixelFormatNumericRepresentation_FORCE_DWORD = 2147483647_u32
   end
-
-  enum WICPlanarOptions : Int32
-    WICPlanarOptionsDefault = 0
-    WICPlanarOptionsPreserveSubsampling = 1
-    WICPLANAROPTIONS_FORCE_DWORD = 2147483647
+  enum WICPlanarOptions
+    WICPlanarOptionsDefault = 0_i32
+    WICPlanarOptionsPreserveSubsampling = 1_i32
+    WICPLANAROPTIONS_FORCE_DWORD = 2147483647_i32
   end
-
   enum WICJpegIndexingOptions : UInt32
-    WICJpegIndexingOptionsGenerateOnDemand = 0
-    WICJpegIndexingOptionsGenerateOnLoad = 1
-    WICJpegIndexingOptions_FORCE_DWORD = 2147483647
+    WICJpegIndexingOptionsGenerateOnDemand = 0_u32
+    WICJpegIndexingOptionsGenerateOnLoad = 1_u32
+    WICJpegIndexingOptions_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICJpegTransferMatrix : UInt32
-    WICJpegTransferMatrixIdentity = 0
-    WICJpegTransferMatrixBT601 = 1
-    WICJpegTransferMatrix_FORCE_DWORD = 2147483647
+    WICJpegTransferMatrixIdentity = 0_u32
+    WICJpegTransferMatrixBT601 = 1_u32
+    WICJpegTransferMatrix_FORCE_DWORD = 2147483647_u32
   end
-
   enum WICJpegScanType : UInt32
-    WICJpegScanTypeInterleaved = 0
-    WICJpegScanTypePlanarComponents = 1
-    WICJpegScanTypeProgressive = 2
-    WICJpegScanType_FORCE_DWORD = 2147483647
+    WICJpegScanTypeInterleaved = 0_u32
+    WICJpegScanTypePlanarComponents = 1_u32
+    WICJpegScanTypeProgressive = 2_u32
+    WICJpegScanType_FORCE_DWORD = 2147483647_u32
+  end
+  enum WICTiffCompressionOption
+    WICTiffCompressionDontCare = 0_i32
+    WICTiffCompressionNone = 1_i32
+    WICTiffCompressionCCITT3 = 2_i32
+    WICTiffCompressionCCITT4 = 3_i32
+    WICTiffCompressionLZW = 4_i32
+    WICTiffCompressionRLE = 5_i32
+    WICTiffCompressionZIP = 6_i32
+    WICTiffCompressionLZWHDifferencing = 7_i32
+    WICTIFFCOMPRESSIONOPTION_FORCE_DWORD = 2147483647_i32
+  end
+  enum WICJpegYCrCbSubsamplingOption
+    WICJpegYCrCbSubsamplingDefault = 0_i32
+    WICJpegYCrCbSubsampling420 = 1_i32
+    WICJpegYCrCbSubsampling422 = 2_i32
+    WICJpegYCrCbSubsampling444 = 3_i32
+    WICJpegYCrCbSubsampling440 = 4_i32
+    WICJPEGYCRCBSUBSAMPLING_FORCE_DWORD = 2147483647_i32
+  end
+  enum WICPngFilterOption
+    WICPngFilterUnspecified = 0_i32
+    WICPngFilterNone = 1_i32
+    WICPngFilterSub = 2_i32
+    WICPngFilterUp = 3_i32
+    WICPngFilterAverage = 4_i32
+    WICPngFilterPaeth = 5_i32
+    WICPngFilterAdaptive = 6_i32
+    WICPNGFILTEROPTION_FORCE_DWORD = 2147483647_i32
+  end
+  enum WICNamedWhitePoint
+    WICWhitePointDefault = 1_i32
+    WICWhitePointDaylight = 2_i32
+    WICWhitePointCloudy = 4_i32
+    WICWhitePointShade = 8_i32
+    WICWhitePointTungsten = 16_i32
+    WICWhitePointFluorescent = 32_i32
+    WICWhitePointFlash = 64_i32
+    WICWhitePointUnderwater = 128_i32
+    WICWhitePointCustom = 256_i32
+    WICWhitePointAutoWhiteBalance = 512_i32
+    WICWhitePointAsShot = 1_i32
+    WICNAMEDWHITEPOINT_FORCE_DWORD = 2147483647_i32
+  end
+  enum WICRawCapabilities
+    WICRawCapabilityNotSupported = 0_i32
+    WICRawCapabilityGetSupported = 1_i32
+    WICRawCapabilityFullySupported = 2_i32
+    WICRAWCAPABILITIES_FORCE_DWORD = 2147483647_i32
+  end
+  enum WICRawRotationCapabilities
+    WICRawRotationCapabilityNotSupported = 0_i32
+    WICRawRotationCapabilityGetSupported = 1_i32
+    WICRawRotationCapabilityNinetyDegreesSupported = 2_i32
+    WICRawRotationCapabilityFullySupported = 3_i32
+    WICRAWROTATIONCAPABILITIES_FORCE_DWORD = 2147483647_i32
+  end
+  enum WICRawParameterSet
+    WICAsShotParameterSet = 1_i32
+    WICUserAdjustedParameterSet = 2_i32
+    WICAutoAdjustedParameterSet = 3_i32
+    WICRAWPARAMETERSET_FORCE_DWORD = 2147483647_i32
+  end
+  enum WICRawRenderMode
+    WICRawRenderModeDraft = 1_i32
+    WICRawRenderModeNormal = 2_i32
+    WICRawRenderModeBestQuality = 3_i32
+    WICRAWRENDERMODE_FORCE_DWORD = 2147483647_i32
+  end
+  enum WICDdsDimension
+    WICDdsTexture1D = 0_i32
+    WICDdsTexture2D = 1_i32
+    WICDdsTexture3D = 2_i32
+    WICDdsTextureCube = 3_i32
+    WICDDSTEXTURE_FORCE_DWORD = 2147483647_i32
+  end
+  enum WICDdsAlphaMode
+    WICDdsAlphaModeUnknown = 0_i32
+    WICDdsAlphaModeStraight = 1_i32
+    WICDdsAlphaModePremultiplied = 2_i32
+    WICDdsAlphaModeOpaque = 3_i32
+    WICDdsAlphaModeCustom = 4_i32
+    WICDDSALPHAMODE_FORCE_DWORD = 2147483647_i32
+  end
+  enum WICMetadataCreationOptions
+    WICMetadataCreationDefault = 0_i32
+    WICMetadataCreationAllowUnknown = 0_i32
+    WICMetadataCreationFailUnknown = 65536_i32
+    WICMetadataCreationMask = -65536_i32
+  end
+  enum WICPersistOptions
+    WICPersistOptionDefault = 0_i32
+    WICPersistOptionLittleEndian = 0_i32
+    WICPersistOptionBigEndian = 1_i32
+    WICPersistOptionStrictFormat = 2_i32
+    WICPersistOptionNoCacheStream = 4_i32
+    WICPersistOptionPreferUTF8 = 8_i32
+    WICPersistOptionMask = 65535_i32
   end
 
-  enum WICTiffCompressionOption : Int32
-    WICTiffCompressionDontCare = 0
-    WICTiffCompressionNone = 1
-    WICTiffCompressionCCITT3 = 2
-    WICTiffCompressionCCITT4 = 3
-    WICTiffCompressionLZW = 4
-    WICTiffCompressionRLE = 5
-    WICTiffCompressionZIP = 6
-    WICTiffCompressionLZWHDifferencing = 7
-    WICTIFFCOMPRESSIONOPTION_FORCE_DWORD = 2147483647
-  end
-
-  enum WICJpegYCrCbSubsamplingOption : Int32
-    WICJpegYCrCbSubsamplingDefault = 0
-    WICJpegYCrCbSubsampling420 = 1
-    WICJpegYCrCbSubsampling422 = 2
-    WICJpegYCrCbSubsampling444 = 3
-    WICJpegYCrCbSubsampling440 = 4
-    WICJPEGYCRCBSUBSAMPLING_FORCE_DWORD = 2147483647
-  end
-
-  enum WICPngFilterOption : Int32
-    WICPngFilterUnspecified = 0
-    WICPngFilterNone = 1
-    WICPngFilterSub = 2
-    WICPngFilterUp = 3
-    WICPngFilterAverage = 4
-    WICPngFilterPaeth = 5
-    WICPngFilterAdaptive = 6
-    WICPNGFILTEROPTION_FORCE_DWORD = 2147483647
-  end
-
-  enum WICNamedWhitePoint : Int32
-    WICWhitePointDefault = 1
-    WICWhitePointDaylight = 2
-    WICWhitePointCloudy = 4
-    WICWhitePointShade = 8
-    WICWhitePointTungsten = 16
-    WICWhitePointFluorescent = 32
-    WICWhitePointFlash = 64
-    WICWhitePointUnderwater = 128
-    WICWhitePointCustom = 256
-    WICWhitePointAutoWhiteBalance = 512
-    WICWhitePointAsShot = 1
-    WICNAMEDWHITEPOINT_FORCE_DWORD = 2147483647
-  end
-
-  enum WICRawCapabilities : Int32
-    WICRawCapabilityNotSupported = 0
-    WICRawCapabilityGetSupported = 1
-    WICRawCapabilityFullySupported = 2
-    WICRAWCAPABILITIES_FORCE_DWORD = 2147483647
-  end
-
-  enum WICRawRotationCapabilities : Int32
-    WICRawRotationCapabilityNotSupported = 0
-    WICRawRotationCapabilityGetSupported = 1
-    WICRawRotationCapabilityNinetyDegreesSupported = 2
-    WICRawRotationCapabilityFullySupported = 3
-    WICRAWROTATIONCAPABILITIES_FORCE_DWORD = 2147483647
-  end
-
-  enum WICRawParameterSet : Int32
-    WICAsShotParameterSet = 1
-    WICUserAdjustedParameterSet = 2
-    WICAutoAdjustedParameterSet = 3
-    WICRAWPARAMETERSET_FORCE_DWORD = 2147483647
-  end
-
-  enum WICRawRenderMode : Int32
-    WICRawRenderModeDraft = 1
-    WICRawRenderModeNormal = 2
-    WICRawRenderModeBestQuality = 3
-    WICRAWRENDERMODE_FORCE_DWORD = 2147483647
-  end
-
-  enum WICDdsDimension : Int32
-    WICDdsTexture1D = 0
-    WICDdsTexture2D = 1
-    WICDdsTexture3D = 2
-    WICDdsTextureCube = 3
-    WICDDSTEXTURE_FORCE_DWORD = 2147483647
-  end
-
-  enum WICDdsAlphaMode : Int32
-    WICDdsAlphaModeUnknown = 0
-    WICDdsAlphaModeStraight = 1
-    WICDdsAlphaModePremultiplied = 2
-    WICDdsAlphaModeOpaque = 3
-    WICDdsAlphaModeCustom = 4
-    WICDDSALPHAMODE_FORCE_DWORD = 2147483647
-  end
-
-  enum WICMetadataCreationOptions : Int32
-    WICMetadataCreationDefault = 0
-    WICMetadataCreationAllowUnknown = 0
-    WICMetadataCreationFailUnknown = 65536
-    WICMetadataCreationMask = -65536
-  end
-
-  enum WICPersistOptions : Int32
-    WICPersistOptionDefault = 0
-    WICPersistOptionLittleEndian = 0
-    WICPersistOptionBigEndian = 1
-    WICPersistOptionStrictFormat = 2
-    WICPersistOptionNoCacheStream = 4
-    WICPersistOptionPreferUTF8 = 8
-    WICPersistOptionMask = 65535
-  end
-
-  struct WICRect
-    x : Int32
-    y : Int32
-    width : Int32
+  @[Extern]
+  record WICRect,
+    x : Int32,
+    y : Int32,
+    width : Int32,
     height : Int32
-  end
-  struct WICBitmapPattern
-    position : ULARGE_INTEGER
-    length : UInt32
-    pattern : UInt8*
-    mask : UInt8*
-    end_of_stream : LibC::BOOL
-  end
-  struct WICImageParameters
-    pixel_format : D2D1_PIXEL_FORMAT
-    dpi_x : Float32
-    dpi_y : Float32
-    top : Float32
-    left : Float32
-    pixel_width : UInt32
+
+  @[Extern]
+  record WICBitmapPattern,
+    position : Win32cr::Foundation::ULARGE_INTEGER,
+    length : UInt32,
+    pattern : UInt8*,
+    mask : UInt8*,
+    end_of_stream : Win32cr::Foundation::BOOL
+
+  @[Extern]
+  record WICImageParameters,
+    pixel_format : Win32cr::Graphics::Direct2D::Common::D2D1_PIXEL_FORMAT,
+    dpi_x : Float32,
+    dpi_y : Float32,
+    top : Float32,
+    left : Float32,
+    pixel_width : UInt32,
     pixel_height : UInt32
-  end
-  struct WICBitmapPlaneDescription
-    format : Guid
-    width : UInt32
+
+  @[Extern]
+  record WICBitmapPlaneDescription,
+    format : LibC::GUID,
+    width : UInt32,
     height : UInt32
-  end
-  struct WICBitmapPlane
-    format : Guid
-    pb_buffer : UInt8*
-    cb_stride : UInt32
-    cb_buffer_size : UInt32
-  end
-  struct WICJpegFrameHeader
-    width : UInt32
-    height : UInt32
-    transfer_matrix : WICJpegTransferMatrix
-    scan_type : WICJpegScanType
-    c_components : UInt32
-    component_identifiers : UInt32
-    sample_factors : UInt32
+
+  @[Extern]
+  record WICBitmapPlane,
+    format : LibC::GUID,
+    pbBuffer : UInt8*,
+    cbStride : UInt32,
+    cbBufferSize : UInt32
+
+  @[Extern]
+  record WICJpegFrameHeader,
+    width : UInt32,
+    height : UInt32,
+    transfer_matrix : Win32cr::Graphics::Imaging::WICJpegTransferMatrix,
+    scan_type : Win32cr::Graphics::Imaging::WICJpegScanType,
+    cComponents : UInt32,
+    component_identifiers : UInt32,
+    sample_factors : UInt32,
     quantization_table_indices : UInt32
-  end
-  struct WICJpegScanHeader
-    c_components : UInt32
-    restart_interval : UInt32
-    component_selectors : UInt32
-    huffman_table_indices : UInt32
-    start_spectral_selection : UInt8
-    end_spectral_selection : UInt8
-    successive_approximation_high : UInt8
+
+  @[Extern]
+  record WICJpegScanHeader,
+    cComponents : UInt32,
+    restart_interval : UInt32,
+    component_selectors : UInt32,
+    huffman_table_indices : UInt32,
+    start_spectral_selection : UInt8,
+    end_spectral_selection : UInt8,
+    successive_approximation_high : UInt8,
     successive_approximation_low : UInt8
-  end
-  struct WICRawCapabilitiesInfo
-    cb_size : UInt32
-    codec_major_version : UInt32
-    codec_minor_version : UInt32
-    exposure_compensation_support : WICRawCapabilities
-    contrast_support : WICRawCapabilities
-    rgb_white_point_support : WICRawCapabilities
-    named_white_point_support : WICRawCapabilities
-    named_white_point_support_mask : UInt32
-    kelvin_white_point_support : WICRawCapabilities
-    gamma_support : WICRawCapabilities
-    tint_support : WICRawCapabilities
-    saturation_support : WICRawCapabilities
-    sharpness_support : WICRawCapabilities
-    noise_reduction_support : WICRawCapabilities
-    destination_color_profile_support : WICRawCapabilities
-    tone_curve_support : WICRawCapabilities
-    rotation_support : WICRawRotationCapabilities
-    render_mode_support : WICRawCapabilities
-  end
-  struct WICRawToneCurvePoint
-    input : Float64
+
+  @[Extern]
+  record WICRawCapabilitiesInfo,
+    cbSize : UInt32,
+    codec_major_version : UInt32,
+    codec_minor_version : UInt32,
+    exposure_compensation_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
+    contrast_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
+    rgb_white_point_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
+    named_white_point_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
+    named_white_point_support_mask : UInt32,
+    kelvin_white_point_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
+    gamma_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
+    tint_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
+    saturation_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
+    sharpness_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
+    noise_reduction_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
+    destination_color_profile_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
+    tone_curve_support : Win32cr::Graphics::Imaging::WICRawCapabilities,
+    rotation_support : Win32cr::Graphics::Imaging::WICRawRotationCapabilities,
+    render_mode_support : Win32cr::Graphics::Imaging::WICRawCapabilities
+
+  @[Extern]
+  record WICRawToneCurvePoint,
+    input : Float64,
     output : Float64
-  end
-  struct WICRawToneCurve
-    c_points : UInt32
-    a_points : WICRawToneCurvePoint[0]*
-  end
-  struct WICDdsParameters
-    width : UInt32
-    height : UInt32
-    depth : UInt32
-    mip_levels : UInt32
-    array_size : UInt32
-    dxgi_format : DXGI_FORMAT
-    dimension : WICDdsDimension
-    alpha_mode : WICDdsAlphaMode
-  end
-  struct WICDdsFormatInfo
-    dxgi_format : DXGI_FORMAT
-    bytes_per_block : UInt32
-    block_width : UInt32
+
+  @[Extern]
+  record WICRawToneCurve,
+    cPoints : UInt32,
+    aPoints : Win32cr::Graphics::Imaging::WICRawToneCurvePoint*
+
+  @[Extern]
+  record WICDdsParameters,
+    width : UInt32,
+    height : UInt32,
+    depth : UInt32,
+    mip_levels : UInt32,
+    array_size : UInt32,
+    dxgi_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
+    dimension : Win32cr::Graphics::Imaging::WICDdsDimension,
+    alpha_mode : Win32cr::Graphics::Imaging::WICDdsAlphaMode
+
+  @[Extern]
+  record WICDdsFormatInfo,
+    dxgi_format : Win32cr::Graphics::Dxgi::Common::DXGI_FORMAT,
+    bytes_per_block : UInt32,
+    block_width : UInt32,
     block_height : UInt32
-  end
-  struct WICMetadataPattern
-    position : ULARGE_INTEGER
-    length : UInt32
-    pattern : UInt8*
-    mask : UInt8*
-    data_offset : ULARGE_INTEGER
-  end
-  struct WICMetadataHeader
-    position : ULARGE_INTEGER
-    length : UInt32
-    header : UInt8*
-    data_offset : ULARGE_INTEGER
-  end
-
-
-  struct IWICPaletteVTbl
-    query_interface : Proc(IWICPalette*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICPalette*, UInt32)
-    release : Proc(IWICPalette*, UInt32)
-    initialize_predefined : Proc(IWICPalette*, WICBitmapPaletteType, LibC::BOOL, HRESULT)
-    initialize_custom : Proc(IWICPalette*, UInt32*, UInt32, HRESULT)
-    initialize_from_bitmap : Proc(IWICPalette*, IWICBitmapSource, UInt32, LibC::BOOL, HRESULT)
-    initialize_from_palette : Proc(IWICPalette*, IWICPalette, HRESULT)
-    get_type : Proc(IWICPalette*, WICBitmapPaletteType*, HRESULT)
-    get_color_count : Proc(IWICPalette*, UInt32*, HRESULT)
-    get_colors : Proc(IWICPalette*, UInt32, UInt32*, UInt32*, HRESULT)
-    is_black_white : Proc(IWICPalette*, LibC::BOOL*, HRESULT)
-    is_grayscale : Proc(IWICPalette*, LibC::BOOL*, HRESULT)
-    has_alpha : Proc(IWICPalette*, LibC::BOOL*, HRESULT)
-  end
-
-  IWICPalette_GUID = "00000040-a8f2-4877-ba0a-fd2b6645fb94"
-  IID_IWICPalette = LibC::GUID.new(0x40_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
-  struct IWICPalette
-    lpVtbl : IWICPaletteVTbl*
-  end
-
-  struct IWICBitmapSourceVTbl
-    query_interface : Proc(IWICBitmapSource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapSource*, UInt32)
-    release : Proc(IWICBitmapSource*, UInt32)
-    get_size : Proc(IWICBitmapSource*, UInt32*, UInt32*, HRESULT)
-    get_pixel_format : Proc(IWICBitmapSource*, Guid*, HRESULT)
-    get_resolution : Proc(IWICBitmapSource*, Float64*, Float64*, HRESULT)
-    copy_palette : Proc(IWICBitmapSource*, IWICPalette, HRESULT)
-    copy_pixels : Proc(IWICBitmapSource*, WICRect*, UInt32, UInt32, UInt8*, HRESULT)
-  end
-
-  IWICBitmapSource_GUID = "00000120-a8f2-4877-ba0a-fd2b6645fb94"
-  IID_IWICBitmapSource = LibC::GUID.new(0x120_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
-  struct IWICBitmapSource
-    lpVtbl : IWICBitmapSourceVTbl*
-  end
-
-  struct IWICFormatConverterVTbl
-    query_interface : Proc(IWICFormatConverter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICFormatConverter*, UInt32)
-    release : Proc(IWICFormatConverter*, UInt32)
-    get_size : Proc(IWICFormatConverter*, UInt32*, UInt32*, HRESULT)
-    get_pixel_format : Proc(IWICFormatConverter*, Guid*, HRESULT)
-    get_resolution : Proc(IWICFormatConverter*, Float64*, Float64*, HRESULT)
-    copy_palette : Proc(IWICFormatConverter*, IWICPalette, HRESULT)
-    copy_pixels : Proc(IWICFormatConverter*, WICRect*, UInt32, UInt32, UInt8*, HRESULT)
-    initialize : Proc(IWICFormatConverter*, IWICBitmapSource, Guid*, WICBitmapDitherType, IWICPalette, Float64, WICBitmapPaletteType, HRESULT)
-    can_convert : Proc(IWICFormatConverter*, Guid*, Guid*, LibC::BOOL*, HRESULT)
-  end
-
-  IWICFormatConverter_GUID = "00000301-a8f2-4877-ba0a-fd2b6645fb94"
-  IID_IWICFormatConverter = LibC::GUID.new(0x301_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
-  struct IWICFormatConverter
-    lpVtbl : IWICFormatConverterVTbl*
-  end
-
-  struct IWICPlanarFormatConverterVTbl
-    query_interface : Proc(IWICPlanarFormatConverter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICPlanarFormatConverter*, UInt32)
-    release : Proc(IWICPlanarFormatConverter*, UInt32)
-    get_size : Proc(IWICPlanarFormatConverter*, UInt32*, UInt32*, HRESULT)
-    get_pixel_format : Proc(IWICPlanarFormatConverter*, Guid*, HRESULT)
-    get_resolution : Proc(IWICPlanarFormatConverter*, Float64*, Float64*, HRESULT)
-    copy_palette : Proc(IWICPlanarFormatConverter*, IWICPalette, HRESULT)
-    copy_pixels : Proc(IWICPlanarFormatConverter*, WICRect*, UInt32, UInt32, UInt8*, HRESULT)
-    initialize : Proc(IWICPlanarFormatConverter*, IWICBitmapSource*, UInt32, Guid*, WICBitmapDitherType, IWICPalette, Float64, WICBitmapPaletteType, HRESULT)
-    can_convert : Proc(IWICPlanarFormatConverter*, Guid*, UInt32, Guid*, LibC::BOOL*, HRESULT)
-  end
-
-  IWICPlanarFormatConverter_GUID = "bebee9cb-83b0-4dcc-8132-b0aaa55eac96"
-  IID_IWICPlanarFormatConverter = LibC::GUID.new(0xbebee9cb_u32, 0x83b0_u16, 0x4dcc_u16, StaticArray[0x81_u8, 0x32_u8, 0xb0_u8, 0xaa_u8, 0xa5_u8, 0x5e_u8, 0xac_u8, 0x96_u8])
-  struct IWICPlanarFormatConverter
-    lpVtbl : IWICPlanarFormatConverterVTbl*
-  end
-
-  struct IWICBitmapScalerVTbl
-    query_interface : Proc(IWICBitmapScaler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapScaler*, UInt32)
-    release : Proc(IWICBitmapScaler*, UInt32)
-    get_size : Proc(IWICBitmapScaler*, UInt32*, UInt32*, HRESULT)
-    get_pixel_format : Proc(IWICBitmapScaler*, Guid*, HRESULT)
-    get_resolution : Proc(IWICBitmapScaler*, Float64*, Float64*, HRESULT)
-    copy_palette : Proc(IWICBitmapScaler*, IWICPalette, HRESULT)
-    copy_pixels : Proc(IWICBitmapScaler*, WICRect*, UInt32, UInt32, UInt8*, HRESULT)
-    initialize : Proc(IWICBitmapScaler*, IWICBitmapSource, UInt32, UInt32, WICBitmapInterpolationMode, HRESULT)
-  end
-
-  IWICBitmapScaler_GUID = "00000302-a8f2-4877-ba0a-fd2b6645fb94"
-  IID_IWICBitmapScaler = LibC::GUID.new(0x302_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
-  struct IWICBitmapScaler
-    lpVtbl : IWICBitmapScalerVTbl*
-  end
-
-  struct IWICBitmapClipperVTbl
-    query_interface : Proc(IWICBitmapClipper*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapClipper*, UInt32)
-    release : Proc(IWICBitmapClipper*, UInt32)
-    get_size : Proc(IWICBitmapClipper*, UInt32*, UInt32*, HRESULT)
-    get_pixel_format : Proc(IWICBitmapClipper*, Guid*, HRESULT)
-    get_resolution : Proc(IWICBitmapClipper*, Float64*, Float64*, HRESULT)
-    copy_palette : Proc(IWICBitmapClipper*, IWICPalette, HRESULT)
-    copy_pixels : Proc(IWICBitmapClipper*, WICRect*, UInt32, UInt32, UInt8*, HRESULT)
-    initialize : Proc(IWICBitmapClipper*, IWICBitmapSource, WICRect*, HRESULT)
-  end
-
-  IWICBitmapClipper_GUID = "e4fbcf03-223d-4e81-9333-d635556dd1b5"
-  IID_IWICBitmapClipper = LibC::GUID.new(0xe4fbcf03_u32, 0x223d_u16, 0x4e81_u16, StaticArray[0x93_u8, 0x33_u8, 0xd6_u8, 0x35_u8, 0x55_u8, 0x6d_u8, 0xd1_u8, 0xb5_u8])
-  struct IWICBitmapClipper
-    lpVtbl : IWICBitmapClipperVTbl*
-  end
-
-  struct IWICBitmapFlipRotatorVTbl
-    query_interface : Proc(IWICBitmapFlipRotator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapFlipRotator*, UInt32)
-    release : Proc(IWICBitmapFlipRotator*, UInt32)
-    get_size : Proc(IWICBitmapFlipRotator*, UInt32*, UInt32*, HRESULT)
-    get_pixel_format : Proc(IWICBitmapFlipRotator*, Guid*, HRESULT)
-    get_resolution : Proc(IWICBitmapFlipRotator*, Float64*, Float64*, HRESULT)
-    copy_palette : Proc(IWICBitmapFlipRotator*, IWICPalette, HRESULT)
-    copy_pixels : Proc(IWICBitmapFlipRotator*, WICRect*, UInt32, UInt32, UInt8*, HRESULT)
-    initialize : Proc(IWICBitmapFlipRotator*, IWICBitmapSource, WICBitmapTransformOptions, HRESULT)
-  end
-
-  IWICBitmapFlipRotator_GUID = "5009834f-2d6a-41ce-9e1b-17c5aff7a782"
-  IID_IWICBitmapFlipRotator = LibC::GUID.new(0x5009834f_u32, 0x2d6a_u16, 0x41ce_u16, StaticArray[0x9e_u8, 0x1b_u8, 0x17_u8, 0xc5_u8, 0xaf_u8, 0xf7_u8, 0xa7_u8, 0x82_u8])
-  struct IWICBitmapFlipRotator
-    lpVtbl : IWICBitmapFlipRotatorVTbl*
-  end
-
-  struct IWICBitmapLockVTbl
-    query_interface : Proc(IWICBitmapLock*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapLock*, UInt32)
-    release : Proc(IWICBitmapLock*, UInt32)
-    get_size : Proc(IWICBitmapLock*, UInt32*, UInt32*, HRESULT)
-    get_stride : Proc(IWICBitmapLock*, UInt32*, HRESULT)
-    get_data_pointer : Proc(IWICBitmapLock*, UInt32*, UInt8**, HRESULT)
-    get_pixel_format : Proc(IWICBitmapLock*, Guid*, HRESULT)
-  end
-
-  IWICBitmapLock_GUID = "00000123-a8f2-4877-ba0a-fd2b6645fb94"
-  IID_IWICBitmapLock = LibC::GUID.new(0x123_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
-  struct IWICBitmapLock
-    lpVtbl : IWICBitmapLockVTbl*
-  end
-
-  struct IWICBitmapVTbl
-    query_interface : Proc(IWICBitmap*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmap*, UInt32)
-    release : Proc(IWICBitmap*, UInt32)
-    get_size : Proc(IWICBitmap*, UInt32*, UInt32*, HRESULT)
-    get_pixel_format : Proc(IWICBitmap*, Guid*, HRESULT)
-    get_resolution : Proc(IWICBitmap*, Float64*, Float64*, HRESULT)
-    copy_palette : Proc(IWICBitmap*, IWICPalette, HRESULT)
-    copy_pixels : Proc(IWICBitmap*, WICRect*, UInt32, UInt32, UInt8*, HRESULT)
-    lock : Proc(IWICBitmap*, WICRect*, UInt32, IWICBitmapLock*, HRESULT)
-    set_palette : Proc(IWICBitmap*, IWICPalette, HRESULT)
-    set_resolution : Proc(IWICBitmap*, Float64, Float64, HRESULT)
-  end
-
-  IWICBitmap_GUID = "00000121-a8f2-4877-ba0a-fd2b6645fb94"
-  IID_IWICBitmap = LibC::GUID.new(0x121_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
-  struct IWICBitmap
-    lpVtbl : IWICBitmapVTbl*
-  end
-
-  struct IWICColorContextVTbl
-    query_interface : Proc(IWICColorContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICColorContext*, UInt32)
-    release : Proc(IWICColorContext*, UInt32)
-    initialize_from_filename : Proc(IWICColorContext*, LibC::LPWSTR, HRESULT)
-    initialize_from_memory : Proc(IWICColorContext*, UInt8*, UInt32, HRESULT)
-    initialize_from_exif_color_space : Proc(IWICColorContext*, UInt32, HRESULT)
-    get_type : Proc(IWICColorContext*, WICColorContextType*, HRESULT)
-    get_profile_bytes : Proc(IWICColorContext*, UInt32, UInt8*, UInt32*, HRESULT)
-    get_exif_color_space : Proc(IWICColorContext*, UInt32*, HRESULT)
-  end
-
-  IWICColorContext_GUID = "3c613a02-34b2-44ea-9a7c-45aea9c6fd6d"
-  IID_IWICColorContext = LibC::GUID.new(0x3c613a02_u32, 0x34b2_u16, 0x44ea_u16, StaticArray[0x9a_u8, 0x7c_u8, 0x45_u8, 0xae_u8, 0xa9_u8, 0xc6_u8, 0xfd_u8, 0x6d_u8])
-  struct IWICColorContext
-    lpVtbl : IWICColorContextVTbl*
-  end
-
-  struct IWICColorTransformVTbl
-    query_interface : Proc(IWICColorTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICColorTransform*, UInt32)
-    release : Proc(IWICColorTransform*, UInt32)
-    get_size : Proc(IWICColorTransform*, UInt32*, UInt32*, HRESULT)
-    get_pixel_format : Proc(IWICColorTransform*, Guid*, HRESULT)
-    get_resolution : Proc(IWICColorTransform*, Float64*, Float64*, HRESULT)
-    copy_palette : Proc(IWICColorTransform*, IWICPalette, HRESULT)
-    copy_pixels : Proc(IWICColorTransform*, WICRect*, UInt32, UInt32, UInt8*, HRESULT)
-    initialize : Proc(IWICColorTransform*, IWICBitmapSource, IWICColorContext, IWICColorContext, Guid*, HRESULT)
-  end
-
-  IWICColorTransform_GUID = "b66f034f-d0e2-40ab-b436-6de39e321a94"
-  IID_IWICColorTransform = LibC::GUID.new(0xb66f034f_u32, 0xd0e2_u16, 0x40ab_u16, StaticArray[0xb4_u8, 0x36_u8, 0x6d_u8, 0xe3_u8, 0x9e_u8, 0x32_u8, 0x1a_u8, 0x94_u8])
-  struct IWICColorTransform
-    lpVtbl : IWICColorTransformVTbl*
-  end
-
-  struct IWICFastMetadataEncoderVTbl
-    query_interface : Proc(IWICFastMetadataEncoder*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICFastMetadataEncoder*, UInt32)
-    release : Proc(IWICFastMetadataEncoder*, UInt32)
-    commit : Proc(IWICFastMetadataEncoder*, HRESULT)
-    get_metadata_query_writer : Proc(IWICFastMetadataEncoder*, IWICMetadataQueryWriter*, HRESULT)
-  end
-
-  IWICFastMetadataEncoder_GUID = "b84e2c09-78c9-4ac4-8bd3-524ae1663a2f"
-  IID_IWICFastMetadataEncoder = LibC::GUID.new(0xb84e2c09_u32, 0x78c9_u16, 0x4ac4_u16, StaticArray[0x8b_u8, 0xd3_u8, 0x52_u8, 0x4a_u8, 0xe1_u8, 0x66_u8, 0x3a_u8, 0x2f_u8])
-  struct IWICFastMetadataEncoder
-    lpVtbl : IWICFastMetadataEncoderVTbl*
-  end
-
-  struct IWICStreamVTbl
-    query_interface : Proc(IWICStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICStream*, UInt32)
-    release : Proc(IWICStream*, UInt32)
-    read : Proc(IWICStream*, Void*, UInt32, UInt32*, HRESULT)
-    write : Proc(IWICStream*, Void*, UInt32, UInt32*, HRESULT)
-    seek : Proc(IWICStream*, LARGE_INTEGER, STREAM_SEEK, ULARGE_INTEGER*, HRESULT)
-    set_size : Proc(IWICStream*, ULARGE_INTEGER, HRESULT)
-    copy_to : Proc(IWICStream*, IStream, ULARGE_INTEGER, ULARGE_INTEGER*, ULARGE_INTEGER*, HRESULT)
-    commit : Proc(IWICStream*, UInt32, HRESULT)
-    revert : Proc(IWICStream*, HRESULT)
-    lock_region : Proc(IWICStream*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    unlock_region : Proc(IWICStream*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    stat : Proc(IWICStream*, STATSTG*, UInt32, HRESULT)
-    clone : Proc(IWICStream*, IStream*, HRESULT)
-    initialize_from_i_stream : Proc(IWICStream*, IStream, HRESULT)
-    initialize_from_filename : Proc(IWICStream*, LibC::LPWSTR, UInt32, HRESULT)
-    initialize_from_memory : Proc(IWICStream*, UInt8*, UInt32, HRESULT)
-    initialize_from_i_stream_region : Proc(IWICStream*, IStream, ULARGE_INTEGER, ULARGE_INTEGER, HRESULT)
-  end
-
-  IWICStream_GUID = "135ff860-22b7-4ddf-b0f6-218f4f299a43"
-  IID_IWICStream = LibC::GUID.new(0x135ff860_u32, 0x22b7_u16, 0x4ddf_u16, StaticArray[0xb0_u8, 0xf6_u8, 0x21_u8, 0x8f_u8, 0x4f_u8, 0x29_u8, 0x9a_u8, 0x43_u8])
-  struct IWICStream
-    lpVtbl : IWICStreamVTbl*
-  end
-
-  struct IWICEnumMetadataItemVTbl
-    query_interface : Proc(IWICEnumMetadataItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICEnumMetadataItem*, UInt32)
-    release : Proc(IWICEnumMetadataItem*, UInt32)
-    next : Proc(IWICEnumMetadataItem*, UInt32, PROPVARIANT*, PROPVARIANT*, PROPVARIANT*, UInt32*, HRESULT)
-    skip : Proc(IWICEnumMetadataItem*, UInt32, HRESULT)
-    reset : Proc(IWICEnumMetadataItem*, HRESULT)
-    clone : Proc(IWICEnumMetadataItem*, IWICEnumMetadataItem*, HRESULT)
-  end
-
-  IWICEnumMetadataItem_GUID = "dc2bb46d-3f07-481e-8625-220c4aedbb33"
-  IID_IWICEnumMetadataItem = LibC::GUID.new(0xdc2bb46d_u32, 0x3f07_u16, 0x481e_u16, StaticArray[0x86_u8, 0x25_u8, 0x22_u8, 0xc_u8, 0x4a_u8, 0xed_u8, 0xbb_u8, 0x33_u8])
-  struct IWICEnumMetadataItem
-    lpVtbl : IWICEnumMetadataItemVTbl*
-  end
-
-  struct IWICMetadataQueryReaderVTbl
-    query_interface : Proc(IWICMetadataQueryReader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICMetadataQueryReader*, UInt32)
-    release : Proc(IWICMetadataQueryReader*, UInt32)
-    get_container_format : Proc(IWICMetadataQueryReader*, Guid*, HRESULT)
-    get_location : Proc(IWICMetadataQueryReader*, UInt32, Char*, UInt32*, HRESULT)
-    get_metadata_by_name : Proc(IWICMetadataQueryReader*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    get_enumerator : Proc(IWICMetadataQueryReader*, IEnumString*, HRESULT)
-  end
-
-  IWICMetadataQueryReader_GUID = "30989668-e1c9-4597-b395-458eedb808df"
-  IID_IWICMetadataQueryReader = LibC::GUID.new(0x30989668_u32, 0xe1c9_u16, 0x4597_u16, StaticArray[0xb3_u8, 0x95_u8, 0x45_u8, 0x8e_u8, 0xed_u8, 0xb8_u8, 0x8_u8, 0xdf_u8])
-  struct IWICMetadataQueryReader
-    lpVtbl : IWICMetadataQueryReaderVTbl*
-  end
-
-  struct IWICMetadataQueryWriterVTbl
-    query_interface : Proc(IWICMetadataQueryWriter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICMetadataQueryWriter*, UInt32)
-    release : Proc(IWICMetadataQueryWriter*, UInt32)
-    get_container_format : Proc(IWICMetadataQueryWriter*, Guid*, HRESULT)
-    get_location : Proc(IWICMetadataQueryWriter*, UInt32, Char*, UInt32*, HRESULT)
-    get_metadata_by_name : Proc(IWICMetadataQueryWriter*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    get_enumerator : Proc(IWICMetadataQueryWriter*, IEnumString*, HRESULT)
-    set_metadata_by_name : Proc(IWICMetadataQueryWriter*, LibC::LPWSTR, PROPVARIANT*, HRESULT)
-    remove_metadata_by_name : Proc(IWICMetadataQueryWriter*, LibC::LPWSTR, HRESULT)
-  end
-
-  IWICMetadataQueryWriter_GUID = "a721791a-0def-4d06-bd91-2118bf1db10b"
-  IID_IWICMetadataQueryWriter = LibC::GUID.new(0xa721791a_u32, 0xdef_u16, 0x4d06_u16, StaticArray[0xbd_u8, 0x91_u8, 0x21_u8, 0x18_u8, 0xbf_u8, 0x1d_u8, 0xb1_u8, 0xb_u8])
-  struct IWICMetadataQueryWriter
-    lpVtbl : IWICMetadataQueryWriterVTbl*
-  end
-
-  struct IWICBitmapEncoderVTbl
-    query_interface : Proc(IWICBitmapEncoder*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapEncoder*, UInt32)
-    release : Proc(IWICBitmapEncoder*, UInt32)
-    initialize : Proc(IWICBitmapEncoder*, IStream, WICBitmapEncoderCacheOption, HRESULT)
-    get_container_format : Proc(IWICBitmapEncoder*, Guid*, HRESULT)
-    get_encoder_info : Proc(IWICBitmapEncoder*, IWICBitmapEncoderInfo*, HRESULT)
-    set_color_contexts : Proc(IWICBitmapEncoder*, UInt32, IWICColorContext*, HRESULT)
-    set_palette : Proc(IWICBitmapEncoder*, IWICPalette, HRESULT)
-    set_thumbnail : Proc(IWICBitmapEncoder*, IWICBitmapSource, HRESULT)
-    set_preview : Proc(IWICBitmapEncoder*, IWICBitmapSource, HRESULT)
-    create_new_frame : Proc(IWICBitmapEncoder*, IWICBitmapFrameEncode*, IPropertyBag2*, HRESULT)
-    commit : Proc(IWICBitmapEncoder*, HRESULT)
-    get_metadata_query_writer : Proc(IWICBitmapEncoder*, IWICMetadataQueryWriter*, HRESULT)
-  end
-
-  IWICBitmapEncoder_GUID = "00000103-a8f2-4877-ba0a-fd2b6645fb94"
-  IID_IWICBitmapEncoder = LibC::GUID.new(0x103_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
-  struct IWICBitmapEncoder
-    lpVtbl : IWICBitmapEncoderVTbl*
-  end
-
-  struct IWICBitmapFrameEncodeVTbl
-    query_interface : Proc(IWICBitmapFrameEncode*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapFrameEncode*, UInt32)
-    release : Proc(IWICBitmapFrameEncode*, UInt32)
-    initialize : Proc(IWICBitmapFrameEncode*, IPropertyBag2, HRESULT)
-    set_size : Proc(IWICBitmapFrameEncode*, UInt32, UInt32, HRESULT)
-    set_resolution : Proc(IWICBitmapFrameEncode*, Float64, Float64, HRESULT)
-    set_pixel_format : Proc(IWICBitmapFrameEncode*, Guid*, HRESULT)
-    set_color_contexts : Proc(IWICBitmapFrameEncode*, UInt32, IWICColorContext*, HRESULT)
-    set_palette : Proc(IWICBitmapFrameEncode*, IWICPalette, HRESULT)
-    set_thumbnail : Proc(IWICBitmapFrameEncode*, IWICBitmapSource, HRESULT)
-    write_pixels : Proc(IWICBitmapFrameEncode*, UInt32, UInt32, UInt32, UInt8*, HRESULT)
-    write_source : Proc(IWICBitmapFrameEncode*, IWICBitmapSource, WICRect*, HRESULT)
-    commit : Proc(IWICBitmapFrameEncode*, HRESULT)
-    get_metadata_query_writer : Proc(IWICBitmapFrameEncode*, IWICMetadataQueryWriter*, HRESULT)
-  end
-
-  IWICBitmapFrameEncode_GUID = "00000105-a8f2-4877-ba0a-fd2b6645fb94"
-  IID_IWICBitmapFrameEncode = LibC::GUID.new(0x105_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
-  struct IWICBitmapFrameEncode
-    lpVtbl : IWICBitmapFrameEncodeVTbl*
-  end
-
-  struct IWICPlanarBitmapFrameEncodeVTbl
-    query_interface : Proc(IWICPlanarBitmapFrameEncode*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICPlanarBitmapFrameEncode*, UInt32)
-    release : Proc(IWICPlanarBitmapFrameEncode*, UInt32)
-    write_pixels : Proc(IWICPlanarBitmapFrameEncode*, UInt32, WICBitmapPlane*, UInt32, HRESULT)
-    write_source : Proc(IWICPlanarBitmapFrameEncode*, IWICBitmapSource*, UInt32, WICRect*, HRESULT)
-  end
-
-  IWICPlanarBitmapFrameEncode_GUID = "f928b7b8-2221-40c1-b72e-7e82f1974d1a"
-  IID_IWICPlanarBitmapFrameEncode = LibC::GUID.new(0xf928b7b8_u32, 0x2221_u16, 0x40c1_u16, StaticArray[0xb7_u8, 0x2e_u8, 0x7e_u8, 0x82_u8, 0xf1_u8, 0x97_u8, 0x4d_u8, 0x1a_u8])
-  struct IWICPlanarBitmapFrameEncode
-    lpVtbl : IWICPlanarBitmapFrameEncodeVTbl*
-  end
-
-  struct IWICBitmapDecoderVTbl
-    query_interface : Proc(IWICBitmapDecoder*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapDecoder*, UInt32)
-    release : Proc(IWICBitmapDecoder*, UInt32)
-    query_capability : Proc(IWICBitmapDecoder*, IStream, UInt32*, HRESULT)
-    initialize : Proc(IWICBitmapDecoder*, IStream, WICDecodeOptions, HRESULT)
-    get_container_format : Proc(IWICBitmapDecoder*, Guid*, HRESULT)
-    get_decoder_info : Proc(IWICBitmapDecoder*, IWICBitmapDecoderInfo*, HRESULT)
-    copy_palette : Proc(IWICBitmapDecoder*, IWICPalette, HRESULT)
-    get_metadata_query_reader : Proc(IWICBitmapDecoder*, IWICMetadataQueryReader*, HRESULT)
-    get_preview : Proc(IWICBitmapDecoder*, IWICBitmapSource*, HRESULT)
-    get_color_contexts : Proc(IWICBitmapDecoder*, UInt32, IWICColorContext*, UInt32*, HRESULT)
-    get_thumbnail : Proc(IWICBitmapDecoder*, IWICBitmapSource*, HRESULT)
-    get_frame_count : Proc(IWICBitmapDecoder*, UInt32*, HRESULT)
-    get_frame : Proc(IWICBitmapDecoder*, UInt32, IWICBitmapFrameDecode*, HRESULT)
-  end
-
-  IWICBitmapDecoder_GUID = "9edde9e7-8dee-47ea-99df-e6faf2ed44bf"
-  IID_IWICBitmapDecoder = LibC::GUID.new(0x9edde9e7_u32, 0x8dee_u16, 0x47ea_u16, StaticArray[0x99_u8, 0xdf_u8, 0xe6_u8, 0xfa_u8, 0xf2_u8, 0xed_u8, 0x44_u8, 0xbf_u8])
-  struct IWICBitmapDecoder
-    lpVtbl : IWICBitmapDecoderVTbl*
-  end
-
-  struct IWICBitmapSourceTransformVTbl
-    query_interface : Proc(IWICBitmapSourceTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapSourceTransform*, UInt32)
-    release : Proc(IWICBitmapSourceTransform*, UInt32)
-    copy_pixels : Proc(IWICBitmapSourceTransform*, WICRect*, UInt32, UInt32, Guid*, WICBitmapTransformOptions, UInt32, UInt32, UInt8*, HRESULT)
-    get_closest_size : Proc(IWICBitmapSourceTransform*, UInt32*, UInt32*, HRESULT)
-    get_closest_pixel_format : Proc(IWICBitmapSourceTransform*, Guid*, HRESULT)
-    does_support_transform : Proc(IWICBitmapSourceTransform*, WICBitmapTransformOptions, LibC::BOOL*, HRESULT)
-  end
-
-  IWICBitmapSourceTransform_GUID = "3b16811b-6a43-4ec9-b713-3d5a0c13b940"
-  IID_IWICBitmapSourceTransform = LibC::GUID.new(0x3b16811b_u32, 0x6a43_u16, 0x4ec9_u16, StaticArray[0xb7_u8, 0x13_u8, 0x3d_u8, 0x5a_u8, 0xc_u8, 0x13_u8, 0xb9_u8, 0x40_u8])
-  struct IWICBitmapSourceTransform
-    lpVtbl : IWICBitmapSourceTransformVTbl*
-  end
-
-  struct IWICPlanarBitmapSourceTransformVTbl
-    query_interface : Proc(IWICPlanarBitmapSourceTransform*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICPlanarBitmapSourceTransform*, UInt32)
-    release : Proc(IWICPlanarBitmapSourceTransform*, UInt32)
-    does_support_transform : Proc(IWICPlanarBitmapSourceTransform*, UInt32*, UInt32*, WICBitmapTransformOptions, WICPlanarOptions, Guid*, WICBitmapPlaneDescription*, UInt32, LibC::BOOL*, HRESULT)
-    copy_pixels : Proc(IWICPlanarBitmapSourceTransform*, WICRect*, UInt32, UInt32, WICBitmapTransformOptions, WICPlanarOptions, WICBitmapPlane*, UInt32, HRESULT)
-  end
-
-  IWICPlanarBitmapSourceTransform_GUID = "3aff9cce-be95-4303-b927-e7d16ff4a613"
-  IID_IWICPlanarBitmapSourceTransform = LibC::GUID.new(0x3aff9cce_u32, 0xbe95_u16, 0x4303_u16, StaticArray[0xb9_u8, 0x27_u8, 0xe7_u8, 0xd1_u8, 0x6f_u8, 0xf4_u8, 0xa6_u8, 0x13_u8])
-  struct IWICPlanarBitmapSourceTransform
-    lpVtbl : IWICPlanarBitmapSourceTransformVTbl*
-  end
-
-  struct IWICBitmapFrameDecodeVTbl
-    query_interface : Proc(IWICBitmapFrameDecode*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapFrameDecode*, UInt32)
-    release : Proc(IWICBitmapFrameDecode*, UInt32)
-    get_size : Proc(IWICBitmapFrameDecode*, UInt32*, UInt32*, HRESULT)
-    get_pixel_format : Proc(IWICBitmapFrameDecode*, Guid*, HRESULT)
-    get_resolution : Proc(IWICBitmapFrameDecode*, Float64*, Float64*, HRESULT)
-    copy_palette : Proc(IWICBitmapFrameDecode*, IWICPalette, HRESULT)
-    copy_pixels : Proc(IWICBitmapFrameDecode*, WICRect*, UInt32, UInt32, UInt8*, HRESULT)
-    get_metadata_query_reader : Proc(IWICBitmapFrameDecode*, IWICMetadataQueryReader*, HRESULT)
-    get_color_contexts : Proc(IWICBitmapFrameDecode*, UInt32, IWICColorContext*, UInt32*, HRESULT)
-    get_thumbnail : Proc(IWICBitmapFrameDecode*, IWICBitmapSource*, HRESULT)
-  end
-
-  IWICBitmapFrameDecode_GUID = "3b16811b-6a43-4ec9-a813-3d930c13b940"
-  IID_IWICBitmapFrameDecode = LibC::GUID.new(0x3b16811b_u32, 0x6a43_u16, 0x4ec9_u16, StaticArray[0xa8_u8, 0x13_u8, 0x3d_u8, 0x93_u8, 0xc_u8, 0x13_u8, 0xb9_u8, 0x40_u8])
-  struct IWICBitmapFrameDecode
-    lpVtbl : IWICBitmapFrameDecodeVTbl*
-  end
-
-  struct IWICProgressiveLevelControlVTbl
-    query_interface : Proc(IWICProgressiveLevelControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICProgressiveLevelControl*, UInt32)
-    release : Proc(IWICProgressiveLevelControl*, UInt32)
-    get_level_count : Proc(IWICProgressiveLevelControl*, UInt32*, HRESULT)
-    get_current_level : Proc(IWICProgressiveLevelControl*, UInt32*, HRESULT)
-    set_current_level : Proc(IWICProgressiveLevelControl*, UInt32, HRESULT)
-  end
-
-  IWICProgressiveLevelControl_GUID = "daac296f-7aa5-4dbf-8d15-225c5976f891"
-  IID_IWICProgressiveLevelControl = LibC::GUID.new(0xdaac296f_u32, 0x7aa5_u16, 0x4dbf_u16, StaticArray[0x8d_u8, 0x15_u8, 0x22_u8, 0x5c_u8, 0x59_u8, 0x76_u8, 0xf8_u8, 0x91_u8])
-  struct IWICProgressiveLevelControl
-    lpVtbl : IWICProgressiveLevelControlVTbl*
-  end
-
-  struct IWICProgressCallbackVTbl
-    query_interface : Proc(IWICProgressCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICProgressCallback*, UInt32)
-    release : Proc(IWICProgressCallback*, UInt32)
-    notify : Proc(IWICProgressCallback*, UInt32, WICProgressOperation, Float64, HRESULT)
-  end
-
-  IWICProgressCallback_GUID = "4776f9cd-9517-45fa-bf24-e89c5ec5c60c"
-  IID_IWICProgressCallback = LibC::GUID.new(0x4776f9cd_u32, 0x9517_u16, 0x45fa_u16, StaticArray[0xbf_u8, 0x24_u8, 0xe8_u8, 0x9c_u8, 0x5e_u8, 0xc5_u8, 0xc6_u8, 0xc_u8])
-  struct IWICProgressCallback
-    lpVtbl : IWICProgressCallbackVTbl*
-  end
-
-  struct IWICBitmapCodecProgressNotificationVTbl
-    query_interface : Proc(IWICBitmapCodecProgressNotification*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapCodecProgressNotification*, UInt32)
-    release : Proc(IWICBitmapCodecProgressNotification*, UInt32)
-    register_progress_notification : Proc(IWICBitmapCodecProgressNotification*, PFNProgressNotification, Void*, UInt32, HRESULT)
-  end
-
-  IWICBitmapCodecProgressNotification_GUID = "64c1024e-c3cf-4462-8078-88c2b11c46d9"
-  IID_IWICBitmapCodecProgressNotification = LibC::GUID.new(0x64c1024e_u32, 0xc3cf_u16, 0x4462_u16, StaticArray[0x80_u8, 0x78_u8, 0x88_u8, 0xc2_u8, 0xb1_u8, 0x1c_u8, 0x46_u8, 0xd9_u8])
-  struct IWICBitmapCodecProgressNotification
-    lpVtbl : IWICBitmapCodecProgressNotificationVTbl*
-  end
-
-  struct IWICComponentInfoVTbl
-    query_interface : Proc(IWICComponentInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICComponentInfo*, UInt32)
-    release : Proc(IWICComponentInfo*, UInt32)
-    get_component_type : Proc(IWICComponentInfo*, WICComponentType*, HRESULT)
-    get_clsid : Proc(IWICComponentInfo*, Guid*, HRESULT)
-    get_signing_status : Proc(IWICComponentInfo*, UInt32*, HRESULT)
-    get_author : Proc(IWICComponentInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_vendor_guid : Proc(IWICComponentInfo*, Guid*, HRESULT)
-    get_version : Proc(IWICComponentInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_spec_version : Proc(IWICComponentInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_friendly_name : Proc(IWICComponentInfo*, UInt32, Char*, UInt32*, HRESULT)
-  end
-
-  IWICComponentInfo_GUID = "23bc3f0a-698b-4357-886b-f24d50671334"
-  IID_IWICComponentInfo = LibC::GUID.new(0x23bc3f0a_u32, 0x698b_u16, 0x4357_u16, StaticArray[0x88_u8, 0x6b_u8, 0xf2_u8, 0x4d_u8, 0x50_u8, 0x67_u8, 0x13_u8, 0x34_u8])
-  struct IWICComponentInfo
-    lpVtbl : IWICComponentInfoVTbl*
-  end
-
-  struct IWICFormatConverterInfoVTbl
-    query_interface : Proc(IWICFormatConverterInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICFormatConverterInfo*, UInt32)
-    release : Proc(IWICFormatConverterInfo*, UInt32)
-    get_component_type : Proc(IWICFormatConverterInfo*, WICComponentType*, HRESULT)
-    get_clsid : Proc(IWICFormatConverterInfo*, Guid*, HRESULT)
-    get_signing_status : Proc(IWICFormatConverterInfo*, UInt32*, HRESULT)
-    get_author : Proc(IWICFormatConverterInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_vendor_guid : Proc(IWICFormatConverterInfo*, Guid*, HRESULT)
-    get_version : Proc(IWICFormatConverterInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_spec_version : Proc(IWICFormatConverterInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_friendly_name : Proc(IWICFormatConverterInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_pixel_formats : Proc(IWICFormatConverterInfo*, UInt32, Guid*, UInt32*, HRESULT)
-    create_instance : Proc(IWICFormatConverterInfo*, IWICFormatConverter*, HRESULT)
-  end
-
-  IWICFormatConverterInfo_GUID = "9f34fb65-13f4-4f15-bc57-3726b5e53d9f"
-  IID_IWICFormatConverterInfo = LibC::GUID.new(0x9f34fb65_u32, 0x13f4_u16, 0x4f15_u16, StaticArray[0xbc_u8, 0x57_u8, 0x37_u8, 0x26_u8, 0xb5_u8, 0xe5_u8, 0x3d_u8, 0x9f_u8])
-  struct IWICFormatConverterInfo
-    lpVtbl : IWICFormatConverterInfoVTbl*
-  end
-
-  struct IWICBitmapCodecInfoVTbl
-    query_interface : Proc(IWICBitmapCodecInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapCodecInfo*, UInt32)
-    release : Proc(IWICBitmapCodecInfo*, UInt32)
-    get_component_type : Proc(IWICBitmapCodecInfo*, WICComponentType*, HRESULT)
-    get_clsid : Proc(IWICBitmapCodecInfo*, Guid*, HRESULT)
-    get_signing_status : Proc(IWICBitmapCodecInfo*, UInt32*, HRESULT)
-    get_author : Proc(IWICBitmapCodecInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_vendor_guid : Proc(IWICBitmapCodecInfo*, Guid*, HRESULT)
-    get_version : Proc(IWICBitmapCodecInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_spec_version : Proc(IWICBitmapCodecInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_friendly_name : Proc(IWICBitmapCodecInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_container_format : Proc(IWICBitmapCodecInfo*, Guid*, HRESULT)
-    get_pixel_formats : Proc(IWICBitmapCodecInfo*, UInt32, Guid*, UInt32*, HRESULT)
-    get_color_management_version : Proc(IWICBitmapCodecInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_device_manufacturer : Proc(IWICBitmapCodecInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_device_models : Proc(IWICBitmapCodecInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_mime_types : Proc(IWICBitmapCodecInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_file_extensions : Proc(IWICBitmapCodecInfo*, UInt32, Char*, UInt32*, HRESULT)
-    does_support_animation : Proc(IWICBitmapCodecInfo*, LibC::BOOL*, HRESULT)
-    does_support_chromakey : Proc(IWICBitmapCodecInfo*, LibC::BOOL*, HRESULT)
-    does_support_lossless : Proc(IWICBitmapCodecInfo*, LibC::BOOL*, HRESULT)
-    does_support_multiframe : Proc(IWICBitmapCodecInfo*, LibC::BOOL*, HRESULT)
-    matches_mime_type : Proc(IWICBitmapCodecInfo*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-  end
-
-  IWICBitmapCodecInfo_GUID = "e87a44c4-b76e-4c47-8b09-298eb12a2714"
-  IID_IWICBitmapCodecInfo = LibC::GUID.new(0xe87a44c4_u32, 0xb76e_u16, 0x4c47_u16, StaticArray[0x8b_u8, 0x9_u8, 0x29_u8, 0x8e_u8, 0xb1_u8, 0x2a_u8, 0x27_u8, 0x14_u8])
-  struct IWICBitmapCodecInfo
-    lpVtbl : IWICBitmapCodecInfoVTbl*
-  end
-
-  struct IWICBitmapEncoderInfoVTbl
-    query_interface : Proc(IWICBitmapEncoderInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapEncoderInfo*, UInt32)
-    release : Proc(IWICBitmapEncoderInfo*, UInt32)
-    get_component_type : Proc(IWICBitmapEncoderInfo*, WICComponentType*, HRESULT)
-    get_clsid : Proc(IWICBitmapEncoderInfo*, Guid*, HRESULT)
-    get_signing_status : Proc(IWICBitmapEncoderInfo*, UInt32*, HRESULT)
-    get_author : Proc(IWICBitmapEncoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_vendor_guid : Proc(IWICBitmapEncoderInfo*, Guid*, HRESULT)
-    get_version : Proc(IWICBitmapEncoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_spec_version : Proc(IWICBitmapEncoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_friendly_name : Proc(IWICBitmapEncoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_container_format : Proc(IWICBitmapEncoderInfo*, Guid*, HRESULT)
-    get_pixel_formats : Proc(IWICBitmapEncoderInfo*, UInt32, Guid*, UInt32*, HRESULT)
-    get_color_management_version : Proc(IWICBitmapEncoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_device_manufacturer : Proc(IWICBitmapEncoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_device_models : Proc(IWICBitmapEncoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_mime_types : Proc(IWICBitmapEncoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_file_extensions : Proc(IWICBitmapEncoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    does_support_animation : Proc(IWICBitmapEncoderInfo*, LibC::BOOL*, HRESULT)
-    does_support_chromakey : Proc(IWICBitmapEncoderInfo*, LibC::BOOL*, HRESULT)
-    does_support_lossless : Proc(IWICBitmapEncoderInfo*, LibC::BOOL*, HRESULT)
-    does_support_multiframe : Proc(IWICBitmapEncoderInfo*, LibC::BOOL*, HRESULT)
-    matches_mime_type : Proc(IWICBitmapEncoderInfo*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-    create_instance : Proc(IWICBitmapEncoderInfo*, IWICBitmapEncoder*, HRESULT)
-  end
-
-  IWICBitmapEncoderInfo_GUID = "94c9b4ee-a09f-4f92-8a1e-4a9bce7e76fb"
-  IID_IWICBitmapEncoderInfo = LibC::GUID.new(0x94c9b4ee_u32, 0xa09f_u16, 0x4f92_u16, StaticArray[0x8a_u8, 0x1e_u8, 0x4a_u8, 0x9b_u8, 0xce_u8, 0x7e_u8, 0x76_u8, 0xfb_u8])
-  struct IWICBitmapEncoderInfo
-    lpVtbl : IWICBitmapEncoderInfoVTbl*
-  end
-
-  struct IWICBitmapDecoderInfoVTbl
-    query_interface : Proc(IWICBitmapDecoderInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICBitmapDecoderInfo*, UInt32)
-    release : Proc(IWICBitmapDecoderInfo*, UInt32)
-    get_component_type : Proc(IWICBitmapDecoderInfo*, WICComponentType*, HRESULT)
-    get_clsid : Proc(IWICBitmapDecoderInfo*, Guid*, HRESULT)
-    get_signing_status : Proc(IWICBitmapDecoderInfo*, UInt32*, HRESULT)
-    get_author : Proc(IWICBitmapDecoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_vendor_guid : Proc(IWICBitmapDecoderInfo*, Guid*, HRESULT)
-    get_version : Proc(IWICBitmapDecoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_spec_version : Proc(IWICBitmapDecoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_friendly_name : Proc(IWICBitmapDecoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_container_format : Proc(IWICBitmapDecoderInfo*, Guid*, HRESULT)
-    get_pixel_formats : Proc(IWICBitmapDecoderInfo*, UInt32, Guid*, UInt32*, HRESULT)
-    get_color_management_version : Proc(IWICBitmapDecoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_device_manufacturer : Proc(IWICBitmapDecoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_device_models : Proc(IWICBitmapDecoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_mime_types : Proc(IWICBitmapDecoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_file_extensions : Proc(IWICBitmapDecoderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    does_support_animation : Proc(IWICBitmapDecoderInfo*, LibC::BOOL*, HRESULT)
-    does_support_chromakey : Proc(IWICBitmapDecoderInfo*, LibC::BOOL*, HRESULT)
-    does_support_lossless : Proc(IWICBitmapDecoderInfo*, LibC::BOOL*, HRESULT)
-    does_support_multiframe : Proc(IWICBitmapDecoderInfo*, LibC::BOOL*, HRESULT)
-    matches_mime_type : Proc(IWICBitmapDecoderInfo*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-    get_patterns : Proc(IWICBitmapDecoderInfo*, UInt32, WICBitmapPattern*, UInt32*, UInt32*, HRESULT)
-    matches_pattern : Proc(IWICBitmapDecoderInfo*, IStream, LibC::BOOL*, HRESULT)
-    create_instance : Proc(IWICBitmapDecoderInfo*, IWICBitmapDecoder*, HRESULT)
-  end
-
-  IWICBitmapDecoderInfo_GUID = "d8cd007f-d08f-4191-9bfc-236ea7f0e4b5"
-  IID_IWICBitmapDecoderInfo = LibC::GUID.new(0xd8cd007f_u32, 0xd08f_u16, 0x4191_u16, StaticArray[0x9b_u8, 0xfc_u8, 0x23_u8, 0x6e_u8, 0xa7_u8, 0xf0_u8, 0xe4_u8, 0xb5_u8])
-  struct IWICBitmapDecoderInfo
-    lpVtbl : IWICBitmapDecoderInfoVTbl*
-  end
 
-  struct IWICPixelFormatInfoVTbl
-    query_interface : Proc(IWICPixelFormatInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICPixelFormatInfo*, UInt32)
-    release : Proc(IWICPixelFormatInfo*, UInt32)
-    get_component_type : Proc(IWICPixelFormatInfo*, WICComponentType*, HRESULT)
-    get_clsid : Proc(IWICPixelFormatInfo*, Guid*, HRESULT)
-    get_signing_status : Proc(IWICPixelFormatInfo*, UInt32*, HRESULT)
-    get_author : Proc(IWICPixelFormatInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_vendor_guid : Proc(IWICPixelFormatInfo*, Guid*, HRESULT)
-    get_version : Proc(IWICPixelFormatInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_spec_version : Proc(IWICPixelFormatInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_friendly_name : Proc(IWICPixelFormatInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_format_guid : Proc(IWICPixelFormatInfo*, Guid*, HRESULT)
-    get_color_context : Proc(IWICPixelFormatInfo*, IWICColorContext*, HRESULT)
-    get_bits_per_pixel : Proc(IWICPixelFormatInfo*, UInt32*, HRESULT)
-    get_channel_count : Proc(IWICPixelFormatInfo*, UInt32*, HRESULT)
-    get_channel_mask : Proc(IWICPixelFormatInfo*, UInt32, UInt32, UInt8*, UInt32*, HRESULT)
-  end
-
-  IWICPixelFormatInfo_GUID = "e8eda601-3d48-431a-ab44-69059be88bbe"
-  IID_IWICPixelFormatInfo = LibC::GUID.new(0xe8eda601_u32, 0x3d48_u16, 0x431a_u16, StaticArray[0xab_u8, 0x44_u8, 0x69_u8, 0x5_u8, 0x9b_u8, 0xe8_u8, 0x8b_u8, 0xbe_u8])
-  struct IWICPixelFormatInfo
-    lpVtbl : IWICPixelFormatInfoVTbl*
-  end
-
-  struct IWICPixelFormatInfo2VTbl
-    query_interface : Proc(IWICPixelFormatInfo2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICPixelFormatInfo2*, UInt32)
-    release : Proc(IWICPixelFormatInfo2*, UInt32)
-    get_component_type : Proc(IWICPixelFormatInfo2*, WICComponentType*, HRESULT)
-    get_clsid : Proc(IWICPixelFormatInfo2*, Guid*, HRESULT)
-    get_signing_status : Proc(IWICPixelFormatInfo2*, UInt32*, HRESULT)
-    get_author : Proc(IWICPixelFormatInfo2*, UInt32, Char*, UInt32*, HRESULT)
-    get_vendor_guid : Proc(IWICPixelFormatInfo2*, Guid*, HRESULT)
-    get_version : Proc(IWICPixelFormatInfo2*, UInt32, Char*, UInt32*, HRESULT)
-    get_spec_version : Proc(IWICPixelFormatInfo2*, UInt32, Char*, UInt32*, HRESULT)
-    get_friendly_name : Proc(IWICPixelFormatInfo2*, UInt32, Char*, UInt32*, HRESULT)
-    get_format_guid : Proc(IWICPixelFormatInfo2*, Guid*, HRESULT)
-    get_color_context : Proc(IWICPixelFormatInfo2*, IWICColorContext*, HRESULT)
-    get_bits_per_pixel : Proc(IWICPixelFormatInfo2*, UInt32*, HRESULT)
-    get_channel_count : Proc(IWICPixelFormatInfo2*, UInt32*, HRESULT)
-    get_channel_mask : Proc(IWICPixelFormatInfo2*, UInt32, UInt32, UInt8*, UInt32*, HRESULT)
-    supports_transparency : Proc(IWICPixelFormatInfo2*, LibC::BOOL*, HRESULT)
-    get_numeric_representation : Proc(IWICPixelFormatInfo2*, WICPixelFormatNumericRepresentation*, HRESULT)
-  end
-
-  IWICPixelFormatInfo2_GUID = "a9db33a2-af5f-43c7-b679-74f5984b5aa4"
-  IID_IWICPixelFormatInfo2 = LibC::GUID.new(0xa9db33a2_u32, 0xaf5f_u16, 0x43c7_u16, StaticArray[0xb6_u8, 0x79_u8, 0x74_u8, 0xf5_u8, 0x98_u8, 0x4b_u8, 0x5a_u8, 0xa4_u8])
-  struct IWICPixelFormatInfo2
-    lpVtbl : IWICPixelFormatInfo2VTbl*
-  end
-
-  struct IWICImagingFactoryVTbl
-    query_interface : Proc(IWICImagingFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICImagingFactory*, UInt32)
-    release : Proc(IWICImagingFactory*, UInt32)
-    create_decoder_from_filename : Proc(IWICImagingFactory*, LibC::LPWSTR, Guid*, UInt32, WICDecodeOptions, IWICBitmapDecoder*, HRESULT)
-    create_decoder_from_stream : Proc(IWICImagingFactory*, IStream, Guid*, WICDecodeOptions, IWICBitmapDecoder*, HRESULT)
-    create_decoder_from_file_handle : Proc(IWICImagingFactory*, LibC::UINT_PTR, Guid*, WICDecodeOptions, IWICBitmapDecoder*, HRESULT)
-    create_component_info : Proc(IWICImagingFactory*, Guid*, IWICComponentInfo*, HRESULT)
-    create_decoder : Proc(IWICImagingFactory*, Guid*, Guid*, IWICBitmapDecoder*, HRESULT)
-    create_encoder : Proc(IWICImagingFactory*, Guid*, Guid*, IWICBitmapEncoder*, HRESULT)
-    create_palette : Proc(IWICImagingFactory*, IWICPalette*, HRESULT)
-    create_format_converter : Proc(IWICImagingFactory*, IWICFormatConverter*, HRESULT)
-    create_bitmap_scaler : Proc(IWICImagingFactory*, IWICBitmapScaler*, HRESULT)
-    create_bitmap_clipper : Proc(IWICImagingFactory*, IWICBitmapClipper*, HRESULT)
-    create_bitmap_flip_rotator : Proc(IWICImagingFactory*, IWICBitmapFlipRotator*, HRESULT)
-    create_stream : Proc(IWICImagingFactory*, IWICStream*, HRESULT)
-    create_color_context : Proc(IWICImagingFactory*, IWICColorContext*, HRESULT)
-    create_color_transformer : Proc(IWICImagingFactory*, IWICColorTransform*, HRESULT)
-    create_bitmap : Proc(IWICImagingFactory*, UInt32, UInt32, Guid*, WICBitmapCreateCacheOption, IWICBitmap*, HRESULT)
-    create_bitmap_from_source : Proc(IWICImagingFactory*, IWICBitmapSource, WICBitmapCreateCacheOption, IWICBitmap*, HRESULT)
-    create_bitmap_from_source_rect : Proc(IWICImagingFactory*, IWICBitmapSource, UInt32, UInt32, UInt32, UInt32, IWICBitmap*, HRESULT)
-    create_bitmap_from_memory : Proc(IWICImagingFactory*, UInt32, UInt32, Guid*, UInt32, UInt32, UInt8*, IWICBitmap*, HRESULT)
-    create_bitmap_from_hbitmap : Proc(IWICImagingFactory*, HBITMAP, HPALETTE, WICBitmapAlphaChannelOption, IWICBitmap*, HRESULT)
-    create_bitmap_from_hicon : Proc(IWICImagingFactory*, LibC::HANDLE, IWICBitmap*, HRESULT)
-    create_component_enumerator : Proc(IWICImagingFactory*, UInt32, UInt32, IEnumUnknown*, HRESULT)
-    create_fast_metadata_encoder_from_decoder : Proc(IWICImagingFactory*, IWICBitmapDecoder, IWICFastMetadataEncoder*, HRESULT)
-    create_fast_metadata_encoder_from_frame_decode : Proc(IWICImagingFactory*, IWICBitmapFrameDecode, IWICFastMetadataEncoder*, HRESULT)
-    create_query_writer : Proc(IWICImagingFactory*, Guid*, Guid*, IWICMetadataQueryWriter*, HRESULT)
-    create_query_writer_from_reader : Proc(IWICImagingFactory*, IWICMetadataQueryReader, Guid*, IWICMetadataQueryWriter*, HRESULT)
-  end
-
-  IWICImagingFactory_GUID = "ec5ec8a9-c395-4314-9c77-54d7a935ff70"
-  IID_IWICImagingFactory = LibC::GUID.new(0xec5ec8a9_u32, 0xc395_u16, 0x4314_u16, StaticArray[0x9c_u8, 0x77_u8, 0x54_u8, 0xd7_u8, 0xa9_u8, 0x35_u8, 0xff_u8, 0x70_u8])
-  struct IWICImagingFactory
-    lpVtbl : IWICImagingFactoryVTbl*
-  end
-
-  struct IWICDevelopRawNotificationCallbackVTbl
-    query_interface : Proc(IWICDevelopRawNotificationCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICDevelopRawNotificationCallback*, UInt32)
-    release : Proc(IWICDevelopRawNotificationCallback*, UInt32)
-    notify : Proc(IWICDevelopRawNotificationCallback*, UInt32, HRESULT)
-  end
-
-  IWICDevelopRawNotificationCallback_GUID = "95c75a6e-3e8c-4ec2-85a8-aebcc551e59b"
-  IID_IWICDevelopRawNotificationCallback = LibC::GUID.new(0x95c75a6e_u32, 0x3e8c_u16, 0x4ec2_u16, StaticArray[0x85_u8, 0xa8_u8, 0xae_u8, 0xbc_u8, 0xc5_u8, 0x51_u8, 0xe5_u8, 0x9b_u8])
-  struct IWICDevelopRawNotificationCallback
-    lpVtbl : IWICDevelopRawNotificationCallbackVTbl*
-  end
-
-  struct IWICDevelopRawVTbl
-    query_interface : Proc(IWICDevelopRaw*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICDevelopRaw*, UInt32)
-    release : Proc(IWICDevelopRaw*, UInt32)
-    get_size : Proc(IWICDevelopRaw*, UInt32*, UInt32*, HRESULT)
-    get_pixel_format : Proc(IWICDevelopRaw*, Guid*, HRESULT)
-    get_resolution : Proc(IWICDevelopRaw*, Float64*, Float64*, HRESULT)
-    copy_palette : Proc(IWICDevelopRaw*, IWICPalette, HRESULT)
-    copy_pixels : Proc(IWICDevelopRaw*, WICRect*, UInt32, UInt32, UInt8*, HRESULT)
-    get_metadata_query_reader : Proc(IWICDevelopRaw*, IWICMetadataQueryReader*, HRESULT)
-    get_color_contexts : Proc(IWICDevelopRaw*, UInt32, IWICColorContext*, UInt32*, HRESULT)
-    get_thumbnail : Proc(IWICDevelopRaw*, IWICBitmapSource*, HRESULT)
-    query_raw_capabilities_info : Proc(IWICDevelopRaw*, WICRawCapabilitiesInfo*, HRESULT)
-    load_parameter_set : Proc(IWICDevelopRaw*, WICRawParameterSet, HRESULT)
-    get_current_parameter_set : Proc(IWICDevelopRaw*, IPropertyBag2*, HRESULT)
-    set_exposure_compensation : Proc(IWICDevelopRaw*, Float64, HRESULT)
-    get_exposure_compensation : Proc(IWICDevelopRaw*, Float64*, HRESULT)
-    set_white_point_rgb : Proc(IWICDevelopRaw*, UInt32, UInt32, UInt32, HRESULT)
-    get_white_point_rgb : Proc(IWICDevelopRaw*, UInt32*, UInt32*, UInt32*, HRESULT)
-    set_named_white_point : Proc(IWICDevelopRaw*, WICNamedWhitePoint, HRESULT)
-    get_named_white_point : Proc(IWICDevelopRaw*, WICNamedWhitePoint*, HRESULT)
-    set_white_point_kelvin : Proc(IWICDevelopRaw*, UInt32, HRESULT)
-    get_white_point_kelvin : Proc(IWICDevelopRaw*, UInt32*, HRESULT)
-    get_kelvin_range_info : Proc(IWICDevelopRaw*, UInt32*, UInt32*, UInt32*, HRESULT)
-    set_contrast : Proc(IWICDevelopRaw*, Float64, HRESULT)
-    get_contrast : Proc(IWICDevelopRaw*, Float64*, HRESULT)
-    set_gamma : Proc(IWICDevelopRaw*, Float64, HRESULT)
-    get_gamma : Proc(IWICDevelopRaw*, Float64*, HRESULT)
-    set_sharpness : Proc(IWICDevelopRaw*, Float64, HRESULT)
-    get_sharpness : Proc(IWICDevelopRaw*, Float64*, HRESULT)
-    set_saturation : Proc(IWICDevelopRaw*, Float64, HRESULT)
-    get_saturation : Proc(IWICDevelopRaw*, Float64*, HRESULT)
-    set_tint : Proc(IWICDevelopRaw*, Float64, HRESULT)
-    get_tint : Proc(IWICDevelopRaw*, Float64*, HRESULT)
-    set_noise_reduction : Proc(IWICDevelopRaw*, Float64, HRESULT)
-    get_noise_reduction : Proc(IWICDevelopRaw*, Float64*, HRESULT)
-    set_destination_color_context : Proc(IWICDevelopRaw*, IWICColorContext, HRESULT)
-    set_tone_curve : Proc(IWICDevelopRaw*, UInt32, WICRawToneCurve*, HRESULT)
-    get_tone_curve : Proc(IWICDevelopRaw*, UInt32, WICRawToneCurve*, UInt32*, HRESULT)
-    set_rotation : Proc(IWICDevelopRaw*, Float64, HRESULT)
-    get_rotation : Proc(IWICDevelopRaw*, Float64*, HRESULT)
-    set_render_mode : Proc(IWICDevelopRaw*, WICRawRenderMode, HRESULT)
-    get_render_mode : Proc(IWICDevelopRaw*, WICRawRenderMode*, HRESULT)
-    set_notification_callback : Proc(IWICDevelopRaw*, IWICDevelopRawNotificationCallback, HRESULT)
-  end
-
-  IWICDevelopRaw_GUID = "fbec5e44-f7be-4b65-b7f8-c0c81fef026d"
-  IID_IWICDevelopRaw = LibC::GUID.new(0xfbec5e44_u32, 0xf7be_u16, 0x4b65_u16, StaticArray[0xb7_u8, 0xf8_u8, 0xc0_u8, 0xc8_u8, 0x1f_u8, 0xef_u8, 0x2_u8, 0x6d_u8])
-  struct IWICDevelopRaw
-    lpVtbl : IWICDevelopRawVTbl*
-  end
-
-  struct IWICDdsDecoderVTbl
-    query_interface : Proc(IWICDdsDecoder*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICDdsDecoder*, UInt32)
-    release : Proc(IWICDdsDecoder*, UInt32)
-    get_parameters : Proc(IWICDdsDecoder*, WICDdsParameters*, HRESULT)
-    get_frame : Proc(IWICDdsDecoder*, UInt32, UInt32, UInt32, IWICBitmapFrameDecode*, HRESULT)
-  end
-
-  IWICDdsDecoder_GUID = "409cd537-8532-40cb-9774-e2feb2df4e9c"
-  IID_IWICDdsDecoder = LibC::GUID.new(0x409cd537_u32, 0x8532_u16, 0x40cb_u16, StaticArray[0x97_u8, 0x74_u8, 0xe2_u8, 0xfe_u8, 0xb2_u8, 0xdf_u8, 0x4e_u8, 0x9c_u8])
-  struct IWICDdsDecoder
-    lpVtbl : IWICDdsDecoderVTbl*
-  end
-
-  struct IWICDdsEncoderVTbl
-    query_interface : Proc(IWICDdsEncoder*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICDdsEncoder*, UInt32)
-    release : Proc(IWICDdsEncoder*, UInt32)
-    set_parameters : Proc(IWICDdsEncoder*, WICDdsParameters*, HRESULT)
-    get_parameters : Proc(IWICDdsEncoder*, WICDdsParameters*, HRESULT)
-    create_new_frame : Proc(IWICDdsEncoder*, IWICBitmapFrameEncode*, UInt32*, UInt32*, UInt32*, HRESULT)
-  end
-
-  IWICDdsEncoder_GUID = "5cacdb4c-407e-41b3-b936-d0f010cd6732"
-  IID_IWICDdsEncoder = LibC::GUID.new(0x5cacdb4c_u32, 0x407e_u16, 0x41b3_u16, StaticArray[0xb9_u8, 0x36_u8, 0xd0_u8, 0xf0_u8, 0x10_u8, 0xcd_u8, 0x67_u8, 0x32_u8])
-  struct IWICDdsEncoder
-    lpVtbl : IWICDdsEncoderVTbl*
-  end
-
-  struct IWICDdsFrameDecodeVTbl
-    query_interface : Proc(IWICDdsFrameDecode*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICDdsFrameDecode*, UInt32)
-    release : Proc(IWICDdsFrameDecode*, UInt32)
-    get_size_in_blocks : Proc(IWICDdsFrameDecode*, UInt32*, UInt32*, HRESULT)
-    get_format_info : Proc(IWICDdsFrameDecode*, WICDdsFormatInfo*, HRESULT)
-    copy_blocks : Proc(IWICDdsFrameDecode*, WICRect*, UInt32, UInt32, UInt8*, HRESULT)
-  end
-
-  IWICDdsFrameDecode_GUID = "3d4c0c61-18a4-41e4-bd80-481a4fc9f464"
-  IID_IWICDdsFrameDecode = LibC::GUID.new(0x3d4c0c61_u32, 0x18a4_u16, 0x41e4_u16, StaticArray[0xbd_u8, 0x80_u8, 0x48_u8, 0x1a_u8, 0x4f_u8, 0xc9_u8, 0xf4_u8, 0x64_u8])
-  struct IWICDdsFrameDecode
-    lpVtbl : IWICDdsFrameDecodeVTbl*
-  end
-
-  struct IWICJpegFrameDecodeVTbl
-    query_interface : Proc(IWICJpegFrameDecode*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICJpegFrameDecode*, UInt32)
-    release : Proc(IWICJpegFrameDecode*, UInt32)
-    does_support_indexing : Proc(IWICJpegFrameDecode*, LibC::BOOL*, HRESULT)
-    set_indexing : Proc(IWICJpegFrameDecode*, WICJpegIndexingOptions, UInt32, HRESULT)
-    clear_indexing : Proc(IWICJpegFrameDecode*, HRESULT)
-    get_ac_huffman_table : Proc(IWICJpegFrameDecode*, UInt32, UInt32, DXGI_JPEG_AC_HUFFMAN_TABLE*, HRESULT)
-    get_dc_huffman_table : Proc(IWICJpegFrameDecode*, UInt32, UInt32, DXGI_JPEG_DC_HUFFMAN_TABLE*, HRESULT)
-    get_quantization_table : Proc(IWICJpegFrameDecode*, UInt32, UInt32, DXGI_JPEG_QUANTIZATION_TABLE*, HRESULT)
-    get_frame_header : Proc(IWICJpegFrameDecode*, WICJpegFrameHeader*, HRESULT)
-    get_scan_header : Proc(IWICJpegFrameDecode*, UInt32, WICJpegScanHeader*, HRESULT)
-    copy_scan : Proc(IWICJpegFrameDecode*, UInt32, UInt32, UInt32, UInt8*, UInt32*, HRESULT)
-    copy_minimal_stream : Proc(IWICJpegFrameDecode*, UInt32, UInt32, UInt8*, UInt32*, HRESULT)
-  end
-
-  IWICJpegFrameDecode_GUID = "8939f66e-c46a-4c21-a9d1-98b327ce1679"
-  IID_IWICJpegFrameDecode = LibC::GUID.new(0x8939f66e_u32, 0xc46a_u16, 0x4c21_u16, StaticArray[0xa9_u8, 0xd1_u8, 0x98_u8, 0xb3_u8, 0x27_u8, 0xce_u8, 0x16_u8, 0x79_u8])
-  struct IWICJpegFrameDecode
-    lpVtbl : IWICJpegFrameDecodeVTbl*
-  end
-
-  struct IWICJpegFrameEncodeVTbl
-    query_interface : Proc(IWICJpegFrameEncode*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICJpegFrameEncode*, UInt32)
-    release : Proc(IWICJpegFrameEncode*, UInt32)
-    get_ac_huffman_table : Proc(IWICJpegFrameEncode*, UInt32, UInt32, DXGI_JPEG_AC_HUFFMAN_TABLE*, HRESULT)
-    get_dc_huffman_table : Proc(IWICJpegFrameEncode*, UInt32, UInt32, DXGI_JPEG_DC_HUFFMAN_TABLE*, HRESULT)
-    get_quantization_table : Proc(IWICJpegFrameEncode*, UInt32, UInt32, DXGI_JPEG_QUANTIZATION_TABLE*, HRESULT)
-    write_scan : Proc(IWICJpegFrameEncode*, UInt32, UInt8*, HRESULT)
-  end
-
-  IWICJpegFrameEncode_GUID = "2f0c601f-d2c6-468c-abfa-49495d983ed1"
-  IID_IWICJpegFrameEncode = LibC::GUID.new(0x2f0c601f_u32, 0xd2c6_u16, 0x468c_u16, StaticArray[0xab_u8, 0xfa_u8, 0x49_u8, 0x49_u8, 0x5d_u8, 0x98_u8, 0x3e_u8, 0xd1_u8])
-  struct IWICJpegFrameEncode
-    lpVtbl : IWICJpegFrameEncodeVTbl*
-  end
-
-  struct IWICMetadataBlockReaderVTbl
-    query_interface : Proc(IWICMetadataBlockReader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICMetadataBlockReader*, UInt32)
-    release : Proc(IWICMetadataBlockReader*, UInt32)
-    get_container_format : Proc(IWICMetadataBlockReader*, Guid*, HRESULT)
-    get_count : Proc(IWICMetadataBlockReader*, UInt32*, HRESULT)
-    get_reader_by_index : Proc(IWICMetadataBlockReader*, UInt32, IWICMetadataReader*, HRESULT)
-    get_enumerator : Proc(IWICMetadataBlockReader*, IEnumUnknown*, HRESULT)
-  end
-
-  IWICMetadataBlockReader_GUID = "feaa2a8d-b3f3-43e4-b25c-d1de990a1ae1"
-  IID_IWICMetadataBlockReader = LibC::GUID.new(0xfeaa2a8d_u32, 0xb3f3_u16, 0x43e4_u16, StaticArray[0xb2_u8, 0x5c_u8, 0xd1_u8, 0xde_u8, 0x99_u8, 0xa_u8, 0x1a_u8, 0xe1_u8])
-  struct IWICMetadataBlockReader
-    lpVtbl : IWICMetadataBlockReaderVTbl*
-  end
-
-  struct IWICMetadataBlockWriterVTbl
-    query_interface : Proc(IWICMetadataBlockWriter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICMetadataBlockWriter*, UInt32)
-    release : Proc(IWICMetadataBlockWriter*, UInt32)
-    get_container_format : Proc(IWICMetadataBlockWriter*, Guid*, HRESULT)
-    get_count : Proc(IWICMetadataBlockWriter*, UInt32*, HRESULT)
-    get_reader_by_index : Proc(IWICMetadataBlockWriter*, UInt32, IWICMetadataReader*, HRESULT)
-    get_enumerator : Proc(IWICMetadataBlockWriter*, IEnumUnknown*, HRESULT)
-    initialize_from_block_reader : Proc(IWICMetadataBlockWriter*, IWICMetadataBlockReader, HRESULT)
-    get_writer_by_index : Proc(IWICMetadataBlockWriter*, UInt32, IWICMetadataWriter*, HRESULT)
-    add_writer : Proc(IWICMetadataBlockWriter*, IWICMetadataWriter, HRESULT)
-    set_writer_by_index : Proc(IWICMetadataBlockWriter*, UInt32, IWICMetadataWriter, HRESULT)
-    remove_writer_by_index : Proc(IWICMetadataBlockWriter*, UInt32, HRESULT)
-  end
-
-  IWICMetadataBlockWriter_GUID = "08fb9676-b444-41e8-8dbe-6a53a542bff1"
-  IID_IWICMetadataBlockWriter = LibC::GUID.new(0x8fb9676_u32, 0xb444_u16, 0x41e8_u16, StaticArray[0x8d_u8, 0xbe_u8, 0x6a_u8, 0x53_u8, 0xa5_u8, 0x42_u8, 0xbf_u8, 0xf1_u8])
-  struct IWICMetadataBlockWriter
-    lpVtbl : IWICMetadataBlockWriterVTbl*
-  end
-
-  struct IWICMetadataReaderVTbl
-    query_interface : Proc(IWICMetadataReader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICMetadataReader*, UInt32)
-    release : Proc(IWICMetadataReader*, UInt32)
-    get_metadata_format : Proc(IWICMetadataReader*, Guid*, HRESULT)
-    get_metadata_handler_info : Proc(IWICMetadataReader*, IWICMetadataHandlerInfo*, HRESULT)
-    get_count : Proc(IWICMetadataReader*, UInt32*, HRESULT)
-    get_value_by_index : Proc(IWICMetadataReader*, UInt32, PROPVARIANT*, PROPVARIANT*, PROPVARIANT*, HRESULT)
-    get_value : Proc(IWICMetadataReader*, PROPVARIANT*, PROPVARIANT*, PROPVARIANT*, HRESULT)
-    get_enumerator : Proc(IWICMetadataReader*, IWICEnumMetadataItem*, HRESULT)
-  end
-
-  IWICMetadataReader_GUID = "9204fe99-d8fc-4fd5-a001-9536b067a899"
-  IID_IWICMetadataReader = LibC::GUID.new(0x9204fe99_u32, 0xd8fc_u16, 0x4fd5_u16, StaticArray[0xa0_u8, 0x1_u8, 0x95_u8, 0x36_u8, 0xb0_u8, 0x67_u8, 0xa8_u8, 0x99_u8])
-  struct IWICMetadataReader
-    lpVtbl : IWICMetadataReaderVTbl*
-  end
-
-  struct IWICMetadataWriterVTbl
-    query_interface : Proc(IWICMetadataWriter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICMetadataWriter*, UInt32)
-    release : Proc(IWICMetadataWriter*, UInt32)
-    get_metadata_format : Proc(IWICMetadataWriter*, Guid*, HRESULT)
-    get_metadata_handler_info : Proc(IWICMetadataWriter*, IWICMetadataHandlerInfo*, HRESULT)
-    get_count : Proc(IWICMetadataWriter*, UInt32*, HRESULT)
-    get_value_by_index : Proc(IWICMetadataWriter*, UInt32, PROPVARIANT*, PROPVARIANT*, PROPVARIANT*, HRESULT)
-    get_value : Proc(IWICMetadataWriter*, PROPVARIANT*, PROPVARIANT*, PROPVARIANT*, HRESULT)
-    get_enumerator : Proc(IWICMetadataWriter*, IWICEnumMetadataItem*, HRESULT)
-    set_value : Proc(IWICMetadataWriter*, PROPVARIANT*, PROPVARIANT*, PROPVARIANT*, HRESULT)
-    set_value_by_index : Proc(IWICMetadataWriter*, UInt32, PROPVARIANT*, PROPVARIANT*, PROPVARIANT*, HRESULT)
-    remove_value : Proc(IWICMetadataWriter*, PROPVARIANT*, PROPVARIANT*, HRESULT)
-    remove_value_by_index : Proc(IWICMetadataWriter*, UInt32, HRESULT)
-  end
-
-  IWICMetadataWriter_GUID = "f7836e16-3be0-470b-86bb-160d0aecd7de"
-  IID_IWICMetadataWriter = LibC::GUID.new(0xf7836e16_u32, 0x3be0_u16, 0x470b_u16, StaticArray[0x86_u8, 0xbb_u8, 0x16_u8, 0xd_u8, 0xa_u8, 0xec_u8, 0xd7_u8, 0xde_u8])
-  struct IWICMetadataWriter
-    lpVtbl : IWICMetadataWriterVTbl*
-  end
-
-  struct IWICStreamProviderVTbl
-    query_interface : Proc(IWICStreamProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICStreamProvider*, UInt32)
-    release : Proc(IWICStreamProvider*, UInt32)
-    get_stream : Proc(IWICStreamProvider*, IStream*, HRESULT)
-    get_persist_options : Proc(IWICStreamProvider*, UInt32*, HRESULT)
-    get_preferred_vendor_guid : Proc(IWICStreamProvider*, Guid*, HRESULT)
-    refresh_stream : Proc(IWICStreamProvider*, HRESULT)
-  end
-
-  IWICStreamProvider_GUID = "449494bc-b468-4927-96d7-ba90d31ab505"
-  IID_IWICStreamProvider = LibC::GUID.new(0x449494bc_u32, 0xb468_u16, 0x4927_u16, StaticArray[0x96_u8, 0xd7_u8, 0xba_u8, 0x90_u8, 0xd3_u8, 0x1a_u8, 0xb5_u8, 0x5_u8])
-  struct IWICStreamProvider
-    lpVtbl : IWICStreamProviderVTbl*
-  end
-
-  struct IWICPersistStreamVTbl
-    query_interface : Proc(IWICPersistStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICPersistStream*, UInt32)
-    release : Proc(IWICPersistStream*, UInt32)
-    get_class_id : Proc(IWICPersistStream*, Guid*, HRESULT)
-    is_dirty : Proc(IWICPersistStream*, HRESULT)
-    load : Proc(IWICPersistStream*, IStream, HRESULT)
-    save : Proc(IWICPersistStream*, IStream, LibC::BOOL, HRESULT)
-    get_size_max : Proc(IWICPersistStream*, ULARGE_INTEGER*, HRESULT)
-    load_ex : Proc(IWICPersistStream*, IStream, Guid*, UInt32, HRESULT)
-    save_ex : Proc(IWICPersistStream*, IStream, UInt32, LibC::BOOL, HRESULT)
-  end
-
-  IWICPersistStream_GUID = "00675040-6908-45f8-86a3-49c7dfd6d9ad"
-  IID_IWICPersistStream = LibC::GUID.new(0x675040_u32, 0x6908_u16, 0x45f8_u16, StaticArray[0x86_u8, 0xa3_u8, 0x49_u8, 0xc7_u8, 0xdf_u8, 0xd6_u8, 0xd9_u8, 0xad_u8])
-  struct IWICPersistStream
-    lpVtbl : IWICPersistStreamVTbl*
-  end
-
-  struct IWICMetadataHandlerInfoVTbl
-    query_interface : Proc(IWICMetadataHandlerInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICMetadataHandlerInfo*, UInt32)
-    release : Proc(IWICMetadataHandlerInfo*, UInt32)
-    get_component_type : Proc(IWICMetadataHandlerInfo*, WICComponentType*, HRESULT)
-    get_clsid : Proc(IWICMetadataHandlerInfo*, Guid*, HRESULT)
-    get_signing_status : Proc(IWICMetadataHandlerInfo*, UInt32*, HRESULT)
-    get_author : Proc(IWICMetadataHandlerInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_vendor_guid : Proc(IWICMetadataHandlerInfo*, Guid*, HRESULT)
-    get_version : Proc(IWICMetadataHandlerInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_spec_version : Proc(IWICMetadataHandlerInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_friendly_name : Proc(IWICMetadataHandlerInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_metadata_format : Proc(IWICMetadataHandlerInfo*, Guid*, HRESULT)
-    get_container_formats : Proc(IWICMetadataHandlerInfo*, UInt32, Guid*, UInt32*, HRESULT)
-    get_device_manufacturer : Proc(IWICMetadataHandlerInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_device_models : Proc(IWICMetadataHandlerInfo*, UInt32, Char*, UInt32*, HRESULT)
-    does_require_full_stream : Proc(IWICMetadataHandlerInfo*, LibC::BOOL*, HRESULT)
-    does_support_padding : Proc(IWICMetadataHandlerInfo*, LibC::BOOL*, HRESULT)
-    does_require_fixed_size : Proc(IWICMetadataHandlerInfo*, LibC::BOOL*, HRESULT)
-  end
-
-  IWICMetadataHandlerInfo_GUID = "aba958bf-c672-44d1-8d61-ce6df2e682c2"
-  IID_IWICMetadataHandlerInfo = LibC::GUID.new(0xaba958bf_u32, 0xc672_u16, 0x44d1_u16, StaticArray[0x8d_u8, 0x61_u8, 0xce_u8, 0x6d_u8, 0xf2_u8, 0xe6_u8, 0x82_u8, 0xc2_u8])
-  struct IWICMetadataHandlerInfo
-    lpVtbl : IWICMetadataHandlerInfoVTbl*
-  end
-
-  struct IWICMetadataReaderInfoVTbl
-    query_interface : Proc(IWICMetadataReaderInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICMetadataReaderInfo*, UInt32)
-    release : Proc(IWICMetadataReaderInfo*, UInt32)
-    get_component_type : Proc(IWICMetadataReaderInfo*, WICComponentType*, HRESULT)
-    get_clsid : Proc(IWICMetadataReaderInfo*, Guid*, HRESULT)
-    get_signing_status : Proc(IWICMetadataReaderInfo*, UInt32*, HRESULT)
-    get_author : Proc(IWICMetadataReaderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_vendor_guid : Proc(IWICMetadataReaderInfo*, Guid*, HRESULT)
-    get_version : Proc(IWICMetadataReaderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_spec_version : Proc(IWICMetadataReaderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_friendly_name : Proc(IWICMetadataReaderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_metadata_format : Proc(IWICMetadataReaderInfo*, Guid*, HRESULT)
-    get_container_formats : Proc(IWICMetadataReaderInfo*, UInt32, Guid*, UInt32*, HRESULT)
-    get_device_manufacturer : Proc(IWICMetadataReaderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_device_models : Proc(IWICMetadataReaderInfo*, UInt32, Char*, UInt32*, HRESULT)
-    does_require_full_stream : Proc(IWICMetadataReaderInfo*, LibC::BOOL*, HRESULT)
-    does_support_padding : Proc(IWICMetadataReaderInfo*, LibC::BOOL*, HRESULT)
-    does_require_fixed_size : Proc(IWICMetadataReaderInfo*, LibC::BOOL*, HRESULT)
-    get_patterns : Proc(IWICMetadataReaderInfo*, Guid*, UInt32, WICMetadataPattern*, UInt32*, UInt32*, HRESULT)
-    matches_pattern : Proc(IWICMetadataReaderInfo*, Guid*, IStream, LibC::BOOL*, HRESULT)
-    create_instance : Proc(IWICMetadataReaderInfo*, IWICMetadataReader*, HRESULT)
-  end
-
-  IWICMetadataReaderInfo_GUID = "eebf1f5b-07c1-4447-a3ab-22acaf78a804"
-  IID_IWICMetadataReaderInfo = LibC::GUID.new(0xeebf1f5b_u32, 0x7c1_u16, 0x4447_u16, StaticArray[0xa3_u8, 0xab_u8, 0x22_u8, 0xac_u8, 0xaf_u8, 0x78_u8, 0xa8_u8, 0x4_u8])
-  struct IWICMetadataReaderInfo
-    lpVtbl : IWICMetadataReaderInfoVTbl*
-  end
-
-  struct IWICMetadataWriterInfoVTbl
-    query_interface : Proc(IWICMetadataWriterInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICMetadataWriterInfo*, UInt32)
-    release : Proc(IWICMetadataWriterInfo*, UInt32)
-    get_component_type : Proc(IWICMetadataWriterInfo*, WICComponentType*, HRESULT)
-    get_clsid : Proc(IWICMetadataWriterInfo*, Guid*, HRESULT)
-    get_signing_status : Proc(IWICMetadataWriterInfo*, UInt32*, HRESULT)
-    get_author : Proc(IWICMetadataWriterInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_vendor_guid : Proc(IWICMetadataWriterInfo*, Guid*, HRESULT)
-    get_version : Proc(IWICMetadataWriterInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_spec_version : Proc(IWICMetadataWriterInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_friendly_name : Proc(IWICMetadataWriterInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_metadata_format : Proc(IWICMetadataWriterInfo*, Guid*, HRESULT)
-    get_container_formats : Proc(IWICMetadataWriterInfo*, UInt32, Guid*, UInt32*, HRESULT)
-    get_device_manufacturer : Proc(IWICMetadataWriterInfo*, UInt32, Char*, UInt32*, HRESULT)
-    get_device_models : Proc(IWICMetadataWriterInfo*, UInt32, Char*, UInt32*, HRESULT)
-    does_require_full_stream : Proc(IWICMetadataWriterInfo*, LibC::BOOL*, HRESULT)
-    does_support_padding : Proc(IWICMetadataWriterInfo*, LibC::BOOL*, HRESULT)
-    does_require_fixed_size : Proc(IWICMetadataWriterInfo*, LibC::BOOL*, HRESULT)
-    get_header : Proc(IWICMetadataWriterInfo*, Guid*, UInt32, WICMetadataHeader*, UInt32*, HRESULT)
-    create_instance : Proc(IWICMetadataWriterInfo*, IWICMetadataWriter*, HRESULT)
-  end
-
-  IWICMetadataWriterInfo_GUID = "b22e3fba-3925-4323-b5c1-9ebfc430f236"
-  IID_IWICMetadataWriterInfo = LibC::GUID.new(0xb22e3fba_u32, 0x3925_u16, 0x4323_u16, StaticArray[0xb5_u8, 0xc1_u8, 0x9e_u8, 0xbf_u8, 0xc4_u8, 0x30_u8, 0xf2_u8, 0x36_u8])
-  struct IWICMetadataWriterInfo
-    lpVtbl : IWICMetadataWriterInfoVTbl*
-  end
-
-  struct IWICComponentFactoryVTbl
-    query_interface : Proc(IWICComponentFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWICComponentFactory*, UInt32)
-    release : Proc(IWICComponentFactory*, UInt32)
-    create_decoder_from_filename : Proc(IWICComponentFactory*, LibC::LPWSTR, Guid*, UInt32, WICDecodeOptions, IWICBitmapDecoder*, HRESULT)
-    create_decoder_from_stream : Proc(IWICComponentFactory*, IStream, Guid*, WICDecodeOptions, IWICBitmapDecoder*, HRESULT)
-    create_decoder_from_file_handle : Proc(IWICComponentFactory*, LibC::UINT_PTR, Guid*, WICDecodeOptions, IWICBitmapDecoder*, HRESULT)
-    create_component_info : Proc(IWICComponentFactory*, Guid*, IWICComponentInfo*, HRESULT)
-    create_decoder : Proc(IWICComponentFactory*, Guid*, Guid*, IWICBitmapDecoder*, HRESULT)
-    create_encoder : Proc(IWICComponentFactory*, Guid*, Guid*, IWICBitmapEncoder*, HRESULT)
-    create_palette : Proc(IWICComponentFactory*, IWICPalette*, HRESULT)
-    create_format_converter : Proc(IWICComponentFactory*, IWICFormatConverter*, HRESULT)
-    create_bitmap_scaler : Proc(IWICComponentFactory*, IWICBitmapScaler*, HRESULT)
-    create_bitmap_clipper : Proc(IWICComponentFactory*, IWICBitmapClipper*, HRESULT)
-    create_bitmap_flip_rotator : Proc(IWICComponentFactory*, IWICBitmapFlipRotator*, HRESULT)
-    create_stream : Proc(IWICComponentFactory*, IWICStream*, HRESULT)
-    create_color_context : Proc(IWICComponentFactory*, IWICColorContext*, HRESULT)
-    create_color_transformer : Proc(IWICComponentFactory*, IWICColorTransform*, HRESULT)
-    create_bitmap : Proc(IWICComponentFactory*, UInt32, UInt32, Guid*, WICBitmapCreateCacheOption, IWICBitmap*, HRESULT)
-    create_bitmap_from_source : Proc(IWICComponentFactory*, IWICBitmapSource, WICBitmapCreateCacheOption, IWICBitmap*, HRESULT)
-    create_bitmap_from_source_rect : Proc(IWICComponentFactory*, IWICBitmapSource, UInt32, UInt32, UInt32, UInt32, IWICBitmap*, HRESULT)
-    create_bitmap_from_memory : Proc(IWICComponentFactory*, UInt32, UInt32, Guid*, UInt32, UInt32, UInt8*, IWICBitmap*, HRESULT)
-    create_bitmap_from_hbitmap : Proc(IWICComponentFactory*, HBITMAP, HPALETTE, WICBitmapAlphaChannelOption, IWICBitmap*, HRESULT)
-    create_bitmap_from_hicon : Proc(IWICComponentFactory*, LibC::HANDLE, IWICBitmap*, HRESULT)
-    create_component_enumerator : Proc(IWICComponentFactory*, UInt32, UInt32, IEnumUnknown*, HRESULT)
-    create_fast_metadata_encoder_from_decoder : Proc(IWICComponentFactory*, IWICBitmapDecoder, IWICFastMetadataEncoder*, HRESULT)
-    create_fast_metadata_encoder_from_frame_decode : Proc(IWICComponentFactory*, IWICBitmapFrameDecode, IWICFastMetadataEncoder*, HRESULT)
-    create_query_writer : Proc(IWICComponentFactory*, Guid*, Guid*, IWICMetadataQueryWriter*, HRESULT)
-    create_query_writer_from_reader : Proc(IWICComponentFactory*, IWICMetadataQueryReader, Guid*, IWICMetadataQueryWriter*, HRESULT)
-    create_metadata_reader : Proc(IWICComponentFactory*, Guid*, Guid*, UInt32, IStream, IWICMetadataReader*, HRESULT)
-    create_metadata_reader_from_container : Proc(IWICComponentFactory*, Guid*, Guid*, UInt32, IStream, IWICMetadataReader*, HRESULT)
-    create_metadata_writer : Proc(IWICComponentFactory*, Guid*, Guid*, UInt32, IWICMetadataWriter*, HRESULT)
-    create_metadata_writer_from_reader : Proc(IWICComponentFactory*, IWICMetadataReader, Guid*, IWICMetadataWriter*, HRESULT)
-    create_query_reader_from_block_reader : Proc(IWICComponentFactory*, IWICMetadataBlockReader, IWICMetadataQueryReader*, HRESULT)
-    create_query_writer_from_block_writer : Proc(IWICComponentFactory*, IWICMetadataBlockWriter, IWICMetadataQueryWriter*, HRESULT)
-    create_encoder_property_bag : Proc(IWICComponentFactory*, PROPBAG2*, UInt32, IPropertyBag2*, HRESULT)
-  end
-
-  IWICComponentFactory_GUID = "412d0c3a-9650-44fa-af5b-dd2a06c8e8fb"
-  IID_IWICComponentFactory = LibC::GUID.new(0x412d0c3a_u32, 0x9650_u16, 0x44fa_u16, StaticArray[0xaf_u8, 0x5b_u8, 0xdd_u8, 0x2a_u8, 0x6_u8, 0xc8_u8, 0xe8_u8, 0xfb_u8])
-  struct IWICComponentFactory
-    lpVtbl : IWICComponentFactoryVTbl*
-  end
-
+  @[Extern]
+  record WICMetadataPattern,
+    position : Win32cr::Foundation::ULARGE_INTEGER,
+    length : UInt32,
+    pattern : UInt8*,
+    mask : UInt8*,
+    data_offset : Win32cr::Foundation::ULARGE_INTEGER
+
+  @[Extern]
+  record WICMetadataHeader,
+    position : Win32cr::Foundation::ULARGE_INTEGER,
+    length : UInt32,
+    header : UInt8*,
+    data_offset : Win32cr::Foundation::ULARGE_INTEGER
+
+  @[Extern]
+  record IWICPaletteVtbl,
+    query_interface : Proc(IWICPalette*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICPalette*, UInt32),
+    release : Proc(IWICPalette*, UInt32),
+    initialize_predefined : Proc(IWICPalette*, Win32cr::Graphics::Imaging::WICBitmapPaletteType, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    initialize_custom : Proc(IWICPalette*, UInt32*, UInt32, Win32cr::Foundation::HRESULT),
+    initialize_from_bitmap : Proc(IWICPalette*, Void*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    initialize_from_palette : Proc(IWICPalette*, Void*, Win32cr::Foundation::HRESULT),
+    get_type : Proc(IWICPalette*, Win32cr::Graphics::Imaging::WICBitmapPaletteType*, Win32cr::Foundation::HRESULT),
+    get_color_count : Proc(IWICPalette*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_colors : Proc(IWICPalette*, UInt32, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    is_black_white : Proc(IWICPalette*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    is_grayscale : Proc(IWICPalette*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    has_alpha : Proc(IWICPalette*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00000040-a8f2-4877-ba0a-fd2b6645fb94")]
+  record IWICPalette, lpVtbl : IWICPaletteVtbl* do
+    GUID = LibC::GUID.new(0x40_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
+    def query_interface(this : IWICPalette*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICPalette*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICPalette*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def initialize_predefined(this : IWICPalette*, ePaletteType : Win32cr::Graphics::Imaging::WICBitmapPaletteType, fAddTransparentColor : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_predefined.call(this, ePaletteType, fAddTransparentColor)
+    end
+    def initialize_custom(this : IWICPalette*, pColors : UInt32*, cCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_custom.call(this, pColors, cCount)
+    end
+    def initialize_from_bitmap(this : IWICPalette*, pISurface : Void*, cCount : UInt32, fAddTransparentColor : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_from_bitmap.call(this, pISurface, cCount, fAddTransparentColor)
+    end
+    def initialize_from_palette(this : IWICPalette*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_from_palette.call(this, pIPalette)
+    end
+    def get_type(this : IWICPalette*, pePaletteType : Win32cr::Graphics::Imaging::WICBitmapPaletteType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type.call(this, pePaletteType)
+    end
+    def get_color_count(this : IWICPalette*, pcCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_color_count.call(this, pcCount)
+    end
+    def get_colors(this : IWICPalette*, cCount : UInt32, pColors : UInt32*, pcActualColors : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_colors.call(this, cCount, pColors, pcActualColors)
+    end
+    def is_black_white(this : IWICPalette*, pfIsBlackWhite : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_black_white.call(this, pfIsBlackWhite)
+    end
+    def is_grayscale(this : IWICPalette*, pfIsGrayscale : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_grayscale.call(this, pfIsGrayscale)
+    end
+    def has_alpha(this : IWICPalette*, pfHasAlpha : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.has_alpha.call(this, pfHasAlpha)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapSourceVtbl,
+    query_interface : Proc(IWICBitmapSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapSource*, UInt32),
+    release : Proc(IWICBitmapSource*, UInt32),
+    get_size : Proc(IWICBitmapSource*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_pixel_format : Proc(IWICBitmapSource*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_resolution : Proc(IWICBitmapSource*, Float64*, Float64*, Win32cr::Foundation::HRESULT),
+    copy_palette : Proc(IWICBitmapSource*, Void*, Win32cr::Foundation::HRESULT),
+    copy_pixels : Proc(IWICBitmapSource*, Win32cr::Graphics::Imaging::WICRect*, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00000120-a8f2-4877-ba0a-fd2b6645fb94")]
+  record IWICBitmapSource, lpVtbl : IWICBitmapSourceVtbl* do
+    GUID = LibC::GUID.new(0x120_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
+    def query_interface(this : IWICBitmapSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapSource*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapSource*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_size(this : IWICBitmapSource*, puiWidth : UInt32*, puiHeight : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, puiWidth, puiHeight)
+    end
+    def get_pixel_format(this : IWICBitmapSource*, pPixelFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_format.call(this, pPixelFormat)
+    end
+    def get_resolution(this : IWICBitmapSource*, pDpiX : Float64*, pDpiY : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_resolution.call(this, pDpiX, pDpiY)
+    end
+    def copy_palette(this : IWICBitmapSource*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_palette.call(this, pIPalette)
+    end
+    def copy_pixels(this : IWICBitmapSource*, prc : Win32cr::Graphics::Imaging::WICRect*, cbStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_pixels.call(this, prc, cbStride, cbBufferSize, pbBuffer)
+    end
+
+  end
+
+  @[Extern]
+  record IWICFormatConverterVtbl,
+    query_interface : Proc(IWICFormatConverter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICFormatConverter*, UInt32),
+    release : Proc(IWICFormatConverter*, UInt32),
+    get_size : Proc(IWICFormatConverter*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_pixel_format : Proc(IWICFormatConverter*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_resolution : Proc(IWICFormatConverter*, Float64*, Float64*, Win32cr::Foundation::HRESULT),
+    copy_palette : Proc(IWICFormatConverter*, Void*, Win32cr::Foundation::HRESULT),
+    copy_pixels : Proc(IWICFormatConverter*, Win32cr::Graphics::Imaging::WICRect*, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IWICFormatConverter*, Void*, LibC::GUID*, Win32cr::Graphics::Imaging::WICBitmapDitherType, Void*, Float64, Win32cr::Graphics::Imaging::WICBitmapPaletteType, Win32cr::Foundation::HRESULT),
+    can_convert : Proc(IWICFormatConverter*, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00000301-a8f2-4877-ba0a-fd2b6645fb94")]
+  record IWICFormatConverter, lpVtbl : IWICFormatConverterVtbl* do
+    GUID = LibC::GUID.new(0x301_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
+    def query_interface(this : IWICFormatConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICFormatConverter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICFormatConverter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_size(this : IWICFormatConverter*, puiWidth : UInt32*, puiHeight : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, puiWidth, puiHeight)
+    end
+    def get_pixel_format(this : IWICFormatConverter*, pPixelFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_format.call(this, pPixelFormat)
+    end
+    def get_resolution(this : IWICFormatConverter*, pDpiX : Float64*, pDpiY : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_resolution.call(this, pDpiX, pDpiY)
+    end
+    def copy_palette(this : IWICFormatConverter*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_palette.call(this, pIPalette)
+    end
+    def copy_pixels(this : IWICFormatConverter*, prc : Win32cr::Graphics::Imaging::WICRect*, cbStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_pixels.call(this, prc, cbStride, cbBufferSize, pbBuffer)
+    end
+    def initialize__(this : IWICFormatConverter*, pISource : Void*, dstFormat : LibC::GUID*, dither : Win32cr::Graphics::Imaging::WICBitmapDitherType, pIPalette : Void*, alphaThresholdPercent : Float64, paletteTranslate : Win32cr::Graphics::Imaging::WICBitmapPaletteType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, pISource, dstFormat, dither, pIPalette, alphaThresholdPercent, paletteTranslate)
+    end
+    def can_convert(this : IWICFormatConverter*, srcPixelFormat : LibC::GUID*, dstPixelFormat : LibC::GUID*, pfCanConvert : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.can_convert.call(this, srcPixelFormat, dstPixelFormat, pfCanConvert)
+    end
+
+  end
+
+  @[Extern]
+  record IWICPlanarFormatConverterVtbl,
+    query_interface : Proc(IWICPlanarFormatConverter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICPlanarFormatConverter*, UInt32),
+    release : Proc(IWICPlanarFormatConverter*, UInt32),
+    get_size : Proc(IWICPlanarFormatConverter*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_pixel_format : Proc(IWICPlanarFormatConverter*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_resolution : Proc(IWICPlanarFormatConverter*, Float64*, Float64*, Win32cr::Foundation::HRESULT),
+    copy_palette : Proc(IWICPlanarFormatConverter*, Void*, Win32cr::Foundation::HRESULT),
+    copy_pixels : Proc(IWICPlanarFormatConverter*, Win32cr::Graphics::Imaging::WICRect*, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IWICPlanarFormatConverter*, Void**, UInt32, LibC::GUID*, Win32cr::Graphics::Imaging::WICBitmapDitherType, Void*, Float64, Win32cr::Graphics::Imaging::WICBitmapPaletteType, Win32cr::Foundation::HRESULT),
+    can_convert : Proc(IWICPlanarFormatConverter*, LibC::GUID*, UInt32, LibC::GUID*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("bebee9cb-83b0-4dcc-8132-b0aaa55eac96")]
+  record IWICPlanarFormatConverter, lpVtbl : IWICPlanarFormatConverterVtbl* do
+    GUID = LibC::GUID.new(0xbebee9cb_u32, 0x83b0_u16, 0x4dcc_u16, StaticArray[0x81_u8, 0x32_u8, 0xb0_u8, 0xaa_u8, 0xa5_u8, 0x5e_u8, 0xac_u8, 0x96_u8])
+    def query_interface(this : IWICPlanarFormatConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICPlanarFormatConverter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICPlanarFormatConverter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_size(this : IWICPlanarFormatConverter*, puiWidth : UInt32*, puiHeight : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, puiWidth, puiHeight)
+    end
+    def get_pixel_format(this : IWICPlanarFormatConverter*, pPixelFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_format.call(this, pPixelFormat)
+    end
+    def get_resolution(this : IWICPlanarFormatConverter*, pDpiX : Float64*, pDpiY : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_resolution.call(this, pDpiX, pDpiY)
+    end
+    def copy_palette(this : IWICPlanarFormatConverter*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_palette.call(this, pIPalette)
+    end
+    def copy_pixels(this : IWICPlanarFormatConverter*, prc : Win32cr::Graphics::Imaging::WICRect*, cbStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_pixels.call(this, prc, cbStride, cbBufferSize, pbBuffer)
+    end
+    def initialize__(this : IWICPlanarFormatConverter*, ppPlanes : Void**, cPlanes : UInt32, dstFormat : LibC::GUID*, dither : Win32cr::Graphics::Imaging::WICBitmapDitherType, pIPalette : Void*, alphaThresholdPercent : Float64, paletteTranslate : Win32cr::Graphics::Imaging::WICBitmapPaletteType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, ppPlanes, cPlanes, dstFormat, dither, pIPalette, alphaThresholdPercent, paletteTranslate)
+    end
+    def can_convert(this : IWICPlanarFormatConverter*, pSrcPixelFormats : LibC::GUID*, cSrcPlanes : UInt32, dstPixelFormat : LibC::GUID*, pfCanConvert : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.can_convert.call(this, pSrcPixelFormats, cSrcPlanes, dstPixelFormat, pfCanConvert)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapScalerVtbl,
+    query_interface : Proc(IWICBitmapScaler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapScaler*, UInt32),
+    release : Proc(IWICBitmapScaler*, UInt32),
+    get_size : Proc(IWICBitmapScaler*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_pixel_format : Proc(IWICBitmapScaler*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_resolution : Proc(IWICBitmapScaler*, Float64*, Float64*, Win32cr::Foundation::HRESULT),
+    copy_palette : Proc(IWICBitmapScaler*, Void*, Win32cr::Foundation::HRESULT),
+    copy_pixels : Proc(IWICBitmapScaler*, Win32cr::Graphics::Imaging::WICRect*, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IWICBitmapScaler*, Void*, UInt32, UInt32, Win32cr::Graphics::Imaging::WICBitmapInterpolationMode, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00000302-a8f2-4877-ba0a-fd2b6645fb94")]
+  record IWICBitmapScaler, lpVtbl : IWICBitmapScalerVtbl* do
+    GUID = LibC::GUID.new(0x302_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
+    def query_interface(this : IWICBitmapScaler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapScaler*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapScaler*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_size(this : IWICBitmapScaler*, puiWidth : UInt32*, puiHeight : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, puiWidth, puiHeight)
+    end
+    def get_pixel_format(this : IWICBitmapScaler*, pPixelFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_format.call(this, pPixelFormat)
+    end
+    def get_resolution(this : IWICBitmapScaler*, pDpiX : Float64*, pDpiY : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_resolution.call(this, pDpiX, pDpiY)
+    end
+    def copy_palette(this : IWICBitmapScaler*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_palette.call(this, pIPalette)
+    end
+    def copy_pixels(this : IWICBitmapScaler*, prc : Win32cr::Graphics::Imaging::WICRect*, cbStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_pixels.call(this, prc, cbStride, cbBufferSize, pbBuffer)
+    end
+    def initialize__(this : IWICBitmapScaler*, pISource : Void*, uiWidth : UInt32, uiHeight : UInt32, mode : Win32cr::Graphics::Imaging::WICBitmapInterpolationMode) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, pISource, uiWidth, uiHeight, mode)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapClipperVtbl,
+    query_interface : Proc(IWICBitmapClipper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapClipper*, UInt32),
+    release : Proc(IWICBitmapClipper*, UInt32),
+    get_size : Proc(IWICBitmapClipper*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_pixel_format : Proc(IWICBitmapClipper*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_resolution : Proc(IWICBitmapClipper*, Float64*, Float64*, Win32cr::Foundation::HRESULT),
+    copy_palette : Proc(IWICBitmapClipper*, Void*, Win32cr::Foundation::HRESULT),
+    copy_pixels : Proc(IWICBitmapClipper*, Win32cr::Graphics::Imaging::WICRect*, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IWICBitmapClipper*, Void*, Win32cr::Graphics::Imaging::WICRect*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("e4fbcf03-223d-4e81-9333-d635556dd1b5")]
+  record IWICBitmapClipper, lpVtbl : IWICBitmapClipperVtbl* do
+    GUID = LibC::GUID.new(0xe4fbcf03_u32, 0x223d_u16, 0x4e81_u16, StaticArray[0x93_u8, 0x33_u8, 0xd6_u8, 0x35_u8, 0x55_u8, 0x6d_u8, 0xd1_u8, 0xb5_u8])
+    def query_interface(this : IWICBitmapClipper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapClipper*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapClipper*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_size(this : IWICBitmapClipper*, puiWidth : UInt32*, puiHeight : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, puiWidth, puiHeight)
+    end
+    def get_pixel_format(this : IWICBitmapClipper*, pPixelFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_format.call(this, pPixelFormat)
+    end
+    def get_resolution(this : IWICBitmapClipper*, pDpiX : Float64*, pDpiY : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_resolution.call(this, pDpiX, pDpiY)
+    end
+    def copy_palette(this : IWICBitmapClipper*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_palette.call(this, pIPalette)
+    end
+    def copy_pixels(this : IWICBitmapClipper*, prc : Win32cr::Graphics::Imaging::WICRect*, cbStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_pixels.call(this, prc, cbStride, cbBufferSize, pbBuffer)
+    end
+    def initialize__(this : IWICBitmapClipper*, pISource : Void*, prc : Win32cr::Graphics::Imaging::WICRect*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, pISource, prc)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapFlipRotatorVtbl,
+    query_interface : Proc(IWICBitmapFlipRotator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapFlipRotator*, UInt32),
+    release : Proc(IWICBitmapFlipRotator*, UInt32),
+    get_size : Proc(IWICBitmapFlipRotator*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_pixel_format : Proc(IWICBitmapFlipRotator*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_resolution : Proc(IWICBitmapFlipRotator*, Float64*, Float64*, Win32cr::Foundation::HRESULT),
+    copy_palette : Proc(IWICBitmapFlipRotator*, Void*, Win32cr::Foundation::HRESULT),
+    copy_pixels : Proc(IWICBitmapFlipRotator*, Win32cr::Graphics::Imaging::WICRect*, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IWICBitmapFlipRotator*, Void*, Win32cr::Graphics::Imaging::WICBitmapTransformOptions, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("5009834f-2d6a-41ce-9e1b-17c5aff7a782")]
+  record IWICBitmapFlipRotator, lpVtbl : IWICBitmapFlipRotatorVtbl* do
+    GUID = LibC::GUID.new(0x5009834f_u32, 0x2d6a_u16, 0x41ce_u16, StaticArray[0x9e_u8, 0x1b_u8, 0x17_u8, 0xc5_u8, 0xaf_u8, 0xf7_u8, 0xa7_u8, 0x82_u8])
+    def query_interface(this : IWICBitmapFlipRotator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapFlipRotator*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapFlipRotator*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_size(this : IWICBitmapFlipRotator*, puiWidth : UInt32*, puiHeight : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, puiWidth, puiHeight)
+    end
+    def get_pixel_format(this : IWICBitmapFlipRotator*, pPixelFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_format.call(this, pPixelFormat)
+    end
+    def get_resolution(this : IWICBitmapFlipRotator*, pDpiX : Float64*, pDpiY : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_resolution.call(this, pDpiX, pDpiY)
+    end
+    def copy_palette(this : IWICBitmapFlipRotator*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_palette.call(this, pIPalette)
+    end
+    def copy_pixels(this : IWICBitmapFlipRotator*, prc : Win32cr::Graphics::Imaging::WICRect*, cbStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_pixels.call(this, prc, cbStride, cbBufferSize, pbBuffer)
+    end
+    def initialize__(this : IWICBitmapFlipRotator*, pISource : Void*, options : Win32cr::Graphics::Imaging::WICBitmapTransformOptions) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, pISource, options)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapLockVtbl,
+    query_interface : Proc(IWICBitmapLock*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapLock*, UInt32),
+    release : Proc(IWICBitmapLock*, UInt32),
+    get_size : Proc(IWICBitmapLock*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_stride : Proc(IWICBitmapLock*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_data_pointer : Proc(IWICBitmapLock*, UInt32*, UInt8**, Win32cr::Foundation::HRESULT),
+    get_pixel_format : Proc(IWICBitmapLock*, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00000123-a8f2-4877-ba0a-fd2b6645fb94")]
+  record IWICBitmapLock, lpVtbl : IWICBitmapLockVtbl* do
+    GUID = LibC::GUID.new(0x123_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
+    def query_interface(this : IWICBitmapLock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapLock*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapLock*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_size(this : IWICBitmapLock*, puiWidth : UInt32*, puiHeight : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, puiWidth, puiHeight)
+    end
+    def get_stride(this : IWICBitmapLock*, pcbStride : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_stride.call(this, pcbStride)
+    end
+    def get_data_pointer(this : IWICBitmapLock*, pcbBufferSize : UInt32*, ppbData : UInt8**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data_pointer.call(this, pcbBufferSize, ppbData)
+    end
+    def get_pixel_format(this : IWICBitmapLock*, pPixelFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_format.call(this, pPixelFormat)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapVtbl,
+    query_interface : Proc(IWICBitmap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmap*, UInt32),
+    release : Proc(IWICBitmap*, UInt32),
+    get_size : Proc(IWICBitmap*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_pixel_format : Proc(IWICBitmap*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_resolution : Proc(IWICBitmap*, Float64*, Float64*, Win32cr::Foundation::HRESULT),
+    copy_palette : Proc(IWICBitmap*, Void*, Win32cr::Foundation::HRESULT),
+    copy_pixels : Proc(IWICBitmap*, Win32cr::Graphics::Imaging::WICRect*, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    lock : Proc(IWICBitmap*, Win32cr::Graphics::Imaging::WICRect*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    set_palette : Proc(IWICBitmap*, Void*, Win32cr::Foundation::HRESULT),
+    set_resolution : Proc(IWICBitmap*, Float64, Float64, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00000121-a8f2-4877-ba0a-fd2b6645fb94")]
+  record IWICBitmap, lpVtbl : IWICBitmapVtbl* do
+    GUID = LibC::GUID.new(0x121_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
+    def query_interface(this : IWICBitmap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmap*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmap*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_size(this : IWICBitmap*, puiWidth : UInt32*, puiHeight : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, puiWidth, puiHeight)
+    end
+    def get_pixel_format(this : IWICBitmap*, pPixelFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_format.call(this, pPixelFormat)
+    end
+    def get_resolution(this : IWICBitmap*, pDpiX : Float64*, pDpiY : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_resolution.call(this, pDpiX, pDpiY)
+    end
+    def copy_palette(this : IWICBitmap*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_palette.call(this, pIPalette)
+    end
+    def copy_pixels(this : IWICBitmap*, prc : Win32cr::Graphics::Imaging::WICRect*, cbStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_pixels.call(this, prc, cbStride, cbBufferSize, pbBuffer)
+    end
+    def lock(this : IWICBitmap*, prcLock : Win32cr::Graphics::Imaging::WICRect*, flags : UInt32, ppILock : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.lock.call(this, prcLock, flags, ppILock)
+    end
+    def set_palette(this : IWICBitmap*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_palette.call(this, pIPalette)
+    end
+    def set_resolution(this : IWICBitmap*, dpiX : Float64, dpiY : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_resolution.call(this, dpiX, dpiY)
+    end
+
+  end
+
+  @[Extern]
+  record IWICColorContextVtbl,
+    query_interface : Proc(IWICColorContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICColorContext*, UInt32),
+    release : Proc(IWICColorContext*, UInt32),
+    initialize_from_filename : Proc(IWICColorContext*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    initialize_from_memory : Proc(IWICColorContext*, UInt8*, UInt32, Win32cr::Foundation::HRESULT),
+    initialize_from_exif_color_space : Proc(IWICColorContext*, UInt32, Win32cr::Foundation::HRESULT),
+    get_type : Proc(IWICColorContext*, Win32cr::Graphics::Imaging::WICColorContextType*, Win32cr::Foundation::HRESULT),
+    get_profile_bytes : Proc(IWICColorContext*, UInt32, UInt8*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_exif_color_space : Proc(IWICColorContext*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("3c613a02-34b2-44ea-9a7c-45aea9c6fd6d")]
+  record IWICColorContext, lpVtbl : IWICColorContextVtbl* do
+    GUID = LibC::GUID.new(0x3c613a02_u32, 0x34b2_u16, 0x44ea_u16, StaticArray[0x9a_u8, 0x7c_u8, 0x45_u8, 0xae_u8, 0xa9_u8, 0xc6_u8, 0xfd_u8, 0x6d_u8])
+    def query_interface(this : IWICColorContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICColorContext*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICColorContext*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def initialize_from_filename(this : IWICColorContext*, wzFilename : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_from_filename.call(this, wzFilename)
+    end
+    def initialize_from_memory(this : IWICColorContext*, pbBuffer : UInt8*, cbBufferSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_from_memory.call(this, pbBuffer, cbBufferSize)
+    end
+    def initialize_from_exif_color_space(this : IWICColorContext*, value : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_from_exif_color_space.call(this, value)
+    end
+    def get_type(this : IWICColorContext*, pType : Win32cr::Graphics::Imaging::WICColorContextType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type.call(this, pType)
+    end
+    def get_profile_bytes(this : IWICColorContext*, cbBuffer : UInt32, pbBuffer : UInt8*, pcbActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_profile_bytes.call(this, cbBuffer, pbBuffer, pcbActual)
+    end
+    def get_exif_color_space(this : IWICColorContext*, pValue : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_exif_color_space.call(this, pValue)
+    end
+
+  end
+
+  @[Extern]
+  record IWICColorTransformVtbl,
+    query_interface : Proc(IWICColorTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICColorTransform*, UInt32),
+    release : Proc(IWICColorTransform*, UInt32),
+    get_size : Proc(IWICColorTransform*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_pixel_format : Proc(IWICColorTransform*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_resolution : Proc(IWICColorTransform*, Float64*, Float64*, Win32cr::Foundation::HRESULT),
+    copy_palette : Proc(IWICColorTransform*, Void*, Win32cr::Foundation::HRESULT),
+    copy_pixels : Proc(IWICColorTransform*, Win32cr::Graphics::Imaging::WICRect*, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IWICColorTransform*, Void*, Void*, Void*, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b66f034f-d0e2-40ab-b436-6de39e321a94")]
+  record IWICColorTransform, lpVtbl : IWICColorTransformVtbl* do
+    GUID = LibC::GUID.new(0xb66f034f_u32, 0xd0e2_u16, 0x40ab_u16, StaticArray[0xb4_u8, 0x36_u8, 0x6d_u8, 0xe3_u8, 0x9e_u8, 0x32_u8, 0x1a_u8, 0x94_u8])
+    def query_interface(this : IWICColorTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICColorTransform*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICColorTransform*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_size(this : IWICColorTransform*, puiWidth : UInt32*, puiHeight : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, puiWidth, puiHeight)
+    end
+    def get_pixel_format(this : IWICColorTransform*, pPixelFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_format.call(this, pPixelFormat)
+    end
+    def get_resolution(this : IWICColorTransform*, pDpiX : Float64*, pDpiY : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_resolution.call(this, pDpiX, pDpiY)
+    end
+    def copy_palette(this : IWICColorTransform*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_palette.call(this, pIPalette)
+    end
+    def copy_pixels(this : IWICColorTransform*, prc : Win32cr::Graphics::Imaging::WICRect*, cbStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_pixels.call(this, prc, cbStride, cbBufferSize, pbBuffer)
+    end
+    def initialize__(this : IWICColorTransform*, pIBitmapSource : Void*, pIContextSource : Void*, pIContextDest : Void*, pixelFmtDest : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, pIBitmapSource, pIContextSource, pIContextDest, pixelFmtDest)
+    end
+
+  end
+
+  @[Extern]
+  record IWICFastMetadataEncoderVtbl,
+    query_interface : Proc(IWICFastMetadataEncoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICFastMetadataEncoder*, UInt32),
+    release : Proc(IWICFastMetadataEncoder*, UInt32),
+    commit : Proc(IWICFastMetadataEncoder*, Win32cr::Foundation::HRESULT),
+    get_metadata_query_writer : Proc(IWICFastMetadataEncoder*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b84e2c09-78c9-4ac4-8bd3-524ae1663a2f")]
+  record IWICFastMetadataEncoder, lpVtbl : IWICFastMetadataEncoderVtbl* do
+    GUID = LibC::GUID.new(0xb84e2c09_u32, 0x78c9_u16, 0x4ac4_u16, StaticArray[0x8b_u8, 0xd3_u8, 0x52_u8, 0x4a_u8, 0xe1_u8, 0x66_u8, 0x3a_u8, 0x2f_u8])
+    def query_interface(this : IWICFastMetadataEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICFastMetadataEncoder*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICFastMetadataEncoder*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def commit(this : IWICFastMetadataEncoder*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this)
+    end
+    def get_metadata_query_writer(this : IWICFastMetadataEncoder*, ppIMetadataQueryWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_query_writer.call(this, ppIMetadataQueryWriter)
+    end
+
+  end
+
+  @[Extern]
+  record IWICStreamVtbl,
+    query_interface : Proc(IWICStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICStream*, UInt32),
+    release : Proc(IWICStream*, UInt32),
+    read : Proc(IWICStream*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    write : Proc(IWICStream*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(IWICStream*, Win32cr::Foundation::LARGE_INTEGER, Win32cr::System::Com::STREAM_SEEK, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    set_size : Proc(IWICStream*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(IWICStream*, Void*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    commit : Proc(IWICStream*, Win32cr::System::Com::STGC, Win32cr::Foundation::HRESULT),
+    revert : Proc(IWICStream*, Win32cr::Foundation::HRESULT),
+    lock_region : Proc(IWICStream*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    unlock_region : Proc(IWICStream*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    stat : Proc(IWICStream*, Win32cr::System::Com::STATSTG*, UInt32, Win32cr::Foundation::HRESULT),
+    clone : Proc(IWICStream*, Void**, Win32cr::Foundation::HRESULT),
+    initialize_from_i_stream : Proc(IWICStream*, Void*, Win32cr::Foundation::HRESULT),
+    initialize_from_filename : Proc(IWICStream*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    initialize_from_memory : Proc(IWICStream*, UInt8*, UInt32, Win32cr::Foundation::HRESULT),
+    initialize_from_i_stream_region : Proc(IWICStream*, Void*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("135ff860-22b7-4ddf-b0f6-218f4f299a43")]
+  record IWICStream, lpVtbl : IWICStreamVtbl* do
+    GUID = LibC::GUID.new(0x135ff860_u32, 0x22b7_u16, 0x4ddf_u16, StaticArray[0xb0_u8, 0xf6_u8, 0x21_u8, 0x8f_u8, 0x4f_u8, 0x29_u8, 0x9a_u8, 0x43_u8])
+    def query_interface(this : IWICStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICStream*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICStream*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def read(this : IWICStream*, pv : Void*, cb : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, pv, cb, pcbRead)
+    end
+    def write(this : IWICStream*, pv : Void*, cb : UInt32, pcbWritten : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, pv, cb, pcbWritten)
+    end
+    def seek(this : IWICStream*, dlibMove : Win32cr::Foundation::LARGE_INTEGER, dwOrigin : Win32cr::System::Com::STREAM_SEEK, plibNewPosition : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, dlibMove, dwOrigin, plibNewPosition)
+    end
+    def set_size(this : IWICStream*, libNewSize : Win32cr::Foundation::ULARGE_INTEGER) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_size.call(this, libNewSize)
+    end
+    def copy_to(this : IWICStream*, pstm : Void*, cb : Win32cr::Foundation::ULARGE_INTEGER, pcbRead : Win32cr::Foundation::ULARGE_INTEGER*, pcbWritten : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_to.call(this, pstm, cb, pcbRead, pcbWritten)
+    end
+    def commit(this : IWICStream*, grfCommitFlags : Win32cr::System::Com::STGC) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this, grfCommitFlags)
+    end
+    def revert(this : IWICStream*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert.call(this)
+    end
+    def lock_region(this : IWICStream*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.lock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def unlock_region(this : IWICStream*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unlock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def stat(this : IWICStream*, pstatstg : Win32cr::System::Com::STATSTG*, grfStatFlag : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stat.call(this, pstatstg, grfStatFlag)
+    end
+    def clone(this : IWICStream*, ppstm : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppstm)
+    end
+    def initialize_from_i_stream(this : IWICStream*, pIStream : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_from_i_stream.call(this, pIStream)
+    end
+    def initialize_from_filename(this : IWICStream*, wzFileName : Win32cr::Foundation::PWSTR, dwDesiredAccess : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_from_filename.call(this, wzFileName, dwDesiredAccess)
+    end
+    def initialize_from_memory(this : IWICStream*, pbBuffer : UInt8*, cbBufferSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_from_memory.call(this, pbBuffer, cbBufferSize)
+    end
+    def initialize_from_i_stream_region(this : IWICStream*, pIStream : Void*, ulOffset : Win32cr::Foundation::ULARGE_INTEGER, ulMaxSize : Win32cr::Foundation::ULARGE_INTEGER) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_from_i_stream_region.call(this, pIStream, ulOffset, ulMaxSize)
+    end
+
+  end
+
+  @[Extern]
+  record IWICEnumMetadataItemVtbl,
+    query_interface : Proc(IWICEnumMetadataItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICEnumMetadataItem*, UInt32),
+    release : Proc(IWICEnumMetadataItem*, UInt32),
+    next__ : Proc(IWICEnumMetadataItem*, UInt32, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, UInt32*, Win32cr::Foundation::HRESULT),
+    skip : Proc(IWICEnumMetadataItem*, UInt32, Win32cr::Foundation::HRESULT),
+    reset : Proc(IWICEnumMetadataItem*, Win32cr::Foundation::HRESULT),
+    clone : Proc(IWICEnumMetadataItem*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("dc2bb46d-3f07-481e-8625-220c4aedbb33")]
+  record IWICEnumMetadataItem, lpVtbl : IWICEnumMetadataItemVtbl* do
+    GUID = LibC::GUID.new(0xdc2bb46d_u32, 0x3f07_u16, 0x481e_u16, StaticArray[0x86_u8, 0x25_u8, 0x22_u8, 0xc_u8, 0x4a_u8, 0xed_u8, 0xbb_u8, 0x33_u8])
+    def query_interface(this : IWICEnumMetadataItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICEnumMetadataItem*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICEnumMetadataItem*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def next__(this : IWICEnumMetadataItem*, celt : UInt32, rgeltSchema : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, rgeltId : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, rgeltValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pceltFetched : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.next__.call(this, celt, rgeltSchema, rgeltId, rgeltValue, pceltFetched)
+    end
+    def skip(this : IWICEnumMetadataItem*, celt : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.skip.call(this, celt)
+    end
+    def reset(this : IWICEnumMetadataItem*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def clone(this : IWICEnumMetadataItem*, ppIEnumMetadataItem : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppIEnumMetadataItem)
+    end
+
+  end
+
+  @[Extern]
+  record IWICMetadataQueryReaderVtbl,
+    query_interface : Proc(IWICMetadataQueryReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICMetadataQueryReader*, UInt32),
+    release : Proc(IWICMetadataQueryReader*, UInt32),
+    get_container_format : Proc(IWICMetadataQueryReader*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_location : Proc(IWICMetadataQueryReader*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_metadata_by_name : Proc(IWICMetadataQueryReader*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    get_enumerator : Proc(IWICMetadataQueryReader*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("30989668-e1c9-4597-b395-458eedb808df")]
+  record IWICMetadataQueryReader, lpVtbl : IWICMetadataQueryReaderVtbl* do
+    GUID = LibC::GUID.new(0x30989668_u32, 0xe1c9_u16, 0x4597_u16, StaticArray[0xb3_u8, 0x95_u8, 0x45_u8, 0x8e_u8, 0xed_u8, 0xb8_u8, 0x8_u8, 0xdf_u8])
+    def query_interface(this : IWICMetadataQueryReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICMetadataQueryReader*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICMetadataQueryReader*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_container_format(this : IWICMetadataQueryReader*, pguidContainerFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_container_format.call(this, pguidContainerFormat)
+    end
+    def get_location(this : IWICMetadataQueryReader*, cchMaxLength : UInt32, wzNamespace : UInt16*, pcchActualLength : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_location.call(this, cchMaxLength, wzNamespace, pcchActualLength)
+    end
+    def get_metadata_by_name(this : IWICMetadataQueryReader*, wzName : Win32cr::Foundation::PWSTR, pvarValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_by_name.call(this, wzName, pvarValue)
+    end
+    def get_enumerator(this : IWICMetadataQueryReader*, ppIEnumString : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_enumerator.call(this, ppIEnumString)
+    end
+
+  end
+
+  @[Extern]
+  record IWICMetadataQueryWriterVtbl,
+    query_interface : Proc(IWICMetadataQueryWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICMetadataQueryWriter*, UInt32),
+    release : Proc(IWICMetadataQueryWriter*, UInt32),
+    get_container_format : Proc(IWICMetadataQueryWriter*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_location : Proc(IWICMetadataQueryWriter*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_metadata_by_name : Proc(IWICMetadataQueryWriter*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    get_enumerator : Proc(IWICMetadataQueryWriter*, Void**, Win32cr::Foundation::HRESULT),
+    set_metadata_by_name : Proc(IWICMetadataQueryWriter*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    remove_metadata_by_name : Proc(IWICMetadataQueryWriter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("a721791a-0def-4d06-bd91-2118bf1db10b")]
+  record IWICMetadataQueryWriter, lpVtbl : IWICMetadataQueryWriterVtbl* do
+    GUID = LibC::GUID.new(0xa721791a_u32, 0xdef_u16, 0x4d06_u16, StaticArray[0xbd_u8, 0x91_u8, 0x21_u8, 0x18_u8, 0xbf_u8, 0x1d_u8, 0xb1_u8, 0xb_u8])
+    def query_interface(this : IWICMetadataQueryWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICMetadataQueryWriter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICMetadataQueryWriter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_container_format(this : IWICMetadataQueryWriter*, pguidContainerFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_container_format.call(this, pguidContainerFormat)
+    end
+    def get_location(this : IWICMetadataQueryWriter*, cchMaxLength : UInt32, wzNamespace : UInt16*, pcchActualLength : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_location.call(this, cchMaxLength, wzNamespace, pcchActualLength)
+    end
+    def get_metadata_by_name(this : IWICMetadataQueryWriter*, wzName : Win32cr::Foundation::PWSTR, pvarValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_by_name.call(this, wzName, pvarValue)
+    end
+    def get_enumerator(this : IWICMetadataQueryWriter*, ppIEnumString : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_enumerator.call(this, ppIEnumString)
+    end
+    def set_metadata_by_name(this : IWICMetadataQueryWriter*, wzName : Win32cr::Foundation::PWSTR, pvarValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_metadata_by_name.call(this, wzName, pvarValue)
+    end
+    def remove_metadata_by_name(this : IWICMetadataQueryWriter*, wzName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_metadata_by_name.call(this, wzName)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapEncoderVtbl,
+    query_interface : Proc(IWICBitmapEncoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapEncoder*, UInt32),
+    release : Proc(IWICBitmapEncoder*, UInt32),
+    initialize__ : Proc(IWICBitmapEncoder*, Void*, Win32cr::Graphics::Imaging::WICBitmapEncoderCacheOption, Win32cr::Foundation::HRESULT),
+    get_container_format : Proc(IWICBitmapEncoder*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_encoder_info : Proc(IWICBitmapEncoder*, Void**, Win32cr::Foundation::HRESULT),
+    set_color_contexts : Proc(IWICBitmapEncoder*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    set_palette : Proc(IWICBitmapEncoder*, Void*, Win32cr::Foundation::HRESULT),
+    set_thumbnail : Proc(IWICBitmapEncoder*, Void*, Win32cr::Foundation::HRESULT),
+    set_preview : Proc(IWICBitmapEncoder*, Void*, Win32cr::Foundation::HRESULT),
+    create_new_frame : Proc(IWICBitmapEncoder*, Void**, Void**, Win32cr::Foundation::HRESULT),
+    commit : Proc(IWICBitmapEncoder*, Win32cr::Foundation::HRESULT),
+    get_metadata_query_writer : Proc(IWICBitmapEncoder*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00000103-a8f2-4877-ba0a-fd2b6645fb94")]
+  record IWICBitmapEncoder, lpVtbl : IWICBitmapEncoderVtbl* do
+    GUID = LibC::GUID.new(0x103_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
+    def query_interface(this : IWICBitmapEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapEncoder*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapEncoder*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def initialize__(this : IWICBitmapEncoder*, pIStream : Void*, cacheOption : Win32cr::Graphics::Imaging::WICBitmapEncoderCacheOption) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, pIStream, cacheOption)
+    end
+    def get_container_format(this : IWICBitmapEncoder*, pguidContainerFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_container_format.call(this, pguidContainerFormat)
+    end
+    def get_encoder_info(this : IWICBitmapEncoder*, ppIEncoderInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_encoder_info.call(this, ppIEncoderInfo)
+    end
+    def set_color_contexts(this : IWICBitmapEncoder*, cCount : UInt32, ppIColorContext : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_color_contexts.call(this, cCount, ppIColorContext)
+    end
+    def set_palette(this : IWICBitmapEncoder*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_palette.call(this, pIPalette)
+    end
+    def set_thumbnail(this : IWICBitmapEncoder*, pIThumbnail : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_thumbnail.call(this, pIThumbnail)
+    end
+    def set_preview(this : IWICBitmapEncoder*, pIPreview : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_preview.call(this, pIPreview)
+    end
+    def create_new_frame(this : IWICBitmapEncoder*, ppIFrameEncode : Void**, ppIEncoderOptions : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_new_frame.call(this, ppIFrameEncode, ppIEncoderOptions)
+    end
+    def commit(this : IWICBitmapEncoder*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this)
+    end
+    def get_metadata_query_writer(this : IWICBitmapEncoder*, ppIMetadataQueryWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_query_writer.call(this, ppIMetadataQueryWriter)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapFrameEncodeVtbl,
+    query_interface : Proc(IWICBitmapFrameEncode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapFrameEncode*, UInt32),
+    release : Proc(IWICBitmapFrameEncode*, UInt32),
+    initialize__ : Proc(IWICBitmapFrameEncode*, Void*, Win32cr::Foundation::HRESULT),
+    set_size : Proc(IWICBitmapFrameEncode*, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    set_resolution : Proc(IWICBitmapFrameEncode*, Float64, Float64, Win32cr::Foundation::HRESULT),
+    set_pixel_format : Proc(IWICBitmapFrameEncode*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_color_contexts : Proc(IWICBitmapFrameEncode*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    set_palette : Proc(IWICBitmapFrameEncode*, Void*, Win32cr::Foundation::HRESULT),
+    set_thumbnail : Proc(IWICBitmapFrameEncode*, Void*, Win32cr::Foundation::HRESULT),
+    write_pixels : Proc(IWICBitmapFrameEncode*, UInt32, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    write_source : Proc(IWICBitmapFrameEncode*, Void*, Win32cr::Graphics::Imaging::WICRect*, Win32cr::Foundation::HRESULT),
+    commit : Proc(IWICBitmapFrameEncode*, Win32cr::Foundation::HRESULT),
+    get_metadata_query_writer : Proc(IWICBitmapFrameEncode*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00000105-a8f2-4877-ba0a-fd2b6645fb94")]
+  record IWICBitmapFrameEncode, lpVtbl : IWICBitmapFrameEncodeVtbl* do
+    GUID = LibC::GUID.new(0x105_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
+    def query_interface(this : IWICBitmapFrameEncode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapFrameEncode*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapFrameEncode*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def initialize__(this : IWICBitmapFrameEncode*, pIEncoderOptions : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, pIEncoderOptions)
+    end
+    def set_size(this : IWICBitmapFrameEncode*, uiWidth : UInt32, uiHeight : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_size.call(this, uiWidth, uiHeight)
+    end
+    def set_resolution(this : IWICBitmapFrameEncode*, dpiX : Float64, dpiY : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_resolution.call(this, dpiX, dpiY)
+    end
+    def set_pixel_format(this : IWICBitmapFrameEncode*, pPixelFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_pixel_format.call(this, pPixelFormat)
+    end
+    def set_color_contexts(this : IWICBitmapFrameEncode*, cCount : UInt32, ppIColorContext : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_color_contexts.call(this, cCount, ppIColorContext)
+    end
+    def set_palette(this : IWICBitmapFrameEncode*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_palette.call(this, pIPalette)
+    end
+    def set_thumbnail(this : IWICBitmapFrameEncode*, pIThumbnail : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_thumbnail.call(this, pIThumbnail)
+    end
+    def write_pixels(this : IWICBitmapFrameEncode*, lineCount : UInt32, cbStride : UInt32, cbBufferSize : UInt32, pbPixels : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write_pixels.call(this, lineCount, cbStride, cbBufferSize, pbPixels)
+    end
+    def write_source(this : IWICBitmapFrameEncode*, pIBitmapSource : Void*, prc : Win32cr::Graphics::Imaging::WICRect*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write_source.call(this, pIBitmapSource, prc)
+    end
+    def commit(this : IWICBitmapFrameEncode*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this)
+    end
+    def get_metadata_query_writer(this : IWICBitmapFrameEncode*, ppIMetadataQueryWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_query_writer.call(this, ppIMetadataQueryWriter)
+    end
+
+  end
+
+  @[Extern]
+  record IWICPlanarBitmapFrameEncodeVtbl,
+    query_interface : Proc(IWICPlanarBitmapFrameEncode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICPlanarBitmapFrameEncode*, UInt32),
+    release : Proc(IWICPlanarBitmapFrameEncode*, UInt32),
+    write_pixels : Proc(IWICPlanarBitmapFrameEncode*, UInt32, Win32cr::Graphics::Imaging::WICBitmapPlane*, UInt32, Win32cr::Foundation::HRESULT),
+    write_source : Proc(IWICPlanarBitmapFrameEncode*, Void**, UInt32, Win32cr::Graphics::Imaging::WICRect*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f928b7b8-2221-40c1-b72e-7e82f1974d1a")]
+  record IWICPlanarBitmapFrameEncode, lpVtbl : IWICPlanarBitmapFrameEncodeVtbl* do
+    GUID = LibC::GUID.new(0xf928b7b8_u32, 0x2221_u16, 0x40c1_u16, StaticArray[0xb7_u8, 0x2e_u8, 0x7e_u8, 0x82_u8, 0xf1_u8, 0x97_u8, 0x4d_u8, 0x1a_u8])
+    def query_interface(this : IWICPlanarBitmapFrameEncode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICPlanarBitmapFrameEncode*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICPlanarBitmapFrameEncode*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def write_pixels(this : IWICPlanarBitmapFrameEncode*, lineCount : UInt32, pPlanes : Win32cr::Graphics::Imaging::WICBitmapPlane*, cPlanes : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write_pixels.call(this, lineCount, pPlanes, cPlanes)
+    end
+    def write_source(this : IWICPlanarBitmapFrameEncode*, ppPlanes : Void**, cPlanes : UInt32, prcSource : Win32cr::Graphics::Imaging::WICRect*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write_source.call(this, ppPlanes, cPlanes, prcSource)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapDecoderVtbl,
+    query_interface : Proc(IWICBitmapDecoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapDecoder*, UInt32),
+    release : Proc(IWICBitmapDecoder*, UInt32),
+    query_capability : Proc(IWICBitmapDecoder*, Void*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IWICBitmapDecoder*, Void*, Win32cr::Graphics::Imaging::WICDecodeOptions, Win32cr::Foundation::HRESULT),
+    get_container_format : Proc(IWICBitmapDecoder*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_decoder_info : Proc(IWICBitmapDecoder*, Void**, Win32cr::Foundation::HRESULT),
+    copy_palette : Proc(IWICBitmapDecoder*, Void*, Win32cr::Foundation::HRESULT),
+    get_metadata_query_reader : Proc(IWICBitmapDecoder*, Void**, Win32cr::Foundation::HRESULT),
+    get_preview : Proc(IWICBitmapDecoder*, Void**, Win32cr::Foundation::HRESULT),
+    get_color_contexts : Proc(IWICBitmapDecoder*, UInt32, Void**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_thumbnail : Proc(IWICBitmapDecoder*, Void**, Win32cr::Foundation::HRESULT),
+    get_frame_count : Proc(IWICBitmapDecoder*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_frame : Proc(IWICBitmapDecoder*, UInt32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("9edde9e7-8dee-47ea-99df-e6faf2ed44bf")]
+  record IWICBitmapDecoder, lpVtbl : IWICBitmapDecoderVtbl* do
+    GUID = LibC::GUID.new(0x9edde9e7_u32, 0x8dee_u16, 0x47ea_u16, StaticArray[0x99_u8, 0xdf_u8, 0xe6_u8, 0xfa_u8, 0xf2_u8, 0xed_u8, 0x44_u8, 0xbf_u8])
+    def query_interface(this : IWICBitmapDecoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapDecoder*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapDecoder*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def query_capability(this : IWICBitmapDecoder*, pIStream : Void*, pdwCapability : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_capability.call(this, pIStream, pdwCapability)
+    end
+    def initialize__(this : IWICBitmapDecoder*, pIStream : Void*, cacheOptions : Win32cr::Graphics::Imaging::WICDecodeOptions) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, pIStream, cacheOptions)
+    end
+    def get_container_format(this : IWICBitmapDecoder*, pguidContainerFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_container_format.call(this, pguidContainerFormat)
+    end
+    def get_decoder_info(this : IWICBitmapDecoder*, ppIDecoderInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_decoder_info.call(this, ppIDecoderInfo)
+    end
+    def copy_palette(this : IWICBitmapDecoder*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_palette.call(this, pIPalette)
+    end
+    def get_metadata_query_reader(this : IWICBitmapDecoder*, ppIMetadataQueryReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_query_reader.call(this, ppIMetadataQueryReader)
+    end
+    def get_preview(this : IWICBitmapDecoder*, ppIBitmapSource : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_preview.call(this, ppIBitmapSource)
+    end
+    def get_color_contexts(this : IWICBitmapDecoder*, cCount : UInt32, ppIColorContexts : Void**, pcActualCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_color_contexts.call(this, cCount, ppIColorContexts, pcActualCount)
+    end
+    def get_thumbnail(this : IWICBitmapDecoder*, ppIThumbnail : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_thumbnail.call(this, ppIThumbnail)
+    end
+    def get_frame_count(this : IWICBitmapDecoder*, pCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_frame_count.call(this, pCount)
+    end
+    def get_frame(this : IWICBitmapDecoder*, index : UInt32, ppIBitmapFrame : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_frame.call(this, index, ppIBitmapFrame)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapSourceTransformVtbl,
+    query_interface : Proc(IWICBitmapSourceTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapSourceTransform*, UInt32),
+    release : Proc(IWICBitmapSourceTransform*, UInt32),
+    copy_pixels : Proc(IWICBitmapSourceTransform*, Win32cr::Graphics::Imaging::WICRect*, UInt32, UInt32, LibC::GUID*, Win32cr::Graphics::Imaging::WICBitmapTransformOptions, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    get_closest_size : Proc(IWICBitmapSourceTransform*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_closest_pixel_format : Proc(IWICBitmapSourceTransform*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    does_support_transform : Proc(IWICBitmapSourceTransform*, Win32cr::Graphics::Imaging::WICBitmapTransformOptions, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("3b16811b-6a43-4ec9-b713-3d5a0c13b940")]
+  record IWICBitmapSourceTransform, lpVtbl : IWICBitmapSourceTransformVtbl* do
+    GUID = LibC::GUID.new(0x3b16811b_u32, 0x6a43_u16, 0x4ec9_u16, StaticArray[0xb7_u8, 0x13_u8, 0x3d_u8, 0x5a_u8, 0xc_u8, 0x13_u8, 0xb9_u8, 0x40_u8])
+    def query_interface(this : IWICBitmapSourceTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapSourceTransform*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapSourceTransform*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def copy_pixels(this : IWICBitmapSourceTransform*, prc : Win32cr::Graphics::Imaging::WICRect*, uiWidth : UInt32, uiHeight : UInt32, pguidDstFormat : LibC::GUID*, dstTransform : Win32cr::Graphics::Imaging::WICBitmapTransformOptions, nStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_pixels.call(this, prc, uiWidth, uiHeight, pguidDstFormat, dstTransform, nStride, cbBufferSize, pbBuffer)
+    end
+    def get_closest_size(this : IWICBitmapSourceTransform*, puiWidth : UInt32*, puiHeight : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_closest_size.call(this, puiWidth, puiHeight)
+    end
+    def get_closest_pixel_format(this : IWICBitmapSourceTransform*, pguidDstFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_closest_pixel_format.call(this, pguidDstFormat)
+    end
+    def does_support_transform(this : IWICBitmapSourceTransform*, dstTransform : Win32cr::Graphics::Imaging::WICBitmapTransformOptions, pfIsSupported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_transform.call(this, dstTransform, pfIsSupported)
+    end
+
+  end
+
+  @[Extern]
+  record IWICPlanarBitmapSourceTransformVtbl,
+    query_interface : Proc(IWICPlanarBitmapSourceTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICPlanarBitmapSourceTransform*, UInt32),
+    release : Proc(IWICPlanarBitmapSourceTransform*, UInt32),
+    does_support_transform : Proc(IWICPlanarBitmapSourceTransform*, UInt32*, UInt32*, Win32cr::Graphics::Imaging::WICBitmapTransformOptions, Win32cr::Graphics::Imaging::WICPlanarOptions, LibC::GUID*, Win32cr::Graphics::Imaging::WICBitmapPlaneDescription*, UInt32, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    copy_pixels : Proc(IWICPlanarBitmapSourceTransform*, Win32cr::Graphics::Imaging::WICRect*, UInt32, UInt32, Win32cr::Graphics::Imaging::WICBitmapTransformOptions, Win32cr::Graphics::Imaging::WICPlanarOptions, Win32cr::Graphics::Imaging::WICBitmapPlane*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("3aff9cce-be95-4303-b927-e7d16ff4a613")]
+  record IWICPlanarBitmapSourceTransform, lpVtbl : IWICPlanarBitmapSourceTransformVtbl* do
+    GUID = LibC::GUID.new(0x3aff9cce_u32, 0xbe95_u16, 0x4303_u16, StaticArray[0xb9_u8, 0x27_u8, 0xe7_u8, 0xd1_u8, 0x6f_u8, 0xf4_u8, 0xa6_u8, 0x13_u8])
+    def query_interface(this : IWICPlanarBitmapSourceTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICPlanarBitmapSourceTransform*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICPlanarBitmapSourceTransform*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def does_support_transform(this : IWICPlanarBitmapSourceTransform*, puiWidth : UInt32*, puiHeight : UInt32*, dstTransform : Win32cr::Graphics::Imaging::WICBitmapTransformOptions, dstPlanarOptions : Win32cr::Graphics::Imaging::WICPlanarOptions, pguidDstFormats : LibC::GUID*, pPlaneDescriptions : Win32cr::Graphics::Imaging::WICBitmapPlaneDescription*, cPlanes : UInt32, pfIsSupported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_transform.call(this, puiWidth, puiHeight, dstTransform, dstPlanarOptions, pguidDstFormats, pPlaneDescriptions, cPlanes, pfIsSupported)
+    end
+    def copy_pixels(this : IWICPlanarBitmapSourceTransform*, prcSource : Win32cr::Graphics::Imaging::WICRect*, uiWidth : UInt32, uiHeight : UInt32, dstTransform : Win32cr::Graphics::Imaging::WICBitmapTransformOptions, dstPlanarOptions : Win32cr::Graphics::Imaging::WICPlanarOptions, pDstPlanes : Win32cr::Graphics::Imaging::WICBitmapPlane*, cPlanes : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_pixels.call(this, prcSource, uiWidth, uiHeight, dstTransform, dstPlanarOptions, pDstPlanes, cPlanes)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapFrameDecodeVtbl,
+    query_interface : Proc(IWICBitmapFrameDecode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapFrameDecode*, UInt32),
+    release : Proc(IWICBitmapFrameDecode*, UInt32),
+    get_size : Proc(IWICBitmapFrameDecode*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_pixel_format : Proc(IWICBitmapFrameDecode*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_resolution : Proc(IWICBitmapFrameDecode*, Float64*, Float64*, Win32cr::Foundation::HRESULT),
+    copy_palette : Proc(IWICBitmapFrameDecode*, Void*, Win32cr::Foundation::HRESULT),
+    copy_pixels : Proc(IWICBitmapFrameDecode*, Win32cr::Graphics::Imaging::WICRect*, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    get_metadata_query_reader : Proc(IWICBitmapFrameDecode*, Void**, Win32cr::Foundation::HRESULT),
+    get_color_contexts : Proc(IWICBitmapFrameDecode*, UInt32, Void**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_thumbnail : Proc(IWICBitmapFrameDecode*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("3b16811b-6a43-4ec9-a813-3d930c13b940")]
+  record IWICBitmapFrameDecode, lpVtbl : IWICBitmapFrameDecodeVtbl* do
+    GUID = LibC::GUID.new(0x3b16811b_u32, 0x6a43_u16, 0x4ec9_u16, StaticArray[0xa8_u8, 0x13_u8, 0x3d_u8, 0x93_u8, 0xc_u8, 0x13_u8, 0xb9_u8, 0x40_u8])
+    def query_interface(this : IWICBitmapFrameDecode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapFrameDecode*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapFrameDecode*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_size(this : IWICBitmapFrameDecode*, puiWidth : UInt32*, puiHeight : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, puiWidth, puiHeight)
+    end
+    def get_pixel_format(this : IWICBitmapFrameDecode*, pPixelFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_format.call(this, pPixelFormat)
+    end
+    def get_resolution(this : IWICBitmapFrameDecode*, pDpiX : Float64*, pDpiY : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_resolution.call(this, pDpiX, pDpiY)
+    end
+    def copy_palette(this : IWICBitmapFrameDecode*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_palette.call(this, pIPalette)
+    end
+    def copy_pixels(this : IWICBitmapFrameDecode*, prc : Win32cr::Graphics::Imaging::WICRect*, cbStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_pixels.call(this, prc, cbStride, cbBufferSize, pbBuffer)
+    end
+    def get_metadata_query_reader(this : IWICBitmapFrameDecode*, ppIMetadataQueryReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_query_reader.call(this, ppIMetadataQueryReader)
+    end
+    def get_color_contexts(this : IWICBitmapFrameDecode*, cCount : UInt32, ppIColorContexts : Void**, pcActualCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_color_contexts.call(this, cCount, ppIColorContexts, pcActualCount)
+    end
+    def get_thumbnail(this : IWICBitmapFrameDecode*, ppIThumbnail : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_thumbnail.call(this, ppIThumbnail)
+    end
+
+  end
+
+  @[Extern]
+  record IWICProgressiveLevelControlVtbl,
+    query_interface : Proc(IWICProgressiveLevelControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICProgressiveLevelControl*, UInt32),
+    release : Proc(IWICProgressiveLevelControl*, UInt32),
+    get_level_count : Proc(IWICProgressiveLevelControl*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_current_level : Proc(IWICProgressiveLevelControl*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_current_level : Proc(IWICProgressiveLevelControl*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("daac296f-7aa5-4dbf-8d15-225c5976f891")]
+  record IWICProgressiveLevelControl, lpVtbl : IWICProgressiveLevelControlVtbl* do
+    GUID = LibC::GUID.new(0xdaac296f_u32, 0x7aa5_u16, 0x4dbf_u16, StaticArray[0x8d_u8, 0x15_u8, 0x22_u8, 0x5c_u8, 0x59_u8, 0x76_u8, 0xf8_u8, 0x91_u8])
+    def query_interface(this : IWICProgressiveLevelControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICProgressiveLevelControl*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICProgressiveLevelControl*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_level_count(this : IWICProgressiveLevelControl*, pcLevels : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_level_count.call(this, pcLevels)
+    end
+    def get_current_level(this : IWICProgressiveLevelControl*, pnLevel : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_current_level.call(this, pnLevel)
+    end
+    def set_current_level(this : IWICProgressiveLevelControl*, nLevel : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_current_level.call(this, nLevel)
+    end
+
+  end
+
+  @[Extern]
+  record IWICProgressCallbackVtbl,
+    query_interface : Proc(IWICProgressCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICProgressCallback*, UInt32),
+    release : Proc(IWICProgressCallback*, UInt32),
+    notify : Proc(IWICProgressCallback*, UInt32, Win32cr::Graphics::Imaging::WICProgressOperation, Float64, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("4776f9cd-9517-45fa-bf24-e89c5ec5c60c")]
+  record IWICProgressCallback, lpVtbl : IWICProgressCallbackVtbl* do
+    GUID = LibC::GUID.new(0x4776f9cd_u32, 0x9517_u16, 0x45fa_u16, StaticArray[0xbf_u8, 0x24_u8, 0xe8_u8, 0x9c_u8, 0x5e_u8, 0xc5_u8, 0xc6_u8, 0xc_u8])
+    def query_interface(this : IWICProgressCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICProgressCallback*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICProgressCallback*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def notify(this : IWICProgressCallback*, uFrameNum : UInt32, operation : Win32cr::Graphics::Imaging::WICProgressOperation, dblProgress : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify.call(this, uFrameNum, operation, dblProgress)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapCodecProgressNotificationVtbl,
+    query_interface : Proc(IWICBitmapCodecProgressNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapCodecProgressNotification*, UInt32),
+    release : Proc(IWICBitmapCodecProgressNotification*, UInt32),
+    register_progress_notification : Proc(IWICBitmapCodecProgressNotification*, Win32cr::Graphics::Imaging::PFNProgressNotification, Void*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("64c1024e-c3cf-4462-8078-88c2b11c46d9")]
+  record IWICBitmapCodecProgressNotification, lpVtbl : IWICBitmapCodecProgressNotificationVtbl* do
+    GUID = LibC::GUID.new(0x64c1024e_u32, 0xc3cf_u16, 0x4462_u16, StaticArray[0x80_u8, 0x78_u8, 0x88_u8, 0xc2_u8, 0xb1_u8, 0x1c_u8, 0x46_u8, 0xd9_u8])
+    def query_interface(this : IWICBitmapCodecProgressNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapCodecProgressNotification*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapCodecProgressNotification*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def register_progress_notification(this : IWICBitmapCodecProgressNotification*, pfnProgressNotification : Win32cr::Graphics::Imaging::PFNProgressNotification, pvData : Void*, dwProgressFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_progress_notification.call(this, pfnProgressNotification, pvData, dwProgressFlags)
+    end
+
+  end
+
+  @[Extern]
+  record IWICComponentInfoVtbl,
+    query_interface : Proc(IWICComponentInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICComponentInfo*, UInt32),
+    release : Proc(IWICComponentInfo*, UInt32),
+    get_component_type : Proc(IWICComponentInfo*, Win32cr::Graphics::Imaging::WICComponentType*, Win32cr::Foundation::HRESULT),
+    get_clsid : Proc(IWICComponentInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_signing_status : Proc(IWICComponentInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_author : Proc(IWICComponentInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_vendor_guid : Proc(IWICComponentInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_version : Proc(IWICComponentInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_spec_version : Proc(IWICComponentInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_friendly_name : Proc(IWICComponentInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("23bc3f0a-698b-4357-886b-f24d50671334")]
+  record IWICComponentInfo, lpVtbl : IWICComponentInfoVtbl* do
+    GUID = LibC::GUID.new(0x23bc3f0a_u32, 0x698b_u16, 0x4357_u16, StaticArray[0x88_u8, 0x6b_u8, 0xf2_u8, 0x4d_u8, 0x50_u8, 0x67_u8, 0x13_u8, 0x34_u8])
+    def query_interface(this : IWICComponentInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICComponentInfo*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICComponentInfo*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_component_type(this : IWICComponentInfo*, pType : Win32cr::Graphics::Imaging::WICComponentType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component_type.call(this, pType)
+    end
+    def get_clsid(this : IWICComponentInfo*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_clsid.call(this, pclsid)
+    end
+    def get_signing_status(this : IWICComponentInfo*, pStatus : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_signing_status.call(this, pStatus)
+    end
+    def get_author(this : IWICComponentInfo*, cchAuthor : UInt32, wzAuthor : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_author.call(this, cchAuthor, wzAuthor, pcchActual)
+    end
+    def get_vendor_guid(this : IWICComponentInfo*, pguidVendor : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_vendor_guid.call(this, pguidVendor)
+    end
+    def get_version(this : IWICComponentInfo*, cchVersion : UInt32, wzVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_version.call(this, cchVersion, wzVersion, pcchActual)
+    end
+    def get_spec_version(this : IWICComponentInfo*, cchSpecVersion : UInt32, wzSpecVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_spec_version.call(this, cchSpecVersion, wzSpecVersion, pcchActual)
+    end
+    def get_friendly_name(this : IWICComponentInfo*, cchFriendlyName : UInt32, wzFriendlyName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_friendly_name.call(this, cchFriendlyName, wzFriendlyName, pcchActual)
+    end
+
+  end
+
+  @[Extern]
+  record IWICFormatConverterInfoVtbl,
+    query_interface : Proc(IWICFormatConverterInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICFormatConverterInfo*, UInt32),
+    release : Proc(IWICFormatConverterInfo*, UInt32),
+    get_component_type : Proc(IWICFormatConverterInfo*, Win32cr::Graphics::Imaging::WICComponentType*, Win32cr::Foundation::HRESULT),
+    get_clsid : Proc(IWICFormatConverterInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_signing_status : Proc(IWICFormatConverterInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_author : Proc(IWICFormatConverterInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_vendor_guid : Proc(IWICFormatConverterInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_version : Proc(IWICFormatConverterInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_spec_version : Proc(IWICFormatConverterInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_friendly_name : Proc(IWICFormatConverterInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_pixel_formats : Proc(IWICFormatConverterInfo*, UInt32, LibC::GUID*, UInt32*, Win32cr::Foundation::HRESULT),
+    create_instance : Proc(IWICFormatConverterInfo*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("9f34fb65-13f4-4f15-bc57-3726b5e53d9f")]
+  record IWICFormatConverterInfo, lpVtbl : IWICFormatConverterInfoVtbl* do
+    GUID = LibC::GUID.new(0x9f34fb65_u32, 0x13f4_u16, 0x4f15_u16, StaticArray[0xbc_u8, 0x57_u8, 0x37_u8, 0x26_u8, 0xb5_u8, 0xe5_u8, 0x3d_u8, 0x9f_u8])
+    def query_interface(this : IWICFormatConverterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICFormatConverterInfo*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICFormatConverterInfo*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_component_type(this : IWICFormatConverterInfo*, pType : Win32cr::Graphics::Imaging::WICComponentType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component_type.call(this, pType)
+    end
+    def get_clsid(this : IWICFormatConverterInfo*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_clsid.call(this, pclsid)
+    end
+    def get_signing_status(this : IWICFormatConverterInfo*, pStatus : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_signing_status.call(this, pStatus)
+    end
+    def get_author(this : IWICFormatConverterInfo*, cchAuthor : UInt32, wzAuthor : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_author.call(this, cchAuthor, wzAuthor, pcchActual)
+    end
+    def get_vendor_guid(this : IWICFormatConverterInfo*, pguidVendor : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_vendor_guid.call(this, pguidVendor)
+    end
+    def get_version(this : IWICFormatConverterInfo*, cchVersion : UInt32, wzVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_version.call(this, cchVersion, wzVersion, pcchActual)
+    end
+    def get_spec_version(this : IWICFormatConverterInfo*, cchSpecVersion : UInt32, wzSpecVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_spec_version.call(this, cchSpecVersion, wzSpecVersion, pcchActual)
+    end
+    def get_friendly_name(this : IWICFormatConverterInfo*, cchFriendlyName : UInt32, wzFriendlyName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_friendly_name.call(this, cchFriendlyName, wzFriendlyName, pcchActual)
+    end
+    def get_pixel_formats(this : IWICFormatConverterInfo*, cFormats : UInt32, pPixelFormatGUIDs : LibC::GUID*, pcActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_formats.call(this, cFormats, pPixelFormatGUIDs, pcActual)
+    end
+    def create_instance(this : IWICFormatConverterInfo*, ppIConverter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_instance.call(this, ppIConverter)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapCodecInfoVtbl,
+    query_interface : Proc(IWICBitmapCodecInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapCodecInfo*, UInt32),
+    release : Proc(IWICBitmapCodecInfo*, UInt32),
+    get_component_type : Proc(IWICBitmapCodecInfo*, Win32cr::Graphics::Imaging::WICComponentType*, Win32cr::Foundation::HRESULT),
+    get_clsid : Proc(IWICBitmapCodecInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_signing_status : Proc(IWICBitmapCodecInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_author : Proc(IWICBitmapCodecInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_vendor_guid : Proc(IWICBitmapCodecInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_version : Proc(IWICBitmapCodecInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_spec_version : Proc(IWICBitmapCodecInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_friendly_name : Proc(IWICBitmapCodecInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_container_format : Proc(IWICBitmapCodecInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_pixel_formats : Proc(IWICBitmapCodecInfo*, UInt32, LibC::GUID*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_color_management_version : Proc(IWICBitmapCodecInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_device_manufacturer : Proc(IWICBitmapCodecInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_device_models : Proc(IWICBitmapCodecInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_mime_types : Proc(IWICBitmapCodecInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_file_extensions : Proc(IWICBitmapCodecInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    does_support_animation : Proc(IWICBitmapCodecInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_support_chromakey : Proc(IWICBitmapCodecInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_support_lossless : Proc(IWICBitmapCodecInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_support_multiframe : Proc(IWICBitmapCodecInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    matches_mime_type : Proc(IWICBitmapCodecInfo*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("e87a44c4-b76e-4c47-8b09-298eb12a2714")]
+  record IWICBitmapCodecInfo, lpVtbl : IWICBitmapCodecInfoVtbl* do
+    GUID = LibC::GUID.new(0xe87a44c4_u32, 0xb76e_u16, 0x4c47_u16, StaticArray[0x8b_u8, 0x9_u8, 0x29_u8, 0x8e_u8, 0xb1_u8, 0x2a_u8, 0x27_u8, 0x14_u8])
+    def query_interface(this : IWICBitmapCodecInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapCodecInfo*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapCodecInfo*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_component_type(this : IWICBitmapCodecInfo*, pType : Win32cr::Graphics::Imaging::WICComponentType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component_type.call(this, pType)
+    end
+    def get_clsid(this : IWICBitmapCodecInfo*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_clsid.call(this, pclsid)
+    end
+    def get_signing_status(this : IWICBitmapCodecInfo*, pStatus : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_signing_status.call(this, pStatus)
+    end
+    def get_author(this : IWICBitmapCodecInfo*, cchAuthor : UInt32, wzAuthor : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_author.call(this, cchAuthor, wzAuthor, pcchActual)
+    end
+    def get_vendor_guid(this : IWICBitmapCodecInfo*, pguidVendor : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_vendor_guid.call(this, pguidVendor)
+    end
+    def get_version(this : IWICBitmapCodecInfo*, cchVersion : UInt32, wzVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_version.call(this, cchVersion, wzVersion, pcchActual)
+    end
+    def get_spec_version(this : IWICBitmapCodecInfo*, cchSpecVersion : UInt32, wzSpecVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_spec_version.call(this, cchSpecVersion, wzSpecVersion, pcchActual)
+    end
+    def get_friendly_name(this : IWICBitmapCodecInfo*, cchFriendlyName : UInt32, wzFriendlyName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_friendly_name.call(this, cchFriendlyName, wzFriendlyName, pcchActual)
+    end
+    def get_container_format(this : IWICBitmapCodecInfo*, pguidContainerFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_container_format.call(this, pguidContainerFormat)
+    end
+    def get_pixel_formats(this : IWICBitmapCodecInfo*, cFormats : UInt32, pguidPixelFormats : LibC::GUID*, pcActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_formats.call(this, cFormats, pguidPixelFormats, pcActual)
+    end
+    def get_color_management_version(this : IWICBitmapCodecInfo*, cchColorManagementVersion : UInt32, wzColorManagementVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_color_management_version.call(this, cchColorManagementVersion, wzColorManagementVersion, pcchActual)
+    end
+    def get_device_manufacturer(this : IWICBitmapCodecInfo*, cchDeviceManufacturer : UInt32, wzDeviceManufacturer : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_manufacturer.call(this, cchDeviceManufacturer, wzDeviceManufacturer, pcchActual)
+    end
+    def get_device_models(this : IWICBitmapCodecInfo*, cchDeviceModels : UInt32, wzDeviceModels : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_models.call(this, cchDeviceModels, wzDeviceModels, pcchActual)
+    end
+    def get_mime_types(this : IWICBitmapCodecInfo*, cchMimeTypes : UInt32, wzMimeTypes : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_mime_types.call(this, cchMimeTypes, wzMimeTypes, pcchActual)
+    end
+    def get_file_extensions(this : IWICBitmapCodecInfo*, cchFileExtensions : UInt32, wzFileExtensions : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_file_extensions.call(this, cchFileExtensions, wzFileExtensions, pcchActual)
+    end
+    def does_support_animation(this : IWICBitmapCodecInfo*, pfSupportAnimation : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_animation.call(this, pfSupportAnimation)
+    end
+    def does_support_chromakey(this : IWICBitmapCodecInfo*, pfSupportChromakey : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_chromakey.call(this, pfSupportChromakey)
+    end
+    def does_support_lossless(this : IWICBitmapCodecInfo*, pfSupportLossless : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_lossless.call(this, pfSupportLossless)
+    end
+    def does_support_multiframe(this : IWICBitmapCodecInfo*, pfSupportMultiframe : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_multiframe.call(this, pfSupportMultiframe)
+    end
+    def matches_mime_type(this : IWICBitmapCodecInfo*, wzMimeType : Win32cr::Foundation::PWSTR, pfMatches : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.matches_mime_type.call(this, wzMimeType, pfMatches)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapEncoderInfoVtbl,
+    query_interface : Proc(IWICBitmapEncoderInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapEncoderInfo*, UInt32),
+    release : Proc(IWICBitmapEncoderInfo*, UInt32),
+    get_component_type : Proc(IWICBitmapEncoderInfo*, Win32cr::Graphics::Imaging::WICComponentType*, Win32cr::Foundation::HRESULT),
+    get_clsid : Proc(IWICBitmapEncoderInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_signing_status : Proc(IWICBitmapEncoderInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_author : Proc(IWICBitmapEncoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_vendor_guid : Proc(IWICBitmapEncoderInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_version : Proc(IWICBitmapEncoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_spec_version : Proc(IWICBitmapEncoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_friendly_name : Proc(IWICBitmapEncoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_container_format : Proc(IWICBitmapEncoderInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_pixel_formats : Proc(IWICBitmapEncoderInfo*, UInt32, LibC::GUID*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_color_management_version : Proc(IWICBitmapEncoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_device_manufacturer : Proc(IWICBitmapEncoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_device_models : Proc(IWICBitmapEncoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_mime_types : Proc(IWICBitmapEncoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_file_extensions : Proc(IWICBitmapEncoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    does_support_animation : Proc(IWICBitmapEncoderInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_support_chromakey : Proc(IWICBitmapEncoderInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_support_lossless : Proc(IWICBitmapEncoderInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_support_multiframe : Proc(IWICBitmapEncoderInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    matches_mime_type : Proc(IWICBitmapEncoderInfo*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    create_instance : Proc(IWICBitmapEncoderInfo*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("94c9b4ee-a09f-4f92-8a1e-4a9bce7e76fb")]
+  record IWICBitmapEncoderInfo, lpVtbl : IWICBitmapEncoderInfoVtbl* do
+    GUID = LibC::GUID.new(0x94c9b4ee_u32, 0xa09f_u16, 0x4f92_u16, StaticArray[0x8a_u8, 0x1e_u8, 0x4a_u8, 0x9b_u8, 0xce_u8, 0x7e_u8, 0x76_u8, 0xfb_u8])
+    def query_interface(this : IWICBitmapEncoderInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapEncoderInfo*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapEncoderInfo*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_component_type(this : IWICBitmapEncoderInfo*, pType : Win32cr::Graphics::Imaging::WICComponentType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component_type.call(this, pType)
+    end
+    def get_clsid(this : IWICBitmapEncoderInfo*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_clsid.call(this, pclsid)
+    end
+    def get_signing_status(this : IWICBitmapEncoderInfo*, pStatus : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_signing_status.call(this, pStatus)
+    end
+    def get_author(this : IWICBitmapEncoderInfo*, cchAuthor : UInt32, wzAuthor : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_author.call(this, cchAuthor, wzAuthor, pcchActual)
+    end
+    def get_vendor_guid(this : IWICBitmapEncoderInfo*, pguidVendor : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_vendor_guid.call(this, pguidVendor)
+    end
+    def get_version(this : IWICBitmapEncoderInfo*, cchVersion : UInt32, wzVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_version.call(this, cchVersion, wzVersion, pcchActual)
+    end
+    def get_spec_version(this : IWICBitmapEncoderInfo*, cchSpecVersion : UInt32, wzSpecVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_spec_version.call(this, cchSpecVersion, wzSpecVersion, pcchActual)
+    end
+    def get_friendly_name(this : IWICBitmapEncoderInfo*, cchFriendlyName : UInt32, wzFriendlyName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_friendly_name.call(this, cchFriendlyName, wzFriendlyName, pcchActual)
+    end
+    def get_container_format(this : IWICBitmapEncoderInfo*, pguidContainerFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_container_format.call(this, pguidContainerFormat)
+    end
+    def get_pixel_formats(this : IWICBitmapEncoderInfo*, cFormats : UInt32, pguidPixelFormats : LibC::GUID*, pcActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_formats.call(this, cFormats, pguidPixelFormats, pcActual)
+    end
+    def get_color_management_version(this : IWICBitmapEncoderInfo*, cchColorManagementVersion : UInt32, wzColorManagementVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_color_management_version.call(this, cchColorManagementVersion, wzColorManagementVersion, pcchActual)
+    end
+    def get_device_manufacturer(this : IWICBitmapEncoderInfo*, cchDeviceManufacturer : UInt32, wzDeviceManufacturer : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_manufacturer.call(this, cchDeviceManufacturer, wzDeviceManufacturer, pcchActual)
+    end
+    def get_device_models(this : IWICBitmapEncoderInfo*, cchDeviceModels : UInt32, wzDeviceModels : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_models.call(this, cchDeviceModels, wzDeviceModels, pcchActual)
+    end
+    def get_mime_types(this : IWICBitmapEncoderInfo*, cchMimeTypes : UInt32, wzMimeTypes : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_mime_types.call(this, cchMimeTypes, wzMimeTypes, pcchActual)
+    end
+    def get_file_extensions(this : IWICBitmapEncoderInfo*, cchFileExtensions : UInt32, wzFileExtensions : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_file_extensions.call(this, cchFileExtensions, wzFileExtensions, pcchActual)
+    end
+    def does_support_animation(this : IWICBitmapEncoderInfo*, pfSupportAnimation : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_animation.call(this, pfSupportAnimation)
+    end
+    def does_support_chromakey(this : IWICBitmapEncoderInfo*, pfSupportChromakey : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_chromakey.call(this, pfSupportChromakey)
+    end
+    def does_support_lossless(this : IWICBitmapEncoderInfo*, pfSupportLossless : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_lossless.call(this, pfSupportLossless)
+    end
+    def does_support_multiframe(this : IWICBitmapEncoderInfo*, pfSupportMultiframe : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_multiframe.call(this, pfSupportMultiframe)
+    end
+    def matches_mime_type(this : IWICBitmapEncoderInfo*, wzMimeType : Win32cr::Foundation::PWSTR, pfMatches : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.matches_mime_type.call(this, wzMimeType, pfMatches)
+    end
+    def create_instance(this : IWICBitmapEncoderInfo*, ppIBitmapEncoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_instance.call(this, ppIBitmapEncoder)
+    end
+
+  end
+
+  @[Extern]
+  record IWICBitmapDecoderInfoVtbl,
+    query_interface : Proc(IWICBitmapDecoderInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICBitmapDecoderInfo*, UInt32),
+    release : Proc(IWICBitmapDecoderInfo*, UInt32),
+    get_component_type : Proc(IWICBitmapDecoderInfo*, Win32cr::Graphics::Imaging::WICComponentType*, Win32cr::Foundation::HRESULT),
+    get_clsid : Proc(IWICBitmapDecoderInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_signing_status : Proc(IWICBitmapDecoderInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_author : Proc(IWICBitmapDecoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_vendor_guid : Proc(IWICBitmapDecoderInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_version : Proc(IWICBitmapDecoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_spec_version : Proc(IWICBitmapDecoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_friendly_name : Proc(IWICBitmapDecoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_container_format : Proc(IWICBitmapDecoderInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_pixel_formats : Proc(IWICBitmapDecoderInfo*, UInt32, LibC::GUID*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_color_management_version : Proc(IWICBitmapDecoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_device_manufacturer : Proc(IWICBitmapDecoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_device_models : Proc(IWICBitmapDecoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_mime_types : Proc(IWICBitmapDecoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_file_extensions : Proc(IWICBitmapDecoderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    does_support_animation : Proc(IWICBitmapDecoderInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_support_chromakey : Proc(IWICBitmapDecoderInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_support_lossless : Proc(IWICBitmapDecoderInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_support_multiframe : Proc(IWICBitmapDecoderInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    matches_mime_type : Proc(IWICBitmapDecoderInfo*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_patterns : Proc(IWICBitmapDecoderInfo*, UInt32, Win32cr::Graphics::Imaging::WICBitmapPattern*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    matches_pattern : Proc(IWICBitmapDecoderInfo*, Void*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    create_instance : Proc(IWICBitmapDecoderInfo*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("d8cd007f-d08f-4191-9bfc-236ea7f0e4b5")]
+  record IWICBitmapDecoderInfo, lpVtbl : IWICBitmapDecoderInfoVtbl* do
+    GUID = LibC::GUID.new(0xd8cd007f_u32, 0xd08f_u16, 0x4191_u16, StaticArray[0x9b_u8, 0xfc_u8, 0x23_u8, 0x6e_u8, 0xa7_u8, 0xf0_u8, 0xe4_u8, 0xb5_u8])
+    def query_interface(this : IWICBitmapDecoderInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICBitmapDecoderInfo*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICBitmapDecoderInfo*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_component_type(this : IWICBitmapDecoderInfo*, pType : Win32cr::Graphics::Imaging::WICComponentType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component_type.call(this, pType)
+    end
+    def get_clsid(this : IWICBitmapDecoderInfo*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_clsid.call(this, pclsid)
+    end
+    def get_signing_status(this : IWICBitmapDecoderInfo*, pStatus : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_signing_status.call(this, pStatus)
+    end
+    def get_author(this : IWICBitmapDecoderInfo*, cchAuthor : UInt32, wzAuthor : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_author.call(this, cchAuthor, wzAuthor, pcchActual)
+    end
+    def get_vendor_guid(this : IWICBitmapDecoderInfo*, pguidVendor : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_vendor_guid.call(this, pguidVendor)
+    end
+    def get_version(this : IWICBitmapDecoderInfo*, cchVersion : UInt32, wzVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_version.call(this, cchVersion, wzVersion, pcchActual)
+    end
+    def get_spec_version(this : IWICBitmapDecoderInfo*, cchSpecVersion : UInt32, wzSpecVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_spec_version.call(this, cchSpecVersion, wzSpecVersion, pcchActual)
+    end
+    def get_friendly_name(this : IWICBitmapDecoderInfo*, cchFriendlyName : UInt32, wzFriendlyName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_friendly_name.call(this, cchFriendlyName, wzFriendlyName, pcchActual)
+    end
+    def get_container_format(this : IWICBitmapDecoderInfo*, pguidContainerFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_container_format.call(this, pguidContainerFormat)
+    end
+    def get_pixel_formats(this : IWICBitmapDecoderInfo*, cFormats : UInt32, pguidPixelFormats : LibC::GUID*, pcActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_formats.call(this, cFormats, pguidPixelFormats, pcActual)
+    end
+    def get_color_management_version(this : IWICBitmapDecoderInfo*, cchColorManagementVersion : UInt32, wzColorManagementVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_color_management_version.call(this, cchColorManagementVersion, wzColorManagementVersion, pcchActual)
+    end
+    def get_device_manufacturer(this : IWICBitmapDecoderInfo*, cchDeviceManufacturer : UInt32, wzDeviceManufacturer : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_manufacturer.call(this, cchDeviceManufacturer, wzDeviceManufacturer, pcchActual)
+    end
+    def get_device_models(this : IWICBitmapDecoderInfo*, cchDeviceModels : UInt32, wzDeviceModels : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_models.call(this, cchDeviceModels, wzDeviceModels, pcchActual)
+    end
+    def get_mime_types(this : IWICBitmapDecoderInfo*, cchMimeTypes : UInt32, wzMimeTypes : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_mime_types.call(this, cchMimeTypes, wzMimeTypes, pcchActual)
+    end
+    def get_file_extensions(this : IWICBitmapDecoderInfo*, cchFileExtensions : UInt32, wzFileExtensions : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_file_extensions.call(this, cchFileExtensions, wzFileExtensions, pcchActual)
+    end
+    def does_support_animation(this : IWICBitmapDecoderInfo*, pfSupportAnimation : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_animation.call(this, pfSupportAnimation)
+    end
+    def does_support_chromakey(this : IWICBitmapDecoderInfo*, pfSupportChromakey : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_chromakey.call(this, pfSupportChromakey)
+    end
+    def does_support_lossless(this : IWICBitmapDecoderInfo*, pfSupportLossless : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_lossless.call(this, pfSupportLossless)
+    end
+    def does_support_multiframe(this : IWICBitmapDecoderInfo*, pfSupportMultiframe : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_multiframe.call(this, pfSupportMultiframe)
+    end
+    def matches_mime_type(this : IWICBitmapDecoderInfo*, wzMimeType : Win32cr::Foundation::PWSTR, pfMatches : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.matches_mime_type.call(this, wzMimeType, pfMatches)
+    end
+    def get_patterns(this : IWICBitmapDecoderInfo*, cbSizePatterns : UInt32, pPatterns : Win32cr::Graphics::Imaging::WICBitmapPattern*, pcPatterns : UInt32*, pcbPatternsActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_patterns.call(this, cbSizePatterns, pPatterns, pcPatterns, pcbPatternsActual)
+    end
+    def matches_pattern(this : IWICBitmapDecoderInfo*, pIStream : Void*, pfMatches : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.matches_pattern.call(this, pIStream, pfMatches)
+    end
+    def create_instance(this : IWICBitmapDecoderInfo*, ppIBitmapDecoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_instance.call(this, ppIBitmapDecoder)
+    end
+
+  end
+
+  @[Extern]
+  record IWICPixelFormatInfoVtbl,
+    query_interface : Proc(IWICPixelFormatInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICPixelFormatInfo*, UInt32),
+    release : Proc(IWICPixelFormatInfo*, UInt32),
+    get_component_type : Proc(IWICPixelFormatInfo*, Win32cr::Graphics::Imaging::WICComponentType*, Win32cr::Foundation::HRESULT),
+    get_clsid : Proc(IWICPixelFormatInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_signing_status : Proc(IWICPixelFormatInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_author : Proc(IWICPixelFormatInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_vendor_guid : Proc(IWICPixelFormatInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_version : Proc(IWICPixelFormatInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_spec_version : Proc(IWICPixelFormatInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_friendly_name : Proc(IWICPixelFormatInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_format_guid : Proc(IWICPixelFormatInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_color_context : Proc(IWICPixelFormatInfo*, Void**, Win32cr::Foundation::HRESULT),
+    get_bits_per_pixel : Proc(IWICPixelFormatInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_channel_count : Proc(IWICPixelFormatInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_channel_mask : Proc(IWICPixelFormatInfo*, UInt32, UInt32, UInt8*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("e8eda601-3d48-431a-ab44-69059be88bbe")]
+  record IWICPixelFormatInfo, lpVtbl : IWICPixelFormatInfoVtbl* do
+    GUID = LibC::GUID.new(0xe8eda601_u32, 0x3d48_u16, 0x431a_u16, StaticArray[0xab_u8, 0x44_u8, 0x69_u8, 0x5_u8, 0x9b_u8, 0xe8_u8, 0x8b_u8, 0xbe_u8])
+    def query_interface(this : IWICPixelFormatInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICPixelFormatInfo*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICPixelFormatInfo*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_component_type(this : IWICPixelFormatInfo*, pType : Win32cr::Graphics::Imaging::WICComponentType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component_type.call(this, pType)
+    end
+    def get_clsid(this : IWICPixelFormatInfo*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_clsid.call(this, pclsid)
+    end
+    def get_signing_status(this : IWICPixelFormatInfo*, pStatus : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_signing_status.call(this, pStatus)
+    end
+    def get_author(this : IWICPixelFormatInfo*, cchAuthor : UInt32, wzAuthor : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_author.call(this, cchAuthor, wzAuthor, pcchActual)
+    end
+    def get_vendor_guid(this : IWICPixelFormatInfo*, pguidVendor : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_vendor_guid.call(this, pguidVendor)
+    end
+    def get_version(this : IWICPixelFormatInfo*, cchVersion : UInt32, wzVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_version.call(this, cchVersion, wzVersion, pcchActual)
+    end
+    def get_spec_version(this : IWICPixelFormatInfo*, cchSpecVersion : UInt32, wzSpecVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_spec_version.call(this, cchSpecVersion, wzSpecVersion, pcchActual)
+    end
+    def get_friendly_name(this : IWICPixelFormatInfo*, cchFriendlyName : UInt32, wzFriendlyName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_friendly_name.call(this, cchFriendlyName, wzFriendlyName, pcchActual)
+    end
+    def get_format_guid(this : IWICPixelFormatInfo*, pFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_format_guid.call(this, pFormat)
+    end
+    def get_color_context(this : IWICPixelFormatInfo*, ppIColorContext : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_color_context.call(this, ppIColorContext)
+    end
+    def get_bits_per_pixel(this : IWICPixelFormatInfo*, puiBitsPerPixel : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_bits_per_pixel.call(this, puiBitsPerPixel)
+    end
+    def get_channel_count(this : IWICPixelFormatInfo*, puiChannelCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_count.call(this, puiChannelCount)
+    end
+    def get_channel_mask(this : IWICPixelFormatInfo*, uiChannelIndex : UInt32, cbMaskBuffer : UInt32, pbMaskBuffer : UInt8*, pcbActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_mask.call(this, uiChannelIndex, cbMaskBuffer, pbMaskBuffer, pcbActual)
+    end
+
+  end
+
+  @[Extern]
+  record IWICPixelFormatInfo2Vtbl,
+    query_interface : Proc(IWICPixelFormatInfo2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICPixelFormatInfo2*, UInt32),
+    release : Proc(IWICPixelFormatInfo2*, UInt32),
+    get_component_type : Proc(IWICPixelFormatInfo2*, Win32cr::Graphics::Imaging::WICComponentType*, Win32cr::Foundation::HRESULT),
+    get_clsid : Proc(IWICPixelFormatInfo2*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_signing_status : Proc(IWICPixelFormatInfo2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_author : Proc(IWICPixelFormatInfo2*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_vendor_guid : Proc(IWICPixelFormatInfo2*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_version : Proc(IWICPixelFormatInfo2*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_spec_version : Proc(IWICPixelFormatInfo2*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_friendly_name : Proc(IWICPixelFormatInfo2*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_format_guid : Proc(IWICPixelFormatInfo2*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_color_context : Proc(IWICPixelFormatInfo2*, Void**, Win32cr::Foundation::HRESULT),
+    get_bits_per_pixel : Proc(IWICPixelFormatInfo2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_channel_count : Proc(IWICPixelFormatInfo2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_channel_mask : Proc(IWICPixelFormatInfo2*, UInt32, UInt32, UInt8*, UInt32*, Win32cr::Foundation::HRESULT),
+    supports_transparency : Proc(IWICPixelFormatInfo2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_numeric_representation : Proc(IWICPixelFormatInfo2*, Win32cr::Graphics::Imaging::WICPixelFormatNumericRepresentation*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("a9db33a2-af5f-43c7-b679-74f5984b5aa4")]
+  record IWICPixelFormatInfo2, lpVtbl : IWICPixelFormatInfo2Vtbl* do
+    GUID = LibC::GUID.new(0xa9db33a2_u32, 0xaf5f_u16, 0x43c7_u16, StaticArray[0xb6_u8, 0x79_u8, 0x74_u8, 0xf5_u8, 0x98_u8, 0x4b_u8, 0x5a_u8, 0xa4_u8])
+    def query_interface(this : IWICPixelFormatInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICPixelFormatInfo2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICPixelFormatInfo2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_component_type(this : IWICPixelFormatInfo2*, pType : Win32cr::Graphics::Imaging::WICComponentType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component_type.call(this, pType)
+    end
+    def get_clsid(this : IWICPixelFormatInfo2*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_clsid.call(this, pclsid)
+    end
+    def get_signing_status(this : IWICPixelFormatInfo2*, pStatus : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_signing_status.call(this, pStatus)
+    end
+    def get_author(this : IWICPixelFormatInfo2*, cchAuthor : UInt32, wzAuthor : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_author.call(this, cchAuthor, wzAuthor, pcchActual)
+    end
+    def get_vendor_guid(this : IWICPixelFormatInfo2*, pguidVendor : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_vendor_guid.call(this, pguidVendor)
+    end
+    def get_version(this : IWICPixelFormatInfo2*, cchVersion : UInt32, wzVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_version.call(this, cchVersion, wzVersion, pcchActual)
+    end
+    def get_spec_version(this : IWICPixelFormatInfo2*, cchSpecVersion : UInt32, wzSpecVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_spec_version.call(this, cchSpecVersion, wzSpecVersion, pcchActual)
+    end
+    def get_friendly_name(this : IWICPixelFormatInfo2*, cchFriendlyName : UInt32, wzFriendlyName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_friendly_name.call(this, cchFriendlyName, wzFriendlyName, pcchActual)
+    end
+    def get_format_guid(this : IWICPixelFormatInfo2*, pFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_format_guid.call(this, pFormat)
+    end
+    def get_color_context(this : IWICPixelFormatInfo2*, ppIColorContext : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_color_context.call(this, ppIColorContext)
+    end
+    def get_bits_per_pixel(this : IWICPixelFormatInfo2*, puiBitsPerPixel : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_bits_per_pixel.call(this, puiBitsPerPixel)
+    end
+    def get_channel_count(this : IWICPixelFormatInfo2*, puiChannelCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_count.call(this, puiChannelCount)
+    end
+    def get_channel_mask(this : IWICPixelFormatInfo2*, uiChannelIndex : UInt32, cbMaskBuffer : UInt32, pbMaskBuffer : UInt8*, pcbActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_mask.call(this, uiChannelIndex, cbMaskBuffer, pbMaskBuffer, pcbActual)
+    end
+    def supports_transparency(this : IWICPixelFormatInfo2*, pfSupportsTransparency : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.supports_transparency.call(this, pfSupportsTransparency)
+    end
+    def get_numeric_representation(this : IWICPixelFormatInfo2*, pNumericRepresentation : Win32cr::Graphics::Imaging::WICPixelFormatNumericRepresentation*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_numeric_representation.call(this, pNumericRepresentation)
+    end
+
+  end
+
+  @[Extern]
+  record IWICImagingFactoryVtbl,
+    query_interface : Proc(IWICImagingFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICImagingFactory*, UInt32),
+    release : Proc(IWICImagingFactory*, UInt32),
+    create_decoder_from_filename : Proc(IWICImagingFactory*, Win32cr::Foundation::PWSTR, LibC::GUID*, UInt32, Win32cr::Graphics::Imaging::WICDecodeOptions, Void**, Win32cr::Foundation::HRESULT),
+    create_decoder_from_stream : Proc(IWICImagingFactory*, Void*, LibC::GUID*, Win32cr::Graphics::Imaging::WICDecodeOptions, Void**, Win32cr::Foundation::HRESULT),
+    create_decoder_from_file_handle : Proc(IWICImagingFactory*, LibC::UIntPtrT, LibC::GUID*, Win32cr::Graphics::Imaging::WICDecodeOptions, Void**, Win32cr::Foundation::HRESULT),
+    create_component_info : Proc(IWICImagingFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_decoder : Proc(IWICImagingFactory*, LibC::GUID*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_encoder : Proc(IWICImagingFactory*, LibC::GUID*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_palette : Proc(IWICImagingFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_format_converter : Proc(IWICImagingFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_scaler : Proc(IWICImagingFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_clipper : Proc(IWICImagingFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_flip_rotator : Proc(IWICImagingFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_stream : Proc(IWICImagingFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_color_context : Proc(IWICImagingFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_color_transformer : Proc(IWICImagingFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap : Proc(IWICImagingFactory*, UInt32, UInt32, LibC::GUID*, Win32cr::Graphics::Imaging::WICBitmapCreateCacheOption, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_from_source : Proc(IWICImagingFactory*, Void*, Win32cr::Graphics::Imaging::WICBitmapCreateCacheOption, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_from_source_rect : Proc(IWICImagingFactory*, Void*, UInt32, UInt32, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_from_memory : Proc(IWICImagingFactory*, UInt32, UInt32, LibC::GUID*, UInt32, UInt32, UInt8*, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_from_hbitmap : Proc(IWICImagingFactory*, Win32cr::Graphics::Gdi::HBITMAP, Win32cr::Graphics::Gdi::HPALETTE, Win32cr::Graphics::Imaging::WICBitmapAlphaChannelOption, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_from_hicon : Proc(IWICImagingFactory*, Win32cr::UI::WindowsAndMessaging::HICON, Void**, Win32cr::Foundation::HRESULT),
+    create_component_enumerator : Proc(IWICImagingFactory*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_fast_metadata_encoder_from_decoder : Proc(IWICImagingFactory*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_fast_metadata_encoder_from_frame_decode : Proc(IWICImagingFactory*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_query_writer : Proc(IWICImagingFactory*, LibC::GUID*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_query_writer_from_reader : Proc(IWICImagingFactory*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("ec5ec8a9-c395-4314-9c77-54d7a935ff70")]
+  record IWICImagingFactory, lpVtbl : IWICImagingFactoryVtbl* do
+    GUID = LibC::GUID.new(0xec5ec8a9_u32, 0xc395_u16, 0x4314_u16, StaticArray[0x9c_u8, 0x77_u8, 0x54_u8, 0xd7_u8, 0xa9_u8, 0x35_u8, 0xff_u8, 0x70_u8])
+    def query_interface(this : IWICImagingFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICImagingFactory*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICImagingFactory*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def create_decoder_from_filename(this : IWICImagingFactory*, wzFilename : Win32cr::Foundation::PWSTR, pguidVendor : LibC::GUID*, dwDesiredAccess : UInt32, metadataOptions : Win32cr::Graphics::Imaging::WICDecodeOptions, ppIDecoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_decoder_from_filename.call(this, wzFilename, pguidVendor, dwDesiredAccess, metadataOptions, ppIDecoder)
+    end
+    def create_decoder_from_stream(this : IWICImagingFactory*, pIStream : Void*, pguidVendor : LibC::GUID*, metadataOptions : Win32cr::Graphics::Imaging::WICDecodeOptions, ppIDecoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_decoder_from_stream.call(this, pIStream, pguidVendor, metadataOptions, ppIDecoder)
+    end
+    def create_decoder_from_file_handle(this : IWICImagingFactory*, hFile : LibC::UIntPtrT, pguidVendor : LibC::GUID*, metadataOptions : Win32cr::Graphics::Imaging::WICDecodeOptions, ppIDecoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_decoder_from_file_handle.call(this, hFile, pguidVendor, metadataOptions, ppIDecoder)
+    end
+    def create_component_info(this : IWICImagingFactory*, clsidComponent : LibC::GUID*, ppIInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_component_info.call(this, clsidComponent, ppIInfo)
+    end
+    def create_decoder(this : IWICImagingFactory*, guidContainerFormat : LibC::GUID*, pguidVendor : LibC::GUID*, ppIDecoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_decoder.call(this, guidContainerFormat, pguidVendor, ppIDecoder)
+    end
+    def create_encoder(this : IWICImagingFactory*, guidContainerFormat : LibC::GUID*, pguidVendor : LibC::GUID*, ppIEncoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_encoder.call(this, guidContainerFormat, pguidVendor, ppIEncoder)
+    end
+    def create_palette(this : IWICImagingFactory*, ppIPalette : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_palette.call(this, ppIPalette)
+    end
+    def create_format_converter(this : IWICImagingFactory*, ppIFormatConverter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_format_converter.call(this, ppIFormatConverter)
+    end
+    def create_bitmap_scaler(this : IWICImagingFactory*, ppIBitmapScaler : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_scaler.call(this, ppIBitmapScaler)
+    end
+    def create_bitmap_clipper(this : IWICImagingFactory*, ppIBitmapClipper : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_clipper.call(this, ppIBitmapClipper)
+    end
+    def create_bitmap_flip_rotator(this : IWICImagingFactory*, ppIBitmapFlipRotator : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_flip_rotator.call(this, ppIBitmapFlipRotator)
+    end
+    def create_stream(this : IWICImagingFactory*, ppIWICStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_stream.call(this, ppIWICStream)
+    end
+    def create_color_context(this : IWICImagingFactory*, ppIWICColorContext : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_color_context.call(this, ppIWICColorContext)
+    end
+    def create_color_transformer(this : IWICImagingFactory*, ppIWICColorTransform : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_color_transformer.call(this, ppIWICColorTransform)
+    end
+    def create_bitmap(this : IWICImagingFactory*, uiWidth : UInt32, uiHeight : UInt32, pixelFormat : LibC::GUID*, option : Win32cr::Graphics::Imaging::WICBitmapCreateCacheOption, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap.call(this, uiWidth, uiHeight, pixelFormat, option, ppIBitmap)
+    end
+    def create_bitmap_from_source(this : IWICImagingFactory*, pIBitmapSource : Void*, option : Win32cr::Graphics::Imaging::WICBitmapCreateCacheOption, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_from_source.call(this, pIBitmapSource, option, ppIBitmap)
+    end
+    def create_bitmap_from_source_rect(this : IWICImagingFactory*, pIBitmapSource : Void*, x : UInt32, y : UInt32, width : UInt32, height : UInt32, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_from_source_rect.call(this, pIBitmapSource, x, y, width, height, ppIBitmap)
+    end
+    def create_bitmap_from_memory(this : IWICImagingFactory*, uiWidth : UInt32, uiHeight : UInt32, pixelFormat : LibC::GUID*, cbStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_from_memory.call(this, uiWidth, uiHeight, pixelFormat, cbStride, cbBufferSize, pbBuffer, ppIBitmap)
+    end
+    def create_bitmap_from_hbitmap(this : IWICImagingFactory*, hBitmap : Win32cr::Graphics::Gdi::HBITMAP, hPalette : Win32cr::Graphics::Gdi::HPALETTE, options : Win32cr::Graphics::Imaging::WICBitmapAlphaChannelOption, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_from_hbitmap.call(this, hBitmap, hPalette, options, ppIBitmap)
+    end
+    def create_bitmap_from_hicon(this : IWICImagingFactory*, hIcon : Win32cr::UI::WindowsAndMessaging::HICON, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_from_hicon.call(this, hIcon, ppIBitmap)
+    end
+    def create_component_enumerator(this : IWICImagingFactory*, componentTypes : UInt32, options : UInt32, ppIEnumUnknown : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_component_enumerator.call(this, componentTypes, options, ppIEnumUnknown)
+    end
+    def create_fast_metadata_encoder_from_decoder(this : IWICImagingFactory*, pIDecoder : Void*, ppIFastEncoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_fast_metadata_encoder_from_decoder.call(this, pIDecoder, ppIFastEncoder)
+    end
+    def create_fast_metadata_encoder_from_frame_decode(this : IWICImagingFactory*, pIFrameDecoder : Void*, ppIFastEncoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_fast_metadata_encoder_from_frame_decode.call(this, pIFrameDecoder, ppIFastEncoder)
+    end
+    def create_query_writer(this : IWICImagingFactory*, guidMetadataFormat : LibC::GUID*, pguidVendor : LibC::GUID*, ppIQueryWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_query_writer.call(this, guidMetadataFormat, pguidVendor, ppIQueryWriter)
+    end
+    def create_query_writer_from_reader(this : IWICImagingFactory*, pIQueryReader : Void*, pguidVendor : LibC::GUID*, ppIQueryWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_query_writer_from_reader.call(this, pIQueryReader, pguidVendor, ppIQueryWriter)
+    end
+
+  end
+
+  @[Extern]
+  record IWICDevelopRawNotificationCallbackVtbl,
+    query_interface : Proc(IWICDevelopRawNotificationCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICDevelopRawNotificationCallback*, UInt32),
+    release : Proc(IWICDevelopRawNotificationCallback*, UInt32),
+    notify : Proc(IWICDevelopRawNotificationCallback*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("95c75a6e-3e8c-4ec2-85a8-aebcc551e59b")]
+  record IWICDevelopRawNotificationCallback, lpVtbl : IWICDevelopRawNotificationCallbackVtbl* do
+    GUID = LibC::GUID.new(0x95c75a6e_u32, 0x3e8c_u16, 0x4ec2_u16, StaticArray[0x85_u8, 0xa8_u8, 0xae_u8, 0xbc_u8, 0xc5_u8, 0x51_u8, 0xe5_u8, 0x9b_u8])
+    def query_interface(this : IWICDevelopRawNotificationCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICDevelopRawNotificationCallback*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICDevelopRawNotificationCallback*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def notify(this : IWICDevelopRawNotificationCallback*, notification_mask : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify.call(this, notification_mask)
+    end
+
+  end
+
+  @[Extern]
+  record IWICDevelopRawVtbl,
+    query_interface : Proc(IWICDevelopRaw*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICDevelopRaw*, UInt32),
+    release : Proc(IWICDevelopRaw*, UInt32),
+    get_size : Proc(IWICDevelopRaw*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_pixel_format : Proc(IWICDevelopRaw*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_resolution : Proc(IWICDevelopRaw*, Float64*, Float64*, Win32cr::Foundation::HRESULT),
+    copy_palette : Proc(IWICDevelopRaw*, Void*, Win32cr::Foundation::HRESULT),
+    copy_pixels : Proc(IWICDevelopRaw*, Win32cr::Graphics::Imaging::WICRect*, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    get_metadata_query_reader : Proc(IWICDevelopRaw*, Void**, Win32cr::Foundation::HRESULT),
+    get_color_contexts : Proc(IWICDevelopRaw*, UInt32, Void**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_thumbnail : Proc(IWICDevelopRaw*, Void**, Win32cr::Foundation::HRESULT),
+    query_raw_capabilities_info : Proc(IWICDevelopRaw*, Win32cr::Graphics::Imaging::WICRawCapabilitiesInfo*, Win32cr::Foundation::HRESULT),
+    load_parameter_set : Proc(IWICDevelopRaw*, Win32cr::Graphics::Imaging::WICRawParameterSet, Win32cr::Foundation::HRESULT),
+    get_current_parameter_set : Proc(IWICDevelopRaw*, Void**, Win32cr::Foundation::HRESULT),
+    set_exposure_compensation : Proc(IWICDevelopRaw*, Float64, Win32cr::Foundation::HRESULT),
+    get_exposure_compensation : Proc(IWICDevelopRaw*, Float64*, Win32cr::Foundation::HRESULT),
+    set_white_point_rgb : Proc(IWICDevelopRaw*, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    get_white_point_rgb : Proc(IWICDevelopRaw*, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_named_white_point : Proc(IWICDevelopRaw*, Win32cr::Graphics::Imaging::WICNamedWhitePoint, Win32cr::Foundation::HRESULT),
+    get_named_white_point : Proc(IWICDevelopRaw*, Win32cr::Graphics::Imaging::WICNamedWhitePoint*, Win32cr::Foundation::HRESULT),
+    set_white_point_kelvin : Proc(IWICDevelopRaw*, UInt32, Win32cr::Foundation::HRESULT),
+    get_white_point_kelvin : Proc(IWICDevelopRaw*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_kelvin_range_info : Proc(IWICDevelopRaw*, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_contrast : Proc(IWICDevelopRaw*, Float64, Win32cr::Foundation::HRESULT),
+    get_contrast : Proc(IWICDevelopRaw*, Float64*, Win32cr::Foundation::HRESULT),
+    set_gamma : Proc(IWICDevelopRaw*, Float64, Win32cr::Foundation::HRESULT),
+    get_gamma : Proc(IWICDevelopRaw*, Float64*, Win32cr::Foundation::HRESULT),
+    set_sharpness : Proc(IWICDevelopRaw*, Float64, Win32cr::Foundation::HRESULT),
+    get_sharpness : Proc(IWICDevelopRaw*, Float64*, Win32cr::Foundation::HRESULT),
+    set_saturation : Proc(IWICDevelopRaw*, Float64, Win32cr::Foundation::HRESULT),
+    get_saturation : Proc(IWICDevelopRaw*, Float64*, Win32cr::Foundation::HRESULT),
+    set_tint : Proc(IWICDevelopRaw*, Float64, Win32cr::Foundation::HRESULT),
+    get_tint : Proc(IWICDevelopRaw*, Float64*, Win32cr::Foundation::HRESULT),
+    set_noise_reduction : Proc(IWICDevelopRaw*, Float64, Win32cr::Foundation::HRESULT),
+    get_noise_reduction : Proc(IWICDevelopRaw*, Float64*, Win32cr::Foundation::HRESULT),
+    set_destination_color_context : Proc(IWICDevelopRaw*, Void*, Win32cr::Foundation::HRESULT),
+    set_tone_curve : Proc(IWICDevelopRaw*, UInt32, Win32cr::Graphics::Imaging::WICRawToneCurve*, Win32cr::Foundation::HRESULT),
+    get_tone_curve : Proc(IWICDevelopRaw*, UInt32, Win32cr::Graphics::Imaging::WICRawToneCurve*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_rotation : Proc(IWICDevelopRaw*, Float64, Win32cr::Foundation::HRESULT),
+    get_rotation : Proc(IWICDevelopRaw*, Float64*, Win32cr::Foundation::HRESULT),
+    set_render_mode : Proc(IWICDevelopRaw*, Win32cr::Graphics::Imaging::WICRawRenderMode, Win32cr::Foundation::HRESULT),
+    get_render_mode : Proc(IWICDevelopRaw*, Win32cr::Graphics::Imaging::WICRawRenderMode*, Win32cr::Foundation::HRESULT),
+    set_notification_callback : Proc(IWICDevelopRaw*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("fbec5e44-f7be-4b65-b7f8-c0c81fef026d")]
+  record IWICDevelopRaw, lpVtbl : IWICDevelopRawVtbl* do
+    GUID = LibC::GUID.new(0xfbec5e44_u32, 0xf7be_u16, 0x4b65_u16, StaticArray[0xb7_u8, 0xf8_u8, 0xc0_u8, 0xc8_u8, 0x1f_u8, 0xef_u8, 0x2_u8, 0x6d_u8])
+    def query_interface(this : IWICDevelopRaw*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICDevelopRaw*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICDevelopRaw*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_size(this : IWICDevelopRaw*, puiWidth : UInt32*, puiHeight : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size.call(this, puiWidth, puiHeight)
+    end
+    def get_pixel_format(this : IWICDevelopRaw*, pPixelFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixel_format.call(this, pPixelFormat)
+    end
+    def get_resolution(this : IWICDevelopRaw*, pDpiX : Float64*, pDpiY : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_resolution.call(this, pDpiX, pDpiY)
+    end
+    def copy_palette(this : IWICDevelopRaw*, pIPalette : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_palette.call(this, pIPalette)
+    end
+    def copy_pixels(this : IWICDevelopRaw*, prc : Win32cr::Graphics::Imaging::WICRect*, cbStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_pixels.call(this, prc, cbStride, cbBufferSize, pbBuffer)
+    end
+    def get_metadata_query_reader(this : IWICDevelopRaw*, ppIMetadataQueryReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_query_reader.call(this, ppIMetadataQueryReader)
+    end
+    def get_color_contexts(this : IWICDevelopRaw*, cCount : UInt32, ppIColorContexts : Void**, pcActualCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_color_contexts.call(this, cCount, ppIColorContexts, pcActualCount)
+    end
+    def get_thumbnail(this : IWICDevelopRaw*, ppIThumbnail : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_thumbnail.call(this, ppIThumbnail)
+    end
+    def query_raw_capabilities_info(this : IWICDevelopRaw*, pInfo : Win32cr::Graphics::Imaging::WICRawCapabilitiesInfo*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_raw_capabilities_info.call(this, pInfo)
+    end
+    def load_parameter_set(this : IWICDevelopRaw*, parameter_set : Win32cr::Graphics::Imaging::WICRawParameterSet) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_parameter_set.call(this, parameter_set)
+    end
+    def get_current_parameter_set(this : IWICDevelopRaw*, ppCurrentParameterSet : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_current_parameter_set.call(this, ppCurrentParameterSet)
+    end
+    def set_exposure_compensation(this : IWICDevelopRaw*, ev : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_exposure_compensation.call(this, ev)
+    end
+    def get_exposure_compensation(this : IWICDevelopRaw*, pEV : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_exposure_compensation.call(this, pEV)
+    end
+    def set_white_point_rgb(this : IWICDevelopRaw*, red : UInt32, green : UInt32, blue : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_white_point_rgb.call(this, red, green, blue)
+    end
+    def get_white_point_rgb(this : IWICDevelopRaw*, pRed : UInt32*, pGreen : UInt32*, pBlue : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_white_point_rgb.call(this, pRed, pGreen, pBlue)
+    end
+    def set_named_white_point(this : IWICDevelopRaw*, white_point : Win32cr::Graphics::Imaging::WICNamedWhitePoint) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_named_white_point.call(this, white_point)
+    end
+    def get_named_white_point(this : IWICDevelopRaw*, pWhitePoint : Win32cr::Graphics::Imaging::WICNamedWhitePoint*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_named_white_point.call(this, pWhitePoint)
+    end
+    def set_white_point_kelvin(this : IWICDevelopRaw*, white_point_kelvin : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_white_point_kelvin.call(this, white_point_kelvin)
+    end
+    def get_white_point_kelvin(this : IWICDevelopRaw*, pWhitePointKelvin : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_white_point_kelvin.call(this, pWhitePointKelvin)
+    end
+    def get_kelvin_range_info(this : IWICDevelopRaw*, pMinKelvinTemp : UInt32*, pMaxKelvinTemp : UInt32*, pKelvinTempStepValue : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_kelvin_range_info.call(this, pMinKelvinTemp, pMaxKelvinTemp, pKelvinTempStepValue)
+    end
+    def set_contrast(this : IWICDevelopRaw*, contrast : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_contrast.call(this, contrast)
+    end
+    def get_contrast(this : IWICDevelopRaw*, pContrast : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_contrast.call(this, pContrast)
+    end
+    def set_gamma(this : IWICDevelopRaw*, gamma : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_gamma.call(this, gamma)
+    end
+    def get_gamma(this : IWICDevelopRaw*, pGamma : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_gamma.call(this, pGamma)
+    end
+    def set_sharpness(this : IWICDevelopRaw*, sharpness : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_sharpness.call(this, sharpness)
+    end
+    def get_sharpness(this : IWICDevelopRaw*, pSharpness : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_sharpness.call(this, pSharpness)
+    end
+    def set_saturation(this : IWICDevelopRaw*, saturation : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_saturation.call(this, saturation)
+    end
+    def get_saturation(this : IWICDevelopRaw*, pSaturation : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_saturation.call(this, pSaturation)
+    end
+    def set_tint(this : IWICDevelopRaw*, tint : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_tint.call(this, tint)
+    end
+    def get_tint(this : IWICDevelopRaw*, pTint : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_tint.call(this, pTint)
+    end
+    def set_noise_reduction(this : IWICDevelopRaw*, noise_reduction : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_noise_reduction.call(this, noise_reduction)
+    end
+    def get_noise_reduction(this : IWICDevelopRaw*, pNoiseReduction : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_noise_reduction.call(this, pNoiseReduction)
+    end
+    def set_destination_color_context(this : IWICDevelopRaw*, pColorContext : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_destination_color_context.call(this, pColorContext)
+    end
+    def set_tone_curve(this : IWICDevelopRaw*, cbToneCurveSize : UInt32, pToneCurve : Win32cr::Graphics::Imaging::WICRawToneCurve*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_tone_curve.call(this, cbToneCurveSize, pToneCurve)
+    end
+    def get_tone_curve(this : IWICDevelopRaw*, cbToneCurveBufferSize : UInt32, pToneCurve : Win32cr::Graphics::Imaging::WICRawToneCurve*, pcbActualToneCurveBufferSize : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_tone_curve.call(this, cbToneCurveBufferSize, pToneCurve, pcbActualToneCurveBufferSize)
+    end
+    def set_rotation(this : IWICDevelopRaw*, rotation : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_rotation.call(this, rotation)
+    end
+    def get_rotation(this : IWICDevelopRaw*, pRotation : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_rotation.call(this, pRotation)
+    end
+    def set_render_mode(this : IWICDevelopRaw*, render_mode : Win32cr::Graphics::Imaging::WICRawRenderMode) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_render_mode.call(this, render_mode)
+    end
+    def get_render_mode(this : IWICDevelopRaw*, pRenderMode : Win32cr::Graphics::Imaging::WICRawRenderMode*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_render_mode.call(this, pRenderMode)
+    end
+    def set_notification_callback(this : IWICDevelopRaw*, pCallback : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notification_callback.call(this, pCallback)
+    end
+
+  end
+
+  @[Extern]
+  record IWICDdsDecoderVtbl,
+    query_interface : Proc(IWICDdsDecoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICDdsDecoder*, UInt32),
+    release : Proc(IWICDdsDecoder*, UInt32),
+    get_parameters : Proc(IWICDdsDecoder*, Win32cr::Graphics::Imaging::WICDdsParameters*, Win32cr::Foundation::HRESULT),
+    get_frame : Proc(IWICDdsDecoder*, UInt32, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("409cd537-8532-40cb-9774-e2feb2df4e9c")]
+  record IWICDdsDecoder, lpVtbl : IWICDdsDecoderVtbl* do
+    GUID = LibC::GUID.new(0x409cd537_u32, 0x8532_u16, 0x40cb_u16, StaticArray[0x97_u8, 0x74_u8, 0xe2_u8, 0xfe_u8, 0xb2_u8, 0xdf_u8, 0x4e_u8, 0x9c_u8])
+    def query_interface(this : IWICDdsDecoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICDdsDecoder*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICDdsDecoder*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_parameters(this : IWICDdsDecoder*, pParameters : Win32cr::Graphics::Imaging::WICDdsParameters*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_parameters.call(this, pParameters)
+    end
+    def get_frame(this : IWICDdsDecoder*, arrayIndex : UInt32, mipLevel : UInt32, sliceIndex : UInt32, ppIBitmapFrame : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_frame.call(this, arrayIndex, mipLevel, sliceIndex, ppIBitmapFrame)
+    end
+
+  end
+
+  @[Extern]
+  record IWICDdsEncoderVtbl,
+    query_interface : Proc(IWICDdsEncoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICDdsEncoder*, UInt32),
+    release : Proc(IWICDdsEncoder*, UInt32),
+    set_parameters : Proc(IWICDdsEncoder*, Win32cr::Graphics::Imaging::WICDdsParameters*, Win32cr::Foundation::HRESULT),
+    get_parameters : Proc(IWICDdsEncoder*, Win32cr::Graphics::Imaging::WICDdsParameters*, Win32cr::Foundation::HRESULT),
+    create_new_frame : Proc(IWICDdsEncoder*, Void**, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("5cacdb4c-407e-41b3-b936-d0f010cd6732")]
+  record IWICDdsEncoder, lpVtbl : IWICDdsEncoderVtbl* do
+    GUID = LibC::GUID.new(0x5cacdb4c_u32, 0x407e_u16, 0x41b3_u16, StaticArray[0xb9_u8, 0x36_u8, 0xd0_u8, 0xf0_u8, 0x10_u8, 0xcd_u8, 0x67_u8, 0x32_u8])
+    def query_interface(this : IWICDdsEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICDdsEncoder*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICDdsEncoder*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_parameters(this : IWICDdsEncoder*, pParameters : Win32cr::Graphics::Imaging::WICDdsParameters*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_parameters.call(this, pParameters)
+    end
+    def get_parameters(this : IWICDdsEncoder*, pParameters : Win32cr::Graphics::Imaging::WICDdsParameters*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_parameters.call(this, pParameters)
+    end
+    def create_new_frame(this : IWICDdsEncoder*, ppIFrameEncode : Void**, pArrayIndex : UInt32*, pMipLevel : UInt32*, pSliceIndex : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_new_frame.call(this, ppIFrameEncode, pArrayIndex, pMipLevel, pSliceIndex)
+    end
+
+  end
+
+  @[Extern]
+  record IWICDdsFrameDecodeVtbl,
+    query_interface : Proc(IWICDdsFrameDecode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICDdsFrameDecode*, UInt32),
+    release : Proc(IWICDdsFrameDecode*, UInt32),
+    get_size_in_blocks : Proc(IWICDdsFrameDecode*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_format_info : Proc(IWICDdsFrameDecode*, Win32cr::Graphics::Imaging::WICDdsFormatInfo*, Win32cr::Foundation::HRESULT),
+    copy_blocks : Proc(IWICDdsFrameDecode*, Win32cr::Graphics::Imaging::WICRect*, UInt32, UInt32, UInt8*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("3d4c0c61-18a4-41e4-bd80-481a4fc9f464")]
+  record IWICDdsFrameDecode, lpVtbl : IWICDdsFrameDecodeVtbl* do
+    GUID = LibC::GUID.new(0x3d4c0c61_u32, 0x18a4_u16, 0x41e4_u16, StaticArray[0xbd_u8, 0x80_u8, 0x48_u8, 0x1a_u8, 0x4f_u8, 0xc9_u8, 0xf4_u8, 0x64_u8])
+    def query_interface(this : IWICDdsFrameDecode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICDdsFrameDecode*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICDdsFrameDecode*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_size_in_blocks(this : IWICDdsFrameDecode*, pWidthInBlocks : UInt32*, pHeightInBlocks : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size_in_blocks.call(this, pWidthInBlocks, pHeightInBlocks)
+    end
+    def get_format_info(this : IWICDdsFrameDecode*, pFormatInfo : Win32cr::Graphics::Imaging::WICDdsFormatInfo*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_format_info.call(this, pFormatInfo)
+    end
+    def copy_blocks(this : IWICDdsFrameDecode*, prcBoundsInBlocks : Win32cr::Graphics::Imaging::WICRect*, cbStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_blocks.call(this, prcBoundsInBlocks, cbStride, cbBufferSize, pbBuffer)
+    end
+
+  end
+
+  @[Extern]
+  record IWICJpegFrameDecodeVtbl,
+    query_interface : Proc(IWICJpegFrameDecode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICJpegFrameDecode*, UInt32),
+    release : Proc(IWICJpegFrameDecode*, UInt32),
+    does_support_indexing : Proc(IWICJpegFrameDecode*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    set_indexing : Proc(IWICJpegFrameDecode*, Win32cr::Graphics::Imaging::WICJpegIndexingOptions, UInt32, Win32cr::Foundation::HRESULT),
+    clear_indexing : Proc(IWICJpegFrameDecode*, Win32cr::Foundation::HRESULT),
+    get_ac_huffman_table : Proc(IWICJpegFrameDecode*, UInt32, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_JPEG_AC_HUFFMAN_TABLE*, Win32cr::Foundation::HRESULT),
+    get_dc_huffman_table : Proc(IWICJpegFrameDecode*, UInt32, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_JPEG_DC_HUFFMAN_TABLE*, Win32cr::Foundation::HRESULT),
+    get_quantization_table : Proc(IWICJpegFrameDecode*, UInt32, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_JPEG_QUANTIZATION_TABLE*, Win32cr::Foundation::HRESULT),
+    get_frame_header : Proc(IWICJpegFrameDecode*, Win32cr::Graphics::Imaging::WICJpegFrameHeader*, Win32cr::Foundation::HRESULT),
+    get_scan_header : Proc(IWICJpegFrameDecode*, UInt32, Win32cr::Graphics::Imaging::WICJpegScanHeader*, Win32cr::Foundation::HRESULT),
+    copy_scan : Proc(IWICJpegFrameDecode*, UInt32, UInt32, UInt32, UInt8*, UInt32*, Win32cr::Foundation::HRESULT),
+    copy_minimal_stream : Proc(IWICJpegFrameDecode*, UInt32, UInt32, UInt8*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("8939f66e-c46a-4c21-a9d1-98b327ce1679")]
+  record IWICJpegFrameDecode, lpVtbl : IWICJpegFrameDecodeVtbl* do
+    GUID = LibC::GUID.new(0x8939f66e_u32, 0xc46a_u16, 0x4c21_u16, StaticArray[0xa9_u8, 0xd1_u8, 0x98_u8, 0xb3_u8, 0x27_u8, 0xce_u8, 0x16_u8, 0x79_u8])
+    def query_interface(this : IWICJpegFrameDecode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICJpegFrameDecode*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICJpegFrameDecode*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def does_support_indexing(this : IWICJpegFrameDecode*, pfIndexingSupported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_indexing.call(this, pfIndexingSupported)
+    end
+    def set_indexing(this : IWICJpegFrameDecode*, options : Win32cr::Graphics::Imaging::WICJpegIndexingOptions, horizontalIntervalSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_indexing.call(this, options, horizontalIntervalSize)
+    end
+    def clear_indexing(this : IWICJpegFrameDecode*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear_indexing.call(this)
+    end
+    def get_ac_huffman_table(this : IWICJpegFrameDecode*, scanIndex : UInt32, tableIndex : UInt32, pAcHuffmanTable : Win32cr::Graphics::Dxgi::Common::DXGI_JPEG_AC_HUFFMAN_TABLE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ac_huffman_table.call(this, scanIndex, tableIndex, pAcHuffmanTable)
+    end
+    def get_dc_huffman_table(this : IWICJpegFrameDecode*, scanIndex : UInt32, tableIndex : UInt32, pDcHuffmanTable : Win32cr::Graphics::Dxgi::Common::DXGI_JPEG_DC_HUFFMAN_TABLE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_dc_huffman_table.call(this, scanIndex, tableIndex, pDcHuffmanTable)
+    end
+    def get_quantization_table(this : IWICJpegFrameDecode*, scanIndex : UInt32, tableIndex : UInt32, pQuantizationTable : Win32cr::Graphics::Dxgi::Common::DXGI_JPEG_QUANTIZATION_TABLE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_quantization_table.call(this, scanIndex, tableIndex, pQuantizationTable)
+    end
+    def get_frame_header(this : IWICJpegFrameDecode*, pFrameHeader : Win32cr::Graphics::Imaging::WICJpegFrameHeader*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_frame_header.call(this, pFrameHeader)
+    end
+    def get_scan_header(this : IWICJpegFrameDecode*, scanIndex : UInt32, pScanHeader : Win32cr::Graphics::Imaging::WICJpegScanHeader*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_scan_header.call(this, scanIndex, pScanHeader)
+    end
+    def copy_scan(this : IWICJpegFrameDecode*, scanIndex : UInt32, scanOffset : UInt32, cbScanData : UInt32, pbScanData : UInt8*, pcbScanDataActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_scan.call(this, scanIndex, scanOffset, cbScanData, pbScanData, pcbScanDataActual)
+    end
+    def copy_minimal_stream(this : IWICJpegFrameDecode*, streamOffset : UInt32, cbStreamData : UInt32, pbStreamData : UInt8*, pcbStreamDataActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_minimal_stream.call(this, streamOffset, cbStreamData, pbStreamData, pcbStreamDataActual)
+    end
+
+  end
+
+  @[Extern]
+  record IWICJpegFrameEncodeVtbl,
+    query_interface : Proc(IWICJpegFrameEncode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICJpegFrameEncode*, UInt32),
+    release : Proc(IWICJpegFrameEncode*, UInt32),
+    get_ac_huffman_table : Proc(IWICJpegFrameEncode*, UInt32, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_JPEG_AC_HUFFMAN_TABLE*, Win32cr::Foundation::HRESULT),
+    get_dc_huffman_table : Proc(IWICJpegFrameEncode*, UInt32, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_JPEG_DC_HUFFMAN_TABLE*, Win32cr::Foundation::HRESULT),
+    get_quantization_table : Proc(IWICJpegFrameEncode*, UInt32, UInt32, Win32cr::Graphics::Dxgi::Common::DXGI_JPEG_QUANTIZATION_TABLE*, Win32cr::Foundation::HRESULT),
+    write_scan : Proc(IWICJpegFrameEncode*, UInt32, UInt8*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2f0c601f-d2c6-468c-abfa-49495d983ed1")]
+  record IWICJpegFrameEncode, lpVtbl : IWICJpegFrameEncodeVtbl* do
+    GUID = LibC::GUID.new(0x2f0c601f_u32, 0xd2c6_u16, 0x468c_u16, StaticArray[0xab_u8, 0xfa_u8, 0x49_u8, 0x49_u8, 0x5d_u8, 0x98_u8, 0x3e_u8, 0xd1_u8])
+    def query_interface(this : IWICJpegFrameEncode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICJpegFrameEncode*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICJpegFrameEncode*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_ac_huffman_table(this : IWICJpegFrameEncode*, scanIndex : UInt32, tableIndex : UInt32, pAcHuffmanTable : Win32cr::Graphics::Dxgi::Common::DXGI_JPEG_AC_HUFFMAN_TABLE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ac_huffman_table.call(this, scanIndex, tableIndex, pAcHuffmanTable)
+    end
+    def get_dc_huffman_table(this : IWICJpegFrameEncode*, scanIndex : UInt32, tableIndex : UInt32, pDcHuffmanTable : Win32cr::Graphics::Dxgi::Common::DXGI_JPEG_DC_HUFFMAN_TABLE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_dc_huffman_table.call(this, scanIndex, tableIndex, pDcHuffmanTable)
+    end
+    def get_quantization_table(this : IWICJpegFrameEncode*, scanIndex : UInt32, tableIndex : UInt32, pQuantizationTable : Win32cr::Graphics::Dxgi::Common::DXGI_JPEG_QUANTIZATION_TABLE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_quantization_table.call(this, scanIndex, tableIndex, pQuantizationTable)
+    end
+    def write_scan(this : IWICJpegFrameEncode*, cbScanData : UInt32, pbScanData : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write_scan.call(this, cbScanData, pbScanData)
+    end
+
+  end
+
+  @[Extern]
+  record IWICMetadataBlockReaderVtbl,
+    query_interface : Proc(IWICMetadataBlockReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICMetadataBlockReader*, UInt32),
+    release : Proc(IWICMetadataBlockReader*, UInt32),
+    get_container_format : Proc(IWICMetadataBlockReader*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_count : Proc(IWICMetadataBlockReader*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_reader_by_index : Proc(IWICMetadataBlockReader*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_enumerator : Proc(IWICMetadataBlockReader*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("feaa2a8d-b3f3-43e4-b25c-d1de990a1ae1")]
+  record IWICMetadataBlockReader, lpVtbl : IWICMetadataBlockReaderVtbl* do
+    GUID = LibC::GUID.new(0xfeaa2a8d_u32, 0xb3f3_u16, 0x43e4_u16, StaticArray[0xb2_u8, 0x5c_u8, 0xd1_u8, 0xde_u8, 0x99_u8, 0xa_u8, 0x1a_u8, 0xe1_u8])
+    def query_interface(this : IWICMetadataBlockReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICMetadataBlockReader*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICMetadataBlockReader*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_container_format(this : IWICMetadataBlockReader*, pguidContainerFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_container_format.call(this, pguidContainerFormat)
+    end
+    def get_count(this : IWICMetadataBlockReader*, pcCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_count.call(this, pcCount)
+    end
+    def get_reader_by_index(this : IWICMetadataBlockReader*, nIndex : UInt32, ppIMetadataReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_reader_by_index.call(this, nIndex, ppIMetadataReader)
+    end
+    def get_enumerator(this : IWICMetadataBlockReader*, ppIEnumMetadata : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_enumerator.call(this, ppIEnumMetadata)
+    end
+
+  end
+
+  @[Extern]
+  record IWICMetadataBlockWriterVtbl,
+    query_interface : Proc(IWICMetadataBlockWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICMetadataBlockWriter*, UInt32),
+    release : Proc(IWICMetadataBlockWriter*, UInt32),
+    get_container_format : Proc(IWICMetadataBlockWriter*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_count : Proc(IWICMetadataBlockWriter*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_reader_by_index : Proc(IWICMetadataBlockWriter*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_enumerator : Proc(IWICMetadataBlockWriter*, Void**, Win32cr::Foundation::HRESULT),
+    initialize_from_block_reader : Proc(IWICMetadataBlockWriter*, Void*, Win32cr::Foundation::HRESULT),
+    get_writer_by_index : Proc(IWICMetadataBlockWriter*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    add_writer : Proc(IWICMetadataBlockWriter*, Void*, Win32cr::Foundation::HRESULT),
+    set_writer_by_index : Proc(IWICMetadataBlockWriter*, UInt32, Void*, Win32cr::Foundation::HRESULT),
+    remove_writer_by_index : Proc(IWICMetadataBlockWriter*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("08fb9676-b444-41e8-8dbe-6a53a542bff1")]
+  record IWICMetadataBlockWriter, lpVtbl : IWICMetadataBlockWriterVtbl* do
+    GUID = LibC::GUID.new(0x8fb9676_u32, 0xb444_u16, 0x41e8_u16, StaticArray[0x8d_u8, 0xbe_u8, 0x6a_u8, 0x53_u8, 0xa5_u8, 0x42_u8, 0xbf_u8, 0xf1_u8])
+    def query_interface(this : IWICMetadataBlockWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICMetadataBlockWriter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICMetadataBlockWriter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_container_format(this : IWICMetadataBlockWriter*, pguidContainerFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_container_format.call(this, pguidContainerFormat)
+    end
+    def get_count(this : IWICMetadataBlockWriter*, pcCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_count.call(this, pcCount)
+    end
+    def get_reader_by_index(this : IWICMetadataBlockWriter*, nIndex : UInt32, ppIMetadataReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_reader_by_index.call(this, nIndex, ppIMetadataReader)
+    end
+    def get_enumerator(this : IWICMetadataBlockWriter*, ppIEnumMetadata : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_enumerator.call(this, ppIEnumMetadata)
+    end
+    def initialize_from_block_reader(this : IWICMetadataBlockWriter*, pIMDBlockReader : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_from_block_reader.call(this, pIMDBlockReader)
+    end
+    def get_writer_by_index(this : IWICMetadataBlockWriter*, nIndex : UInt32, ppIMetadataWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_writer_by_index.call(this, nIndex, ppIMetadataWriter)
+    end
+    def add_writer(this : IWICMetadataBlockWriter*, pIMetadataWriter : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_writer.call(this, pIMetadataWriter)
+    end
+    def set_writer_by_index(this : IWICMetadataBlockWriter*, nIndex : UInt32, pIMetadataWriter : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_writer_by_index.call(this, nIndex, pIMetadataWriter)
+    end
+    def remove_writer_by_index(this : IWICMetadataBlockWriter*, nIndex : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_writer_by_index.call(this, nIndex)
+    end
+
+  end
+
+  @[Extern]
+  record IWICMetadataReaderVtbl,
+    query_interface : Proc(IWICMetadataReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICMetadataReader*, UInt32),
+    release : Proc(IWICMetadataReader*, UInt32),
+    get_metadata_format : Proc(IWICMetadataReader*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_metadata_handler_info : Proc(IWICMetadataReader*, Void**, Win32cr::Foundation::HRESULT),
+    get_count : Proc(IWICMetadataReader*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_value_by_index : Proc(IWICMetadataReader*, UInt32, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(IWICMetadataReader*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    get_enumerator : Proc(IWICMetadataReader*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("9204fe99-d8fc-4fd5-a001-9536b067a899")]
+  record IWICMetadataReader, lpVtbl : IWICMetadataReaderVtbl* do
+    GUID = LibC::GUID.new(0x9204fe99_u32, 0xd8fc_u16, 0x4fd5_u16, StaticArray[0xa0_u8, 0x1_u8, 0x95_u8, 0x36_u8, 0xb0_u8, 0x67_u8, 0xa8_u8, 0x99_u8])
+    def query_interface(this : IWICMetadataReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICMetadataReader*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICMetadataReader*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_metadata_format(this : IWICMetadataReader*, pguidMetadataFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_format.call(this, pguidMetadataFormat)
+    end
+    def get_metadata_handler_info(this : IWICMetadataReader*, ppIHandler : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_handler_info.call(this, ppIHandler)
+    end
+    def get_count(this : IWICMetadataReader*, pcCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_count.call(this, pcCount)
+    end
+    def get_value_by_index(this : IWICMetadataReader*, nIndex : UInt32, pvarSchema : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarId : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_value_by_index.call(this, nIndex, pvarSchema, pvarId, pvarValue)
+    end
+    def get_value(this : IWICMetadataReader*, pvarSchema : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarId : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_value.call(this, pvarSchema, pvarId, pvarValue)
+    end
+    def get_enumerator(this : IWICMetadataReader*, ppIEnumMetadata : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_enumerator.call(this, ppIEnumMetadata)
+    end
+
+  end
+
+  @[Extern]
+  record IWICMetadataWriterVtbl,
+    query_interface : Proc(IWICMetadataWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICMetadataWriter*, UInt32),
+    release : Proc(IWICMetadataWriter*, UInt32),
+    get_metadata_format : Proc(IWICMetadataWriter*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_metadata_handler_info : Proc(IWICMetadataWriter*, Void**, Win32cr::Foundation::HRESULT),
+    get_count : Proc(IWICMetadataWriter*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_value_by_index : Proc(IWICMetadataWriter*, UInt32, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(IWICMetadataWriter*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    get_enumerator : Proc(IWICMetadataWriter*, Void**, Win32cr::Foundation::HRESULT),
+    set_value : Proc(IWICMetadataWriter*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    set_value_by_index : Proc(IWICMetadataWriter*, UInt32, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    remove_value : Proc(IWICMetadataWriter*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    remove_value_by_index : Proc(IWICMetadataWriter*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f7836e16-3be0-470b-86bb-160d0aecd7de")]
+  record IWICMetadataWriter, lpVtbl : IWICMetadataWriterVtbl* do
+    GUID = LibC::GUID.new(0xf7836e16_u32, 0x3be0_u16, 0x470b_u16, StaticArray[0x86_u8, 0xbb_u8, 0x16_u8, 0xd_u8, 0xa_u8, 0xec_u8, 0xd7_u8, 0xde_u8])
+    def query_interface(this : IWICMetadataWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICMetadataWriter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICMetadataWriter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_metadata_format(this : IWICMetadataWriter*, pguidMetadataFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_format.call(this, pguidMetadataFormat)
+    end
+    def get_metadata_handler_info(this : IWICMetadataWriter*, ppIHandler : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_handler_info.call(this, ppIHandler)
+    end
+    def get_count(this : IWICMetadataWriter*, pcCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_count.call(this, pcCount)
+    end
+    def get_value_by_index(this : IWICMetadataWriter*, nIndex : UInt32, pvarSchema : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarId : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_value_by_index.call(this, nIndex, pvarSchema, pvarId, pvarValue)
+    end
+    def get_value(this : IWICMetadataWriter*, pvarSchema : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarId : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_value.call(this, pvarSchema, pvarId, pvarValue)
+    end
+    def get_enumerator(this : IWICMetadataWriter*, ppIEnumMetadata : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_enumerator.call(this, ppIEnumMetadata)
+    end
+    def set_value(this : IWICMetadataWriter*, pvarSchema : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarId : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_value.call(this, pvarSchema, pvarId, pvarValue)
+    end
+    def set_value_by_index(this : IWICMetadataWriter*, nIndex : UInt32, pvarSchema : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarId : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_value_by_index.call(this, nIndex, pvarSchema, pvarId, pvarValue)
+    end
+    def remove_value(this : IWICMetadataWriter*, pvarSchema : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarId : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_value.call(this, pvarSchema, pvarId)
+    end
+    def remove_value_by_index(this : IWICMetadataWriter*, nIndex : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_value_by_index.call(this, nIndex)
+    end
+
+  end
+
+  @[Extern]
+  record IWICStreamProviderVtbl,
+    query_interface : Proc(IWICStreamProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICStreamProvider*, UInt32),
+    release : Proc(IWICStreamProvider*, UInt32),
+    get_stream : Proc(IWICStreamProvider*, Void**, Win32cr::Foundation::HRESULT),
+    get_persist_options : Proc(IWICStreamProvider*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_preferred_vendor_guid : Proc(IWICStreamProvider*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    refresh_stream : Proc(IWICStreamProvider*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("449494bc-b468-4927-96d7-ba90d31ab505")]
+  record IWICStreamProvider, lpVtbl : IWICStreamProviderVtbl* do
+    GUID = LibC::GUID.new(0x449494bc_u32, 0xb468_u16, 0x4927_u16, StaticArray[0x96_u8, 0xd7_u8, 0xba_u8, 0x90_u8, 0xd3_u8, 0x1a_u8, 0xb5_u8, 0x5_u8])
+    def query_interface(this : IWICStreamProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICStreamProvider*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICStreamProvider*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_stream(this : IWICStreamProvider*, ppIStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_stream.call(this, ppIStream)
+    end
+    def get_persist_options(this : IWICStreamProvider*, pdwPersistOptions : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_persist_options.call(this, pdwPersistOptions)
+    end
+    def get_preferred_vendor_guid(this : IWICStreamProvider*, pguidPreferredVendor : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_preferred_vendor_guid.call(this, pguidPreferredVendor)
+    end
+    def refresh_stream(this : IWICStreamProvider*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.refresh_stream.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record IWICPersistStreamVtbl,
+    query_interface : Proc(IWICPersistStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICPersistStream*, UInt32),
+    release : Proc(IWICPersistStream*, UInt32),
+    get_class_id : Proc(IWICPersistStream*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    is_dirty : Proc(IWICPersistStream*, Win32cr::Foundation::HRESULT),
+    load : Proc(IWICPersistStream*, Void*, Win32cr::Foundation::HRESULT),
+    save : Proc(IWICPersistStream*, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_size_max : Proc(IWICPersistStream*, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    load_ex : Proc(IWICPersistStream*, Void*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    save_ex : Proc(IWICPersistStream*, Void*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("00675040-6908-45f8-86a3-49c7dfd6d9ad")]
+  record IWICPersistStream, lpVtbl : IWICPersistStreamVtbl* do
+    GUID = LibC::GUID.new(0x675040_u32, 0x6908_u16, 0x45f8_u16, StaticArray[0x86_u8, 0xa3_u8, 0x49_u8, 0xc7_u8, 0xdf_u8, 0xd6_u8, 0xd9_u8, 0xad_u8])
+    def query_interface(this : IWICPersistStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICPersistStream*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICPersistStream*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_class_id(this : IWICPersistStream*, pClassID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_class_id.call(this, pClassID)
+    end
+    def is_dirty(this : IWICPersistStream*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_dirty.call(this)
+    end
+    def load(this : IWICPersistStream*, pStm : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load.call(this, pStm)
+    end
+    def save(this : IWICPersistStream*, pStm : Void*, fClearDirty : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save.call(this, pStm, fClearDirty)
+    end
+    def get_size_max(this : IWICPersistStream*, pcbSize : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_size_max.call(this, pcbSize)
+    end
+    def load_ex(this : IWICPersistStream*, pIStream : Void*, pguidPreferredVendor : LibC::GUID*, dwPersistOptions : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_ex.call(this, pIStream, pguidPreferredVendor, dwPersistOptions)
+    end
+    def save_ex(this : IWICPersistStream*, pIStream : Void*, dwPersistOptions : UInt32, fClearDirty : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_ex.call(this, pIStream, dwPersistOptions, fClearDirty)
+    end
+
+  end
+
+  @[Extern]
+  record IWICMetadataHandlerInfoVtbl,
+    query_interface : Proc(IWICMetadataHandlerInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICMetadataHandlerInfo*, UInt32),
+    release : Proc(IWICMetadataHandlerInfo*, UInt32),
+    get_component_type : Proc(IWICMetadataHandlerInfo*, Win32cr::Graphics::Imaging::WICComponentType*, Win32cr::Foundation::HRESULT),
+    get_clsid : Proc(IWICMetadataHandlerInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_signing_status : Proc(IWICMetadataHandlerInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_author : Proc(IWICMetadataHandlerInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_vendor_guid : Proc(IWICMetadataHandlerInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_version : Proc(IWICMetadataHandlerInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_spec_version : Proc(IWICMetadataHandlerInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_friendly_name : Proc(IWICMetadataHandlerInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_metadata_format : Proc(IWICMetadataHandlerInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_container_formats : Proc(IWICMetadataHandlerInfo*, UInt32, LibC::GUID*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_device_manufacturer : Proc(IWICMetadataHandlerInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_device_models : Proc(IWICMetadataHandlerInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    does_require_full_stream : Proc(IWICMetadataHandlerInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_support_padding : Proc(IWICMetadataHandlerInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_require_fixed_size : Proc(IWICMetadataHandlerInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("aba958bf-c672-44d1-8d61-ce6df2e682c2")]
+  record IWICMetadataHandlerInfo, lpVtbl : IWICMetadataHandlerInfoVtbl* do
+    GUID = LibC::GUID.new(0xaba958bf_u32, 0xc672_u16, 0x44d1_u16, StaticArray[0x8d_u8, 0x61_u8, 0xce_u8, 0x6d_u8, 0xf2_u8, 0xe6_u8, 0x82_u8, 0xc2_u8])
+    def query_interface(this : IWICMetadataHandlerInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICMetadataHandlerInfo*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICMetadataHandlerInfo*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_component_type(this : IWICMetadataHandlerInfo*, pType : Win32cr::Graphics::Imaging::WICComponentType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component_type.call(this, pType)
+    end
+    def get_clsid(this : IWICMetadataHandlerInfo*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_clsid.call(this, pclsid)
+    end
+    def get_signing_status(this : IWICMetadataHandlerInfo*, pStatus : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_signing_status.call(this, pStatus)
+    end
+    def get_author(this : IWICMetadataHandlerInfo*, cchAuthor : UInt32, wzAuthor : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_author.call(this, cchAuthor, wzAuthor, pcchActual)
+    end
+    def get_vendor_guid(this : IWICMetadataHandlerInfo*, pguidVendor : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_vendor_guid.call(this, pguidVendor)
+    end
+    def get_version(this : IWICMetadataHandlerInfo*, cchVersion : UInt32, wzVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_version.call(this, cchVersion, wzVersion, pcchActual)
+    end
+    def get_spec_version(this : IWICMetadataHandlerInfo*, cchSpecVersion : UInt32, wzSpecVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_spec_version.call(this, cchSpecVersion, wzSpecVersion, pcchActual)
+    end
+    def get_friendly_name(this : IWICMetadataHandlerInfo*, cchFriendlyName : UInt32, wzFriendlyName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_friendly_name.call(this, cchFriendlyName, wzFriendlyName, pcchActual)
+    end
+    def get_metadata_format(this : IWICMetadataHandlerInfo*, pguidMetadataFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_format.call(this, pguidMetadataFormat)
+    end
+    def get_container_formats(this : IWICMetadataHandlerInfo*, cContainerFormats : UInt32, pguidContainerFormats : LibC::GUID*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_container_formats.call(this, cContainerFormats, pguidContainerFormats, pcchActual)
+    end
+    def get_device_manufacturer(this : IWICMetadataHandlerInfo*, cchDeviceManufacturer : UInt32, wzDeviceManufacturer : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_manufacturer.call(this, cchDeviceManufacturer, wzDeviceManufacturer, pcchActual)
+    end
+    def get_device_models(this : IWICMetadataHandlerInfo*, cchDeviceModels : UInt32, wzDeviceModels : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_models.call(this, cchDeviceModels, wzDeviceModels, pcchActual)
+    end
+    def does_require_full_stream(this : IWICMetadataHandlerInfo*, pfRequiresFullStream : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_require_full_stream.call(this, pfRequiresFullStream)
+    end
+    def does_support_padding(this : IWICMetadataHandlerInfo*, pfSupportsPadding : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_padding.call(this, pfSupportsPadding)
+    end
+    def does_require_fixed_size(this : IWICMetadataHandlerInfo*, pfFixedSize : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_require_fixed_size.call(this, pfFixedSize)
+    end
+
+  end
+
+  @[Extern]
+  record IWICMetadataReaderInfoVtbl,
+    query_interface : Proc(IWICMetadataReaderInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICMetadataReaderInfo*, UInt32),
+    release : Proc(IWICMetadataReaderInfo*, UInt32),
+    get_component_type : Proc(IWICMetadataReaderInfo*, Win32cr::Graphics::Imaging::WICComponentType*, Win32cr::Foundation::HRESULT),
+    get_clsid : Proc(IWICMetadataReaderInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_signing_status : Proc(IWICMetadataReaderInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_author : Proc(IWICMetadataReaderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_vendor_guid : Proc(IWICMetadataReaderInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_version : Proc(IWICMetadataReaderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_spec_version : Proc(IWICMetadataReaderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_friendly_name : Proc(IWICMetadataReaderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_metadata_format : Proc(IWICMetadataReaderInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_container_formats : Proc(IWICMetadataReaderInfo*, UInt32, LibC::GUID*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_device_manufacturer : Proc(IWICMetadataReaderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_device_models : Proc(IWICMetadataReaderInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    does_require_full_stream : Proc(IWICMetadataReaderInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_support_padding : Proc(IWICMetadataReaderInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_require_fixed_size : Proc(IWICMetadataReaderInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_patterns : Proc(IWICMetadataReaderInfo*, LibC::GUID*, UInt32, Win32cr::Graphics::Imaging::WICMetadataPattern*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    matches_pattern : Proc(IWICMetadataReaderInfo*, LibC::GUID*, Void*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    create_instance : Proc(IWICMetadataReaderInfo*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("eebf1f5b-07c1-4447-a3ab-22acaf78a804")]
+  record IWICMetadataReaderInfo, lpVtbl : IWICMetadataReaderInfoVtbl* do
+    GUID = LibC::GUID.new(0xeebf1f5b_u32, 0x7c1_u16, 0x4447_u16, StaticArray[0xa3_u8, 0xab_u8, 0x22_u8, 0xac_u8, 0xaf_u8, 0x78_u8, 0xa8_u8, 0x4_u8])
+    def query_interface(this : IWICMetadataReaderInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICMetadataReaderInfo*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICMetadataReaderInfo*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_component_type(this : IWICMetadataReaderInfo*, pType : Win32cr::Graphics::Imaging::WICComponentType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component_type.call(this, pType)
+    end
+    def get_clsid(this : IWICMetadataReaderInfo*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_clsid.call(this, pclsid)
+    end
+    def get_signing_status(this : IWICMetadataReaderInfo*, pStatus : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_signing_status.call(this, pStatus)
+    end
+    def get_author(this : IWICMetadataReaderInfo*, cchAuthor : UInt32, wzAuthor : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_author.call(this, cchAuthor, wzAuthor, pcchActual)
+    end
+    def get_vendor_guid(this : IWICMetadataReaderInfo*, pguidVendor : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_vendor_guid.call(this, pguidVendor)
+    end
+    def get_version(this : IWICMetadataReaderInfo*, cchVersion : UInt32, wzVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_version.call(this, cchVersion, wzVersion, pcchActual)
+    end
+    def get_spec_version(this : IWICMetadataReaderInfo*, cchSpecVersion : UInt32, wzSpecVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_spec_version.call(this, cchSpecVersion, wzSpecVersion, pcchActual)
+    end
+    def get_friendly_name(this : IWICMetadataReaderInfo*, cchFriendlyName : UInt32, wzFriendlyName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_friendly_name.call(this, cchFriendlyName, wzFriendlyName, pcchActual)
+    end
+    def get_metadata_format(this : IWICMetadataReaderInfo*, pguidMetadataFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_format.call(this, pguidMetadataFormat)
+    end
+    def get_container_formats(this : IWICMetadataReaderInfo*, cContainerFormats : UInt32, pguidContainerFormats : LibC::GUID*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_container_formats.call(this, cContainerFormats, pguidContainerFormats, pcchActual)
+    end
+    def get_device_manufacturer(this : IWICMetadataReaderInfo*, cchDeviceManufacturer : UInt32, wzDeviceManufacturer : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_manufacturer.call(this, cchDeviceManufacturer, wzDeviceManufacturer, pcchActual)
+    end
+    def get_device_models(this : IWICMetadataReaderInfo*, cchDeviceModels : UInt32, wzDeviceModels : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_models.call(this, cchDeviceModels, wzDeviceModels, pcchActual)
+    end
+    def does_require_full_stream(this : IWICMetadataReaderInfo*, pfRequiresFullStream : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_require_full_stream.call(this, pfRequiresFullStream)
+    end
+    def does_support_padding(this : IWICMetadataReaderInfo*, pfSupportsPadding : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_padding.call(this, pfSupportsPadding)
+    end
+    def does_require_fixed_size(this : IWICMetadataReaderInfo*, pfFixedSize : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_require_fixed_size.call(this, pfFixedSize)
+    end
+    def get_patterns(this : IWICMetadataReaderInfo*, guidContainerFormat : LibC::GUID*, cbSize : UInt32, pPattern : Win32cr::Graphics::Imaging::WICMetadataPattern*, pcCount : UInt32*, pcbActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_patterns.call(this, guidContainerFormat, cbSize, pPattern, pcCount, pcbActual)
+    end
+    def matches_pattern(this : IWICMetadataReaderInfo*, guidContainerFormat : LibC::GUID*, pIStream : Void*, pfMatches : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.matches_pattern.call(this, guidContainerFormat, pIStream, pfMatches)
+    end
+    def create_instance(this : IWICMetadataReaderInfo*, ppIReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_instance.call(this, ppIReader)
+    end
+
+  end
+
+  @[Extern]
+  record IWICMetadataWriterInfoVtbl,
+    query_interface : Proc(IWICMetadataWriterInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICMetadataWriterInfo*, UInt32),
+    release : Proc(IWICMetadataWriterInfo*, UInt32),
+    get_component_type : Proc(IWICMetadataWriterInfo*, Win32cr::Graphics::Imaging::WICComponentType*, Win32cr::Foundation::HRESULT),
+    get_clsid : Proc(IWICMetadataWriterInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_signing_status : Proc(IWICMetadataWriterInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_author : Proc(IWICMetadataWriterInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_vendor_guid : Proc(IWICMetadataWriterInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_version : Proc(IWICMetadataWriterInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_spec_version : Proc(IWICMetadataWriterInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_friendly_name : Proc(IWICMetadataWriterInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_metadata_format : Proc(IWICMetadataWriterInfo*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_container_formats : Proc(IWICMetadataWriterInfo*, UInt32, LibC::GUID*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_device_manufacturer : Proc(IWICMetadataWriterInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_device_models : Proc(IWICMetadataWriterInfo*, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    does_require_full_stream : Proc(IWICMetadataWriterInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_support_padding : Proc(IWICMetadataWriterInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    does_require_fixed_size : Proc(IWICMetadataWriterInfo*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_header : Proc(IWICMetadataWriterInfo*, LibC::GUID*, UInt32, Win32cr::Graphics::Imaging::WICMetadataHeader*, UInt32*, Win32cr::Foundation::HRESULT),
+    create_instance : Proc(IWICMetadataWriterInfo*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b22e3fba-3925-4323-b5c1-9ebfc430f236")]
+  record IWICMetadataWriterInfo, lpVtbl : IWICMetadataWriterInfoVtbl* do
+    GUID = LibC::GUID.new(0xb22e3fba_u32, 0x3925_u16, 0x4323_u16, StaticArray[0xb5_u8, 0xc1_u8, 0x9e_u8, 0xbf_u8, 0xc4_u8, 0x30_u8, 0xf2_u8, 0x36_u8])
+    def query_interface(this : IWICMetadataWriterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICMetadataWriterInfo*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICMetadataWriterInfo*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_component_type(this : IWICMetadataWriterInfo*, pType : Win32cr::Graphics::Imaging::WICComponentType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component_type.call(this, pType)
+    end
+    def get_clsid(this : IWICMetadataWriterInfo*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_clsid.call(this, pclsid)
+    end
+    def get_signing_status(this : IWICMetadataWriterInfo*, pStatus : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_signing_status.call(this, pStatus)
+    end
+    def get_author(this : IWICMetadataWriterInfo*, cchAuthor : UInt32, wzAuthor : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_author.call(this, cchAuthor, wzAuthor, pcchActual)
+    end
+    def get_vendor_guid(this : IWICMetadataWriterInfo*, pguidVendor : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_vendor_guid.call(this, pguidVendor)
+    end
+    def get_version(this : IWICMetadataWriterInfo*, cchVersion : UInt32, wzVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_version.call(this, cchVersion, wzVersion, pcchActual)
+    end
+    def get_spec_version(this : IWICMetadataWriterInfo*, cchSpecVersion : UInt32, wzSpecVersion : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_spec_version.call(this, cchSpecVersion, wzSpecVersion, pcchActual)
+    end
+    def get_friendly_name(this : IWICMetadataWriterInfo*, cchFriendlyName : UInt32, wzFriendlyName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_friendly_name.call(this, cchFriendlyName, wzFriendlyName, pcchActual)
+    end
+    def get_metadata_format(this : IWICMetadataWriterInfo*, pguidMetadataFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_metadata_format.call(this, pguidMetadataFormat)
+    end
+    def get_container_formats(this : IWICMetadataWriterInfo*, cContainerFormats : UInt32, pguidContainerFormats : LibC::GUID*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_container_formats.call(this, cContainerFormats, pguidContainerFormats, pcchActual)
+    end
+    def get_device_manufacturer(this : IWICMetadataWriterInfo*, cchDeviceManufacturer : UInt32, wzDeviceManufacturer : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_manufacturer.call(this, cchDeviceManufacturer, wzDeviceManufacturer, pcchActual)
+    end
+    def get_device_models(this : IWICMetadataWriterInfo*, cchDeviceModels : UInt32, wzDeviceModels : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_models.call(this, cchDeviceModels, wzDeviceModels, pcchActual)
+    end
+    def does_require_full_stream(this : IWICMetadataWriterInfo*, pfRequiresFullStream : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_require_full_stream.call(this, pfRequiresFullStream)
+    end
+    def does_support_padding(this : IWICMetadataWriterInfo*, pfSupportsPadding : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_support_padding.call(this, pfSupportsPadding)
+    end
+    def does_require_fixed_size(this : IWICMetadataWriterInfo*, pfFixedSize : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.does_require_fixed_size.call(this, pfFixedSize)
+    end
+    def get_header(this : IWICMetadataWriterInfo*, guidContainerFormat : LibC::GUID*, cbSize : UInt32, pHeader : Win32cr::Graphics::Imaging::WICMetadataHeader*, pcbActual : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_header.call(this, guidContainerFormat, cbSize, pHeader, pcbActual)
+    end
+    def create_instance(this : IWICMetadataWriterInfo*, ppIWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_instance.call(this, ppIWriter)
+    end
+
+  end
+
+  @[Extern]
+  record IWICComponentFactoryVtbl,
+    query_interface : Proc(IWICComponentFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWICComponentFactory*, UInt32),
+    release : Proc(IWICComponentFactory*, UInt32),
+    create_decoder_from_filename : Proc(IWICComponentFactory*, Win32cr::Foundation::PWSTR, LibC::GUID*, UInt32, Win32cr::Graphics::Imaging::WICDecodeOptions, Void**, Win32cr::Foundation::HRESULT),
+    create_decoder_from_stream : Proc(IWICComponentFactory*, Void*, LibC::GUID*, Win32cr::Graphics::Imaging::WICDecodeOptions, Void**, Win32cr::Foundation::HRESULT),
+    create_decoder_from_file_handle : Proc(IWICComponentFactory*, LibC::UIntPtrT, LibC::GUID*, Win32cr::Graphics::Imaging::WICDecodeOptions, Void**, Win32cr::Foundation::HRESULT),
+    create_component_info : Proc(IWICComponentFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_decoder : Proc(IWICComponentFactory*, LibC::GUID*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_encoder : Proc(IWICComponentFactory*, LibC::GUID*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_palette : Proc(IWICComponentFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_format_converter : Proc(IWICComponentFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_scaler : Proc(IWICComponentFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_clipper : Proc(IWICComponentFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_flip_rotator : Proc(IWICComponentFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_stream : Proc(IWICComponentFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_color_context : Proc(IWICComponentFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_color_transformer : Proc(IWICComponentFactory*, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap : Proc(IWICComponentFactory*, UInt32, UInt32, LibC::GUID*, Win32cr::Graphics::Imaging::WICBitmapCreateCacheOption, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_from_source : Proc(IWICComponentFactory*, Void*, Win32cr::Graphics::Imaging::WICBitmapCreateCacheOption, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_from_source_rect : Proc(IWICComponentFactory*, Void*, UInt32, UInt32, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_from_memory : Proc(IWICComponentFactory*, UInt32, UInt32, LibC::GUID*, UInt32, UInt32, UInt8*, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_from_hbitmap : Proc(IWICComponentFactory*, Win32cr::Graphics::Gdi::HBITMAP, Win32cr::Graphics::Gdi::HPALETTE, Win32cr::Graphics::Imaging::WICBitmapAlphaChannelOption, Void**, Win32cr::Foundation::HRESULT),
+    create_bitmap_from_hicon : Proc(IWICComponentFactory*, Win32cr::UI::WindowsAndMessaging::HICON, Void**, Win32cr::Foundation::HRESULT),
+    create_component_enumerator : Proc(IWICComponentFactory*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_fast_metadata_encoder_from_decoder : Proc(IWICComponentFactory*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_fast_metadata_encoder_from_frame_decode : Proc(IWICComponentFactory*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_query_writer : Proc(IWICComponentFactory*, LibC::GUID*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_query_writer_from_reader : Proc(IWICComponentFactory*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_metadata_reader : Proc(IWICComponentFactory*, LibC::GUID*, LibC::GUID*, UInt32, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_metadata_reader_from_container : Proc(IWICComponentFactory*, LibC::GUID*, LibC::GUID*, UInt32, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_metadata_writer : Proc(IWICComponentFactory*, LibC::GUID*, LibC::GUID*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_metadata_writer_from_reader : Proc(IWICComponentFactory*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_query_reader_from_block_reader : Proc(IWICComponentFactory*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_query_writer_from_block_writer : Proc(IWICComponentFactory*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    create_encoder_property_bag : Proc(IWICComponentFactory*, Win32cr::System::Com::StructuredStorage::PROPBAG2*, UInt32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("412d0c3a-9650-44fa-af5b-dd2a06c8e8fb")]
+  record IWICComponentFactory, lpVtbl : IWICComponentFactoryVtbl* do
+    GUID = LibC::GUID.new(0x412d0c3a_u32, 0x9650_u16, 0x44fa_u16, StaticArray[0xaf_u8, 0x5b_u8, 0xdd_u8, 0x2a_u8, 0x6_u8, 0xc8_u8, 0xe8_u8, 0xfb_u8])
+    def query_interface(this : IWICComponentFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWICComponentFactory*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWICComponentFactory*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def create_decoder_from_filename(this : IWICComponentFactory*, wzFilename : Win32cr::Foundation::PWSTR, pguidVendor : LibC::GUID*, dwDesiredAccess : UInt32, metadataOptions : Win32cr::Graphics::Imaging::WICDecodeOptions, ppIDecoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_decoder_from_filename.call(this, wzFilename, pguidVendor, dwDesiredAccess, metadataOptions, ppIDecoder)
+    end
+    def create_decoder_from_stream(this : IWICComponentFactory*, pIStream : Void*, pguidVendor : LibC::GUID*, metadataOptions : Win32cr::Graphics::Imaging::WICDecodeOptions, ppIDecoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_decoder_from_stream.call(this, pIStream, pguidVendor, metadataOptions, ppIDecoder)
+    end
+    def create_decoder_from_file_handle(this : IWICComponentFactory*, hFile : LibC::UIntPtrT, pguidVendor : LibC::GUID*, metadataOptions : Win32cr::Graphics::Imaging::WICDecodeOptions, ppIDecoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_decoder_from_file_handle.call(this, hFile, pguidVendor, metadataOptions, ppIDecoder)
+    end
+    def create_component_info(this : IWICComponentFactory*, clsidComponent : LibC::GUID*, ppIInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_component_info.call(this, clsidComponent, ppIInfo)
+    end
+    def create_decoder(this : IWICComponentFactory*, guidContainerFormat : LibC::GUID*, pguidVendor : LibC::GUID*, ppIDecoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_decoder.call(this, guidContainerFormat, pguidVendor, ppIDecoder)
+    end
+    def create_encoder(this : IWICComponentFactory*, guidContainerFormat : LibC::GUID*, pguidVendor : LibC::GUID*, ppIEncoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_encoder.call(this, guidContainerFormat, pguidVendor, ppIEncoder)
+    end
+    def create_palette(this : IWICComponentFactory*, ppIPalette : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_palette.call(this, ppIPalette)
+    end
+    def create_format_converter(this : IWICComponentFactory*, ppIFormatConverter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_format_converter.call(this, ppIFormatConverter)
+    end
+    def create_bitmap_scaler(this : IWICComponentFactory*, ppIBitmapScaler : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_scaler.call(this, ppIBitmapScaler)
+    end
+    def create_bitmap_clipper(this : IWICComponentFactory*, ppIBitmapClipper : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_clipper.call(this, ppIBitmapClipper)
+    end
+    def create_bitmap_flip_rotator(this : IWICComponentFactory*, ppIBitmapFlipRotator : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_flip_rotator.call(this, ppIBitmapFlipRotator)
+    end
+    def create_stream(this : IWICComponentFactory*, ppIWICStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_stream.call(this, ppIWICStream)
+    end
+    def create_color_context(this : IWICComponentFactory*, ppIWICColorContext : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_color_context.call(this, ppIWICColorContext)
+    end
+    def create_color_transformer(this : IWICComponentFactory*, ppIWICColorTransform : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_color_transformer.call(this, ppIWICColorTransform)
+    end
+    def create_bitmap(this : IWICComponentFactory*, uiWidth : UInt32, uiHeight : UInt32, pixelFormat : LibC::GUID*, option : Win32cr::Graphics::Imaging::WICBitmapCreateCacheOption, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap.call(this, uiWidth, uiHeight, pixelFormat, option, ppIBitmap)
+    end
+    def create_bitmap_from_source(this : IWICComponentFactory*, pIBitmapSource : Void*, option : Win32cr::Graphics::Imaging::WICBitmapCreateCacheOption, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_from_source.call(this, pIBitmapSource, option, ppIBitmap)
+    end
+    def create_bitmap_from_source_rect(this : IWICComponentFactory*, pIBitmapSource : Void*, x : UInt32, y : UInt32, width : UInt32, height : UInt32, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_from_source_rect.call(this, pIBitmapSource, x, y, width, height, ppIBitmap)
+    end
+    def create_bitmap_from_memory(this : IWICComponentFactory*, uiWidth : UInt32, uiHeight : UInt32, pixelFormat : LibC::GUID*, cbStride : UInt32, cbBufferSize : UInt32, pbBuffer : UInt8*, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_from_memory.call(this, uiWidth, uiHeight, pixelFormat, cbStride, cbBufferSize, pbBuffer, ppIBitmap)
+    end
+    def create_bitmap_from_hbitmap(this : IWICComponentFactory*, hBitmap : Win32cr::Graphics::Gdi::HBITMAP, hPalette : Win32cr::Graphics::Gdi::HPALETTE, options : Win32cr::Graphics::Imaging::WICBitmapAlphaChannelOption, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_from_hbitmap.call(this, hBitmap, hPalette, options, ppIBitmap)
+    end
+    def create_bitmap_from_hicon(this : IWICComponentFactory*, hIcon : Win32cr::UI::WindowsAndMessaging::HICON, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_bitmap_from_hicon.call(this, hIcon, ppIBitmap)
+    end
+    def create_component_enumerator(this : IWICComponentFactory*, componentTypes : UInt32, options : UInt32, ppIEnumUnknown : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_component_enumerator.call(this, componentTypes, options, ppIEnumUnknown)
+    end
+    def create_fast_metadata_encoder_from_decoder(this : IWICComponentFactory*, pIDecoder : Void*, ppIFastEncoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_fast_metadata_encoder_from_decoder.call(this, pIDecoder, ppIFastEncoder)
+    end
+    def create_fast_metadata_encoder_from_frame_decode(this : IWICComponentFactory*, pIFrameDecoder : Void*, ppIFastEncoder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_fast_metadata_encoder_from_frame_decode.call(this, pIFrameDecoder, ppIFastEncoder)
+    end
+    def create_query_writer(this : IWICComponentFactory*, guidMetadataFormat : LibC::GUID*, pguidVendor : LibC::GUID*, ppIQueryWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_query_writer.call(this, guidMetadataFormat, pguidVendor, ppIQueryWriter)
+    end
+    def create_query_writer_from_reader(this : IWICComponentFactory*, pIQueryReader : Void*, pguidVendor : LibC::GUID*, ppIQueryWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_query_writer_from_reader.call(this, pIQueryReader, pguidVendor, ppIQueryWriter)
+    end
+    def create_metadata_reader(this : IWICComponentFactory*, guidMetadataFormat : LibC::GUID*, pguidVendor : LibC::GUID*, dwOptions : UInt32, pIStream : Void*, ppIReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_metadata_reader.call(this, guidMetadataFormat, pguidVendor, dwOptions, pIStream, ppIReader)
+    end
+    def create_metadata_reader_from_container(this : IWICComponentFactory*, guidContainerFormat : LibC::GUID*, pguidVendor : LibC::GUID*, dwOptions : UInt32, pIStream : Void*, ppIReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_metadata_reader_from_container.call(this, guidContainerFormat, pguidVendor, dwOptions, pIStream, ppIReader)
+    end
+    def create_metadata_writer(this : IWICComponentFactory*, guidMetadataFormat : LibC::GUID*, pguidVendor : LibC::GUID*, dwMetadataOptions : UInt32, ppIWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_metadata_writer.call(this, guidMetadataFormat, pguidVendor, dwMetadataOptions, ppIWriter)
+    end
+    def create_metadata_writer_from_reader(this : IWICComponentFactory*, pIReader : Void*, pguidVendor : LibC::GUID*, ppIWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_metadata_writer_from_reader.call(this, pIReader, pguidVendor, ppIWriter)
+    end
+    def create_query_reader_from_block_reader(this : IWICComponentFactory*, pIBlockReader : Void*, ppIQueryReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_query_reader_from_block_reader.call(this, pIBlockReader, ppIQueryReader)
+    end
+    def create_query_writer_from_block_writer(this : IWICComponentFactory*, pIBlockWriter : Void*, ppIQueryWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_query_writer_from_block_writer.call(this, pIBlockWriter, ppIQueryWriter)
+    end
+    def create_encoder_property_bag(this : IWICComponentFactory*, ppropOptions : Win32cr::System::Com::StructuredStorage::PROPBAG2*, cCount : UInt32, ppIPropertyBag : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_encoder_property_bag.call(this, ppropOptions, cCount, ppIPropertyBag)
+    end
+
+  end
+
+  @[Link("windowscodecs")]
+  lib C
+    fun WICConvertBitmapSource(dstFormat : LibC::GUID*, pISrc : Void*, ppIDst : Void**) : Win32cr::Foundation::HRESULT
+
+    fun WICCreateBitmapFromSection(width : UInt32, height : UInt32, pixelFormat : LibC::GUID*, hSection : Win32cr::Foundation::HANDLE, stride : UInt32, offset : UInt32, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+
+    fun WICCreateBitmapFromSectionEx(width : UInt32, height : UInt32, pixelFormat : LibC::GUID*, hSection : Win32cr::Foundation::HANDLE, stride : UInt32, offset : UInt32, desiredAccessLevel : Win32cr::Graphics::Imaging::WICSectionAccessLevel, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+
+    fun WICMapGuidToShortName(guid : LibC::GUID*, cchName : UInt32, wzName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+
+    fun WICMapShortNameToGuid(wzName : Win32cr::Foundation::PWSTR, pguid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+
+    fun WICMapSchemaToName(guidMetadataFormat : LibC::GUID*, pwzSchema : Win32cr::Foundation::PWSTR, cchName : UInt32, wzName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+
+    fun WICMatchMetadataContent(guidContainerFormat : LibC::GUID*, pguidVendor : LibC::GUID*, pIStream : Void*, pguidMetadataFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+
+    fun WICSerializeMetadataContent(guidContainerFormat : LibC::GUID*, pIWriter : Void*, dwPersistOptions : UInt32, pIStream : Void*) : Win32cr::Foundation::HRESULT
+
+    fun WICGetMetadataContentSize(guidContainerFormat : LibC::GUID*, pIWriter : Void*, pcbSize : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
 
-  # Params # dstformat : Guid* [In],pisrc : IWICBitmapSource [In],ppidst : IWICBitmapSource* [In]
-  fun WICConvertBitmapSource(dstformat : Guid*, pisrc : IWICBitmapSource, ppidst : IWICBitmapSource*) : HRESULT
-
-  # Params # width : UInt32 [In],height : UInt32 [In],pixelformat : Guid* [In],hsection : LibC::HANDLE [In],stride : UInt32 [In],offset : UInt32 [In],ppibitmap : IWICBitmap* [In]
-  fun WICCreateBitmapFromSection(width : UInt32, height : UInt32, pixelformat : Guid*, hsection : LibC::HANDLE, stride : UInt32, offset : UInt32, ppibitmap : IWICBitmap*) : HRESULT
-
-  # Params # width : UInt32 [In],height : UInt32 [In],pixelformat : Guid* [In],hsection : LibC::HANDLE [In],stride : UInt32 [In],offset : UInt32 [In],desiredaccesslevel : WICSectionAccessLevel [In],ppibitmap : IWICBitmap* [In]
-  fun WICCreateBitmapFromSectionEx(width : UInt32, height : UInt32, pixelformat : Guid*, hsection : LibC::HANDLE, stride : UInt32, offset : UInt32, desiredaccesslevel : WICSectionAccessLevel, ppibitmap : IWICBitmap*) : HRESULT
-
-  # Params # guid : Guid* [In],cchname : UInt32 [In],wzname : Char* [In],pcchactual : UInt32* [In]
-  fun WICMapGuidToShortName(guid : Guid*, cchname : UInt32, wzname : Char*, pcchactual : UInt32*) : HRESULT
-
-  # Params # wzname : LibC::LPWSTR [In],pguid : Guid* [In]
-  fun WICMapShortNameToGuid(wzname : LibC::LPWSTR, pguid : Guid*) : HRESULT
-
-  # Params # guidmetadataformat : Guid* [In],pwzschema : LibC::LPWSTR [In],cchname : UInt32 [In],wzname : Char* [In],pcchactual : UInt32* [In]
-  fun WICMapSchemaToName(guidmetadataformat : Guid*, pwzschema : LibC::LPWSTR, cchname : UInt32, wzname : Char*, pcchactual : UInt32*) : HRESULT
-
-  # Params # guidcontainerformat : Guid* [In],pguidvendor : Guid* [In],pistream : IStream [In],pguidmetadataformat : Guid* [In]
-  fun WICMatchMetadataContent(guidcontainerformat : Guid*, pguidvendor : Guid*, pistream : IStream, pguidmetadataformat : Guid*) : HRESULT
-
-  # Params # guidcontainerformat : Guid* [In],piwriter : IWICMetadataWriter [In],dwpersistoptions : UInt32 [In],pistream : IStream [In]
-  fun WICSerializeMetadataContent(guidcontainerformat : Guid*, piwriter : IWICMetadataWriter, dwpersistoptions : UInt32, pistream : IStream) : HRESULT
-
-  # Params # guidcontainerformat : Guid* [In],piwriter : IWICMetadataWriter [In],pcbsize : ULARGE_INTEGER* [In]
-  fun WICGetMetadataContentSize(guidcontainerformat : Guid*, piwriter : IWICMetadataWriter, pcbsize : ULARGE_INTEGER*) : HRESULT
-end
-struct LibWin32::IWICPalette
-  def query_interface(this : IWICPalette*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICPalette*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICPalette*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def initialize_predefined(this : IWICPalette*, epalettetype : WICBitmapPaletteType, faddtransparentcolor : LibC::BOOL) : HRESULT
-    @lpVtbl.value.initialize_predefined.call(this, epalettetype, faddtransparentcolor)
-  end
-  def initialize_custom(this : IWICPalette*, pcolors : UInt32*, ccount : UInt32) : HRESULT
-    @lpVtbl.value.initialize_custom.call(this, pcolors, ccount)
-  end
-  def initialize_from_bitmap(this : IWICPalette*, pisurface : IWICBitmapSource, ccount : UInt32, faddtransparentcolor : LibC::BOOL) : HRESULT
-    @lpVtbl.value.initialize_from_bitmap.call(this, pisurface, ccount, faddtransparentcolor)
-  end
-  def initialize_from_palette(this : IWICPalette*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.initialize_from_palette.call(this, pipalette)
-  end
-  def get_type(this : IWICPalette*, pepalettetype : WICBitmapPaletteType*) : HRESULT
-    @lpVtbl.value.get_type.call(this, pepalettetype)
-  end
-  def get_color_count(this : IWICPalette*, pccount : UInt32*) : HRESULT
-    @lpVtbl.value.get_color_count.call(this, pccount)
-  end
-  def get_colors(this : IWICPalette*, ccount : UInt32, pcolors : UInt32*, pcactualcolors : UInt32*) : HRESULT
-    @lpVtbl.value.get_colors.call(this, ccount, pcolors, pcactualcolors)
-  end
-  def is_black_white(this : IWICPalette*, pfisblackwhite : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_black_white.call(this, pfisblackwhite)
-  end
-  def is_grayscale(this : IWICPalette*, pfisgrayscale : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_grayscale.call(this, pfisgrayscale)
-  end
-  def has_alpha(this : IWICPalette*, pfhasalpha : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.has_alpha.call(this, pfhasalpha)
-  end
-end
-struct LibWin32::IWICBitmapSource
-  def query_interface(this : IWICBitmapSource*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapSource*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapSource*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_size(this : IWICBitmapSource*, puiwidth : UInt32*, puiheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_size.call(this, puiwidth, puiheight)
-  end
-  def get_pixel_format(this : IWICBitmapSource*, ppixelformat : Guid*) : HRESULT
-    @lpVtbl.value.get_pixel_format.call(this, ppixelformat)
-  end
-  def get_resolution(this : IWICBitmapSource*, pdpix : Float64*, pdpiy : Float64*) : HRESULT
-    @lpVtbl.value.get_resolution.call(this, pdpix, pdpiy)
-  end
-  def copy_palette(this : IWICBitmapSource*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.copy_palette.call(this, pipalette)
-  end
-  def copy_pixels(this : IWICBitmapSource*, prc : WICRect*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*) : HRESULT
-    @lpVtbl.value.copy_pixels.call(this, prc, cbstride, cbbuffersize, pbbuffer)
-  end
-end
-struct LibWin32::IWICFormatConverter
-  def query_interface(this : IWICFormatConverter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICFormatConverter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICFormatConverter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_size(this : IWICFormatConverter*, puiwidth : UInt32*, puiheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_size.call(this, puiwidth, puiheight)
-  end
-  def get_pixel_format(this : IWICFormatConverter*, ppixelformat : Guid*) : HRESULT
-    @lpVtbl.value.get_pixel_format.call(this, ppixelformat)
-  end
-  def get_resolution(this : IWICFormatConverter*, pdpix : Float64*, pdpiy : Float64*) : HRESULT
-    @lpVtbl.value.get_resolution.call(this, pdpix, pdpiy)
-  end
-  def copy_palette(this : IWICFormatConverter*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.copy_palette.call(this, pipalette)
-  end
-  def copy_pixels(this : IWICFormatConverter*, prc : WICRect*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*) : HRESULT
-    @lpVtbl.value.copy_pixels.call(this, prc, cbstride, cbbuffersize, pbbuffer)
-  end
-  def initialize(this : IWICFormatConverter*, pisource : IWICBitmapSource, dstformat : Guid*, dither : WICBitmapDitherType, pipalette : IWICPalette, alphathresholdpercent : Float64, palettetranslate : WICBitmapPaletteType) : HRESULT
-    @lpVtbl.value.initialize.call(this, pisource, dstformat, dither, pipalette, alphathresholdpercent, palettetranslate)
-  end
-  def can_convert(this : IWICFormatConverter*, srcpixelformat : Guid*, dstpixelformat : Guid*, pfcanconvert : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.can_convert.call(this, srcpixelformat, dstpixelformat, pfcanconvert)
-  end
-end
-struct LibWin32::IWICPlanarFormatConverter
-  def query_interface(this : IWICPlanarFormatConverter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICPlanarFormatConverter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICPlanarFormatConverter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_size(this : IWICPlanarFormatConverter*, puiwidth : UInt32*, puiheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_size.call(this, puiwidth, puiheight)
-  end
-  def get_pixel_format(this : IWICPlanarFormatConverter*, ppixelformat : Guid*) : HRESULT
-    @lpVtbl.value.get_pixel_format.call(this, ppixelformat)
-  end
-  def get_resolution(this : IWICPlanarFormatConverter*, pdpix : Float64*, pdpiy : Float64*) : HRESULT
-    @lpVtbl.value.get_resolution.call(this, pdpix, pdpiy)
-  end
-  def copy_palette(this : IWICPlanarFormatConverter*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.copy_palette.call(this, pipalette)
-  end
-  def copy_pixels(this : IWICPlanarFormatConverter*, prc : WICRect*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*) : HRESULT
-    @lpVtbl.value.copy_pixels.call(this, prc, cbstride, cbbuffersize, pbbuffer)
-  end
-  def initialize(this : IWICPlanarFormatConverter*, ppplanes : IWICBitmapSource*, cplanes : UInt32, dstformat : Guid*, dither : WICBitmapDitherType, pipalette : IWICPalette, alphathresholdpercent : Float64, palettetranslate : WICBitmapPaletteType) : HRESULT
-    @lpVtbl.value.initialize.call(this, ppplanes, cplanes, dstformat, dither, pipalette, alphathresholdpercent, palettetranslate)
-  end
-  def can_convert(this : IWICPlanarFormatConverter*, psrcpixelformats : Guid*, csrcplanes : UInt32, dstpixelformat : Guid*, pfcanconvert : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.can_convert.call(this, psrcpixelformats, csrcplanes, dstpixelformat, pfcanconvert)
-  end
-end
-struct LibWin32::IWICBitmapScaler
-  def query_interface(this : IWICBitmapScaler*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapScaler*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapScaler*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_size(this : IWICBitmapScaler*, puiwidth : UInt32*, puiheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_size.call(this, puiwidth, puiheight)
-  end
-  def get_pixel_format(this : IWICBitmapScaler*, ppixelformat : Guid*) : HRESULT
-    @lpVtbl.value.get_pixel_format.call(this, ppixelformat)
-  end
-  def get_resolution(this : IWICBitmapScaler*, pdpix : Float64*, pdpiy : Float64*) : HRESULT
-    @lpVtbl.value.get_resolution.call(this, pdpix, pdpiy)
-  end
-  def copy_palette(this : IWICBitmapScaler*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.copy_palette.call(this, pipalette)
-  end
-  def copy_pixels(this : IWICBitmapScaler*, prc : WICRect*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*) : HRESULT
-    @lpVtbl.value.copy_pixels.call(this, prc, cbstride, cbbuffersize, pbbuffer)
-  end
-  def initialize(this : IWICBitmapScaler*, pisource : IWICBitmapSource, uiwidth : UInt32, uiheight : UInt32, mode : WICBitmapInterpolationMode) : HRESULT
-    @lpVtbl.value.initialize.call(this, pisource, uiwidth, uiheight, mode)
-  end
-end
-struct LibWin32::IWICBitmapClipper
-  def query_interface(this : IWICBitmapClipper*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapClipper*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapClipper*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_size(this : IWICBitmapClipper*, puiwidth : UInt32*, puiheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_size.call(this, puiwidth, puiheight)
-  end
-  def get_pixel_format(this : IWICBitmapClipper*, ppixelformat : Guid*) : HRESULT
-    @lpVtbl.value.get_pixel_format.call(this, ppixelformat)
-  end
-  def get_resolution(this : IWICBitmapClipper*, pdpix : Float64*, pdpiy : Float64*) : HRESULT
-    @lpVtbl.value.get_resolution.call(this, pdpix, pdpiy)
-  end
-  def copy_palette(this : IWICBitmapClipper*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.copy_palette.call(this, pipalette)
-  end
-  def copy_pixels(this : IWICBitmapClipper*, prc : WICRect*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*) : HRESULT
-    @lpVtbl.value.copy_pixels.call(this, prc, cbstride, cbbuffersize, pbbuffer)
-  end
-  def initialize(this : IWICBitmapClipper*, pisource : IWICBitmapSource, prc : WICRect*) : HRESULT
-    @lpVtbl.value.initialize.call(this, pisource, prc)
-  end
-end
-struct LibWin32::IWICBitmapFlipRotator
-  def query_interface(this : IWICBitmapFlipRotator*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapFlipRotator*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapFlipRotator*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_size(this : IWICBitmapFlipRotator*, puiwidth : UInt32*, puiheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_size.call(this, puiwidth, puiheight)
-  end
-  def get_pixel_format(this : IWICBitmapFlipRotator*, ppixelformat : Guid*) : HRESULT
-    @lpVtbl.value.get_pixel_format.call(this, ppixelformat)
-  end
-  def get_resolution(this : IWICBitmapFlipRotator*, pdpix : Float64*, pdpiy : Float64*) : HRESULT
-    @lpVtbl.value.get_resolution.call(this, pdpix, pdpiy)
-  end
-  def copy_palette(this : IWICBitmapFlipRotator*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.copy_palette.call(this, pipalette)
-  end
-  def copy_pixels(this : IWICBitmapFlipRotator*, prc : WICRect*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*) : HRESULT
-    @lpVtbl.value.copy_pixels.call(this, prc, cbstride, cbbuffersize, pbbuffer)
-  end
-  def initialize(this : IWICBitmapFlipRotator*, pisource : IWICBitmapSource, options : WICBitmapTransformOptions) : HRESULT
-    @lpVtbl.value.initialize.call(this, pisource, options)
-  end
-end
-struct LibWin32::IWICBitmapLock
-  def query_interface(this : IWICBitmapLock*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapLock*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapLock*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_size(this : IWICBitmapLock*, puiwidth : UInt32*, puiheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_size.call(this, puiwidth, puiheight)
-  end
-  def get_stride(this : IWICBitmapLock*, pcbstride : UInt32*) : HRESULT
-    @lpVtbl.value.get_stride.call(this, pcbstride)
-  end
-  def get_data_pointer(this : IWICBitmapLock*, pcbbuffersize : UInt32*, ppbdata : UInt8**) : HRESULT
-    @lpVtbl.value.get_data_pointer.call(this, pcbbuffersize, ppbdata)
-  end
-  def get_pixel_format(this : IWICBitmapLock*, ppixelformat : Guid*) : HRESULT
-    @lpVtbl.value.get_pixel_format.call(this, ppixelformat)
-  end
-end
-struct LibWin32::IWICBitmap
-  def query_interface(this : IWICBitmap*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmap*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmap*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_size(this : IWICBitmap*, puiwidth : UInt32*, puiheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_size.call(this, puiwidth, puiheight)
-  end
-  def get_pixel_format(this : IWICBitmap*, ppixelformat : Guid*) : HRESULT
-    @lpVtbl.value.get_pixel_format.call(this, ppixelformat)
-  end
-  def get_resolution(this : IWICBitmap*, pdpix : Float64*, pdpiy : Float64*) : HRESULT
-    @lpVtbl.value.get_resolution.call(this, pdpix, pdpiy)
-  end
-  def copy_palette(this : IWICBitmap*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.copy_palette.call(this, pipalette)
-  end
-  def copy_pixels(this : IWICBitmap*, prc : WICRect*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*) : HRESULT
-    @lpVtbl.value.copy_pixels.call(this, prc, cbstride, cbbuffersize, pbbuffer)
-  end
-  def lock(this : IWICBitmap*, prclock : WICRect*, flags : UInt32, ppilock : IWICBitmapLock*) : HRESULT
-    @lpVtbl.value.lock.call(this, prclock, flags, ppilock)
-  end
-  def set_palette(this : IWICBitmap*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.set_palette.call(this, pipalette)
-  end
-  def set_resolution(this : IWICBitmap*, dpix : Float64, dpiy : Float64) : HRESULT
-    @lpVtbl.value.set_resolution.call(this, dpix, dpiy)
-  end
-end
-struct LibWin32::IWICColorContext
-  def query_interface(this : IWICColorContext*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICColorContext*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICColorContext*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def initialize_from_filename(this : IWICColorContext*, wzfilename : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.initialize_from_filename.call(this, wzfilename)
-  end
-  def initialize_from_memory(this : IWICColorContext*, pbbuffer : UInt8*, cbbuffersize : UInt32) : HRESULT
-    @lpVtbl.value.initialize_from_memory.call(this, pbbuffer, cbbuffersize)
-  end
-  def initialize_from_exif_color_space(this : IWICColorContext*, value : UInt32) : HRESULT
-    @lpVtbl.value.initialize_from_exif_color_space.call(this, value)
-  end
-  def get_type(this : IWICColorContext*, ptype : WICColorContextType*) : HRESULT
-    @lpVtbl.value.get_type.call(this, ptype)
-  end
-  def get_profile_bytes(this : IWICColorContext*, cbbuffer : UInt32, pbbuffer : UInt8*, pcbactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_profile_bytes.call(this, cbbuffer, pbbuffer, pcbactual)
-  end
-  def get_exif_color_space(this : IWICColorContext*, pvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_exif_color_space.call(this, pvalue)
-  end
-end
-struct LibWin32::IWICColorTransform
-  def query_interface(this : IWICColorTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICColorTransform*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICColorTransform*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_size(this : IWICColorTransform*, puiwidth : UInt32*, puiheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_size.call(this, puiwidth, puiheight)
-  end
-  def get_pixel_format(this : IWICColorTransform*, ppixelformat : Guid*) : HRESULT
-    @lpVtbl.value.get_pixel_format.call(this, ppixelformat)
-  end
-  def get_resolution(this : IWICColorTransform*, pdpix : Float64*, pdpiy : Float64*) : HRESULT
-    @lpVtbl.value.get_resolution.call(this, pdpix, pdpiy)
-  end
-  def copy_palette(this : IWICColorTransform*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.copy_palette.call(this, pipalette)
-  end
-  def copy_pixels(this : IWICColorTransform*, prc : WICRect*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*) : HRESULT
-    @lpVtbl.value.copy_pixels.call(this, prc, cbstride, cbbuffersize, pbbuffer)
-  end
-  def initialize(this : IWICColorTransform*, pibitmapsource : IWICBitmapSource, picontextsource : IWICColorContext, picontextdest : IWICColorContext, pixelfmtdest : Guid*) : HRESULT
-    @lpVtbl.value.initialize.call(this, pibitmapsource, picontextsource, picontextdest, pixelfmtdest)
-  end
-end
-struct LibWin32::IWICFastMetadataEncoder
-  def query_interface(this : IWICFastMetadataEncoder*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICFastMetadataEncoder*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICFastMetadataEncoder*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def commit(this : IWICFastMetadataEncoder*) : HRESULT
-    @lpVtbl.value.commit.call(this)
-  end
-  def get_metadata_query_writer(this : IWICFastMetadataEncoder*, ppimetadataquerywriter : IWICMetadataQueryWriter*) : HRESULT
-    @lpVtbl.value.get_metadata_query_writer.call(this, ppimetadataquerywriter)
-  end
-end
-struct LibWin32::IWICStream
-  def query_interface(this : IWICStream*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICStream*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICStream*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def read(this : IWICStream*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
-    @lpVtbl.value.read.call(this, pv, cb, pcbread)
-  end
-  def write(this : IWICStream*, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
-    @lpVtbl.value.write.call(this, pv, cb, pcbwritten)
-  end
-  def seek(this : IWICStream*, dlibmove : LARGE_INTEGER, dworigin : STREAM_SEEK, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek.call(this, dlibmove, dworigin, plibnewposition)
-  end
-  def set_size(this : IWICStream*, libnewsize : ULARGE_INTEGER) : HRESULT
-    @lpVtbl.value.set_size.call(this, libnewsize)
-  end
-  def copy_to(this : IWICStream*, pstm : IStream, cb : ULARGE_INTEGER, pcbread : ULARGE_INTEGER*, pcbwritten : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.copy_to.call(this, pstm, cb, pcbread, pcbwritten)
-  end
-  def commit(this : IWICStream*, grfcommitflags : UInt32) : HRESULT
-    @lpVtbl.value.commit.call(this, grfcommitflags)
-  end
-  def revert(this : IWICStream*) : HRESULT
-    @lpVtbl.value.revert.call(this)
-  end
-  def lock_region(this : IWICStream*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.lock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def unlock_region(this : IWICStream*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.unlock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def stat(this : IWICStream*, pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
-    @lpVtbl.value.stat.call(this, pstatstg, grfstatflag)
-  end
-  def clone(this : IWICStream*, ppstm : IStream*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppstm)
-  end
-  def initialize_from_i_stream(this : IWICStream*, pistream : IStream) : HRESULT
-    @lpVtbl.value.initialize_from_i_stream.call(this, pistream)
-  end
-  def initialize_from_filename(this : IWICStream*, wzfilename : LibC::LPWSTR, dwdesiredaccess : UInt32) : HRESULT
-    @lpVtbl.value.initialize_from_filename.call(this, wzfilename, dwdesiredaccess)
-  end
-  def initialize_from_memory(this : IWICStream*, pbbuffer : UInt8*, cbbuffersize : UInt32) : HRESULT
-    @lpVtbl.value.initialize_from_memory.call(this, pbbuffer, cbbuffersize)
-  end
-  def initialize_from_i_stream_region(this : IWICStream*, pistream : IStream, uloffset : ULARGE_INTEGER, ulmaxsize : ULARGE_INTEGER) : HRESULT
-    @lpVtbl.value.initialize_from_i_stream_region.call(this, pistream, uloffset, ulmaxsize)
-  end
-end
-struct LibWin32::IWICEnumMetadataItem
-  def query_interface(this : IWICEnumMetadataItem*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICEnumMetadataItem*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICEnumMetadataItem*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def next(this : IWICEnumMetadataItem*, celt : UInt32, rgeltschema : PROPVARIANT*, rgeltid : PROPVARIANT*, rgeltvalue : PROPVARIANT*, pceltfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.call(this, celt, rgeltschema, rgeltid, rgeltvalue, pceltfetched)
-  end
-  def skip(this : IWICEnumMetadataItem*, celt : UInt32) : HRESULT
-    @lpVtbl.value.skip.call(this, celt)
-  end
-  def reset(this : IWICEnumMetadataItem*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def clone(this : IWICEnumMetadataItem*, ppienummetadataitem : IWICEnumMetadataItem*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppienummetadataitem)
-  end
-end
-struct LibWin32::IWICMetadataQueryReader
-  def query_interface(this : IWICMetadataQueryReader*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICMetadataQueryReader*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICMetadataQueryReader*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_container_format(this : IWICMetadataQueryReader*, pguidcontainerformat : Guid*) : HRESULT
-    @lpVtbl.value.get_container_format.call(this, pguidcontainerformat)
-  end
-  def get_location(this : IWICMetadataQueryReader*, cchmaxlength : UInt32, wznamespace : Char*, pcchactuallength : UInt32*) : HRESULT
-    @lpVtbl.value.get_location.call(this, cchmaxlength, wznamespace, pcchactuallength)
-  end
-  def get_metadata_by_name(this : IWICMetadataQueryReader*, wzname : LibC::LPWSTR, pvarvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_metadata_by_name.call(this, wzname, pvarvalue)
-  end
-  def get_enumerator(this : IWICMetadataQueryReader*, ppienumstring : IEnumString*) : HRESULT
-    @lpVtbl.value.get_enumerator.call(this, ppienumstring)
-  end
-end
-struct LibWin32::IWICMetadataQueryWriter
-  def query_interface(this : IWICMetadataQueryWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICMetadataQueryWriter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICMetadataQueryWriter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_container_format(this : IWICMetadataQueryWriter*, pguidcontainerformat : Guid*) : HRESULT
-    @lpVtbl.value.get_container_format.call(this, pguidcontainerformat)
-  end
-  def get_location(this : IWICMetadataQueryWriter*, cchmaxlength : UInt32, wznamespace : Char*, pcchactuallength : UInt32*) : HRESULT
-    @lpVtbl.value.get_location.call(this, cchmaxlength, wznamespace, pcchactuallength)
-  end
-  def get_metadata_by_name(this : IWICMetadataQueryWriter*, wzname : LibC::LPWSTR, pvarvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_metadata_by_name.call(this, wzname, pvarvalue)
-  end
-  def get_enumerator(this : IWICMetadataQueryWriter*, ppienumstring : IEnumString*) : HRESULT
-    @lpVtbl.value.get_enumerator.call(this, ppienumstring)
-  end
-  def set_metadata_by_name(this : IWICMetadataQueryWriter*, wzname : LibC::LPWSTR, pvarvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.set_metadata_by_name.call(this, wzname, pvarvalue)
-  end
-  def remove_metadata_by_name(this : IWICMetadataQueryWriter*, wzname : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.remove_metadata_by_name.call(this, wzname)
-  end
-end
-struct LibWin32::IWICBitmapEncoder
-  def query_interface(this : IWICBitmapEncoder*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapEncoder*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapEncoder*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def initialize(this : IWICBitmapEncoder*, pistream : IStream, cacheoption : WICBitmapEncoderCacheOption) : HRESULT
-    @lpVtbl.value.initialize.call(this, pistream, cacheoption)
-  end
-  def get_container_format(this : IWICBitmapEncoder*, pguidcontainerformat : Guid*) : HRESULT
-    @lpVtbl.value.get_container_format.call(this, pguidcontainerformat)
-  end
-  def get_encoder_info(this : IWICBitmapEncoder*, ppiencoderinfo : IWICBitmapEncoderInfo*) : HRESULT
-    @lpVtbl.value.get_encoder_info.call(this, ppiencoderinfo)
-  end
-  def set_color_contexts(this : IWICBitmapEncoder*, ccount : UInt32, ppicolorcontext : IWICColorContext*) : HRESULT
-    @lpVtbl.value.set_color_contexts.call(this, ccount, ppicolorcontext)
-  end
-  def set_palette(this : IWICBitmapEncoder*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.set_palette.call(this, pipalette)
-  end
-  def set_thumbnail(this : IWICBitmapEncoder*, pithumbnail : IWICBitmapSource) : HRESULT
-    @lpVtbl.value.set_thumbnail.call(this, pithumbnail)
-  end
-  def set_preview(this : IWICBitmapEncoder*, pipreview : IWICBitmapSource) : HRESULT
-    @lpVtbl.value.set_preview.call(this, pipreview)
-  end
-  def create_new_frame(this : IWICBitmapEncoder*, ppiframeencode : IWICBitmapFrameEncode*, ppiencoderoptions : IPropertyBag2*) : HRESULT
-    @lpVtbl.value.create_new_frame.call(this, ppiframeencode, ppiencoderoptions)
-  end
-  def commit(this : IWICBitmapEncoder*) : HRESULT
-    @lpVtbl.value.commit.call(this)
-  end
-  def get_metadata_query_writer(this : IWICBitmapEncoder*, ppimetadataquerywriter : IWICMetadataQueryWriter*) : HRESULT
-    @lpVtbl.value.get_metadata_query_writer.call(this, ppimetadataquerywriter)
-  end
-end
-struct LibWin32::IWICBitmapFrameEncode
-  def query_interface(this : IWICBitmapFrameEncode*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapFrameEncode*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapFrameEncode*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def initialize(this : IWICBitmapFrameEncode*, piencoderoptions : IPropertyBag2) : HRESULT
-    @lpVtbl.value.initialize.call(this, piencoderoptions)
-  end
-  def set_size(this : IWICBitmapFrameEncode*, uiwidth : UInt32, uiheight : UInt32) : HRESULT
-    @lpVtbl.value.set_size.call(this, uiwidth, uiheight)
-  end
-  def set_resolution(this : IWICBitmapFrameEncode*, dpix : Float64, dpiy : Float64) : HRESULT
-    @lpVtbl.value.set_resolution.call(this, dpix, dpiy)
-  end
-  def set_pixel_format(this : IWICBitmapFrameEncode*, ppixelformat : Guid*) : HRESULT
-    @lpVtbl.value.set_pixel_format.call(this, ppixelformat)
-  end
-  def set_color_contexts(this : IWICBitmapFrameEncode*, ccount : UInt32, ppicolorcontext : IWICColorContext*) : HRESULT
-    @lpVtbl.value.set_color_contexts.call(this, ccount, ppicolorcontext)
-  end
-  def set_palette(this : IWICBitmapFrameEncode*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.set_palette.call(this, pipalette)
-  end
-  def set_thumbnail(this : IWICBitmapFrameEncode*, pithumbnail : IWICBitmapSource) : HRESULT
-    @lpVtbl.value.set_thumbnail.call(this, pithumbnail)
-  end
-  def write_pixels(this : IWICBitmapFrameEncode*, linecount : UInt32, cbstride : UInt32, cbbuffersize : UInt32, pbpixels : UInt8*) : HRESULT
-    @lpVtbl.value.write_pixels.call(this, linecount, cbstride, cbbuffersize, pbpixels)
-  end
-  def write_source(this : IWICBitmapFrameEncode*, pibitmapsource : IWICBitmapSource, prc : WICRect*) : HRESULT
-    @lpVtbl.value.write_source.call(this, pibitmapsource, prc)
-  end
-  def commit(this : IWICBitmapFrameEncode*) : HRESULT
-    @lpVtbl.value.commit.call(this)
-  end
-  def get_metadata_query_writer(this : IWICBitmapFrameEncode*, ppimetadataquerywriter : IWICMetadataQueryWriter*) : HRESULT
-    @lpVtbl.value.get_metadata_query_writer.call(this, ppimetadataquerywriter)
-  end
-end
-struct LibWin32::IWICPlanarBitmapFrameEncode
-  def query_interface(this : IWICPlanarBitmapFrameEncode*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICPlanarBitmapFrameEncode*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICPlanarBitmapFrameEncode*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def write_pixels(this : IWICPlanarBitmapFrameEncode*, linecount : UInt32, pplanes : WICBitmapPlane*, cplanes : UInt32) : HRESULT
-    @lpVtbl.value.write_pixels.call(this, linecount, pplanes, cplanes)
-  end
-  def write_source(this : IWICPlanarBitmapFrameEncode*, ppplanes : IWICBitmapSource*, cplanes : UInt32, prcsource : WICRect*) : HRESULT
-    @lpVtbl.value.write_source.call(this, ppplanes, cplanes, prcsource)
-  end
-end
-struct LibWin32::IWICBitmapDecoder
-  def query_interface(this : IWICBitmapDecoder*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapDecoder*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapDecoder*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def query_capability(this : IWICBitmapDecoder*, pistream : IStream, pdwcapability : UInt32*) : HRESULT
-    @lpVtbl.value.query_capability.call(this, pistream, pdwcapability)
-  end
-  def initialize(this : IWICBitmapDecoder*, pistream : IStream, cacheoptions : WICDecodeOptions) : HRESULT
-    @lpVtbl.value.initialize.call(this, pistream, cacheoptions)
-  end
-  def get_container_format(this : IWICBitmapDecoder*, pguidcontainerformat : Guid*) : HRESULT
-    @lpVtbl.value.get_container_format.call(this, pguidcontainerformat)
-  end
-  def get_decoder_info(this : IWICBitmapDecoder*, ppidecoderinfo : IWICBitmapDecoderInfo*) : HRESULT
-    @lpVtbl.value.get_decoder_info.call(this, ppidecoderinfo)
-  end
-  def copy_palette(this : IWICBitmapDecoder*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.copy_palette.call(this, pipalette)
-  end
-  def get_metadata_query_reader(this : IWICBitmapDecoder*, ppimetadataqueryreader : IWICMetadataQueryReader*) : HRESULT
-    @lpVtbl.value.get_metadata_query_reader.call(this, ppimetadataqueryreader)
-  end
-  def get_preview(this : IWICBitmapDecoder*, ppibitmapsource : IWICBitmapSource*) : HRESULT
-    @lpVtbl.value.get_preview.call(this, ppibitmapsource)
-  end
-  def get_color_contexts(this : IWICBitmapDecoder*, ccount : UInt32, ppicolorcontexts : IWICColorContext*, pcactualcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_color_contexts.call(this, ccount, ppicolorcontexts, pcactualcount)
-  end
-  def get_thumbnail(this : IWICBitmapDecoder*, ppithumbnail : IWICBitmapSource*) : HRESULT
-    @lpVtbl.value.get_thumbnail.call(this, ppithumbnail)
-  end
-  def get_frame_count(this : IWICBitmapDecoder*, pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_frame_count.call(this, pcount)
-  end
-  def get_frame(this : IWICBitmapDecoder*, index : UInt32, ppibitmapframe : IWICBitmapFrameDecode*) : HRESULT
-    @lpVtbl.value.get_frame.call(this, index, ppibitmapframe)
-  end
-end
-struct LibWin32::IWICBitmapSourceTransform
-  def query_interface(this : IWICBitmapSourceTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapSourceTransform*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapSourceTransform*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def copy_pixels(this : IWICBitmapSourceTransform*, prc : WICRect*, uiwidth : UInt32, uiheight : UInt32, pguiddstformat : Guid*, dsttransform : WICBitmapTransformOptions, nstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*) : HRESULT
-    @lpVtbl.value.copy_pixels.call(this, prc, uiwidth, uiheight, pguiddstformat, dsttransform, nstride, cbbuffersize, pbbuffer)
-  end
-  def get_closest_size(this : IWICBitmapSourceTransform*, puiwidth : UInt32*, puiheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_closest_size.call(this, puiwidth, puiheight)
-  end
-  def get_closest_pixel_format(this : IWICBitmapSourceTransform*, pguiddstformat : Guid*) : HRESULT
-    @lpVtbl.value.get_closest_pixel_format.call(this, pguiddstformat)
-  end
-  def does_support_transform(this : IWICBitmapSourceTransform*, dsttransform : WICBitmapTransformOptions, pfissupported : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_transform.call(this, dsttransform, pfissupported)
-  end
-end
-struct LibWin32::IWICPlanarBitmapSourceTransform
-  def query_interface(this : IWICPlanarBitmapSourceTransform*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICPlanarBitmapSourceTransform*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICPlanarBitmapSourceTransform*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def does_support_transform(this : IWICPlanarBitmapSourceTransform*, puiwidth : UInt32*, puiheight : UInt32*, dsttransform : WICBitmapTransformOptions, dstplanaroptions : WICPlanarOptions, pguiddstformats : Guid*, pplanedescriptions : WICBitmapPlaneDescription*, cplanes : UInt32, pfissupported : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_transform.call(this, puiwidth, puiheight, dsttransform, dstplanaroptions, pguiddstformats, pplanedescriptions, cplanes, pfissupported)
-  end
-  def copy_pixels(this : IWICPlanarBitmapSourceTransform*, prcsource : WICRect*, uiwidth : UInt32, uiheight : UInt32, dsttransform : WICBitmapTransformOptions, dstplanaroptions : WICPlanarOptions, pdstplanes : WICBitmapPlane*, cplanes : UInt32) : HRESULT
-    @lpVtbl.value.copy_pixels.call(this, prcsource, uiwidth, uiheight, dsttransform, dstplanaroptions, pdstplanes, cplanes)
-  end
-end
-struct LibWin32::IWICBitmapFrameDecode
-  def query_interface(this : IWICBitmapFrameDecode*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapFrameDecode*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapFrameDecode*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_size(this : IWICBitmapFrameDecode*, puiwidth : UInt32*, puiheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_size.call(this, puiwidth, puiheight)
-  end
-  def get_pixel_format(this : IWICBitmapFrameDecode*, ppixelformat : Guid*) : HRESULT
-    @lpVtbl.value.get_pixel_format.call(this, ppixelformat)
-  end
-  def get_resolution(this : IWICBitmapFrameDecode*, pdpix : Float64*, pdpiy : Float64*) : HRESULT
-    @lpVtbl.value.get_resolution.call(this, pdpix, pdpiy)
-  end
-  def copy_palette(this : IWICBitmapFrameDecode*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.copy_palette.call(this, pipalette)
-  end
-  def copy_pixels(this : IWICBitmapFrameDecode*, prc : WICRect*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*) : HRESULT
-    @lpVtbl.value.copy_pixels.call(this, prc, cbstride, cbbuffersize, pbbuffer)
-  end
-  def get_metadata_query_reader(this : IWICBitmapFrameDecode*, ppimetadataqueryreader : IWICMetadataQueryReader*) : HRESULT
-    @lpVtbl.value.get_metadata_query_reader.call(this, ppimetadataqueryreader)
-  end
-  def get_color_contexts(this : IWICBitmapFrameDecode*, ccount : UInt32, ppicolorcontexts : IWICColorContext*, pcactualcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_color_contexts.call(this, ccount, ppicolorcontexts, pcactualcount)
-  end
-  def get_thumbnail(this : IWICBitmapFrameDecode*, ppithumbnail : IWICBitmapSource*) : HRESULT
-    @lpVtbl.value.get_thumbnail.call(this, ppithumbnail)
-  end
-end
-struct LibWin32::IWICProgressiveLevelControl
-  def query_interface(this : IWICProgressiveLevelControl*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICProgressiveLevelControl*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICProgressiveLevelControl*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_level_count(this : IWICProgressiveLevelControl*, pclevels : UInt32*) : HRESULT
-    @lpVtbl.value.get_level_count.call(this, pclevels)
-  end
-  def get_current_level(this : IWICProgressiveLevelControl*, pnlevel : UInt32*) : HRESULT
-    @lpVtbl.value.get_current_level.call(this, pnlevel)
-  end
-  def set_current_level(this : IWICProgressiveLevelControl*, nlevel : UInt32) : HRESULT
-    @lpVtbl.value.set_current_level.call(this, nlevel)
-  end
-end
-struct LibWin32::IWICProgressCallback
-  def query_interface(this : IWICProgressCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICProgressCallback*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICProgressCallback*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def notify(this : IWICProgressCallback*, uframenum : UInt32, operation : WICProgressOperation, dblprogress : Float64) : HRESULT
-    @lpVtbl.value.notify.call(this, uframenum, operation, dblprogress)
-  end
-end
-struct LibWin32::IWICBitmapCodecProgressNotification
-  def query_interface(this : IWICBitmapCodecProgressNotification*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapCodecProgressNotification*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapCodecProgressNotification*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def register_progress_notification(this : IWICBitmapCodecProgressNotification*, pfnprogressnotification : PFNProgressNotification, pvdata : Void*, dwprogressflags : UInt32) : HRESULT
-    @lpVtbl.value.register_progress_notification.call(this, pfnprogressnotification, pvdata, dwprogressflags)
-  end
-end
-struct LibWin32::IWICComponentInfo
-  def query_interface(this : IWICComponentInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICComponentInfo*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICComponentInfo*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_component_type(this : IWICComponentInfo*, ptype : WICComponentType*) : HRESULT
-    @lpVtbl.value.get_component_type.call(this, ptype)
-  end
-  def get_clsid(this : IWICComponentInfo*, pclsid : Guid*) : HRESULT
-    @lpVtbl.value.get_clsid.call(this, pclsid)
-  end
-  def get_signing_status(this : IWICComponentInfo*, pstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_signing_status.call(this, pstatus)
-  end
-  def get_author(this : IWICComponentInfo*, cchauthor : UInt32, wzauthor : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_author.call(this, cchauthor, wzauthor, pcchactual)
-  end
-  def get_vendor_guid(this : IWICComponentInfo*, pguidvendor : Guid*) : HRESULT
-    @lpVtbl.value.get_vendor_guid.call(this, pguidvendor)
-  end
-  def get_version(this : IWICComponentInfo*, cchversion : UInt32, wzversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_version.call(this, cchversion, wzversion, pcchactual)
-  end
-  def get_spec_version(this : IWICComponentInfo*, cchspecversion : UInt32, wzspecversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_spec_version.call(this, cchspecversion, wzspecversion, pcchactual)
-  end
-  def get_friendly_name(this : IWICComponentInfo*, cchfriendlyname : UInt32, wzfriendlyname : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_friendly_name.call(this, cchfriendlyname, wzfriendlyname, pcchactual)
-  end
-end
-struct LibWin32::IWICFormatConverterInfo
-  def query_interface(this : IWICFormatConverterInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICFormatConverterInfo*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICFormatConverterInfo*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_component_type(this : IWICFormatConverterInfo*, ptype : WICComponentType*) : HRESULT
-    @lpVtbl.value.get_component_type.call(this, ptype)
-  end
-  def get_clsid(this : IWICFormatConverterInfo*, pclsid : Guid*) : HRESULT
-    @lpVtbl.value.get_clsid.call(this, pclsid)
-  end
-  def get_signing_status(this : IWICFormatConverterInfo*, pstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_signing_status.call(this, pstatus)
-  end
-  def get_author(this : IWICFormatConverterInfo*, cchauthor : UInt32, wzauthor : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_author.call(this, cchauthor, wzauthor, pcchactual)
-  end
-  def get_vendor_guid(this : IWICFormatConverterInfo*, pguidvendor : Guid*) : HRESULT
-    @lpVtbl.value.get_vendor_guid.call(this, pguidvendor)
-  end
-  def get_version(this : IWICFormatConverterInfo*, cchversion : UInt32, wzversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_version.call(this, cchversion, wzversion, pcchactual)
-  end
-  def get_spec_version(this : IWICFormatConverterInfo*, cchspecversion : UInt32, wzspecversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_spec_version.call(this, cchspecversion, wzspecversion, pcchactual)
-  end
-  def get_friendly_name(this : IWICFormatConverterInfo*, cchfriendlyname : UInt32, wzfriendlyname : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_friendly_name.call(this, cchfriendlyname, wzfriendlyname, pcchactual)
-  end
-  def get_pixel_formats(this : IWICFormatConverterInfo*, cformats : UInt32, ppixelformatguids : Guid*, pcactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_pixel_formats.call(this, cformats, ppixelformatguids, pcactual)
-  end
-  def create_instance(this : IWICFormatConverterInfo*, ppiconverter : IWICFormatConverter*) : HRESULT
-    @lpVtbl.value.create_instance.call(this, ppiconverter)
-  end
-end
-struct LibWin32::IWICBitmapCodecInfo
-  def query_interface(this : IWICBitmapCodecInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapCodecInfo*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapCodecInfo*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_component_type(this : IWICBitmapCodecInfo*, ptype : WICComponentType*) : HRESULT
-    @lpVtbl.value.get_component_type.call(this, ptype)
-  end
-  def get_clsid(this : IWICBitmapCodecInfo*, pclsid : Guid*) : HRESULT
-    @lpVtbl.value.get_clsid.call(this, pclsid)
-  end
-  def get_signing_status(this : IWICBitmapCodecInfo*, pstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_signing_status.call(this, pstatus)
-  end
-  def get_author(this : IWICBitmapCodecInfo*, cchauthor : UInt32, wzauthor : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_author.call(this, cchauthor, wzauthor, pcchactual)
-  end
-  def get_vendor_guid(this : IWICBitmapCodecInfo*, pguidvendor : Guid*) : HRESULT
-    @lpVtbl.value.get_vendor_guid.call(this, pguidvendor)
-  end
-  def get_version(this : IWICBitmapCodecInfo*, cchversion : UInt32, wzversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_version.call(this, cchversion, wzversion, pcchactual)
-  end
-  def get_spec_version(this : IWICBitmapCodecInfo*, cchspecversion : UInt32, wzspecversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_spec_version.call(this, cchspecversion, wzspecversion, pcchactual)
-  end
-  def get_friendly_name(this : IWICBitmapCodecInfo*, cchfriendlyname : UInt32, wzfriendlyname : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_friendly_name.call(this, cchfriendlyname, wzfriendlyname, pcchactual)
-  end
-  def get_container_format(this : IWICBitmapCodecInfo*, pguidcontainerformat : Guid*) : HRESULT
-    @lpVtbl.value.get_container_format.call(this, pguidcontainerformat)
-  end
-  def get_pixel_formats(this : IWICBitmapCodecInfo*, cformats : UInt32, pguidpixelformats : Guid*, pcactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_pixel_formats.call(this, cformats, pguidpixelformats, pcactual)
-  end
-  def get_color_management_version(this : IWICBitmapCodecInfo*, cchcolormanagementversion : UInt32, wzcolormanagementversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_color_management_version.call(this, cchcolormanagementversion, wzcolormanagementversion, pcchactual)
-  end
-  def get_device_manufacturer(this : IWICBitmapCodecInfo*, cchdevicemanufacturer : UInt32, wzdevicemanufacturer : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_manufacturer.call(this, cchdevicemanufacturer, wzdevicemanufacturer, pcchactual)
-  end
-  def get_device_models(this : IWICBitmapCodecInfo*, cchdevicemodels : UInt32, wzdevicemodels : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_models.call(this, cchdevicemodels, wzdevicemodels, pcchactual)
-  end
-  def get_mime_types(this : IWICBitmapCodecInfo*, cchmimetypes : UInt32, wzmimetypes : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_mime_types.call(this, cchmimetypes, wzmimetypes, pcchactual)
-  end
-  def get_file_extensions(this : IWICBitmapCodecInfo*, cchfileextensions : UInt32, wzfileextensions : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_file_extensions.call(this, cchfileextensions, wzfileextensions, pcchactual)
-  end
-  def does_support_animation(this : IWICBitmapCodecInfo*, pfsupportanimation : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_animation.call(this, pfsupportanimation)
-  end
-  def does_support_chromakey(this : IWICBitmapCodecInfo*, pfsupportchromakey : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_chromakey.call(this, pfsupportchromakey)
-  end
-  def does_support_lossless(this : IWICBitmapCodecInfo*, pfsupportlossless : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_lossless.call(this, pfsupportlossless)
-  end
-  def does_support_multiframe(this : IWICBitmapCodecInfo*, pfsupportmultiframe : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_multiframe.call(this, pfsupportmultiframe)
-  end
-  def matches_mime_type(this : IWICBitmapCodecInfo*, wzmimetype : LibC::LPWSTR, pfmatches : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.matches_mime_type.call(this, wzmimetype, pfmatches)
-  end
-end
-struct LibWin32::IWICBitmapEncoderInfo
-  def query_interface(this : IWICBitmapEncoderInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapEncoderInfo*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapEncoderInfo*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_component_type(this : IWICBitmapEncoderInfo*, ptype : WICComponentType*) : HRESULT
-    @lpVtbl.value.get_component_type.call(this, ptype)
-  end
-  def get_clsid(this : IWICBitmapEncoderInfo*, pclsid : Guid*) : HRESULT
-    @lpVtbl.value.get_clsid.call(this, pclsid)
-  end
-  def get_signing_status(this : IWICBitmapEncoderInfo*, pstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_signing_status.call(this, pstatus)
-  end
-  def get_author(this : IWICBitmapEncoderInfo*, cchauthor : UInt32, wzauthor : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_author.call(this, cchauthor, wzauthor, pcchactual)
-  end
-  def get_vendor_guid(this : IWICBitmapEncoderInfo*, pguidvendor : Guid*) : HRESULT
-    @lpVtbl.value.get_vendor_guid.call(this, pguidvendor)
-  end
-  def get_version(this : IWICBitmapEncoderInfo*, cchversion : UInt32, wzversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_version.call(this, cchversion, wzversion, pcchactual)
-  end
-  def get_spec_version(this : IWICBitmapEncoderInfo*, cchspecversion : UInt32, wzspecversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_spec_version.call(this, cchspecversion, wzspecversion, pcchactual)
-  end
-  def get_friendly_name(this : IWICBitmapEncoderInfo*, cchfriendlyname : UInt32, wzfriendlyname : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_friendly_name.call(this, cchfriendlyname, wzfriendlyname, pcchactual)
-  end
-  def get_container_format(this : IWICBitmapEncoderInfo*, pguidcontainerformat : Guid*) : HRESULT
-    @lpVtbl.value.get_container_format.call(this, pguidcontainerformat)
-  end
-  def get_pixel_formats(this : IWICBitmapEncoderInfo*, cformats : UInt32, pguidpixelformats : Guid*, pcactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_pixel_formats.call(this, cformats, pguidpixelformats, pcactual)
-  end
-  def get_color_management_version(this : IWICBitmapEncoderInfo*, cchcolormanagementversion : UInt32, wzcolormanagementversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_color_management_version.call(this, cchcolormanagementversion, wzcolormanagementversion, pcchactual)
-  end
-  def get_device_manufacturer(this : IWICBitmapEncoderInfo*, cchdevicemanufacturer : UInt32, wzdevicemanufacturer : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_manufacturer.call(this, cchdevicemanufacturer, wzdevicemanufacturer, pcchactual)
-  end
-  def get_device_models(this : IWICBitmapEncoderInfo*, cchdevicemodels : UInt32, wzdevicemodels : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_models.call(this, cchdevicemodels, wzdevicemodels, pcchactual)
-  end
-  def get_mime_types(this : IWICBitmapEncoderInfo*, cchmimetypes : UInt32, wzmimetypes : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_mime_types.call(this, cchmimetypes, wzmimetypes, pcchactual)
-  end
-  def get_file_extensions(this : IWICBitmapEncoderInfo*, cchfileextensions : UInt32, wzfileextensions : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_file_extensions.call(this, cchfileextensions, wzfileextensions, pcchactual)
-  end
-  def does_support_animation(this : IWICBitmapEncoderInfo*, pfsupportanimation : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_animation.call(this, pfsupportanimation)
-  end
-  def does_support_chromakey(this : IWICBitmapEncoderInfo*, pfsupportchromakey : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_chromakey.call(this, pfsupportchromakey)
-  end
-  def does_support_lossless(this : IWICBitmapEncoderInfo*, pfsupportlossless : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_lossless.call(this, pfsupportlossless)
-  end
-  def does_support_multiframe(this : IWICBitmapEncoderInfo*, pfsupportmultiframe : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_multiframe.call(this, pfsupportmultiframe)
-  end
-  def matches_mime_type(this : IWICBitmapEncoderInfo*, wzmimetype : LibC::LPWSTR, pfmatches : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.matches_mime_type.call(this, wzmimetype, pfmatches)
-  end
-  def create_instance(this : IWICBitmapEncoderInfo*, ppibitmapencoder : IWICBitmapEncoder*) : HRESULT
-    @lpVtbl.value.create_instance.call(this, ppibitmapencoder)
-  end
-end
-struct LibWin32::IWICBitmapDecoderInfo
-  def query_interface(this : IWICBitmapDecoderInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICBitmapDecoderInfo*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICBitmapDecoderInfo*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_component_type(this : IWICBitmapDecoderInfo*, ptype : WICComponentType*) : HRESULT
-    @lpVtbl.value.get_component_type.call(this, ptype)
-  end
-  def get_clsid(this : IWICBitmapDecoderInfo*, pclsid : Guid*) : HRESULT
-    @lpVtbl.value.get_clsid.call(this, pclsid)
-  end
-  def get_signing_status(this : IWICBitmapDecoderInfo*, pstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_signing_status.call(this, pstatus)
-  end
-  def get_author(this : IWICBitmapDecoderInfo*, cchauthor : UInt32, wzauthor : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_author.call(this, cchauthor, wzauthor, pcchactual)
-  end
-  def get_vendor_guid(this : IWICBitmapDecoderInfo*, pguidvendor : Guid*) : HRESULT
-    @lpVtbl.value.get_vendor_guid.call(this, pguidvendor)
-  end
-  def get_version(this : IWICBitmapDecoderInfo*, cchversion : UInt32, wzversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_version.call(this, cchversion, wzversion, pcchactual)
-  end
-  def get_spec_version(this : IWICBitmapDecoderInfo*, cchspecversion : UInt32, wzspecversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_spec_version.call(this, cchspecversion, wzspecversion, pcchactual)
-  end
-  def get_friendly_name(this : IWICBitmapDecoderInfo*, cchfriendlyname : UInt32, wzfriendlyname : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_friendly_name.call(this, cchfriendlyname, wzfriendlyname, pcchactual)
-  end
-  def get_container_format(this : IWICBitmapDecoderInfo*, pguidcontainerformat : Guid*) : HRESULT
-    @lpVtbl.value.get_container_format.call(this, pguidcontainerformat)
-  end
-  def get_pixel_formats(this : IWICBitmapDecoderInfo*, cformats : UInt32, pguidpixelformats : Guid*, pcactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_pixel_formats.call(this, cformats, pguidpixelformats, pcactual)
-  end
-  def get_color_management_version(this : IWICBitmapDecoderInfo*, cchcolormanagementversion : UInt32, wzcolormanagementversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_color_management_version.call(this, cchcolormanagementversion, wzcolormanagementversion, pcchactual)
-  end
-  def get_device_manufacturer(this : IWICBitmapDecoderInfo*, cchdevicemanufacturer : UInt32, wzdevicemanufacturer : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_manufacturer.call(this, cchdevicemanufacturer, wzdevicemanufacturer, pcchactual)
-  end
-  def get_device_models(this : IWICBitmapDecoderInfo*, cchdevicemodels : UInt32, wzdevicemodels : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_models.call(this, cchdevicemodels, wzdevicemodels, pcchactual)
-  end
-  def get_mime_types(this : IWICBitmapDecoderInfo*, cchmimetypes : UInt32, wzmimetypes : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_mime_types.call(this, cchmimetypes, wzmimetypes, pcchactual)
-  end
-  def get_file_extensions(this : IWICBitmapDecoderInfo*, cchfileextensions : UInt32, wzfileextensions : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_file_extensions.call(this, cchfileextensions, wzfileextensions, pcchactual)
-  end
-  def does_support_animation(this : IWICBitmapDecoderInfo*, pfsupportanimation : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_animation.call(this, pfsupportanimation)
-  end
-  def does_support_chromakey(this : IWICBitmapDecoderInfo*, pfsupportchromakey : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_chromakey.call(this, pfsupportchromakey)
-  end
-  def does_support_lossless(this : IWICBitmapDecoderInfo*, pfsupportlossless : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_lossless.call(this, pfsupportlossless)
-  end
-  def does_support_multiframe(this : IWICBitmapDecoderInfo*, pfsupportmultiframe : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_multiframe.call(this, pfsupportmultiframe)
-  end
-  def matches_mime_type(this : IWICBitmapDecoderInfo*, wzmimetype : LibC::LPWSTR, pfmatches : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.matches_mime_type.call(this, wzmimetype, pfmatches)
-  end
-  def get_patterns(this : IWICBitmapDecoderInfo*, cbsizepatterns : UInt32, ppatterns : WICBitmapPattern*, pcpatterns : UInt32*, pcbpatternsactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_patterns.call(this, cbsizepatterns, ppatterns, pcpatterns, pcbpatternsactual)
-  end
-  def matches_pattern(this : IWICBitmapDecoderInfo*, pistream : IStream, pfmatches : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.matches_pattern.call(this, pistream, pfmatches)
-  end
-  def create_instance(this : IWICBitmapDecoderInfo*, ppibitmapdecoder : IWICBitmapDecoder*) : HRESULT
-    @lpVtbl.value.create_instance.call(this, ppibitmapdecoder)
-  end
-end
-struct LibWin32::IWICPixelFormatInfo
-  def query_interface(this : IWICPixelFormatInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICPixelFormatInfo*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICPixelFormatInfo*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_component_type(this : IWICPixelFormatInfo*, ptype : WICComponentType*) : HRESULT
-    @lpVtbl.value.get_component_type.call(this, ptype)
-  end
-  def get_clsid(this : IWICPixelFormatInfo*, pclsid : Guid*) : HRESULT
-    @lpVtbl.value.get_clsid.call(this, pclsid)
-  end
-  def get_signing_status(this : IWICPixelFormatInfo*, pstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_signing_status.call(this, pstatus)
-  end
-  def get_author(this : IWICPixelFormatInfo*, cchauthor : UInt32, wzauthor : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_author.call(this, cchauthor, wzauthor, pcchactual)
-  end
-  def get_vendor_guid(this : IWICPixelFormatInfo*, pguidvendor : Guid*) : HRESULT
-    @lpVtbl.value.get_vendor_guid.call(this, pguidvendor)
-  end
-  def get_version(this : IWICPixelFormatInfo*, cchversion : UInt32, wzversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_version.call(this, cchversion, wzversion, pcchactual)
-  end
-  def get_spec_version(this : IWICPixelFormatInfo*, cchspecversion : UInt32, wzspecversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_spec_version.call(this, cchspecversion, wzspecversion, pcchactual)
-  end
-  def get_friendly_name(this : IWICPixelFormatInfo*, cchfriendlyname : UInt32, wzfriendlyname : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_friendly_name.call(this, cchfriendlyname, wzfriendlyname, pcchactual)
-  end
-  def get_format_guid(this : IWICPixelFormatInfo*, pformat : Guid*) : HRESULT
-    @lpVtbl.value.get_format_guid.call(this, pformat)
-  end
-  def get_color_context(this : IWICPixelFormatInfo*, ppicolorcontext : IWICColorContext*) : HRESULT
-    @lpVtbl.value.get_color_context.call(this, ppicolorcontext)
-  end
-  def get_bits_per_pixel(this : IWICPixelFormatInfo*, puibitsperpixel : UInt32*) : HRESULT
-    @lpVtbl.value.get_bits_per_pixel.call(this, puibitsperpixel)
-  end
-  def get_channel_count(this : IWICPixelFormatInfo*, puichannelcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_count.call(this, puichannelcount)
-  end
-  def get_channel_mask(this : IWICPixelFormatInfo*, uichannelindex : UInt32, cbmaskbuffer : UInt32, pbmaskbuffer : UInt8*, pcbactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_mask.call(this, uichannelindex, cbmaskbuffer, pbmaskbuffer, pcbactual)
-  end
-end
-struct LibWin32::IWICPixelFormatInfo2
-  def query_interface(this : IWICPixelFormatInfo2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICPixelFormatInfo2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICPixelFormatInfo2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_component_type(this : IWICPixelFormatInfo2*, ptype : WICComponentType*) : HRESULT
-    @lpVtbl.value.get_component_type.call(this, ptype)
-  end
-  def get_clsid(this : IWICPixelFormatInfo2*, pclsid : Guid*) : HRESULT
-    @lpVtbl.value.get_clsid.call(this, pclsid)
-  end
-  def get_signing_status(this : IWICPixelFormatInfo2*, pstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_signing_status.call(this, pstatus)
-  end
-  def get_author(this : IWICPixelFormatInfo2*, cchauthor : UInt32, wzauthor : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_author.call(this, cchauthor, wzauthor, pcchactual)
-  end
-  def get_vendor_guid(this : IWICPixelFormatInfo2*, pguidvendor : Guid*) : HRESULT
-    @lpVtbl.value.get_vendor_guid.call(this, pguidvendor)
-  end
-  def get_version(this : IWICPixelFormatInfo2*, cchversion : UInt32, wzversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_version.call(this, cchversion, wzversion, pcchactual)
-  end
-  def get_spec_version(this : IWICPixelFormatInfo2*, cchspecversion : UInt32, wzspecversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_spec_version.call(this, cchspecversion, wzspecversion, pcchactual)
-  end
-  def get_friendly_name(this : IWICPixelFormatInfo2*, cchfriendlyname : UInt32, wzfriendlyname : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_friendly_name.call(this, cchfriendlyname, wzfriendlyname, pcchactual)
-  end
-  def get_format_guid(this : IWICPixelFormatInfo2*, pformat : Guid*) : HRESULT
-    @lpVtbl.value.get_format_guid.call(this, pformat)
-  end
-  def get_color_context(this : IWICPixelFormatInfo2*, ppicolorcontext : IWICColorContext*) : HRESULT
-    @lpVtbl.value.get_color_context.call(this, ppicolorcontext)
-  end
-  def get_bits_per_pixel(this : IWICPixelFormatInfo2*, puibitsperpixel : UInt32*) : HRESULT
-    @lpVtbl.value.get_bits_per_pixel.call(this, puibitsperpixel)
-  end
-  def get_channel_count(this : IWICPixelFormatInfo2*, puichannelcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_count.call(this, puichannelcount)
-  end
-  def get_channel_mask(this : IWICPixelFormatInfo2*, uichannelindex : UInt32, cbmaskbuffer : UInt32, pbmaskbuffer : UInt8*, pcbactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_mask.call(this, uichannelindex, cbmaskbuffer, pbmaskbuffer, pcbactual)
-  end
-  def supports_transparency(this : IWICPixelFormatInfo2*, pfsupportstransparency : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.supports_transparency.call(this, pfsupportstransparency)
-  end
-  def get_numeric_representation(this : IWICPixelFormatInfo2*, pnumericrepresentation : WICPixelFormatNumericRepresentation*) : HRESULT
-    @lpVtbl.value.get_numeric_representation.call(this, pnumericrepresentation)
-  end
-end
-struct LibWin32::IWICImagingFactory
-  def query_interface(this : IWICImagingFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICImagingFactory*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICImagingFactory*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def create_decoder_from_filename(this : IWICImagingFactory*, wzfilename : LibC::LPWSTR, pguidvendor : Guid*, dwdesiredaccess : UInt32, metadataoptions : WICDecodeOptions, ppidecoder : IWICBitmapDecoder*) : HRESULT
-    @lpVtbl.value.create_decoder_from_filename.call(this, wzfilename, pguidvendor, dwdesiredaccess, metadataoptions, ppidecoder)
-  end
-  def create_decoder_from_stream(this : IWICImagingFactory*, pistream : IStream, pguidvendor : Guid*, metadataoptions : WICDecodeOptions, ppidecoder : IWICBitmapDecoder*) : HRESULT
-    @lpVtbl.value.create_decoder_from_stream.call(this, pistream, pguidvendor, metadataoptions, ppidecoder)
-  end
-  def create_decoder_from_file_handle(this : IWICImagingFactory*, hfile : LibC::UINT_PTR, pguidvendor : Guid*, metadataoptions : WICDecodeOptions, ppidecoder : IWICBitmapDecoder*) : HRESULT
-    @lpVtbl.value.create_decoder_from_file_handle.call(this, hfile, pguidvendor, metadataoptions, ppidecoder)
-  end
-  def create_component_info(this : IWICImagingFactory*, clsidcomponent : Guid*, ppiinfo : IWICComponentInfo*) : HRESULT
-    @lpVtbl.value.create_component_info.call(this, clsidcomponent, ppiinfo)
-  end
-  def create_decoder(this : IWICImagingFactory*, guidcontainerformat : Guid*, pguidvendor : Guid*, ppidecoder : IWICBitmapDecoder*) : HRESULT
-    @lpVtbl.value.create_decoder.call(this, guidcontainerformat, pguidvendor, ppidecoder)
-  end
-  def create_encoder(this : IWICImagingFactory*, guidcontainerformat : Guid*, pguidvendor : Guid*, ppiencoder : IWICBitmapEncoder*) : HRESULT
-    @lpVtbl.value.create_encoder.call(this, guidcontainerformat, pguidvendor, ppiencoder)
-  end
-  def create_palette(this : IWICImagingFactory*, ppipalette : IWICPalette*) : HRESULT
-    @lpVtbl.value.create_palette.call(this, ppipalette)
-  end
-  def create_format_converter(this : IWICImagingFactory*, ppiformatconverter : IWICFormatConverter*) : HRESULT
-    @lpVtbl.value.create_format_converter.call(this, ppiformatconverter)
-  end
-  def create_bitmap_scaler(this : IWICImagingFactory*, ppibitmapscaler : IWICBitmapScaler*) : HRESULT
-    @lpVtbl.value.create_bitmap_scaler.call(this, ppibitmapscaler)
-  end
-  def create_bitmap_clipper(this : IWICImagingFactory*, ppibitmapclipper : IWICBitmapClipper*) : HRESULT
-    @lpVtbl.value.create_bitmap_clipper.call(this, ppibitmapclipper)
-  end
-  def create_bitmap_flip_rotator(this : IWICImagingFactory*, ppibitmapfliprotator : IWICBitmapFlipRotator*) : HRESULT
-    @lpVtbl.value.create_bitmap_flip_rotator.call(this, ppibitmapfliprotator)
-  end
-  def create_stream(this : IWICImagingFactory*, ppiwicstream : IWICStream*) : HRESULT
-    @lpVtbl.value.create_stream.call(this, ppiwicstream)
-  end
-  def create_color_context(this : IWICImagingFactory*, ppiwiccolorcontext : IWICColorContext*) : HRESULT
-    @lpVtbl.value.create_color_context.call(this, ppiwiccolorcontext)
-  end
-  def create_color_transformer(this : IWICImagingFactory*, ppiwiccolortransform : IWICColorTransform*) : HRESULT
-    @lpVtbl.value.create_color_transformer.call(this, ppiwiccolortransform)
-  end
-  def create_bitmap(this : IWICImagingFactory*, uiwidth : UInt32, uiheight : UInt32, pixelformat : Guid*, option : WICBitmapCreateCacheOption, ppibitmap : IWICBitmap*) : HRESULT
-    @lpVtbl.value.create_bitmap.call(this, uiwidth, uiheight, pixelformat, option, ppibitmap)
-  end
-  def create_bitmap_from_source(this : IWICImagingFactory*, pibitmapsource : IWICBitmapSource, option : WICBitmapCreateCacheOption, ppibitmap : IWICBitmap*) : HRESULT
-    @lpVtbl.value.create_bitmap_from_source.call(this, pibitmapsource, option, ppibitmap)
-  end
-  def create_bitmap_from_source_rect(this : IWICImagingFactory*, pibitmapsource : IWICBitmapSource, x : UInt32, y : UInt32, width : UInt32, height : UInt32, ppibitmap : IWICBitmap*) : HRESULT
-    @lpVtbl.value.create_bitmap_from_source_rect.call(this, pibitmapsource, x, y, width, height, ppibitmap)
-  end
-  def create_bitmap_from_memory(this : IWICImagingFactory*, uiwidth : UInt32, uiheight : UInt32, pixelformat : Guid*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*, ppibitmap : IWICBitmap*) : HRESULT
-    @lpVtbl.value.create_bitmap_from_memory.call(this, uiwidth, uiheight, pixelformat, cbstride, cbbuffersize, pbbuffer, ppibitmap)
-  end
-  def create_bitmap_from_hbitmap(this : IWICImagingFactory*, hbitmap : HBITMAP, hpalette : HPALETTE, options : WICBitmapAlphaChannelOption, ppibitmap : IWICBitmap*) : HRESULT
-    @lpVtbl.value.create_bitmap_from_hbitmap.call(this, hbitmap, hpalette, options, ppibitmap)
-  end
-  def create_bitmap_from_hicon(this : IWICImagingFactory*, hicon : LibC::HANDLE, ppibitmap : IWICBitmap*) : HRESULT
-    @lpVtbl.value.create_bitmap_from_hicon.call(this, hicon, ppibitmap)
-  end
-  def create_component_enumerator(this : IWICImagingFactory*, componenttypes : UInt32, options : UInt32, ppienumunknown : IEnumUnknown*) : HRESULT
-    @lpVtbl.value.create_component_enumerator.call(this, componenttypes, options, ppienumunknown)
-  end
-  def create_fast_metadata_encoder_from_decoder(this : IWICImagingFactory*, pidecoder : IWICBitmapDecoder, ppifastencoder : IWICFastMetadataEncoder*) : HRESULT
-    @lpVtbl.value.create_fast_metadata_encoder_from_decoder.call(this, pidecoder, ppifastencoder)
-  end
-  def create_fast_metadata_encoder_from_frame_decode(this : IWICImagingFactory*, piframedecoder : IWICBitmapFrameDecode, ppifastencoder : IWICFastMetadataEncoder*) : HRESULT
-    @lpVtbl.value.create_fast_metadata_encoder_from_frame_decode.call(this, piframedecoder, ppifastencoder)
-  end
-  def create_query_writer(this : IWICImagingFactory*, guidmetadataformat : Guid*, pguidvendor : Guid*, ppiquerywriter : IWICMetadataQueryWriter*) : HRESULT
-    @lpVtbl.value.create_query_writer.call(this, guidmetadataformat, pguidvendor, ppiquerywriter)
-  end
-  def create_query_writer_from_reader(this : IWICImagingFactory*, piqueryreader : IWICMetadataQueryReader, pguidvendor : Guid*, ppiquerywriter : IWICMetadataQueryWriter*) : HRESULT
-    @lpVtbl.value.create_query_writer_from_reader.call(this, piqueryreader, pguidvendor, ppiquerywriter)
-  end
-end
-struct LibWin32::IWICDevelopRawNotificationCallback
-  def query_interface(this : IWICDevelopRawNotificationCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICDevelopRawNotificationCallback*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICDevelopRawNotificationCallback*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def notify(this : IWICDevelopRawNotificationCallback*, notificationmask : UInt32) : HRESULT
-    @lpVtbl.value.notify.call(this, notificationmask)
-  end
-end
-struct LibWin32::IWICDevelopRaw
-  def query_interface(this : IWICDevelopRaw*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICDevelopRaw*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICDevelopRaw*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_size(this : IWICDevelopRaw*, puiwidth : UInt32*, puiheight : UInt32*) : HRESULT
-    @lpVtbl.value.get_size.call(this, puiwidth, puiheight)
-  end
-  def get_pixel_format(this : IWICDevelopRaw*, ppixelformat : Guid*) : HRESULT
-    @lpVtbl.value.get_pixel_format.call(this, ppixelformat)
-  end
-  def get_resolution(this : IWICDevelopRaw*, pdpix : Float64*, pdpiy : Float64*) : HRESULT
-    @lpVtbl.value.get_resolution.call(this, pdpix, pdpiy)
-  end
-  def copy_palette(this : IWICDevelopRaw*, pipalette : IWICPalette) : HRESULT
-    @lpVtbl.value.copy_palette.call(this, pipalette)
-  end
-  def copy_pixels(this : IWICDevelopRaw*, prc : WICRect*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*) : HRESULT
-    @lpVtbl.value.copy_pixels.call(this, prc, cbstride, cbbuffersize, pbbuffer)
-  end
-  def get_metadata_query_reader(this : IWICDevelopRaw*, ppimetadataqueryreader : IWICMetadataQueryReader*) : HRESULT
-    @lpVtbl.value.get_metadata_query_reader.call(this, ppimetadataqueryreader)
-  end
-  def get_color_contexts(this : IWICDevelopRaw*, ccount : UInt32, ppicolorcontexts : IWICColorContext*, pcactualcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_color_contexts.call(this, ccount, ppicolorcontexts, pcactualcount)
-  end
-  def get_thumbnail(this : IWICDevelopRaw*, ppithumbnail : IWICBitmapSource*) : HRESULT
-    @lpVtbl.value.get_thumbnail.call(this, ppithumbnail)
-  end
-  def query_raw_capabilities_info(this : IWICDevelopRaw*, pinfo : WICRawCapabilitiesInfo*) : HRESULT
-    @lpVtbl.value.query_raw_capabilities_info.call(this, pinfo)
-  end
-  def load_parameter_set(this : IWICDevelopRaw*, parameterset : WICRawParameterSet) : HRESULT
-    @lpVtbl.value.load_parameter_set.call(this, parameterset)
-  end
-  def get_current_parameter_set(this : IWICDevelopRaw*, ppcurrentparameterset : IPropertyBag2*) : HRESULT
-    @lpVtbl.value.get_current_parameter_set.call(this, ppcurrentparameterset)
-  end
-  def set_exposure_compensation(this : IWICDevelopRaw*, ev : Float64) : HRESULT
-    @lpVtbl.value.set_exposure_compensation.call(this, ev)
-  end
-  def get_exposure_compensation(this : IWICDevelopRaw*, pev : Float64*) : HRESULT
-    @lpVtbl.value.get_exposure_compensation.call(this, pev)
-  end
-  def set_white_point_rgb(this : IWICDevelopRaw*, red : UInt32, green : UInt32, blue : UInt32) : HRESULT
-    @lpVtbl.value.set_white_point_rgb.call(this, red, green, blue)
-  end
-  def get_white_point_rgb(this : IWICDevelopRaw*, pred : UInt32*, pgreen : UInt32*, pblue : UInt32*) : HRESULT
-    @lpVtbl.value.get_white_point_rgb.call(this, pred, pgreen, pblue)
-  end
-  def set_named_white_point(this : IWICDevelopRaw*, whitepoint : WICNamedWhitePoint) : HRESULT
-    @lpVtbl.value.set_named_white_point.call(this, whitepoint)
-  end
-  def get_named_white_point(this : IWICDevelopRaw*, pwhitepoint : WICNamedWhitePoint*) : HRESULT
-    @lpVtbl.value.get_named_white_point.call(this, pwhitepoint)
-  end
-  def set_white_point_kelvin(this : IWICDevelopRaw*, whitepointkelvin : UInt32) : HRESULT
-    @lpVtbl.value.set_white_point_kelvin.call(this, whitepointkelvin)
-  end
-  def get_white_point_kelvin(this : IWICDevelopRaw*, pwhitepointkelvin : UInt32*) : HRESULT
-    @lpVtbl.value.get_white_point_kelvin.call(this, pwhitepointkelvin)
-  end
-  def get_kelvin_range_info(this : IWICDevelopRaw*, pminkelvintemp : UInt32*, pmaxkelvintemp : UInt32*, pkelvintempstepvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_kelvin_range_info.call(this, pminkelvintemp, pmaxkelvintemp, pkelvintempstepvalue)
-  end
-  def set_contrast(this : IWICDevelopRaw*, contrast : Float64) : HRESULT
-    @lpVtbl.value.set_contrast.call(this, contrast)
-  end
-  def get_contrast(this : IWICDevelopRaw*, pcontrast : Float64*) : HRESULT
-    @lpVtbl.value.get_contrast.call(this, pcontrast)
-  end
-  def set_gamma(this : IWICDevelopRaw*, gamma : Float64) : HRESULT
-    @lpVtbl.value.set_gamma.call(this, gamma)
-  end
-  def get_gamma(this : IWICDevelopRaw*, pgamma : Float64*) : HRESULT
-    @lpVtbl.value.get_gamma.call(this, pgamma)
-  end
-  def set_sharpness(this : IWICDevelopRaw*, sharpness : Float64) : HRESULT
-    @lpVtbl.value.set_sharpness.call(this, sharpness)
-  end
-  def get_sharpness(this : IWICDevelopRaw*, psharpness : Float64*) : HRESULT
-    @lpVtbl.value.get_sharpness.call(this, psharpness)
-  end
-  def set_saturation(this : IWICDevelopRaw*, saturation : Float64) : HRESULT
-    @lpVtbl.value.set_saturation.call(this, saturation)
-  end
-  def get_saturation(this : IWICDevelopRaw*, psaturation : Float64*) : HRESULT
-    @lpVtbl.value.get_saturation.call(this, psaturation)
-  end
-  def set_tint(this : IWICDevelopRaw*, tint : Float64) : HRESULT
-    @lpVtbl.value.set_tint.call(this, tint)
-  end
-  def get_tint(this : IWICDevelopRaw*, ptint : Float64*) : HRESULT
-    @lpVtbl.value.get_tint.call(this, ptint)
-  end
-  def set_noise_reduction(this : IWICDevelopRaw*, noisereduction : Float64) : HRESULT
-    @lpVtbl.value.set_noise_reduction.call(this, noisereduction)
-  end
-  def get_noise_reduction(this : IWICDevelopRaw*, pnoisereduction : Float64*) : HRESULT
-    @lpVtbl.value.get_noise_reduction.call(this, pnoisereduction)
-  end
-  def set_destination_color_context(this : IWICDevelopRaw*, pcolorcontext : IWICColorContext) : HRESULT
-    @lpVtbl.value.set_destination_color_context.call(this, pcolorcontext)
-  end
-  def set_tone_curve(this : IWICDevelopRaw*, cbtonecurvesize : UInt32, ptonecurve : WICRawToneCurve*) : HRESULT
-    @lpVtbl.value.set_tone_curve.call(this, cbtonecurvesize, ptonecurve)
-  end
-  def get_tone_curve(this : IWICDevelopRaw*, cbtonecurvebuffersize : UInt32, ptonecurve : WICRawToneCurve*, pcbactualtonecurvebuffersize : UInt32*) : HRESULT
-    @lpVtbl.value.get_tone_curve.call(this, cbtonecurvebuffersize, ptonecurve, pcbactualtonecurvebuffersize)
-  end
-  def set_rotation(this : IWICDevelopRaw*, rotation : Float64) : HRESULT
-    @lpVtbl.value.set_rotation.call(this, rotation)
-  end
-  def get_rotation(this : IWICDevelopRaw*, protation : Float64*) : HRESULT
-    @lpVtbl.value.get_rotation.call(this, protation)
-  end
-  def set_render_mode(this : IWICDevelopRaw*, rendermode : WICRawRenderMode) : HRESULT
-    @lpVtbl.value.set_render_mode.call(this, rendermode)
-  end
-  def get_render_mode(this : IWICDevelopRaw*, prendermode : WICRawRenderMode*) : HRESULT
-    @lpVtbl.value.get_render_mode.call(this, prendermode)
-  end
-  def set_notification_callback(this : IWICDevelopRaw*, pcallback : IWICDevelopRawNotificationCallback) : HRESULT
-    @lpVtbl.value.set_notification_callback.call(this, pcallback)
-  end
-end
-struct LibWin32::IWICDdsDecoder
-  def query_interface(this : IWICDdsDecoder*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICDdsDecoder*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICDdsDecoder*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_parameters(this : IWICDdsDecoder*, pparameters : WICDdsParameters*) : HRESULT
-    @lpVtbl.value.get_parameters.call(this, pparameters)
-  end
-  def get_frame(this : IWICDdsDecoder*, arrayindex : UInt32, miplevel : UInt32, sliceindex : UInt32, ppibitmapframe : IWICBitmapFrameDecode*) : HRESULT
-    @lpVtbl.value.get_frame.call(this, arrayindex, miplevel, sliceindex, ppibitmapframe)
-  end
-end
-struct LibWin32::IWICDdsEncoder
-  def query_interface(this : IWICDdsEncoder*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICDdsEncoder*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICDdsEncoder*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_parameters(this : IWICDdsEncoder*, pparameters : WICDdsParameters*) : HRESULT
-    @lpVtbl.value.set_parameters.call(this, pparameters)
-  end
-  def get_parameters(this : IWICDdsEncoder*, pparameters : WICDdsParameters*) : HRESULT
-    @lpVtbl.value.get_parameters.call(this, pparameters)
-  end
-  def create_new_frame(this : IWICDdsEncoder*, ppiframeencode : IWICBitmapFrameEncode*, parrayindex : UInt32*, pmiplevel : UInt32*, psliceindex : UInt32*) : HRESULT
-    @lpVtbl.value.create_new_frame.call(this, ppiframeencode, parrayindex, pmiplevel, psliceindex)
-  end
-end
-struct LibWin32::IWICDdsFrameDecode
-  def query_interface(this : IWICDdsFrameDecode*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICDdsFrameDecode*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICDdsFrameDecode*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_size_in_blocks(this : IWICDdsFrameDecode*, pwidthinblocks : UInt32*, pheightinblocks : UInt32*) : HRESULT
-    @lpVtbl.value.get_size_in_blocks.call(this, pwidthinblocks, pheightinblocks)
-  end
-  def get_format_info(this : IWICDdsFrameDecode*, pformatinfo : WICDdsFormatInfo*) : HRESULT
-    @lpVtbl.value.get_format_info.call(this, pformatinfo)
-  end
-  def copy_blocks(this : IWICDdsFrameDecode*, prcboundsinblocks : WICRect*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*) : HRESULT
-    @lpVtbl.value.copy_blocks.call(this, prcboundsinblocks, cbstride, cbbuffersize, pbbuffer)
-  end
-end
-struct LibWin32::IWICJpegFrameDecode
-  def query_interface(this : IWICJpegFrameDecode*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICJpegFrameDecode*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICJpegFrameDecode*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def does_support_indexing(this : IWICJpegFrameDecode*, pfindexingsupported : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_indexing.call(this, pfindexingsupported)
-  end
-  def set_indexing(this : IWICJpegFrameDecode*, options : WICJpegIndexingOptions, horizontalintervalsize : UInt32) : HRESULT
-    @lpVtbl.value.set_indexing.call(this, options, horizontalintervalsize)
-  end
-  def clear_indexing(this : IWICJpegFrameDecode*) : HRESULT
-    @lpVtbl.value.clear_indexing.call(this)
-  end
-  def get_ac_huffman_table(this : IWICJpegFrameDecode*, scanindex : UInt32, tableindex : UInt32, pachuffmantable : DXGI_JPEG_AC_HUFFMAN_TABLE*) : HRESULT
-    @lpVtbl.value.get_ac_huffman_table.call(this, scanindex, tableindex, pachuffmantable)
-  end
-  def get_dc_huffman_table(this : IWICJpegFrameDecode*, scanindex : UInt32, tableindex : UInt32, pdchuffmantable : DXGI_JPEG_DC_HUFFMAN_TABLE*) : HRESULT
-    @lpVtbl.value.get_dc_huffman_table.call(this, scanindex, tableindex, pdchuffmantable)
-  end
-  def get_quantization_table(this : IWICJpegFrameDecode*, scanindex : UInt32, tableindex : UInt32, pquantizationtable : DXGI_JPEG_QUANTIZATION_TABLE*) : HRESULT
-    @lpVtbl.value.get_quantization_table.call(this, scanindex, tableindex, pquantizationtable)
-  end
-  def get_frame_header(this : IWICJpegFrameDecode*, pframeheader : WICJpegFrameHeader*) : HRESULT
-    @lpVtbl.value.get_frame_header.call(this, pframeheader)
-  end
-  def get_scan_header(this : IWICJpegFrameDecode*, scanindex : UInt32, pscanheader : WICJpegScanHeader*) : HRESULT
-    @lpVtbl.value.get_scan_header.call(this, scanindex, pscanheader)
-  end
-  def copy_scan(this : IWICJpegFrameDecode*, scanindex : UInt32, scanoffset : UInt32, cbscandata : UInt32, pbscandata : UInt8*, pcbscandataactual : UInt32*) : HRESULT
-    @lpVtbl.value.copy_scan.call(this, scanindex, scanoffset, cbscandata, pbscandata, pcbscandataactual)
-  end
-  def copy_minimal_stream(this : IWICJpegFrameDecode*, streamoffset : UInt32, cbstreamdata : UInt32, pbstreamdata : UInt8*, pcbstreamdataactual : UInt32*) : HRESULT
-    @lpVtbl.value.copy_minimal_stream.call(this, streamoffset, cbstreamdata, pbstreamdata, pcbstreamdataactual)
-  end
-end
-struct LibWin32::IWICJpegFrameEncode
-  def query_interface(this : IWICJpegFrameEncode*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICJpegFrameEncode*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICJpegFrameEncode*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_ac_huffman_table(this : IWICJpegFrameEncode*, scanindex : UInt32, tableindex : UInt32, pachuffmantable : DXGI_JPEG_AC_HUFFMAN_TABLE*) : HRESULT
-    @lpVtbl.value.get_ac_huffman_table.call(this, scanindex, tableindex, pachuffmantable)
-  end
-  def get_dc_huffman_table(this : IWICJpegFrameEncode*, scanindex : UInt32, tableindex : UInt32, pdchuffmantable : DXGI_JPEG_DC_HUFFMAN_TABLE*) : HRESULT
-    @lpVtbl.value.get_dc_huffman_table.call(this, scanindex, tableindex, pdchuffmantable)
-  end
-  def get_quantization_table(this : IWICJpegFrameEncode*, scanindex : UInt32, tableindex : UInt32, pquantizationtable : DXGI_JPEG_QUANTIZATION_TABLE*) : HRESULT
-    @lpVtbl.value.get_quantization_table.call(this, scanindex, tableindex, pquantizationtable)
-  end
-  def write_scan(this : IWICJpegFrameEncode*, cbscandata : UInt32, pbscandata : UInt8*) : HRESULT
-    @lpVtbl.value.write_scan.call(this, cbscandata, pbscandata)
-  end
-end
-struct LibWin32::IWICMetadataBlockReader
-  def query_interface(this : IWICMetadataBlockReader*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICMetadataBlockReader*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICMetadataBlockReader*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_container_format(this : IWICMetadataBlockReader*, pguidcontainerformat : Guid*) : HRESULT
-    @lpVtbl.value.get_container_format.call(this, pguidcontainerformat)
-  end
-  def get_count(this : IWICMetadataBlockReader*, pccount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, pccount)
-  end
-  def get_reader_by_index(this : IWICMetadataBlockReader*, nindex : UInt32, ppimetadatareader : IWICMetadataReader*) : HRESULT
-    @lpVtbl.value.get_reader_by_index.call(this, nindex, ppimetadatareader)
-  end
-  def get_enumerator(this : IWICMetadataBlockReader*, ppienummetadata : IEnumUnknown*) : HRESULT
-    @lpVtbl.value.get_enumerator.call(this, ppienummetadata)
-  end
-end
-struct LibWin32::IWICMetadataBlockWriter
-  def query_interface(this : IWICMetadataBlockWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICMetadataBlockWriter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICMetadataBlockWriter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_container_format(this : IWICMetadataBlockWriter*, pguidcontainerformat : Guid*) : HRESULT
-    @lpVtbl.value.get_container_format.call(this, pguidcontainerformat)
-  end
-  def get_count(this : IWICMetadataBlockWriter*, pccount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, pccount)
-  end
-  def get_reader_by_index(this : IWICMetadataBlockWriter*, nindex : UInt32, ppimetadatareader : IWICMetadataReader*) : HRESULT
-    @lpVtbl.value.get_reader_by_index.call(this, nindex, ppimetadatareader)
-  end
-  def get_enumerator(this : IWICMetadataBlockWriter*, ppienummetadata : IEnumUnknown*) : HRESULT
-    @lpVtbl.value.get_enumerator.call(this, ppienummetadata)
-  end
-  def initialize_from_block_reader(this : IWICMetadataBlockWriter*, pimdblockreader : IWICMetadataBlockReader) : HRESULT
-    @lpVtbl.value.initialize_from_block_reader.call(this, pimdblockreader)
-  end
-  def get_writer_by_index(this : IWICMetadataBlockWriter*, nindex : UInt32, ppimetadatawriter : IWICMetadataWriter*) : HRESULT
-    @lpVtbl.value.get_writer_by_index.call(this, nindex, ppimetadatawriter)
-  end
-  def add_writer(this : IWICMetadataBlockWriter*, pimetadatawriter : IWICMetadataWriter) : HRESULT
-    @lpVtbl.value.add_writer.call(this, pimetadatawriter)
-  end
-  def set_writer_by_index(this : IWICMetadataBlockWriter*, nindex : UInt32, pimetadatawriter : IWICMetadataWriter) : HRESULT
-    @lpVtbl.value.set_writer_by_index.call(this, nindex, pimetadatawriter)
-  end
-  def remove_writer_by_index(this : IWICMetadataBlockWriter*, nindex : UInt32) : HRESULT
-    @lpVtbl.value.remove_writer_by_index.call(this, nindex)
-  end
-end
-struct LibWin32::IWICMetadataReader
-  def query_interface(this : IWICMetadataReader*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICMetadataReader*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICMetadataReader*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_metadata_format(this : IWICMetadataReader*, pguidmetadataformat : Guid*) : HRESULT
-    @lpVtbl.value.get_metadata_format.call(this, pguidmetadataformat)
-  end
-  def get_metadata_handler_info(this : IWICMetadataReader*, ppihandler : IWICMetadataHandlerInfo*) : HRESULT
-    @lpVtbl.value.get_metadata_handler_info.call(this, ppihandler)
-  end
-  def get_count(this : IWICMetadataReader*, pccount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, pccount)
-  end
-  def get_value_by_index(this : IWICMetadataReader*, nindex : UInt32, pvarschema : PROPVARIANT*, pvarid : PROPVARIANT*, pvarvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value_by_index.call(this, nindex, pvarschema, pvarid, pvarvalue)
-  end
-  def get_value(this : IWICMetadataReader*, pvarschema : PROPVARIANT*, pvarid : PROPVARIANT*, pvarvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value.call(this, pvarschema, pvarid, pvarvalue)
-  end
-  def get_enumerator(this : IWICMetadataReader*, ppienummetadata : IWICEnumMetadataItem*) : HRESULT
-    @lpVtbl.value.get_enumerator.call(this, ppienummetadata)
-  end
-end
-struct LibWin32::IWICMetadataWriter
-  def query_interface(this : IWICMetadataWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICMetadataWriter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICMetadataWriter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_metadata_format(this : IWICMetadataWriter*, pguidmetadataformat : Guid*) : HRESULT
-    @lpVtbl.value.get_metadata_format.call(this, pguidmetadataformat)
-  end
-  def get_metadata_handler_info(this : IWICMetadataWriter*, ppihandler : IWICMetadataHandlerInfo*) : HRESULT
-    @lpVtbl.value.get_metadata_handler_info.call(this, ppihandler)
-  end
-  def get_count(this : IWICMetadataWriter*, pccount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, pccount)
-  end
-  def get_value_by_index(this : IWICMetadataWriter*, nindex : UInt32, pvarschema : PROPVARIANT*, pvarid : PROPVARIANT*, pvarvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value_by_index.call(this, nindex, pvarschema, pvarid, pvarvalue)
-  end
-  def get_value(this : IWICMetadataWriter*, pvarschema : PROPVARIANT*, pvarid : PROPVARIANT*, pvarvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value.call(this, pvarschema, pvarid, pvarvalue)
-  end
-  def get_enumerator(this : IWICMetadataWriter*, ppienummetadata : IWICEnumMetadataItem*) : HRESULT
-    @lpVtbl.value.get_enumerator.call(this, ppienummetadata)
-  end
-  def set_value(this : IWICMetadataWriter*, pvarschema : PROPVARIANT*, pvarid : PROPVARIANT*, pvarvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.set_value.call(this, pvarschema, pvarid, pvarvalue)
-  end
-  def set_value_by_index(this : IWICMetadataWriter*, nindex : UInt32, pvarschema : PROPVARIANT*, pvarid : PROPVARIANT*, pvarvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.set_value_by_index.call(this, nindex, pvarschema, pvarid, pvarvalue)
-  end
-  def remove_value(this : IWICMetadataWriter*, pvarschema : PROPVARIANT*, pvarid : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.remove_value.call(this, pvarschema, pvarid)
-  end
-  def remove_value_by_index(this : IWICMetadataWriter*, nindex : UInt32) : HRESULT
-    @lpVtbl.value.remove_value_by_index.call(this, nindex)
-  end
-end
-struct LibWin32::IWICStreamProvider
-  def query_interface(this : IWICStreamProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICStreamProvider*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICStreamProvider*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_stream(this : IWICStreamProvider*, ppistream : IStream*) : HRESULT
-    @lpVtbl.value.get_stream.call(this, ppistream)
-  end
-  def get_persist_options(this : IWICStreamProvider*, pdwpersistoptions : UInt32*) : HRESULT
-    @lpVtbl.value.get_persist_options.call(this, pdwpersistoptions)
-  end
-  def get_preferred_vendor_guid(this : IWICStreamProvider*, pguidpreferredvendor : Guid*) : HRESULT
-    @lpVtbl.value.get_preferred_vendor_guid.call(this, pguidpreferredvendor)
-  end
-  def refresh_stream(this : IWICStreamProvider*) : HRESULT
-    @lpVtbl.value.refresh_stream.call(this)
-  end
-end
-struct LibWin32::IWICPersistStream
-  def query_interface(this : IWICPersistStream*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICPersistStream*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICPersistStream*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_class_id(this : IWICPersistStream*, pclassid : Guid*) : HRESULT
-    @lpVtbl.value.get_class_id.call(this, pclassid)
-  end
-  def is_dirty(this : IWICPersistStream*) : HRESULT
-    @lpVtbl.value.is_dirty.call(this)
-  end
-  def load(this : IWICPersistStream*, pstm : IStream) : HRESULT
-    @lpVtbl.value.load.call(this, pstm)
-  end
-  def save(this : IWICPersistStream*, pstm : IStream, fcleardirty : LibC::BOOL) : HRESULT
-    @lpVtbl.value.save.call(this, pstm, fcleardirty)
-  end
-  def get_size_max(this : IWICPersistStream*, pcbsize : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.get_size_max.call(this, pcbsize)
-  end
-  def load_ex(this : IWICPersistStream*, pistream : IStream, pguidpreferredvendor : Guid*, dwpersistoptions : UInt32) : HRESULT
-    @lpVtbl.value.load_ex.call(this, pistream, pguidpreferredvendor, dwpersistoptions)
-  end
-  def save_ex(this : IWICPersistStream*, pistream : IStream, dwpersistoptions : UInt32, fcleardirty : LibC::BOOL) : HRESULT
-    @lpVtbl.value.save_ex.call(this, pistream, dwpersistoptions, fcleardirty)
-  end
-end
-struct LibWin32::IWICMetadataHandlerInfo
-  def query_interface(this : IWICMetadataHandlerInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICMetadataHandlerInfo*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICMetadataHandlerInfo*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_component_type(this : IWICMetadataHandlerInfo*, ptype : WICComponentType*) : HRESULT
-    @lpVtbl.value.get_component_type.call(this, ptype)
-  end
-  def get_clsid(this : IWICMetadataHandlerInfo*, pclsid : Guid*) : HRESULT
-    @lpVtbl.value.get_clsid.call(this, pclsid)
-  end
-  def get_signing_status(this : IWICMetadataHandlerInfo*, pstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_signing_status.call(this, pstatus)
-  end
-  def get_author(this : IWICMetadataHandlerInfo*, cchauthor : UInt32, wzauthor : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_author.call(this, cchauthor, wzauthor, pcchactual)
-  end
-  def get_vendor_guid(this : IWICMetadataHandlerInfo*, pguidvendor : Guid*) : HRESULT
-    @lpVtbl.value.get_vendor_guid.call(this, pguidvendor)
-  end
-  def get_version(this : IWICMetadataHandlerInfo*, cchversion : UInt32, wzversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_version.call(this, cchversion, wzversion, pcchactual)
-  end
-  def get_spec_version(this : IWICMetadataHandlerInfo*, cchspecversion : UInt32, wzspecversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_spec_version.call(this, cchspecversion, wzspecversion, pcchactual)
-  end
-  def get_friendly_name(this : IWICMetadataHandlerInfo*, cchfriendlyname : UInt32, wzfriendlyname : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_friendly_name.call(this, cchfriendlyname, wzfriendlyname, pcchactual)
-  end
-  def get_metadata_format(this : IWICMetadataHandlerInfo*, pguidmetadataformat : Guid*) : HRESULT
-    @lpVtbl.value.get_metadata_format.call(this, pguidmetadataformat)
-  end
-  def get_container_formats(this : IWICMetadataHandlerInfo*, ccontainerformats : UInt32, pguidcontainerformats : Guid*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_container_formats.call(this, ccontainerformats, pguidcontainerformats, pcchactual)
-  end
-  def get_device_manufacturer(this : IWICMetadataHandlerInfo*, cchdevicemanufacturer : UInt32, wzdevicemanufacturer : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_manufacturer.call(this, cchdevicemanufacturer, wzdevicemanufacturer, pcchactual)
-  end
-  def get_device_models(this : IWICMetadataHandlerInfo*, cchdevicemodels : UInt32, wzdevicemodels : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_models.call(this, cchdevicemodels, wzdevicemodels, pcchactual)
-  end
-  def does_require_full_stream(this : IWICMetadataHandlerInfo*, pfrequiresfullstream : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_require_full_stream.call(this, pfrequiresfullstream)
-  end
-  def does_support_padding(this : IWICMetadataHandlerInfo*, pfsupportspadding : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_padding.call(this, pfsupportspadding)
-  end
-  def does_require_fixed_size(this : IWICMetadataHandlerInfo*, pffixedsize : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_require_fixed_size.call(this, pffixedsize)
-  end
-end
-struct LibWin32::IWICMetadataReaderInfo
-  def query_interface(this : IWICMetadataReaderInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICMetadataReaderInfo*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICMetadataReaderInfo*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_component_type(this : IWICMetadataReaderInfo*, ptype : WICComponentType*) : HRESULT
-    @lpVtbl.value.get_component_type.call(this, ptype)
-  end
-  def get_clsid(this : IWICMetadataReaderInfo*, pclsid : Guid*) : HRESULT
-    @lpVtbl.value.get_clsid.call(this, pclsid)
-  end
-  def get_signing_status(this : IWICMetadataReaderInfo*, pstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_signing_status.call(this, pstatus)
-  end
-  def get_author(this : IWICMetadataReaderInfo*, cchauthor : UInt32, wzauthor : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_author.call(this, cchauthor, wzauthor, pcchactual)
-  end
-  def get_vendor_guid(this : IWICMetadataReaderInfo*, pguidvendor : Guid*) : HRESULT
-    @lpVtbl.value.get_vendor_guid.call(this, pguidvendor)
-  end
-  def get_version(this : IWICMetadataReaderInfo*, cchversion : UInt32, wzversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_version.call(this, cchversion, wzversion, pcchactual)
-  end
-  def get_spec_version(this : IWICMetadataReaderInfo*, cchspecversion : UInt32, wzspecversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_spec_version.call(this, cchspecversion, wzspecversion, pcchactual)
-  end
-  def get_friendly_name(this : IWICMetadataReaderInfo*, cchfriendlyname : UInt32, wzfriendlyname : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_friendly_name.call(this, cchfriendlyname, wzfriendlyname, pcchactual)
-  end
-  def get_metadata_format(this : IWICMetadataReaderInfo*, pguidmetadataformat : Guid*) : HRESULT
-    @lpVtbl.value.get_metadata_format.call(this, pguidmetadataformat)
-  end
-  def get_container_formats(this : IWICMetadataReaderInfo*, ccontainerformats : UInt32, pguidcontainerformats : Guid*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_container_formats.call(this, ccontainerformats, pguidcontainerformats, pcchactual)
-  end
-  def get_device_manufacturer(this : IWICMetadataReaderInfo*, cchdevicemanufacturer : UInt32, wzdevicemanufacturer : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_manufacturer.call(this, cchdevicemanufacturer, wzdevicemanufacturer, pcchactual)
-  end
-  def get_device_models(this : IWICMetadataReaderInfo*, cchdevicemodels : UInt32, wzdevicemodels : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_models.call(this, cchdevicemodels, wzdevicemodels, pcchactual)
-  end
-  def does_require_full_stream(this : IWICMetadataReaderInfo*, pfrequiresfullstream : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_require_full_stream.call(this, pfrequiresfullstream)
-  end
-  def does_support_padding(this : IWICMetadataReaderInfo*, pfsupportspadding : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_padding.call(this, pfsupportspadding)
-  end
-  def does_require_fixed_size(this : IWICMetadataReaderInfo*, pffixedsize : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_require_fixed_size.call(this, pffixedsize)
-  end
-  def get_patterns(this : IWICMetadataReaderInfo*, guidcontainerformat : Guid*, cbsize : UInt32, ppattern : WICMetadataPattern*, pccount : UInt32*, pcbactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_patterns.call(this, guidcontainerformat, cbsize, ppattern, pccount, pcbactual)
-  end
-  def matches_pattern(this : IWICMetadataReaderInfo*, guidcontainerformat : Guid*, pistream : IStream, pfmatches : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.matches_pattern.call(this, guidcontainerformat, pistream, pfmatches)
-  end
-  def create_instance(this : IWICMetadataReaderInfo*, ppireader : IWICMetadataReader*) : HRESULT
-    @lpVtbl.value.create_instance.call(this, ppireader)
-  end
-end
-struct LibWin32::IWICMetadataWriterInfo
-  def query_interface(this : IWICMetadataWriterInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICMetadataWriterInfo*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICMetadataWriterInfo*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_component_type(this : IWICMetadataWriterInfo*, ptype : WICComponentType*) : HRESULT
-    @lpVtbl.value.get_component_type.call(this, ptype)
-  end
-  def get_clsid(this : IWICMetadataWriterInfo*, pclsid : Guid*) : HRESULT
-    @lpVtbl.value.get_clsid.call(this, pclsid)
-  end
-  def get_signing_status(this : IWICMetadataWriterInfo*, pstatus : UInt32*) : HRESULT
-    @lpVtbl.value.get_signing_status.call(this, pstatus)
-  end
-  def get_author(this : IWICMetadataWriterInfo*, cchauthor : UInt32, wzauthor : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_author.call(this, cchauthor, wzauthor, pcchactual)
-  end
-  def get_vendor_guid(this : IWICMetadataWriterInfo*, pguidvendor : Guid*) : HRESULT
-    @lpVtbl.value.get_vendor_guid.call(this, pguidvendor)
-  end
-  def get_version(this : IWICMetadataWriterInfo*, cchversion : UInt32, wzversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_version.call(this, cchversion, wzversion, pcchactual)
-  end
-  def get_spec_version(this : IWICMetadataWriterInfo*, cchspecversion : UInt32, wzspecversion : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_spec_version.call(this, cchspecversion, wzspecversion, pcchactual)
-  end
-  def get_friendly_name(this : IWICMetadataWriterInfo*, cchfriendlyname : UInt32, wzfriendlyname : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_friendly_name.call(this, cchfriendlyname, wzfriendlyname, pcchactual)
-  end
-  def get_metadata_format(this : IWICMetadataWriterInfo*, pguidmetadataformat : Guid*) : HRESULT
-    @lpVtbl.value.get_metadata_format.call(this, pguidmetadataformat)
-  end
-  def get_container_formats(this : IWICMetadataWriterInfo*, ccontainerformats : UInt32, pguidcontainerformats : Guid*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_container_formats.call(this, ccontainerformats, pguidcontainerformats, pcchactual)
-  end
-  def get_device_manufacturer(this : IWICMetadataWriterInfo*, cchdevicemanufacturer : UInt32, wzdevicemanufacturer : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_manufacturer.call(this, cchdevicemanufacturer, wzdevicemanufacturer, pcchactual)
-  end
-  def get_device_models(this : IWICMetadataWriterInfo*, cchdevicemodels : UInt32, wzdevicemodels : Char*, pcchactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_models.call(this, cchdevicemodels, wzdevicemodels, pcchactual)
-  end
-  def does_require_full_stream(this : IWICMetadataWriterInfo*, pfrequiresfullstream : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_require_full_stream.call(this, pfrequiresfullstream)
-  end
-  def does_support_padding(this : IWICMetadataWriterInfo*, pfsupportspadding : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_support_padding.call(this, pfsupportspadding)
-  end
-  def does_require_fixed_size(this : IWICMetadataWriterInfo*, pffixedsize : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.does_require_fixed_size.call(this, pffixedsize)
-  end
-  def get_header(this : IWICMetadataWriterInfo*, guidcontainerformat : Guid*, cbsize : UInt32, pheader : WICMetadataHeader*, pcbactual : UInt32*) : HRESULT
-    @lpVtbl.value.get_header.call(this, guidcontainerformat, cbsize, pheader, pcbactual)
-  end
-  def create_instance(this : IWICMetadataWriterInfo*, ppiwriter : IWICMetadataWriter*) : HRESULT
-    @lpVtbl.value.create_instance.call(this, ppiwriter)
-  end
-end
-struct LibWin32::IWICComponentFactory
-  def query_interface(this : IWICComponentFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWICComponentFactory*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWICComponentFactory*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def create_decoder_from_filename(this : IWICComponentFactory*, wzfilename : LibC::LPWSTR, pguidvendor : Guid*, dwdesiredaccess : UInt32, metadataoptions : WICDecodeOptions, ppidecoder : IWICBitmapDecoder*) : HRESULT
-    @lpVtbl.value.create_decoder_from_filename.call(this, wzfilename, pguidvendor, dwdesiredaccess, metadataoptions, ppidecoder)
-  end
-  def create_decoder_from_stream(this : IWICComponentFactory*, pistream : IStream, pguidvendor : Guid*, metadataoptions : WICDecodeOptions, ppidecoder : IWICBitmapDecoder*) : HRESULT
-    @lpVtbl.value.create_decoder_from_stream.call(this, pistream, pguidvendor, metadataoptions, ppidecoder)
-  end
-  def create_decoder_from_file_handle(this : IWICComponentFactory*, hfile : LibC::UINT_PTR, pguidvendor : Guid*, metadataoptions : WICDecodeOptions, ppidecoder : IWICBitmapDecoder*) : HRESULT
-    @lpVtbl.value.create_decoder_from_file_handle.call(this, hfile, pguidvendor, metadataoptions, ppidecoder)
-  end
-  def create_component_info(this : IWICComponentFactory*, clsidcomponent : Guid*, ppiinfo : IWICComponentInfo*) : HRESULT
-    @lpVtbl.value.create_component_info.call(this, clsidcomponent, ppiinfo)
-  end
-  def create_decoder(this : IWICComponentFactory*, guidcontainerformat : Guid*, pguidvendor : Guid*, ppidecoder : IWICBitmapDecoder*) : HRESULT
-    @lpVtbl.value.create_decoder.call(this, guidcontainerformat, pguidvendor, ppidecoder)
-  end
-  def create_encoder(this : IWICComponentFactory*, guidcontainerformat : Guid*, pguidvendor : Guid*, ppiencoder : IWICBitmapEncoder*) : HRESULT
-    @lpVtbl.value.create_encoder.call(this, guidcontainerformat, pguidvendor, ppiencoder)
-  end
-  def create_palette(this : IWICComponentFactory*, ppipalette : IWICPalette*) : HRESULT
-    @lpVtbl.value.create_palette.call(this, ppipalette)
-  end
-  def create_format_converter(this : IWICComponentFactory*, ppiformatconverter : IWICFormatConverter*) : HRESULT
-    @lpVtbl.value.create_format_converter.call(this, ppiformatconverter)
-  end
-  def create_bitmap_scaler(this : IWICComponentFactory*, ppibitmapscaler : IWICBitmapScaler*) : HRESULT
-    @lpVtbl.value.create_bitmap_scaler.call(this, ppibitmapscaler)
-  end
-  def create_bitmap_clipper(this : IWICComponentFactory*, ppibitmapclipper : IWICBitmapClipper*) : HRESULT
-    @lpVtbl.value.create_bitmap_clipper.call(this, ppibitmapclipper)
-  end
-  def create_bitmap_flip_rotator(this : IWICComponentFactory*, ppibitmapfliprotator : IWICBitmapFlipRotator*) : HRESULT
-    @lpVtbl.value.create_bitmap_flip_rotator.call(this, ppibitmapfliprotator)
-  end
-  def create_stream(this : IWICComponentFactory*, ppiwicstream : IWICStream*) : HRESULT
-    @lpVtbl.value.create_stream.call(this, ppiwicstream)
-  end
-  def create_color_context(this : IWICComponentFactory*, ppiwiccolorcontext : IWICColorContext*) : HRESULT
-    @lpVtbl.value.create_color_context.call(this, ppiwiccolorcontext)
-  end
-  def create_color_transformer(this : IWICComponentFactory*, ppiwiccolortransform : IWICColorTransform*) : HRESULT
-    @lpVtbl.value.create_color_transformer.call(this, ppiwiccolortransform)
-  end
-  def create_bitmap(this : IWICComponentFactory*, uiwidth : UInt32, uiheight : UInt32, pixelformat : Guid*, option : WICBitmapCreateCacheOption, ppibitmap : IWICBitmap*) : HRESULT
-    @lpVtbl.value.create_bitmap.call(this, uiwidth, uiheight, pixelformat, option, ppibitmap)
-  end
-  def create_bitmap_from_source(this : IWICComponentFactory*, pibitmapsource : IWICBitmapSource, option : WICBitmapCreateCacheOption, ppibitmap : IWICBitmap*) : HRESULT
-    @lpVtbl.value.create_bitmap_from_source.call(this, pibitmapsource, option, ppibitmap)
-  end
-  def create_bitmap_from_source_rect(this : IWICComponentFactory*, pibitmapsource : IWICBitmapSource, x : UInt32, y : UInt32, width : UInt32, height : UInt32, ppibitmap : IWICBitmap*) : HRESULT
-    @lpVtbl.value.create_bitmap_from_source_rect.call(this, pibitmapsource, x, y, width, height, ppibitmap)
-  end
-  def create_bitmap_from_memory(this : IWICComponentFactory*, uiwidth : UInt32, uiheight : UInt32, pixelformat : Guid*, cbstride : UInt32, cbbuffersize : UInt32, pbbuffer : UInt8*, ppibitmap : IWICBitmap*) : HRESULT
-    @lpVtbl.value.create_bitmap_from_memory.call(this, uiwidth, uiheight, pixelformat, cbstride, cbbuffersize, pbbuffer, ppibitmap)
-  end
-  def create_bitmap_from_hbitmap(this : IWICComponentFactory*, hbitmap : HBITMAP, hpalette : HPALETTE, options : WICBitmapAlphaChannelOption, ppibitmap : IWICBitmap*) : HRESULT
-    @lpVtbl.value.create_bitmap_from_hbitmap.call(this, hbitmap, hpalette, options, ppibitmap)
-  end
-  def create_bitmap_from_hicon(this : IWICComponentFactory*, hicon : LibC::HANDLE, ppibitmap : IWICBitmap*) : HRESULT
-    @lpVtbl.value.create_bitmap_from_hicon.call(this, hicon, ppibitmap)
-  end
-  def create_component_enumerator(this : IWICComponentFactory*, componenttypes : UInt32, options : UInt32, ppienumunknown : IEnumUnknown*) : HRESULT
-    @lpVtbl.value.create_component_enumerator.call(this, componenttypes, options, ppienumunknown)
-  end
-  def create_fast_metadata_encoder_from_decoder(this : IWICComponentFactory*, pidecoder : IWICBitmapDecoder, ppifastencoder : IWICFastMetadataEncoder*) : HRESULT
-    @lpVtbl.value.create_fast_metadata_encoder_from_decoder.call(this, pidecoder, ppifastencoder)
-  end
-  def create_fast_metadata_encoder_from_frame_decode(this : IWICComponentFactory*, piframedecoder : IWICBitmapFrameDecode, ppifastencoder : IWICFastMetadataEncoder*) : HRESULT
-    @lpVtbl.value.create_fast_metadata_encoder_from_frame_decode.call(this, piframedecoder, ppifastencoder)
-  end
-  def create_query_writer(this : IWICComponentFactory*, guidmetadataformat : Guid*, pguidvendor : Guid*, ppiquerywriter : IWICMetadataQueryWriter*) : HRESULT
-    @lpVtbl.value.create_query_writer.call(this, guidmetadataformat, pguidvendor, ppiquerywriter)
-  end
-  def create_query_writer_from_reader(this : IWICComponentFactory*, piqueryreader : IWICMetadataQueryReader, pguidvendor : Guid*, ppiquerywriter : IWICMetadataQueryWriter*) : HRESULT
-    @lpVtbl.value.create_query_writer_from_reader.call(this, piqueryreader, pguidvendor, ppiquerywriter)
-  end
-  def create_metadata_reader(this : IWICComponentFactory*, guidmetadataformat : Guid*, pguidvendor : Guid*, dwoptions : UInt32, pistream : IStream, ppireader : IWICMetadataReader*) : HRESULT
-    @lpVtbl.value.create_metadata_reader.call(this, guidmetadataformat, pguidvendor, dwoptions, pistream, ppireader)
-  end
-  def create_metadata_reader_from_container(this : IWICComponentFactory*, guidcontainerformat : Guid*, pguidvendor : Guid*, dwoptions : UInt32, pistream : IStream, ppireader : IWICMetadataReader*) : HRESULT
-    @lpVtbl.value.create_metadata_reader_from_container.call(this, guidcontainerformat, pguidvendor, dwoptions, pistream, ppireader)
-  end
-  def create_metadata_writer(this : IWICComponentFactory*, guidmetadataformat : Guid*, pguidvendor : Guid*, dwmetadataoptions : UInt32, ppiwriter : IWICMetadataWriter*) : HRESULT
-    @lpVtbl.value.create_metadata_writer.call(this, guidmetadataformat, pguidvendor, dwmetadataoptions, ppiwriter)
-  end
-  def create_metadata_writer_from_reader(this : IWICComponentFactory*, pireader : IWICMetadataReader, pguidvendor : Guid*, ppiwriter : IWICMetadataWriter*) : HRESULT
-    @lpVtbl.value.create_metadata_writer_from_reader.call(this, pireader, pguidvendor, ppiwriter)
-  end
-  def create_query_reader_from_block_reader(this : IWICComponentFactory*, piblockreader : IWICMetadataBlockReader, ppiqueryreader : IWICMetadataQueryReader*) : HRESULT
-    @lpVtbl.value.create_query_reader_from_block_reader.call(this, piblockreader, ppiqueryreader)
-  end
-  def create_query_writer_from_block_writer(this : IWICComponentFactory*, piblockwriter : IWICMetadataBlockWriter, ppiquerywriter : IWICMetadataQueryWriter*) : HRESULT
-    @lpVtbl.value.create_query_writer_from_block_writer.call(this, piblockwriter, ppiquerywriter)
-  end
-  def create_encoder_property_bag(this : IWICComponentFactory*, ppropoptions : PROPBAG2*, ccount : UInt32, ppipropertybag : IPropertyBag2*) : HRESULT
-    @lpVtbl.value.create_encoder_property_bag.call(this, ppropoptions, ccount, ppipropertybag)
   end
 end

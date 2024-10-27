@@ -1,186 +1,188 @@
-require "../foundation.cr"
+require "./../foundation.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:user32.dll")]
-{% else %}
-@[Link("user32")]
-{% end %}
-lib LibWin32
+module Win32cr::UI::Input
   alias HRAWINPUT = LibC::IntPtrT
 
-
   enum RAW_INPUT_DATA_COMMAND_FLAGS : UInt32
-    RID_HEADER = 268435461
-    RID_INPUT = 268435459
+    RID_HEADER = 268435461_u32
+    RID_INPUT = 268435459_u32
   end
-
   enum RAW_INPUT_DEVICE_INFO_COMMAND : UInt32
-    RIDI_PREPARSEDDATA = 536870917
-    RIDI_DEVICENAME = 536870919
-    RIDI_DEVICEINFO = 536870923
+    RIDI_PREPARSEDDATA = 536870917_u32
+    RIDI_DEVICENAME = 536870919_u32
+    RIDI_DEVICEINFO = 536870923_u32
   end
-
   enum RID_DEVICE_INFO_TYPE : UInt32
-    RIM_TYPEMOUSE = 0
-    RIM_TYPEKEYBOARD = 1
-    RIM_TYPEHID = 2
+    RIM_TYPEMOUSE = 0_u32
+    RIM_TYPEKEYBOARD = 1_u32
+    RIM_TYPEHID = 2_u32
   end
-
+  @[Flags]
   enum RAWINPUTDEVICE_FLAGS : UInt32
-    RIDEV_REMOVE = 1
-    RIDEV_EXCLUDE = 16
-    RIDEV_PAGEONLY = 32
-    RIDEV_NOLEGACY = 48
-    RIDEV_INPUTSINK = 256
-    RIDEV_CAPTUREMOUSE = 512
-    RIDEV_NOHOTKEYS = 512
-    RIDEV_APPKEYS = 1024
-    RIDEV_EXINPUTSINK = 4096
-    RIDEV_DEVNOTIFY = 8192
+    RIDEV_REMOVE = 1_u32
+    RIDEV_EXCLUDE = 16_u32
+    RIDEV_PAGEONLY = 32_u32
+    RIDEV_NOLEGACY = 48_u32
+    RIDEV_INPUTSINK = 256_u32
+    RIDEV_CAPTUREMOUSE = 512_u32
+    RIDEV_NOHOTKEYS = 512_u32
+    RIDEV_APPKEYS = 1024_u32
+    RIDEV_EXINPUTSINK = 4096_u32
+    RIDEV_DEVNOTIFY = 8192_u32
+  end
+  enum INPUT_MESSAGE_DEVICE_TYPE
+    IMDT_UNAVAILABLE = 0_i32
+    IMDT_KEYBOARD = 1_i32
+    IMDT_MOUSE = 2_i32
+    IMDT_TOUCH = 4_i32
+    IMDT_PEN = 8_i32
+    IMDT_TOUCHPAD = 16_i32
+  end
+  enum INPUT_MESSAGE_ORIGIN_ID
+    IMO_UNAVAILABLE = 0_i32
+    IMO_HARDWARE = 1_i32
+    IMO_INJECTED = 2_i32
+    IMO_SYSTEM = 4_i32
   end
 
-  enum INPUT_MESSAGE_DEVICE_TYPE : Int32
-    IMDT_UNAVAILABLE = 0
-    IMDT_KEYBOARD = 1
-    IMDT_MOUSE = 2
-    IMDT_TOUCH = 4
-    IMDT_PEN = 8
-    IMDT_TOUCHPAD = 16
+  @[Extern]
+  record RAWINPUTHEADER,
+    dwType : UInt32,
+    dwSize : UInt32,
+    hDevice : Win32cr::Foundation::HANDLE,
+    wParam : Win32cr::Foundation::WPARAM
+
+  @[Extern]
+  record RAWMOUSE,
+    usFlags : UInt16,
+    anonymous : Anonymous_e__Union,
+    ulRawButtons : UInt32,
+    lLastX : Int32,
+    lLastY : Int32,
+    ulExtraInformation : UInt32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      ulButtons : UInt32,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        usButtonFlags : UInt16,
+        usButtonData : UInt16
+
+    end
+
   end
 
-  enum INPUT_MESSAGE_ORIGIN_ID : Int32
-    IMO_UNAVAILABLE = 0
-    IMO_HARDWARE = 1
-    IMO_INJECTED = 2
-    IMO_SYSTEM = 4
-  end
-
-  union RAWMOUSE_Anonymous_e__Union
-    ul_buttons : UInt32
-    anonymous : RAWMOUSE_Anonymous_e__Union_Anonymous_e__Struct
-  end
-  union RAWINPUT_data_e__Union
-    mouse : RAWMOUSE
-    keyboard : RAWKEYBOARD
-    hid : RAWHID
-  end
-  union RID_DEVICE_INFO_Anonymous_e__Union
-    mouse : RID_DEVICE_INFO_MOUSE
-    keyboard : RID_DEVICE_INFO_KEYBOARD
-    hid : RID_DEVICE_INFO_HID
-  end
-
-  struct RAWINPUTHEADER
-    dw_type : UInt32
-    dw_size : UInt32
-    h_device : LibC::HANDLE
-    w_param : LibC::UINT_PTR
-  end
-  struct RAWMOUSE
-    us_flags : UInt16
-    anonymous : RAWMOUSE_Anonymous_e__Union
-    ul_raw_buttons : UInt32
-    l_last_x : Int32
-    l_last_y : Int32
-    ul_extra_information : UInt32
-  end
-  struct RAWMOUSE_Anonymous_e__Union_Anonymous_e__Struct
-    us_button_flags : UInt16
-    us_button_data : UInt16
-  end
-  struct RAWKEYBOARD
-    make_code : UInt16
-    flags : UInt16
-    reserved : UInt16
-    v_key : UInt16
-    message : UInt32
+  @[Extern]
+  record RAWKEYBOARD,
+    make_code : UInt16,
+    flags : UInt16,
+    reserved : UInt16,
+    v_key : UInt16,
+    message : UInt32,
     extra_information : UInt32
-  end
-  struct RAWHID
-    dw_size_hid : UInt32
-    dw_count : UInt32
-    b_raw_data : UInt8[0]*
-  end
-  struct RAWINPUT
-    header : RAWINPUTHEADER
-    data : RAWINPUT_data_e__Union
-  end
-  struct RID_DEVICE_INFO_MOUSE
-    dw_id : UInt32
-    dw_number_of_buttons : UInt32
-    dw_sample_rate : UInt32
-    f_has_horizontal_wheel : LibC::BOOL
-  end
-  struct RID_DEVICE_INFO_KEYBOARD
-    dw_type : UInt32
-    dw_sub_type : UInt32
-    dw_keyboard_mode : UInt32
-    dw_number_of_function_keys : UInt32
-    dw_number_of_indicators : UInt32
-    dw_number_of_keys_total : UInt32
-  end
-  struct RID_DEVICE_INFO_HID
-    dw_vendor_id : UInt32
-    dw_product_id : UInt32
-    dw_version_number : UInt32
-    us_usage_page : UInt16
-    us_usage : UInt16
-  end
-  struct RID_DEVICE_INFO
-    cb_size : UInt32
-    dw_type : RID_DEVICE_INFO_TYPE
-    anonymous : RID_DEVICE_INFO_Anonymous_e__Union
-  end
-  struct RAWINPUTDEVICE
-    us_usage_page : UInt16
-    us_usage : UInt16
-    dw_flags : RAWINPUTDEVICE_FLAGS
-    hwnd_target : HANDLE
-  end
-  struct RAWINPUTDEVICELIST
-    h_device : LibC::HANDLE
-    dw_type : RID_DEVICE_INFO_TYPE
-  end
-  struct INPUT_MESSAGE_SOURCE
-    device_type : INPUT_MESSAGE_DEVICE_TYPE
-    origin_id : INPUT_MESSAGE_ORIGIN_ID
+
+  @[Extern]
+  record RAWHID,
+    dwSizeHid : UInt32,
+    dwCount : UInt32,
+    bRawData : UInt8*
+
+  @[Extern]
+  record RAWINPUT,
+    header : Win32cr::UI::Input::RAWINPUTHEADER,
+    data : Data_e__union do
+
+    # Nested Type Data_e__union
+    @[Extern(union: true)]
+    record Data_e__union,
+      mouse : Win32cr::UI::Input::RAWMOUSE,
+      keyboard : Win32cr::UI::Input::RAWKEYBOARD,
+      hid : Win32cr::UI::Input::RAWHID
+
   end
 
+  @[Extern]
+  record RID_DEVICE_INFO_MOUSE,
+    dwId : UInt32,
+    dwNumberOfButtons : UInt32,
+    dwSampleRate : UInt32,
+    fHasHorizontalWheel : Win32cr::Foundation::BOOL
 
-  # Params # hrawinput : HRAWINPUT [In],uicommand : RAW_INPUT_DATA_COMMAND_FLAGS [In],pdata : Void* [In],pcbsize : UInt32* [In],cbsizeheader : UInt32 [In]
-  fun GetRawInputData(hrawinput : HRAWINPUT, uicommand : RAW_INPUT_DATA_COMMAND_FLAGS, pdata : Void*, pcbsize : UInt32*, cbsizeheader : UInt32) : UInt32
+  @[Extern]
+  record RID_DEVICE_INFO_KEYBOARD,
+    dwType : UInt32,
+    dwSubType : UInt32,
+    dwKeyboardMode : UInt32,
+    dwNumberOfFunctionKeys : UInt32,
+    dwNumberOfIndicators : UInt32,
+    dwNumberOfKeysTotal : UInt32
 
-  # Params # hdevice : LibC::HANDLE [In],uicommand : RAW_INPUT_DEVICE_INFO_COMMAND [In],pdata : Void* [In],pcbsize : UInt32* [In]
-  fun GetRawInputDeviceInfoA(hdevice : LibC::HANDLE, uicommand : RAW_INPUT_DEVICE_INFO_COMMAND, pdata : Void*, pcbsize : UInt32*) : UInt32
+  @[Extern]
+  record RID_DEVICE_INFO_HID,
+    dwVendorId : UInt32,
+    dwProductId : UInt32,
+    dwVersionNumber : UInt32,
+    usUsagePage : UInt16,
+    usUsage : UInt16
 
-  # Params # hdevice : LibC::HANDLE [In],uicommand : RAW_INPUT_DEVICE_INFO_COMMAND [In],pdata : Void* [In],pcbsize : UInt32* [In]
-  fun GetRawInputDeviceInfoW(hdevice : LibC::HANDLE, uicommand : RAW_INPUT_DEVICE_INFO_COMMAND, pdata : Void*, pcbsize : UInt32*) : UInt32
+  @[Extern]
+  record RID_DEVICE_INFO,
+    cbSize : UInt32,
+    dwType : Win32cr::UI::Input::RID_DEVICE_INFO_TYPE,
+    anonymous : Anonymous_e__Union do
 
-  # Params # pdata : RAWINPUT* [In],pcbsize : UInt32* [In],cbsizeheader : UInt32 [In]
-  fun GetRawInputBuffer(pdata : RAWINPUT*, pcbsize : UInt32*, cbsizeheader : UInt32) : UInt32
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      mouse : Win32cr::UI::Input::RID_DEVICE_INFO_MOUSE,
+      keyboard : Win32cr::UI::Input::RID_DEVICE_INFO_KEYBOARD,
+      hid : Win32cr::UI::Input::RID_DEVICE_INFO_HID
 
-  # Params # prawinputdevices : RAWINPUTDEVICE* [In],uinumdevices : UInt32 [In],cbsize : UInt32 [In]
-  fun RegisterRawInputDevices(prawinputdevices : RAWINPUTDEVICE*, uinumdevices : UInt32, cbsize : UInt32) : LibC::BOOL
+  end
 
-  # Params # prawinputdevices : RAWINPUTDEVICE* [In],puinumdevices : UInt32* [In],cbsize : UInt32 [In]
-  fun GetRegisteredRawInputDevices(prawinputdevices : RAWINPUTDEVICE*, puinumdevices : UInt32*, cbsize : UInt32) : UInt32
+  @[Extern]
+  record RAWINPUTDEVICE,
+    usUsagePage : UInt16,
+    usUsage : UInt16,
+    dwFlags : Win32cr::UI::Input::RAWINPUTDEVICE_FLAGS,
+    hwndTarget : Win32cr::Foundation::HWND
 
-  # Params # prawinputdevicelist : RAWINPUTDEVICELIST* [In],puinumdevices : UInt32* [In],cbsize : UInt32 [In]
-  fun GetRawInputDeviceList(prawinputdevicelist : RAWINPUTDEVICELIST*, puinumdevices : UInt32*, cbsize : UInt32) : UInt32
+  @[Extern]
+  record RAWINPUTDEVICELIST,
+    hDevice : Win32cr::Foundation::HANDLE,
+    dwType : Win32cr::UI::Input::RID_DEVICE_INFO_TYPE
 
-  # Params # parawinput : RAWINPUT** [In],ninput : Int32 [In],cbsizeheader : UInt32 [In]
-  fun DefRawInputProc(parawinput : RAWINPUT**, ninput : Int32, cbsizeheader : UInt32) : LRESULT
+  @[Extern]
+  record INPUT_MESSAGE_SOURCE,
+    deviceType : Win32cr::UI::Input::INPUT_MESSAGE_DEVICE_TYPE,
+    originId : Win32cr::UI::Input::INPUT_MESSAGE_ORIGIN_ID
 
-  # Params # inputmessagesource : INPUT_MESSAGE_SOURCE* [In]
-  fun GetCurrentInputMessageSource(inputmessagesource : INPUT_MESSAGE_SOURCE*) : LibC::BOOL
+  @[Link("user32")]
+  lib C
+    fun GetRawInputData(hRawInput : Win32cr::UI::Input::HRAWINPUT, uiCommand : Win32cr::UI::Input::RAW_INPUT_DATA_COMMAND_FLAGS, pData : Void*, pcbSize : UInt32*, cbSizeHeader : UInt32) : UInt32
 
-  # Params # inputmessagesource : INPUT_MESSAGE_SOURCE* [In]
-  fun GetCIMSSM(inputmessagesource : INPUT_MESSAGE_SOURCE*) : LibC::BOOL
+    fun GetRawInputDeviceInfoA(hDevice : Win32cr::Foundation::HANDLE, uiCommand : Win32cr::UI::Input::RAW_INPUT_DEVICE_INFO_COMMAND, pData : Void*, pcbSize : UInt32*) : UInt32
+
+    fun GetRawInputDeviceInfoW(hDevice : Win32cr::Foundation::HANDLE, uiCommand : Win32cr::UI::Input::RAW_INPUT_DEVICE_INFO_COMMAND, pData : Void*, pcbSize : UInt32*) : UInt32
+
+    fun GetRawInputBuffer(pData : Win32cr::UI::Input::RAWINPUT*, pcbSize : UInt32*, cbSizeHeader : UInt32) : UInt32
+
+    fun RegisterRawInputDevices(pRawInputDevices : Win32cr::UI::Input::RAWINPUTDEVICE*, uiNumDevices : UInt32, cbSize : UInt32) : Win32cr::Foundation::BOOL
+
+    fun GetRegisteredRawInputDevices(pRawInputDevices : Win32cr::UI::Input::RAWINPUTDEVICE*, puiNumDevices : UInt32*, cbSize : UInt32) : UInt32
+
+    fun GetRawInputDeviceList(pRawInputDeviceList : Win32cr::UI::Input::RAWINPUTDEVICELIST*, puiNumDevices : UInt32*, cbSize : UInt32) : UInt32
+
+    fun DefRawInputProc(paRawInput : Win32cr::UI::Input::RAWINPUT**, nInput : Int32, cbSizeHeader : UInt32) : Win32cr::Foundation::LRESULT
+
+    fun GetCurrentInputMessageSource(inputMessageSource : Win32cr::UI::Input::INPUT_MESSAGE_SOURCE*) : Win32cr::Foundation::BOOL
+
+    fun GetCIMSSM(inputMessageSource : Win32cr::UI::Input::INPUT_MESSAGE_SOURCE*) : Win32cr::Foundation::BOOL
+
+  end
 end

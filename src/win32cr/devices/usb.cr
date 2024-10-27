@@ -1,19 +1,9 @@
-require "../foundation.cr"
-require "../system/io.cr"
+require "./../foundation.cr"
+require "./../system/io.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:winusb.dll")]
-{% else %}
-@[Link("winusb")]
-{% end %}
-lib LibWin32
+module Win32cr::Devices::Usb
+  alias USB_IDLE_CALLBACK = Proc(Void*, Void)*
+
   SHORT_PACKET_TERMINATE = 1_u32
   AUTO_CLEAR_STALL = 2_u32
   PIPE_TRANSFER_TIMEOUT = 3_u32
@@ -451,8 +441,13 @@ lib LibWin32
   OS_STRING_DESCRIPTOR_INDEX = 238_u32
   MS_GENRE_DESCRIPTOR_INDEX = 1_u32
   MS_POWER_DESCRIPTOR_INDEX = 2_u32
+  MS_OS_STRING_SIGNATURE = "MSFT100"
   MS_OS_FLAGS_CONTAINERID = 2_u32
   URB_OPEN_STATIC_STREAMS_VERSION_100 = 256_u32
+  KREGUSBFNENUMPATH = "\\Registry\\Machine\\SYSTEM\\CurrentControlSet\\Control\\USBFN\\"
+  UREGUSBFNENUMPATH = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\USBFN\\"
+  KREGMANUSBFNENUMPATH = "\\Registry\\Machine\\SYSTEM\\CurrentControlSet\\Control\\ManufacturingMode\\Current\\USBFN\\"
+  UREGMANUSBFNENUMPATH = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\ManufacturingMode\\Current\\USBFN\\"
   MAX_NUM_USBFN_ENDPOINTS = 15_u32
   MAX_CONFIGURATION_NAME_LENGTH = 40_u32
   MAX_USB_STRING_LENGTH = 255_u32
@@ -558,1361 +553,1615 @@ lib LibWin32
   IOCTL_ABORT_PIPE = 2147491844_u32
   WinUSB_TestGuid = "da812bff-12c3-46a2-8e2b-dbd3b7834c43"
 
-  alias USB_IDLE_CALLBACK = Proc(Void*, Void)
-
-
-  enum USB_DEVICE_SPEED : Int32
-    UsbLowSpeed = 0
-    UsbFullSpeed = 1
-    UsbHighSpeed = 2
-    UsbSuperSpeed = 3
+  enum USB_DEVICE_SPEED
+    UsbLowSpeed = 0_i32
+    UsbFullSpeed = 1_i32
+    UsbHighSpeed = 2_i32
+    UsbSuperSpeed = 3_i32
+  end
+  enum USB_DEVICE_TYPE
+    Usb11Device = 0_i32
+    Usb20Device = 1_i32
+  end
+  enum USB_CONTROLLER_FLAVOR
+    USB_HcGeneric = 0_i32
+    OHCI_Generic = 100_i32
+    OHCI_Hydra = 101_i32
+    OHCI_NEC = 102_i32
+    UHCI_Generic = 200_i32
+    UHCI_Piix4 = 201_i32
+    UHCI_Piix3 = 202_i32
+    UHCI_Ich2 = 203_i32
+    UHCI_Reserved204 = 204_i32
+    UHCI_Ich1 = 205_i32
+    UHCI_Ich3m = 206_i32
+    UHCI_Ich4 = 207_i32
+    UHCI_Ich5 = 208_i32
+    UHCI_Ich6 = 209_i32
+    UHCI_Intel = 249_i32
+    UHCI_VIA = 250_i32
+    UHCI_VIA_x01 = 251_i32
+    UHCI_VIA_x02 = 252_i32
+    UHCI_VIA_x03 = 253_i32
+    UHCI_VIA_x04 = 254_i32
+    UHCI_VIA_x0E_FIFO = 264_i32
+    EHCI_Generic = 1000_i32
+    EHCI_NEC = 2000_i32
+    EHCI_Lucent = 3000_i32
+    EHCI_NVIDIA_Tegra2 = 4000_i32
+    EHCI_NVIDIA_Tegra3 = 4001_i32
+    EHCI_Intel_Medfield = 5001_i32
+  end
+  enum USBD_PIPE_TYPE
+    UsbdPipeTypeControl = 0_i32
+    UsbdPipeTypeIsochronous = 1_i32
+    UsbdPipeTypeBulk = 2_i32
+    UsbdPipeTypeInterrupt = 3_i32
+  end
+  enum USBD_ENDPOINT_OFFLOAD_MODE
+    UsbdEndpointOffloadModeNotSupported = 0_i32
+    UsbdEndpointOffloadSoftwareAssisted = 1_i32
+    UsbdEndpointOffloadHardwareAssisted = 2_i32
+  end
+  enum USB_USER_ERROR_CODE
+    UsbUserSuccess = 0_i32
+    UsbUserNotSupported = 1_i32
+    UsbUserInvalidRequestCode = 2_i32
+    UsbUserFeatureDisabled = 3_i32
+    UsbUserInvalidHeaderParameter = 4_i32
+    UsbUserInvalidParameter = 5_i32
+    UsbUserMiniportError = 6_i32
+    UsbUserBufferTooSmall = 7_i32
+    UsbUserErrorNotMapped = 8_i32
+    UsbUserDeviceNotStarted = 9_i32
+    UsbUserNoDeviceConnected = 10_i32
+  end
+  enum WDMUSB_POWER_STATE
+    WdmUsbPowerNotMapped = 0_i32
+    WdmUsbPowerSystemUnspecified = 100_i32
+    WdmUsbPowerSystemWorking = 101_i32
+    WdmUsbPowerSystemSleeping1 = 102_i32
+    WdmUsbPowerSystemSleeping2 = 103_i32
+    WdmUsbPowerSystemSleeping3 = 104_i32
+    WdmUsbPowerSystemHibernate = 105_i32
+    WdmUsbPowerSystemShutdown = 106_i32
+    WdmUsbPowerDeviceUnspecified = 200_i32
+    WdmUsbPowerDeviceD0 = 201_i32
+    WdmUsbPowerDeviceD1 = 202_i32
+    WdmUsbPowerDeviceD2 = 203_i32
+    WdmUsbPowerDeviceD3 = 204_i32
+  end
+  enum USBFN_EVENT
+    UsbfnEventMinimum = 0_i32
+    UsbfnEventAttach = 1_i32
+    UsbfnEventReset = 2_i32
+    UsbfnEventDetach = 3_i32
+    UsbfnEventSuspend = 4_i32
+    UsbfnEventResume = 5_i32
+    UsbfnEventSetupPacket = 6_i32
+    UsbfnEventConfigured = 7_i32
+    UsbfnEventUnConfigured = 8_i32
+    UsbfnEventPortType = 9_i32
+    UsbfnEventBusTearDown = 10_i32
+    UsbfnEventSetInterface = 11_i32
+    UsbfnEventMaximum = 12_i32
+  end
+  enum USBFN_PORT_TYPE
+    UsbfnUnknownPort = 0_i32
+    UsbfnStandardDownstreamPort = 1_i32
+    UsbfnChargingDownstreamPort = 2_i32
+    UsbfnDedicatedChargingPort = 3_i32
+    UsbfnInvalidDedicatedChargingPort = 4_i32
+    UsbfnProprietaryDedicatedChargingPort = 5_i32
+    UsbfnPortTypeMaximum = 6_i32
+  end
+  enum USBFN_BUS_SPEED
+    UsbfnBusSpeedLow = 0_i32
+    UsbfnBusSpeedFull = 1_i32
+    UsbfnBusSpeedHigh = 2_i32
+    UsbfnBusSpeedSuper = 3_i32
+    UsbfnBusSpeedMaximum = 4_i32
+  end
+  enum USBFN_DIRECTION
+    UsbfnDirectionMinimum = 0_i32
+    UsbfnDirectionIn = 1_i32
+    UsbfnDirectionOut = 2_i32
+    UsbfnDirectionTx = 1_i32
+    UsbfnDirectionRx = 2_i32
+    UsbfnDirectionMaximum = 3_i32
+  end
+  enum USBFN_DEVICE_STATE
+    UsbfnDeviceStateMinimum = 0_i32
+    UsbfnDeviceStateAttached = 1_i32
+    UsbfnDeviceStateDefault = 2_i32
+    UsbfnDeviceStateDetached = 3_i32
+    UsbfnDeviceStateAddressed = 4_i32
+    UsbfnDeviceStateConfigured = 5_i32
+    UsbfnDeviceStateSuspended = 6_i32
+    UsbfnDeviceStateStateMaximum = 7_i32
+  end
+  enum PIPE_TYPE
+    EVENT_PIPE = 0_i32
+    READ_DATA_PIPE = 1_i32
+    WRITE_DATA_PIPE = 2_i32
+    ALL_PIPE = 3_i32
+  end
+  enum RAW_PIPE_TYPE
+    USBSCAN_PIPE_CONTROL = 0_i32
+    USBSCAN_PIPE_ISOCHRONOUS = 1_i32
+    USBSCAN_PIPE_BULK = 2_i32
+    USBSCAN_PIPE_INTERRUPT = 3_i32
   end
 
-  enum USB_DEVICE_TYPE : Int32
-    Usb11Device = 0
-    Usb20Device = 1
+  @[Extern(union: true)]
+  record BM_REQUEST_TYPE,
+    s : BM,
+    b : UInt8 do
+
+    # Nested Type BM
+    @[Extern]
+    record BM,
+      _bitfield : UInt8
+
   end
 
-  enum USB_CONTROLLER_FLAVOR : Int32
-    USB_HcGeneric = 0
-    OHCI_Generic = 100
-    OHCI_Hydra = 101
-    OHCI_NEC = 102
-    UHCI_Generic = 200
-    UHCI_Piix4 = 201
-    UHCI_Piix3 = 202
-    UHCI_Ich2 = 203
-    UHCI_Reserved204 = 204
-    UHCI_Ich1 = 205
-    UHCI_Ich3m = 206
-    UHCI_Ich4 = 207
-    UHCI_Ich5 = 208
-    UHCI_Ich6 = 209
-    UHCI_Intel = 249
-    UHCI_VIA = 250
-    UHCI_VIA_x01 = 251
-    UHCI_VIA_x02 = 252
-    UHCI_VIA_x03 = 253
-    UHCI_VIA_x04 = 254
-    UHCI_VIA_x0E_FIFO = 264
-    EHCI_Generic = 1000
-    EHCI_NEC = 2000
-    EHCI_Lucent = 3000
-    EHCI_NVIDIA_Tegra2 = 4000
-    EHCI_NVIDIA_Tegra3 = 4001
-    EHCI_Intel_Medfield = 5001
+  @[Extern]
+  record USB_DEFAULT_PIPE_SETUP_PACKET,
+    bmRequestType : Win32cr::Devices::Usb::BM_REQUEST_TYPE,
+    bRequest : UInt8,
+    wValue : Wvalue,
+    wIndex : Windex,
+    wLength : UInt16 do
+
+    # Nested Type Windex
+    @[Extern(union: true)]
+    record Windex,
+      anonymous : Anonymous_e__Struct,
+      w : UInt16 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        low_byte : UInt8,
+        hi_byte : UInt8
+
+    end
+
+
+    # Nested Type Wvalue
+    @[Extern(union: true)]
+    record Wvalue,
+      anonymous : Anonymous_e__Struct,
+      w : UInt16 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        low_byte : UInt8,
+        hi_byte : UInt8
+
+    end
+
   end
 
-  enum USBD_PIPE_TYPE : Int32
-    UsbdPipeTypeControl = 0
-    UsbdPipeTypeIsochronous = 1
-    UsbdPipeTypeBulk = 2
-    UsbdPipeTypeInterrupt = 3
+  @[Extern(union: true)]
+  record USB_DEVICE_STATUS,
+    as_ushort16 : UInt16,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt16
+
   end
 
-  enum USBD_ENDPOINT_OFFLOAD_MODE : Int32
-    UsbdEndpointOffloadModeNotSupported = 0
-    UsbdEndpointOffloadSoftwareAssisted = 1
-    UsbdEndpointOffloadHardwareAssisted = 2
+  @[Extern(union: true)]
+  record USB_INTERFACE_STATUS,
+    as_ushort16 : UInt16,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt16
+
   end
 
-  enum USB_USER_ERROR_CODE : Int32
-    UsbUserSuccess = 0
-    UsbUserNotSupported = 1
-    UsbUserInvalidRequestCode = 2
-    UsbUserFeatureDisabled = 3
-    UsbUserInvalidHeaderParameter = 4
-    UsbUserInvalidParameter = 5
-    UsbUserMiniportError = 6
-    UsbUserBufferTooSmall = 7
-    UsbUserErrorNotMapped = 8
-    UsbUserDeviceNotStarted = 9
-    UsbUserNoDeviceConnected = 10
+  @[Extern(union: true)]
+  record USB_ENDPOINT_STATUS,
+    as_ushort16 : UInt16,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt16
+
   end
 
-  enum WDMUSB_POWER_STATE : Int32
-    WdmUsbPowerNotMapped = 0
-    WdmUsbPowerSystemUnspecified = 100
-    WdmUsbPowerSystemWorking = 101
-    WdmUsbPowerSystemSleeping1 = 102
-    WdmUsbPowerSystemSleeping2 = 103
-    WdmUsbPowerSystemSleeping3 = 104
-    WdmUsbPowerSystemHibernate = 105
-    WdmUsbPowerSystemShutdown = 106
-    WdmUsbPowerDeviceUnspecified = 200
-    WdmUsbPowerDeviceD0 = 201
-    WdmUsbPowerDeviceD1 = 202
-    WdmUsbPowerDeviceD2 = 203
-    WdmUsbPowerDeviceD3 = 204
+  @[Extern]
+  record USB_COMMON_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8
+
+  @[Extern]
+  record USB_DEVICE_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bcdUSB : UInt16,
+    bDeviceClass : UInt8,
+    bDeviceSubClass : UInt8,
+    bDeviceProtocol : UInt8,
+    bMaxPacketSize0 : UInt8,
+    idVendor : UInt16,
+    idProduct : UInt16,
+    bcdDevice : UInt16,
+    iManufacturer : UInt8,
+    iProduct : UInt8,
+    iSerialNumber : UInt8,
+    bNumConfigurations : UInt8
+
+  @[Extern]
+  record USB_DEVICE_QUALIFIER_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bcdUSB : UInt16,
+    bDeviceClass : UInt8,
+    bDeviceSubClass : UInt8,
+    bDeviceProtocol : UInt8,
+    bMaxPacketSize0 : UInt8,
+    bNumConfigurations : UInt8,
+    bReserved : UInt8
+
+  @[Extern]
+  record USB_BOS_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    wTotalLength : UInt16,
+    bNumDeviceCaps : UInt8
+
+  @[Extern]
+  record USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bDevCapabilityType : UInt8,
+    bmAttributes : Bmattributes_e__union do
+
+    # Nested Type Bmattributes_e__union
+    @[Extern(union: true)]
+    record Bmattributes_e__union,
+      as_ulong : UInt32,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
 
-  enum USBFN_EVENT : Int32
-    UsbfnEventMinimum = 0
-    UsbfnEventAttach = 1
-    UsbfnEventReset = 2
-    UsbfnEventDetach = 3
-    UsbfnEventSuspend = 4
-    UsbfnEventResume = 5
-    UsbfnEventSetupPacket = 6
-    UsbfnEventConfigured = 7
-    UsbfnEventUnConfigured = 8
-    UsbfnEventPortType = 9
-    UsbfnEventBusTearDown = 10
-    UsbfnEventSetInterface = 11
-    UsbfnEventMaximum = 12
+  @[Extern]
+  record USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bDevCapabilityType : UInt8,
+    bReserved : UInt8,
+    bmAttributes : Bmattributes_e__union,
+    bmProviderPorts : UInt16,
+    bmConsumerPorts : UInt16,
+    bcdBCVersion : UInt16,
+    bcdPDVersion : UInt16,
+    bcdUSBTypeCVersion : UInt16 do
+
+    # Nested Type Bmattributes_e__union
+    @[Extern(union: true)]
+    record Bmattributes_e__union,
+      as_ulong : UInt32,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
 
-  enum USBFN_PORT_TYPE : Int32
-    UsbfnUnknownPort = 0
-    UsbfnStandardDownstreamPort = 1
-    UsbfnChargingDownstreamPort = 2
-    UsbfnDedicatedChargingPort = 3
-    UsbfnInvalidDedicatedChargingPort = 4
-    UsbfnProprietaryDedicatedChargingPort = 5
-    UsbfnPortTypeMaximum = 6
+  @[Extern]
+  record USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bDevCapabilityType : UInt8,
+    bReserved : UInt8,
+    bmCapabilities : Bmcapabilities_e__union,
+    wMinVoltage : UInt16,
+    wMaxVoltage : UInt16,
+    wReserved : UInt16,
+    dwMaxOperatingPower : UInt32,
+    dwMaxPeakPower : UInt32,
+    dwMaxPeakPowerTime : UInt32 do
+
+    # Nested Type Bmcapabilities_e__union
+    @[Extern(union: true)]
+    record Bmcapabilities_e__union,
+      as_ushort : UInt16,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt16
+
+    end
+
   end
 
-  enum USBFN_BUS_SPEED : Int32
-    UsbfnBusSpeedLow = 0
-    UsbfnBusSpeedFull = 1
-    UsbfnBusSpeedHigh = 2
-    UsbfnBusSpeedSuper = 3
-    UsbfnBusSpeedMaximum = 4
+  @[Extern]
+  record USB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bDevCapabilityType : UInt8,
+    bmAttributes : UInt8,
+    wSpeedsSupported : UInt16,
+    bFunctionalitySupport : UInt8,
+    bU1DevExitLat : UInt8,
+    wU2DevExitLat : UInt16
+
+  @[Extern(union: true)]
+  record USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED,
+    as_ulong32 : UInt32,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt32
+
   end
 
-  enum USBFN_DIRECTION : Int32
-    UsbfnDirectionMinimum = 0
-    UsbfnDirectionIn = 1
-    UsbfnDirectionOut = 2
-    UsbfnDirectionTx = 1
-    UsbfnDirectionRx = 2
-    UsbfnDirectionMaximum = 3
+  @[Extern]
+  record USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bDevCapabilityType : UInt8,
+    bReserved : UInt8,
+    bmAttributes : Bmattributes_e__union,
+    wFunctionalitySupport : Wfunctionalitysupport_e__union,
+    wReserved : UInt16,
+    bmSublinkSpeedAttr : Win32cr::Devices::Usb::USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED* do
+
+    # Nested Type Wfunctionalitysupport_e__union
+    @[Extern(union: true)]
+    record Wfunctionalitysupport_e__union,
+      as_ushort : UInt16,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt16
+
+    end
+
+
+    # Nested Type Bmattributes_e__union
+    @[Extern(union: true)]
+    record Bmattributes_e__union,
+      as_ulong : UInt32,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
 
-  enum USBFN_DEVICE_STATE : Int32
-    UsbfnDeviceStateMinimum = 0
-    UsbfnDeviceStateAttached = 1
-    UsbfnDeviceStateDefault = 2
-    UsbfnDeviceStateDetached = 3
-    UsbfnDeviceStateAddressed = 4
-    UsbfnDeviceStateConfigured = 5
-    UsbfnDeviceStateSuspended = 6
-    UsbfnDeviceStateStateMaximum = 7
+  @[Extern]
+  record USB_DEVICE_CAPABILITY_CONTAINER_ID_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bDevCapabilityType : UInt8,
+    bReserved : UInt8,
+    container_id : UInt8[16]
+
+  @[Extern]
+  record USB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bDevCapabilityType : UInt8,
+    bReserved : UInt8,
+    platform_capability_uuid : LibC::GUID,
+    capabilility_data : UInt8*
+
+  @[Extern]
+  record USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bDevCapabilityType : UInt8,
+    iAddtionalInfoURL : UInt8,
+    bNumberOfAlternateModes : UInt8,
+    bPreferredAlternateMode : UInt8,
+    vconn_power : VconnPower_e__Union,
+    bmConfigured : UInt8[32],
+    bReserved : UInt32,
+    alternate_mode : Anonymous_e__Struct* do
+
+    # Nested Type VconnPower_e__Union
+    @[Extern(union: true)]
+    record VconnPower_e__Union,
+      as_ushort : UInt16,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt16
+
+    end
+
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      wSVID : UInt16,
+      bAlternateMode : UInt8,
+      iAlternateModeSetting : UInt8
+
   end
 
-  enum PIPE_TYPE : Int32
-    EVENT_PIPE = 0
-    READ_DATA_PIPE = 1
-    WRITE_DATA_PIPE = 2
-    ALL_PIPE = 3
+  @[Extern]
+  record USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bDevCapabilityType : UInt8,
+    bcdDescriptorVersion : UInt8,
+    bmAttributes : Bmattributes_e__union do
+
+    # Nested Type Bmattributes_e__union
+    @[Extern(union: true)]
+    record Bmattributes_e__union,
+      as_ulong : UInt32,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
 
-  enum RAW_PIPE_TYPE : Int32
-    USBSCAN_PIPE_CONTROL = 0
-    USBSCAN_PIPE_ISOCHRONOUS = 1
-    USBSCAN_PIPE_BULK = 2
-    USBSCAN_PIPE_INTERRUPT = 3
-  end
+  @[Extern]
+  record USB_DEVICE_CAPABILITY_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bDevCapabilityType : UInt8
 
-  union BM_REQUEST_TYPE
-    s : BM_REQUEST_TYPE_BM
-    b : UInt8
-  end
-  union USB_DEFAULT_PIPE_SETUP_PACKET_wIndex
-    anonymous : USB_DEFAULT_PIPE_SETUP_PACKET_wIndex_Anonymous_e__Struct
-    w : UInt16
-  end
-  union USB_DEFAULT_PIPE_SETUP_PACKET_wValue
-    anonymous : USB_DEFAULT_PIPE_SETUP_PACKET_wValue_Anonymous_e__Struct
-    w : UInt16
-  end
-  union USB_DEVICE_STATUS
-    as_ushort16 : UInt16
-    anonymous : USB_DEVICE_STATUS_Anonymous_e__Struct
-  end
-  union USB_INTERFACE_STATUS
-    as_ushort16 : UInt16
-    anonymous : USB_INTERFACE_STATUS_Anonymous_e__Struct
-  end
-  union USB_ENDPOINT_STATUS
-    as_ushort16 : UInt16
-    anonymous : USB_ENDPOINT_STATUS_Anonymous_e__Struct
-  end
-  union USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union
-    as_ulong : UInt32
-    anonymous : USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
-  end
-  union USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR_bmAttributes_e__Union
-    as_ulong : UInt32
-    anonymous : USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
-  end
-  union USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR_bmCapabilities_e__Union
-    as_ushort : UInt16
-    anonymous : USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR_bmCapabilities_e__Union_Anonymous_e__Struct
-  end
-  union USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED
-    as_ulong32 : UInt32
-    anonymous : USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_Anonymous_e__Struct
-  end
-  union USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_wFunctionalitySupport_e__Union
-    as_ushort : UInt16
-    anonymous : USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_wFunctionalitySupport_e__Union_Anonymous_e__Struct
-  end
-  union USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_bmAttributes_e__Union
-    as_ulong : UInt32
-    anonymous : USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
-  end
-  union USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_VconnPower_e__Union
-    as_ushort : UInt16
-    anonymous : USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_VconnPower_e__Union_Anonymous_e__Struct
-  end
-  union USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union
-    as_ulong : UInt32
-    anonymous : USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
-  end
-  union USB_HIGH_SPEED_MAXPACKET
-    us : UInt16
-  end
-  union USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_e__Union
-    as_uchar : UInt8
-    bulk : USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_e__Union_Bulk_e__Struct
-    isochronous : USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_e__Union_Isochronous_e__Struct
-  end
-  union USB_HUB_STATUS
-    as_ushort16 : UInt16
-    anonymous : USB_HUB_STATUS_Anonymous_e__Struct
-  end
-  union USB_HUB_CHANGE
-    as_ushort16 : UInt16
-    anonymous : USB_HUB_CHANGE_Anonymous_e__Struct
-  end
-  union USB_HUB_STATUS_AND_CHANGE
-    as_ulong32 : UInt32
-    anonymous : USB_HUB_STATUS_AND_CHANGE_Anonymous_e__Struct
-  end
-  union USB_20_PORT_STATUS
-    as_ushort16 : UInt16
-    anonymous : USB_20_PORT_STATUS_Anonymous_e__Struct
-  end
-  union USB_20_PORT_CHANGE
-    as_ushort16 : UInt16
-    anonymous : USB_20_PORT_CHANGE_Anonymous_e__Struct
-  end
-  union USB_30_PORT_STATUS
-    as_ushort16 : UInt16
-    anonymous : USB_30_PORT_STATUS_Anonymous_e__Struct
-  end
-  union USB_30_PORT_CHANGE
-    as_ushort16 : UInt16
-    anonymous : USB_30_PORT_CHANGE_Anonymous_e__Struct
-  end
-  union USB_PORT_STATUS
-    as_ushort16 : UInt16
-    usb20_port_status : USB_20_PORT_STATUS
-    usb30_port_status : USB_30_PORT_STATUS
-  end
-  union USB_PORT_CHANGE
-    as_ushort16 : UInt16
-    usb20_port_change : USB_20_PORT_CHANGE
-    usb30_port_change : USB_30_PORT_CHANGE
-  end
-  union USB_PORT_EXT_STATUS
-    as_ulong32 : UInt32
-    anonymous : USB_PORT_EXT_STATUS_Anonymous_e__Struct
-  end
-  union USB_PORT_STATUS_AND_CHANGE
-    as_ulong32 : UInt32
-    anonymous : USB_PORT_STATUS_AND_CHANGE_Anonymous_e__Struct
-  end
-  union USB_PORT_EXT_STATUS_AND_CHANGE
-    as_ulong64 : UInt64
-    anonymous : USB_PORT_EXT_STATUS_AND_CHANGE_Anonymous_e__Struct
-  end
-  union USB_HUB_30_PORT_REMOTE_WAKE_MASK
-    as_uchar8 : UInt8
-    anonymous : USB_HUB_30_PORT_REMOTE_WAKE_MASK_Anonymous_e__Struct
-  end
-  union USB_FUNCTION_SUSPEND_OPTIONS
-    as_uchar : UInt8
-    anonymous : USB_FUNCTION_SUSPEND_OPTIONS_Anonymous_e__Struct
-  end
-  union OS_STRING_Anonymous_e__Union
-    b_pad : UInt8
-    b_flags : UInt8
-  end
-  union URB_Anonymous_e__Union
-    urb_header : URB_HEADER
-    urb_select_interface : URB_SELECT_INTERFACE
-    urb_select_configuration : URB_SELECT_CONFIGURATION
-    urb_pipe_request : URB_PIPE_REQUEST
-    urb_frame_length_control : URB_FRAME_LENGTH_CONTROL
-    urb_get_frame_length : URB_GET_FRAME_LENGTH
-    urb_set_frame_length : URB_SET_FRAME_LENGTH
-    urb_get_current_frame_number : URB_GET_CURRENT_FRAME_NUMBER
-    urb_control_transfer : URB_CONTROL_TRANSFER
-    urb_control_transfer_ex : URB_CONTROL_TRANSFER_EX
-    urb_bulk_or_interrupt_transfer : URB_BULK_OR_INTERRUPT_TRANSFER
-    urb_isochronous_transfer : URB_ISOCH_TRANSFER
-    urb_control_descriptor_request : URB_CONTROL_DESCRIPTOR_REQUEST
-    urb_control_get_status_request : URB_CONTROL_GET_STATUS_REQUEST
-    urb_control_feature_request : URB_CONTROL_FEATURE_REQUEST
-    urb_control_vendor_class_request : URB_CONTROL_VENDOR_OR_CLASS_REQUEST
-    urb_control_get_interface_request : URB_CONTROL_GET_INTERFACE_REQUEST
-    urb_control_get_configuration_request : URB_CONTROL_GET_CONFIGURATION_REQUEST
-    urb_os_feature_descriptor_request : URB_OS_FEATURE_DESCRIPTOR_REQUEST
-    urb_open_static_streams : URB_OPEN_STATIC_STREAMS
-    urb_get_isoch_pipe_transfer_path_delays : URB_GET_ISOCH_PIPE_TRANSFER_PATH_DELAYS
-  end
-  union USBFN_NOTIFICATION_u_e__Union
-    bus_speed : USBFN_BUS_SPEED
-    setup_packet : USB_DEFAULT_PIPE_SETUP_PACKET
-    configuration_value : UInt16
-    port_type : USBFN_PORT_TYPE
-    alternate_interface : ALTERNATE_INTERFACE
-  end
-
-  struct BM_REQUEST_TYPE_BM
-    _bitfield : UInt8
-  end
-  struct USB_DEFAULT_PIPE_SETUP_PACKET
-    bm_request_type : BM_REQUEST_TYPE
-    b_request : UInt8
-    w_value : USB_DEFAULT_PIPE_SETUP_PACKET_wValue
-    w_index : USB_DEFAULT_PIPE_SETUP_PACKET_wIndex
-    w_length : UInt16
-  end
-  struct USB_DEFAULT_PIPE_SETUP_PACKET_wIndex_Anonymous_e__Struct
-    low_byte : UInt8
-    hi_byte : UInt8
-  end
-  struct USB_DEFAULT_PIPE_SETUP_PACKET_wValue_Anonymous_e__Struct
-    low_byte : UInt8
-    hi_byte : UInt8
-  end
-  struct USB_DEVICE_STATUS_Anonymous_e__Struct
-    _bitfield : UInt16
-  end
-  struct USB_INTERFACE_STATUS_Anonymous_e__Struct
-    _bitfield : UInt16
-  end
-  struct USB_ENDPOINT_STATUS_Anonymous_e__Struct
-    _bitfield : UInt16
-  end
-  struct USB_COMMON_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-  end
-  struct USB_DEVICE_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    bcd_usb : UInt16
-    b_device_class : UInt8
-    b_device_sub_class : UInt8
-    b_device_protocol : UInt8
-    b_max_packet_size0 : UInt8
-    id_vendor : UInt16
-    id_product : UInt16
-    bcd_device : UInt16
-    i_manufacturer : UInt8
-    i_product : UInt8
-    i_serial_number : UInt8
-    b_num_configurations : UInt8
-  end
-  struct USB_DEVICE_QUALIFIER_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    bcd_usb : UInt16
-    b_device_class : UInt8
-    b_device_sub_class : UInt8
-    b_device_protocol : UInt8
-    b_max_packet_size0 : UInt8
-    b_num_configurations : UInt8
-    b_reserved : UInt8
-  end
-  struct USB_BOS_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    w_total_length : UInt16
-    b_num_device_caps : UInt8
-  end
-  struct USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_dev_capability_type : UInt8
-    bm_attributes : USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union
-  end
-  struct USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_dev_capability_type : UInt8
-    b_reserved : UInt8
-    bm_attributes : USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR_bmAttributes_e__Union
-    bm_provider_ports : UInt16
-    bm_consumer_ports : UInt16
-    bcd_bc_version : UInt16
-    bcd_pd_version : UInt16
-    bcd_usb_type_c_version : UInt16
-  end
-  struct USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_dev_capability_type : UInt8
-    b_reserved : UInt8
-    bm_capabilities : USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR_bmCapabilities_e__Union
-    w_min_voltage : UInt16
-    w_max_voltage : UInt16
-    w_reserved : UInt16
-    dw_max_operating_power : UInt32
-    dw_max_peak_power : UInt32
-    dw_max_peak_power_time : UInt32
-  end
-  struct USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR_bmCapabilities_e__Union_Anonymous_e__Struct
-    _bitfield : UInt16
-  end
-  struct USB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_dev_capability_type : UInt8
-    bm_attributes : UInt8
-    w_speeds_supported : UInt16
-    b_functionality_support : UInt8
-    b_u1_dev_exit_lat : UInt8
-    w_u2_dev_exit_lat : UInt16
-  end
-  struct USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_dev_capability_type : UInt8
-    b_reserved : UInt8
-    bm_attributes : USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_bmAttributes_e__Union
-    w_functionality_support : USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_wFunctionalitySupport_e__Union
-    w_reserved : UInt16
-    bm_sublink_speed_attr : USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED[0]*
-  end
-  struct USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_wFunctionalitySupport_e__Union_Anonymous_e__Struct
-    _bitfield : UInt16
-  end
-  struct USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct USB_DEVICE_CAPABILITY_CONTAINER_ID_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_dev_capability_type : UInt8
-    b_reserved : UInt8
-    container_id : UInt8[16]*
-  end
-  struct USB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_dev_capability_type : UInt8
-    b_reserved : UInt8
-    platform_capability_uuid : Guid
-    capabilility_data : UInt8[0]*
-  end
-  struct USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_dev_capability_type : UInt8
-    i_addtional_info_url : UInt8
-    b_number_of_alternate_modes : UInt8
-    b_preferred_alternate_mode : UInt8
-    vconn_power : USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_VconnPower_e__Union
-    bm_configured : UInt8[32]*
-    b_reserved : UInt32
-    alternate_mode : USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_Anonymous_e__Struct[0]*
-  end
-  struct USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_VconnPower_e__Union_Anonymous_e__Struct
-    _bitfield : UInt16
-  end
-  struct USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR_Anonymous_e__Struct
-    w_svid : UInt16
-    b_alternate_mode : UInt8
-    i_alternate_mode_setting : UInt8
-  end
-  struct USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_dev_capability_type : UInt8
-    bcd_descriptor_version : UInt8
-    bm_attributes : USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union
-  end
-  struct USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct USB_DEVICE_CAPABILITY_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_dev_capability_type : UInt8
-  end
-  struct USB_CONFIGURATION_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    w_total_length : UInt16
-    b_num_interfaces : UInt8
-    b_configuration_value : UInt8
-    i_configuration : UInt8
-    bm_attributes : UInt8
+  @[Extern]
+  record USB_CONFIGURATION_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    wTotalLength : UInt16,
+    bNumInterfaces : UInt8,
+    bConfigurationValue : UInt8,
+    iConfiguration : UInt8,
+    bmAttributes : UInt8,
     max_power : UInt8
+
+  @[Extern]
+  record USB_INTERFACE_ASSOCIATION_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bFirstInterface : UInt8,
+    bInterfaceCount : UInt8,
+    bFunctionClass : UInt8,
+    bFunctionSubClass : UInt8,
+    bFunctionProtocol : UInt8,
+    iFunction : UInt8
+
+  @[Extern]
+  record USB_INTERFACE_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bInterfaceNumber : UInt8,
+    bAlternateSetting : UInt8,
+    bNumEndpoints : UInt8,
+    bInterfaceClass : UInt8,
+    bInterfaceSubClass : UInt8,
+    bInterfaceProtocol : UInt8,
+    iInterface : UInt8
+
+  @[Extern]
+  record USB_ENDPOINT_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bEndpointAddress : UInt8,
+    bmAttributes : UInt8,
+    wMaxPacketSize : UInt16,
+    bInterval : UInt8
+
+  @[Extern(union: true)]
+  record USB_HIGH_SPEED_MAXPACKET,
+    us : UInt16 do
+
+    # Nested Type MP
+    @[Extern]
+    record MP,
+      _bitfield : UInt16
+
   end
-  struct USB_INTERFACE_ASSOCIATION_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_first_interface : UInt8
-    b_interface_count : UInt8
-    b_function_class : UInt8
-    b_function_sub_class : UInt8
-    b_function_protocol : UInt8
-    i_function : UInt8
+
+  @[Extern]
+  record USB_STRING_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bString : UInt16*
+
+  @[Extern]
+  record USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bMaxBurst : UInt8,
+    bmAttributes : Bmattributes_e__union,
+    wBytesPerInterval : UInt16 do
+
+    # Nested Type Bmattributes_e__union
+    @[Extern(union: true)]
+    record Bmattributes_e__union,
+      as_uchar : UInt8,
+      bulk : Bulk_e__Struct,
+      isochronous : Isochronous_e__Struct do
+
+      # Nested Type Bulk_e__Struct
+      @[Extern]
+      record Bulk_e__Struct,
+        _bitfield : UInt8
+
+
+      # Nested Type Isochronous_e__Struct
+      @[Extern]
+      record Isochronous_e__Struct,
+        _bitfield : UInt8
+
+    end
+
   end
-  struct USB_INTERFACE_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_interface_number : UInt8
-    b_alternate_setting : UInt8
-    b_num_endpoints : UInt8
-    b_interface_class : UInt8
-    b_interface_sub_class : UInt8
-    b_interface_protocol : UInt8
-    i_interface : UInt8
-  end
-  struct USB_ENDPOINT_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_endpoint_address : UInt8
-    bm_attributes : UInt8
-    w_max_packet_size : UInt16
-    b_interval : UInt8
-  end
-  struct USB_HIGH_SPEED_MAXPACKET_MP
-    _bitfield : UInt16
-  end
-  struct USB_STRING_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_string : Char[0]*
-  end
-  struct USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_max_burst : UInt8
-    bm_attributes : USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_e__Union
-    w_bytes_per_interval : UInt16
-  end
-  struct USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_e__Union_Bulk_e__Struct
-    _bitfield : UInt8
-  end
-  struct USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR_bmAttributes_e__Union_Isochronous_e__Struct
-    _bitfield : UInt8
-  end
-  struct USB_SUPERSPEEDPLUS_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    w_reserved : UInt16
-    dw_bytes_per_interval : UInt32
-  end
-  struct USB_HUB_DESCRIPTOR
-    b_descriptor_length : UInt8
-    b_descriptor_type : UInt8
-    b_number_of_ports : UInt8
-    w_hub_characteristics : UInt16
-    b_power_on_to_power_good : UInt8
-    b_hub_control_current : UInt8
-    b_remove_and_power_mask : UInt8[64]*
-  end
-  struct USB_30_HUB_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    b_number_of_ports : UInt8
-    w_hub_characteristics : UInt16
-    b_power_on_to_power_good : UInt8
-    b_hub_control_current : UInt8
-    b_hub_hdr_dec_lat : UInt8
-    w_hub_delay : UInt16
+
+  @[Extern]
+  record USB_SUPERSPEEDPLUS_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    wReserved : UInt16,
+    dwBytesPerInterval : UInt32
+
+  @[Extern]
+  record USB_HUB_DESCRIPTOR,
+    bDescriptorLength : UInt8,
+    bDescriptorType : UInt8,
+    bNumberOfPorts : UInt8,
+    wHubCharacteristics : UInt16,
+    bPowerOnToPowerGood : UInt8,
+    bHubControlCurrent : UInt8,
+    bRemoveAndPowerMask : UInt8[64]
+
+  @[Extern]
+  record USB_30_HUB_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bNumberOfPorts : UInt8,
+    wHubCharacteristics : UInt16,
+    bPowerOnToPowerGood : UInt8,
+    bHubControlCurrent : UInt8,
+    bHubHdrDecLat : UInt8,
+    wHubDelay : UInt16,
     device_removable : UInt16
+
+  @[Extern(union: true)]
+  record USB_HUB_STATUS,
+    as_ushort16 : UInt16,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt16
+
   end
-  struct USB_HUB_STATUS_Anonymous_e__Struct
-    _bitfield : UInt16
+
+  @[Extern(union: true)]
+  record USB_HUB_CHANGE,
+    as_ushort16 : UInt16,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt16
+
   end
-  struct USB_HUB_CHANGE_Anonymous_e__Struct
-    _bitfield : UInt16
+
+  @[Extern(union: true)]
+  record USB_HUB_STATUS_AND_CHANGE,
+    as_ulong32 : UInt32,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      hub_status : Win32cr::Devices::Usb::USB_HUB_STATUS,
+      hub_change : Win32cr::Devices::Usb::USB_HUB_CHANGE
+
   end
-  struct USB_HUB_STATUS_AND_CHANGE_Anonymous_e__Struct
-    hub_status : USB_HUB_STATUS
-    hub_change : USB_HUB_CHANGE
+
+  @[Extern(union: true)]
+  record USB_20_PORT_STATUS,
+    as_ushort16 : UInt16,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt16
+
   end
-  struct USB_20_PORT_STATUS_Anonymous_e__Struct
-    _bitfield : UInt16
+
+  @[Extern(union: true)]
+  record USB_20_PORT_CHANGE,
+    as_ushort16 : UInt16,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt16
+
   end
-  struct USB_20_PORT_CHANGE_Anonymous_e__Struct
-    _bitfield : UInt16
+
+  @[Extern(union: true)]
+  record USB_30_PORT_STATUS,
+    as_ushort16 : UInt16,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt16
+
   end
-  struct USB_30_PORT_STATUS_Anonymous_e__Struct
-    _bitfield : UInt16
+
+  @[Extern(union: true)]
+  record USB_30_PORT_CHANGE,
+    as_ushort16 : UInt16,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt16
+
   end
-  struct USB_30_PORT_CHANGE_Anonymous_e__Struct
-    _bitfield : UInt16
+
+  @[Extern(union: true)]
+  record USB_PORT_STATUS,
+    as_ushort16 : UInt16,
+    usb20_port_status : Win32cr::Devices::Usb::USB_20_PORT_STATUS,
+    usb30_port_status : Win32cr::Devices::Usb::USB_30_PORT_STATUS
+
+  @[Extern(union: true)]
+  record USB_PORT_CHANGE,
+    as_ushort16 : UInt16,
+    usb20_port_change : Win32cr::Devices::Usb::USB_20_PORT_CHANGE,
+    usb30_port_change : Win32cr::Devices::Usb::USB_30_PORT_CHANGE
+
+  @[Extern(union: true)]
+  record USB_PORT_EXT_STATUS,
+    as_ulong32 : UInt32,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt32
+
   end
-  struct USB_PORT_EXT_STATUS_Anonymous_e__Struct
-    _bitfield : UInt32
+
+  @[Extern(union: true)]
+  record USB_PORT_STATUS_AND_CHANGE,
+    as_ulong32 : UInt32,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      port_status : Win32cr::Devices::Usb::USB_PORT_STATUS,
+      port_change : Win32cr::Devices::Usb::USB_PORT_CHANGE
+
   end
-  struct USB_PORT_STATUS_AND_CHANGE_Anonymous_e__Struct
-    port_status : USB_PORT_STATUS
-    port_change : USB_PORT_CHANGE
+
+  @[Extern(union: true)]
+  record USB_PORT_EXT_STATUS_AND_CHANGE,
+    as_ulong64 : UInt64,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      port_status_change : Win32cr::Devices::Usb::USB_PORT_STATUS_AND_CHANGE,
+      port_ext_status : Win32cr::Devices::Usb::USB_PORT_EXT_STATUS
+
   end
-  struct USB_PORT_EXT_STATUS_AND_CHANGE_Anonymous_e__Struct
-    port_status_change : USB_PORT_STATUS_AND_CHANGE
-    port_ext_status : USB_PORT_EXT_STATUS
+
+  @[Extern(union: true)]
+  record USB_HUB_30_PORT_REMOTE_WAKE_MASK,
+    as_uchar8 : UInt8,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt8
+
   end
-  struct USB_HUB_30_PORT_REMOTE_WAKE_MASK_Anonymous_e__Struct
-    _bitfield : UInt8
+
+  @[Extern(union: true)]
+  record USB_FUNCTION_SUSPEND_OPTIONS,
+    as_uchar : UInt8,
+    anonymous : Anonymous_e__Struct do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt8
+
   end
-  struct USB_FUNCTION_SUSPEND_OPTIONS_Anonymous_e__Struct
-    _bitfield : UInt8
-  end
-  struct USB_CONFIGURATION_POWER_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    self_power_consumed_d0 : UInt8[3]*
-    b_power_summary_id : UInt8
-    b_bus_power_saving_d1 : UInt8
-    b_self_power_saving_d1 : UInt8
-    b_bus_power_saving_d2 : UInt8
-    b_self_power_saving_d2 : UInt8
-    b_bus_power_saving_d3 : UInt8
-    b_self_power_saving_d3 : UInt8
-    transition_time_from_d1 : UInt16
-    transition_time_from_d2 : UInt16
+
+  @[Extern]
+  record USB_CONFIGURATION_POWER_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    self_power_consumed_d0 : UInt8[3],
+    bPowerSummaryId : UInt8,
+    bBusPowerSavingD1 : UInt8,
+    bSelfPowerSavingD1 : UInt8,
+    bBusPowerSavingD2 : UInt8,
+    bSelfPowerSavingD2 : UInt8,
+    bBusPowerSavingD3 : UInt8,
+    bSelfPowerSavingD3 : UInt8,
+    transition_time_from_d1 : UInt16,
+    transition_time_from_d2 : UInt16,
     transition_time_from_d3 : UInt16
-  end
-  struct USB_INTERFACE_POWER_DESCRIPTOR
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    bm_capabilities_flags : UInt8
-    b_bus_power_saving_d1 : UInt8
-    b_self_power_saving_d1 : UInt8
-    b_bus_power_saving_d2 : UInt8
-    b_self_power_saving_d2 : UInt8
-    b_bus_power_saving_d3 : UInt8
-    b_self_power_saving_d3 : UInt8
-    transition_time_from_d1 : UInt16
-    transition_time_from_d2 : UInt16
+
+  @[Extern]
+  record USB_INTERFACE_POWER_DESCRIPTOR,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    bmCapabilitiesFlags : UInt8,
+    bBusPowerSavingD1 : UInt8,
+    bSelfPowerSavingD1 : UInt8,
+    bBusPowerSavingD2 : UInt8,
+    bSelfPowerSavingD2 : UInt8,
+    bBusPowerSavingD3 : UInt8,
+    bSelfPowerSavingD3 : UInt8,
+    transition_time_from_d1 : UInt16,
+    transition_time_from_d2 : UInt16,
     transition_time_from_d3 : UInt16
-  end
-  struct USBD_VERSION_INFORMATION
-    usbdi_version : UInt32
+
+  @[Extern]
+  record USBD_VERSION_INFORMATION,
+    usbdi_version : UInt32,
     supported_usb_version : UInt32
-  end
-  struct USBD_DEVICE_INFORMATION
-    offset_next : UInt32
-    usbd_device_handle : Void*
-    device_descriptor : USB_DEVICE_DESCRIPTOR
-  end
-  struct USBD_PIPE_INFORMATION
-    maximum_packet_size : UInt16
-    endpoint_address : UInt8
-    interval : UInt8
-    pipe_type : USBD_PIPE_TYPE
-    pipe_handle : Void*
-    maximum_transfer_size : UInt32
+
+  @[Extern]
+  record USBD_DEVICE_INFORMATION,
+    offset_next : UInt32,
+    usbd_device_handle : Void*,
+    device_descriptor : Win32cr::Devices::Usb::USB_DEVICE_DESCRIPTOR
+
+  @[Extern]
+  record USBD_PIPE_INFORMATION,
+    maximum_packet_size : UInt16,
+    endpoint_address : UInt8,
+    interval : UInt8,
+    pipe_type : Win32cr::Devices::Usb::USBD_PIPE_TYPE,
+    pipe_handle : Void*,
+    maximum_transfer_size : UInt32,
     pipe_flags : UInt32
-  end
-  struct USBD_ENDPOINT_OFFLOAD_INFORMATION
-    size : UInt32
-    endpoint_address : UInt16
-    resource_id : UInt32
-    mode : USBD_ENDPOINT_OFFLOAD_MODE
-    _bitfield1 : UInt32
-    _bitfield2 : UInt32
-    transfer_segment_la : LARGE_INTEGER
-    transfer_segment_va : Void*
-    transfer_ring_size : LibC::UINT_PTR
-    transfer_ring_initial_cycle_bit : UInt32
-    message_number : UInt32
-    event_ring_segment_la : LARGE_INTEGER
-    event_ring_segment_va : Void*
-    event_ring_size : LibC::UINT_PTR
+
+  @[Extern]
+  record USBD_ENDPOINT_OFFLOAD_INFORMATION,
+    size : UInt32,
+    endpoint_address : UInt16,
+    resource_id : UInt32,
+    mode : Win32cr::Devices::Usb::USBD_ENDPOINT_OFFLOAD_MODE,
+    _bitfield1 : UInt32,
+    _bitfield2 : UInt32,
+    transfer_segment_la : Win32cr::Foundation::LARGE_INTEGER,
+    transfer_segment_va : Void*,
+    transfer_ring_size : LibC::UIntPtrT,
+    transfer_ring_initial_cycle_bit : UInt32,
+    message_number : UInt32,
+    event_ring_segment_la : Win32cr::Foundation::LARGE_INTEGER,
+    event_ring_segment_va : Void*,
+    event_ring_size : LibC::UIntPtrT,
     event_ring_initial_cycle_bit : UInt32
-  end
-  struct USBD_INTERFACE_INFORMATION
-    length : UInt16
-    interface_number : UInt8
-    alternate_setting : UInt8
-    class_ : UInt8
-    sub_class : UInt8
-    protocol : UInt8
-    reserved : UInt8
-    interface_handle : Void*
-    number_of_pipes : UInt32
-    pipes : USBD_PIPE_INFORMATION[0]*
-  end
-  struct URB_HCD_AREA
-    reserved8 : Void[8]**
-  end
-  struct URB_HEADER
-    length : UInt16
-    function : UInt16
-    status : Int32
-    usbd_device_handle : Void*
+
+  @[Extern]
+  record USBD_INTERFACE_INFORMATION,
+    length : UInt16,
+    interface_number : UInt8,
+    alternate_setting : UInt8,
+    class__ : UInt8,
+    sub_class : UInt8,
+    protocol : UInt8,
+    reserved : UInt8,
+    interface_handle : Void*,
+    number_of_pipes : UInt32,
+    pipes : Win32cr::Devices::Usb::USBD_PIPE_INFORMATION*
+
+  @[Extern]
+  record URB_HCD_AREA,
+    reserved8 : Void*[8]
+
+  @[Extern]
+  record URB_HEADER,
+    length : UInt16,
+    function : UInt16,
+    status : Int32,
+    usbd_device_handle : Void*,
     usbd_flags : UInt32
-  end
-  struct URB_SELECT_INTERFACE
-    hdr : URB_HEADER
-    configuration_handle : Void*
-    interface : USBD_INTERFACE_INFORMATION
-  end
-  struct URB_SELECT_CONFIGURATION
-    hdr : URB_HEADER
-    configuration_descriptor : USB_CONFIGURATION_DESCRIPTOR*
-    configuration_handle : Void*
-    interface : USBD_INTERFACE_INFORMATION
-  end
-  struct URB_PIPE_REQUEST
-    hdr : URB_HEADER
-    pipe_handle : Void*
+
+  @[Extern]
+  record URB_SELECT_INTERFACE,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    configuration_handle : Void*,
+    interface : Win32cr::Devices::Usb::USBD_INTERFACE_INFORMATION
+
+  @[Extern]
+  record URB_SELECT_CONFIGURATION,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    configuration_descriptor : Win32cr::Devices::Usb::USB_CONFIGURATION_DESCRIPTOR*,
+    configuration_handle : Void*,
+    interface : Win32cr::Devices::Usb::USBD_INTERFACE_INFORMATION
+
+  @[Extern]
+  record URB_PIPE_REQUEST,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    pipe_handle : Void*,
     reserved : UInt32
-  end
-  struct URB_FRAME_LENGTH_CONTROL
-    hdr : URB_HEADER
-  end
-  struct URB_GET_FRAME_LENGTH
-    hdr : URB_HEADER
-    frame_length : UInt32
+
+  @[Extern]
+  record URB_FRAME_LENGTH_CONTROL,
+    hdr : Win32cr::Devices::Usb::URB_HEADER
+
+  @[Extern]
+  record URB_GET_FRAME_LENGTH,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    frame_length : UInt32,
     frame_number : UInt32
-  end
-  struct URB_SET_FRAME_LENGTH
-    hdr : URB_HEADER
+
+  @[Extern]
+  record URB_SET_FRAME_LENGTH,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
     frame_length_delta : Int32
-  end
-  struct URB_GET_CURRENT_FRAME_NUMBER
-    hdr : URB_HEADER
+
+  @[Extern]
+  record URB_GET_CURRENT_FRAME_NUMBER,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
     frame_number : UInt32
-  end
-  struct URB_CONTROL_DESCRIPTOR_REQUEST
-    hdr : URB_HEADER
-    reserved : Void*
-    reserved0 : UInt32
-    transfer_buffer_length : UInt32
-    transfer_buffer : Void*
-    transfer_buffer_mdl : Void*
-    urb_link : URB*
-    hca : URB_HCD_AREA
-    reserved1 : UInt16
-    index : UInt8
-    descriptor_type : UInt8
-    language_id : UInt16
+
+  @[Extern]
+  record URB_CONTROL_DESCRIPTOR_REQUEST,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    reserved : Void*,
+    reserved0 : UInt32,
+    transfer_buffer_length : UInt32,
+    transfer_buffer : Void*,
+    transfer_buffer_mdl : Void*,
+    urb_link : Win32cr::Devices::Usb::URB*,
+    hca : Win32cr::Devices::Usb::URB_HCD_AREA,
+    reserved1 : UInt16,
+    index : UInt8,
+    descriptor_type : UInt8,
+    language_id : UInt16,
     reserved2 : UInt16
-  end
-  struct URB_CONTROL_GET_STATUS_REQUEST
-    hdr : URB_HEADER
-    reserved : Void*
-    reserved0 : UInt32
-    transfer_buffer_length : UInt32
-    transfer_buffer : Void*
-    transfer_buffer_mdl : Void*
-    urb_link : URB*
-    hca : URB_HCD_AREA
-    reserved1 : UInt8[4]*
-    index : UInt16
+
+  @[Extern]
+  record URB_CONTROL_GET_STATUS_REQUEST,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    reserved : Void*,
+    reserved0 : UInt32,
+    transfer_buffer_length : UInt32,
+    transfer_buffer : Void*,
+    transfer_buffer_mdl : Void*,
+    urb_link : Win32cr::Devices::Usb::URB*,
+    hca : Win32cr::Devices::Usb::URB_HCD_AREA,
+    reserved1 : UInt8[4],
+    index : UInt16,
     reserved2 : UInt16
-  end
-  struct URB_CONTROL_FEATURE_REQUEST
-    hdr : URB_HEADER
-    reserved : Void*
-    reserved2 : UInt32
-    reserved3 : UInt32
-    reserved4 : Void*
-    reserved5 : Void*
-    urb_link : URB*
-    hca : URB_HCD_AREA
-    reserved0 : UInt16
-    feature_selector : UInt16
-    index : UInt16
+
+  @[Extern]
+  record URB_CONTROL_FEATURE_REQUEST,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    reserved : Void*,
+    reserved2 : UInt32,
+    reserved3 : UInt32,
+    reserved4 : Void*,
+    reserved5 : Void*,
+    urb_link : Win32cr::Devices::Usb::URB*,
+    hca : Win32cr::Devices::Usb::URB_HCD_AREA,
+    reserved0 : UInt16,
+    feature_selector : UInt16,
+    index : UInt16,
     reserved1 : UInt16
-  end
-  struct URB_CONTROL_VENDOR_OR_CLASS_REQUEST
-    hdr : URB_HEADER
-    reserved : Void*
-    transfer_flags : UInt32
-    transfer_buffer_length : UInt32
-    transfer_buffer : Void*
-    transfer_buffer_mdl : Void*
-    urb_link : URB*
-    hca : URB_HCD_AREA
-    request_type_reserved_bits : UInt8
-    request : UInt8
-    value : UInt16
-    index : UInt16
+
+  @[Extern]
+  record URB_CONTROL_VENDOR_OR_CLASS_REQUEST,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    reserved : Void*,
+    transfer_flags : UInt32,
+    transfer_buffer_length : UInt32,
+    transfer_buffer : Void*,
+    transfer_buffer_mdl : Void*,
+    urb_link : Win32cr::Devices::Usb::URB*,
+    hca : Win32cr::Devices::Usb::URB_HCD_AREA,
+    request_type_reserved_bits : UInt8,
+    request : UInt8,
+    value : UInt16,
+    index : UInt16,
     reserved1 : UInt16
-  end
-  struct URB_CONTROL_GET_INTERFACE_REQUEST
-    hdr : URB_HEADER
-    reserved : Void*
-    reserved0 : UInt32
-    transfer_buffer_length : UInt32
-    transfer_buffer : Void*
-    transfer_buffer_mdl : Void*
-    urb_link : URB*
-    hca : URB_HCD_AREA
-    reserved1 : UInt8[4]*
-    interface : UInt16
+
+  @[Extern]
+  record URB_CONTROL_GET_INTERFACE_REQUEST,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    reserved : Void*,
+    reserved0 : UInt32,
+    transfer_buffer_length : UInt32,
+    transfer_buffer : Void*,
+    transfer_buffer_mdl : Void*,
+    urb_link : Win32cr::Devices::Usb::URB*,
+    hca : Win32cr::Devices::Usb::URB_HCD_AREA,
+    reserved1 : UInt8[4],
+    interface : UInt16,
     reserved2 : UInt16
+
+  @[Extern]
+  record URB_CONTROL_GET_CONFIGURATION_REQUEST,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    reserved : Void*,
+    reserved0 : UInt32,
+    transfer_buffer_length : UInt32,
+    transfer_buffer : Void*,
+    transfer_buffer_mdl : Void*,
+    urb_link : Win32cr::Devices::Usb::URB*,
+    hca : Win32cr::Devices::Usb::URB_HCD_AREA,
+    reserved1 : UInt8[8]
+
+  @[Extern]
+  record OS_STRING,
+    bLength : UInt8,
+    bDescriptorType : UInt8,
+    microsoft_string : UInt16[7],
+    bVendorCode : UInt8,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      bPad : UInt8,
+      bFlags : UInt8
+
   end
-  struct URB_CONTROL_GET_CONFIGURATION_REQUEST
-    hdr : URB_HEADER
-    reserved : Void*
-    reserved0 : UInt32
-    transfer_buffer_length : UInt32
-    transfer_buffer : Void*
-    transfer_buffer_mdl : Void*
-    urb_link : URB*
-    hca : URB_HCD_AREA
-    reserved1 : UInt8[8]*
-  end
-  struct OS_STRING
-    b_length : UInt8
-    b_descriptor_type : UInt8
-    microsoft_string : Char[7]*
-    b_vendor_code : UInt8
-    anonymous : OS_STRING_Anonymous_e__Union
-  end
-  struct URB_OS_FEATURE_DESCRIPTOR_REQUEST
-    hdr : URB_HEADER
-    reserved : Void*
-    reserved0 : UInt32
-    transfer_buffer_length : UInt32
-    transfer_buffer : Void*
-    transfer_buffer_mdl : Void*
-    urb_link : URB*
-    hca : URB_HCD_AREA
-    _bitfield : UInt8
-    reserved2 : UInt8
-    interface_number : UInt8
-    ms_page_index : UInt8
-    ms_feature_descriptor_index : UInt16
+
+  @[Extern]
+  record URB_OS_FEATURE_DESCRIPTOR_REQUEST,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    reserved : Void*,
+    reserved0 : UInt32,
+    transfer_buffer_length : UInt32,
+    transfer_buffer : Void*,
+    transfer_buffer_mdl : Void*,
+    urb_link : Win32cr::Devices::Usb::URB*,
+    hca : Win32cr::Devices::Usb::URB_HCD_AREA,
+    _bitfield : UInt8,
+    reserved2 : UInt8,
+    interface_number : UInt8,
+    ms_page_index : UInt8,
+    ms_feature_descriptor_index : UInt16,
     reserved3 : UInt16
-  end
-  struct URB_CONTROL_TRANSFER
-    hdr : URB_HEADER
-    pipe_handle : Void*
-    transfer_flags : UInt32
-    transfer_buffer_length : UInt32
-    transfer_buffer : Void*
-    transfer_buffer_mdl : Void*
-    urb_link : URB*
-    hca : URB_HCD_AREA
-    setup_packet : UInt8[8]*
-  end
-  struct URB_CONTROL_TRANSFER_EX
-    hdr : URB_HEADER
-    pipe_handle : Void*
-    transfer_flags : UInt32
-    transfer_buffer_length : UInt32
-    transfer_buffer : Void*
-    transfer_buffer_mdl : Void*
-    timeout : UInt32
-    hca : URB_HCD_AREA
-    setup_packet : UInt8[8]*
-  end
-  struct URB_BULK_OR_INTERRUPT_TRANSFER
-    hdr : URB_HEADER
-    pipe_handle : Void*
-    transfer_flags : UInt32
-    transfer_buffer_length : UInt32
-    transfer_buffer : Void*
-    transfer_buffer_mdl : Void*
-    urb_link : URB*
-    hca : URB_HCD_AREA
-  end
-  struct USBD_ISO_PACKET_DESCRIPTOR
-    offset : UInt32
-    length : UInt32
+
+  @[Extern]
+  record URB_CONTROL_TRANSFER,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    pipe_handle : Void*,
+    transfer_flags : UInt32,
+    transfer_buffer_length : UInt32,
+    transfer_buffer : Void*,
+    transfer_buffer_mdl : Void*,
+    urb_link : Win32cr::Devices::Usb::URB*,
+    hca : Win32cr::Devices::Usb::URB_HCD_AREA,
+    setup_packet : UInt8[8]
+
+  @[Extern]
+  record URB_CONTROL_TRANSFER_EX,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    pipe_handle : Void*,
+    transfer_flags : UInt32,
+    transfer_buffer_length : UInt32,
+    transfer_buffer : Void*,
+    transfer_buffer_mdl : Void*,
+    timeout : UInt32,
+    hca : Win32cr::Devices::Usb::URB_HCD_AREA,
+    setup_packet : UInt8[8]
+
+  @[Extern]
+  record URB_BULK_OR_INTERRUPT_TRANSFER,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    pipe_handle : Void*,
+    transfer_flags : UInt32,
+    transfer_buffer_length : UInt32,
+    transfer_buffer : Void*,
+    transfer_buffer_mdl : Void*,
+    urb_link : Win32cr::Devices::Usb::URB*,
+    hca : Win32cr::Devices::Usb::URB_HCD_AREA
+
+  @[Extern]
+  record USBD_ISO_PACKET_DESCRIPTOR,
+    offset : UInt32,
+    length : UInt32,
     status : Int32
-  end
-  struct URB_ISOCH_TRANSFER
-    hdr : URB_HEADER
-    pipe_handle : Void*
-    transfer_flags : UInt32
-    transfer_buffer_length : UInt32
-    transfer_buffer : Void*
-    transfer_buffer_mdl : Void*
-    urb_link : URB*
-    hca : URB_HCD_AREA
-    start_frame : UInt32
-    number_of_packets : UInt32
-    error_count : UInt32
-    iso_packet : USBD_ISO_PACKET_DESCRIPTOR[0]*
-  end
-  struct USBD_STREAM_INFORMATION
-    pipe_handle : Void*
-    stream_id : UInt32
-    maximum_transfer_size : UInt32
+
+  @[Extern]
+  record URB_ISOCH_TRANSFER,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    pipe_handle : Void*,
+    transfer_flags : UInt32,
+    transfer_buffer_length : UInt32,
+    transfer_buffer : Void*,
+    transfer_buffer_mdl : Void*,
+    urb_link : Win32cr::Devices::Usb::URB*,
+    hca : Win32cr::Devices::Usb::URB_HCD_AREA,
+    start_frame : UInt32,
+    number_of_packets : UInt32,
+    error_count : UInt32,
+    iso_packet : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR*
+
+  @[Extern]
+  record USBD_STREAM_INFORMATION,
+    pipe_handle : Void*,
+    stream_id : UInt32,
+    maximum_transfer_size : UInt32,
     pipe_flags : UInt32
-  end
-  struct URB_OPEN_STATIC_STREAMS
-    hdr : URB_HEADER
-    pipe_handle : Void*
-    number_of_streams : UInt32
-    stream_info_version : UInt16
-    stream_info_size : UInt16
-    streams : USBD_STREAM_INFORMATION*
-  end
-  struct URB_GET_ISOCH_PIPE_TRANSFER_PATH_DELAYS
-    hdr : URB_HEADER
-    pipe_handle : Void*
-    maximum_send_path_delay_in_milli_seconds : UInt32
+
+  @[Extern]
+  record URB_OPEN_STATIC_STREAMS,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    pipe_handle : Void*,
+    number_of_streams : UInt32,
+    stream_info_version : UInt16,
+    stream_info_size : UInt16,
+    streams : Win32cr::Devices::Usb::USBD_STREAM_INFORMATION*
+
+  @[Extern]
+  record URB_GET_ISOCH_PIPE_TRANSFER_PATH_DELAYS,
+    hdr : Win32cr::Devices::Usb::URB_HEADER,
+    pipe_handle : Void*,
+    maximum_send_path_delay_in_milli_seconds : UInt32,
     maximum_completion_path_delay_in_milli_seconds : UInt32
+
+  @[Extern]
+  record URB,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      urb_header : Win32cr::Devices::Usb::URB_HEADER,
+      urb_select_interface : Win32cr::Devices::Usb::URB_SELECT_INTERFACE,
+      urb_select_configuration : Win32cr::Devices::Usb::URB_SELECT_CONFIGURATION,
+      urb_pipe_request : Win32cr::Devices::Usb::URB_PIPE_REQUEST,
+      urb_frame_length_control : Win32cr::Devices::Usb::URB_FRAME_LENGTH_CONTROL,
+      urb_get_frame_length : Win32cr::Devices::Usb::URB_GET_FRAME_LENGTH,
+      urb_set_frame_length : Win32cr::Devices::Usb::URB_SET_FRAME_LENGTH,
+      urb_get_current_frame_number : Win32cr::Devices::Usb::URB_GET_CURRENT_FRAME_NUMBER,
+      urb_control_transfer : Win32cr::Devices::Usb::URB_CONTROL_TRANSFER,
+      urb_control_transfer_ex : Win32cr::Devices::Usb::URB_CONTROL_TRANSFER_EX,
+      urb_bulk_or_interrupt_transfer : Win32cr::Devices::Usb::URB_BULK_OR_INTERRUPT_TRANSFER,
+      urb_isochronous_transfer : Win32cr::Devices::Usb::URB_ISOCH_TRANSFER,
+      urb_control_descriptor_request : Win32cr::Devices::Usb::URB_CONTROL_DESCRIPTOR_REQUEST,
+      urb_control_get_status_request : Win32cr::Devices::Usb::URB_CONTROL_GET_STATUS_REQUEST,
+      urb_control_feature_request : Win32cr::Devices::Usb::URB_CONTROL_FEATURE_REQUEST,
+      urb_control_vendor_class_request : Win32cr::Devices::Usb::URB_CONTROL_VENDOR_OR_CLASS_REQUEST,
+      urb_control_get_interface_request : Win32cr::Devices::Usb::URB_CONTROL_GET_INTERFACE_REQUEST,
+      urb_control_get_configuration_request : Win32cr::Devices::Usb::URB_CONTROL_GET_CONFIGURATION_REQUEST,
+      urb_os_feature_descriptor_request : Win32cr::Devices::Usb::URB_OS_FEATURE_DESCRIPTOR_REQUEST,
+      urb_open_static_streams : Win32cr::Devices::Usb::URB_OPEN_STATIC_STREAMS,
+      urb_get_isoch_pipe_transfer_path_delays : Win32cr::Devices::Usb::URB_GET_ISOCH_PIPE_TRANSFER_PATH_DELAYS
+
   end
-  struct URB
-    anonymous : URB_Anonymous_e__Union
-  end
-  struct USB_IDLE_CALLBACK_INFO
-    idle_callback : USB_IDLE_CALLBACK
+
+  @[Extern]
+  record USB_IDLE_CALLBACK_INFO,
+    idle_callback : Win32cr::Devices::Usb::USB_IDLE_CALLBACK,
     idle_context : Void*
-  end
-  struct USBUSER_REQUEST_HEADER
-    usb_user_request : UInt32
-    usb_user_status_code : USB_USER_ERROR_CODE
-    request_buffer_length : UInt32
+
+  @[Extern]
+  record USBUSER_REQUEST_HEADER,
+    usb_user_request : UInt32,
+    usb_user_status_code : Win32cr::Devices::Usb::USB_USER_ERROR_CODE,
+    request_buffer_length : UInt32,
     actual_buffer_length : UInt32
-  end
-  struct PACKET_PARAMETERS
-    device_address : UInt8
-    endpoint_address : UInt8
-    maximum_packet_size : UInt16
-    timeout : UInt32
-    flags : UInt32
-    data_length : UInt32
-    hub_device_address : UInt16
-    port_tt_number : UInt16
-    error_count : UInt8
-    pad : UInt8[3]*
-    usbd_status_code : Int32
-    data : UInt8[4]*
-  end
-  struct USBUSER_SEND_ONE_PACKET
-    header : USBUSER_REQUEST_HEADER
-    packet_parameters : PACKET_PARAMETERS
-  end
-  struct RAW_RESET_PORT_PARAMETERS
-    port_number : UInt16
+
+  @[Extern]
+  record PACKET_PARAMETERS,
+    device_address : UInt8,
+    endpoint_address : UInt8,
+    maximum_packet_size : UInt16,
+    timeout : UInt32,
+    flags : UInt32,
+    data_length : UInt32,
+    hub_device_address : UInt16,
+    port_tt_number : UInt16,
+    error_count : UInt8,
+    pad : UInt8[3],
+    usbd_status_code : Int32,
+    data : UInt8[4]
+
+  @[Extern]
+  record USBUSER_SEND_ONE_PACKET,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    packet_parameters : Win32cr::Devices::Usb::PACKET_PARAMETERS
+
+  @[Extern]
+  record RAW_RESET_PORT_PARAMETERS,
+    port_number : UInt16,
     port_status : UInt16
-  end
-  struct USBUSER_RAW_RESET_ROOT_PORT
-    header : USBUSER_REQUEST_HEADER
-    parameters : RAW_RESET_PORT_PARAMETERS
-  end
-  struct RAW_ROOTPORT_FEATURE
-    port_number : UInt16
-    port_feature : UInt16
+
+  @[Extern]
+  record USBUSER_RAW_RESET_ROOT_PORT,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    parameters : Win32cr::Devices::Usb::RAW_RESET_PORT_PARAMETERS
+
+  @[Extern]
+  record RAW_ROOTPORT_FEATURE,
+    port_number : UInt16,
+    port_feature : UInt16,
     port_status : UInt16
-  end
-  struct USBUSER_ROOTPORT_FEATURE_REQUEST
-    header : USBUSER_REQUEST_HEADER
-    parameters : RAW_ROOTPORT_FEATURE
-  end
-  struct RAW_ROOTPORT_PARAMETERS
-    port_number : UInt16
+
+  @[Extern]
+  record USBUSER_ROOTPORT_FEATURE_REQUEST,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    parameters : Win32cr::Devices::Usb::RAW_ROOTPORT_FEATURE
+
+  @[Extern]
+  record RAW_ROOTPORT_PARAMETERS,
+    port_number : UInt16,
     port_status : UInt16
-  end
-  struct USBUSER_ROOTPORT_PARAMETERS
-    header : USBUSER_REQUEST_HEADER
-    parameters : RAW_ROOTPORT_PARAMETERS
-  end
-  struct USB_CONTROLLER_INFO_0
-    pci_vendor_id : UInt32
-    pci_device_id : UInt32
-    pci_revision : UInt32
-    number_of_root_ports : UInt32
-    controller_flavor : USB_CONTROLLER_FLAVOR
+
+  @[Extern]
+  record USBUSER_ROOTPORT_PARAMETERS,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    parameters : Win32cr::Devices::Usb::RAW_ROOTPORT_PARAMETERS
+
+  @[Extern]
+  record USB_CONTROLLER_INFO_0,
+    pci_vendor_id : UInt32,
+    pci_device_id : UInt32,
+    pci_revision : UInt32,
+    number_of_root_ports : UInt32,
+    controller_flavor : Win32cr::Devices::Usb::USB_CONTROLLER_FLAVOR,
     hc_feature_flags : UInt32
-  end
-  struct USBUSER_CONTROLLER_INFO_0
-    header : USBUSER_REQUEST_HEADER
-    info0 : USB_CONTROLLER_INFO_0
-  end
-  struct USB_UNICODE_NAME
-    length : UInt32
-    string : Char[0]*
-  end
-  struct USBUSER_CONTROLLER_UNICODE_NAME
-    header : USBUSER_REQUEST_HEADER
-    unicode_name : USB_UNICODE_NAME
-  end
-  struct USB_PASS_THRU_PARAMETERS
-    function_guid : Guid
-    parameter_length : UInt32
-    parameters : UInt8[4]*
-  end
-  struct USBUSER_PASS_THRU_REQUEST
-    header : USBUSER_REQUEST_HEADER
-    pass_thru : USB_PASS_THRU_PARAMETERS
-  end
-  struct USB_POWER_INFO
-    system_state : WDMUSB_POWER_STATE
-    hc_device_power_state : WDMUSB_POWER_STATE
-    hc_device_wake : WDMUSB_POWER_STATE
-    hc_system_wake : WDMUSB_POWER_STATE
-    rh_device_power_state : WDMUSB_POWER_STATE
-    rh_device_wake : WDMUSB_POWER_STATE
-    rh_system_wake : WDMUSB_POWER_STATE
-    last_system_sleep_state : WDMUSB_POWER_STATE
-    can_wakeup : BOOLEAN
-    is_powered : BOOLEAN
-  end
-  struct USBUSER_POWER_INFO_REQUEST
-    header : USBUSER_REQUEST_HEADER
-    power_information : USB_POWER_INFO
-  end
-  struct USB_OPEN_RAW_DEVICE_PARAMETERS
-    port_status : UInt16
+
+  @[Extern]
+  record USBUSER_CONTROLLER_INFO_0,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    info0 : Win32cr::Devices::Usb::USB_CONTROLLER_INFO_0
+
+  @[Extern]
+  record USB_UNICODE_NAME,
+    length : UInt32,
+    string : UInt16*
+
+  @[Extern]
+  record USBUSER_CONTROLLER_UNICODE_NAME,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    unicode_name : Win32cr::Devices::Usb::USB_UNICODE_NAME
+
+  @[Extern]
+  record USB_PASS_THRU_PARAMETERS,
+    function_guid : LibC::GUID,
+    parameter_length : UInt32,
+    parameters : UInt8[4]
+
+  @[Extern]
+  record USBUSER_PASS_THRU_REQUEST,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    pass_thru : Win32cr::Devices::Usb::USB_PASS_THRU_PARAMETERS
+
+  @[Extern]
+  record USB_POWER_INFO,
+    system_state : Win32cr::Devices::Usb::WDMUSB_POWER_STATE,
+    hc_device_power_state : Win32cr::Devices::Usb::WDMUSB_POWER_STATE,
+    hc_device_wake : Win32cr::Devices::Usb::WDMUSB_POWER_STATE,
+    hc_system_wake : Win32cr::Devices::Usb::WDMUSB_POWER_STATE,
+    rh_device_power_state : Win32cr::Devices::Usb::WDMUSB_POWER_STATE,
+    rh_device_wake : Win32cr::Devices::Usb::WDMUSB_POWER_STATE,
+    rh_system_wake : Win32cr::Devices::Usb::WDMUSB_POWER_STATE,
+    last_system_sleep_state : Win32cr::Devices::Usb::WDMUSB_POWER_STATE,
+    can_wakeup : Win32cr::Foundation::BOOLEAN,
+    is_powered : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record USBUSER_POWER_INFO_REQUEST,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    power_information : Win32cr::Devices::Usb::USB_POWER_INFO
+
+  @[Extern]
+  record USB_OPEN_RAW_DEVICE_PARAMETERS,
+    port_status : UInt16,
     max_packet_ep0 : UInt16
-  end
-  struct USBUSER_OPEN_RAW_DEVICE
-    header : USBUSER_REQUEST_HEADER
-    parameters : USB_OPEN_RAW_DEVICE_PARAMETERS
-  end
-  struct USB_CLOSE_RAW_DEVICE_PARAMETERS
+
+  @[Extern]
+  record USBUSER_OPEN_RAW_DEVICE,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    parameters : Win32cr::Devices::Usb::USB_OPEN_RAW_DEVICE_PARAMETERS
+
+  @[Extern]
+  record USB_CLOSE_RAW_DEVICE_PARAMETERS,
     xxx : UInt32
-  end
-  struct USBUSER_CLOSE_RAW_DEVICE
-    header : USBUSER_REQUEST_HEADER
-    parameters : USB_CLOSE_RAW_DEVICE_PARAMETERS
-  end
-  struct USB_SEND_RAW_COMMAND_PARAMETERS
-    usb_bm_request : UInt8
-    usb_b_request : UInt8
-    usb_w_vlaue : UInt16
-    usb_w_index : UInt16
-    usb_w_length : UInt16
-    device_address : UInt16
-    maximum_packet_size : UInt16
-    timeout : UInt32
-    data_length : UInt32
-    usbd_status_code : Int32
-    data : UInt8[4]*
-  end
-  struct USBUSER_SEND_RAW_COMMAND
-    header : USBUSER_REQUEST_HEADER
-    parameters : USB_SEND_RAW_COMMAND_PARAMETERS
-  end
-  struct USB_BANDWIDTH_INFO
-    device_count : UInt32
-    total_bus_bandwidth : UInt32
-    total32sec_bandwidth : UInt32
-    alloced_bulk_and_control : UInt32
-    alloced_iso : UInt32
-    alloced_interrupt_1ms : UInt32
-    alloced_interrupt_2ms : UInt32
-    alloced_interrupt_4ms : UInt32
-    alloced_interrupt_8ms : UInt32
-    alloced_interrupt_16ms : UInt32
+
+  @[Extern]
+  record USBUSER_CLOSE_RAW_DEVICE,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    parameters : Win32cr::Devices::Usb::USB_CLOSE_RAW_DEVICE_PARAMETERS
+
+  @[Extern]
+  record USB_SEND_RAW_COMMAND_PARAMETERS,
+    usb_bm_request : UInt8,
+    usb_b_request : UInt8,
+    usb_w_vlaue : UInt16,
+    usb_w_index : UInt16,
+    usb_w_length : UInt16,
+    device_address : UInt16,
+    maximum_packet_size : UInt16,
+    timeout : UInt32,
+    data_length : UInt32,
+    usbd_status_code : Int32,
+    data : UInt8[4]
+
+  @[Extern]
+  record USBUSER_SEND_RAW_COMMAND,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    parameters : Win32cr::Devices::Usb::USB_SEND_RAW_COMMAND_PARAMETERS
+
+  @[Extern]
+  record USB_BANDWIDTH_INFO,
+    device_count : UInt32,
+    total_bus_bandwidth : UInt32,
+    total32sec_bandwidth : UInt32,
+    alloced_bulk_and_control : UInt32,
+    alloced_iso : UInt32,
+    alloced_interrupt_1ms : UInt32,
+    alloced_interrupt_2ms : UInt32,
+    alloced_interrupt_4ms : UInt32,
+    alloced_interrupt_8ms : UInt32,
+    alloced_interrupt_16ms : UInt32,
     alloced_interrupt_32ms : UInt32
-  end
-  struct USBUSER_BANDWIDTH_INFO_REQUEST
-    header : USBUSER_REQUEST_HEADER
-    bandwidth_information : USB_BANDWIDTH_INFO
-  end
-  struct USB_BUS_STATISTICS_0
-    device_count : UInt32
-    current_system_time : LARGE_INTEGER
-    current_usb_frame : UInt32
-    bulk_bytes : UInt32
-    iso_bytes : UInt32
-    interrupt_bytes : UInt32
-    control_data_bytes : UInt32
-    pci_interrupt_count : UInt32
-    hard_reset_count : UInt32
-    worker_signal_count : UInt32
-    common_buffer_bytes : UInt32
-    worker_idle_time_ms : UInt32
-    root_hub_enabled : BOOLEAN
-    root_hub_device_power_state : UInt8
-    unused : UInt8
+
+  @[Extern]
+  record USBUSER_BANDWIDTH_INFO_REQUEST,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    bandwidth_information : Win32cr::Devices::Usb::USB_BANDWIDTH_INFO
+
+  @[Extern]
+  record USB_BUS_STATISTICS_0,
+    device_count : UInt32,
+    current_system_time : Win32cr::Foundation::LARGE_INTEGER,
+    current_usb_frame : UInt32,
+    bulk_bytes : UInt32,
+    iso_bytes : UInt32,
+    interrupt_bytes : UInt32,
+    control_data_bytes : UInt32,
+    pci_interrupt_count : UInt32,
+    hard_reset_count : UInt32,
+    worker_signal_count : UInt32,
+    common_buffer_bytes : UInt32,
+    worker_idle_time_ms : UInt32,
+    root_hub_enabled : Win32cr::Foundation::BOOLEAN,
+    root_hub_device_power_state : UInt8,
+    unused : UInt8,
     name_index : UInt8
-  end
-  struct USBUSER_BUS_STATISTICS_0_REQUEST
-    header : USBUSER_REQUEST_HEADER
-    bus_statistics0 : USB_BUS_STATISTICS_0
-  end
-  struct USB_DRIVER_VERSION_PARAMETERS
-    driver_tracking_code : UInt32
-    usbdi_version : UInt32
-    usbuser_version : UInt32
-    checked_port_driver : BOOLEAN
-    checked_miniport_driver : BOOLEAN
+
+  @[Extern]
+  record USBUSER_BUS_STATISTICS_0_REQUEST,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    bus_statistics0 : Win32cr::Devices::Usb::USB_BUS_STATISTICS_0
+
+  @[Extern]
+  record USB_DRIVER_VERSION_PARAMETERS,
+    driver_tracking_code : UInt32,
+    usbdi_version : UInt32,
+    usbuser_version : UInt32,
+    checked_port_driver : Win32cr::Foundation::BOOLEAN,
+    checked_miniport_driver : Win32cr::Foundation::BOOLEAN,
     usb_version : UInt16
-  end
-  struct USBUSER_GET_DRIVER_VERSION
-    header : USBUSER_REQUEST_HEADER
-    parameters : USB_DRIVER_VERSION_PARAMETERS
-  end
-  struct USB_USB2HW_VERSION_PARAMETERS
+
+  @[Extern]
+  record USBUSER_GET_DRIVER_VERSION,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    parameters : Win32cr::Devices::Usb::USB_DRIVER_VERSION_PARAMETERS
+
+  @[Extern]
+  record USB_USB2HW_VERSION_PARAMETERS,
     usb2_hw_revision : UInt8
-  end
-  struct USBUSER_GET_USB2HW_VERSION
-    header : USBUSER_REQUEST_HEADER
-    parameters : USB_USB2HW_VERSION_PARAMETERS
-  end
-  struct USBUSER_REFRESH_HCT_REG
-    header : USBUSER_REQUEST_HEADER
+
+  @[Extern]
+  record USBUSER_GET_USB2HW_VERSION,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
+    parameters : Win32cr::Devices::Usb::USB_USB2HW_VERSION_PARAMETERS
+
+  @[Extern]
+  record USBUSER_REFRESH_HCT_REG,
+    header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER,
     flags : UInt32
-  end
-  struct WINUSB_PIPE_INFORMATION
-    pipe_type : USBD_PIPE_TYPE
-    pipe_id : UInt8
-    maximum_packet_size : UInt16
+
+  @[Extern]
+  record WINUSB_PIPE_INFORMATION,
+    pipe_type : Win32cr::Devices::Usb::USBD_PIPE_TYPE,
+    pipe_id : UInt8,
+    maximum_packet_size : UInt16,
     interval : UInt8
-  end
-  struct WINUSB_PIPE_INFORMATION_EX
-    pipe_type : USBD_PIPE_TYPE
-    pipe_id : UInt8
-    maximum_packet_size : UInt16
-    interval : UInt8
+
+  @[Extern]
+  record WINUSB_PIPE_INFORMATION_EX,
+    pipe_type : Win32cr::Devices::Usb::USBD_PIPE_TYPE,
+    pipe_id : UInt8,
+    maximum_packet_size : UInt16,
+    interval : UInt8,
     maximum_bytes_per_interval : UInt32
-  end
-  struct WINUSB_SETUP_PACKET
-    request_type : UInt8
-    request : UInt8
-    value : UInt16
-    index : UInt16
+
+  @[Extern]
+  record WINUSB_SETUP_PACKET,
+    request_type : UInt8,
+    request : UInt8,
+    value : UInt16,
+    index : UInt16,
     length : UInt16
-  end
-  struct USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION
-    time_tracking_handle : LibC::HANDLE
-    is_startup_delay_tolerable : BOOLEAN
-  end
-  struct USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION
-    time_tracking_handle : LibC::HANDLE
-  end
-  struct USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION
-    time_tracking_handle : LibC::HANDLE
-    input_frame_number : UInt32
-    input_micro_frame_number : UInt32
-    query_performance_counter_at_input_frame_or_micro_frame : LARGE_INTEGER
-    query_performance_counter_frequency : LARGE_INTEGER
-    predicted_accuracy_in_micro_seconds : UInt32
-    current_generation_id : UInt32
-    current_query_performance_counter : LARGE_INTEGER
-    current_hardware_frame_number : UInt32
-    current_hardware_micro_frame_number : UInt32
+
+  @[Extern]
+  record USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION,
+    time_tracking_handle : Win32cr::Foundation::HANDLE,
+    is_startup_delay_tolerable : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION,
+    time_tracking_handle : Win32cr::Foundation::HANDLE
+
+  @[Extern]
+  record USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION,
+    time_tracking_handle : Win32cr::Foundation::HANDLE,
+    input_frame_number : UInt32,
+    input_micro_frame_number : UInt32,
+    query_performance_counter_at_input_frame_or_micro_frame : Win32cr::Foundation::LARGE_INTEGER,
+    query_performance_counter_frequency : Win32cr::Foundation::LARGE_INTEGER,
+    predicted_accuracy_in_micro_seconds : UInt32,
+    current_generation_id : UInt32,
+    current_query_performance_counter : Win32cr::Foundation::LARGE_INTEGER,
+    current_hardware_frame_number : UInt32,
+    current_hardware_micro_frame_number : UInt32,
     current_usb_frame_number : UInt32
-  end
-  struct ALTERNATE_INTERFACE
-    interface_number : UInt16
+
+  @[Extern]
+  record ALTERNATE_INTERFACE,
+    interface_number : UInt16,
     alternate_interface_number : UInt16
+
+  @[Extern]
+  record USBFN_NOTIFICATION,
+    event : Win32cr::Devices::Usb::USBFN_EVENT,
+    u : U_e__union do
+
+    # Nested Type U_e__union
+    @[Extern(union: true)]
+    record U_e__union,
+      bus_speed : Win32cr::Devices::Usb::USBFN_BUS_SPEED,
+      setup_packet : Win32cr::Devices::Usb::USB_DEFAULT_PIPE_SETUP_PACKET,
+      configuration_value : UInt16,
+      port_type : Win32cr::Devices::Usb::USBFN_PORT_TYPE,
+      alternate_interface : Win32cr::Devices::Usb::ALTERNATE_INTERFACE
+
   end
-  struct USBFN_NOTIFICATION
-    event : USBFN_EVENT
-    u : USBFN_NOTIFICATION_u_e__Union
-  end
-  struct USBFN_PIPE_INFORMATION
-    ep_desc : USB_ENDPOINT_DESCRIPTOR
+
+  @[Extern]
+  record USBFN_PIPE_INFORMATION,
+    ep_desc : Win32cr::Devices::Usb::USB_ENDPOINT_DESCRIPTOR,
     pipe_id : UInt32
-  end
-  struct USBFN_CLASS_INTERFACE
-    interface_number : UInt8
-    pipe_count : UInt8
-    pipe_arr : USBFN_PIPE_INFORMATION[16]*
-  end
-  struct USBFN_CLASS_INFORMATION_PACKET
-    full_speed_class_interface : USBFN_CLASS_INTERFACE
-    high_speed_class_interface : USBFN_CLASS_INTERFACE
-    interface_name : Char[40]*
-    interface_guid : Char[39]*
-    has_interface_guid : BOOLEAN
-    super_speed_class_interface : USBFN_CLASS_INTERFACE
-  end
-  struct USBFN_CLASS_INTERFACE_EX
-    base_interface_number : UInt8
-    interface_count : UInt8
-    pipe_count : UInt8
-    pipe_arr : USBFN_PIPE_INFORMATION[16]*
-  end
-  struct USBFN_CLASS_INFORMATION_PACKET_EX
-    full_speed_class_interface_ex : USBFN_CLASS_INTERFACE_EX
-    high_speed_class_interface_ex : USBFN_CLASS_INTERFACE_EX
-    super_speed_class_interface_ex : USBFN_CLASS_INTERFACE_EX
-    interface_name : Char[40]*
-    interface_guid : Char[39]*
-    has_interface_guid : BOOLEAN
-  end
-  struct USBFN_INTERFACE_INFO
-    interface_number : UInt8
-    speed : USBFN_BUS_SPEED
-    size : UInt16
-    interface_descriptor_set : UInt8[0]*
-  end
-  struct USBFN_USB_STRING
-    string_index : UInt8
-    usb_string : Char[255]*
-  end
-  struct USBFN_BUS_CONFIGURATION_INFO
-    configuration_name : Char[40]*
-    is_current : BOOLEAN
-    is_active : BOOLEAN
-  end
-  struct DRV_VERSION
-    major : UInt32
-    minor : UInt32
+
+  @[Extern]
+  record USBFN_CLASS_INTERFACE,
+    interface_number : UInt8,
+    pipe_count : UInt8,
+    pipe_arr : Win32cr::Devices::Usb::USBFN_PIPE_INFORMATION[16]
+
+  @[Extern]
+  record USBFN_CLASS_INFORMATION_PACKET,
+    full_speed_class_interface : Win32cr::Devices::Usb::USBFN_CLASS_INTERFACE,
+    high_speed_class_interface : Win32cr::Devices::Usb::USBFN_CLASS_INTERFACE,
+    interface_name : UInt16[40],
+    interface_guid : UInt16[39],
+    has_interface_guid : Win32cr::Foundation::BOOLEAN,
+    super_speed_class_interface : Win32cr::Devices::Usb::USBFN_CLASS_INTERFACE
+
+  @[Extern]
+  record USBFN_CLASS_INTERFACE_EX,
+    base_interface_number : UInt8,
+    interface_count : UInt8,
+    pipe_count : UInt8,
+    pipe_arr : Win32cr::Devices::Usb::USBFN_PIPE_INFORMATION[16]
+
+  @[Extern]
+  record USBFN_CLASS_INFORMATION_PACKET_EX,
+    full_speed_class_interface_ex : Win32cr::Devices::Usb::USBFN_CLASS_INTERFACE_EX,
+    high_speed_class_interface_ex : Win32cr::Devices::Usb::USBFN_CLASS_INTERFACE_EX,
+    super_speed_class_interface_ex : Win32cr::Devices::Usb::USBFN_CLASS_INTERFACE_EX,
+    interface_name : UInt16[40],
+    interface_guid : UInt16[39],
+    has_interface_guid : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record USBFN_INTERFACE_INFO,
+    interface_number : UInt8,
+    speed : Win32cr::Devices::Usb::USBFN_BUS_SPEED,
+    size : UInt16,
+    interface_descriptor_set : UInt8*
+
+  @[Extern]
+  record USBFN_USB_STRING,
+    string_index : UInt8,
+    usb_string : UInt16[255]
+
+  @[Extern]
+  record USBFN_BUS_CONFIGURATION_INFO,
+    configuration_name : UInt16[40],
+    is_current : Win32cr::Foundation::BOOLEAN,
+    is_active : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record DRV_VERSION,
+    major : UInt32,
+    minor : UInt32,
     internal : UInt32
-  end
-  struct IO_BLOCK
-    u_offset : UInt32
-    u_length : UInt32
-    pby_data : UInt8*
-    u_index : UInt32
-  end
-  struct IO_BLOCK_EX
-    u_offset : UInt32
-    u_length : UInt32
-    pby_data : UInt8*
-    u_index : UInt32
-    b_request : UInt8
-    bm_request_type : UInt8
-    f_transfer_direction_in : UInt8
-  end
-  struct CHANNEL_INFO
-    event_channel_size : UInt32
-    u_read_data_alignment : UInt32
-    u_write_data_alignment : UInt32
-  end
-  struct USBSCAN_GET_DESCRIPTOR
-    descriptor_type : UInt8
-    index : UInt8
+
+  @[Extern]
+  record IO_BLOCK,
+    uOffset : UInt32,
+    uLength : UInt32,
+    pbyData : UInt8*,
+    uIndex : UInt32
+
+  @[Extern]
+  record IO_BLOCK_EX,
+    uOffset : UInt32,
+    uLength : UInt32,
+    pbyData : UInt8*,
+    uIndex : UInt32,
+    bRequest : UInt8,
+    bmRequestType : UInt8,
+    fTransferDirectionIn : UInt8
+
+  @[Extern]
+  record CHANNEL_INFO,
+    event_channel_size : UInt32,
+    uReadDataAlignment : UInt32,
+    uWriteDataAlignment : UInt32
+
+  @[Extern]
+  record USBSCAN_GET_DESCRIPTOR,
+    descriptor_type : UInt8,
+    index : UInt8,
     language_id : UInt16
-  end
-  struct DEVICE_DESCRIPTOR
-    us_vendor_id : UInt16
-    us_product_id : UInt16
-    us_bcd_device : UInt16
-    us_language_id : UInt16
-  end
-  struct USBSCAN_PIPE_INFORMATION
-    maximum_packet_size : UInt16
-    endpoint_address : UInt8
-    interval : UInt8
-    pipe_type : RAW_PIPE_TYPE
-  end
-  struct USBSCAN_PIPE_CONFIGURATION
-    number_of_pipes : UInt32
-    pipe_info : USBSCAN_PIPE_INFORMATION[8]*
-  end
-  struct USBSCAN_TIMEOUT
-    timeout_read : UInt32
-    timeout_write : UInt32
+
+  @[Extern]
+  record DEVICE_DESCRIPTOR,
+    usVendorId : UInt16,
+    usProductId : UInt16,
+    usBcdDevice : UInt16,
+    usLanguageId : UInt16
+
+  @[Extern]
+  record USBSCAN_PIPE_INFORMATION,
+    maximum_packet_size : UInt16,
+    endpoint_address : UInt8,
+    interval : UInt8,
+    pipe_type : Win32cr::Devices::Usb::RAW_PIPE_TYPE
+
+  @[Extern]
+  record USBSCAN_PIPE_CONFIGURATION,
+    number_of_pipes : UInt32,
+    pipe_info : Win32cr::Devices::Usb::USBSCAN_PIPE_INFORMATION[8]
+
+  @[Extern]
+  record USBSCAN_TIMEOUT,
+    timeout_read : UInt32,
+    timeout_write : UInt32,
     timeout_event : UInt32
+
+  @[Link("winusb")]
+  lib C
+    fun WinUsb_Initialize(device_handle : Win32cr::Foundation::HANDLE, interface_handle : Void**) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_Free(interface_handle : Void*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_GetAssociatedInterface(interface_handle : Void*, associated_interface_index : UInt8, associated_interface_handle : Void**) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_GetDescriptor(interface_handle : Void*, descriptor_type : UInt8, index : UInt8, language_id : UInt16, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_QueryInterfaceSettings(interface_handle : Void*, alternate_interface_number : UInt8, usb_alt_interface_descriptor : Win32cr::Devices::Usb::USB_INTERFACE_DESCRIPTOR*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_QueryDeviceInformation(interface_handle : Void*, information_type : UInt32, buffer_length : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_SetCurrentAlternateSetting(interface_handle : Void*, setting_number : UInt8) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_GetCurrentAlternateSetting(interface_handle : Void*, setting_number : UInt8*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_QueryPipe(interface_handle : Void*, alternate_interface_number : UInt8, pipe_index : UInt8, pipe_information : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_QueryPipeEx(interface_handle : Void*, alternate_setting_number : UInt8, pipe_index : UInt8, pipe_information_ex : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION_EX*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_SetPipePolicy(interface_handle : Void*, pipe_id : UInt8, policy_type : UInt32, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_GetPipePolicy(interface_handle : Void*, pipe_id : UInt8, policy_type : UInt32, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_ReadPipe(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_WritePipe(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_ControlTransfer(interface_handle : Void*, setup_packet : Win32cr::Devices::Usb::WINUSB_SETUP_PACKET, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_ResetPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_AbortPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_FlushPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_SetPowerPolicy(interface_handle : Void*, policy_type : UInt32, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_GetPowerPolicy(interface_handle : Void*, policy_type : UInt32, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_GetOverlappedResult(interface_handle : Void*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpNumberOfBytesTransferred : UInt32*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_ParseConfigurationDescriptor(configuration_descriptor : Win32cr::Devices::Usb::USB_CONFIGURATION_DESCRIPTOR*, start_position : Void*, interface_number : Int32, alternate_setting : Int32, interface_class : Int32, interface_sub_class : Int32, interface_protocol : Int32) : Win32cr::Devices::Usb::USB_INTERFACE_DESCRIPTOR*
+
+    fun WinUsb_ParseDescriptors(descriptor_buffer : Void*, total_length : UInt32, start_position : Void*, descriptor_type : Int32) : Win32cr::Devices::Usb::USB_COMMON_DESCRIPTOR*
+
+    fun WinUsb_GetCurrentFrameNumber(interface_handle : Void*, current_frame_number : UInt32*, time_stamp : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_GetAdjustedFrameNumber(current_frame_number : UInt32*, time_stamp : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_RegisterIsochBuffer(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, isoch_buffer_handle : Void**) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_UnregisterIsochBuffer(isoch_buffer_handle : Void*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_WriteIsochPipe(buffer_handle : Void*, offset : UInt32, length : UInt32, frame_number : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_ReadIsochPipe(buffer_handle : Void*, offset : UInt32, length : UInt32, frame_number : UInt32*, number_of_packets : UInt32, iso_packet_descriptors : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_WriteIsochPipeAsap(buffer_handle : Void*, offset : UInt32, length : UInt32, continue_stream : Win32cr::Foundation::BOOL, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_ReadIsochPipeAsap(buffer_handle : Void*, offset : UInt32, length : UInt32, continue_stream : Win32cr::Foundation::BOOL, number_of_packets : UInt32, iso_packet_descriptors : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_StartTrackingForTimeSync(interface_handle : Void*, start_tracking_info : Win32cr::Devices::Usb::USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_GetCurrentFrameNumberAndQpc(interface_handle : Void*, frame_qpc_info : Win32cr::Devices::Usb::USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+
+    fun WinUsb_StopTrackingForTimeSync(interface_handle : Void*, stop_tracking_info : Win32cr::Devices::Usb::USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+
   end
-
-
-  # Params # devicehandle : LibC::HANDLE [In],interfacehandle : Void** [In]
-  fun WinUsb_Initialize(devicehandle : LibC::HANDLE, interfacehandle : Void**) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In]
-  fun WinUsb_Free(interfacehandle : Void*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],associatedinterfaceindex : UInt8 [In],associatedinterfacehandle : Void** [In]
-  fun WinUsb_GetAssociatedInterface(interfacehandle : Void*, associatedinterfaceindex : UInt8, associatedinterfacehandle : Void**) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],descriptortype : UInt8 [In],index : UInt8 [In],languageid : UInt16 [In],buffer : UInt8* [In],bufferlength : UInt32 [In],lengthtransferred : UInt32* [In]
-  fun WinUsb_GetDescriptor(interfacehandle : Void*, descriptortype : UInt8, index : UInt8, languageid : UInt16, buffer : UInt8*, bufferlength : UInt32, lengthtransferred : UInt32*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],alternateinterfacenumber : UInt8 [In],usbaltinterfacedescriptor : USB_INTERFACE_DESCRIPTOR* [In]
-  fun WinUsb_QueryInterfaceSettings(interfacehandle : Void*, alternateinterfacenumber : UInt8, usbaltinterfacedescriptor : USB_INTERFACE_DESCRIPTOR*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],informationtype : UInt32 [In],bufferlength : UInt32* [In],buffer : Void* [In]
-  fun WinUsb_QueryDeviceInformation(interfacehandle : Void*, informationtype : UInt32, bufferlength : UInt32*, buffer : Void*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],settingnumber : UInt8 [In]
-  fun WinUsb_SetCurrentAlternateSetting(interfacehandle : Void*, settingnumber : UInt8) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],settingnumber : UInt8* [In]
-  fun WinUsb_GetCurrentAlternateSetting(interfacehandle : Void*, settingnumber : UInt8*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],alternateinterfacenumber : UInt8 [In],pipeindex : UInt8 [In],pipeinformation : WINUSB_PIPE_INFORMATION* [In]
-  fun WinUsb_QueryPipe(interfacehandle : Void*, alternateinterfacenumber : UInt8, pipeindex : UInt8, pipeinformation : WINUSB_PIPE_INFORMATION*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],alternatesettingnumber : UInt8 [In],pipeindex : UInt8 [In],pipeinformationex : WINUSB_PIPE_INFORMATION_EX* [In]
-  fun WinUsb_QueryPipeEx(interfacehandle : Void*, alternatesettingnumber : UInt8, pipeindex : UInt8, pipeinformationex : WINUSB_PIPE_INFORMATION_EX*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],pipeid : UInt8 [In],policytype : UInt32 [In],valuelength : UInt32 [In],value : Void* [In]
-  fun WinUsb_SetPipePolicy(interfacehandle : Void*, pipeid : UInt8, policytype : UInt32, valuelength : UInt32, value : Void*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],pipeid : UInt8 [In],policytype : UInt32 [In],valuelength : UInt32* [In],value : Void* [In]
-  fun WinUsb_GetPipePolicy(interfacehandle : Void*, pipeid : UInt8, policytype : UInt32, valuelength : UInt32*, value : Void*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],pipeid : UInt8 [In],buffer : UInt8* [In],bufferlength : UInt32 [In],lengthtransferred : UInt32* [In],overlapped : OVERLAPPED* [In]
-  fun WinUsb_ReadPipe(interfacehandle : Void*, pipeid : UInt8, buffer : UInt8*, bufferlength : UInt32, lengthtransferred : UInt32*, overlapped : OVERLAPPED*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],pipeid : UInt8 [In],buffer : UInt8* [In],bufferlength : UInt32 [In],lengthtransferred : UInt32* [In],overlapped : OVERLAPPED* [In]
-  fun WinUsb_WritePipe(interfacehandle : Void*, pipeid : UInt8, buffer : UInt8*, bufferlength : UInt32, lengthtransferred : UInt32*, overlapped : OVERLAPPED*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],setuppacket : WINUSB_SETUP_PACKET [In],buffer : UInt8* [In],bufferlength : UInt32 [In],lengthtransferred : UInt32* [In],overlapped : OVERLAPPED* [In]
-  fun WinUsb_ControlTransfer(interfacehandle : Void*, setuppacket : WINUSB_SETUP_PACKET, buffer : UInt8*, bufferlength : UInt32, lengthtransferred : UInt32*, overlapped : OVERLAPPED*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],pipeid : UInt8 [In]
-  fun WinUsb_ResetPipe(interfacehandle : Void*, pipeid : UInt8) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],pipeid : UInt8 [In]
-  fun WinUsb_AbortPipe(interfacehandle : Void*, pipeid : UInt8) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],pipeid : UInt8 [In]
-  fun WinUsb_FlushPipe(interfacehandle : Void*, pipeid : UInt8) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],policytype : UInt32 [In],valuelength : UInt32 [In],value : Void* [In]
-  fun WinUsb_SetPowerPolicy(interfacehandle : Void*, policytype : UInt32, valuelength : UInt32, value : Void*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],policytype : UInt32 [In],valuelength : UInt32* [In],value : Void* [In]
-  fun WinUsb_GetPowerPolicy(interfacehandle : Void*, policytype : UInt32, valuelength : UInt32*, value : Void*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],lpoverlapped : OVERLAPPED* [In],lpnumberofbytestransferred : UInt32* [In],bwait : LibC::BOOL [In]
-  fun WinUsb_GetOverlappedResult(interfacehandle : Void*, lpoverlapped : OVERLAPPED*, lpnumberofbytestransferred : UInt32*, bwait : LibC::BOOL) : LibC::BOOL
-
-  # Params # configurationdescriptor : USB_CONFIGURATION_DESCRIPTOR* [In],startposition : Void* [In],interfacenumber : Int32 [In],alternatesetting : Int32 [In],interfaceclass : Int32 [In],interfacesubclass : Int32 [In],interfaceprotocol : Int32 [In]
-  fun WinUsb_ParseConfigurationDescriptor(configurationdescriptor : USB_CONFIGURATION_DESCRIPTOR*, startposition : Void*, interfacenumber : Int32, alternatesetting : Int32, interfaceclass : Int32, interfacesubclass : Int32, interfaceprotocol : Int32) : USB_INTERFACE_DESCRIPTOR*
-
-  # Params # descriptorbuffer : Void* [In],totallength : UInt32 [In],startposition : Void* [In],descriptortype : Int32 [In]
-  fun WinUsb_ParseDescriptors(descriptorbuffer : Void*, totallength : UInt32, startposition : Void*, descriptortype : Int32) : USB_COMMON_DESCRIPTOR*
-
-  # Params # interfacehandle : Void* [In],currentframenumber : UInt32* [In],timestamp : LARGE_INTEGER* [In]
-  fun WinUsb_GetCurrentFrameNumber(interfacehandle : Void*, currentframenumber : UInt32*, timestamp : LARGE_INTEGER*) : LibC::BOOL
-
-  # Params # currentframenumber : UInt32* [In],timestamp : LARGE_INTEGER [In]
-  fun WinUsb_GetAdjustedFrameNumber(currentframenumber : UInt32*, timestamp : LARGE_INTEGER) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],pipeid : UInt8 [In],buffer : UInt8* [In],bufferlength : UInt32 [In],isochbufferhandle : Void** [In]
-  fun WinUsb_RegisterIsochBuffer(interfacehandle : Void*, pipeid : UInt8, buffer : UInt8*, bufferlength : UInt32, isochbufferhandle : Void**) : LibC::BOOL
-
-  # Params # isochbufferhandle : Void* [In]
-  fun WinUsb_UnregisterIsochBuffer(isochbufferhandle : Void*) : LibC::BOOL
-
-  # Params # bufferhandle : Void* [In],offset : UInt32 [In],length : UInt32 [In],framenumber : UInt32* [In],overlapped : OVERLAPPED* [In]
-  fun WinUsb_WriteIsochPipe(bufferhandle : Void*, offset : UInt32, length : UInt32, framenumber : UInt32*, overlapped : OVERLAPPED*) : LibC::BOOL
-
-  # Params # bufferhandle : Void* [In],offset : UInt32 [In],length : UInt32 [In],framenumber : UInt32* [In],numberofpackets : UInt32 [In],isopacketdescriptors : USBD_ISO_PACKET_DESCRIPTOR* [In],overlapped : OVERLAPPED* [In]
-  fun WinUsb_ReadIsochPipe(bufferhandle : Void*, offset : UInt32, length : UInt32, framenumber : UInt32*, numberofpackets : UInt32, isopacketdescriptors : USBD_ISO_PACKET_DESCRIPTOR*, overlapped : OVERLAPPED*) : LibC::BOOL
-
-  # Params # bufferhandle : Void* [In],offset : UInt32 [In],length : UInt32 [In],continuestream : LibC::BOOL [In],overlapped : OVERLAPPED* [In]
-  fun WinUsb_WriteIsochPipeAsap(bufferhandle : Void*, offset : UInt32, length : UInt32, continuestream : LibC::BOOL, overlapped : OVERLAPPED*) : LibC::BOOL
-
-  # Params # bufferhandle : Void* [In],offset : UInt32 [In],length : UInt32 [In],continuestream : LibC::BOOL [In],numberofpackets : UInt32 [In],isopacketdescriptors : USBD_ISO_PACKET_DESCRIPTOR* [In],overlapped : OVERLAPPED* [In]
-  fun WinUsb_ReadIsochPipeAsap(bufferhandle : Void*, offset : UInt32, length : UInt32, continuestream : LibC::BOOL, numberofpackets : UInt32, isopacketdescriptors : USBD_ISO_PACKET_DESCRIPTOR*, overlapped : OVERLAPPED*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],starttrackinginfo : USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION* [In]
-  fun WinUsb_StartTrackingForTimeSync(interfacehandle : Void*, starttrackinginfo : USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],frameqpcinfo : USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION* [In]
-  fun WinUsb_GetCurrentFrameNumberAndQpc(interfacehandle : Void*, frameqpcinfo : USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION*) : LibC::BOOL
-
-  # Params # interfacehandle : Void* [In],stoptrackinginfo : USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION* [In]
-  fun WinUsb_StopTrackingForTimeSync(interfacehandle : Void*, stoptrackinginfo : USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION*) : LibC::BOOL
 end

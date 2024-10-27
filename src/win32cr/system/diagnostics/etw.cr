@@ -1,24 +1,21 @@
-require "../../foundation.cr"
-require "../../system/time.cr"
-require "../../system/com.cr"
-require "../../security.cr"
+require "./../../foundation.cr"
+require "./../time.cr"
+require "./../com.cr"
+require "./../../security.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
-@[Link(ldflags: "/DELAYLOAD:tdh.dll")]
-{% else %}
-@[Link("advapi32")]
-@[Link("tdh")]
-{% end %}
-lib LibWin32
+module Win32cr::System::Diagnostics::Etw
   alias TDH_HANDLE = LibC::IntPtrT
+  alias PEVENT_TRACE_BUFFER_CALLBACKW = Proc(Win32cr::System::Diagnostics::Etw::EVENT_TRACE_LOGFILEW*, UInt32)*
+
+  alias PEVENT_TRACE_BUFFER_CALLBACKA = Proc(Win32cr::System::Diagnostics::Etw::EVENT_TRACE_LOGFILEA*, UInt32)*
+
+  alias PEVENT_CALLBACK = Proc(Win32cr::System::Diagnostics::Etw::EVENT_TRACE*, Void)*
+
+  alias PEVENT_RECORD_CALLBACK = Proc(Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, Void)*
+
+  alias WMIDPREQUEST = Proc(Win32cr::System::Diagnostics::Etw::WMIDPREQUESTCODE, Void*, UInt32*, Void*, UInt32)*
+
+  alias PENABLECALLBACK = Proc(LibC::GUID*, Win32cr::System::Diagnostics::Etw::ENABLECALLBACK_ENABLED_STATE, UInt8, UInt64, UInt64, Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*, Void*, Void)*
 
   WNODE_FLAG_ALL_DATA = 1_u32
   WNODE_FLAG_SINGLE_INSTANCE = 2_u32
@@ -95,6 +92,14 @@ lib LibWin32
   SystemSyscallProviderGuid = "434286f7-6f1b-45bb-b37e-95f623046c7c"
   SystemInterruptProviderGuid = "d4bbee17-b545-4888-858b-744169015b25"
   SystemTimerProviderGuid = "4f061568-e215-499f-ab2e-eda0ae890a5b"
+  KERNEL_LOGGER_NAMEW = "NT Kernel Logger"
+  GLOBAL_LOGGER_NAMEW = "GlobalLogger"
+  EVENT_LOGGER_NAMEW = "EventLog"
+  DIAG_LOGGER_NAMEW = "DiagLog"
+  KERNEL_LOGGER_NAMEA = "NT Kernel Logger"
+  GLOBAL_LOGGER_NAMEA = "GlobalLogger"
+  EVENT_LOGGER_NAMEA = "EventLog"
+  DIAG_LOGGER_NAMEA = "DiagLog"
   MAX_MOF_FIELDS = 16_u32
   SYSTEM_EVENT_TYPE = 1_u32
   EVENT_TRACE_TYPE_INFO = 0_u32
@@ -393,6 +398,9 @@ lib LibWin32
   ETW_REFRENCE_TYPE_VALUE = 120_u32
   TRACE_PROVIDER_FLAG_LEGACY = 1_u32
   TRACE_PROVIDER_FLAG_PRE_ENABLE = 2_u32
+  KERNEL_LOGGER_NAME = "NT Kernel Logger"
+  GLOBAL_LOGGER_NAME = "GlobalLogger"
+  EVENT_LOGGER_NAME = "EventLog"
   ENABLE_TRACE_PARAMETERS_VERSION = 1_u32
   ENABLE_TRACE_PARAMETERS_VERSION_2 = 2_u32
   EVENT_MIN_LEVEL = 0_u32
@@ -479,1557 +487,1765 @@ lib LibWin32
   PROCESS_TRACE_MODE_RAW_TIMESTAMP = 4096_u32
   PROCESS_TRACE_MODE_EVENT_RECORD = 268435456_u32
   CLSID_TraceRelogger = "7b40792d-05ff-44c4-9058-f440c71f17d4"
+
   CLSID_CTraceRelogger = LibC::GUID.new(0x7b40792d_u32, 0x5ff_u16, 0x44c4_u16, StaticArray[0x90_u8, 0x58_u8, 0xf4_u8, 0x40_u8, 0xc7_u8, 0x1f_u8, 0x17_u8, 0xd4_u8])
 
-  alias PEVENT_TRACE_BUFFER_CALLBACKW = Proc(EVENT_TRACE_LOGFILEW*, UInt32)
-  alias PEVENT_TRACE_BUFFER_CALLBACKA = Proc(EVENT_TRACE_LOGFILEA*, UInt32)
-  alias PEVENT_CALLBACK = Proc(EVENT_TRACE*, Void)
-  alias PEVENT_RECORD_CALLBACK = Proc(EVENT_RECORD*, Void)
-  alias WMIDPREQUEST = Proc(WMIDPREQUESTCODE, Void*, UInt32*, Void*, UInt32)
-  alias PENABLECALLBACK = Proc(Guid*, ENABLECALLBACK_ENABLED_STATE, UInt8, UInt64, UInt64, EVENT_FILTER_DESCRIPTOR*, Void*, Void)
-
-
+  @[Flags]
   enum TRACE_MESSAGE_FLAGS : UInt32
-    TRACE_MESSAGE_COMPONENTID = 4
-    TRACE_MESSAGE_GUID = 2
-    TRACE_MESSAGE_SEQUENCE = 1
-    TRACE_MESSAGE_SYSTEMINFO = 32
-    TRACE_MESSAGE_TIMESTAMP = 8
+    TRACE_MESSAGE_COMPONENTID = 4_u32
+    TRACE_MESSAGE_GUID = 2_u32
+    TRACE_MESSAGE_SEQUENCE = 1_u32
+    TRACE_MESSAGE_SYSTEMINFO = 32_u32
+    TRACE_MESSAGE_TIMESTAMP = 8_u32
   end
-
   enum ENABLECALLBACK_ENABLED_STATE : UInt32
-    EVENT_CONTROL_CODE_DISABLE_PROVIDER = 0
-    EVENT_CONTROL_CODE_ENABLE_PROVIDER = 1
-    EVENT_CONTROL_CODE_CAPTURE_STATE = 2
+    EVENT_CONTROL_CODE_DISABLE_PROVIDER = 0_u32
+    EVENT_CONTROL_CODE_ENABLE_PROVIDER = 1_u32
+    EVENT_CONTROL_CODE_CAPTURE_STATE = 2_u32
   end
-
   enum EVENT_TRACE_CONTROL : UInt32
-    EVENT_TRACE_CONTROL_FLUSH = 3
-    EVENT_TRACE_CONTROL_QUERY = 0
-    EVENT_TRACE_CONTROL_STOP = 1
-    EVENT_TRACE_CONTROL_UPDATE = 2
+    EVENT_TRACE_CONTROL_FLUSH = 3_u32
+    EVENT_TRACE_CONTROL_QUERY = 0_u32
+    EVENT_TRACE_CONTROL_STOP = 1_u32
+    EVENT_TRACE_CONTROL_UPDATE = 2_u32
   end
-
+  @[Flags]
   enum EVENT_TRACE_FLAG : UInt32
-    EVENT_TRACE_FLAG_ALPC = 1048576
-    EVENT_TRACE_FLAG_CSWITCH = 16
-    EVENT_TRACE_FLAG_DBGPRINT = 262144
-    EVENT_TRACE_FLAG_DISK_FILE_IO = 512
-    EVENT_TRACE_FLAG_DISK_IO = 256
-    EVENT_TRACE_FLAG_DISK_IO_INIT = 1024
-    EVENT_TRACE_FLAG_DISPATCHER = 2048
-    EVENT_TRACE_FLAG_DPC = 32
-    EVENT_TRACE_FLAG_DRIVER = 8388608
-    EVENT_TRACE_FLAG_FILE_IO = 33554432
-    EVENT_TRACE_FLAG_FILE_IO_INIT = 67108864
-    EVENT_TRACE_FLAG_IMAGE_LOAD = 4
-    EVENT_TRACE_FLAG_INTERRUPT = 64
-    EVENT_TRACE_FLAG_JOB = 524288
-    EVENT_TRACE_FLAG_MEMORY_HARD_FAULTS = 8192
-    EVENT_TRACE_FLAG_MEMORY_PAGE_FAULTS = 4096
-    EVENT_TRACE_FLAG_NETWORK_TCPIP = 65536
-    EVENT_TRACE_FLAG_NO_SYSCONFIG = 268435456
-    EVENT_TRACE_FLAG_PROCESS = 1
-    EVENT_TRACE_FLAG_PROCESS_COUNTERS = 8
-    EVENT_TRACE_FLAG_PROFILE = 16777216
-    EVENT_TRACE_FLAG_REGISTRY = 131072
-    EVENT_TRACE_FLAG_SPLIT_IO = 2097152
-    EVENT_TRACE_FLAG_SYSTEMCALL = 128
-    EVENT_TRACE_FLAG_THREAD = 2
-    EVENT_TRACE_FLAG_VAMAP = 32768
-    EVENT_TRACE_FLAG_VIRTUAL_ALLOC = 16384
+    EVENT_TRACE_FLAG_ALPC = 1048576_u32
+    EVENT_TRACE_FLAG_CSWITCH = 16_u32
+    EVENT_TRACE_FLAG_DBGPRINT = 262144_u32
+    EVENT_TRACE_FLAG_DISK_FILE_IO = 512_u32
+    EVENT_TRACE_FLAG_DISK_IO = 256_u32
+    EVENT_TRACE_FLAG_DISK_IO_INIT = 1024_u32
+    EVENT_TRACE_FLAG_DISPATCHER = 2048_u32
+    EVENT_TRACE_FLAG_DPC = 32_u32
+    EVENT_TRACE_FLAG_DRIVER = 8388608_u32
+    EVENT_TRACE_FLAG_FILE_IO = 33554432_u32
+    EVENT_TRACE_FLAG_FILE_IO_INIT = 67108864_u32
+    EVENT_TRACE_FLAG_IMAGE_LOAD = 4_u32
+    EVENT_TRACE_FLAG_INTERRUPT = 64_u32
+    EVENT_TRACE_FLAG_JOB = 524288_u32
+    EVENT_TRACE_FLAG_MEMORY_HARD_FAULTS = 8192_u32
+    EVENT_TRACE_FLAG_MEMORY_PAGE_FAULTS = 4096_u32
+    EVENT_TRACE_FLAG_NETWORK_TCPIP = 65536_u32
+    EVENT_TRACE_FLAG_NO_SYSCONFIG = 268435456_u32
+    EVENT_TRACE_FLAG_PROCESS = 1_u32
+    EVENT_TRACE_FLAG_PROCESS_COUNTERS = 8_u32
+    EVENT_TRACE_FLAG_PROFILE = 16777216_u32
+    EVENT_TRACE_FLAG_REGISTRY = 131072_u32
+    EVENT_TRACE_FLAG_SPLIT_IO = 2097152_u32
+    EVENT_TRACE_FLAG_SYSTEMCALL = 128_u32
+    EVENT_TRACE_FLAG_THREAD = 2_u32
+    EVENT_TRACE_FLAG_VAMAP = 32768_u32
+    EVENT_TRACE_FLAG_VIRTUAL_ALLOC = 16384_u32
+  end
+  enum WMIDPREQUESTCODE
+    WMI_GET_ALL_DATA = 0_i32
+    WMI_GET_SINGLE_INSTANCE = 1_i32
+    WMI_SET_SINGLE_INSTANCE = 2_i32
+    WMI_SET_SINGLE_ITEM = 3_i32
+    WMI_ENABLE_EVENTS = 4_i32
+    WMI_DISABLE_EVENTS = 5_i32
+    WMI_ENABLE_COLLECTION = 6_i32
+    WMI_DISABLE_COLLECTION = 7_i32
+    WMI_REGINFO = 8_i32
+    WMI_EXECUTE_METHOD = 9_i32
+    WMI_CAPTURE_STATE = 10_i32
+  end
+  enum ETW_COMPRESSION_RESUMPTION_MODE
+    EtwCompressionModeRestart = 0_i32
+    EtwCompressionModeNoDisable = 1_i32
+    EtwCompressionModeNoRestart = 2_i32
+  end
+  enum ETW_PMC_COUNTER_OWNER_TYPE
+    EtwPmcOwnerFree = 0_i32
+    EtwPmcOwnerUntagged = 1_i32
+    EtwPmcOwnerTagged = 2_i32
+    EtwPmcOwnerTaggedWithSource = 3_i32
+  end
+  enum TRACE_QUERY_INFO_CLASS
+    TraceGuidQueryList = 0_i32
+    TraceGuidQueryInfo = 1_i32
+    TraceGuidQueryProcess = 2_i32
+    TraceStackTracingInfo = 3_i32
+    TraceSystemTraceEnableFlagsInfo = 4_i32
+    TraceSampledProfileIntervalInfo = 5_i32
+    TraceProfileSourceConfigInfo = 6_i32
+    TraceProfileSourceListInfo = 7_i32
+    TracePmcEventListInfo = 8_i32
+    TracePmcCounterListInfo = 9_i32
+    TraceSetDisallowList = 10_i32
+    TraceVersionInfo = 11_i32
+    TraceGroupQueryList = 12_i32
+    TraceGroupQueryInfo = 13_i32
+    TraceDisallowListQuery = 14_i32
+    TraceInfoReserved15 = 15_i32
+    TracePeriodicCaptureStateListInfo = 16_i32
+    TracePeriodicCaptureStateInfo = 17_i32
+    TraceProviderBinaryTracking = 18_i32
+    TraceMaxLoggersQuery = 19_i32
+    TraceLbrConfigurationInfo = 20_i32
+    TraceLbrEventListInfo = 21_i32
+    TraceMaxPmcCounterQuery = 22_i32
+    TraceStreamCount = 23_i32
+    TraceStackCachingInfo = 24_i32
+    TracePmcCounterOwners = 25_i32
+    TraceUnifiedStackCachingInfo = 26_i32
+    MaxTraceSetInfoClass = 27_i32
+  end
+  enum ETW_PROCESS_HANDLE_INFO_TYPE
+    EtwQueryPartitionInformation = 1_i32
+    EtwQueryPartitionInformationV2 = 2_i32
+    EtwQueryLastDroppedTimes = 3_i32
+    EtwQueryProcessHandleInfoMax = 4_i32
+  end
+  enum EVENT_INFO_CLASS
+    EventProviderBinaryTrackInfo = 0_i32
+    EventProviderSetReserved1 = 1_i32
+    EventProviderSetTraits = 2_i32
+    EventProviderUseDescriptorType = 3_i32
+    MaxEventInfo = 4_i32
+  end
+  enum ETW_PROVIDER_TRAIT_TYPE
+    EtwProviderTraitTypeGroup = 1_i32
+    EtwProviderTraitDecodeGuid = 2_i32
+    EtwProviderTraitTypeMax = 3_i32
+  end
+  enum EVENTSECURITYOPERATION
+    EventSecuritySetDACL = 0_i32
+    EventSecuritySetSACL = 1_i32
+    EventSecurityAddDACL = 2_i32
+    EventSecurityAddSACL = 3_i32
+    EventSecurityMax = 4_i32
+  end
+  enum MAP_FLAGS
+    EVENTMAP_INFO_FLAG_MANIFEST_VALUEMAP = 1_i32
+    EVENTMAP_INFO_FLAG_MANIFEST_BITMAP = 2_i32
+    EVENTMAP_INFO_FLAG_MANIFEST_PATTERNMAP = 4_i32
+    EVENTMAP_INFO_FLAG_WBEM_VALUEMAP = 8_i32
+    EVENTMAP_INFO_FLAG_WBEM_BITMAP = 16_i32
+    EVENTMAP_INFO_FLAG_WBEM_FLAG = 32_i32
+    EVENTMAP_INFO_FLAG_WBEM_NO_MAP = 64_i32
+  end
+  enum MAP_VALUETYPE
+    EVENTMAP_ENTRY_VALUETYPE_ULONG = 0_i32
+    EVENTMAP_ENTRY_VALUETYPE_STRING = 1_i32
+  end
+  enum TDH_IN_TYPE
+    TDH_INTYPE_NULL = 0_i32
+    TDH_INTYPE_UNICODESTRING = 1_i32
+    TDH_INTYPE_ANSISTRING = 2_i32
+    TDH_INTYPE_INT8 = 3_i32
+    TDH_INTYPE_UINT8 = 4_i32
+    TDH_INTYPE_INT16 = 5_i32
+    TDH_INTYPE_UINT16 = 6_i32
+    TDH_INTYPE_INT32 = 7_i32
+    TDH_INTYPE_UINT32 = 8_i32
+    TDH_INTYPE_INT64 = 9_i32
+    TDH_INTYPE_UINT64 = 10_i32
+    TDH_INTYPE_FLOAT = 11_i32
+    TDH_INTYPE_DOUBLE = 12_i32
+    TDH_INTYPE_BOOLEAN = 13_i32
+    TDH_INTYPE_BINARY = 14_i32
+    TDH_INTYPE_GUID = 15_i32
+    TDH_INTYPE_POINTER = 16_i32
+    TDH_INTYPE_FILETIME = 17_i32
+    TDH_INTYPE_SYSTEMTIME = 18_i32
+    TDH_INTYPE_SID = 19_i32
+    TDH_INTYPE_HEXINT32 = 20_i32
+    TDH_INTYPE_HEXINT64 = 21_i32
+    TDH_INTYPE_MANIFEST_COUNTEDSTRING = 22_i32
+    TDH_INTYPE_MANIFEST_COUNTEDANSISTRING = 23_i32
+    TDH_INTYPE_RESERVED24 = 24_i32
+    TDH_INTYPE_MANIFEST_COUNTEDBINARY = 25_i32
+    TDH_INTYPE_COUNTEDSTRING = 300_i32
+    TDH_INTYPE_COUNTEDANSISTRING = 301_i32
+    TDH_INTYPE_REVERSEDCOUNTEDSTRING = 302_i32
+    TDH_INTYPE_REVERSEDCOUNTEDANSISTRING = 303_i32
+    TDH_INTYPE_NONNULLTERMINATEDSTRING = 304_i32
+    TDH_INTYPE_NONNULLTERMINATEDANSISTRING = 305_i32
+    TDH_INTYPE_UNICODECHAR = 306_i32
+    TDH_INTYPE_ANSICHAR = 307_i32
+    TDH_INTYPE_SIZET = 308_i32
+    TDH_INTYPE_HEXDUMP = 309_i32
+    TDH_INTYPE_WBEMSID = 310_i32
+  end
+  enum TDH_OUT_TYPE
+    TDH_OUTTYPE_NULL = 0_i32
+    TDH_OUTTYPE_STRING = 1_i32
+    TDH_OUTTYPE_DATETIME = 2_i32
+    TDH_OUTTYPE_BYTE = 3_i32
+    TDH_OUTTYPE_UNSIGNEDBYTE = 4_i32
+    TDH_OUTTYPE_SHORT = 5_i32
+    TDH_OUTTYPE_UNSIGNEDSHORT = 6_i32
+    TDH_OUTTYPE_INT = 7_i32
+    TDH_OUTTYPE_UNSIGNEDINT = 8_i32
+    TDH_OUTTYPE_LONG = 9_i32
+    TDH_OUTTYPE_UNSIGNEDLONG = 10_i32
+    TDH_OUTTYPE_FLOAT = 11_i32
+    TDH_OUTTYPE_DOUBLE = 12_i32
+    TDH_OUTTYPE_BOOLEAN = 13_i32
+    TDH_OUTTYPE_GUID = 14_i32
+    TDH_OUTTYPE_HEXBINARY = 15_i32
+    TDH_OUTTYPE_HEXINT8 = 16_i32
+    TDH_OUTTYPE_HEXINT16 = 17_i32
+    TDH_OUTTYPE_HEXINT32 = 18_i32
+    TDH_OUTTYPE_HEXINT64 = 19_i32
+    TDH_OUTTYPE_PID = 20_i32
+    TDH_OUTTYPE_TID = 21_i32
+    TDH_OUTTYPE_PORT = 22_i32
+    TDH_OUTTYPE_IPV4 = 23_i32
+    TDH_OUTTYPE_IPV6 = 24_i32
+    TDH_OUTTYPE_SOCKETADDRESS = 25_i32
+    TDH_OUTTYPE_CIMDATETIME = 26_i32
+    TDH_OUTTYPE_ETWTIME = 27_i32
+    TDH_OUTTYPE_XML = 28_i32
+    TDH_OUTTYPE_ERRORCODE = 29_i32
+    TDH_OUTTYPE_WIN32ERROR = 30_i32
+    TDH_OUTTYPE_NTSTATUS = 31_i32
+    TDH_OUTTYPE_HRESULT = 32_i32
+    TDH_OUTTYPE_CULTURE_INSENSITIVE_DATETIME = 33_i32
+    TDH_OUTTYPE_JSON = 34_i32
+    TDH_OUTTYPE_UTF8 = 35_i32
+    TDH_OUTTYPE_PKCS7_WITH_TYPE_INFO = 36_i32
+    TDH_OUTTYPE_CODE_POINTER = 37_i32
+    TDH_OUTTYPE_DATETIME_UTC = 38_i32
+    TDH_OUTTYPE_REDUCEDSTRING = 300_i32
+    TDH_OUTTYPE_NOPRINT = 301_i32
+  end
+  enum PROPERTY_FLAGS
+    PropertyStruct = 1_i32
+    PropertyParamLength = 2_i32
+    PropertyParamCount = 4_i32
+    PropertyWBEMXmlFragment = 8_i32
+    PropertyParamFixedLength = 16_i32
+    PropertyParamFixedCount = 32_i32
+    PropertyHasTags = 64_i32
+    PropertyHasCustomSchema = 128_i32
+  end
+  enum DECODING_SOURCE
+    DecodingSourceXMLFile = 0_i32
+    DecodingSourceWbem = 1_i32
+    DecodingSourceWPP = 2_i32
+    DecodingSourceTlg = 3_i32
+    DecodingSourceMax = 4_i32
+  end
+  enum TEMPLATE_FLAGS
+    TEMPLATE_EVENT_DATA = 1_i32
+    TEMPLATE_USER_DATA = 2_i32
+    TEMPLATE_CONTROL_GUID = 4_i32
+  end
+  enum PAYLOAD_OPERATOR
+    PAYLOADFIELD_EQ = 0_i32
+    PAYLOADFIELD_NE = 1_i32
+    PAYLOADFIELD_LE = 2_i32
+    PAYLOADFIELD_GT = 3_i32
+    PAYLOADFIELD_LT = 4_i32
+    PAYLOADFIELD_GE = 5_i32
+    PAYLOADFIELD_BETWEEN = 6_i32
+    PAYLOADFIELD_NOTBETWEEN = 7_i32
+    PAYLOADFIELD_MODULO = 8_i32
+    PAYLOADFIELD_CONTAINS = 20_i32
+    PAYLOADFIELD_DOESNTCONTAIN = 21_i32
+    PAYLOADFIELD_IS = 30_i32
+    PAYLOADFIELD_ISNOT = 31_i32
+    PAYLOADFIELD_INVALID = 32_i32
+  end
+  enum EVENT_FIELD_TYPE
+    EventKeywordInformation = 0_i32
+    EventLevelInformation = 1_i32
+    EventChannelInformation = 2_i32
+    EventTaskInformation = 3_i32
+    EventOpcodeInformation = 4_i32
+    EventInformationMax = 5_i32
+  end
+  enum TDH_CONTEXT_TYPE
+    TDH_CONTEXT_WPP_TMFFILE = 0_i32
+    TDH_CONTEXT_WPP_TMFSEARCHPATH = 1_i32
+    TDH_CONTEXT_WPP_GMT = 2_i32
+    TDH_CONTEXT_POINTERSIZE = 3_i32
+    TDH_CONTEXT_PDB_PATH = 4_i32
+    TDH_CONTEXT_MAXIMUM = 5_i32
   end
 
-  enum WMIDPREQUESTCODE : Int32
-    WMI_GET_ALL_DATA = 0
-    WMI_GET_SINGLE_INSTANCE = 1
-    WMI_SET_SINGLE_INSTANCE = 2
-    WMI_SET_SINGLE_ITEM = 3
-    WMI_ENABLE_EVENTS = 4
-    WMI_DISABLE_EVENTS = 5
-    WMI_ENABLE_COLLECTION = 6
-    WMI_DISABLE_COLLECTION = 7
-    WMI_REGINFO = 8
-    WMI_EXECUTE_METHOD = 9
-    WMI_CAPTURE_STATE = 10
+  @[Extern]
+  record WNODE_HEADER,
+    buffer_size : UInt32,
+    provider_id : UInt32,
+    anonymous1 : Anonymous1_e__Union,
+    anonymous2 : Anonymous2_e__Union,
+    guid : LibC::GUID,
+    client_context : UInt32,
+    flags : UInt32 do
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      count_lost : UInt32,
+      kernel_handle : Win32cr::Foundation::HANDLE,
+      time_stamp : Win32cr::Foundation::LARGE_INTEGER
+
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      historical_context : UInt64,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        version : UInt32,
+        linkage : UInt32
+
+    end
+
   end
 
-  enum ETW_COMPRESSION_RESUMPTION_MODE : Int32
-    EtwCompressionModeRestart = 0
-    EtwCompressionModeNoDisable = 1
-    EtwCompressionModeNoRestart = 2
-  end
-
-  enum ETW_PMC_COUNTER_OWNER_TYPE : Int32
-    EtwPmcOwnerFree = 0
-    EtwPmcOwnerUntagged = 1
-    EtwPmcOwnerTagged = 2
-    EtwPmcOwnerTaggedWithSource = 3
-  end
-
-  enum TRACE_QUERY_INFO_CLASS : Int32
-    TraceGuidQueryList = 0
-    TraceGuidQueryInfo = 1
-    TraceGuidQueryProcess = 2
-    TraceStackTracingInfo = 3
-    TraceSystemTraceEnableFlagsInfo = 4
-    TraceSampledProfileIntervalInfo = 5
-    TraceProfileSourceConfigInfo = 6
-    TraceProfileSourceListInfo = 7
-    TracePmcEventListInfo = 8
-    TracePmcCounterListInfo = 9
-    TraceSetDisallowList = 10
-    TraceVersionInfo = 11
-    TraceGroupQueryList = 12
-    TraceGroupQueryInfo = 13
-    TraceDisallowListQuery = 14
-    TraceInfoReserved15 = 15
-    TracePeriodicCaptureStateListInfo = 16
-    TracePeriodicCaptureStateInfo = 17
-    TraceProviderBinaryTracking = 18
-    TraceMaxLoggersQuery = 19
-    TraceLbrConfigurationInfo = 20
-    TraceLbrEventListInfo = 21
-    TraceMaxPmcCounterQuery = 22
-    TraceStreamCount = 23
-    TraceStackCachingInfo = 24
-    TracePmcCounterOwners = 25
-    TraceUnifiedStackCachingInfo = 26
-    MaxTraceSetInfoClass = 27
-  end
-
-  enum ETW_PROCESS_HANDLE_INFO_TYPE : Int32
-    EtwQueryPartitionInformation = 1
-    EtwQueryPartitionInformationV2 = 2
-    EtwQueryLastDroppedTimes = 3
-    EtwQueryProcessHandleInfoMax = 4
-  end
-
-  enum EVENT_INFO_CLASS : Int32
-    EventProviderBinaryTrackInfo = 0
-    EventProviderSetReserved1 = 1
-    EventProviderSetTraits = 2
-    EventProviderUseDescriptorType = 3
-    MaxEventInfo = 4
-  end
-
-  enum ETW_PROVIDER_TRAIT_TYPE : Int32
-    EtwProviderTraitTypeGroup = 1
-    EtwProviderTraitDecodeGuid = 2
-    EtwProviderTraitTypeMax = 3
-  end
-
-  enum EVENTSECURITYOPERATION : Int32
-    EventSecuritySetDACL = 0
-    EventSecuritySetSACL = 1
-    EventSecurityAddDACL = 2
-    EventSecurityAddSACL = 3
-    EventSecurityMax = 4
-  end
-
-  enum MAP_FLAGS : Int32
-    EVENTMAP_INFO_FLAG_MANIFEST_VALUEMAP = 1
-    EVENTMAP_INFO_FLAG_MANIFEST_BITMAP = 2
-    EVENTMAP_INFO_FLAG_MANIFEST_PATTERNMAP = 4
-    EVENTMAP_INFO_FLAG_WBEM_VALUEMAP = 8
-    EVENTMAP_INFO_FLAG_WBEM_BITMAP = 16
-    EVENTMAP_INFO_FLAG_WBEM_FLAG = 32
-    EVENTMAP_INFO_FLAG_WBEM_NO_MAP = 64
-  end
-
-  enum MAP_VALUETYPE : Int32
-    EVENTMAP_ENTRY_VALUETYPE_ULONG = 0
-    EVENTMAP_ENTRY_VALUETYPE_STRING = 1
-  end
-
-  enum TDH_IN_TYPE : Int32
-    TDH_INTYPE_NULL = 0
-    TDH_INTYPE_UNICODESTRING = 1
-    TDH_INTYPE_ANSISTRING = 2
-    TDH_INTYPE_INT8 = 3
-    TDH_INTYPE_UINT8 = 4
-    TDH_INTYPE_INT16 = 5
-    TDH_INTYPE_UINT16 = 6
-    TDH_INTYPE_INT32 = 7
-    TDH_INTYPE_UINT32 = 8
-    TDH_INTYPE_INT64 = 9
-    TDH_INTYPE_UINT64 = 10
-    TDH_INTYPE_FLOAT = 11
-    TDH_INTYPE_DOUBLE = 12
-    TDH_INTYPE_BOOLEAN = 13
-    TDH_INTYPE_BINARY = 14
-    TDH_INTYPE_GUID = 15
-    TDH_INTYPE_POINTER = 16
-    TDH_INTYPE_FILETIME = 17
-    TDH_INTYPE_SYSTEMTIME = 18
-    TDH_INTYPE_SID = 19
-    TDH_INTYPE_HEXINT32 = 20
-    TDH_INTYPE_HEXINT64 = 21
-    TDH_INTYPE_MANIFEST_COUNTEDSTRING = 22
-    TDH_INTYPE_MANIFEST_COUNTEDANSISTRING = 23
-    TDH_INTYPE_RESERVED24 = 24
-    TDH_INTYPE_MANIFEST_COUNTEDBINARY = 25
-    TDH_INTYPE_COUNTEDSTRING = 300
-    TDH_INTYPE_COUNTEDANSISTRING = 301
-    TDH_INTYPE_REVERSEDCOUNTEDSTRING = 302
-    TDH_INTYPE_REVERSEDCOUNTEDANSISTRING = 303
-    TDH_INTYPE_NONNULLTERMINATEDSTRING = 304
-    TDH_INTYPE_NONNULLTERMINATEDANSISTRING = 305
-    TDH_INTYPE_UNICODECHAR = 306
-    TDH_INTYPE_ANSICHAR = 307
-    TDH_INTYPE_SIZET = 308
-    TDH_INTYPE_HEXDUMP = 309
-    TDH_INTYPE_WBEMSID = 310
-  end
-
-  enum TDH_OUT_TYPE : Int32
-    TDH_OUTTYPE_NULL = 0
-    TDH_OUTTYPE_STRING = 1
-    TDH_OUTTYPE_DATETIME = 2
-    TDH_OUTTYPE_BYTE = 3
-    TDH_OUTTYPE_UNSIGNEDBYTE = 4
-    TDH_OUTTYPE_SHORT = 5
-    TDH_OUTTYPE_UNSIGNEDSHORT = 6
-    TDH_OUTTYPE_INT = 7
-    TDH_OUTTYPE_UNSIGNEDINT = 8
-    TDH_OUTTYPE_LONG = 9
-    TDH_OUTTYPE_UNSIGNEDLONG = 10
-    TDH_OUTTYPE_FLOAT = 11
-    TDH_OUTTYPE_DOUBLE = 12
-    TDH_OUTTYPE_BOOLEAN = 13
-    TDH_OUTTYPE_GUID = 14
-    TDH_OUTTYPE_HEXBINARY = 15
-    TDH_OUTTYPE_HEXINT8 = 16
-    TDH_OUTTYPE_HEXINT16 = 17
-    TDH_OUTTYPE_HEXINT32 = 18
-    TDH_OUTTYPE_HEXINT64 = 19
-    TDH_OUTTYPE_PID = 20
-    TDH_OUTTYPE_TID = 21
-    TDH_OUTTYPE_PORT = 22
-    TDH_OUTTYPE_IPV4 = 23
-    TDH_OUTTYPE_IPV6 = 24
-    TDH_OUTTYPE_SOCKETADDRESS = 25
-    TDH_OUTTYPE_CIMDATETIME = 26
-    TDH_OUTTYPE_ETWTIME = 27
-    TDH_OUTTYPE_XML = 28
-    TDH_OUTTYPE_ERRORCODE = 29
-    TDH_OUTTYPE_WIN32ERROR = 30
-    TDH_OUTTYPE_NTSTATUS = 31
-    TDH_OUTTYPE_HRESULT = 32
-    TDH_OUTTYPE_CULTURE_INSENSITIVE_DATETIME = 33
-    TDH_OUTTYPE_JSON = 34
-    TDH_OUTTYPE_UTF8 = 35
-    TDH_OUTTYPE_PKCS7_WITH_TYPE_INFO = 36
-    TDH_OUTTYPE_CODE_POINTER = 37
-    TDH_OUTTYPE_DATETIME_UTC = 38
-    TDH_OUTTYPE_REDUCEDSTRING = 300
-    TDH_OUTTYPE_NOPRINT = 301
-  end
-
-  enum PROPERTY_FLAGS : Int32
-    PropertyStruct = 1
-    PropertyParamLength = 2
-    PropertyParamCount = 4
-    PropertyWBEMXmlFragment = 8
-    PropertyParamFixedLength = 16
-    PropertyParamFixedCount = 32
-    PropertyHasTags = 64
-    PropertyHasCustomSchema = 128
-  end
-
-  enum DECODING_SOURCE : Int32
-    DecodingSourceXMLFile = 0
-    DecodingSourceWbem = 1
-    DecodingSourceWPP = 2
-    DecodingSourceTlg = 3
-    DecodingSourceMax = 4
-  end
-
-  enum TEMPLATE_FLAGS : Int32
-    TEMPLATE_EVENT_DATA = 1
-    TEMPLATE_USER_DATA = 2
-    TEMPLATE_CONTROL_GUID = 4
-  end
-
-  enum PAYLOAD_OPERATOR : Int32
-    PAYLOADFIELD_EQ = 0
-    PAYLOADFIELD_NE = 1
-    PAYLOADFIELD_LE = 2
-    PAYLOADFIELD_GT = 3
-    PAYLOADFIELD_LT = 4
-    PAYLOADFIELD_GE = 5
-    PAYLOADFIELD_BETWEEN = 6
-    PAYLOADFIELD_NOTBETWEEN = 7
-    PAYLOADFIELD_MODULO = 8
-    PAYLOADFIELD_CONTAINS = 20
-    PAYLOADFIELD_DOESNTCONTAIN = 21
-    PAYLOADFIELD_IS = 30
-    PAYLOADFIELD_ISNOT = 31
-    PAYLOADFIELD_INVALID = 32
-  end
-
-  enum EVENT_FIELD_TYPE : Int32
-    EventKeywordInformation = 0
-    EventLevelInformation = 1
-    EventChannelInformation = 2
-    EventTaskInformation = 3
-    EventOpcodeInformation = 4
-    EventInformationMax = 5
-  end
-
-  enum TDH_CONTEXT_TYPE : Int32
-    TDH_CONTEXT_WPP_TMFFILE = 0
-    TDH_CONTEXT_WPP_TMFSEARCHPATH = 1
-    TDH_CONTEXT_WPP_GMT = 2
-    TDH_CONTEXT_POINTERSIZE = 3
-    TDH_CONTEXT_PDB_PATH = 4
-    TDH_CONTEXT_MAXIMUM = 5
-  end
-
-  union WNODE_HEADER_Anonymous2_e__Union
-    count_lost : UInt32
-    kernel_handle : LibC::HANDLE
-    time_stamp : LARGE_INTEGER
-  end
-  union WNODE_HEADER_Anonymous1_e__Union
-    historical_context : UInt64
-    anonymous : WNODE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
-  end
-  union WNODE_ALL_DATA_Anonymous_e__Union
-    fixed_instance_size : UInt32
-    offset_instance_data_and_length : OFFSETINSTANCEDATAANDLENGTH[0]*
-  end
-  union WNODE_EVENT_REFERENCE_Anonymous_e__Union
-    target_instance_index : UInt32
-    target_instance_name : Char[0]*
-  end
-  union WMIREGGUIDW_Anonymous_e__Union
-    instance_name_list : UInt32
-    base_name_offset : UInt32
-    pdo : LibC::UINT_PTR
-    instance_info : LibC::UINT_PTR
-  end
-  union EVENT_TRACE_HEADER_Anonymous4_e__Union
-    anonymous1 : EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous1_e__Struct
-    processor_time : UInt64
-    anonymous2 : EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous2_e__Struct
-  end
-  union EVENT_TRACE_HEADER_Anonymous2_e__Union
-    version : UInt32
-    class_ : EVENT_TRACE_HEADER_Anonymous2_e__Union_Class_e__Struct
-  end
-  union EVENT_TRACE_HEADER_Anonymous1_e__Union
-    field_type_flags : UInt16
-    anonymous : EVENT_TRACE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
-  end
-  union EVENT_TRACE_HEADER_Anonymous3_e__Union
-    guid : Guid
-    guid_ptr : UInt64
-  end
-  union EVENT_INSTANCE_HEADER_Anonymous3_e__Union
-    anonymous1 : EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous1_e__Struct
-    processor_time : UInt64
-    anonymous2 : EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous2_e__Struct
-  end
-  union EVENT_INSTANCE_HEADER_Anonymous2_e__Union
-    version : UInt32
-    class_ : EVENT_INSTANCE_HEADER_Anonymous2_e__Union_Class_e__Struct
-  end
-  union EVENT_INSTANCE_HEADER_Anonymous1_e__Union
-    field_type_flags : UInt16
-    anonymous : EVENT_INSTANCE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
-  end
-  union TRACE_LOGFILE_HEADER_Anonymous2_e__Union
-    log_instance_guid : Guid
-    anonymous : TRACE_LOGFILE_HEADER_Anonymous2_e__Union_Anonymous_e__Struct
-  end
-  union TRACE_LOGFILE_HEADER_Anonymous1_e__Union
-    version : UInt32
-    version_detail : TRACE_LOGFILE_HEADER_Anonymous1_e__Union_VersionDetail_e__Struct
-  end
-  union TRACE_LOGFILE_HEADER32_Anonymous2_e__Union
-    log_instance_guid : Guid
-    anonymous : TRACE_LOGFILE_HEADER32_Anonymous2_e__Union_Anonymous_e__Struct
-  end
-  union TRACE_LOGFILE_HEADER32_Anonymous1_e__Union
-    version : UInt32
-    version_detail : TRACE_LOGFILE_HEADER32_Anonymous1_e__Union_VersionDetail_e__Struct
-  end
-  union TRACE_LOGFILE_HEADER64_Anonymous2_e__Union
-    log_instance_guid : Guid
-    anonymous : TRACE_LOGFILE_HEADER64_Anonymous2_e__Union_Anonymous_e__Struct
-  end
-  union TRACE_LOGFILE_HEADER64_Anonymous1_e__Union
-    version : UInt32
-    version_detail : TRACE_LOGFILE_HEADER64_Anonymous1_e__Union_VersionDetail_e__Struct
-  end
-  union EVENT_TRACE_PROPERTIES_Anonymous_e__Union
-    age_limit : Int32
-    flush_threshold : Int32
-  end
-  union EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union
-    anonymous : EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union_Anonymous_e__Struct
-    v2_options : UInt64
-  end
-  union EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union
-    anonymous : EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union_Anonymous_e__Struct
-    v2_control : UInt32
-  end
-  union EVENT_TRACE_PROPERTIES_V2_Anonymous1_e__Union
-    age_limit : Int32
-    flush_threshold : Int32
-  end
-  union ETW_BUFFER_CONTEXT_Anonymous_e__Union
-    anonymous : ETW_BUFFER_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct
-    processor_index : UInt16
-  end
-  union EVENT_TRACE_Anonymous_e__Union
-    client_context : UInt32
-    buffer_context : ETW_BUFFER_CONTEXT
-  end
-  union EVENT_TRACE_LOGFILEW_Anonymous1_e__Union
-    log_file_mode : UInt32
-    process_trace_mode : UInt32
-  end
-  union EVENT_TRACE_LOGFILEW_Anonymous2_e__Union
-    event_callback : PEVENT_CALLBACK
-    event_record_callback : PEVENT_RECORD_CALLBACK
-  end
-  union EVENT_TRACE_LOGFILEA_Anonymous1_e__Union
-    log_file_mode : UInt32
-    process_trace_mode : UInt32
-  end
-  union EVENT_TRACE_LOGFILEA_Anonymous2_e__Union
-    event_callback : PEVENT_CALLBACK
-    event_record_callback : PEVENT_RECORD_CALLBACK
-  end
-  union EVENT_DATA_DESCRIPTOR_Anonymous_e__Union
-    reserved : UInt32
-    anonymous : EVENT_DATA_DESCRIPTOR_Anonymous_e__Union_Anonymous_e__Struct
-  end
-  union EVENT_HEADER_Anonymous_e__Union
-    anonymous : EVENT_HEADER_Anonymous_e__Union_Anonymous_e__Struct
-    processor_time : UInt64
-  end
-  union EVENT_MAP_ENTRY_Anonymous_e__Union
-    value : UInt32
-    input_offset : UInt32
-  end
-  union EVENT_MAP_INFO_Anonymous_e__Union
-    map_entry_value_type : MAP_VALUETYPE
-    format_string_offset : UInt32
-  end
-  union EVENT_PROPERTY_INFO_Anonymous4_e__Union
-    reserved : UInt32
-    anonymous : EVENT_PROPERTY_INFO_Anonymous4_e__Union_Anonymous_e__Struct
-  end
-  union EVENT_PROPERTY_INFO_Anonymous2_e__Union
-    count : UInt16
-    count_property_index : UInt16
-  end
-  union EVENT_PROPERTY_INFO_Anonymous1_e__Union
-    non_struct_type : EVENT_PROPERTY_INFO_Anonymous1_e__Union_nonStructType
-    struct_type : EVENT_PROPERTY_INFO_Anonymous1_e__Union_structType
-    custom_schema_type : EVENT_PROPERTY_INFO_Anonymous1_e__Union_customSchemaType
-  end
-  union EVENT_PROPERTY_INFO_Anonymous3_e__Union
-    length : UInt16
-    length_property_index : UInt16
-  end
-  union TRACE_EVENT_INFO_Anonymous3_e__Union
-    flags : TEMPLATE_FLAGS
-    anonymous : TRACE_EVENT_INFO_Anonymous3_e__Union_Anonymous_e__Struct
-  end
-  union TRACE_EVENT_INFO_Anonymous1_e__Union
-    event_name_offset : UInt32
-    activity_id_name_offset : UInt32
-  end
-  union TRACE_EVENT_INFO_Anonymous2_e__Union
-    event_attributes_offset : UInt32
-    related_activity_id_name_offset : UInt32
-  end
-
-  struct WNODE_HEADER
-    buffer_size : UInt32
-    provider_id : UInt32
-    anonymous1 : WNODE_HEADER_Anonymous1_e__Union
-    anonymous2 : WNODE_HEADER_Anonymous2_e__Union
-    guid : Guid
-    client_context : UInt32
-    flags : UInt32
-  end
-  struct WNODE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
-    version : UInt32
-    linkage : UInt32
-  end
-  struct OFFSETINSTANCEDATAANDLENGTH
-    offset_instance_data : UInt32
+  @[Extern]
+  record OFFSETINSTANCEDATAANDLENGTH,
+    offset_instance_data : UInt32,
     length_instance_data : UInt32
+
+  @[Extern]
+  record WNODE_ALL_DATA,
+    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
+    data_block_offset : UInt32,
+    instance_count : UInt32,
+    offset_instance_name_offsets : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      fixed_instance_size : UInt32,
+      offset_instance_data_and_length : Win32cr::System::Diagnostics::Etw::OFFSETINSTANCEDATAANDLENGTH*
+
   end
-  struct WNODE_ALL_DATA
-    wnode_header : WNODE_HEADER
-    data_block_offset : UInt32
-    instance_count : UInt32
-    offset_instance_name_offsets : UInt32
-    anonymous : WNODE_ALL_DATA_Anonymous_e__Union
+
+  @[Extern]
+  record WNODE_SINGLE_INSTANCE,
+    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
+    offset_instance_name : UInt32,
+    instance_index : UInt32,
+    data_block_offset : UInt32,
+    size_data_block : UInt32,
+    variable_data : UInt8*
+
+  @[Extern]
+  record WNODE_SINGLE_ITEM,
+    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
+    offset_instance_name : UInt32,
+    instance_index : UInt32,
+    item_id : UInt32,
+    data_block_offset : UInt32,
+    size_data_item : UInt32,
+    variable_data : UInt8*
+
+  @[Extern]
+  record WNODE_METHOD_ITEM,
+    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
+    offset_instance_name : UInt32,
+    instance_index : UInt32,
+    method_id : UInt32,
+    data_block_offset : UInt32,
+    size_data_block : UInt32,
+    variable_data : UInt8*
+
+  @[Extern]
+  record WNODE_EVENT_ITEM,
+    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER
+
+  @[Extern]
+  record WNODE_EVENT_REFERENCE,
+    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
+    target_guid : LibC::GUID,
+    target_data_block_size : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      target_instance_index : UInt32,
+      target_instance_name : UInt16*
+
   end
-  struct WNODE_SINGLE_INSTANCE
-    wnode_header : WNODE_HEADER
-    offset_instance_name : UInt32
-    instance_index : UInt32
-    data_block_offset : UInt32
-    size_data_block : UInt32
-    variable_data : UInt8[0]*
-  end
-  struct WNODE_SINGLE_ITEM
-    wnode_header : WNODE_HEADER
-    offset_instance_name : UInt32
-    instance_index : UInt32
-    item_id : UInt32
-    data_block_offset : UInt32
-    size_data_item : UInt32
-    variable_data : UInt8[0]*
-  end
-  struct WNODE_METHOD_ITEM
-    wnode_header : WNODE_HEADER
-    offset_instance_name : UInt32
-    instance_index : UInt32
-    method_id : UInt32
-    data_block_offset : UInt32
-    size_data_block : UInt32
-    variable_data : UInt8[0]*
-  end
-  struct WNODE_EVENT_ITEM
-    wnode_header : WNODE_HEADER
-  end
-  struct WNODE_EVENT_REFERENCE
-    wnode_header : WNODE_HEADER
-    target_guid : Guid
-    target_data_block_size : UInt32
-    anonymous : WNODE_EVENT_REFERENCE_Anonymous_e__Union
-  end
-  struct WNODE_TOO_SMALL
-    wnode_header : WNODE_HEADER
+
+  @[Extern]
+  record WNODE_TOO_SMALL,
+    wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
     size_needed : UInt32
+
+  @[Extern]
+  record WMIREGGUIDW,
+    guid : LibC::GUID,
+    flags : UInt32,
+    instance_count : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      instance_name_list : UInt32,
+      base_name_offset : UInt32,
+      pdo : LibC::UIntPtrT,
+      instance_info : LibC::UIntPtrT
+
   end
-  struct WMIREGGUIDW
-    guid : Guid
-    flags : UInt32
-    instance_count : UInt32
-    anonymous : WMIREGGUIDW_Anonymous_e__Union
+
+  @[Extern]
+  record WMIREGINFOW,
+    buffer_size : UInt32,
+    next_wmi_reg_info : UInt32,
+    registry_path : UInt32,
+    mof_resource_name : UInt32,
+    guid_count : UInt32,
+    wmi_reg_guid : Win32cr::System::Diagnostics::Etw::WMIREGGUIDW*
+
+  @[Extern]
+  record EVENT_TRACE_HEADER,
+    size : UInt16,
+    anonymous1 : Anonymous1_e__Union,
+    anonymous2 : Anonymous2_e__Union,
+    thread_id : UInt32,
+    process_id : UInt32,
+    time_stamp : Win32cr::Foundation::LARGE_INTEGER,
+    anonymous3 : Anonymous3_e__Union,
+    anonymous4 : Anonymous4_e__Union do
+
+    # Nested Type Anonymous4_e__Union
+    @[Extern(union: true)]
+    record Anonymous4_e__Union,
+      anonymous1 : Anonymous1_e__Struct,
+      processor_time : UInt64,
+      anonymous2 : Anonymous2_e__Struct do
+
+      # Nested Type Anonymous2_e__Struct
+      @[Extern]
+      record Anonymous2_e__Struct,
+        client_context : UInt32,
+        flags : UInt32
+
+
+      # Nested Type Anonymous1_e__Struct
+      @[Extern]
+      record Anonymous1_e__Struct,
+        kernel_time : UInt32,
+        user_time : UInt32
+
+    end
+
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      version : UInt32,
+      class__ : Class_e__Struct do
+
+      # Nested Type Class_e__Struct
+      @[Extern]
+      record Class_e__Struct,
+        type__ : UInt8,
+        level : UInt8,
+        version : UInt16
+
+    end
+
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      field_type_flags : UInt16,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        header_type : UInt8,
+        marker_flags : UInt8
+
+    end
+
+
+    # Nested Type Anonymous3_e__Union
+    @[Extern(union: true)]
+    record Anonymous3_e__Union,
+      guid : LibC::GUID,
+      guid_ptr : UInt64
+
   end
-  struct WMIREGINFOW
-    buffer_size : UInt32
-    next_wmi_reg_info : UInt32
-    registry_path : UInt32
-    mof_resource_name : UInt32
-    guid_count : UInt32
-    wmi_reg_guid : WMIREGGUIDW[0]*
+
+  @[Extern]
+  record EVENT_INSTANCE_HEADER,
+    size : UInt16,
+    anonymous1 : Anonymous1_e__Union,
+    anonymous2 : Anonymous2_e__Union,
+    thread_id : UInt32,
+    process_id : UInt32,
+    time_stamp : Win32cr::Foundation::LARGE_INTEGER,
+    reg_handle : UInt64,
+    instance_id : UInt32,
+    parent_instance_id : UInt32,
+    anonymous3 : Anonymous3_e__Union,
+    parent_reg_handle : UInt64 do
+
+    # Nested Type Anonymous3_e__Union
+    @[Extern(union: true)]
+    record Anonymous3_e__Union,
+      anonymous1 : Anonymous1_e__Struct,
+      processor_time : UInt64,
+      anonymous2 : Anonymous2_e__Struct do
+
+      # Nested Type Anonymous2_e__Struct
+      @[Extern]
+      record Anonymous2_e__Struct,
+        event_id : UInt32,
+        flags : UInt32
+
+
+      # Nested Type Anonymous1_e__Struct
+      @[Extern]
+      record Anonymous1_e__Struct,
+        kernel_time : UInt32,
+        user_time : UInt32
+
+    end
+
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      version : UInt32,
+      class__ : Class_e__Struct do
+
+      # Nested Type Class_e__Struct
+      @[Extern]
+      record Class_e__Struct,
+        type__ : UInt8,
+        level : UInt8,
+        version : UInt16
+
+    end
+
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      field_type_flags : UInt16,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        header_type : UInt8,
+        marker_flags : UInt8
+
+    end
+
   end
-  struct EVENT_TRACE_HEADER
-    size : UInt16
-    anonymous1 : EVENT_TRACE_HEADER_Anonymous1_e__Union
-    anonymous2 : EVENT_TRACE_HEADER_Anonymous2_e__Union
-    thread_id : UInt32
-    process_id : UInt32
-    time_stamp : LARGE_INTEGER
-    anonymous3 : EVENT_TRACE_HEADER_Anonymous3_e__Union
-    anonymous4 : EVENT_TRACE_HEADER_Anonymous4_e__Union
-  end
-  struct EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous2_e__Struct
-    client_context : UInt32
-    flags : UInt32
-  end
-  struct EVENT_TRACE_HEADER_Anonymous4_e__Union_Anonymous1_e__Struct
-    kernel_time : UInt32
-    user_time : UInt32
-  end
-  struct EVENT_TRACE_HEADER_Anonymous2_e__Union_Class_e__Struct
-    type : UInt8
-    level : UInt8
-    version : UInt16
-  end
-  struct EVENT_TRACE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
-    header_type : UInt8
-    marker_flags : UInt8
-  end
-  struct EVENT_INSTANCE_HEADER
-    size : UInt16
-    anonymous1 : EVENT_INSTANCE_HEADER_Anonymous1_e__Union
-    anonymous2 : EVENT_INSTANCE_HEADER_Anonymous2_e__Union
-    thread_id : UInt32
-    process_id : UInt32
-    time_stamp : LARGE_INTEGER
-    reg_handle : UInt64
-    instance_id : UInt32
-    parent_instance_id : UInt32
-    anonymous3 : EVENT_INSTANCE_HEADER_Anonymous3_e__Union
-    parent_reg_handle : UInt64
-  end
-  struct EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous2_e__Struct
-    event_id : UInt32
-    flags : UInt32
-  end
-  struct EVENT_INSTANCE_HEADER_Anonymous3_e__Union_Anonymous1_e__Struct
-    kernel_time : UInt32
-    user_time : UInt32
-  end
-  struct EVENT_INSTANCE_HEADER_Anonymous2_e__Union_Class_e__Struct
-    type : UInt8
-    level : UInt8
-    version : UInt16
-  end
-  struct EVENT_INSTANCE_HEADER_Anonymous1_e__Union_Anonymous_e__Struct
-    header_type : UInt8
-    marker_flags : UInt8
-  end
-  struct MOF_FIELD
-    data_ptr : UInt64
-    length : UInt32
+
+  @[Extern]
+  record MOF_FIELD,
+    data_ptr : UInt64,
+    length : UInt32,
     data_type : UInt32
+
+  @[Extern]
+  record TRACE_LOGFILE_HEADER,
+    buffer_size : UInt32,
+    anonymous1 : Anonymous1_e__Union,
+    provider_version : UInt32,
+    number_of_processors : UInt32,
+    end_time : Win32cr::Foundation::LARGE_INTEGER,
+    timer_resolution : UInt32,
+    maximum_file_size : UInt32,
+    log_file_mode : UInt32,
+    buffers_written : UInt32,
+    anonymous2 : Anonymous2_e__Union,
+    logger_name : Win32cr::Foundation::PWSTR,
+    log_file_name : Win32cr::Foundation::PWSTR,
+    time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION,
+    boot_time : Win32cr::Foundation::LARGE_INTEGER,
+    perf_freq : Win32cr::Foundation::LARGE_INTEGER,
+    start_time : Win32cr::Foundation::LARGE_INTEGER,
+    reserved_flags : UInt32,
+    buffers_lost : UInt32 do
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      log_instance_guid : LibC::GUID,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        start_buffers : UInt32,
+        pointer_size : UInt32,
+        events_lost : UInt32,
+        cpu_speed_in_m_hz : UInt32
+
+    end
+
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      version : UInt32,
+      version_detail : VersionDetail_e__Struct do
+
+      # Nested Type VersionDetail_e__Struct
+      @[Extern]
+      record VersionDetail_e__Struct,
+        major_version : UInt8,
+        minor_version : UInt8,
+        sub_version : UInt8,
+        sub_minor_version : UInt8
+
+    end
+
   end
-  struct TRACE_LOGFILE_HEADER
-    buffer_size : UInt32
-    anonymous1 : TRACE_LOGFILE_HEADER_Anonymous1_e__Union
-    provider_version : UInt32
-    number_of_processors : UInt32
-    end_time : LARGE_INTEGER
-    timer_resolution : UInt32
-    maximum_file_size : UInt32
-    log_file_mode : UInt32
-    buffers_written : UInt32
-    anonymous2 : TRACE_LOGFILE_HEADER_Anonymous2_e__Union
-    logger_name : LibC::LPWSTR
-    log_file_name : LibC::LPWSTR
-    time_zone : TIME_ZONE_INFORMATION
-    boot_time : LARGE_INTEGER
-    perf_freq : LARGE_INTEGER
-    start_time : LARGE_INTEGER
-    reserved_flags : UInt32
-    buffers_lost : UInt32
+
+  @[Extern]
+  record TRACE_LOGFILE_HEADER32,
+    buffer_size : UInt32,
+    anonymous1 : Anonymous1_e__Union,
+    provider_version : UInt32,
+    number_of_processors : UInt32,
+    end_time : Win32cr::Foundation::LARGE_INTEGER,
+    timer_resolution : UInt32,
+    maximum_file_size : UInt32,
+    log_file_mode : UInt32,
+    buffers_written : UInt32,
+    anonymous2 : Anonymous2_e__Union,
+    logger_name : UInt32,
+    log_file_name : UInt32,
+    time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION,
+    boot_time : Win32cr::Foundation::LARGE_INTEGER,
+    perf_freq : Win32cr::Foundation::LARGE_INTEGER,
+    start_time : Win32cr::Foundation::LARGE_INTEGER,
+    reserved_flags : UInt32,
+    buffers_lost : UInt32 do
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      log_instance_guid : LibC::GUID,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        start_buffers : UInt32,
+        pointer_size : UInt32,
+        events_lost : UInt32,
+        cpu_speed_in_m_hz : UInt32
+
+    end
+
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      version : UInt32,
+      version_detail : VersionDetail_e__Struct do
+
+      # Nested Type VersionDetail_e__Struct
+      @[Extern]
+      record VersionDetail_e__Struct,
+        major_version : UInt8,
+        minor_version : UInt8,
+        sub_version : UInt8,
+        sub_minor_version : UInt8
+
+    end
+
   end
-  struct TRACE_LOGFILE_HEADER_Anonymous2_e__Union_Anonymous_e__Struct
-    start_buffers : UInt32
-    pointer_size : UInt32
-    events_lost : UInt32
-    cpu_speed_in_m_hz : UInt32
+
+  @[Extern]
+  record TRACE_LOGFILE_HEADER64,
+    buffer_size : UInt32,
+    anonymous1 : Anonymous1_e__Union,
+    provider_version : UInt32,
+    number_of_processors : UInt32,
+    end_time : Win32cr::Foundation::LARGE_INTEGER,
+    timer_resolution : UInt32,
+    maximum_file_size : UInt32,
+    log_file_mode : UInt32,
+    buffers_written : UInt32,
+    anonymous2 : Anonymous2_e__Union,
+    logger_name : UInt64,
+    log_file_name : UInt64,
+    time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION,
+    boot_time : Win32cr::Foundation::LARGE_INTEGER,
+    perf_freq : Win32cr::Foundation::LARGE_INTEGER,
+    start_time : Win32cr::Foundation::LARGE_INTEGER,
+    reserved_flags : UInt32,
+    buffers_lost : UInt32 do
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      log_instance_guid : LibC::GUID,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        start_buffers : UInt32,
+        pointer_size : UInt32,
+        events_lost : UInt32,
+        cpu_speed_in_m_hz : UInt32
+
+    end
+
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      version : UInt32,
+      version_detail : VersionDetail_e__Struct do
+
+      # Nested Type VersionDetail_e__Struct
+      @[Extern]
+      record VersionDetail_e__Struct,
+        major_version : UInt8,
+        minor_version : UInt8,
+        sub_version : UInt8,
+        sub_minor_version : UInt8
+
+    end
+
   end
-  struct TRACE_LOGFILE_HEADER_Anonymous1_e__Union_VersionDetail_e__Struct
-    major_version : UInt8
-    minor_version : UInt8
-    sub_version : UInt8
-    sub_minor_version : UInt8
-  end
-  struct TRACE_LOGFILE_HEADER32
-    buffer_size : UInt32
-    anonymous1 : TRACE_LOGFILE_HEADER32_Anonymous1_e__Union
-    provider_version : UInt32
-    number_of_processors : UInt32
-    end_time : LARGE_INTEGER
-    timer_resolution : UInt32
-    maximum_file_size : UInt32
-    log_file_mode : UInt32
-    buffers_written : UInt32
-    anonymous2 : TRACE_LOGFILE_HEADER32_Anonymous2_e__Union
-    logger_name : UInt32
-    log_file_name : UInt32
-    time_zone : TIME_ZONE_INFORMATION
-    boot_time : LARGE_INTEGER
-    perf_freq : LARGE_INTEGER
-    start_time : LARGE_INTEGER
-    reserved_flags : UInt32
-    buffers_lost : UInt32
-  end
-  struct TRACE_LOGFILE_HEADER32_Anonymous2_e__Union_Anonymous_e__Struct
-    start_buffers : UInt32
-    pointer_size : UInt32
-    events_lost : UInt32
-    cpu_speed_in_m_hz : UInt32
-  end
-  struct TRACE_LOGFILE_HEADER32_Anonymous1_e__Union_VersionDetail_e__Struct
-    major_version : UInt8
-    minor_version : UInt8
-    sub_version : UInt8
-    sub_minor_version : UInt8
-  end
-  struct TRACE_LOGFILE_HEADER64
-    buffer_size : UInt32
-    anonymous1 : TRACE_LOGFILE_HEADER64_Anonymous1_e__Union
-    provider_version : UInt32
-    number_of_processors : UInt32
-    end_time : LARGE_INTEGER
-    timer_resolution : UInt32
-    maximum_file_size : UInt32
-    log_file_mode : UInt32
-    buffers_written : UInt32
-    anonymous2 : TRACE_LOGFILE_HEADER64_Anonymous2_e__Union
-    logger_name : UInt64
-    log_file_name : UInt64
-    time_zone : TIME_ZONE_INFORMATION
-    boot_time : LARGE_INTEGER
-    perf_freq : LARGE_INTEGER
-    start_time : LARGE_INTEGER
-    reserved_flags : UInt32
-    buffers_lost : UInt32
-  end
-  struct TRACE_LOGFILE_HEADER64_Anonymous2_e__Union_Anonymous_e__Struct
-    start_buffers : UInt32
-    pointer_size : UInt32
-    events_lost : UInt32
-    cpu_speed_in_m_hz : UInt32
-  end
-  struct TRACE_LOGFILE_HEADER64_Anonymous1_e__Union_VersionDetail_e__Struct
-    major_version : UInt8
-    minor_version : UInt8
-    sub_version : UInt8
-    sub_minor_version : UInt8
-  end
-  struct EVENT_INSTANCE_INFO
-    reg_handle : LibC::HANDLE
+
+  @[Extern]
+  record EVENT_INSTANCE_INFO,
+    reg_handle : Win32cr::Foundation::HANDLE,
     instance_id : UInt32
+
+  @[Extern]
+  record EVENT_TRACE_PROPERTIES,
+    wnode : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
+    buffer_size : UInt32,
+    minimum_buffers : UInt32,
+    maximum_buffers : UInt32,
+    maximum_file_size : UInt32,
+    log_file_mode : UInt32,
+    flush_timer : UInt32,
+    enable_flags : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_FLAG,
+    anonymous : Anonymous_e__Union,
+    number_of_buffers : UInt32,
+    free_buffers : UInt32,
+    events_lost : UInt32,
+    buffers_written : UInt32,
+    log_buffers_lost : UInt32,
+    real_time_buffers_lost : UInt32,
+    logger_thread_id : Win32cr::Foundation::HANDLE,
+    log_file_name_offset : UInt32,
+    logger_name_offset : UInt32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      age_limit : Int32,
+      flush_threshold : Int32
+
   end
-  struct EVENT_TRACE_PROPERTIES
-    wnode : WNODE_HEADER
-    buffer_size : UInt32
-    minimum_buffers : UInt32
-    maximum_buffers : UInt32
-    maximum_file_size : UInt32
-    log_file_mode : UInt32
-    flush_timer : UInt32
-    enable_flags : EVENT_TRACE_FLAG
-    anonymous : EVENT_TRACE_PROPERTIES_Anonymous_e__Union
-    number_of_buffers : UInt32
-    free_buffers : UInt32
-    events_lost : UInt32
-    buffers_written : UInt32
-    log_buffers_lost : UInt32
-    real_time_buffers_lost : UInt32
-    logger_thread_id : LibC::HANDLE
-    log_file_name_offset : UInt32
-    logger_name_offset : UInt32
+
+  @[Extern]
+  record EVENT_TRACE_PROPERTIES_V2,
+    wnode : Win32cr::System::Diagnostics::Etw::WNODE_HEADER,
+    buffer_size : UInt32,
+    minimum_buffers : UInt32,
+    maximum_buffers : UInt32,
+    maximum_file_size : UInt32,
+    log_file_mode : UInt32,
+    flush_timer : UInt32,
+    enable_flags : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_FLAG,
+    anonymous1 : Anonymous1_e__Union,
+    number_of_buffers : UInt32,
+    free_buffers : UInt32,
+    events_lost : UInt32,
+    buffers_written : UInt32,
+    log_buffers_lost : UInt32,
+    real_time_buffers_lost : UInt32,
+    logger_thread_id : Win32cr::Foundation::HANDLE,
+    log_file_name_offset : UInt32,
+    logger_name_offset : UInt32,
+    anonymous2 : Anonymous2_e__Union,
+    filter_desc_count : UInt32,
+    filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*,
+    anonymous3 : Anonymous3_e__Union do
+
+    # Nested Type Anonymous3_e__Union
+    @[Extern(union: true)]
+    record Anonymous3_e__Union,
+      anonymous : Anonymous_e__Struct,
+      v2_options : UInt64 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      anonymous : Anonymous_e__Struct,
+      v2_control : UInt32 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      age_limit : Int32,
+      flush_threshold : Int32
+
   end
-  struct EVENT_TRACE_PROPERTIES_V2
-    wnode : WNODE_HEADER
-    buffer_size : UInt32
-    minimum_buffers : UInt32
-    maximum_buffers : UInt32
-    maximum_file_size : UInt32
-    log_file_mode : UInt32
-    flush_timer : UInt32
-    enable_flags : EVENT_TRACE_FLAG
-    anonymous1 : EVENT_TRACE_PROPERTIES_V2_Anonymous1_e__Union
-    number_of_buffers : UInt32
-    free_buffers : UInt32
-    events_lost : UInt32
-    buffers_written : UInt32
-    log_buffers_lost : UInt32
-    real_time_buffers_lost : UInt32
-    logger_thread_id : LibC::HANDLE
-    log_file_name_offset : UInt32
-    logger_name_offset : UInt32
-    anonymous2 : EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union
-    filter_desc_count : UInt32
-    filter_desc : EVENT_FILTER_DESCRIPTOR*
-    anonymous3 : EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union
+
+  @[Extern]
+  record TRACE_GUID_REGISTRATION,
+    guid : LibC::GUID*,
+    reg_handle : Win32cr::Foundation::HANDLE
+
+  @[Extern]
+  record TRACE_GUID_PROPERTIES,
+    guid : LibC::GUID,
+    guid_type : UInt32,
+    logger_id : UInt32,
+    enable_level : UInt32,
+    enable_flags : UInt32,
+    is_enable : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record ETW_BUFFER_CONTEXT,
+    anonymous : Anonymous_e__Union,
+    logger_id : UInt16 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      processor_index : UInt16 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        processor_number : UInt8,
+        alignment : UInt8
+
+    end
+
   end
-  struct EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct TRACE_GUID_REGISTRATION
-    guid : Guid*
-    reg_handle : LibC::HANDLE
-  end
-  struct TRACE_GUID_PROPERTIES
-    guid : Guid
-    guid_type : UInt32
-    logger_id : UInt32
-    enable_level : UInt32
-    enable_flags : UInt32
-    is_enable : BOOLEAN
-  end
-  struct ETW_BUFFER_CONTEXT
-    anonymous : ETW_BUFFER_CONTEXT_Anonymous_e__Union
-    logger_id : UInt16
-  end
-  struct ETW_BUFFER_CONTEXT_Anonymous_e__Union_Anonymous_e__Struct
-    processor_number : UInt8
-    alignment : UInt8
-  end
-  struct TRACE_ENABLE_INFO
-    is_enabled : UInt32
-    level : UInt8
-    reserved1 : UInt8
-    logger_id : UInt16
-    enable_property : UInt32
-    reserved2 : UInt32
-    match_any_keyword : UInt64
+
+  @[Extern]
+  record TRACE_ENABLE_INFO,
+    is_enabled : UInt32,
+    level : UInt8,
+    reserved1 : UInt8,
+    logger_id : UInt16,
+    enable_property : UInt32,
+    reserved2 : UInt32,
+    match_any_keyword : UInt64,
     match_all_keyword : UInt64
-  end
-  struct TRACE_PROVIDER_INSTANCE_INFO
-    next_offset : UInt32
-    enable_count : UInt32
-    pid : UInt32
+
+  @[Extern]
+  record TRACE_PROVIDER_INSTANCE_INFO,
+    next_offset : UInt32,
+    enable_count : UInt32,
+    pid : UInt32,
     flags : UInt32
-  end
-  struct TRACE_GUID_INFO
-    instance_count : UInt32
+
+  @[Extern]
+  record TRACE_GUID_INFO,
+    instance_count : UInt32,
     reserved : UInt32
-  end
-  struct PROFILE_SOURCE_INFO
-    next_entry_offset : UInt32
-    source : UInt32
-    min_interval : UInt32
-    max_interval : UInt32
-    reserved : UInt64
-    description : Char[0]*
-  end
-  struct ETW_PMC_COUNTER_OWNER
-    owner_type : ETW_PMC_COUNTER_OWNER_TYPE
-    profile_source : UInt32
+
+  @[Extern]
+  record PROFILE_SOURCE_INFO,
+    next_entry_offset : UInt32,
+    source : UInt32,
+    min_interval : UInt32,
+    max_interval : UInt32,
+    reserved : UInt64,
+    description : UInt16*
+
+  @[Extern]
+  record ETW_PMC_COUNTER_OWNER,
+    owner_type : Win32cr::System::Diagnostics::Etw::ETW_PMC_COUNTER_OWNER_TYPE,
+    profile_source : UInt32,
     owner_tag : UInt32
+
+  @[Extern]
+  record ETW_PMC_COUNTER_OWNERSHIP_STATUS,
+    processor_number : UInt32,
+    number_of_counters : UInt32,
+    counter_owners : Win32cr::System::Diagnostics::Etw::ETW_PMC_COUNTER_OWNER*
+
+  @[Extern]
+  record EVENT_TRACE,
+    header : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_HEADER,
+    instance_id : UInt32,
+    parent_instance_id : UInt32,
+    parent_guid : LibC::GUID,
+    mof_data : Void*,
+    mof_length : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      client_context : UInt32,
+      buffer_context : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_CONTEXT
+
   end
-  struct ETW_PMC_COUNTER_OWNERSHIP_STATUS
-    processor_number : UInt32
-    number_of_counters : UInt32
-    counter_owners : ETW_PMC_COUNTER_OWNER[0]*
+
+  @[Extern]
+  record EVENT_TRACE_LOGFILEW,
+    log_file_name : Win32cr::Foundation::PWSTR,
+    logger_name : Win32cr::Foundation::PWSTR,
+    current_time : Int64,
+    buffers_read : UInt32,
+    anonymous1 : Anonymous1_e__Union,
+    current_event : Win32cr::System::Diagnostics::Etw::EVENT_TRACE,
+    logfile_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER,
+    buffer_callback : Win32cr::System::Diagnostics::Etw::PEVENT_TRACE_BUFFER_CALLBACKW,
+    buffer_size : UInt32,
+    filled : UInt32,
+    events_lost : UInt32,
+    anonymous2 : Anonymous2_e__Union,
+    is_kernel_trace : UInt32,
+    context : Void* do
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      log_file_mode : UInt32,
+      process_trace_mode : UInt32
+
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      event_callback : Win32cr::System::Diagnostics::Etw::PEVENT_CALLBACK,
+      event_record_callback : Win32cr::System::Diagnostics::Etw::PEVENT_RECORD_CALLBACK
+
   end
-  struct EVENT_TRACE
-    header : EVENT_TRACE_HEADER
-    instance_id : UInt32
-    parent_instance_id : UInt32
-    parent_guid : Guid
-    mof_data : Void*
-    mof_length : UInt32
-    anonymous : EVENT_TRACE_Anonymous_e__Union
+
+  @[Extern]
+  record EVENT_TRACE_LOGFILEA,
+    log_file_name : Win32cr::Foundation::PSTR,
+    logger_name : Win32cr::Foundation::PSTR,
+    current_time : Int64,
+    buffers_read : UInt32,
+    anonymous1 : Anonymous1_e__Union,
+    current_event : Win32cr::System::Diagnostics::Etw::EVENT_TRACE,
+    logfile_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER,
+    buffer_callback : Win32cr::System::Diagnostics::Etw::PEVENT_TRACE_BUFFER_CALLBACKA,
+    buffer_size : UInt32,
+    filled : UInt32,
+    events_lost : UInt32,
+    anonymous2 : Anonymous2_e__Union,
+    is_kernel_trace : UInt32,
+    context : Void* do
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      log_file_mode : UInt32,
+      process_trace_mode : UInt32
+
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      event_callback : Win32cr::System::Diagnostics::Etw::PEVENT_CALLBACK,
+      event_record_callback : Win32cr::System::Diagnostics::Etw::PEVENT_RECORD_CALLBACK
+
   end
-  struct EVENT_TRACE_LOGFILEW
-    log_file_name : LibC::LPWSTR
-    logger_name : LibC::LPWSTR
-    current_time : Int64
-    buffers_read : UInt32
-    anonymous1 : EVENT_TRACE_LOGFILEW_Anonymous1_e__Union
-    current_event : EVENT_TRACE
-    logfile_header : TRACE_LOGFILE_HEADER
-    buffer_callback : PEVENT_TRACE_BUFFER_CALLBACKW
-    buffer_size : UInt32
-    filled : UInt32
-    events_lost : UInt32
-    anonymous2 : EVENT_TRACE_LOGFILEW_Anonymous2_e__Union
-    is_kernel_trace : UInt32
-    context : Void*
-  end
-  struct EVENT_TRACE_LOGFILEA
-    log_file_name : PSTR
-    logger_name : PSTR
-    current_time : Int64
-    buffers_read : UInt32
-    anonymous1 : EVENT_TRACE_LOGFILEA_Anonymous1_e__Union
-    current_event : EVENT_TRACE
-    logfile_header : TRACE_LOGFILE_HEADER
-    buffer_callback : PEVENT_TRACE_BUFFER_CALLBACKA
-    buffer_size : UInt32
-    filled : UInt32
-    events_lost : UInt32
-    anonymous2 : EVENT_TRACE_LOGFILEA_Anonymous2_e__Union
-    is_kernel_trace : UInt32
-    context : Void*
-  end
-  struct ENABLE_TRACE_PARAMETERS_V1
-    version : UInt32
-    enable_property : UInt32
-    control_flags : UInt32
-    source_id : Guid
-    enable_filter_desc : EVENT_FILTER_DESCRIPTOR*
-  end
-  struct ENABLE_TRACE_PARAMETERS
-    version : UInt32
-    enable_property : UInt32
-    control_flags : UInt32
-    source_id : Guid
-    enable_filter_desc : EVENT_FILTER_DESCRIPTOR*
+
+  @[Extern]
+  record ENABLE_TRACE_PARAMETERS_V1,
+    version : UInt32,
+    enable_property : UInt32,
+    control_flags : UInt32,
+    source_id : LibC::GUID,
+    enable_filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*
+
+  @[Extern]
+  record ENABLE_TRACE_PARAMETERS,
+    version : UInt32,
+    enable_property : UInt32,
+    control_flags : UInt32,
+    source_id : LibC::GUID,
+    enable_filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*,
     filter_desc_count : UInt32
-  end
-  struct CLASSIC_EVENT_ID
-    event_guid : Guid
-    type : UInt8
-    reserved : UInt8[7]*
-  end
-  struct TRACE_STACK_CACHING_INFO
-    enabled : BOOLEAN
-    cache_size : UInt32
+
+  @[Extern]
+  record CLASSIC_EVENT_ID,
+    event_guid : LibC::GUID,
+    type__ : UInt8,
+    reserved : UInt8[7]
+
+  @[Extern]
+  record TRACE_STACK_CACHING_INFO,
+    enabled : Win32cr::Foundation::BOOLEAN,
+    cache_size : UInt32,
     bucket_count : UInt32
-  end
-  struct TRACE_PROFILE_INTERVAL
-    source : UInt32
+
+  @[Extern]
+  record TRACE_PROFILE_INTERVAL,
+    source : UInt32,
     interval : UInt32
-  end
-  struct TRACE_VERSION_INFO
-    etw_trace_processing_version : UInt32
+
+  @[Extern]
+  record TRACE_VERSION_INFO,
+    etw_trace_processing_version : UInt32,
     reserved : UInt32
-  end
-  struct TRACE_PERIODIC_CAPTURE_STATE_INFO
-    capture_state_frequency_in_seconds : UInt32
-    provider_count : UInt16
+
+  @[Extern]
+  record TRACE_PERIODIC_CAPTURE_STATE_INFO,
+    capture_state_frequency_in_seconds : UInt32,
+    provider_count : UInt16,
     reserved : UInt16
-  end
-  struct ETW_TRACE_PARTITION_INFORMATION
-    partition_id : Guid
-    parent_id : Guid
-    qpc_offset_from_root : Int64
+
+  @[Extern]
+  record ETW_TRACE_PARTITION_INFORMATION,
+    partition_id : LibC::GUID,
+    parent_id : LibC::GUID,
+    qpc_offset_from_root : Int64,
     partition_type : UInt32
+
+  @[Extern]
+  record ETW_TRACE_PARTITION_INFORMATION_V2,
+    qpc_offset_from_root : Int64,
+    partition_type : UInt32,
+    partition_id : Win32cr::Foundation::PWSTR,
+    parent_id : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record EVENT_DATA_DESCRIPTOR,
+    ptr : UInt64,
+    size : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      reserved : UInt32,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        type__ : UInt8,
+        reserved1 : UInt8,
+        reserved2 : UInt16
+
+    end
+
   end
-  struct ETW_TRACE_PARTITION_INFORMATION_V2
-    qpc_offset_from_root : Int64
-    partition_type : UInt32
-    partition_id : LibC::LPWSTR
-    parent_id : LibC::LPWSTR
-  end
-  struct EVENT_DATA_DESCRIPTOR
-    ptr : UInt64
-    size : UInt32
-    anonymous : EVENT_DATA_DESCRIPTOR_Anonymous_e__Union
-  end
-  struct EVENT_DATA_DESCRIPTOR_Anonymous_e__Union_Anonymous_e__Struct
-    type : UInt8
-    reserved1 : UInt8
-    reserved2 : UInt16
-  end
-  struct EVENT_DESCRIPTOR
-    id : UInt16
-    version : UInt8
-    channel : UInt8
-    level : UInt8
-    opcode : UInt8
-    task : UInt16
+
+  @[Extern]
+  record EVENT_DESCRIPTOR,
+    id : UInt16,
+    version : UInt8,
+    channel : UInt8,
+    level : UInt8,
+    opcode : UInt8,
+    task : UInt16,
     keyword : UInt64
-  end
-  struct EVENT_FILTER_DESCRIPTOR
-    ptr : UInt64
-    size : UInt32
-    type : UInt32
-  end
-  struct EVENT_FILTER_HEADER
-    id : UInt16
-    version : UInt8
-    reserved : UInt8[5]*
-    instance_id : UInt64
-    size : UInt32
+
+  @[Extern]
+  record EVENT_FILTER_DESCRIPTOR,
+    ptr : UInt64,
+    size : UInt32,
+    type__ : UInt32
+
+  @[Extern]
+  record EVENT_FILTER_HEADER,
+    id : UInt16,
+    version : UInt8,
+    reserved : UInt8[5],
+    instance_id : UInt64,
+    size : UInt32,
     next_offset : UInt32
+
+  @[Extern]
+  record EVENT_FILTER_EVENT_ID,
+    filter_in : Win32cr::Foundation::BOOLEAN,
+    reserved : UInt8,
+    count : UInt16,
+    events : UInt16*
+
+  @[Extern]
+  record EVENT_FILTER_EVENT_NAME,
+    match_any_keyword : UInt64,
+    match_all_keyword : UInt64,
+    level : UInt8,
+    filter_in : Win32cr::Foundation::BOOLEAN,
+    name_count : UInt16,
+    names : UInt8*
+
+  @[Extern]
+  record EVENT_FILTER_LEVEL_KW,
+    match_any_keyword : UInt64,
+    match_all_keyword : UInt64,
+    level : UInt8,
+    filter_in : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record EVENT_HEADER_EXTENDED_DATA_ITEM,
+    reserved1 : UInt16,
+    ext_type : UInt16,
+    anonymous : Anonymous_e__Struct,
+    data_size : UInt16,
+    data_ptr : UInt64 do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt16
+
   end
-  struct EVENT_FILTER_EVENT_ID
-    filter_in : BOOLEAN
-    reserved : UInt8
-    count : UInt16
-    events : UInt16[0]*
-  end
-  struct EVENT_FILTER_EVENT_NAME
-    match_any_keyword : UInt64
-    match_all_keyword : UInt64
-    level : UInt8
-    filter_in : BOOLEAN
-    name_count : UInt16
-    names : UInt8[0]*
-  end
-  struct EVENT_FILTER_LEVEL_KW
-    match_any_keyword : UInt64
-    match_all_keyword : UInt64
-    level : UInt8
-    filter_in : BOOLEAN
-  end
-  struct EVENT_HEADER_EXTENDED_DATA_ITEM
-    reserved1 : UInt16
-    ext_type : UInt16
-    anonymous : EVENT_HEADER_EXTENDED_DATA_ITEM_Anonymous_e__Struct
-    data_size : UInt16
-    data_ptr : UInt64
-  end
-  struct EVENT_HEADER_EXTENDED_DATA_ITEM_Anonymous_e__Struct
-    _bitfield : UInt16
-  end
-  struct EVENT_EXTENDED_ITEM_INSTANCE
-    instance_id : UInt32
-    parent_instance_id : UInt32
-    parent_guid : Guid
-  end
-  struct EVENT_EXTENDED_ITEM_RELATED_ACTIVITYID
-    related_activity_id : Guid
-  end
-  struct EVENT_EXTENDED_ITEM_TS_ID
+
+  @[Extern]
+  record EVENT_EXTENDED_ITEM_INSTANCE,
+    instance_id : UInt32,
+    parent_instance_id : UInt32,
+    parent_guid : LibC::GUID
+
+  @[Extern]
+  record EVENT_EXTENDED_ITEM_RELATED_ACTIVITYID,
+    related_activity_id : LibC::GUID
+
+  @[Extern]
+  record EVENT_EXTENDED_ITEM_TS_ID,
     session_id : UInt32
-  end
-  struct EVENT_EXTENDED_ITEM_STACK_TRACE32
-    match_id : UInt64
-    address : UInt32[0]*
-  end
-  struct EVENT_EXTENDED_ITEM_STACK_TRACE64
-    match_id : UInt64
-    address : UInt64[0]*
-  end
-  struct EVENT_EXTENDED_ITEM_STACK_KEY32
-    match_id : UInt64
-    stack_key : UInt32
+
+  @[Extern]
+  record EVENT_EXTENDED_ITEM_STACK_TRACE32,
+    match_id : UInt64,
+    address : UInt32*
+
+  @[Extern]
+  record EVENT_EXTENDED_ITEM_STACK_TRACE64,
+    match_id : UInt64,
+    address : UInt64*
+
+  @[Extern]
+  record EVENT_EXTENDED_ITEM_STACK_KEY32,
+    match_id : UInt64,
+    stack_key : UInt32,
     padding : UInt32
-  end
-  struct EVENT_EXTENDED_ITEM_STACK_KEY64
-    match_id : UInt64
+
+  @[Extern]
+  record EVENT_EXTENDED_ITEM_STACK_KEY64,
+    match_id : UInt64,
     stack_key : UInt64
-  end
-  struct EVENT_EXTENDED_ITEM_PEBS_INDEX
+
+  @[Extern]
+  record EVENT_EXTENDED_ITEM_PEBS_INDEX,
     pebs_index : UInt64
-  end
-  struct EVENT_EXTENDED_ITEM_PMC_COUNTERS
-    counter : UInt64[0]*
-  end
-  struct EVENT_EXTENDED_ITEM_PROCESS_START_KEY
+
+  @[Extern]
+  record EVENT_EXTENDED_ITEM_PMC_COUNTERS,
+    counter : UInt64*
+
+  @[Extern]
+  record EVENT_EXTENDED_ITEM_PROCESS_START_KEY,
     process_start_key : UInt64
-  end
-  struct EVENT_EXTENDED_ITEM_EVENT_KEY
+
+  @[Extern]
+  record EVENT_EXTENDED_ITEM_EVENT_KEY,
     key : UInt64
+
+  @[Extern]
+  record EVENT_HEADER,
+    size : UInt16,
+    header_type : UInt16,
+    flags : UInt16,
+    event_property : UInt16,
+    thread_id : UInt32,
+    process_id : UInt32,
+    time_stamp : Win32cr::Foundation::LARGE_INTEGER,
+    provider_id : LibC::GUID,
+    event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR,
+    anonymous : Anonymous_e__Union,
+    activity_id : LibC::GUID do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      processor_time : UInt64 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        kernel_time : UInt32,
+        user_time : UInt32
+
+    end
+
   end
-  struct EVENT_HEADER
-    size : UInt16
-    header_type : UInt16
-    flags : UInt16
-    event_property : UInt16
-    thread_id : UInt32
-    process_id : UInt32
-    time_stamp : LARGE_INTEGER
-    provider_id : Guid
-    event_descriptor : EVENT_DESCRIPTOR
-    anonymous : EVENT_HEADER_Anonymous_e__Union
-    activity_id : Guid
-  end
-  struct EVENT_HEADER_Anonymous_e__Union_Anonymous_e__Struct
-    kernel_time : UInt32
-    user_time : UInt32
-  end
-  struct EVENT_RECORD
-    event_header : EVENT_HEADER
-    buffer_context : ETW_BUFFER_CONTEXT
-    extended_data_count : UInt16
-    user_data_length : UInt16
-    extended_data : EVENT_HEADER_EXTENDED_DATA_ITEM*
-    user_data : Void*
+
+  @[Extern]
+  record EVENT_RECORD,
+    event_header : Win32cr::System::Diagnostics::Etw::EVENT_HEADER,
+    buffer_context : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_CONTEXT,
+    extended_data_count : UInt16,
+    user_data_length : UInt16,
+    extended_data : Win32cr::System::Diagnostics::Etw::EVENT_HEADER_EXTENDED_DATA_ITEM*,
+    user_data : Void*,
     user_context : Void*
+
+  @[Extern]
+  record EVENT_MAP_ENTRY,
+    output_offset : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      value : UInt32,
+      input_offset : UInt32
+
   end
-  struct EVENT_MAP_ENTRY
-    output_offset : UInt32
-    anonymous : EVENT_MAP_ENTRY_Anonymous_e__Union
+
+  @[Extern]
+  record EVENT_MAP_INFO,
+    name_offset : UInt32,
+    flag : Win32cr::System::Diagnostics::Etw::MAP_FLAGS,
+    entry_count : UInt32,
+    anonymous : Anonymous_e__Union,
+    map_entry_array : Win32cr::System::Diagnostics::Etw::EVENT_MAP_ENTRY* do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      map_entry_value_type : Win32cr::System::Diagnostics::Etw::MAP_VALUETYPE,
+      format_string_offset : UInt32
+
   end
-  struct EVENT_MAP_INFO
-    name_offset : UInt32
-    flag : MAP_FLAGS
-    entry_count : UInt32
-    anonymous : EVENT_MAP_INFO_Anonymous_e__Union
-    map_entry_array : EVENT_MAP_ENTRY[0]*
+
+  @[Extern]
+  record EVENT_PROPERTY_INFO,
+    flags : Win32cr::System::Diagnostics::Etw::PROPERTY_FLAGS,
+    name_offset : UInt32,
+    anonymous1 : Anonymous1_e__Union,
+    anonymous2 : Anonymous2_e__Union,
+    anonymous3 : Anonymous3_e__Union,
+    anonymous4 : Anonymous4_e__Union do
+
+    # Nested Type Anonymous4_e__Union
+    @[Extern(union: true)]
+    record Anonymous4_e__Union,
+      reserved : UInt32,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      count : UInt16,
+      countPropertyIndex : UInt16
+
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      nonStructType : Nonstructtype,
+      structType : Structtype,
+      customSchemaType : Customschematype do
+
+      # Nested Type Customschematype
+      @[Extern]
+      record Customschematype,
+        in_type : UInt16,
+        out_type : UInt16,
+        custom_schema_offset : UInt32
+
+
+      # Nested Type Nonstructtype
+      @[Extern]
+      record Nonstructtype,
+        in_type : UInt16,
+        out_type : UInt16,
+        map_name_offset : UInt32
+
+
+      # Nested Type Structtype
+      @[Extern]
+      record Structtype,
+        struct_start_index : UInt16,
+        num_of_struct_members : UInt16,
+        padding : UInt32
+
+    end
+
+
+    # Nested Type Anonymous3_e__Union
+    @[Extern(union: true)]
+    record Anonymous3_e__Union,
+      length : UInt16,
+      lengthPropertyIndex : UInt16
+
   end
-  struct EVENT_PROPERTY_INFO
-    flags : PROPERTY_FLAGS
-    name_offset : UInt32
-    anonymous1 : EVENT_PROPERTY_INFO_Anonymous1_e__Union
-    anonymous2 : EVENT_PROPERTY_INFO_Anonymous2_e__Union
-    anonymous3 : EVENT_PROPERTY_INFO_Anonymous3_e__Union
-    anonymous4 : EVENT_PROPERTY_INFO_Anonymous4_e__Union
+
+  @[Extern]
+  record TRACE_EVENT_INFO,
+    provider_guid : LibC::GUID,
+    event_guid : LibC::GUID,
+    event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR,
+    decoding_source : Win32cr::System::Diagnostics::Etw::DECODING_SOURCE,
+    provider_name_offset : UInt32,
+    level_name_offset : UInt32,
+    channel_name_offset : UInt32,
+    keywords_name_offset : UInt32,
+    task_name_offset : UInt32,
+    opcode_name_offset : UInt32,
+    event_message_offset : UInt32,
+    provider_message_offset : UInt32,
+    binary_xml_offset : UInt32,
+    binary_xml_size : UInt32,
+    anonymous1 : Anonymous1_e__Union,
+    anonymous2 : Anonymous2_e__Union,
+    property_count : UInt32,
+    top_level_property_count : UInt32,
+    anonymous3 : Anonymous3_e__Union,
+    event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO* do
+
+    # Nested Type Anonymous3_e__Union
+    @[Extern(union: true)]
+    record Anonymous3_e__Union,
+      flags : Win32cr::System::Diagnostics::Etw::TEMPLATE_FLAGS,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      event_name_offset : UInt32,
+      activity_id_name_offset : UInt32
+
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      event_attributes_offset : UInt32,
+      related_activity_id_name_offset : UInt32
+
   end
-  struct EVENT_PROPERTY_INFO_Anonymous4_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct EVENT_PROPERTY_INFO_Anonymous1_e__Union_customSchemaType
-    in_type : UInt16
-    out_type : UInt16
-    custom_schema_offset : UInt32
-  end
-  struct EVENT_PROPERTY_INFO_Anonymous1_e__Union_nonStructType
-    in_type : UInt16
-    out_type : UInt16
-    map_name_offset : UInt32
-  end
-  struct EVENT_PROPERTY_INFO_Anonymous1_e__Union_structType
-    struct_start_index : UInt16
-    num_of_struct_members : UInt16
-    padding : UInt32
-  end
-  struct TRACE_EVENT_INFO
-    provider_guid : Guid
-    event_guid : Guid
-    event_descriptor : EVENT_DESCRIPTOR
-    decoding_source : DECODING_SOURCE
-    provider_name_offset : UInt32
-    level_name_offset : UInt32
-    channel_name_offset : UInt32
-    keywords_name_offset : UInt32
-    task_name_offset : UInt32
-    opcode_name_offset : UInt32
-    event_message_offset : UInt32
-    provider_message_offset : UInt32
-    binary_xml_offset : UInt32
-    binary_xml_size : UInt32
-    anonymous1 : TRACE_EVENT_INFO_Anonymous1_e__Union
-    anonymous2 : TRACE_EVENT_INFO_Anonymous2_e__Union
-    property_count : UInt32
-    top_level_property_count : UInt32
-    anonymous3 : TRACE_EVENT_INFO_Anonymous3_e__Union
-    event_property_info_array : EVENT_PROPERTY_INFO[0]*
-  end
-  struct TRACE_EVENT_INFO_Anonymous3_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct PROPERTY_DATA_DESCRIPTOR
-    property_name : UInt64
-    array_index : UInt32
+
+  @[Extern]
+  record PROPERTY_DATA_DESCRIPTOR,
+    property_name : UInt64,
+    array_index : UInt32,
     reserved : UInt32
-  end
-  struct PAYLOAD_FILTER_PREDICATE
-    field_name : LibC::LPWSTR
-    compare_op : UInt16
-    value : LibC::LPWSTR
-  end
-  struct PROVIDER_FILTER_INFO
-    id : UInt8
-    version : UInt8
-    message_offset : UInt32
-    reserved : UInt32
-    property_count : UInt32
-    event_property_info_array : EVENT_PROPERTY_INFO[0]*
-  end
-  struct PROVIDER_FIELD_INFO
-    name_offset : UInt32
-    description_offset : UInt32
+
+  @[Extern]
+  record PAYLOAD_FILTER_PREDICATE,
+    field_name : Win32cr::Foundation::PWSTR,
+    compare_op : UInt16,
+    value : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record PROVIDER_FILTER_INFO,
+    id : UInt8,
+    version : UInt8,
+    message_offset : UInt32,
+    reserved : UInt32,
+    property_count : UInt32,
+    event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO*
+
+  @[Extern]
+  record PROVIDER_FIELD_INFO,
+    name_offset : UInt32,
+    description_offset : UInt32,
     value : UInt64
-  end
-  struct PROVIDER_FIELD_INFOARRAY
-    number_of_elements : UInt32
-    field_type : EVENT_FIELD_TYPE
-    field_info_array : PROVIDER_FIELD_INFO[0]*
-  end
-  struct TRACE_PROVIDER_INFO
-    provider_guid : Guid
-    schema_source : UInt32
+
+  @[Extern]
+  record PROVIDER_FIELD_INFOARRAY,
+    number_of_elements : UInt32,
+    field_type : Win32cr::System::Diagnostics::Etw::EVENT_FIELD_TYPE,
+    field_info_array : Win32cr::System::Diagnostics::Etw::PROVIDER_FIELD_INFO*
+
+  @[Extern]
+  record TRACE_PROVIDER_INFO,
+    provider_guid : LibC::GUID,
+    schema_source : UInt32,
     provider_name_offset : UInt32
-  end
-  struct PROVIDER_ENUMERATION_INFO
-    number_of_providers : UInt32
-    reserved : UInt32
-    trace_provider_info_array : TRACE_PROVIDER_INFO[0]*
-  end
-  struct PROVIDER_EVENT_INFO
-    number_of_events : UInt32
-    reserved : UInt32
-    event_descriptors_array : EVENT_DESCRIPTOR[0]*
-  end
-  struct TDH_CONTEXT
-    parameter_value : UInt64
-    parameter_type : TDH_CONTEXT_TYPE
+
+  @[Extern]
+  record PROVIDER_ENUMERATION_INFO,
+    number_of_providers : UInt32,
+    reserved : UInt32,
+    trace_provider_info_array : Win32cr::System::Diagnostics::Etw::TRACE_PROVIDER_INFO*
+
+  @[Extern]
+  record PROVIDER_EVENT_INFO,
+    number_of_events : UInt32,
+    reserved : UInt32,
+    event_descriptors_array : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*
+
+  @[Extern]
+  record TDH_CONTEXT,
+    parameter_value : UInt64,
+    parameter_type : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT_TYPE,
     parameter_size : UInt32
+
+  @[Extern]
+  record ITraceEventVtbl,
+    query_interface : Proc(ITraceEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ITraceEvent*, UInt32),
+    release : Proc(ITraceEvent*, UInt32),
+    clone : Proc(ITraceEvent*, Void**, Win32cr::Foundation::HRESULT),
+    get_user_context : Proc(ITraceEvent*, Void**, Win32cr::Foundation::HRESULT),
+    get_event_record : Proc(ITraceEvent*, Win32cr::System::Diagnostics::Etw::EVENT_RECORD**, Win32cr::Foundation::HRESULT),
+    set_payload : Proc(ITraceEvent*, UInt8*, UInt32, Win32cr::Foundation::HRESULT),
+    set_event_descriptor : Proc(ITraceEvent*, Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, Win32cr::Foundation::HRESULT),
+    set_process_id : Proc(ITraceEvent*, UInt32, Win32cr::Foundation::HRESULT),
+    set_processor_index : Proc(ITraceEvent*, UInt32, Win32cr::Foundation::HRESULT),
+    set_thread_id : Proc(ITraceEvent*, UInt32, Win32cr::Foundation::HRESULT),
+    set_thread_times : Proc(ITraceEvent*, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    set_activity_id : Proc(ITraceEvent*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_time_stamp : Proc(ITraceEvent*, Win32cr::Foundation::LARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    set_provider_id : Proc(ITraceEvent*, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("8cc97f40-9028-4ff3-9b62-7d1f79ca7bcb")]
+  record ITraceEvent, lpVtbl : ITraceEventVtbl* do
+    GUID = LibC::GUID.new(0x8cc97f40_u32, 0x9028_u16, 0x4ff3_u16, StaticArray[0x9b_u8, 0x62_u8, 0x7d_u8, 0x1f_u8, 0x79_u8, 0xca_u8, 0x7b_u8, 0xcb_u8])
+    def query_interface(this : ITraceEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ITraceEvent*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ITraceEvent*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def clone(this : ITraceEvent*, new_event : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, new_event)
+    end
+    def get_user_context(this : ITraceEvent*, user_context : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_user_context.call(this, user_context)
+    end
+    def get_event_record(this : ITraceEvent*, event_record : Win32cr::System::Diagnostics::Etw::EVENT_RECORD**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_event_record.call(this, event_record)
+    end
+    def set_payload(this : ITraceEvent*, payload : UInt8*, payload_size : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_payload.call(this, payload, payload_size)
+    end
+    def set_event_descriptor(this : ITraceEvent*, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_event_descriptor.call(this, event_descriptor)
+    end
+    def set_process_id(this : ITraceEvent*, process_id : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_process_id.call(this, process_id)
+    end
+    def set_processor_index(this : ITraceEvent*, processor_index : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_processor_index.call(this, processor_index)
+    end
+    def set_thread_id(this : ITraceEvent*, thread_id : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_thread_id.call(this, thread_id)
+    end
+    def set_thread_times(this : ITraceEvent*, kernel_time : UInt32, user_time : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_thread_times.call(this, kernel_time, user_time)
+    end
+    def set_activity_id(this : ITraceEvent*, activity_id : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_activity_id.call(this, activity_id)
+    end
+    def set_time_stamp(this : ITraceEvent*, time_stamp : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_time_stamp.call(this, time_stamp)
+    end
+    def set_provider_id(this : ITraceEvent*, provider_id : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_provider_id.call(this, provider_id)
+    end
+
   end
 
+  @[Extern]
+  record ITraceEventCallbackVtbl,
+    query_interface : Proc(ITraceEventCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ITraceEventCallback*, UInt32),
+    release : Proc(ITraceEventCallback*, UInt32),
+    on_begin_process_trace : Proc(ITraceEventCallback*, Void*, Void*, Win32cr::Foundation::HRESULT),
+    on_finalize_process_trace : Proc(ITraceEventCallback*, Void*, Win32cr::Foundation::HRESULT),
+    on_event : Proc(ITraceEventCallback*, Void*, Void*, Win32cr::Foundation::HRESULT)
 
-  struct ITraceEventVTbl
-    query_interface : Proc(ITraceEvent*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITraceEvent*, UInt32)
-    release : Proc(ITraceEvent*, UInt32)
-    clone : Proc(ITraceEvent*, ITraceEvent*, HRESULT)
-    get_user_context : Proc(ITraceEvent*, Void**, HRESULT)
-    get_event_record : Proc(ITraceEvent*, EVENT_RECORD**, HRESULT)
-    set_payload : Proc(ITraceEvent*, UInt8*, UInt32, HRESULT)
-    set_event_descriptor : Proc(ITraceEvent*, EVENT_DESCRIPTOR*, HRESULT)
-    set_process_id : Proc(ITraceEvent*, UInt32, HRESULT)
-    set_processor_index : Proc(ITraceEvent*, UInt32, HRESULT)
-    set_thread_id : Proc(ITraceEvent*, UInt32, HRESULT)
-    set_thread_times : Proc(ITraceEvent*, UInt32, UInt32, HRESULT)
-    set_activity_id : Proc(ITraceEvent*, Guid*, HRESULT)
-    set_time_stamp : Proc(ITraceEvent*, LARGE_INTEGER*, HRESULT)
-    set_provider_id : Proc(ITraceEvent*, Guid*, HRESULT)
+
+  @[Extern]
+  #@[Com("3ed25501-593f-43e9-8f38-3ab46f5a4a52")]
+  record ITraceEventCallback, lpVtbl : ITraceEventCallbackVtbl* do
+    GUID = LibC::GUID.new(0x3ed25501_u32, 0x593f_u16, 0x43e9_u16, StaticArray[0x8f_u8, 0x38_u8, 0x3a_u8, 0xb4_u8, 0x6f_u8, 0x5a_u8, 0x4a_u8, 0x52_u8])
+    def query_interface(this : ITraceEventCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ITraceEventCallback*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ITraceEventCallback*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_begin_process_trace(this : ITraceEventCallback*, header_event : Void*, relogger : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_begin_process_trace.call(this, header_event, relogger)
+    end
+    def on_finalize_process_trace(this : ITraceEventCallback*, relogger : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_finalize_process_trace.call(this, relogger)
+    end
+    def on_event(this : ITraceEventCallback*, event : Void*, relogger : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_event.call(this, event, relogger)
+    end
+
   end
 
-  ITraceEvent_GUID = "8cc97f40-9028-4ff3-9b62-7d1f79ca7bcb"
-  IID_ITraceEvent = LibC::GUID.new(0x8cc97f40_u32, 0x9028_u16, 0x4ff3_u16, StaticArray[0x9b_u8, 0x62_u8, 0x7d_u8, 0x1f_u8, 0x79_u8, 0xca_u8, 0x7b_u8, 0xcb_u8])
-  struct ITraceEvent
-    lpVtbl : ITraceEventVTbl*
+  @[Extern]
+  record ITraceReloggerVtbl,
+    query_interface : Proc(ITraceRelogger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ITraceRelogger*, UInt32),
+    release : Proc(ITraceRelogger*, UInt32),
+    add_logfile_trace_stream : Proc(ITraceRelogger*, Win32cr::Foundation::BSTR, Void*, UInt64*, Win32cr::Foundation::HRESULT),
+    add_realtime_trace_stream : Proc(ITraceRelogger*, Win32cr::Foundation::BSTR, Void*, UInt64*, Win32cr::Foundation::HRESULT),
+    register_callback : Proc(ITraceRelogger*, Void*, Win32cr::Foundation::HRESULT),
+    inject : Proc(ITraceRelogger*, Void*, Win32cr::Foundation::HRESULT),
+    create_event_instance : Proc(ITraceRelogger*, UInt64, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    process_trace : Proc(ITraceRelogger*, Win32cr::Foundation::HRESULT),
+    set_output_filename : Proc(ITraceRelogger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_compression_mode : Proc(ITraceRelogger*, Win32cr::Foundation::BOOLEAN, Win32cr::Foundation::HRESULT),
+    cancel : Proc(ITraceRelogger*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f754ad43-3bcc-4286-8009-9c5da214e84e")]
+  record ITraceRelogger, lpVtbl : ITraceReloggerVtbl* do
+    GUID = LibC::GUID.new(0xf754ad43_u32, 0x3bcc_u16, 0x4286_u16, StaticArray[0x80_u8, 0x9_u8, 0x9c_u8, 0x5d_u8, 0xa2_u8, 0x14_u8, 0xe8_u8, 0x4e_u8])
+    def query_interface(this : ITraceRelogger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ITraceRelogger*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ITraceRelogger*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def add_logfile_trace_stream(this : ITraceRelogger*, logfile_name : Win32cr::Foundation::BSTR, user_context : Void*, trace_handle : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_logfile_trace_stream.call(this, logfile_name, user_context, trace_handle)
+    end
+    def add_realtime_trace_stream(this : ITraceRelogger*, logger_name : Win32cr::Foundation::BSTR, user_context : Void*, trace_handle : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_realtime_trace_stream.call(this, logger_name, user_context, trace_handle)
+    end
+    def register_callback(this : ITraceRelogger*, callback : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_callback.call(this, callback)
+    end
+    def inject(this : ITraceRelogger*, event : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.inject.call(this, event)
+    end
+    def create_event_instance(this : ITraceRelogger*, trace_handle : UInt64, flags : UInt32, event : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_event_instance.call(this, trace_handle, flags, event)
+    end
+    def process_trace(this : ITraceRelogger*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.process_trace.call(this)
+    end
+    def set_output_filename(this : ITraceRelogger*, logfile_name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_output_filename.call(this, logfile_name)
+    end
+    def set_compression_mode(this : ITraceRelogger*, compression_mode : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_compression_mode.call(this, compression_mode)
+    end
+    def cancel(this : ITraceRelogger*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cancel.call(this)
+    end
+
   end
 
-  struct ITraceEventCallbackVTbl
-    query_interface : Proc(ITraceEventCallback*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITraceEventCallback*, UInt32)
-    release : Proc(ITraceEventCallback*, UInt32)
-    on_begin_process_trace : Proc(ITraceEventCallback*, ITraceEvent, ITraceRelogger, HRESULT)
-    on_finalize_process_trace : Proc(ITraceEventCallback*, ITraceRelogger, HRESULT)
-    on_event : Proc(ITraceEventCallback*, ITraceEvent, ITraceRelogger, HRESULT)
-  end
+  @[Link("advapi32")]
+  @[Link("tdh")]
+  lib C
+    fun StartTraceW(trace_handle : UInt64*, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : UInt32
 
-  ITraceEventCallback_GUID = "3ed25501-593f-43e9-8f38-3ab46f5a4a52"
-  IID_ITraceEventCallback = LibC::GUID.new(0x3ed25501_u32, 0x593f_u16, 0x43e9_u16, StaticArray[0x8f_u8, 0x38_u8, 0x3a_u8, 0xb4_u8, 0x6f_u8, 0x5a_u8, 0x4a_u8, 0x52_u8])
-  struct ITraceEventCallback
-    lpVtbl : ITraceEventCallbackVTbl*
-  end
+    fun StartTraceA(trace_handle : UInt64*, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : UInt32
 
-  struct ITraceReloggerVTbl
-    query_interface : Proc(ITraceRelogger*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITraceRelogger*, UInt32)
-    release : Proc(ITraceRelogger*, UInt32)
-    add_logfile_trace_stream : Proc(ITraceRelogger*, UInt8*, Void*, UInt64*, HRESULT)
-    add_realtime_trace_stream : Proc(ITraceRelogger*, UInt8*, Void*, UInt64*, HRESULT)
-    register_callback : Proc(ITraceRelogger*, ITraceEventCallback, HRESULT)
-    inject : Proc(ITraceRelogger*, ITraceEvent, HRESULT)
-    create_event_instance : Proc(ITraceRelogger*, UInt64, UInt32, ITraceEvent*, HRESULT)
-    process_trace : Proc(ITraceRelogger*, HRESULT)
-    set_output_filename : Proc(ITraceRelogger*, UInt8*, HRESULT)
-    set_compression_mode : Proc(ITraceRelogger*, BOOLEAN, HRESULT)
-    cancel : Proc(ITraceRelogger*, HRESULT)
-  end
+    fun StopTraceW(trace_handle : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : UInt32
 
-  ITraceRelogger_GUID = "f754ad43-3bcc-4286-8009-9c5da214e84e"
-  IID_ITraceRelogger = LibC::GUID.new(0xf754ad43_u32, 0x3bcc_u16, 0x4286_u16, StaticArray[0x80_u8, 0x9_u8, 0x9c_u8, 0x5d_u8, 0xa2_u8, 0x14_u8, 0xe8_u8, 0x4e_u8])
-  struct ITraceRelogger
-    lpVtbl : ITraceReloggerVTbl*
-  end
+    fun StopTraceA(trace_handle : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : UInt32
 
+    fun QueryTraceW(trace_handle : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : UInt32
 
-  # Params # tracehandle : UInt64* [In],instancename : LibC::LPWSTR [In],properties : EVENT_TRACE_PROPERTIES* [In]
-  fun StartTraceW(tracehandle : UInt64*, instancename : LibC::LPWSTR, properties : EVENT_TRACE_PROPERTIES*) : UInt32
+    fun QueryTraceA(trace_handle : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : UInt32
 
-  # Params # tracehandle : UInt64* [In],instancename : PSTR [In],properties : EVENT_TRACE_PROPERTIES* [In]
-  fun StartTraceA(tracehandle : UInt64*, instancename : PSTR, properties : EVENT_TRACE_PROPERTIES*) : UInt32
+    fun UpdateTraceW(trace_handle : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : UInt32
 
-  # Params # tracehandle : UInt64 [In],instancename : LibC::LPWSTR [In],properties : EVENT_TRACE_PROPERTIES* [In]
-  fun StopTraceW(tracehandle : UInt64, instancename : LibC::LPWSTR, properties : EVENT_TRACE_PROPERTIES*) : UInt32
+    fun UpdateTraceA(trace_handle : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : UInt32
 
-  # Params # tracehandle : UInt64 [In],instancename : PSTR [In],properties : EVENT_TRACE_PROPERTIES* [In]
-  fun StopTraceA(tracehandle : UInt64, instancename : PSTR, properties : EVENT_TRACE_PROPERTIES*) : UInt32
+    fun FlushTraceW(trace_handle : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : UInt32
 
-  # Params # tracehandle : UInt64 [In],instancename : LibC::LPWSTR [In],properties : EVENT_TRACE_PROPERTIES* [In]
-  fun QueryTraceW(tracehandle : UInt64, instancename : LibC::LPWSTR, properties : EVENT_TRACE_PROPERTIES*) : UInt32
+    fun FlushTraceA(trace_handle : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : UInt32
 
-  # Params # tracehandle : UInt64 [In],instancename : PSTR [In],properties : EVENT_TRACE_PROPERTIES* [In]
-  fun QueryTraceA(tracehandle : UInt64, instancename : PSTR, properties : EVENT_TRACE_PROPERTIES*) : UInt32
+    fun ControlTraceW(trace_handle : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*, control_code : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_CONTROL) : UInt32
 
-  # Params # tracehandle : UInt64 [In],instancename : LibC::LPWSTR [In],properties : EVENT_TRACE_PROPERTIES* [In]
-  fun UpdateTraceW(tracehandle : UInt64, instancename : LibC::LPWSTR, properties : EVENT_TRACE_PROPERTIES*) : UInt32
+    fun ControlTraceA(trace_handle : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*, control_code : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_CONTROL) : UInt32
 
-  # Params # tracehandle : UInt64 [In],instancename : PSTR [In],properties : EVENT_TRACE_PROPERTIES* [In]
-  fun UpdateTraceA(tracehandle : UInt64, instancename : PSTR, properties : EVENT_TRACE_PROPERTIES*) : UInt32
+    fun QueryAllTracesW(property_array : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES**, property_array_count : UInt32, logger_count : UInt32*) : UInt32
 
-  # Params # tracehandle : UInt64 [In],instancename : LibC::LPWSTR [In],properties : EVENT_TRACE_PROPERTIES* [In]
-  fun FlushTraceW(tracehandle : UInt64, instancename : LibC::LPWSTR, properties : EVENT_TRACE_PROPERTIES*) : UInt32
+    fun QueryAllTracesA(property_array : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES**, property_array_count : UInt32, logger_count : UInt32*) : UInt32
 
-  # Params # tracehandle : UInt64 [In],instancename : PSTR [In],properties : EVENT_TRACE_PROPERTIES* [In]
-  fun FlushTraceA(tracehandle : UInt64, instancename : PSTR, properties : EVENT_TRACE_PROPERTIES*) : UInt32
+    fun EnableTrace(enable : UInt32, enable_flag : UInt32, enable_level : UInt32, control_guid : LibC::GUID*, trace_handle : UInt64) : UInt32
 
-  # Params # tracehandle : UInt64 [In],instancename : LibC::LPWSTR [In],properties : EVENT_TRACE_PROPERTIES* [In],controlcode : EVENT_TRACE_CONTROL [In]
-  fun ControlTraceW(tracehandle : UInt64, instancename : LibC::LPWSTR, properties : EVENT_TRACE_PROPERTIES*, controlcode : EVENT_TRACE_CONTROL) : UInt32
+    fun EnableTraceEx(provider_id : LibC::GUID*, source_id : LibC::GUID*, trace_handle : UInt64, is_enabled : UInt32, level : UInt8, match_any_keyword : UInt64, match_all_keyword : UInt64, enable_property : UInt32, enable_filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*) : UInt32
 
-  # Params # tracehandle : UInt64 [In],instancename : PSTR [In],properties : EVENT_TRACE_PROPERTIES* [In],controlcode : EVENT_TRACE_CONTROL [In]
-  fun ControlTraceA(tracehandle : UInt64, instancename : PSTR, properties : EVENT_TRACE_PROPERTIES*, controlcode : EVENT_TRACE_CONTROL) : UInt32
+    fun EnableTraceEx2(trace_handle : UInt64, provider_id : LibC::GUID*, control_code : UInt32, level : UInt8, match_any_keyword : UInt64, match_all_keyword : UInt64, timeout : UInt32, enable_parameters : Win32cr::System::Diagnostics::Etw::ENABLE_TRACE_PARAMETERS*) : UInt32
 
-  # Params # propertyarray : EVENT_TRACE_PROPERTIES** [In],propertyarraycount : UInt32 [In],loggercount : UInt32* [In]
-  fun QueryAllTracesW(propertyarray : EVENT_TRACE_PROPERTIES**, propertyarraycount : UInt32, loggercount : UInt32*) : UInt32
+    fun EnumerateTraceGuidsEx(trace_query_info_class : Win32cr::System::Diagnostics::Etw::TRACE_QUERY_INFO_CLASS, in_buffer : Void*, in_buffer_size : UInt32, out_buffer : Void*, out_buffer_size : UInt32, return_length : UInt32*) : UInt32
 
-  # Params # propertyarray : EVENT_TRACE_PROPERTIES** [In],propertyarraycount : UInt32 [In],loggercount : UInt32* [In]
-  fun QueryAllTracesA(propertyarray : EVENT_TRACE_PROPERTIES**, propertyarraycount : UInt32, loggercount : UInt32*) : UInt32
+    fun TraceSetInformation(session_handle : UInt64, information_class : Win32cr::System::Diagnostics::Etw::TRACE_QUERY_INFO_CLASS, trace_information : Void*, information_length : UInt32) : UInt32
 
-  # Params # enable : UInt32 [In],enableflag : UInt32 [In],enablelevel : UInt32 [In],controlguid : Guid* [In],tracehandle : UInt64 [In]
-  fun EnableTrace(enable : UInt32, enableflag : UInt32, enablelevel : UInt32, controlguid : Guid*, tracehandle : UInt64) : UInt32
+    fun TraceQueryInformation(session_handle : UInt64, information_class : Win32cr::System::Diagnostics::Etw::TRACE_QUERY_INFO_CLASS, trace_information : Void*, information_length : UInt32, return_length : UInt32*) : UInt32
 
-  # Params # providerid : Guid* [In],sourceid : Guid* [In],tracehandle : UInt64 [In],isenabled : UInt32 [In],level : UInt8 [In],matchanykeyword : UInt64 [In],matchallkeyword : UInt64 [In],enableproperty : UInt32 [In],enablefilterdesc : EVENT_FILTER_DESCRIPTOR* [In]
-  fun EnableTraceEx(providerid : Guid*, sourceid : Guid*, tracehandle : UInt64, isenabled : UInt32, level : UInt8, matchanykeyword : UInt64, matchallkeyword : UInt64, enableproperty : UInt32, enablefilterdesc : EVENT_FILTER_DESCRIPTOR*) : UInt32
+    fun CreateTraceInstanceId(reg_handle : Win32cr::Foundation::HANDLE, inst_info : Win32cr::System::Diagnostics::Etw::EVENT_INSTANCE_INFO*) : UInt32
 
-  # Params # tracehandle : UInt64 [In],providerid : Guid* [In],controlcode : UInt32 [In],level : UInt8 [In],matchanykeyword : UInt64 [In],matchallkeyword : UInt64 [In],timeout : UInt32 [In],enableparameters : ENABLE_TRACE_PARAMETERS* [In]
-  fun EnableTraceEx2(tracehandle : UInt64, providerid : Guid*, controlcode : UInt32, level : UInt8, matchanykeyword : UInt64, matchallkeyword : UInt64, timeout : UInt32, enableparameters : ENABLE_TRACE_PARAMETERS*) : UInt32
+    fun TraceEvent(trace_handle : UInt64, event_trace : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_HEADER*) : UInt32
 
-  # Params # tracequeryinfoclass : TRACE_QUERY_INFO_CLASS [In],inbuffer : Void* [In],inbuffersize : UInt32 [In],outbuffer : Void* [In],outbuffersize : UInt32 [In],returnlength : UInt32* [In]
-  fun EnumerateTraceGuidsEx(tracequeryinfoclass : TRACE_QUERY_INFO_CLASS, inbuffer : Void*, inbuffersize : UInt32, outbuffer : Void*, outbuffersize : UInt32, returnlength : UInt32*) : UInt32
+    fun TraceEventInstance(trace_handle : UInt64, event_trace : Win32cr::System::Diagnostics::Etw::EVENT_INSTANCE_HEADER*, inst_info : Win32cr::System::Diagnostics::Etw::EVENT_INSTANCE_INFO*, parent_inst_info : Win32cr::System::Diagnostics::Etw::EVENT_INSTANCE_INFO*) : UInt32
 
-  # Params # sessionhandle : UInt64 [In],informationclass : TRACE_QUERY_INFO_CLASS [In],traceinformation : Void* [In],informationlength : UInt32 [In]
-  fun TraceSetInformation(sessionhandle : UInt64, informationclass : TRACE_QUERY_INFO_CLASS, traceinformation : Void*, informationlength : UInt32) : UInt32
+    fun RegisterTraceGuidsW(request_address : Win32cr::System::Diagnostics::Etw::WMIDPREQUEST, request_context : Void*, control_guid : LibC::GUID*, guid_count : UInt32, trace_guid_reg : Win32cr::System::Diagnostics::Etw::TRACE_GUID_REGISTRATION*, mof_image_path : Win32cr::Foundation::PWSTR, mof_resource_name : Win32cr::Foundation::PWSTR, registration_handle : UInt64*) : UInt32
 
-  # Params # sessionhandle : UInt64 [In],informationclass : TRACE_QUERY_INFO_CLASS [In],traceinformation : Void* [In],informationlength : UInt32 [In],returnlength : UInt32* [In]
-  fun TraceQueryInformation(sessionhandle : UInt64, informationclass : TRACE_QUERY_INFO_CLASS, traceinformation : Void*, informationlength : UInt32, returnlength : UInt32*) : UInt32
+    fun RegisterTraceGuidsA(request_address : Win32cr::System::Diagnostics::Etw::WMIDPREQUEST, request_context : Void*, control_guid : LibC::GUID*, guid_count : UInt32, trace_guid_reg : Win32cr::System::Diagnostics::Etw::TRACE_GUID_REGISTRATION*, mof_image_path : Win32cr::Foundation::PSTR, mof_resource_name : Win32cr::Foundation::PSTR, registration_handle : UInt64*) : UInt32
 
-  # Params # reghandle : LibC::HANDLE [In],instinfo : EVENT_INSTANCE_INFO* [In]
-  fun CreateTraceInstanceId(reghandle : LibC::HANDLE, instinfo : EVENT_INSTANCE_INFO*) : UInt32
+    fun EnumerateTraceGuids(guid_properties_array : Win32cr::System::Diagnostics::Etw::TRACE_GUID_PROPERTIES**, property_array_count : UInt32, guid_count : UInt32*) : UInt32
 
-  # Params # tracehandle : UInt64 [In],eventtrace : EVENT_TRACE_HEADER* [In]
-  fun TraceEvent(tracehandle : UInt64, eventtrace : EVENT_TRACE_HEADER*) : UInt32
+    fun UnregisterTraceGuids(registration_handle : UInt64) : UInt32
 
-  # Params # tracehandle : UInt64 [In],eventtrace : EVENT_INSTANCE_HEADER* [In],instinfo : EVENT_INSTANCE_INFO* [In],parentinstinfo : EVENT_INSTANCE_INFO* [In]
-  fun TraceEventInstance(tracehandle : UInt64, eventtrace : EVENT_INSTANCE_HEADER*, instinfo : EVENT_INSTANCE_INFO*, parentinstinfo : EVENT_INSTANCE_INFO*) : UInt32
+    fun GetTraceLoggerHandle(buffer : Void*) : UInt64
 
-  # Params # requestaddress : WMIDPREQUEST [In],requestcontext : Void* [In],controlguid : Guid* [In],guidcount : UInt32 [In],traceguidreg : TRACE_GUID_REGISTRATION* [In],mofimagepath : LibC::LPWSTR [In],mofresourcename : LibC::LPWSTR [In],registrationhandle : UInt64* [In]
-  fun RegisterTraceGuidsW(requestaddress : WMIDPREQUEST, requestcontext : Void*, controlguid : Guid*, guidcount : UInt32, traceguidreg : TRACE_GUID_REGISTRATION*, mofimagepath : LibC::LPWSTR, mofresourcename : LibC::LPWSTR, registrationhandle : UInt64*) : UInt32
+    fun GetTraceEnableLevel(trace_handle : UInt64) : UInt8
 
-  # Params # requestaddress : WMIDPREQUEST [In],requestcontext : Void* [In],controlguid : Guid* [In],guidcount : UInt32 [In],traceguidreg : TRACE_GUID_REGISTRATION* [In],mofimagepath : PSTR [In],mofresourcename : PSTR [In],registrationhandle : UInt64* [In]
-  fun RegisterTraceGuidsA(requestaddress : WMIDPREQUEST, requestcontext : Void*, controlguid : Guid*, guidcount : UInt32, traceguidreg : TRACE_GUID_REGISTRATION*, mofimagepath : PSTR, mofresourcename : PSTR, registrationhandle : UInt64*) : UInt32
+    fun GetTraceEnableFlags(trace_handle : UInt64) : UInt32
 
-  # Params # guidpropertiesarray : TRACE_GUID_PROPERTIES** [In],propertyarraycount : UInt32 [In],guidcount : UInt32* [In]
-  fun EnumerateTraceGuids(guidpropertiesarray : TRACE_GUID_PROPERTIES**, propertyarraycount : UInt32, guidcount : UInt32*) : UInt32
+    fun OpenTraceW(logfile : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_LOGFILEW*) : UInt64
 
-  # Params # registrationhandle : UInt64 [In]
-  fun UnregisterTraceGuids(registrationhandle : UInt64) : UInt32
+    fun ProcessTrace(handle_array : UInt64*, handle_count : UInt32, start_time : Win32cr::Foundation::FILETIME*, end_time : Win32cr::Foundation::FILETIME*) : UInt32
 
-  # Params # buffer : Void* [In]
-  fun GetTraceLoggerHandle(buffer : Void*) : UInt64
+    fun CloseTrace(trace_handle : UInt64) : UInt32
 
-  # Params # tracehandle : UInt64 [In]
-  fun GetTraceEnableLevel(tracehandle : UInt64) : UInt8
+    fun QueryTraceProcessingHandle(processing_handle : UInt64, information_class : Win32cr::System::Diagnostics::Etw::ETW_PROCESS_HANDLE_INFO_TYPE, in_buffer : Void*, in_buffer_size : UInt32, out_buffer : Void*, out_buffer_size : UInt32, return_length : UInt32*) : UInt32
 
-  # Params # tracehandle : UInt64 [In]
-  fun GetTraceEnableFlags(tracehandle : UInt64) : UInt32
+    fun OpenTraceA(logfile : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_LOGFILEA*) : UInt64
 
-  # Params # logfile : EVENT_TRACE_LOGFILEW* [In]
-  fun OpenTraceW(logfile : EVENT_TRACE_LOGFILEW*) : UInt64
+    fun SetTraceCallback(pGuid : LibC::GUID*, event_callback : Win32cr::System::Diagnostics::Etw::PEVENT_CALLBACK) : UInt32
 
-  # Params # handlearray : UInt64* [In],handlecount : UInt32 [In],starttime : FILETIME* [In],endtime : FILETIME* [In]
-  fun ProcessTrace(handlearray : UInt64*, handlecount : UInt32, starttime : FILETIME*, endtime : FILETIME*) : UInt32
+    fun RemoveTraceCallback(pGuid : LibC::GUID*) : UInt32
 
-  # Params # tracehandle : UInt64 [In]
-  fun CloseTrace(tracehandle : UInt64) : UInt32
+    fun TraceMessage(logger_handle : UInt64, message_flags : Win32cr::System::Diagnostics::Etw::TRACE_MESSAGE_FLAGS, message_guid : LibC::GUID*, message_number : UInt16) : UInt32
 
-  # Params # processinghandle : UInt64 [In],informationclass : ETW_PROCESS_HANDLE_INFO_TYPE [In],inbuffer : Void* [In],inbuffersize : UInt32 [In],outbuffer : Void* [In],outbuffersize : UInt32 [In],returnlength : UInt32* [In]
-  fun QueryTraceProcessingHandle(processinghandle : UInt64, informationclass : ETW_PROCESS_HANDLE_INFO_TYPE, inbuffer : Void*, inbuffersize : UInt32, outbuffer : Void*, outbuffersize : UInt32, returnlength : UInt32*) : UInt32
+    fun TraceMessageVa(logger_handle : UInt64, message_flags : Win32cr::System::Diagnostics::Etw::TRACE_MESSAGE_FLAGS, message_guid : LibC::GUID*, message_number : UInt16, message_arg_list : Int8*) : UInt32
 
-  # Params # logfile : EVENT_TRACE_LOGFILEA* [In]
-  fun OpenTraceA(logfile : EVENT_TRACE_LOGFILEA*) : UInt64
+    fun EventRegister(provider_id : LibC::GUID*, enable_callback : Win32cr::System::Diagnostics::Etw::PENABLECALLBACK, callback_context : Void*, reg_handle : UInt64*) : UInt32
 
-  # Params # pguid : Guid* [In],eventcallback : PEVENT_CALLBACK [In]
-  fun SetTraceCallback(pguid : Guid*, eventcallback : PEVENT_CALLBACK) : UInt32
+    fun EventUnregister(reg_handle : UInt64) : UInt32
 
-  # Params # pguid : Guid* [In]
-  fun RemoveTraceCallback(pguid : Guid*) : UInt32
+    fun EventSetInformation(reg_handle : UInt64, information_class : Win32cr::System::Diagnostics::Etw::EVENT_INFO_CLASS, event_information : Void*, information_length : UInt32) : UInt32
 
-  # Params # loggerhandle : UInt64 [In],messageflags : TRACE_MESSAGE_FLAGS [In],messageguid : Guid* [In],messagenumber : UInt16 [In]
-  fun TraceMessage(loggerhandle : UInt64, messageflags : TRACE_MESSAGE_FLAGS, messageguid : Guid*, messagenumber : UInt16) : UInt32
+    fun EventEnabled(reg_handle : UInt64, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*) : Win32cr::Foundation::BOOLEAN
 
-  # Params # loggerhandle : UInt64 [In],messageflags : TRACE_MESSAGE_FLAGS [In],messageguid : Guid* [In],messagenumber : UInt16 [In],messagearglist : Int8* [In]
-  fun TraceMessageVa(loggerhandle : UInt64, messageflags : TRACE_MESSAGE_FLAGS, messageguid : Guid*, messagenumber : UInt16, messagearglist : Int8*) : UInt32
+    fun EventProviderEnabled(reg_handle : UInt64, level : UInt8, keyword : UInt64) : Win32cr::Foundation::BOOLEAN
 
-  # Params # providerid : Guid* [In],enablecallback : PENABLECALLBACK [In],callbackcontext : Void* [In],reghandle : UInt64* [In]
-  fun EventRegister(providerid : Guid*, enablecallback : PENABLECALLBACK, callbackcontext : Void*, reghandle : UInt64*) : UInt32
+    fun EventWrite(reg_handle : UInt64, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
 
-  # Params # reghandle : UInt64 [In]
-  fun EventUnregister(reghandle : UInt64) : UInt32
+    fun EventWriteTransfer(reg_handle : UInt64, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, activity_id : LibC::GUID*, related_activity_id : LibC::GUID*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
 
-  # Params # reghandle : UInt64 [In],informationclass : EVENT_INFO_CLASS [In],eventinformation : Void* [In],informationlength : UInt32 [In]
-  fun EventSetInformation(reghandle : UInt64, informationclass : EVENT_INFO_CLASS, eventinformation : Void*, informationlength : UInt32) : UInt32
+    fun EventWriteEx(reg_handle : UInt64, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, filter : UInt64, flags : UInt32, activity_id : LibC::GUID*, related_activity_id : LibC::GUID*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
 
-  # Params # reghandle : UInt64 [In],eventdescriptor : EVENT_DESCRIPTOR* [In]
-  fun EventEnabled(reghandle : UInt64, eventdescriptor : EVENT_DESCRIPTOR*) : BOOLEAN
+    fun EventWriteString(reg_handle : UInt64, level : UInt8, keyword : UInt64, string : Win32cr::Foundation::PWSTR) : UInt32
 
-  # Params # reghandle : UInt64 [In],level : UInt8 [In],keyword : UInt64 [In]
-  fun EventProviderEnabled(reghandle : UInt64, level : UInt8, keyword : UInt64) : BOOLEAN
+    fun EventActivityIdControl(control_code : UInt32, activity_id : LibC::GUID*) : UInt32
 
-  # Params # reghandle : UInt64 [In],eventdescriptor : EVENT_DESCRIPTOR* [In],userdatacount : UInt32 [In],userdata : EVENT_DATA_DESCRIPTOR* [In]
-  fun EventWrite(reghandle : UInt64, eventdescriptor : EVENT_DESCRIPTOR*, userdatacount : UInt32, userdata : EVENT_DATA_DESCRIPTOR*) : UInt32
+    fun EventAccessControl(guid : LibC::GUID*, operation : UInt32, sid : Win32cr::Foundation::PSID, rights : UInt32, allow_or_deny : Win32cr::Foundation::BOOLEAN) : UInt32
 
-  # Params # reghandle : UInt64 [In],eventdescriptor : EVENT_DESCRIPTOR* [In],activityid : Guid* [In],relatedactivityid : Guid* [In],userdatacount : UInt32 [In],userdata : EVENT_DATA_DESCRIPTOR* [In]
-  fun EventWriteTransfer(reghandle : UInt64, eventdescriptor : EVENT_DESCRIPTOR*, activityid : Guid*, relatedactivityid : Guid*, userdatacount : UInt32, userdata : EVENT_DATA_DESCRIPTOR*) : UInt32
+    fun EventAccessQuery(guid : LibC::GUID*, buffer : Win32cr::Security::PSECURITY_DESCRIPTOR, buffer_size : UInt32*) : UInt32
 
-  # Params # reghandle : UInt64 [In],eventdescriptor : EVENT_DESCRIPTOR* [In],filter : UInt64 [In],flags : UInt32 [In],activityid : Guid* [In],relatedactivityid : Guid* [In],userdatacount : UInt32 [In],userdata : EVENT_DATA_DESCRIPTOR* [In]
-  fun EventWriteEx(reghandle : UInt64, eventdescriptor : EVENT_DESCRIPTOR*, filter : UInt64, flags : UInt32, activityid : Guid*, relatedactivityid : Guid*, userdatacount : UInt32, userdata : EVENT_DATA_DESCRIPTOR*) : UInt32
+    fun EventAccessRemove(guid : LibC::GUID*) : UInt32
 
-  # Params # reghandle : UInt64 [In],level : UInt8 [In],keyword : UInt64 [In],string : LibC::LPWSTR [In]
-  fun EventWriteString(reghandle : UInt64, level : UInt8, keyword : UInt64, string : LibC::LPWSTR) : UInt32
+    fun TdhCreatePayloadFilter(provider_guid : LibC::GUID*, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, event_match_any : Win32cr::Foundation::BOOLEAN, payload_predicate_count : UInt32, payload_predicates : Win32cr::System::Diagnostics::Etw::PAYLOAD_FILTER_PREDICATE*, payload_filter : Void**) : UInt32
 
-  # Params # controlcode : UInt32 [In],activityid : Guid* [In]
-  fun EventActivityIdControl(controlcode : UInt32, activityid : Guid*) : UInt32
+    fun TdhDeletePayloadFilter(payload_filter : Void**) : UInt32
 
-  # Params # guid : Guid* [In],operation : UInt32 [In],sid : PSID [In],rights : UInt32 [In],allowordeny : BOOLEAN [In]
-  fun EventAccessControl(guid : Guid*, operation : UInt32, sid : PSID, rights : UInt32, allowordeny : BOOLEAN) : UInt32
+    fun TdhAggregatePayloadFilters(payload_filter_count : UInt32, payload_filter_ptrs : Void**, event_match_all_flags : Win32cr::Foundation::BOOLEAN*, event_filter_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*) : UInt32
 
-  # Params # guid : Guid* [In],buffer : SECURITY_DESCRIPTOR* [In],buffersize : UInt32* [In]
-  fun EventAccessQuery(guid : Guid*, buffer : SECURITY_DESCRIPTOR*, buffersize : UInt32*) : UInt32
+    fun TdhCleanupPayloadEventFilterDescriptor(event_filter_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*) : UInt32
 
-  # Params # guid : Guid* [In]
-  fun EventAccessRemove(guid : Guid*) : UInt32
+    fun TdhGetEventInformation(event : Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, tdh_context_count : UInt32, tdh_context : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT*, buffer : Win32cr::System::Diagnostics::Etw::TRACE_EVENT_INFO*, buffer_size : UInt32*) : UInt32
 
-  # Params # providerguid : Guid* [In],eventdescriptor : EVENT_DESCRIPTOR* [In],eventmatchany : BOOLEAN [In],payloadpredicatecount : UInt32 [In],payloadpredicates : PAYLOAD_FILTER_PREDICATE* [In],payloadfilter : Void** [In]
-  fun TdhCreatePayloadFilter(providerguid : Guid*, eventdescriptor : EVENT_DESCRIPTOR*, eventmatchany : BOOLEAN, payloadpredicatecount : UInt32, payloadpredicates : PAYLOAD_FILTER_PREDICATE*, payloadfilter : Void**) : UInt32
+    fun TdhGetEventMapInformation(pEvent : Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, pMapName : Win32cr::Foundation::PWSTR, pBuffer : Win32cr::System::Diagnostics::Etw::EVENT_MAP_INFO*, pBufferSize : UInt32*) : UInt32
 
-  # Params # payloadfilter : Void** [In]
-  fun TdhDeletePayloadFilter(payloadfilter : Void**) : UInt32
+    fun TdhGetPropertySize(pEvent : Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, tdh_context_count : UInt32, pTdhContext : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT*, property_data_count : UInt32, pPropertyData : Win32cr::System::Diagnostics::Etw::PROPERTY_DATA_DESCRIPTOR*, pPropertySize : UInt32*) : UInt32
 
-  # Params # payloadfiltercount : UInt32 [In],payloadfilterptrs : Void** [In],eventmatchallflags : BOOLEAN* [In],eventfilterdescriptor : EVENT_FILTER_DESCRIPTOR* [In]
-  fun TdhAggregatePayloadFilters(payloadfiltercount : UInt32, payloadfilterptrs : Void**, eventmatchallflags : BOOLEAN*, eventfilterdescriptor : EVENT_FILTER_DESCRIPTOR*) : UInt32
+    fun TdhGetProperty(pEvent : Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, tdh_context_count : UInt32, pTdhContext : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT*, property_data_count : UInt32, pPropertyData : Win32cr::System::Diagnostics::Etw::PROPERTY_DATA_DESCRIPTOR*, buffer_size : UInt32, pBuffer : UInt8*) : UInt32
 
-  # Params # eventfilterdescriptor : EVENT_FILTER_DESCRIPTOR* [In]
-  fun TdhCleanupPayloadEventFilterDescriptor(eventfilterdescriptor : EVENT_FILTER_DESCRIPTOR*) : UInt32
+    fun TdhEnumerateProviders(pBuffer : Win32cr::System::Diagnostics::Etw::PROVIDER_ENUMERATION_INFO*, pBufferSize : UInt32*) : UInt32
 
-  # Params # event : EVENT_RECORD* [In],tdhcontextcount : UInt32 [In],tdhcontext : TDH_CONTEXT* [In],buffer : TRACE_EVENT_INFO* [In],buffersize : UInt32* [In]
-  fun TdhGetEventInformation(event : EVENT_RECORD*, tdhcontextcount : UInt32, tdhcontext : TDH_CONTEXT*, buffer : TRACE_EVENT_INFO*, buffersize : UInt32*) : UInt32
+    fun TdhEnumerateProvidersForDecodingSource(filter : Win32cr::System::Diagnostics::Etw::DECODING_SOURCE, buffer : Win32cr::System::Diagnostics::Etw::PROVIDER_ENUMERATION_INFO*, bufferSize : UInt32, bufferRequired : UInt32*) : UInt32
 
-  # Params # pevent : EVENT_RECORD* [In],pmapname : LibC::LPWSTR [In],pbuffer : EVENT_MAP_INFO* [In],pbuffersize : UInt32* [In]
-  fun TdhGetEventMapInformation(pevent : EVENT_RECORD*, pmapname : LibC::LPWSTR, pbuffer : EVENT_MAP_INFO*, pbuffersize : UInt32*) : UInt32
+    fun TdhQueryProviderFieldInformation(pGuid : LibC::GUID*, event_field_value : UInt64, event_field_type : Win32cr::System::Diagnostics::Etw::EVENT_FIELD_TYPE, pBuffer : Win32cr::System::Diagnostics::Etw::PROVIDER_FIELD_INFOARRAY*, pBufferSize : UInt32*) : UInt32
 
-  # Params # pevent : EVENT_RECORD* [In],tdhcontextcount : UInt32 [In],ptdhcontext : TDH_CONTEXT* [In],propertydatacount : UInt32 [In],ppropertydata : PROPERTY_DATA_DESCRIPTOR* [In],ppropertysize : UInt32* [In]
-  fun TdhGetPropertySize(pevent : EVENT_RECORD*, tdhcontextcount : UInt32, ptdhcontext : TDH_CONTEXT*, propertydatacount : UInt32, ppropertydata : PROPERTY_DATA_DESCRIPTOR*, ppropertysize : UInt32*) : UInt32
+    fun TdhEnumerateProviderFieldInformation(pGuid : LibC::GUID*, event_field_type : Win32cr::System::Diagnostics::Etw::EVENT_FIELD_TYPE, pBuffer : Win32cr::System::Diagnostics::Etw::PROVIDER_FIELD_INFOARRAY*, pBufferSize : UInt32*) : UInt32
 
-  # Params # pevent : EVENT_RECORD* [In],tdhcontextcount : UInt32 [In],ptdhcontext : TDH_CONTEXT* [In],propertydatacount : UInt32 [In],ppropertydata : PROPERTY_DATA_DESCRIPTOR* [In],buffersize : UInt32 [In],pbuffer : UInt8* [In]
-  fun TdhGetProperty(pevent : EVENT_RECORD*, tdhcontextcount : UInt32, ptdhcontext : TDH_CONTEXT*, propertydatacount : UInt32, ppropertydata : PROPERTY_DATA_DESCRIPTOR*, buffersize : UInt32, pbuffer : UInt8*) : UInt32
+    fun TdhEnumerateProviderFilters(guid : LibC::GUID*, tdh_context_count : UInt32, tdh_context : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT*, filter_count : UInt32*, buffer : Win32cr::System::Diagnostics::Etw::PROVIDER_FILTER_INFO**, buffer_size : UInt32*) : UInt32
 
-  # Params # pbuffer : PROVIDER_ENUMERATION_INFO* [In],pbuffersize : UInt32* [In]
-  fun TdhEnumerateProviders(pbuffer : PROVIDER_ENUMERATION_INFO*, pbuffersize : UInt32*) : UInt32
+    fun TdhLoadManifest(manifest : Win32cr::Foundation::PWSTR) : UInt32
 
-  # Params # filter : DECODING_SOURCE [In],buffer : PROVIDER_ENUMERATION_INFO* [In],buffersize : UInt32 [In],bufferrequired : UInt32* [In]
-  fun TdhEnumerateProvidersForDecodingSource(filter : DECODING_SOURCE, buffer : PROVIDER_ENUMERATION_INFO*, buffersize : UInt32, bufferrequired : UInt32*) : UInt32
+    fun TdhLoadManifestFromMemory(pData : Void*, cbData : UInt32) : UInt32
 
-  # Params # pguid : Guid* [In],eventfieldvalue : UInt64 [In],eventfieldtype : EVENT_FIELD_TYPE [In],pbuffer : PROVIDER_FIELD_INFOARRAY* [In],pbuffersize : UInt32* [In]
-  fun TdhQueryProviderFieldInformation(pguid : Guid*, eventfieldvalue : UInt64, eventfieldtype : EVENT_FIELD_TYPE, pbuffer : PROVIDER_FIELD_INFOARRAY*, pbuffersize : UInt32*) : UInt32
+    fun TdhUnloadManifest(manifest : Win32cr::Foundation::PWSTR) : UInt32
 
-  # Params # pguid : Guid* [In],eventfieldtype : EVENT_FIELD_TYPE [In],pbuffer : PROVIDER_FIELD_INFOARRAY* [In],pbuffersize : UInt32* [In]
-  fun TdhEnumerateProviderFieldInformation(pguid : Guid*, eventfieldtype : EVENT_FIELD_TYPE, pbuffer : PROVIDER_FIELD_INFOARRAY*, pbuffersize : UInt32*) : UInt32
+    fun TdhUnloadManifestFromMemory(pData : Void*, cbData : UInt32) : UInt32
 
-  # Params # guid : Guid* [In],tdhcontextcount : UInt32 [In],tdhcontext : TDH_CONTEXT* [In],filtercount : UInt32* [In],buffer : PROVIDER_FILTER_INFO** [In],buffersize : UInt32* [In]
-  fun TdhEnumerateProviderFilters(guid : Guid*, tdhcontextcount : UInt32, tdhcontext : TDH_CONTEXT*, filtercount : UInt32*, buffer : PROVIDER_FILTER_INFO**, buffersize : UInt32*) : UInt32
+    fun TdhFormatProperty(event_info : Win32cr::System::Diagnostics::Etw::TRACE_EVENT_INFO*, map_info : Win32cr::System::Diagnostics::Etw::EVENT_MAP_INFO*, pointer_size : UInt32, property_in_type : UInt16, property_out_type : UInt16, property_length : UInt16, user_data_length : UInt16, user_data : UInt8*, buffer_size : UInt32*, buffer : Win32cr::Foundation::PWSTR, user_data_consumed : UInt16*) : UInt32
 
-  # Params # manifest : LibC::LPWSTR [In]
-  fun TdhLoadManifest(manifest : LibC::LPWSTR) : UInt32
-
-  # Params # pdata : Void* [In],cbdata : UInt32 [In]
-  fun TdhLoadManifestFromMemory(pdata : Void*, cbdata : UInt32) : UInt32
-
-  # Params # manifest : LibC::LPWSTR [In]
-  fun TdhUnloadManifest(manifest : LibC::LPWSTR) : UInt32
-
-  # Params # pdata : Void* [In],cbdata : UInt32 [In]
-  fun TdhUnloadManifestFromMemory(pdata : Void*, cbdata : UInt32) : UInt32
-
-  # Params # eventinfo : TRACE_EVENT_INFO* [In],mapinfo : EVENT_MAP_INFO* [In],pointersize : UInt32 [In],propertyintype : UInt16 [In],propertyouttype : UInt16 [In],propertylength : UInt16 [In],userdatalength : UInt16 [In],userdata : UInt8* [In],buffersize : UInt32* [In],buffer : LibC::LPWSTR [In],userdataconsumed : UInt16* [In]
-  fun TdhFormatProperty(eventinfo : TRACE_EVENT_INFO*, mapinfo : EVENT_MAP_INFO*, pointersize : UInt32, propertyintype : UInt16, propertyouttype : UInt16, propertylength : UInt16, userdatalength : UInt16, userdata : UInt8*, buffersize : UInt32*, buffer : LibC::LPWSTR, userdataconsumed : UInt16*) : UInt32
-
-  # Params # handle : TDH_HANDLE* [In]
-  fun TdhOpenDecodingHandle(handle : TDH_HANDLE*) : UInt32
-
-  # Params # handle : TDH_HANDLE [In],tdhcontext : TDH_CONTEXT* [In]
-  fun TdhSetDecodingParameter(handle : TDH_HANDLE, tdhcontext : TDH_CONTEXT*) : UInt32
-
-  # Params # handle : TDH_HANDLE [In],tdhcontext : TDH_CONTEXT* [In]
-  fun TdhGetDecodingParameter(handle : TDH_HANDLE, tdhcontext : TDH_CONTEXT*) : UInt32
-
-  # Params # handle : TDH_HANDLE [In],eventrecord : EVENT_RECORD* [In],propertyname : LibC::LPWSTR [In],buffersize : UInt32* [In],buffer : UInt8* [In]
-  fun TdhGetWppProperty(handle : TDH_HANDLE, eventrecord : EVENT_RECORD*, propertyname : LibC::LPWSTR, buffersize : UInt32*, buffer : UInt8*) : UInt32
-
-  # Params # handle : TDH_HANDLE [In],eventrecord : EVENT_RECORD* [In],buffersize : UInt32* [In],buffer : UInt8* [In]
-  fun TdhGetWppMessage(handle : TDH_HANDLE, eventrecord : EVENT_RECORD*, buffersize : UInt32*, buffer : UInt8*) : UInt32
-
-  # Params # handle : TDH_HANDLE [In]
-  fun TdhCloseDecodingHandle(handle : TDH_HANDLE) : UInt32
-
-  # Params # binarypath : LibC::LPWSTR [In]
-  fun TdhLoadManifestFromBinary(binarypath : LibC::LPWSTR) : UInt32
-
-  # Params # providerguid : Guid* [In],buffer : PROVIDER_EVENT_INFO* [In],buffersize : UInt32* [In]
-  fun TdhEnumerateManifestProviderEvents(providerguid : Guid*, buffer : PROVIDER_EVENT_INFO*, buffersize : UInt32*) : UInt32
-
-  # Params # providerguid : Guid* [In],eventdescriptor : EVENT_DESCRIPTOR* [In],buffer : TRACE_EVENT_INFO* [In],buffersize : UInt32* [In]
-  fun TdhGetManifestEventInformation(providerguid : Guid*, eventdescriptor : EVENT_DESCRIPTOR*, buffer : TRACE_EVENT_INFO*, buffersize : UInt32*) : UInt32
-
-  # Params # cveid : LibC::LPWSTR [In],additionaldetails : LibC::LPWSTR [In]
-  fun CveEventWrite(cveid : LibC::LPWSTR, additionaldetails : LibC::LPWSTR) : Int32
-end
-struct LibWin32::ITraceEvent
-  def query_interface(this : ITraceEvent*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ITraceEvent*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ITraceEvent*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def clone(this : ITraceEvent*, newevent : ITraceEvent*) : HRESULT
-    @lpVtbl.value.clone.call(this, newevent)
-  end
-  def get_user_context(this : ITraceEvent*, usercontext : Void**) : HRESULT
-    @lpVtbl.value.get_user_context.call(this, usercontext)
-  end
-  def get_event_record(this : ITraceEvent*, eventrecord : EVENT_RECORD**) : HRESULT
-    @lpVtbl.value.get_event_record.call(this, eventrecord)
-  end
-  def set_payload(this : ITraceEvent*, payload : UInt8*, payloadsize : UInt32) : HRESULT
-    @lpVtbl.value.set_payload.call(this, payload, payloadsize)
-  end
-  def set_event_descriptor(this : ITraceEvent*, eventdescriptor : EVENT_DESCRIPTOR*) : HRESULT
-    @lpVtbl.value.set_event_descriptor.call(this, eventdescriptor)
-  end
-  def set_process_id(this : ITraceEvent*, processid : UInt32) : HRESULT
-    @lpVtbl.value.set_process_id.call(this, processid)
-  end
-  def set_processor_index(this : ITraceEvent*, processorindex : UInt32) : HRESULT
-    @lpVtbl.value.set_processor_index.call(this, processorindex)
-  end
-  def set_thread_id(this : ITraceEvent*, threadid : UInt32) : HRESULT
-    @lpVtbl.value.set_thread_id.call(this, threadid)
-  end
-  def set_thread_times(this : ITraceEvent*, kerneltime : UInt32, usertime : UInt32) : HRESULT
-    @lpVtbl.value.set_thread_times.call(this, kerneltime, usertime)
-  end
-  def set_activity_id(this : ITraceEvent*, activityid : Guid*) : HRESULT
-    @lpVtbl.value.set_activity_id.call(this, activityid)
-  end
-  def set_time_stamp(this : ITraceEvent*, timestamp : LARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.set_time_stamp.call(this, timestamp)
-  end
-  def set_provider_id(this : ITraceEvent*, providerid : Guid*) : HRESULT
-    @lpVtbl.value.set_provider_id.call(this, providerid)
-  end
-end
-struct LibWin32::ITraceEventCallback
-  def query_interface(this : ITraceEventCallback*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ITraceEventCallback*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ITraceEventCallback*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def on_begin_process_trace(this : ITraceEventCallback*, headerevent : ITraceEvent, relogger : ITraceRelogger) : HRESULT
-    @lpVtbl.value.on_begin_process_trace.call(this, headerevent, relogger)
-  end
-  def on_finalize_process_trace(this : ITraceEventCallback*, relogger : ITraceRelogger) : HRESULT
-    @lpVtbl.value.on_finalize_process_trace.call(this, relogger)
-  end
-  def on_event(this : ITraceEventCallback*, event : ITraceEvent, relogger : ITraceRelogger) : HRESULT
-    @lpVtbl.value.on_event.call(this, event, relogger)
-  end
-end
-struct LibWin32::ITraceRelogger
-  def query_interface(this : ITraceRelogger*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ITraceRelogger*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ITraceRelogger*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def add_logfile_trace_stream(this : ITraceRelogger*, logfilename : UInt8*, usercontext : Void*, tracehandle : UInt64*) : HRESULT
-    @lpVtbl.value.add_logfile_trace_stream.call(this, logfilename, usercontext, tracehandle)
-  end
-  def add_realtime_trace_stream(this : ITraceRelogger*, loggername : UInt8*, usercontext : Void*, tracehandle : UInt64*) : HRESULT
-    @lpVtbl.value.add_realtime_trace_stream.call(this, loggername, usercontext, tracehandle)
-  end
-  def register_callback(this : ITraceRelogger*, callback : ITraceEventCallback) : HRESULT
-    @lpVtbl.value.register_callback.call(this, callback)
-  end
-  def inject(this : ITraceRelogger*, event : ITraceEvent) : HRESULT
-    @lpVtbl.value.inject.call(this, event)
-  end
-  def create_event_instance(this : ITraceRelogger*, tracehandle : UInt64, flags : UInt32, event : ITraceEvent*) : HRESULT
-    @lpVtbl.value.create_event_instance.call(this, tracehandle, flags, event)
-  end
-  def process_trace(this : ITraceRelogger*) : HRESULT
-    @lpVtbl.value.process_trace.call(this)
-  end
-  def set_output_filename(this : ITraceRelogger*, logfilename : UInt8*) : HRESULT
-    @lpVtbl.value.set_output_filename.call(this, logfilename)
-  end
-  def set_compression_mode(this : ITraceRelogger*, compressionmode : BOOLEAN) : HRESULT
-    @lpVtbl.value.set_compression_mode.call(this, compressionmode)
-  end
-  def cancel(this : ITraceRelogger*) : HRESULT
-    @lpVtbl.value.cancel.call(this)
+    fun TdhOpenDecodingHandle(handle : Win32cr::System::Diagnostics::Etw::TDH_HANDLE*) : UInt32
+
+    fun TdhSetDecodingParameter(handle : Win32cr::System::Diagnostics::Etw::TDH_HANDLE, tdh_context : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT*) : UInt32
+
+    fun TdhGetDecodingParameter(handle : Win32cr::System::Diagnostics::Etw::TDH_HANDLE, tdh_context : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT*) : UInt32
+
+    fun TdhGetWppProperty(handle : Win32cr::System::Diagnostics::Etw::TDH_HANDLE, event_record : Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, property_name : Win32cr::Foundation::PWSTR, buffer_size : UInt32*, buffer : UInt8*) : UInt32
+
+    fun TdhGetWppMessage(handle : Win32cr::System::Diagnostics::Etw::TDH_HANDLE, event_record : Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, buffer_size : UInt32*, buffer : UInt8*) : UInt32
+
+    fun TdhCloseDecodingHandle(handle : Win32cr::System::Diagnostics::Etw::TDH_HANDLE) : UInt32
+
+    fun TdhLoadManifestFromBinary(binary_path : Win32cr::Foundation::PWSTR) : UInt32
+
+    fun TdhEnumerateManifestProviderEvents(provider_guid : LibC::GUID*, buffer : Win32cr::System::Diagnostics::Etw::PROVIDER_EVENT_INFO*, buffer_size : UInt32*) : UInt32
+
+    fun TdhGetManifestEventInformation(provider_guid : LibC::GUID*, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, buffer : Win32cr::System::Diagnostics::Etw::TRACE_EVENT_INFO*, buffer_size : UInt32*) : UInt32
+
+    fun CveEventWrite(cve_id : Win32cr::Foundation::PWSTR, additional_details : Win32cr::Foundation::PWSTR) : Int32
+
   end
 end

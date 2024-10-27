@@ -1,216 +1,17 @@
-require "../foundation.cr"
+require "./../foundation.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:bluetoothapis.dll")]
-@[Link(ldflags: "/DELAYLOAD:bthprops.dll")]
-{% else %}
-@[Link("bluetoothapis")]
-@[Link("bthprops")]
-{% end %}
-lib LibWin32
+module Win32cr::Devices::Bluetooth
   alias HANDLE_SDP_TYPE = UInt64
+  alias PFN_DEVICE_CALLBACK = Proc(Void*, Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, Win32cr::Foundation::BOOL)*
 
-  BT_PORT_MIN = 1_u32
-  BT_PORT_MAX = 65535_u32
-  BT_PORT_DYN_FIRST = 4097_u32
-  AF_BTH = 32_u16
-  PF_BTH = 32_u16
-  NS_BTH = 16_u32
-  SVCID_BTH_PROVIDER = "06aa63e0-7d60-41ff-afb2-3ee6d2d9392d"
-  BTH_ADDR_STRING_SIZE = 12_u32
-  BTHPROTO_RFCOMM = 3_u32
-  BTHPROTO_L2CAP = 256_u32
-  SOL_RFCOMM = 3_u32
-  SOL_L2CAP = 256_u32
-  SOL_SDP = 257_u32
-  SO_BTH_AUTHENTICATE = 2147483649_u32
-  SO_BTH_ENCRYPT = 2_u32
-  SO_BTH_MTU = 2147483655_u32
-  SO_BTH_MTU_MAX = 2147483656_u32
-  SO_BTH_MTU_MIN = 2147483658_u32
-  RFCOMM_MAX_MTU = 1011_u32
-  RFCOMM_MIN_MTU = 23_u32
-  BTH_SDP_VERSION = 1_u32
-  SDP_DEFAULT_INQUIRY_SECONDS = 6_u32
-  SDP_MAX_INQUIRY_SECONDS = 60_u32
-  SDP_DEFAULT_INQUIRY_MAX_RESPONSES = 255_u32
-  SDP_SERVICE_SEARCH_REQUEST = 1_u32
-  SDP_SERVICE_ATTRIBUTE_REQUEST = 2_u32
-  SDP_SERVICE_SEARCH_ATTRIBUTE_REQUEST = 3_u32
-  BTHNS_RESULT_DEVICE_CONNECTED = 65536_u32
-  BTHNS_RESULT_DEVICE_REMEMBERED = 131072_u32
-  BTHNS_RESULT_DEVICE_AUTHENTICATED = 262144_u32
-  RLS_ERROR = 1_u32
-  RLS_OVERRUN = 2_u32
-  RLS_PARITY = 4_u32
-  RLS_FRAMING = 8_u32
-  RPN_BAUD_2400 = 0_u32
-  RPN_BAUD_4800 = 1_u32
-  RPN_BAUD_7200 = 2_u32
-  RPN_BAUD_9600 = 3_u32
-  RPN_BAUD_19200 = 4_u32
-  RPN_BAUD_38400 = 5_u32
-  RPN_BAUD_57600 = 6_u32
-  RPN_BAUD_115200 = 7_u32
-  RPN_BAUD_230400 = 8_u32
-  RPN_DATA_5 = 0_u32
-  RPN_DATA_6 = 1_u32
-  RPN_DATA_7 = 2_u32
-  RPN_DATA_8 = 3_u32
-  RPN_STOP_1 = 0_u32
-  RPN_STOP_1_5 = 4_u32
-  RPN_PARITY_NONE = 0_u32
-  RPN_PARITY_ODD = 8_u32
-  RPN_PARITY_EVEN = 24_u32
-  RPN_PARITY_MARK = 40_u32
-  RPN_PARITY_SPACE = 56_u32
-  RPN_FLOW_X_IN = 1_u32
-  RPN_FLOW_X_OUT = 2_u32
-  RPN_FLOW_RTR_IN = 4_u32
-  RPN_FLOW_RTR_OUT = 8_u32
-  RPN_FLOW_RTC_IN = 16_u32
-  RPN_FLOW_RTC_OUT = 32_u32
-  RPN_PARAM_BAUD = 1_u32
-  RPN_PARAM_DATA = 2_u32
-  RPN_PARAM_STOP = 4_u32
-  RPN_PARAM_PARITY = 8_u32
-  RPN_PARAM_P_TYPE = 16_u32
-  RPN_PARAM_XON = 32_u32
-  RPN_PARAM_XOFF = 64_u32
-  RPN_PARAM_X_IN = 1_u32
-  RPN_PARAM_X_OUT = 2_u32
-  RPN_PARAM_RTR_IN = 4_u32
-  RPN_PARAM_RTR_OUT = 8_u32
-  RPN_PARAM_RTC_IN = 16_u32
-  RPN_PARAM_RTC_OUT = 32_u32
-  RFCOMM_CMD_NONE = 0_u32
-  RFCOMM_CMD_MSC = 1_u32
-  RFCOMM_CMD_RLS = 2_u32
-  RFCOMM_CMD_RPN = 3_u32
-  RFCOMM_CMD_RPN_REQUEST = 4_u32
-  RFCOMM_CMD_RPN_RESPONSE = 5_u32
-  BLUETOOTH_MAX_NAME_SIZE = 248_u32
-  BLUETOOTH_MAX_PASSKEY_SIZE = 16_u32
-  BLUETOOTH_MAX_PASSKEY_BUFFER_SIZE = 17_u32
-  BLUETOOTH_MAX_SERVICE_NAME_SIZE = 256_u32
-  BLUETOOTH_DEVICE_NAME_SIZE = 256_u32
-  BLUETOOTH_SERVICE_DISABLE = 0_u32
-  BLUETOOTH_SERVICE_ENABLE = 1_u32
-  GUID_BLUETOOTHLE_DEVICE_INTERFACE = "781aee18-7733-4ce4-add0-91f41c67b592"
-  GUID_BLUETOOTH_GATT_SERVICE_DEVICE_INTERFACE = "6e3bb679-4372-40c8-9eaa-4509df260cd8"
-  BTH_LE_ATT_BLUETOOTH_BASE_GUID = "00000000-0000-1000-8000-00805f9b34fb"
-  BTH_LE_SERVICE_GAP = 6144_u32
-  BTH_LE_SERVICE_GATT = 6145_u32
-  BTH_LE_GATT_ATTRIBUTE_TYPE_PRIMARY_SERVICE = 10240_u32
-  BTH_LE_GATT_ATTRIBUTE_TYPE_SECONDARY_SERVICE = 10241_u32
-  BTH_LE_GATT_ATTRIBUTE_TYPE_INCLUDE = 10242_u32
-  BTH_LE_GATT_ATTRIBUTE_TYPE_CHARACTERISTIC = 10243_u32
-  BTH_LE_GATT_CHARACTERISTIC_DESCRIPTOR_EXTENDED_PROPERTIES = 10496_u32
-  BTH_LE_GATT_CHARACTERISTIC_DESCRIPTOR_USER_DESCRIPTION = 10497_u32
-  BTH_LE_GATT_CHARACTERISTIC_DESCRIPTOR_CLIENT_CONFIGURATION = 10498_u32
-  BTH_LE_GATT_CHARACTERISTIC_DESCRIPTOR_SERVER_CONFIGURATION = 10499_u32
-  BTH_LE_GATT_CHARACTERISTIC_DESCRIPTOR_FORMAT = 10500_u32
-  BTH_LE_GATT_CHARACTERISTIC_DESCRIPTOR_AGGREGATE_FORMAT = 10501_u32
-  BTH_LE_GATT_CHARACTERISTIC_TYPE_DEVICE_NAME = 10752_u32
-  BTH_LE_GATT_CHARACTERISTIC_TYPE_APPEARANCE = 10753_u32
-  BTH_LE_GATT_CHARACTERISTIC_TYPE_PERIPHERAL_PRIVACY_FLAG = 10754_u32
-  BTH_LE_GATT_CHARACTERISTIC_TYPE_RECONNECTION_ADDRESS = 10755_u32
-  BTH_LE_GATT_CHARACTERISTIC_TYPE_PERIPHERAL_PREFERED_CONNECTION_PARAMETER = 10756_u32
-  BTH_LE_GATT_CHARACTERISTIC_TYPE_SERVICE_CHANGED = 10757_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_OFFSET = 6_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_MASK = 1023_u32
-  BTH_LE_GAP_APPEARANCE_SUB_CATEGORY_MASK = 63_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_UNCATEGORIZED = 0_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_PHONE = 1_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_COMPUTER = 2_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_WATCH = 3_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_CLOCK = 4_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_DISPLAY = 5_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_REMOTE_CONTROL = 6_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_EYE_GLASSES = 7_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_TAG = 8_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_KEYRING = 9_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_MEDIA_PLAYER = 10_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_BARCODE_SCANNER = 11_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_THERMOMETER = 12_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_HEART_RATE = 13_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_BLOOD_PRESSURE = 14_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_HID = 15_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_GLUCOSE_METER = 16_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_RUNNING_WALKING_SENSOR = 17_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_CYCLING = 18_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_PLUSE_OXIMETER = 49_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_WEIGHT_SCALE = 50_u32
-  BTH_LE_GAP_APPEARANCE_CATEGORY_OUTDOOR_SPORTS_ACTIVITY = 81_u32
-  BTH_LE_GAP_APPEARANCE_SUBCATEGORY_GENERIC = 0_u32
-  BTH_LE_GAP_APPEARANCE_WATCH_SUBCATEGORY_SPORTS_WATCH = 1_u32
-  BTH_LE_GAP_APPEARANCE_THERMOMETER_SUBCATEGORY_EAR = 1_u32
-  BTH_LE_GAP_APPEARANCE_HEART_RATE_SUBCATEGORY_HEART_RATE_BELT = 1_u32
-  BTH_LE_GAP_APPEARANCE_BLOOD_PRESSURE_SUBCATEGORY_ARM = 1_u32
-  BTH_LE_GAP_APPEARANCE_BLOOD_PRESSURE_SUBCATEGORY_WRIST = 2_u32
-  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_KEYBOARD = 1_u32
-  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_MOUSE = 2_u32
-  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_JOYSTICK = 3_u32
-  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_GAMEPAD = 4_u32
-  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_DIGITIZER_TABLET = 5_u32
-  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_CARD_READER = 6_u32
-  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_DIGITAL_PEN = 7_u32
-  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_BARCODE_SCANNER = 8_u32
-  BTH_LE_GAP_APPEARANCE_RUNNING_WALKING_SENSOR_SUBCATEGORY_IN_SHOE = 1_u32
-  BTH_LE_GAP_APPEARANCE_RUNNING_WALKING_SENSOR_SUBCATEGORY_ON_SHOE = 2_u32
-  BTH_LE_GAP_APPEARANCE_RUNNING_WALKING_SENSOR_SUBCATEGORY_ON_HIP = 3_u32
-  BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_CYCLING_COMPUTER = 1_u32
-  BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_SPEED_SENSOR = 2_u32
-  BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_CADENCE_SENSOR = 3_u32
-  BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_POWER_SENSOR = 4_u32
-  BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_SPEED_AND_CADENCE_SENSOR = 5_u32
-  BTH_LE_GAP_APPEARANCE_PULSE_OXIMETER_SUBCATEGORY_FINGERTIP = 1_u32
-  BTH_LE_GAP_APPEARANCE_PULSE_OXIMETER_SUBCATEGORY_WRIST_WORN = 2_u32
-  BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_DISPLAY_DEVICE = 1_u32
-  BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_NAVIGATION_DISPLAY_DEVICE = 2_u32
-  BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_POD = 3_u32
-  BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_NAVIGATION_POD = 4_u32
-  BTH_LE_GATT_DEFAULT_MAX_INCLUDED_SERVICES_DEPTH = 3_u32
-  BTH_LE_ATT_TRANSACTION_TIMEOUT = 30_u32
-  BTH_LE_ATT_MAX_VALUE_SIZE = 512_u32
-  BTH_LE_ATT_CID = 4_u32
-  BTHLEENUM_ATT_MTU_MIN = 23_u32
-  BTHLEENUM_ATT_MTU_MAX = 65535_u32
-  BTHLEENUM_ATT_MTU_DEFAULT = 23_u32
-  BTHLEENUM_ATT_MTU_INITIAL_NEGOTIATION = 525_u32
-  BTH_LE_ERROR_INVALID_HANDLE = 1_u32
-  BTH_LE_ERROR_READ_NOT_PERMITTED = 2_u32
-  BTH_LE_ERROR_WRITE_NOT_PERMITTED = 3_u32
-  BTH_LE_ERROR_INVALID_PDU = 4_u32
-  BTH_LE_ERROR_INSUFFICIENT_AUTHENTICATION = 5_u32
-  BTH_LE_ERROR_REQUEST_NOT_SUPPORTED = 6_u32
-  BTH_LE_ERROR_INVALID_OFFSET = 7_u32
-  BTH_LE_ERROR_INSUFFICIENT_AUTHORIZATION = 8_u32
-  BTH_LE_ERROR_PREPARE_QUEUE_FULL = 9_u32
-  BTH_LE_ERROR_ATTRIBUTE_NOT_FOUND = 10_u32
-  BTH_LE_ERROR_ATTRIBUTE_NOT_LONG = 11_u32
-  BTH_LE_ERROR_INSUFFICIENT_ENCRYPTION_KEY_SIZE = 12_u32
-  BTH_LE_ERROR_INVALID_ATTRIBUTE_VALUE_LENGTH = 13_u32
-  BTH_LE_ERROR_UNLIKELY = 14_u32
-  BTH_LE_ERROR_INSUFFICIENT_ENCRYPTION = 15_u32
-  BTH_LE_ERROR_UNSUPPORTED_GROUP_TYPE = 16_u32
-  BTH_LE_ERROR_INSUFFICIENT_RESOURCES = 17_u32
-  BTH_LE_ERROR_UNKNOWN = 4096_u32
-  BLUETOOTH_GATT_FLAG_NONE = 0_u32
-  BLUETOOTH_GATT_FLAG_CONNECTION_ENCRYPTED = 1_u32
-  BLUETOOTH_GATT_FLAG_CONNECTION_AUTHENTICATED = 2_u32
-  BLUETOOTH_GATT_FLAG_FORCE_READ_FROM_DEVICE = 4_u32
-  BLUETOOTH_GATT_FLAG_FORCE_READ_FROM_CACHE = 8_u32
-  BLUETOOTH_GATT_FLAG_SIGNED_WRITE = 16_u32
-  BLUETOOTH_GATT_FLAG_WRITE_WITHOUT_RESPONSE = 32_u32
-  BLUETOOTH_GATT_FLAG_RETURN_ALL = 64_u32
+  alias PFN_AUTHENTICATION_CALLBACK = Proc(Void*, Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_AUTHENTICATION_CALLBACK_EX = Proc(Void*, Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK = Proc(UInt32, UInt8*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFNBLUETOOTH_GATT_EVENT_CALLBACK = Proc(Win32cr::Devices::Bluetooth::BTH_LE_GATT_EVENT_TYPE, Void*, Void*, Void)*
+
   BTH_MAJORVERSION = 2_u32
   BTH_MINORVERSION = 1_u32
   GUID_BTHPORT_DEVICE_INTERFACE = "0850302a-b344-4fda-9be9-90576b8d46f0"
@@ -763,6 +564,15 @@ lib LibWin32
   PSM_ATT = 31_u32
   PSM_3DSP = 33_u32
   PSM_LE_IPSP = 35_u32
+  STR_ADDR_FMTA = "(%02x:%02x:%02x:%02x:%02x:%02x)"
+  STR_ADDR_FMTW = "(%02x:%02x:%02x:%02x:%02x:%02x)"
+  STR_ADDR_SHORT_FMTA = "%04x%08x"
+  STR_ADDR_SHORT_FMTW = "%04x%08x"
+  STR_USBHCI_CLASS_HARDWAREIDA = "USB\\Class_E0&SubClass_01&Prot_01"
+  STR_USBHCI_CLASS_HARDWAREIDW = "USB\\Class_E0&SubClass_01&Prot_01"
+  STR_ADDR_FMT = "(%02x:%02x:%02x:%02x:%02x:%02x)"
+  STR_ADDR_SHORT_FMT = "%04x%08x"
+  STR_USBHCI_CLASS_HARDWAREID = "USB\\Class_E0&SubClass_01&Prot_01"
   BTH_IOCTL_BASE = 0_u32
   SDP_CONNECT_CACHE = 1_u32
   SDP_CONNECT_ALLOW_PIN = 2_u32
@@ -787,457 +597,824 @@ lib LibWin32
   BTH_HOST_FEATURE_LOW_ENERGY = 4_u64
   BTH_HOST_FEATURE_SCO_HCI = 8_u64
   BTH_HOST_FEATURE_SCO_HCIBYPASS = 16_u64
+  BLUETOOTH_MAX_NAME_SIZE = 248_u32
+  BLUETOOTH_MAX_PASSKEY_SIZE = 16_u32
+  BLUETOOTH_MAX_PASSKEY_BUFFER_SIZE = 17_u32
+  BLUETOOTH_MAX_SERVICE_NAME_SIZE = 256_u32
+  BLUETOOTH_DEVICE_NAME_SIZE = 256_u32
+  BLUETOOTH_SERVICE_DISABLE = 0_u32
+  BLUETOOTH_SERVICE_ENABLE = 1_u32
+  GUID_BLUETOOTHLE_DEVICE_INTERFACE = "781aee18-7733-4ce4-add0-91f41c67b592"
+  GUID_BLUETOOTH_GATT_SERVICE_DEVICE_INTERFACE = "6e3bb679-4372-40c8-9eaa-4509df260cd8"
+  BTH_LE_ATT_BLUETOOTH_BASE_GUID = "00000000-0000-1000-8000-00805f9b34fb"
+  BTH_LE_SERVICE_GAP = 6144_u32
+  BTH_LE_SERVICE_GATT = 6145_u32
+  BTH_LE_GATT_ATTRIBUTE_TYPE_PRIMARY_SERVICE = 10240_u32
+  BTH_LE_GATT_ATTRIBUTE_TYPE_SECONDARY_SERVICE = 10241_u32
+  BTH_LE_GATT_ATTRIBUTE_TYPE_INCLUDE = 10242_u32
+  BTH_LE_GATT_ATTRIBUTE_TYPE_CHARACTERISTIC = 10243_u32
+  BTH_LE_GATT_CHARACTERISTIC_DESCRIPTOR_EXTENDED_PROPERTIES = 10496_u32
+  BTH_LE_GATT_CHARACTERISTIC_DESCRIPTOR_USER_DESCRIPTION = 10497_u32
+  BTH_LE_GATT_CHARACTERISTIC_DESCRIPTOR_CLIENT_CONFIGURATION = 10498_u32
+  BTH_LE_GATT_CHARACTERISTIC_DESCRIPTOR_SERVER_CONFIGURATION = 10499_u32
+  BTH_LE_GATT_CHARACTERISTIC_DESCRIPTOR_FORMAT = 10500_u32
+  BTH_LE_GATT_CHARACTERISTIC_DESCRIPTOR_AGGREGATE_FORMAT = 10501_u32
+  BTH_LE_GATT_CHARACTERISTIC_TYPE_DEVICE_NAME = 10752_u32
+  BTH_LE_GATT_CHARACTERISTIC_TYPE_APPEARANCE = 10753_u32
+  BTH_LE_GATT_CHARACTERISTIC_TYPE_PERIPHERAL_PRIVACY_FLAG = 10754_u32
+  BTH_LE_GATT_CHARACTERISTIC_TYPE_RECONNECTION_ADDRESS = 10755_u32
+  BTH_LE_GATT_CHARACTERISTIC_TYPE_PERIPHERAL_PREFERED_CONNECTION_PARAMETER = 10756_u32
+  BTH_LE_GATT_CHARACTERISTIC_TYPE_SERVICE_CHANGED = 10757_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_OFFSET = 6_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_MASK = 1023_u32
+  BTH_LE_GAP_APPEARANCE_SUB_CATEGORY_MASK = 63_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_UNCATEGORIZED = 0_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_PHONE = 1_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_COMPUTER = 2_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_WATCH = 3_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_CLOCK = 4_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_DISPLAY = 5_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_REMOTE_CONTROL = 6_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_EYE_GLASSES = 7_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_TAG = 8_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_KEYRING = 9_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_MEDIA_PLAYER = 10_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_BARCODE_SCANNER = 11_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_THERMOMETER = 12_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_HEART_RATE = 13_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_BLOOD_PRESSURE = 14_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_HID = 15_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_GLUCOSE_METER = 16_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_RUNNING_WALKING_SENSOR = 17_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_CYCLING = 18_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_PLUSE_OXIMETER = 49_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_WEIGHT_SCALE = 50_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_OUTDOOR_SPORTS_ACTIVITY = 81_u32
+  BTH_LE_GAP_APPEARANCE_SUBCATEGORY_GENERIC = 0_u32
+  BTH_LE_GAP_APPEARANCE_WATCH_SUBCATEGORY_SPORTS_WATCH = 1_u32
+  BTH_LE_GAP_APPEARANCE_THERMOMETER_SUBCATEGORY_EAR = 1_u32
+  BTH_LE_GAP_APPEARANCE_HEART_RATE_SUBCATEGORY_HEART_RATE_BELT = 1_u32
+  BTH_LE_GAP_APPEARANCE_BLOOD_PRESSURE_SUBCATEGORY_ARM = 1_u32
+  BTH_LE_GAP_APPEARANCE_BLOOD_PRESSURE_SUBCATEGORY_WRIST = 2_u32
+  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_KEYBOARD = 1_u32
+  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_MOUSE = 2_u32
+  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_JOYSTICK = 3_u32
+  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_GAMEPAD = 4_u32
+  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_DIGITIZER_TABLET = 5_u32
+  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_CARD_READER = 6_u32
+  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_DIGITAL_PEN = 7_u32
+  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_BARCODE_SCANNER = 8_u32
+  BTH_LE_GAP_APPEARANCE_RUNNING_WALKING_SENSOR_SUBCATEGORY_IN_SHOE = 1_u32
+  BTH_LE_GAP_APPEARANCE_RUNNING_WALKING_SENSOR_SUBCATEGORY_ON_SHOE = 2_u32
+  BTH_LE_GAP_APPEARANCE_RUNNING_WALKING_SENSOR_SUBCATEGORY_ON_HIP = 3_u32
+  BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_CYCLING_COMPUTER = 1_u32
+  BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_SPEED_SENSOR = 2_u32
+  BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_CADENCE_SENSOR = 3_u32
+  BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_POWER_SENSOR = 4_u32
+  BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_SPEED_AND_CADENCE_SENSOR = 5_u32
+  BTH_LE_GAP_APPEARANCE_PULSE_OXIMETER_SUBCATEGORY_FINGERTIP = 1_u32
+  BTH_LE_GAP_APPEARANCE_PULSE_OXIMETER_SUBCATEGORY_WRIST_WORN = 2_u32
+  BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_DISPLAY_DEVICE = 1_u32
+  BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_NAVIGATION_DISPLAY_DEVICE = 2_u32
+  BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_POD = 3_u32
+  BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_NAVIGATION_POD = 4_u32
+  BTH_LE_GATT_DEFAULT_MAX_INCLUDED_SERVICES_DEPTH = 3_u32
+  BTH_LE_ATT_TRANSACTION_TIMEOUT = 30_u32
+  BTH_LE_ATT_MAX_VALUE_SIZE = 512_u32
+  BTH_LE_ATT_CID = 4_u32
+  BTHLEENUM_ATT_MTU_MIN = 23_u32
+  BTHLEENUM_ATT_MTU_MAX = 65535_u32
+  BTHLEENUM_ATT_MTU_DEFAULT = 23_u32
+  BTHLEENUM_ATT_MTU_INITIAL_NEGOTIATION = 525_u32
+  BTH_LE_ERROR_INVALID_HANDLE = 1_u32
+  BTH_LE_ERROR_READ_NOT_PERMITTED = 2_u32
+  BTH_LE_ERROR_WRITE_NOT_PERMITTED = 3_u32
+  BTH_LE_ERROR_INVALID_PDU = 4_u32
+  BTH_LE_ERROR_INSUFFICIENT_AUTHENTICATION = 5_u32
+  BTH_LE_ERROR_REQUEST_NOT_SUPPORTED = 6_u32
+  BTH_LE_ERROR_INVALID_OFFSET = 7_u32
+  BTH_LE_ERROR_INSUFFICIENT_AUTHORIZATION = 8_u32
+  BTH_LE_ERROR_PREPARE_QUEUE_FULL = 9_u32
+  BTH_LE_ERROR_ATTRIBUTE_NOT_FOUND = 10_u32
+  BTH_LE_ERROR_ATTRIBUTE_NOT_LONG = 11_u32
+  BTH_LE_ERROR_INSUFFICIENT_ENCRYPTION_KEY_SIZE = 12_u32
+  BTH_LE_ERROR_INVALID_ATTRIBUTE_VALUE_LENGTH = 13_u32
+  BTH_LE_ERROR_UNLIKELY = 14_u32
+  BTH_LE_ERROR_INSUFFICIENT_ENCRYPTION = 15_u32
+  BTH_LE_ERROR_UNSUPPORTED_GROUP_TYPE = 16_u32
+  BTH_LE_ERROR_INSUFFICIENT_RESOURCES = 17_u32
+  BTH_LE_ERROR_UNKNOWN = 4096_u32
+  BLUETOOTH_GATT_FLAG_NONE = 0_u32
+  BLUETOOTH_GATT_FLAG_CONNECTION_ENCRYPTED = 1_u32
+  BLUETOOTH_GATT_FLAG_CONNECTION_AUTHENTICATED = 2_u32
+  BLUETOOTH_GATT_FLAG_FORCE_READ_FROM_DEVICE = 4_u32
+  BLUETOOTH_GATT_FLAG_FORCE_READ_FROM_CACHE = 8_u32
+  BLUETOOTH_GATT_FLAG_SIGNED_WRITE = 16_u32
+  BLUETOOTH_GATT_FLAG_WRITE_WITHOUT_RESPONSE = 32_u32
+  BLUETOOTH_GATT_FLAG_RETURN_ALL = 64_u32
+  BT_PORT_MIN = 1_u32
+  BT_PORT_MAX = 65535_u32
+  BT_PORT_DYN_FIRST = 4097_u32
+  AF_BTH = 32_u16
+  PF_BTH = 32_u16
+  NS_BTH = 16_u32
+  SVCID_BTH_PROVIDER = "06aa63e0-7d60-41ff-afb2-3ee6d2d9392d"
+  BTH_ADDR_STRING_SIZE = 12_u32
+  BTHPROTO_RFCOMM = 3_u32
+  BTHPROTO_L2CAP = 256_u32
+  SOL_RFCOMM = 3_u32
+  SOL_L2CAP = 256_u32
+  SOL_SDP = 257_u32
+  SO_BTH_AUTHENTICATE = 2147483649_u32
+  SO_BTH_ENCRYPT = 2_u32
+  SO_BTH_MTU = 2147483655_u32
+  SO_BTH_MTU_MAX = 2147483656_u32
+  SO_BTH_MTU_MIN = 2147483658_u32
+  RFCOMM_MAX_MTU = 1011_u32
+  RFCOMM_MIN_MTU = 23_u32
+  BTH_SDP_VERSION = 1_u32
+  SDP_DEFAULT_INQUIRY_SECONDS = 6_u32
+  SDP_MAX_INQUIRY_SECONDS = 60_u32
+  SDP_DEFAULT_INQUIRY_MAX_RESPONSES = 255_u32
+  SDP_SERVICE_SEARCH_REQUEST = 1_u32
+  SDP_SERVICE_ATTRIBUTE_REQUEST = 2_u32
+  SDP_SERVICE_SEARCH_ATTRIBUTE_REQUEST = 3_u32
+  BTHNS_RESULT_DEVICE_CONNECTED = 65536_u32
+  BTHNS_RESULT_DEVICE_REMEMBERED = 131072_u32
+  BTHNS_RESULT_DEVICE_AUTHENTICATED = 262144_u32
+  RLS_ERROR = 1_u32
+  RLS_OVERRUN = 2_u32
+  RLS_PARITY = 4_u32
+  RLS_FRAMING = 8_u32
+  RPN_BAUD_2400 = 0_u32
+  RPN_BAUD_4800 = 1_u32
+  RPN_BAUD_7200 = 2_u32
+  RPN_BAUD_9600 = 3_u32
+  RPN_BAUD_19200 = 4_u32
+  RPN_BAUD_38400 = 5_u32
+  RPN_BAUD_57600 = 6_u32
+  RPN_BAUD_115200 = 7_u32
+  RPN_BAUD_230400 = 8_u32
+  RPN_DATA_5 = 0_u32
+  RPN_DATA_6 = 1_u32
+  RPN_DATA_7 = 2_u32
+  RPN_DATA_8 = 3_u32
+  RPN_STOP_1 = 0_u32
+  RPN_STOP_1_5 = 4_u32
+  RPN_PARITY_NONE = 0_u32
+  RPN_PARITY_ODD = 8_u32
+  RPN_PARITY_EVEN = 24_u32
+  RPN_PARITY_MARK = 40_u32
+  RPN_PARITY_SPACE = 56_u32
+  RPN_FLOW_X_IN = 1_u32
+  RPN_FLOW_X_OUT = 2_u32
+  RPN_FLOW_RTR_IN = 4_u32
+  RPN_FLOW_RTR_OUT = 8_u32
+  RPN_FLOW_RTC_IN = 16_u32
+  RPN_FLOW_RTC_OUT = 32_u32
+  RPN_PARAM_BAUD = 1_u32
+  RPN_PARAM_DATA = 2_u32
+  RPN_PARAM_STOP = 4_u32
+  RPN_PARAM_PARITY = 8_u32
+  RPN_PARAM_P_TYPE = 16_u32
+  RPN_PARAM_XON = 32_u32
+  RPN_PARAM_XOFF = 64_u32
+  RPN_PARAM_X_IN = 1_u32
+  RPN_PARAM_X_OUT = 2_u32
+  RPN_PARAM_RTR_IN = 4_u32
+  RPN_PARAM_RTR_OUT = 8_u32
+  RPN_PARAM_RTC_IN = 16_u32
+  RPN_PARAM_RTC_OUT = 32_u32
+  RFCOMM_CMD_NONE = 0_u32
+  RFCOMM_CMD_MSC = 1_u32
+  RFCOMM_CMD_RLS = 2_u32
+  RFCOMM_CMD_RPN = 3_u32
+  RFCOMM_CMD_RPN_REQUEST = 4_u32
+  RFCOMM_CMD_RPN_RESPONSE = 5_u32
 
-  alias PFN_DEVICE_CALLBACK = Proc(Void*, BLUETOOTH_DEVICE_INFO*, LibC::BOOL)
-  alias PFN_AUTHENTICATION_CALLBACK = Proc(Void*, BLUETOOTH_DEVICE_INFO*, LibC::BOOL)
-  alias PFN_AUTHENTICATION_CALLBACK_EX = Proc(Void*, BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS*, LibC::BOOL)
-  alias PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK = Proc(UInt32, UInt8*, UInt32, Void*, LibC::BOOL)
-
-
-  enum NodeContainerType : Int32
-    NodeContainerTypeSequence = 0
-    NodeContainerTypeAlternative = 1
+  enum NodeContainerType
+    NodeContainerTypeSequence = 0_i32
+    NodeContainerTypeAlternative = 1_i32
+  end
+  enum SDP_TYPE
+    SDP_TYPE_NIL = 0_i32
+    SDP_TYPE_UINT = 1_i32
+    SDP_TYPE_INT = 2_i32
+    SDP_TYPE_UUID = 3_i32
+    SDP_TYPE_STRING = 4_i32
+    SDP_TYPE_BOOLEAN = 5_i32
+    SDP_TYPE_SEQUENCE = 6_i32
+    SDP_TYPE_ALTERNATIVE = 7_i32
+    SDP_TYPE_URL = 8_i32
+    SDP_TYPE_CONTAINER = 32_i32
+  end
+  enum SDP_SPECIFICTYPE
+    SDP_ST_NONE = 0_i32
+    SDP_ST_UINT8 = 16_i32
+    SDP_ST_UINT16 = 272_i32
+    SDP_ST_UINT32 = 528_i32
+    SDP_ST_UINT64 = 784_i32
+    SDP_ST_UINT128 = 1040_i32
+    SDP_ST_INT8 = 32_i32
+    SDP_ST_INT16 = 288_i32
+    SDP_ST_INT32 = 544_i32
+    SDP_ST_INT64 = 800_i32
+    SDP_ST_INT128 = 1056_i32
+    SDP_ST_UUID16 = 304_i32
+    SDP_ST_UUID32 = 544_i32
+    SDP_ST_UUID128 = 1072_i32
+  end
+  enum IO_CAPABILITY
+    IoCaps_DisplayOnly = 0_i32
+    IoCaps_DisplayYesNo = 1_i32
+    IoCaps_KeyboardOnly = 2_i32
+    IoCaps_NoInputNoOutput = 3_i32
+    IoCaps_Undefined = 255_i32
+  end
+  enum AUTHENTICATION_REQUIREMENTS
+    MITMProtectionNotRequired = 0_i32
+    MITMProtectionRequired = 1_i32
+    MITMProtectionNotRequiredBonding = 2_i32
+    MITMProtectionRequiredBonding = 3_i32
+    MITMProtectionNotRequiredGeneralBonding = 4_i32
+    MITMProtectionRequiredGeneralBonding = 5_i32
+    MITMProtectionNotDefined = 255_i32
+  end
+  enum BLUETOOTH_AUTHENTICATION_METHOD
+    BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 1_i32
+    BLUETOOTH_AUTHENTICATION_METHOD_OOB = 2_i32
+    BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON = 3_i32
+    BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION = 4_i32
+    BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 5_i32
+  end
+  enum BLUETOOTH_IO_CAPABILITY
+    BLUETOOTH_IO_CAPABILITY_DISPLAYONLY = 0_i32
+    BLUETOOTH_IO_CAPABILITY_DISPLAYYESNO = 1_i32
+    BLUETOOTH_IO_CAPABILITY_KEYBOARDONLY = 2_i32
+    BLUETOOTH_IO_CAPABILITY_NOINPUTNOOUTPUT = 3_i32
+    BLUETOOTH_IO_CAPABILITY_UNDEFINED = 255_i32
+  end
+  enum BLUETOOTH_AUTHENTICATION_REQUIREMENTS
+    BLUETOOTH_MITM_ProtectionNotRequired = 0_i32
+    BLUETOOTH_MITM_ProtectionRequired = 1_i32
+    BLUETOOTH_MITM_ProtectionNotRequiredBonding = 2_i32
+    BLUETOOTH_MITM_ProtectionRequiredBonding = 3_i32
+    BLUETOOTH_MITM_ProtectionNotRequiredGeneralBonding = 4_i32
+    BLUETOOTH_MITM_ProtectionRequiredGeneralBonding = 5_i32
+    BLUETOOTH_MITM_ProtectionNotDefined = 255_i32
+  end
+  enum BTH_LE_GATT_DESCRIPTOR_TYPE
+    CharacteristicExtendedProperties = 0_i32
+    CharacteristicUserDescription = 1_i32
+    ClientCharacteristicConfiguration = 2_i32
+    ServerCharacteristicConfiguration = 3_i32
+    CharacteristicFormat = 4_i32
+    CharacteristicAggregateFormat = 5_i32
+    CustomDescriptor = 6_i32
+  end
+  enum BTH_LE_GATT_EVENT_TYPE
+    CharacteristicValueChangedEvent = 0_i32
   end
 
-  enum SDP_TYPE : Int32
-    SDP_TYPE_NIL = 0
-    SDP_TYPE_UINT = 1
-    SDP_TYPE_INT = 2
-    SDP_TYPE_UUID = 3
-    SDP_TYPE_STRING = 4
-    SDP_TYPE_BOOLEAN = 5
-    SDP_TYPE_SEQUENCE = 6
-    SDP_TYPE_ALTERNATIVE = 7
-    SDP_TYPE_URL = 8
-    SDP_TYPE_CONTAINER = 32
-  end
-
-  enum SDP_SPECIFICTYPE : Int32
-    SDP_ST_NONE = 0
-    SDP_ST_UINT8 = 16
-    SDP_ST_UINT16 = 272
-    SDP_ST_UINT32 = 528
-    SDP_ST_UINT64 = 784
-    SDP_ST_UINT128 = 1040
-    SDP_ST_INT8 = 32
-    SDP_ST_INT16 = 288
-    SDP_ST_INT32 = 544
-    SDP_ST_INT64 = 800
-    SDP_ST_INT128 = 1056
-    SDP_ST_UUID16 = 304
-    SDP_ST_UUID32 = 544
-    SDP_ST_UUID128 = 1072
-  end
-
-  enum IO_CAPABILITY : Int32
-    IoCaps_DisplayOnly = 0
-    IoCaps_DisplayYesNo = 1
-    IoCaps_KeyboardOnly = 2
-    IoCaps_NoInputNoOutput = 3
-    IoCaps_Undefined = 255
-  end
-
-  enum AUTHENTICATION_REQUIREMENTS : Int32
-    MITMProtectionNotRequired = 0
-    MITMProtectionRequired = 1
-    MITMProtectionNotRequiredBonding = 2
-    MITMProtectionRequiredBonding = 3
-    MITMProtectionNotRequiredGeneralBonding = 4
-    MITMProtectionRequiredGeneralBonding = 5
-    MITMProtectionNotDefined = 255
-  end
-
-  enum BLUETOOTH_AUTHENTICATION_METHOD : Int32
-    BLUETOOTH_AUTHENTICATION_METHOD_LEGACY = 1
-    BLUETOOTH_AUTHENTICATION_METHOD_OOB = 2
-    BLUETOOTH_AUTHENTICATION_METHOD_NUMERIC_COMPARISON = 3
-    BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY_NOTIFICATION = 4
-    BLUETOOTH_AUTHENTICATION_METHOD_PASSKEY = 5
-  end
-
-  enum BLUETOOTH_IO_CAPABILITY : Int32
-    BLUETOOTH_IO_CAPABILITY_DISPLAYONLY = 0
-    BLUETOOTH_IO_CAPABILITY_DISPLAYYESNO = 1
-    BLUETOOTH_IO_CAPABILITY_KEYBOARDONLY = 2
-    BLUETOOTH_IO_CAPABILITY_NOINPUTNOOUTPUT = 3
-    BLUETOOTH_IO_CAPABILITY_UNDEFINED = 255
-  end
-
-  enum BLUETOOTH_AUTHENTICATION_REQUIREMENTS : Int32
-    BLUETOOTH_MITM_ProtectionNotRequired = 0
-    BLUETOOTH_MITM_ProtectionRequired = 1
-    BLUETOOTH_MITM_ProtectionNotRequiredBonding = 2
-    BLUETOOTH_MITM_ProtectionRequiredBonding = 3
-    BLUETOOTH_MITM_ProtectionNotRequiredGeneralBonding = 4
-    BLUETOOTH_MITM_ProtectionRequiredGeneralBonding = 5
-    BLUETOOTH_MITM_ProtectionNotDefined = 255
-  end
-
-  union SdpQueryUuidUnion
-    uuid128 : Guid
-    uuid32 : UInt32
-    uuid16 : UInt16
-  end
-  union BLUETOOTH_ADDRESS_Anonymous_e__Union
-    ull_long : UInt64
-    rg_bytes : UInt8[6]*
-  end
-  union BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Anonymous_e__Union
-    numeric_value : UInt32
-    passkey : UInt32
-  end
-  union BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union
-    pin_info : BLUETOOTH_PIN_INFO
-    oob_info : BLUETOOTH_OOB_DATA_INFO
-    numeric_comp_info : BLUETOOTH_NUMERIC_COMPARISON_INFO
-    passkey_info : BLUETOOTH_PASSKEY_INFO
-  end
-  union SDP_ELEMENT_DATA_data_e__Union
-    int128 : SDP_LARGE_INTEGER_16
-    int64 : Int64
-    int32 : Int32
-    int16 : Int16
-    int8 : CHAR
-    uint128 : SDP_ULARGE_INTEGER_16
-    uint64 : UInt64
-    uint32 : UInt32
-    uint16 : UInt16
-    uint8 : UInt8
-    boolean_val : UInt8
-    uuid128 : Guid
-    uuid32 : UInt32
-    uuid16 : UInt16
-    string : SDP_ELEMENT_DATA_data_e__Union_string_e__Struct
-    url : SDP_ELEMENT_DATA_data_e__Union_url_e__Struct
-    sequence : SDP_ELEMENT_DATA_data_e__Union_sequence_e__Struct
-    alternative : SDP_ELEMENT_DATA_data_e__Union_alternative_e__Struct
-  end
-  union RFCOMM_COMMAND_Data_e__Union
-    msc : RFCOMM_MSC_DATA
-    rls : RFCOMM_RLS_DATA
-    rpn : RFCOMM_RPN_DATA
-  end
-  union BTH_INFO_RSP_Anonymous_e__Union
-    connectionless_mtu : UInt16
-    data : UInt8[44]*
-  end
-
-  struct SDP_LARGE_INTEGER_16
-    low_part : UInt64
+  @[Extern]
+  record SDP_LARGE_INTEGER_16,
+    low_part : UInt64,
     high_part : Int64
-  end
-  struct SDP_ULARGE_INTEGER_16
-    low_part : UInt64
+
+  @[Extern]
+  record SDP_ULARGE_INTEGER_16,
+    low_part : UInt64,
     high_part : UInt64
-  end
-  struct SdpAttributeRange
-    min_attribute : UInt16
-    max_attribute : UInt16
-  end
-  struct SdpQueryUuid
-    u : SdpQueryUuidUnion
-    uuid_type : UInt16
-  end
-  struct BTH_DEVICE_INFO
-    flags : UInt32
-    address : UInt64
-    class_of_device : UInt32
-    name : CHAR[248]*
-  end
-  struct BTH_RADIO_IN_RANGE
-    device_info : BTH_DEVICE_INFO
-    previous_device_flags : UInt32
-  end
-  struct BTH_L2CAP_EVENT_INFO
-    bth_address : UInt64
-    psm : UInt16
-    connected : UInt8
+
+  @[Extern]
+  record SdpAttributeRange,
+    minAttribute : UInt16,
+    maxAttribute : UInt16
+
+  @[Extern(union: true)]
+  record SdpQueryUuidUnion,
+    uuid128 : LibC::GUID,
+    uuid32 : UInt32,
+    uuid16 : UInt16
+
+  @[Extern]
+  record SdpQueryUuid,
+    u : Win32cr::Devices::Bluetooth::SdpQueryUuidUnion,
+    uuidType : UInt16
+
+  @[Extern]
+  record BTH_DEVICE_INFO,
+    flags : UInt32,
+    address : UInt64,
+    classOfDevice : UInt32,
+    name : Win32cr::Foundation::CHAR[248]
+
+  @[Extern]
+  record BTH_RADIO_IN_RANGE,
+    deviceInfo : Win32cr::Devices::Bluetooth::BTH_DEVICE_INFO,
+    previousDeviceFlags : UInt32
+
+  @[Extern]
+  record BTH_L2CAP_EVENT_INFO,
+    bthAddress : UInt64,
+    psm : UInt16,
+    connected : UInt8,
     initiated : UInt8
-  end
-  struct BTH_HCI_EVENT_INFO
-    bth_address : UInt64
-    connection_type : UInt8
+
+  @[Extern]
+  record BTH_HCI_EVENT_INFO,
+    bthAddress : UInt64,
+    connectionType : UInt8,
     connected : UInt8
+
+  @[Extern]
+  record BLUETOOTH_ADDRESS,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      ullLong : UInt64,
+      rgBytes : UInt8[6]
+
   end
-  struct BLUETOOTH_ADDRESS
-    anonymous : BLUETOOTH_ADDRESS_Anonymous_e__Union
-  end
-  struct BLUETOOTH_LOCAL_SERVICE_INFO
-    enabled : LibC::BOOL
-    bt_addr : BLUETOOTH_ADDRESS
-    sz_name : Char[256]*
-    sz_device_string : Char[256]*
-  end
-  struct BLUETOOTH_FIND_RADIO_PARAMS
-    dw_size : UInt32
-  end
-  struct BLUETOOTH_RADIO_INFO
-    dw_size : UInt32
-    address : BLUETOOTH_ADDRESS
-    sz_name : Char[248]*
-    ul_classof_device : UInt32
-    lmp_subversion : UInt16
+
+  @[Extern]
+  record BLUETOOTH_LOCAL_SERVICE_INFO,
+    enabled : Win32cr::Foundation::BOOL,
+    btAddr : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS,
+    szName : UInt16[256],
+    szDeviceString : UInt16[256]
+
+  @[Extern]
+  record BLUETOOTH_FIND_RADIO_PARAMS,
+    dwSize : UInt32
+
+  @[Extern]
+  record BLUETOOTH_RADIO_INFO,
+    dwSize : UInt32,
+    address : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS,
+    szName : UInt16[248],
+    ulClassofDevice : UInt32,
+    lmpSubversion : UInt16,
     manufacturer : UInt16
+
+  @[Extern]
+  record BLUETOOTH_DEVICE_INFO,
+    dwSize : UInt32,
+    address : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS,
+    ulClassofDevice : UInt32,
+    fConnected : Win32cr::Foundation::BOOL,
+    fRemembered : Win32cr::Foundation::BOOL,
+    fAuthenticated : Win32cr::Foundation::BOOL,
+    stLastSeen : Win32cr::Foundation::SYSTEMTIME,
+    stLastUsed : Win32cr::Foundation::SYSTEMTIME,
+    szName : UInt16[248]
+
+  @[Extern]
+  record BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS,
+    deviceInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO,
+    authenticationMethod : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_METHOD,
+    ioCapability : Win32cr::Devices::Bluetooth::BLUETOOTH_IO_CAPABILITY,
+    authenticationRequirements : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_REQUIREMENTS,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      numeric_value : UInt32,
+      passkey : UInt32
+
   end
-  struct BLUETOOTH_DEVICE_INFO
-    dw_size : UInt32
-    address : BLUETOOTH_ADDRESS
-    ul_classof_device : UInt32
-    f_connected : LibC::BOOL
-    f_remembered : LibC::BOOL
-    f_authenticated : LibC::BOOL
-    st_last_seen : SYSTEMTIME
-    st_last_used : SYSTEMTIME
-    sz_name : Char[248]*
-  end
-  struct BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS
-    device_info : BLUETOOTH_DEVICE_INFO
-    authentication_method : BLUETOOTH_AUTHENTICATION_METHOD
-    io_capability : BLUETOOTH_IO_CAPABILITY
-    authentication_requirements : BLUETOOTH_AUTHENTICATION_REQUIREMENTS
-    anonymous : BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Anonymous_e__Union
-  end
-  struct BLUETOOTH_DEVICE_SEARCH_PARAMS
-    dw_size : UInt32
-    f_return_authenticated : LibC::BOOL
-    f_return_remembered : LibC::BOOL
-    f_return_unknown : LibC::BOOL
-    f_return_connected : LibC::BOOL
-    f_issue_inquiry : LibC::BOOL
-    c_timeout_multiplier : UInt8
-    h_radio : LibC::HANDLE
-  end
-  struct BLUETOOTH_COD_PAIRS
-    ul_cod_mask : UInt32
-    pcsz_description : LibC::LPWSTR
-  end
-  struct BLUETOOTH_SELECT_DEVICE_PARAMS
-    dw_size : UInt32
-    c_num_of_classes : UInt32
-    prg_class_of_devices : BLUETOOTH_COD_PAIRS*
-    psz_info : LibC::LPWSTR
-    hwnd_parent : HANDLE
-    f_force_authentication : LibC::BOOL
-    f_show_authenticated : LibC::BOOL
-    f_show_remembered : LibC::BOOL
-    f_show_unknown : LibC::BOOL
-    f_add_new_device_wizard : LibC::BOOL
-    f_skip_services_page : LibC::BOOL
-    pfn_device_callback : PFN_DEVICE_CALLBACK
-    pv_param : Void*
-    c_num_devices : UInt32
-    p_devices : BLUETOOTH_DEVICE_INFO*
-  end
-  struct BLUETOOTH_PIN_INFO
-    pin : UInt8[16]*
-    pin_length : UInt8
-  end
-  struct BLUETOOTH_OOB_DATA_INFO
-    c : UInt8[16]*
-    r : UInt8[16]*
-  end
-  struct BLUETOOTH_NUMERIC_COMPARISON_INFO
+
+  @[Extern]
+  record BLUETOOTH_DEVICE_SEARCH_PARAMS,
+    dwSize : UInt32,
+    fReturnAuthenticated : Win32cr::Foundation::BOOL,
+    fReturnRemembered : Win32cr::Foundation::BOOL,
+    fReturnUnknown : Win32cr::Foundation::BOOL,
+    fReturnConnected : Win32cr::Foundation::BOOL,
+    fIssueInquiry : Win32cr::Foundation::BOOL,
+    cTimeoutMultiplier : UInt8,
+    hRadio : Win32cr::Foundation::HANDLE
+
+  @[Extern]
+  record BLUETOOTH_COD_PAIRS,
+    ulCODMask : UInt32,
+    pcszDescription : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record BLUETOOTH_SELECT_DEVICE_PARAMS,
+    dwSize : UInt32,
+    cNumOfClasses : UInt32,
+    prgClassOfDevices : Win32cr::Devices::Bluetooth::BLUETOOTH_COD_PAIRS*,
+    pszInfo : Win32cr::Foundation::PWSTR,
+    hwndParent : Win32cr::Foundation::HWND,
+    fForceAuthentication : Win32cr::Foundation::BOOL,
+    fShowAuthenticated : Win32cr::Foundation::BOOL,
+    fShowRemembered : Win32cr::Foundation::BOOL,
+    fShowUnknown : Win32cr::Foundation::BOOL,
+    fAddNewDeviceWizard : Win32cr::Foundation::BOOL,
+    fSkipServicesPage : Win32cr::Foundation::BOOL,
+    pfnDeviceCallback : Win32cr::Devices::Bluetooth::PFN_DEVICE_CALLBACK,
+    pvParam : Void*,
+    cNumDevices : UInt32,
+    pDevices : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*
+
+  @[Extern]
+  record BLUETOOTH_PIN_INFO,
+    pin : UInt8[16],
+    pinLength : UInt8
+
+  @[Extern]
+  record BLUETOOTH_OOB_DATA_INFO,
+    c : UInt8[16],
+    r : UInt8[16]
+
+  @[Extern]
+  record BLUETOOTH_NUMERIC_COMPARISON_INFO,
     numeric_value : UInt32
-  end
-  struct BLUETOOTH_PASSKEY_INFO
+
+  @[Extern]
+  record BLUETOOTH_PASSKEY_INFO,
     passkey : UInt32
+
+  @[Extern]
+  record BLUETOOTH_AUTHENTICATE_RESPONSE,
+    bthAddressRemote : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS,
+    authMethod : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATION_METHOD,
+    anonymous : Anonymous_e__Union,
+    negativeResponse : UInt8 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      pinInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_PIN_INFO,
+      oobInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_OOB_DATA_INFO,
+      numericCompInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_NUMERIC_COMPARISON_INFO,
+      passkeyInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_PASSKEY_INFO
+
   end
-  struct BLUETOOTH_AUTHENTICATE_RESPONSE
-    bth_address_remote : BLUETOOTH_ADDRESS
-    auth_method : BLUETOOTH_AUTHENTICATION_METHOD
-    anonymous : BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union
-    negative_response : UInt8
+
+  @[Extern]
+  record SDP_ELEMENT_DATA,
+    type__ : Win32cr::Devices::Bluetooth::SDP_TYPE,
+    specificType : Win32cr::Devices::Bluetooth::SDP_SPECIFICTYPE,
+    data : Data_e__union do
+
+    # Nested Type Data_e__union
+    @[Extern(union: true)]
+    record Data_e__union,
+      int128 : Win32cr::Devices::Bluetooth::SDP_LARGE_INTEGER_16,
+      int64 : Int64,
+      int32 : Int32,
+      int16 : Int16,
+      int8 : Win32cr::Foundation::CHAR,
+      uint128 : Win32cr::Devices::Bluetooth::SDP_ULARGE_INTEGER_16,
+      uint64 : UInt64,
+      uint32 : UInt32,
+      uint16 : UInt16,
+      uint8 : UInt8,
+      booleanVal : UInt8,
+      uuid128 : LibC::GUID,
+      uuid32 : UInt32,
+      uuid16 : UInt16,
+      string : String_e__struct,
+      url : Url_e__struct,
+      sequence : Sequence_e__struct,
+      alternative : Alternative_e__struct do
+
+      # Nested Type Alternative_e__struct
+      @[Extern]
+      record Alternative_e__struct,
+        value : UInt8*,
+        length : UInt32
+
+
+      # Nested Type Url_e__struct
+      @[Extern]
+      record Url_e__struct,
+        value : UInt8*,
+        length : UInt32
+
+
+      # Nested Type String_e__struct
+      @[Extern]
+      record String_e__struct,
+        value : UInt8*,
+        length : UInt32
+
+
+      # Nested Type Sequence_e__struct
+      @[Extern]
+      record Sequence_e__struct,
+        value : UInt8*,
+        length : UInt32
+
+    end
+
   end
-  struct SDP_ELEMENT_DATA
-    type : SDP_TYPE
-    specific_type : SDP_SPECIFICTYPE
-    data : SDP_ELEMENT_DATA_data_e__Union
+
+  @[Extern]
+  record SDP_STRING_TYPE_DATA,
+    encoding : UInt16,
+    mibeNum : UInt16,
+    attributeId : UInt16
+
+  @[Extern]
+  record BTH_LE_UUID,
+    is_short_uuid : Win32cr::Foundation::BOOLEAN,
+    value : Value_e__Union do
+
+    # Nested Type Value_e__Union
+    @[Extern(union: true)]
+    record Value_e__Union,
+      short_uuid : UInt16,
+      long_uuid : LibC::GUID
+
   end
-  struct SDP_ELEMENT_DATA_data_e__Union_sequence_e__Struct
-    value : UInt8*
-    length : UInt32
+
+  @[Extern]
+  record BTH_LE_GATT_SERVICE,
+    service_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID,
+    attribute_handle : UInt16
+
+  @[Extern]
+  record BTH_LE_GATT_CHARACTERISTIC,
+    service_handle : UInt16,
+    characteristic_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID,
+    attribute_handle : UInt16,
+    characteristic_value_handle : UInt16,
+    is_broadcastable : Win32cr::Foundation::BOOLEAN,
+    is_readable : Win32cr::Foundation::BOOLEAN,
+    is_writable : Win32cr::Foundation::BOOLEAN,
+    is_writable_without_response : Win32cr::Foundation::BOOLEAN,
+    is_signed_writable : Win32cr::Foundation::BOOLEAN,
+    is_notifiable : Win32cr::Foundation::BOOLEAN,
+    is_indicatable : Win32cr::Foundation::BOOLEAN,
+    has_extended_properties : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record BTH_LE_GATT_CHARACTERISTIC_VALUE,
+    data_size : UInt32,
+    data : UInt8*
+
+  @[Extern]
+  record BTH_LE_GATT_DESCRIPTOR,
+    service_handle : UInt16,
+    characteristic_handle : UInt16,
+    descriptor_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_TYPE,
+    descriptor_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID,
+    attribute_handle : UInt16
+
+  @[Extern]
+  record BTH_LE_GATT_DESCRIPTOR_VALUE,
+    descriptor_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_TYPE,
+    descriptor_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID,
+    anonymous : Anonymous_e__Union,
+    data_size : UInt32,
+    data : UInt8* do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      characteristic_extended_properties : CharacteristicExtendedProperties_e__Struct,
+      client_characteristic_configuration : ClientCharacteristicConfiguration_e__Struct,
+      server_characteristic_configuration : ServerCharacteristicConfiguration_e__Struct,
+      characteristic_format : CharacteristicFormat_e__Struct do
+
+      # Nested Type ServerCharacteristicConfiguration_e__Struct
+      @[Extern]
+      record ServerCharacteristicConfiguration_e__Struct,
+        is_broadcast : Win32cr::Foundation::BOOLEAN
+
+
+      # Nested Type CharacteristicExtendedProperties_e__Struct
+      @[Extern]
+      record CharacteristicExtendedProperties_e__Struct,
+        is_reliable_write_enabled : Win32cr::Foundation::BOOLEAN,
+        is_auxiliaries_writable : Win32cr::Foundation::BOOLEAN
+
+
+      # Nested Type CharacteristicFormat_e__Struct
+      @[Extern]
+      record CharacteristicFormat_e__Struct,
+        format : UInt8,
+        exponent : UInt8,
+        unit : Win32cr::Devices::Bluetooth::BTH_LE_UUID,
+        name_space : UInt8,
+        description : Win32cr::Devices::Bluetooth::BTH_LE_UUID
+
+
+      # Nested Type ClientCharacteristicConfiguration_e__Struct
+      @[Extern]
+      record ClientCharacteristicConfiguration_e__Struct,
+        is_subscribe_to_notification : Win32cr::Foundation::BOOLEAN,
+        is_subscribe_to_indication : Win32cr::Foundation::BOOLEAN
+
+    end
+
   end
-  struct SDP_ELEMENT_DATA_data_e__Union_string_e__Struct
-    value : UInt8*
-    length : UInt32
-  end
-  struct SDP_ELEMENT_DATA_data_e__Union_alternative_e__Struct
-    value : UInt8*
-    length : UInt32
-  end
-  struct SDP_ELEMENT_DATA_data_e__Union_url_e__Struct
-    value : UInt8*
-    length : UInt32
-  end
-  struct SDP_STRING_TYPE_DATA
-    encoding : UInt16
-    mibe_num : UInt16
-    attribute_id : UInt16
-  end
-  struct SOCKADDR_BTH
-    address_family : UInt16
-    bt_addr : UInt64
-    service_class_id : Guid
+
+  @[Extern]
+  record BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION,
+    num_characteristics : UInt16,
+    characteristics : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*
+
+  @[Extern]
+  record BLUETOOTH_GATT_VALUE_CHANGED_EVENT,
+    changed_attribute_handle : UInt16,
+    characteristic_value_data_size : LibC::UIntPtrT,
+    characteristic_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC_VALUE*
+
+  @[Extern]
+  record SOCKADDR_BTH,
+    addressFamily : UInt16,
+    btAddr : UInt64,
+    serviceClassId : LibC::GUID,
     port : UInt32
-  end
-  struct BTH_SET_SERVICE
-    p_sdp_version : UInt32*
-    p_record_handle : LibC::HANDLE*
-    f_cod_service : UInt32
-    reserved : UInt32[5]*
-    ul_record_length : UInt32
-    p_record : UInt8[0]*
-  end
-  struct BTH_QUERY_DEVICE
-    lap : UInt32
+
+  @[Extern]
+  record BTH_SET_SERVICE,
+    pSdpVersion : UInt32*,
+    pRecordHandle : Win32cr::Foundation::HANDLE*,
+    fCodService : UInt32,
+    reserved : UInt32[5],
+    ulRecordLength : UInt32,
+    pRecord : UInt8*
+
+  @[Extern]
+  record BTH_QUERY_DEVICE,
+    lap : UInt32,
     length : UInt8
-  end
-  struct BTH_QUERY_SERVICE
-    type : UInt32
-    service_handle : UInt32
-    uuids : SdpQueryUuid[12]*
-    num_range : UInt32
-    p_range : SdpAttributeRange[0]*
-  end
-  struct RFCOMM_MSC_DATA
-    signals : UInt8
-    break : UInt8
-  end
-  struct RFCOMM_RLS_DATA
+
+  @[Extern]
+  record BTH_QUERY_SERVICE,
+    type__ : UInt32,
+    serviceHandle : UInt32,
+    uuids : Win32cr::Devices::Bluetooth::SdpQueryUuid[12],
+    numRange : UInt32,
+    pRange : Win32cr::Devices::Bluetooth::SdpAttributeRange*
+
+  @[Extern]
+  record RFCOMM_MSC_DATA,
+    signals : UInt8,
+    break__ : UInt8
+
+  @[Extern]
+  record RFCOMM_RLS_DATA,
     line_status : UInt8
-  end
-  struct RFCOMM_RPN_DATA
-    baud : UInt8
-    data : UInt8
-    flow_control : UInt8
-    xon_char : UInt8
-    xoff_char : UInt8
-    parameter_mask1 : UInt8
+
+  @[Extern]
+  record RFCOMM_RPN_DATA,
+    baud : UInt8,
+    data : UInt8,
+    flow_control : UInt8,
+    xon_char : UInt8,
+    xoff_char : UInt8,
+    parameter_mask1 : UInt8,
     parameter_mask2 : UInt8
-  end
-  struct RFCOMM_COMMAND
-    cmd_type : UInt32
-    data : RFCOMM_COMMAND_Data_e__Union
-  end
-  struct BTH_PING_REQ
-    bt_addr : UInt64
-    data_len : UInt8
-    data : UInt8[44]*
-  end
-  struct BTH_PING_RSP
-    data_len : UInt8
-    data : UInt8[44]*
-  end
-  struct BTH_INFO_REQ
-    bt_addr : UInt64
-    info_type : UInt16
-  end
-  struct BTH_INFO_RSP
-    result : UInt16
-    data_len : UInt8
-    anonymous : BTH_INFO_RSP_Anonymous_e__Union
+
+  @[Extern]
+  record RFCOMM_COMMAND,
+    cmd_type : UInt32,
+    data : Data_e__Union do
+
+    # Nested Type Data_e__Union
+    @[Extern(union: true)]
+    record Data_e__Union,
+      msc : Win32cr::Devices::Bluetooth::RFCOMM_MSC_DATA,
+      rls : Win32cr::Devices::Bluetooth::RFCOMM_RLS_DATA,
+      rpn : Win32cr::Devices::Bluetooth::RFCOMM_RPN_DATA
+
   end
 
+  @[Extern]
+  record BTH_PING_REQ,
+    btAddr : UInt64,
+    dataLen : UInt8,
+    data : UInt8[44]
 
-  # Params # pbtfrp : BLUETOOTH_FIND_RADIO_PARAMS* [In],phradio : LibC::HANDLE* [In]
-  fun BluetoothFindFirstRadio(pbtfrp : BLUETOOTH_FIND_RADIO_PARAMS*, phradio : LibC::HANDLE*) : LibC::IntPtrT
+  @[Extern]
+  record BTH_PING_RSP,
+    dataLen : UInt8,
+    data : UInt8[44]
 
-  # Params # hfind : LibC::IntPtrT [In],phradio : LibC::HANDLE* [In]
-  fun BluetoothFindNextRadio(hfind : LibC::IntPtrT, phradio : LibC::HANDLE*) : LibC::BOOL
+  @[Extern]
+  record BTH_INFO_REQ,
+    btAddr : UInt64,
+    infoType : UInt16
 
-  # Params # hfind : LibC::IntPtrT [In]
-  fun BluetoothFindRadioClose(hfind : LibC::IntPtrT) : LibC::BOOL
+  @[Extern]
+  record BTH_INFO_RSP,
+    result : UInt16,
+    dataLen : UInt8,
+    anonymous : Anonymous_e__Union do
 
-  # Params # hradio : LibC::HANDLE [In],pradioinfo : BLUETOOTH_RADIO_INFO* [In]
-  fun BluetoothGetRadioInfo(hradio : LibC::HANDLE, pradioinfo : BLUETOOTH_RADIO_INFO*) : UInt32
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      connectionlessMTU : UInt16,
+      data : UInt8[44]
 
-  # Params # pbtsp : BLUETOOTH_DEVICE_SEARCH_PARAMS* [In],pbtdi : BLUETOOTH_DEVICE_INFO* [In]
-  fun BluetoothFindFirstDevice(pbtsp : BLUETOOTH_DEVICE_SEARCH_PARAMS*, pbtdi : BLUETOOTH_DEVICE_INFO*) : LibC::IntPtrT
+  end
 
-  # Params # hfind : LibC::IntPtrT [In],pbtdi : BLUETOOTH_DEVICE_INFO* [In]
-  fun BluetoothFindNextDevice(hfind : LibC::IntPtrT, pbtdi : BLUETOOTH_DEVICE_INFO*) : LibC::BOOL
+  @[Link("bluetoothapis")]
+  @[Link("bthprops.cpl")]
+  lib C
+    fun BluetoothFindFirstRadio(pbtfrp : Win32cr::Devices::Bluetooth::BLUETOOTH_FIND_RADIO_PARAMS*, phRadio : Win32cr::Foundation::HANDLE*) : LibC::IntPtrT
 
-  # Params # hfind : LibC::IntPtrT [In]
-  fun BluetoothFindDeviceClose(hfind : LibC::IntPtrT) : LibC::BOOL
+    fun BluetoothFindNextRadio(hFind : LibC::IntPtrT, phRadio : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
 
-  # Params # hradio : LibC::HANDLE [In],pbtdi : BLUETOOTH_DEVICE_INFO* [In]
-  fun BluetoothGetDeviceInfo(hradio : LibC::HANDLE, pbtdi : BLUETOOTH_DEVICE_INFO*) : UInt32
+    fun BluetoothFindRadioClose(hFind : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
-  # Params # pbtdi : BLUETOOTH_DEVICE_INFO* [In]
-  fun BluetoothUpdateDeviceRecord(pbtdi : BLUETOOTH_DEVICE_INFO*) : UInt32
+    fun BluetoothGetRadioInfo(hRadio : Win32cr::Foundation::HANDLE, pRadioInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_RADIO_INFO*) : UInt32
 
-  # Params # paddress : BLUETOOTH_ADDRESS* [In]
-  fun BluetoothRemoveDevice(paddress : BLUETOOTH_ADDRESS*) : UInt32
+    fun BluetoothFindFirstDevice(pbtsp : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_SEARCH_PARAMS*, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : LibC::IntPtrT
 
-  # Params # pbtsdp : BLUETOOTH_SELECT_DEVICE_PARAMS* [In]
-  fun BluetoothSelectDevices(pbtsdp : BLUETOOTH_SELECT_DEVICE_PARAMS*) : LibC::BOOL
+    fun BluetoothFindNextDevice(hFind : LibC::IntPtrT, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Foundation::BOOL
 
-  # Params # pbtsdp : BLUETOOTH_SELECT_DEVICE_PARAMS* [In]
-  fun BluetoothSelectDevicesFree(pbtsdp : BLUETOOTH_SELECT_DEVICE_PARAMS*) : LibC::BOOL
+    fun BluetoothFindDeviceClose(hFind : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
-  # Params # hwndparent : LibC::HANDLE [In],pbtdi : BLUETOOTH_DEVICE_INFO* [In]
-  fun BluetoothDisplayDeviceProperties(hwndparent : LibC::HANDLE, pbtdi : BLUETOOTH_DEVICE_INFO*) : LibC::BOOL
+    fun BluetoothGetDeviceInfo(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : UInt32
 
-  # Params # hwndparent : LibC::HANDLE [In],hradio : LibC::HANDLE [In],pbtbi : BLUETOOTH_DEVICE_INFO* [In],pszpasskey : Char* [In],ulpasskeylength : UInt32 [In]
-  fun BluetoothAuthenticateDevice(hwndparent : LibC::HANDLE, hradio : LibC::HANDLE, pbtbi : BLUETOOTH_DEVICE_INFO*, pszpasskey : Char*, ulpasskeylength : UInt32) : UInt32
+    fun BluetoothUpdateDeviceRecord(pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : UInt32
 
-  # Params # hwndparentin : LibC::HANDLE [In],hradioin : LibC::HANDLE [In],pbtdiinout : BLUETOOTH_DEVICE_INFO* [In],pbtoobdata : BLUETOOTH_OOB_DATA_INFO* [In],authenticationrequirement : AUTHENTICATION_REQUIREMENTS [In]
-  fun BluetoothAuthenticateDeviceEx(hwndparentin : LibC::HANDLE, hradioin : LibC::HANDLE, pbtdiinout : BLUETOOTH_DEVICE_INFO*, pbtoobdata : BLUETOOTH_OOB_DATA_INFO*, authenticationrequirement : AUTHENTICATION_REQUIREMENTS) : UInt32
+    fun BluetoothRemoveDevice(pAddress : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS*) : UInt32
 
-  # Params # hwndparent : LibC::HANDLE [In],hradio : LibC::HANDLE [In],cdevices : UInt32 [In],rgbtdi : BLUETOOTH_DEVICE_INFO* [In]
-  fun BluetoothAuthenticateMultipleDevices(hwndparent : LibC::HANDLE, hradio : LibC::HANDLE, cdevices : UInt32, rgbtdi : BLUETOOTH_DEVICE_INFO*) : UInt32
+    fun BluetoothSelectDevices(pbtsdp : Win32cr::Devices::Bluetooth::BLUETOOTH_SELECT_DEVICE_PARAMS*) : Win32cr::Foundation::BOOL
 
-  # Params # hradio : LibC::HANDLE [In],pbtdi : BLUETOOTH_DEVICE_INFO* [In],pguidservice : Guid* [In],dwserviceflags : UInt32 [In]
-  fun BluetoothSetServiceState(hradio : LibC::HANDLE, pbtdi : BLUETOOTH_DEVICE_INFO*, pguidservice : Guid*, dwserviceflags : UInt32) : UInt32
+    fun BluetoothSelectDevicesFree(pbtsdp : Win32cr::Devices::Bluetooth::BLUETOOTH_SELECT_DEVICE_PARAMS*) : Win32cr::Foundation::BOOL
 
-  # Params # hradio : LibC::HANDLE [In],pbtdi : BLUETOOTH_DEVICE_INFO* [In],pcserviceinout : UInt32* [In],pguidservices : Guid* [In]
-  fun BluetoothEnumerateInstalledServices(hradio : LibC::HANDLE, pbtdi : BLUETOOTH_DEVICE_INFO*, pcserviceinout : UInt32*, pguidservices : Guid*) : UInt32
+    fun BluetoothDisplayDeviceProperties(hwndParent : Win32cr::Foundation::HWND, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Foundation::BOOL
 
-  # Params # hradio : LibC::HANDLE [In],fenabled : LibC::BOOL [In]
-  fun BluetoothEnableDiscovery(hradio : LibC::HANDLE, fenabled : LibC::BOOL) : LibC::BOOL
+    fun BluetoothAuthenticateDevice(hwndParent : Win32cr::Foundation::HWND, hRadio : Win32cr::Foundation::HANDLE, pbtbi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pszPasskey : UInt16*, ulPasskeyLength : UInt32) : UInt32
 
-  # Params # hradio : LibC::HANDLE [In]
-  fun BluetoothIsDiscoverable(hradio : LibC::HANDLE) : LibC::BOOL
+    fun BluetoothAuthenticateDeviceEx(hwndParentIn : Win32cr::Foundation::HWND, hRadioIn : Win32cr::Foundation::HANDLE, pbtdiInout : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pbtOobData : Win32cr::Devices::Bluetooth::BLUETOOTH_OOB_DATA_INFO*, authenticationRequirement : Win32cr::Devices::Bluetooth::AUTHENTICATION_REQUIREMENTS) : UInt32
 
-  # Params # hradio : LibC::HANDLE [In],fenabled : LibC::BOOL [In]
-  fun BluetoothEnableIncomingConnections(hradio : LibC::HANDLE, fenabled : LibC::BOOL) : LibC::BOOL
+    fun BluetoothAuthenticateMultipleDevices(hwndParent : Win32cr::Foundation::HWND, hRadio : Win32cr::Foundation::HANDLE, cDevices : UInt32, rgbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : UInt32
 
-  # Params # hradio : LibC::HANDLE [In]
-  fun BluetoothIsConnectable(hradio : LibC::HANDLE) : LibC::BOOL
+    fun BluetoothSetServiceState(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pGuidService : LibC::GUID*, dwServiceFlags : UInt32) : UInt32
 
-  # Params # pbtdi : BLUETOOTH_DEVICE_INFO* [In],phreghandle : LibC::IntPtrT* [In],pfncallback : PFN_AUTHENTICATION_CALLBACK [In],pvparam : Void* [In]
-  fun BluetoothRegisterForAuthentication(pbtdi : BLUETOOTH_DEVICE_INFO*, phreghandle : LibC::IntPtrT*, pfncallback : PFN_AUTHENTICATION_CALLBACK, pvparam : Void*) : UInt32
+    fun BluetoothEnumerateInstalledServices(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pcServiceInout : UInt32*, pGuidServices : LibC::GUID*) : UInt32
 
-  # Params # pbtdiin : BLUETOOTH_DEVICE_INFO* [In],phreghandleout : LibC::IntPtrT* [In],pfncallbackin : PFN_AUTHENTICATION_CALLBACK_EX [In],pvparam : Void* [In]
-  fun BluetoothRegisterForAuthenticationEx(pbtdiin : BLUETOOTH_DEVICE_INFO*, phreghandleout : LibC::IntPtrT*, pfncallbackin : PFN_AUTHENTICATION_CALLBACK_EX, pvparam : Void*) : UInt32
+    fun BluetoothEnableDiscovery(hRadio : Win32cr::Foundation::HANDLE, fEnabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
-  # Params # hreghandle : LibC::IntPtrT [In]
-  fun BluetoothUnregisterAuthentication(hreghandle : LibC::IntPtrT) : LibC::BOOL
+    fun BluetoothIsDiscoverable(hRadio : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
-  # Params # hradio : LibC::HANDLE [In],pbtdi : BLUETOOTH_DEVICE_INFO* [In],pszpasskey : LibC::LPWSTR [In]
-  fun BluetoothSendAuthenticationResponse(hradio : LibC::HANDLE, pbtdi : BLUETOOTH_DEVICE_INFO*, pszpasskey : LibC::LPWSTR) : UInt32
+    fun BluetoothEnableIncomingConnections(hRadio : Win32cr::Foundation::HANDLE, fEnabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
-  # Params # hradioin : LibC::HANDLE [In],pauthresponse : BLUETOOTH_AUTHENTICATE_RESPONSE* [In]
-  fun BluetoothSendAuthenticationResponseEx(hradioin : LibC::HANDLE, pauthresponse : BLUETOOTH_AUTHENTICATE_RESPONSE*) : UInt32
+    fun BluetoothIsConnectable(hRadio : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
-  # Params # psdpstream : UInt8* [In],cbsdpstreamlength : UInt32 [In],pdata : SDP_ELEMENT_DATA* [In]
-  fun BluetoothSdpGetElementData(psdpstream : UInt8*, cbsdpstreamlength : UInt32, pdata : SDP_ELEMENT_DATA*) : UInt32
+    fun BluetoothRegisterForAuthentication(pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, phRegHandle : LibC::IntPtrT*, pfnCallback : Win32cr::Devices::Bluetooth::PFN_AUTHENTICATION_CALLBACK, pvParam : Void*) : UInt32
 
-  # Params # pcontainerstream : UInt8* [In],cbcontainerlength : UInt32 [In],pelement : LibC::IntPtrT* [In],pdata : SDP_ELEMENT_DATA* [In]
-  fun BluetoothSdpGetContainerElementData(pcontainerstream : UInt8*, cbcontainerlength : UInt32, pelement : LibC::IntPtrT*, pdata : SDP_ELEMENT_DATA*) : UInt32
+    fun BluetoothRegisterForAuthenticationEx(pbtdiIn : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, phRegHandleOut : LibC::IntPtrT*, pfnCallbackIn : Win32cr::Devices::Bluetooth::PFN_AUTHENTICATION_CALLBACK_EX, pvParam : Void*) : UInt32
 
-  # Params # precordstream : UInt8* [In],cbrecordlength : UInt32 [In],usattributeid : UInt16 [In],pattributedata : SDP_ELEMENT_DATA* [In]
-  fun BluetoothSdpGetAttributeValue(precordstream : UInt8*, cbrecordlength : UInt32, usattributeid : UInt16, pattributedata : SDP_ELEMENT_DATA*) : UInt32
+    fun BluetoothUnregisterAuthentication(hRegHandle : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
-  # Params # precordstream : UInt8* [In],cbrecordlength : UInt32 [In],pstringdata : SDP_STRING_TYPE_DATA* [In],usstringoffset : UInt16 [In],pszstring : Char* [In],pcchstringlength : UInt32* [In]
-  fun BluetoothSdpGetString(precordstream : UInt8*, cbrecordlength : UInt32, pstringdata : SDP_STRING_TYPE_DATA*, usstringoffset : UInt16, pszstring : Char*, pcchstringlength : UInt32*) : UInt32
+    fun BluetoothSendAuthenticationResponse(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pszPasskey : Win32cr::Foundation::PWSTR) : UInt32
 
-  # Params # psdpstream : UInt8* [In],cbstreamsize : UInt32 [In],pfncallback : PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK [In],pvparam : Void* [In]
-  fun BluetoothSdpEnumAttributes(psdpstream : UInt8*, cbstreamsize : UInt32, pfncallback : PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK, pvparam : Void*) : LibC::BOOL
+    fun BluetoothSendAuthenticationResponseEx(hRadioIn : Win32cr::Foundation::HANDLE, pauthResponse : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATE_RESPONSE*) : UInt32
 
-  # Params # hradioin : LibC::HANDLE [In],pclassguid : Guid* [In],ulinstance : UInt32 [In],pserviceinfoin : BLUETOOTH_LOCAL_SERVICE_INFO* [In]
-  fun BluetoothSetLocalServiceInfo(hradioin : LibC::HANDLE, pclassguid : Guid*, ulinstance : UInt32, pserviceinfoin : BLUETOOTH_LOCAL_SERVICE_INFO*) : UInt32
+    fun BluetoothSdpGetElementData(pSdpStream : UInt8*, cbSdpStreamLength : UInt32, pData : Win32cr::Devices::Bluetooth::SDP_ELEMENT_DATA*) : UInt32
 
-  # Params # majorversion : UInt8 [In],minorversion : UInt8 [In]
-  fun BluetoothIsVersionAvailable(majorversion : UInt8, minorversion : UInt8) : LibC::BOOL
+    fun BluetoothSdpGetContainerElementData(pContainerStream : UInt8*, cbContainerLength : UInt32, pElement : LibC::IntPtrT*, pData : Win32cr::Devices::Bluetooth::SDP_ELEMENT_DATA*) : UInt32
+
+    fun BluetoothSdpGetAttributeValue(pRecordStream : UInt8*, cbRecordLength : UInt32, usAttributeId : UInt16, pAttributeData : Win32cr::Devices::Bluetooth::SDP_ELEMENT_DATA*) : UInt32
+
+    fun BluetoothSdpGetString(pRecordStream : UInt8*, cbRecordLength : UInt32, pStringData : Win32cr::Devices::Bluetooth::SDP_STRING_TYPE_DATA*, usStringOffset : UInt16, pszString : UInt16*, pcchStringLength : UInt32*) : UInt32
+
+    fun BluetoothSdpEnumAttributes(pSDPStream : UInt8*, cbStreamSize : UInt32, pfnCallback : Win32cr::Devices::Bluetooth::PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK, pvParam : Void*) : Win32cr::Foundation::BOOL
+
+    fun BluetoothSetLocalServiceInfo(hRadioIn : Win32cr::Foundation::HANDLE, pClassGuid : LibC::GUID*, ulInstance : UInt32, pServiceInfoIn : Win32cr::Devices::Bluetooth::BLUETOOTH_LOCAL_SERVICE_INFO*) : UInt32
+
+    fun BluetoothIsVersionAvailable(major_version : UInt8, minor_version : UInt8) : Win32cr::Foundation::BOOL
+
+    fun BluetoothGATTGetServices(hDevice : Win32cr::Foundation::HANDLE, services_buffer_count : UInt16, services_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, services_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun BluetoothGATTGetIncludedServices(hDevice : Win32cr::Foundation::HANDLE, parent_service : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, included_services_buffer_count : UInt16, included_services_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, included_services_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun BluetoothGATTGetCharacteristics(hDevice : Win32cr::Foundation::HANDLE, service : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, characteristics_buffer_count : UInt16, characteristics_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, characteristics_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun BluetoothGATTGetDescriptors(hDevice : Win32cr::Foundation::HANDLE, characteristic : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, descriptors_buffer_count : UInt16, descriptors_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR*, descriptors_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun BluetoothGATTGetCharacteristicValue(hDevice : Win32cr::Foundation::HANDLE, characteristic : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, characteristic_value_data_size : UInt32, characteristic_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC_VALUE*, characteristic_value_size_required : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun BluetoothGATTGetDescriptorValue(hDevice : Win32cr::Foundation::HANDLE, descriptor : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR*, descriptor_value_data_size : UInt32, descriptor_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_VALUE*, descriptor_value_size_required : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun BluetoothGATTBeginReliableWrite(hDevice : Win32cr::Foundation::HANDLE, reliable_write_context : UInt64*, flags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun BluetoothGATTSetCharacteristicValue(hDevice : Win32cr::Foundation::HANDLE, characteristic : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, characteristic_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC_VALUE*, reliable_write_context : UInt64, flags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun BluetoothGATTEndReliableWrite(hDevice : Win32cr::Foundation::HANDLE, reliable_write_context : UInt64, flags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun BluetoothGATTAbortReliableWrite(hDevice : Win32cr::Foundation::HANDLE, reliable_write_context : UInt64, flags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun BluetoothGATTSetDescriptorValue(hDevice : Win32cr::Foundation::HANDLE, descriptor : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR*, descriptor_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_VALUE*, flags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun BluetoothGATTRegisterEvent(hService : Win32cr::Foundation::HANDLE, event_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_EVENT_TYPE, event_parameter_in : Void*, callback : Win32cr::Devices::Bluetooth::PFNBLUETOOTH_GATT_EVENT_CALLBACK, callback_context : Void*, pEventHandle : LibC::IntPtrT*, flags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun BluetoothGATTUnregisterEvent(event_handle : LibC::IntPtrT, flags : UInt32) : Win32cr::Foundation::HRESULT
+
+  end
 end

@@ -1,17 +1,60 @@
-require "../foundation.cr"
-require "../system/com.cr"
-require "../system/registry.cr"
-require "../media/audio.cr"
-require "../system/com/urlmon.cr"
+require "./../foundation.cr"
+require "./../system/com.cr"
+require "./../system/registry.cr"
+require "./audio.cr"
+require "./../system/com/urlmon.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-lib LibWin32
+module Win32cr::Media::Speech
+  alias SPNOTIFYCALLBACK = Proc(Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Void)*
+
+  SPDUI_EngineProperties = "EngineProperties"
+  SPDUI_AddRemoveWord = "AddRemoveWord"
+  SPDUI_UserTraining = "UserTraining"
+  SPDUI_MicTraining = "MicTraining"
+  SPDUI_RecoProfileProperties = "RecoProfileProperties"
+  SPDUI_AudioProperties = "AudioProperties"
+  SPDUI_AudioVolume = "AudioVolume"
+  SPDUI_UserEnrollment = "UserEnrollment"
+  SPDUI_ShareData = "ShareData"
+  SPDUI_Tutorial = "Tutorial"
+  SPREG_USER_ROOT = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Speech"
+  SPREG_LOCAL_MACHINE_ROOT = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech"
+  SPCAT_AUDIOOUT = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AudioOutput"
+  SPCAT_AUDIOIN = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AudioInput"
+  SPCAT_VOICES = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices"
+  SPCAT_RECOGNIZERS = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Recognizers"
+  SPCAT_APPLEXICONS = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AppLexicons"
+  SPCAT_PHONECONVERTERS = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\PhoneConverters"
+  SPCAT_TEXTNORMALIZERS = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\TextNormalizers"
+  SPCAT_RECOPROFILES = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Speech\\RecoProfiles"
+  SPMMSYS_AUDIO_IN_TOKEN_ID = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AudioInput\\TokenEnums\\MMAudioIn\\"
+  SPMMSYS_AUDIO_OUT_TOKEN_ID = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\AudioOutput\\TokenEnums\\MMAudioOut\\"
+  SPCURRENT_USER_LEXICON_TOKEN_ID = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Speech\\CurrentUserLexicon"
+  SPCURRENT_USER_SHORTCUT_TOKEN_ID = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Speech\\CurrentUserShortcut"
+  SPTOKENVALUE_CLSID = "CLSID"
+  SPTOKENKEY_FILES = "Files"
+  SPTOKENKEY_UI = "UI"
+  SPTOKENKEY_ATTRIBUTES = "Attributes"
+  SPTOKENKEY_RETAINEDAUDIO = "SecondsPerRetainedAudioEvent"
+  SPTOKENKEY_AUDIO_LATENCY_WARNING = "LatencyWarningThreshold"
+  SPTOKENKEY_AUDIO_LATENCY_TRUNCATE = "LatencyTruncateThreshold"
+  SPTOKENKEY_AUDIO_LATENCY_UPDATE_INTERVAL = "LatencyUpdateInterval"
+  SPVOICECATEGORY_TTSRATE = "DefaultTTSRate"
+  SPPROP_RESOURCE_USAGE = "ResourceUsage"
+  SPPROP_HIGH_CONFIDENCE_THRESHOLD = "HighConfidenceThreshold"
+  SPPROP_NORMAL_CONFIDENCE_THRESHOLD = "NormalConfidenceThreshold"
+  SPPROP_LOW_CONFIDENCE_THRESHOLD = "LowConfidenceThreshold"
+  SPPROP_RESPONSE_SPEED = "ResponseSpeed"
+  SPPROP_COMPLEX_RESPONSE_SPEED = "ComplexResponseSpeed"
+  SPPROP_ADAPTATION_ON = "AdaptationOn"
+  SPPROP_PERSISTED_BACKGROUND_ADAPTATION = "PersistedBackgroundAdaptation"
+  SPPROP_PERSISTED_LANGUAGE_MODEL_ADAPTATION = "PersistedLanguageModelAdaptation"
+  SPPROP_UX_IS_LISTENING = "UXIsListening"
+  SPTOPIC_SPELLING = "Spelling"
+  SPWILDCARD = "..."
+  SPDICTATION = "*"
+  SPINFDICTATION = "*+"
+  SPREG_SAFE_USER_TOKENS = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\UserTokens"
   SP_LOW_CONFIDENCE = -1_i32
   SP_NORMAL_CONFIDENCE = 0_u32
   DEFAULT_WEIGHT = 1_u32
@@ -22,8343 +65,8285 @@ lib LibWin32
   SP_STREAMPOS_REALTIME = -1_i32
   SPRP_NORMAL = 0_u32
   SP_MAX_LANGIDS = 20_u32
+  SPRECOEXTENSION = "RecoExtension"
+  SPALTERNATESCLSID = "AlternatesCLSID"
+  SR_LOCALIZED_DESCRIPTION = "Description"
   SAPI_ERROR_BASE = 20480_u32
-  Speech_Default_Weight = "1.0_f32"
+  Speech_Default_Weight = 1
   Speech_Max_Word_Length = 128_i32
   Speech_Max_Pron_Length = 384_i32
   Speech_StreamPos_Asap = 0_i32
   Speech_StreamPos_RealTime = -1_i32
   SpeechAllElements = -1_i32
+
   CLSID_SpNotifyTranslator = LibC::GUID.new(0xe2ae5372_u32, 0x5d40_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+
   CLSID_SpObjectTokenCategory = LibC::GUID.new(0xa910187f_u32, 0xc7a_u16, 0x45ac_u16, StaticArray[0x92_u8, 0xcc_u8, 0x59_u8, 0xed_u8, 0xaf_u8, 0xb7_u8, 0x7b_u8, 0x53_u8])
+
   CLSID_SpObjectToken = LibC::GUID.new(0xef411752_u32, 0x3736_u16, 0x4cb4_u16, StaticArray[0x9c_u8, 0x8c_u8, 0x8e_u8, 0xf4_u8, 0xcc_u8, 0xb5_u8, 0x8e_u8, 0xfe_u8])
+
   CLSID_SpResourceManager = LibC::GUID.new(0x96749373_u32, 0x3391_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xe3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
+
   CLSID_SpStreamFormatConverter = LibC::GUID.new(0x7013943a_u32, 0xe2ec_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x86_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf9_u8, 0xb5_u8])
+
   CLSID_SpMMAudioEnum = LibC::GUID.new(0xab1890a0_u32, 0xe91f_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x91_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
+
   CLSID_SpMMAudioIn = LibC::GUID.new(0xcf3d2e50_u32, 0x53f2_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+
   CLSID_SpMMAudioOut = LibC::GUID.new(0xa8c680eb_u32, 0x3d32_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xe7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
+
   CLSID_SpStream = LibC::GUID.new(0x715d9c59_u32, 0x4442_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+
   CLSID_SpVoice = LibC::GUID.new(0x96749377_u32, 0x3391_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xe3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
+
   CLSID_SpSharedRecoContext = LibC::GUID.new(0x47206204_u32, 0x5eca_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+
   CLSID_SpInprocRecognizer = LibC::GUID.new(0x41b89b6b_u32, 0x9399_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x23_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+
   CLSID_SpSharedRecognizer = LibC::GUID.new(0x3bee4890_u32, 0x4fe9_u16, 0x4a37_u16, StaticArray[0x8c_u8, 0x1e_u8, 0x5e_u8, 0x7e_u8, 0x12_u8, 0x79_u8, 0x1c_u8, 0x1f_u8])
+
   CLSID_SpLexicon = LibC::GUID.new(0x655e396_u32, 0x25d0_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0x26_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf8_u8, 0x7c_u8])
+
   CLSID_SpUnCompressedLexicon = LibC::GUID.new(0xc9e37c15_u32, 0xdf92_u16, 0x4727_u16, StaticArray[0x85_u8, 0xd6_u8, 0x72_u8, 0xe5_u8, 0xee_u8, 0xb6_u8, 0x99_u8, 0x5a_u8])
+
   CLSID_SpCompressedLexicon = LibC::GUID.new(0x90903716_u32, 0x2f42_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0x26_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf8_u8, 0x7c_u8])
+
   CLSID_SpShortcut = LibC::GUID.new(0xd722f1a_u32, 0x9fcf_u16, 0x4e62_u16, StaticArray[0x96_u8, 0xd8_u8, 0x6d_u8, 0xf8_u8, 0xf0_u8, 0x1a_u8, 0x26_u8, 0xaa_u8])
+
   CLSID_SpPhoneConverter = LibC::GUID.new(0x9185f743_u32, 0x1143_u16, 0x4c28_u16, StaticArray[0x86_u8, 0xb5_u8, 0xbf_u8, 0xf1_u8, 0x4f_u8, 0x20_u8, 0xe5_u8, 0xc8_u8])
+
   CLSID_SpPhoneticAlphabetConverter = LibC::GUID.new(0x4f414126_u32, 0xdfe3_u16, 0x4629_u16, StaticArray[0x99_u8, 0xee_u8, 0x79_u8, 0x79_u8, 0x78_u8, 0x31_u8, 0x7e_u8, 0xad_u8])
+
   CLSID_SpNullPhoneConverter = LibC::GUID.new(0x455f24e9_u32, 0x7396_u16, 0x4a16_u16, StaticArray[0x97_u8, 0x15_u8, 0x7c_u8, 0xf_u8, 0xdb_u8, 0xe3_u8, 0xef_u8, 0xe3_u8])
+
   CLSID_SpTextSelectionInformation = LibC::GUID.new(0xf92030a_u32, 0xcbfd_u16, 0x4ab8_u16, StaticArray[0xa1_u8, 0x64_u8, 0xff_u8, 0x59_u8, 0x85_u8, 0x54_u8, 0x7f_u8, 0xf6_u8])
+
   CLSID_SpPhraseInfoBuilder = LibC::GUID.new(0xc23fc28d_u32, 0xc55f_u16, 0x4720_u16, StaticArray[0x8b_u8, 0x32_u8, 0x91_u8, 0xf7_u8, 0x3c_u8, 0x2b_u8, 0xd5_u8, 0xd1_u8])
+
   CLSID_SpAudioFormat = LibC::GUID.new(0x9ef96870_u32, 0xe160_u16, 0x4792_u16, StaticArray[0x82_u8, 0xd_u8, 0x48_u8, 0xcf_u8, 0x6_u8, 0x49_u8, 0xe4_u8, 0xec_u8])
+
   CLSID_SpWaveFormatEx = LibC::GUID.new(0xc79a574c_u32, 0x63be_u16, 0x44b9_u16, StaticArray[0x80_u8, 0x1f_u8, 0x28_u8, 0x3f_u8, 0x87_u8, 0xf8_u8, 0x98_u8, 0xbe_u8])
+
   CLSID_SpInProcRecoContext = LibC::GUID.new(0x73ad6842_u32, 0xace0_u16, 0x45e8_u16, StaticArray[0xa4_u8, 0xdd_u8, 0x87_u8, 0x95_u8, 0x88_u8, 0x1a_u8, 0x2c_u8, 0x2a_u8])
+
   CLSID_SpCustomStream = LibC::GUID.new(0x8dbef13f_u32, 0x1948_u16, 0x4aa8_u16, StaticArray[0x8c_u8, 0xf0_u8, 0x4_u8, 0x8e_u8, 0xeb_u8, 0xed_u8, 0x95_u8, 0xd8_u8])
+
   CLSID_SpFileStream = LibC::GUID.new(0x947812b3_u32, 0x2ae1_u16, 0x4644_u16, StaticArray[0xba_u8, 0x86_u8, 0x9e_u8, 0x90_u8, 0xde_u8, 0xd7_u8, 0xec_u8, 0x91_u8])
+
   CLSID_SpMemoryStream = LibC::GUID.new(0x5fb7ef7d_u32, 0xdff4_u16, 0x468a_u16, StaticArray[0xb6_u8, 0xb7_u8, 0x2f_u8, 0xcb_u8, 0xd1_u8, 0x88_u8, 0xf9_u8, 0x94_u8])
 
-  alias SPNOTIFYCALLBACK = Proc(LibC::UINT_PTR, LPARAM, Void)
-
-
-  enum SPDATAKEYLOCATION : Int32
-    SPDKL_DefaultLocation = 0
-    SPDKL_CurrentUser = 1
-    SPDKL_LocalMachine = 2
-    SPDKL_CurrentConfig = 5
+  enum SPDATAKEYLOCATION
+    SPDKL_DefaultLocation = 0_i32
+    SPDKL_CurrentUser = 1_i32
+    SPDKL_LocalMachine = 2_i32
+    SPDKL_CurrentConfig = 5_i32
   end
-
-  enum SPSTREAMFORMAT : Int32
-    SPSF_Default = -1
-    SPSF_NoAssignedFormat = 0
-    SPSF_Text = 1
-    SPSF_NonStandardFormat = 2
-    SPSF_ExtendedAudioFormat = 3
-    SPSF_8kHz8BitMono = 4
-    SPSF_8kHz8BitStereo = 5
-    SPSF_8kHz16BitMono = 6
-    SPSF_8kHz16BitStereo = 7
-    SPSF_11kHz8BitMono = 8
-    SPSF_11kHz8BitStereo = 9
-    SPSF_11kHz16BitMono = 10
-    SPSF_11kHz16BitStereo = 11
-    SPSF_12kHz8BitMono = 12
-    SPSF_12kHz8BitStereo = 13
-    SPSF_12kHz16BitMono = 14
-    SPSF_12kHz16BitStereo = 15
-    SPSF_16kHz8BitMono = 16
-    SPSF_16kHz8BitStereo = 17
-    SPSF_16kHz16BitMono = 18
-    SPSF_16kHz16BitStereo = 19
-    SPSF_22kHz8BitMono = 20
-    SPSF_22kHz8BitStereo = 21
-    SPSF_22kHz16BitMono = 22
-    SPSF_22kHz16BitStereo = 23
-    SPSF_24kHz8BitMono = 24
-    SPSF_24kHz8BitStereo = 25
-    SPSF_24kHz16BitMono = 26
-    SPSF_24kHz16BitStereo = 27
-    SPSF_32kHz8BitMono = 28
-    SPSF_32kHz8BitStereo = 29
-    SPSF_32kHz16BitMono = 30
-    SPSF_32kHz16BitStereo = 31
-    SPSF_44kHz8BitMono = 32
-    SPSF_44kHz8BitStereo = 33
-    SPSF_44kHz16BitMono = 34
-    SPSF_44kHz16BitStereo = 35
-    SPSF_48kHz8BitMono = 36
-    SPSF_48kHz8BitStereo = 37
-    SPSF_48kHz16BitMono = 38
-    SPSF_48kHz16BitStereo = 39
-    SPSF_TrueSpeech_8kHz1BitMono = 40
-    SPSF_CCITT_ALaw_8kHzMono = 41
-    SPSF_CCITT_ALaw_8kHzStereo = 42
-    SPSF_CCITT_ALaw_11kHzMono = 43
-    SPSF_CCITT_ALaw_11kHzStereo = 44
-    SPSF_CCITT_ALaw_22kHzMono = 45
-    SPSF_CCITT_ALaw_22kHzStereo = 46
-    SPSF_CCITT_ALaw_44kHzMono = 47
-    SPSF_CCITT_ALaw_44kHzStereo = 48
-    SPSF_CCITT_uLaw_8kHzMono = 49
-    SPSF_CCITT_uLaw_8kHzStereo = 50
-    SPSF_CCITT_uLaw_11kHzMono = 51
-    SPSF_CCITT_uLaw_11kHzStereo = 52
-    SPSF_CCITT_uLaw_22kHzMono = 53
-    SPSF_CCITT_uLaw_22kHzStereo = 54
-    SPSF_CCITT_uLaw_44kHzMono = 55
-    SPSF_CCITT_uLaw_44kHzStereo = 56
-    SPSF_ADPCM_8kHzMono = 57
-    SPSF_ADPCM_8kHzStereo = 58
-    SPSF_ADPCM_11kHzMono = 59
-    SPSF_ADPCM_11kHzStereo = 60
-    SPSF_ADPCM_22kHzMono = 61
-    SPSF_ADPCM_22kHzStereo = 62
-    SPSF_ADPCM_44kHzMono = 63
-    SPSF_ADPCM_44kHzStereo = 64
-    SPSF_GSM610_8kHzMono = 65
-    SPSF_GSM610_11kHzMono = 66
-    SPSF_GSM610_22kHzMono = 67
-    SPSF_GSM610_44kHzMono = 68
-    SPSF_NUM_FORMATS = 69
+  enum SPSTREAMFORMAT
+    SPSF_Default = -1_i32
+    SPSF_NoAssignedFormat = 0_i32
+    SPSF_Text = 1_i32
+    SPSF_NonStandardFormat = 2_i32
+    SPSF_ExtendedAudioFormat = 3_i32
+    SPSF_8kHz8BitMono = 4_i32
+    SPSF_8kHz8BitStereo = 5_i32
+    SPSF_8kHz16BitMono = 6_i32
+    SPSF_8kHz16BitStereo = 7_i32
+    SPSF_11kHz8BitMono = 8_i32
+    SPSF_11kHz8BitStereo = 9_i32
+    SPSF_11kHz16BitMono = 10_i32
+    SPSF_11kHz16BitStereo = 11_i32
+    SPSF_12kHz8BitMono = 12_i32
+    SPSF_12kHz8BitStereo = 13_i32
+    SPSF_12kHz16BitMono = 14_i32
+    SPSF_12kHz16BitStereo = 15_i32
+    SPSF_16kHz8BitMono = 16_i32
+    SPSF_16kHz8BitStereo = 17_i32
+    SPSF_16kHz16BitMono = 18_i32
+    SPSF_16kHz16BitStereo = 19_i32
+    SPSF_22kHz8BitMono = 20_i32
+    SPSF_22kHz8BitStereo = 21_i32
+    SPSF_22kHz16BitMono = 22_i32
+    SPSF_22kHz16BitStereo = 23_i32
+    SPSF_24kHz8BitMono = 24_i32
+    SPSF_24kHz8BitStereo = 25_i32
+    SPSF_24kHz16BitMono = 26_i32
+    SPSF_24kHz16BitStereo = 27_i32
+    SPSF_32kHz8BitMono = 28_i32
+    SPSF_32kHz8BitStereo = 29_i32
+    SPSF_32kHz16BitMono = 30_i32
+    SPSF_32kHz16BitStereo = 31_i32
+    SPSF_44kHz8BitMono = 32_i32
+    SPSF_44kHz8BitStereo = 33_i32
+    SPSF_44kHz16BitMono = 34_i32
+    SPSF_44kHz16BitStereo = 35_i32
+    SPSF_48kHz8BitMono = 36_i32
+    SPSF_48kHz8BitStereo = 37_i32
+    SPSF_48kHz16BitMono = 38_i32
+    SPSF_48kHz16BitStereo = 39_i32
+    SPSF_TrueSpeech_8kHz1BitMono = 40_i32
+    SPSF_CCITT_ALaw_8kHzMono = 41_i32
+    SPSF_CCITT_ALaw_8kHzStereo = 42_i32
+    SPSF_CCITT_ALaw_11kHzMono = 43_i32
+    SPSF_CCITT_ALaw_11kHzStereo = 44_i32
+    SPSF_CCITT_ALaw_22kHzMono = 45_i32
+    SPSF_CCITT_ALaw_22kHzStereo = 46_i32
+    SPSF_CCITT_ALaw_44kHzMono = 47_i32
+    SPSF_CCITT_ALaw_44kHzStereo = 48_i32
+    SPSF_CCITT_uLaw_8kHzMono = 49_i32
+    SPSF_CCITT_uLaw_8kHzStereo = 50_i32
+    SPSF_CCITT_uLaw_11kHzMono = 51_i32
+    SPSF_CCITT_uLaw_11kHzStereo = 52_i32
+    SPSF_CCITT_uLaw_22kHzMono = 53_i32
+    SPSF_CCITT_uLaw_22kHzStereo = 54_i32
+    SPSF_CCITT_uLaw_44kHzMono = 55_i32
+    SPSF_CCITT_uLaw_44kHzStereo = 56_i32
+    SPSF_ADPCM_8kHzMono = 57_i32
+    SPSF_ADPCM_8kHzStereo = 58_i32
+    SPSF_ADPCM_11kHzMono = 59_i32
+    SPSF_ADPCM_11kHzStereo = 60_i32
+    SPSF_ADPCM_22kHzMono = 61_i32
+    SPSF_ADPCM_22kHzStereo = 62_i32
+    SPSF_ADPCM_44kHzMono = 63_i32
+    SPSF_ADPCM_44kHzStereo = 64_i32
+    SPSF_GSM610_8kHzMono = 65_i32
+    SPSF_GSM610_11kHzMono = 66_i32
+    SPSF_GSM610_22kHzMono = 67_i32
+    SPSF_GSM610_44kHzMono = 68_i32
+    SPSF_NUM_FORMATS = 69_i32
   end
-
-  enum SPEVENTLPARAMTYPE : Int32
-    SPET_LPARAM_IS_UNDEFINED = 0
-    SPET_LPARAM_IS_TOKEN = 1
-    SPET_LPARAM_IS_OBJECT = 2
-    SPET_LPARAM_IS_POINTER = 3
-    SPET_LPARAM_IS_STRING = 4
+  enum SPEVENTLPARAMTYPE
+    SPET_LPARAM_IS_UNDEFINED = 0_i32
+    SPET_LPARAM_IS_TOKEN = 1_i32
+    SPET_LPARAM_IS_OBJECT = 2_i32
+    SPET_LPARAM_IS_POINTER = 3_i32
+    SPET_LPARAM_IS_STRING = 4_i32
   end
-
-  enum SPEVENTENUM : Int32
-    SPEI_UNDEFINED = 0
-    SPEI_START_INPUT_STREAM = 1
-    SPEI_END_INPUT_STREAM = 2
-    SPEI_VOICE_CHANGE = 3
-    SPEI_TTS_BOOKMARK = 4
-    SPEI_WORD_BOUNDARY = 5
-    SPEI_PHONEME = 6
-    SPEI_SENTENCE_BOUNDARY = 7
-    SPEI_VISEME = 8
-    SPEI_TTS_AUDIO_LEVEL = 9
-    SPEI_TTS_PRIVATE = 15
-    SPEI_MIN_TTS = 1
-    SPEI_MAX_TTS = 15
-    SPEI_END_SR_STREAM = 34
-    SPEI_SOUND_START = 35
-    SPEI_SOUND_END = 36
-    SPEI_PHRASE_START = 37
-    SPEI_RECOGNITION = 38
-    SPEI_HYPOTHESIS = 39
-    SPEI_SR_BOOKMARK = 40
-    SPEI_PROPERTY_NUM_CHANGE = 41
-    SPEI_PROPERTY_STRING_CHANGE = 42
-    SPEI_FALSE_RECOGNITION = 43
-    SPEI_INTERFERENCE = 44
-    SPEI_REQUEST_UI = 45
-    SPEI_RECO_STATE_CHANGE = 46
-    SPEI_ADAPTATION = 47
-    SPEI_START_SR_STREAM = 48
-    SPEI_RECO_OTHER_CONTEXT = 49
-    SPEI_SR_AUDIO_LEVEL = 50
-    SPEI_SR_RETAINEDAUDIO = 51
-    SPEI_SR_PRIVATE = 52
-    SPEI_RESERVED4 = 53
-    SPEI_RESERVED5 = 54
-    SPEI_RESERVED6 = 55
-    SPEI_MIN_SR = 34
-    SPEI_MAX_SR = 55
-    SPEI_RESERVED1 = 30
-    SPEI_RESERVED2 = 33
-    SPEI_RESERVED3 = 63
+  enum SPEVENTENUM
+    SPEI_UNDEFINED = 0_i32
+    SPEI_START_INPUT_STREAM = 1_i32
+    SPEI_END_INPUT_STREAM = 2_i32
+    SPEI_VOICE_CHANGE = 3_i32
+    SPEI_TTS_BOOKMARK = 4_i32
+    SPEI_WORD_BOUNDARY = 5_i32
+    SPEI_PHONEME = 6_i32
+    SPEI_SENTENCE_BOUNDARY = 7_i32
+    SPEI_VISEME = 8_i32
+    SPEI_TTS_AUDIO_LEVEL = 9_i32
+    SPEI_TTS_PRIVATE = 15_i32
+    SPEI_MIN_TTS = 1_i32
+    SPEI_MAX_TTS = 15_i32
+    SPEI_END_SR_STREAM = 34_i32
+    SPEI_SOUND_START = 35_i32
+    SPEI_SOUND_END = 36_i32
+    SPEI_PHRASE_START = 37_i32
+    SPEI_RECOGNITION = 38_i32
+    SPEI_HYPOTHESIS = 39_i32
+    SPEI_SR_BOOKMARK = 40_i32
+    SPEI_PROPERTY_NUM_CHANGE = 41_i32
+    SPEI_PROPERTY_STRING_CHANGE = 42_i32
+    SPEI_FALSE_RECOGNITION = 43_i32
+    SPEI_INTERFERENCE = 44_i32
+    SPEI_REQUEST_UI = 45_i32
+    SPEI_RECO_STATE_CHANGE = 46_i32
+    SPEI_ADAPTATION = 47_i32
+    SPEI_START_SR_STREAM = 48_i32
+    SPEI_RECO_OTHER_CONTEXT = 49_i32
+    SPEI_SR_AUDIO_LEVEL = 50_i32
+    SPEI_SR_RETAINEDAUDIO = 51_i32
+    SPEI_SR_PRIVATE = 52_i32
+    SPEI_RESERVED4 = 53_i32
+    SPEI_RESERVED5 = 54_i32
+    SPEI_RESERVED6 = 55_i32
+    SPEI_MIN_SR = 34_i32
+    SPEI_MAX_SR = 55_i32
+    SPEI_RESERVED1 = 30_i32
+    SPEI_RESERVED2 = 33_i32
+    SPEI_RESERVED3 = 63_i32
   end
-
-  enum SPINTERFERENCE : Int32
-    SPINTERFERENCE_NONE = 0
-    SPINTERFERENCE_NOISE = 1
-    SPINTERFERENCE_NOSIGNAL = 2
-    SPINTERFERENCE_TOOLOUD = 3
-    SPINTERFERENCE_TOOQUIET = 4
-    SPINTERFERENCE_TOOFAST = 5
-    SPINTERFERENCE_TOOSLOW = 6
-    SPINTERFERENCE_LATENCY_WARNING = 7
-    SPINTERFERENCE_LATENCY_TRUNCATE_BEGIN = 8
-    SPINTERFERENCE_LATENCY_TRUNCATE_END = 9
+  enum SPINTERFERENCE
+    SPINTERFERENCE_NONE = 0_i32
+    SPINTERFERENCE_NOISE = 1_i32
+    SPINTERFERENCE_NOSIGNAL = 2_i32
+    SPINTERFERENCE_TOOLOUD = 3_i32
+    SPINTERFERENCE_TOOQUIET = 4_i32
+    SPINTERFERENCE_TOOFAST = 5_i32
+    SPINTERFERENCE_TOOSLOW = 6_i32
+    SPINTERFERENCE_LATENCY_WARNING = 7_i32
+    SPINTERFERENCE_LATENCY_TRUNCATE_BEGIN = 8_i32
+    SPINTERFERENCE_LATENCY_TRUNCATE_END = 9_i32
   end
-
-  enum SPENDSRSTREAMFLAGS : Int32
-    SPESF_NONE = 0
-    SPESF_STREAM_RELEASED = 1
-    SPESF_EMULATED = 2
+  enum SPENDSRSTREAMFLAGS
+    SPESF_NONE = 0_i32
+    SPESF_STREAM_RELEASED = 1_i32
+    SPESF_EMULATED = 2_i32
   end
-
-  enum SPVFEATURE : Int32
-    SPVFEATURE_STRESSED = 1
-    SPVFEATURE_EMPHASIS = 2
+  enum SPVFEATURE
+    SPVFEATURE_STRESSED = 1_i32
+    SPVFEATURE_EMPHASIS = 2_i32
   end
-
-  enum SPVISEMES : Int32
-    SP_VISEME_0 = 0
-    SP_VISEME_1 = 1
-    SP_VISEME_2 = 2
-    SP_VISEME_3 = 3
-    SP_VISEME_4 = 4
-    SP_VISEME_5 = 5
-    SP_VISEME_6 = 6
-    SP_VISEME_7 = 7
-    SP_VISEME_8 = 8
-    SP_VISEME_9 = 9
-    SP_VISEME_10 = 10
-    SP_VISEME_11 = 11
-    SP_VISEME_12 = 12
-    SP_VISEME_13 = 13
-    SP_VISEME_14 = 14
-    SP_VISEME_15 = 15
-    SP_VISEME_16 = 16
-    SP_VISEME_17 = 17
-    SP_VISEME_18 = 18
-    SP_VISEME_19 = 19
-    SP_VISEME_20 = 20
-    SP_VISEME_21 = 21
+  enum SPVISEMES
+    SP_VISEME_0 = 0_i32
+    SP_VISEME_1 = 1_i32
+    SP_VISEME_2 = 2_i32
+    SP_VISEME_3 = 3_i32
+    SP_VISEME_4 = 4_i32
+    SP_VISEME_5 = 5_i32
+    SP_VISEME_6 = 6_i32
+    SP_VISEME_7 = 7_i32
+    SP_VISEME_8 = 8_i32
+    SP_VISEME_9 = 9_i32
+    SP_VISEME_10 = 10_i32
+    SP_VISEME_11 = 11_i32
+    SP_VISEME_12 = 12_i32
+    SP_VISEME_13 = 13_i32
+    SP_VISEME_14 = 14_i32
+    SP_VISEME_15 = 15_i32
+    SP_VISEME_16 = 16_i32
+    SP_VISEME_17 = 17_i32
+    SP_VISEME_18 = 18_i32
+    SP_VISEME_19 = 19_i32
+    SP_VISEME_20 = 20_i32
+    SP_VISEME_21 = 21_i32
   end
-
-  enum SPFILEMODE : Int32
-    SPFM_OPEN_READONLY = 0
-    SPFM_OPEN_READWRITE = 1
-    SPFM_CREATE = 2
-    SPFM_CREATE_ALWAYS = 3
-    SPFM_NUM_MODES = 4
+  enum SPFILEMODE
+    SPFM_OPEN_READONLY = 0_i32
+    SPFM_OPEN_READWRITE = 1_i32
+    SPFM_CREATE = 2_i32
+    SPFM_CREATE_ALWAYS = 3_i32
+    SPFM_NUM_MODES = 4_i32
   end
-
-  enum SPAUDIOSTATE : Int32
-    SPAS_CLOSED = 0
-    SPAS_STOP = 1
-    SPAS_PAUSE = 2
-    SPAS_RUN = 3
+  enum SPAUDIOSTATE
+    SPAS_CLOSED = 0_i32
+    SPAS_STOP = 1_i32
+    SPAS_PAUSE = 2_i32
+    SPAS_RUN = 3_i32
   end
-
-  enum SPDISPLYATTRIBUTES : Int32
-    SPAF_ONE_TRAILING_SPACE = 2
-    SPAF_TWO_TRAILING_SPACES = 4
-    SPAF_CONSUME_LEADING_SPACES = 8
-    SPAF_BUFFER_POSITION = 16
-    SPAF_ALL = 31
-    SPAF_USER_SPECIFIED = 128
+  enum SPDISPLYATTRIBUTES
+    SPAF_ONE_TRAILING_SPACE = 2_i32
+    SPAF_TWO_TRAILING_SPACES = 4_i32
+    SPAF_CONSUME_LEADING_SPACES = 8_i32
+    SPAF_BUFFER_POSITION = 16_i32
+    SPAF_ALL = 31_i32
+    SPAF_USER_SPECIFIED = 128_i32
   end
-
-  enum SPPHRASEPROPERTYUNIONTYPE : Int32
-    SPPPUT_UNUSED = 0
-    SPPPUT_ARRAY_INDEX = 1
+  enum SPPHRASEPROPERTYUNIONTYPE
+    SPPPUT_UNUSED = 0_i32
+    SPPPUT_ARRAY_INDEX = 1_i32
   end
-
-  enum SPSEMANTICFORMAT : Int32
-    SPSMF_SAPI_PROPERTIES = 0
-    SPSMF_SRGS_SEMANTICINTERPRETATION_MS = 1
-    SPSMF_SRGS_SAPIPROPERTIES = 2
-    SPSMF_UPS = 4
-    SPSMF_SRGS_SEMANTICINTERPRETATION_W3C = 8
+  enum SPSEMANTICFORMAT
+    SPSMF_SAPI_PROPERTIES = 0_i32
+    SPSMF_SRGS_SEMANTICINTERPRETATION_MS = 1_i32
+    SPSMF_SRGS_SAPIPROPERTIES = 2_i32
+    SPSMF_UPS = 4_i32
+    SPSMF_SRGS_SEMANTICINTERPRETATION_W3C = 8_i32
   end
-
-  enum SPVALUETYPE : Int32
-    SPDF_PROPERTY = 1
-    SPDF_REPLACEMENT = 2
-    SPDF_RULE = 4
-    SPDF_DISPLAYTEXT = 8
-    SPDF_LEXICALFORM = 16
-    SPDF_PRONUNCIATION = 32
-    SPDF_AUDIO = 64
-    SPDF_ALTERNATES = 128
-    SPDF_ALL = 255
+  enum SPVALUETYPE
+    SPDF_PROPERTY = 1_i32
+    SPDF_REPLACEMENT = 2_i32
+    SPDF_RULE = 4_i32
+    SPDF_DISPLAYTEXT = 8_i32
+    SPDF_LEXICALFORM = 16_i32
+    SPDF_PRONUNCIATION = 32_i32
+    SPDF_AUDIO = 64_i32
+    SPDF_ALTERNATES = 128_i32
+    SPDF_ALL = 255_i32
   end
-
-  enum SPPHRASERNG : Int32
-    SPPR_ALL_ELEMENTS = -1
+  enum SPPHRASERNG
+    SPPR_ALL_ELEMENTS = -1_i32
   end
-
-  enum SPRECOEVENTFLAGS : Int32
-    SPREF_AutoPause = 1
-    SPREF_Emulated = 2
-    SPREF_SMLTimeout = 4
-    SPREF_ExtendableParse = 8
-    SPREF_ReSent = 16
-    SPREF_Hypothesis = 32
-    SPREF_FalseRecognition = 64
+  enum SPRECOEVENTFLAGS
+    SPREF_AutoPause = 1_i32
+    SPREF_Emulated = 2_i32
+    SPREF_SMLTimeout = 4_i32
+    SPREF_ExtendableParse = 8_i32
+    SPREF_ReSent = 16_i32
+    SPREF_Hypothesis = 32_i32
+    SPREF_FalseRecognition = 64_i32
   end
-
-  enum SPPARTOFSPEECH : Int32
-    SPPS_NotOverriden = -1
-    SPPS_Unknown = 0
-    SPPS_Noun = 4096
-    SPPS_Verb = 8192
-    SPPS_Modifier = 12288
-    SPPS_Function = 16384
-    SPPS_Interjection = 20480
-    SPPS_Noncontent = 24576
-    SPPS_LMA = 28672
-    SPPS_SuppressWord = 61440
+  enum SPPARTOFSPEECH
+    SPPS_NotOverriden = -1_i32
+    SPPS_Unknown = 0_i32
+    SPPS_Noun = 4096_i32
+    SPPS_Verb = 8192_i32
+    SPPS_Modifier = 12288_i32
+    SPPS_Function = 16384_i32
+    SPPS_Interjection = 20480_i32
+    SPPS_Noncontent = 24576_i32
+    SPPS_LMA = 28672_i32
+    SPPS_SuppressWord = 61440_i32
   end
-
-  enum SPLEXICONTYPE : Int32
-    Elextype_user = 1
-    Elextype_app = 2
-    Elextype_vendorlexicon = 4
-    Elextype_lettertosound = 8
-    Elextype_morphology = 16
-    Elextype_reserved4 = 32
-    Elextype_user_shortcut = 64
-    Elextype_reserved6 = 128
-    Elextype_reserved7 = 256
-    Elextype_reserved8 = 512
-    Elextype_reserved9 = 1024
-    Elextype_reserved10 = 2048
-    Elextype_private1 = 4096
-    Elextype_private2 = 8192
-    Elextype_private3 = 16384
-    Elextype_private4 = 32768
-    Elextype_private5 = 65536
-    Elextype_private6 = 131072
-    Elextype_private7 = 262144
-    Elextype_private8 = 524288
-    Elextype_private9 = 1048576
-    Elextype_private10 = 2097152
-    Elextype_private11 = 4194304
-    Elextype_private12 = 8388608
-    Elextype_private13 = 16777216
-    Elextype_private14 = 33554432
-    Elextype_private15 = 67108864
-    Elextype_private16 = 134217728
-    Elextype_private17 = 268435456
-    Elextype_private18 = 536870912
-    Elextype_private19 = 1073741824
-    Elextype_private20 = -2147483648
+  enum SPLEXICONTYPE
+    Elextype_user = 1_i32
+    Elextype_app = 2_i32
+    Elextype_vendorlexicon = 4_i32
+    Elextype_lettertosound = 8_i32
+    Elextype_morphology = 16_i32
+    Elextype_reserved4 = 32_i32
+    Elextype_user_shortcut = 64_i32
+    Elextype_reserved6 = 128_i32
+    Elextype_reserved7 = 256_i32
+    Elextype_reserved8 = 512_i32
+    Elextype_reserved9 = 1024_i32
+    Elextype_reserved10 = 2048_i32
+    Elextype_private1 = 4096_i32
+    Elextype_private2 = 8192_i32
+    Elextype_private3 = 16384_i32
+    Elextype_private4 = 32768_i32
+    Elextype_private5 = 65536_i32
+    Elextype_private6 = 131072_i32
+    Elextype_private7 = 262144_i32
+    Elextype_private8 = 524288_i32
+    Elextype_private9 = 1048576_i32
+    Elextype_private10 = 2097152_i32
+    Elextype_private11 = 4194304_i32
+    Elextype_private12 = 8388608_i32
+    Elextype_private13 = 16777216_i32
+    Elextype_private14 = 33554432_i32
+    Elextype_private15 = 67108864_i32
+    Elextype_private16 = 134217728_i32
+    Elextype_private17 = 268435456_i32
+    Elextype_private18 = 536870912_i32
+    Elextype_private19 = 1073741824_i32
+    Elextype_private20 = -2147483648_i32
   end
-
-  enum SPWORDTYPE : Int32
-    Ewordtype_added = 1
-    Ewordtype_deleted = 2
+  enum SPWORDTYPE
+    Ewordtype_added = 1_i32
+    Ewordtype_deleted = 2_i32
   end
-
-  enum SPPRONUNCIATIONFLAGS : Int32
-    Epronflag_used = 1
+  enum SPPRONUNCIATIONFLAGS
+    Epronflag_used = 1_i32
   end
-
-  enum SPSHORTCUTTYPE : Int32
-    SPSHT_NotOverriden = -1
-    SPSHT_Unknown = 0
-    SPSHT_EMAIL = 4096
-    SPSHT_OTHER = 8192
-    SPPS_RESERVED1 = 12288
-    SPPS_RESERVED2 = 16384
-    SPPS_RESERVED3 = 20480
-    SPPS_RESERVED4 = 61440
+  enum SPSHORTCUTTYPE
+    SPSHT_NotOverriden = -1_i32
+    SPSHT_Unknown = 0_i32
+    SPSHT_EMAIL = 4096_i32
+    SPSHT_OTHER = 8192_i32
+    SPPS_RESERVED1 = 12288_i32
+    SPPS_RESERVED2 = 16384_i32
+    SPPS_RESERVED3 = 20480_i32
+    SPPS_RESERVED4 = 61440_i32
   end
-
-  enum SPVACTIONS : Int32
-    SPVA_Speak = 0
-    SPVA_Silence = 1
-    SPVA_Pronounce = 2
-    SPVA_Bookmark = 3
-    SPVA_SpellOut = 4
-    SPVA_Section = 5
-    SPVA_ParseUnknownTag = 6
+  enum SPVACTIONS
+    SPVA_Speak = 0_i32
+    SPVA_Silence = 1_i32
+    SPVA_Pronounce = 2_i32
+    SPVA_Bookmark = 3_i32
+    SPVA_SpellOut = 4_i32
+    SPVA_Section = 5_i32
+    SPVA_ParseUnknownTag = 6_i32
   end
-
-  enum SPRUNSTATE : Int32
-    SPRS_DONE = 1
-    SPRS_IS_SPEAKING = 2
+  enum SPRUNSTATE
+    SPRS_DONE = 1_i32
+    SPRS_IS_SPEAKING = 2_i32
   end
-
-  enum SPVLIMITS : Int32
-    SPMIN_VOLUME = 0
-    SPMAX_VOLUME = 100
-    SPMIN_RATE = -10
-    SPMAX_RATE = 10
+  enum SPVLIMITS
+    SPMIN_VOLUME = 0_i32
+    SPMAX_VOLUME = 100_i32
+    SPMIN_RATE = -10_i32
+    SPMAX_RATE = 10_i32
   end
-
-  enum SPVPRIORITY : Int32
-    SPVPRI_NORMAL = 0
-    SPVPRI_ALERT = 1
-    SPVPRI_OVER = 2
+  enum SPVPRIORITY
+    SPVPRI_NORMAL = 0_i32
+    SPVPRI_ALERT = 1_i32
+    SPVPRI_OVER = 2_i32
   end
-
-  enum SPEAKFLAGS : Int32
-    SPF_DEFAULT = 0
-    SPF_ASYNC = 1
-    SPF_PURGEBEFORESPEAK = 2
-    SPF_IS_FILENAME = 4
-    SPF_IS_XML = 8
-    SPF_IS_NOT_XML = 16
-    SPF_PERSIST_XML = 32
-    SPF_NLP_SPEAK_PUNC = 64
-    SPF_PARSE_SAPI = 128
-    SPF_PARSE_SSML = 256
-    SPF_PARSE_AUTODETECT = 0
-    SPF_NLP_MASK = 64
-    SPF_PARSE_MASK = 384
-    SPF_VOICE_MASK = 511
-    SPF_UNUSED_FLAGS = -512
+  enum SPEAKFLAGS
+    SPF_DEFAULT = 0_i32
+    SPF_ASYNC = 1_i32
+    SPF_PURGEBEFORESPEAK = 2_i32
+    SPF_IS_FILENAME = 4_i32
+    SPF_IS_XML = 8_i32
+    SPF_IS_NOT_XML = 16_i32
+    SPF_PERSIST_XML = 32_i32
+    SPF_NLP_SPEAK_PUNC = 64_i32
+    SPF_PARSE_SAPI = 128_i32
+    SPF_PARSE_SSML = 256_i32
+    SPF_PARSE_AUTODETECT = 0_i32
+    SPF_NLP_MASK = 64_i32
+    SPF_PARSE_MASK = 384_i32
+    SPF_VOICE_MASK = 511_i32
+    SPF_UNUSED_FLAGS = -512_i32
   end
-
-  enum SPXMLRESULTOPTIONS : Int32
-    SPXRO_SML = 0
-    SPXRO_Alternates_SML = 1
+  enum SPXMLRESULTOPTIONS
+    SPXRO_SML = 0_i32
+    SPXRO_Alternates_SML = 1_i32
   end
-
-  enum SPCOMMITFLAGS : Int32
-    SPCF_NONE = 0
-    SPCF_ADD_TO_USER_LEXICON = 1
-    SPCF_DEFINITE_CORRECTION = 2
+  enum SPCOMMITFLAGS
+    SPCF_NONE = 0_i32
+    SPCF_ADD_TO_USER_LEXICON = 1_i32
+    SPCF_DEFINITE_CORRECTION = 2_i32
   end
-
-  enum SPWORDPRONOUNCEABLE : Int32
-    SPWP_UNKNOWN_WORD_UNPRONOUNCEABLE = 0
-    SPWP_UNKNOWN_WORD_PRONOUNCEABLE = 1
-    SPWP_KNOWN_WORD_PRONOUNCEABLE = 2
+  enum SPWORDPRONOUNCEABLE
+    SPWP_UNKNOWN_WORD_UNPRONOUNCEABLE = 0_i32
+    SPWP_UNKNOWN_WORD_PRONOUNCEABLE = 1_i32
+    SPWP_KNOWN_WORD_PRONOUNCEABLE = 2_i32
   end
-
-  enum SPGRAMMARSTATE : Int32
-    SPGS_DISABLED = 0
-    SPGS_ENABLED = 1
-    SPGS_EXCLUSIVE = 3
+  enum SPGRAMMARSTATE
+    SPGS_DISABLED = 0_i32
+    SPGS_ENABLED = 1_i32
+    SPGS_EXCLUSIVE = 3_i32
   end
-
-  enum SPCONTEXTSTATE : Int32
-    SPCS_DISABLED = 0
-    SPCS_ENABLED = 1
+  enum SPCONTEXTSTATE
+    SPCS_DISABLED = 0_i32
+    SPCS_ENABLED = 1_i32
   end
-
-  enum SPRULESTATE : Int32
-    SPRS_INACTIVE = 0
-    SPRS_ACTIVE = 1
-    SPRS_ACTIVE_WITH_AUTO_PAUSE = 3
-    SPRS_ACTIVE_USER_DELIMITED = 4
+  enum SPRULESTATE
+    SPRS_INACTIVE = 0_i32
+    SPRS_ACTIVE = 1_i32
+    SPRS_ACTIVE_WITH_AUTO_PAUSE = 3_i32
+    SPRS_ACTIVE_USER_DELIMITED = 4_i32
   end
-
-  enum SPGRAMMARWORDTYPE : Int32
-    SPWT_DISPLAY = 0
-    SPWT_LEXICAL = 1
-    SPWT_PRONUNCIATION = 2
-    SPWT_LEXICAL_NO_SPECIAL_CHARS = 3
+  enum SPGRAMMARWORDTYPE
+    SPWT_DISPLAY = 0_i32
+    SPWT_LEXICAL = 1_i32
+    SPWT_PRONUNCIATION = 2_i32
+    SPWT_LEXICAL_NO_SPECIAL_CHARS = 3_i32
   end
-
-  enum SPCFGRULEATTRIBUTES : Int32
-    SPRAF_TopLevel = 1
-    SPRAF_Active = 2
-    SPRAF_Export = 4
-    SPRAF_Import = 8
-    SPRAF_Interpreter = 16
-    SPRAF_Dynamic = 32
-    SPRAF_Root = 64
-    SPRAF_AutoPause = 65536
-    SPRAF_UserDelimited = 131072
+  enum SPCFGRULEATTRIBUTES
+    SPRAF_TopLevel = 1_i32
+    SPRAF_Active = 2_i32
+    SPRAF_Export = 4_i32
+    SPRAF_Import = 8_i32
+    SPRAF_Interpreter = 16_i32
+    SPRAF_Dynamic = 32_i32
+    SPRAF_Root = 64_i32
+    SPRAF_AutoPause = 65536_i32
+    SPRAF_UserDelimited = 131072_i32
   end
-
-  enum SPLOADOPTIONS : Int32
-    SPLO_STATIC = 0
-    SPLO_DYNAMIC = 1
+  enum SPLOADOPTIONS
+    SPLO_STATIC = 0_i32
+    SPLO_DYNAMIC = 1_i32
   end
-
-  enum SPMATCHINGMODE : Int32
-    AllWords = 0
-    Subsequence = 1
-    OrderedSubset = 3
-    SubsequenceContentRequired = 5
-    OrderedSubsetContentRequired = 7
+  enum SPMATCHINGMODE
+    AllWords = 0_i32
+    Subsequence = 1_i32
+    OrderedSubset = 3_i32
+    SubsequenceContentRequired = 5_i32
+    OrderedSubsetContentRequired = 7_i32
   end
-
-  enum PHONETICALPHABET : Int32
-    PA_Ipa = 0
-    PA_Ups = 1
-    PA_Sapi = 2
+  enum PHONETICALPHABET
+    PA_Ipa = 0_i32
+    PA_Ups = 1_i32
+    PA_Sapi = 2_i32
   end
-
-  enum SPBOOKMARKOPTIONS : Int32
-    SPBO_NONE = 0
-    SPBO_PAUSE = 1
-    SPBO_AHEAD = 2
-    SPBO_TIME_UNITS = 4
+  enum SPBOOKMARKOPTIONS
+    SPBO_NONE = 0_i32
+    SPBO_PAUSE = 1_i32
+    SPBO_AHEAD = 2_i32
+    SPBO_TIME_UNITS = 4_i32
   end
-
-  enum SPAUDIOOPTIONS : Int32
-    SPAO_NONE = 0
-    SPAO_RETAIN_AUDIO = 1
+  enum SPAUDIOOPTIONS
+    SPAO_NONE = 0_i32
+    SPAO_RETAIN_AUDIO = 1_i32
   end
-
-  enum SPGRAMMAROPTIONS : Int32
-    SPGO_SAPI = 1
-    SPGO_SRGS = 2
-    SPGO_UPS = 4
-    SPGO_SRGS_MS_SCRIPT = 8
-    SPGO_SRGS_W3C_SCRIPT = 256
-    SPGO_SRGS_STG_SCRIPT = 512
-    SPGO_SRGS_SCRIPT = 778
-    SPGO_FILE = 16
-    SPGO_HTTP = 32
-    SPGO_RES = 64
-    SPGO_OBJECT = 128
-    SPGO_DEFAULT = 1019
-    SPGO_ALL = 1023
+  enum SPGRAMMAROPTIONS
+    SPGO_SAPI = 1_i32
+    SPGO_SRGS = 2_i32
+    SPGO_UPS = 4_i32
+    SPGO_SRGS_MS_SCRIPT = 8_i32
+    SPGO_SRGS_W3C_SCRIPT = 256_i32
+    SPGO_SRGS_STG_SCRIPT = 512_i32
+    SPGO_SRGS_SCRIPT = 778_i32
+    SPGO_FILE = 16_i32
+    SPGO_HTTP = 32_i32
+    SPGO_RES = 64_i32
+    SPGO_OBJECT = 128_i32
+    SPGO_DEFAULT = 1019_i32
+    SPGO_ALL = 1023_i32
   end
-
-  enum SPADAPTATIONSETTINGS : Int32
-    SPADS_Default = 0
-    SPADS_CurrentRecognizer = 1
-    SPADS_RecoProfile = 2
-    SPADS_Immediate = 4
-    SPADS_Reset = 8
-    SPADS_HighVolumeDataSource = 16
+  enum SPADAPTATIONSETTINGS
+    SPADS_Default = 0_i32
+    SPADS_CurrentRecognizer = 1_i32
+    SPADS_RecoProfile = 2_i32
+    SPADS_Immediate = 4_i32
+    SPADS_Reset = 8_i32
+    SPADS_HighVolumeDataSource = 16_i32
   end
-
-  enum SPADAPTATIONRELEVANCE : Int32
-    SPAR_Unknown = 0
-    SPAR_Low = 1
-    SPAR_Medium = 2
-    SPAR_High = 3
+  enum SPADAPTATIONRELEVANCE
+    SPAR_Unknown = 0_i32
+    SPAR_Low = 1_i32
+    SPAR_Medium = 2_i32
+    SPAR_High = 3_i32
   end
-
-  enum SPWAVEFORMATTYPE : Int32
-    SPWF_INPUT = 0
-    SPWF_SRENGINE = 1
+  enum SPWAVEFORMATTYPE
+    SPWF_INPUT = 0_i32
+    SPWF_SRENGINE = 1_i32
   end
-
-  enum SPRECOSTATE : Int32
-    SPRST_INACTIVE = 0
-    SPRST_ACTIVE = 1
-    SPRST_ACTIVE_ALWAYS = 2
-    SPRST_INACTIVE_WITH_PURGE = 3
-    SPRST_NUM_STATES = 4
+  enum SPRECOSTATE
+    SPRST_INACTIVE = 0_i32
+    SPRST_ACTIVE = 1_i32
+    SPRST_ACTIVE_ALWAYS = 2_i32
+    SPRST_INACTIVE_WITH_PURGE = 3_i32
+    SPRST_NUM_STATES = 4_i32
   end
-
-  enum DISPID_SpeechDataKey : Int32
-    DISPID_SDKSetBinaryValue = 1
-    DISPID_SDKGetBinaryValue = 2
-    DISPID_SDKSetStringValue = 3
-    DISPID_SDKGetStringValue = 4
-    DISPID_SDKSetLongValue = 5
-    DISPID_SDKGetlongValue = 6
-    DISPID_SDKOpenKey = 7
-    DISPID_SDKCreateKey = 8
-    DISPID_SDKDeleteKey = 9
-    DISPID_SDKDeleteValue = 10
-    DISPID_SDKEnumKeys = 11
-    DISPID_SDKEnumValues = 12
+  enum DISPID_SpeechDataKey
+    DISPID_SDKSetBinaryValue = 1_i32
+    DISPID_SDKGetBinaryValue = 2_i32
+    DISPID_SDKSetStringValue = 3_i32
+    DISPID_SDKGetStringValue = 4_i32
+    DISPID_SDKSetLongValue = 5_i32
+    DISPID_SDKGetlongValue = 6_i32
+    DISPID_SDKOpenKey = 7_i32
+    DISPID_SDKCreateKey = 8_i32
+    DISPID_SDKDeleteKey = 9_i32
+    DISPID_SDKDeleteValue = 10_i32
+    DISPID_SDKEnumKeys = 11_i32
+    DISPID_SDKEnumValues = 12_i32
   end
-
-  enum DISPID_SpeechObjectToken : Int32
-    DISPID_SOTId = 1
-    DISPID_SOTDataKey = 2
-    DISPID_SOTCategory = 3
-    DISPID_SOTGetDescription = 4
-    DISPID_SOTSetId = 5
-    DISPID_SOTGetAttribute = 6
-    DISPID_SOTCreateInstance = 7
-    DISPID_SOTRemove = 8
-    DISPID_SOTGetStorageFileName = 9
-    DISPID_SOTRemoveStorageFileName = 10
-    DISPID_SOTIsUISupported = 11
-    DISPID_SOTDisplayUI = 12
-    DISPID_SOTMatchesAttributes = 13
+  enum DISPID_SpeechObjectToken
+    DISPID_SOTId = 1_i32
+    DISPID_SOTDataKey = 2_i32
+    DISPID_SOTCategory = 3_i32
+    DISPID_SOTGetDescription = 4_i32
+    DISPID_SOTSetId = 5_i32
+    DISPID_SOTGetAttribute = 6_i32
+    DISPID_SOTCreateInstance = 7_i32
+    DISPID_SOTRemove = 8_i32
+    DISPID_SOTGetStorageFileName = 9_i32
+    DISPID_SOTRemoveStorageFileName = 10_i32
+    DISPID_SOTIsUISupported = 11_i32
+    DISPID_SOTDisplayUI = 12_i32
+    DISPID_SOTMatchesAttributes = 13_i32
   end
-
-  enum SpeechDataKeyLocation : Int32
-    SDKLDefaultLocation = 0
-    SDKLCurrentUser = 1
-    SDKLLocalMachine = 2
-    SDKLCurrentConfig = 5
+  enum SpeechDataKeyLocation
+    SDKLDefaultLocation = 0_i32
+    SDKLCurrentUser = 1_i32
+    SDKLLocalMachine = 2_i32
+    SDKLCurrentConfig = 5_i32
   end
-
   enum SpeechTokenContext : UInt32
-    STCInprocServer = 1
-    STCInprocHandler = 2
-    STCLocalServer = 4
-    STCRemoteServer = 16
-    STCAll = 23
+    STCInprocServer = 1_u32
+    STCInprocHandler = 2_u32
+    STCLocalServer = 4_u32
+    STCRemoteServer = 16_u32
+    STCAll = 23_u32
   end
-
-  enum SpeechTokenShellFolder : Int32
-    STSF_AppData = 26
-    STSF_LocalAppData = 28
-    STSF_CommonAppData = 35
-    STSF_FlagCreate = 32768
+  enum SpeechTokenShellFolder
+    STSF_AppData = 26_i32
+    STSF_LocalAppData = 28_i32
+    STSF_CommonAppData = 35_i32
+    STSF_FlagCreate = 32768_i32
   end
-
-  enum DISPID_SpeechObjectTokens : Int32
-    DISPID_SOTsCount = 1
-    DISPID_SOTsItem = 0
-    DISPID_SOTs_NewEnum = -4
+  enum DISPID_SpeechObjectTokens
+    DISPID_SOTsCount = 1_i32
+    DISPID_SOTsItem = 0_i32
+    DISPID_SOTs_NewEnum = -4_i32
   end
-
-  enum DISPID_SpeechObjectTokenCategory : Int32
-    DISPID_SOTCId = 1
-    DISPID_SOTCDefault = 2
-    DISPID_SOTCSetId = 3
-    DISPID_SOTCGetDataKey = 4
-    DISPID_SOTCEnumerateTokens = 5
+  enum DISPID_SpeechObjectTokenCategory
+    DISPID_SOTCId = 1_i32
+    DISPID_SOTCDefault = 2_i32
+    DISPID_SOTCSetId = 3_i32
+    DISPID_SOTCGetDataKey = 4_i32
+    DISPID_SOTCEnumerateTokens = 5_i32
   end
-
-  enum SpeechAudioFormatType : Int32
-    SAFTDefault = -1
-    SAFTNoAssignedFormat = 0
-    SAFTText = 1
-    SAFTNonStandardFormat = 2
-    SAFTExtendedAudioFormat = 3
-    SAFT8kHz8BitMono = 4
-    SAFT8kHz8BitStereo = 5
-    SAFT8kHz16BitMono = 6
-    SAFT8kHz16BitStereo = 7
-    SAFT11kHz8BitMono = 8
-    SAFT11kHz8BitStereo = 9
-    SAFT11kHz16BitMono = 10
-    SAFT11kHz16BitStereo = 11
-    SAFT12kHz8BitMono = 12
-    SAFT12kHz8BitStereo = 13
-    SAFT12kHz16BitMono = 14
-    SAFT12kHz16BitStereo = 15
-    SAFT16kHz8BitMono = 16
-    SAFT16kHz8BitStereo = 17
-    SAFT16kHz16BitMono = 18
-    SAFT16kHz16BitStereo = 19
-    SAFT22kHz8BitMono = 20
-    SAFT22kHz8BitStereo = 21
-    SAFT22kHz16BitMono = 22
-    SAFT22kHz16BitStereo = 23
-    SAFT24kHz8BitMono = 24
-    SAFT24kHz8BitStereo = 25
-    SAFT24kHz16BitMono = 26
-    SAFT24kHz16BitStereo = 27
-    SAFT32kHz8BitMono = 28
-    SAFT32kHz8BitStereo = 29
-    SAFT32kHz16BitMono = 30
-    SAFT32kHz16BitStereo = 31
-    SAFT44kHz8BitMono = 32
-    SAFT44kHz8BitStereo = 33
-    SAFT44kHz16BitMono = 34
-    SAFT44kHz16BitStereo = 35
-    SAFT48kHz8BitMono = 36
-    SAFT48kHz8BitStereo = 37
-    SAFT48kHz16BitMono = 38
-    SAFT48kHz16BitStereo = 39
-    SAFTTrueSpeech_8kHz1BitMono = 40
-    SAFTCCITT_ALaw_8kHzMono = 41
-    SAFTCCITT_ALaw_8kHzStereo = 42
-    SAFTCCITT_ALaw_11kHzMono = 43
-    SAFTCCITT_ALaw_11kHzStereo = 44
-    SAFTCCITT_ALaw_22kHzMono = 45
-    SAFTCCITT_ALaw_22kHzStereo = 46
-    SAFTCCITT_ALaw_44kHzMono = 47
-    SAFTCCITT_ALaw_44kHzStereo = 48
-    SAFTCCITT_uLaw_8kHzMono = 49
-    SAFTCCITT_uLaw_8kHzStereo = 50
-    SAFTCCITT_uLaw_11kHzMono = 51
-    SAFTCCITT_uLaw_11kHzStereo = 52
-    SAFTCCITT_uLaw_22kHzMono = 53
-    SAFTCCITT_uLaw_22kHzStereo = 54
-    SAFTCCITT_uLaw_44kHzMono = 55
-    SAFTCCITT_uLaw_44kHzStereo = 56
-    SAFTADPCM_8kHzMono = 57
-    SAFTADPCM_8kHzStereo = 58
-    SAFTADPCM_11kHzMono = 59
-    SAFTADPCM_11kHzStereo = 60
-    SAFTADPCM_22kHzMono = 61
-    SAFTADPCM_22kHzStereo = 62
-    SAFTADPCM_44kHzMono = 63
-    SAFTADPCM_44kHzStereo = 64
-    SAFTGSM610_8kHzMono = 65
-    SAFTGSM610_11kHzMono = 66
-    SAFTGSM610_22kHzMono = 67
-    SAFTGSM610_44kHzMono = 68
+  enum SpeechAudioFormatType
+    SAFTDefault = -1_i32
+    SAFTNoAssignedFormat = 0_i32
+    SAFTText = 1_i32
+    SAFTNonStandardFormat = 2_i32
+    SAFTExtendedAudioFormat = 3_i32
+    SAFT8kHz8BitMono = 4_i32
+    SAFT8kHz8BitStereo = 5_i32
+    SAFT8kHz16BitMono = 6_i32
+    SAFT8kHz16BitStereo = 7_i32
+    SAFT11kHz8BitMono = 8_i32
+    SAFT11kHz8BitStereo = 9_i32
+    SAFT11kHz16BitMono = 10_i32
+    SAFT11kHz16BitStereo = 11_i32
+    SAFT12kHz8BitMono = 12_i32
+    SAFT12kHz8BitStereo = 13_i32
+    SAFT12kHz16BitMono = 14_i32
+    SAFT12kHz16BitStereo = 15_i32
+    SAFT16kHz8BitMono = 16_i32
+    SAFT16kHz8BitStereo = 17_i32
+    SAFT16kHz16BitMono = 18_i32
+    SAFT16kHz16BitStereo = 19_i32
+    SAFT22kHz8BitMono = 20_i32
+    SAFT22kHz8BitStereo = 21_i32
+    SAFT22kHz16BitMono = 22_i32
+    SAFT22kHz16BitStereo = 23_i32
+    SAFT24kHz8BitMono = 24_i32
+    SAFT24kHz8BitStereo = 25_i32
+    SAFT24kHz16BitMono = 26_i32
+    SAFT24kHz16BitStereo = 27_i32
+    SAFT32kHz8BitMono = 28_i32
+    SAFT32kHz8BitStereo = 29_i32
+    SAFT32kHz16BitMono = 30_i32
+    SAFT32kHz16BitStereo = 31_i32
+    SAFT44kHz8BitMono = 32_i32
+    SAFT44kHz8BitStereo = 33_i32
+    SAFT44kHz16BitMono = 34_i32
+    SAFT44kHz16BitStereo = 35_i32
+    SAFT48kHz8BitMono = 36_i32
+    SAFT48kHz8BitStereo = 37_i32
+    SAFT48kHz16BitMono = 38_i32
+    SAFT48kHz16BitStereo = 39_i32
+    SAFTTrueSpeech_8kHz1BitMono = 40_i32
+    SAFTCCITT_ALaw_8kHzMono = 41_i32
+    SAFTCCITT_ALaw_8kHzStereo = 42_i32
+    SAFTCCITT_ALaw_11kHzMono = 43_i32
+    SAFTCCITT_ALaw_11kHzStereo = 44_i32
+    SAFTCCITT_ALaw_22kHzMono = 45_i32
+    SAFTCCITT_ALaw_22kHzStereo = 46_i32
+    SAFTCCITT_ALaw_44kHzMono = 47_i32
+    SAFTCCITT_ALaw_44kHzStereo = 48_i32
+    SAFTCCITT_uLaw_8kHzMono = 49_i32
+    SAFTCCITT_uLaw_8kHzStereo = 50_i32
+    SAFTCCITT_uLaw_11kHzMono = 51_i32
+    SAFTCCITT_uLaw_11kHzStereo = 52_i32
+    SAFTCCITT_uLaw_22kHzMono = 53_i32
+    SAFTCCITT_uLaw_22kHzStereo = 54_i32
+    SAFTCCITT_uLaw_44kHzMono = 55_i32
+    SAFTCCITT_uLaw_44kHzStereo = 56_i32
+    SAFTADPCM_8kHzMono = 57_i32
+    SAFTADPCM_8kHzStereo = 58_i32
+    SAFTADPCM_11kHzMono = 59_i32
+    SAFTADPCM_11kHzStereo = 60_i32
+    SAFTADPCM_22kHzMono = 61_i32
+    SAFTADPCM_22kHzStereo = 62_i32
+    SAFTADPCM_44kHzMono = 63_i32
+    SAFTADPCM_44kHzStereo = 64_i32
+    SAFTGSM610_8kHzMono = 65_i32
+    SAFTGSM610_11kHzMono = 66_i32
+    SAFTGSM610_22kHzMono = 67_i32
+    SAFTGSM610_44kHzMono = 68_i32
   end
-
-  enum DISPID_SpeechAudioFormat : Int32
-    DISPID_SAFType = 1
-    DISPID_SAFGuid = 2
-    DISPID_SAFGetWaveFormatEx = 3
-    DISPID_SAFSetWaveFormatEx = 4
+  enum DISPID_SpeechAudioFormat
+    DISPID_SAFType = 1_i32
+    DISPID_SAFGuid = 2_i32
+    DISPID_SAFGetWaveFormatEx = 3_i32
+    DISPID_SAFSetWaveFormatEx = 4_i32
   end
-
-  enum DISPID_SpeechBaseStream : Int32
-    DISPID_SBSFormat = 1
-    DISPID_SBSRead = 2
-    DISPID_SBSWrite = 3
-    DISPID_SBSSeek = 4
+  enum DISPID_SpeechBaseStream
+    DISPID_SBSFormat = 1_i32
+    DISPID_SBSRead = 2_i32
+    DISPID_SBSWrite = 3_i32
+    DISPID_SBSSeek = 4_i32
   end
-
   enum SpeechStreamSeekPositionType : UInt32
-    SSSPTRelativeToStart = 0
-    SSSPTRelativeToCurrentPosition = 1
-    SSSPTRelativeToEnd = 2
-  end
-
-  enum DISPID_SpeechAudio : Int32
-    DISPID_SAStatus = 200
-    DISPID_SABufferInfo = 201
-    DISPID_SADefaultFormat = 202
-    DISPID_SAVolume = 203
-    DISPID_SABufferNotifySize = 204
-    DISPID_SAEventHandle = 205
-    DISPID_SASetState = 206
-  end
-
-  enum SpeechAudioState : Int32
-    SASClosed = 0
-    SASStop = 1
-    SASPause = 2
-    SASRun = 3
-  end
-
-  enum DISPID_SpeechMMSysAudio : Int32
-    DISPID_SMSADeviceId = 300
-    DISPID_SMSALineId = 301
-    DISPID_SMSAMMHandle = 302
-  end
-
-  enum DISPID_SpeechFileStream : Int32
-    DISPID_SFSOpen = 100
-    DISPID_SFSClose = 101
-  end
-
-  enum SpeechStreamFileMode : Int32
-    SSFMOpenForRead = 0
-    SSFMOpenReadWrite = 1
-    SSFMCreate = 2
-    SSFMCreateForWrite = 3
-  end
-
-  enum DISPID_SpeechCustomStream : Int32
-    DISPID_SCSBaseStream = 100
-  end
-
-  enum DISPID_SpeechMemoryStream : Int32
-    DISPID_SMSSetData = 100
-    DISPID_SMSGetData = 101
-  end
-
-  enum DISPID_SpeechAudioStatus : Int32
-    DISPID_SASFreeBufferSpace = 1
-    DISPID_SASNonBlockingIO = 2
-    DISPID_SASState = 3
-    DISPID_SASCurrentSeekPosition = 4
-    DISPID_SASCurrentDevicePosition = 5
-  end
-
-  enum DISPID_SpeechAudioBufferInfo : Int32
-    DISPID_SABIMinNotification = 1
-    DISPID_SABIBufferSize = 2
-    DISPID_SABIEventBias = 3
-  end
-
-  enum DISPID_SpeechWaveFormatEx : Int32
-    DISPID_SWFEFormatTag = 1
-    DISPID_SWFEChannels = 2
-    DISPID_SWFESamplesPerSec = 3
-    DISPID_SWFEAvgBytesPerSec = 4
-    DISPID_SWFEBlockAlign = 5
-    DISPID_SWFEBitsPerSample = 6
-    DISPID_SWFEExtraData = 7
-  end
-
-  enum DISPID_SpeechVoice : Int32
-    DISPID_SVStatus = 1
-    DISPID_SVVoice = 2
-    DISPID_SVAudioOutput = 3
-    DISPID_SVAudioOutputStream = 4
-    DISPID_SVRate = 5
-    DISPID_SVVolume = 6
-    DISPID_SVAllowAudioOuputFormatChangesOnNextSet = 7
-    DISPID_SVEventInterests = 8
-    DISPID_SVPriority = 9
-    DISPID_SVAlertBoundary = 10
-    DISPID_SVSyncronousSpeakTimeout = 11
-    DISPID_SVSpeak = 12
-    DISPID_SVSpeakStream = 13
-    DISPID_SVPause = 14
-    DISPID_SVResume = 15
-    DISPID_SVSkip = 16
-    DISPID_SVGetVoices = 17
-    DISPID_SVGetAudioOutputs = 18
-    DISPID_SVWaitUntilDone = 19
-    DISPID_SVSpeakCompleteEvent = 20
-    DISPID_SVIsUISupported = 21
-    DISPID_SVDisplayUI = 22
-  end
-
-  enum SpeechVoicePriority : Int32
-    SVPNormal = 0
-    SVPAlert = 1
-    SVPOver = 2
-  end
-
-  enum SpeechVoiceSpeakFlags : Int32
-    SVSFDefault = 0
-    SVSFlagsAsync = 1
-    SVSFPurgeBeforeSpeak = 2
-    SVSFIsFilename = 4
-    SVSFIsXML = 8
-    SVSFIsNotXML = 16
-    SVSFPersistXML = 32
-    SVSFNLPSpeakPunc = 64
-    SVSFParseSapi = 128
-    SVSFParseSsml = 256
-    SVSFParseAutodetect = 0
-    SVSFNLPMask = 64
-    SVSFParseMask = 384
-    SVSFVoiceMask = 511
-    SVSFUnusedFlags = -512
-  end
-
-  enum SpeechVoiceEvents : Int32
-    SVEStartInputStream = 2
-    SVEEndInputStream = 4
-    SVEVoiceChange = 8
-    SVEBookmark = 16
-    SVEWordBoundary = 32
-    SVEPhoneme = 64
-    SVESentenceBoundary = 128
-    SVEViseme = 256
-    SVEAudioLevel = 512
-    SVEPrivate = 32768
-    SVEAllEvents = 33790
-  end
-
-  enum DISPID_SpeechVoiceStatus : Int32
-    DISPID_SVSCurrentStreamNumber = 1
-    DISPID_SVSLastStreamNumberQueued = 2
-    DISPID_SVSLastResult = 3
-    DISPID_SVSRunningState = 4
-    DISPID_SVSInputWordPosition = 5
-    DISPID_SVSInputWordLength = 6
-    DISPID_SVSInputSentencePosition = 7
-    DISPID_SVSInputSentenceLength = 8
-    DISPID_SVSLastBookmark = 9
-    DISPID_SVSLastBookmarkId = 10
-    DISPID_SVSPhonemeId = 11
-    DISPID_SVSVisemeId = 12
-  end
-
-  enum SpeechRunState : Int32
-    SRSEDone = 1
-    SRSEIsSpeaking = 2
-  end
-
-  enum SpeechVisemeType : Int32
-    SVP_0 = 0
-    SVP_1 = 1
-    SVP_2 = 2
-    SVP_3 = 3
-    SVP_4 = 4
-    SVP_5 = 5
-    SVP_6 = 6
-    SVP_7 = 7
-    SVP_8 = 8
-    SVP_9 = 9
-    SVP_10 = 10
-    SVP_11 = 11
-    SVP_12 = 12
-    SVP_13 = 13
-    SVP_14 = 14
-    SVP_15 = 15
-    SVP_16 = 16
-    SVP_17 = 17
-    SVP_18 = 18
-    SVP_19 = 19
-    SVP_20 = 20
-    SVP_21 = 21
-  end
-
-  enum SpeechVisemeFeature : Int32
-    SVF_None = 0
-    SVF_Stressed = 1
-    SVF_Emphasis = 2
-  end
-
-  enum DISPID_SpeechVoiceEvent : Int32
-    DISPID_SVEStreamStart = 1
-    DISPID_SVEStreamEnd = 2
-    DISPID_SVEVoiceChange = 3
-    DISPID_SVEBookmark = 4
-    DISPID_SVEWord = 5
-    DISPID_SVEPhoneme = 6
-    DISPID_SVESentenceBoundary = 7
-    DISPID_SVEViseme = 8
-    DISPID_SVEAudioLevel = 9
-    DISPID_SVEEnginePrivate = 10
-  end
-
-  enum DISPID_SpeechRecognizer : Int32
-    DISPID_SRRecognizer = 1
-    DISPID_SRAllowAudioInputFormatChangesOnNextSet = 2
-    DISPID_SRAudioInput = 3
-    DISPID_SRAudioInputStream = 4
-    DISPID_SRIsShared = 5
-    DISPID_SRState = 6
-    DISPID_SRStatus = 7
-    DISPID_SRProfile = 8
-    DISPID_SREmulateRecognition = 9
-    DISPID_SRCreateRecoContext = 10
-    DISPID_SRGetFormat = 11
-    DISPID_SRSetPropertyNumber = 12
-    DISPID_SRGetPropertyNumber = 13
-    DISPID_SRSetPropertyString = 14
-    DISPID_SRGetPropertyString = 15
-    DISPID_SRIsUISupported = 16
-    DISPID_SRDisplayUI = 17
-    DISPID_SRGetRecognizers = 18
-    DISPID_SVGetAudioInputs = 19
-    DISPID_SVGetProfiles = 20
-  end
-
-  enum SpeechRecognizerState : Int32
-    SRSInactive = 0
-    SRSActive = 1
-    SRSActiveAlways = 2
-    SRSInactiveWithPurge = 3
-  end
-
-  enum SpeechDisplayAttributes : Int32
-    SDA_No_Trailing_Space = 0
-    SDA_One_Trailing_Space = 2
-    SDA_Two_Trailing_Spaces = 4
-    SDA_Consume_Leading_Spaces = 8
-  end
-
-  enum SpeechFormatType : Int32
-    SFTInput = 0
-    SFTSREngine = 1
-  end
-
-  enum SpeechEmulationCompareFlags : Int32
-    SECFIgnoreCase = 1
-    SECFIgnoreKanaType = 65536
-    SECFIgnoreWidth = 131072
-    SECFNoSpecialChars = 536870912
-    SECFEmulateResult = 1073741824
-    SECFDefault = 196609
-  end
-
-  enum DISPID_SpeechRecognizerStatus : Int32
-    DISPID_SRSAudioStatus = 1
-    DISPID_SRSCurrentStreamPosition = 2
-    DISPID_SRSCurrentStreamNumber = 3
-    DISPID_SRSNumberOfActiveRules = 4
-    DISPID_SRSClsidEngine = 5
-    DISPID_SRSSupportedLanguages = 6
-  end
-
-  enum DISPID_SpeechRecoContext : Int32
-    DISPID_SRCRecognizer = 1
-    DISPID_SRCAudioInInterferenceStatus = 2
-    DISPID_SRCRequestedUIType = 3
-    DISPID_SRCVoice = 4
-    DISPID_SRAllowVoiceFormatMatchingOnNextSet = 5
-    DISPID_SRCVoicePurgeEvent = 6
-    DISPID_SRCEventInterests = 7
-    DISPID_SRCCmdMaxAlternates = 8
-    DISPID_SRCState = 9
-    DISPID_SRCRetainedAudio = 10
-    DISPID_SRCRetainedAudioFormat = 11
-    DISPID_SRCPause = 12
-    DISPID_SRCResume = 13
-    DISPID_SRCCreateGrammar = 14
-    DISPID_SRCCreateResultFromMemory = 15
-    DISPID_SRCBookmark = 16
-    DISPID_SRCSetAdaptationData = 17
-  end
-
-  enum SpeechRetainedAudioOptions : Int32
-    SRAONone = 0
-    SRAORetainAudio = 1
-  end
-
-  enum SpeechBookmarkOptions : Int32
-    SBONone = 0
-    SBOPause = 1
-  end
-
-  enum SpeechInterference : Int32
-    SINone = 0
-    SINoise = 1
-    SINoSignal = 2
-    SITooLoud = 3
-    SITooQuiet = 4
-    SITooFast = 5
-    SITooSlow = 6
-  end
-
-  enum SpeechRecoEvents : Int32
-    SREStreamEnd = 1
-    SRESoundStart = 2
-    SRESoundEnd = 4
-    SREPhraseStart = 8
-    SRERecognition = 16
-    SREHypothesis = 32
-    SREBookmark = 64
-    SREPropertyNumChange = 128
-    SREPropertyStringChange = 256
-    SREFalseRecognition = 512
-    SREInterference = 1024
-    SRERequestUI = 2048
-    SREStateChange = 4096
-    SREAdaptation = 8192
-    SREStreamStart = 16384
-    SRERecoOtherContext = 32768
-    SREAudioLevel = 65536
-    SREPrivate = 262144
-    SREAllEvents = 393215
-  end
-
-  enum SpeechRecoContextState : Int32
-    SRCS_Disabled = 0
-    SRCS_Enabled = 1
-  end
-
-  enum DISPIDSPRG : Int32
-    DISPID_SRGId = 1
-    DISPID_SRGRecoContext = 2
-    DISPID_SRGState = 3
-    DISPID_SRGRules = 4
-    DISPID_SRGReset = 5
-    DISPID_SRGCommit = 6
-    DISPID_SRGCmdLoadFromFile = 7
-    DISPID_SRGCmdLoadFromObject = 8
-    DISPID_SRGCmdLoadFromResource = 9
-    DISPID_SRGCmdLoadFromMemory = 10
-    DISPID_SRGCmdLoadFromProprietaryGrammar = 11
-    DISPID_SRGCmdSetRuleState = 12
-    DISPID_SRGCmdSetRuleIdState = 13
-    DISPID_SRGDictationLoad = 14
-    DISPID_SRGDictationUnload = 15
-    DISPID_SRGDictationSetState = 16
-    DISPID_SRGSetWordSequenceData = 17
-    DISPID_SRGSetTextSelection = 18
-    DISPID_SRGIsPronounceable = 19
-  end
-
-  enum SpeechLoadOption : Int32
-    SLOStatic = 0
-    SLODynamic = 1
-  end
-
-  enum SpeechWordPronounceable : Int32
-    SWPUnknownWordUnpronounceable = 0
-    SWPUnknownWordPronounceable = 1
-    SWPKnownWordPronounceable = 2
-  end
-
-  enum SpeechGrammarState : Int32
-    SGSEnabled = 1
-    SGSDisabled = 0
-    SGSExclusive = 3
-  end
-
-  enum SpeechRuleState : Int32
-    SGDSInactive = 0
-    SGDSActive = 1
-    SGDSActiveWithAutoPause = 3
-    SGDSActiveUserDelimited = 4
-  end
-
-  enum SpeechRuleAttributes : Int32
-    SRATopLevel = 1
-    SRADefaultToActive = 2
-    SRAExport = 4
-    SRAImport = 8
-    SRAInterpreter = 16
-    SRADynamic = 32
-    SRARoot = 64
-  end
-
-  enum SpeechGrammarWordType : Int32
-    SGDisplay = 0
-    SGLexical = 1
-    SGPronounciation = 2
-    SGLexicalNoSpecialChars = 3
-  end
-
-  enum DISPID_SpeechRecoContextEvents : Int32
-    DISPID_SRCEStartStream = 1
-    DISPID_SRCEEndStream = 2
-    DISPID_SRCEBookmark = 3
-    DISPID_SRCESoundStart = 4
-    DISPID_SRCESoundEnd = 5
-    DISPID_SRCEPhraseStart = 6
-    DISPID_SRCERecognition = 7
-    DISPID_SRCEHypothesis = 8
-    DISPID_SRCEPropertyNumberChange = 9
-    DISPID_SRCEPropertyStringChange = 10
-    DISPID_SRCEFalseRecognition = 11
-    DISPID_SRCEInterference = 12
-    DISPID_SRCERequestUI = 13
-    DISPID_SRCERecognizerStateChange = 14
-    DISPID_SRCEAdaptation = 15
-    DISPID_SRCERecognitionForOtherContext = 16
-    DISPID_SRCEAudioLevel = 17
-    DISPID_SRCEEnginePrivate = 18
-  end
-
-  enum SpeechRecognitionType : Int32
-    SRTStandard = 0
-    SRTAutopause = 1
-    SRTEmulated = 2
-    SRTSMLTimeout = 4
-    SRTExtendableParse = 8
-    SRTReSent = 16
-  end
-
-  enum DISPID_SpeechGrammarRule : Int32
-    DISPID_SGRAttributes = 1
-    DISPID_SGRInitialState = 2
-    DISPID_SGRName = 3
-    DISPID_SGRId = 4
-    DISPID_SGRClear = 5
-    DISPID_SGRAddResource = 6
-    DISPID_SGRAddState = 7
-  end
-
-  enum DISPID_SpeechGrammarRules : Int32
-    DISPID_SGRsCount = 1
-    DISPID_SGRsDynamic = 2
-    DISPID_SGRsAdd = 3
-    DISPID_SGRsCommit = 4
-    DISPID_SGRsCommitAndSave = 5
-    DISPID_SGRsFindRule = 6
-    DISPID_SGRsItem = 0
-    DISPID_SGRs_NewEnum = -4
-  end
-
-  enum DISPID_SpeechGrammarRuleState : Int32
-    DISPID_SGRSRule = 1
-    DISPID_SGRSTransitions = 2
-    DISPID_SGRSAddWordTransition = 3
-    DISPID_SGRSAddRuleTransition = 4
-    DISPID_SGRSAddSpecialTransition = 5
-  end
-
-  enum SpeechSpecialTransitionType : Int32
-    SSTTWildcard = 1
-    SSTTDictation = 2
-    SSTTTextBuffer = 3
-  end
-
-  enum DISPID_SpeechGrammarRuleStateTransitions : Int32
-    DISPID_SGRSTsCount = 1
-    DISPID_SGRSTsItem = 0
-    DISPID_SGRSTs_NewEnum = -4
-  end
-
-  enum DISPID_SpeechGrammarRuleStateTransition : Int32
-    DISPID_SGRSTType = 1
-    DISPID_SGRSTText = 2
-    DISPID_SGRSTRule = 3
-    DISPID_SGRSTWeight = 4
-    DISPID_SGRSTPropertyName = 5
-    DISPID_SGRSTPropertyId = 6
-    DISPID_SGRSTPropertyValue = 7
-    DISPID_SGRSTNextState = 8
-  end
-
-  enum SpeechGrammarRuleStateTransitionType : Int32
-    SGRSTTEpsilon = 0
-    SGRSTTWord = 1
-    SGRSTTRule = 2
-    SGRSTTDictation = 3
-    SGRSTTWildcard = 4
-    SGRSTTTextBuffer = 5
-  end
-
-  enum DISPIDSPTSI : Int32
-    DISPIDSPTSI_ActiveOffset = 1
-    DISPIDSPTSI_ActiveLength = 2
-    DISPIDSPTSI_SelectionOffset = 3
-    DISPIDSPTSI_SelectionLength = 4
-  end
-
-  enum DISPID_SpeechRecoResult : Int32
-    DISPID_SRRRecoContext = 1
-    DISPID_SRRTimes = 2
-    DISPID_SRRAudioFormat = 3
-    DISPID_SRRPhraseInfo = 4
-    DISPID_SRRAlternates = 5
-    DISPID_SRRAudio = 6
-    DISPID_SRRSpeakAudio = 7
-    DISPID_SRRSaveToMemory = 8
-    DISPID_SRRDiscardResultInfo = 9
-  end
-
-  enum SpeechDiscardType : Int32
-    SDTProperty = 1
-    SDTReplacement = 2
-    SDTRule = 4
-    SDTDisplayText = 8
-    SDTLexicalForm = 16
-    SDTPronunciation = 32
-    SDTAudio = 64
-    SDTAlternates = 128
-    SDTAll = 255
-  end
-
-  enum DISPID_SpeechXMLRecoResult : Int32
-    DISPID_SRRGetXMLResult = 10
-    DISPID_SRRGetXMLErrorInfo = 11
-  end
-
-  enum DISPID_SpeechRecoResult2 : Int32
-    DISPID_SRRSetTextFeedback = 12
-  end
-
-  enum DISPID_SpeechPhraseBuilder : Int32
-    DISPID_SPPBRestorePhraseFromMemory = 1
-  end
-
-  enum DISPID_SpeechRecoResultTimes : Int32
-    DISPID_SRRTStreamTime = 1
-    DISPID_SRRTLength = 2
-    DISPID_SRRTTickCount = 3
-    DISPID_SRRTOffsetFromStart = 4
-  end
-
-  enum DISPID_SpeechPhraseAlternate : Int32
-    DISPID_SPARecoResult = 1
-    DISPID_SPAStartElementInResult = 2
-    DISPID_SPANumberOfElementsInResult = 3
-    DISPID_SPAPhraseInfo = 4
-    DISPID_SPACommit = 5
-  end
-
-  enum DISPID_SpeechPhraseAlternates : Int32
-    DISPID_SPAsCount = 1
-    DISPID_SPAsItem = 0
-    DISPID_SPAs_NewEnum = -4
-  end
-
-  enum DISPID_SpeechPhraseInfo : Int32
-    DISPID_SPILanguageId = 1
-    DISPID_SPIGrammarId = 2
-    DISPID_SPIStartTime = 3
-    DISPID_SPIAudioStreamPosition = 4
-    DISPID_SPIAudioSizeBytes = 5
-    DISPID_SPIRetainedSizeBytes = 6
-    DISPID_SPIAudioSizeTime = 7
-    DISPID_SPIRule = 8
-    DISPID_SPIProperties = 9
-    DISPID_SPIElements = 10
-    DISPID_SPIReplacements = 11
-    DISPID_SPIEngineId = 12
-    DISPID_SPIEnginePrivateData = 13
-    DISPID_SPISaveToMemory = 14
-    DISPID_SPIGetText = 15
-    DISPID_SPIGetDisplayAttributes = 16
-  end
-
-  enum DISPID_SpeechPhraseElement : Int32
-    DISPID_SPEAudioTimeOffset = 1
-    DISPID_SPEAudioSizeTime = 2
-    DISPID_SPEAudioStreamOffset = 3
-    DISPID_SPEAudioSizeBytes = 4
-    DISPID_SPERetainedStreamOffset = 5
-    DISPID_SPERetainedSizeBytes = 6
-    DISPID_SPEDisplayText = 7
-    DISPID_SPELexicalForm = 8
-    DISPID_SPEPronunciation = 9
-    DISPID_SPEDisplayAttributes = 10
-    DISPID_SPERequiredConfidence = 11
-    DISPID_SPEActualConfidence = 12
-    DISPID_SPEEngineConfidence = 13
-  end
-
-  enum SpeechEngineConfidence : Int32
-    SECLowConfidence = -1
-    SECNormalConfidence = 0
-    SECHighConfidence = 1
-  end
-
-  enum DISPID_SpeechPhraseElements : Int32
-    DISPID_SPEsCount = 1
-    DISPID_SPEsItem = 0
-    DISPID_SPEs_NewEnum = -4
-  end
-
-  enum DISPID_SpeechPhraseReplacement : Int32
-    DISPID_SPRDisplayAttributes = 1
-    DISPID_SPRText = 2
-    DISPID_SPRFirstElement = 3
-    DISPID_SPRNumberOfElements = 4
-  end
-
-  enum DISPID_SpeechPhraseReplacements : Int32
-    DISPID_SPRsCount = 1
-    DISPID_SPRsItem = 0
-    DISPID_SPRs_NewEnum = -4
-  end
-
-  enum DISPID_SpeechPhraseProperty : Int32
-    DISPID_SPPName = 1
-    DISPID_SPPId = 2
-    DISPID_SPPValue = 3
-    DISPID_SPPFirstElement = 4
-    DISPID_SPPNumberOfElements = 5
-    DISPID_SPPEngineConfidence = 6
-    DISPID_SPPConfidence = 7
-    DISPID_SPPParent = 8
-    DISPID_SPPChildren = 9
-  end
-
-  enum DISPID_SpeechPhraseProperties : Int32
-    DISPID_SPPsCount = 1
-    DISPID_SPPsItem = 0
-    DISPID_SPPs_NewEnum = -4
-  end
-
-  enum DISPID_SpeechPhraseRule : Int32
-    DISPID_SPRuleName = 1
-    DISPID_SPRuleId = 2
-    DISPID_SPRuleFirstElement = 3
-    DISPID_SPRuleNumberOfElements = 4
-    DISPID_SPRuleParent = 5
-    DISPID_SPRuleChildren = 6
-    DISPID_SPRuleConfidence = 7
-    DISPID_SPRuleEngineConfidence = 8
-  end
-
-  enum DISPID_SpeechPhraseRules : Int32
-    DISPID_SPRulesCount = 1
-    DISPID_SPRulesItem = 0
-    DISPID_SPRules_NewEnum = -4
-  end
-
-  enum DISPID_SpeechLexicon : Int32
-    DISPID_SLGenerationId = 1
-    DISPID_SLGetWords = 2
-    DISPID_SLAddPronunciation = 3
-    DISPID_SLAddPronunciationByPhoneIds = 4
-    DISPID_SLRemovePronunciation = 5
-    DISPID_SLRemovePronunciationByPhoneIds = 6
-    DISPID_SLGetPronunciations = 7
-    DISPID_SLGetGenerationChange = 8
-  end
-
-  enum SpeechLexiconType : Int32
-    SLTUser = 1
-    SLTApp = 2
-  end
-
-  enum SpeechPartOfSpeech : Int32
-    SPSNotOverriden = -1
-    SPSUnknown = 0
-    SPSNoun = 4096
-    SPSVerb = 8192
-    SPSModifier = 12288
-    SPSFunction = 16384
-    SPSInterjection = 20480
-    SPSLMA = 28672
-    SPSSuppressWord = 61440
-  end
-
-  enum DISPID_SpeechLexiconWords : Int32
-    DISPID_SLWsCount = 1
-    DISPID_SLWsItem = 0
-    DISPID_SLWs_NewEnum = -4
-  end
-
-  enum SpeechWordType : Int32
-    SWTAdded = 1
-    SWTDeleted = 2
-  end
-
-  enum DISPID_SpeechLexiconWord : Int32
-    DISPID_SLWLangId = 1
-    DISPID_SLWType = 2
-    DISPID_SLWWord = 3
-    DISPID_SLWPronunciations = 4
-  end
-
-  enum DISPID_SpeechLexiconProns : Int32
-    DISPID_SLPsCount = 1
-    DISPID_SLPsItem = 0
-    DISPID_SLPs_NewEnum = -4
-  end
-
-  enum DISPID_SpeechLexiconPronunciation : Int32
-    DISPID_SLPType = 1
-    DISPID_SLPLangId = 2
-    DISPID_SLPPartOfSpeech = 3
-    DISPID_SLPPhoneIds = 4
-    DISPID_SLPSymbolic = 5
-  end
-
-  enum DISPID_SpeechPhoneConverter : Int32
-    DISPID_SPCLangId = 1
-    DISPID_SPCPhoneToId = 2
-    DISPID_SPCIdToPhone = 3
-  end
-
-  union SPPHRASEPROPERTY_Anonymous_e__Union
-    ul_id : UInt32
-    anonymous : SPPHRASEPROPERTY_Anonymous_e__Union_Anonymous_e__Struct
-  end
-
-  struct SPEVENT
-    _bitfield : Int32
-    ul_stream_num : UInt32
-    ull_audio_stream_offset : UInt64
-    w_param : LibC::UINT_PTR
-    l_param : LPARAM
-  end
-  struct SPSERIALIZEDEVENT
-    _bitfield : Int32
-    ul_stream_num : UInt32
-    ull_audio_stream_offset : UInt64
-    serializedw_param : UInt32
+    SSSPTRelativeToStart = 0_u32
+    SSSPTRelativeToCurrentPosition = 1_u32
+    SSSPTRelativeToEnd = 2_u32
+  end
+  enum DISPID_SpeechAudio
+    DISPID_SAStatus = 200_i32
+    DISPID_SABufferInfo = 201_i32
+    DISPID_SADefaultFormat = 202_i32
+    DISPID_SAVolume = 203_i32
+    DISPID_SABufferNotifySize = 204_i32
+    DISPID_SAEventHandle = 205_i32
+    DISPID_SASetState = 206_i32
+  end
+  enum SpeechAudioState
+    SASClosed = 0_i32
+    SASStop = 1_i32
+    SASPause = 2_i32
+    SASRun = 3_i32
+  end
+  enum DISPID_SpeechMMSysAudio
+    DISPID_SMSADeviceId = 300_i32
+    DISPID_SMSALineId = 301_i32
+    DISPID_SMSAMMHandle = 302_i32
+  end
+  enum DISPID_SpeechFileStream
+    DISPID_SFSOpen = 100_i32
+    DISPID_SFSClose = 101_i32
+  end
+  enum SpeechStreamFileMode
+    SSFMOpenForRead = 0_i32
+    SSFMOpenReadWrite = 1_i32
+    SSFMCreate = 2_i32
+    SSFMCreateForWrite = 3_i32
+  end
+  enum DISPID_SpeechCustomStream
+    DISPID_SCSBaseStream = 100_i32
+  end
+  enum DISPID_SpeechMemoryStream
+    DISPID_SMSSetData = 100_i32
+    DISPID_SMSGetData = 101_i32
+  end
+  enum DISPID_SpeechAudioStatus
+    DISPID_SASFreeBufferSpace = 1_i32
+    DISPID_SASNonBlockingIO = 2_i32
+    DISPID_SASState = 3_i32
+    DISPID_SASCurrentSeekPosition = 4_i32
+    DISPID_SASCurrentDevicePosition = 5_i32
+  end
+  enum DISPID_SpeechAudioBufferInfo
+    DISPID_SABIMinNotification = 1_i32
+    DISPID_SABIBufferSize = 2_i32
+    DISPID_SABIEventBias = 3_i32
+  end
+  enum DISPID_SpeechWaveFormatEx
+    DISPID_SWFEFormatTag = 1_i32
+    DISPID_SWFEChannels = 2_i32
+    DISPID_SWFESamplesPerSec = 3_i32
+    DISPID_SWFEAvgBytesPerSec = 4_i32
+    DISPID_SWFEBlockAlign = 5_i32
+    DISPID_SWFEBitsPerSample = 6_i32
+    DISPID_SWFEExtraData = 7_i32
+  end
+  enum DISPID_SpeechVoice
+    DISPID_SVStatus = 1_i32
+    DISPID_SVVoice = 2_i32
+    DISPID_SVAudioOutput = 3_i32
+    DISPID_SVAudioOutputStream = 4_i32
+    DISPID_SVRate = 5_i32
+    DISPID_SVVolume = 6_i32
+    DISPID_SVAllowAudioOuputFormatChangesOnNextSet = 7_i32
+    DISPID_SVEventInterests = 8_i32
+    DISPID_SVPriority = 9_i32
+    DISPID_SVAlertBoundary = 10_i32
+    DISPID_SVSyncronousSpeakTimeout = 11_i32
+    DISPID_SVSpeak = 12_i32
+    DISPID_SVSpeakStream = 13_i32
+    DISPID_SVPause = 14_i32
+    DISPID_SVResume = 15_i32
+    DISPID_SVSkip = 16_i32
+    DISPID_SVGetVoices = 17_i32
+    DISPID_SVGetAudioOutputs = 18_i32
+    DISPID_SVWaitUntilDone = 19_i32
+    DISPID_SVSpeakCompleteEvent = 20_i32
+    DISPID_SVIsUISupported = 21_i32
+    DISPID_SVDisplayUI = 22_i32
+  end
+  enum SpeechVoicePriority
+    SVPNormal = 0_i32
+    SVPAlert = 1_i32
+    SVPOver = 2_i32
+  end
+  enum SpeechVoiceSpeakFlags
+    SVSFDefault = 0_i32
+    SVSFlagsAsync = 1_i32
+    SVSFPurgeBeforeSpeak = 2_i32
+    SVSFIsFilename = 4_i32
+    SVSFIsXML = 8_i32
+    SVSFIsNotXML = 16_i32
+    SVSFPersistXML = 32_i32
+    SVSFNLPSpeakPunc = 64_i32
+    SVSFParseSapi = 128_i32
+    SVSFParseSsml = 256_i32
+    SVSFParseAutodetect = 0_i32
+    SVSFNLPMask = 64_i32
+    SVSFParseMask = 384_i32
+    SVSFVoiceMask = 511_i32
+    SVSFUnusedFlags = -512_i32
+  end
+  enum SpeechVoiceEvents
+    SVEStartInputStream = 2_i32
+    SVEEndInputStream = 4_i32
+    SVEVoiceChange = 8_i32
+    SVEBookmark = 16_i32
+    SVEWordBoundary = 32_i32
+    SVEPhoneme = 64_i32
+    SVESentenceBoundary = 128_i32
+    SVEViseme = 256_i32
+    SVEAudioLevel = 512_i32
+    SVEPrivate = 32768_i32
+    SVEAllEvents = 33790_i32
+  end
+  enum DISPID_SpeechVoiceStatus
+    DISPID_SVSCurrentStreamNumber = 1_i32
+    DISPID_SVSLastStreamNumberQueued = 2_i32
+    DISPID_SVSLastResult = 3_i32
+    DISPID_SVSRunningState = 4_i32
+    DISPID_SVSInputWordPosition = 5_i32
+    DISPID_SVSInputWordLength = 6_i32
+    DISPID_SVSInputSentencePosition = 7_i32
+    DISPID_SVSInputSentenceLength = 8_i32
+    DISPID_SVSLastBookmark = 9_i32
+    DISPID_SVSLastBookmarkId = 10_i32
+    DISPID_SVSPhonemeId = 11_i32
+    DISPID_SVSVisemeId = 12_i32
+  end
+  enum SpeechRunState
+    SRSEDone = 1_i32
+    SRSEIsSpeaking = 2_i32
+  end
+  enum SpeechVisemeType
+    SVP_0 = 0_i32
+    SVP_1 = 1_i32
+    SVP_2 = 2_i32
+    SVP_3 = 3_i32
+    SVP_4 = 4_i32
+    SVP_5 = 5_i32
+    SVP_6 = 6_i32
+    SVP_7 = 7_i32
+    SVP_8 = 8_i32
+    SVP_9 = 9_i32
+    SVP_10 = 10_i32
+    SVP_11 = 11_i32
+    SVP_12 = 12_i32
+    SVP_13 = 13_i32
+    SVP_14 = 14_i32
+    SVP_15 = 15_i32
+    SVP_16 = 16_i32
+    SVP_17 = 17_i32
+    SVP_18 = 18_i32
+    SVP_19 = 19_i32
+    SVP_20 = 20_i32
+    SVP_21 = 21_i32
+  end
+  enum SpeechVisemeFeature
+    SVF_None = 0_i32
+    SVF_Stressed = 1_i32
+    SVF_Emphasis = 2_i32
+  end
+  enum DISPID_SpeechVoiceEvent
+    DISPID_SVEStreamStart = 1_i32
+    DISPID_SVEStreamEnd = 2_i32
+    DISPID_SVEVoiceChange = 3_i32
+    DISPID_SVEBookmark = 4_i32
+    DISPID_SVEWord = 5_i32
+    DISPID_SVEPhoneme = 6_i32
+    DISPID_SVESentenceBoundary = 7_i32
+    DISPID_SVEViseme = 8_i32
+    DISPID_SVEAudioLevel = 9_i32
+    DISPID_SVEEnginePrivate = 10_i32
+  end
+  enum DISPID_SpeechRecognizer
+    DISPID_SRRecognizer = 1_i32
+    DISPID_SRAllowAudioInputFormatChangesOnNextSet = 2_i32
+    DISPID_SRAudioInput = 3_i32
+    DISPID_SRAudioInputStream = 4_i32
+    DISPID_SRIsShared = 5_i32
+    DISPID_SRState = 6_i32
+    DISPID_SRStatus = 7_i32
+    DISPID_SRProfile = 8_i32
+    DISPID_SREmulateRecognition = 9_i32
+    DISPID_SRCreateRecoContext = 10_i32
+    DISPID_SRGetFormat = 11_i32
+    DISPID_SRSetPropertyNumber = 12_i32
+    DISPID_SRGetPropertyNumber = 13_i32
+    DISPID_SRSetPropertyString = 14_i32
+    DISPID_SRGetPropertyString = 15_i32
+    DISPID_SRIsUISupported = 16_i32
+    DISPID_SRDisplayUI = 17_i32
+    DISPID_SRGetRecognizers = 18_i32
+    DISPID_SVGetAudioInputs = 19_i32
+    DISPID_SVGetProfiles = 20_i32
+  end
+  enum SpeechRecognizerState
+    SRSInactive = 0_i32
+    SRSActive = 1_i32
+    SRSActiveAlways = 2_i32
+    SRSInactiveWithPurge = 3_i32
+  end
+  enum SpeechDisplayAttributes
+    SDA_No_Trailing_Space = 0_i32
+    SDA_One_Trailing_Space = 2_i32
+    SDA_Two_Trailing_Spaces = 4_i32
+    SDA_Consume_Leading_Spaces = 8_i32
+  end
+  enum SpeechFormatType
+    SFTInput = 0_i32
+    SFTSREngine = 1_i32
+  end
+  enum SpeechEmulationCompareFlags
+    SECFIgnoreCase = 1_i32
+    SECFIgnoreKanaType = 65536_i32
+    SECFIgnoreWidth = 131072_i32
+    SECFNoSpecialChars = 536870912_i32
+    SECFEmulateResult = 1073741824_i32
+    SECFDefault = 196609_i32
+  end
+  enum DISPID_SpeechRecognizerStatus
+    DISPID_SRSAudioStatus = 1_i32
+    DISPID_SRSCurrentStreamPosition = 2_i32
+    DISPID_SRSCurrentStreamNumber = 3_i32
+    DISPID_SRSNumberOfActiveRules = 4_i32
+    DISPID_SRSClsidEngine = 5_i32
+    DISPID_SRSSupportedLanguages = 6_i32
+  end
+  enum DISPID_SpeechRecoContext
+    DISPID_SRCRecognizer = 1_i32
+    DISPID_SRCAudioInInterferenceStatus = 2_i32
+    DISPID_SRCRequestedUIType = 3_i32
+    DISPID_SRCVoice = 4_i32
+    DISPID_SRAllowVoiceFormatMatchingOnNextSet = 5_i32
+    DISPID_SRCVoicePurgeEvent = 6_i32
+    DISPID_SRCEventInterests = 7_i32
+    DISPID_SRCCmdMaxAlternates = 8_i32
+    DISPID_SRCState = 9_i32
+    DISPID_SRCRetainedAudio = 10_i32
+    DISPID_SRCRetainedAudioFormat = 11_i32
+    DISPID_SRCPause = 12_i32
+    DISPID_SRCResume = 13_i32
+    DISPID_SRCCreateGrammar = 14_i32
+    DISPID_SRCCreateResultFromMemory = 15_i32
+    DISPID_SRCBookmark = 16_i32
+    DISPID_SRCSetAdaptationData = 17_i32
+  end
+  enum SpeechRetainedAudioOptions
+    SRAONone = 0_i32
+    SRAORetainAudio = 1_i32
+  end
+  enum SpeechBookmarkOptions
+    SBONone = 0_i32
+    SBOPause = 1_i32
+  end
+  enum SpeechInterference
+    SINone = 0_i32
+    SINoise = 1_i32
+    SINoSignal = 2_i32
+    SITooLoud = 3_i32
+    SITooQuiet = 4_i32
+    SITooFast = 5_i32
+    SITooSlow = 6_i32
+  end
+  enum SpeechRecoEvents
+    SREStreamEnd = 1_i32
+    SRESoundStart = 2_i32
+    SRESoundEnd = 4_i32
+    SREPhraseStart = 8_i32
+    SRERecognition = 16_i32
+    SREHypothesis = 32_i32
+    SREBookmark = 64_i32
+    SREPropertyNumChange = 128_i32
+    SREPropertyStringChange = 256_i32
+    SREFalseRecognition = 512_i32
+    SREInterference = 1024_i32
+    SRERequestUI = 2048_i32
+    SREStateChange = 4096_i32
+    SREAdaptation = 8192_i32
+    SREStreamStart = 16384_i32
+    SRERecoOtherContext = 32768_i32
+    SREAudioLevel = 65536_i32
+    SREPrivate = 262144_i32
+    SREAllEvents = 393215_i32
+  end
+  enum SpeechRecoContextState
+    SRCS_Disabled = 0_i32
+    SRCS_Enabled = 1_i32
+  end
+  enum DISPIDSPRG
+    DISPID_SRGId = 1_i32
+    DISPID_SRGRecoContext = 2_i32
+    DISPID_SRGState = 3_i32
+    DISPID_SRGRules = 4_i32
+    DISPID_SRGReset = 5_i32
+    DISPID_SRGCommit = 6_i32
+    DISPID_SRGCmdLoadFromFile = 7_i32
+    DISPID_SRGCmdLoadFromObject = 8_i32
+    DISPID_SRGCmdLoadFromResource = 9_i32
+    DISPID_SRGCmdLoadFromMemory = 10_i32
+    DISPID_SRGCmdLoadFromProprietaryGrammar = 11_i32
+    DISPID_SRGCmdSetRuleState = 12_i32
+    DISPID_SRGCmdSetRuleIdState = 13_i32
+    DISPID_SRGDictationLoad = 14_i32
+    DISPID_SRGDictationUnload = 15_i32
+    DISPID_SRGDictationSetState = 16_i32
+    DISPID_SRGSetWordSequenceData = 17_i32
+    DISPID_SRGSetTextSelection = 18_i32
+    DISPID_SRGIsPronounceable = 19_i32
+  end
+  enum SpeechLoadOption
+    SLOStatic = 0_i32
+    SLODynamic = 1_i32
+  end
+  enum SpeechWordPronounceable
+    SWPUnknownWordUnpronounceable = 0_i32
+    SWPUnknownWordPronounceable = 1_i32
+    SWPKnownWordPronounceable = 2_i32
+  end
+  enum SpeechGrammarState
+    SGSEnabled = 1_i32
+    SGSDisabled = 0_i32
+    SGSExclusive = 3_i32
+  end
+  enum SpeechRuleState
+    SGDSInactive = 0_i32
+    SGDSActive = 1_i32
+    SGDSActiveWithAutoPause = 3_i32
+    SGDSActiveUserDelimited = 4_i32
+  end
+  enum SpeechRuleAttributes
+    SRATopLevel = 1_i32
+    SRADefaultToActive = 2_i32
+    SRAExport = 4_i32
+    SRAImport = 8_i32
+    SRAInterpreter = 16_i32
+    SRADynamic = 32_i32
+    SRARoot = 64_i32
+  end
+  enum SpeechGrammarWordType
+    SGDisplay = 0_i32
+    SGLexical = 1_i32
+    SGPronounciation = 2_i32
+    SGLexicalNoSpecialChars = 3_i32
+  end
+  enum DISPID_SpeechRecoContextEvents
+    DISPID_SRCEStartStream = 1_i32
+    DISPID_SRCEEndStream = 2_i32
+    DISPID_SRCEBookmark = 3_i32
+    DISPID_SRCESoundStart = 4_i32
+    DISPID_SRCESoundEnd = 5_i32
+    DISPID_SRCEPhraseStart = 6_i32
+    DISPID_SRCERecognition = 7_i32
+    DISPID_SRCEHypothesis = 8_i32
+    DISPID_SRCEPropertyNumberChange = 9_i32
+    DISPID_SRCEPropertyStringChange = 10_i32
+    DISPID_SRCEFalseRecognition = 11_i32
+    DISPID_SRCEInterference = 12_i32
+    DISPID_SRCERequestUI = 13_i32
+    DISPID_SRCERecognizerStateChange = 14_i32
+    DISPID_SRCEAdaptation = 15_i32
+    DISPID_SRCERecognitionForOtherContext = 16_i32
+    DISPID_SRCEAudioLevel = 17_i32
+    DISPID_SRCEEnginePrivate = 18_i32
+  end
+  enum SpeechRecognitionType
+    SRTStandard = 0_i32
+    SRTAutopause = 1_i32
+    SRTEmulated = 2_i32
+    SRTSMLTimeout = 4_i32
+    SRTExtendableParse = 8_i32
+    SRTReSent = 16_i32
+  end
+  enum DISPID_SpeechGrammarRule
+    DISPID_SGRAttributes = 1_i32
+    DISPID_SGRInitialState = 2_i32
+    DISPID_SGRName = 3_i32
+    DISPID_SGRId = 4_i32
+    DISPID_SGRClear = 5_i32
+    DISPID_SGRAddResource = 6_i32
+    DISPID_SGRAddState = 7_i32
+  end
+  enum DISPID_SpeechGrammarRules
+    DISPID_SGRsCount = 1_i32
+    DISPID_SGRsDynamic = 2_i32
+    DISPID_SGRsAdd = 3_i32
+    DISPID_SGRsCommit = 4_i32
+    DISPID_SGRsCommitAndSave = 5_i32
+    DISPID_SGRsFindRule = 6_i32
+    DISPID_SGRsItem = 0_i32
+    DISPID_SGRs_NewEnum = -4_i32
+  end
+  enum DISPID_SpeechGrammarRuleState
+    DISPID_SGRSRule = 1_i32
+    DISPID_SGRSTransitions = 2_i32
+    DISPID_SGRSAddWordTransition = 3_i32
+    DISPID_SGRSAddRuleTransition = 4_i32
+    DISPID_SGRSAddSpecialTransition = 5_i32
+  end
+  enum SpeechSpecialTransitionType
+    SSTTWildcard = 1_i32
+    SSTTDictation = 2_i32
+    SSTTTextBuffer = 3_i32
+  end
+  enum DISPID_SpeechGrammarRuleStateTransitions
+    DISPID_SGRSTsCount = 1_i32
+    DISPID_SGRSTsItem = 0_i32
+    DISPID_SGRSTs_NewEnum = -4_i32
+  end
+  enum DISPID_SpeechGrammarRuleStateTransition
+    DISPID_SGRSTType = 1_i32
+    DISPID_SGRSTText = 2_i32
+    DISPID_SGRSTRule = 3_i32
+    DISPID_SGRSTWeight = 4_i32
+    DISPID_SGRSTPropertyName = 5_i32
+    DISPID_SGRSTPropertyId = 6_i32
+    DISPID_SGRSTPropertyValue = 7_i32
+    DISPID_SGRSTNextState = 8_i32
+  end
+  enum SpeechGrammarRuleStateTransitionType
+    SGRSTTEpsilon = 0_i32
+    SGRSTTWord = 1_i32
+    SGRSTTRule = 2_i32
+    SGRSTTDictation = 3_i32
+    SGRSTTWildcard = 4_i32
+    SGRSTTTextBuffer = 5_i32
+  end
+  enum DISPIDSPTSI
+    DISPIDSPTSI_ActiveOffset = 1_i32
+    DISPIDSPTSI_ActiveLength = 2_i32
+    DISPIDSPTSI_SelectionOffset = 3_i32
+    DISPIDSPTSI_SelectionLength = 4_i32
+  end
+  enum DISPID_SpeechRecoResult
+    DISPID_SRRRecoContext = 1_i32
+    DISPID_SRRTimes = 2_i32
+    DISPID_SRRAudioFormat = 3_i32
+    DISPID_SRRPhraseInfo = 4_i32
+    DISPID_SRRAlternates = 5_i32
+    DISPID_SRRAudio = 6_i32
+    DISPID_SRRSpeakAudio = 7_i32
+    DISPID_SRRSaveToMemory = 8_i32
+    DISPID_SRRDiscardResultInfo = 9_i32
+  end
+  enum SpeechDiscardType
+    SDTProperty = 1_i32
+    SDTReplacement = 2_i32
+    SDTRule = 4_i32
+    SDTDisplayText = 8_i32
+    SDTLexicalForm = 16_i32
+    SDTPronunciation = 32_i32
+    SDTAudio = 64_i32
+    SDTAlternates = 128_i32
+    SDTAll = 255_i32
+  end
+  enum DISPID_SpeechXMLRecoResult
+    DISPID_SRRGetXMLResult = 10_i32
+    DISPID_SRRGetXMLErrorInfo = 11_i32
+  end
+  enum DISPID_SpeechRecoResult2
+    DISPID_SRRSetTextFeedback = 12_i32
+  end
+  enum DISPID_SpeechPhraseBuilder
+    DISPID_SPPBRestorePhraseFromMemory = 1_i32
+  end
+  enum DISPID_SpeechRecoResultTimes
+    DISPID_SRRTStreamTime = 1_i32
+    DISPID_SRRTLength = 2_i32
+    DISPID_SRRTTickCount = 3_i32
+    DISPID_SRRTOffsetFromStart = 4_i32
+  end
+  enum DISPID_SpeechPhraseAlternate
+    DISPID_SPARecoResult = 1_i32
+    DISPID_SPAStartElementInResult = 2_i32
+    DISPID_SPANumberOfElementsInResult = 3_i32
+    DISPID_SPAPhraseInfo = 4_i32
+    DISPID_SPACommit = 5_i32
+  end
+  enum DISPID_SpeechPhraseAlternates
+    DISPID_SPAsCount = 1_i32
+    DISPID_SPAsItem = 0_i32
+    DISPID_SPAs_NewEnum = -4_i32
+  end
+  enum DISPID_SpeechPhraseInfo
+    DISPID_SPILanguageId = 1_i32
+    DISPID_SPIGrammarId = 2_i32
+    DISPID_SPIStartTime = 3_i32
+    DISPID_SPIAudioStreamPosition = 4_i32
+    DISPID_SPIAudioSizeBytes = 5_i32
+    DISPID_SPIRetainedSizeBytes = 6_i32
+    DISPID_SPIAudioSizeTime = 7_i32
+    DISPID_SPIRule = 8_i32
+    DISPID_SPIProperties = 9_i32
+    DISPID_SPIElements = 10_i32
+    DISPID_SPIReplacements = 11_i32
+    DISPID_SPIEngineId = 12_i32
+    DISPID_SPIEnginePrivateData = 13_i32
+    DISPID_SPISaveToMemory = 14_i32
+    DISPID_SPIGetText = 15_i32
+    DISPID_SPIGetDisplayAttributes = 16_i32
+  end
+  enum DISPID_SpeechPhraseElement
+    DISPID_SPEAudioTimeOffset = 1_i32
+    DISPID_SPEAudioSizeTime = 2_i32
+    DISPID_SPEAudioStreamOffset = 3_i32
+    DISPID_SPEAudioSizeBytes = 4_i32
+    DISPID_SPERetainedStreamOffset = 5_i32
+    DISPID_SPERetainedSizeBytes = 6_i32
+    DISPID_SPEDisplayText = 7_i32
+    DISPID_SPELexicalForm = 8_i32
+    DISPID_SPEPronunciation = 9_i32
+    DISPID_SPEDisplayAttributes = 10_i32
+    DISPID_SPERequiredConfidence = 11_i32
+    DISPID_SPEActualConfidence = 12_i32
+    DISPID_SPEEngineConfidence = 13_i32
+  end
+  enum SpeechEngineConfidence
+    SECLowConfidence = -1_i32
+    SECNormalConfidence = 0_i32
+    SECHighConfidence = 1_i32
+  end
+  enum DISPID_SpeechPhraseElements
+    DISPID_SPEsCount = 1_i32
+    DISPID_SPEsItem = 0_i32
+    DISPID_SPEs_NewEnum = -4_i32
+  end
+  enum DISPID_SpeechPhraseReplacement
+    DISPID_SPRDisplayAttributes = 1_i32
+    DISPID_SPRText = 2_i32
+    DISPID_SPRFirstElement = 3_i32
+    DISPID_SPRNumberOfElements = 4_i32
+  end
+  enum DISPID_SpeechPhraseReplacements
+    DISPID_SPRsCount = 1_i32
+    DISPID_SPRsItem = 0_i32
+    DISPID_SPRs_NewEnum = -4_i32
+  end
+  enum DISPID_SpeechPhraseProperty
+    DISPID_SPPName = 1_i32
+    DISPID_SPPId = 2_i32
+    DISPID_SPPValue = 3_i32
+    DISPID_SPPFirstElement = 4_i32
+    DISPID_SPPNumberOfElements = 5_i32
+    DISPID_SPPEngineConfidence = 6_i32
+    DISPID_SPPConfidence = 7_i32
+    DISPID_SPPParent = 8_i32
+    DISPID_SPPChildren = 9_i32
+  end
+  enum DISPID_SpeechPhraseProperties
+    DISPID_SPPsCount = 1_i32
+    DISPID_SPPsItem = 0_i32
+    DISPID_SPPs_NewEnum = -4_i32
+  end
+  enum DISPID_SpeechPhraseRule
+    DISPID_SPRuleName = 1_i32
+    DISPID_SPRuleId = 2_i32
+    DISPID_SPRuleFirstElement = 3_i32
+    DISPID_SPRuleNumberOfElements = 4_i32
+    DISPID_SPRuleParent = 5_i32
+    DISPID_SPRuleChildren = 6_i32
+    DISPID_SPRuleConfidence = 7_i32
+    DISPID_SPRuleEngineConfidence = 8_i32
+  end
+  enum DISPID_SpeechPhraseRules
+    DISPID_SPRulesCount = 1_i32
+    DISPID_SPRulesItem = 0_i32
+    DISPID_SPRules_NewEnum = -4_i32
+  end
+  enum DISPID_SpeechLexicon
+    DISPID_SLGenerationId = 1_i32
+    DISPID_SLGetWords = 2_i32
+    DISPID_SLAddPronunciation = 3_i32
+    DISPID_SLAddPronunciationByPhoneIds = 4_i32
+    DISPID_SLRemovePronunciation = 5_i32
+    DISPID_SLRemovePronunciationByPhoneIds = 6_i32
+    DISPID_SLGetPronunciations = 7_i32
+    DISPID_SLGetGenerationChange = 8_i32
+  end
+  enum SpeechLexiconType
+    SLTUser = 1_i32
+    SLTApp = 2_i32
+  end
+  enum SpeechPartOfSpeech
+    SPSNotOverriden = -1_i32
+    SPSUnknown = 0_i32
+    SPSNoun = 4096_i32
+    SPSVerb = 8192_i32
+    SPSModifier = 12288_i32
+    SPSFunction = 16384_i32
+    SPSInterjection = 20480_i32
+    SPSLMA = 28672_i32
+    SPSSuppressWord = 61440_i32
+  end
+  enum DISPID_SpeechLexiconWords
+    DISPID_SLWsCount = 1_i32
+    DISPID_SLWsItem = 0_i32
+    DISPID_SLWs_NewEnum = -4_i32
+  end
+  enum SpeechWordType
+    SWTAdded = 1_i32
+    SWTDeleted = 2_i32
+  end
+  enum DISPID_SpeechLexiconWord
+    DISPID_SLWLangId = 1_i32
+    DISPID_SLWType = 2_i32
+    DISPID_SLWWord = 3_i32
+    DISPID_SLWPronunciations = 4_i32
+  end
+  enum DISPID_SpeechLexiconProns
+    DISPID_SLPsCount = 1_i32
+    DISPID_SLPsItem = 0_i32
+    DISPID_SLPs_NewEnum = -4_i32
+  end
+  enum DISPID_SpeechLexiconPronunciation
+    DISPID_SLPType = 1_i32
+    DISPID_SLPLangId = 2_i32
+    DISPID_SLPPartOfSpeech = 3_i32
+    DISPID_SLPPhoneIds = 4_i32
+    DISPID_SLPSymbolic = 5_i32
+  end
+  enum DISPID_SpeechPhoneConverter
+    DISPID_SPCLangId = 1_i32
+    DISPID_SPCPhoneToId = 2_i32
+    DISPID_SPCIdToPhone = 3_i32
+  end
+
+  @[Extern]
+  record SPEVENT,
+    _bitfield : Int32,
+    ulStreamNum : UInt32,
+    ullAudioStreamOffset : UInt64,
+    wParam : Win32cr::Foundation::WPARAM,
+    lParam : Win32cr::Foundation::LPARAM
+
+  @[Extern]
+  record SPSERIALIZEDEVENT,
+    _bitfield : Int32,
+    ulStreamNum : UInt32,
+    ullAudioStreamOffset : UInt64,
+    serializedw_param : UInt32,
     serializedl_param : Int32
-  end
-  struct SPSERIALIZEDEVENT64
-    _bitfield : Int32
-    ul_stream_num : UInt32
-    ull_audio_stream_offset : UInt64
-    serializedw_param : UInt64
+
+  @[Extern]
+  record SPSERIALIZEDEVENT64,
+    _bitfield : Int32,
+    ulStreamNum : UInt32,
+    ullAudioStreamOffset : UInt64,
+    serializedw_param : UInt64,
     serializedl_param : Int64
-  end
-  struct SPEVENTEX
-    _bitfield : Int32
-    ul_stream_num : UInt32
-    ull_audio_stream_offset : UInt64
-    w_param : LibC::UINT_PTR
-    l_param : LPARAM
-    ull_audio_time_offset : UInt64
-  end
-  struct SPEVENTSOURCEINFO
-    ull_event_interest : UInt64
-    ull_queued_interest : UInt64
-    ul_count : UInt32
-  end
-  struct SPAUDIOSTATUS
-    cb_free_buff_space : Int32
-    cb_non_blocking_io : UInt32
-    state : SPAUDIOSTATE
-    cur_seek_pos : UInt64
-    cur_device_pos : UInt64
-    dw_audio_level : UInt32
-    dw_reserved2 : UInt32
-  end
-  struct SPAUDIOBUFFERINFO
-    ul_ms_min_notification : UInt32
-    ul_ms_buffer_size : UInt32
-    ul_ms_event_bias : UInt32
-  end
-  struct SPPHRASEELEMENT
-    ul_audio_time_offset : UInt32
-    ul_audio_size_time : UInt32
-    ul_audio_stream_offset : UInt32
-    ul_audio_size_bytes : UInt32
-    ul_retained_stream_offset : UInt32
-    ul_retained_size_bytes : UInt32
-    psz_display_text : LibC::LPWSTR
-    psz_lexical_form : LibC::LPWSTR
-    psz_pronunciation : UInt16*
-    b_display_attributes : UInt8
-    required_confidence : Int8
-    actual_confidence : Int8
-    reserved : UInt8
+
+  @[Extern]
+  record SPEVENTEX,
+    _bitfield : Int32,
+    ulStreamNum : UInt32,
+    ullAudioStreamOffset : UInt64,
+    wParam : Win32cr::Foundation::WPARAM,
+    lParam : Win32cr::Foundation::LPARAM,
+    ullAudioTimeOffset : UInt64
+
+  @[Extern]
+  record SPEVENTSOURCEINFO,
+    ullEventInterest : UInt64,
+    ullQueuedInterest : UInt64,
+    ulCount : UInt32
+
+  @[Extern]
+  record SPAUDIOSTATUS,
+    cbFreeBuffSpace : Int32,
+    cbNonBlockingIO : UInt32,
+    state : Win32cr::Media::Speech::SPAUDIOSTATE,
+    cur_seek_pos : UInt64,
+    cur_device_pos : UInt64,
+    dwAudioLevel : UInt32,
+    dwReserved2 : UInt32
+
+  @[Extern]
+  record SPAUDIOBUFFERINFO,
+    ulMsMinNotification : UInt32,
+    ulMsBufferSize : UInt32,
+    ulMsEventBias : UInt32
+
+  @[Extern]
+  record SPPHRASEELEMENT,
+    ulAudioTimeOffset : UInt32,
+    ulAudioSizeTime : UInt32,
+    ulAudioStreamOffset : UInt32,
+    ulAudioSizeBytes : UInt32,
+    ulRetainedStreamOffset : UInt32,
+    ulRetainedSizeBytes : UInt32,
+    pszDisplayText : Win32cr::Foundation::PWSTR,
+    pszLexicalForm : Win32cr::Foundation::PWSTR,
+    pszPronunciation : UInt16*,
+    bDisplayAttributes : UInt8,
+    required_confidence : Int8,
+    actual_confidence : Int8,
+    reserved : UInt8,
     sr_engine_confidence : Float32
-  end
-  struct SPPHRASERULE
-    psz_name : LibC::LPWSTR
-    ul_id : UInt32
-    ul_first_element : UInt32
-    ul_count_of_elements : UInt32
-    p_next_sibling : SPPHRASERULE*
-    p_first_child : SPPHRASERULE*
-    sr_engine_confidence : Float32
+
+  @[Extern]
+  record SPPHRASERULE,
+    pszName : Win32cr::Foundation::PWSTR,
+    ulId : UInt32,
+    ulFirstElement : UInt32,
+    ulCountOfElements : UInt32,
+    pNextSibling : Win32cr::Media::Speech::SPPHRASERULE*,
+    pFirstChild : Win32cr::Media::Speech::SPPHRASERULE*,
+    sr_engine_confidence : Float32,
     confidence : Int8
+
+  @[Extern]
+  record SPPHRASEPROPERTY,
+    pszName : Win32cr::Foundation::PWSTR,
+    anonymous : Anonymous_e__Union,
+    pszValue : Win32cr::Foundation::PWSTR,
+    vValue : Win32cr::System::Com::VARIANT,
+    ulFirstElement : UInt32,
+    ulCountOfElements : UInt32,
+    pNextSibling : Win32cr::Media::Speech::SPPHRASEPROPERTY*,
+    pFirstChild : Win32cr::Media::Speech::SPPHRASEPROPERTY*,
+    sr_engine_confidence : Float32,
+    confidence : Int8 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      ulId : UInt32,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        bType : UInt8,
+        bReserved : UInt8,
+        usArrayIndex : UInt16
+
+    end
+
   end
-  struct SPPHRASEPROPERTY
-    psz_name : LibC::LPWSTR
-    anonymous : SPPHRASEPROPERTY_Anonymous_e__Union
-    psz_value : LibC::LPWSTR
-    v_value : VARIANT
-    ul_first_element : UInt32
-    ul_count_of_elements : UInt32
-    p_next_sibling : SPPHRASEPROPERTY*
-    p_first_child : SPPHRASEPROPERTY*
-    sr_engine_confidence : Float32
-    confidence : Int8
-  end
-  struct SPPHRASEPROPERTY_Anonymous_e__Union_Anonymous_e__Struct
-    b_type : UInt8
-    b_reserved : UInt8
-    us_array_index : UInt16
-  end
-  struct SPPHRASEREPLACEMENT
-    b_display_attributes : UInt8
-    psz_replacement_text : LibC::LPWSTR
-    ul_first_element : UInt32
-    ul_count_of_elements : UInt32
-  end
-  struct SPSEMANTICERRORINFO
-    ul_line_number : UInt32
-    psz_script_line : LibC::LPWSTR
-    psz_source : LibC::LPWSTR
-    psz_description : LibC::LPWSTR
-    hr_result_code : HRESULT
-  end
-  struct SPPHRASE_50
-    cb_size : UInt32
-    lang_id : UInt16
-    w_homophone_group_id : UInt16
-    ull_grammar_id : UInt64
-    ft_start_time : UInt64
-    ull_audio_stream_position : UInt64
-    ul_audio_size_bytes : UInt32
-    ul_retained_size_bytes : UInt32
-    ul_audio_size_time : UInt32
-    rule : SPPHRASERULE
-    p_properties : SPPHRASEPROPERTY*
-    p_elements : SPPHRASEELEMENT*
-    c_replacements : UInt32
-    p_replacements : SPPHRASEREPLACEMENT*
-    sr_engine_id : Guid
-    ul_sr_engine_private_data_size : UInt32
-    p_sr_engine_private_data : UInt8*
-  end
-  struct SPPHRASE
-    __anonymous_base_sapi53_l5821_c34 : SPPHRASE_50
-    p_sml : LibC::LPWSTR
-    p_semantic_error_info : SPSEMANTICERRORINFO*
-  end
-  struct SPSERIALIZEDPHRASE
-    ul_serialized_size : UInt32
-  end
-  struct SPRULE
-    psz_rule_name : LibC::LPWSTR
-    ul_rule_id : UInt32
-    dw_attributes : UInt32
-  end
-  struct SPBINARYGRAMMAR
-    ul_total_serialized_size : UInt32
-  end
-  struct SPSTATEHANDLE__
+
+  @[Extern]
+  record SPPHRASEREPLACEMENT,
+    bDisplayAttributes : UInt8,
+    pszReplacementText : Win32cr::Foundation::PWSTR,
+    ulFirstElement : UInt32,
+    ulCountOfElements : UInt32
+
+  @[Extern]
+  record SPSEMANTICERRORINFO,
+    ulLineNumber : UInt32,
+    pszScriptLine : Win32cr::Foundation::PWSTR,
+    pszSource : Win32cr::Foundation::PWSTR,
+    pszDescription : Win32cr::Foundation::PWSTR,
+    hrResultCode : Win32cr::Foundation::HRESULT
+
+  @[Extern]
+  record SPPHRASE_50,
+    cbSize : UInt32,
+    lang_id : UInt16,
+    wHomophoneGroupId : UInt16,
+    ullGrammarID : UInt64,
+    ftStartTime : UInt64,
+    ullAudioStreamPosition : UInt64,
+    ulAudioSizeBytes : UInt32,
+    ulRetainedSizeBytes : UInt32,
+    ulAudioSizeTime : UInt32,
+    rule : Win32cr::Media::Speech::SPPHRASERULE,
+    pProperties : Win32cr::Media::Speech::SPPHRASEPROPERTY*,
+    pElements : Win32cr::Media::Speech::SPPHRASEELEMENT*,
+    cReplacements : UInt32,
+    pReplacements : Win32cr::Media::Speech::SPPHRASEREPLACEMENT*,
+    sr_engine_id : LibC::GUID,
+    ulSREnginePrivateDataSize : UInt32,
+    pSREnginePrivateData : UInt8*
+
+  @[Extern]
+  record SPPHRASE,
+    __anonymous_base_sapi53_l5821_c34 : Win32cr::Media::Speech::SPPHRASE_50,
+    pSML : Win32cr::Foundation::PWSTR,
+    pSemanticErrorInfo : Win32cr::Media::Speech::SPSEMANTICERRORINFO*
+
+  @[Extern]
+  record SPSERIALIZEDPHRASE,
+    ulSerializedSize : UInt32
+
+  @[Extern]
+  record SPRULE,
+    pszRuleName : Win32cr::Foundation::PWSTR,
+    ulRuleId : UInt32,
+    dwAttributes : UInt32
+
+  @[Extern]
+  record SPBINARYGRAMMAR,
+    ulTotalSerializedSize : UInt32
+
+  @[Extern]
+  record SPSTATEHANDLE__,
     unused : Int32
-  end
-  struct SPWORDPRONUNCIATION
-    p_next_word_pronunciation : SPWORDPRONUNCIATION*
-    e_lexicon_type : SPLEXICONTYPE
-    lang_id : UInt16
-    w_pronunciation_flags : UInt16
-    e_part_of_speech : SPPARTOFSPEECH
-    sz_pronunciation : UInt16[0]*
-  end
-  struct SPWORDPRONUNCIATIONLIST
-    ul_size : UInt32
-    pv_buffer : UInt8*
-    p_first_word_pronunciation : SPWORDPRONUNCIATION*
-  end
-  struct SPWORD
-    p_next_word : SPWORD*
-    lang_id : UInt16
-    w_reserved : UInt16
-    e_word_type : SPWORDTYPE
-    psz_word : LibC::LPWSTR
-    p_first_word_pronunciation : SPWORDPRONUNCIATION*
-  end
-  struct SPWORDLIST
-    ul_size : UInt32
-    pv_buffer : UInt8*
-    p_first_word : SPWORD*
-  end
-  struct SPSHORTCUTPAIR
-    p_next_shortcutpair : SPSHORTCUTPAIR*
-    lang_id : UInt16
-    sh_type : SPSHORTCUTTYPE
-    psz_display : LibC::LPWSTR
-    psz_spoken : LibC::LPWSTR
-  end
-  struct SPSHORTCUTPAIRLIST
-    ul_size : UInt32
-    pv_buffer : UInt8*
-    p_first_shortcut_pair : SPSHORTCUTPAIR*
-  end
-  struct SPVPITCH
-    middle_adj : Int32
+
+  @[Extern]
+  record SPWORDPRONUNCIATION,
+    pNextWordPronunciation : Win32cr::Media::Speech::SPWORDPRONUNCIATION*,
+    eLexiconType : Win32cr::Media::Speech::SPLEXICONTYPE,
+    lang_id : UInt16,
+    wPronunciationFlags : UInt16,
+    ePartOfSpeech : Win32cr::Media::Speech::SPPARTOFSPEECH,
+    szPronunciation : UInt16*
+
+  @[Extern]
+  record SPWORDPRONUNCIATIONLIST,
+    ulSize : UInt32,
+    pvBuffer : UInt8*,
+    pFirstWordPronunciation : Win32cr::Media::Speech::SPWORDPRONUNCIATION*
+
+  @[Extern]
+  record SPWORD,
+    pNextWord : Win32cr::Media::Speech::SPWORD*,
+    lang_id : UInt16,
+    wReserved : UInt16,
+    eWordType : Win32cr::Media::Speech::SPWORDTYPE,
+    pszWord : Win32cr::Foundation::PWSTR,
+    pFirstWordPronunciation : Win32cr::Media::Speech::SPWORDPRONUNCIATION*
+
+  @[Extern]
+  record SPWORDLIST,
+    ulSize : UInt32,
+    pvBuffer : UInt8*,
+    pFirstWord : Win32cr::Media::Speech::SPWORD*
+
+  @[Extern]
+  record SPSHORTCUTPAIR,
+    pNextSHORTCUTPAIR : Win32cr::Media::Speech::SPSHORTCUTPAIR*,
+    lang_id : UInt16,
+    shType : Win32cr::Media::Speech::SPSHORTCUTTYPE,
+    pszDisplay : Win32cr::Foundation::PWSTR,
+    pszSpoken : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record SPSHORTCUTPAIRLIST,
+    ulSize : UInt32,
+    pvBuffer : UInt8*,
+    pFirstShortcutPair : Win32cr::Media::Speech::SPSHORTCUTPAIR*
+
+  @[Extern]
+  record SPVPITCH,
+    middle_adj : Int32,
     range_adj : Int32
-  end
-  struct SPVCONTEXT
-    p_category : LibC::LPWSTR
-    p_before : LibC::LPWSTR
-    p_after : LibC::LPWSTR
-  end
-  struct SPVSTATE
-    e_action : SPVACTIONS
-    lang_id : UInt16
-    w_reserved : UInt16
-    emph_adj : Int32
-    rate_adj : Int32
-    volume : UInt32
-    pitch_adj : SPVPITCH
-    silence_m_secs : UInt32
-    p_phone_ids : UInt16*
-    e_part_of_speech : SPPARTOFSPEECH
-    context : SPVCONTEXT
-  end
-  struct SPVOICESTATUS
-    ul_current_stream : UInt32
-    ul_last_stream_queued : UInt32
-    hr_last_result : HRESULT
-    dw_running_state : UInt32
-    ul_input_word_pos : UInt32
-    ul_input_word_len : UInt32
-    ul_input_sent_pos : UInt32
-    ul_input_sent_len : UInt32
-    l_bookmark_id : Int32
-    phoneme_id : UInt16
-    viseme_id : SPVISEMES
-    dw_reserved1 : UInt32
-    dw_reserved2 : UInt32
-  end
-  struct SPRECORESULTTIMES
-    ft_stream_time : FILETIME
-    ull_length : UInt64
-    dw_tick_count : UInt32
-    ull_start : UInt64
-  end
-  struct SPSERIALIZEDRESULT
-    ul_serialized_size : UInt32
-  end
-  struct SPTEXTSELECTIONINFO
-    ul_start_active_offset : UInt32
-    cch_active_chars : UInt32
-    ul_start_selection : UInt32
-    cch_selection : UInt32
-  end
-  struct SPPROPERTYINFO
-    psz_name : LibC::LPWSTR
-    ul_id : UInt32
-    psz_value : LibC::LPWSTR
-    v_value : VARIANT
-  end
-  struct SPRECOCONTEXTSTATUS
-    e_interference : SPINTERFERENCE
-    sz_request_type_of_ui : Char[255]*
-    dw_reserved1 : UInt32
-    dw_reserved2 : UInt32
-  end
-  struct SPRECOGNIZERSTATUS
-    audio_status : SPAUDIOSTATUS
-    ull_recognition_stream_pos : UInt64
-    ul_stream_number : UInt32
-    ul_num_active : UInt32
-    clsid_engine : Guid
-    c_lang_i_ds : UInt32
-    a_lang_id : UInt16[20]*
-    ull_recognition_stream_time : UInt64
-  end
-  struct SPNORMALIZATIONLIST
-    ul_size : UInt32
-    ppszz_normalized_list : UInt16**
-  end
-  struct SPDISPLAYTOKEN
-    psz_lexical : LibC::LPWSTR
-    psz_display : LibC::LPWSTR
-    b_display_attributes : UInt8
-  end
-  struct SPDISPLAYPHRASE
-    ul_num_tokens : UInt32
-    p_tokens : SPDISPLAYTOKEN*
-  end
-
-
-  struct ISpNotifyCallbackVTbl
-    notify_callback : Proc(ISpNotifyCallback*, LibC::UINT_PTR, LPARAM, HRESULT)
-  end
-
-  struct ISpNotifyCallback
-    lpVtbl : ISpNotifyCallbackVTbl*
-  end
-
-  struct ISpNotifySourceVTbl
-    query_interface : Proc(ISpNotifySource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpNotifySource*, UInt32)
-    release : Proc(ISpNotifySource*, UInt32)
-    set_notify_sink : Proc(ISpNotifySource*, ISpNotifySink, HRESULT)
-    set_notify_window_message : Proc(ISpNotifySource*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_callback_function : Proc(ISpNotifySource*, SPNOTIFYCALLBACK*, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_callback_interface : Proc(ISpNotifySource*, ISpNotifyCallback, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_win32_event : Proc(ISpNotifySource*, HRESULT)
-    wait_for_notify_event : Proc(ISpNotifySource*, UInt32, HRESULT)
-    get_notify_event_handle : Proc(ISpNotifySource*, LibC::HANDLE)
-  end
-
-  ISpNotifySource_GUID = "5eff4aef-8487-11d2-961c-00c04f8ee628"
-  IID_ISpNotifySource = LibC::GUID.new(0x5eff4aef_u32, 0x8487_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x1c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
-  struct ISpNotifySource
-    lpVtbl : ISpNotifySourceVTbl*
-  end
-
-  struct ISpNotifySinkVTbl
-    query_interface : Proc(ISpNotifySink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpNotifySink*, UInt32)
-    release : Proc(ISpNotifySink*, UInt32)
-    notify : Proc(ISpNotifySink*, HRESULT)
-  end
-
-  ISpNotifySink_GUID = "259684dc-37c3-11d2-9603-00c04f8ee628"
-  IID_ISpNotifySink = LibC::GUID.new(0x259684dc_u32, 0x37c3_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
-  struct ISpNotifySink
-    lpVtbl : ISpNotifySinkVTbl*
-  end
-
-  struct ISpNotifyTranslatorVTbl
-    query_interface : Proc(ISpNotifyTranslator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpNotifyTranslator*, UInt32)
-    release : Proc(ISpNotifyTranslator*, UInt32)
-    notify : Proc(ISpNotifyTranslator*, HRESULT)
-    init_window_message : Proc(ISpNotifyTranslator*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
-    init_callback : Proc(ISpNotifyTranslator*, SPNOTIFYCALLBACK*, LibC::UINT_PTR, LPARAM, HRESULT)
-    init_sp_notify_callback : Proc(ISpNotifyTranslator*, ISpNotifyCallback, LibC::UINT_PTR, LPARAM, HRESULT)
-    init_win32_event : Proc(ISpNotifyTranslator*, LibC::HANDLE, LibC::BOOL, HRESULT)
-    wait : Proc(ISpNotifyTranslator*, UInt32, HRESULT)
-    get_event_handle : Proc(ISpNotifyTranslator*, LibC::HANDLE)
-  end
-
-  ISpNotifyTranslator_GUID = "aca16614-5d3d-11d2-960e-00c04f8ee628"
-  IID_ISpNotifyTranslator = LibC::GUID.new(0xaca16614_u32, 0x5d3d_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
-  struct ISpNotifyTranslator
-    lpVtbl : ISpNotifyTranslatorVTbl*
-  end
-
-  struct ISpDataKeyVTbl
-    query_interface : Proc(ISpDataKey*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpDataKey*, UInt32)
-    release : Proc(ISpDataKey*, UInt32)
-    set_data : Proc(ISpDataKey*, LibC::LPWSTR, UInt32, UInt8*, HRESULT)
-    get_data : Proc(ISpDataKey*, LibC::LPWSTR, UInt32*, UInt8*, HRESULT)
-    set_string_value : Proc(ISpDataKey*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_string_value : Proc(ISpDataKey*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
-    set_dword : Proc(ISpDataKey*, LibC::LPWSTR, UInt32, HRESULT)
-    get_dword : Proc(ISpDataKey*, LibC::LPWSTR, UInt32*, HRESULT)
-    open_key : Proc(ISpDataKey*, LibC::LPWSTR, ISpDataKey*, HRESULT)
-    create_key : Proc(ISpDataKey*, LibC::LPWSTR, ISpDataKey*, HRESULT)
-    delete_key : Proc(ISpDataKey*, LibC::LPWSTR, HRESULT)
-    delete_value : Proc(ISpDataKey*, LibC::LPWSTR, HRESULT)
-    enum_keys : Proc(ISpDataKey*, UInt32, LibC::LPWSTR*, HRESULT)
-    enum_values : Proc(ISpDataKey*, UInt32, LibC::LPWSTR*, HRESULT)
-  end
-
-  ISpDataKey_GUID = "14056581-e16c-11d2-bb90-00c04f8ee6c0"
-  IID_ISpDataKey = LibC::GUID.new(0x14056581_u32, 0xe16c_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
-  struct ISpDataKey
-    lpVtbl : ISpDataKeyVTbl*
-  end
-
-  struct ISpRegDataKeyVTbl
-    query_interface : Proc(ISpRegDataKey*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpRegDataKey*, UInt32)
-    release : Proc(ISpRegDataKey*, UInt32)
-    set_data : Proc(ISpRegDataKey*, LibC::LPWSTR, UInt32, UInt8*, HRESULT)
-    get_data : Proc(ISpRegDataKey*, LibC::LPWSTR, UInt32*, UInt8*, HRESULT)
-    set_string_value : Proc(ISpRegDataKey*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_string_value : Proc(ISpRegDataKey*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
-    set_dword : Proc(ISpRegDataKey*, LibC::LPWSTR, UInt32, HRESULT)
-    get_dword : Proc(ISpRegDataKey*, LibC::LPWSTR, UInt32*, HRESULT)
-    open_key : Proc(ISpRegDataKey*, LibC::LPWSTR, ISpDataKey*, HRESULT)
-    create_key : Proc(ISpRegDataKey*, LibC::LPWSTR, ISpDataKey*, HRESULT)
-    delete_key : Proc(ISpRegDataKey*, LibC::LPWSTR, HRESULT)
-    delete_value : Proc(ISpRegDataKey*, LibC::LPWSTR, HRESULT)
-    enum_keys : Proc(ISpRegDataKey*, UInt32, LibC::LPWSTR*, HRESULT)
-    enum_values : Proc(ISpRegDataKey*, UInt32, LibC::LPWSTR*, HRESULT)
-    set_key : Proc(ISpRegDataKey*, HKEY, LibC::BOOL, HRESULT)
-  end
-
-  ISpRegDataKey_GUID = "92a66e2b-c830-4149-83df-6fc2ba1e7a5b"
-  IID_ISpRegDataKey = LibC::GUID.new(0x92a66e2b_u32, 0xc830_u16, 0x4149_u16, StaticArray[0x83_u8, 0xdf_u8, 0x6f_u8, 0xc2_u8, 0xba_u8, 0x1e_u8, 0x7a_u8, 0x5b_u8])
-  struct ISpRegDataKey
-    lpVtbl : ISpRegDataKeyVTbl*
-  end
-
-  struct ISpObjectTokenCategoryVTbl
-    query_interface : Proc(ISpObjectTokenCategory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpObjectTokenCategory*, UInt32)
-    release : Proc(ISpObjectTokenCategory*, UInt32)
-    set_data : Proc(ISpObjectTokenCategory*, LibC::LPWSTR, UInt32, UInt8*, HRESULT)
-    get_data : Proc(ISpObjectTokenCategory*, LibC::LPWSTR, UInt32*, UInt8*, HRESULT)
-    set_string_value : Proc(ISpObjectTokenCategory*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_string_value : Proc(ISpObjectTokenCategory*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
-    set_dword : Proc(ISpObjectTokenCategory*, LibC::LPWSTR, UInt32, HRESULT)
-    get_dword : Proc(ISpObjectTokenCategory*, LibC::LPWSTR, UInt32*, HRESULT)
-    open_key : Proc(ISpObjectTokenCategory*, LibC::LPWSTR, ISpDataKey*, HRESULT)
-    create_key : Proc(ISpObjectTokenCategory*, LibC::LPWSTR, ISpDataKey*, HRESULT)
-    delete_key : Proc(ISpObjectTokenCategory*, LibC::LPWSTR, HRESULT)
-    delete_value : Proc(ISpObjectTokenCategory*, LibC::LPWSTR, HRESULT)
-    enum_keys : Proc(ISpObjectTokenCategory*, UInt32, LibC::LPWSTR*, HRESULT)
-    enum_values : Proc(ISpObjectTokenCategory*, UInt32, LibC::LPWSTR*, HRESULT)
-    set_id : Proc(ISpObjectTokenCategory*, LibC::LPWSTR, LibC::BOOL, HRESULT)
-    get_id : Proc(ISpObjectTokenCategory*, LibC::LPWSTR*, HRESULT)
-    get_data_key : Proc(ISpObjectTokenCategory*, SPDATAKEYLOCATION, ISpDataKey*, HRESULT)
-    enum_tokens : Proc(ISpObjectTokenCategory*, LibC::LPWSTR, LibC::LPWSTR, IEnumSpObjectTokens*, HRESULT)
-    set_default_token_id : Proc(ISpObjectTokenCategory*, LibC::LPWSTR, HRESULT)
-    get_default_token_id : Proc(ISpObjectTokenCategory*, LibC::LPWSTR*, HRESULT)
-  end
-
-  ISpObjectTokenCategory_GUID = "2d3d3845-39af-4850-bbf9-40b49780011d"
-  IID_ISpObjectTokenCategory = LibC::GUID.new(0x2d3d3845_u32, 0x39af_u16, 0x4850_u16, StaticArray[0xbb_u8, 0xf9_u8, 0x40_u8, 0xb4_u8, 0x97_u8, 0x80_u8, 0x1_u8, 0x1d_u8])
-  struct ISpObjectTokenCategory
-    lpVtbl : ISpObjectTokenCategoryVTbl*
-  end
-
-  struct ISpObjectTokenVTbl
-    query_interface : Proc(ISpObjectToken*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpObjectToken*, UInt32)
-    release : Proc(ISpObjectToken*, UInt32)
-    set_data : Proc(ISpObjectToken*, LibC::LPWSTR, UInt32, UInt8*, HRESULT)
-    get_data : Proc(ISpObjectToken*, LibC::LPWSTR, UInt32*, UInt8*, HRESULT)
-    set_string_value : Proc(ISpObjectToken*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_string_value : Proc(ISpObjectToken*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
-    set_dword : Proc(ISpObjectToken*, LibC::LPWSTR, UInt32, HRESULT)
-    get_dword : Proc(ISpObjectToken*, LibC::LPWSTR, UInt32*, HRESULT)
-    open_key : Proc(ISpObjectToken*, LibC::LPWSTR, ISpDataKey*, HRESULT)
-    create_key : Proc(ISpObjectToken*, LibC::LPWSTR, ISpDataKey*, HRESULT)
-    delete_key : Proc(ISpObjectToken*, LibC::LPWSTR, HRESULT)
-    delete_value : Proc(ISpObjectToken*, LibC::LPWSTR, HRESULT)
-    enum_keys : Proc(ISpObjectToken*, UInt32, LibC::LPWSTR*, HRESULT)
-    enum_values : Proc(ISpObjectToken*, UInt32, LibC::LPWSTR*, HRESULT)
-    set_id : Proc(ISpObjectToken*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, HRESULT)
-    get_id : Proc(ISpObjectToken*, LibC::LPWSTR*, HRESULT)
-    get_category : Proc(ISpObjectToken*, ISpObjectTokenCategory*, HRESULT)
-    create_instance : Proc(ISpObjectToken*, IUnknown, UInt32, Guid*, Void**, HRESULT)
-    get_storage_file_name : Proc(ISpObjectToken*, Guid*, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)
-    remove_storage_file_name : Proc(ISpObjectToken*, Guid*, LibC::LPWSTR, LibC::BOOL, HRESULT)
-    remove : Proc(ISpObjectToken*, Guid*, HRESULT)
-    is_ui_supported : Proc(ISpObjectToken*, LibC::LPWSTR, Void*, UInt32, IUnknown, LibC::BOOL*, HRESULT)
-    display_ui : Proc(ISpObjectToken*, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, Void*, UInt32, IUnknown, HRESULT)
-    matches_attributes : Proc(ISpObjectToken*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-  end
-
-  ISpObjectToken_GUID = "14056589-e16c-11d2-bb90-00c04f8ee6c0"
-  IID_ISpObjectToken = LibC::GUID.new(0x14056589_u32, 0xe16c_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
-  struct ISpObjectToken
-    lpVtbl : ISpObjectTokenVTbl*
-  end
-
-  struct ISpObjectTokenInitVTbl
-    query_interface : Proc(ISpObjectTokenInit*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpObjectTokenInit*, UInt32)
-    release : Proc(ISpObjectTokenInit*, UInt32)
-    set_data : Proc(ISpObjectTokenInit*, LibC::LPWSTR, UInt32, UInt8*, HRESULT)
-    get_data : Proc(ISpObjectTokenInit*, LibC::LPWSTR, UInt32*, UInt8*, HRESULT)
-    set_string_value : Proc(ISpObjectTokenInit*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_string_value : Proc(ISpObjectTokenInit*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
-    set_dword : Proc(ISpObjectTokenInit*, LibC::LPWSTR, UInt32, HRESULT)
-    get_dword : Proc(ISpObjectTokenInit*, LibC::LPWSTR, UInt32*, HRESULT)
-    open_key : Proc(ISpObjectTokenInit*, LibC::LPWSTR, ISpDataKey*, HRESULT)
-    create_key : Proc(ISpObjectTokenInit*, LibC::LPWSTR, ISpDataKey*, HRESULT)
-    delete_key : Proc(ISpObjectTokenInit*, LibC::LPWSTR, HRESULT)
-    delete_value : Proc(ISpObjectTokenInit*, LibC::LPWSTR, HRESULT)
-    enum_keys : Proc(ISpObjectTokenInit*, UInt32, LibC::LPWSTR*, HRESULT)
-    enum_values : Proc(ISpObjectTokenInit*, UInt32, LibC::LPWSTR*, HRESULT)
-    set_id : Proc(ISpObjectTokenInit*, LibC::LPWSTR, LibC::LPWSTR, LibC::BOOL, HRESULT)
-    get_id : Proc(ISpObjectTokenInit*, LibC::LPWSTR*, HRESULT)
-    get_category : Proc(ISpObjectTokenInit*, ISpObjectTokenCategory*, HRESULT)
-    create_instance : Proc(ISpObjectTokenInit*, IUnknown, UInt32, Guid*, Void**, HRESULT)
-    get_storage_file_name : Proc(ISpObjectTokenInit*, Guid*, LibC::LPWSTR, LibC::LPWSTR, UInt32, LibC::LPWSTR*, HRESULT)
-    remove_storage_file_name : Proc(ISpObjectTokenInit*, Guid*, LibC::LPWSTR, LibC::BOOL, HRESULT)
-    remove : Proc(ISpObjectTokenInit*, Guid*, HRESULT)
-    is_ui_supported : Proc(ISpObjectTokenInit*, LibC::LPWSTR, Void*, UInt32, IUnknown, LibC::BOOL*, HRESULT)
-    display_ui : Proc(ISpObjectTokenInit*, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, Void*, UInt32, IUnknown, HRESULT)
-    matches_attributes : Proc(ISpObjectTokenInit*, LibC::LPWSTR, LibC::BOOL*, HRESULT)
-    init_from_data_key : Proc(ISpObjectTokenInit*, LibC::LPWSTR, LibC::LPWSTR, ISpDataKey, HRESULT)
-  end
-
-  ISpObjectTokenInit_GUID = "b8aab0cf-346f-49d8-9499-c8b03f161d51"
-  IID_ISpObjectTokenInit = LibC::GUID.new(0xb8aab0cf_u32, 0x346f_u16, 0x49d8_u16, StaticArray[0x94_u8, 0x99_u8, 0xc8_u8, 0xb0_u8, 0x3f_u8, 0x16_u8, 0x1d_u8, 0x51_u8])
-  struct ISpObjectTokenInit
-    lpVtbl : ISpObjectTokenInitVTbl*
-  end
-
-  struct IEnumSpObjectTokensVTbl
-    query_interface : Proc(IEnumSpObjectTokens*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumSpObjectTokens*, UInt32)
-    release : Proc(IEnumSpObjectTokens*, UInt32)
-    next : Proc(IEnumSpObjectTokens*, UInt32, ISpObjectToken*, UInt32*, HRESULT)
-    skip : Proc(IEnumSpObjectTokens*, UInt32, HRESULT)
-    reset : Proc(IEnumSpObjectTokens*, HRESULT)
-    clone : Proc(IEnumSpObjectTokens*, IEnumSpObjectTokens*, HRESULT)
-    item : Proc(IEnumSpObjectTokens*, UInt32, ISpObjectToken*, HRESULT)
-    get_count : Proc(IEnumSpObjectTokens*, UInt32*, HRESULT)
-  end
-
-  IEnumSpObjectTokens_GUID = "06b64f9e-7fda-11d2-b4f2-00c04f797396"
-  IID_IEnumSpObjectTokens = LibC::GUID.new(0x6b64f9e_u32, 0x7fda_u16, 0x11d2_u16, StaticArray[0xb4_u8, 0xf2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
-  struct IEnumSpObjectTokens
-    lpVtbl : IEnumSpObjectTokensVTbl*
-  end
-
-  struct ISpObjectWithTokenVTbl
-    query_interface : Proc(ISpObjectWithToken*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpObjectWithToken*, UInt32)
-    release : Proc(ISpObjectWithToken*, UInt32)
-    set_object_token : Proc(ISpObjectWithToken*, ISpObjectToken, HRESULT)
-    get_object_token : Proc(ISpObjectWithToken*, ISpObjectToken*, HRESULT)
-  end
-
-  ISpObjectWithToken_GUID = "5b559f40-e952-11d2-bb91-00c04f8ee6c0"
-  IID_ISpObjectWithToken = LibC::GUID.new(0x5b559f40_u32, 0xe952_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x91_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
-  struct ISpObjectWithToken
-    lpVtbl : ISpObjectWithTokenVTbl*
-  end
-
-  struct ISpResourceManagerVTbl
-    query_interface : Proc(ISpResourceManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpResourceManager*, UInt32)
-    release : Proc(ISpResourceManager*, UInt32)
-    query_service : Proc(ISpResourceManager*, Guid*, Guid*, Void**, HRESULT)
-    set_object : Proc(ISpResourceManager*, Guid*, IUnknown, HRESULT)
-    get_object : Proc(ISpResourceManager*, Guid*, Guid*, Guid*, LibC::BOOL, Void**, HRESULT)
-  end
-
-  ISpResourceManager_GUID = "93384e18-5014-43d5-adbb-a78e055926bd"
-  IID_ISpResourceManager = LibC::GUID.new(0x93384e18_u32, 0x5014_u16, 0x43d5_u16, StaticArray[0xad_u8, 0xbb_u8, 0xa7_u8, 0x8e_u8, 0x5_u8, 0x59_u8, 0x26_u8, 0xbd_u8])
-  struct ISpResourceManager
-    lpVtbl : ISpResourceManagerVTbl*
-  end
-
-  struct ISpEventSourceVTbl
-    query_interface : Proc(ISpEventSource*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpEventSource*, UInt32)
-    release : Proc(ISpEventSource*, UInt32)
-    set_notify_sink : Proc(ISpEventSource*, ISpNotifySink, HRESULT)
-    set_notify_window_message : Proc(ISpEventSource*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_callback_function : Proc(ISpEventSource*, SPNOTIFYCALLBACK*, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_callback_interface : Proc(ISpEventSource*, ISpNotifyCallback, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_win32_event : Proc(ISpEventSource*, HRESULT)
-    wait_for_notify_event : Proc(ISpEventSource*, UInt32, HRESULT)
-    get_notify_event_handle : Proc(ISpEventSource*, LibC::HANDLE)
-    set_interest : Proc(ISpEventSource*, UInt64, UInt64, HRESULT)
-    get_events : Proc(ISpEventSource*, UInt32, SPEVENT*, UInt32*, HRESULT)
-    get_info : Proc(ISpEventSource*, SPEVENTSOURCEINFO*, HRESULT)
-  end
-
-  ISpEventSource_GUID = "be7a9cce-5f9e-11d2-960f-00c04f8ee628"
-  IID_ISpEventSource = LibC::GUID.new(0xbe7a9cce_u32, 0x5f9e_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
-  struct ISpEventSource
-    lpVtbl : ISpEventSourceVTbl*
-  end
-
-  struct ISpEventSource2VTbl
-    query_interface : Proc(ISpEventSource2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpEventSource2*, UInt32)
-    release : Proc(ISpEventSource2*, UInt32)
-    set_notify_sink : Proc(ISpEventSource2*, ISpNotifySink, HRESULT)
-    set_notify_window_message : Proc(ISpEventSource2*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_callback_function : Proc(ISpEventSource2*, SPNOTIFYCALLBACK*, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_callback_interface : Proc(ISpEventSource2*, ISpNotifyCallback, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_win32_event : Proc(ISpEventSource2*, HRESULT)
-    wait_for_notify_event : Proc(ISpEventSource2*, UInt32, HRESULT)
-    get_notify_event_handle : Proc(ISpEventSource2*, LibC::HANDLE)
-    set_interest : Proc(ISpEventSource2*, UInt64, UInt64, HRESULT)
-    get_events : Proc(ISpEventSource2*, UInt32, SPEVENT*, UInt32*, HRESULT)
-    get_info : Proc(ISpEventSource2*, SPEVENTSOURCEINFO*, HRESULT)
-    get_events_ex : Proc(ISpEventSource2*, UInt32, SPEVENTEX*, UInt32*, HRESULT)
-  end
-
-  ISpEventSource2_GUID = "2373a435-6a4b-429e-a6ac-d4231a61975b"
-  IID_ISpEventSource2 = LibC::GUID.new(0x2373a435_u32, 0x6a4b_u16, 0x429e_u16, StaticArray[0xa6_u8, 0xac_u8, 0xd4_u8, 0x23_u8, 0x1a_u8, 0x61_u8, 0x97_u8, 0x5b_u8])
-  struct ISpEventSource2
-    lpVtbl : ISpEventSource2VTbl*
-  end
-
-  struct ISpEventSinkVTbl
-    query_interface : Proc(ISpEventSink*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpEventSink*, UInt32)
-    release : Proc(ISpEventSink*, UInt32)
-    add_events : Proc(ISpEventSink*, SPEVENT*, UInt32, HRESULT)
-    get_event_interest : Proc(ISpEventSink*, UInt64*, HRESULT)
-  end
-
-  ISpEventSink_GUID = "be7a9cc9-5f9e-11d2-960f-00c04f8ee628"
-  IID_ISpEventSink = LibC::GUID.new(0xbe7a9cc9_u32, 0x5f9e_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
-  struct ISpEventSink
-    lpVtbl : ISpEventSinkVTbl*
-  end
-
-  struct ISpStreamFormatVTbl
-    query_interface : Proc(ISpStreamFormat*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpStreamFormat*, UInt32)
-    release : Proc(ISpStreamFormat*, UInt32)
-    read : Proc(ISpStreamFormat*, Void*, UInt32, UInt32*, HRESULT)
-    write : Proc(ISpStreamFormat*, Void*, UInt32, UInt32*, HRESULT)
-    seek : Proc(ISpStreamFormat*, LARGE_INTEGER, STREAM_SEEK, ULARGE_INTEGER*, HRESULT)
-    set_size : Proc(ISpStreamFormat*, ULARGE_INTEGER, HRESULT)
-    copy_to : Proc(ISpStreamFormat*, IStream, ULARGE_INTEGER, ULARGE_INTEGER*, ULARGE_INTEGER*, HRESULT)
-    commit : Proc(ISpStreamFormat*, UInt32, HRESULT)
-    revert : Proc(ISpStreamFormat*, HRESULT)
-    lock_region : Proc(ISpStreamFormat*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    unlock_region : Proc(ISpStreamFormat*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    stat : Proc(ISpStreamFormat*, STATSTG*, UInt32, HRESULT)
-    clone : Proc(ISpStreamFormat*, IStream*, HRESULT)
-    get_format : Proc(ISpStreamFormat*, Guid*, WAVEFORMATEX**, HRESULT)
-  end
-
-  ISpStreamFormat_GUID = "bed530be-2606-4f4d-a1c0-54c5cda5566f"
-  IID_ISpStreamFormat = LibC::GUID.new(0xbed530be_u32, 0x2606_u16, 0x4f4d_u16, StaticArray[0xa1_u8, 0xc0_u8, 0x54_u8, 0xc5_u8, 0xcd_u8, 0xa5_u8, 0x56_u8, 0x6f_u8])
-  struct ISpStreamFormat
-    lpVtbl : ISpStreamFormatVTbl*
-  end
-
-  struct ISpStreamVTbl
-    query_interface : Proc(ISpStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpStream*, UInt32)
-    release : Proc(ISpStream*, UInt32)
-    read : Proc(ISpStream*, Void*, UInt32, UInt32*, HRESULT)
-    write : Proc(ISpStream*, Void*, UInt32, UInt32*, HRESULT)
-    seek : Proc(ISpStream*, LARGE_INTEGER, STREAM_SEEK, ULARGE_INTEGER*, HRESULT)
-    set_size : Proc(ISpStream*, ULARGE_INTEGER, HRESULT)
-    copy_to : Proc(ISpStream*, IStream, ULARGE_INTEGER, ULARGE_INTEGER*, ULARGE_INTEGER*, HRESULT)
-    commit : Proc(ISpStream*, UInt32, HRESULT)
-    revert : Proc(ISpStream*, HRESULT)
-    lock_region : Proc(ISpStream*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    unlock_region : Proc(ISpStream*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    stat : Proc(ISpStream*, STATSTG*, UInt32, HRESULT)
-    clone : Proc(ISpStream*, IStream*, HRESULT)
-    get_format : Proc(ISpStream*, Guid*, WAVEFORMATEX**, HRESULT)
-    set_base_stream : Proc(ISpStream*, IStream, Guid*, WAVEFORMATEX*, HRESULT)
-    get_base_stream : Proc(ISpStream*, IStream*, HRESULT)
-    bind_to_file : Proc(ISpStream*, LibC::LPWSTR, SPFILEMODE, Guid*, WAVEFORMATEX*, UInt64, HRESULT)
-    close : Proc(ISpStream*, HRESULT)
-  end
-
-  ISpStream_GUID = "12e3cca9-7518-44c5-a5e7-ba5a79cb929e"
-  IID_ISpStream = LibC::GUID.new(0x12e3cca9_u32, 0x7518_u16, 0x44c5_u16, StaticArray[0xa5_u8, 0xe7_u8, 0xba_u8, 0x5a_u8, 0x79_u8, 0xcb_u8, 0x92_u8, 0x9e_u8])
-  struct ISpStream
-    lpVtbl : ISpStreamVTbl*
-  end
-
-  struct ISpStreamFormatConverterVTbl
-    query_interface : Proc(ISpStreamFormatConverter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpStreamFormatConverter*, UInt32)
-    release : Proc(ISpStreamFormatConverter*, UInt32)
-    read : Proc(ISpStreamFormatConverter*, Void*, UInt32, UInt32*, HRESULT)
-    write : Proc(ISpStreamFormatConverter*, Void*, UInt32, UInt32*, HRESULT)
-    seek : Proc(ISpStreamFormatConverter*, LARGE_INTEGER, STREAM_SEEK, ULARGE_INTEGER*, HRESULT)
-    set_size : Proc(ISpStreamFormatConverter*, ULARGE_INTEGER, HRESULT)
-    copy_to : Proc(ISpStreamFormatConverter*, IStream, ULARGE_INTEGER, ULARGE_INTEGER*, ULARGE_INTEGER*, HRESULT)
-    commit : Proc(ISpStreamFormatConverter*, UInt32, HRESULT)
-    revert : Proc(ISpStreamFormatConverter*, HRESULT)
-    lock_region : Proc(ISpStreamFormatConverter*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    unlock_region : Proc(ISpStreamFormatConverter*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    stat : Proc(ISpStreamFormatConverter*, STATSTG*, UInt32, HRESULT)
-    clone : Proc(ISpStreamFormatConverter*, IStream*, HRESULT)
-    get_format : Proc(ISpStreamFormatConverter*, Guid*, WAVEFORMATEX**, HRESULT)
-    set_base_stream : Proc(ISpStreamFormatConverter*, ISpStreamFormat, LibC::BOOL, LibC::BOOL, HRESULT)
-    get_base_stream : Proc(ISpStreamFormatConverter*, ISpStreamFormat*, HRESULT)
-    set_format : Proc(ISpStreamFormatConverter*, Guid*, WAVEFORMATEX*, HRESULT)
-    reset_seek_position : Proc(ISpStreamFormatConverter*, HRESULT)
-    scale_converted_to_base_offset : Proc(ISpStreamFormatConverter*, UInt64, UInt64*, HRESULT)
-    scale_base_to_converted_offset : Proc(ISpStreamFormatConverter*, UInt64, UInt64*, HRESULT)
-  end
-
-  ISpStreamFormatConverter_GUID = "678a932c-ea71-4446-9b41-78fda6280a29"
-  IID_ISpStreamFormatConverter = LibC::GUID.new(0x678a932c_u32, 0xea71_u16, 0x4446_u16, StaticArray[0x9b_u8, 0x41_u8, 0x78_u8, 0xfd_u8, 0xa6_u8, 0x28_u8, 0xa_u8, 0x29_u8])
-  struct ISpStreamFormatConverter
-    lpVtbl : ISpStreamFormatConverterVTbl*
-  end
-
-  struct ISpAudioVTbl
-    query_interface : Proc(ISpAudio*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpAudio*, UInt32)
-    release : Proc(ISpAudio*, UInt32)
-    read : Proc(ISpAudio*, Void*, UInt32, UInt32*, HRESULT)
-    write : Proc(ISpAudio*, Void*, UInt32, UInt32*, HRESULT)
-    seek : Proc(ISpAudio*, LARGE_INTEGER, STREAM_SEEK, ULARGE_INTEGER*, HRESULT)
-    set_size : Proc(ISpAudio*, ULARGE_INTEGER, HRESULT)
-    copy_to : Proc(ISpAudio*, IStream, ULARGE_INTEGER, ULARGE_INTEGER*, ULARGE_INTEGER*, HRESULT)
-    commit : Proc(ISpAudio*, UInt32, HRESULT)
-    revert : Proc(ISpAudio*, HRESULT)
-    lock_region : Proc(ISpAudio*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    unlock_region : Proc(ISpAudio*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    stat : Proc(ISpAudio*, STATSTG*, UInt32, HRESULT)
-    clone : Proc(ISpAudio*, IStream*, HRESULT)
-    get_format : Proc(ISpAudio*, Guid*, WAVEFORMATEX**, HRESULT)
-    set_state : Proc(ISpAudio*, SPAUDIOSTATE, UInt64, HRESULT)
-    set_format : Proc(ISpAudio*, Guid*, WAVEFORMATEX*, HRESULT)
-    get_status : Proc(ISpAudio*, SPAUDIOSTATUS*, HRESULT)
-    set_buffer_info : Proc(ISpAudio*, SPAUDIOBUFFERINFO*, HRESULT)
-    get_buffer_info : Proc(ISpAudio*, SPAUDIOBUFFERINFO*, HRESULT)
-    get_default_format : Proc(ISpAudio*, Guid*, WAVEFORMATEX**, HRESULT)
-    event_handle : Proc(ISpAudio*, LibC::HANDLE)
-    get_volume_level : Proc(ISpAudio*, UInt32*, HRESULT)
-    set_volume_level : Proc(ISpAudio*, UInt32, HRESULT)
-    get_buffer_notify_size : Proc(ISpAudio*, UInt32*, HRESULT)
-    set_buffer_notify_size : Proc(ISpAudio*, UInt32, HRESULT)
-  end
-
-  ISpAudio_GUID = "c05c768f-fae8-4ec2-8e07-338321c12452"
-  IID_ISpAudio = LibC::GUID.new(0xc05c768f_u32, 0xfae8_u16, 0x4ec2_u16, StaticArray[0x8e_u8, 0x7_u8, 0x33_u8, 0x83_u8, 0x21_u8, 0xc1_u8, 0x24_u8, 0x52_u8])
-  struct ISpAudio
-    lpVtbl : ISpAudioVTbl*
-  end
-
-  struct ISpMMSysAudioVTbl
-    query_interface : Proc(ISpMMSysAudio*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpMMSysAudio*, UInt32)
-    release : Proc(ISpMMSysAudio*, UInt32)
-    read : Proc(ISpMMSysAudio*, Void*, UInt32, UInt32*, HRESULT)
-    write : Proc(ISpMMSysAudio*, Void*, UInt32, UInt32*, HRESULT)
-    seek : Proc(ISpMMSysAudio*, LARGE_INTEGER, STREAM_SEEK, ULARGE_INTEGER*, HRESULT)
-    set_size : Proc(ISpMMSysAudio*, ULARGE_INTEGER, HRESULT)
-    copy_to : Proc(ISpMMSysAudio*, IStream, ULARGE_INTEGER, ULARGE_INTEGER*, ULARGE_INTEGER*, HRESULT)
-    commit : Proc(ISpMMSysAudio*, UInt32, HRESULT)
-    revert : Proc(ISpMMSysAudio*, HRESULT)
-    lock_region : Proc(ISpMMSysAudio*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    unlock_region : Proc(ISpMMSysAudio*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    stat : Proc(ISpMMSysAudio*, STATSTG*, UInt32, HRESULT)
-    clone : Proc(ISpMMSysAudio*, IStream*, HRESULT)
-    get_format : Proc(ISpMMSysAudio*, Guid*, WAVEFORMATEX**, HRESULT)
-    set_state : Proc(ISpMMSysAudio*, SPAUDIOSTATE, UInt64, HRESULT)
-    set_format : Proc(ISpMMSysAudio*, Guid*, WAVEFORMATEX*, HRESULT)
-    get_status : Proc(ISpMMSysAudio*, SPAUDIOSTATUS*, HRESULT)
-    set_buffer_info : Proc(ISpMMSysAudio*, SPAUDIOBUFFERINFO*, HRESULT)
-    get_buffer_info : Proc(ISpMMSysAudio*, SPAUDIOBUFFERINFO*, HRESULT)
-    get_default_format : Proc(ISpMMSysAudio*, Guid*, WAVEFORMATEX**, HRESULT)
-    event_handle : Proc(ISpMMSysAudio*, LibC::HANDLE)
-    get_volume_level : Proc(ISpMMSysAudio*, UInt32*, HRESULT)
-    set_volume_level : Proc(ISpMMSysAudio*, UInt32, HRESULT)
-    get_buffer_notify_size : Proc(ISpMMSysAudio*, UInt32*, HRESULT)
-    set_buffer_notify_size : Proc(ISpMMSysAudio*, UInt32, HRESULT)
-    get_device_id : Proc(ISpMMSysAudio*, UInt32*, HRESULT)
-    set_device_id : Proc(ISpMMSysAudio*, UInt32, HRESULT)
-    get_mm_handle : Proc(ISpMMSysAudio*, Void**, HRESULT)
-    get_line_id : Proc(ISpMMSysAudio*, UInt32*, HRESULT)
-    set_line_id : Proc(ISpMMSysAudio*, UInt32, HRESULT)
-  end
-
-  ISpMMSysAudio_GUID = "15806f6e-1d70-4b48-98e6-3b1a007509ab"
-  IID_ISpMMSysAudio = LibC::GUID.new(0x15806f6e_u32, 0x1d70_u16, 0x4b48_u16, StaticArray[0x98_u8, 0xe6_u8, 0x3b_u8, 0x1a_u8, 0x0_u8, 0x75_u8, 0x9_u8, 0xab_u8])
-  struct ISpMMSysAudio
-    lpVtbl : ISpMMSysAudioVTbl*
-  end
-
-  struct ISpTranscriptVTbl
-    query_interface : Proc(ISpTranscript*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpTranscript*, UInt32)
-    release : Proc(ISpTranscript*, UInt32)
-    get_transcript : Proc(ISpTranscript*, LibC::LPWSTR*, HRESULT)
-    append_transcript : Proc(ISpTranscript*, LibC::LPWSTR, HRESULT)
-  end
-
-  ISpTranscript_GUID = "10f63bce-201a-11d3-ac70-00c04f8ee6c0"
-  IID_ISpTranscript = LibC::GUID.new(0x10f63bce_u32, 0x201a_u16, 0x11d3_u16, StaticArray[0xac_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
-  struct ISpTranscript
-    lpVtbl : ISpTranscriptVTbl*
-  end
-
-  struct ISpLexiconVTbl
-    query_interface : Proc(ISpLexicon*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpLexicon*, UInt32)
-    release : Proc(ISpLexicon*, UInt32)
-    get_pronunciations : Proc(ISpLexicon*, LibC::LPWSTR, UInt16, UInt32, SPWORDPRONUNCIATIONLIST*, HRESULT)
-    add_pronunciation : Proc(ISpLexicon*, LibC::LPWSTR, UInt16, SPPARTOFSPEECH, UInt16*, HRESULT)
-    remove_pronunciation : Proc(ISpLexicon*, LibC::LPWSTR, UInt16, SPPARTOFSPEECH, UInt16*, HRESULT)
-    get_generation : Proc(ISpLexicon*, UInt32*, HRESULT)
-    get_generation_change : Proc(ISpLexicon*, UInt32, UInt32*, SPWORDLIST*, HRESULT)
-    get_words : Proc(ISpLexicon*, UInt32, UInt32*, UInt32*, SPWORDLIST*, HRESULT)
-  end
-
-  ISpLexicon_GUID = "da41a7c2-5383-4db2-916b-6c1719e3db58"
-  IID_ISpLexicon = LibC::GUID.new(0xda41a7c2_u32, 0x5383_u16, 0x4db2_u16, StaticArray[0x91_u8, 0x6b_u8, 0x6c_u8, 0x17_u8, 0x19_u8, 0xe3_u8, 0xdb_u8, 0x58_u8])
-  struct ISpLexicon
-    lpVtbl : ISpLexiconVTbl*
-  end
-
-  struct ISpContainerLexiconVTbl
-    query_interface : Proc(ISpContainerLexicon*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpContainerLexicon*, UInt32)
-    release : Proc(ISpContainerLexicon*, UInt32)
-    get_pronunciations : Proc(ISpContainerLexicon*, LibC::LPWSTR, UInt16, UInt32, SPWORDPRONUNCIATIONLIST*, HRESULT)
-    add_pronunciation : Proc(ISpContainerLexicon*, LibC::LPWSTR, UInt16, SPPARTOFSPEECH, UInt16*, HRESULT)
-    remove_pronunciation : Proc(ISpContainerLexicon*, LibC::LPWSTR, UInt16, SPPARTOFSPEECH, UInt16*, HRESULT)
-    get_generation : Proc(ISpContainerLexicon*, UInt32*, HRESULT)
-    get_generation_change : Proc(ISpContainerLexicon*, UInt32, UInt32*, SPWORDLIST*, HRESULT)
-    get_words : Proc(ISpContainerLexicon*, UInt32, UInt32*, UInt32*, SPWORDLIST*, HRESULT)
-    add_lexicon : Proc(ISpContainerLexicon*, ISpLexicon, UInt32, HRESULT)
-  end
-
-  ISpContainerLexicon_GUID = "8565572f-c094-41cc-b56e-10bd9c3ff044"
-  IID_ISpContainerLexicon = LibC::GUID.new(0x8565572f_u32, 0xc094_u16, 0x41cc_u16, StaticArray[0xb5_u8, 0x6e_u8, 0x10_u8, 0xbd_u8, 0x9c_u8, 0x3f_u8, 0xf0_u8, 0x44_u8])
-  struct ISpContainerLexicon
-    lpVtbl : ISpContainerLexiconVTbl*
-  end
-
-  struct ISpShortcutVTbl
-    query_interface : Proc(ISpShortcut*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpShortcut*, UInt32)
-    release : Proc(ISpShortcut*, UInt32)
-    add_shortcut : Proc(ISpShortcut*, LibC::LPWSTR, UInt16, LibC::LPWSTR, SPSHORTCUTTYPE, HRESULT)
-    remove_shortcut : Proc(ISpShortcut*, LibC::LPWSTR, UInt16, LibC::LPWSTR, SPSHORTCUTTYPE, HRESULT)
-    get_shortcuts : Proc(ISpShortcut*, UInt16, SPSHORTCUTPAIRLIST*, HRESULT)
-    get_generation : Proc(ISpShortcut*, UInt32*, HRESULT)
-    get_words_from_generation_change : Proc(ISpShortcut*, UInt32*, SPWORDLIST*, HRESULT)
-    get_words : Proc(ISpShortcut*, UInt32*, UInt32*, SPWORDLIST*, HRESULT)
-    get_shortcuts_for_generation : Proc(ISpShortcut*, UInt32*, UInt32*, SPSHORTCUTPAIRLIST*, HRESULT)
-    get_generation_change : Proc(ISpShortcut*, UInt32*, SPSHORTCUTPAIRLIST*, HRESULT)
-  end
-
-  ISpShortcut_GUID = "3df681e2-ea56-11d9-8bde-f66bad1e3f3a"
-  IID_ISpShortcut = LibC::GUID.new(0x3df681e2_u32, 0xea56_u16, 0x11d9_u16, StaticArray[0x8b_u8, 0xde_u8, 0xf6_u8, 0x6b_u8, 0xad_u8, 0x1e_u8, 0x3f_u8, 0x3a_u8])
-  struct ISpShortcut
-    lpVtbl : ISpShortcutVTbl*
-  end
-
-  struct ISpPhoneConverterVTbl
-    query_interface : Proc(ISpPhoneConverter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpPhoneConverter*, UInt32)
-    release : Proc(ISpPhoneConverter*, UInt32)
-    set_object_token : Proc(ISpPhoneConverter*, ISpObjectToken, HRESULT)
-    get_object_token : Proc(ISpPhoneConverter*, ISpObjectToken*, HRESULT)
-    phone_to_id : Proc(ISpPhoneConverter*, LibC::LPWSTR, UInt16*, HRESULT)
-    id_to_phone : Proc(ISpPhoneConverter*, UInt16*, LibC::LPWSTR, HRESULT)
-  end
-
-  ISpPhoneConverter_GUID = "8445c581-0cac-4a38-abfe-9b2ce2826455"
-  IID_ISpPhoneConverter = LibC::GUID.new(0x8445c581_u32, 0xcac_u16, 0x4a38_u16, StaticArray[0xab_u8, 0xfe_u8, 0x9b_u8, 0x2c_u8, 0xe2_u8, 0x82_u8, 0x64_u8, 0x55_u8])
-  struct ISpPhoneConverter
-    lpVtbl : ISpPhoneConverterVTbl*
-  end
-
-  struct ISpPhoneticAlphabetConverterVTbl
-    query_interface : Proc(ISpPhoneticAlphabetConverter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpPhoneticAlphabetConverter*, UInt32)
-    release : Proc(ISpPhoneticAlphabetConverter*, UInt32)
-    get_lang_id : Proc(ISpPhoneticAlphabetConverter*, UInt16*, HRESULT)
-    set_lang_id : Proc(ISpPhoneticAlphabetConverter*, UInt16, HRESULT)
-    sapi2_ups : Proc(ISpPhoneticAlphabetConverter*, UInt16*, UInt16*, UInt32, HRESULT)
-    ups2_sapi : Proc(ISpPhoneticAlphabetConverter*, UInt16*, UInt16*, UInt32, HRESULT)
-    get_max_convert_length : Proc(ISpPhoneticAlphabetConverter*, UInt32, LibC::BOOL, UInt32*, HRESULT)
-  end
-
-  ISpPhoneticAlphabetConverter_GUID = "133adcd4-19b4-4020-9fdc-842e78253b17"
-  IID_ISpPhoneticAlphabetConverter = LibC::GUID.new(0x133adcd4_u32, 0x19b4_u16, 0x4020_u16, StaticArray[0x9f_u8, 0xdc_u8, 0x84_u8, 0x2e_u8, 0x78_u8, 0x25_u8, 0x3b_u8, 0x17_u8])
-  struct ISpPhoneticAlphabetConverter
-    lpVtbl : ISpPhoneticAlphabetConverterVTbl*
-  end
-
-  struct ISpPhoneticAlphabetSelectionVTbl
-    query_interface : Proc(ISpPhoneticAlphabetSelection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpPhoneticAlphabetSelection*, UInt32)
-    release : Proc(ISpPhoneticAlphabetSelection*, UInt32)
-    is_alphabet_ups : Proc(ISpPhoneticAlphabetSelection*, LibC::BOOL*, HRESULT)
-    set_alphabet_to_ups : Proc(ISpPhoneticAlphabetSelection*, LibC::BOOL, HRESULT)
-  end
-
-  ISpPhoneticAlphabetSelection_GUID = "b2745efd-42ce-48ca-81f1-a96e02538a90"
-  IID_ISpPhoneticAlphabetSelection = LibC::GUID.new(0xb2745efd_u32, 0x42ce_u16, 0x48ca_u16, StaticArray[0x81_u8, 0xf1_u8, 0xa9_u8, 0x6e_u8, 0x2_u8, 0x53_u8, 0x8a_u8, 0x90_u8])
-  struct ISpPhoneticAlphabetSelection
-    lpVtbl : ISpPhoneticAlphabetSelectionVTbl*
-  end
-
-  struct ISpVoiceVTbl
-    query_interface : Proc(ISpVoice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpVoice*, UInt32)
-    release : Proc(ISpVoice*, UInt32)
-    set_notify_sink : Proc(ISpVoice*, ISpNotifySink, HRESULT)
-    set_notify_window_message : Proc(ISpVoice*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_callback_function : Proc(ISpVoice*, SPNOTIFYCALLBACK*, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_callback_interface : Proc(ISpVoice*, ISpNotifyCallback, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_win32_event : Proc(ISpVoice*, HRESULT)
-    wait_for_notify_event : Proc(ISpVoice*, UInt32, HRESULT)
-    get_notify_event_handle : Proc(ISpVoice*, LibC::HANDLE)
-    set_interest : Proc(ISpVoice*, UInt64, UInt64, HRESULT)
-    get_events : Proc(ISpVoice*, UInt32, SPEVENT*, UInt32*, HRESULT)
-    get_info : Proc(ISpVoice*, SPEVENTSOURCEINFO*, HRESULT)
-    set_output : Proc(ISpVoice*, IUnknown, LibC::BOOL, HRESULT)
-    get_output_object_token : Proc(ISpVoice*, ISpObjectToken*, HRESULT)
-    get_output_stream : Proc(ISpVoice*, ISpStreamFormat*, HRESULT)
-    pause : Proc(ISpVoice*, HRESULT)
-    resume : Proc(ISpVoice*, HRESULT)
-    set_voice : Proc(ISpVoice*, ISpObjectToken, HRESULT)
-    get_voice : Proc(ISpVoice*, ISpObjectToken*, HRESULT)
-    speak : Proc(ISpVoice*, LibC::LPWSTR, UInt32, UInt32*, HRESULT)
-    speak_stream : Proc(ISpVoice*, IStream, UInt32, UInt32*, HRESULT)
-    get_status : Proc(ISpVoice*, SPVOICESTATUS*, LibC::LPWSTR*, HRESULT)
-    skip : Proc(ISpVoice*, LibC::LPWSTR, Int32, UInt32*, HRESULT)
-    set_priority : Proc(ISpVoice*, SPVPRIORITY, HRESULT)
-    get_priority : Proc(ISpVoice*, SPVPRIORITY*, HRESULT)
-    set_alert_boundary : Proc(ISpVoice*, SPEVENTENUM, HRESULT)
-    get_alert_boundary : Proc(ISpVoice*, SPEVENTENUM*, HRESULT)
-    set_rate : Proc(ISpVoice*, Int32, HRESULT)
-    get_rate : Proc(ISpVoice*, Int32*, HRESULT)
-    set_volume : Proc(ISpVoice*, UInt16, HRESULT)
-    get_volume : Proc(ISpVoice*, UInt16*, HRESULT)
-    wait_until_done : Proc(ISpVoice*, UInt32, HRESULT)
-    set_sync_speak_timeout : Proc(ISpVoice*, UInt32, HRESULT)
-    get_sync_speak_timeout : Proc(ISpVoice*, UInt32*, HRESULT)
-    speak_complete_event : Proc(ISpVoice*, LibC::HANDLE)
-    is_ui_supported : Proc(ISpVoice*, LibC::LPWSTR, Void*, UInt32, LibC::BOOL*, HRESULT)
-    display_ui : Proc(ISpVoice*, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, Void*, UInt32, HRESULT)
-  end
-
-  ISpVoice_GUID = "6c44df74-72b9-4992-a1ec-ef996e0422d4"
-  IID_ISpVoice = LibC::GUID.new(0x6c44df74_u32, 0x72b9_u16, 0x4992_u16, StaticArray[0xa1_u8, 0xec_u8, 0xef_u8, 0x99_u8, 0x6e_u8, 0x4_u8, 0x22_u8, 0xd4_u8])
-  struct ISpVoice
-    lpVtbl : ISpVoiceVTbl*
-  end
-
-  struct ISpPhraseVTbl
-    query_interface : Proc(ISpPhrase*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpPhrase*, UInt32)
-    release : Proc(ISpPhrase*, UInt32)
-    get_phrase : Proc(ISpPhrase*, SPPHRASE**, HRESULT)
-    get_serialized_phrase : Proc(ISpPhrase*, SPSERIALIZEDPHRASE**, HRESULT)
-    get_text : Proc(ISpPhrase*, UInt32, UInt32, LibC::BOOL, LibC::LPWSTR*, UInt8*, HRESULT)
-    discard : Proc(ISpPhrase*, UInt32, HRESULT)
-  end
-
-  ISpPhrase_GUID = "1a5c0354-b621-4b5a-8791-d306ed379e53"
-  IID_ISpPhrase = LibC::GUID.new(0x1a5c0354_u32, 0xb621_u16, 0x4b5a_u16, StaticArray[0x87_u8, 0x91_u8, 0xd3_u8, 0x6_u8, 0xed_u8, 0x37_u8, 0x9e_u8, 0x53_u8])
-  struct ISpPhrase
-    lpVtbl : ISpPhraseVTbl*
-  end
-
-  struct ISpPhraseAltVTbl
-    query_interface : Proc(ISpPhraseAlt*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpPhraseAlt*, UInt32)
-    release : Proc(ISpPhraseAlt*, UInt32)
-    get_phrase : Proc(ISpPhraseAlt*, SPPHRASE**, HRESULT)
-    get_serialized_phrase : Proc(ISpPhraseAlt*, SPSERIALIZEDPHRASE**, HRESULT)
-    get_text : Proc(ISpPhraseAlt*, UInt32, UInt32, LibC::BOOL, LibC::LPWSTR*, UInt8*, HRESULT)
-    discard : Proc(ISpPhraseAlt*, UInt32, HRESULT)
-    get_alt_info : Proc(ISpPhraseAlt*, ISpPhrase*, UInt32*, UInt32*, UInt32*, HRESULT)
-    commit : Proc(ISpPhraseAlt*, HRESULT)
-  end
-
-  ISpPhraseAlt_GUID = "8fcebc98-4e49-4067-9c6c-d86a0e092e3d"
-  IID_ISpPhraseAlt = LibC::GUID.new(0x8fcebc98_u32, 0x4e49_u16, 0x4067_u16, StaticArray[0x9c_u8, 0x6c_u8, 0xd8_u8, 0x6a_u8, 0xe_u8, 0x9_u8, 0x2e_u8, 0x3d_u8])
-  struct ISpPhraseAlt
-    lpVtbl : ISpPhraseAltVTbl*
-  end
-
-  struct ISpPhrase2VTbl
-    query_interface : Proc(ISpPhrase2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpPhrase2*, UInt32)
-    release : Proc(ISpPhrase2*, UInt32)
-    get_phrase : Proc(ISpPhrase2*, SPPHRASE**, HRESULT)
-    get_serialized_phrase : Proc(ISpPhrase2*, SPSERIALIZEDPHRASE**, HRESULT)
-    get_text : Proc(ISpPhrase2*, UInt32, UInt32, LibC::BOOL, LibC::LPWSTR*, UInt8*, HRESULT)
-    discard : Proc(ISpPhrase2*, UInt32, HRESULT)
-    get_xml_result : Proc(ISpPhrase2*, LibC::LPWSTR*, SPXMLRESULTOPTIONS, HRESULT)
-    get_xml_error_info : Proc(ISpPhrase2*, SPSEMANTICERRORINFO*, HRESULT)
-    get_audio : Proc(ISpPhrase2*, UInt32, UInt32, ISpStreamFormat*, HRESULT)
-  end
-
-  ISpPhrase2_GUID = "f264da52-e457-4696-b856-a737b717af79"
-  IID_ISpPhrase2 = LibC::GUID.new(0xf264da52_u32, 0xe457_u16, 0x4696_u16, StaticArray[0xb8_u8, 0x56_u8, 0xa7_u8, 0x37_u8, 0xb7_u8, 0x17_u8, 0xaf_u8, 0x79_u8])
-  struct ISpPhrase2
-    lpVtbl : ISpPhrase2VTbl*
-  end
-
-  struct ISpRecoResultVTbl
-    query_interface : Proc(ISpRecoResult*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpRecoResult*, UInt32)
-    release : Proc(ISpRecoResult*, UInt32)
-    get_phrase : Proc(ISpRecoResult*, SPPHRASE**, HRESULT)
-    get_serialized_phrase : Proc(ISpRecoResult*, SPSERIALIZEDPHRASE**, HRESULT)
-    get_text : Proc(ISpRecoResult*, UInt32, UInt32, LibC::BOOL, LibC::LPWSTR*, UInt8*, HRESULT)
-    discard : Proc(ISpRecoResult*, UInt32, HRESULT)
-    get_result_times : Proc(ISpRecoResult*, SPRECORESULTTIMES*, HRESULT)
-    get_alternates : Proc(ISpRecoResult*, UInt32, UInt32, UInt32, ISpPhraseAlt*, UInt32*, HRESULT)
-    get_audio : Proc(ISpRecoResult*, UInt32, UInt32, ISpStreamFormat*, HRESULT)
-    speak_audio : Proc(ISpRecoResult*, UInt32, UInt32, UInt32, UInt32*, HRESULT)
-    serialize : Proc(ISpRecoResult*, SPSERIALIZEDRESULT**, HRESULT)
-    scale_audio : Proc(ISpRecoResult*, Guid*, WAVEFORMATEX*, HRESULT)
-    get_reco_context : Proc(ISpRecoResult*, ISpRecoContext*, HRESULT)
-  end
-
-  ISpRecoResult_GUID = "20b053be-e235-43cd-9a2a-8d17a48b7842"
-  IID_ISpRecoResult = LibC::GUID.new(0x20b053be_u32, 0xe235_u16, 0x43cd_u16, StaticArray[0x9a_u8, 0x2a_u8, 0x8d_u8, 0x17_u8, 0xa4_u8, 0x8b_u8, 0x78_u8, 0x42_u8])
-  struct ISpRecoResult
-    lpVtbl : ISpRecoResultVTbl*
-  end
-
-  struct ISpRecoResult2VTbl
-    query_interface : Proc(ISpRecoResult2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpRecoResult2*, UInt32)
-    release : Proc(ISpRecoResult2*, UInt32)
-    get_phrase : Proc(ISpRecoResult2*, SPPHRASE**, HRESULT)
-    get_serialized_phrase : Proc(ISpRecoResult2*, SPSERIALIZEDPHRASE**, HRESULT)
-    get_text : Proc(ISpRecoResult2*, UInt32, UInt32, LibC::BOOL, LibC::LPWSTR*, UInt8*, HRESULT)
-    discard : Proc(ISpRecoResult2*, UInt32, HRESULT)
-    get_result_times : Proc(ISpRecoResult2*, SPRECORESULTTIMES*, HRESULT)
-    get_alternates : Proc(ISpRecoResult2*, UInt32, UInt32, UInt32, ISpPhraseAlt*, UInt32*, HRESULT)
-    get_audio : Proc(ISpRecoResult2*, UInt32, UInt32, ISpStreamFormat*, HRESULT)
-    speak_audio : Proc(ISpRecoResult2*, UInt32, UInt32, UInt32, UInt32*, HRESULT)
-    serialize : Proc(ISpRecoResult2*, SPSERIALIZEDRESULT**, HRESULT)
-    scale_audio : Proc(ISpRecoResult2*, Guid*, WAVEFORMATEX*, HRESULT)
-    get_reco_context : Proc(ISpRecoResult2*, ISpRecoContext*, HRESULT)
-    commit_alternate : Proc(ISpRecoResult2*, ISpPhraseAlt, ISpRecoResult*, HRESULT)
-    commit_text : Proc(ISpRecoResult2*, UInt32, UInt32, LibC::LPWSTR, UInt32, HRESULT)
-    set_text_feedback : Proc(ISpRecoResult2*, LibC::LPWSTR, LibC::BOOL, HRESULT)
-  end
-
-  ISpRecoResult2_GUID = "27cac6c4-88f2-41f2-8817-0c95e59f1e6e"
-  IID_ISpRecoResult2 = LibC::GUID.new(0x27cac6c4_u32, 0x88f2_u16, 0x41f2_u16, StaticArray[0x88_u8, 0x17_u8, 0xc_u8, 0x95_u8, 0xe5_u8, 0x9f_u8, 0x1e_u8, 0x6e_u8])
-  struct ISpRecoResult2
-    lpVtbl : ISpRecoResult2VTbl*
-  end
-
-  struct ISpXMLRecoResultVTbl
-    query_interface : Proc(ISpXMLRecoResult*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpXMLRecoResult*, UInt32)
-    release : Proc(ISpXMLRecoResult*, UInt32)
-    get_phrase : Proc(ISpXMLRecoResult*, SPPHRASE**, HRESULT)
-    get_serialized_phrase : Proc(ISpXMLRecoResult*, SPSERIALIZEDPHRASE**, HRESULT)
-    get_text : Proc(ISpXMLRecoResult*, UInt32, UInt32, LibC::BOOL, LibC::LPWSTR*, UInt8*, HRESULT)
-    discard : Proc(ISpXMLRecoResult*, UInt32, HRESULT)
-    get_result_times : Proc(ISpXMLRecoResult*, SPRECORESULTTIMES*, HRESULT)
-    get_alternates : Proc(ISpXMLRecoResult*, UInt32, UInt32, UInt32, ISpPhraseAlt*, UInt32*, HRESULT)
-    get_audio : Proc(ISpXMLRecoResult*, UInt32, UInt32, ISpStreamFormat*, HRESULT)
-    speak_audio : Proc(ISpXMLRecoResult*, UInt32, UInt32, UInt32, UInt32*, HRESULT)
-    serialize : Proc(ISpXMLRecoResult*, SPSERIALIZEDRESULT**, HRESULT)
-    scale_audio : Proc(ISpXMLRecoResult*, Guid*, WAVEFORMATEX*, HRESULT)
-    get_reco_context : Proc(ISpXMLRecoResult*, ISpRecoContext*, HRESULT)
-    get_xml_result : Proc(ISpXMLRecoResult*, LibC::LPWSTR*, SPXMLRESULTOPTIONS, HRESULT)
-    get_xml_error_info : Proc(ISpXMLRecoResult*, SPSEMANTICERRORINFO*, HRESULT)
-  end
-
-  ISpXMLRecoResult_GUID = "ae39362b-45a8-4074-9b9e-ccf49aa2d0b6"
-  IID_ISpXMLRecoResult = LibC::GUID.new(0xae39362b_u32, 0x45a8_u16, 0x4074_u16, StaticArray[0x9b_u8, 0x9e_u8, 0xcc_u8, 0xf4_u8, 0x9a_u8, 0xa2_u8, 0xd0_u8, 0xb6_u8])
-  struct ISpXMLRecoResult
-    lpVtbl : ISpXMLRecoResultVTbl*
-  end
-
-  struct ISpGrammarBuilderVTbl
-    query_interface : Proc(ISpGrammarBuilder*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpGrammarBuilder*, UInt32)
-    release : Proc(ISpGrammarBuilder*, UInt32)
-    reset_grammar : Proc(ISpGrammarBuilder*, UInt16, HRESULT)
-    get_rule : Proc(ISpGrammarBuilder*, LibC::LPWSTR, UInt32, UInt32, LibC::BOOL, SPSTATEHANDLE__**, HRESULT)
-    clear_rule : Proc(ISpGrammarBuilder*, SPSTATEHANDLE__*, HRESULT)
-    create_new_state : Proc(ISpGrammarBuilder*, SPSTATEHANDLE__*, SPSTATEHANDLE__**, HRESULT)
-    add_word_transition : Proc(ISpGrammarBuilder*, SPSTATEHANDLE__*, SPSTATEHANDLE__*, LibC::LPWSTR, LibC::LPWSTR, SPGRAMMARWORDTYPE, Float32, SPPROPERTYINFO*, HRESULT)
-    add_rule_transition : Proc(ISpGrammarBuilder*, SPSTATEHANDLE__*, SPSTATEHANDLE__*, SPSTATEHANDLE__*, Float32, SPPROPERTYINFO*, HRESULT)
-    add_resource : Proc(ISpGrammarBuilder*, SPSTATEHANDLE__*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    commit : Proc(ISpGrammarBuilder*, UInt32, HRESULT)
-  end
-
-  ISpGrammarBuilder_GUID = "8137828f-591a-4a42-be58-49ea7ebaac68"
-  IID_ISpGrammarBuilder = LibC::GUID.new(0x8137828f_u32, 0x591a_u16, 0x4a42_u16, StaticArray[0xbe_u8, 0x58_u8, 0x49_u8, 0xea_u8, 0x7e_u8, 0xba_u8, 0xac_u8, 0x68_u8])
-  struct ISpGrammarBuilder
-    lpVtbl : ISpGrammarBuilderVTbl*
-  end
-
-  struct ISpRecoGrammarVTbl
-    query_interface : Proc(ISpRecoGrammar*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpRecoGrammar*, UInt32)
-    release : Proc(ISpRecoGrammar*, UInt32)
-    reset_grammar : Proc(ISpRecoGrammar*, UInt16, HRESULT)
-    get_rule : Proc(ISpRecoGrammar*, LibC::LPWSTR, UInt32, UInt32, LibC::BOOL, SPSTATEHANDLE__**, HRESULT)
-    clear_rule : Proc(ISpRecoGrammar*, SPSTATEHANDLE__*, HRESULT)
-    create_new_state : Proc(ISpRecoGrammar*, SPSTATEHANDLE__*, SPSTATEHANDLE__**, HRESULT)
-    add_word_transition : Proc(ISpRecoGrammar*, SPSTATEHANDLE__*, SPSTATEHANDLE__*, LibC::LPWSTR, LibC::LPWSTR, SPGRAMMARWORDTYPE, Float32, SPPROPERTYINFO*, HRESULT)
-    add_rule_transition : Proc(ISpRecoGrammar*, SPSTATEHANDLE__*, SPSTATEHANDLE__*, SPSTATEHANDLE__*, Float32, SPPROPERTYINFO*, HRESULT)
-    add_resource : Proc(ISpRecoGrammar*, SPSTATEHANDLE__*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    commit : Proc(ISpRecoGrammar*, UInt32, HRESULT)
-    get_grammar_id : Proc(ISpRecoGrammar*, UInt64*, HRESULT)
-    get_reco_context : Proc(ISpRecoGrammar*, ISpRecoContext*, HRESULT)
-    load_cmd_from_file : Proc(ISpRecoGrammar*, LibC::LPWSTR, SPLOADOPTIONS, HRESULT)
-    load_cmd_from_object : Proc(ISpRecoGrammar*, Guid*, LibC::LPWSTR, SPLOADOPTIONS, HRESULT)
-    load_cmd_from_resource : Proc(ISpRecoGrammar*, HINSTANCE, LibC::LPWSTR, LibC::LPWSTR, UInt16, SPLOADOPTIONS, HRESULT)
-    load_cmd_from_memory : Proc(ISpRecoGrammar*, SPBINARYGRAMMAR*, SPLOADOPTIONS, HRESULT)
-    load_cmd_from_proprietary_grammar : Proc(ISpRecoGrammar*, Guid*, LibC::LPWSTR, Void*, UInt32, SPLOADOPTIONS, HRESULT)
-    set_rule_state : Proc(ISpRecoGrammar*, LibC::LPWSTR, Void*, SPRULESTATE, HRESULT)
-    set_rule_id_state : Proc(ISpRecoGrammar*, UInt32, SPRULESTATE, HRESULT)
-    load_dictation : Proc(ISpRecoGrammar*, LibC::LPWSTR, SPLOADOPTIONS, HRESULT)
-    unload_dictation : Proc(ISpRecoGrammar*, HRESULT)
-    set_dictation_state : Proc(ISpRecoGrammar*, SPRULESTATE, HRESULT)
-    set_word_sequence_data : Proc(ISpRecoGrammar*, Char*, UInt32, SPTEXTSELECTIONINFO*, HRESULT)
-    set_text_selection : Proc(ISpRecoGrammar*, SPTEXTSELECTIONINFO*, HRESULT)
-    is_pronounceable : Proc(ISpRecoGrammar*, LibC::LPWSTR, SPWORDPRONOUNCEABLE*, HRESULT)
-    set_grammar_state : Proc(ISpRecoGrammar*, SPGRAMMARSTATE, HRESULT)
-    save_cmd : Proc(ISpRecoGrammar*, IStream, LibC::LPWSTR*, HRESULT)
-    get_grammar_state : Proc(ISpRecoGrammar*, SPGRAMMARSTATE*, HRESULT)
-  end
-
-  ISpRecoGrammar_GUID = "2177db29-7f45-47d0-8554-067e91c80502"
-  IID_ISpRecoGrammar = LibC::GUID.new(0x2177db29_u32, 0x7f45_u16, 0x47d0_u16, StaticArray[0x85_u8, 0x54_u8, 0x6_u8, 0x7e_u8, 0x91_u8, 0xc8_u8, 0x5_u8, 0x2_u8])
-  struct ISpRecoGrammar
-    lpVtbl : ISpRecoGrammarVTbl*
-  end
-
-  struct ISpGrammarBuilder2VTbl
-    query_interface : Proc(ISpGrammarBuilder2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpGrammarBuilder2*, UInt32)
-    release : Proc(ISpGrammarBuilder2*, UInt32)
-    add_text_subset : Proc(ISpGrammarBuilder2*, SPSTATEHANDLE__*, SPSTATEHANDLE__*, LibC::LPWSTR, SPMATCHINGMODE, HRESULT)
-    set_phonetic_alphabet : Proc(ISpGrammarBuilder2*, PHONETICALPHABET, HRESULT)
-  end
-
-  ISpGrammarBuilder2_GUID = "8ab10026-20cc-4b20-8c22-a49c9ba78f60"
-  IID_ISpGrammarBuilder2 = LibC::GUID.new(0x8ab10026_u32, 0x20cc_u16, 0x4b20_u16, StaticArray[0x8c_u8, 0x22_u8, 0xa4_u8, 0x9c_u8, 0x9b_u8, 0xa7_u8, 0x8f_u8, 0x60_u8])
-  struct ISpGrammarBuilder2
-    lpVtbl : ISpGrammarBuilder2VTbl*
-  end
-
-  struct ISpRecoGrammar2VTbl
-    query_interface : Proc(ISpRecoGrammar2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpRecoGrammar2*, UInt32)
-    release : Proc(ISpRecoGrammar2*, UInt32)
-    get_rules : Proc(ISpRecoGrammar2*, SPRULE**, UInt32*, HRESULT)
-    load_cmd_from_file2 : Proc(ISpRecoGrammar2*, LibC::LPWSTR, SPLOADOPTIONS, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    load_cmd_from_memory2 : Proc(ISpRecoGrammar2*, SPBINARYGRAMMAR*, SPLOADOPTIONS, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    set_rule_priority : Proc(ISpRecoGrammar2*, LibC::LPWSTR, UInt32, Int32, HRESULT)
-    set_rule_weight : Proc(ISpRecoGrammar2*, LibC::LPWSTR, UInt32, Float32, HRESULT)
-    set_dictation_weight : Proc(ISpRecoGrammar2*, Float32, HRESULT)
-    set_grammar_loader : Proc(ISpRecoGrammar2*, ISpeechResourceLoader, HRESULT)
-    set_sml_security_manager : Proc(ISpRecoGrammar2*, IInternetSecurityManager, HRESULT)
-  end
-
-  ISpRecoGrammar2_GUID = "4b37bc9e-9ed6-44a3-93d3-18f022b79ec3"
-  IID_ISpRecoGrammar2 = LibC::GUID.new(0x4b37bc9e_u32, 0x9ed6_u16, 0x44a3_u16, StaticArray[0x93_u8, 0xd3_u8, 0x18_u8, 0xf0_u8, 0x22_u8, 0xb7_u8, 0x9e_u8, 0xc3_u8])
-  struct ISpRecoGrammar2
-    lpVtbl : ISpRecoGrammar2VTbl*
-  end
-
-  struct ISpeechResourceLoaderVTbl
-    query_interface : Proc(ISpeechResourceLoader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechResourceLoader*, UInt32)
-    release : Proc(ISpeechResourceLoader*, UInt32)
-    get_type_info_count : Proc(ISpeechResourceLoader*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechResourceLoader*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechResourceLoader*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechResourceLoader*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    load_resource : Proc(ISpeechResourceLoader*, UInt8*, Int16, IUnknown*, UInt8**, Int16*, UInt8**, HRESULT)
-    get_local_copy : Proc(ISpeechResourceLoader*, UInt8*, UInt8**, UInt8**, UInt8**, HRESULT)
-    release_local_copy : Proc(ISpeechResourceLoader*, UInt8*, HRESULT)
-  end
-
-  ISpeechResourceLoader_GUID = "b9ac5783-fcd0-4b21-b119-b4f8da8fd2c3"
-  IID_ISpeechResourceLoader = LibC::GUID.new(0xb9ac5783_u32, 0xfcd0_u16, 0x4b21_u16, StaticArray[0xb1_u8, 0x19_u8, 0xb4_u8, 0xf8_u8, 0xda_u8, 0x8f_u8, 0xd2_u8, 0xc3_u8])
-  struct ISpeechResourceLoader
-    lpVtbl : ISpeechResourceLoaderVTbl*
-  end
-
-  struct ISpRecoContextVTbl
-    query_interface : Proc(ISpRecoContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpRecoContext*, UInt32)
-    release : Proc(ISpRecoContext*, UInt32)
-    set_notify_sink : Proc(ISpRecoContext*, ISpNotifySink, HRESULT)
-    set_notify_window_message : Proc(ISpRecoContext*, LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_callback_function : Proc(ISpRecoContext*, SPNOTIFYCALLBACK*, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_callback_interface : Proc(ISpRecoContext*, ISpNotifyCallback, LibC::UINT_PTR, LPARAM, HRESULT)
-    set_notify_win32_event : Proc(ISpRecoContext*, HRESULT)
-    wait_for_notify_event : Proc(ISpRecoContext*, UInt32, HRESULT)
-    get_notify_event_handle : Proc(ISpRecoContext*, LibC::HANDLE)
-    set_interest : Proc(ISpRecoContext*, UInt64, UInt64, HRESULT)
-    get_events : Proc(ISpRecoContext*, UInt32, SPEVENT*, UInt32*, HRESULT)
-    get_info : Proc(ISpRecoContext*, SPEVENTSOURCEINFO*, HRESULT)
-    get_recognizer : Proc(ISpRecoContext*, ISpRecognizer*, HRESULT)
-    create_grammar : Proc(ISpRecoContext*, UInt64, ISpRecoGrammar*, HRESULT)
-    get_status : Proc(ISpRecoContext*, SPRECOCONTEXTSTATUS*, HRESULT)
-    get_max_alternates : Proc(ISpRecoContext*, UInt32*, HRESULT)
-    set_max_alternates : Proc(ISpRecoContext*, UInt32, HRESULT)
-    set_audio_options : Proc(ISpRecoContext*, SPAUDIOOPTIONS, Guid*, WAVEFORMATEX*, HRESULT)
-    get_audio_options : Proc(ISpRecoContext*, SPAUDIOOPTIONS*, Guid*, WAVEFORMATEX**, HRESULT)
-    deserialize_result : Proc(ISpRecoContext*, SPSERIALIZEDRESULT*, ISpRecoResult*, HRESULT)
-    bookmark : Proc(ISpRecoContext*, SPBOOKMARKOPTIONS, UInt64, LPARAM, HRESULT)
-    set_adaptation_data : Proc(ISpRecoContext*, LibC::LPWSTR, UInt32, HRESULT)
-    pause : Proc(ISpRecoContext*, UInt32, HRESULT)
-    resume : Proc(ISpRecoContext*, UInt32, HRESULT)
-    set_voice : Proc(ISpRecoContext*, ISpVoice, LibC::BOOL, HRESULT)
-    get_voice : Proc(ISpRecoContext*, ISpVoice*, HRESULT)
-    set_voice_purge_event : Proc(ISpRecoContext*, UInt64, HRESULT)
-    get_voice_purge_event : Proc(ISpRecoContext*, UInt64*, HRESULT)
-    set_context_state : Proc(ISpRecoContext*, SPCONTEXTSTATE, HRESULT)
-    get_context_state : Proc(ISpRecoContext*, SPCONTEXTSTATE*, HRESULT)
-  end
-
-  ISpRecoContext_GUID = "f740a62f-7c15-489e-8234-940a33d9272d"
-  IID_ISpRecoContext = LibC::GUID.new(0xf740a62f_u32, 0x7c15_u16, 0x489e_u16, StaticArray[0x82_u8, 0x34_u8, 0x94_u8, 0xa_u8, 0x33_u8, 0xd9_u8, 0x27_u8, 0x2d_u8])
-  struct ISpRecoContext
-    lpVtbl : ISpRecoContextVTbl*
-  end
-
-  struct ISpRecoContext2VTbl
-    query_interface : Proc(ISpRecoContext2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpRecoContext2*, UInt32)
-    release : Proc(ISpRecoContext2*, UInt32)
-    set_grammar_options : Proc(ISpRecoContext2*, UInt32, HRESULT)
-    get_grammar_options : Proc(ISpRecoContext2*, UInt32*, HRESULT)
-    set_adaptation_data2 : Proc(ISpRecoContext2*, LibC::LPWSTR, UInt32, LibC::LPWSTR, UInt32, SPADAPTATIONRELEVANCE, HRESULT)
-  end
-
-  ISpRecoContext2_GUID = "bead311c-52ff-437f-9464-6b21054ca73d"
-  IID_ISpRecoContext2 = LibC::GUID.new(0xbead311c_u32, 0x52ff_u16, 0x437f_u16, StaticArray[0x94_u8, 0x64_u8, 0x6b_u8, 0x21_u8, 0x5_u8, 0x4c_u8, 0xa7_u8, 0x3d_u8])
-  struct ISpRecoContext2
-    lpVtbl : ISpRecoContext2VTbl*
-  end
-
-  struct ISpPropertiesVTbl
-    query_interface : Proc(ISpProperties*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpProperties*, UInt32)
-    release : Proc(ISpProperties*, UInt32)
-    set_property_num : Proc(ISpProperties*, LibC::LPWSTR, Int32, HRESULT)
-    get_property_num : Proc(ISpProperties*, LibC::LPWSTR, Int32*, HRESULT)
-    set_property_string : Proc(ISpProperties*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_property_string : Proc(ISpProperties*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
-  end
-
-  ISpProperties_GUID = "5b4fb971-b115-4de1-ad97-e482e3bf6ee4"
-  IID_ISpProperties = LibC::GUID.new(0x5b4fb971_u32, 0xb115_u16, 0x4de1_u16, StaticArray[0xad_u8, 0x97_u8, 0xe4_u8, 0x82_u8, 0xe3_u8, 0xbf_u8, 0x6e_u8, 0xe4_u8])
-  struct ISpProperties
-    lpVtbl : ISpPropertiesVTbl*
-  end
-
-  struct ISpRecognizerVTbl
-    query_interface : Proc(ISpRecognizer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpRecognizer*, UInt32)
-    release : Proc(ISpRecognizer*, UInt32)
-    set_property_num : Proc(ISpRecognizer*, LibC::LPWSTR, Int32, HRESULT)
-    get_property_num : Proc(ISpRecognizer*, LibC::LPWSTR, Int32*, HRESULT)
-    set_property_string : Proc(ISpRecognizer*, LibC::LPWSTR, LibC::LPWSTR, HRESULT)
-    get_property_string : Proc(ISpRecognizer*, LibC::LPWSTR, LibC::LPWSTR*, HRESULT)
-    set_recognizer : Proc(ISpRecognizer*, ISpObjectToken, HRESULT)
-    get_recognizer : Proc(ISpRecognizer*, ISpObjectToken*, HRESULT)
-    set_input : Proc(ISpRecognizer*, IUnknown, LibC::BOOL, HRESULT)
-    get_input_object_token : Proc(ISpRecognizer*, ISpObjectToken*, HRESULT)
-    get_input_stream : Proc(ISpRecognizer*, ISpStreamFormat*, HRESULT)
-    create_reco_context : Proc(ISpRecognizer*, ISpRecoContext*, HRESULT)
-    get_reco_profile : Proc(ISpRecognizer*, ISpObjectToken*, HRESULT)
-    set_reco_profile : Proc(ISpRecognizer*, ISpObjectToken, HRESULT)
-    is_shared_instance : Proc(ISpRecognizer*, HRESULT)
-    get_reco_state : Proc(ISpRecognizer*, SPRECOSTATE*, HRESULT)
-    set_reco_state : Proc(ISpRecognizer*, SPRECOSTATE, HRESULT)
-    get_status : Proc(ISpRecognizer*, SPRECOGNIZERSTATUS*, HRESULT)
-    get_format : Proc(ISpRecognizer*, SPWAVEFORMATTYPE, Guid*, WAVEFORMATEX**, HRESULT)
-    is_ui_supported : Proc(ISpRecognizer*, LibC::LPWSTR, Void*, UInt32, LibC::BOOL*, HRESULT)
-    display_ui : Proc(ISpRecognizer*, LibC::HANDLE, LibC::LPWSTR, LibC::LPWSTR, Void*, UInt32, HRESULT)
-    emulate_recognition : Proc(ISpRecognizer*, ISpPhrase, HRESULT)
-  end
-
-  ISpRecognizer_GUID = "c2b5f241-daa0-4507-9e16-5a1eaa2b7a5c"
-  IID_ISpRecognizer = LibC::GUID.new(0xc2b5f241_u32, 0xdaa0_u16, 0x4507_u16, StaticArray[0x9e_u8, 0x16_u8, 0x5a_u8, 0x1e_u8, 0xaa_u8, 0x2b_u8, 0x7a_u8, 0x5c_u8])
-  struct ISpRecognizer
-    lpVtbl : ISpRecognizerVTbl*
-  end
-
-  struct ISpSerializeStateVTbl
-    query_interface : Proc(ISpSerializeState*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpSerializeState*, UInt32)
-    release : Proc(ISpSerializeState*, UInt32)
-    get_serialized_state : Proc(ISpSerializeState*, UInt8**, UInt32*, UInt32, HRESULT)
-    set_serialized_state : Proc(ISpSerializeState*, UInt8*, UInt32, UInt32, HRESULT)
-  end
-
-  ISpSerializeState_GUID = "21b501a0-0ec7-46c9-92c3-a2bc784c54b9"
-  IID_ISpSerializeState = LibC::GUID.new(0x21b501a0_u32, 0xec7_u16, 0x46c9_u16, StaticArray[0x92_u8, 0xc3_u8, 0xa2_u8, 0xbc_u8, 0x78_u8, 0x4c_u8, 0x54_u8, 0xb9_u8])
-  struct ISpSerializeState
-    lpVtbl : ISpSerializeStateVTbl*
-  end
-
-  struct ISpRecognizer2VTbl
-    query_interface : Proc(ISpRecognizer2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpRecognizer2*, UInt32)
-    release : Proc(ISpRecognizer2*, UInt32)
-    emulate_recognition_ex : Proc(ISpRecognizer2*, ISpPhrase, UInt32, HRESULT)
-    set_training_state : Proc(ISpRecognizer2*, LibC::BOOL, LibC::BOOL, HRESULT)
-    reset_acoustic_model_adaptation : Proc(ISpRecognizer2*, HRESULT)
-  end
-
-  ISpRecognizer2_GUID = "8fc6d974-c81e-4098-93c5-0147f61ed4d3"
-  IID_ISpRecognizer2 = LibC::GUID.new(0x8fc6d974_u32, 0xc81e_u16, 0x4098_u16, StaticArray[0x93_u8, 0xc5_u8, 0x1_u8, 0x47_u8, 0xf6_u8, 0x1e_u8, 0xd4_u8, 0xd3_u8])
-  struct ISpRecognizer2
-    lpVtbl : ISpRecognizer2VTbl*
-  end
-
-  struct ISpEnginePronunciationVTbl
-    query_interface : Proc(ISpEnginePronunciation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpEnginePronunciation*, UInt32)
-    release : Proc(ISpEnginePronunciation*, UInt32)
-    normalize : Proc(ISpEnginePronunciation*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt16, SPNORMALIZATIONLIST*, HRESULT)
-    get_pronunciations : Proc(ISpEnginePronunciation*, LibC::LPWSTR, LibC::LPWSTR, LibC::LPWSTR, UInt16, SPWORDPRONUNCIATIONLIST*, HRESULT)
-  end
-
-  ISpEnginePronunciation_GUID = "c360ce4b-76d1-4214-ad68-52657d5083da"
-  IID_ISpEnginePronunciation = LibC::GUID.new(0xc360ce4b_u32, 0x76d1_u16, 0x4214_u16, StaticArray[0xad_u8, 0x68_u8, 0x52_u8, 0x65_u8, 0x7d_u8, 0x50_u8, 0x83_u8, 0xda_u8])
-  struct ISpEnginePronunciation
-    lpVtbl : ISpEnginePronunciationVTbl*
-  end
-
-  struct ISpDisplayAlternatesVTbl
-    query_interface : Proc(ISpDisplayAlternates*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpDisplayAlternates*, UInt32)
-    release : Proc(ISpDisplayAlternates*, UInt32)
-    get_display_alternates : Proc(ISpDisplayAlternates*, SPDISPLAYPHRASE*, UInt32, SPDISPLAYPHRASE**, UInt32*, HRESULT)
-    set_full_stop_trail_space : Proc(ISpDisplayAlternates*, UInt32, HRESULT)
-  end
-
-  ISpDisplayAlternates_GUID = "c8d7c7e2-0dde-44b7-afe3-b0c991fbeb5e"
-  IID_ISpDisplayAlternates = LibC::GUID.new(0xc8d7c7e2_u32, 0xdde_u16, 0x44b7_u16, StaticArray[0xaf_u8, 0xe3_u8, 0xb0_u8, 0xc9_u8, 0x91_u8, 0xfb_u8, 0xeb_u8, 0x5e_u8])
-  struct ISpDisplayAlternates
-    lpVtbl : ISpDisplayAlternatesVTbl*
-  end
-
-  struct ISpeechDataKeyVTbl
-    query_interface : Proc(ISpeechDataKey*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechDataKey*, UInt32)
-    release : Proc(ISpeechDataKey*, UInt32)
-    get_type_info_count : Proc(ISpeechDataKey*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechDataKey*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechDataKey*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechDataKey*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    set_binary_value : Proc(ISpeechDataKey*, UInt8*, VARIANT, HRESULT)
-    get_binary_value : Proc(ISpeechDataKey*, UInt8*, VARIANT*, HRESULT)
-    set_string_value : Proc(ISpeechDataKey*, UInt8*, UInt8*, HRESULT)
-    get_string_value : Proc(ISpeechDataKey*, UInt8*, UInt8**, HRESULT)
-    set_long_value : Proc(ISpeechDataKey*, UInt8*, Int32, HRESULT)
-    get_long_value : Proc(ISpeechDataKey*, UInt8*, Int32*, HRESULT)
-    open_key : Proc(ISpeechDataKey*, UInt8*, ISpeechDataKey*, HRESULT)
-    create_key : Proc(ISpeechDataKey*, UInt8*, ISpeechDataKey*, HRESULT)
-    delete_key : Proc(ISpeechDataKey*, UInt8*, HRESULT)
-    delete_value : Proc(ISpeechDataKey*, UInt8*, HRESULT)
-    enum_keys : Proc(ISpeechDataKey*, Int32, UInt8**, HRESULT)
-    enum_values : Proc(ISpeechDataKey*, Int32, UInt8**, HRESULT)
-  end
-
-  ISpeechDataKey_GUID = "ce17c09b-4efa-44d5-a4c9-59d9585ab0cd"
-  IID_ISpeechDataKey = LibC::GUID.new(0xce17c09b_u32, 0x4efa_u16, 0x44d5_u16, StaticArray[0xa4_u8, 0xc9_u8, 0x59_u8, 0xd9_u8, 0x58_u8, 0x5a_u8, 0xb0_u8, 0xcd_u8])
-  struct ISpeechDataKey
-    lpVtbl : ISpeechDataKeyVTbl*
-  end
-
-  struct ISpeechObjectTokenVTbl
-    query_interface : Proc(ISpeechObjectToken*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechObjectToken*, UInt32)
-    release : Proc(ISpeechObjectToken*, UInt32)
-    get_type_info_count : Proc(ISpeechObjectToken*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechObjectToken*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechObjectToken*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechObjectToken*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_id : Proc(ISpeechObjectToken*, UInt8**, HRESULT)
-    get_data_key : Proc(ISpeechObjectToken*, ISpeechDataKey*, HRESULT)
-    get_category : Proc(ISpeechObjectToken*, ISpeechObjectTokenCategory*, HRESULT)
-    get_description : Proc(ISpeechObjectToken*, Int32, UInt8**, HRESULT)
-    set_id : Proc(ISpeechObjectToken*, UInt8*, UInt8*, Int16, HRESULT)
-    get_attribute : Proc(ISpeechObjectToken*, UInt8*, UInt8**, HRESULT)
-    create_instance : Proc(ISpeechObjectToken*, IUnknown, SpeechTokenContext, IUnknown*, HRESULT)
-    remove : Proc(ISpeechObjectToken*, UInt8*, HRESULT)
-    get_storage_file_name : Proc(ISpeechObjectToken*, UInt8*, UInt8*, UInt8*, SpeechTokenShellFolder, UInt8**, HRESULT)
-    remove_storage_file_name : Proc(ISpeechObjectToken*, UInt8*, UInt8*, Int16, HRESULT)
-    is_ui_supported : Proc(ISpeechObjectToken*, UInt8*, VARIANT*, IUnknown, Int16*, HRESULT)
-    display_ui : Proc(ISpeechObjectToken*, Int32, UInt8*, UInt8*, VARIANT*, IUnknown, HRESULT)
-    matches_attributes : Proc(ISpeechObjectToken*, UInt8*, Int16*, HRESULT)
-  end
-
-  ISpeechObjectToken_GUID = "c74a3adc-b727-4500-a84a-b526721c8b8c"
-  IID_ISpeechObjectToken = LibC::GUID.new(0xc74a3adc_u32, 0xb727_u16, 0x4500_u16, StaticArray[0xa8_u8, 0x4a_u8, 0xb5_u8, 0x26_u8, 0x72_u8, 0x1c_u8, 0x8b_u8, 0x8c_u8])
-  struct ISpeechObjectToken
-    lpVtbl : ISpeechObjectTokenVTbl*
-  end
-
-  struct ISpeechObjectTokensVTbl
-    query_interface : Proc(ISpeechObjectTokens*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechObjectTokens*, UInt32)
-    release : Proc(ISpeechObjectTokens*, UInt32)
-    get_type_info_count : Proc(ISpeechObjectTokens*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechObjectTokens*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechObjectTokens*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechObjectTokens*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ISpeechObjectTokens*, Int32*, HRESULT)
-    item : Proc(ISpeechObjectTokens*, Int32, ISpeechObjectToken*, HRESULT)
-    get__new_enum : Proc(ISpeechObjectTokens*, IUnknown*, HRESULT)
-  end
-
-  ISpeechObjectTokens_GUID = "9285b776-2e7b-4bc0-b53e-580eb6fa967f"
-  IID_ISpeechObjectTokens = LibC::GUID.new(0x9285b776_u32, 0x2e7b_u16, 0x4bc0_u16, StaticArray[0xb5_u8, 0x3e_u8, 0x58_u8, 0xe_u8, 0xb6_u8, 0xfa_u8, 0x96_u8, 0x7f_u8])
-  struct ISpeechObjectTokens
-    lpVtbl : ISpeechObjectTokensVTbl*
-  end
-
-  struct ISpeechObjectTokenCategoryVTbl
-    query_interface : Proc(ISpeechObjectTokenCategory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechObjectTokenCategory*, UInt32)
-    release : Proc(ISpeechObjectTokenCategory*, UInt32)
-    get_type_info_count : Proc(ISpeechObjectTokenCategory*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechObjectTokenCategory*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechObjectTokenCategory*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechObjectTokenCategory*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_id : Proc(ISpeechObjectTokenCategory*, UInt8**, HRESULT)
-    put_default : Proc(ISpeechObjectTokenCategory*, UInt8*, HRESULT)
-    get_default : Proc(ISpeechObjectTokenCategory*, UInt8**, HRESULT)
-    set_id : Proc(ISpeechObjectTokenCategory*, UInt8*, Int16, HRESULT)
-    get_data_key : Proc(ISpeechObjectTokenCategory*, SpeechDataKeyLocation, ISpeechDataKey*, HRESULT)
-    enumerate_tokens : Proc(ISpeechObjectTokenCategory*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
-  end
-
-  ISpeechObjectTokenCategory_GUID = "ca7eac50-2d01-4145-86d4-5ae7d70f4469"
-  IID_ISpeechObjectTokenCategory = LibC::GUID.new(0xca7eac50_u32, 0x2d01_u16, 0x4145_u16, StaticArray[0x86_u8, 0xd4_u8, 0x5a_u8, 0xe7_u8, 0xd7_u8, 0xf_u8, 0x44_u8, 0x69_u8])
-  struct ISpeechObjectTokenCategory
-    lpVtbl : ISpeechObjectTokenCategoryVTbl*
-  end
-
-  struct ISpeechAudioBufferInfoVTbl
-    query_interface : Proc(ISpeechAudioBufferInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechAudioBufferInfo*, UInt32)
-    release : Proc(ISpeechAudioBufferInfo*, UInt32)
-    get_type_info_count : Proc(ISpeechAudioBufferInfo*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechAudioBufferInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechAudioBufferInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechAudioBufferInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_min_notification : Proc(ISpeechAudioBufferInfo*, Int32*, HRESULT)
-    put_min_notification : Proc(ISpeechAudioBufferInfo*, Int32, HRESULT)
-    get_buffer_size : Proc(ISpeechAudioBufferInfo*, Int32*, HRESULT)
-    put_buffer_size : Proc(ISpeechAudioBufferInfo*, Int32, HRESULT)
-    get_event_bias : Proc(ISpeechAudioBufferInfo*, Int32*, HRESULT)
-    put_event_bias : Proc(ISpeechAudioBufferInfo*, Int32, HRESULT)
-  end
-
-  ISpeechAudioBufferInfo_GUID = "11b103d8-1142-4edf-a093-82fb3915f8cc"
-  IID_ISpeechAudioBufferInfo = LibC::GUID.new(0x11b103d8_u32, 0x1142_u16, 0x4edf_u16, StaticArray[0xa0_u8, 0x93_u8, 0x82_u8, 0xfb_u8, 0x39_u8, 0x15_u8, 0xf8_u8, 0xcc_u8])
-  struct ISpeechAudioBufferInfo
-    lpVtbl : ISpeechAudioBufferInfoVTbl*
-  end
-
-  struct ISpeechAudioStatusVTbl
-    query_interface : Proc(ISpeechAudioStatus*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechAudioStatus*, UInt32)
-    release : Proc(ISpeechAudioStatus*, UInt32)
-    get_type_info_count : Proc(ISpeechAudioStatus*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechAudioStatus*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechAudioStatus*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechAudioStatus*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_free_buffer_space : Proc(ISpeechAudioStatus*, Int32*, HRESULT)
-    get_non_blocking_io : Proc(ISpeechAudioStatus*, Int32*, HRESULT)
-    get_state : Proc(ISpeechAudioStatus*, SpeechAudioState*, HRESULT)
-    get_current_seek_position : Proc(ISpeechAudioStatus*, VARIANT*, HRESULT)
-    get_current_device_position : Proc(ISpeechAudioStatus*, VARIANT*, HRESULT)
-  end
-
-  ISpeechAudioStatus_GUID = "c62d9c91-7458-47f6-862d-1ef86fb0b278"
-  IID_ISpeechAudioStatus = LibC::GUID.new(0xc62d9c91_u32, 0x7458_u16, 0x47f6_u16, StaticArray[0x86_u8, 0x2d_u8, 0x1e_u8, 0xf8_u8, 0x6f_u8, 0xb0_u8, 0xb2_u8, 0x78_u8])
-  struct ISpeechAudioStatus
-    lpVtbl : ISpeechAudioStatusVTbl*
-  end
-
-  struct ISpeechAudioFormatVTbl
-    query_interface : Proc(ISpeechAudioFormat*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechAudioFormat*, UInt32)
-    release : Proc(ISpeechAudioFormat*, UInt32)
-    get_type_info_count : Proc(ISpeechAudioFormat*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechAudioFormat*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechAudioFormat*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechAudioFormat*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_type : Proc(ISpeechAudioFormat*, SpeechAudioFormatType*, HRESULT)
-    put_type : Proc(ISpeechAudioFormat*, SpeechAudioFormatType, HRESULT)
-    get_guid : Proc(ISpeechAudioFormat*, UInt8**, HRESULT)
-    put_guid : Proc(ISpeechAudioFormat*, UInt8*, HRESULT)
-    get_wave_format_ex : Proc(ISpeechAudioFormat*, ISpeechWaveFormatEx*, HRESULT)
-    set_wave_format_ex : Proc(ISpeechAudioFormat*, ISpeechWaveFormatEx, HRESULT)
-  end
-
-  ISpeechAudioFormat_GUID = "e6e9c590-3e18-40e3-8299-061f98bde7c7"
-  IID_ISpeechAudioFormat = LibC::GUID.new(0xe6e9c590_u32, 0x3e18_u16, 0x40e3_u16, StaticArray[0x82_u8, 0x99_u8, 0x6_u8, 0x1f_u8, 0x98_u8, 0xbd_u8, 0xe7_u8, 0xc7_u8])
-  struct ISpeechAudioFormat
-    lpVtbl : ISpeechAudioFormatVTbl*
-  end
-
-  struct ISpeechWaveFormatExVTbl
-    query_interface : Proc(ISpeechWaveFormatEx*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechWaveFormatEx*, UInt32)
-    release : Proc(ISpeechWaveFormatEx*, UInt32)
-    get_type_info_count : Proc(ISpeechWaveFormatEx*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechWaveFormatEx*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechWaveFormatEx*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechWaveFormatEx*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_format_tag : Proc(ISpeechWaveFormatEx*, Int16*, HRESULT)
-    put_format_tag : Proc(ISpeechWaveFormatEx*, Int16, HRESULT)
-    get_channels : Proc(ISpeechWaveFormatEx*, Int16*, HRESULT)
-    put_channels : Proc(ISpeechWaveFormatEx*, Int16, HRESULT)
-    get_samples_per_sec : Proc(ISpeechWaveFormatEx*, Int32*, HRESULT)
-    put_samples_per_sec : Proc(ISpeechWaveFormatEx*, Int32, HRESULT)
-    get_avg_bytes_per_sec : Proc(ISpeechWaveFormatEx*, Int32*, HRESULT)
-    put_avg_bytes_per_sec : Proc(ISpeechWaveFormatEx*, Int32, HRESULT)
-    get_block_align : Proc(ISpeechWaveFormatEx*, Int16*, HRESULT)
-    put_block_align : Proc(ISpeechWaveFormatEx*, Int16, HRESULT)
-    get_bits_per_sample : Proc(ISpeechWaveFormatEx*, Int16*, HRESULT)
-    put_bits_per_sample : Proc(ISpeechWaveFormatEx*, Int16, HRESULT)
-    get_extra_data : Proc(ISpeechWaveFormatEx*, VARIANT*, HRESULT)
-    put_extra_data : Proc(ISpeechWaveFormatEx*, VARIANT, HRESULT)
-  end
-
-  ISpeechWaveFormatEx_GUID = "7a1ef0d5-1581-4741-88e4-209a49f11a10"
-  IID_ISpeechWaveFormatEx = LibC::GUID.new(0x7a1ef0d5_u32, 0x1581_u16, 0x4741_u16, StaticArray[0x88_u8, 0xe4_u8, 0x20_u8, 0x9a_u8, 0x49_u8, 0xf1_u8, 0x1a_u8, 0x10_u8])
-  struct ISpeechWaveFormatEx
-    lpVtbl : ISpeechWaveFormatExVTbl*
-  end
-
-  struct ISpeechBaseStreamVTbl
-    query_interface : Proc(ISpeechBaseStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechBaseStream*, UInt32)
-    release : Proc(ISpeechBaseStream*, UInt32)
-    get_type_info_count : Proc(ISpeechBaseStream*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechBaseStream*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechBaseStream*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechBaseStream*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_format : Proc(ISpeechBaseStream*, ISpeechAudioFormat*, HRESULT)
-    putref_format : Proc(ISpeechBaseStream*, ISpeechAudioFormat, HRESULT)
-    read : Proc(ISpeechBaseStream*, VARIANT*, Int32, Int32*, HRESULT)
-    write : Proc(ISpeechBaseStream*, VARIANT, Int32*, HRESULT)
-    seek : Proc(ISpeechBaseStream*, VARIANT, SpeechStreamSeekPositionType, VARIANT*, HRESULT)
-  end
-
-  ISpeechBaseStream_GUID = "6450336f-7d49-4ced-8097-49d6dee37294"
-  IID_ISpeechBaseStream = LibC::GUID.new(0x6450336f_u32, 0x7d49_u16, 0x4ced_u16, StaticArray[0x80_u8, 0x97_u8, 0x49_u8, 0xd6_u8, 0xde_u8, 0xe3_u8, 0x72_u8, 0x94_u8])
-  struct ISpeechBaseStream
-    lpVtbl : ISpeechBaseStreamVTbl*
-  end
-
-  struct ISpeechFileStreamVTbl
-    query_interface : Proc(ISpeechFileStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechFileStream*, UInt32)
-    release : Proc(ISpeechFileStream*, UInt32)
-    get_type_info_count : Proc(ISpeechFileStream*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechFileStream*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechFileStream*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechFileStream*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_format : Proc(ISpeechFileStream*, ISpeechAudioFormat*, HRESULT)
-    putref_format : Proc(ISpeechFileStream*, ISpeechAudioFormat, HRESULT)
-    read : Proc(ISpeechFileStream*, VARIANT*, Int32, Int32*, HRESULT)
-    write : Proc(ISpeechFileStream*, VARIANT, Int32*, HRESULT)
-    seek : Proc(ISpeechFileStream*, VARIANT, SpeechStreamSeekPositionType, VARIANT*, HRESULT)
-    open : Proc(ISpeechFileStream*, UInt8*, SpeechStreamFileMode, Int16, HRESULT)
-    close : Proc(ISpeechFileStream*, HRESULT)
-  end
-
-  ISpeechFileStream_GUID = "af67f125-ab39-4e93-b4a2-cc2e66e182a7"
-  IID_ISpeechFileStream = LibC::GUID.new(0xaf67f125_u32, 0xab39_u16, 0x4e93_u16, StaticArray[0xb4_u8, 0xa2_u8, 0xcc_u8, 0x2e_u8, 0x66_u8, 0xe1_u8, 0x82_u8, 0xa7_u8])
-  struct ISpeechFileStream
-    lpVtbl : ISpeechFileStreamVTbl*
-  end
-
-  struct ISpeechMemoryStreamVTbl
-    query_interface : Proc(ISpeechMemoryStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechMemoryStream*, UInt32)
-    release : Proc(ISpeechMemoryStream*, UInt32)
-    get_type_info_count : Proc(ISpeechMemoryStream*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechMemoryStream*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechMemoryStream*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechMemoryStream*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_format : Proc(ISpeechMemoryStream*, ISpeechAudioFormat*, HRESULT)
-    putref_format : Proc(ISpeechMemoryStream*, ISpeechAudioFormat, HRESULT)
-    read : Proc(ISpeechMemoryStream*, VARIANT*, Int32, Int32*, HRESULT)
-    write : Proc(ISpeechMemoryStream*, VARIANT, Int32*, HRESULT)
-    seek : Proc(ISpeechMemoryStream*, VARIANT, SpeechStreamSeekPositionType, VARIANT*, HRESULT)
-    set_data : Proc(ISpeechMemoryStream*, VARIANT, HRESULT)
-    get_data : Proc(ISpeechMemoryStream*, VARIANT*, HRESULT)
-  end
-
-  ISpeechMemoryStream_GUID = "eeb14b68-808b-4abe-a5ea-b51da7588008"
-  IID_ISpeechMemoryStream = LibC::GUID.new(0xeeb14b68_u32, 0x808b_u16, 0x4abe_u16, StaticArray[0xa5_u8, 0xea_u8, 0xb5_u8, 0x1d_u8, 0xa7_u8, 0x58_u8, 0x80_u8, 0x8_u8])
-  struct ISpeechMemoryStream
-    lpVtbl : ISpeechMemoryStreamVTbl*
-  end
-
-  struct ISpeechCustomStreamVTbl
-    query_interface : Proc(ISpeechCustomStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechCustomStream*, UInt32)
-    release : Proc(ISpeechCustomStream*, UInt32)
-    get_type_info_count : Proc(ISpeechCustomStream*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechCustomStream*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechCustomStream*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechCustomStream*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_format : Proc(ISpeechCustomStream*, ISpeechAudioFormat*, HRESULT)
-    putref_format : Proc(ISpeechCustomStream*, ISpeechAudioFormat, HRESULT)
-    read : Proc(ISpeechCustomStream*, VARIANT*, Int32, Int32*, HRESULT)
-    write : Proc(ISpeechCustomStream*, VARIANT, Int32*, HRESULT)
-    seek : Proc(ISpeechCustomStream*, VARIANT, SpeechStreamSeekPositionType, VARIANT*, HRESULT)
-    get_base_stream : Proc(ISpeechCustomStream*, IUnknown*, HRESULT)
-    putref_base_stream : Proc(ISpeechCustomStream*, IUnknown, HRESULT)
-  end
-
-  ISpeechCustomStream_GUID = "1a9e9f4f-104f-4db8-a115-efd7fd0c97ae"
-  IID_ISpeechCustomStream = LibC::GUID.new(0x1a9e9f4f_u32, 0x104f_u16, 0x4db8_u16, StaticArray[0xa1_u8, 0x15_u8, 0xef_u8, 0xd7_u8, 0xfd_u8, 0xc_u8, 0x97_u8, 0xae_u8])
-  struct ISpeechCustomStream
-    lpVtbl : ISpeechCustomStreamVTbl*
-  end
-
-  struct ISpeechAudioVTbl
-    query_interface : Proc(ISpeechAudio*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechAudio*, UInt32)
-    release : Proc(ISpeechAudio*, UInt32)
-    get_type_info_count : Proc(ISpeechAudio*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechAudio*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechAudio*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechAudio*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_format : Proc(ISpeechAudio*, ISpeechAudioFormat*, HRESULT)
-    putref_format : Proc(ISpeechAudio*, ISpeechAudioFormat, HRESULT)
-    read : Proc(ISpeechAudio*, VARIANT*, Int32, Int32*, HRESULT)
-    write : Proc(ISpeechAudio*, VARIANT, Int32*, HRESULT)
-    seek : Proc(ISpeechAudio*, VARIANT, SpeechStreamSeekPositionType, VARIANT*, HRESULT)
-    get_status : Proc(ISpeechAudio*, ISpeechAudioStatus*, HRESULT)
-    get_buffer_info : Proc(ISpeechAudio*, ISpeechAudioBufferInfo*, HRESULT)
-    get_default_format : Proc(ISpeechAudio*, ISpeechAudioFormat*, HRESULT)
-    get_volume : Proc(ISpeechAudio*, Int32*, HRESULT)
-    put_volume : Proc(ISpeechAudio*, Int32, HRESULT)
-    get_buffer_notify_size : Proc(ISpeechAudio*, Int32*, HRESULT)
-    put_buffer_notify_size : Proc(ISpeechAudio*, Int32, HRESULT)
-    get_event_handle : Proc(ISpeechAudio*, Int32*, HRESULT)
-    set_state : Proc(ISpeechAudio*, SpeechAudioState, HRESULT)
-  end
-
-  ISpeechAudio_GUID = "cff8e175-019e-11d3-a08e-00c04f8ef9b5"
-  IID_ISpeechAudio = LibC::GUID.new(0xcff8e175_u32, 0x19e_u16, 0x11d3_u16, StaticArray[0xa0_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf9_u8, 0xb5_u8])
-  struct ISpeechAudio
-    lpVtbl : ISpeechAudioVTbl*
-  end
-
-  struct ISpeechMMSysAudioVTbl
-    query_interface : Proc(ISpeechMMSysAudio*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechMMSysAudio*, UInt32)
-    release : Proc(ISpeechMMSysAudio*, UInt32)
-    get_type_info_count : Proc(ISpeechMMSysAudio*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechMMSysAudio*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechMMSysAudio*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechMMSysAudio*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_format : Proc(ISpeechMMSysAudio*, ISpeechAudioFormat*, HRESULT)
-    putref_format : Proc(ISpeechMMSysAudio*, ISpeechAudioFormat, HRESULT)
-    read : Proc(ISpeechMMSysAudio*, VARIANT*, Int32, Int32*, HRESULT)
-    write : Proc(ISpeechMMSysAudio*, VARIANT, Int32*, HRESULT)
-    seek : Proc(ISpeechMMSysAudio*, VARIANT, SpeechStreamSeekPositionType, VARIANT*, HRESULT)
-    get_status : Proc(ISpeechMMSysAudio*, ISpeechAudioStatus*, HRESULT)
-    get_buffer_info : Proc(ISpeechMMSysAudio*, ISpeechAudioBufferInfo*, HRESULT)
-    get_default_format : Proc(ISpeechMMSysAudio*, ISpeechAudioFormat*, HRESULT)
-    get_volume : Proc(ISpeechMMSysAudio*, Int32*, HRESULT)
-    put_volume : Proc(ISpeechMMSysAudio*, Int32, HRESULT)
-    get_buffer_notify_size : Proc(ISpeechMMSysAudio*, Int32*, HRESULT)
-    put_buffer_notify_size : Proc(ISpeechMMSysAudio*, Int32, HRESULT)
-    get_event_handle : Proc(ISpeechMMSysAudio*, Int32*, HRESULT)
-    set_state : Proc(ISpeechMMSysAudio*, SpeechAudioState, HRESULT)
-    get_device_id : Proc(ISpeechMMSysAudio*, Int32*, HRESULT)
-    put_device_id : Proc(ISpeechMMSysAudio*, Int32, HRESULT)
-    get_line_id : Proc(ISpeechMMSysAudio*, Int32*, HRESULT)
-    put_line_id : Proc(ISpeechMMSysAudio*, Int32, HRESULT)
-    get_mm_handle : Proc(ISpeechMMSysAudio*, Int32*, HRESULT)
-  end
-
-  ISpeechMMSysAudio_GUID = "3c76af6d-1fd7-4831-81d1-3b71d5a13c44"
-  IID_ISpeechMMSysAudio = LibC::GUID.new(0x3c76af6d_u32, 0x1fd7_u16, 0x4831_u16, StaticArray[0x81_u8, 0xd1_u8, 0x3b_u8, 0x71_u8, 0xd5_u8, 0xa1_u8, 0x3c_u8, 0x44_u8])
-  struct ISpeechMMSysAudio
-    lpVtbl : ISpeechMMSysAudioVTbl*
-  end
-
-  struct ISpeechVoiceVTbl
-    query_interface : Proc(ISpeechVoice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechVoice*, UInt32)
-    release : Proc(ISpeechVoice*, UInt32)
-    get_type_info_count : Proc(ISpeechVoice*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechVoice*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechVoice*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechVoice*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_status : Proc(ISpeechVoice*, ISpeechVoiceStatus*, HRESULT)
-    get_voice : Proc(ISpeechVoice*, ISpeechObjectToken*, HRESULT)
-    putref_voice : Proc(ISpeechVoice*, ISpeechObjectToken, HRESULT)
-    get_audio_output : Proc(ISpeechVoice*, ISpeechObjectToken*, HRESULT)
-    putref_audio_output : Proc(ISpeechVoice*, ISpeechObjectToken, HRESULT)
-    get_audio_output_stream : Proc(ISpeechVoice*, ISpeechBaseStream*, HRESULT)
-    putref_audio_output_stream : Proc(ISpeechVoice*, ISpeechBaseStream, HRESULT)
-    get_rate : Proc(ISpeechVoice*, Int32*, HRESULT)
-    put_rate : Proc(ISpeechVoice*, Int32, HRESULT)
-    get_volume : Proc(ISpeechVoice*, Int32*, HRESULT)
-    put_volume : Proc(ISpeechVoice*, Int32, HRESULT)
-    put_allow_audio_output_format_changes_on_next_set : Proc(ISpeechVoice*, Int16, HRESULT)
-    get_allow_audio_output_format_changes_on_next_set : Proc(ISpeechVoice*, Int16*, HRESULT)
-    get_event_interests : Proc(ISpeechVoice*, SpeechVoiceEvents*, HRESULT)
-    put_event_interests : Proc(ISpeechVoice*, SpeechVoiceEvents, HRESULT)
-    put_priority : Proc(ISpeechVoice*, SpeechVoicePriority, HRESULT)
-    get_priority : Proc(ISpeechVoice*, SpeechVoicePriority*, HRESULT)
-    put_alert_boundary : Proc(ISpeechVoice*, SpeechVoiceEvents, HRESULT)
-    get_alert_boundary : Proc(ISpeechVoice*, SpeechVoiceEvents*, HRESULT)
-    put_synchronous_speak_timeout : Proc(ISpeechVoice*, Int32, HRESULT)
-    get_synchronous_speak_timeout : Proc(ISpeechVoice*, Int32*, HRESULT)
-    speak : Proc(ISpeechVoice*, UInt8*, SpeechVoiceSpeakFlags, Int32*, HRESULT)
-    speak_stream : Proc(ISpeechVoice*, ISpeechBaseStream, SpeechVoiceSpeakFlags, Int32*, HRESULT)
-    pause : Proc(ISpeechVoice*, HRESULT)
-    resume : Proc(ISpeechVoice*, HRESULT)
-    skip : Proc(ISpeechVoice*, UInt8*, Int32, Int32*, HRESULT)
-    get_voices : Proc(ISpeechVoice*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
-    get_audio_outputs : Proc(ISpeechVoice*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
-    wait_until_done : Proc(ISpeechVoice*, Int32, Int16*, HRESULT)
-    speak_complete_event : Proc(ISpeechVoice*, Int32*, HRESULT)
-    is_ui_supported : Proc(ISpeechVoice*, UInt8*, VARIANT*, Int16*, HRESULT)
-    display_ui : Proc(ISpeechVoice*, Int32, UInt8*, UInt8*, VARIANT*, HRESULT)
-  end
-
-  ISpeechVoice_GUID = "269316d8-57bd-11d2-9eee-00c04f797396"
-  IID_ISpeechVoice = LibC::GUID.new(0x269316d8_u32, 0x57bd_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xee_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
-  struct ISpeechVoice
-    lpVtbl : ISpeechVoiceVTbl*
-  end
-
-  struct ISpeechVoiceStatusVTbl
-    query_interface : Proc(ISpeechVoiceStatus*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechVoiceStatus*, UInt32)
-    release : Proc(ISpeechVoiceStatus*, UInt32)
-    get_type_info_count : Proc(ISpeechVoiceStatus*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechVoiceStatus*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechVoiceStatus*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechVoiceStatus*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_current_stream_number : Proc(ISpeechVoiceStatus*, Int32*, HRESULT)
-    get_last_stream_number_queued : Proc(ISpeechVoiceStatus*, Int32*, HRESULT)
-    get_last_h_result : Proc(ISpeechVoiceStatus*, Int32*, HRESULT)
-    get_running_state : Proc(ISpeechVoiceStatus*, SpeechRunState*, HRESULT)
-    get_input_word_position : Proc(ISpeechVoiceStatus*, Int32*, HRESULT)
-    get_input_word_length : Proc(ISpeechVoiceStatus*, Int32*, HRESULT)
-    get_input_sentence_position : Proc(ISpeechVoiceStatus*, Int32*, HRESULT)
-    get_input_sentence_length : Proc(ISpeechVoiceStatus*, Int32*, HRESULT)
-    get_last_bookmark : Proc(ISpeechVoiceStatus*, UInt8**, HRESULT)
-    get_last_bookmark_id : Proc(ISpeechVoiceStatus*, Int32*, HRESULT)
-    get_phoneme_id : Proc(ISpeechVoiceStatus*, Int16*, HRESULT)
-    get_viseme_id : Proc(ISpeechVoiceStatus*, Int16*, HRESULT)
-  end
-
-  ISpeechVoiceStatus_GUID = "8be47b07-57f6-11d2-9eee-00c04f797396"
-  IID_ISpeechVoiceStatus = LibC::GUID.new(0x8be47b07_u32, 0x57f6_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xee_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
-  struct ISpeechVoiceStatus
-    lpVtbl : ISpeechVoiceStatusVTbl*
-  end
-
-  struct IISpeechVoiceEventsVTbl
-    query_interface : Proc(IISpeechVoiceEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IISpeechVoiceEvents*, UInt32)
-    release : Proc(IISpeechVoiceEvents*, UInt32)
-    get_type_info_count : Proc(IISpeechVoiceEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IISpeechVoiceEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IISpeechVoiceEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IISpeechVoiceEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-  end
-
-  IISpeechVoiceEvents_GUID = "a372acd1-3bef-4bbd-8ffb-cb3e2b416af8"
-  IID_IISpeechVoiceEvents = LibC::GUID.new(0xa372acd1_u32, 0x3bef_u16, 0x4bbd_u16, StaticArray[0x8f_u8, 0xfb_u8, 0xcb_u8, 0x3e_u8, 0x2b_u8, 0x41_u8, 0x6a_u8, 0xf8_u8])
-  struct IISpeechVoiceEvents
-    lpVtbl : IISpeechVoiceEventsVTbl*
-  end
-
-  struct ISpeechRecognizerVTbl
-    query_interface : Proc(ISpeechRecognizer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechRecognizer*, UInt32)
-    release : Proc(ISpeechRecognizer*, UInt32)
-    get_type_info_count : Proc(ISpeechRecognizer*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechRecognizer*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechRecognizer*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechRecognizer*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    putref_recognizer : Proc(ISpeechRecognizer*, ISpeechObjectToken, HRESULT)
-    get_recognizer : Proc(ISpeechRecognizer*, ISpeechObjectToken*, HRESULT)
-    put_allow_audio_input_format_changes_on_next_set : Proc(ISpeechRecognizer*, Int16, HRESULT)
-    get_allow_audio_input_format_changes_on_next_set : Proc(ISpeechRecognizer*, Int16*, HRESULT)
-    putref_audio_input : Proc(ISpeechRecognizer*, ISpeechObjectToken, HRESULT)
-    get_audio_input : Proc(ISpeechRecognizer*, ISpeechObjectToken*, HRESULT)
-    putref_audio_input_stream : Proc(ISpeechRecognizer*, ISpeechBaseStream, HRESULT)
-    get_audio_input_stream : Proc(ISpeechRecognizer*, ISpeechBaseStream*, HRESULT)
-    get_is_shared : Proc(ISpeechRecognizer*, Int16*, HRESULT)
-    put_state : Proc(ISpeechRecognizer*, SpeechRecognizerState, HRESULT)
-    get_state : Proc(ISpeechRecognizer*, SpeechRecognizerState*, HRESULT)
-    get_status : Proc(ISpeechRecognizer*, ISpeechRecognizerStatus*, HRESULT)
-    putref_profile : Proc(ISpeechRecognizer*, ISpeechObjectToken, HRESULT)
-    get_profile : Proc(ISpeechRecognizer*, ISpeechObjectToken*, HRESULT)
-    emulate_recognition : Proc(ISpeechRecognizer*, VARIANT, VARIANT*, Int32, HRESULT)
-    create_reco_context : Proc(ISpeechRecognizer*, ISpeechRecoContext*, HRESULT)
-    get_format : Proc(ISpeechRecognizer*, SpeechFormatType, ISpeechAudioFormat*, HRESULT)
-    set_property_number : Proc(ISpeechRecognizer*, UInt8*, Int32, Int16*, HRESULT)
-    get_property_number : Proc(ISpeechRecognizer*, UInt8*, Int32*, Int16*, HRESULT)
-    set_property_string : Proc(ISpeechRecognizer*, UInt8*, UInt8*, Int16*, HRESULT)
-    get_property_string : Proc(ISpeechRecognizer*, UInt8*, UInt8**, Int16*, HRESULT)
-    is_ui_supported : Proc(ISpeechRecognizer*, UInt8*, VARIANT*, Int16*, HRESULT)
-    display_ui : Proc(ISpeechRecognizer*, Int32, UInt8*, UInt8*, VARIANT*, HRESULT)
-    get_recognizers : Proc(ISpeechRecognizer*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
-    get_audio_inputs : Proc(ISpeechRecognizer*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
-    get_profiles : Proc(ISpeechRecognizer*, UInt8*, UInt8*, ISpeechObjectTokens*, HRESULT)
-  end
-
-  ISpeechRecognizer_GUID = "2d5f1c0c-bd75-4b08-9478-3b11fea2586c"
-  IID_ISpeechRecognizer = LibC::GUID.new(0x2d5f1c0c_u32, 0xbd75_u16, 0x4b08_u16, StaticArray[0x94_u8, 0x78_u8, 0x3b_u8, 0x11_u8, 0xfe_u8, 0xa2_u8, 0x58_u8, 0x6c_u8])
-  struct ISpeechRecognizer
-    lpVtbl : ISpeechRecognizerVTbl*
-  end
-
-  struct ISpeechRecognizerStatusVTbl
-    query_interface : Proc(ISpeechRecognizerStatus*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechRecognizerStatus*, UInt32)
-    release : Proc(ISpeechRecognizerStatus*, UInt32)
-    get_type_info_count : Proc(ISpeechRecognizerStatus*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechRecognizerStatus*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechRecognizerStatus*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechRecognizerStatus*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_audio_status : Proc(ISpeechRecognizerStatus*, ISpeechAudioStatus*, HRESULT)
-    get_current_stream_position : Proc(ISpeechRecognizerStatus*, VARIANT*, HRESULT)
-    get_current_stream_number : Proc(ISpeechRecognizerStatus*, Int32*, HRESULT)
-    get_number_of_active_rules : Proc(ISpeechRecognizerStatus*, Int32*, HRESULT)
-    get_clsid_engine : Proc(ISpeechRecognizerStatus*, UInt8**, HRESULT)
-    get_supported_languages : Proc(ISpeechRecognizerStatus*, VARIANT*, HRESULT)
-  end
-
-  ISpeechRecognizerStatus_GUID = "bff9e781-53ec-484e-bb8a-0e1b5551e35c"
-  IID_ISpeechRecognizerStatus = LibC::GUID.new(0xbff9e781_u32, 0x53ec_u16, 0x484e_u16, StaticArray[0xbb_u8, 0x8a_u8, 0xe_u8, 0x1b_u8, 0x55_u8, 0x51_u8, 0xe3_u8, 0x5c_u8])
-  struct ISpeechRecognizerStatus
-    lpVtbl : ISpeechRecognizerStatusVTbl*
-  end
-
-  struct ISpeechRecoContextVTbl
-    query_interface : Proc(ISpeechRecoContext*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechRecoContext*, UInt32)
-    release : Proc(ISpeechRecoContext*, UInt32)
-    get_type_info_count : Proc(ISpeechRecoContext*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechRecoContext*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechRecoContext*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechRecoContext*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_recognizer : Proc(ISpeechRecoContext*, ISpeechRecognizer*, HRESULT)
-    get_audio_input_interference_status : Proc(ISpeechRecoContext*, SpeechInterference*, HRESULT)
-    get_requested_ui_type : Proc(ISpeechRecoContext*, UInt8**, HRESULT)
-    putref_voice : Proc(ISpeechRecoContext*, ISpeechVoice, HRESULT)
-    get_voice : Proc(ISpeechRecoContext*, ISpeechVoice*, HRESULT)
-    put_allow_voice_format_matching_on_next_set : Proc(ISpeechRecoContext*, Int16, HRESULT)
-    get_allow_voice_format_matching_on_next_set : Proc(ISpeechRecoContext*, Int16*, HRESULT)
-    put_voice_purge_event : Proc(ISpeechRecoContext*, SpeechRecoEvents, HRESULT)
-    get_voice_purge_event : Proc(ISpeechRecoContext*, SpeechRecoEvents*, HRESULT)
-    put_event_interests : Proc(ISpeechRecoContext*, SpeechRecoEvents, HRESULT)
-    get_event_interests : Proc(ISpeechRecoContext*, SpeechRecoEvents*, HRESULT)
-    put_cmd_max_alternates : Proc(ISpeechRecoContext*, Int32, HRESULT)
-    get_cmd_max_alternates : Proc(ISpeechRecoContext*, Int32*, HRESULT)
-    put_state : Proc(ISpeechRecoContext*, SpeechRecoContextState, HRESULT)
-    get_state : Proc(ISpeechRecoContext*, SpeechRecoContextState*, HRESULT)
-    put_retained_audio : Proc(ISpeechRecoContext*, SpeechRetainedAudioOptions, HRESULT)
-    get_retained_audio : Proc(ISpeechRecoContext*, SpeechRetainedAudioOptions*, HRESULT)
-    putref_retained_audio_format : Proc(ISpeechRecoContext*, ISpeechAudioFormat, HRESULT)
-    get_retained_audio_format : Proc(ISpeechRecoContext*, ISpeechAudioFormat*, HRESULT)
-    pause : Proc(ISpeechRecoContext*, HRESULT)
-    resume : Proc(ISpeechRecoContext*, HRESULT)
-    create_grammar : Proc(ISpeechRecoContext*, VARIANT, ISpeechRecoGrammar*, HRESULT)
-    create_result_from_memory : Proc(ISpeechRecoContext*, VARIANT*, ISpeechRecoResult*, HRESULT)
-    bookmark : Proc(ISpeechRecoContext*, SpeechBookmarkOptions, VARIANT, VARIANT, HRESULT)
-    set_adaptation_data : Proc(ISpeechRecoContext*, UInt8*, HRESULT)
-  end
-
-  ISpeechRecoContext_GUID = "580aa49d-7e1e-4809-b8e2-57da806104b8"
-  IID_ISpeechRecoContext = LibC::GUID.new(0x580aa49d_u32, 0x7e1e_u16, 0x4809_u16, StaticArray[0xb8_u8, 0xe2_u8, 0x57_u8, 0xda_u8, 0x80_u8, 0x61_u8, 0x4_u8, 0xb8_u8])
-  struct ISpeechRecoContext
-    lpVtbl : ISpeechRecoContextVTbl*
-  end
-
-  struct ISpeechRecoGrammarVTbl
-    query_interface : Proc(ISpeechRecoGrammar*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechRecoGrammar*, UInt32)
-    release : Proc(ISpeechRecoGrammar*, UInt32)
-    get_type_info_count : Proc(ISpeechRecoGrammar*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechRecoGrammar*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechRecoGrammar*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechRecoGrammar*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_id : Proc(ISpeechRecoGrammar*, VARIANT*, HRESULT)
-    get_reco_context : Proc(ISpeechRecoGrammar*, ISpeechRecoContext*, HRESULT)
-    put_state : Proc(ISpeechRecoGrammar*, SpeechGrammarState, HRESULT)
-    get_state : Proc(ISpeechRecoGrammar*, SpeechGrammarState*, HRESULT)
-    get_rules : Proc(ISpeechRecoGrammar*, ISpeechGrammarRules*, HRESULT)
-    reset : Proc(ISpeechRecoGrammar*, Int32, HRESULT)
-    cmd_load_from_file : Proc(ISpeechRecoGrammar*, UInt8*, SpeechLoadOption, HRESULT)
-    cmd_load_from_object : Proc(ISpeechRecoGrammar*, UInt8*, UInt8*, SpeechLoadOption, HRESULT)
-    cmd_load_from_resource : Proc(ISpeechRecoGrammar*, Int32, VARIANT, VARIANT, Int32, SpeechLoadOption, HRESULT)
-    cmd_load_from_memory : Proc(ISpeechRecoGrammar*, VARIANT, SpeechLoadOption, HRESULT)
-    cmd_load_from_proprietary_grammar : Proc(ISpeechRecoGrammar*, UInt8*, UInt8*, VARIANT, SpeechLoadOption, HRESULT)
-    cmd_set_rule_state : Proc(ISpeechRecoGrammar*, UInt8*, SpeechRuleState, HRESULT)
-    cmd_set_rule_id_state : Proc(ISpeechRecoGrammar*, Int32, SpeechRuleState, HRESULT)
-    dictation_load : Proc(ISpeechRecoGrammar*, UInt8*, SpeechLoadOption, HRESULT)
-    dictation_unload : Proc(ISpeechRecoGrammar*, HRESULT)
-    dictation_set_state : Proc(ISpeechRecoGrammar*, SpeechRuleState, HRESULT)
-    set_word_sequence_data : Proc(ISpeechRecoGrammar*, UInt8*, Int32, ISpeechTextSelectionInformation, HRESULT)
-    set_text_selection : Proc(ISpeechRecoGrammar*, ISpeechTextSelectionInformation, HRESULT)
-    is_pronounceable : Proc(ISpeechRecoGrammar*, UInt8*, SpeechWordPronounceable*, HRESULT)
-  end
-
-  ISpeechRecoGrammar_GUID = "b6d6f79f-2158-4e50-b5bc-9a9ccd852a09"
-  IID_ISpeechRecoGrammar = LibC::GUID.new(0xb6d6f79f_u32, 0x2158_u16, 0x4e50_u16, StaticArray[0xb5_u8, 0xbc_u8, 0x9a_u8, 0x9c_u8, 0xcd_u8, 0x85_u8, 0x2a_u8, 0x9_u8])
-  struct ISpeechRecoGrammar
-    lpVtbl : ISpeechRecoGrammarVTbl*
-  end
-
-  struct IISpeechRecoContextEventsVTbl
-    query_interface : Proc(IISpeechRecoContextEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IISpeechRecoContextEvents*, UInt32)
-    release : Proc(IISpeechRecoContextEvents*, UInt32)
-    get_type_info_count : Proc(IISpeechRecoContextEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IISpeechRecoContextEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IISpeechRecoContextEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IISpeechRecoContextEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-  end
-
-  IISpeechRecoContextEvents_GUID = "7b8fcb42-0e9d-4f00-a048-7b04d6179d3d"
-  IID_IISpeechRecoContextEvents = LibC::GUID.new(0x7b8fcb42_u32, 0xe9d_u16, 0x4f00_u16, StaticArray[0xa0_u8, 0x48_u8, 0x7b_u8, 0x4_u8, 0xd6_u8, 0x17_u8, 0x9d_u8, 0x3d_u8])
-  struct IISpeechRecoContextEvents
-    lpVtbl : IISpeechRecoContextEventsVTbl*
-  end
-
-  struct ISpeechGrammarRuleVTbl
-    query_interface : Proc(ISpeechGrammarRule*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechGrammarRule*, UInt32)
-    release : Proc(ISpeechGrammarRule*, UInt32)
-    get_type_info_count : Proc(ISpeechGrammarRule*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechGrammarRule*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechGrammarRule*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechGrammarRule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_attributes : Proc(ISpeechGrammarRule*, SpeechRuleAttributes*, HRESULT)
-    get_initial_state : Proc(ISpeechGrammarRule*, ISpeechGrammarRuleState*, HRESULT)
-    get_name : Proc(ISpeechGrammarRule*, UInt8**, HRESULT)
-    get_id : Proc(ISpeechGrammarRule*, Int32*, HRESULT)
-    clear : Proc(ISpeechGrammarRule*, HRESULT)
-    add_resource : Proc(ISpeechGrammarRule*, UInt8*, UInt8*, HRESULT)
-    add_state : Proc(ISpeechGrammarRule*, ISpeechGrammarRuleState*, HRESULT)
-  end
-
-  ISpeechGrammarRule_GUID = "afe719cf-5dd1-44f2-999c-7a399f1cfccc"
-  IID_ISpeechGrammarRule = LibC::GUID.new(0xafe719cf_u32, 0x5dd1_u16, 0x44f2_u16, StaticArray[0x99_u8, 0x9c_u8, 0x7a_u8, 0x39_u8, 0x9f_u8, 0x1c_u8, 0xfc_u8, 0xcc_u8])
-  struct ISpeechGrammarRule
-    lpVtbl : ISpeechGrammarRuleVTbl*
-  end
-
-  struct ISpeechGrammarRulesVTbl
-    query_interface : Proc(ISpeechGrammarRules*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechGrammarRules*, UInt32)
-    release : Proc(ISpeechGrammarRules*, UInt32)
-    get_type_info_count : Proc(ISpeechGrammarRules*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechGrammarRules*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechGrammarRules*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechGrammarRules*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ISpeechGrammarRules*, Int32*, HRESULT)
-    find_rule : Proc(ISpeechGrammarRules*, VARIANT, ISpeechGrammarRule*, HRESULT)
-    item : Proc(ISpeechGrammarRules*, Int32, ISpeechGrammarRule*, HRESULT)
-    get__new_enum : Proc(ISpeechGrammarRules*, IUnknown*, HRESULT)
-    get_dynamic : Proc(ISpeechGrammarRules*, Int16*, HRESULT)
-    add : Proc(ISpeechGrammarRules*, UInt8*, SpeechRuleAttributes, Int32, ISpeechGrammarRule*, HRESULT)
-    commit : Proc(ISpeechGrammarRules*, HRESULT)
-    commit_and_save : Proc(ISpeechGrammarRules*, UInt8**, VARIANT*, HRESULT)
-  end
-
-  ISpeechGrammarRules_GUID = "6ffa3b44-fc2d-40d1-8afc-32911c7f1ad1"
-  IID_ISpeechGrammarRules = LibC::GUID.new(0x6ffa3b44_u32, 0xfc2d_u16, 0x40d1_u16, StaticArray[0x8a_u8, 0xfc_u8, 0x32_u8, 0x91_u8, 0x1c_u8, 0x7f_u8, 0x1a_u8, 0xd1_u8])
-  struct ISpeechGrammarRules
-    lpVtbl : ISpeechGrammarRulesVTbl*
-  end
-
-  struct ISpeechGrammarRuleStateVTbl
-    query_interface : Proc(ISpeechGrammarRuleState*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechGrammarRuleState*, UInt32)
-    release : Proc(ISpeechGrammarRuleState*, UInt32)
-    get_type_info_count : Proc(ISpeechGrammarRuleState*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechGrammarRuleState*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechGrammarRuleState*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechGrammarRuleState*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_rule : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRule*, HRESULT)
-    get_transitions : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRuleStateTransitions*, HRESULT)
-    add_word_transition : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRuleState, UInt8*, UInt8*, SpeechGrammarWordType, UInt8*, Int32, VARIANT*, Float32, HRESULT)
-    add_rule_transition : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRuleState, ISpeechGrammarRule, UInt8*, Int32, VARIANT*, Float32, HRESULT)
-    add_special_transition : Proc(ISpeechGrammarRuleState*, ISpeechGrammarRuleState, SpeechSpecialTransitionType, UInt8*, Int32, VARIANT*, Float32, HRESULT)
-  end
-
-  ISpeechGrammarRuleState_GUID = "d4286f2c-ee67-45ae-b928-28d695362eda"
-  IID_ISpeechGrammarRuleState = LibC::GUID.new(0xd4286f2c_u32, 0xee67_u16, 0x45ae_u16, StaticArray[0xb9_u8, 0x28_u8, 0x28_u8, 0xd6_u8, 0x95_u8, 0x36_u8, 0x2e_u8, 0xda_u8])
-  struct ISpeechGrammarRuleState
-    lpVtbl : ISpeechGrammarRuleStateVTbl*
-  end
-
-  struct ISpeechGrammarRuleStateTransitionVTbl
-    query_interface : Proc(ISpeechGrammarRuleStateTransition*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechGrammarRuleStateTransition*, UInt32)
-    release : Proc(ISpeechGrammarRuleStateTransition*, UInt32)
-    get_type_info_count : Proc(ISpeechGrammarRuleStateTransition*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechGrammarRuleStateTransition*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechGrammarRuleStateTransition*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechGrammarRuleStateTransition*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_type : Proc(ISpeechGrammarRuleStateTransition*, SpeechGrammarRuleStateTransitionType*, HRESULT)
-    get_text : Proc(ISpeechGrammarRuleStateTransition*, UInt8**, HRESULT)
-    get_rule : Proc(ISpeechGrammarRuleStateTransition*, ISpeechGrammarRule*, HRESULT)
-    get_weight : Proc(ISpeechGrammarRuleStateTransition*, VARIANT*, HRESULT)
-    get_property_name : Proc(ISpeechGrammarRuleStateTransition*, UInt8**, HRESULT)
-    get_property_id : Proc(ISpeechGrammarRuleStateTransition*, Int32*, HRESULT)
-    get_property_value : Proc(ISpeechGrammarRuleStateTransition*, VARIANT*, HRESULT)
-    get_next_state : Proc(ISpeechGrammarRuleStateTransition*, ISpeechGrammarRuleState*, HRESULT)
-  end
-
-  ISpeechGrammarRuleStateTransition_GUID = "cafd1db1-41d1-4a06-9863-e2e81da17a9a"
-  IID_ISpeechGrammarRuleStateTransition = LibC::GUID.new(0xcafd1db1_u32, 0x41d1_u16, 0x4a06_u16, StaticArray[0x98_u8, 0x63_u8, 0xe2_u8, 0xe8_u8, 0x1d_u8, 0xa1_u8, 0x7a_u8, 0x9a_u8])
-  struct ISpeechGrammarRuleStateTransition
-    lpVtbl : ISpeechGrammarRuleStateTransitionVTbl*
-  end
-
-  struct ISpeechGrammarRuleStateTransitionsVTbl
-    query_interface : Proc(ISpeechGrammarRuleStateTransitions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechGrammarRuleStateTransitions*, UInt32)
-    release : Proc(ISpeechGrammarRuleStateTransitions*, UInt32)
-    get_type_info_count : Proc(ISpeechGrammarRuleStateTransitions*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechGrammarRuleStateTransitions*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechGrammarRuleStateTransitions*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechGrammarRuleStateTransitions*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ISpeechGrammarRuleStateTransitions*, Int32*, HRESULT)
-    item : Proc(ISpeechGrammarRuleStateTransitions*, Int32, ISpeechGrammarRuleStateTransition*, HRESULT)
-    get__new_enum : Proc(ISpeechGrammarRuleStateTransitions*, IUnknown*, HRESULT)
-  end
-
-  ISpeechGrammarRuleStateTransitions_GUID = "eabce657-75bc-44a2-aa7f-c56476742963"
-  IID_ISpeechGrammarRuleStateTransitions = LibC::GUID.new(0xeabce657_u32, 0x75bc_u16, 0x44a2_u16, StaticArray[0xaa_u8, 0x7f_u8, 0xc5_u8, 0x64_u8, 0x76_u8, 0x74_u8, 0x29_u8, 0x63_u8])
-  struct ISpeechGrammarRuleStateTransitions
-    lpVtbl : ISpeechGrammarRuleStateTransitionsVTbl*
-  end
-
-  struct ISpeechTextSelectionInformationVTbl
-    query_interface : Proc(ISpeechTextSelectionInformation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechTextSelectionInformation*, UInt32)
-    release : Proc(ISpeechTextSelectionInformation*, UInt32)
-    get_type_info_count : Proc(ISpeechTextSelectionInformation*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechTextSelectionInformation*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechTextSelectionInformation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechTextSelectionInformation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    put_active_offset : Proc(ISpeechTextSelectionInformation*, Int32, HRESULT)
-    get_active_offset : Proc(ISpeechTextSelectionInformation*, Int32*, HRESULT)
-    put_active_length : Proc(ISpeechTextSelectionInformation*, Int32, HRESULT)
-    get_active_length : Proc(ISpeechTextSelectionInformation*, Int32*, HRESULT)
-    put_selection_offset : Proc(ISpeechTextSelectionInformation*, Int32, HRESULT)
-    get_selection_offset : Proc(ISpeechTextSelectionInformation*, Int32*, HRESULT)
-    put_selection_length : Proc(ISpeechTextSelectionInformation*, Int32, HRESULT)
-    get_selection_length : Proc(ISpeechTextSelectionInformation*, Int32*, HRESULT)
-  end
-
-  ISpeechTextSelectionInformation_GUID = "3b9c7e7a-6eee-4ded-9092-11657279adbe"
-  IID_ISpeechTextSelectionInformation = LibC::GUID.new(0x3b9c7e7a_u32, 0x6eee_u16, 0x4ded_u16, StaticArray[0x90_u8, 0x92_u8, 0x11_u8, 0x65_u8, 0x72_u8, 0x79_u8, 0xad_u8, 0xbe_u8])
-  struct ISpeechTextSelectionInformation
-    lpVtbl : ISpeechTextSelectionInformationVTbl*
-  end
-
-  struct ISpeechRecoResultVTbl
-    query_interface : Proc(ISpeechRecoResult*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechRecoResult*, UInt32)
-    release : Proc(ISpeechRecoResult*, UInt32)
-    get_type_info_count : Proc(ISpeechRecoResult*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechRecoResult*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechRecoResult*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechRecoResult*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_reco_context : Proc(ISpeechRecoResult*, ISpeechRecoContext*, HRESULT)
-    get_times : Proc(ISpeechRecoResult*, ISpeechRecoResultTimes*, HRESULT)
-    putref_audio_format : Proc(ISpeechRecoResult*, ISpeechAudioFormat, HRESULT)
-    get_audio_format : Proc(ISpeechRecoResult*, ISpeechAudioFormat*, HRESULT)
-    get_phrase_info : Proc(ISpeechRecoResult*, ISpeechPhraseInfo*, HRESULT)
-    alternates : Proc(ISpeechRecoResult*, Int32, Int32, Int32, ISpeechPhraseAlternates*, HRESULT)
-    audio : Proc(ISpeechRecoResult*, Int32, Int32, ISpeechMemoryStream*, HRESULT)
-    speak_audio : Proc(ISpeechRecoResult*, Int32, Int32, SpeechVoiceSpeakFlags, Int32*, HRESULT)
-    save_to_memory : Proc(ISpeechRecoResult*, VARIANT*, HRESULT)
-    discard_result_info : Proc(ISpeechRecoResult*, SpeechDiscardType, HRESULT)
-  end
-
-  ISpeechRecoResult_GUID = "ed2879cf-ced9-4ee6-a534-de0191d5468d"
-  IID_ISpeechRecoResult = LibC::GUID.new(0xed2879cf_u32, 0xced9_u16, 0x4ee6_u16, StaticArray[0xa5_u8, 0x34_u8, 0xde_u8, 0x1_u8, 0x91_u8, 0xd5_u8, 0x46_u8, 0x8d_u8])
-  struct ISpeechRecoResult
-    lpVtbl : ISpeechRecoResultVTbl*
-  end
-
-  struct ISpeechRecoResult2VTbl
-    query_interface : Proc(ISpeechRecoResult2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechRecoResult2*, UInt32)
-    release : Proc(ISpeechRecoResult2*, UInt32)
-    get_type_info_count : Proc(ISpeechRecoResult2*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechRecoResult2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechRecoResult2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechRecoResult2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_reco_context : Proc(ISpeechRecoResult2*, ISpeechRecoContext*, HRESULT)
-    get_times : Proc(ISpeechRecoResult2*, ISpeechRecoResultTimes*, HRESULT)
-    putref_audio_format : Proc(ISpeechRecoResult2*, ISpeechAudioFormat, HRESULT)
-    get_audio_format : Proc(ISpeechRecoResult2*, ISpeechAudioFormat*, HRESULT)
-    get_phrase_info : Proc(ISpeechRecoResult2*, ISpeechPhraseInfo*, HRESULT)
-    alternates : Proc(ISpeechRecoResult2*, Int32, Int32, Int32, ISpeechPhraseAlternates*, HRESULT)
-    audio : Proc(ISpeechRecoResult2*, Int32, Int32, ISpeechMemoryStream*, HRESULT)
-    speak_audio : Proc(ISpeechRecoResult2*, Int32, Int32, SpeechVoiceSpeakFlags, Int32*, HRESULT)
-    save_to_memory : Proc(ISpeechRecoResult2*, VARIANT*, HRESULT)
-    discard_result_info : Proc(ISpeechRecoResult2*, SpeechDiscardType, HRESULT)
-    set_text_feedback : Proc(ISpeechRecoResult2*, UInt8*, Int16, HRESULT)
-  end
-
-  ISpeechRecoResult2_GUID = "8e0a246d-d3c8-45de-8657-04290c458c3c"
-  IID_ISpeechRecoResult2 = LibC::GUID.new(0x8e0a246d_u32, 0xd3c8_u16, 0x45de_u16, StaticArray[0x86_u8, 0x57_u8, 0x4_u8, 0x29_u8, 0xc_u8, 0x45_u8, 0x8c_u8, 0x3c_u8])
-  struct ISpeechRecoResult2
-    lpVtbl : ISpeechRecoResult2VTbl*
-  end
-
-  struct ISpeechRecoResultTimesVTbl
-    query_interface : Proc(ISpeechRecoResultTimes*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechRecoResultTimes*, UInt32)
-    release : Proc(ISpeechRecoResultTimes*, UInt32)
-    get_type_info_count : Proc(ISpeechRecoResultTimes*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechRecoResultTimes*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechRecoResultTimes*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechRecoResultTimes*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_stream_time : Proc(ISpeechRecoResultTimes*, VARIANT*, HRESULT)
-    get_length : Proc(ISpeechRecoResultTimes*, VARIANT*, HRESULT)
-    get_tick_count : Proc(ISpeechRecoResultTimes*, Int32*, HRESULT)
-    get_offset_from_start : Proc(ISpeechRecoResultTimes*, VARIANT*, HRESULT)
-  end
-
-  ISpeechRecoResultTimes_GUID = "62b3b8fb-f6e7-41be-bdcb-056b1c29efc0"
-  IID_ISpeechRecoResultTimes = LibC::GUID.new(0x62b3b8fb_u32, 0xf6e7_u16, 0x41be_u16, StaticArray[0xbd_u8, 0xcb_u8, 0x5_u8, 0x6b_u8, 0x1c_u8, 0x29_u8, 0xef_u8, 0xc0_u8])
-  struct ISpeechRecoResultTimes
-    lpVtbl : ISpeechRecoResultTimesVTbl*
-  end
-
-  struct ISpeechPhraseAlternateVTbl
-    query_interface : Proc(ISpeechPhraseAlternate*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechPhraseAlternate*, UInt32)
-    release : Proc(ISpeechPhraseAlternate*, UInt32)
-    get_type_info_count : Proc(ISpeechPhraseAlternate*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechPhraseAlternate*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechPhraseAlternate*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechPhraseAlternate*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_reco_result : Proc(ISpeechPhraseAlternate*, ISpeechRecoResult*, HRESULT)
-    get_start_element_in_result : Proc(ISpeechPhraseAlternate*, Int32*, HRESULT)
-    get_number_of_elements_in_result : Proc(ISpeechPhraseAlternate*, Int32*, HRESULT)
-    get_phrase_info : Proc(ISpeechPhraseAlternate*, ISpeechPhraseInfo*, HRESULT)
-    commit : Proc(ISpeechPhraseAlternate*, HRESULT)
-  end
-
-  ISpeechPhraseAlternate_GUID = "27864a2a-2b9f-4cb8-92d3-0d2722fd1e73"
-  IID_ISpeechPhraseAlternate = LibC::GUID.new(0x27864a2a_u32, 0x2b9f_u16, 0x4cb8_u16, StaticArray[0x92_u8, 0xd3_u8, 0xd_u8, 0x27_u8, 0x22_u8, 0xfd_u8, 0x1e_u8, 0x73_u8])
-  struct ISpeechPhraseAlternate
-    lpVtbl : ISpeechPhraseAlternateVTbl*
-  end
-
-  struct ISpeechPhraseAlternatesVTbl
-    query_interface : Proc(ISpeechPhraseAlternates*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechPhraseAlternates*, UInt32)
-    release : Proc(ISpeechPhraseAlternates*, UInt32)
-    get_type_info_count : Proc(ISpeechPhraseAlternates*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechPhraseAlternates*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechPhraseAlternates*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechPhraseAlternates*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ISpeechPhraseAlternates*, Int32*, HRESULT)
-    item : Proc(ISpeechPhraseAlternates*, Int32, ISpeechPhraseAlternate*, HRESULT)
-    get__new_enum : Proc(ISpeechPhraseAlternates*, IUnknown*, HRESULT)
-  end
-
-  ISpeechPhraseAlternates_GUID = "b238b6d5-f276-4c3d-a6c1-2974801c3cc2"
-  IID_ISpeechPhraseAlternates = LibC::GUID.new(0xb238b6d5_u32, 0xf276_u16, 0x4c3d_u16, StaticArray[0xa6_u8, 0xc1_u8, 0x29_u8, 0x74_u8, 0x80_u8, 0x1c_u8, 0x3c_u8, 0xc2_u8])
-  struct ISpeechPhraseAlternates
-    lpVtbl : ISpeechPhraseAlternatesVTbl*
-  end
-
-  struct ISpeechPhraseInfoVTbl
-    query_interface : Proc(ISpeechPhraseInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechPhraseInfo*, UInt32)
-    release : Proc(ISpeechPhraseInfo*, UInt32)
-    get_type_info_count : Proc(ISpeechPhraseInfo*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechPhraseInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechPhraseInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechPhraseInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_language_id : Proc(ISpeechPhraseInfo*, Int32*, HRESULT)
-    get_grammar_id : Proc(ISpeechPhraseInfo*, VARIANT*, HRESULT)
-    get_start_time : Proc(ISpeechPhraseInfo*, VARIANT*, HRESULT)
-    get_audio_stream_position : Proc(ISpeechPhraseInfo*, VARIANT*, HRESULT)
-    get_audio_size_bytes : Proc(ISpeechPhraseInfo*, Int32*, HRESULT)
-    get_retained_size_bytes : Proc(ISpeechPhraseInfo*, Int32*, HRESULT)
-    get_audio_size_time : Proc(ISpeechPhraseInfo*, Int32*, HRESULT)
-    get_rule : Proc(ISpeechPhraseInfo*, ISpeechPhraseRule*, HRESULT)
-    get_properties : Proc(ISpeechPhraseInfo*, ISpeechPhraseProperties*, HRESULT)
-    get_elements : Proc(ISpeechPhraseInfo*, ISpeechPhraseElements*, HRESULT)
-    get_replacements : Proc(ISpeechPhraseInfo*, ISpeechPhraseReplacements*, HRESULT)
-    get_engine_id : Proc(ISpeechPhraseInfo*, UInt8**, HRESULT)
-    get_engine_private_data : Proc(ISpeechPhraseInfo*, VARIANT*, HRESULT)
-    save_to_memory : Proc(ISpeechPhraseInfo*, VARIANT*, HRESULT)
-    get_text : Proc(ISpeechPhraseInfo*, Int32, Int32, Int16, UInt8**, HRESULT)
-    get_display_attributes : Proc(ISpeechPhraseInfo*, Int32, Int32, Int16, SpeechDisplayAttributes*, HRESULT)
-  end
-
-  ISpeechPhraseInfo_GUID = "961559cf-4e67-4662-8bf0-d93f1fcd61b3"
-  IID_ISpeechPhraseInfo = LibC::GUID.new(0x961559cf_u32, 0x4e67_u16, 0x4662_u16, StaticArray[0x8b_u8, 0xf0_u8, 0xd9_u8, 0x3f_u8, 0x1f_u8, 0xcd_u8, 0x61_u8, 0xb3_u8])
-  struct ISpeechPhraseInfo
-    lpVtbl : ISpeechPhraseInfoVTbl*
-  end
-
-  struct ISpeechPhraseElementVTbl
-    query_interface : Proc(ISpeechPhraseElement*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechPhraseElement*, UInt32)
-    release : Proc(ISpeechPhraseElement*, UInt32)
-    get_type_info_count : Proc(ISpeechPhraseElement*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechPhraseElement*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechPhraseElement*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechPhraseElement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_audio_time_offset : Proc(ISpeechPhraseElement*, Int32*, HRESULT)
-    get_audio_size_time : Proc(ISpeechPhraseElement*, Int32*, HRESULT)
-    get_audio_stream_offset : Proc(ISpeechPhraseElement*, Int32*, HRESULT)
-    get_audio_size_bytes : Proc(ISpeechPhraseElement*, Int32*, HRESULT)
-    get_retained_stream_offset : Proc(ISpeechPhraseElement*, Int32*, HRESULT)
-    get_retained_size_bytes : Proc(ISpeechPhraseElement*, Int32*, HRESULT)
-    get_display_text : Proc(ISpeechPhraseElement*, UInt8**, HRESULT)
-    get_lexical_form : Proc(ISpeechPhraseElement*, UInt8**, HRESULT)
-    get_pronunciation : Proc(ISpeechPhraseElement*, VARIANT*, HRESULT)
-    get_display_attributes : Proc(ISpeechPhraseElement*, SpeechDisplayAttributes*, HRESULT)
-    get_required_confidence : Proc(ISpeechPhraseElement*, SpeechEngineConfidence*, HRESULT)
-    get_actual_confidence : Proc(ISpeechPhraseElement*, SpeechEngineConfidence*, HRESULT)
-    get_engine_confidence : Proc(ISpeechPhraseElement*, Float32*, HRESULT)
-  end
-
-  ISpeechPhraseElement_GUID = "e6176f96-e373-4801-b223-3b62c068c0b4"
-  IID_ISpeechPhraseElement = LibC::GUID.new(0xe6176f96_u32, 0xe373_u16, 0x4801_u16, StaticArray[0xb2_u8, 0x23_u8, 0x3b_u8, 0x62_u8, 0xc0_u8, 0x68_u8, 0xc0_u8, 0xb4_u8])
-  struct ISpeechPhraseElement
-    lpVtbl : ISpeechPhraseElementVTbl*
-  end
-
-  struct ISpeechPhraseElementsVTbl
-    query_interface : Proc(ISpeechPhraseElements*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechPhraseElements*, UInt32)
-    release : Proc(ISpeechPhraseElements*, UInt32)
-    get_type_info_count : Proc(ISpeechPhraseElements*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechPhraseElements*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechPhraseElements*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechPhraseElements*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ISpeechPhraseElements*, Int32*, HRESULT)
-    item : Proc(ISpeechPhraseElements*, Int32, ISpeechPhraseElement*, HRESULT)
-    get__new_enum : Proc(ISpeechPhraseElements*, IUnknown*, HRESULT)
-  end
-
-  ISpeechPhraseElements_GUID = "0626b328-3478-467d-a0b3-d0853b93dda3"
-  IID_ISpeechPhraseElements = LibC::GUID.new(0x626b328_u32, 0x3478_u16, 0x467d_u16, StaticArray[0xa0_u8, 0xb3_u8, 0xd0_u8, 0x85_u8, 0x3b_u8, 0x93_u8, 0xdd_u8, 0xa3_u8])
-  struct ISpeechPhraseElements
-    lpVtbl : ISpeechPhraseElementsVTbl*
-  end
-
-  struct ISpeechPhraseReplacementVTbl
-    query_interface : Proc(ISpeechPhraseReplacement*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechPhraseReplacement*, UInt32)
-    release : Proc(ISpeechPhraseReplacement*, UInt32)
-    get_type_info_count : Proc(ISpeechPhraseReplacement*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechPhraseReplacement*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechPhraseReplacement*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechPhraseReplacement*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_display_attributes : Proc(ISpeechPhraseReplacement*, SpeechDisplayAttributes*, HRESULT)
-    get_text : Proc(ISpeechPhraseReplacement*, UInt8**, HRESULT)
-    get_first_element : Proc(ISpeechPhraseReplacement*, Int32*, HRESULT)
-    get_number_of_elements : Proc(ISpeechPhraseReplacement*, Int32*, HRESULT)
-  end
-
-  ISpeechPhraseReplacement_GUID = "2890a410-53a7-4fb5-94ec-06d4998e3d02"
-  IID_ISpeechPhraseReplacement = LibC::GUID.new(0x2890a410_u32, 0x53a7_u16, 0x4fb5_u16, StaticArray[0x94_u8, 0xec_u8, 0x6_u8, 0xd4_u8, 0x99_u8, 0x8e_u8, 0x3d_u8, 0x2_u8])
-  struct ISpeechPhraseReplacement
-    lpVtbl : ISpeechPhraseReplacementVTbl*
-  end
-
-  struct ISpeechPhraseReplacementsVTbl
-    query_interface : Proc(ISpeechPhraseReplacements*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechPhraseReplacements*, UInt32)
-    release : Proc(ISpeechPhraseReplacements*, UInt32)
-    get_type_info_count : Proc(ISpeechPhraseReplacements*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechPhraseReplacements*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechPhraseReplacements*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechPhraseReplacements*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ISpeechPhraseReplacements*, Int32*, HRESULT)
-    item : Proc(ISpeechPhraseReplacements*, Int32, ISpeechPhraseReplacement*, HRESULT)
-    get__new_enum : Proc(ISpeechPhraseReplacements*, IUnknown*, HRESULT)
-  end
-
-  ISpeechPhraseReplacements_GUID = "38bc662f-2257-4525-959e-2069d2596c05"
-  IID_ISpeechPhraseReplacements = LibC::GUID.new(0x38bc662f_u32, 0x2257_u16, 0x4525_u16, StaticArray[0x95_u8, 0x9e_u8, 0x20_u8, 0x69_u8, 0xd2_u8, 0x59_u8, 0x6c_u8, 0x5_u8])
-  struct ISpeechPhraseReplacements
-    lpVtbl : ISpeechPhraseReplacementsVTbl*
-  end
-
-  struct ISpeechPhrasePropertyVTbl
-    query_interface : Proc(ISpeechPhraseProperty*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechPhraseProperty*, UInt32)
-    release : Proc(ISpeechPhraseProperty*, UInt32)
-    get_type_info_count : Proc(ISpeechPhraseProperty*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechPhraseProperty*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechPhraseProperty*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechPhraseProperty*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(ISpeechPhraseProperty*, UInt8**, HRESULT)
-    get_id : Proc(ISpeechPhraseProperty*, Int32*, HRESULT)
-    get_value : Proc(ISpeechPhraseProperty*, VARIANT*, HRESULT)
-    get_first_element : Proc(ISpeechPhraseProperty*, Int32*, HRESULT)
-    get_number_of_elements : Proc(ISpeechPhraseProperty*, Int32*, HRESULT)
-    get_engine_confidence : Proc(ISpeechPhraseProperty*, Float32*, HRESULT)
-    get_confidence : Proc(ISpeechPhraseProperty*, SpeechEngineConfidence*, HRESULT)
-    get_parent : Proc(ISpeechPhraseProperty*, ISpeechPhraseProperty*, HRESULT)
-    get_children : Proc(ISpeechPhraseProperty*, ISpeechPhraseProperties*, HRESULT)
-  end
-
-  ISpeechPhraseProperty_GUID = "ce563d48-961e-4732-a2e1-378a42b430be"
-  IID_ISpeechPhraseProperty = LibC::GUID.new(0xce563d48_u32, 0x961e_u16, 0x4732_u16, StaticArray[0xa2_u8, 0xe1_u8, 0x37_u8, 0x8a_u8, 0x42_u8, 0xb4_u8, 0x30_u8, 0xbe_u8])
-  struct ISpeechPhraseProperty
-    lpVtbl : ISpeechPhrasePropertyVTbl*
-  end
-
-  struct ISpeechPhrasePropertiesVTbl
-    query_interface : Proc(ISpeechPhraseProperties*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechPhraseProperties*, UInt32)
-    release : Proc(ISpeechPhraseProperties*, UInt32)
-    get_type_info_count : Proc(ISpeechPhraseProperties*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechPhraseProperties*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechPhraseProperties*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechPhraseProperties*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ISpeechPhraseProperties*, Int32*, HRESULT)
-    item : Proc(ISpeechPhraseProperties*, Int32, ISpeechPhraseProperty*, HRESULT)
-    get__new_enum : Proc(ISpeechPhraseProperties*, IUnknown*, HRESULT)
-  end
-
-  ISpeechPhraseProperties_GUID = "08166b47-102e-4b23-a599-bdb98dbfd1f4"
-  IID_ISpeechPhraseProperties = LibC::GUID.new(0x8166b47_u32, 0x102e_u16, 0x4b23_u16, StaticArray[0xa5_u8, 0x99_u8, 0xbd_u8, 0xb9_u8, 0x8d_u8, 0xbf_u8, 0xd1_u8, 0xf4_u8])
-  struct ISpeechPhraseProperties
-    lpVtbl : ISpeechPhrasePropertiesVTbl*
-  end
-
-  struct ISpeechPhraseRuleVTbl
-    query_interface : Proc(ISpeechPhraseRule*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechPhraseRule*, UInt32)
-    release : Proc(ISpeechPhraseRule*, UInt32)
-    get_type_info_count : Proc(ISpeechPhraseRule*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechPhraseRule*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechPhraseRule*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechPhraseRule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(ISpeechPhraseRule*, UInt8**, HRESULT)
-    get_id : Proc(ISpeechPhraseRule*, Int32*, HRESULT)
-    get_first_element : Proc(ISpeechPhraseRule*, Int32*, HRESULT)
-    get_number_of_elements : Proc(ISpeechPhraseRule*, Int32*, HRESULT)
-    get_parent : Proc(ISpeechPhraseRule*, ISpeechPhraseRule*, HRESULT)
-    get_children : Proc(ISpeechPhraseRule*, ISpeechPhraseRules*, HRESULT)
-    get_confidence : Proc(ISpeechPhraseRule*, SpeechEngineConfidence*, HRESULT)
-    get_engine_confidence : Proc(ISpeechPhraseRule*, Float32*, HRESULT)
-  end
-
-  ISpeechPhraseRule_GUID = "a7bfe112-a4a0-48d9-b602-c313843f6964"
-  IID_ISpeechPhraseRule = LibC::GUID.new(0xa7bfe112_u32, 0xa4a0_u16, 0x48d9_u16, StaticArray[0xb6_u8, 0x2_u8, 0xc3_u8, 0x13_u8, 0x84_u8, 0x3f_u8, 0x69_u8, 0x64_u8])
-  struct ISpeechPhraseRule
-    lpVtbl : ISpeechPhraseRuleVTbl*
-  end
-
-  struct ISpeechPhraseRulesVTbl
-    query_interface : Proc(ISpeechPhraseRules*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechPhraseRules*, UInt32)
-    release : Proc(ISpeechPhraseRules*, UInt32)
-    get_type_info_count : Proc(ISpeechPhraseRules*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechPhraseRules*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechPhraseRules*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechPhraseRules*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ISpeechPhraseRules*, Int32*, HRESULT)
-    item : Proc(ISpeechPhraseRules*, Int32, ISpeechPhraseRule*, HRESULT)
-    get__new_enum : Proc(ISpeechPhraseRules*, IUnknown*, HRESULT)
-  end
-
-  ISpeechPhraseRules_GUID = "9047d593-01dd-4b72-81a3-e4a0ca69f407"
-  IID_ISpeechPhraseRules = LibC::GUID.new(0x9047d593_u32, 0x1dd_u16, 0x4b72_u16, StaticArray[0x81_u8, 0xa3_u8, 0xe4_u8, 0xa0_u8, 0xca_u8, 0x69_u8, 0xf4_u8, 0x7_u8])
-  struct ISpeechPhraseRules
-    lpVtbl : ISpeechPhraseRulesVTbl*
-  end
-
-  struct ISpeechLexiconVTbl
-    query_interface : Proc(ISpeechLexicon*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechLexicon*, UInt32)
-    release : Proc(ISpeechLexicon*, UInt32)
-    get_type_info_count : Proc(ISpeechLexicon*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechLexicon*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechLexicon*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechLexicon*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_generation_id : Proc(ISpeechLexicon*, Int32*, HRESULT)
-    get_words : Proc(ISpeechLexicon*, SpeechLexiconType, Int32*, ISpeechLexiconWords*, HRESULT)
-    add_pronunciation : Proc(ISpeechLexicon*, UInt8*, Int32, SpeechPartOfSpeech, UInt8*, HRESULT)
-    add_pronunciation_by_phone_ids : Proc(ISpeechLexicon*, UInt8*, Int32, SpeechPartOfSpeech, VARIANT*, HRESULT)
-    remove_pronunciation : Proc(ISpeechLexicon*, UInt8*, Int32, SpeechPartOfSpeech, UInt8*, HRESULT)
-    remove_pronunciation_by_phone_ids : Proc(ISpeechLexicon*, UInt8*, Int32, SpeechPartOfSpeech, VARIANT*, HRESULT)
-    get_pronunciations : Proc(ISpeechLexicon*, UInt8*, Int32, SpeechLexiconType, ISpeechLexiconPronunciations*, HRESULT)
-    get_generation_change : Proc(ISpeechLexicon*, Int32*, ISpeechLexiconWords*, HRESULT)
-  end
-
-  ISpeechLexicon_GUID = "3da7627a-c7ae-4b23-8708-638c50362c25"
-  IID_ISpeechLexicon = LibC::GUID.new(0x3da7627a_u32, 0xc7ae_u16, 0x4b23_u16, StaticArray[0x87_u8, 0x8_u8, 0x63_u8, 0x8c_u8, 0x50_u8, 0x36_u8, 0x2c_u8, 0x25_u8])
-  struct ISpeechLexicon
-    lpVtbl : ISpeechLexiconVTbl*
-  end
-
-  struct ISpeechLexiconWordsVTbl
-    query_interface : Proc(ISpeechLexiconWords*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechLexiconWords*, UInt32)
-    release : Proc(ISpeechLexiconWords*, UInt32)
-    get_type_info_count : Proc(ISpeechLexiconWords*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechLexiconWords*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechLexiconWords*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechLexiconWords*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ISpeechLexiconWords*, Int32*, HRESULT)
-    item : Proc(ISpeechLexiconWords*, Int32, ISpeechLexiconWord*, HRESULT)
-    get__new_enum : Proc(ISpeechLexiconWords*, IUnknown*, HRESULT)
-  end
-
-  ISpeechLexiconWords_GUID = "8d199862-415e-47d5-ac4f-faa608b424e6"
-  IID_ISpeechLexiconWords = LibC::GUID.new(0x8d199862_u32, 0x415e_u16, 0x47d5_u16, StaticArray[0xac_u8, 0x4f_u8, 0xfa_u8, 0xa6_u8, 0x8_u8, 0xb4_u8, 0x24_u8, 0xe6_u8])
-  struct ISpeechLexiconWords
-    lpVtbl : ISpeechLexiconWordsVTbl*
-  end
-
-  struct ISpeechLexiconWordVTbl
-    query_interface : Proc(ISpeechLexiconWord*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechLexiconWord*, UInt32)
-    release : Proc(ISpeechLexiconWord*, UInt32)
-    get_type_info_count : Proc(ISpeechLexiconWord*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechLexiconWord*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechLexiconWord*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechLexiconWord*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_lang_id : Proc(ISpeechLexiconWord*, Int32*, HRESULT)
-    get_type : Proc(ISpeechLexiconWord*, SpeechWordType*, HRESULT)
-    get_word : Proc(ISpeechLexiconWord*, UInt8**, HRESULT)
-    get_pronunciations : Proc(ISpeechLexiconWord*, ISpeechLexiconPronunciations*, HRESULT)
-  end
-
-  ISpeechLexiconWord_GUID = "4e5b933c-c9be-48ed-8842-1ee51bb1d4ff"
-  IID_ISpeechLexiconWord = LibC::GUID.new(0x4e5b933c_u32, 0xc9be_u16, 0x48ed_u16, StaticArray[0x88_u8, 0x42_u8, 0x1e_u8, 0xe5_u8, 0x1b_u8, 0xb1_u8, 0xd4_u8, 0xff_u8])
-  struct ISpeechLexiconWord
-    lpVtbl : ISpeechLexiconWordVTbl*
-  end
-
-  struct ISpeechLexiconPronunciationsVTbl
-    query_interface : Proc(ISpeechLexiconPronunciations*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechLexiconPronunciations*, UInt32)
-    release : Proc(ISpeechLexiconPronunciations*, UInt32)
-    get_type_info_count : Proc(ISpeechLexiconPronunciations*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechLexiconPronunciations*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechLexiconPronunciations*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechLexiconPronunciations*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ISpeechLexiconPronunciations*, Int32*, HRESULT)
-    item : Proc(ISpeechLexiconPronunciations*, Int32, ISpeechLexiconPronunciation*, HRESULT)
-    get__new_enum : Proc(ISpeechLexiconPronunciations*, IUnknown*, HRESULT)
-  end
-
-  ISpeechLexiconPronunciations_GUID = "72829128-5682-4704-a0d4-3e2bb6f2ead3"
-  IID_ISpeechLexiconPronunciations = LibC::GUID.new(0x72829128_u32, 0x5682_u16, 0x4704_u16, StaticArray[0xa0_u8, 0xd4_u8, 0x3e_u8, 0x2b_u8, 0xb6_u8, 0xf2_u8, 0xea_u8, 0xd3_u8])
-  struct ISpeechLexiconPronunciations
-    lpVtbl : ISpeechLexiconPronunciationsVTbl*
-  end
-
-  struct ISpeechLexiconPronunciationVTbl
-    query_interface : Proc(ISpeechLexiconPronunciation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechLexiconPronunciation*, UInt32)
-    release : Proc(ISpeechLexiconPronunciation*, UInt32)
-    get_type_info_count : Proc(ISpeechLexiconPronunciation*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechLexiconPronunciation*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechLexiconPronunciation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechLexiconPronunciation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_type : Proc(ISpeechLexiconPronunciation*, SpeechLexiconType*, HRESULT)
-    get_lang_id : Proc(ISpeechLexiconPronunciation*, Int32*, HRESULT)
-    get_part_of_speech : Proc(ISpeechLexiconPronunciation*, SpeechPartOfSpeech*, HRESULT)
-    get_phone_ids : Proc(ISpeechLexiconPronunciation*, VARIANT*, HRESULT)
-    get_symbolic : Proc(ISpeechLexiconPronunciation*, UInt8**, HRESULT)
-  end
-
-  ISpeechLexiconPronunciation_GUID = "95252c5d-9e43-4f4a-9899-48ee73352f9f"
-  IID_ISpeechLexiconPronunciation = LibC::GUID.new(0x95252c5d_u32, 0x9e43_u16, 0x4f4a_u16, StaticArray[0x98_u8, 0x99_u8, 0x48_u8, 0xee_u8, 0x73_u8, 0x35_u8, 0x2f_u8, 0x9f_u8])
-  struct ISpeechLexiconPronunciation
-    lpVtbl : ISpeechLexiconPronunciationVTbl*
-  end
-
-  struct ISpeechXMLRecoResultVTbl
-    query_interface : Proc(ISpeechXMLRecoResult*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechXMLRecoResult*, UInt32)
-    release : Proc(ISpeechXMLRecoResult*, UInt32)
-    get_type_info_count : Proc(ISpeechXMLRecoResult*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechXMLRecoResult*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechXMLRecoResult*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechXMLRecoResult*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_reco_context : Proc(ISpeechXMLRecoResult*, ISpeechRecoContext*, HRESULT)
-    get_times : Proc(ISpeechXMLRecoResult*, ISpeechRecoResultTimes*, HRESULT)
-    putref_audio_format : Proc(ISpeechXMLRecoResult*, ISpeechAudioFormat, HRESULT)
-    get_audio_format : Proc(ISpeechXMLRecoResult*, ISpeechAudioFormat*, HRESULT)
-    get_phrase_info : Proc(ISpeechXMLRecoResult*, ISpeechPhraseInfo*, HRESULT)
-    alternates : Proc(ISpeechXMLRecoResult*, Int32, Int32, Int32, ISpeechPhraseAlternates*, HRESULT)
-    audio : Proc(ISpeechXMLRecoResult*, Int32, Int32, ISpeechMemoryStream*, HRESULT)
-    speak_audio : Proc(ISpeechXMLRecoResult*, Int32, Int32, SpeechVoiceSpeakFlags, Int32*, HRESULT)
-    save_to_memory : Proc(ISpeechXMLRecoResult*, VARIANT*, HRESULT)
-    discard_result_info : Proc(ISpeechXMLRecoResult*, SpeechDiscardType, HRESULT)
-    get_xml_result : Proc(ISpeechXMLRecoResult*, SPXMLRESULTOPTIONS, UInt8**, HRESULT)
-    get_xml_error_info : Proc(ISpeechXMLRecoResult*, Int32*, UInt8**, UInt8**, UInt8**, Int32*, Int16*, HRESULT)
-  end
-
-  ISpeechXMLRecoResult_GUID = "aaec54af-8f85-4924-944d-b79d39d72e19"
-  IID_ISpeechXMLRecoResult = LibC::GUID.new(0xaaec54af_u32, 0x8f85_u16, 0x4924_u16, StaticArray[0x94_u8, 0x4d_u8, 0xb7_u8, 0x9d_u8, 0x39_u8, 0xd7_u8, 0x2e_u8, 0x19_u8])
-  struct ISpeechXMLRecoResult
-    lpVtbl : ISpeechXMLRecoResultVTbl*
-  end
-
-  struct ISpeechRecoResultDispatchVTbl
-    query_interface : Proc(ISpeechRecoResultDispatch*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechRecoResultDispatch*, UInt32)
-    release : Proc(ISpeechRecoResultDispatch*, UInt32)
-    get_type_info_count : Proc(ISpeechRecoResultDispatch*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechRecoResultDispatch*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechRecoResultDispatch*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechRecoResultDispatch*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_reco_context : Proc(ISpeechRecoResultDispatch*, ISpeechRecoContext*, HRESULT)
-    get_times : Proc(ISpeechRecoResultDispatch*, ISpeechRecoResultTimes*, HRESULT)
-    putref_audio_format : Proc(ISpeechRecoResultDispatch*, ISpeechAudioFormat, HRESULT)
-    get_audio_format : Proc(ISpeechRecoResultDispatch*, ISpeechAudioFormat*, HRESULT)
-    get_phrase_info : Proc(ISpeechRecoResultDispatch*, ISpeechPhraseInfo*, HRESULT)
-    alternates : Proc(ISpeechRecoResultDispatch*, Int32, Int32, Int32, ISpeechPhraseAlternates*, HRESULT)
-    audio : Proc(ISpeechRecoResultDispatch*, Int32, Int32, ISpeechMemoryStream*, HRESULT)
-    speak_audio : Proc(ISpeechRecoResultDispatch*, Int32, Int32, SpeechVoiceSpeakFlags, Int32*, HRESULT)
-    save_to_memory : Proc(ISpeechRecoResultDispatch*, VARIANT*, HRESULT)
-    discard_result_info : Proc(ISpeechRecoResultDispatch*, SpeechDiscardType, HRESULT)
-    get_xml_result : Proc(ISpeechRecoResultDispatch*, SPXMLRESULTOPTIONS, UInt8**, HRESULT)
-    get_xml_error_info : Proc(ISpeechRecoResultDispatch*, Int32*, UInt8**, UInt8**, UInt8**, HRESULT*, Int16*, HRESULT)
-    set_text_feedback : Proc(ISpeechRecoResultDispatch*, UInt8*, Int16, HRESULT)
-  end
-
-  ISpeechRecoResultDispatch_GUID = "6d60eb64-aced-40a6-bbf3-4e557f71dee2"
-  IID_ISpeechRecoResultDispatch = LibC::GUID.new(0x6d60eb64_u32, 0xaced_u16, 0x40a6_u16, StaticArray[0xbb_u8, 0xf3_u8, 0x4e_u8, 0x55_u8, 0x7f_u8, 0x71_u8, 0xde_u8, 0xe2_u8])
-  struct ISpeechRecoResultDispatch
-    lpVtbl : ISpeechRecoResultDispatchVTbl*
-  end
-
-  struct ISpeechPhraseInfoBuilderVTbl
-    query_interface : Proc(ISpeechPhraseInfoBuilder*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechPhraseInfoBuilder*, UInt32)
-    release : Proc(ISpeechPhraseInfoBuilder*, UInt32)
-    get_type_info_count : Proc(ISpeechPhraseInfoBuilder*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechPhraseInfoBuilder*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechPhraseInfoBuilder*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechPhraseInfoBuilder*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    restore_phrase_from_memory : Proc(ISpeechPhraseInfoBuilder*, VARIANT*, ISpeechPhraseInfo*, HRESULT)
-  end
-
-  ISpeechPhraseInfoBuilder_GUID = "3b151836-df3a-4e0a-846c-d2adc9334333"
-  IID_ISpeechPhraseInfoBuilder = LibC::GUID.new(0x3b151836_u32, 0xdf3a_u16, 0x4e0a_u16, StaticArray[0x84_u8, 0x6c_u8, 0xd2_u8, 0xad_u8, 0xc9_u8, 0x33_u8, 0x43_u8, 0x33_u8])
-  struct ISpeechPhraseInfoBuilder
-    lpVtbl : ISpeechPhraseInfoBuilderVTbl*
-  end
-
-  struct ISpeechPhoneConverterVTbl
-    query_interface : Proc(ISpeechPhoneConverter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpeechPhoneConverter*, UInt32)
-    release : Proc(ISpeechPhoneConverter*, UInt32)
-    get_type_info_count : Proc(ISpeechPhoneConverter*, UInt32*, HRESULT)
-    get_type_info : Proc(ISpeechPhoneConverter*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISpeechPhoneConverter*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISpeechPhoneConverter*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_language_id : Proc(ISpeechPhoneConverter*, Int32*, HRESULT)
-    put_language_id : Proc(ISpeechPhoneConverter*, Int32, HRESULT)
-    phone_to_id : Proc(ISpeechPhoneConverter*, UInt8*, VARIANT*, HRESULT)
-    id_to_phone : Proc(ISpeechPhoneConverter*, VARIANT, UInt8**, HRESULT)
-  end
-
-  ISpeechPhoneConverter_GUID = "c3e4f353-433f-43d6-89a1-6a62a7054c3d"
-  IID_ISpeechPhoneConverter = LibC::GUID.new(0xc3e4f353_u32, 0x433f_u16, 0x43d6_u16, StaticArray[0x89_u8, 0xa1_u8, 0x6a_u8, 0x62_u8, 0xa7_u8, 0x5_u8, 0x4c_u8, 0x3d_u8])
-  struct ISpeechPhoneConverter
-    lpVtbl : ISpeechPhoneConverterVTbl*
-  end
-
-end
-struct LibWin32::ISpNotifyCallback
-  def notify_callback(this : ISpNotifyCallback*, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.notify_callback.call(this, wparam, lparam)
-  end
-end
-struct LibWin32::ISpNotifySource
-  def query_interface(this : ISpNotifySource*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpNotifySource*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpNotifySource*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_notify_sink(this : ISpNotifySource*, pnotifysink : ISpNotifySink) : HRESULT
-    @lpVtbl.value.set_notify_sink.call(this, pnotifysink)
-  end
-  def set_notify_window_message(this : ISpNotifySource*, hwnd : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_window_message.call(this, hwnd, msg, wparam, lparam)
-  end
-  def set_notify_callback_function(this : ISpNotifySource*, pfncallback : SPNOTIFYCALLBACK*, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_callback_function.call(this, pfncallback, wparam, lparam)
-  end
-  def set_notify_callback_interface(this : ISpNotifySource*, pspcallback : ISpNotifyCallback, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_callback_interface.call(this, pspcallback, wparam, lparam)
-  end
-  def set_notify_win32_event(this : ISpNotifySource*) : HRESULT
-    @lpVtbl.value.set_notify_win32_event.call(this)
-  end
-  def wait_for_notify_event(this : ISpNotifySource*, dwmilliseconds : UInt32) : HRESULT
-    @lpVtbl.value.wait_for_notify_event.call(this, dwmilliseconds)
-  end
-  def get_notify_event_handle(this : ISpNotifySource*) : LibC::HANDLE
-    @lpVtbl.value.get_notify_event_handle.call(this)
-  end
-end
-struct LibWin32::ISpNotifySink
-  def query_interface(this : ISpNotifySink*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpNotifySink*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpNotifySink*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def notify(this : ISpNotifySink*) : HRESULT
-    @lpVtbl.value.notify.call(this)
-  end
-end
-struct LibWin32::ISpNotifyTranslator
-  def query_interface(this : ISpNotifyTranslator*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpNotifyTranslator*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpNotifyTranslator*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def notify(this : ISpNotifyTranslator*) : HRESULT
-    @lpVtbl.value.notify.call(this)
-  end
-  def init_window_message(this : ISpNotifyTranslator*, hwnd : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.init_window_message.call(this, hwnd, msg, wparam, lparam)
-  end
-  def init_callback(this : ISpNotifyTranslator*, pfncallback : SPNOTIFYCALLBACK*, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.init_callback.call(this, pfncallback, wparam, lparam)
-  end
-  def init_sp_notify_callback(this : ISpNotifyTranslator*, pspcallback : ISpNotifyCallback, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.init_sp_notify_callback.call(this, pspcallback, wparam, lparam)
-  end
-  def init_win32_event(this : ISpNotifyTranslator*, hevent : LibC::HANDLE, fclosehandleonrelease : LibC::BOOL) : HRESULT
-    @lpVtbl.value.init_win32_event.call(this, hevent, fclosehandleonrelease)
-  end
-  def wait(this : ISpNotifyTranslator*, dwmilliseconds : UInt32) : HRESULT
-    @lpVtbl.value.wait.call(this, dwmilliseconds)
-  end
-  def get_event_handle(this : ISpNotifyTranslator*) : LibC::HANDLE
-    @lpVtbl.value.get_event_handle.call(this)
-  end
-end
-struct LibWin32::ISpDataKey
-  def query_interface(this : ISpDataKey*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpDataKey*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpDataKey*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_data(this : ISpDataKey*, pszvaluename : LibC::LPWSTR, cbdata : UInt32, pdata : UInt8*) : HRESULT
-    @lpVtbl.value.set_data.call(this, pszvaluename, cbdata, pdata)
-  end
-  def get_data(this : ISpDataKey*, pszvaluename : LibC::LPWSTR, pcbdata : UInt32*, pdata : UInt8*) : HRESULT
-    @lpVtbl.value.get_data.call(this, pszvaluename, pcbdata, pdata)
-  end
-  def set_string_value(this : ISpDataKey*, pszvaluename : LibC::LPWSTR, pszvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_string_value.call(this, pszvaluename, pszvalue)
-  end
-  def get_string_value(this : ISpDataKey*, pszvaluename : LibC::LPWSTR, ppszvalue : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_string_value.call(this, pszvaluename, ppszvalue)
-  end
-  def set_dword(this : ISpDataKey*, pszvaluename : LibC::LPWSTR, dwvalue : UInt32) : HRESULT
-    @lpVtbl.value.set_dword.call(this, pszvaluename, dwvalue)
-  end
-  def get_dword(this : ISpDataKey*, pszvaluename : LibC::LPWSTR, pdwvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_dword.call(this, pszvaluename, pdwvalue)
-  end
-  def open_key(this : ISpDataKey*, pszsubkeyname : LibC::LPWSTR, ppsubkey : ISpDataKey*) : HRESULT
-    @lpVtbl.value.open_key.call(this, pszsubkeyname, ppsubkey)
-  end
-  def create_key(this : ISpDataKey*, pszsubkey : LibC::LPWSTR, ppsubkey : ISpDataKey*) : HRESULT
-    @lpVtbl.value.create_key.call(this, pszsubkey, ppsubkey)
-  end
-  def delete_key(this : ISpDataKey*, pszsubkey : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_key.call(this, pszsubkey)
-  end
-  def delete_value(this : ISpDataKey*, pszvaluename : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_value.call(this, pszvaluename)
-  end
-  def enum_keys(this : ISpDataKey*, index : UInt32, ppszsubkeyname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.enum_keys.call(this, index, ppszsubkeyname)
-  end
-  def enum_values(this : ISpDataKey*, index : UInt32, ppszvaluename : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.enum_values.call(this, index, ppszvaluename)
-  end
-end
-struct LibWin32::ISpRegDataKey
-  def query_interface(this : ISpRegDataKey*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpRegDataKey*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpRegDataKey*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_data(this : ISpRegDataKey*, pszvaluename : LibC::LPWSTR, cbdata : UInt32, pdata : UInt8*) : HRESULT
-    @lpVtbl.value.set_data.call(this, pszvaluename, cbdata, pdata)
-  end
-  def get_data(this : ISpRegDataKey*, pszvaluename : LibC::LPWSTR, pcbdata : UInt32*, pdata : UInt8*) : HRESULT
-    @lpVtbl.value.get_data.call(this, pszvaluename, pcbdata, pdata)
-  end
-  def set_string_value(this : ISpRegDataKey*, pszvaluename : LibC::LPWSTR, pszvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_string_value.call(this, pszvaluename, pszvalue)
-  end
-  def get_string_value(this : ISpRegDataKey*, pszvaluename : LibC::LPWSTR, ppszvalue : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_string_value.call(this, pszvaluename, ppszvalue)
-  end
-  def set_dword(this : ISpRegDataKey*, pszvaluename : LibC::LPWSTR, dwvalue : UInt32) : HRESULT
-    @lpVtbl.value.set_dword.call(this, pszvaluename, dwvalue)
-  end
-  def get_dword(this : ISpRegDataKey*, pszvaluename : LibC::LPWSTR, pdwvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_dword.call(this, pszvaluename, pdwvalue)
-  end
-  def open_key(this : ISpRegDataKey*, pszsubkeyname : LibC::LPWSTR, ppsubkey : ISpDataKey*) : HRESULT
-    @lpVtbl.value.open_key.call(this, pszsubkeyname, ppsubkey)
-  end
-  def create_key(this : ISpRegDataKey*, pszsubkey : LibC::LPWSTR, ppsubkey : ISpDataKey*) : HRESULT
-    @lpVtbl.value.create_key.call(this, pszsubkey, ppsubkey)
-  end
-  def delete_key(this : ISpRegDataKey*, pszsubkey : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_key.call(this, pszsubkey)
-  end
-  def delete_value(this : ISpRegDataKey*, pszvaluename : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_value.call(this, pszvaluename)
-  end
-  def enum_keys(this : ISpRegDataKey*, index : UInt32, ppszsubkeyname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.enum_keys.call(this, index, ppszsubkeyname)
-  end
-  def enum_values(this : ISpRegDataKey*, index : UInt32, ppszvaluename : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.enum_values.call(this, index, ppszvaluename)
-  end
-  def set_key(this : ISpRegDataKey*, hkey : HKEY, freadonly : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_key.call(this, hkey, freadonly)
-  end
-end
-struct LibWin32::ISpObjectTokenCategory
-  def query_interface(this : ISpObjectTokenCategory*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpObjectTokenCategory*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpObjectTokenCategory*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_data(this : ISpObjectTokenCategory*, pszvaluename : LibC::LPWSTR, cbdata : UInt32, pdata : UInt8*) : HRESULT
-    @lpVtbl.value.set_data.call(this, pszvaluename, cbdata, pdata)
-  end
-  def get_data(this : ISpObjectTokenCategory*, pszvaluename : LibC::LPWSTR, pcbdata : UInt32*, pdata : UInt8*) : HRESULT
-    @lpVtbl.value.get_data.call(this, pszvaluename, pcbdata, pdata)
-  end
-  def set_string_value(this : ISpObjectTokenCategory*, pszvaluename : LibC::LPWSTR, pszvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_string_value.call(this, pszvaluename, pszvalue)
-  end
-  def get_string_value(this : ISpObjectTokenCategory*, pszvaluename : LibC::LPWSTR, ppszvalue : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_string_value.call(this, pszvaluename, ppszvalue)
-  end
-  def set_dword(this : ISpObjectTokenCategory*, pszvaluename : LibC::LPWSTR, dwvalue : UInt32) : HRESULT
-    @lpVtbl.value.set_dword.call(this, pszvaluename, dwvalue)
-  end
-  def get_dword(this : ISpObjectTokenCategory*, pszvaluename : LibC::LPWSTR, pdwvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_dword.call(this, pszvaluename, pdwvalue)
-  end
-  def open_key(this : ISpObjectTokenCategory*, pszsubkeyname : LibC::LPWSTR, ppsubkey : ISpDataKey*) : HRESULT
-    @lpVtbl.value.open_key.call(this, pszsubkeyname, ppsubkey)
-  end
-  def create_key(this : ISpObjectTokenCategory*, pszsubkey : LibC::LPWSTR, ppsubkey : ISpDataKey*) : HRESULT
-    @lpVtbl.value.create_key.call(this, pszsubkey, ppsubkey)
-  end
-  def delete_key(this : ISpObjectTokenCategory*, pszsubkey : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_key.call(this, pszsubkey)
-  end
-  def delete_value(this : ISpObjectTokenCategory*, pszvaluename : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_value.call(this, pszvaluename)
-  end
-  def enum_keys(this : ISpObjectTokenCategory*, index : UInt32, ppszsubkeyname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.enum_keys.call(this, index, ppszsubkeyname)
-  end
-  def enum_values(this : ISpObjectTokenCategory*, index : UInt32, ppszvaluename : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.enum_values.call(this, index, ppszvaluename)
-  end
-  def set_id(this : ISpObjectTokenCategory*, pszcategoryid : LibC::LPWSTR, fcreateifnotexist : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_id.call(this, pszcategoryid, fcreateifnotexist)
-  end
-  def get_id(this : ISpObjectTokenCategory*, ppszcomemcategoryid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.call(this, ppszcomemcategoryid)
-  end
-  def get_data_key(this : ISpObjectTokenCategory*, spdkl : SPDATAKEYLOCATION, ppdatakey : ISpDataKey*) : HRESULT
-    @lpVtbl.value.get_data_key.call(this, spdkl, ppdatakey)
-  end
-  def enum_tokens(this : ISpObjectTokenCategory*, pzsreqattribs : LibC::LPWSTR, pszoptattribs : LibC::LPWSTR, ppenum : IEnumSpObjectTokens*) : HRESULT
-    @lpVtbl.value.enum_tokens.call(this, pzsreqattribs, pszoptattribs, ppenum)
-  end
-  def set_default_token_id(this : ISpObjectTokenCategory*, psztokenid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_default_token_id.call(this, psztokenid)
-  end
-  def get_default_token_id(this : ISpObjectTokenCategory*, ppszcomemtokenid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_default_token_id.call(this, ppszcomemtokenid)
-  end
-end
-struct LibWin32::ISpObjectToken
-  def query_interface(this : ISpObjectToken*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpObjectToken*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpObjectToken*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_data(this : ISpObjectToken*, pszvaluename : LibC::LPWSTR, cbdata : UInt32, pdata : UInt8*) : HRESULT
-    @lpVtbl.value.set_data.call(this, pszvaluename, cbdata, pdata)
-  end
-  def get_data(this : ISpObjectToken*, pszvaluename : LibC::LPWSTR, pcbdata : UInt32*, pdata : UInt8*) : HRESULT
-    @lpVtbl.value.get_data.call(this, pszvaluename, pcbdata, pdata)
-  end
-  def set_string_value(this : ISpObjectToken*, pszvaluename : LibC::LPWSTR, pszvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_string_value.call(this, pszvaluename, pszvalue)
-  end
-  def get_string_value(this : ISpObjectToken*, pszvaluename : LibC::LPWSTR, ppszvalue : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_string_value.call(this, pszvaluename, ppszvalue)
-  end
-  def set_dword(this : ISpObjectToken*, pszvaluename : LibC::LPWSTR, dwvalue : UInt32) : HRESULT
-    @lpVtbl.value.set_dword.call(this, pszvaluename, dwvalue)
-  end
-  def get_dword(this : ISpObjectToken*, pszvaluename : LibC::LPWSTR, pdwvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_dword.call(this, pszvaluename, pdwvalue)
-  end
-  def open_key(this : ISpObjectToken*, pszsubkeyname : LibC::LPWSTR, ppsubkey : ISpDataKey*) : HRESULT
-    @lpVtbl.value.open_key.call(this, pszsubkeyname, ppsubkey)
-  end
-  def create_key(this : ISpObjectToken*, pszsubkey : LibC::LPWSTR, ppsubkey : ISpDataKey*) : HRESULT
-    @lpVtbl.value.create_key.call(this, pszsubkey, ppsubkey)
-  end
-  def delete_key(this : ISpObjectToken*, pszsubkey : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_key.call(this, pszsubkey)
-  end
-  def delete_value(this : ISpObjectToken*, pszvaluename : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_value.call(this, pszvaluename)
-  end
-  def enum_keys(this : ISpObjectToken*, index : UInt32, ppszsubkeyname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.enum_keys.call(this, index, ppszsubkeyname)
-  end
-  def enum_values(this : ISpObjectToken*, index : UInt32, ppszvaluename : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.enum_values.call(this, index, ppszvaluename)
-  end
-  def set_id(this : ISpObjectToken*, pszcategoryid : LibC::LPWSTR, psztokenid : LibC::LPWSTR, fcreateifnotexist : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_id.call(this, pszcategoryid, psztokenid, fcreateifnotexist)
-  end
-  def get_id(this : ISpObjectToken*, ppszcomemtokenid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.call(this, ppszcomemtokenid)
-  end
-  def get_category(this : ISpObjectToken*, pptokencategory : ISpObjectTokenCategory*) : HRESULT
-    @lpVtbl.value.get_category.call(this, pptokencategory)
-  end
-  def create_instance(this : ISpObjectToken*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.create_instance.call(this, punkouter, dwclscontext, riid, ppvobject)
-  end
-  def get_storage_file_name(this : ISpObjectToken*, clsidcaller : Guid*, pszvaluename : LibC::LPWSTR, pszfilenamespecifier : LibC::LPWSTR, nfolder : UInt32, ppszfilepath : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_storage_file_name.call(this, clsidcaller, pszvaluename, pszfilenamespecifier, nfolder, ppszfilepath)
-  end
-  def remove_storage_file_name(this : ISpObjectToken*, clsidcaller : Guid*, pszkeyname : LibC::LPWSTR, fdeletefile : LibC::BOOL) : HRESULT
-    @lpVtbl.value.remove_storage_file_name.call(this, clsidcaller, pszkeyname, fdeletefile)
-  end
-  def remove(this : ISpObjectToken*, pclsidcaller : Guid*) : HRESULT
-    @lpVtbl.value.remove.call(this, pclsidcaller)
-  end
-  def is_ui_supported(this : ISpObjectToken*, psztypeofui : LibC::LPWSTR, pvextradata : Void*, cbextradata : UInt32, punkobject : IUnknown, pfsupported : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_ui_supported.call(this, psztypeofui, pvextradata, cbextradata, punkobject, pfsupported)
-  end
-  def display_ui(this : ISpObjectToken*, hwndparent : LibC::HANDLE, psztitle : LibC::LPWSTR, psztypeofui : LibC::LPWSTR, pvextradata : Void*, cbextradata : UInt32, punkobject : IUnknown) : HRESULT
-    @lpVtbl.value.display_ui.call(this, hwndparent, psztitle, psztypeofui, pvextradata, cbextradata, punkobject)
-  end
-  def matches_attributes(this : ISpObjectToken*, pszattributes : LibC::LPWSTR, pfmatches : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.matches_attributes.call(this, pszattributes, pfmatches)
-  end
-end
-struct LibWin32::ISpObjectTokenInit
-  def query_interface(this : ISpObjectTokenInit*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpObjectTokenInit*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpObjectTokenInit*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_data(this : ISpObjectTokenInit*, pszvaluename : LibC::LPWSTR, cbdata : UInt32, pdata : UInt8*) : HRESULT
-    @lpVtbl.value.set_data.call(this, pszvaluename, cbdata, pdata)
-  end
-  def get_data(this : ISpObjectTokenInit*, pszvaluename : LibC::LPWSTR, pcbdata : UInt32*, pdata : UInt8*) : HRESULT
-    @lpVtbl.value.get_data.call(this, pszvaluename, pcbdata, pdata)
-  end
-  def set_string_value(this : ISpObjectTokenInit*, pszvaluename : LibC::LPWSTR, pszvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_string_value.call(this, pszvaluename, pszvalue)
-  end
-  def get_string_value(this : ISpObjectTokenInit*, pszvaluename : LibC::LPWSTR, ppszvalue : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_string_value.call(this, pszvaluename, ppszvalue)
-  end
-  def set_dword(this : ISpObjectTokenInit*, pszvaluename : LibC::LPWSTR, dwvalue : UInt32) : HRESULT
-    @lpVtbl.value.set_dword.call(this, pszvaluename, dwvalue)
-  end
-  def get_dword(this : ISpObjectTokenInit*, pszvaluename : LibC::LPWSTR, pdwvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_dword.call(this, pszvaluename, pdwvalue)
-  end
-  def open_key(this : ISpObjectTokenInit*, pszsubkeyname : LibC::LPWSTR, ppsubkey : ISpDataKey*) : HRESULT
-    @lpVtbl.value.open_key.call(this, pszsubkeyname, ppsubkey)
-  end
-  def create_key(this : ISpObjectTokenInit*, pszsubkey : LibC::LPWSTR, ppsubkey : ISpDataKey*) : HRESULT
-    @lpVtbl.value.create_key.call(this, pszsubkey, ppsubkey)
-  end
-  def delete_key(this : ISpObjectTokenInit*, pszsubkey : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_key.call(this, pszsubkey)
-  end
-  def delete_value(this : ISpObjectTokenInit*, pszvaluename : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.delete_value.call(this, pszvaluename)
-  end
-  def enum_keys(this : ISpObjectTokenInit*, index : UInt32, ppszsubkeyname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.enum_keys.call(this, index, ppszsubkeyname)
-  end
-  def enum_values(this : ISpObjectTokenInit*, index : UInt32, ppszvaluename : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.enum_values.call(this, index, ppszvaluename)
-  end
-  def set_id(this : ISpObjectTokenInit*, pszcategoryid : LibC::LPWSTR, psztokenid : LibC::LPWSTR, fcreateifnotexist : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_id.call(this, pszcategoryid, psztokenid, fcreateifnotexist)
-  end
-  def get_id(this : ISpObjectTokenInit*, ppszcomemtokenid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.call(this, ppszcomemtokenid)
-  end
-  def get_category(this : ISpObjectTokenInit*, pptokencategory : ISpObjectTokenCategory*) : HRESULT
-    @lpVtbl.value.get_category.call(this, pptokencategory)
-  end
-  def create_instance(this : ISpObjectTokenInit*, punkouter : IUnknown, dwclscontext : UInt32, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.create_instance.call(this, punkouter, dwclscontext, riid, ppvobject)
-  end
-  def get_storage_file_name(this : ISpObjectTokenInit*, clsidcaller : Guid*, pszvaluename : LibC::LPWSTR, pszfilenamespecifier : LibC::LPWSTR, nfolder : UInt32, ppszfilepath : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_storage_file_name.call(this, clsidcaller, pszvaluename, pszfilenamespecifier, nfolder, ppszfilepath)
-  end
-  def remove_storage_file_name(this : ISpObjectTokenInit*, clsidcaller : Guid*, pszkeyname : LibC::LPWSTR, fdeletefile : LibC::BOOL) : HRESULT
-    @lpVtbl.value.remove_storage_file_name.call(this, clsidcaller, pszkeyname, fdeletefile)
-  end
-  def remove(this : ISpObjectTokenInit*, pclsidcaller : Guid*) : HRESULT
-    @lpVtbl.value.remove.call(this, pclsidcaller)
-  end
-  def is_ui_supported(this : ISpObjectTokenInit*, psztypeofui : LibC::LPWSTR, pvextradata : Void*, cbextradata : UInt32, punkobject : IUnknown, pfsupported : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_ui_supported.call(this, psztypeofui, pvextradata, cbextradata, punkobject, pfsupported)
-  end
-  def display_ui(this : ISpObjectTokenInit*, hwndparent : LibC::HANDLE, psztitle : LibC::LPWSTR, psztypeofui : LibC::LPWSTR, pvextradata : Void*, cbextradata : UInt32, punkobject : IUnknown) : HRESULT
-    @lpVtbl.value.display_ui.call(this, hwndparent, psztitle, psztypeofui, pvextradata, cbextradata, punkobject)
-  end
-  def matches_attributes(this : ISpObjectTokenInit*, pszattributes : LibC::LPWSTR, pfmatches : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.matches_attributes.call(this, pszattributes, pfmatches)
-  end
-  def init_from_data_key(this : ISpObjectTokenInit*, pszcategoryid : LibC::LPWSTR, psztokenid : LibC::LPWSTR, pdatakey : ISpDataKey) : HRESULT
-    @lpVtbl.value.init_from_data_key.call(this, pszcategoryid, psztokenid, pdatakey)
-  end
-end
-struct LibWin32::IEnumSpObjectTokens
-  def query_interface(this : IEnumSpObjectTokens*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEnumSpObjectTokens*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEnumSpObjectTokens*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def next(this : IEnumSpObjectTokens*, celt : UInt32, pelt : ISpObjectToken*, pceltfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.call(this, celt, pelt, pceltfetched)
-  end
-  def skip(this : IEnumSpObjectTokens*, celt : UInt32) : HRESULT
-    @lpVtbl.value.skip.call(this, celt)
-  end
-  def reset(this : IEnumSpObjectTokens*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def clone(this : IEnumSpObjectTokens*, ppenum : IEnumSpObjectTokens*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppenum)
-  end
-  def item(this : IEnumSpObjectTokens*, index : UInt32, pptoken : ISpObjectToken*) : HRESULT
-    @lpVtbl.value.item.call(this, index, pptoken)
-  end
-  def get_count(this : IEnumSpObjectTokens*, pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, pcount)
-  end
-end
-struct LibWin32::ISpObjectWithToken
-  def query_interface(this : ISpObjectWithToken*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpObjectWithToken*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpObjectWithToken*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_object_token(this : ISpObjectWithToken*, ptoken : ISpObjectToken) : HRESULT
-    @lpVtbl.value.set_object_token.call(this, ptoken)
-  end
-  def get_object_token(this : ISpObjectWithToken*, pptoken : ISpObjectToken*) : HRESULT
-    @lpVtbl.value.get_object_token.call(this, pptoken)
-  end
-end
-struct LibWin32::ISpResourceManager
-  def query_interface(this : ISpResourceManager*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpResourceManager*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpResourceManager*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def query_service(this : ISpResourceManager*, guidservice : Guid*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_service.call(this, guidservice, riid, ppvobject)
-  end
-  def set_object(this : ISpResourceManager*, guidserviceid : Guid*, punkobject : IUnknown) : HRESULT
-    @lpVtbl.value.set_object.call(this, guidserviceid, punkobject)
-  end
-  def get_object(this : ISpResourceManager*, guidserviceid : Guid*, objectclsid : Guid*, objectiid : Guid*, freleasewhenlastexternalrefreleased : LibC::BOOL, ppobject : Void**) : HRESULT
-    @lpVtbl.value.get_object.call(this, guidserviceid, objectclsid, objectiid, freleasewhenlastexternalrefreleased, ppobject)
-  end
-end
-struct LibWin32::ISpEventSource
-  def query_interface(this : ISpEventSource*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpEventSource*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpEventSource*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_notify_sink(this : ISpEventSource*, pnotifysink : ISpNotifySink) : HRESULT
-    @lpVtbl.value.set_notify_sink.call(this, pnotifysink)
-  end
-  def set_notify_window_message(this : ISpEventSource*, hwnd : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_window_message.call(this, hwnd, msg, wparam, lparam)
-  end
-  def set_notify_callback_function(this : ISpEventSource*, pfncallback : SPNOTIFYCALLBACK*, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_callback_function.call(this, pfncallback, wparam, lparam)
-  end
-  def set_notify_callback_interface(this : ISpEventSource*, pspcallback : ISpNotifyCallback, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_callback_interface.call(this, pspcallback, wparam, lparam)
-  end
-  def set_notify_win32_event(this : ISpEventSource*) : HRESULT
-    @lpVtbl.value.set_notify_win32_event.call(this)
-  end
-  def wait_for_notify_event(this : ISpEventSource*, dwmilliseconds : UInt32) : HRESULT
-    @lpVtbl.value.wait_for_notify_event.call(this, dwmilliseconds)
-  end
-  def get_notify_event_handle(this : ISpEventSource*) : LibC::HANDLE
-    @lpVtbl.value.get_notify_event_handle.call(this)
-  end
-  def set_interest(this : ISpEventSource*, ulleventinterest : UInt64, ullqueuedinterest : UInt64) : HRESULT
-    @lpVtbl.value.set_interest.call(this, ulleventinterest, ullqueuedinterest)
-  end
-  def get_events(this : ISpEventSource*, ulcount : UInt32, peventarray : SPEVENT*, pulfetched : UInt32*) : HRESULT
-    @lpVtbl.value.get_events.call(this, ulcount, peventarray, pulfetched)
-  end
-  def get_info(this : ISpEventSource*, pinfo : SPEVENTSOURCEINFO*) : HRESULT
-    @lpVtbl.value.get_info.call(this, pinfo)
-  end
-end
-struct LibWin32::ISpEventSource2
-  def query_interface(this : ISpEventSource2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpEventSource2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpEventSource2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_notify_sink(this : ISpEventSource2*, pnotifysink : ISpNotifySink) : HRESULT
-    @lpVtbl.value.set_notify_sink.call(this, pnotifysink)
-  end
-  def set_notify_window_message(this : ISpEventSource2*, hwnd : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_window_message.call(this, hwnd, msg, wparam, lparam)
-  end
-  def set_notify_callback_function(this : ISpEventSource2*, pfncallback : SPNOTIFYCALLBACK*, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_callback_function.call(this, pfncallback, wparam, lparam)
-  end
-  def set_notify_callback_interface(this : ISpEventSource2*, pspcallback : ISpNotifyCallback, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_callback_interface.call(this, pspcallback, wparam, lparam)
-  end
-  def set_notify_win32_event(this : ISpEventSource2*) : HRESULT
-    @lpVtbl.value.set_notify_win32_event.call(this)
-  end
-  def wait_for_notify_event(this : ISpEventSource2*, dwmilliseconds : UInt32) : HRESULT
-    @lpVtbl.value.wait_for_notify_event.call(this, dwmilliseconds)
-  end
-  def get_notify_event_handle(this : ISpEventSource2*) : LibC::HANDLE
-    @lpVtbl.value.get_notify_event_handle.call(this)
-  end
-  def set_interest(this : ISpEventSource2*, ulleventinterest : UInt64, ullqueuedinterest : UInt64) : HRESULT
-    @lpVtbl.value.set_interest.call(this, ulleventinterest, ullqueuedinterest)
-  end
-  def get_events(this : ISpEventSource2*, ulcount : UInt32, peventarray : SPEVENT*, pulfetched : UInt32*) : HRESULT
-    @lpVtbl.value.get_events.call(this, ulcount, peventarray, pulfetched)
-  end
-  def get_info(this : ISpEventSource2*, pinfo : SPEVENTSOURCEINFO*) : HRESULT
-    @lpVtbl.value.get_info.call(this, pinfo)
-  end
-  def get_events_ex(this : ISpEventSource2*, ulcount : UInt32, peventarray : SPEVENTEX*, pulfetched : UInt32*) : HRESULT
-    @lpVtbl.value.get_events_ex.call(this, ulcount, peventarray, pulfetched)
-  end
-end
-struct LibWin32::ISpEventSink
-  def query_interface(this : ISpEventSink*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpEventSink*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpEventSink*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def add_events(this : ISpEventSink*, peventarray : SPEVENT*, ulcount : UInt32) : HRESULT
-    @lpVtbl.value.add_events.call(this, peventarray, ulcount)
-  end
-  def get_event_interest(this : ISpEventSink*, pulleventinterest : UInt64*) : HRESULT
-    @lpVtbl.value.get_event_interest.call(this, pulleventinterest)
-  end
-end
-struct LibWin32::ISpStreamFormat
-  def query_interface(this : ISpStreamFormat*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpStreamFormat*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpStreamFormat*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def read(this : ISpStreamFormat*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
-    @lpVtbl.value.read.call(this, pv, cb, pcbread)
-  end
-  def write(this : ISpStreamFormat*, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
-    @lpVtbl.value.write.call(this, pv, cb, pcbwritten)
-  end
-  def seek(this : ISpStreamFormat*, dlibmove : LARGE_INTEGER, dworigin : STREAM_SEEK, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek.call(this, dlibmove, dworigin, plibnewposition)
-  end
-  def set_size(this : ISpStreamFormat*, libnewsize : ULARGE_INTEGER) : HRESULT
-    @lpVtbl.value.set_size.call(this, libnewsize)
-  end
-  def copy_to(this : ISpStreamFormat*, pstm : IStream, cb : ULARGE_INTEGER, pcbread : ULARGE_INTEGER*, pcbwritten : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.copy_to.call(this, pstm, cb, pcbread, pcbwritten)
-  end
-  def commit(this : ISpStreamFormat*, grfcommitflags : UInt32) : HRESULT
-    @lpVtbl.value.commit.call(this, grfcommitflags)
-  end
-  def revert(this : ISpStreamFormat*) : HRESULT
-    @lpVtbl.value.revert.call(this)
-  end
-  def lock_region(this : ISpStreamFormat*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.lock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def unlock_region(this : ISpStreamFormat*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.unlock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def stat(this : ISpStreamFormat*, pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
-    @lpVtbl.value.stat.call(this, pstatstg, grfstatflag)
-  end
-  def clone(this : ISpStreamFormat*, ppstm : IStream*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppstm)
-  end
-  def get_format(this : ISpStreamFormat*, pguidformatid : Guid*, ppcomemwaveformatex : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.get_format.call(this, pguidformatid, ppcomemwaveformatex)
-  end
-end
-struct LibWin32::ISpStream
-  def query_interface(this : ISpStream*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpStream*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpStream*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def read(this : ISpStream*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
-    @lpVtbl.value.read.call(this, pv, cb, pcbread)
-  end
-  def write(this : ISpStream*, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
-    @lpVtbl.value.write.call(this, pv, cb, pcbwritten)
-  end
-  def seek(this : ISpStream*, dlibmove : LARGE_INTEGER, dworigin : STREAM_SEEK, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek.call(this, dlibmove, dworigin, plibnewposition)
-  end
-  def set_size(this : ISpStream*, libnewsize : ULARGE_INTEGER) : HRESULT
-    @lpVtbl.value.set_size.call(this, libnewsize)
-  end
-  def copy_to(this : ISpStream*, pstm : IStream, cb : ULARGE_INTEGER, pcbread : ULARGE_INTEGER*, pcbwritten : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.copy_to.call(this, pstm, cb, pcbread, pcbwritten)
-  end
-  def commit(this : ISpStream*, grfcommitflags : UInt32) : HRESULT
-    @lpVtbl.value.commit.call(this, grfcommitflags)
-  end
-  def revert(this : ISpStream*) : HRESULT
-    @lpVtbl.value.revert.call(this)
-  end
-  def lock_region(this : ISpStream*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.lock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def unlock_region(this : ISpStream*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.unlock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def stat(this : ISpStream*, pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
-    @lpVtbl.value.stat.call(this, pstatstg, grfstatflag)
-  end
-  def clone(this : ISpStream*, ppstm : IStream*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppstm)
-  end
-  def get_format(this : ISpStream*, pguidformatid : Guid*, ppcomemwaveformatex : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.get_format.call(this, pguidformatid, ppcomemwaveformatex)
-  end
-  def set_base_stream(this : ISpStream*, pstream : IStream, rguidformat : Guid*, pwaveformatex : WAVEFORMATEX*) : HRESULT
-    @lpVtbl.value.set_base_stream.call(this, pstream, rguidformat, pwaveformatex)
-  end
-  def get_base_stream(this : ISpStream*, ppstream : IStream*) : HRESULT
-    @lpVtbl.value.get_base_stream.call(this, ppstream)
-  end
-  def bind_to_file(this : ISpStream*, pszfilename : LibC::LPWSTR, emode : SPFILEMODE, pformatid : Guid*, pwaveformatex : WAVEFORMATEX*, ulleventinterest : UInt64) : HRESULT
-    @lpVtbl.value.bind_to_file.call(this, pszfilename, emode, pformatid, pwaveformatex, ulleventinterest)
-  end
-  def close(this : ISpStream*) : HRESULT
-    @lpVtbl.value.close.call(this)
-  end
-end
-struct LibWin32::ISpStreamFormatConverter
-  def query_interface(this : ISpStreamFormatConverter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpStreamFormatConverter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpStreamFormatConverter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def read(this : ISpStreamFormatConverter*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
-    @lpVtbl.value.read.call(this, pv, cb, pcbread)
-  end
-  def write(this : ISpStreamFormatConverter*, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
-    @lpVtbl.value.write.call(this, pv, cb, pcbwritten)
-  end
-  def seek(this : ISpStreamFormatConverter*, dlibmove : LARGE_INTEGER, dworigin : STREAM_SEEK, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek.call(this, dlibmove, dworigin, plibnewposition)
-  end
-  def set_size(this : ISpStreamFormatConverter*, libnewsize : ULARGE_INTEGER) : HRESULT
-    @lpVtbl.value.set_size.call(this, libnewsize)
-  end
-  def copy_to(this : ISpStreamFormatConverter*, pstm : IStream, cb : ULARGE_INTEGER, pcbread : ULARGE_INTEGER*, pcbwritten : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.copy_to.call(this, pstm, cb, pcbread, pcbwritten)
-  end
-  def commit(this : ISpStreamFormatConverter*, grfcommitflags : UInt32) : HRESULT
-    @lpVtbl.value.commit.call(this, grfcommitflags)
-  end
-  def revert(this : ISpStreamFormatConverter*) : HRESULT
-    @lpVtbl.value.revert.call(this)
-  end
-  def lock_region(this : ISpStreamFormatConverter*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.lock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def unlock_region(this : ISpStreamFormatConverter*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.unlock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def stat(this : ISpStreamFormatConverter*, pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
-    @lpVtbl.value.stat.call(this, pstatstg, grfstatflag)
-  end
-  def clone(this : ISpStreamFormatConverter*, ppstm : IStream*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppstm)
-  end
-  def get_format(this : ISpStreamFormatConverter*, pguidformatid : Guid*, ppcomemwaveformatex : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.get_format.call(this, pguidformatid, ppcomemwaveformatex)
-  end
-  def set_base_stream(this : ISpStreamFormatConverter*, pstream : ISpStreamFormat, fsetformattobasestreamformat : LibC::BOOL, fwritetobasestream : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_base_stream.call(this, pstream, fsetformattobasestreamformat, fwritetobasestream)
-  end
-  def get_base_stream(this : ISpStreamFormatConverter*, ppstream : ISpStreamFormat*) : HRESULT
-    @lpVtbl.value.get_base_stream.call(this, ppstream)
-  end
-  def set_format(this : ISpStreamFormatConverter*, rguidformatidofconvertedstream : Guid*, pwaveformatexofconvertedstream : WAVEFORMATEX*) : HRESULT
-    @lpVtbl.value.set_format.call(this, rguidformatidofconvertedstream, pwaveformatexofconvertedstream)
-  end
-  def reset_seek_position(this : ISpStreamFormatConverter*) : HRESULT
-    @lpVtbl.value.reset_seek_position.call(this)
-  end
-  def scale_converted_to_base_offset(this : ISpStreamFormatConverter*, ulloffsetconvertedstream : UInt64, pulloffsetbasestream : UInt64*) : HRESULT
-    @lpVtbl.value.scale_converted_to_base_offset.call(this, ulloffsetconvertedstream, pulloffsetbasestream)
-  end
-  def scale_base_to_converted_offset(this : ISpStreamFormatConverter*, ulloffsetbasestream : UInt64, pulloffsetconvertedstream : UInt64*) : HRESULT
-    @lpVtbl.value.scale_base_to_converted_offset.call(this, ulloffsetbasestream, pulloffsetconvertedstream)
-  end
-end
-struct LibWin32::ISpAudio
-  def query_interface(this : ISpAudio*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpAudio*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpAudio*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def read(this : ISpAudio*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
-    @lpVtbl.value.read.call(this, pv, cb, pcbread)
-  end
-  def write(this : ISpAudio*, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
-    @lpVtbl.value.write.call(this, pv, cb, pcbwritten)
-  end
-  def seek(this : ISpAudio*, dlibmove : LARGE_INTEGER, dworigin : STREAM_SEEK, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek.call(this, dlibmove, dworigin, plibnewposition)
-  end
-  def set_size(this : ISpAudio*, libnewsize : ULARGE_INTEGER) : HRESULT
-    @lpVtbl.value.set_size.call(this, libnewsize)
-  end
-  def copy_to(this : ISpAudio*, pstm : IStream, cb : ULARGE_INTEGER, pcbread : ULARGE_INTEGER*, pcbwritten : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.copy_to.call(this, pstm, cb, pcbread, pcbwritten)
-  end
-  def commit(this : ISpAudio*, grfcommitflags : UInt32) : HRESULT
-    @lpVtbl.value.commit.call(this, grfcommitflags)
-  end
-  def revert(this : ISpAudio*) : HRESULT
-    @lpVtbl.value.revert.call(this)
-  end
-  def lock_region(this : ISpAudio*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.lock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def unlock_region(this : ISpAudio*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.unlock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def stat(this : ISpAudio*, pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
-    @lpVtbl.value.stat.call(this, pstatstg, grfstatflag)
-  end
-  def clone(this : ISpAudio*, ppstm : IStream*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppstm)
-  end
-  def get_format(this : ISpAudio*, pguidformatid : Guid*, ppcomemwaveformatex : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.get_format.call(this, pguidformatid, ppcomemwaveformatex)
-  end
-  def set_state(this : ISpAudio*, newstate : SPAUDIOSTATE, ullreserved : UInt64) : HRESULT
-    @lpVtbl.value.set_state.call(this, newstate, ullreserved)
-  end
-  def set_format(this : ISpAudio*, rguidfmtid : Guid*, pwaveformatex : WAVEFORMATEX*) : HRESULT
-    @lpVtbl.value.set_format.call(this, rguidfmtid, pwaveformatex)
-  end
-  def get_status(this : ISpAudio*, pstatus : SPAUDIOSTATUS*) : HRESULT
-    @lpVtbl.value.get_status.call(this, pstatus)
-  end
-  def set_buffer_info(this : ISpAudio*, pbuffinfo : SPAUDIOBUFFERINFO*) : HRESULT
-    @lpVtbl.value.set_buffer_info.call(this, pbuffinfo)
-  end
-  def get_buffer_info(this : ISpAudio*, pbuffinfo : SPAUDIOBUFFERINFO*) : HRESULT
-    @lpVtbl.value.get_buffer_info.call(this, pbuffinfo)
-  end
-  def get_default_format(this : ISpAudio*, pformatid : Guid*, ppcomemwaveformatex : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.get_default_format.call(this, pformatid, ppcomemwaveformatex)
-  end
-  def event_handle(this : ISpAudio*) : LibC::HANDLE
-    @lpVtbl.value.event_handle.call(this)
-  end
-  def get_volume_level(this : ISpAudio*, plevel : UInt32*) : HRESULT
-    @lpVtbl.value.get_volume_level.call(this, plevel)
-  end
-  def set_volume_level(this : ISpAudio*, level : UInt32) : HRESULT
-    @lpVtbl.value.set_volume_level.call(this, level)
-  end
-  def get_buffer_notify_size(this : ISpAudio*, pcbsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffer_notify_size.call(this, pcbsize)
-  end
-  def set_buffer_notify_size(this : ISpAudio*, cbsize : UInt32) : HRESULT
-    @lpVtbl.value.set_buffer_notify_size.call(this, cbsize)
-  end
-end
-struct LibWin32::ISpMMSysAudio
-  def query_interface(this : ISpMMSysAudio*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpMMSysAudio*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpMMSysAudio*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def read(this : ISpMMSysAudio*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
-    @lpVtbl.value.read.call(this, pv, cb, pcbread)
-  end
-  def write(this : ISpMMSysAudio*, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
-    @lpVtbl.value.write.call(this, pv, cb, pcbwritten)
-  end
-  def seek(this : ISpMMSysAudio*, dlibmove : LARGE_INTEGER, dworigin : STREAM_SEEK, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek.call(this, dlibmove, dworigin, plibnewposition)
-  end
-  def set_size(this : ISpMMSysAudio*, libnewsize : ULARGE_INTEGER) : HRESULT
-    @lpVtbl.value.set_size.call(this, libnewsize)
-  end
-  def copy_to(this : ISpMMSysAudio*, pstm : IStream, cb : ULARGE_INTEGER, pcbread : ULARGE_INTEGER*, pcbwritten : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.copy_to.call(this, pstm, cb, pcbread, pcbwritten)
-  end
-  def commit(this : ISpMMSysAudio*, grfcommitflags : UInt32) : HRESULT
-    @lpVtbl.value.commit.call(this, grfcommitflags)
-  end
-  def revert(this : ISpMMSysAudio*) : HRESULT
-    @lpVtbl.value.revert.call(this)
-  end
-  def lock_region(this : ISpMMSysAudio*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.lock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def unlock_region(this : ISpMMSysAudio*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.unlock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def stat(this : ISpMMSysAudio*, pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
-    @lpVtbl.value.stat.call(this, pstatstg, grfstatflag)
-  end
-  def clone(this : ISpMMSysAudio*, ppstm : IStream*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppstm)
-  end
-  def get_format(this : ISpMMSysAudio*, pguidformatid : Guid*, ppcomemwaveformatex : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.get_format.call(this, pguidformatid, ppcomemwaveformatex)
-  end
-  def set_state(this : ISpMMSysAudio*, newstate : SPAUDIOSTATE, ullreserved : UInt64) : HRESULT
-    @lpVtbl.value.set_state.call(this, newstate, ullreserved)
-  end
-  def set_format(this : ISpMMSysAudio*, rguidfmtid : Guid*, pwaveformatex : WAVEFORMATEX*) : HRESULT
-    @lpVtbl.value.set_format.call(this, rguidfmtid, pwaveformatex)
-  end
-  def get_status(this : ISpMMSysAudio*, pstatus : SPAUDIOSTATUS*) : HRESULT
-    @lpVtbl.value.get_status.call(this, pstatus)
-  end
-  def set_buffer_info(this : ISpMMSysAudio*, pbuffinfo : SPAUDIOBUFFERINFO*) : HRESULT
-    @lpVtbl.value.set_buffer_info.call(this, pbuffinfo)
-  end
-  def get_buffer_info(this : ISpMMSysAudio*, pbuffinfo : SPAUDIOBUFFERINFO*) : HRESULT
-    @lpVtbl.value.get_buffer_info.call(this, pbuffinfo)
-  end
-  def get_default_format(this : ISpMMSysAudio*, pformatid : Guid*, ppcomemwaveformatex : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.get_default_format.call(this, pformatid, ppcomemwaveformatex)
-  end
-  def event_handle(this : ISpMMSysAudio*) : LibC::HANDLE
-    @lpVtbl.value.event_handle.call(this)
-  end
-  def get_volume_level(this : ISpMMSysAudio*, plevel : UInt32*) : HRESULT
-    @lpVtbl.value.get_volume_level.call(this, plevel)
-  end
-  def set_volume_level(this : ISpMMSysAudio*, level : UInt32) : HRESULT
-    @lpVtbl.value.set_volume_level.call(this, level)
-  end
-  def get_buffer_notify_size(this : ISpMMSysAudio*, pcbsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffer_notify_size.call(this, pcbsize)
-  end
-  def set_buffer_notify_size(this : ISpMMSysAudio*, cbsize : UInt32) : HRESULT
-    @lpVtbl.value.set_buffer_notify_size.call(this, cbsize)
-  end
-  def get_device_id(this : ISpMMSysAudio*, pudeviceid : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_id.call(this, pudeviceid)
-  end
-  def set_device_id(this : ISpMMSysAudio*, udeviceid : UInt32) : HRESULT
-    @lpVtbl.value.set_device_id.call(this, udeviceid)
-  end
-  def get_mm_handle(this : ISpMMSysAudio*, phandle : Void**) : HRESULT
-    @lpVtbl.value.get_mm_handle.call(this, phandle)
-  end
-  def get_line_id(this : ISpMMSysAudio*, pulineid : UInt32*) : HRESULT
-    @lpVtbl.value.get_line_id.call(this, pulineid)
-  end
-  def set_line_id(this : ISpMMSysAudio*, ulineid : UInt32) : HRESULT
-    @lpVtbl.value.set_line_id.call(this, ulineid)
-  end
-end
-struct LibWin32::ISpTranscript
-  def query_interface(this : ISpTranscript*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpTranscript*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpTranscript*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_transcript(this : ISpTranscript*, ppsztranscript : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_transcript.call(this, ppsztranscript)
-  end
-  def append_transcript(this : ISpTranscript*, psztranscript : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.append_transcript.call(this, psztranscript)
-  end
-end
-struct LibWin32::ISpLexicon
-  def query_interface(this : ISpLexicon*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpLexicon*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpLexicon*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_pronunciations(this : ISpLexicon*, pszword : LibC::LPWSTR, langid : UInt16, dwflags : UInt32, pwordpronunciationlist : SPWORDPRONUNCIATIONLIST*) : HRESULT
-    @lpVtbl.value.get_pronunciations.call(this, pszword, langid, dwflags, pwordpronunciationlist)
-  end
-  def add_pronunciation(this : ISpLexicon*, pszword : LibC::LPWSTR, langid : UInt16, epartofspeech : SPPARTOFSPEECH, pszpronunciation : UInt16*) : HRESULT
-    @lpVtbl.value.add_pronunciation.call(this, pszword, langid, epartofspeech, pszpronunciation)
-  end
-  def remove_pronunciation(this : ISpLexicon*, pszword : LibC::LPWSTR, langid : UInt16, epartofspeech : SPPARTOFSPEECH, pszpronunciation : UInt16*) : HRESULT
-    @lpVtbl.value.remove_pronunciation.call(this, pszword, langid, epartofspeech, pszpronunciation)
-  end
-  def get_generation(this : ISpLexicon*, pdwgeneration : UInt32*) : HRESULT
-    @lpVtbl.value.get_generation.call(this, pdwgeneration)
-  end
-  def get_generation_change(this : ISpLexicon*, dwflags : UInt32, pdwgeneration : UInt32*, pwordlist : SPWORDLIST*) : HRESULT
-    @lpVtbl.value.get_generation_change.call(this, dwflags, pdwgeneration, pwordlist)
-  end
-  def get_words(this : ISpLexicon*, dwflags : UInt32, pdwgeneration : UInt32*, pdwcookie : UInt32*, pwordlist : SPWORDLIST*) : HRESULT
-    @lpVtbl.value.get_words.call(this, dwflags, pdwgeneration, pdwcookie, pwordlist)
-  end
-end
-struct LibWin32::ISpContainerLexicon
-  def query_interface(this : ISpContainerLexicon*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpContainerLexicon*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpContainerLexicon*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_pronunciations(this : ISpContainerLexicon*, pszword : LibC::LPWSTR, langid : UInt16, dwflags : UInt32, pwordpronunciationlist : SPWORDPRONUNCIATIONLIST*) : HRESULT
-    @lpVtbl.value.get_pronunciations.call(this, pszword, langid, dwflags, pwordpronunciationlist)
-  end
-  def add_pronunciation(this : ISpContainerLexicon*, pszword : LibC::LPWSTR, langid : UInt16, epartofspeech : SPPARTOFSPEECH, pszpronunciation : UInt16*) : HRESULT
-    @lpVtbl.value.add_pronunciation.call(this, pszword, langid, epartofspeech, pszpronunciation)
-  end
-  def remove_pronunciation(this : ISpContainerLexicon*, pszword : LibC::LPWSTR, langid : UInt16, epartofspeech : SPPARTOFSPEECH, pszpronunciation : UInt16*) : HRESULT
-    @lpVtbl.value.remove_pronunciation.call(this, pszword, langid, epartofspeech, pszpronunciation)
-  end
-  def get_generation(this : ISpContainerLexicon*, pdwgeneration : UInt32*) : HRESULT
-    @lpVtbl.value.get_generation.call(this, pdwgeneration)
-  end
-  def get_generation_change(this : ISpContainerLexicon*, dwflags : UInt32, pdwgeneration : UInt32*, pwordlist : SPWORDLIST*) : HRESULT
-    @lpVtbl.value.get_generation_change.call(this, dwflags, pdwgeneration, pwordlist)
-  end
-  def get_words(this : ISpContainerLexicon*, dwflags : UInt32, pdwgeneration : UInt32*, pdwcookie : UInt32*, pwordlist : SPWORDLIST*) : HRESULT
-    @lpVtbl.value.get_words.call(this, dwflags, pdwgeneration, pdwcookie, pwordlist)
-  end
-  def add_lexicon(this : ISpContainerLexicon*, paddlexicon : ISpLexicon, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.add_lexicon.call(this, paddlexicon, dwflags)
-  end
-end
-struct LibWin32::ISpShortcut
-  def query_interface(this : ISpShortcut*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpShortcut*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpShortcut*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def add_shortcut(this : ISpShortcut*, pszdisplay : LibC::LPWSTR, langid : UInt16, pszspoken : LibC::LPWSTR, shtype : SPSHORTCUTTYPE) : HRESULT
-    @lpVtbl.value.add_shortcut.call(this, pszdisplay, langid, pszspoken, shtype)
-  end
-  def remove_shortcut(this : ISpShortcut*, pszdisplay : LibC::LPWSTR, langid : UInt16, pszspoken : LibC::LPWSTR, shtype : SPSHORTCUTTYPE) : HRESULT
-    @lpVtbl.value.remove_shortcut.call(this, pszdisplay, langid, pszspoken, shtype)
-  end
-  def get_shortcuts(this : ISpShortcut*, langid : UInt16, pshortcutpairlist : SPSHORTCUTPAIRLIST*) : HRESULT
-    @lpVtbl.value.get_shortcuts.call(this, langid, pshortcutpairlist)
-  end
-  def get_generation(this : ISpShortcut*, pdwgeneration : UInt32*) : HRESULT
-    @lpVtbl.value.get_generation.call(this, pdwgeneration)
-  end
-  def get_words_from_generation_change(this : ISpShortcut*, pdwgeneration : UInt32*, pwordlist : SPWORDLIST*) : HRESULT
-    @lpVtbl.value.get_words_from_generation_change.call(this, pdwgeneration, pwordlist)
-  end
-  def get_words(this : ISpShortcut*, pdwgeneration : UInt32*, pdwcookie : UInt32*, pwordlist : SPWORDLIST*) : HRESULT
-    @lpVtbl.value.get_words.call(this, pdwgeneration, pdwcookie, pwordlist)
-  end
-  def get_shortcuts_for_generation(this : ISpShortcut*, pdwgeneration : UInt32*, pdwcookie : UInt32*, pshortcutpairlist : SPSHORTCUTPAIRLIST*) : HRESULT
-    @lpVtbl.value.get_shortcuts_for_generation.call(this, pdwgeneration, pdwcookie, pshortcutpairlist)
-  end
-  def get_generation_change(this : ISpShortcut*, pdwgeneration : UInt32*, pshortcutpairlist : SPSHORTCUTPAIRLIST*) : HRESULT
-    @lpVtbl.value.get_generation_change.call(this, pdwgeneration, pshortcutpairlist)
-  end
-end
-struct LibWin32::ISpPhoneConverter
-  def query_interface(this : ISpPhoneConverter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpPhoneConverter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpPhoneConverter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_object_token(this : ISpPhoneConverter*, ptoken : ISpObjectToken) : HRESULT
-    @lpVtbl.value.set_object_token.call(this, ptoken)
-  end
-  def get_object_token(this : ISpPhoneConverter*, pptoken : ISpObjectToken*) : HRESULT
-    @lpVtbl.value.get_object_token.call(this, pptoken)
-  end
-  def phone_to_id(this : ISpPhoneConverter*, pszphone : LibC::LPWSTR, pid : UInt16*) : HRESULT
-    @lpVtbl.value.phone_to_id.call(this, pszphone, pid)
-  end
-  def id_to_phone(this : ISpPhoneConverter*, pid : UInt16*, pszphone : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.id_to_phone.call(this, pid, pszphone)
-  end
-end
-struct LibWin32::ISpPhoneticAlphabetConverter
-  def query_interface(this : ISpPhoneticAlphabetConverter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpPhoneticAlphabetConverter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpPhoneticAlphabetConverter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_lang_id(this : ISpPhoneticAlphabetConverter*, plangid : UInt16*) : HRESULT
-    @lpVtbl.value.get_lang_id.call(this, plangid)
-  end
-  def set_lang_id(this : ISpPhoneticAlphabetConverter*, langid : UInt16) : HRESULT
-    @lpVtbl.value.set_lang_id.call(this, langid)
-  end
-  def sapi2_ups(this : ISpPhoneticAlphabetConverter*, pszsapiid : UInt16*, pszupsid : UInt16*, cmaxlength : UInt32) : HRESULT
-    @lpVtbl.value.sapi2_ups.call(this, pszsapiid, pszupsid, cmaxlength)
-  end
-  def ups2_sapi(this : ISpPhoneticAlphabetConverter*, pszupsid : UInt16*, pszsapiid : UInt16*, cmaxlength : UInt32) : HRESULT
-    @lpVtbl.value.ups2_sapi.call(this, pszupsid, pszsapiid, cmaxlength)
-  end
-  def get_max_convert_length(this : ISpPhoneticAlphabetConverter*, csrclength : UInt32, bsapi2ups : LibC::BOOL, pcmaxdestlength : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_convert_length.call(this, csrclength, bsapi2ups, pcmaxdestlength)
-  end
-end
-struct LibWin32::ISpPhoneticAlphabetSelection
-  def query_interface(this : ISpPhoneticAlphabetSelection*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpPhoneticAlphabetSelection*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpPhoneticAlphabetSelection*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def is_alphabet_ups(this : ISpPhoneticAlphabetSelection*, pfisups : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_alphabet_ups.call(this, pfisups)
-  end
-  def set_alphabet_to_ups(this : ISpPhoneticAlphabetSelection*, fforceups : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_alphabet_to_ups.call(this, fforceups)
-  end
-end
-struct LibWin32::ISpVoice
-  def query_interface(this : ISpVoice*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpVoice*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpVoice*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_notify_sink(this : ISpVoice*, pnotifysink : ISpNotifySink) : HRESULT
-    @lpVtbl.value.set_notify_sink.call(this, pnotifysink)
-  end
-  def set_notify_window_message(this : ISpVoice*, hwnd : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_window_message.call(this, hwnd, msg, wparam, lparam)
-  end
-  def set_notify_callback_function(this : ISpVoice*, pfncallback : SPNOTIFYCALLBACK*, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_callback_function.call(this, pfncallback, wparam, lparam)
-  end
-  def set_notify_callback_interface(this : ISpVoice*, pspcallback : ISpNotifyCallback, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_callback_interface.call(this, pspcallback, wparam, lparam)
-  end
-  def set_notify_win32_event(this : ISpVoice*) : HRESULT
-    @lpVtbl.value.set_notify_win32_event.call(this)
-  end
-  def wait_for_notify_event(this : ISpVoice*, dwmilliseconds : UInt32) : HRESULT
-    @lpVtbl.value.wait_for_notify_event.call(this, dwmilliseconds)
-  end
-  def get_notify_event_handle(this : ISpVoice*) : LibC::HANDLE
-    @lpVtbl.value.get_notify_event_handle.call(this)
-  end
-  def set_interest(this : ISpVoice*, ulleventinterest : UInt64, ullqueuedinterest : UInt64) : HRESULT
-    @lpVtbl.value.set_interest.call(this, ulleventinterest, ullqueuedinterest)
-  end
-  def get_events(this : ISpVoice*, ulcount : UInt32, peventarray : SPEVENT*, pulfetched : UInt32*) : HRESULT
-    @lpVtbl.value.get_events.call(this, ulcount, peventarray, pulfetched)
-  end
-  def get_info(this : ISpVoice*, pinfo : SPEVENTSOURCEINFO*) : HRESULT
-    @lpVtbl.value.get_info.call(this, pinfo)
-  end
-  def set_output(this : ISpVoice*, punkoutput : IUnknown, fallowformatchanges : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_output.call(this, punkoutput, fallowformatchanges)
-  end
-  def get_output_object_token(this : ISpVoice*, ppobjecttoken : ISpObjectToken*) : HRESULT
-    @lpVtbl.value.get_output_object_token.call(this, ppobjecttoken)
-  end
-  def get_output_stream(this : ISpVoice*, ppstream : ISpStreamFormat*) : HRESULT
-    @lpVtbl.value.get_output_stream.call(this, ppstream)
-  end
-  def pause(this : ISpVoice*) : HRESULT
-    @lpVtbl.value.pause.call(this)
-  end
-  def resume(this : ISpVoice*) : HRESULT
-    @lpVtbl.value.resume.call(this)
-  end
-  def set_voice(this : ISpVoice*, ptoken : ISpObjectToken) : HRESULT
-    @lpVtbl.value.set_voice.call(this, ptoken)
-  end
-  def get_voice(this : ISpVoice*, pptoken : ISpObjectToken*) : HRESULT
-    @lpVtbl.value.get_voice.call(this, pptoken)
-  end
-  def speak(this : ISpVoice*, pwcs : LibC::LPWSTR, dwflags : UInt32, pulstreamnumber : UInt32*) : HRESULT
-    @lpVtbl.value.speak.call(this, pwcs, dwflags, pulstreamnumber)
-  end
-  def speak_stream(this : ISpVoice*, pstream : IStream, dwflags : UInt32, pulstreamnumber : UInt32*) : HRESULT
-    @lpVtbl.value.speak_stream.call(this, pstream, dwflags, pulstreamnumber)
-  end
-  def get_status(this : ISpVoice*, pstatus : SPVOICESTATUS*, ppszlastbookmark : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_status.call(this, pstatus, ppszlastbookmark)
-  end
-  def skip(this : ISpVoice*, pitemtype : LibC::LPWSTR, lnumitems : Int32, pulnumskipped : UInt32*) : HRESULT
-    @lpVtbl.value.skip.call(this, pitemtype, lnumitems, pulnumskipped)
-  end
-  def set_priority(this : ISpVoice*, epriority : SPVPRIORITY) : HRESULT
-    @lpVtbl.value.set_priority.call(this, epriority)
-  end
-  def get_priority(this : ISpVoice*, pepriority : SPVPRIORITY*) : HRESULT
-    @lpVtbl.value.get_priority.call(this, pepriority)
-  end
-  def set_alert_boundary(this : ISpVoice*, eboundary : SPEVENTENUM) : HRESULT
-    @lpVtbl.value.set_alert_boundary.call(this, eboundary)
-  end
-  def get_alert_boundary(this : ISpVoice*, peboundary : SPEVENTENUM*) : HRESULT
-    @lpVtbl.value.get_alert_boundary.call(this, peboundary)
-  end
-  def set_rate(this : ISpVoice*, rateadjust : Int32) : HRESULT
-    @lpVtbl.value.set_rate.call(this, rateadjust)
-  end
-  def get_rate(this : ISpVoice*, prateadjust : Int32*) : HRESULT
-    @lpVtbl.value.get_rate.call(this, prateadjust)
-  end
-  def set_volume(this : ISpVoice*, usvolume : UInt16) : HRESULT
-    @lpVtbl.value.set_volume.call(this, usvolume)
-  end
-  def get_volume(this : ISpVoice*, pusvolume : UInt16*) : HRESULT
-    @lpVtbl.value.get_volume.call(this, pusvolume)
-  end
-  def wait_until_done(this : ISpVoice*, mstimeout : UInt32) : HRESULT
-    @lpVtbl.value.wait_until_done.call(this, mstimeout)
-  end
-  def set_sync_speak_timeout(this : ISpVoice*, mstimeout : UInt32) : HRESULT
-    @lpVtbl.value.set_sync_speak_timeout.call(this, mstimeout)
-  end
-  def get_sync_speak_timeout(this : ISpVoice*, pmstimeout : UInt32*) : HRESULT
-    @lpVtbl.value.get_sync_speak_timeout.call(this, pmstimeout)
-  end
-  def speak_complete_event(this : ISpVoice*) : LibC::HANDLE
-    @lpVtbl.value.speak_complete_event.call(this)
-  end
-  def is_ui_supported(this : ISpVoice*, psztypeofui : LibC::LPWSTR, pvextradata : Void*, cbextradata : UInt32, pfsupported : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_ui_supported.call(this, psztypeofui, pvextradata, cbextradata, pfsupported)
-  end
-  def display_ui(this : ISpVoice*, hwndparent : LibC::HANDLE, psztitle : LibC::LPWSTR, psztypeofui : LibC::LPWSTR, pvextradata : Void*, cbextradata : UInt32) : HRESULT
-    @lpVtbl.value.display_ui.call(this, hwndparent, psztitle, psztypeofui, pvextradata, cbextradata)
-  end
-end
-struct LibWin32::ISpPhrase
-  def query_interface(this : ISpPhrase*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpPhrase*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpPhrase*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_phrase(this : ISpPhrase*, ppcomemphrase : SPPHRASE**) : HRESULT
-    @lpVtbl.value.get_phrase.call(this, ppcomemphrase)
-  end
-  def get_serialized_phrase(this : ISpPhrase*, ppcomemphrase : SPSERIALIZEDPHRASE**) : HRESULT
-    @lpVtbl.value.get_serialized_phrase.call(this, ppcomemphrase)
-  end
-  def get_text(this : ISpPhrase*, ulstart : UInt32, ulcount : UInt32, fusetextreplacements : LibC::BOOL, ppszcomemtext : LibC::LPWSTR*, pbdisplayattributes : UInt8*) : HRESULT
-    @lpVtbl.value.get_text.call(this, ulstart, ulcount, fusetextreplacements, ppszcomemtext, pbdisplayattributes)
-  end
-  def discard(this : ISpPhrase*, dwvaluetypes : UInt32) : HRESULT
-    @lpVtbl.value.discard.call(this, dwvaluetypes)
-  end
-end
-struct LibWin32::ISpPhraseAlt
-  def query_interface(this : ISpPhraseAlt*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpPhraseAlt*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpPhraseAlt*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_phrase(this : ISpPhraseAlt*, ppcomemphrase : SPPHRASE**) : HRESULT
-    @lpVtbl.value.get_phrase.call(this, ppcomemphrase)
-  end
-  def get_serialized_phrase(this : ISpPhraseAlt*, ppcomemphrase : SPSERIALIZEDPHRASE**) : HRESULT
-    @lpVtbl.value.get_serialized_phrase.call(this, ppcomemphrase)
-  end
-  def get_text(this : ISpPhraseAlt*, ulstart : UInt32, ulcount : UInt32, fusetextreplacements : LibC::BOOL, ppszcomemtext : LibC::LPWSTR*, pbdisplayattributes : UInt8*) : HRESULT
-    @lpVtbl.value.get_text.call(this, ulstart, ulcount, fusetextreplacements, ppszcomemtext, pbdisplayattributes)
-  end
-  def discard(this : ISpPhraseAlt*, dwvaluetypes : UInt32) : HRESULT
-    @lpVtbl.value.discard.call(this, dwvaluetypes)
-  end
-  def get_alt_info(this : ISpPhraseAlt*, ppparent : ISpPhrase*, pulstartelementinparent : UInt32*, pcelementsinparent : UInt32*, pcelementsinalt : UInt32*) : HRESULT
-    @lpVtbl.value.get_alt_info.call(this, ppparent, pulstartelementinparent, pcelementsinparent, pcelementsinalt)
-  end
-  def commit(this : ISpPhraseAlt*) : HRESULT
-    @lpVtbl.value.commit.call(this)
-  end
-end
-struct LibWin32::ISpPhrase2
-  def query_interface(this : ISpPhrase2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpPhrase2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpPhrase2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_phrase(this : ISpPhrase2*, ppcomemphrase : SPPHRASE**) : HRESULT
-    @lpVtbl.value.get_phrase.call(this, ppcomemphrase)
-  end
-  def get_serialized_phrase(this : ISpPhrase2*, ppcomemphrase : SPSERIALIZEDPHRASE**) : HRESULT
-    @lpVtbl.value.get_serialized_phrase.call(this, ppcomemphrase)
-  end
-  def get_text(this : ISpPhrase2*, ulstart : UInt32, ulcount : UInt32, fusetextreplacements : LibC::BOOL, ppszcomemtext : LibC::LPWSTR*, pbdisplayattributes : UInt8*) : HRESULT
-    @lpVtbl.value.get_text.call(this, ulstart, ulcount, fusetextreplacements, ppszcomemtext, pbdisplayattributes)
-  end
-  def discard(this : ISpPhrase2*, dwvaluetypes : UInt32) : HRESULT
-    @lpVtbl.value.discard.call(this, dwvaluetypes)
-  end
-  def get_xml_result(this : ISpPhrase2*, ppszcomemxmlresult : LibC::LPWSTR*, options : SPXMLRESULTOPTIONS) : HRESULT
-    @lpVtbl.value.get_xml_result.call(this, ppszcomemxmlresult, options)
-  end
-  def get_xml_error_info(this : ISpPhrase2*, psemanticerrorinfo : SPSEMANTICERRORINFO*) : HRESULT
-    @lpVtbl.value.get_xml_error_info.call(this, psemanticerrorinfo)
-  end
-  def get_audio(this : ISpPhrase2*, ulstartelement : UInt32, celements : UInt32, ppstream : ISpStreamFormat*) : HRESULT
-    @lpVtbl.value.get_audio.call(this, ulstartelement, celements, ppstream)
-  end
-end
-struct LibWin32::ISpRecoResult
-  def query_interface(this : ISpRecoResult*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpRecoResult*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpRecoResult*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_phrase(this : ISpRecoResult*, ppcomemphrase : SPPHRASE**) : HRESULT
-    @lpVtbl.value.get_phrase.call(this, ppcomemphrase)
-  end
-  def get_serialized_phrase(this : ISpRecoResult*, ppcomemphrase : SPSERIALIZEDPHRASE**) : HRESULT
-    @lpVtbl.value.get_serialized_phrase.call(this, ppcomemphrase)
-  end
-  def get_text(this : ISpRecoResult*, ulstart : UInt32, ulcount : UInt32, fusetextreplacements : LibC::BOOL, ppszcomemtext : LibC::LPWSTR*, pbdisplayattributes : UInt8*) : HRESULT
-    @lpVtbl.value.get_text.call(this, ulstart, ulcount, fusetextreplacements, ppszcomemtext, pbdisplayattributes)
-  end
-  def discard(this : ISpRecoResult*, dwvaluetypes : UInt32) : HRESULT
-    @lpVtbl.value.discard.call(this, dwvaluetypes)
-  end
-  def get_result_times(this : ISpRecoResult*, ptimes : SPRECORESULTTIMES*) : HRESULT
-    @lpVtbl.value.get_result_times.call(this, ptimes)
-  end
-  def get_alternates(this : ISpRecoResult*, ulstartelement : UInt32, celements : UInt32, ulrequestcount : UInt32, ppphrases : ISpPhraseAlt*, pcphrasesreturned : UInt32*) : HRESULT
-    @lpVtbl.value.get_alternates.call(this, ulstartelement, celements, ulrequestcount, ppphrases, pcphrasesreturned)
-  end
-  def get_audio(this : ISpRecoResult*, ulstartelement : UInt32, celements : UInt32, ppstream : ISpStreamFormat*) : HRESULT
-    @lpVtbl.value.get_audio.call(this, ulstartelement, celements, ppstream)
-  end
-  def speak_audio(this : ISpRecoResult*, ulstartelement : UInt32, celements : UInt32, dwflags : UInt32, pulstreamnumber : UInt32*) : HRESULT
-    @lpVtbl.value.speak_audio.call(this, ulstartelement, celements, dwflags, pulstreamnumber)
-  end
-  def serialize(this : ISpRecoResult*, ppcomemserializedresult : SPSERIALIZEDRESULT**) : HRESULT
-    @lpVtbl.value.serialize.call(this, ppcomemserializedresult)
-  end
-  def scale_audio(this : ISpRecoResult*, paudioformatid : Guid*, pwaveformatex : WAVEFORMATEX*) : HRESULT
-    @lpVtbl.value.scale_audio.call(this, paudioformatid, pwaveformatex)
-  end
-  def get_reco_context(this : ISpRecoResult*, pprecocontext : ISpRecoContext*) : HRESULT
-    @lpVtbl.value.get_reco_context.call(this, pprecocontext)
-  end
-end
-struct LibWin32::ISpRecoResult2
-  def query_interface(this : ISpRecoResult2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpRecoResult2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpRecoResult2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_phrase(this : ISpRecoResult2*, ppcomemphrase : SPPHRASE**) : HRESULT
-    @lpVtbl.value.get_phrase.call(this, ppcomemphrase)
-  end
-  def get_serialized_phrase(this : ISpRecoResult2*, ppcomemphrase : SPSERIALIZEDPHRASE**) : HRESULT
-    @lpVtbl.value.get_serialized_phrase.call(this, ppcomemphrase)
-  end
-  def get_text(this : ISpRecoResult2*, ulstart : UInt32, ulcount : UInt32, fusetextreplacements : LibC::BOOL, ppszcomemtext : LibC::LPWSTR*, pbdisplayattributes : UInt8*) : HRESULT
-    @lpVtbl.value.get_text.call(this, ulstart, ulcount, fusetextreplacements, ppszcomemtext, pbdisplayattributes)
-  end
-  def discard(this : ISpRecoResult2*, dwvaluetypes : UInt32) : HRESULT
-    @lpVtbl.value.discard.call(this, dwvaluetypes)
-  end
-  def get_result_times(this : ISpRecoResult2*, ptimes : SPRECORESULTTIMES*) : HRESULT
-    @lpVtbl.value.get_result_times.call(this, ptimes)
-  end
-  def get_alternates(this : ISpRecoResult2*, ulstartelement : UInt32, celements : UInt32, ulrequestcount : UInt32, ppphrases : ISpPhraseAlt*, pcphrasesreturned : UInt32*) : HRESULT
-    @lpVtbl.value.get_alternates.call(this, ulstartelement, celements, ulrequestcount, ppphrases, pcphrasesreturned)
-  end
-  def get_audio(this : ISpRecoResult2*, ulstartelement : UInt32, celements : UInt32, ppstream : ISpStreamFormat*) : HRESULT
-    @lpVtbl.value.get_audio.call(this, ulstartelement, celements, ppstream)
-  end
-  def speak_audio(this : ISpRecoResult2*, ulstartelement : UInt32, celements : UInt32, dwflags : UInt32, pulstreamnumber : UInt32*) : HRESULT
-    @lpVtbl.value.speak_audio.call(this, ulstartelement, celements, dwflags, pulstreamnumber)
-  end
-  def serialize(this : ISpRecoResult2*, ppcomemserializedresult : SPSERIALIZEDRESULT**) : HRESULT
-    @lpVtbl.value.serialize.call(this, ppcomemserializedresult)
-  end
-  def scale_audio(this : ISpRecoResult2*, paudioformatid : Guid*, pwaveformatex : WAVEFORMATEX*) : HRESULT
-    @lpVtbl.value.scale_audio.call(this, paudioformatid, pwaveformatex)
-  end
-  def get_reco_context(this : ISpRecoResult2*, pprecocontext : ISpRecoContext*) : HRESULT
-    @lpVtbl.value.get_reco_context.call(this, pprecocontext)
-  end
-  def commit_alternate(this : ISpRecoResult2*, pphrasealt : ISpPhraseAlt, ppnewresult : ISpRecoResult*) : HRESULT
-    @lpVtbl.value.commit_alternate.call(this, pphrasealt, ppnewresult)
-  end
-  def commit_text(this : ISpRecoResult2*, ulstartelement : UInt32, celements : UInt32, pszcorrecteddata : LibC::LPWSTR, ecommitflags : UInt32) : HRESULT
-    @lpVtbl.value.commit_text.call(this, ulstartelement, celements, pszcorrecteddata, ecommitflags)
-  end
-  def set_text_feedback(this : ISpRecoResult2*, pszfeedback : LibC::LPWSTR, fsuccessful : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_text_feedback.call(this, pszfeedback, fsuccessful)
-  end
-end
-struct LibWin32::ISpXMLRecoResult
-  def query_interface(this : ISpXMLRecoResult*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpXMLRecoResult*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpXMLRecoResult*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_phrase(this : ISpXMLRecoResult*, ppcomemphrase : SPPHRASE**) : HRESULT
-    @lpVtbl.value.get_phrase.call(this, ppcomemphrase)
-  end
-  def get_serialized_phrase(this : ISpXMLRecoResult*, ppcomemphrase : SPSERIALIZEDPHRASE**) : HRESULT
-    @lpVtbl.value.get_serialized_phrase.call(this, ppcomemphrase)
-  end
-  def get_text(this : ISpXMLRecoResult*, ulstart : UInt32, ulcount : UInt32, fusetextreplacements : LibC::BOOL, ppszcomemtext : LibC::LPWSTR*, pbdisplayattributes : UInt8*) : HRESULT
-    @lpVtbl.value.get_text.call(this, ulstart, ulcount, fusetextreplacements, ppszcomemtext, pbdisplayattributes)
-  end
-  def discard(this : ISpXMLRecoResult*, dwvaluetypes : UInt32) : HRESULT
-    @lpVtbl.value.discard.call(this, dwvaluetypes)
-  end
-  def get_result_times(this : ISpXMLRecoResult*, ptimes : SPRECORESULTTIMES*) : HRESULT
-    @lpVtbl.value.get_result_times.call(this, ptimes)
-  end
-  def get_alternates(this : ISpXMLRecoResult*, ulstartelement : UInt32, celements : UInt32, ulrequestcount : UInt32, ppphrases : ISpPhraseAlt*, pcphrasesreturned : UInt32*) : HRESULT
-    @lpVtbl.value.get_alternates.call(this, ulstartelement, celements, ulrequestcount, ppphrases, pcphrasesreturned)
-  end
-  def get_audio(this : ISpXMLRecoResult*, ulstartelement : UInt32, celements : UInt32, ppstream : ISpStreamFormat*) : HRESULT
-    @lpVtbl.value.get_audio.call(this, ulstartelement, celements, ppstream)
-  end
-  def speak_audio(this : ISpXMLRecoResult*, ulstartelement : UInt32, celements : UInt32, dwflags : UInt32, pulstreamnumber : UInt32*) : HRESULT
-    @lpVtbl.value.speak_audio.call(this, ulstartelement, celements, dwflags, pulstreamnumber)
-  end
-  def serialize(this : ISpXMLRecoResult*, ppcomemserializedresult : SPSERIALIZEDRESULT**) : HRESULT
-    @lpVtbl.value.serialize.call(this, ppcomemserializedresult)
-  end
-  def scale_audio(this : ISpXMLRecoResult*, paudioformatid : Guid*, pwaveformatex : WAVEFORMATEX*) : HRESULT
-    @lpVtbl.value.scale_audio.call(this, paudioformatid, pwaveformatex)
-  end
-  def get_reco_context(this : ISpXMLRecoResult*, pprecocontext : ISpRecoContext*) : HRESULT
-    @lpVtbl.value.get_reco_context.call(this, pprecocontext)
-  end
-  def get_xml_result(this : ISpXMLRecoResult*, ppszcomemxmlresult : LibC::LPWSTR*, options : SPXMLRESULTOPTIONS) : HRESULT
-    @lpVtbl.value.get_xml_result.call(this, ppszcomemxmlresult, options)
-  end
-  def get_xml_error_info(this : ISpXMLRecoResult*, psemanticerrorinfo : SPSEMANTICERRORINFO*) : HRESULT
-    @lpVtbl.value.get_xml_error_info.call(this, psemanticerrorinfo)
-  end
-end
-struct LibWin32::ISpGrammarBuilder
-  def query_interface(this : ISpGrammarBuilder*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpGrammarBuilder*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpGrammarBuilder*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def reset_grammar(this : ISpGrammarBuilder*, newlanguage : UInt16) : HRESULT
-    @lpVtbl.value.reset_grammar.call(this, newlanguage)
-  end
-  def get_rule(this : ISpGrammarBuilder*, pszrulename : LibC::LPWSTR, dwruleid : UInt32, dwattributes : UInt32, fcreateifnotexist : LibC::BOOL, phinitialstate : SPSTATEHANDLE__**) : HRESULT
-    @lpVtbl.value.get_rule.call(this, pszrulename, dwruleid, dwattributes, fcreateifnotexist, phinitialstate)
-  end
-  def clear_rule(this : ISpGrammarBuilder*, hstate : SPSTATEHANDLE__*) : HRESULT
-    @lpVtbl.value.clear_rule.call(this, hstate)
-  end
-  def create_new_state(this : ISpGrammarBuilder*, hstate : SPSTATEHANDLE__*, phstate : SPSTATEHANDLE__**) : HRESULT
-    @lpVtbl.value.create_new_state.call(this, hstate, phstate)
-  end
-  def add_word_transition(this : ISpGrammarBuilder*, hfromstate : SPSTATEHANDLE__*, htostate : SPSTATEHANDLE__*, psz : LibC::LPWSTR, pszseparators : LibC::LPWSTR, ewordtype : SPGRAMMARWORDTYPE, weight : Float32, ppropinfo : SPPROPERTYINFO*) : HRESULT
-    @lpVtbl.value.add_word_transition.call(this, hfromstate, htostate, psz, pszseparators, ewordtype, weight, ppropinfo)
-  end
-  def add_rule_transition(this : ISpGrammarBuilder*, hfromstate : SPSTATEHANDLE__*, htostate : SPSTATEHANDLE__*, hrule : SPSTATEHANDLE__*, weight : Float32, ppropinfo : SPPROPERTYINFO*) : HRESULT
-    @lpVtbl.value.add_rule_transition.call(this, hfromstate, htostate, hrule, weight, ppropinfo)
-  end
-  def add_resource(this : ISpGrammarBuilder*, hrulestate : SPSTATEHANDLE__*, pszresourcename : LibC::LPWSTR, pszresourcevalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add_resource.call(this, hrulestate, pszresourcename, pszresourcevalue)
-  end
-  def commit(this : ISpGrammarBuilder*, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.commit.call(this, dwreserved)
-  end
-end
-struct LibWin32::ISpRecoGrammar
-  def query_interface(this : ISpRecoGrammar*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpRecoGrammar*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpRecoGrammar*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def reset_grammar(this : ISpRecoGrammar*, newlanguage : UInt16) : HRESULT
-    @lpVtbl.value.reset_grammar.call(this, newlanguage)
-  end
-  def get_rule(this : ISpRecoGrammar*, pszrulename : LibC::LPWSTR, dwruleid : UInt32, dwattributes : UInt32, fcreateifnotexist : LibC::BOOL, phinitialstate : SPSTATEHANDLE__**) : HRESULT
-    @lpVtbl.value.get_rule.call(this, pszrulename, dwruleid, dwattributes, fcreateifnotexist, phinitialstate)
-  end
-  def clear_rule(this : ISpRecoGrammar*, hstate : SPSTATEHANDLE__*) : HRESULT
-    @lpVtbl.value.clear_rule.call(this, hstate)
-  end
-  def create_new_state(this : ISpRecoGrammar*, hstate : SPSTATEHANDLE__*, phstate : SPSTATEHANDLE__**) : HRESULT
-    @lpVtbl.value.create_new_state.call(this, hstate, phstate)
-  end
-  def add_word_transition(this : ISpRecoGrammar*, hfromstate : SPSTATEHANDLE__*, htostate : SPSTATEHANDLE__*, psz : LibC::LPWSTR, pszseparators : LibC::LPWSTR, ewordtype : SPGRAMMARWORDTYPE, weight : Float32, ppropinfo : SPPROPERTYINFO*) : HRESULT
-    @lpVtbl.value.add_word_transition.call(this, hfromstate, htostate, psz, pszseparators, ewordtype, weight, ppropinfo)
-  end
-  def add_rule_transition(this : ISpRecoGrammar*, hfromstate : SPSTATEHANDLE__*, htostate : SPSTATEHANDLE__*, hrule : SPSTATEHANDLE__*, weight : Float32, ppropinfo : SPPROPERTYINFO*) : HRESULT
-    @lpVtbl.value.add_rule_transition.call(this, hfromstate, htostate, hrule, weight, ppropinfo)
-  end
-  def add_resource(this : ISpRecoGrammar*, hrulestate : SPSTATEHANDLE__*, pszresourcename : LibC::LPWSTR, pszresourcevalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.add_resource.call(this, hrulestate, pszresourcename, pszresourcevalue)
-  end
-  def commit(this : ISpRecoGrammar*, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.commit.call(this, dwreserved)
-  end
-  def get_grammar_id(this : ISpRecoGrammar*, pullgrammarid : UInt64*) : HRESULT
-    @lpVtbl.value.get_grammar_id.call(this, pullgrammarid)
-  end
-  def get_reco_context(this : ISpRecoGrammar*, pprecoctxt : ISpRecoContext*) : HRESULT
-    @lpVtbl.value.get_reco_context.call(this, pprecoctxt)
-  end
-  def load_cmd_from_file(this : ISpRecoGrammar*, pszfilename : LibC::LPWSTR, options : SPLOADOPTIONS) : HRESULT
-    @lpVtbl.value.load_cmd_from_file.call(this, pszfilename, options)
-  end
-  def load_cmd_from_object(this : ISpRecoGrammar*, rcid : Guid*, pszgrammarname : LibC::LPWSTR, options : SPLOADOPTIONS) : HRESULT
-    @lpVtbl.value.load_cmd_from_object.call(this, rcid, pszgrammarname, options)
-  end
-  def load_cmd_from_resource(this : ISpRecoGrammar*, hmodule : HINSTANCE, pszresourcename : LibC::LPWSTR, pszresourcetype : LibC::LPWSTR, wlanguage : UInt16, options : SPLOADOPTIONS) : HRESULT
-    @lpVtbl.value.load_cmd_from_resource.call(this, hmodule, pszresourcename, pszresourcetype, wlanguage, options)
-  end
-  def load_cmd_from_memory(this : ISpRecoGrammar*, pgrammar : SPBINARYGRAMMAR*, options : SPLOADOPTIONS) : HRESULT
-    @lpVtbl.value.load_cmd_from_memory.call(this, pgrammar, options)
-  end
-  def load_cmd_from_proprietary_grammar(this : ISpRecoGrammar*, rguidparam : Guid*, pszstringparam : LibC::LPWSTR, pvdataprarm : Void*, cbdatasize : UInt32, options : SPLOADOPTIONS) : HRESULT
-    @lpVtbl.value.load_cmd_from_proprietary_grammar.call(this, rguidparam, pszstringparam, pvdataprarm, cbdatasize, options)
-  end
-  def set_rule_state(this : ISpRecoGrammar*, pszname : LibC::LPWSTR, preserved : Void*, newstate : SPRULESTATE) : HRESULT
-    @lpVtbl.value.set_rule_state.call(this, pszname, preserved, newstate)
-  end
-  def set_rule_id_state(this : ISpRecoGrammar*, ulruleid : UInt32, newstate : SPRULESTATE) : HRESULT
-    @lpVtbl.value.set_rule_id_state.call(this, ulruleid, newstate)
-  end
-  def load_dictation(this : ISpRecoGrammar*, psztopicname : LibC::LPWSTR, options : SPLOADOPTIONS) : HRESULT
-    @lpVtbl.value.load_dictation.call(this, psztopicname, options)
-  end
-  def unload_dictation(this : ISpRecoGrammar*) : HRESULT
-    @lpVtbl.value.unload_dictation.call(this)
-  end
-  def set_dictation_state(this : ISpRecoGrammar*, newstate : SPRULESTATE) : HRESULT
-    @lpVtbl.value.set_dictation_state.call(this, newstate)
-  end
-  def set_word_sequence_data(this : ISpRecoGrammar*, ptext : Char*, cchtext : UInt32, pinfo : SPTEXTSELECTIONINFO*) : HRESULT
-    @lpVtbl.value.set_word_sequence_data.call(this, ptext, cchtext, pinfo)
-  end
-  def set_text_selection(this : ISpRecoGrammar*, pinfo : SPTEXTSELECTIONINFO*) : HRESULT
-    @lpVtbl.value.set_text_selection.call(this, pinfo)
-  end
-  def is_pronounceable(this : ISpRecoGrammar*, pszword : LibC::LPWSTR, pwordpronounceable : SPWORDPRONOUNCEABLE*) : HRESULT
-    @lpVtbl.value.is_pronounceable.call(this, pszword, pwordpronounceable)
-  end
-  def set_grammar_state(this : ISpRecoGrammar*, egrammarstate : SPGRAMMARSTATE) : HRESULT
-    @lpVtbl.value.set_grammar_state.call(this, egrammarstate)
-  end
-  def save_cmd(this : ISpRecoGrammar*, pstream : IStream, ppszcomemerrortext : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.save_cmd.call(this, pstream, ppszcomemerrortext)
-  end
-  def get_grammar_state(this : ISpRecoGrammar*, pegrammarstate : SPGRAMMARSTATE*) : HRESULT
-    @lpVtbl.value.get_grammar_state.call(this, pegrammarstate)
-  end
-end
-struct LibWin32::ISpGrammarBuilder2
-  def query_interface(this : ISpGrammarBuilder2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpGrammarBuilder2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpGrammarBuilder2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def add_text_subset(this : ISpGrammarBuilder2*, hfromstate : SPSTATEHANDLE__*, htostate : SPSTATEHANDLE__*, psz : LibC::LPWSTR, ematchmode : SPMATCHINGMODE) : HRESULT
-    @lpVtbl.value.add_text_subset.call(this, hfromstate, htostate, psz, ematchmode)
-  end
-  def set_phonetic_alphabet(this : ISpGrammarBuilder2*, phoneticalphabet : PHONETICALPHABET) : HRESULT
-    @lpVtbl.value.set_phonetic_alphabet.call(this, phoneticalphabet)
-  end
-end
-struct LibWin32::ISpRecoGrammar2
-  def query_interface(this : ISpRecoGrammar2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpRecoGrammar2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpRecoGrammar2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_rules(this : ISpRecoGrammar2*, ppcomemrules : SPRULE**, punumrules : UInt32*) : HRESULT
-    @lpVtbl.value.get_rules.call(this, ppcomemrules, punumrules)
-  end
-  def load_cmd_from_file2(this : ISpRecoGrammar2*, pszfilename : LibC::LPWSTR, options : SPLOADOPTIONS, pszsharinguri : LibC::LPWSTR, pszbaseuri : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.load_cmd_from_file2.call(this, pszfilename, options, pszsharinguri, pszbaseuri)
-  end
-  def load_cmd_from_memory2(this : ISpRecoGrammar2*, pgrammar : SPBINARYGRAMMAR*, options : SPLOADOPTIONS, pszsharinguri : LibC::LPWSTR, pszbaseuri : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.load_cmd_from_memory2.call(this, pgrammar, options, pszsharinguri, pszbaseuri)
-  end
-  def set_rule_priority(this : ISpRecoGrammar2*, pszrulename : LibC::LPWSTR, ulruleid : UInt32, nrulepriority : Int32) : HRESULT
-    @lpVtbl.value.set_rule_priority.call(this, pszrulename, ulruleid, nrulepriority)
-  end
-  def set_rule_weight(this : ISpRecoGrammar2*, pszrulename : LibC::LPWSTR, ulruleid : UInt32, flweight : Float32) : HRESULT
-    @lpVtbl.value.set_rule_weight.call(this, pszrulename, ulruleid, flweight)
-  end
-  def set_dictation_weight(this : ISpRecoGrammar2*, flweight : Float32) : HRESULT
-    @lpVtbl.value.set_dictation_weight.call(this, flweight)
-  end
-  def set_grammar_loader(this : ISpRecoGrammar2*, ploader : ISpeechResourceLoader) : HRESULT
-    @lpVtbl.value.set_grammar_loader.call(this, ploader)
-  end
-  def set_sml_security_manager(this : ISpRecoGrammar2*, psmlsecuritymanager : IInternetSecurityManager) : HRESULT
-    @lpVtbl.value.set_sml_security_manager.call(this, psmlsecuritymanager)
-  end
-end
-struct LibWin32::ISpeechResourceLoader
-  def query_interface(this : ISpeechResourceLoader*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechResourceLoader*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechResourceLoader*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechResourceLoader*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechResourceLoader*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechResourceLoader*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechResourceLoader*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def load_resource(this : ISpeechResourceLoader*, bstrresourceuri : UInt8*, falwaysreload : Int16, pstream : IUnknown*, pbstrmimetype : UInt8**, pfmodified : Int16*, pbstrredirecturl : UInt8**) : HRESULT
-    @lpVtbl.value.load_resource.call(this, bstrresourceuri, falwaysreload, pstream, pbstrmimetype, pfmodified, pbstrredirecturl)
-  end
-  def get_local_copy(this : ISpeechResourceLoader*, bstrresourceuri : UInt8*, pbstrlocalpath : UInt8**, pbstrmimetype : UInt8**, pbstrredirecturl : UInt8**) : HRESULT
-    @lpVtbl.value.get_local_copy.call(this, bstrresourceuri, pbstrlocalpath, pbstrmimetype, pbstrredirecturl)
-  end
-  def release_local_copy(this : ISpeechResourceLoader*, pbstrlocalpath : UInt8*) : HRESULT
-    @lpVtbl.value.release_local_copy.call(this, pbstrlocalpath)
-  end
-end
-struct LibWin32::ISpRecoContext
-  def query_interface(this : ISpRecoContext*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpRecoContext*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpRecoContext*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_notify_sink(this : ISpRecoContext*, pnotifysink : ISpNotifySink) : HRESULT
-    @lpVtbl.value.set_notify_sink.call(this, pnotifysink)
-  end
-  def set_notify_window_message(this : ISpRecoContext*, hwnd : LibC::HANDLE, msg : UInt32, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_window_message.call(this, hwnd, msg, wparam, lparam)
-  end
-  def set_notify_callback_function(this : ISpRecoContext*, pfncallback : SPNOTIFYCALLBACK*, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_callback_function.call(this, pfncallback, wparam, lparam)
-  end
-  def set_notify_callback_interface(this : ISpRecoContext*, pspcallback : ISpNotifyCallback, wparam : LibC::UINT_PTR, lparam : LPARAM) : HRESULT
-    @lpVtbl.value.set_notify_callback_interface.call(this, pspcallback, wparam, lparam)
-  end
-  def set_notify_win32_event(this : ISpRecoContext*) : HRESULT
-    @lpVtbl.value.set_notify_win32_event.call(this)
-  end
-  def wait_for_notify_event(this : ISpRecoContext*, dwmilliseconds : UInt32) : HRESULT
-    @lpVtbl.value.wait_for_notify_event.call(this, dwmilliseconds)
-  end
-  def get_notify_event_handle(this : ISpRecoContext*) : LibC::HANDLE
-    @lpVtbl.value.get_notify_event_handle.call(this)
-  end
-  def set_interest(this : ISpRecoContext*, ulleventinterest : UInt64, ullqueuedinterest : UInt64) : HRESULT
-    @lpVtbl.value.set_interest.call(this, ulleventinterest, ullqueuedinterest)
-  end
-  def get_events(this : ISpRecoContext*, ulcount : UInt32, peventarray : SPEVENT*, pulfetched : UInt32*) : HRESULT
-    @lpVtbl.value.get_events.call(this, ulcount, peventarray, pulfetched)
-  end
-  def get_info(this : ISpRecoContext*, pinfo : SPEVENTSOURCEINFO*) : HRESULT
-    @lpVtbl.value.get_info.call(this, pinfo)
-  end
-  def get_recognizer(this : ISpRecoContext*, pprecognizer : ISpRecognizer*) : HRESULT
-    @lpVtbl.value.get_recognizer.call(this, pprecognizer)
-  end
-  def create_grammar(this : ISpRecoContext*, ullgrammarid : UInt64, ppgrammar : ISpRecoGrammar*) : HRESULT
-    @lpVtbl.value.create_grammar.call(this, ullgrammarid, ppgrammar)
-  end
-  def get_status(this : ISpRecoContext*, pstatus : SPRECOCONTEXTSTATUS*) : HRESULT
-    @lpVtbl.value.get_status.call(this, pstatus)
-  end
-  def get_max_alternates(this : ISpRecoContext*, pcalternates : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_alternates.call(this, pcalternates)
-  end
-  def set_max_alternates(this : ISpRecoContext*, calternates : UInt32) : HRESULT
-    @lpVtbl.value.set_max_alternates.call(this, calternates)
-  end
-  def set_audio_options(this : ISpRecoContext*, options : SPAUDIOOPTIONS, paudioformatid : Guid*, pwaveformatex : WAVEFORMATEX*) : HRESULT
-    @lpVtbl.value.set_audio_options.call(this, options, paudioformatid, pwaveformatex)
-  end
-  def get_audio_options(this : ISpRecoContext*, poptions : SPAUDIOOPTIONS*, paudioformatid : Guid*, ppcomemwfex : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.get_audio_options.call(this, poptions, paudioformatid, ppcomemwfex)
-  end
-  def deserialize_result(this : ISpRecoContext*, pserializedresult : SPSERIALIZEDRESULT*, ppresult : ISpRecoResult*) : HRESULT
-    @lpVtbl.value.deserialize_result.call(this, pserializedresult, ppresult)
-  end
-  def bookmark(this : ISpRecoContext*, options : SPBOOKMARKOPTIONS, ullstreamposition : UInt64, lparamevent : LPARAM) : HRESULT
-    @lpVtbl.value.bookmark.call(this, options, ullstreamposition, lparamevent)
-  end
-  def set_adaptation_data(this : ISpRecoContext*, padaptationdata : LibC::LPWSTR, cch : UInt32) : HRESULT
-    @lpVtbl.value.set_adaptation_data.call(this, padaptationdata, cch)
-  end
-  def pause(this : ISpRecoContext*, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.pause.call(this, dwreserved)
-  end
-  def resume(this : ISpRecoContext*, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.resume.call(this, dwreserved)
-  end
-  def set_voice(this : ISpRecoContext*, pvoice : ISpVoice, fallowformatchanges : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_voice.call(this, pvoice, fallowformatchanges)
-  end
-  def get_voice(this : ISpRecoContext*, ppvoice : ISpVoice*) : HRESULT
-    @lpVtbl.value.get_voice.call(this, ppvoice)
-  end
-  def set_voice_purge_event(this : ISpRecoContext*, ulleventinterest : UInt64) : HRESULT
-    @lpVtbl.value.set_voice_purge_event.call(this, ulleventinterest)
-  end
-  def get_voice_purge_event(this : ISpRecoContext*, pulleventinterest : UInt64*) : HRESULT
-    @lpVtbl.value.get_voice_purge_event.call(this, pulleventinterest)
-  end
-  def set_context_state(this : ISpRecoContext*, econtextstate : SPCONTEXTSTATE) : HRESULT
-    @lpVtbl.value.set_context_state.call(this, econtextstate)
-  end
-  def get_context_state(this : ISpRecoContext*, pecontextstate : SPCONTEXTSTATE*) : HRESULT
-    @lpVtbl.value.get_context_state.call(this, pecontextstate)
-  end
-end
-struct LibWin32::ISpRecoContext2
-  def query_interface(this : ISpRecoContext2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpRecoContext2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpRecoContext2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_grammar_options(this : ISpRecoContext2*, egrammaroptions : UInt32) : HRESULT
-    @lpVtbl.value.set_grammar_options.call(this, egrammaroptions)
-  end
-  def get_grammar_options(this : ISpRecoContext2*, pegrammaroptions : UInt32*) : HRESULT
-    @lpVtbl.value.get_grammar_options.call(this, pegrammaroptions)
-  end
-  def set_adaptation_data2(this : ISpRecoContext2*, padaptationdata : LibC::LPWSTR, cch : UInt32, ptopicname : LibC::LPWSTR, eadaptationsettings : UInt32, erelevance : SPADAPTATIONRELEVANCE) : HRESULT
-    @lpVtbl.value.set_adaptation_data2.call(this, padaptationdata, cch, ptopicname, eadaptationsettings, erelevance)
-  end
-end
-struct LibWin32::ISpProperties
-  def query_interface(this : ISpProperties*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpProperties*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpProperties*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_property_num(this : ISpProperties*, pname : LibC::LPWSTR, lvalue : Int32) : HRESULT
-    @lpVtbl.value.set_property_num.call(this, pname, lvalue)
-  end
-  def get_property_num(this : ISpProperties*, pname : LibC::LPWSTR, plvalue : Int32*) : HRESULT
-    @lpVtbl.value.get_property_num.call(this, pname, plvalue)
-  end
-  def set_property_string(this : ISpProperties*, pname : LibC::LPWSTR, pvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_property_string.call(this, pname, pvalue)
-  end
-  def get_property_string(this : ISpProperties*, pname : LibC::LPWSTR, ppcomemvalue : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_property_string.call(this, pname, ppcomemvalue)
-  end
-end
-struct LibWin32::ISpRecognizer
-  def query_interface(this : ISpRecognizer*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpRecognizer*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpRecognizer*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_property_num(this : ISpRecognizer*, pname : LibC::LPWSTR, lvalue : Int32) : HRESULT
-    @lpVtbl.value.set_property_num.call(this, pname, lvalue)
-  end
-  def get_property_num(this : ISpRecognizer*, pname : LibC::LPWSTR, plvalue : Int32*) : HRESULT
-    @lpVtbl.value.get_property_num.call(this, pname, plvalue)
-  end
-  def set_property_string(this : ISpRecognizer*, pname : LibC::LPWSTR, pvalue : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.set_property_string.call(this, pname, pvalue)
-  end
-  def get_property_string(this : ISpRecognizer*, pname : LibC::LPWSTR, ppcomemvalue : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_property_string.call(this, pname, ppcomemvalue)
-  end
-  def set_recognizer(this : ISpRecognizer*, precognizer : ISpObjectToken) : HRESULT
-    @lpVtbl.value.set_recognizer.call(this, precognizer)
-  end
-  def get_recognizer(this : ISpRecognizer*, pprecognizer : ISpObjectToken*) : HRESULT
-    @lpVtbl.value.get_recognizer.call(this, pprecognizer)
-  end
-  def set_input(this : ISpRecognizer*, punkinput : IUnknown, fallowformatchanges : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_input.call(this, punkinput, fallowformatchanges)
-  end
-  def get_input_object_token(this : ISpRecognizer*, pptoken : ISpObjectToken*) : HRESULT
-    @lpVtbl.value.get_input_object_token.call(this, pptoken)
-  end
-  def get_input_stream(this : ISpRecognizer*, ppstream : ISpStreamFormat*) : HRESULT
-    @lpVtbl.value.get_input_stream.call(this, ppstream)
-  end
-  def create_reco_context(this : ISpRecognizer*, ppnewctxt : ISpRecoContext*) : HRESULT
-    @lpVtbl.value.create_reco_context.call(this, ppnewctxt)
-  end
-  def get_reco_profile(this : ISpRecognizer*, pptoken : ISpObjectToken*) : HRESULT
-    @lpVtbl.value.get_reco_profile.call(this, pptoken)
-  end
-  def set_reco_profile(this : ISpRecognizer*, ptoken : ISpObjectToken) : HRESULT
-    @lpVtbl.value.set_reco_profile.call(this, ptoken)
-  end
-  def is_shared_instance(this : ISpRecognizer*) : HRESULT
-    @lpVtbl.value.is_shared_instance.call(this)
-  end
-  def get_reco_state(this : ISpRecognizer*, pstate : SPRECOSTATE*) : HRESULT
-    @lpVtbl.value.get_reco_state.call(this, pstate)
-  end
-  def set_reco_state(this : ISpRecognizer*, newstate : SPRECOSTATE) : HRESULT
-    @lpVtbl.value.set_reco_state.call(this, newstate)
-  end
-  def get_status(this : ISpRecognizer*, pstatus : SPRECOGNIZERSTATUS*) : HRESULT
-    @lpVtbl.value.get_status.call(this, pstatus)
-  end
-  def get_format(this : ISpRecognizer*, waveformattype : SPWAVEFORMATTYPE, pformatid : Guid*, ppcomemwfex : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.get_format.call(this, waveformattype, pformatid, ppcomemwfex)
-  end
-  def is_ui_supported(this : ISpRecognizer*, psztypeofui : LibC::LPWSTR, pvextradata : Void*, cbextradata : UInt32, pfsupported : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_ui_supported.call(this, psztypeofui, pvextradata, cbextradata, pfsupported)
-  end
-  def display_ui(this : ISpRecognizer*, hwndparent : LibC::HANDLE, psztitle : LibC::LPWSTR, psztypeofui : LibC::LPWSTR, pvextradata : Void*, cbextradata : UInt32) : HRESULT
-    @lpVtbl.value.display_ui.call(this, hwndparent, psztitle, psztypeofui, pvextradata, cbextradata)
-  end
-  def emulate_recognition(this : ISpRecognizer*, pphrase : ISpPhrase) : HRESULT
-    @lpVtbl.value.emulate_recognition.call(this, pphrase)
-  end
-end
-struct LibWin32::ISpSerializeState
-  def query_interface(this : ISpSerializeState*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpSerializeState*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpSerializeState*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_serialized_state(this : ISpSerializeState*, ppbdata : UInt8**, pulsize : UInt32*, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.get_serialized_state.call(this, ppbdata, pulsize, dwreserved)
-  end
-  def set_serialized_state(this : ISpSerializeState*, pbdata : UInt8*, ulsize : UInt32, dwreserved : UInt32) : HRESULT
-    @lpVtbl.value.set_serialized_state.call(this, pbdata, ulsize, dwreserved)
-  end
-end
-struct LibWin32::ISpRecognizer2
-  def query_interface(this : ISpRecognizer2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpRecognizer2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpRecognizer2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def emulate_recognition_ex(this : ISpRecognizer2*, pphrase : ISpPhrase, dwcompareflags : UInt32) : HRESULT
-    @lpVtbl.value.emulate_recognition_ex.call(this, pphrase, dwcompareflags)
-  end
-  def set_training_state(this : ISpRecognizer2*, fdoingtraining : LibC::BOOL, fadaptfromtrainingdata : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_training_state.call(this, fdoingtraining, fadaptfromtrainingdata)
-  end
-  def reset_acoustic_model_adaptation(this : ISpRecognizer2*) : HRESULT
-    @lpVtbl.value.reset_acoustic_model_adaptation.call(this)
-  end
-end
-struct LibWin32::ISpEnginePronunciation
-  def query_interface(this : ISpEnginePronunciation*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpEnginePronunciation*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpEnginePronunciation*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def normalize(this : ISpEnginePronunciation*, pszword : LibC::LPWSTR, pszleftcontext : LibC::LPWSTR, pszrightcontext : LibC::LPWSTR, langid : UInt16, pnormalizationlist : SPNORMALIZATIONLIST*) : HRESULT
-    @lpVtbl.value.normalize.call(this, pszword, pszleftcontext, pszrightcontext, langid, pnormalizationlist)
-  end
-  def get_pronunciations(this : ISpEnginePronunciation*, pszword : LibC::LPWSTR, pszleftcontext : LibC::LPWSTR, pszrightcontext : LibC::LPWSTR, langid : UInt16, penginepronunciationlist : SPWORDPRONUNCIATIONLIST*) : HRESULT
-    @lpVtbl.value.get_pronunciations.call(this, pszword, pszleftcontext, pszrightcontext, langid, penginepronunciationlist)
-  end
-end
-struct LibWin32::ISpDisplayAlternates
-  def query_interface(this : ISpDisplayAlternates*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpDisplayAlternates*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpDisplayAlternates*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_display_alternates(this : ISpDisplayAlternates*, pphrase : SPDISPLAYPHRASE*, crequestcount : UInt32, ppcomemphrases : SPDISPLAYPHRASE**, pcphrasesreturned : UInt32*) : HRESULT
-    @lpVtbl.value.get_display_alternates.call(this, pphrase, crequestcount, ppcomemphrases, pcphrasesreturned)
-  end
-  def set_full_stop_trail_space(this : ISpDisplayAlternates*, ultrailspace : UInt32) : HRESULT
-    @lpVtbl.value.set_full_stop_trail_space.call(this, ultrailspace)
-  end
-end
-struct LibWin32::ISpeechDataKey
-  def query_interface(this : ISpeechDataKey*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechDataKey*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechDataKey*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechDataKey*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechDataKey*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechDataKey*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechDataKey*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def set_binary_value(this : ISpeechDataKey*, valuename : UInt8*, value : VARIANT) : HRESULT
-    @lpVtbl.value.set_binary_value.call(this, valuename, value)
-  end
-  def get_binary_value(this : ISpeechDataKey*, valuename : UInt8*, value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_binary_value.call(this, valuename, value)
-  end
-  def set_string_value(this : ISpeechDataKey*, valuename : UInt8*, value : UInt8*) : HRESULT
-    @lpVtbl.value.set_string_value.call(this, valuename, value)
-  end
-  def get_string_value(this : ISpeechDataKey*, valuename : UInt8*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_string_value.call(this, valuename, value)
-  end
-  def set_long_value(this : ISpeechDataKey*, valuename : UInt8*, value : Int32) : HRESULT
-    @lpVtbl.value.set_long_value.call(this, valuename, value)
-  end
-  def get_long_value(this : ISpeechDataKey*, valuename : UInt8*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_long_value.call(this, valuename, value)
-  end
-  def open_key(this : ISpeechDataKey*, subkeyname : UInt8*, subkey : ISpeechDataKey*) : HRESULT
-    @lpVtbl.value.open_key.call(this, subkeyname, subkey)
-  end
-  def create_key(this : ISpeechDataKey*, subkeyname : UInt8*, subkey : ISpeechDataKey*) : HRESULT
-    @lpVtbl.value.create_key.call(this, subkeyname, subkey)
-  end
-  def delete_key(this : ISpeechDataKey*, subkeyname : UInt8*) : HRESULT
-    @lpVtbl.value.delete_key.call(this, subkeyname)
-  end
-  def delete_value(this : ISpeechDataKey*, valuename : UInt8*) : HRESULT
-    @lpVtbl.value.delete_value.call(this, valuename)
-  end
-  def enum_keys(this : ISpeechDataKey*, index : Int32, subkeyname : UInt8**) : HRESULT
-    @lpVtbl.value.enum_keys.call(this, index, subkeyname)
-  end
-  def enum_values(this : ISpeechDataKey*, index : Int32, valuename : UInt8**) : HRESULT
-    @lpVtbl.value.enum_values.call(this, index, valuename)
-  end
-end
-struct LibWin32::ISpeechObjectToken
-  def query_interface(this : ISpeechObjectToken*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechObjectToken*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechObjectToken*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechObjectToken*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechObjectToken*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechObjectToken*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechObjectToken*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_id(this : ISpeechObjectToken*, objectid : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.call(this, objectid)
-  end
-  def get_data_key(this : ISpeechObjectToken*, datakey : ISpeechDataKey*) : HRESULT
-    @lpVtbl.value.get_data_key.call(this, datakey)
-  end
-  def get_category(this : ISpeechObjectToken*, category : ISpeechObjectTokenCategory*) : HRESULT
-    @lpVtbl.value.get_category.call(this, category)
-  end
-  def get_description(this : ISpeechObjectToken*, locale : Int32, description : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.call(this, locale, description)
-  end
-  def set_id(this : ISpeechObjectToken*, id : UInt8*, categoryid : UInt8*, createifnotexist : Int16) : HRESULT
-    @lpVtbl.value.set_id.call(this, id, categoryid, createifnotexist)
-  end
-  def get_attribute(this : ISpeechObjectToken*, attributename : UInt8*, attributevalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_attribute.call(this, attributename, attributevalue)
-  end
-  def create_instance(this : ISpeechObjectToken*, punkouter : IUnknown, clscontext : SpeechTokenContext, object : IUnknown*) : HRESULT
-    @lpVtbl.value.create_instance.call(this, punkouter, clscontext, object)
-  end
-  def remove(this : ISpeechObjectToken*, objectstorageclsid : UInt8*) : HRESULT
-    @lpVtbl.value.remove.call(this, objectstorageclsid)
-  end
-  def get_storage_file_name(this : ISpeechObjectToken*, objectstorageclsid : UInt8*, keyname : UInt8*, filename : UInt8*, folder : SpeechTokenShellFolder, filepath : UInt8**) : HRESULT
-    @lpVtbl.value.get_storage_file_name.call(this, objectstorageclsid, keyname, filename, folder, filepath)
-  end
-  def remove_storage_file_name(this : ISpeechObjectToken*, objectstorageclsid : UInt8*, keyname : UInt8*, deletefilea : Int16) : HRESULT
-    @lpVtbl.value.remove_storage_file_name.call(this, objectstorageclsid, keyname, deletefilea)
-  end
-  def is_ui_supported(this : ISpeechObjectToken*, typeofui : UInt8*, extradata : VARIANT*, object : IUnknown, supported : Int16*) : HRESULT
-    @lpVtbl.value.is_ui_supported.call(this, typeofui, extradata, object, supported)
-  end
-  def display_ui(this : ISpeechObjectToken*, hwnd : Int32, title : UInt8*, typeofui : UInt8*, extradata : VARIANT*, object : IUnknown) : HRESULT
-    @lpVtbl.value.display_ui.call(this, hwnd, title, typeofui, extradata, object)
-  end
-  def matches_attributes(this : ISpeechObjectToken*, attributes : UInt8*, matches : Int16*) : HRESULT
-    @lpVtbl.value.matches_attributes.call(this, attributes, matches)
-  end
-end
-struct LibWin32::ISpeechObjectTokens
-  def query_interface(this : ISpeechObjectTokens*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechObjectTokens*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechObjectTokens*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechObjectTokens*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechObjectTokens*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechObjectTokens*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechObjectTokens*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : ISpeechObjectTokens*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def item(this : ISpeechObjectTokens*, index : Int32, token : ISpeechObjectToken*) : HRESULT
-    @lpVtbl.value.item.call(this, index, token)
-  end
-  def get__new_enum(this : ISpeechObjectTokens*, ppenumvariant : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, ppenumvariant)
-  end
-end
-struct LibWin32::ISpeechObjectTokenCategory
-  def query_interface(this : ISpeechObjectTokenCategory*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechObjectTokenCategory*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechObjectTokenCategory*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechObjectTokenCategory*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechObjectTokenCategory*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechObjectTokenCategory*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechObjectTokenCategory*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_id(this : ISpeechObjectTokenCategory*, id : UInt8**) : HRESULT
-    @lpVtbl.value.get_id.call(this, id)
-  end
-  def put_default(this : ISpeechObjectTokenCategory*, tokenid : UInt8*) : HRESULT
-    @lpVtbl.value.put_default.call(this, tokenid)
-  end
-  def get_default(this : ISpeechObjectTokenCategory*, tokenid : UInt8**) : HRESULT
-    @lpVtbl.value.get_default.call(this, tokenid)
-  end
-  def set_id(this : ISpeechObjectTokenCategory*, id : UInt8*, createifnotexist : Int16) : HRESULT
-    @lpVtbl.value.set_id.call(this, id, createifnotexist)
-  end
-  def get_data_key(this : ISpeechObjectTokenCategory*, location : SpeechDataKeyLocation, datakey : ISpeechDataKey*) : HRESULT
-    @lpVtbl.value.get_data_key.call(this, location, datakey)
-  end
-  def enumerate_tokens(this : ISpeechObjectTokenCategory*, requiredattributes : UInt8*, optionalattributes : UInt8*, tokens : ISpeechObjectTokens*) : HRESULT
-    @lpVtbl.value.enumerate_tokens.call(this, requiredattributes, optionalattributes, tokens)
-  end
-end
-struct LibWin32::ISpeechAudioBufferInfo
-  def query_interface(this : ISpeechAudioBufferInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechAudioBufferInfo*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechAudioBufferInfo*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechAudioBufferInfo*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechAudioBufferInfo*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechAudioBufferInfo*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechAudioBufferInfo*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_min_notification(this : ISpeechAudioBufferInfo*, minnotification : Int32*) : HRESULT
-    @lpVtbl.value.get_min_notification.call(this, minnotification)
-  end
-  def put_min_notification(this : ISpeechAudioBufferInfo*, minnotification : Int32) : HRESULT
-    @lpVtbl.value.put_min_notification.call(this, minnotification)
-  end
-  def get_buffer_size(this : ISpeechAudioBufferInfo*, buffersize : Int32*) : HRESULT
-    @lpVtbl.value.get_buffer_size.call(this, buffersize)
-  end
-  def put_buffer_size(this : ISpeechAudioBufferInfo*, buffersize : Int32) : HRESULT
-    @lpVtbl.value.put_buffer_size.call(this, buffersize)
-  end
-  def get_event_bias(this : ISpeechAudioBufferInfo*, eventbias : Int32*) : HRESULT
-    @lpVtbl.value.get_event_bias.call(this, eventbias)
-  end
-  def put_event_bias(this : ISpeechAudioBufferInfo*, eventbias : Int32) : HRESULT
-    @lpVtbl.value.put_event_bias.call(this, eventbias)
-  end
-end
-struct LibWin32::ISpeechAudioStatus
-  def query_interface(this : ISpeechAudioStatus*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechAudioStatus*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechAudioStatus*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechAudioStatus*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechAudioStatus*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechAudioStatus*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechAudioStatus*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_free_buffer_space(this : ISpeechAudioStatus*, freebufferspace : Int32*) : HRESULT
-    @lpVtbl.value.get_free_buffer_space.call(this, freebufferspace)
-  end
-  def get_non_blocking_io(this : ISpeechAudioStatus*, nonblockingio : Int32*) : HRESULT
-    @lpVtbl.value.get_non_blocking_io.call(this, nonblockingio)
-  end
-  def get_state(this : ISpeechAudioStatus*, state : SpeechAudioState*) : HRESULT
-    @lpVtbl.value.get_state.call(this, state)
-  end
-  def get_current_seek_position(this : ISpeechAudioStatus*, currentseekposition : VARIANT*) : HRESULT
-    @lpVtbl.value.get_current_seek_position.call(this, currentseekposition)
-  end
-  def get_current_device_position(this : ISpeechAudioStatus*, currentdeviceposition : VARIANT*) : HRESULT
-    @lpVtbl.value.get_current_device_position.call(this, currentdeviceposition)
-  end
-end
-struct LibWin32::ISpeechAudioFormat
-  def query_interface(this : ISpeechAudioFormat*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechAudioFormat*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechAudioFormat*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechAudioFormat*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechAudioFormat*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechAudioFormat*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechAudioFormat*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_type(this : ISpeechAudioFormat*, audioformat : SpeechAudioFormatType*) : HRESULT
-    @lpVtbl.value.get_type.call(this, audioformat)
-  end
-  def put_type(this : ISpeechAudioFormat*, audioformat : SpeechAudioFormatType) : HRESULT
-    @lpVtbl.value.put_type.call(this, audioformat)
-  end
-  def get_guid(this : ISpeechAudioFormat*, guid : UInt8**) : HRESULT
-    @lpVtbl.value.get_guid.call(this, guid)
-  end
-  def put_guid(this : ISpeechAudioFormat*, guid : UInt8*) : HRESULT
-    @lpVtbl.value.put_guid.call(this, guid)
-  end
-  def get_wave_format_ex(this : ISpeechAudioFormat*, speechwaveformatex : ISpeechWaveFormatEx*) : HRESULT
-    @lpVtbl.value.get_wave_format_ex.call(this, speechwaveformatex)
-  end
-  def set_wave_format_ex(this : ISpeechAudioFormat*, speechwaveformatex : ISpeechWaveFormatEx) : HRESULT
-    @lpVtbl.value.set_wave_format_ex.call(this, speechwaveformatex)
-  end
-end
-struct LibWin32::ISpeechWaveFormatEx
-  def query_interface(this : ISpeechWaveFormatEx*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechWaveFormatEx*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechWaveFormatEx*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechWaveFormatEx*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechWaveFormatEx*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechWaveFormatEx*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechWaveFormatEx*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_format_tag(this : ISpeechWaveFormatEx*, formattag : Int16*) : HRESULT
-    @lpVtbl.value.get_format_tag.call(this, formattag)
-  end
-  def put_format_tag(this : ISpeechWaveFormatEx*, formattag : Int16) : HRESULT
-    @lpVtbl.value.put_format_tag.call(this, formattag)
-  end
-  def get_channels(this : ISpeechWaveFormatEx*, channels : Int16*) : HRESULT
-    @lpVtbl.value.get_channels.call(this, channels)
-  end
-  def put_channels(this : ISpeechWaveFormatEx*, channels : Int16) : HRESULT
-    @lpVtbl.value.put_channels.call(this, channels)
-  end
-  def get_samples_per_sec(this : ISpeechWaveFormatEx*, samplespersec : Int32*) : HRESULT
-    @lpVtbl.value.get_samples_per_sec.call(this, samplespersec)
-  end
-  def put_samples_per_sec(this : ISpeechWaveFormatEx*, samplespersec : Int32) : HRESULT
-    @lpVtbl.value.put_samples_per_sec.call(this, samplespersec)
-  end
-  def get_avg_bytes_per_sec(this : ISpeechWaveFormatEx*, avgbytespersec : Int32*) : HRESULT
-    @lpVtbl.value.get_avg_bytes_per_sec.call(this, avgbytespersec)
-  end
-  def put_avg_bytes_per_sec(this : ISpeechWaveFormatEx*, avgbytespersec : Int32) : HRESULT
-    @lpVtbl.value.put_avg_bytes_per_sec.call(this, avgbytespersec)
-  end
-  def get_block_align(this : ISpeechWaveFormatEx*, blockalign : Int16*) : HRESULT
-    @lpVtbl.value.get_block_align.call(this, blockalign)
-  end
-  def put_block_align(this : ISpeechWaveFormatEx*, blockalign : Int16) : HRESULT
-    @lpVtbl.value.put_block_align.call(this, blockalign)
-  end
-  def get_bits_per_sample(this : ISpeechWaveFormatEx*, bitspersample : Int16*) : HRESULT
-    @lpVtbl.value.get_bits_per_sample.call(this, bitspersample)
-  end
-  def put_bits_per_sample(this : ISpeechWaveFormatEx*, bitspersample : Int16) : HRESULT
-    @lpVtbl.value.put_bits_per_sample.call(this, bitspersample)
-  end
-  def get_extra_data(this : ISpeechWaveFormatEx*, extradata : VARIANT*) : HRESULT
-    @lpVtbl.value.get_extra_data.call(this, extradata)
-  end
-  def put_extra_data(this : ISpeechWaveFormatEx*, extradata : VARIANT) : HRESULT
-    @lpVtbl.value.put_extra_data.call(this, extradata)
-  end
-end
-struct LibWin32::ISpeechBaseStream
-  def query_interface(this : ISpeechBaseStream*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechBaseStream*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechBaseStream*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechBaseStream*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechBaseStream*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechBaseStream*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechBaseStream*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_format(this : ISpeechBaseStream*, audioformat : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_format.call(this, audioformat)
-  end
-  def putref_format(this : ISpeechBaseStream*, audioformat : ISpeechAudioFormat) : HRESULT
-    @lpVtbl.value.putref_format.call(this, audioformat)
-  end
-  def read(this : ISpeechBaseStream*, buffer : VARIANT*, numberofbytes : Int32, bytesread : Int32*) : HRESULT
-    @lpVtbl.value.read.call(this, buffer, numberofbytes, bytesread)
-  end
-  def write(this : ISpeechBaseStream*, buffer : VARIANT, byteswritten : Int32*) : HRESULT
-    @lpVtbl.value.write.call(this, buffer, byteswritten)
-  end
-  def seek(this : ISpeechBaseStream*, position : VARIANT, origin : SpeechStreamSeekPositionType, newposition : VARIANT*) : HRESULT
-    @lpVtbl.value.seek.call(this, position, origin, newposition)
-  end
-end
-struct LibWin32::ISpeechFileStream
-  def query_interface(this : ISpeechFileStream*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechFileStream*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechFileStream*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechFileStream*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechFileStream*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechFileStream*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechFileStream*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_format(this : ISpeechFileStream*, audioformat : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_format.call(this, audioformat)
-  end
-  def putref_format(this : ISpeechFileStream*, audioformat : ISpeechAudioFormat) : HRESULT
-    @lpVtbl.value.putref_format.call(this, audioformat)
-  end
-  def read(this : ISpeechFileStream*, buffer : VARIANT*, numberofbytes : Int32, bytesread : Int32*) : HRESULT
-    @lpVtbl.value.read.call(this, buffer, numberofbytes, bytesread)
-  end
-  def write(this : ISpeechFileStream*, buffer : VARIANT, byteswritten : Int32*) : HRESULT
-    @lpVtbl.value.write.call(this, buffer, byteswritten)
-  end
-  def seek(this : ISpeechFileStream*, position : VARIANT, origin : SpeechStreamSeekPositionType, newposition : VARIANT*) : HRESULT
-    @lpVtbl.value.seek.call(this, position, origin, newposition)
-  end
-  def open(this : ISpeechFileStream*, filename : UInt8*, filemode : SpeechStreamFileMode, doevents : Int16) : HRESULT
-    @lpVtbl.value.open.call(this, filename, filemode, doevents)
-  end
-  def close(this : ISpeechFileStream*) : HRESULT
-    @lpVtbl.value.close.call(this)
-  end
-end
-struct LibWin32::ISpeechMemoryStream
-  def query_interface(this : ISpeechMemoryStream*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechMemoryStream*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechMemoryStream*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechMemoryStream*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechMemoryStream*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechMemoryStream*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechMemoryStream*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_format(this : ISpeechMemoryStream*, audioformat : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_format.call(this, audioformat)
-  end
-  def putref_format(this : ISpeechMemoryStream*, audioformat : ISpeechAudioFormat) : HRESULT
-    @lpVtbl.value.putref_format.call(this, audioformat)
-  end
-  def read(this : ISpeechMemoryStream*, buffer : VARIANT*, numberofbytes : Int32, bytesread : Int32*) : HRESULT
-    @lpVtbl.value.read.call(this, buffer, numberofbytes, bytesread)
-  end
-  def write(this : ISpeechMemoryStream*, buffer : VARIANT, byteswritten : Int32*) : HRESULT
-    @lpVtbl.value.write.call(this, buffer, byteswritten)
-  end
-  def seek(this : ISpeechMemoryStream*, position : VARIANT, origin : SpeechStreamSeekPositionType, newposition : VARIANT*) : HRESULT
-    @lpVtbl.value.seek.call(this, position, origin, newposition)
-  end
-  def set_data(this : ISpeechMemoryStream*, data : VARIANT) : HRESULT
-    @lpVtbl.value.set_data.call(this, data)
-  end
-  def get_data(this : ISpeechMemoryStream*, pdata : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data.call(this, pdata)
-  end
-end
-struct LibWin32::ISpeechCustomStream
-  def query_interface(this : ISpeechCustomStream*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechCustomStream*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechCustomStream*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechCustomStream*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechCustomStream*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechCustomStream*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechCustomStream*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_format(this : ISpeechCustomStream*, audioformat : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_format.call(this, audioformat)
-  end
-  def putref_format(this : ISpeechCustomStream*, audioformat : ISpeechAudioFormat) : HRESULT
-    @lpVtbl.value.putref_format.call(this, audioformat)
-  end
-  def read(this : ISpeechCustomStream*, buffer : VARIANT*, numberofbytes : Int32, bytesread : Int32*) : HRESULT
-    @lpVtbl.value.read.call(this, buffer, numberofbytes, bytesread)
-  end
-  def write(this : ISpeechCustomStream*, buffer : VARIANT, byteswritten : Int32*) : HRESULT
-    @lpVtbl.value.write.call(this, buffer, byteswritten)
-  end
-  def seek(this : ISpeechCustomStream*, position : VARIANT, origin : SpeechStreamSeekPositionType, newposition : VARIANT*) : HRESULT
-    @lpVtbl.value.seek.call(this, position, origin, newposition)
-  end
-  def get_base_stream(this : ISpeechCustomStream*, ppunkstream : IUnknown*) : HRESULT
-    @lpVtbl.value.get_base_stream.call(this, ppunkstream)
-  end
-  def putref_base_stream(this : ISpeechCustomStream*, punkstream : IUnknown) : HRESULT
-    @lpVtbl.value.putref_base_stream.call(this, punkstream)
-  end
-end
-struct LibWin32::ISpeechAudio
-  def query_interface(this : ISpeechAudio*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechAudio*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechAudio*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechAudio*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechAudio*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechAudio*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechAudio*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_format(this : ISpeechAudio*, audioformat : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_format.call(this, audioformat)
-  end
-  def putref_format(this : ISpeechAudio*, audioformat : ISpeechAudioFormat) : HRESULT
-    @lpVtbl.value.putref_format.call(this, audioformat)
-  end
-  def read(this : ISpeechAudio*, buffer : VARIANT*, numberofbytes : Int32, bytesread : Int32*) : HRESULT
-    @lpVtbl.value.read.call(this, buffer, numberofbytes, bytesread)
-  end
-  def write(this : ISpeechAudio*, buffer : VARIANT, byteswritten : Int32*) : HRESULT
-    @lpVtbl.value.write.call(this, buffer, byteswritten)
-  end
-  def seek(this : ISpeechAudio*, position : VARIANT, origin : SpeechStreamSeekPositionType, newposition : VARIANT*) : HRESULT
-    @lpVtbl.value.seek.call(this, position, origin, newposition)
-  end
-  def get_status(this : ISpeechAudio*, status : ISpeechAudioStatus*) : HRESULT
-    @lpVtbl.value.get_status.call(this, status)
-  end
-  def get_buffer_info(this : ISpeechAudio*, bufferinfo : ISpeechAudioBufferInfo*) : HRESULT
-    @lpVtbl.value.get_buffer_info.call(this, bufferinfo)
-  end
-  def get_default_format(this : ISpeechAudio*, streamformat : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_default_format.call(this, streamformat)
-  end
-  def get_volume(this : ISpeechAudio*, volume : Int32*) : HRESULT
-    @lpVtbl.value.get_volume.call(this, volume)
-  end
-  def put_volume(this : ISpeechAudio*, volume : Int32) : HRESULT
-    @lpVtbl.value.put_volume.call(this, volume)
-  end
-  def get_buffer_notify_size(this : ISpeechAudio*, buffernotifysize : Int32*) : HRESULT
-    @lpVtbl.value.get_buffer_notify_size.call(this, buffernotifysize)
-  end
-  def put_buffer_notify_size(this : ISpeechAudio*, buffernotifysize : Int32) : HRESULT
-    @lpVtbl.value.put_buffer_notify_size.call(this, buffernotifysize)
-  end
-  def get_event_handle(this : ISpeechAudio*, eventhandle : Int32*) : HRESULT
-    @lpVtbl.value.get_event_handle.call(this, eventhandle)
-  end
-  def set_state(this : ISpeechAudio*, state : SpeechAudioState) : HRESULT
-    @lpVtbl.value.set_state.call(this, state)
-  end
-end
-struct LibWin32::ISpeechMMSysAudio
-  def query_interface(this : ISpeechMMSysAudio*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechMMSysAudio*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechMMSysAudio*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechMMSysAudio*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechMMSysAudio*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechMMSysAudio*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechMMSysAudio*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_format(this : ISpeechMMSysAudio*, audioformat : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_format.call(this, audioformat)
-  end
-  def putref_format(this : ISpeechMMSysAudio*, audioformat : ISpeechAudioFormat) : HRESULT
-    @lpVtbl.value.putref_format.call(this, audioformat)
-  end
-  def read(this : ISpeechMMSysAudio*, buffer : VARIANT*, numberofbytes : Int32, bytesread : Int32*) : HRESULT
-    @lpVtbl.value.read.call(this, buffer, numberofbytes, bytesread)
-  end
-  def write(this : ISpeechMMSysAudio*, buffer : VARIANT, byteswritten : Int32*) : HRESULT
-    @lpVtbl.value.write.call(this, buffer, byteswritten)
-  end
-  def seek(this : ISpeechMMSysAudio*, position : VARIANT, origin : SpeechStreamSeekPositionType, newposition : VARIANT*) : HRESULT
-    @lpVtbl.value.seek.call(this, position, origin, newposition)
-  end
-  def get_status(this : ISpeechMMSysAudio*, status : ISpeechAudioStatus*) : HRESULT
-    @lpVtbl.value.get_status.call(this, status)
-  end
-  def get_buffer_info(this : ISpeechMMSysAudio*, bufferinfo : ISpeechAudioBufferInfo*) : HRESULT
-    @lpVtbl.value.get_buffer_info.call(this, bufferinfo)
-  end
-  def get_default_format(this : ISpeechMMSysAudio*, streamformat : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_default_format.call(this, streamformat)
-  end
-  def get_volume(this : ISpeechMMSysAudio*, volume : Int32*) : HRESULT
-    @lpVtbl.value.get_volume.call(this, volume)
-  end
-  def put_volume(this : ISpeechMMSysAudio*, volume : Int32) : HRESULT
-    @lpVtbl.value.put_volume.call(this, volume)
-  end
-  def get_buffer_notify_size(this : ISpeechMMSysAudio*, buffernotifysize : Int32*) : HRESULT
-    @lpVtbl.value.get_buffer_notify_size.call(this, buffernotifysize)
-  end
-  def put_buffer_notify_size(this : ISpeechMMSysAudio*, buffernotifysize : Int32) : HRESULT
-    @lpVtbl.value.put_buffer_notify_size.call(this, buffernotifysize)
-  end
-  def get_event_handle(this : ISpeechMMSysAudio*, eventhandle : Int32*) : HRESULT
-    @lpVtbl.value.get_event_handle.call(this, eventhandle)
-  end
-  def set_state(this : ISpeechMMSysAudio*, state : SpeechAudioState) : HRESULT
-    @lpVtbl.value.set_state.call(this, state)
-  end
-  def get_device_id(this : ISpeechMMSysAudio*, deviceid : Int32*) : HRESULT
-    @lpVtbl.value.get_device_id.call(this, deviceid)
-  end
-  def put_device_id(this : ISpeechMMSysAudio*, deviceid : Int32) : HRESULT
-    @lpVtbl.value.put_device_id.call(this, deviceid)
-  end
-  def get_line_id(this : ISpeechMMSysAudio*, lineid : Int32*) : HRESULT
-    @lpVtbl.value.get_line_id.call(this, lineid)
-  end
-  def put_line_id(this : ISpeechMMSysAudio*, lineid : Int32) : HRESULT
-    @lpVtbl.value.put_line_id.call(this, lineid)
-  end
-  def get_mm_handle(this : ISpeechMMSysAudio*, handle : Int32*) : HRESULT
-    @lpVtbl.value.get_mm_handle.call(this, handle)
-  end
-end
-struct LibWin32::ISpeechVoice
-  def query_interface(this : ISpeechVoice*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechVoice*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechVoice*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechVoice*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechVoice*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechVoice*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechVoice*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_status(this : ISpeechVoice*, status : ISpeechVoiceStatus*) : HRESULT
-    @lpVtbl.value.get_status.call(this, status)
-  end
-  def get_voice(this : ISpeechVoice*, voice : ISpeechObjectToken*) : HRESULT
-    @lpVtbl.value.get_voice.call(this, voice)
-  end
-  def putref_voice(this : ISpeechVoice*, voice : ISpeechObjectToken) : HRESULT
-    @lpVtbl.value.putref_voice.call(this, voice)
-  end
-  def get_audio_output(this : ISpeechVoice*, audiooutput : ISpeechObjectToken*) : HRESULT
-    @lpVtbl.value.get_audio_output.call(this, audiooutput)
-  end
-  def putref_audio_output(this : ISpeechVoice*, audiooutput : ISpeechObjectToken) : HRESULT
-    @lpVtbl.value.putref_audio_output.call(this, audiooutput)
-  end
-  def get_audio_output_stream(this : ISpeechVoice*, audiooutputstream : ISpeechBaseStream*) : HRESULT
-    @lpVtbl.value.get_audio_output_stream.call(this, audiooutputstream)
-  end
-  def putref_audio_output_stream(this : ISpeechVoice*, audiooutputstream : ISpeechBaseStream) : HRESULT
-    @lpVtbl.value.putref_audio_output_stream.call(this, audiooutputstream)
-  end
-  def get_rate(this : ISpeechVoice*, rate : Int32*) : HRESULT
-    @lpVtbl.value.get_rate.call(this, rate)
-  end
-  def put_rate(this : ISpeechVoice*, rate : Int32) : HRESULT
-    @lpVtbl.value.put_rate.call(this, rate)
-  end
-  def get_volume(this : ISpeechVoice*, volume : Int32*) : HRESULT
-    @lpVtbl.value.get_volume.call(this, volume)
-  end
-  def put_volume(this : ISpeechVoice*, volume : Int32) : HRESULT
-    @lpVtbl.value.put_volume.call(this, volume)
-  end
-  def put_allow_audio_output_format_changes_on_next_set(this : ISpeechVoice*, allow : Int16) : HRESULT
-    @lpVtbl.value.put_allow_audio_output_format_changes_on_next_set.call(this, allow)
-  end
-  def get_allow_audio_output_format_changes_on_next_set(this : ISpeechVoice*, allow : Int16*) : HRESULT
-    @lpVtbl.value.get_allow_audio_output_format_changes_on_next_set.call(this, allow)
-  end
-  def get_event_interests(this : ISpeechVoice*, eventinterestflags : SpeechVoiceEvents*) : HRESULT
-    @lpVtbl.value.get_event_interests.call(this, eventinterestflags)
-  end
-  def put_event_interests(this : ISpeechVoice*, eventinterestflags : SpeechVoiceEvents) : HRESULT
-    @lpVtbl.value.put_event_interests.call(this, eventinterestflags)
-  end
-  def put_priority(this : ISpeechVoice*, priority : SpeechVoicePriority) : HRESULT
-    @lpVtbl.value.put_priority.call(this, priority)
-  end
-  def get_priority(this : ISpeechVoice*, priority : SpeechVoicePriority*) : HRESULT
-    @lpVtbl.value.get_priority.call(this, priority)
-  end
-  def put_alert_boundary(this : ISpeechVoice*, boundary : SpeechVoiceEvents) : HRESULT
-    @lpVtbl.value.put_alert_boundary.call(this, boundary)
-  end
-  def get_alert_boundary(this : ISpeechVoice*, boundary : SpeechVoiceEvents*) : HRESULT
-    @lpVtbl.value.get_alert_boundary.call(this, boundary)
-  end
-  def put_synchronous_speak_timeout(this : ISpeechVoice*, mstimeout : Int32) : HRESULT
-    @lpVtbl.value.put_synchronous_speak_timeout.call(this, mstimeout)
-  end
-  def get_synchronous_speak_timeout(this : ISpeechVoice*, mstimeout : Int32*) : HRESULT
-    @lpVtbl.value.get_synchronous_speak_timeout.call(this, mstimeout)
-  end
-  def speak(this : ISpeechVoice*, text : UInt8*, flags : SpeechVoiceSpeakFlags, streamnumber : Int32*) : HRESULT
-    @lpVtbl.value.speak.call(this, text, flags, streamnumber)
-  end
-  def speak_stream(this : ISpeechVoice*, stream : ISpeechBaseStream, flags : SpeechVoiceSpeakFlags, streamnumber : Int32*) : HRESULT
-    @lpVtbl.value.speak_stream.call(this, stream, flags, streamnumber)
-  end
-  def pause(this : ISpeechVoice*) : HRESULT
-    @lpVtbl.value.pause.call(this)
-  end
-  def resume(this : ISpeechVoice*) : HRESULT
-    @lpVtbl.value.resume.call(this)
-  end
-  def skip(this : ISpeechVoice*, type : UInt8*, numitems : Int32, numskipped : Int32*) : HRESULT
-    @lpVtbl.value.skip.call(this, type, numitems, numskipped)
-  end
-  def get_voices(this : ISpeechVoice*, requiredattributes : UInt8*, optionalattributes : UInt8*, objecttokens : ISpeechObjectTokens*) : HRESULT
-    @lpVtbl.value.get_voices.call(this, requiredattributes, optionalattributes, objecttokens)
-  end
-  def get_audio_outputs(this : ISpeechVoice*, requiredattributes : UInt8*, optionalattributes : UInt8*, objecttokens : ISpeechObjectTokens*) : HRESULT
-    @lpVtbl.value.get_audio_outputs.call(this, requiredattributes, optionalattributes, objecttokens)
-  end
-  def wait_until_done(this : ISpeechVoice*, mstimeout : Int32, done : Int16*) : HRESULT
-    @lpVtbl.value.wait_until_done.call(this, mstimeout, done)
-  end
-  def speak_complete_event(this : ISpeechVoice*, handle : Int32*) : HRESULT
-    @lpVtbl.value.speak_complete_event.call(this, handle)
-  end
-  def is_ui_supported(this : ISpeechVoice*, typeofui : UInt8*, extradata : VARIANT*, supported : Int16*) : HRESULT
-    @lpVtbl.value.is_ui_supported.call(this, typeofui, extradata, supported)
-  end
-  def display_ui(this : ISpeechVoice*, hwndparent : Int32, title : UInt8*, typeofui : UInt8*, extradata : VARIANT*) : HRESULT
-    @lpVtbl.value.display_ui.call(this, hwndparent, title, typeofui, extradata)
-  end
-end
-struct LibWin32::ISpeechVoiceStatus
-  def query_interface(this : ISpeechVoiceStatus*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechVoiceStatus*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechVoiceStatus*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechVoiceStatus*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechVoiceStatus*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechVoiceStatus*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechVoiceStatus*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_current_stream_number(this : ISpeechVoiceStatus*, streamnumber : Int32*) : HRESULT
-    @lpVtbl.value.get_current_stream_number.call(this, streamnumber)
-  end
-  def get_last_stream_number_queued(this : ISpeechVoiceStatus*, streamnumber : Int32*) : HRESULT
-    @lpVtbl.value.get_last_stream_number_queued.call(this, streamnumber)
-  end
-  def get_last_h_result(this : ISpeechVoiceStatus*, hresult : Int32*) : HRESULT
-    @lpVtbl.value.get_last_h_result.call(this, hresult)
-  end
-  def get_running_state(this : ISpeechVoiceStatus*, state : SpeechRunState*) : HRESULT
-    @lpVtbl.value.get_running_state.call(this, state)
-  end
-  def get_input_word_position(this : ISpeechVoiceStatus*, position : Int32*) : HRESULT
-    @lpVtbl.value.get_input_word_position.call(this, position)
-  end
-  def get_input_word_length(this : ISpeechVoiceStatus*, length : Int32*) : HRESULT
-    @lpVtbl.value.get_input_word_length.call(this, length)
-  end
-  def get_input_sentence_position(this : ISpeechVoiceStatus*, position : Int32*) : HRESULT
-    @lpVtbl.value.get_input_sentence_position.call(this, position)
-  end
-  def get_input_sentence_length(this : ISpeechVoiceStatus*, length : Int32*) : HRESULT
-    @lpVtbl.value.get_input_sentence_length.call(this, length)
-  end
-  def get_last_bookmark(this : ISpeechVoiceStatus*, bookmark : UInt8**) : HRESULT
-    @lpVtbl.value.get_last_bookmark.call(this, bookmark)
-  end
-  def get_last_bookmark_id(this : ISpeechVoiceStatus*, bookmarkid : Int32*) : HRESULT
-    @lpVtbl.value.get_last_bookmark_id.call(this, bookmarkid)
-  end
-  def get_phoneme_id(this : ISpeechVoiceStatus*, phoneid : Int16*) : HRESULT
-    @lpVtbl.value.get_phoneme_id.call(this, phoneid)
-  end
-  def get_viseme_id(this : ISpeechVoiceStatus*, visemeid : Int16*) : HRESULT
-    @lpVtbl.value.get_viseme_id.call(this, visemeid)
-  end
-end
-struct LibWin32::IISpeechVoiceEvents
-  def query_interface(this : IISpeechVoiceEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IISpeechVoiceEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IISpeechVoiceEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IISpeechVoiceEvents*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IISpeechVoiceEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IISpeechVoiceEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IISpeechVoiceEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-end
-struct LibWin32::ISpeechRecognizer
-  def query_interface(this : ISpeechRecognizer*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechRecognizer*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechRecognizer*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechRecognizer*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechRecognizer*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechRecognizer*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechRecognizer*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def putref_recognizer(this : ISpeechRecognizer*, recognizer : ISpeechObjectToken) : HRESULT
-    @lpVtbl.value.putref_recognizer.call(this, recognizer)
-  end
-  def get_recognizer(this : ISpeechRecognizer*, recognizer : ISpeechObjectToken*) : HRESULT
-    @lpVtbl.value.get_recognizer.call(this, recognizer)
-  end
-  def put_allow_audio_input_format_changes_on_next_set(this : ISpeechRecognizer*, allow : Int16) : HRESULT
-    @lpVtbl.value.put_allow_audio_input_format_changes_on_next_set.call(this, allow)
-  end
-  def get_allow_audio_input_format_changes_on_next_set(this : ISpeechRecognizer*, allow : Int16*) : HRESULT
-    @lpVtbl.value.get_allow_audio_input_format_changes_on_next_set.call(this, allow)
-  end
-  def putref_audio_input(this : ISpeechRecognizer*, audioinput : ISpeechObjectToken) : HRESULT
-    @lpVtbl.value.putref_audio_input.call(this, audioinput)
-  end
-  def get_audio_input(this : ISpeechRecognizer*, audioinput : ISpeechObjectToken*) : HRESULT
-    @lpVtbl.value.get_audio_input.call(this, audioinput)
-  end
-  def putref_audio_input_stream(this : ISpeechRecognizer*, audioinputstream : ISpeechBaseStream) : HRESULT
-    @lpVtbl.value.putref_audio_input_stream.call(this, audioinputstream)
-  end
-  def get_audio_input_stream(this : ISpeechRecognizer*, audioinputstream : ISpeechBaseStream*) : HRESULT
-    @lpVtbl.value.get_audio_input_stream.call(this, audioinputstream)
-  end
-  def get_is_shared(this : ISpeechRecognizer*, shared : Int16*) : HRESULT
-    @lpVtbl.value.get_is_shared.call(this, shared)
-  end
-  def put_state(this : ISpeechRecognizer*, state : SpeechRecognizerState) : HRESULT
-    @lpVtbl.value.put_state.call(this, state)
-  end
-  def get_state(this : ISpeechRecognizer*, state : SpeechRecognizerState*) : HRESULT
-    @lpVtbl.value.get_state.call(this, state)
-  end
-  def get_status(this : ISpeechRecognizer*, status : ISpeechRecognizerStatus*) : HRESULT
-    @lpVtbl.value.get_status.call(this, status)
-  end
-  def putref_profile(this : ISpeechRecognizer*, profile : ISpeechObjectToken) : HRESULT
-    @lpVtbl.value.putref_profile.call(this, profile)
-  end
-  def get_profile(this : ISpeechRecognizer*, profile : ISpeechObjectToken*) : HRESULT
-    @lpVtbl.value.get_profile.call(this, profile)
-  end
-  def emulate_recognition(this : ISpeechRecognizer*, textelements : VARIANT, elementdisplayattributes : VARIANT*, languageid : Int32) : HRESULT
-    @lpVtbl.value.emulate_recognition.call(this, textelements, elementdisplayattributes, languageid)
-  end
-  def create_reco_context(this : ISpeechRecognizer*, newcontext : ISpeechRecoContext*) : HRESULT
-    @lpVtbl.value.create_reco_context.call(this, newcontext)
-  end
-  def get_format(this : ISpeechRecognizer*, type : SpeechFormatType, format : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_format.call(this, type, format)
-  end
-  def set_property_number(this : ISpeechRecognizer*, name : UInt8*, value : Int32, supported : Int16*) : HRESULT
-    @lpVtbl.value.set_property_number.call(this, name, value, supported)
-  end
-  def get_property_number(this : ISpeechRecognizer*, name : UInt8*, value : Int32*, supported : Int16*) : HRESULT
-    @lpVtbl.value.get_property_number.call(this, name, value, supported)
-  end
-  def set_property_string(this : ISpeechRecognizer*, name : UInt8*, value : UInt8*, supported : Int16*) : HRESULT
-    @lpVtbl.value.set_property_string.call(this, name, value, supported)
-  end
-  def get_property_string(this : ISpeechRecognizer*, name : UInt8*, value : UInt8**, supported : Int16*) : HRESULT
-    @lpVtbl.value.get_property_string.call(this, name, value, supported)
-  end
-  def is_ui_supported(this : ISpeechRecognizer*, typeofui : UInt8*, extradata : VARIANT*, supported : Int16*) : HRESULT
-    @lpVtbl.value.is_ui_supported.call(this, typeofui, extradata, supported)
-  end
-  def display_ui(this : ISpeechRecognizer*, hwndparent : Int32, title : UInt8*, typeofui : UInt8*, extradata : VARIANT*) : HRESULT
-    @lpVtbl.value.display_ui.call(this, hwndparent, title, typeofui, extradata)
-  end
-  def get_recognizers(this : ISpeechRecognizer*, requiredattributes : UInt8*, optionalattributes : UInt8*, objecttokens : ISpeechObjectTokens*) : HRESULT
-    @lpVtbl.value.get_recognizers.call(this, requiredattributes, optionalattributes, objecttokens)
-  end
-  def get_audio_inputs(this : ISpeechRecognizer*, requiredattributes : UInt8*, optionalattributes : UInt8*, objecttokens : ISpeechObjectTokens*) : HRESULT
-    @lpVtbl.value.get_audio_inputs.call(this, requiredattributes, optionalattributes, objecttokens)
-  end
-  def get_profiles(this : ISpeechRecognizer*, requiredattributes : UInt8*, optionalattributes : UInt8*, objecttokens : ISpeechObjectTokens*) : HRESULT
-    @lpVtbl.value.get_profiles.call(this, requiredattributes, optionalattributes, objecttokens)
-  end
-end
-struct LibWin32::ISpeechRecognizerStatus
-  def query_interface(this : ISpeechRecognizerStatus*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechRecognizerStatus*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechRecognizerStatus*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechRecognizerStatus*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechRecognizerStatus*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechRecognizerStatus*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechRecognizerStatus*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_audio_status(this : ISpeechRecognizerStatus*, audiostatus : ISpeechAudioStatus*) : HRESULT
-    @lpVtbl.value.get_audio_status.call(this, audiostatus)
-  end
-  def get_current_stream_position(this : ISpeechRecognizerStatus*, pcurrentstreampos : VARIANT*) : HRESULT
-    @lpVtbl.value.get_current_stream_position.call(this, pcurrentstreampos)
-  end
-  def get_current_stream_number(this : ISpeechRecognizerStatus*, streamnumber : Int32*) : HRESULT
-    @lpVtbl.value.get_current_stream_number.call(this, streamnumber)
-  end
-  def get_number_of_active_rules(this : ISpeechRecognizerStatus*, numberofactiverules : Int32*) : HRESULT
-    @lpVtbl.value.get_number_of_active_rules.call(this, numberofactiverules)
-  end
-  def get_clsid_engine(this : ISpeechRecognizerStatus*, clsidengine : UInt8**) : HRESULT
-    @lpVtbl.value.get_clsid_engine.call(this, clsidengine)
-  end
-  def get_supported_languages(this : ISpeechRecognizerStatus*, supportedlanguages : VARIANT*) : HRESULT
-    @lpVtbl.value.get_supported_languages.call(this, supportedlanguages)
-  end
-end
-struct LibWin32::ISpeechRecoContext
-  def query_interface(this : ISpeechRecoContext*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechRecoContext*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechRecoContext*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechRecoContext*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechRecoContext*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechRecoContext*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechRecoContext*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_recognizer(this : ISpeechRecoContext*, recognizer : ISpeechRecognizer*) : HRESULT
-    @lpVtbl.value.get_recognizer.call(this, recognizer)
-  end
-  def get_audio_input_interference_status(this : ISpeechRecoContext*, interference : SpeechInterference*) : HRESULT
-    @lpVtbl.value.get_audio_input_interference_status.call(this, interference)
-  end
-  def get_requested_ui_type(this : ISpeechRecoContext*, uitype : UInt8**) : HRESULT
-    @lpVtbl.value.get_requested_ui_type.call(this, uitype)
-  end
-  def putref_voice(this : ISpeechRecoContext*, voice : ISpeechVoice) : HRESULT
-    @lpVtbl.value.putref_voice.call(this, voice)
-  end
-  def get_voice(this : ISpeechRecoContext*, voice : ISpeechVoice*) : HRESULT
-    @lpVtbl.value.get_voice.call(this, voice)
-  end
-  def put_allow_voice_format_matching_on_next_set(this : ISpeechRecoContext*, allow : Int16) : HRESULT
-    @lpVtbl.value.put_allow_voice_format_matching_on_next_set.call(this, allow)
-  end
-  def get_allow_voice_format_matching_on_next_set(this : ISpeechRecoContext*, pallow : Int16*) : HRESULT
-    @lpVtbl.value.get_allow_voice_format_matching_on_next_set.call(this, pallow)
-  end
-  def put_voice_purge_event(this : ISpeechRecoContext*, eventinterest : SpeechRecoEvents) : HRESULT
-    @lpVtbl.value.put_voice_purge_event.call(this, eventinterest)
-  end
-  def get_voice_purge_event(this : ISpeechRecoContext*, eventinterest : SpeechRecoEvents*) : HRESULT
-    @lpVtbl.value.get_voice_purge_event.call(this, eventinterest)
-  end
-  def put_event_interests(this : ISpeechRecoContext*, eventinterest : SpeechRecoEvents) : HRESULT
-    @lpVtbl.value.put_event_interests.call(this, eventinterest)
-  end
-  def get_event_interests(this : ISpeechRecoContext*, eventinterest : SpeechRecoEvents*) : HRESULT
-    @lpVtbl.value.get_event_interests.call(this, eventinterest)
-  end
-  def put_cmd_max_alternates(this : ISpeechRecoContext*, maxalternates : Int32) : HRESULT
-    @lpVtbl.value.put_cmd_max_alternates.call(this, maxalternates)
-  end
-  def get_cmd_max_alternates(this : ISpeechRecoContext*, maxalternates : Int32*) : HRESULT
-    @lpVtbl.value.get_cmd_max_alternates.call(this, maxalternates)
-  end
-  def put_state(this : ISpeechRecoContext*, state : SpeechRecoContextState) : HRESULT
-    @lpVtbl.value.put_state.call(this, state)
-  end
-  def get_state(this : ISpeechRecoContext*, state : SpeechRecoContextState*) : HRESULT
-    @lpVtbl.value.get_state.call(this, state)
-  end
-  def put_retained_audio(this : ISpeechRecoContext*, option : SpeechRetainedAudioOptions) : HRESULT
-    @lpVtbl.value.put_retained_audio.call(this, option)
-  end
-  def get_retained_audio(this : ISpeechRecoContext*, option : SpeechRetainedAudioOptions*) : HRESULT
-    @lpVtbl.value.get_retained_audio.call(this, option)
-  end
-  def putref_retained_audio_format(this : ISpeechRecoContext*, format : ISpeechAudioFormat) : HRESULT
-    @lpVtbl.value.putref_retained_audio_format.call(this, format)
-  end
-  def get_retained_audio_format(this : ISpeechRecoContext*, format : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_retained_audio_format.call(this, format)
-  end
-  def pause(this : ISpeechRecoContext*) : HRESULT
-    @lpVtbl.value.pause.call(this)
-  end
-  def resume(this : ISpeechRecoContext*) : HRESULT
-    @lpVtbl.value.resume.call(this)
-  end
-  def create_grammar(this : ISpeechRecoContext*, grammarid : VARIANT, grammar : ISpeechRecoGrammar*) : HRESULT
-    @lpVtbl.value.create_grammar.call(this, grammarid, grammar)
-  end
-  def create_result_from_memory(this : ISpeechRecoContext*, resultblock : VARIANT*, result : ISpeechRecoResult*) : HRESULT
-    @lpVtbl.value.create_result_from_memory.call(this, resultblock, result)
-  end
-  def bookmark(this : ISpeechRecoContext*, options : SpeechBookmarkOptions, streampos : VARIANT, bookmarkid : VARIANT) : HRESULT
-    @lpVtbl.value.bookmark.call(this, options, streampos, bookmarkid)
-  end
-  def set_adaptation_data(this : ISpeechRecoContext*, adaptationstring : UInt8*) : HRESULT
-    @lpVtbl.value.set_adaptation_data.call(this, adaptationstring)
-  end
-end
-struct LibWin32::ISpeechRecoGrammar
-  def query_interface(this : ISpeechRecoGrammar*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechRecoGrammar*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechRecoGrammar*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechRecoGrammar*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechRecoGrammar*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechRecoGrammar*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechRecoGrammar*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_id(this : ISpeechRecoGrammar*, id : VARIANT*) : HRESULT
-    @lpVtbl.value.get_id.call(this, id)
-  end
-  def get_reco_context(this : ISpeechRecoGrammar*, recocontext : ISpeechRecoContext*) : HRESULT
-    @lpVtbl.value.get_reco_context.call(this, recocontext)
-  end
-  def put_state(this : ISpeechRecoGrammar*, state : SpeechGrammarState) : HRESULT
-    @lpVtbl.value.put_state.call(this, state)
-  end
-  def get_state(this : ISpeechRecoGrammar*, state : SpeechGrammarState*) : HRESULT
-    @lpVtbl.value.get_state.call(this, state)
-  end
-  def get_rules(this : ISpeechRecoGrammar*, rules : ISpeechGrammarRules*) : HRESULT
-    @lpVtbl.value.get_rules.call(this, rules)
-  end
-  def reset(this : ISpeechRecoGrammar*, newlanguage : Int32) : HRESULT
-    @lpVtbl.value.reset.call(this, newlanguage)
-  end
-  def cmd_load_from_file(this : ISpeechRecoGrammar*, filename : UInt8*, loadoption : SpeechLoadOption) : HRESULT
-    @lpVtbl.value.cmd_load_from_file.call(this, filename, loadoption)
-  end
-  def cmd_load_from_object(this : ISpeechRecoGrammar*, classid : UInt8*, grammarname : UInt8*, loadoption : SpeechLoadOption) : HRESULT
-    @lpVtbl.value.cmd_load_from_object.call(this, classid, grammarname, loadoption)
-  end
-  def cmd_load_from_resource(this : ISpeechRecoGrammar*, hmodule : Int32, resourcename : VARIANT, resourcetype : VARIANT, languageid : Int32, loadoption : SpeechLoadOption) : HRESULT
-    @lpVtbl.value.cmd_load_from_resource.call(this, hmodule, resourcename, resourcetype, languageid, loadoption)
-  end
-  def cmd_load_from_memory(this : ISpeechRecoGrammar*, grammardata : VARIANT, loadoption : SpeechLoadOption) : HRESULT
-    @lpVtbl.value.cmd_load_from_memory.call(this, grammardata, loadoption)
-  end
-  def cmd_load_from_proprietary_grammar(this : ISpeechRecoGrammar*, proprietaryguid : UInt8*, proprietarystring : UInt8*, proprietarydata : VARIANT, loadoption : SpeechLoadOption) : HRESULT
-    @lpVtbl.value.cmd_load_from_proprietary_grammar.call(this, proprietaryguid, proprietarystring, proprietarydata, loadoption)
-  end
-  def cmd_set_rule_state(this : ISpeechRecoGrammar*, name : UInt8*, state : SpeechRuleState) : HRESULT
-    @lpVtbl.value.cmd_set_rule_state.call(this, name, state)
-  end
-  def cmd_set_rule_id_state(this : ISpeechRecoGrammar*, ruleid : Int32, state : SpeechRuleState) : HRESULT
-    @lpVtbl.value.cmd_set_rule_id_state.call(this, ruleid, state)
-  end
-  def dictation_load(this : ISpeechRecoGrammar*, topicname : UInt8*, loadoption : SpeechLoadOption) : HRESULT
-    @lpVtbl.value.dictation_load.call(this, topicname, loadoption)
-  end
-  def dictation_unload(this : ISpeechRecoGrammar*) : HRESULT
-    @lpVtbl.value.dictation_unload.call(this)
-  end
-  def dictation_set_state(this : ISpeechRecoGrammar*, state : SpeechRuleState) : HRESULT
-    @lpVtbl.value.dictation_set_state.call(this, state)
-  end
-  def set_word_sequence_data(this : ISpeechRecoGrammar*, text : UInt8*, textlength : Int32, info : ISpeechTextSelectionInformation) : HRESULT
-    @lpVtbl.value.set_word_sequence_data.call(this, text, textlength, info)
-  end
-  def set_text_selection(this : ISpeechRecoGrammar*, info : ISpeechTextSelectionInformation) : HRESULT
-    @lpVtbl.value.set_text_selection.call(this, info)
-  end
-  def is_pronounceable(this : ISpeechRecoGrammar*, word : UInt8*, wordpronounceable : SpeechWordPronounceable*) : HRESULT
-    @lpVtbl.value.is_pronounceable.call(this, word, wordpronounceable)
-  end
-end
-struct LibWin32::IISpeechRecoContextEvents
-  def query_interface(this : IISpeechRecoContextEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IISpeechRecoContextEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IISpeechRecoContextEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IISpeechRecoContextEvents*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IISpeechRecoContextEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IISpeechRecoContextEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IISpeechRecoContextEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-end
-struct LibWin32::ISpeechGrammarRule
-  def query_interface(this : ISpeechGrammarRule*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechGrammarRule*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechGrammarRule*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechGrammarRule*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechGrammarRule*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechGrammarRule*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechGrammarRule*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_attributes(this : ISpeechGrammarRule*, attributes : SpeechRuleAttributes*) : HRESULT
-    @lpVtbl.value.get_attributes.call(this, attributes)
-  end
-  def get_initial_state(this : ISpeechGrammarRule*, state : ISpeechGrammarRuleState*) : HRESULT
-    @lpVtbl.value.get_initial_state.call(this, state)
-  end
-  def get_name(this : ISpeechGrammarRule*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, name)
-  end
-  def get_id(this : ISpeechGrammarRule*, id : Int32*) : HRESULT
-    @lpVtbl.value.get_id.call(this, id)
-  end
-  def clear(this : ISpeechGrammarRule*) : HRESULT
-    @lpVtbl.value.clear.call(this)
-  end
-  def add_resource(this : ISpeechGrammarRule*, resourcename : UInt8*, resourcevalue : UInt8*) : HRESULT
-    @lpVtbl.value.add_resource.call(this, resourcename, resourcevalue)
-  end
-  def add_state(this : ISpeechGrammarRule*, state : ISpeechGrammarRuleState*) : HRESULT
-    @lpVtbl.value.add_state.call(this, state)
-  end
-end
-struct LibWin32::ISpeechGrammarRules
-  def query_interface(this : ISpeechGrammarRules*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechGrammarRules*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechGrammarRules*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechGrammarRules*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechGrammarRules*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechGrammarRules*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechGrammarRules*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : ISpeechGrammarRules*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def find_rule(this : ISpeechGrammarRules*, rulenameorid : VARIANT, rule : ISpeechGrammarRule*) : HRESULT
-    @lpVtbl.value.find_rule.call(this, rulenameorid, rule)
-  end
-  def item(this : ISpeechGrammarRules*, index : Int32, rule : ISpeechGrammarRule*) : HRESULT
-    @lpVtbl.value.item.call(this, index, rule)
-  end
-  def get__new_enum(this : ISpeechGrammarRules*, enumvariant : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, enumvariant)
-  end
-  def get_dynamic(this : ISpeechGrammarRules*, dynamic : Int16*) : HRESULT
-    @lpVtbl.value.get_dynamic.call(this, dynamic)
-  end
-  def add(this : ISpeechGrammarRules*, rulename : UInt8*, attributes : SpeechRuleAttributes, ruleid : Int32, rule : ISpeechGrammarRule*) : HRESULT
-    @lpVtbl.value.add.call(this, rulename, attributes, ruleid, rule)
-  end
-  def commit(this : ISpeechGrammarRules*) : HRESULT
-    @lpVtbl.value.commit.call(this)
-  end
-  def commit_and_save(this : ISpeechGrammarRules*, errortext : UInt8**, savestream : VARIANT*) : HRESULT
-    @lpVtbl.value.commit_and_save.call(this, errortext, savestream)
-  end
-end
-struct LibWin32::ISpeechGrammarRuleState
-  def query_interface(this : ISpeechGrammarRuleState*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechGrammarRuleState*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechGrammarRuleState*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechGrammarRuleState*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechGrammarRuleState*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechGrammarRuleState*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechGrammarRuleState*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_rule(this : ISpeechGrammarRuleState*, rule : ISpeechGrammarRule*) : HRESULT
-    @lpVtbl.value.get_rule.call(this, rule)
-  end
-  def get_transitions(this : ISpeechGrammarRuleState*, transitions : ISpeechGrammarRuleStateTransitions*) : HRESULT
-    @lpVtbl.value.get_transitions.call(this, transitions)
-  end
-  def add_word_transition(this : ISpeechGrammarRuleState*, deststate : ISpeechGrammarRuleState, words : UInt8*, separators : UInt8*, type : SpeechGrammarWordType, propertyname : UInt8*, propertyid : Int32, propertyvalue : VARIANT*, weight : Float32) : HRESULT
-    @lpVtbl.value.add_word_transition.call(this, deststate, words, separators, type, propertyname, propertyid, propertyvalue, weight)
-  end
-  def add_rule_transition(this : ISpeechGrammarRuleState*, destinationstate : ISpeechGrammarRuleState, rule : ISpeechGrammarRule, propertyname : UInt8*, propertyid : Int32, propertyvalue : VARIANT*, weight : Float32) : HRESULT
-    @lpVtbl.value.add_rule_transition.call(this, destinationstate, rule, propertyname, propertyid, propertyvalue, weight)
-  end
-  def add_special_transition(this : ISpeechGrammarRuleState*, destinationstate : ISpeechGrammarRuleState, type : SpeechSpecialTransitionType, propertyname : UInt8*, propertyid : Int32, propertyvalue : VARIANT*, weight : Float32) : HRESULT
-    @lpVtbl.value.add_special_transition.call(this, destinationstate, type, propertyname, propertyid, propertyvalue, weight)
-  end
-end
-struct LibWin32::ISpeechGrammarRuleStateTransition
-  def query_interface(this : ISpeechGrammarRuleStateTransition*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechGrammarRuleStateTransition*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechGrammarRuleStateTransition*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechGrammarRuleStateTransition*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechGrammarRuleStateTransition*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechGrammarRuleStateTransition*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechGrammarRuleStateTransition*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_type(this : ISpeechGrammarRuleStateTransition*, type : SpeechGrammarRuleStateTransitionType*) : HRESULT
-    @lpVtbl.value.get_type.call(this, type)
-  end
-  def get_text(this : ISpeechGrammarRuleStateTransition*, text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.call(this, text)
-  end
-  def get_rule(this : ISpeechGrammarRuleStateTransition*, rule : ISpeechGrammarRule*) : HRESULT
-    @lpVtbl.value.get_rule.call(this, rule)
-  end
-  def get_weight(this : ISpeechGrammarRuleStateTransition*, weight : VARIANT*) : HRESULT
-    @lpVtbl.value.get_weight.call(this, weight)
-  end
-  def get_property_name(this : ISpeechGrammarRuleStateTransition*, propertyname : UInt8**) : HRESULT
-    @lpVtbl.value.get_property_name.call(this, propertyname)
-  end
-  def get_property_id(this : ISpeechGrammarRuleStateTransition*, propertyid : Int32*) : HRESULT
-    @lpVtbl.value.get_property_id.call(this, propertyid)
-  end
-  def get_property_value(this : ISpeechGrammarRuleStateTransition*, propertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_property_value.call(this, propertyvalue)
-  end
-  def get_next_state(this : ISpeechGrammarRuleStateTransition*, nextstate : ISpeechGrammarRuleState*) : HRESULT
-    @lpVtbl.value.get_next_state.call(this, nextstate)
-  end
-end
-struct LibWin32::ISpeechGrammarRuleStateTransitions
-  def query_interface(this : ISpeechGrammarRuleStateTransitions*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechGrammarRuleStateTransitions*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechGrammarRuleStateTransitions*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechGrammarRuleStateTransitions*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechGrammarRuleStateTransitions*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechGrammarRuleStateTransitions*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechGrammarRuleStateTransitions*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : ISpeechGrammarRuleStateTransitions*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def item(this : ISpeechGrammarRuleStateTransitions*, index : Int32, transition : ISpeechGrammarRuleStateTransition*) : HRESULT
-    @lpVtbl.value.item.call(this, index, transition)
-  end
-  def get__new_enum(this : ISpeechGrammarRuleStateTransitions*, enumvariant : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, enumvariant)
-  end
-end
-struct LibWin32::ISpeechTextSelectionInformation
-  def query_interface(this : ISpeechTextSelectionInformation*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechTextSelectionInformation*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechTextSelectionInformation*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechTextSelectionInformation*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechTextSelectionInformation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechTextSelectionInformation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechTextSelectionInformation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def put_active_offset(this : ISpeechTextSelectionInformation*, activeoffset : Int32) : HRESULT
-    @lpVtbl.value.put_active_offset.call(this, activeoffset)
-  end
-  def get_active_offset(this : ISpeechTextSelectionInformation*, activeoffset : Int32*) : HRESULT
-    @lpVtbl.value.get_active_offset.call(this, activeoffset)
-  end
-  def put_active_length(this : ISpeechTextSelectionInformation*, activelength : Int32) : HRESULT
-    @lpVtbl.value.put_active_length.call(this, activelength)
-  end
-  def get_active_length(this : ISpeechTextSelectionInformation*, activelength : Int32*) : HRESULT
-    @lpVtbl.value.get_active_length.call(this, activelength)
-  end
-  def put_selection_offset(this : ISpeechTextSelectionInformation*, selectionoffset : Int32) : HRESULT
-    @lpVtbl.value.put_selection_offset.call(this, selectionoffset)
-  end
-  def get_selection_offset(this : ISpeechTextSelectionInformation*, selectionoffset : Int32*) : HRESULT
-    @lpVtbl.value.get_selection_offset.call(this, selectionoffset)
-  end
-  def put_selection_length(this : ISpeechTextSelectionInformation*, selectionlength : Int32) : HRESULT
-    @lpVtbl.value.put_selection_length.call(this, selectionlength)
-  end
-  def get_selection_length(this : ISpeechTextSelectionInformation*, selectionlength : Int32*) : HRESULT
-    @lpVtbl.value.get_selection_length.call(this, selectionlength)
-  end
-end
-struct LibWin32::ISpeechRecoResult
-  def query_interface(this : ISpeechRecoResult*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechRecoResult*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechRecoResult*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechRecoResult*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechRecoResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechRecoResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechRecoResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_reco_context(this : ISpeechRecoResult*, recocontext : ISpeechRecoContext*) : HRESULT
-    @lpVtbl.value.get_reco_context.call(this, recocontext)
-  end
-  def get_times(this : ISpeechRecoResult*, times : ISpeechRecoResultTimes*) : HRESULT
-    @lpVtbl.value.get_times.call(this, times)
-  end
-  def putref_audio_format(this : ISpeechRecoResult*, format : ISpeechAudioFormat) : HRESULT
-    @lpVtbl.value.putref_audio_format.call(this, format)
-  end
-  def get_audio_format(this : ISpeechRecoResult*, format : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_audio_format.call(this, format)
-  end
-  def get_phrase_info(this : ISpeechRecoResult*, phraseinfo : ISpeechPhraseInfo*) : HRESULT
-    @lpVtbl.value.get_phrase_info.call(this, phraseinfo)
-  end
-  def alternates(this : ISpeechRecoResult*, requestcount : Int32, startelement : Int32, elements : Int32, alternates : ISpeechPhraseAlternates*) : HRESULT
-    @lpVtbl.value.alternates.call(this, requestcount, startelement, elements, alternates)
-  end
-  def audio(this : ISpeechRecoResult*, startelement : Int32, elements : Int32, stream : ISpeechMemoryStream*) : HRESULT
-    @lpVtbl.value.audio.call(this, startelement, elements, stream)
-  end
-  def speak_audio(this : ISpeechRecoResult*, startelement : Int32, elements : Int32, flags : SpeechVoiceSpeakFlags, streamnumber : Int32*) : HRESULT
-    @lpVtbl.value.speak_audio.call(this, startelement, elements, flags, streamnumber)
-  end
-  def save_to_memory(this : ISpeechRecoResult*, resultblock : VARIANT*) : HRESULT
-    @lpVtbl.value.save_to_memory.call(this, resultblock)
-  end
-  def discard_result_info(this : ISpeechRecoResult*, valuetypes : SpeechDiscardType) : HRESULT
-    @lpVtbl.value.discard_result_info.call(this, valuetypes)
-  end
-end
-struct LibWin32::ISpeechRecoResult2
-  def query_interface(this : ISpeechRecoResult2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechRecoResult2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechRecoResult2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechRecoResult2*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechRecoResult2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechRecoResult2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechRecoResult2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_reco_context(this : ISpeechRecoResult2*, recocontext : ISpeechRecoContext*) : HRESULT
-    @lpVtbl.value.get_reco_context.call(this, recocontext)
-  end
-  def get_times(this : ISpeechRecoResult2*, times : ISpeechRecoResultTimes*) : HRESULT
-    @lpVtbl.value.get_times.call(this, times)
-  end
-  def putref_audio_format(this : ISpeechRecoResult2*, format : ISpeechAudioFormat) : HRESULT
-    @lpVtbl.value.putref_audio_format.call(this, format)
-  end
-  def get_audio_format(this : ISpeechRecoResult2*, format : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_audio_format.call(this, format)
-  end
-  def get_phrase_info(this : ISpeechRecoResult2*, phraseinfo : ISpeechPhraseInfo*) : HRESULT
-    @lpVtbl.value.get_phrase_info.call(this, phraseinfo)
-  end
-  def alternates(this : ISpeechRecoResult2*, requestcount : Int32, startelement : Int32, elements : Int32, alternates : ISpeechPhraseAlternates*) : HRESULT
-    @lpVtbl.value.alternates.call(this, requestcount, startelement, elements, alternates)
-  end
-  def audio(this : ISpeechRecoResult2*, startelement : Int32, elements : Int32, stream : ISpeechMemoryStream*) : HRESULT
-    @lpVtbl.value.audio.call(this, startelement, elements, stream)
-  end
-  def speak_audio(this : ISpeechRecoResult2*, startelement : Int32, elements : Int32, flags : SpeechVoiceSpeakFlags, streamnumber : Int32*) : HRESULT
-    @lpVtbl.value.speak_audio.call(this, startelement, elements, flags, streamnumber)
-  end
-  def save_to_memory(this : ISpeechRecoResult2*, resultblock : VARIANT*) : HRESULT
-    @lpVtbl.value.save_to_memory.call(this, resultblock)
-  end
-  def discard_result_info(this : ISpeechRecoResult2*, valuetypes : SpeechDiscardType) : HRESULT
-    @lpVtbl.value.discard_result_info.call(this, valuetypes)
-  end
-  def set_text_feedback(this : ISpeechRecoResult2*, feedback : UInt8*, wassuccessful : Int16) : HRESULT
-    @lpVtbl.value.set_text_feedback.call(this, feedback, wassuccessful)
-  end
-end
-struct LibWin32::ISpeechRecoResultTimes
-  def query_interface(this : ISpeechRecoResultTimes*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechRecoResultTimes*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechRecoResultTimes*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechRecoResultTimes*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechRecoResultTimes*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechRecoResultTimes*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechRecoResultTimes*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_stream_time(this : ISpeechRecoResultTimes*, time : VARIANT*) : HRESULT
-    @lpVtbl.value.get_stream_time.call(this, time)
-  end
-  def get_length(this : ISpeechRecoResultTimes*, length : VARIANT*) : HRESULT
-    @lpVtbl.value.get_length.call(this, length)
-  end
-  def get_tick_count(this : ISpeechRecoResultTimes*, tickcount : Int32*) : HRESULT
-    @lpVtbl.value.get_tick_count.call(this, tickcount)
-  end
-  def get_offset_from_start(this : ISpeechRecoResultTimes*, offsetfromstart : VARIANT*) : HRESULT
-    @lpVtbl.value.get_offset_from_start.call(this, offsetfromstart)
-  end
-end
-struct LibWin32::ISpeechPhraseAlternate
-  def query_interface(this : ISpeechPhraseAlternate*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechPhraseAlternate*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechPhraseAlternate*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechPhraseAlternate*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechPhraseAlternate*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechPhraseAlternate*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechPhraseAlternate*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_reco_result(this : ISpeechPhraseAlternate*, recoresult : ISpeechRecoResult*) : HRESULT
-    @lpVtbl.value.get_reco_result.call(this, recoresult)
-  end
-  def get_start_element_in_result(this : ISpeechPhraseAlternate*, startelement : Int32*) : HRESULT
-    @lpVtbl.value.get_start_element_in_result.call(this, startelement)
-  end
-  def get_number_of_elements_in_result(this : ISpeechPhraseAlternate*, numberofelements : Int32*) : HRESULT
-    @lpVtbl.value.get_number_of_elements_in_result.call(this, numberofelements)
-  end
-  def get_phrase_info(this : ISpeechPhraseAlternate*, phraseinfo : ISpeechPhraseInfo*) : HRESULT
-    @lpVtbl.value.get_phrase_info.call(this, phraseinfo)
-  end
-  def commit(this : ISpeechPhraseAlternate*) : HRESULT
-    @lpVtbl.value.commit.call(this)
-  end
-end
-struct LibWin32::ISpeechPhraseAlternates
-  def query_interface(this : ISpeechPhraseAlternates*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechPhraseAlternates*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechPhraseAlternates*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechPhraseAlternates*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechPhraseAlternates*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechPhraseAlternates*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechPhraseAlternates*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : ISpeechPhraseAlternates*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def item(this : ISpeechPhraseAlternates*, index : Int32, phrasealternate : ISpeechPhraseAlternate*) : HRESULT
-    @lpVtbl.value.item.call(this, index, phrasealternate)
-  end
-  def get__new_enum(this : ISpeechPhraseAlternates*, enumvariant : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, enumvariant)
-  end
-end
-struct LibWin32::ISpeechPhraseInfo
-  def query_interface(this : ISpeechPhraseInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechPhraseInfo*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechPhraseInfo*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechPhraseInfo*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechPhraseInfo*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechPhraseInfo*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechPhraseInfo*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_language_id(this : ISpeechPhraseInfo*, languageid : Int32*) : HRESULT
-    @lpVtbl.value.get_language_id.call(this, languageid)
-  end
-  def get_grammar_id(this : ISpeechPhraseInfo*, grammarid : VARIANT*) : HRESULT
-    @lpVtbl.value.get_grammar_id.call(this, grammarid)
-  end
-  def get_start_time(this : ISpeechPhraseInfo*, starttime : VARIANT*) : HRESULT
-    @lpVtbl.value.get_start_time.call(this, starttime)
-  end
-  def get_audio_stream_position(this : ISpeechPhraseInfo*, audiostreamposition : VARIANT*) : HRESULT
-    @lpVtbl.value.get_audio_stream_position.call(this, audiostreamposition)
-  end
-  def get_audio_size_bytes(this : ISpeechPhraseInfo*, paudiosizebytes : Int32*) : HRESULT
-    @lpVtbl.value.get_audio_size_bytes.call(this, paudiosizebytes)
-  end
-  def get_retained_size_bytes(this : ISpeechPhraseInfo*, retainedsizebytes : Int32*) : HRESULT
-    @lpVtbl.value.get_retained_size_bytes.call(this, retainedsizebytes)
-  end
-  def get_audio_size_time(this : ISpeechPhraseInfo*, audiosizetime : Int32*) : HRESULT
-    @lpVtbl.value.get_audio_size_time.call(this, audiosizetime)
-  end
-  def get_rule(this : ISpeechPhraseInfo*, rule : ISpeechPhraseRule*) : HRESULT
-    @lpVtbl.value.get_rule.call(this, rule)
-  end
-  def get_properties(this : ISpeechPhraseInfo*, properties : ISpeechPhraseProperties*) : HRESULT
-    @lpVtbl.value.get_properties.call(this, properties)
-  end
-  def get_elements(this : ISpeechPhraseInfo*, elements : ISpeechPhraseElements*) : HRESULT
-    @lpVtbl.value.get_elements.call(this, elements)
-  end
-  def get_replacements(this : ISpeechPhraseInfo*, replacements : ISpeechPhraseReplacements*) : HRESULT
-    @lpVtbl.value.get_replacements.call(this, replacements)
-  end
-  def get_engine_id(this : ISpeechPhraseInfo*, engineidguid : UInt8**) : HRESULT
-    @lpVtbl.value.get_engine_id.call(this, engineidguid)
-  end
-  def get_engine_private_data(this : ISpeechPhraseInfo*, privatedata : VARIANT*) : HRESULT
-    @lpVtbl.value.get_engine_private_data.call(this, privatedata)
-  end
-  def save_to_memory(this : ISpeechPhraseInfo*, phraseblock : VARIANT*) : HRESULT
-    @lpVtbl.value.save_to_memory.call(this, phraseblock)
-  end
-  def get_text(this : ISpeechPhraseInfo*, startelement : Int32, elements : Int32, usereplacements : Int16, text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.call(this, startelement, elements, usereplacements, text)
-  end
-  def get_display_attributes(this : ISpeechPhraseInfo*, startelement : Int32, elements : Int32, usereplacements : Int16, displayattributes : SpeechDisplayAttributes*) : HRESULT
-    @lpVtbl.value.get_display_attributes.call(this, startelement, elements, usereplacements, displayattributes)
-  end
-end
-struct LibWin32::ISpeechPhraseElement
-  def query_interface(this : ISpeechPhraseElement*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechPhraseElement*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechPhraseElement*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechPhraseElement*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechPhraseElement*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechPhraseElement*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechPhraseElement*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_audio_time_offset(this : ISpeechPhraseElement*, audiotimeoffset : Int32*) : HRESULT
-    @lpVtbl.value.get_audio_time_offset.call(this, audiotimeoffset)
-  end
-  def get_audio_size_time(this : ISpeechPhraseElement*, audiosizetime : Int32*) : HRESULT
-    @lpVtbl.value.get_audio_size_time.call(this, audiosizetime)
-  end
-  def get_audio_stream_offset(this : ISpeechPhraseElement*, audiostreamoffset : Int32*) : HRESULT
-    @lpVtbl.value.get_audio_stream_offset.call(this, audiostreamoffset)
-  end
-  def get_audio_size_bytes(this : ISpeechPhraseElement*, audiosizebytes : Int32*) : HRESULT
-    @lpVtbl.value.get_audio_size_bytes.call(this, audiosizebytes)
-  end
-  def get_retained_stream_offset(this : ISpeechPhraseElement*, retainedstreamoffset : Int32*) : HRESULT
-    @lpVtbl.value.get_retained_stream_offset.call(this, retainedstreamoffset)
-  end
-  def get_retained_size_bytes(this : ISpeechPhraseElement*, retainedsizebytes : Int32*) : HRESULT
-    @lpVtbl.value.get_retained_size_bytes.call(this, retainedsizebytes)
-  end
-  def get_display_text(this : ISpeechPhraseElement*, displaytext : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_text.call(this, displaytext)
-  end
-  def get_lexical_form(this : ISpeechPhraseElement*, lexicalform : UInt8**) : HRESULT
-    @lpVtbl.value.get_lexical_form.call(this, lexicalform)
-  end
-  def get_pronunciation(this : ISpeechPhraseElement*, pronunciation : VARIANT*) : HRESULT
-    @lpVtbl.value.get_pronunciation.call(this, pronunciation)
-  end
-  def get_display_attributes(this : ISpeechPhraseElement*, displayattributes : SpeechDisplayAttributes*) : HRESULT
-    @lpVtbl.value.get_display_attributes.call(this, displayattributes)
-  end
-  def get_required_confidence(this : ISpeechPhraseElement*, requiredconfidence : SpeechEngineConfidence*) : HRESULT
-    @lpVtbl.value.get_required_confidence.call(this, requiredconfidence)
-  end
-  def get_actual_confidence(this : ISpeechPhraseElement*, actualconfidence : SpeechEngineConfidence*) : HRESULT
-    @lpVtbl.value.get_actual_confidence.call(this, actualconfidence)
-  end
-  def get_engine_confidence(this : ISpeechPhraseElement*, engineconfidence : Float32*) : HRESULT
-    @lpVtbl.value.get_engine_confidence.call(this, engineconfidence)
-  end
-end
-struct LibWin32::ISpeechPhraseElements
-  def query_interface(this : ISpeechPhraseElements*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechPhraseElements*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechPhraseElements*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechPhraseElements*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechPhraseElements*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechPhraseElements*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechPhraseElements*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : ISpeechPhraseElements*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def item(this : ISpeechPhraseElements*, index : Int32, element : ISpeechPhraseElement*) : HRESULT
-    @lpVtbl.value.item.call(this, index, element)
-  end
-  def get__new_enum(this : ISpeechPhraseElements*, enumvariant : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, enumvariant)
-  end
-end
-struct LibWin32::ISpeechPhraseReplacement
-  def query_interface(this : ISpeechPhraseReplacement*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechPhraseReplacement*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechPhraseReplacement*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechPhraseReplacement*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechPhraseReplacement*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechPhraseReplacement*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechPhraseReplacement*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_display_attributes(this : ISpeechPhraseReplacement*, displayattributes : SpeechDisplayAttributes*) : HRESULT
-    @lpVtbl.value.get_display_attributes.call(this, displayattributes)
-  end
-  def get_text(this : ISpeechPhraseReplacement*, text : UInt8**) : HRESULT
-    @lpVtbl.value.get_text.call(this, text)
-  end
-  def get_first_element(this : ISpeechPhraseReplacement*, firstelement : Int32*) : HRESULT
-    @lpVtbl.value.get_first_element.call(this, firstelement)
-  end
-  def get_number_of_elements(this : ISpeechPhraseReplacement*, numberofelements : Int32*) : HRESULT
-    @lpVtbl.value.get_number_of_elements.call(this, numberofelements)
-  end
-end
-struct LibWin32::ISpeechPhraseReplacements
-  def query_interface(this : ISpeechPhraseReplacements*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechPhraseReplacements*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechPhraseReplacements*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechPhraseReplacements*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechPhraseReplacements*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechPhraseReplacements*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechPhraseReplacements*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : ISpeechPhraseReplacements*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def item(this : ISpeechPhraseReplacements*, index : Int32, reps : ISpeechPhraseReplacement*) : HRESULT
-    @lpVtbl.value.item.call(this, index, reps)
-  end
-  def get__new_enum(this : ISpeechPhraseReplacements*, enumvariant : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, enumvariant)
-  end
-end
-struct LibWin32::ISpeechPhraseProperty
-  def query_interface(this : ISpeechPhraseProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechPhraseProperty*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechPhraseProperty*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechPhraseProperty*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechPhraseProperty*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechPhraseProperty*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechPhraseProperty*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_name(this : ISpeechPhraseProperty*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, name)
-  end
-  def get_id(this : ISpeechPhraseProperty*, id : Int32*) : HRESULT
-    @lpVtbl.value.get_id.call(this, id)
-  end
-  def get_value(this : ISpeechPhraseProperty*, value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_value.call(this, value)
-  end
-  def get_first_element(this : ISpeechPhraseProperty*, firstelement : Int32*) : HRESULT
-    @lpVtbl.value.get_first_element.call(this, firstelement)
-  end
-  def get_number_of_elements(this : ISpeechPhraseProperty*, numberofelements : Int32*) : HRESULT
-    @lpVtbl.value.get_number_of_elements.call(this, numberofelements)
-  end
-  def get_engine_confidence(this : ISpeechPhraseProperty*, confidence : Float32*) : HRESULT
-    @lpVtbl.value.get_engine_confidence.call(this, confidence)
-  end
-  def get_confidence(this : ISpeechPhraseProperty*, confidence : SpeechEngineConfidence*) : HRESULT
-    @lpVtbl.value.get_confidence.call(this, confidence)
-  end
-  def get_parent(this : ISpeechPhraseProperty*, parentproperty : ISpeechPhraseProperty*) : HRESULT
-    @lpVtbl.value.get_parent.call(this, parentproperty)
-  end
-  def get_children(this : ISpeechPhraseProperty*, children : ISpeechPhraseProperties*) : HRESULT
-    @lpVtbl.value.get_children.call(this, children)
-  end
-end
-struct LibWin32::ISpeechPhraseProperties
-  def query_interface(this : ISpeechPhraseProperties*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechPhraseProperties*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechPhraseProperties*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechPhraseProperties*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechPhraseProperties*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechPhraseProperties*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechPhraseProperties*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : ISpeechPhraseProperties*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def item(this : ISpeechPhraseProperties*, index : Int32, property : ISpeechPhraseProperty*) : HRESULT
-    @lpVtbl.value.item.call(this, index, property)
-  end
-  def get__new_enum(this : ISpeechPhraseProperties*, enumvariant : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, enumvariant)
-  end
-end
-struct LibWin32::ISpeechPhraseRule
-  def query_interface(this : ISpeechPhraseRule*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechPhraseRule*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechPhraseRule*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechPhraseRule*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechPhraseRule*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechPhraseRule*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechPhraseRule*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_name(this : ISpeechPhraseRule*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, name)
-  end
-  def get_id(this : ISpeechPhraseRule*, id : Int32*) : HRESULT
-    @lpVtbl.value.get_id.call(this, id)
-  end
-  def get_first_element(this : ISpeechPhraseRule*, firstelement : Int32*) : HRESULT
-    @lpVtbl.value.get_first_element.call(this, firstelement)
-  end
-  def get_number_of_elements(this : ISpeechPhraseRule*, numberofelements : Int32*) : HRESULT
-    @lpVtbl.value.get_number_of_elements.call(this, numberofelements)
-  end
-  def get_parent(this : ISpeechPhraseRule*, parent : ISpeechPhraseRule*) : HRESULT
-    @lpVtbl.value.get_parent.call(this, parent)
-  end
-  def get_children(this : ISpeechPhraseRule*, children : ISpeechPhraseRules*) : HRESULT
-    @lpVtbl.value.get_children.call(this, children)
-  end
-  def get_confidence(this : ISpeechPhraseRule*, actualconfidence : SpeechEngineConfidence*) : HRESULT
-    @lpVtbl.value.get_confidence.call(this, actualconfidence)
-  end
-  def get_engine_confidence(this : ISpeechPhraseRule*, engineconfidence : Float32*) : HRESULT
-    @lpVtbl.value.get_engine_confidence.call(this, engineconfidence)
-  end
-end
-struct LibWin32::ISpeechPhraseRules
-  def query_interface(this : ISpeechPhraseRules*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechPhraseRules*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechPhraseRules*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechPhraseRules*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechPhraseRules*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechPhraseRules*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechPhraseRules*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : ISpeechPhraseRules*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def item(this : ISpeechPhraseRules*, index : Int32, rule : ISpeechPhraseRule*) : HRESULT
-    @lpVtbl.value.item.call(this, index, rule)
-  end
-  def get__new_enum(this : ISpeechPhraseRules*, enumvariant : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, enumvariant)
-  end
-end
-struct LibWin32::ISpeechLexicon
-  def query_interface(this : ISpeechLexicon*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechLexicon*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechLexicon*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechLexicon*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechLexicon*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechLexicon*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechLexicon*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_generation_id(this : ISpeechLexicon*, generationid : Int32*) : HRESULT
-    @lpVtbl.value.get_generation_id.call(this, generationid)
-  end
-  def get_words(this : ISpeechLexicon*, flags : SpeechLexiconType, generationid : Int32*, words : ISpeechLexiconWords*) : HRESULT
-    @lpVtbl.value.get_words.call(this, flags, generationid, words)
-  end
-  def add_pronunciation(this : ISpeechLexicon*, bstrword : UInt8*, langid : Int32, partofspeech : SpeechPartOfSpeech, bstrpronunciation : UInt8*) : HRESULT
-    @lpVtbl.value.add_pronunciation.call(this, bstrword, langid, partofspeech, bstrpronunciation)
-  end
-  def add_pronunciation_by_phone_ids(this : ISpeechLexicon*, bstrword : UInt8*, langid : Int32, partofspeech : SpeechPartOfSpeech, phoneids : VARIANT*) : HRESULT
-    @lpVtbl.value.add_pronunciation_by_phone_ids.call(this, bstrword, langid, partofspeech, phoneids)
-  end
-  def remove_pronunciation(this : ISpeechLexicon*, bstrword : UInt8*, langid : Int32, partofspeech : SpeechPartOfSpeech, bstrpronunciation : UInt8*) : HRESULT
-    @lpVtbl.value.remove_pronunciation.call(this, bstrword, langid, partofspeech, bstrpronunciation)
-  end
-  def remove_pronunciation_by_phone_ids(this : ISpeechLexicon*, bstrword : UInt8*, langid : Int32, partofspeech : SpeechPartOfSpeech, phoneids : VARIANT*) : HRESULT
-    @lpVtbl.value.remove_pronunciation_by_phone_ids.call(this, bstrword, langid, partofspeech, phoneids)
-  end
-  def get_pronunciations(this : ISpeechLexicon*, bstrword : UInt8*, langid : Int32, typeflags : SpeechLexiconType, pppronunciations : ISpeechLexiconPronunciations*) : HRESULT
-    @lpVtbl.value.get_pronunciations.call(this, bstrword, langid, typeflags, pppronunciations)
-  end
-  def get_generation_change(this : ISpeechLexicon*, generationid : Int32*, ppwords : ISpeechLexiconWords*) : HRESULT
-    @lpVtbl.value.get_generation_change.call(this, generationid, ppwords)
-  end
-end
-struct LibWin32::ISpeechLexiconWords
-  def query_interface(this : ISpeechLexiconWords*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechLexiconWords*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechLexiconWords*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechLexiconWords*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechLexiconWords*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechLexiconWords*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechLexiconWords*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : ISpeechLexiconWords*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def item(this : ISpeechLexiconWords*, index : Int32, word : ISpeechLexiconWord*) : HRESULT
-    @lpVtbl.value.item.call(this, index, word)
-  end
-  def get__new_enum(this : ISpeechLexiconWords*, enumvariant : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, enumvariant)
-  end
-end
-struct LibWin32::ISpeechLexiconWord
-  def query_interface(this : ISpeechLexiconWord*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechLexiconWord*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechLexiconWord*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechLexiconWord*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechLexiconWord*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechLexiconWord*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechLexiconWord*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_lang_id(this : ISpeechLexiconWord*, langid : Int32*) : HRESULT
-    @lpVtbl.value.get_lang_id.call(this, langid)
-  end
-  def get_type(this : ISpeechLexiconWord*, wordtype : SpeechWordType*) : HRESULT
-    @lpVtbl.value.get_type.call(this, wordtype)
-  end
-  def get_word(this : ISpeechLexiconWord*, word : UInt8**) : HRESULT
-    @lpVtbl.value.get_word.call(this, word)
-  end
-  def get_pronunciations(this : ISpeechLexiconWord*, pronunciations : ISpeechLexiconPronunciations*) : HRESULT
-    @lpVtbl.value.get_pronunciations.call(this, pronunciations)
-  end
-end
-struct LibWin32::ISpeechLexiconPronunciations
-  def query_interface(this : ISpeechLexiconPronunciations*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechLexiconPronunciations*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechLexiconPronunciations*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechLexiconPronunciations*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechLexiconPronunciations*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechLexiconPronunciations*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechLexiconPronunciations*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : ISpeechLexiconPronunciations*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def item(this : ISpeechLexiconPronunciations*, index : Int32, pronunciation : ISpeechLexiconPronunciation*) : HRESULT
-    @lpVtbl.value.item.call(this, index, pronunciation)
-  end
-  def get__new_enum(this : ISpeechLexiconPronunciations*, enumvariant : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, enumvariant)
-  end
-end
-struct LibWin32::ISpeechLexiconPronunciation
-  def query_interface(this : ISpeechLexiconPronunciation*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechLexiconPronunciation*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechLexiconPronunciation*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechLexiconPronunciation*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechLexiconPronunciation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechLexiconPronunciation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechLexiconPronunciation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_type(this : ISpeechLexiconPronunciation*, lexicontype : SpeechLexiconType*) : HRESULT
-    @lpVtbl.value.get_type.call(this, lexicontype)
-  end
-  def get_lang_id(this : ISpeechLexiconPronunciation*, langid : Int32*) : HRESULT
-    @lpVtbl.value.get_lang_id.call(this, langid)
-  end
-  def get_part_of_speech(this : ISpeechLexiconPronunciation*, partofspeech : SpeechPartOfSpeech*) : HRESULT
-    @lpVtbl.value.get_part_of_speech.call(this, partofspeech)
-  end
-  def get_phone_ids(this : ISpeechLexiconPronunciation*, phoneids : VARIANT*) : HRESULT
-    @lpVtbl.value.get_phone_ids.call(this, phoneids)
-  end
-  def get_symbolic(this : ISpeechLexiconPronunciation*, symbolic : UInt8**) : HRESULT
-    @lpVtbl.value.get_symbolic.call(this, symbolic)
-  end
-end
-struct LibWin32::ISpeechXMLRecoResult
-  def query_interface(this : ISpeechXMLRecoResult*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechXMLRecoResult*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechXMLRecoResult*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechXMLRecoResult*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechXMLRecoResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechXMLRecoResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechXMLRecoResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_reco_context(this : ISpeechXMLRecoResult*, recocontext : ISpeechRecoContext*) : HRESULT
-    @lpVtbl.value.get_reco_context.call(this, recocontext)
-  end
-  def get_times(this : ISpeechXMLRecoResult*, times : ISpeechRecoResultTimes*) : HRESULT
-    @lpVtbl.value.get_times.call(this, times)
-  end
-  def putref_audio_format(this : ISpeechXMLRecoResult*, format : ISpeechAudioFormat) : HRESULT
-    @lpVtbl.value.putref_audio_format.call(this, format)
-  end
-  def get_audio_format(this : ISpeechXMLRecoResult*, format : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_audio_format.call(this, format)
-  end
-  def get_phrase_info(this : ISpeechXMLRecoResult*, phraseinfo : ISpeechPhraseInfo*) : HRESULT
-    @lpVtbl.value.get_phrase_info.call(this, phraseinfo)
-  end
-  def alternates(this : ISpeechXMLRecoResult*, requestcount : Int32, startelement : Int32, elements : Int32, alternates : ISpeechPhraseAlternates*) : HRESULT
-    @lpVtbl.value.alternates.call(this, requestcount, startelement, elements, alternates)
-  end
-  def audio(this : ISpeechXMLRecoResult*, startelement : Int32, elements : Int32, stream : ISpeechMemoryStream*) : HRESULT
-    @lpVtbl.value.audio.call(this, startelement, elements, stream)
-  end
-  def speak_audio(this : ISpeechXMLRecoResult*, startelement : Int32, elements : Int32, flags : SpeechVoiceSpeakFlags, streamnumber : Int32*) : HRESULT
-    @lpVtbl.value.speak_audio.call(this, startelement, elements, flags, streamnumber)
-  end
-  def save_to_memory(this : ISpeechXMLRecoResult*, resultblock : VARIANT*) : HRESULT
-    @lpVtbl.value.save_to_memory.call(this, resultblock)
-  end
-  def discard_result_info(this : ISpeechXMLRecoResult*, valuetypes : SpeechDiscardType) : HRESULT
-    @lpVtbl.value.discard_result_info.call(this, valuetypes)
-  end
-  def get_xml_result(this : ISpeechXMLRecoResult*, options : SPXMLRESULTOPTIONS, presult : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml_result.call(this, options, presult)
-  end
-  def get_xml_error_info(this : ISpeechXMLRecoResult*, linenumber : Int32*, scriptline : UInt8**, source : UInt8**, description : UInt8**, resultcode : Int32*, iserror : Int16*) : HRESULT
-    @lpVtbl.value.get_xml_error_info.call(this, linenumber, scriptline, source, description, resultcode, iserror)
-  end
-end
-struct LibWin32::ISpeechRecoResultDispatch
-  def query_interface(this : ISpeechRecoResultDispatch*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechRecoResultDispatch*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechRecoResultDispatch*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechRecoResultDispatch*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechRecoResultDispatch*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechRecoResultDispatch*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechRecoResultDispatch*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_reco_context(this : ISpeechRecoResultDispatch*, recocontext : ISpeechRecoContext*) : HRESULT
-    @lpVtbl.value.get_reco_context.call(this, recocontext)
-  end
-  def get_times(this : ISpeechRecoResultDispatch*, times : ISpeechRecoResultTimes*) : HRESULT
-    @lpVtbl.value.get_times.call(this, times)
-  end
-  def putref_audio_format(this : ISpeechRecoResultDispatch*, format : ISpeechAudioFormat) : HRESULT
-    @lpVtbl.value.putref_audio_format.call(this, format)
-  end
-  def get_audio_format(this : ISpeechRecoResultDispatch*, format : ISpeechAudioFormat*) : HRESULT
-    @lpVtbl.value.get_audio_format.call(this, format)
-  end
-  def get_phrase_info(this : ISpeechRecoResultDispatch*, phraseinfo : ISpeechPhraseInfo*) : HRESULT
-    @lpVtbl.value.get_phrase_info.call(this, phraseinfo)
-  end
-  def alternates(this : ISpeechRecoResultDispatch*, requestcount : Int32, startelement : Int32, elements : Int32, alternates : ISpeechPhraseAlternates*) : HRESULT
-    @lpVtbl.value.alternates.call(this, requestcount, startelement, elements, alternates)
-  end
-  def audio(this : ISpeechRecoResultDispatch*, startelement : Int32, elements : Int32, stream : ISpeechMemoryStream*) : HRESULT
-    @lpVtbl.value.audio.call(this, startelement, elements, stream)
-  end
-  def speak_audio(this : ISpeechRecoResultDispatch*, startelement : Int32, elements : Int32, flags : SpeechVoiceSpeakFlags, streamnumber : Int32*) : HRESULT
-    @lpVtbl.value.speak_audio.call(this, startelement, elements, flags, streamnumber)
-  end
-  def save_to_memory(this : ISpeechRecoResultDispatch*, resultblock : VARIANT*) : HRESULT
-    @lpVtbl.value.save_to_memory.call(this, resultblock)
-  end
-  def discard_result_info(this : ISpeechRecoResultDispatch*, valuetypes : SpeechDiscardType) : HRESULT
-    @lpVtbl.value.discard_result_info.call(this, valuetypes)
-  end
-  def get_xml_result(this : ISpeechRecoResultDispatch*, options : SPXMLRESULTOPTIONS, presult : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml_result.call(this, options, presult)
-  end
-  def get_xml_error_info(this : ISpeechRecoResultDispatch*, linenumber : Int32*, scriptline : UInt8**, source : UInt8**, description : UInt8**, resultcode : HRESULT*, iserror : Int16*) : HRESULT
-    @lpVtbl.value.get_xml_error_info.call(this, linenumber, scriptline, source, description, resultcode, iserror)
-  end
-  def set_text_feedback(this : ISpeechRecoResultDispatch*, feedback : UInt8*, wassuccessful : Int16) : HRESULT
-    @lpVtbl.value.set_text_feedback.call(this, feedback, wassuccessful)
-  end
-end
-struct LibWin32::ISpeechPhraseInfoBuilder
-  def query_interface(this : ISpeechPhraseInfoBuilder*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechPhraseInfoBuilder*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechPhraseInfoBuilder*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechPhraseInfoBuilder*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechPhraseInfoBuilder*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechPhraseInfoBuilder*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechPhraseInfoBuilder*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def restore_phrase_from_memory(this : ISpeechPhraseInfoBuilder*, phraseinmemory : VARIANT*, phraseinfo : ISpeechPhraseInfo*) : HRESULT
-    @lpVtbl.value.restore_phrase_from_memory.call(this, phraseinmemory, phraseinfo)
-  end
-end
-struct LibWin32::ISpeechPhoneConverter
-  def query_interface(this : ISpeechPhoneConverter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpeechPhoneConverter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpeechPhoneConverter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISpeechPhoneConverter*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISpeechPhoneConverter*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISpeechPhoneConverter*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISpeechPhoneConverter*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_language_id(this : ISpeechPhoneConverter*, languageid : Int32*) : HRESULT
-    @lpVtbl.value.get_language_id.call(this, languageid)
-  end
-  def put_language_id(this : ISpeechPhoneConverter*, languageid : Int32) : HRESULT
-    @lpVtbl.value.put_language_id.call(this, languageid)
-  end
-  def phone_to_id(this : ISpeechPhoneConverter*, phonemes : UInt8*, idarray : VARIANT*) : HRESULT
-    @lpVtbl.value.phone_to_id.call(this, phonemes, idarray)
-  end
-  def id_to_phone(this : ISpeechPhoneConverter*, idarray : VARIANT, phonemes : UInt8**) : HRESULT
-    @lpVtbl.value.id_to_phone.call(this, idarray, phonemes)
+
+  @[Extern]
+  record SPVCONTEXT,
+    pCategory : Win32cr::Foundation::PWSTR,
+    pBefore : Win32cr::Foundation::PWSTR,
+    pAfter : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record SPVSTATE,
+    eAction : Win32cr::Media::Speech::SPVACTIONS,
+    lang_id : UInt16,
+    wReserved : UInt16,
+    emph_adj : Int32,
+    rate_adj : Int32,
+    volume : UInt32,
+    pitch_adj : Win32cr::Media::Speech::SPVPITCH,
+    silence_m_secs : UInt32,
+    pPhoneIds : UInt16*,
+    ePartOfSpeech : Win32cr::Media::Speech::SPPARTOFSPEECH,
+    context : Win32cr::Media::Speech::SPVCONTEXT
+
+  @[Extern]
+  record SPVOICESTATUS,
+    ulCurrentStream : UInt32,
+    ulLastStreamQueued : UInt32,
+    hrLastResult : Win32cr::Foundation::HRESULT,
+    dwRunningState : UInt32,
+    ulInputWordPos : UInt32,
+    ulInputWordLen : UInt32,
+    ulInputSentPos : UInt32,
+    ulInputSentLen : UInt32,
+    lBookmarkId : Int32,
+    phoneme_id : UInt16,
+    viseme_id : Win32cr::Media::Speech::SPVISEMES,
+    dwReserved1 : UInt32,
+    dwReserved2 : UInt32
+
+  @[Extern]
+  record SPRECORESULTTIMES,
+    ftStreamTime : Win32cr::Foundation::FILETIME,
+    ullLength : UInt64,
+    dwTickCount : UInt32,
+    ullStart : UInt64
+
+  @[Extern]
+  record SPSERIALIZEDRESULT,
+    ulSerializedSize : UInt32
+
+  @[Extern]
+  record SPTEXTSELECTIONINFO,
+    ulStartActiveOffset : UInt32,
+    cchActiveChars : UInt32,
+    ulStartSelection : UInt32,
+    cchSelection : UInt32
+
+  @[Extern]
+  record SPPROPERTYINFO,
+    pszName : Win32cr::Foundation::PWSTR,
+    ulId : UInt32,
+    pszValue : Win32cr::Foundation::PWSTR,
+    vValue : Win32cr::System::Com::VARIANT
+
+  @[Extern]
+  record SPRECOCONTEXTSTATUS,
+    eInterference : Win32cr::Media::Speech::SPINTERFERENCE,
+    szRequestTypeOfUI : UInt16[255],
+    dwReserved1 : UInt32,
+    dwReserved2 : UInt32
+
+  @[Extern]
+  record SPRECOGNIZERSTATUS,
+    audio_status : Win32cr::Media::Speech::SPAUDIOSTATUS,
+    ullRecognitionStreamPos : UInt64,
+    ulStreamNumber : UInt32,
+    ulNumActive : UInt32,
+    clsidEngine : LibC::GUID,
+    cLangIDs : UInt32,
+    aLangID : UInt16[20],
+    ullRecognitionStreamTime : UInt64
+
+  @[Extern]
+  record SPNORMALIZATIONLIST,
+    ulSize : UInt32,
+    ppszzNormalizedList : UInt16**
+
+  @[Extern]
+  record SPDISPLAYTOKEN,
+    pszLexical : Win32cr::Foundation::PWSTR,
+    pszDisplay : Win32cr::Foundation::PWSTR,
+    bDisplayAttributes : UInt8
+
+  @[Extern]
+  record SPDISPLAYPHRASE,
+    ulNumTokens : UInt32,
+    pTokens : Win32cr::Media::Speech::SPDISPLAYTOKEN*
+
+  @[Extern]
+  record ISpNotifyCallbackVtbl,
+    notify_callback : Proc(ISpNotifyCallback*, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record ISpNotifyCallback, lpVtbl : ISpNotifyCallbackVtbl* do
+    GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
+    def notify_callback(this : ISpNotifyCallback*, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_callback.call(this, wParam, lParam)
+    end
+
+  end
+
+  @[Extern]
+  record ISpNotifySourceVtbl,
+    query_interface : Proc(ISpNotifySource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpNotifySource*, UInt32),
+    release : Proc(ISpNotifySource*, UInt32),
+    set_notify_sink : Proc(ISpNotifySource*, Void*, Win32cr::Foundation::HRESULT),
+    set_notify_window_message : Proc(ISpNotifySource*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_callback_function : Proc(ISpNotifySource*, Win32cr::Media::Speech::SPNOTIFYCALLBACK*, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_callback_interface : Proc(ISpNotifySource*, Void*, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_win32_event : Proc(ISpNotifySource*, Win32cr::Foundation::HRESULT),
+    wait_for_notify_event : Proc(ISpNotifySource*, UInt32, Win32cr::Foundation::HRESULT),
+    get_notify_event_handle : Proc(ISpNotifySource*, Win32cr::Foundation::HANDLE)
+
+
+  @[Extern]
+  #@[Com("5eff4aef-8487-11d2-961c-00c04f8ee628")]
+  record ISpNotifySource, lpVtbl : ISpNotifySourceVtbl* do
+    GUID = LibC::GUID.new(0x5eff4aef_u32, 0x8487_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x1c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+    def query_interface(this : ISpNotifySource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpNotifySource*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpNotifySource*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_notify_sink(this : ISpNotifySource*, pNotifySink : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_sink.call(this, pNotifySink)
+    end
+    def set_notify_window_message(this : ISpNotifySource*, hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_window_message.call(this, hWnd, msg, wParam, lParam)
+    end
+    def set_notify_callback_function(this : ISpNotifySource*, pfnCallback : Win32cr::Media::Speech::SPNOTIFYCALLBACK*, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_callback_function.call(this, pfnCallback, wParam, lParam)
+    end
+    def set_notify_callback_interface(this : ISpNotifySource*, pSpCallback : Void*, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_callback_interface.call(this, pSpCallback, wParam, lParam)
+    end
+    def set_notify_win32_event(this : ISpNotifySource*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_win32_event.call(this)
+    end
+    def wait_for_notify_event(this : ISpNotifySource*, dwMilliseconds : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.wait_for_notify_event.call(this, dwMilliseconds)
+    end
+    def get_notify_event_handle(this : ISpNotifySource*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.get_notify_event_handle.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ISpNotifySinkVtbl,
+    query_interface : Proc(ISpNotifySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpNotifySink*, UInt32),
+    release : Proc(ISpNotifySink*, UInt32),
+    notify : Proc(ISpNotifySink*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("259684dc-37c3-11d2-9603-00c04f8ee628")]
+  record ISpNotifySink, lpVtbl : ISpNotifySinkVtbl* do
+    GUID = LibC::GUID.new(0x259684dc_u32, 0x37c3_u16, 0x11d2_u16, StaticArray[0x96_u8, 0x3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+    def query_interface(this : ISpNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpNotifySink*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpNotifySink*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def notify(this : ISpNotifySink*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ISpNotifyTranslatorVtbl,
+    query_interface : Proc(ISpNotifyTranslator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpNotifyTranslator*, UInt32),
+    release : Proc(ISpNotifyTranslator*, UInt32),
+    notify : Proc(ISpNotifyTranslator*, Win32cr::Foundation::HRESULT),
+    init_window_message : Proc(ISpNotifyTranslator*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    init_callback : Proc(ISpNotifyTranslator*, Win32cr::Media::Speech::SPNOTIFYCALLBACK*, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    init_sp_notify_callback : Proc(ISpNotifyTranslator*, Void*, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    init_win32_event : Proc(ISpNotifyTranslator*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    wait : Proc(ISpNotifyTranslator*, UInt32, Win32cr::Foundation::HRESULT),
+    get_event_handle : Proc(ISpNotifyTranslator*, Win32cr::Foundation::HANDLE)
+
+
+  @[Extern]
+  #@[Com("aca16614-5d3d-11d2-960e-00c04f8ee628")]
+  record ISpNotifyTranslator, lpVtbl : ISpNotifyTranslatorVtbl* do
+    GUID = LibC::GUID.new(0xaca16614_u32, 0x5d3d_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+    def query_interface(this : ISpNotifyTranslator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpNotifyTranslator*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpNotifyTranslator*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def notify(this : ISpNotifyTranslator*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify.call(this)
+    end
+    def init_window_message(this : ISpNotifyTranslator*, hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.init_window_message.call(this, hWnd, msg, wParam, lParam)
+    end
+    def init_callback(this : ISpNotifyTranslator*, pfnCallback : Win32cr::Media::Speech::SPNOTIFYCALLBACK*, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.init_callback.call(this, pfnCallback, wParam, lParam)
+    end
+    def init_sp_notify_callback(this : ISpNotifyTranslator*, pSpCallback : Void*, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.init_sp_notify_callback.call(this, pSpCallback, wParam, lParam)
+    end
+    def init_win32_event(this : ISpNotifyTranslator*, hEvent : Win32cr::Foundation::HANDLE, fCloseHandleOnRelease : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.init_win32_event.call(this, hEvent, fCloseHandleOnRelease)
+    end
+    def wait(this : ISpNotifyTranslator*, dwMilliseconds : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.wait.call(this, dwMilliseconds)
+    end
+    def get_event_handle(this : ISpNotifyTranslator*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.get_event_handle.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ISpDataKeyVtbl,
+    query_interface : Proc(ISpDataKey*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpDataKey*, UInt32),
+    release : Proc(ISpDataKey*, UInt32),
+    set_data : Proc(ISpDataKey*, Win32cr::Foundation::PWSTR, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    get_data : Proc(ISpDataKey*, Win32cr::Foundation::PWSTR, UInt32*, UInt8*, Win32cr::Foundation::HRESULT),
+    set_string_value : Proc(ISpDataKey*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    get_string_value : Proc(ISpDataKey*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_dword : Proc(ISpDataKey*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_dword : Proc(ISpDataKey*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    open_key : Proc(ISpDataKey*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_key : Proc(ISpDataKey*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    delete_key : Proc(ISpDataKey*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    delete_value : Proc(ISpDataKey*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    enum_keys : Proc(ISpDataKey*, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    enum_values : Proc(ISpDataKey*, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("14056581-e16c-11d2-bb90-00c04f8ee6c0")]
+  record ISpDataKey, lpVtbl : ISpDataKeyVtbl* do
+    GUID = LibC::GUID.new(0x14056581_u32, 0xe16c_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
+    def query_interface(this : ISpDataKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpDataKey*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpDataKey*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_data(this : ISpDataKey*, pszValueName : Win32cr::Foundation::PWSTR, cbData : UInt32, pData : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_data.call(this, pszValueName, cbData, pData)
+    end
+    def get_data(this : ISpDataKey*, pszValueName : Win32cr::Foundation::PWSTR, pcbData : UInt32*, pData : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data.call(this, pszValueName, pcbData, pData)
+    end
+    def set_string_value(this : ISpDataKey*, pszValueName : Win32cr::Foundation::PWSTR, pszValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_string_value.call(this, pszValueName, pszValue)
+    end
+    def get_string_value(this : ISpDataKey*, pszValueName : Win32cr::Foundation::PWSTR, ppszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_string_value.call(this, pszValueName, ppszValue)
+    end
+    def set_dword(this : ISpDataKey*, pszValueName : Win32cr::Foundation::PWSTR, dwValue : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_dword.call(this, pszValueName, dwValue)
+    end
+    def get_dword(this : ISpDataKey*, pszValueName : Win32cr::Foundation::PWSTR, pdwValue : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_dword.call(this, pszValueName, pdwValue)
+    end
+    def open_key(this : ISpDataKey*, pszSubKeyName : Win32cr::Foundation::PWSTR, ppSubKey : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_key.call(this, pszSubKeyName, ppSubKey)
+    end
+    def create_key(this : ISpDataKey*, pszSubKey : Win32cr::Foundation::PWSTR, ppSubKey : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_key.call(this, pszSubKey, ppSubKey)
+    end
+    def delete_key(this : ISpDataKey*, pszSubKey : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_key.call(this, pszSubKey)
+    end
+    def delete_value(this : ISpDataKey*, pszValueName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_value.call(this, pszValueName)
+    end
+    def enum_keys(this : ISpDataKey*, index : UInt32, ppszSubKeyName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_keys.call(this, index, ppszSubKeyName)
+    end
+    def enum_values(this : ISpDataKey*, index : UInt32, ppszValueName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_values.call(this, index, ppszValueName)
+    end
+
+  end
+
+  @[Extern]
+  record ISpRegDataKeyVtbl,
+    query_interface : Proc(ISpRegDataKey*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpRegDataKey*, UInt32),
+    release : Proc(ISpRegDataKey*, UInt32),
+    set_data : Proc(ISpRegDataKey*, Win32cr::Foundation::PWSTR, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    get_data : Proc(ISpRegDataKey*, Win32cr::Foundation::PWSTR, UInt32*, UInt8*, Win32cr::Foundation::HRESULT),
+    set_string_value : Proc(ISpRegDataKey*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    get_string_value : Proc(ISpRegDataKey*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_dword : Proc(ISpRegDataKey*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_dword : Proc(ISpRegDataKey*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    open_key : Proc(ISpRegDataKey*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_key : Proc(ISpRegDataKey*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    delete_key : Proc(ISpRegDataKey*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    delete_value : Proc(ISpRegDataKey*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    enum_keys : Proc(ISpRegDataKey*, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    enum_values : Proc(ISpRegDataKey*, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_key : Proc(ISpRegDataKey*, Win32cr::System::Registry::HKEY, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("92a66e2b-c830-4149-83df-6fc2ba1e7a5b")]
+  record ISpRegDataKey, lpVtbl : ISpRegDataKeyVtbl* do
+    GUID = LibC::GUID.new(0x92a66e2b_u32, 0xc830_u16, 0x4149_u16, StaticArray[0x83_u8, 0xdf_u8, 0x6f_u8, 0xc2_u8, 0xba_u8, 0x1e_u8, 0x7a_u8, 0x5b_u8])
+    def query_interface(this : ISpRegDataKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpRegDataKey*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpRegDataKey*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_data(this : ISpRegDataKey*, pszValueName : Win32cr::Foundation::PWSTR, cbData : UInt32, pData : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_data.call(this, pszValueName, cbData, pData)
+    end
+    def get_data(this : ISpRegDataKey*, pszValueName : Win32cr::Foundation::PWSTR, pcbData : UInt32*, pData : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data.call(this, pszValueName, pcbData, pData)
+    end
+    def set_string_value(this : ISpRegDataKey*, pszValueName : Win32cr::Foundation::PWSTR, pszValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_string_value.call(this, pszValueName, pszValue)
+    end
+    def get_string_value(this : ISpRegDataKey*, pszValueName : Win32cr::Foundation::PWSTR, ppszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_string_value.call(this, pszValueName, ppszValue)
+    end
+    def set_dword(this : ISpRegDataKey*, pszValueName : Win32cr::Foundation::PWSTR, dwValue : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_dword.call(this, pszValueName, dwValue)
+    end
+    def get_dword(this : ISpRegDataKey*, pszValueName : Win32cr::Foundation::PWSTR, pdwValue : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_dword.call(this, pszValueName, pdwValue)
+    end
+    def open_key(this : ISpRegDataKey*, pszSubKeyName : Win32cr::Foundation::PWSTR, ppSubKey : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_key.call(this, pszSubKeyName, ppSubKey)
+    end
+    def create_key(this : ISpRegDataKey*, pszSubKey : Win32cr::Foundation::PWSTR, ppSubKey : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_key.call(this, pszSubKey, ppSubKey)
+    end
+    def delete_key(this : ISpRegDataKey*, pszSubKey : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_key.call(this, pszSubKey)
+    end
+    def delete_value(this : ISpRegDataKey*, pszValueName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_value.call(this, pszValueName)
+    end
+    def enum_keys(this : ISpRegDataKey*, index : UInt32, ppszSubKeyName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_keys.call(this, index, ppszSubKeyName)
+    end
+    def enum_values(this : ISpRegDataKey*, index : UInt32, ppszValueName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_values.call(this, index, ppszValueName)
+    end
+    def set_key(this : ISpRegDataKey*, hkey : Win32cr::System::Registry::HKEY, fReadOnly : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_key.call(this, hkey, fReadOnly)
+    end
+
+  end
+
+  @[Extern]
+  record ISpObjectTokenCategoryVtbl,
+    query_interface : Proc(ISpObjectTokenCategory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpObjectTokenCategory*, UInt32),
+    release : Proc(ISpObjectTokenCategory*, UInt32),
+    set_data : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    get_data : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR, UInt32*, UInt8*, Win32cr::Foundation::HRESULT),
+    set_string_value : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    get_string_value : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_dword : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_dword : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    open_key : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_key : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    delete_key : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    delete_value : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    enum_keys : Proc(ISpObjectTokenCategory*, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    enum_values : Proc(ISpObjectTokenCategory*, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_id : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_id : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_data_key : Proc(ISpObjectTokenCategory*, Win32cr::Media::Speech::SPDATAKEYLOCATION, Void**, Win32cr::Foundation::HRESULT),
+    enum_tokens : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    set_default_token_id : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    get_default_token_id : Proc(ISpObjectTokenCategory*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2d3d3845-39af-4850-bbf9-40b49780011d")]
+  record ISpObjectTokenCategory, lpVtbl : ISpObjectTokenCategoryVtbl* do
+    GUID = LibC::GUID.new(0x2d3d3845_u32, 0x39af_u16, 0x4850_u16, StaticArray[0xbb_u8, 0xf9_u8, 0x40_u8, 0xb4_u8, 0x97_u8, 0x80_u8, 0x1_u8, 0x1d_u8])
+    def query_interface(this : ISpObjectTokenCategory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpObjectTokenCategory*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpObjectTokenCategory*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_data(this : ISpObjectTokenCategory*, pszValueName : Win32cr::Foundation::PWSTR, cbData : UInt32, pData : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_data.call(this, pszValueName, cbData, pData)
+    end
+    def get_data(this : ISpObjectTokenCategory*, pszValueName : Win32cr::Foundation::PWSTR, pcbData : UInt32*, pData : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data.call(this, pszValueName, pcbData, pData)
+    end
+    def set_string_value(this : ISpObjectTokenCategory*, pszValueName : Win32cr::Foundation::PWSTR, pszValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_string_value.call(this, pszValueName, pszValue)
+    end
+    def get_string_value(this : ISpObjectTokenCategory*, pszValueName : Win32cr::Foundation::PWSTR, ppszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_string_value.call(this, pszValueName, ppszValue)
+    end
+    def set_dword(this : ISpObjectTokenCategory*, pszValueName : Win32cr::Foundation::PWSTR, dwValue : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_dword.call(this, pszValueName, dwValue)
+    end
+    def get_dword(this : ISpObjectTokenCategory*, pszValueName : Win32cr::Foundation::PWSTR, pdwValue : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_dword.call(this, pszValueName, pdwValue)
+    end
+    def open_key(this : ISpObjectTokenCategory*, pszSubKeyName : Win32cr::Foundation::PWSTR, ppSubKey : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_key.call(this, pszSubKeyName, ppSubKey)
+    end
+    def create_key(this : ISpObjectTokenCategory*, pszSubKey : Win32cr::Foundation::PWSTR, ppSubKey : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_key.call(this, pszSubKey, ppSubKey)
+    end
+    def delete_key(this : ISpObjectTokenCategory*, pszSubKey : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_key.call(this, pszSubKey)
+    end
+    def delete_value(this : ISpObjectTokenCategory*, pszValueName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_value.call(this, pszValueName)
+    end
+    def enum_keys(this : ISpObjectTokenCategory*, index : UInt32, ppszSubKeyName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_keys.call(this, index, ppszSubKeyName)
+    end
+    def enum_values(this : ISpObjectTokenCategory*, index : UInt32, ppszValueName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_values.call(this, index, ppszValueName)
+    end
+    def set_id(this : ISpObjectTokenCategory*, pszCategoryId : Win32cr::Foundation::PWSTR, fCreateIfNotExist : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_id.call(this, pszCategoryId, fCreateIfNotExist)
+    end
+    def get_id(this : ISpObjectTokenCategory*, ppszCoMemCategoryId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_id.call(this, ppszCoMemCategoryId)
+    end
+    def get_data_key(this : ISpObjectTokenCategory*, spdkl : Win32cr::Media::Speech::SPDATAKEYLOCATION, ppDataKey : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data_key.call(this, spdkl, ppDataKey)
+    end
+    def enum_tokens(this : ISpObjectTokenCategory*, pzsReqAttribs : Win32cr::Foundation::PWSTR, pszOptAttribs : Win32cr::Foundation::PWSTR, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_tokens.call(this, pzsReqAttribs, pszOptAttribs, ppEnum)
+    end
+    def set_default_token_id(this : ISpObjectTokenCategory*, pszTokenId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_default_token_id.call(this, pszTokenId)
+    end
+    def get_default_token_id(this : ISpObjectTokenCategory*, ppszCoMemTokenId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_default_token_id.call(this, ppszCoMemTokenId)
+    end
+
+  end
+
+  @[Extern]
+  record ISpObjectTokenVtbl,
+    query_interface : Proc(ISpObjectToken*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpObjectToken*, UInt32),
+    release : Proc(ISpObjectToken*, UInt32),
+    set_data : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    get_data : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR, UInt32*, UInt8*, Win32cr::Foundation::HRESULT),
+    set_string_value : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    get_string_value : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_dword : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_dword : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    open_key : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_key : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    delete_key : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    delete_value : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    enum_keys : Proc(ISpObjectToken*, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    enum_values : Proc(ISpObjectToken*, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_id : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_id : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_category : Proc(ISpObjectToken*, Void**, Win32cr::Foundation::HRESULT),
+    create_instance : Proc(ISpObjectToken*, Void*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_storage_file_name : Proc(ISpObjectToken*, LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    remove_storage_file_name : Proc(ISpObjectToken*, LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    remove : Proc(ISpObjectToken*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    is_ui_supported : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR, Void*, UInt32, Void*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    display_ui : Proc(ISpObjectToken*, Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, UInt32, Void*, Win32cr::Foundation::HRESULT),
+    matches_attributes : Proc(ISpObjectToken*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("14056589-e16c-11d2-bb90-00c04f8ee6c0")]
+  record ISpObjectToken, lpVtbl : ISpObjectTokenVtbl* do
+    GUID = LibC::GUID.new(0x14056589_u32, 0xe16c_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
+    def query_interface(this : ISpObjectToken*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpObjectToken*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpObjectToken*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_data(this : ISpObjectToken*, pszValueName : Win32cr::Foundation::PWSTR, cbData : UInt32, pData : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_data.call(this, pszValueName, cbData, pData)
+    end
+    def get_data(this : ISpObjectToken*, pszValueName : Win32cr::Foundation::PWSTR, pcbData : UInt32*, pData : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data.call(this, pszValueName, pcbData, pData)
+    end
+    def set_string_value(this : ISpObjectToken*, pszValueName : Win32cr::Foundation::PWSTR, pszValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_string_value.call(this, pszValueName, pszValue)
+    end
+    def get_string_value(this : ISpObjectToken*, pszValueName : Win32cr::Foundation::PWSTR, ppszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_string_value.call(this, pszValueName, ppszValue)
+    end
+    def set_dword(this : ISpObjectToken*, pszValueName : Win32cr::Foundation::PWSTR, dwValue : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_dword.call(this, pszValueName, dwValue)
+    end
+    def get_dword(this : ISpObjectToken*, pszValueName : Win32cr::Foundation::PWSTR, pdwValue : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_dword.call(this, pszValueName, pdwValue)
+    end
+    def open_key(this : ISpObjectToken*, pszSubKeyName : Win32cr::Foundation::PWSTR, ppSubKey : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_key.call(this, pszSubKeyName, ppSubKey)
+    end
+    def create_key(this : ISpObjectToken*, pszSubKey : Win32cr::Foundation::PWSTR, ppSubKey : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_key.call(this, pszSubKey, ppSubKey)
+    end
+    def delete_key(this : ISpObjectToken*, pszSubKey : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_key.call(this, pszSubKey)
+    end
+    def delete_value(this : ISpObjectToken*, pszValueName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_value.call(this, pszValueName)
+    end
+    def enum_keys(this : ISpObjectToken*, index : UInt32, ppszSubKeyName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_keys.call(this, index, ppszSubKeyName)
+    end
+    def enum_values(this : ISpObjectToken*, index : UInt32, ppszValueName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_values.call(this, index, ppszValueName)
+    end
+    def set_id(this : ISpObjectToken*, pszCategoryId : Win32cr::Foundation::PWSTR, pszTokenId : Win32cr::Foundation::PWSTR, fCreateIfNotExist : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_id.call(this, pszCategoryId, pszTokenId, fCreateIfNotExist)
+    end
+    def get_id(this : ISpObjectToken*, ppszCoMemTokenId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_id.call(this, ppszCoMemTokenId)
+    end
+    def get_category(this : ISpObjectToken*, ppTokenCategory : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_category.call(this, ppTokenCategory)
+    end
+    def create_instance(this : ISpObjectToken*, pUnkOuter : Void*, dwClsContext : UInt32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_instance.call(this, pUnkOuter, dwClsContext, riid, ppvObject)
+    end
+    def get_storage_file_name(this : ISpObjectToken*, clsidCaller : LibC::GUID*, pszValueName : Win32cr::Foundation::PWSTR, pszFileNameSpecifier : Win32cr::Foundation::PWSTR, nFolder : UInt32, ppszFilePath : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_storage_file_name.call(this, clsidCaller, pszValueName, pszFileNameSpecifier, nFolder, ppszFilePath)
+    end
+    def remove_storage_file_name(this : ISpObjectToken*, clsidCaller : LibC::GUID*, pszKeyName : Win32cr::Foundation::PWSTR, fDeleteFile : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_storage_file_name.call(this, clsidCaller, pszKeyName, fDeleteFile)
+    end
+    def remove(this : ISpObjectToken*, pclsidCaller : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, pclsidCaller)
+    end
+    def is_ui_supported(this : ISpObjectToken*, pszTypeOfUI : Win32cr::Foundation::PWSTR, pvExtraData : Void*, cbExtraData : UInt32, punkObject : Void*, pfSupported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_ui_supported.call(this, pszTypeOfUI, pvExtraData, cbExtraData, punkObject, pfSupported)
+    end
+    def display_ui(this : ISpObjectToken*, hwndParent : Win32cr::Foundation::HWND, pszTitle : Win32cr::Foundation::PWSTR, pszTypeOfUI : Win32cr::Foundation::PWSTR, pvExtraData : Void*, cbExtraData : UInt32, punkObject : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.display_ui.call(this, hwndParent, pszTitle, pszTypeOfUI, pvExtraData, cbExtraData, punkObject)
+    end
+    def matches_attributes(this : ISpObjectToken*, pszAttributes : Win32cr::Foundation::PWSTR, pfMatches : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.matches_attributes.call(this, pszAttributes, pfMatches)
+    end
+
+  end
+
+  @[Extern]
+  record ISpObjectTokenInitVtbl,
+    query_interface : Proc(ISpObjectTokenInit*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpObjectTokenInit*, UInt32),
+    release : Proc(ISpObjectTokenInit*, UInt32),
+    set_data : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
+    get_data : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, UInt32*, UInt8*, Win32cr::Foundation::HRESULT),
+    set_string_value : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    get_string_value : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_dword : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    get_dword : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
+    open_key : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_key : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    delete_key : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    delete_value : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    enum_keys : Proc(ISpObjectTokenInit*, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    enum_values : Proc(ISpObjectTokenInit*, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_id : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_id : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_category : Proc(ISpObjectTokenInit*, Void**, Win32cr::Foundation::HRESULT),
+    create_instance : Proc(ISpObjectTokenInit*, Void*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_storage_file_name : Proc(ISpObjectTokenInit*, LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    remove_storage_file_name : Proc(ISpObjectTokenInit*, LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    remove : Proc(ISpObjectTokenInit*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    is_ui_supported : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, Void*, UInt32, Void*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    display_ui : Proc(ISpObjectTokenInit*, Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, UInt32, Void*, Win32cr::Foundation::HRESULT),
+    matches_attributes : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    init_from_data_key : Proc(ISpObjectTokenInit*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b8aab0cf-346f-49d8-9499-c8b03f161d51")]
+  record ISpObjectTokenInit, lpVtbl : ISpObjectTokenInitVtbl* do
+    GUID = LibC::GUID.new(0xb8aab0cf_u32, 0x346f_u16, 0x49d8_u16, StaticArray[0x94_u8, 0x99_u8, 0xc8_u8, 0xb0_u8, 0x3f_u8, 0x16_u8, 0x1d_u8, 0x51_u8])
+    def query_interface(this : ISpObjectTokenInit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpObjectTokenInit*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpObjectTokenInit*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_data(this : ISpObjectTokenInit*, pszValueName : Win32cr::Foundation::PWSTR, cbData : UInt32, pData : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_data.call(this, pszValueName, cbData, pData)
+    end
+    def get_data(this : ISpObjectTokenInit*, pszValueName : Win32cr::Foundation::PWSTR, pcbData : UInt32*, pData : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data.call(this, pszValueName, pcbData, pData)
+    end
+    def set_string_value(this : ISpObjectTokenInit*, pszValueName : Win32cr::Foundation::PWSTR, pszValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_string_value.call(this, pszValueName, pszValue)
+    end
+    def get_string_value(this : ISpObjectTokenInit*, pszValueName : Win32cr::Foundation::PWSTR, ppszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_string_value.call(this, pszValueName, ppszValue)
+    end
+    def set_dword(this : ISpObjectTokenInit*, pszValueName : Win32cr::Foundation::PWSTR, dwValue : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_dword.call(this, pszValueName, dwValue)
+    end
+    def get_dword(this : ISpObjectTokenInit*, pszValueName : Win32cr::Foundation::PWSTR, pdwValue : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_dword.call(this, pszValueName, pdwValue)
+    end
+    def open_key(this : ISpObjectTokenInit*, pszSubKeyName : Win32cr::Foundation::PWSTR, ppSubKey : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_key.call(this, pszSubKeyName, ppSubKey)
+    end
+    def create_key(this : ISpObjectTokenInit*, pszSubKey : Win32cr::Foundation::PWSTR, ppSubKey : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_key.call(this, pszSubKey, ppSubKey)
+    end
+    def delete_key(this : ISpObjectTokenInit*, pszSubKey : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_key.call(this, pszSubKey)
+    end
+    def delete_value(this : ISpObjectTokenInit*, pszValueName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_value.call(this, pszValueName)
+    end
+    def enum_keys(this : ISpObjectTokenInit*, index : UInt32, ppszSubKeyName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_keys.call(this, index, ppszSubKeyName)
+    end
+    def enum_values(this : ISpObjectTokenInit*, index : UInt32, ppszValueName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_values.call(this, index, ppszValueName)
+    end
+    def set_id(this : ISpObjectTokenInit*, pszCategoryId : Win32cr::Foundation::PWSTR, pszTokenId : Win32cr::Foundation::PWSTR, fCreateIfNotExist : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_id.call(this, pszCategoryId, pszTokenId, fCreateIfNotExist)
+    end
+    def get_id(this : ISpObjectTokenInit*, ppszCoMemTokenId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_id.call(this, ppszCoMemTokenId)
+    end
+    def get_category(this : ISpObjectTokenInit*, ppTokenCategory : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_category.call(this, ppTokenCategory)
+    end
+    def create_instance(this : ISpObjectTokenInit*, pUnkOuter : Void*, dwClsContext : UInt32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_instance.call(this, pUnkOuter, dwClsContext, riid, ppvObject)
+    end
+    def get_storage_file_name(this : ISpObjectTokenInit*, clsidCaller : LibC::GUID*, pszValueName : Win32cr::Foundation::PWSTR, pszFileNameSpecifier : Win32cr::Foundation::PWSTR, nFolder : UInt32, ppszFilePath : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_storage_file_name.call(this, clsidCaller, pszValueName, pszFileNameSpecifier, nFolder, ppszFilePath)
+    end
+    def remove_storage_file_name(this : ISpObjectTokenInit*, clsidCaller : LibC::GUID*, pszKeyName : Win32cr::Foundation::PWSTR, fDeleteFile : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_storage_file_name.call(this, clsidCaller, pszKeyName, fDeleteFile)
+    end
+    def remove(this : ISpObjectTokenInit*, pclsidCaller : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, pclsidCaller)
+    end
+    def is_ui_supported(this : ISpObjectTokenInit*, pszTypeOfUI : Win32cr::Foundation::PWSTR, pvExtraData : Void*, cbExtraData : UInt32, punkObject : Void*, pfSupported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_ui_supported.call(this, pszTypeOfUI, pvExtraData, cbExtraData, punkObject, pfSupported)
+    end
+    def display_ui(this : ISpObjectTokenInit*, hwndParent : Win32cr::Foundation::HWND, pszTitle : Win32cr::Foundation::PWSTR, pszTypeOfUI : Win32cr::Foundation::PWSTR, pvExtraData : Void*, cbExtraData : UInt32, punkObject : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.display_ui.call(this, hwndParent, pszTitle, pszTypeOfUI, pvExtraData, cbExtraData, punkObject)
+    end
+    def matches_attributes(this : ISpObjectTokenInit*, pszAttributes : Win32cr::Foundation::PWSTR, pfMatches : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.matches_attributes.call(this, pszAttributes, pfMatches)
+    end
+    def init_from_data_key(this : ISpObjectTokenInit*, pszCategoryId : Win32cr::Foundation::PWSTR, pszTokenId : Win32cr::Foundation::PWSTR, pDataKey : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.init_from_data_key.call(this, pszCategoryId, pszTokenId, pDataKey)
+    end
+
+  end
+
+  @[Extern]
+  record IEnumSpObjectTokensVtbl,
+    query_interface : Proc(IEnumSpObjectTokens*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEnumSpObjectTokens*, UInt32),
+    release : Proc(IEnumSpObjectTokens*, UInt32),
+    next__ : Proc(IEnumSpObjectTokens*, UInt32, Void**, UInt32*, Win32cr::Foundation::HRESULT),
+    skip : Proc(IEnumSpObjectTokens*, UInt32, Win32cr::Foundation::HRESULT),
+    reset : Proc(IEnumSpObjectTokens*, Win32cr::Foundation::HRESULT),
+    clone : Proc(IEnumSpObjectTokens*, Void**, Win32cr::Foundation::HRESULT),
+    item : Proc(IEnumSpObjectTokens*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_count : Proc(IEnumSpObjectTokens*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("06b64f9e-7fda-11d2-b4f2-00c04f797396")]
+  record IEnumSpObjectTokens, lpVtbl : IEnumSpObjectTokensVtbl* do
+    GUID = LibC::GUID.new(0x6b64f9e_u32, 0x7fda_u16, 0x11d2_u16, StaticArray[0xb4_u8, 0xf2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
+    def query_interface(this : IEnumSpObjectTokens*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEnumSpObjectTokens*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEnumSpObjectTokens*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def next__(this : IEnumSpObjectTokens*, celt : UInt32, pelt : Void**, pceltFetched : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.next__.call(this, celt, pelt, pceltFetched)
+    end
+    def skip(this : IEnumSpObjectTokens*, celt : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.skip.call(this, celt)
+    end
+    def reset(this : IEnumSpObjectTokens*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def clone(this : IEnumSpObjectTokens*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppEnum)
+    end
+    def item(this : IEnumSpObjectTokens*, index : UInt32, ppToken : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.item.call(this, index, ppToken)
+    end
+    def get_count(this : IEnumSpObjectTokens*, pCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_count.call(this, pCount)
+    end
+
+  end
+
+  @[Extern]
+  record ISpObjectWithTokenVtbl,
+    query_interface : Proc(ISpObjectWithToken*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpObjectWithToken*, UInt32),
+    release : Proc(ISpObjectWithToken*, UInt32),
+    set_object_token : Proc(ISpObjectWithToken*, Void*, Win32cr::Foundation::HRESULT),
+    get_object_token : Proc(ISpObjectWithToken*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("5b559f40-e952-11d2-bb91-00c04f8ee6c0")]
+  record ISpObjectWithToken, lpVtbl : ISpObjectWithTokenVtbl* do
+    GUID = LibC::GUID.new(0x5b559f40_u32, 0xe952_u16, 0x11d2_u16, StaticArray[0xbb_u8, 0x91_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
+    def query_interface(this : ISpObjectWithToken*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpObjectWithToken*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpObjectWithToken*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_object_token(this : ISpObjectWithToken*, pToken : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_object_token.call(this, pToken)
+    end
+    def get_object_token(this : ISpObjectWithToken*, ppToken : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_object_token.call(this, ppToken)
+    end
+
+  end
+
+  @[Extern]
+  record ISpResourceManagerVtbl,
+    query_interface : Proc(ISpResourceManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpResourceManager*, UInt32),
+    release : Proc(ISpResourceManager*, UInt32),
+    query_service : Proc(ISpResourceManager*, LibC::GUID*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    set_object : Proc(ISpResourceManager*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
+    get_object : Proc(ISpResourceManager*, LibC::GUID*, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("93384e18-5014-43d5-adbb-a78e055926bd")]
+  record ISpResourceManager, lpVtbl : ISpResourceManagerVtbl* do
+    GUID = LibC::GUID.new(0x93384e18_u32, 0x5014_u16, 0x43d5_u16, StaticArray[0xad_u8, 0xbb_u8, 0xa7_u8, 0x8e_u8, 0x5_u8, 0x59_u8, 0x26_u8, 0xbd_u8])
+    def query_interface(this : ISpResourceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpResourceManager*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpResourceManager*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def query_service(this : ISpResourceManager*, guidService : LibC::GUID*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_service.call(this, guidService, riid, ppvObject)
+    end
+    def set_object(this : ISpResourceManager*, guidServiceId : LibC::GUID*, pUnkObject : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_object.call(this, guidServiceId, pUnkObject)
+    end
+    def get_object(this : ISpResourceManager*, guidServiceId : LibC::GUID*, object_clsid : LibC::GUID*, object_iid : LibC::GUID*, fReleaseWhenLastExternalRefReleased : Win32cr::Foundation::BOOL, ppObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_object.call(this, guidServiceId, object_clsid, object_iid, fReleaseWhenLastExternalRefReleased, ppObject)
+    end
+
+  end
+
+  @[Extern]
+  record ISpEventSourceVtbl,
+    query_interface : Proc(ISpEventSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpEventSource*, UInt32),
+    release : Proc(ISpEventSource*, UInt32),
+    set_notify_sink : Proc(ISpEventSource*, Void*, Win32cr::Foundation::HRESULT),
+    set_notify_window_message : Proc(ISpEventSource*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_callback_function : Proc(ISpEventSource*, Win32cr::Media::Speech::SPNOTIFYCALLBACK*, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_callback_interface : Proc(ISpEventSource*, Void*, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_win32_event : Proc(ISpEventSource*, Win32cr::Foundation::HRESULT),
+    wait_for_notify_event : Proc(ISpEventSource*, UInt32, Win32cr::Foundation::HRESULT),
+    get_notify_event_handle : Proc(ISpEventSource*, Win32cr::Foundation::HANDLE),
+    set_interest : Proc(ISpEventSource*, UInt64, UInt64, Win32cr::Foundation::HRESULT),
+    get_events : Proc(ISpEventSource*, UInt32, Win32cr::Media::Speech::SPEVENT*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_info : Proc(ISpEventSource*, Win32cr::Media::Speech::SPEVENTSOURCEINFO*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("be7a9cce-5f9e-11d2-960f-00c04f8ee628")]
+  record ISpEventSource, lpVtbl : ISpEventSourceVtbl* do
+    GUID = LibC::GUID.new(0xbe7a9cce_u32, 0x5f9e_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+    def query_interface(this : ISpEventSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpEventSource*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpEventSource*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_notify_sink(this : ISpEventSource*, pNotifySink : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_sink.call(this, pNotifySink)
+    end
+    def set_notify_window_message(this : ISpEventSource*, hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_window_message.call(this, hWnd, msg, wParam, lParam)
+    end
+    def set_notify_callback_function(this : ISpEventSource*, pfnCallback : Win32cr::Media::Speech::SPNOTIFYCALLBACK*, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_callback_function.call(this, pfnCallback, wParam, lParam)
+    end
+    def set_notify_callback_interface(this : ISpEventSource*, pSpCallback : Void*, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_callback_interface.call(this, pSpCallback, wParam, lParam)
+    end
+    def set_notify_win32_event(this : ISpEventSource*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_win32_event.call(this)
+    end
+    def wait_for_notify_event(this : ISpEventSource*, dwMilliseconds : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.wait_for_notify_event.call(this, dwMilliseconds)
+    end
+    def get_notify_event_handle(this : ISpEventSource*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.get_notify_event_handle.call(this)
+    end
+    def set_interest(this : ISpEventSource*, ullEventInterest : UInt64, ullQueuedInterest : UInt64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_interest.call(this, ullEventInterest, ullQueuedInterest)
+    end
+    def get_events(this : ISpEventSource*, ulCount : UInt32, pEventArray : Win32cr::Media::Speech::SPEVENT*, pulFetched : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_events.call(this, ulCount, pEventArray, pulFetched)
+    end
+    def get_info(this : ISpEventSource*, pInfo : Win32cr::Media::Speech::SPEVENTSOURCEINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_info.call(this, pInfo)
+    end
+
+  end
+
+  @[Extern]
+  record ISpEventSource2Vtbl,
+    query_interface : Proc(ISpEventSource2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpEventSource2*, UInt32),
+    release : Proc(ISpEventSource2*, UInt32),
+    set_notify_sink : Proc(ISpEventSource2*, Void*, Win32cr::Foundation::HRESULT),
+    set_notify_window_message : Proc(ISpEventSource2*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_callback_function : Proc(ISpEventSource2*, Win32cr::Media::Speech::SPNOTIFYCALLBACK*, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_callback_interface : Proc(ISpEventSource2*, Void*, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_win32_event : Proc(ISpEventSource2*, Win32cr::Foundation::HRESULT),
+    wait_for_notify_event : Proc(ISpEventSource2*, UInt32, Win32cr::Foundation::HRESULT),
+    get_notify_event_handle : Proc(ISpEventSource2*, Win32cr::Foundation::HANDLE),
+    set_interest : Proc(ISpEventSource2*, UInt64, UInt64, Win32cr::Foundation::HRESULT),
+    get_events : Proc(ISpEventSource2*, UInt32, Win32cr::Media::Speech::SPEVENT*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_info : Proc(ISpEventSource2*, Win32cr::Media::Speech::SPEVENTSOURCEINFO*, Win32cr::Foundation::HRESULT),
+    get_events_ex : Proc(ISpEventSource2*, UInt32, Win32cr::Media::Speech::SPEVENTEX*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2373a435-6a4b-429e-a6ac-d4231a61975b")]
+  record ISpEventSource2, lpVtbl : ISpEventSource2Vtbl* do
+    GUID = LibC::GUID.new(0x2373a435_u32, 0x6a4b_u16, 0x429e_u16, StaticArray[0xa6_u8, 0xac_u8, 0xd4_u8, 0x23_u8, 0x1a_u8, 0x61_u8, 0x97_u8, 0x5b_u8])
+    def query_interface(this : ISpEventSource2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpEventSource2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpEventSource2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_notify_sink(this : ISpEventSource2*, pNotifySink : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_sink.call(this, pNotifySink)
+    end
+    def set_notify_window_message(this : ISpEventSource2*, hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_window_message.call(this, hWnd, msg, wParam, lParam)
+    end
+    def set_notify_callback_function(this : ISpEventSource2*, pfnCallback : Win32cr::Media::Speech::SPNOTIFYCALLBACK*, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_callback_function.call(this, pfnCallback, wParam, lParam)
+    end
+    def set_notify_callback_interface(this : ISpEventSource2*, pSpCallback : Void*, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_callback_interface.call(this, pSpCallback, wParam, lParam)
+    end
+    def set_notify_win32_event(this : ISpEventSource2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_win32_event.call(this)
+    end
+    def wait_for_notify_event(this : ISpEventSource2*, dwMilliseconds : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.wait_for_notify_event.call(this, dwMilliseconds)
+    end
+    def get_notify_event_handle(this : ISpEventSource2*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.get_notify_event_handle.call(this)
+    end
+    def set_interest(this : ISpEventSource2*, ullEventInterest : UInt64, ullQueuedInterest : UInt64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_interest.call(this, ullEventInterest, ullQueuedInterest)
+    end
+    def get_events(this : ISpEventSource2*, ulCount : UInt32, pEventArray : Win32cr::Media::Speech::SPEVENT*, pulFetched : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_events.call(this, ulCount, pEventArray, pulFetched)
+    end
+    def get_info(this : ISpEventSource2*, pInfo : Win32cr::Media::Speech::SPEVENTSOURCEINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_info.call(this, pInfo)
+    end
+    def get_events_ex(this : ISpEventSource2*, ulCount : UInt32, pEventArray : Win32cr::Media::Speech::SPEVENTEX*, pulFetched : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_events_ex.call(this, ulCount, pEventArray, pulFetched)
+    end
+
+  end
+
+  @[Extern]
+  record ISpEventSinkVtbl,
+    query_interface : Proc(ISpEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpEventSink*, UInt32),
+    release : Proc(ISpEventSink*, UInt32),
+    add_events : Proc(ISpEventSink*, Win32cr::Media::Speech::SPEVENT*, UInt32, Win32cr::Foundation::HRESULT),
+    get_event_interest : Proc(ISpEventSink*, UInt64*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("be7a9cc9-5f9e-11d2-960f-00c04f8ee628")]
+  record ISpEventSink, lpVtbl : ISpEventSinkVtbl* do
+    GUID = LibC::GUID.new(0xbe7a9cc9_u32, 0x5f9e_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0x28_u8])
+    def query_interface(this : ISpEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpEventSink*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpEventSink*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def add_events(this : ISpEventSink*, pEventArray : Win32cr::Media::Speech::SPEVENT*, ulCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_events.call(this, pEventArray, ulCount)
+    end
+    def get_event_interest(this : ISpEventSink*, pullEventInterest : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_event_interest.call(this, pullEventInterest)
+    end
+
+  end
+
+  @[Extern]
+  record ISpStreamFormatVtbl,
+    query_interface : Proc(ISpStreamFormat*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpStreamFormat*, UInt32),
+    release : Proc(ISpStreamFormat*, UInt32),
+    read : Proc(ISpStreamFormat*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    write : Proc(ISpStreamFormat*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(ISpStreamFormat*, Win32cr::Foundation::LARGE_INTEGER, Win32cr::System::Com::STREAM_SEEK, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    set_size : Proc(ISpStreamFormat*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(ISpStreamFormat*, Void*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    commit : Proc(ISpStreamFormat*, Win32cr::System::Com::STGC, Win32cr::Foundation::HRESULT),
+    revert : Proc(ISpStreamFormat*, Win32cr::Foundation::HRESULT),
+    lock_region : Proc(ISpStreamFormat*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    unlock_region : Proc(ISpStreamFormat*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    stat : Proc(ISpStreamFormat*, Win32cr::System::Com::STATSTG*, UInt32, Win32cr::Foundation::HRESULT),
+    clone : Proc(ISpStreamFormat*, Void**, Win32cr::Foundation::HRESULT),
+    get_format : Proc(ISpStreamFormat*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("bed530be-2606-4f4d-a1c0-54c5cda5566f")]
+  record ISpStreamFormat, lpVtbl : ISpStreamFormatVtbl* do
+    GUID = LibC::GUID.new(0xbed530be_u32, 0x2606_u16, 0x4f4d_u16, StaticArray[0xa1_u8, 0xc0_u8, 0x54_u8, 0xc5_u8, 0xcd_u8, 0xa5_u8, 0x56_u8, 0x6f_u8])
+    def query_interface(this : ISpStreamFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpStreamFormat*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpStreamFormat*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def read(this : ISpStreamFormat*, pv : Void*, cb : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, pv, cb, pcbRead)
+    end
+    def write(this : ISpStreamFormat*, pv : Void*, cb : UInt32, pcbWritten : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, pv, cb, pcbWritten)
+    end
+    def seek(this : ISpStreamFormat*, dlibMove : Win32cr::Foundation::LARGE_INTEGER, dwOrigin : Win32cr::System::Com::STREAM_SEEK, plibNewPosition : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, dlibMove, dwOrigin, plibNewPosition)
+    end
+    def set_size(this : ISpStreamFormat*, libNewSize : Win32cr::Foundation::ULARGE_INTEGER) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_size.call(this, libNewSize)
+    end
+    def copy_to(this : ISpStreamFormat*, pstm : Void*, cb : Win32cr::Foundation::ULARGE_INTEGER, pcbRead : Win32cr::Foundation::ULARGE_INTEGER*, pcbWritten : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_to.call(this, pstm, cb, pcbRead, pcbWritten)
+    end
+    def commit(this : ISpStreamFormat*, grfCommitFlags : Win32cr::System::Com::STGC) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this, grfCommitFlags)
+    end
+    def revert(this : ISpStreamFormat*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert.call(this)
+    end
+    def lock_region(this : ISpStreamFormat*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.lock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def unlock_region(this : ISpStreamFormat*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unlock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def stat(this : ISpStreamFormat*, pstatstg : Win32cr::System::Com::STATSTG*, grfStatFlag : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stat.call(this, pstatstg, grfStatFlag)
+    end
+    def clone(this : ISpStreamFormat*, ppstm : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppstm)
+    end
+    def get_format(this : ISpStreamFormat*, pguidFormatId : LibC::GUID*, ppCoMemWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_format.call(this, pguidFormatId, ppCoMemWaveFormatEx)
+    end
+
+  end
+
+  @[Extern]
+  record ISpStreamVtbl,
+    query_interface : Proc(ISpStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpStream*, UInt32),
+    release : Proc(ISpStream*, UInt32),
+    read : Proc(ISpStream*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    write : Proc(ISpStream*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(ISpStream*, Win32cr::Foundation::LARGE_INTEGER, Win32cr::System::Com::STREAM_SEEK, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    set_size : Proc(ISpStream*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(ISpStream*, Void*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    commit : Proc(ISpStream*, Win32cr::System::Com::STGC, Win32cr::Foundation::HRESULT),
+    revert : Proc(ISpStream*, Win32cr::Foundation::HRESULT),
+    lock_region : Proc(ISpStream*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    unlock_region : Proc(ISpStream*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    stat : Proc(ISpStream*, Win32cr::System::Com::STATSTG*, UInt32, Win32cr::Foundation::HRESULT),
+    clone : Proc(ISpStream*, Void**, Win32cr::Foundation::HRESULT),
+    get_format : Proc(ISpStream*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    set_base_stream : Proc(ISpStream*, Void*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
+    get_base_stream : Proc(ISpStream*, Void**, Win32cr::Foundation::HRESULT),
+    bind_to_file : Proc(ISpStream*, Win32cr::Foundation::PWSTR, Win32cr::Media::Speech::SPFILEMODE, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX*, UInt64, Win32cr::Foundation::HRESULT),
+    close : Proc(ISpStream*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("12e3cca9-7518-44c5-a5e7-ba5a79cb929e")]
+  record ISpStream, lpVtbl : ISpStreamVtbl* do
+    GUID = LibC::GUID.new(0x12e3cca9_u32, 0x7518_u16, 0x44c5_u16, StaticArray[0xa5_u8, 0xe7_u8, 0xba_u8, 0x5a_u8, 0x79_u8, 0xcb_u8, 0x92_u8, 0x9e_u8])
+    def query_interface(this : ISpStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpStream*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpStream*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def read(this : ISpStream*, pv : Void*, cb : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, pv, cb, pcbRead)
+    end
+    def write(this : ISpStream*, pv : Void*, cb : UInt32, pcbWritten : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, pv, cb, pcbWritten)
+    end
+    def seek(this : ISpStream*, dlibMove : Win32cr::Foundation::LARGE_INTEGER, dwOrigin : Win32cr::System::Com::STREAM_SEEK, plibNewPosition : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, dlibMove, dwOrigin, plibNewPosition)
+    end
+    def set_size(this : ISpStream*, libNewSize : Win32cr::Foundation::ULARGE_INTEGER) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_size.call(this, libNewSize)
+    end
+    def copy_to(this : ISpStream*, pstm : Void*, cb : Win32cr::Foundation::ULARGE_INTEGER, pcbRead : Win32cr::Foundation::ULARGE_INTEGER*, pcbWritten : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_to.call(this, pstm, cb, pcbRead, pcbWritten)
+    end
+    def commit(this : ISpStream*, grfCommitFlags : Win32cr::System::Com::STGC) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this, grfCommitFlags)
+    end
+    def revert(this : ISpStream*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert.call(this)
+    end
+    def lock_region(this : ISpStream*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.lock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def unlock_region(this : ISpStream*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unlock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def stat(this : ISpStream*, pstatstg : Win32cr::System::Com::STATSTG*, grfStatFlag : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stat.call(this, pstatstg, grfStatFlag)
+    end
+    def clone(this : ISpStream*, ppstm : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppstm)
+    end
+    def get_format(this : ISpStream*, pguidFormatId : LibC::GUID*, ppCoMemWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_format.call(this, pguidFormatId, ppCoMemWaveFormatEx)
+    end
+    def set_base_stream(this : ISpStream*, pStream : Void*, rguidFormat : LibC::GUID*, pWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_base_stream.call(this, pStream, rguidFormat, pWaveFormatEx)
+    end
+    def get_base_stream(this : ISpStream*, ppStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_base_stream.call(this, ppStream)
+    end
+    def bind_to_file(this : ISpStream*, pszFileName : Win32cr::Foundation::PWSTR, eMode : Win32cr::Media::Speech::SPFILEMODE, pFormatId : LibC::GUID*, pWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX*, ullEventInterest : UInt64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.bind_to_file.call(this, pszFileName, eMode, pFormatId, pWaveFormatEx, ullEventInterest)
+    end
+    def close(this : ISpStream*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.close.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ISpStreamFormatConverterVtbl,
+    query_interface : Proc(ISpStreamFormatConverter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpStreamFormatConverter*, UInt32),
+    release : Proc(ISpStreamFormatConverter*, UInt32),
+    read : Proc(ISpStreamFormatConverter*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    write : Proc(ISpStreamFormatConverter*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(ISpStreamFormatConverter*, Win32cr::Foundation::LARGE_INTEGER, Win32cr::System::Com::STREAM_SEEK, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    set_size : Proc(ISpStreamFormatConverter*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(ISpStreamFormatConverter*, Void*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    commit : Proc(ISpStreamFormatConverter*, Win32cr::System::Com::STGC, Win32cr::Foundation::HRESULT),
+    revert : Proc(ISpStreamFormatConverter*, Win32cr::Foundation::HRESULT),
+    lock_region : Proc(ISpStreamFormatConverter*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    unlock_region : Proc(ISpStreamFormatConverter*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    stat : Proc(ISpStreamFormatConverter*, Win32cr::System::Com::STATSTG*, UInt32, Win32cr::Foundation::HRESULT),
+    clone : Proc(ISpStreamFormatConverter*, Void**, Win32cr::Foundation::HRESULT),
+    get_format : Proc(ISpStreamFormatConverter*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    set_base_stream : Proc(ISpStreamFormatConverter*, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_base_stream : Proc(ISpStreamFormatConverter*, Void**, Win32cr::Foundation::HRESULT),
+    set_format : Proc(ISpStreamFormatConverter*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
+    reset_seek_position : Proc(ISpStreamFormatConverter*, Win32cr::Foundation::HRESULT),
+    scale_converted_to_base_offset : Proc(ISpStreamFormatConverter*, UInt64, UInt64*, Win32cr::Foundation::HRESULT),
+    scale_base_to_converted_offset : Proc(ISpStreamFormatConverter*, UInt64, UInt64*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("678a932c-ea71-4446-9b41-78fda6280a29")]
+  record ISpStreamFormatConverter, lpVtbl : ISpStreamFormatConverterVtbl* do
+    GUID = LibC::GUID.new(0x678a932c_u32, 0xea71_u16, 0x4446_u16, StaticArray[0x9b_u8, 0x41_u8, 0x78_u8, 0xfd_u8, 0xa6_u8, 0x28_u8, 0xa_u8, 0x29_u8])
+    def query_interface(this : ISpStreamFormatConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpStreamFormatConverter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpStreamFormatConverter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def read(this : ISpStreamFormatConverter*, pv : Void*, cb : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, pv, cb, pcbRead)
+    end
+    def write(this : ISpStreamFormatConverter*, pv : Void*, cb : UInt32, pcbWritten : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, pv, cb, pcbWritten)
+    end
+    def seek(this : ISpStreamFormatConverter*, dlibMove : Win32cr::Foundation::LARGE_INTEGER, dwOrigin : Win32cr::System::Com::STREAM_SEEK, plibNewPosition : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, dlibMove, dwOrigin, plibNewPosition)
+    end
+    def set_size(this : ISpStreamFormatConverter*, libNewSize : Win32cr::Foundation::ULARGE_INTEGER) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_size.call(this, libNewSize)
+    end
+    def copy_to(this : ISpStreamFormatConverter*, pstm : Void*, cb : Win32cr::Foundation::ULARGE_INTEGER, pcbRead : Win32cr::Foundation::ULARGE_INTEGER*, pcbWritten : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_to.call(this, pstm, cb, pcbRead, pcbWritten)
+    end
+    def commit(this : ISpStreamFormatConverter*, grfCommitFlags : Win32cr::System::Com::STGC) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this, grfCommitFlags)
+    end
+    def revert(this : ISpStreamFormatConverter*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert.call(this)
+    end
+    def lock_region(this : ISpStreamFormatConverter*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.lock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def unlock_region(this : ISpStreamFormatConverter*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unlock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def stat(this : ISpStreamFormatConverter*, pstatstg : Win32cr::System::Com::STATSTG*, grfStatFlag : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stat.call(this, pstatstg, grfStatFlag)
+    end
+    def clone(this : ISpStreamFormatConverter*, ppstm : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppstm)
+    end
+    def get_format(this : ISpStreamFormatConverter*, pguidFormatId : LibC::GUID*, ppCoMemWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_format.call(this, pguidFormatId, ppCoMemWaveFormatEx)
+    end
+    def set_base_stream(this : ISpStreamFormatConverter*, pStream : Void*, fSetFormatToBaseStreamFormat : Win32cr::Foundation::BOOL, fWriteToBaseStream : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_base_stream.call(this, pStream, fSetFormatToBaseStreamFormat, fWriteToBaseStream)
+    end
+    def get_base_stream(this : ISpStreamFormatConverter*, ppStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_base_stream.call(this, ppStream)
+    end
+    def set_format(this : ISpStreamFormatConverter*, rguidFormatIdOfConvertedStream : LibC::GUID*, pWaveFormatExOfConvertedStream : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_format.call(this, rguidFormatIdOfConvertedStream, pWaveFormatExOfConvertedStream)
+    end
+    def reset_seek_position(this : ISpStreamFormatConverter*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset_seek_position.call(this)
+    end
+    def scale_converted_to_base_offset(this : ISpStreamFormatConverter*, ullOffsetConvertedStream : UInt64, pullOffsetBaseStream : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.scale_converted_to_base_offset.call(this, ullOffsetConvertedStream, pullOffsetBaseStream)
+    end
+    def scale_base_to_converted_offset(this : ISpStreamFormatConverter*, ullOffsetBaseStream : UInt64, pullOffsetConvertedStream : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.scale_base_to_converted_offset.call(this, ullOffsetBaseStream, pullOffsetConvertedStream)
+    end
+
+  end
+
+  @[Extern]
+  record ISpAudioVtbl,
+    query_interface : Proc(ISpAudio*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpAudio*, UInt32),
+    release : Proc(ISpAudio*, UInt32),
+    read : Proc(ISpAudio*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    write : Proc(ISpAudio*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(ISpAudio*, Win32cr::Foundation::LARGE_INTEGER, Win32cr::System::Com::STREAM_SEEK, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    set_size : Proc(ISpAudio*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(ISpAudio*, Void*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    commit : Proc(ISpAudio*, Win32cr::System::Com::STGC, Win32cr::Foundation::HRESULT),
+    revert : Proc(ISpAudio*, Win32cr::Foundation::HRESULT),
+    lock_region : Proc(ISpAudio*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    unlock_region : Proc(ISpAudio*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    stat : Proc(ISpAudio*, Win32cr::System::Com::STATSTG*, UInt32, Win32cr::Foundation::HRESULT),
+    clone : Proc(ISpAudio*, Void**, Win32cr::Foundation::HRESULT),
+    get_format : Proc(ISpAudio*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    set_state : Proc(ISpAudio*, Win32cr::Media::Speech::SPAUDIOSTATE, UInt64, Win32cr::Foundation::HRESULT),
+    set_format : Proc(ISpAudio*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
+    get_status : Proc(ISpAudio*, Win32cr::Media::Speech::SPAUDIOSTATUS*, Win32cr::Foundation::HRESULT),
+    set_buffer_info : Proc(ISpAudio*, Win32cr::Media::Speech::SPAUDIOBUFFERINFO*, Win32cr::Foundation::HRESULT),
+    get_buffer_info : Proc(ISpAudio*, Win32cr::Media::Speech::SPAUDIOBUFFERINFO*, Win32cr::Foundation::HRESULT),
+    get_default_format : Proc(ISpAudio*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    event_handle : Proc(ISpAudio*, Win32cr::Foundation::HANDLE),
+    get_volume_level : Proc(ISpAudio*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_volume_level : Proc(ISpAudio*, UInt32, Win32cr::Foundation::HRESULT),
+    get_buffer_notify_size : Proc(ISpAudio*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_buffer_notify_size : Proc(ISpAudio*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c05c768f-fae8-4ec2-8e07-338321c12452")]
+  record ISpAudio, lpVtbl : ISpAudioVtbl* do
+    GUID = LibC::GUID.new(0xc05c768f_u32, 0xfae8_u16, 0x4ec2_u16, StaticArray[0x8e_u8, 0x7_u8, 0x33_u8, 0x83_u8, 0x21_u8, 0xc1_u8, 0x24_u8, 0x52_u8])
+    def query_interface(this : ISpAudio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpAudio*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpAudio*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def read(this : ISpAudio*, pv : Void*, cb : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, pv, cb, pcbRead)
+    end
+    def write(this : ISpAudio*, pv : Void*, cb : UInt32, pcbWritten : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, pv, cb, pcbWritten)
+    end
+    def seek(this : ISpAudio*, dlibMove : Win32cr::Foundation::LARGE_INTEGER, dwOrigin : Win32cr::System::Com::STREAM_SEEK, plibNewPosition : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, dlibMove, dwOrigin, plibNewPosition)
+    end
+    def set_size(this : ISpAudio*, libNewSize : Win32cr::Foundation::ULARGE_INTEGER) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_size.call(this, libNewSize)
+    end
+    def copy_to(this : ISpAudio*, pstm : Void*, cb : Win32cr::Foundation::ULARGE_INTEGER, pcbRead : Win32cr::Foundation::ULARGE_INTEGER*, pcbWritten : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_to.call(this, pstm, cb, pcbRead, pcbWritten)
+    end
+    def commit(this : ISpAudio*, grfCommitFlags : Win32cr::System::Com::STGC) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this, grfCommitFlags)
+    end
+    def revert(this : ISpAudio*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert.call(this)
+    end
+    def lock_region(this : ISpAudio*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.lock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def unlock_region(this : ISpAudio*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unlock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def stat(this : ISpAudio*, pstatstg : Win32cr::System::Com::STATSTG*, grfStatFlag : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stat.call(this, pstatstg, grfStatFlag)
+    end
+    def clone(this : ISpAudio*, ppstm : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppstm)
+    end
+    def get_format(this : ISpAudio*, pguidFormatId : LibC::GUID*, ppCoMemWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_format.call(this, pguidFormatId, ppCoMemWaveFormatEx)
+    end
+    def set_state(this : ISpAudio*, new_state : Win32cr::Media::Speech::SPAUDIOSTATE, ullReserved : UInt64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_state.call(this, new_state, ullReserved)
+    end
+    def set_format(this : ISpAudio*, rguidFmtId : LibC::GUID*, pWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_format.call(this, rguidFmtId, pWaveFormatEx)
+    end
+    def get_status(this : ISpAudio*, pStatus : Win32cr::Media::Speech::SPAUDIOSTATUS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_status.call(this, pStatus)
+    end
+    def set_buffer_info(this : ISpAudio*, pBuffInfo : Win32cr::Media::Speech::SPAUDIOBUFFERINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_buffer_info.call(this, pBuffInfo)
+    end
+    def get_buffer_info(this : ISpAudio*, pBuffInfo : Win32cr::Media::Speech::SPAUDIOBUFFERINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer_info.call(this, pBuffInfo)
+    end
+    def get_default_format(this : ISpAudio*, pFormatId : LibC::GUID*, ppCoMemWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_default_format.call(this, pFormatId, ppCoMemWaveFormatEx)
+    end
+    def event_handle(this : ISpAudio*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.event_handle.call(this)
+    end
+    def get_volume_level(this : ISpAudio*, pLevel : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_volume_level.call(this, pLevel)
+    end
+    def set_volume_level(this : ISpAudio*, level : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_volume_level.call(this, level)
+    end
+    def get_buffer_notify_size(this : ISpAudio*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer_notify_size.call(this, pcbSize)
+    end
+    def set_buffer_notify_size(this : ISpAudio*, cbSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_buffer_notify_size.call(this, cbSize)
+    end
+
+  end
+
+  @[Extern]
+  record ISpMMSysAudioVtbl,
+    query_interface : Proc(ISpMMSysAudio*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpMMSysAudio*, UInt32),
+    release : Proc(ISpMMSysAudio*, UInt32),
+    read : Proc(ISpMMSysAudio*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    write : Proc(ISpMMSysAudio*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(ISpMMSysAudio*, Win32cr::Foundation::LARGE_INTEGER, Win32cr::System::Com::STREAM_SEEK, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    set_size : Proc(ISpMMSysAudio*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(ISpMMSysAudio*, Void*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    commit : Proc(ISpMMSysAudio*, Win32cr::System::Com::STGC, Win32cr::Foundation::HRESULT),
+    revert : Proc(ISpMMSysAudio*, Win32cr::Foundation::HRESULT),
+    lock_region : Proc(ISpMMSysAudio*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    unlock_region : Proc(ISpMMSysAudio*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    stat : Proc(ISpMMSysAudio*, Win32cr::System::Com::STATSTG*, UInt32, Win32cr::Foundation::HRESULT),
+    clone : Proc(ISpMMSysAudio*, Void**, Win32cr::Foundation::HRESULT),
+    get_format : Proc(ISpMMSysAudio*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    set_state : Proc(ISpMMSysAudio*, Win32cr::Media::Speech::SPAUDIOSTATE, UInt64, Win32cr::Foundation::HRESULT),
+    set_format : Proc(ISpMMSysAudio*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
+    get_status : Proc(ISpMMSysAudio*, Win32cr::Media::Speech::SPAUDIOSTATUS*, Win32cr::Foundation::HRESULT),
+    set_buffer_info : Proc(ISpMMSysAudio*, Win32cr::Media::Speech::SPAUDIOBUFFERINFO*, Win32cr::Foundation::HRESULT),
+    get_buffer_info : Proc(ISpMMSysAudio*, Win32cr::Media::Speech::SPAUDIOBUFFERINFO*, Win32cr::Foundation::HRESULT),
+    get_default_format : Proc(ISpMMSysAudio*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    event_handle : Proc(ISpMMSysAudio*, Win32cr::Foundation::HANDLE),
+    get_volume_level : Proc(ISpMMSysAudio*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_volume_level : Proc(ISpMMSysAudio*, UInt32, Win32cr::Foundation::HRESULT),
+    get_buffer_notify_size : Proc(ISpMMSysAudio*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_buffer_notify_size : Proc(ISpMMSysAudio*, UInt32, Win32cr::Foundation::HRESULT),
+    get_device_id : Proc(ISpMMSysAudio*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_device_id : Proc(ISpMMSysAudio*, UInt32, Win32cr::Foundation::HRESULT),
+    get_mm_handle : Proc(ISpMMSysAudio*, Void**, Win32cr::Foundation::HRESULT),
+    get_line_id : Proc(ISpMMSysAudio*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_line_id : Proc(ISpMMSysAudio*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("15806f6e-1d70-4b48-98e6-3b1a007509ab")]
+  record ISpMMSysAudio, lpVtbl : ISpMMSysAudioVtbl* do
+    GUID = LibC::GUID.new(0x15806f6e_u32, 0x1d70_u16, 0x4b48_u16, StaticArray[0x98_u8, 0xe6_u8, 0x3b_u8, 0x1a_u8, 0x0_u8, 0x75_u8, 0x9_u8, 0xab_u8])
+    def query_interface(this : ISpMMSysAudio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpMMSysAudio*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpMMSysAudio*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def read(this : ISpMMSysAudio*, pv : Void*, cb : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, pv, cb, pcbRead)
+    end
+    def write(this : ISpMMSysAudio*, pv : Void*, cb : UInt32, pcbWritten : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, pv, cb, pcbWritten)
+    end
+    def seek(this : ISpMMSysAudio*, dlibMove : Win32cr::Foundation::LARGE_INTEGER, dwOrigin : Win32cr::System::Com::STREAM_SEEK, plibNewPosition : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, dlibMove, dwOrigin, plibNewPosition)
+    end
+    def set_size(this : ISpMMSysAudio*, libNewSize : Win32cr::Foundation::ULARGE_INTEGER) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_size.call(this, libNewSize)
+    end
+    def copy_to(this : ISpMMSysAudio*, pstm : Void*, cb : Win32cr::Foundation::ULARGE_INTEGER, pcbRead : Win32cr::Foundation::ULARGE_INTEGER*, pcbWritten : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_to.call(this, pstm, cb, pcbRead, pcbWritten)
+    end
+    def commit(this : ISpMMSysAudio*, grfCommitFlags : Win32cr::System::Com::STGC) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this, grfCommitFlags)
+    end
+    def revert(this : ISpMMSysAudio*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert.call(this)
+    end
+    def lock_region(this : ISpMMSysAudio*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.lock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def unlock_region(this : ISpMMSysAudio*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unlock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def stat(this : ISpMMSysAudio*, pstatstg : Win32cr::System::Com::STATSTG*, grfStatFlag : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stat.call(this, pstatstg, grfStatFlag)
+    end
+    def clone(this : ISpMMSysAudio*, ppstm : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppstm)
+    end
+    def get_format(this : ISpMMSysAudio*, pguidFormatId : LibC::GUID*, ppCoMemWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_format.call(this, pguidFormatId, ppCoMemWaveFormatEx)
+    end
+    def set_state(this : ISpMMSysAudio*, new_state : Win32cr::Media::Speech::SPAUDIOSTATE, ullReserved : UInt64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_state.call(this, new_state, ullReserved)
+    end
+    def set_format(this : ISpMMSysAudio*, rguidFmtId : LibC::GUID*, pWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_format.call(this, rguidFmtId, pWaveFormatEx)
+    end
+    def get_status(this : ISpMMSysAudio*, pStatus : Win32cr::Media::Speech::SPAUDIOSTATUS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_status.call(this, pStatus)
+    end
+    def set_buffer_info(this : ISpMMSysAudio*, pBuffInfo : Win32cr::Media::Speech::SPAUDIOBUFFERINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_buffer_info.call(this, pBuffInfo)
+    end
+    def get_buffer_info(this : ISpMMSysAudio*, pBuffInfo : Win32cr::Media::Speech::SPAUDIOBUFFERINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer_info.call(this, pBuffInfo)
+    end
+    def get_default_format(this : ISpMMSysAudio*, pFormatId : LibC::GUID*, ppCoMemWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_default_format.call(this, pFormatId, ppCoMemWaveFormatEx)
+    end
+    def event_handle(this : ISpMMSysAudio*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.event_handle.call(this)
+    end
+    def get_volume_level(this : ISpMMSysAudio*, pLevel : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_volume_level.call(this, pLevel)
+    end
+    def set_volume_level(this : ISpMMSysAudio*, level : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_volume_level.call(this, level)
+    end
+    def get_buffer_notify_size(this : ISpMMSysAudio*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer_notify_size.call(this, pcbSize)
+    end
+    def set_buffer_notify_size(this : ISpMMSysAudio*, cbSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_buffer_notify_size.call(this, cbSize)
+    end
+    def get_device_id(this : ISpMMSysAudio*, puDeviceId : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_id.call(this, puDeviceId)
+    end
+    def set_device_id(this : ISpMMSysAudio*, uDeviceId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_device_id.call(this, uDeviceId)
+    end
+    def get_mm_handle(this : ISpMMSysAudio*, pHandle : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_mm_handle.call(this, pHandle)
+    end
+    def get_line_id(this : ISpMMSysAudio*, puLineId : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_line_id.call(this, puLineId)
+    end
+    def set_line_id(this : ISpMMSysAudio*, uLineId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_line_id.call(this, uLineId)
+    end
+
+  end
+
+  @[Extern]
+  record ISpTranscriptVtbl,
+    query_interface : Proc(ISpTranscript*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpTranscript*, UInt32),
+    release : Proc(ISpTranscript*, UInt32),
+    get_transcript : Proc(ISpTranscript*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    append_transcript : Proc(ISpTranscript*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("10f63bce-201a-11d3-ac70-00c04f8ee6c0")]
+  record ISpTranscript, lpVtbl : ISpTranscriptVtbl* do
+    GUID = LibC::GUID.new(0x10f63bce_u32, 0x201a_u16, 0x11d3_u16, StaticArray[0xac_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xe6_u8, 0xc0_u8])
+    def query_interface(this : ISpTranscript*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpTranscript*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpTranscript*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_transcript(this : ISpTranscript*, ppszTranscript : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_transcript.call(this, ppszTranscript)
+    end
+    def append_transcript(this : ISpTranscript*, pszTranscript : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.append_transcript.call(this, pszTranscript)
+    end
+
+  end
+
+  @[Extern]
+  record ISpLexiconVtbl,
+    query_interface : Proc(ISpLexicon*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpLexicon*, UInt32),
+    release : Proc(ISpLexicon*, UInt32),
+    get_pronunciations : Proc(ISpLexicon*, Win32cr::Foundation::PWSTR, UInt16, UInt32, Win32cr::Media::Speech::SPWORDPRONUNCIATIONLIST*, Win32cr::Foundation::HRESULT),
+    add_pronunciation : Proc(ISpLexicon*, Win32cr::Foundation::PWSTR, UInt16, Win32cr::Media::Speech::SPPARTOFSPEECH, UInt16*, Win32cr::Foundation::HRESULT),
+    remove_pronunciation : Proc(ISpLexicon*, Win32cr::Foundation::PWSTR, UInt16, Win32cr::Media::Speech::SPPARTOFSPEECH, UInt16*, Win32cr::Foundation::HRESULT),
+    get_generation : Proc(ISpLexicon*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_generation_change : Proc(ISpLexicon*, UInt32, UInt32*, Win32cr::Media::Speech::SPWORDLIST*, Win32cr::Foundation::HRESULT),
+    get_words : Proc(ISpLexicon*, UInt32, UInt32*, UInt32*, Win32cr::Media::Speech::SPWORDLIST*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("da41a7c2-5383-4db2-916b-6c1719e3db58")]
+  record ISpLexicon, lpVtbl : ISpLexiconVtbl* do
+    GUID = LibC::GUID.new(0xda41a7c2_u32, 0x5383_u16, 0x4db2_u16, StaticArray[0x91_u8, 0x6b_u8, 0x6c_u8, 0x17_u8, 0x19_u8, 0xe3_u8, 0xdb_u8, 0x58_u8])
+    def query_interface(this : ISpLexicon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpLexicon*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpLexicon*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_pronunciations(this : ISpLexicon*, pszWord : Win32cr::Foundation::PWSTR, lang_id : UInt16, dwFlags : UInt32, pWordPronunciationList : Win32cr::Media::Speech::SPWORDPRONUNCIATIONLIST*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pronunciations.call(this, pszWord, lang_id, dwFlags, pWordPronunciationList)
+    end
+    def add_pronunciation(this : ISpLexicon*, pszWord : Win32cr::Foundation::PWSTR, lang_id : UInt16, ePartOfSpeech : Win32cr::Media::Speech::SPPARTOFSPEECH, pszPronunciation : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_pronunciation.call(this, pszWord, lang_id, ePartOfSpeech, pszPronunciation)
+    end
+    def remove_pronunciation(this : ISpLexicon*, pszWord : Win32cr::Foundation::PWSTR, lang_id : UInt16, ePartOfSpeech : Win32cr::Media::Speech::SPPARTOFSPEECH, pszPronunciation : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_pronunciation.call(this, pszWord, lang_id, ePartOfSpeech, pszPronunciation)
+    end
+    def get_generation(this : ISpLexicon*, pdwGeneration : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_generation.call(this, pdwGeneration)
+    end
+    def get_generation_change(this : ISpLexicon*, dwFlags : UInt32, pdwGeneration : UInt32*, pWordList : Win32cr::Media::Speech::SPWORDLIST*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_generation_change.call(this, dwFlags, pdwGeneration, pWordList)
+    end
+    def get_words(this : ISpLexicon*, dwFlags : UInt32, pdwGeneration : UInt32*, pdwCookie : UInt32*, pWordList : Win32cr::Media::Speech::SPWORDLIST*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_words.call(this, dwFlags, pdwGeneration, pdwCookie, pWordList)
+    end
+
+  end
+
+  @[Extern]
+  record ISpContainerLexiconVtbl,
+    query_interface : Proc(ISpContainerLexicon*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpContainerLexicon*, UInt32),
+    release : Proc(ISpContainerLexicon*, UInt32),
+    get_pronunciations : Proc(ISpContainerLexicon*, Win32cr::Foundation::PWSTR, UInt16, UInt32, Win32cr::Media::Speech::SPWORDPRONUNCIATIONLIST*, Win32cr::Foundation::HRESULT),
+    add_pronunciation : Proc(ISpContainerLexicon*, Win32cr::Foundation::PWSTR, UInt16, Win32cr::Media::Speech::SPPARTOFSPEECH, UInt16*, Win32cr::Foundation::HRESULT),
+    remove_pronunciation : Proc(ISpContainerLexicon*, Win32cr::Foundation::PWSTR, UInt16, Win32cr::Media::Speech::SPPARTOFSPEECH, UInt16*, Win32cr::Foundation::HRESULT),
+    get_generation : Proc(ISpContainerLexicon*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_generation_change : Proc(ISpContainerLexicon*, UInt32, UInt32*, Win32cr::Media::Speech::SPWORDLIST*, Win32cr::Foundation::HRESULT),
+    get_words : Proc(ISpContainerLexicon*, UInt32, UInt32*, UInt32*, Win32cr::Media::Speech::SPWORDLIST*, Win32cr::Foundation::HRESULT),
+    add_lexicon : Proc(ISpContainerLexicon*, Void*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("8565572f-c094-41cc-b56e-10bd9c3ff044")]
+  record ISpContainerLexicon, lpVtbl : ISpContainerLexiconVtbl* do
+    GUID = LibC::GUID.new(0x8565572f_u32, 0xc094_u16, 0x41cc_u16, StaticArray[0xb5_u8, 0x6e_u8, 0x10_u8, 0xbd_u8, 0x9c_u8, 0x3f_u8, 0xf0_u8, 0x44_u8])
+    def query_interface(this : ISpContainerLexicon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpContainerLexicon*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpContainerLexicon*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_pronunciations(this : ISpContainerLexicon*, pszWord : Win32cr::Foundation::PWSTR, lang_id : UInt16, dwFlags : UInt32, pWordPronunciationList : Win32cr::Media::Speech::SPWORDPRONUNCIATIONLIST*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pronunciations.call(this, pszWord, lang_id, dwFlags, pWordPronunciationList)
+    end
+    def add_pronunciation(this : ISpContainerLexicon*, pszWord : Win32cr::Foundation::PWSTR, lang_id : UInt16, ePartOfSpeech : Win32cr::Media::Speech::SPPARTOFSPEECH, pszPronunciation : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_pronunciation.call(this, pszWord, lang_id, ePartOfSpeech, pszPronunciation)
+    end
+    def remove_pronunciation(this : ISpContainerLexicon*, pszWord : Win32cr::Foundation::PWSTR, lang_id : UInt16, ePartOfSpeech : Win32cr::Media::Speech::SPPARTOFSPEECH, pszPronunciation : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_pronunciation.call(this, pszWord, lang_id, ePartOfSpeech, pszPronunciation)
+    end
+    def get_generation(this : ISpContainerLexicon*, pdwGeneration : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_generation.call(this, pdwGeneration)
+    end
+    def get_generation_change(this : ISpContainerLexicon*, dwFlags : UInt32, pdwGeneration : UInt32*, pWordList : Win32cr::Media::Speech::SPWORDLIST*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_generation_change.call(this, dwFlags, pdwGeneration, pWordList)
+    end
+    def get_words(this : ISpContainerLexicon*, dwFlags : UInt32, pdwGeneration : UInt32*, pdwCookie : UInt32*, pWordList : Win32cr::Media::Speech::SPWORDLIST*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_words.call(this, dwFlags, pdwGeneration, pdwCookie, pWordList)
+    end
+    def add_lexicon(this : ISpContainerLexicon*, pAddLexicon : Void*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_lexicon.call(this, pAddLexicon, dwFlags)
+    end
+
+  end
+
+  @[Extern]
+  record ISpShortcutVtbl,
+    query_interface : Proc(ISpShortcut*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpShortcut*, UInt32),
+    release : Proc(ISpShortcut*, UInt32),
+    add_shortcut : Proc(ISpShortcut*, Win32cr::Foundation::PWSTR, UInt16, Win32cr::Foundation::PWSTR, Win32cr::Media::Speech::SPSHORTCUTTYPE, Win32cr::Foundation::HRESULT),
+    remove_shortcut : Proc(ISpShortcut*, Win32cr::Foundation::PWSTR, UInt16, Win32cr::Foundation::PWSTR, Win32cr::Media::Speech::SPSHORTCUTTYPE, Win32cr::Foundation::HRESULT),
+    get_shortcuts : Proc(ISpShortcut*, UInt16, Win32cr::Media::Speech::SPSHORTCUTPAIRLIST*, Win32cr::Foundation::HRESULT),
+    get_generation : Proc(ISpShortcut*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_words_from_generation_change : Proc(ISpShortcut*, UInt32*, Win32cr::Media::Speech::SPWORDLIST*, Win32cr::Foundation::HRESULT),
+    get_words : Proc(ISpShortcut*, UInt32*, UInt32*, Win32cr::Media::Speech::SPWORDLIST*, Win32cr::Foundation::HRESULT),
+    get_shortcuts_for_generation : Proc(ISpShortcut*, UInt32*, UInt32*, Win32cr::Media::Speech::SPSHORTCUTPAIRLIST*, Win32cr::Foundation::HRESULT),
+    get_generation_change : Proc(ISpShortcut*, UInt32*, Win32cr::Media::Speech::SPSHORTCUTPAIRLIST*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("3df681e2-ea56-11d9-8bde-f66bad1e3f3a")]
+  record ISpShortcut, lpVtbl : ISpShortcutVtbl* do
+    GUID = LibC::GUID.new(0x3df681e2_u32, 0xea56_u16, 0x11d9_u16, StaticArray[0x8b_u8, 0xde_u8, 0xf6_u8, 0x6b_u8, 0xad_u8, 0x1e_u8, 0x3f_u8, 0x3a_u8])
+    def query_interface(this : ISpShortcut*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpShortcut*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpShortcut*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def add_shortcut(this : ISpShortcut*, pszDisplay : Win32cr::Foundation::PWSTR, lang_id : UInt16, pszSpoken : Win32cr::Foundation::PWSTR, shType : Win32cr::Media::Speech::SPSHORTCUTTYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_shortcut.call(this, pszDisplay, lang_id, pszSpoken, shType)
+    end
+    def remove_shortcut(this : ISpShortcut*, pszDisplay : Win32cr::Foundation::PWSTR, lang_id : UInt16, pszSpoken : Win32cr::Foundation::PWSTR, shType : Win32cr::Media::Speech::SPSHORTCUTTYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_shortcut.call(this, pszDisplay, lang_id, pszSpoken, shType)
+    end
+    def get_shortcuts(this : ISpShortcut*, lang_id : UInt16, pShortcutpairList : Win32cr::Media::Speech::SPSHORTCUTPAIRLIST*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_shortcuts.call(this, lang_id, pShortcutpairList)
+    end
+    def get_generation(this : ISpShortcut*, pdwGeneration : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_generation.call(this, pdwGeneration)
+    end
+    def get_words_from_generation_change(this : ISpShortcut*, pdwGeneration : UInt32*, pWordList : Win32cr::Media::Speech::SPWORDLIST*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_words_from_generation_change.call(this, pdwGeneration, pWordList)
+    end
+    def get_words(this : ISpShortcut*, pdwGeneration : UInt32*, pdwCookie : UInt32*, pWordList : Win32cr::Media::Speech::SPWORDLIST*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_words.call(this, pdwGeneration, pdwCookie, pWordList)
+    end
+    def get_shortcuts_for_generation(this : ISpShortcut*, pdwGeneration : UInt32*, pdwCookie : UInt32*, pShortcutpairList : Win32cr::Media::Speech::SPSHORTCUTPAIRLIST*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_shortcuts_for_generation.call(this, pdwGeneration, pdwCookie, pShortcutpairList)
+    end
+    def get_generation_change(this : ISpShortcut*, pdwGeneration : UInt32*, pShortcutpairList : Win32cr::Media::Speech::SPSHORTCUTPAIRLIST*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_generation_change.call(this, pdwGeneration, pShortcutpairList)
+    end
+
+  end
+
+  @[Extern]
+  record ISpPhoneConverterVtbl,
+    query_interface : Proc(ISpPhoneConverter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpPhoneConverter*, UInt32),
+    release : Proc(ISpPhoneConverter*, UInt32),
+    set_object_token : Proc(ISpPhoneConverter*, Void*, Win32cr::Foundation::HRESULT),
+    get_object_token : Proc(ISpPhoneConverter*, Void**, Win32cr::Foundation::HRESULT),
+    phone_to_id : Proc(ISpPhoneConverter*, Win32cr::Foundation::PWSTR, UInt16*, Win32cr::Foundation::HRESULT),
+    id_to_phone : Proc(ISpPhoneConverter*, UInt16*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("8445c581-0cac-4a38-abfe-9b2ce2826455")]
+  record ISpPhoneConverter, lpVtbl : ISpPhoneConverterVtbl* do
+    GUID = LibC::GUID.new(0x8445c581_u32, 0xcac_u16, 0x4a38_u16, StaticArray[0xab_u8, 0xfe_u8, 0x9b_u8, 0x2c_u8, 0xe2_u8, 0x82_u8, 0x64_u8, 0x55_u8])
+    def query_interface(this : ISpPhoneConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpPhoneConverter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpPhoneConverter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_object_token(this : ISpPhoneConverter*, pToken : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_object_token.call(this, pToken)
+    end
+    def get_object_token(this : ISpPhoneConverter*, ppToken : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_object_token.call(this, ppToken)
+    end
+    def phone_to_id(this : ISpPhoneConverter*, pszPhone : Win32cr::Foundation::PWSTR, pId : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.phone_to_id.call(this, pszPhone, pId)
+    end
+    def id_to_phone(this : ISpPhoneConverter*, pId : UInt16*, pszPhone : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.id_to_phone.call(this, pId, pszPhone)
+    end
+
+  end
+
+  @[Extern]
+  record ISpPhoneticAlphabetConverterVtbl,
+    query_interface : Proc(ISpPhoneticAlphabetConverter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpPhoneticAlphabetConverter*, UInt32),
+    release : Proc(ISpPhoneticAlphabetConverter*, UInt32),
+    get_lang_id : Proc(ISpPhoneticAlphabetConverter*, UInt16*, Win32cr::Foundation::HRESULT),
+    set_lang_id : Proc(ISpPhoneticAlphabetConverter*, UInt16, Win32cr::Foundation::HRESULT),
+    sapi2_ups : Proc(ISpPhoneticAlphabetConverter*, UInt16*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    ups2_sapi : Proc(ISpPhoneticAlphabetConverter*, UInt16*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_max_convert_length : Proc(ISpPhoneticAlphabetConverter*, UInt32, Win32cr::Foundation::BOOL, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("133adcd4-19b4-4020-9fdc-842e78253b17")]
+  record ISpPhoneticAlphabetConverter, lpVtbl : ISpPhoneticAlphabetConverterVtbl* do
+    GUID = LibC::GUID.new(0x133adcd4_u32, 0x19b4_u16, 0x4020_u16, StaticArray[0x9f_u8, 0xdc_u8, 0x84_u8, 0x2e_u8, 0x78_u8, 0x25_u8, 0x3b_u8, 0x17_u8])
+    def query_interface(this : ISpPhoneticAlphabetConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpPhoneticAlphabetConverter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpPhoneticAlphabetConverter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_lang_id(this : ISpPhoneticAlphabetConverter*, pLangID : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_lang_id.call(this, pLangID)
+    end
+    def set_lang_id(this : ISpPhoneticAlphabetConverter*, lang_id : UInt16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_lang_id.call(this, lang_id)
+    end
+    def sapi2_ups(this : ISpPhoneticAlphabetConverter*, pszSAPIId : UInt16*, pszUPSId : UInt16*, cMaxLength : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.sapi2_ups.call(this, pszSAPIId, pszUPSId, cMaxLength)
+    end
+    def ups2_sapi(this : ISpPhoneticAlphabetConverter*, pszUPSId : UInt16*, pszSAPIId : UInt16*, cMaxLength : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ups2_sapi.call(this, pszUPSId, pszSAPIId, cMaxLength)
+    end
+    def get_max_convert_length(this : ISpPhoneticAlphabetConverter*, cSrcLength : UInt32, bSAPI2UPS : Win32cr::Foundation::BOOL, pcMaxDestLength : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_max_convert_length.call(this, cSrcLength, bSAPI2UPS, pcMaxDestLength)
+    end
+
+  end
+
+  @[Extern]
+  record ISpPhoneticAlphabetSelectionVtbl,
+    query_interface : Proc(ISpPhoneticAlphabetSelection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpPhoneticAlphabetSelection*, UInt32),
+    release : Proc(ISpPhoneticAlphabetSelection*, UInt32),
+    is_alphabet_ups : Proc(ISpPhoneticAlphabetSelection*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    set_alphabet_to_ups : Proc(ISpPhoneticAlphabetSelection*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b2745efd-42ce-48ca-81f1-a96e02538a90")]
+  record ISpPhoneticAlphabetSelection, lpVtbl : ISpPhoneticAlphabetSelectionVtbl* do
+    GUID = LibC::GUID.new(0xb2745efd_u32, 0x42ce_u16, 0x48ca_u16, StaticArray[0x81_u8, 0xf1_u8, 0xa9_u8, 0x6e_u8, 0x2_u8, 0x53_u8, 0x8a_u8, 0x90_u8])
+    def query_interface(this : ISpPhoneticAlphabetSelection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpPhoneticAlphabetSelection*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpPhoneticAlphabetSelection*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def is_alphabet_ups(this : ISpPhoneticAlphabetSelection*, pfIsUPS : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_alphabet_ups.call(this, pfIsUPS)
+    end
+    def set_alphabet_to_ups(this : ISpPhoneticAlphabetSelection*, fForceUPS : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_alphabet_to_ups.call(this, fForceUPS)
+    end
+
+  end
+
+  @[Extern]
+  record ISpVoiceVtbl,
+    query_interface : Proc(ISpVoice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpVoice*, UInt32),
+    release : Proc(ISpVoice*, UInt32),
+    set_notify_sink : Proc(ISpVoice*, Void*, Win32cr::Foundation::HRESULT),
+    set_notify_window_message : Proc(ISpVoice*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_callback_function : Proc(ISpVoice*, Win32cr::Media::Speech::SPNOTIFYCALLBACK*, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_callback_interface : Proc(ISpVoice*, Void*, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_win32_event : Proc(ISpVoice*, Win32cr::Foundation::HRESULT),
+    wait_for_notify_event : Proc(ISpVoice*, UInt32, Win32cr::Foundation::HRESULT),
+    get_notify_event_handle : Proc(ISpVoice*, Win32cr::Foundation::HANDLE),
+    set_interest : Proc(ISpVoice*, UInt64, UInt64, Win32cr::Foundation::HRESULT),
+    get_events : Proc(ISpVoice*, UInt32, Win32cr::Media::Speech::SPEVENT*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_info : Proc(ISpVoice*, Win32cr::Media::Speech::SPEVENTSOURCEINFO*, Win32cr::Foundation::HRESULT),
+    set_output : Proc(ISpVoice*, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_output_object_token : Proc(ISpVoice*, Void**, Win32cr::Foundation::HRESULT),
+    get_output_stream : Proc(ISpVoice*, Void**, Win32cr::Foundation::HRESULT),
+    pause : Proc(ISpVoice*, Win32cr::Foundation::HRESULT),
+    resume : Proc(ISpVoice*, Win32cr::Foundation::HRESULT),
+    set_voice : Proc(ISpVoice*, Void*, Win32cr::Foundation::HRESULT),
+    get_voice : Proc(ISpVoice*, Void**, Win32cr::Foundation::HRESULT),
+    speak : Proc(ISpVoice*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    speak_stream : Proc(ISpVoice*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_status : Proc(ISpVoice*, Win32cr::Media::Speech::SPVOICESTATUS*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    skip : Proc(ISpVoice*, Win32cr::Foundation::PWSTR, Int32, UInt32*, Win32cr::Foundation::HRESULT),
+    set_priority : Proc(ISpVoice*, Win32cr::Media::Speech::SPVPRIORITY, Win32cr::Foundation::HRESULT),
+    get_priority : Proc(ISpVoice*, Win32cr::Media::Speech::SPVPRIORITY*, Win32cr::Foundation::HRESULT),
+    set_alert_boundary : Proc(ISpVoice*, Win32cr::Media::Speech::SPEVENTENUM, Win32cr::Foundation::HRESULT),
+    get_alert_boundary : Proc(ISpVoice*, Win32cr::Media::Speech::SPEVENTENUM*, Win32cr::Foundation::HRESULT),
+    set_rate : Proc(ISpVoice*, Int32, Win32cr::Foundation::HRESULT),
+    get_rate : Proc(ISpVoice*, Int32*, Win32cr::Foundation::HRESULT),
+    set_volume : Proc(ISpVoice*, UInt16, Win32cr::Foundation::HRESULT),
+    get_volume : Proc(ISpVoice*, UInt16*, Win32cr::Foundation::HRESULT),
+    wait_until_done : Proc(ISpVoice*, UInt32, Win32cr::Foundation::HRESULT),
+    set_sync_speak_timeout : Proc(ISpVoice*, UInt32, Win32cr::Foundation::HRESULT),
+    get_sync_speak_timeout : Proc(ISpVoice*, UInt32*, Win32cr::Foundation::HRESULT),
+    speak_complete_event : Proc(ISpVoice*, Win32cr::Foundation::HANDLE),
+    is_ui_supported : Proc(ISpVoice*, Win32cr::Foundation::PWSTR, Void*, UInt32, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    display_ui : Proc(ISpVoice*, Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("6c44df74-72b9-4992-a1ec-ef996e0422d4")]
+  record ISpVoice, lpVtbl : ISpVoiceVtbl* do
+    GUID = LibC::GUID.new(0x6c44df74_u32, 0x72b9_u16, 0x4992_u16, StaticArray[0xa1_u8, 0xec_u8, 0xef_u8, 0x99_u8, 0x6e_u8, 0x4_u8, 0x22_u8, 0xd4_u8])
+    def query_interface(this : ISpVoice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpVoice*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpVoice*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_notify_sink(this : ISpVoice*, pNotifySink : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_sink.call(this, pNotifySink)
+    end
+    def set_notify_window_message(this : ISpVoice*, hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_window_message.call(this, hWnd, msg, wParam, lParam)
+    end
+    def set_notify_callback_function(this : ISpVoice*, pfnCallback : Win32cr::Media::Speech::SPNOTIFYCALLBACK*, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_callback_function.call(this, pfnCallback, wParam, lParam)
+    end
+    def set_notify_callback_interface(this : ISpVoice*, pSpCallback : Void*, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_callback_interface.call(this, pSpCallback, wParam, lParam)
+    end
+    def set_notify_win32_event(this : ISpVoice*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_win32_event.call(this)
+    end
+    def wait_for_notify_event(this : ISpVoice*, dwMilliseconds : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.wait_for_notify_event.call(this, dwMilliseconds)
+    end
+    def get_notify_event_handle(this : ISpVoice*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.get_notify_event_handle.call(this)
+    end
+    def set_interest(this : ISpVoice*, ullEventInterest : UInt64, ullQueuedInterest : UInt64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_interest.call(this, ullEventInterest, ullQueuedInterest)
+    end
+    def get_events(this : ISpVoice*, ulCount : UInt32, pEventArray : Win32cr::Media::Speech::SPEVENT*, pulFetched : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_events.call(this, ulCount, pEventArray, pulFetched)
+    end
+    def get_info(this : ISpVoice*, pInfo : Win32cr::Media::Speech::SPEVENTSOURCEINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_info.call(this, pInfo)
+    end
+    def set_output(this : ISpVoice*, pUnkOutput : Void*, fAllowFormatChanges : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_output.call(this, pUnkOutput, fAllowFormatChanges)
+    end
+    def get_output_object_token(this : ISpVoice*, ppObjectToken : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_output_object_token.call(this, ppObjectToken)
+    end
+    def get_output_stream(this : ISpVoice*, ppStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_output_stream.call(this, ppStream)
+    end
+    def pause(this : ISpVoice*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pause.call(this)
+    end
+    def resume(this : ISpVoice*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.resume.call(this)
+    end
+    def set_voice(this : ISpVoice*, pToken : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_voice.call(this, pToken)
+    end
+    def get_voice(this : ISpVoice*, ppToken : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_voice.call(this, ppToken)
+    end
+    def speak(this : ISpVoice*, pwcs : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pulStreamNumber : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.speak.call(this, pwcs, dwFlags, pulStreamNumber)
+    end
+    def speak_stream(this : ISpVoice*, pStream : Void*, dwFlags : UInt32, pulStreamNumber : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.speak_stream.call(this, pStream, dwFlags, pulStreamNumber)
+    end
+    def get_status(this : ISpVoice*, pStatus : Win32cr::Media::Speech::SPVOICESTATUS*, ppszLastBookmark : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_status.call(this, pStatus, ppszLastBookmark)
+    end
+    def skip(this : ISpVoice*, pItemType : Win32cr::Foundation::PWSTR, lNumItems : Int32, pulNumSkipped : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.skip.call(this, pItemType, lNumItems, pulNumSkipped)
+    end
+    def set_priority(this : ISpVoice*, ePriority : Win32cr::Media::Speech::SPVPRIORITY) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_priority.call(this, ePriority)
+    end
+    def get_priority(this : ISpVoice*, pePriority : Win32cr::Media::Speech::SPVPRIORITY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_priority.call(this, pePriority)
+    end
+    def set_alert_boundary(this : ISpVoice*, eBoundary : Win32cr::Media::Speech::SPEVENTENUM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_alert_boundary.call(this, eBoundary)
+    end
+    def get_alert_boundary(this : ISpVoice*, peBoundary : Win32cr::Media::Speech::SPEVENTENUM*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_alert_boundary.call(this, peBoundary)
+    end
+    def set_rate(this : ISpVoice*, rate_adjust : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_rate.call(this, rate_adjust)
+    end
+    def get_rate(this : ISpVoice*, pRateAdjust : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_rate.call(this, pRateAdjust)
+    end
+    def set_volume(this : ISpVoice*, usVolume : UInt16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_volume.call(this, usVolume)
+    end
+    def get_volume(this : ISpVoice*, pusVolume : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_volume.call(this, pusVolume)
+    end
+    def wait_until_done(this : ISpVoice*, msTimeout : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.wait_until_done.call(this, msTimeout)
+    end
+    def set_sync_speak_timeout(this : ISpVoice*, msTimeout : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_sync_speak_timeout.call(this, msTimeout)
+    end
+    def get_sync_speak_timeout(this : ISpVoice*, pmsTimeout : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_sync_speak_timeout.call(this, pmsTimeout)
+    end
+    def speak_complete_event(this : ISpVoice*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.speak_complete_event.call(this)
+    end
+    def is_ui_supported(this : ISpVoice*, pszTypeOfUI : Win32cr::Foundation::PWSTR, pvExtraData : Void*, cbExtraData : UInt32, pfSupported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_ui_supported.call(this, pszTypeOfUI, pvExtraData, cbExtraData, pfSupported)
+    end
+    def display_ui(this : ISpVoice*, hwndParent : Win32cr::Foundation::HWND, pszTitle : Win32cr::Foundation::PWSTR, pszTypeOfUI : Win32cr::Foundation::PWSTR, pvExtraData : Void*, cbExtraData : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.display_ui.call(this, hwndParent, pszTitle, pszTypeOfUI, pvExtraData, cbExtraData)
+    end
+
+  end
+
+  @[Extern]
+  record ISpPhraseVtbl,
+    query_interface : Proc(ISpPhrase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpPhrase*, UInt32),
+    release : Proc(ISpPhrase*, UInt32),
+    get_phrase : Proc(ISpPhrase*, Win32cr::Media::Speech::SPPHRASE**, Win32cr::Foundation::HRESULT),
+    get_serialized_phrase : Proc(ISpPhrase*, Win32cr::Media::Speech::SPSERIALIZEDPHRASE**, Win32cr::Foundation::HRESULT),
+    get_text : Proc(ISpPhrase*, UInt32, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR*, UInt8*, Win32cr::Foundation::HRESULT),
+    discard : Proc(ISpPhrase*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("1a5c0354-b621-4b5a-8791-d306ed379e53")]
+  record ISpPhrase, lpVtbl : ISpPhraseVtbl* do
+    GUID = LibC::GUID.new(0x1a5c0354_u32, 0xb621_u16, 0x4b5a_u16, StaticArray[0x87_u8, 0x91_u8, 0xd3_u8, 0x6_u8, 0xed_u8, 0x37_u8, 0x9e_u8, 0x53_u8])
+    def query_interface(this : ISpPhrase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpPhrase*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpPhrase*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_phrase(this : ISpPhrase*, ppCoMemPhrase : Win32cr::Media::Speech::SPPHRASE**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_phrase.call(this, ppCoMemPhrase)
+    end
+    def get_serialized_phrase(this : ISpPhrase*, ppCoMemPhrase : Win32cr::Media::Speech::SPSERIALIZEDPHRASE**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_serialized_phrase.call(this, ppCoMemPhrase)
+    end
+    def get_text(this : ISpPhrase*, ulStart : UInt32, ulCount : UInt32, fUseTextReplacements : Win32cr::Foundation::BOOL, ppszCoMemText : Win32cr::Foundation::PWSTR*, pbDisplayAttributes : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_text.call(this, ulStart, ulCount, fUseTextReplacements, ppszCoMemText, pbDisplayAttributes)
+    end
+    def discard(this : ISpPhrase*, dwValueTypes : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.discard.call(this, dwValueTypes)
+    end
+
+  end
+
+  @[Extern]
+  record ISpPhraseAltVtbl,
+    query_interface : Proc(ISpPhraseAlt*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpPhraseAlt*, UInt32),
+    release : Proc(ISpPhraseAlt*, UInt32),
+    get_phrase : Proc(ISpPhraseAlt*, Win32cr::Media::Speech::SPPHRASE**, Win32cr::Foundation::HRESULT),
+    get_serialized_phrase : Proc(ISpPhraseAlt*, Win32cr::Media::Speech::SPSERIALIZEDPHRASE**, Win32cr::Foundation::HRESULT),
+    get_text : Proc(ISpPhraseAlt*, UInt32, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR*, UInt8*, Win32cr::Foundation::HRESULT),
+    discard : Proc(ISpPhraseAlt*, UInt32, Win32cr::Foundation::HRESULT),
+    get_alt_info : Proc(ISpPhraseAlt*, Void**, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    commit : Proc(ISpPhraseAlt*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("8fcebc98-4e49-4067-9c6c-d86a0e092e3d")]
+  record ISpPhraseAlt, lpVtbl : ISpPhraseAltVtbl* do
+    GUID = LibC::GUID.new(0x8fcebc98_u32, 0x4e49_u16, 0x4067_u16, StaticArray[0x9c_u8, 0x6c_u8, 0xd8_u8, 0x6a_u8, 0xe_u8, 0x9_u8, 0x2e_u8, 0x3d_u8])
+    def query_interface(this : ISpPhraseAlt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpPhraseAlt*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpPhraseAlt*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_phrase(this : ISpPhraseAlt*, ppCoMemPhrase : Win32cr::Media::Speech::SPPHRASE**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_phrase.call(this, ppCoMemPhrase)
+    end
+    def get_serialized_phrase(this : ISpPhraseAlt*, ppCoMemPhrase : Win32cr::Media::Speech::SPSERIALIZEDPHRASE**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_serialized_phrase.call(this, ppCoMemPhrase)
+    end
+    def get_text(this : ISpPhraseAlt*, ulStart : UInt32, ulCount : UInt32, fUseTextReplacements : Win32cr::Foundation::BOOL, ppszCoMemText : Win32cr::Foundation::PWSTR*, pbDisplayAttributes : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_text.call(this, ulStart, ulCount, fUseTextReplacements, ppszCoMemText, pbDisplayAttributes)
+    end
+    def discard(this : ISpPhraseAlt*, dwValueTypes : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.discard.call(this, dwValueTypes)
+    end
+    def get_alt_info(this : ISpPhraseAlt*, ppParent : Void**, pulStartElementInParent : UInt32*, pcElementsInParent : UInt32*, pcElementsInAlt : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_alt_info.call(this, ppParent, pulStartElementInParent, pcElementsInParent, pcElementsInAlt)
+    end
+    def commit(this : ISpPhraseAlt*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ISpPhrase2Vtbl,
+    query_interface : Proc(ISpPhrase2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpPhrase2*, UInt32),
+    release : Proc(ISpPhrase2*, UInt32),
+    get_phrase : Proc(ISpPhrase2*, Win32cr::Media::Speech::SPPHRASE**, Win32cr::Foundation::HRESULT),
+    get_serialized_phrase : Proc(ISpPhrase2*, Win32cr::Media::Speech::SPSERIALIZEDPHRASE**, Win32cr::Foundation::HRESULT),
+    get_text : Proc(ISpPhrase2*, UInt32, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR*, UInt8*, Win32cr::Foundation::HRESULT),
+    discard : Proc(ISpPhrase2*, UInt32, Win32cr::Foundation::HRESULT),
+    get_xml_result : Proc(ISpPhrase2*, Win32cr::Foundation::PWSTR*, Win32cr::Media::Speech::SPXMLRESULTOPTIONS, Win32cr::Foundation::HRESULT),
+    get_xml_error_info : Proc(ISpPhrase2*, Win32cr::Media::Speech::SPSEMANTICERRORINFO*, Win32cr::Foundation::HRESULT),
+    get_audio : Proc(ISpPhrase2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f264da52-e457-4696-b856-a737b717af79")]
+  record ISpPhrase2, lpVtbl : ISpPhrase2Vtbl* do
+    GUID = LibC::GUID.new(0xf264da52_u32, 0xe457_u16, 0x4696_u16, StaticArray[0xb8_u8, 0x56_u8, 0xa7_u8, 0x37_u8, 0xb7_u8, 0x17_u8, 0xaf_u8, 0x79_u8])
+    def query_interface(this : ISpPhrase2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpPhrase2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpPhrase2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_phrase(this : ISpPhrase2*, ppCoMemPhrase : Win32cr::Media::Speech::SPPHRASE**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_phrase.call(this, ppCoMemPhrase)
+    end
+    def get_serialized_phrase(this : ISpPhrase2*, ppCoMemPhrase : Win32cr::Media::Speech::SPSERIALIZEDPHRASE**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_serialized_phrase.call(this, ppCoMemPhrase)
+    end
+    def get_text(this : ISpPhrase2*, ulStart : UInt32, ulCount : UInt32, fUseTextReplacements : Win32cr::Foundation::BOOL, ppszCoMemText : Win32cr::Foundation::PWSTR*, pbDisplayAttributes : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_text.call(this, ulStart, ulCount, fUseTextReplacements, ppszCoMemText, pbDisplayAttributes)
+    end
+    def discard(this : ISpPhrase2*, dwValueTypes : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.discard.call(this, dwValueTypes)
+    end
+    def get_xml_result(this : ISpPhrase2*, ppszCoMemXMLResult : Win32cr::Foundation::PWSTR*, options : Win32cr::Media::Speech::SPXMLRESULTOPTIONS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_xml_result.call(this, ppszCoMemXMLResult, options)
+    end
+    def get_xml_error_info(this : ISpPhrase2*, pSemanticErrorInfo : Win32cr::Media::Speech::SPSEMANTICERRORINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_xml_error_info.call(this, pSemanticErrorInfo)
+    end
+    def get_audio(this : ISpPhrase2*, ulStartElement : UInt32, cElements : UInt32, ppStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio.call(this, ulStartElement, cElements, ppStream)
+    end
+
+  end
+
+  @[Extern]
+  record ISpRecoResultVtbl,
+    query_interface : Proc(ISpRecoResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpRecoResult*, UInt32),
+    release : Proc(ISpRecoResult*, UInt32),
+    get_phrase : Proc(ISpRecoResult*, Win32cr::Media::Speech::SPPHRASE**, Win32cr::Foundation::HRESULT),
+    get_serialized_phrase : Proc(ISpRecoResult*, Win32cr::Media::Speech::SPSERIALIZEDPHRASE**, Win32cr::Foundation::HRESULT),
+    get_text : Proc(ISpRecoResult*, UInt32, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR*, UInt8*, Win32cr::Foundation::HRESULT),
+    discard : Proc(ISpRecoResult*, UInt32, Win32cr::Foundation::HRESULT),
+    get_result_times : Proc(ISpRecoResult*, Win32cr::Media::Speech::SPRECORESULTTIMES*, Win32cr::Foundation::HRESULT),
+    get_alternates : Proc(ISpRecoResult*, UInt32, UInt32, UInt32, Void**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_audio : Proc(ISpRecoResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    speak_audio : Proc(ISpRecoResult*, UInt32, UInt32, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    serialize : Proc(ISpRecoResult*, Win32cr::Media::Speech::SPSERIALIZEDRESULT**, Win32cr::Foundation::HRESULT),
+    scale_audio : Proc(ISpRecoResult*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
+    get_reco_context : Proc(ISpRecoResult*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("20b053be-e235-43cd-9a2a-8d17a48b7842")]
+  record ISpRecoResult, lpVtbl : ISpRecoResultVtbl* do
+    GUID = LibC::GUID.new(0x20b053be_u32, 0xe235_u16, 0x43cd_u16, StaticArray[0x9a_u8, 0x2a_u8, 0x8d_u8, 0x17_u8, 0xa4_u8, 0x8b_u8, 0x78_u8, 0x42_u8])
+    def query_interface(this : ISpRecoResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpRecoResult*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpRecoResult*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_phrase(this : ISpRecoResult*, ppCoMemPhrase : Win32cr::Media::Speech::SPPHRASE**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_phrase.call(this, ppCoMemPhrase)
+    end
+    def get_serialized_phrase(this : ISpRecoResult*, ppCoMemPhrase : Win32cr::Media::Speech::SPSERIALIZEDPHRASE**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_serialized_phrase.call(this, ppCoMemPhrase)
+    end
+    def get_text(this : ISpRecoResult*, ulStart : UInt32, ulCount : UInt32, fUseTextReplacements : Win32cr::Foundation::BOOL, ppszCoMemText : Win32cr::Foundation::PWSTR*, pbDisplayAttributes : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_text.call(this, ulStart, ulCount, fUseTextReplacements, ppszCoMemText, pbDisplayAttributes)
+    end
+    def discard(this : ISpRecoResult*, dwValueTypes : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.discard.call(this, dwValueTypes)
+    end
+    def get_result_times(this : ISpRecoResult*, pTimes : Win32cr::Media::Speech::SPRECORESULTTIMES*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_result_times.call(this, pTimes)
+    end
+    def get_alternates(this : ISpRecoResult*, ulStartElement : UInt32, cElements : UInt32, ulRequestCount : UInt32, ppPhrases : Void**, pcPhrasesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_alternates.call(this, ulStartElement, cElements, ulRequestCount, ppPhrases, pcPhrasesReturned)
+    end
+    def get_audio(this : ISpRecoResult*, ulStartElement : UInt32, cElements : UInt32, ppStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio.call(this, ulStartElement, cElements, ppStream)
+    end
+    def speak_audio(this : ISpRecoResult*, ulStartElement : UInt32, cElements : UInt32, dwFlags : UInt32, pulStreamNumber : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.speak_audio.call(this, ulStartElement, cElements, dwFlags, pulStreamNumber)
+    end
+    def serialize(this : ISpRecoResult*, ppCoMemSerializedResult : Win32cr::Media::Speech::SPSERIALIZEDRESULT**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.serialize.call(this, ppCoMemSerializedResult)
+    end
+    def scale_audio(this : ISpRecoResult*, pAudioFormatId : LibC::GUID*, pWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.scale_audio.call(this, pAudioFormatId, pWaveFormatEx)
+    end
+    def get_reco_context(this : ISpRecoResult*, ppRecoContext : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_reco_context.call(this, ppRecoContext)
+    end
+
+  end
+
+  @[Extern]
+  record ISpRecoResult2Vtbl,
+    query_interface : Proc(ISpRecoResult2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpRecoResult2*, UInt32),
+    release : Proc(ISpRecoResult2*, UInt32),
+    get_phrase : Proc(ISpRecoResult2*, Win32cr::Media::Speech::SPPHRASE**, Win32cr::Foundation::HRESULT),
+    get_serialized_phrase : Proc(ISpRecoResult2*, Win32cr::Media::Speech::SPSERIALIZEDPHRASE**, Win32cr::Foundation::HRESULT),
+    get_text : Proc(ISpRecoResult2*, UInt32, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR*, UInt8*, Win32cr::Foundation::HRESULT),
+    discard : Proc(ISpRecoResult2*, UInt32, Win32cr::Foundation::HRESULT),
+    get_result_times : Proc(ISpRecoResult2*, Win32cr::Media::Speech::SPRECORESULTTIMES*, Win32cr::Foundation::HRESULT),
+    get_alternates : Proc(ISpRecoResult2*, UInt32, UInt32, UInt32, Void**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_audio : Proc(ISpRecoResult2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    speak_audio : Proc(ISpRecoResult2*, UInt32, UInt32, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    serialize : Proc(ISpRecoResult2*, Win32cr::Media::Speech::SPSERIALIZEDRESULT**, Win32cr::Foundation::HRESULT),
+    scale_audio : Proc(ISpRecoResult2*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
+    get_reco_context : Proc(ISpRecoResult2*, Void**, Win32cr::Foundation::HRESULT),
+    commit_alternate : Proc(ISpRecoResult2*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    commit_text : Proc(ISpRecoResult2*, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    set_text_feedback : Proc(ISpRecoResult2*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27cac6c4-88f2-41f2-8817-0c95e59f1e6e")]
+  record ISpRecoResult2, lpVtbl : ISpRecoResult2Vtbl* do
+    GUID = LibC::GUID.new(0x27cac6c4_u32, 0x88f2_u16, 0x41f2_u16, StaticArray[0x88_u8, 0x17_u8, 0xc_u8, 0x95_u8, 0xe5_u8, 0x9f_u8, 0x1e_u8, 0x6e_u8])
+    def query_interface(this : ISpRecoResult2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpRecoResult2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpRecoResult2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_phrase(this : ISpRecoResult2*, ppCoMemPhrase : Win32cr::Media::Speech::SPPHRASE**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_phrase.call(this, ppCoMemPhrase)
+    end
+    def get_serialized_phrase(this : ISpRecoResult2*, ppCoMemPhrase : Win32cr::Media::Speech::SPSERIALIZEDPHRASE**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_serialized_phrase.call(this, ppCoMemPhrase)
+    end
+    def get_text(this : ISpRecoResult2*, ulStart : UInt32, ulCount : UInt32, fUseTextReplacements : Win32cr::Foundation::BOOL, ppszCoMemText : Win32cr::Foundation::PWSTR*, pbDisplayAttributes : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_text.call(this, ulStart, ulCount, fUseTextReplacements, ppszCoMemText, pbDisplayAttributes)
+    end
+    def discard(this : ISpRecoResult2*, dwValueTypes : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.discard.call(this, dwValueTypes)
+    end
+    def get_result_times(this : ISpRecoResult2*, pTimes : Win32cr::Media::Speech::SPRECORESULTTIMES*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_result_times.call(this, pTimes)
+    end
+    def get_alternates(this : ISpRecoResult2*, ulStartElement : UInt32, cElements : UInt32, ulRequestCount : UInt32, ppPhrases : Void**, pcPhrasesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_alternates.call(this, ulStartElement, cElements, ulRequestCount, ppPhrases, pcPhrasesReturned)
+    end
+    def get_audio(this : ISpRecoResult2*, ulStartElement : UInt32, cElements : UInt32, ppStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio.call(this, ulStartElement, cElements, ppStream)
+    end
+    def speak_audio(this : ISpRecoResult2*, ulStartElement : UInt32, cElements : UInt32, dwFlags : UInt32, pulStreamNumber : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.speak_audio.call(this, ulStartElement, cElements, dwFlags, pulStreamNumber)
+    end
+    def serialize(this : ISpRecoResult2*, ppCoMemSerializedResult : Win32cr::Media::Speech::SPSERIALIZEDRESULT**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.serialize.call(this, ppCoMemSerializedResult)
+    end
+    def scale_audio(this : ISpRecoResult2*, pAudioFormatId : LibC::GUID*, pWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.scale_audio.call(this, pAudioFormatId, pWaveFormatEx)
+    end
+    def get_reco_context(this : ISpRecoResult2*, ppRecoContext : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_reco_context.call(this, ppRecoContext)
+    end
+    def commit_alternate(this : ISpRecoResult2*, pPhraseAlt : Void*, ppNewResult : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit_alternate.call(this, pPhraseAlt, ppNewResult)
+    end
+    def commit_text(this : ISpRecoResult2*, ulStartElement : UInt32, cElements : UInt32, pszCorrectedData : Win32cr::Foundation::PWSTR, eCommitFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit_text.call(this, ulStartElement, cElements, pszCorrectedData, eCommitFlags)
+    end
+    def set_text_feedback(this : ISpRecoResult2*, pszFeedback : Win32cr::Foundation::PWSTR, fSuccessful : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_text_feedback.call(this, pszFeedback, fSuccessful)
+    end
+
+  end
+
+  @[Extern]
+  record ISpXMLRecoResultVtbl,
+    query_interface : Proc(ISpXMLRecoResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpXMLRecoResult*, UInt32),
+    release : Proc(ISpXMLRecoResult*, UInt32),
+    get_phrase : Proc(ISpXMLRecoResult*, Win32cr::Media::Speech::SPPHRASE**, Win32cr::Foundation::HRESULT),
+    get_serialized_phrase : Proc(ISpXMLRecoResult*, Win32cr::Media::Speech::SPSERIALIZEDPHRASE**, Win32cr::Foundation::HRESULT),
+    get_text : Proc(ISpXMLRecoResult*, UInt32, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR*, UInt8*, Win32cr::Foundation::HRESULT),
+    discard : Proc(ISpXMLRecoResult*, UInt32, Win32cr::Foundation::HRESULT),
+    get_result_times : Proc(ISpXMLRecoResult*, Win32cr::Media::Speech::SPRECORESULTTIMES*, Win32cr::Foundation::HRESULT),
+    get_alternates : Proc(ISpXMLRecoResult*, UInt32, UInt32, UInt32, Void**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_audio : Proc(ISpXMLRecoResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    speak_audio : Proc(ISpXMLRecoResult*, UInt32, UInt32, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    serialize : Proc(ISpXMLRecoResult*, Win32cr::Media::Speech::SPSERIALIZEDRESULT**, Win32cr::Foundation::HRESULT),
+    scale_audio : Proc(ISpXMLRecoResult*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
+    get_reco_context : Proc(ISpXMLRecoResult*, Void**, Win32cr::Foundation::HRESULT),
+    get_xml_result : Proc(ISpXMLRecoResult*, Win32cr::Foundation::PWSTR*, Win32cr::Media::Speech::SPXMLRESULTOPTIONS, Win32cr::Foundation::HRESULT),
+    get_xml_error_info : Proc(ISpXMLRecoResult*, Win32cr::Media::Speech::SPSEMANTICERRORINFO*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("ae39362b-45a8-4074-9b9e-ccf49aa2d0b6")]
+  record ISpXMLRecoResult, lpVtbl : ISpXMLRecoResultVtbl* do
+    GUID = LibC::GUID.new(0xae39362b_u32, 0x45a8_u16, 0x4074_u16, StaticArray[0x9b_u8, 0x9e_u8, 0xcc_u8, 0xf4_u8, 0x9a_u8, 0xa2_u8, 0xd0_u8, 0xb6_u8])
+    def query_interface(this : ISpXMLRecoResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpXMLRecoResult*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpXMLRecoResult*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_phrase(this : ISpXMLRecoResult*, ppCoMemPhrase : Win32cr::Media::Speech::SPPHRASE**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_phrase.call(this, ppCoMemPhrase)
+    end
+    def get_serialized_phrase(this : ISpXMLRecoResult*, ppCoMemPhrase : Win32cr::Media::Speech::SPSERIALIZEDPHRASE**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_serialized_phrase.call(this, ppCoMemPhrase)
+    end
+    def get_text(this : ISpXMLRecoResult*, ulStart : UInt32, ulCount : UInt32, fUseTextReplacements : Win32cr::Foundation::BOOL, ppszCoMemText : Win32cr::Foundation::PWSTR*, pbDisplayAttributes : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_text.call(this, ulStart, ulCount, fUseTextReplacements, ppszCoMemText, pbDisplayAttributes)
+    end
+    def discard(this : ISpXMLRecoResult*, dwValueTypes : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.discard.call(this, dwValueTypes)
+    end
+    def get_result_times(this : ISpXMLRecoResult*, pTimes : Win32cr::Media::Speech::SPRECORESULTTIMES*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_result_times.call(this, pTimes)
+    end
+    def get_alternates(this : ISpXMLRecoResult*, ulStartElement : UInt32, cElements : UInt32, ulRequestCount : UInt32, ppPhrases : Void**, pcPhrasesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_alternates.call(this, ulStartElement, cElements, ulRequestCount, ppPhrases, pcPhrasesReturned)
+    end
+    def get_audio(this : ISpXMLRecoResult*, ulStartElement : UInt32, cElements : UInt32, ppStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio.call(this, ulStartElement, cElements, ppStream)
+    end
+    def speak_audio(this : ISpXMLRecoResult*, ulStartElement : UInt32, cElements : UInt32, dwFlags : UInt32, pulStreamNumber : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.speak_audio.call(this, ulStartElement, cElements, dwFlags, pulStreamNumber)
+    end
+    def serialize(this : ISpXMLRecoResult*, ppCoMemSerializedResult : Win32cr::Media::Speech::SPSERIALIZEDRESULT**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.serialize.call(this, ppCoMemSerializedResult)
+    end
+    def scale_audio(this : ISpXMLRecoResult*, pAudioFormatId : LibC::GUID*, pWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.scale_audio.call(this, pAudioFormatId, pWaveFormatEx)
+    end
+    def get_reco_context(this : ISpXMLRecoResult*, ppRecoContext : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_reco_context.call(this, ppRecoContext)
+    end
+    def get_xml_result(this : ISpXMLRecoResult*, ppszCoMemXMLResult : Win32cr::Foundation::PWSTR*, options : Win32cr::Media::Speech::SPXMLRESULTOPTIONS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_xml_result.call(this, ppszCoMemXMLResult, options)
+    end
+    def get_xml_error_info(this : ISpXMLRecoResult*, pSemanticErrorInfo : Win32cr::Media::Speech::SPSEMANTICERRORINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_xml_error_info.call(this, pSemanticErrorInfo)
+    end
+
+  end
+
+  @[Extern]
+  record ISpGrammarBuilderVtbl,
+    query_interface : Proc(ISpGrammarBuilder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpGrammarBuilder*, UInt32),
+    release : Proc(ISpGrammarBuilder*, UInt32),
+    reset_grammar : Proc(ISpGrammarBuilder*, UInt16, Win32cr::Foundation::HRESULT),
+    get_rule : Proc(ISpGrammarBuilder*, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::BOOL, Win32cr::Media::Speech::SPSTATEHANDLE__**, Win32cr::Foundation::HRESULT),
+    clear_rule : Proc(ISpGrammarBuilder*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Foundation::HRESULT),
+    create_new_state : Proc(ISpGrammarBuilder*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Media::Speech::SPSTATEHANDLE__**, Win32cr::Foundation::HRESULT),
+    add_word_transition : Proc(ISpGrammarBuilder*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Media::Speech::SPGRAMMARWORDTYPE, Float32, Win32cr::Media::Speech::SPPROPERTYINFO*, Win32cr::Foundation::HRESULT),
+    add_rule_transition : Proc(ISpGrammarBuilder*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Float32, Win32cr::Media::Speech::SPPROPERTYINFO*, Win32cr::Foundation::HRESULT),
+    add_resource : Proc(ISpGrammarBuilder*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    commit : Proc(ISpGrammarBuilder*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("8137828f-591a-4a42-be58-49ea7ebaac68")]
+  record ISpGrammarBuilder, lpVtbl : ISpGrammarBuilderVtbl* do
+    GUID = LibC::GUID.new(0x8137828f_u32, 0x591a_u16, 0x4a42_u16, StaticArray[0xbe_u8, 0x58_u8, 0x49_u8, 0xea_u8, 0x7e_u8, 0xba_u8, 0xac_u8, 0x68_u8])
+    def query_interface(this : ISpGrammarBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpGrammarBuilder*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpGrammarBuilder*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def reset_grammar(this : ISpGrammarBuilder*, new_language : UInt16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset_grammar.call(this, new_language)
+    end
+    def get_rule(this : ISpGrammarBuilder*, pszRuleName : Win32cr::Foundation::PWSTR, dwRuleId : UInt32, dwAttributes : UInt32, fCreateIfNotExist : Win32cr::Foundation::BOOL, phInitialState : Win32cr::Media::Speech::SPSTATEHANDLE__**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_rule.call(this, pszRuleName, dwRuleId, dwAttributes, fCreateIfNotExist, phInitialState)
+    end
+    def clear_rule(this : ISpGrammarBuilder*, hState : Win32cr::Media::Speech::SPSTATEHANDLE__*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear_rule.call(this, hState)
+    end
+    def create_new_state(this : ISpGrammarBuilder*, hState : Win32cr::Media::Speech::SPSTATEHANDLE__*, phState : Win32cr::Media::Speech::SPSTATEHANDLE__**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_new_state.call(this, hState, phState)
+    end
+    def add_word_transition(this : ISpGrammarBuilder*, hFromState : Win32cr::Media::Speech::SPSTATEHANDLE__*, hToState : Win32cr::Media::Speech::SPSTATEHANDLE__*, psz : Win32cr::Foundation::PWSTR, pszSeparators : Win32cr::Foundation::PWSTR, eWordType : Win32cr::Media::Speech::SPGRAMMARWORDTYPE, weight : Float32, pPropInfo : Win32cr::Media::Speech::SPPROPERTYINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_word_transition.call(this, hFromState, hToState, psz, pszSeparators, eWordType, weight, pPropInfo)
+    end
+    def add_rule_transition(this : ISpGrammarBuilder*, hFromState : Win32cr::Media::Speech::SPSTATEHANDLE__*, hToState : Win32cr::Media::Speech::SPSTATEHANDLE__*, hRule : Win32cr::Media::Speech::SPSTATEHANDLE__*, weight : Float32, pPropInfo : Win32cr::Media::Speech::SPPROPERTYINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_rule_transition.call(this, hFromState, hToState, hRule, weight, pPropInfo)
+    end
+    def add_resource(this : ISpGrammarBuilder*, hRuleState : Win32cr::Media::Speech::SPSTATEHANDLE__*, pszResourceName : Win32cr::Foundation::PWSTR, pszResourceValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_resource.call(this, hRuleState, pszResourceName, pszResourceValue)
+    end
+    def commit(this : ISpGrammarBuilder*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this, dwReserved)
+    end
+
+  end
+
+  @[Extern]
+  record ISpRecoGrammarVtbl,
+    query_interface : Proc(ISpRecoGrammar*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpRecoGrammar*, UInt32),
+    release : Proc(ISpRecoGrammar*, UInt32),
+    reset_grammar : Proc(ISpRecoGrammar*, UInt16, Win32cr::Foundation::HRESULT),
+    get_rule : Proc(ISpRecoGrammar*, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::BOOL, Win32cr::Media::Speech::SPSTATEHANDLE__**, Win32cr::Foundation::HRESULT),
+    clear_rule : Proc(ISpRecoGrammar*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Foundation::HRESULT),
+    create_new_state : Proc(ISpRecoGrammar*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Media::Speech::SPSTATEHANDLE__**, Win32cr::Foundation::HRESULT),
+    add_word_transition : Proc(ISpRecoGrammar*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Media::Speech::SPGRAMMARWORDTYPE, Float32, Win32cr::Media::Speech::SPPROPERTYINFO*, Win32cr::Foundation::HRESULT),
+    add_rule_transition : Proc(ISpRecoGrammar*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Float32, Win32cr::Media::Speech::SPPROPERTYINFO*, Win32cr::Foundation::HRESULT),
+    add_resource : Proc(ISpRecoGrammar*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    commit : Proc(ISpRecoGrammar*, UInt32, Win32cr::Foundation::HRESULT),
+    get_grammar_id : Proc(ISpRecoGrammar*, UInt64*, Win32cr::Foundation::HRESULT),
+    get_reco_context : Proc(ISpRecoGrammar*, Void**, Win32cr::Foundation::HRESULT),
+    load_cmd_from_file : Proc(ISpRecoGrammar*, Win32cr::Foundation::PWSTR, Win32cr::Media::Speech::SPLOADOPTIONS, Win32cr::Foundation::HRESULT),
+    load_cmd_from_object : Proc(ISpRecoGrammar*, LibC::GUID*, Win32cr::Foundation::PWSTR, Win32cr::Media::Speech::SPLOADOPTIONS, Win32cr::Foundation::HRESULT),
+    load_cmd_from_resource : Proc(ISpRecoGrammar*, Win32cr::Foundation::HINSTANCE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt16, Win32cr::Media::Speech::SPLOADOPTIONS, Win32cr::Foundation::HRESULT),
+    load_cmd_from_memory : Proc(ISpRecoGrammar*, Win32cr::Media::Speech::SPBINARYGRAMMAR*, Win32cr::Media::Speech::SPLOADOPTIONS, Win32cr::Foundation::HRESULT),
+    load_cmd_from_proprietary_grammar : Proc(ISpRecoGrammar*, LibC::GUID*, Win32cr::Foundation::PWSTR, Void*, UInt32, Win32cr::Media::Speech::SPLOADOPTIONS, Win32cr::Foundation::HRESULT),
+    set_rule_state : Proc(ISpRecoGrammar*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Media::Speech::SPRULESTATE, Win32cr::Foundation::HRESULT),
+    set_rule_id_state : Proc(ISpRecoGrammar*, UInt32, Win32cr::Media::Speech::SPRULESTATE, Win32cr::Foundation::HRESULT),
+    load_dictation : Proc(ISpRecoGrammar*, Win32cr::Foundation::PWSTR, Win32cr::Media::Speech::SPLOADOPTIONS, Win32cr::Foundation::HRESULT),
+    unload_dictation : Proc(ISpRecoGrammar*, Win32cr::Foundation::HRESULT),
+    set_dictation_state : Proc(ISpRecoGrammar*, Win32cr::Media::Speech::SPRULESTATE, Win32cr::Foundation::HRESULT),
+    set_word_sequence_data : Proc(ISpRecoGrammar*, UInt16*, UInt32, Win32cr::Media::Speech::SPTEXTSELECTIONINFO*, Win32cr::Foundation::HRESULT),
+    set_text_selection : Proc(ISpRecoGrammar*, Win32cr::Media::Speech::SPTEXTSELECTIONINFO*, Win32cr::Foundation::HRESULT),
+    is_pronounceable : Proc(ISpRecoGrammar*, Win32cr::Foundation::PWSTR, Win32cr::Media::Speech::SPWORDPRONOUNCEABLE*, Win32cr::Foundation::HRESULT),
+    set_grammar_state : Proc(ISpRecoGrammar*, Win32cr::Media::Speech::SPGRAMMARSTATE, Win32cr::Foundation::HRESULT),
+    save_cmd : Proc(ISpRecoGrammar*, Void*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_grammar_state : Proc(ISpRecoGrammar*, Win32cr::Media::Speech::SPGRAMMARSTATE*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2177db29-7f45-47d0-8554-067e91c80502")]
+  record ISpRecoGrammar, lpVtbl : ISpRecoGrammarVtbl* do
+    GUID = LibC::GUID.new(0x2177db29_u32, 0x7f45_u16, 0x47d0_u16, StaticArray[0x85_u8, 0x54_u8, 0x6_u8, 0x7e_u8, 0x91_u8, 0xc8_u8, 0x5_u8, 0x2_u8])
+    def query_interface(this : ISpRecoGrammar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpRecoGrammar*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpRecoGrammar*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def reset_grammar(this : ISpRecoGrammar*, new_language : UInt16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset_grammar.call(this, new_language)
+    end
+    def get_rule(this : ISpRecoGrammar*, pszRuleName : Win32cr::Foundation::PWSTR, dwRuleId : UInt32, dwAttributes : UInt32, fCreateIfNotExist : Win32cr::Foundation::BOOL, phInitialState : Win32cr::Media::Speech::SPSTATEHANDLE__**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_rule.call(this, pszRuleName, dwRuleId, dwAttributes, fCreateIfNotExist, phInitialState)
+    end
+    def clear_rule(this : ISpRecoGrammar*, hState : Win32cr::Media::Speech::SPSTATEHANDLE__*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear_rule.call(this, hState)
+    end
+    def create_new_state(this : ISpRecoGrammar*, hState : Win32cr::Media::Speech::SPSTATEHANDLE__*, phState : Win32cr::Media::Speech::SPSTATEHANDLE__**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_new_state.call(this, hState, phState)
+    end
+    def add_word_transition(this : ISpRecoGrammar*, hFromState : Win32cr::Media::Speech::SPSTATEHANDLE__*, hToState : Win32cr::Media::Speech::SPSTATEHANDLE__*, psz : Win32cr::Foundation::PWSTR, pszSeparators : Win32cr::Foundation::PWSTR, eWordType : Win32cr::Media::Speech::SPGRAMMARWORDTYPE, weight : Float32, pPropInfo : Win32cr::Media::Speech::SPPROPERTYINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_word_transition.call(this, hFromState, hToState, psz, pszSeparators, eWordType, weight, pPropInfo)
+    end
+    def add_rule_transition(this : ISpRecoGrammar*, hFromState : Win32cr::Media::Speech::SPSTATEHANDLE__*, hToState : Win32cr::Media::Speech::SPSTATEHANDLE__*, hRule : Win32cr::Media::Speech::SPSTATEHANDLE__*, weight : Float32, pPropInfo : Win32cr::Media::Speech::SPPROPERTYINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_rule_transition.call(this, hFromState, hToState, hRule, weight, pPropInfo)
+    end
+    def add_resource(this : ISpRecoGrammar*, hRuleState : Win32cr::Media::Speech::SPSTATEHANDLE__*, pszResourceName : Win32cr::Foundation::PWSTR, pszResourceValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_resource.call(this, hRuleState, pszResourceName, pszResourceValue)
+    end
+    def commit(this : ISpRecoGrammar*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this, dwReserved)
+    end
+    def get_grammar_id(this : ISpRecoGrammar*, pullGrammarId : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_grammar_id.call(this, pullGrammarId)
+    end
+    def get_reco_context(this : ISpRecoGrammar*, ppRecoCtxt : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_reco_context.call(this, ppRecoCtxt)
+    end
+    def load_cmd_from_file(this : ISpRecoGrammar*, pszFileName : Win32cr::Foundation::PWSTR, options : Win32cr::Media::Speech::SPLOADOPTIONS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_cmd_from_file.call(this, pszFileName, options)
+    end
+    def load_cmd_from_object(this : ISpRecoGrammar*, rcid : LibC::GUID*, pszGrammarName : Win32cr::Foundation::PWSTR, options : Win32cr::Media::Speech::SPLOADOPTIONS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_cmd_from_object.call(this, rcid, pszGrammarName, options)
+    end
+    def load_cmd_from_resource(this : ISpRecoGrammar*, hModule : Win32cr::Foundation::HINSTANCE, pszResourceName : Win32cr::Foundation::PWSTR, pszResourceType : Win32cr::Foundation::PWSTR, wLanguage : UInt16, options : Win32cr::Media::Speech::SPLOADOPTIONS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_cmd_from_resource.call(this, hModule, pszResourceName, pszResourceType, wLanguage, options)
+    end
+    def load_cmd_from_memory(this : ISpRecoGrammar*, pGrammar : Win32cr::Media::Speech::SPBINARYGRAMMAR*, options : Win32cr::Media::Speech::SPLOADOPTIONS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_cmd_from_memory.call(this, pGrammar, options)
+    end
+    def load_cmd_from_proprietary_grammar(this : ISpRecoGrammar*, rguidParam : LibC::GUID*, pszStringParam : Win32cr::Foundation::PWSTR, pvDataPrarm : Void*, cbDataSize : UInt32, options : Win32cr::Media::Speech::SPLOADOPTIONS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_cmd_from_proprietary_grammar.call(this, rguidParam, pszStringParam, pvDataPrarm, cbDataSize, options)
+    end
+    def set_rule_state(this : ISpRecoGrammar*, pszName : Win32cr::Foundation::PWSTR, pReserved : Void*, new_state : Win32cr::Media::Speech::SPRULESTATE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_rule_state.call(this, pszName, pReserved, new_state)
+    end
+    def set_rule_id_state(this : ISpRecoGrammar*, ulRuleId : UInt32, new_state : Win32cr::Media::Speech::SPRULESTATE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_rule_id_state.call(this, ulRuleId, new_state)
+    end
+    def load_dictation(this : ISpRecoGrammar*, pszTopicName : Win32cr::Foundation::PWSTR, options : Win32cr::Media::Speech::SPLOADOPTIONS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_dictation.call(this, pszTopicName, options)
+    end
+    def unload_dictation(this : ISpRecoGrammar*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unload_dictation.call(this)
+    end
+    def set_dictation_state(this : ISpRecoGrammar*, new_state : Win32cr::Media::Speech::SPRULESTATE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_dictation_state.call(this, new_state)
+    end
+    def set_word_sequence_data(this : ISpRecoGrammar*, pText : UInt16*, cchText : UInt32, pInfo : Win32cr::Media::Speech::SPTEXTSELECTIONINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_word_sequence_data.call(this, pText, cchText, pInfo)
+    end
+    def set_text_selection(this : ISpRecoGrammar*, pInfo : Win32cr::Media::Speech::SPTEXTSELECTIONINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_text_selection.call(this, pInfo)
+    end
+    def is_pronounceable(this : ISpRecoGrammar*, pszWord : Win32cr::Foundation::PWSTR, pWordPronounceable : Win32cr::Media::Speech::SPWORDPRONOUNCEABLE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_pronounceable.call(this, pszWord, pWordPronounceable)
+    end
+    def set_grammar_state(this : ISpRecoGrammar*, eGrammarState : Win32cr::Media::Speech::SPGRAMMARSTATE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_grammar_state.call(this, eGrammarState)
+    end
+    def save_cmd(this : ISpRecoGrammar*, pStream : Void*, ppszCoMemErrorText : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_cmd.call(this, pStream, ppszCoMemErrorText)
+    end
+    def get_grammar_state(this : ISpRecoGrammar*, peGrammarState : Win32cr::Media::Speech::SPGRAMMARSTATE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_grammar_state.call(this, peGrammarState)
+    end
+
+  end
+
+  @[Extern]
+  record ISpGrammarBuilder2Vtbl,
+    query_interface : Proc(ISpGrammarBuilder2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpGrammarBuilder2*, UInt32),
+    release : Proc(ISpGrammarBuilder2*, UInt32),
+    add_text_subset : Proc(ISpGrammarBuilder2*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Media::Speech::SPSTATEHANDLE__*, Win32cr::Foundation::PWSTR, Win32cr::Media::Speech::SPMATCHINGMODE, Win32cr::Foundation::HRESULT),
+    set_phonetic_alphabet : Proc(ISpGrammarBuilder2*, Win32cr::Media::Speech::PHONETICALPHABET, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("8ab10026-20cc-4b20-8c22-a49c9ba78f60")]
+  record ISpGrammarBuilder2, lpVtbl : ISpGrammarBuilder2Vtbl* do
+    GUID = LibC::GUID.new(0x8ab10026_u32, 0x20cc_u16, 0x4b20_u16, StaticArray[0x8c_u8, 0x22_u8, 0xa4_u8, 0x9c_u8, 0x9b_u8, 0xa7_u8, 0x8f_u8, 0x60_u8])
+    def query_interface(this : ISpGrammarBuilder2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpGrammarBuilder2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpGrammarBuilder2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def add_text_subset(this : ISpGrammarBuilder2*, hFromState : Win32cr::Media::Speech::SPSTATEHANDLE__*, hToState : Win32cr::Media::Speech::SPSTATEHANDLE__*, psz : Win32cr::Foundation::PWSTR, eMatchMode : Win32cr::Media::Speech::SPMATCHINGMODE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_text_subset.call(this, hFromState, hToState, psz, eMatchMode)
+    end
+    def set_phonetic_alphabet(this : ISpGrammarBuilder2*, phoneticALphabet : Win32cr::Media::Speech::PHONETICALPHABET) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_phonetic_alphabet.call(this, phoneticALphabet)
+    end
+
+  end
+
+  @[Extern]
+  record ISpRecoGrammar2Vtbl,
+    query_interface : Proc(ISpRecoGrammar2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpRecoGrammar2*, UInt32),
+    release : Proc(ISpRecoGrammar2*, UInt32),
+    get_rules : Proc(ISpRecoGrammar2*, Win32cr::Media::Speech::SPRULE**, UInt32*, Win32cr::Foundation::HRESULT),
+    load_cmd_from_file2 : Proc(ISpRecoGrammar2*, Win32cr::Foundation::PWSTR, Win32cr::Media::Speech::SPLOADOPTIONS, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    load_cmd_from_memory2 : Proc(ISpRecoGrammar2*, Win32cr::Media::Speech::SPBINARYGRAMMAR*, Win32cr::Media::Speech::SPLOADOPTIONS, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    set_rule_priority : Proc(ISpRecoGrammar2*, Win32cr::Foundation::PWSTR, UInt32, Int32, Win32cr::Foundation::HRESULT),
+    set_rule_weight : Proc(ISpRecoGrammar2*, Win32cr::Foundation::PWSTR, UInt32, Float32, Win32cr::Foundation::HRESULT),
+    set_dictation_weight : Proc(ISpRecoGrammar2*, Float32, Win32cr::Foundation::HRESULT),
+    set_grammar_loader : Proc(ISpRecoGrammar2*, Void*, Win32cr::Foundation::HRESULT),
+    set_sml_security_manager : Proc(ISpRecoGrammar2*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("4b37bc9e-9ed6-44a3-93d3-18f022b79ec3")]
+  record ISpRecoGrammar2, lpVtbl : ISpRecoGrammar2Vtbl* do
+    GUID = LibC::GUID.new(0x4b37bc9e_u32, 0x9ed6_u16, 0x44a3_u16, StaticArray[0x93_u8, 0xd3_u8, 0x18_u8, 0xf0_u8, 0x22_u8, 0xb7_u8, 0x9e_u8, 0xc3_u8])
+    def query_interface(this : ISpRecoGrammar2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpRecoGrammar2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpRecoGrammar2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_rules(this : ISpRecoGrammar2*, ppCoMemRules : Win32cr::Media::Speech::SPRULE**, puNumRules : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_rules.call(this, ppCoMemRules, puNumRules)
+    end
+    def load_cmd_from_file2(this : ISpRecoGrammar2*, pszFileName : Win32cr::Foundation::PWSTR, options : Win32cr::Media::Speech::SPLOADOPTIONS, pszSharingUri : Win32cr::Foundation::PWSTR, pszBaseUri : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_cmd_from_file2.call(this, pszFileName, options, pszSharingUri, pszBaseUri)
+    end
+    def load_cmd_from_memory2(this : ISpRecoGrammar2*, pGrammar : Win32cr::Media::Speech::SPBINARYGRAMMAR*, options : Win32cr::Media::Speech::SPLOADOPTIONS, pszSharingUri : Win32cr::Foundation::PWSTR, pszBaseUri : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_cmd_from_memory2.call(this, pGrammar, options, pszSharingUri, pszBaseUri)
+    end
+    def set_rule_priority(this : ISpRecoGrammar2*, pszRuleName : Win32cr::Foundation::PWSTR, ulRuleId : UInt32, nRulePriority : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_rule_priority.call(this, pszRuleName, ulRuleId, nRulePriority)
+    end
+    def set_rule_weight(this : ISpRecoGrammar2*, pszRuleName : Win32cr::Foundation::PWSTR, ulRuleId : UInt32, flWeight : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_rule_weight.call(this, pszRuleName, ulRuleId, flWeight)
+    end
+    def set_dictation_weight(this : ISpRecoGrammar2*, flWeight : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_dictation_weight.call(this, flWeight)
+    end
+    def set_grammar_loader(this : ISpRecoGrammar2*, pLoader : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_grammar_loader.call(this, pLoader)
+    end
+    def set_sml_security_manager(this : ISpRecoGrammar2*, pSMLSecurityManager : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_sml_security_manager.call(this, pSMLSecurityManager)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechResourceLoaderVtbl,
+    query_interface : Proc(ISpeechResourceLoader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechResourceLoader*, UInt32),
+    release : Proc(ISpeechResourceLoader*, UInt32),
+    get_type_info_count : Proc(ISpeechResourceLoader*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechResourceLoader*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechResourceLoader*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechResourceLoader*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    load_resource : Proc(ISpeechResourceLoader*, Win32cr::Foundation::BSTR, Int16, Void**, Win32cr::Foundation::BSTR*, Int16*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_local_copy : Proc(ISpeechResourceLoader*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    release_local_copy : Proc(ISpeechResourceLoader*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b9ac5783-fcd0-4b21-b119-b4f8da8fd2c3")]
+  record ISpeechResourceLoader, lpVtbl : ISpeechResourceLoaderVtbl* do
+    GUID = LibC::GUID.new(0xb9ac5783_u32, 0xfcd0_u16, 0x4b21_u16, StaticArray[0xb1_u8, 0x19_u8, 0xb4_u8, 0xf8_u8, 0xda_u8, 0x8f_u8, 0xd2_u8, 0xc3_u8])
+    def query_interface(this : ISpeechResourceLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechResourceLoader*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechResourceLoader*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechResourceLoader*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechResourceLoader*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechResourceLoader*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechResourceLoader*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def load_resource(this : ISpeechResourceLoader*, bstrResourceUri : Win32cr::Foundation::BSTR, fAlwaysReload : Int16, pStream : Void**, pbstrMIMEType : Win32cr::Foundation::BSTR*, pfModified : Int16*, pbstrRedirectUrl : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_resource.call(this, bstrResourceUri, fAlwaysReload, pStream, pbstrMIMEType, pfModified, pbstrRedirectUrl)
+    end
+    def get_local_copy(this : ISpeechResourceLoader*, bstrResourceUri : Win32cr::Foundation::BSTR, pbstrLocalPath : Win32cr::Foundation::BSTR*, pbstrMIMEType : Win32cr::Foundation::BSTR*, pbstrRedirectUrl : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_local_copy.call(this, bstrResourceUri, pbstrLocalPath, pbstrMIMEType, pbstrRedirectUrl)
+    end
+    def release_local_copy(this : ISpeechResourceLoader*, pbstrLocalPath : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.release_local_copy.call(this, pbstrLocalPath)
+    end
+
+  end
+
+  @[Extern]
+  record ISpRecoContextVtbl,
+    query_interface : Proc(ISpRecoContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpRecoContext*, UInt32),
+    release : Proc(ISpRecoContext*, UInt32),
+    set_notify_sink : Proc(ISpRecoContext*, Void*, Win32cr::Foundation::HRESULT),
+    set_notify_window_message : Proc(ISpRecoContext*, Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_callback_function : Proc(ISpRecoContext*, Win32cr::Media::Speech::SPNOTIFYCALLBACK*, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_callback_interface : Proc(ISpRecoContext*, Void*, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_notify_win32_event : Proc(ISpRecoContext*, Win32cr::Foundation::HRESULT),
+    wait_for_notify_event : Proc(ISpRecoContext*, UInt32, Win32cr::Foundation::HRESULT),
+    get_notify_event_handle : Proc(ISpRecoContext*, Win32cr::Foundation::HANDLE),
+    set_interest : Proc(ISpRecoContext*, UInt64, UInt64, Win32cr::Foundation::HRESULT),
+    get_events : Proc(ISpRecoContext*, UInt32, Win32cr::Media::Speech::SPEVENT*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_info : Proc(ISpRecoContext*, Win32cr::Media::Speech::SPEVENTSOURCEINFO*, Win32cr::Foundation::HRESULT),
+    get_recognizer : Proc(ISpRecoContext*, Void**, Win32cr::Foundation::HRESULT),
+    create_grammar : Proc(ISpRecoContext*, UInt64, Void**, Win32cr::Foundation::HRESULT),
+    get_status : Proc(ISpRecoContext*, Win32cr::Media::Speech::SPRECOCONTEXTSTATUS*, Win32cr::Foundation::HRESULT),
+    get_max_alternates : Proc(ISpRecoContext*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_max_alternates : Proc(ISpRecoContext*, UInt32, Win32cr::Foundation::HRESULT),
+    set_audio_options : Proc(ISpRecoContext*, Win32cr::Media::Speech::SPAUDIOOPTIONS, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
+    get_audio_options : Proc(ISpRecoContext*, Win32cr::Media::Speech::SPAUDIOOPTIONS*, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    deserialize_result : Proc(ISpRecoContext*, Win32cr::Media::Speech::SPSERIALIZEDRESULT*, Void**, Win32cr::Foundation::HRESULT),
+    bookmark : Proc(ISpRecoContext*, Win32cr::Media::Speech::SPBOOKMARKOPTIONS, UInt64, Win32cr::Foundation::LPARAM, Win32cr::Foundation::HRESULT),
+    set_adaptation_data : Proc(ISpRecoContext*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    pause : Proc(ISpRecoContext*, UInt32, Win32cr::Foundation::HRESULT),
+    resume : Proc(ISpRecoContext*, UInt32, Win32cr::Foundation::HRESULT),
+    set_voice : Proc(ISpRecoContext*, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_voice : Proc(ISpRecoContext*, Void**, Win32cr::Foundation::HRESULT),
+    set_voice_purge_event : Proc(ISpRecoContext*, UInt64, Win32cr::Foundation::HRESULT),
+    get_voice_purge_event : Proc(ISpRecoContext*, UInt64*, Win32cr::Foundation::HRESULT),
+    set_context_state : Proc(ISpRecoContext*, Win32cr::Media::Speech::SPCONTEXTSTATE, Win32cr::Foundation::HRESULT),
+    get_context_state : Proc(ISpRecoContext*, Win32cr::Media::Speech::SPCONTEXTSTATE*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f740a62f-7c15-489e-8234-940a33d9272d")]
+  record ISpRecoContext, lpVtbl : ISpRecoContextVtbl* do
+    GUID = LibC::GUID.new(0xf740a62f_u32, 0x7c15_u16, 0x489e_u16, StaticArray[0x82_u8, 0x34_u8, 0x94_u8, 0xa_u8, 0x33_u8, 0xd9_u8, 0x27_u8, 0x2d_u8])
+    def query_interface(this : ISpRecoContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpRecoContext*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpRecoContext*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_notify_sink(this : ISpRecoContext*, pNotifySink : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_sink.call(this, pNotifySink)
+    end
+    def set_notify_window_message(this : ISpRecoContext*, hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_window_message.call(this, hWnd, msg, wParam, lParam)
+    end
+    def set_notify_callback_function(this : ISpRecoContext*, pfnCallback : Win32cr::Media::Speech::SPNOTIFYCALLBACK*, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_callback_function.call(this, pfnCallback, wParam, lParam)
+    end
+    def set_notify_callback_interface(this : ISpRecoContext*, pSpCallback : Void*, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_callback_interface.call(this, pSpCallback, wParam, lParam)
+    end
+    def set_notify_win32_event(this : ISpRecoContext*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_notify_win32_event.call(this)
+    end
+    def wait_for_notify_event(this : ISpRecoContext*, dwMilliseconds : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.wait_for_notify_event.call(this, dwMilliseconds)
+    end
+    def get_notify_event_handle(this : ISpRecoContext*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.get_notify_event_handle.call(this)
+    end
+    def set_interest(this : ISpRecoContext*, ullEventInterest : UInt64, ullQueuedInterest : UInt64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_interest.call(this, ullEventInterest, ullQueuedInterest)
+    end
+    def get_events(this : ISpRecoContext*, ulCount : UInt32, pEventArray : Win32cr::Media::Speech::SPEVENT*, pulFetched : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_events.call(this, ulCount, pEventArray, pulFetched)
+    end
+    def get_info(this : ISpRecoContext*, pInfo : Win32cr::Media::Speech::SPEVENTSOURCEINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_info.call(this, pInfo)
+    end
+    def get_recognizer(this : ISpRecoContext*, ppRecognizer : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recognizer.call(this, ppRecognizer)
+    end
+    def create_grammar(this : ISpRecoContext*, ullGrammarId : UInt64, ppGrammar : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_grammar.call(this, ullGrammarId, ppGrammar)
+    end
+    def get_status(this : ISpRecoContext*, pStatus : Win32cr::Media::Speech::SPRECOCONTEXTSTATUS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_status.call(this, pStatus)
+    end
+    def get_max_alternates(this : ISpRecoContext*, pcAlternates : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_max_alternates.call(this, pcAlternates)
+    end
+    def set_max_alternates(this : ISpRecoContext*, cAlternates : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_max_alternates.call(this, cAlternates)
+    end
+    def set_audio_options(this : ISpRecoContext*, options : Win32cr::Media::Speech::SPAUDIOOPTIONS, pAudioFormatId : LibC::GUID*, pWaveFormatEx : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_audio_options.call(this, options, pAudioFormatId, pWaveFormatEx)
+    end
+    def get_audio_options(this : ISpRecoContext*, pOptions : Win32cr::Media::Speech::SPAUDIOOPTIONS*, pAudioFormatId : LibC::GUID*, ppCoMemWFEX : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio_options.call(this, pOptions, pAudioFormatId, ppCoMemWFEX)
+    end
+    def deserialize_result(this : ISpRecoContext*, pSerializedResult : Win32cr::Media::Speech::SPSERIALIZEDRESULT*, ppResult : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.deserialize_result.call(this, pSerializedResult, ppResult)
+    end
+    def bookmark(this : ISpRecoContext*, options : Win32cr::Media::Speech::SPBOOKMARKOPTIONS, ullStreamPosition : UInt64, lparamEvent : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.bookmark.call(this, options, ullStreamPosition, lparamEvent)
+    end
+    def set_adaptation_data(this : ISpRecoContext*, pAdaptationData : Win32cr::Foundation::PWSTR, cch : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_adaptation_data.call(this, pAdaptationData, cch)
+    end
+    def pause(this : ISpRecoContext*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pause.call(this, dwReserved)
+    end
+    def resume(this : ISpRecoContext*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.resume.call(this, dwReserved)
+    end
+    def set_voice(this : ISpRecoContext*, pVoice : Void*, fAllowFormatChanges : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_voice.call(this, pVoice, fAllowFormatChanges)
+    end
+    def get_voice(this : ISpRecoContext*, ppVoice : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_voice.call(this, ppVoice)
+    end
+    def set_voice_purge_event(this : ISpRecoContext*, ullEventInterest : UInt64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_voice_purge_event.call(this, ullEventInterest)
+    end
+    def get_voice_purge_event(this : ISpRecoContext*, pullEventInterest : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_voice_purge_event.call(this, pullEventInterest)
+    end
+    def set_context_state(this : ISpRecoContext*, eContextState : Win32cr::Media::Speech::SPCONTEXTSTATE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_context_state.call(this, eContextState)
+    end
+    def get_context_state(this : ISpRecoContext*, peContextState : Win32cr::Media::Speech::SPCONTEXTSTATE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_context_state.call(this, peContextState)
+    end
+
+  end
+
+  @[Extern]
+  record ISpRecoContext2Vtbl,
+    query_interface : Proc(ISpRecoContext2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpRecoContext2*, UInt32),
+    release : Proc(ISpRecoContext2*, UInt32),
+    set_grammar_options : Proc(ISpRecoContext2*, UInt32, Win32cr::Foundation::HRESULT),
+    get_grammar_options : Proc(ISpRecoContext2*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_adaptation_data2 : Proc(ISpRecoContext2*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Media::Speech::SPADAPTATIONRELEVANCE, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("bead311c-52ff-437f-9464-6b21054ca73d")]
+  record ISpRecoContext2, lpVtbl : ISpRecoContext2Vtbl* do
+    GUID = LibC::GUID.new(0xbead311c_u32, 0x52ff_u16, 0x437f_u16, StaticArray[0x94_u8, 0x64_u8, 0x6b_u8, 0x21_u8, 0x5_u8, 0x4c_u8, 0xa7_u8, 0x3d_u8])
+    def query_interface(this : ISpRecoContext2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpRecoContext2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpRecoContext2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_grammar_options(this : ISpRecoContext2*, eGrammarOptions : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_grammar_options.call(this, eGrammarOptions)
+    end
+    def get_grammar_options(this : ISpRecoContext2*, peGrammarOptions : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_grammar_options.call(this, peGrammarOptions)
+    end
+    def set_adaptation_data2(this : ISpRecoContext2*, pAdaptationData : Win32cr::Foundation::PWSTR, cch : UInt32, pTopicName : Win32cr::Foundation::PWSTR, eAdaptationSettings : UInt32, eRelevance : Win32cr::Media::Speech::SPADAPTATIONRELEVANCE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_adaptation_data2.call(this, pAdaptationData, cch, pTopicName, eAdaptationSettings, eRelevance)
+    end
+
+  end
+
+  @[Extern]
+  record ISpPropertiesVtbl,
+    query_interface : Proc(ISpProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpProperties*, UInt32),
+    release : Proc(ISpProperties*, UInt32),
+    set_property_num : Proc(ISpProperties*, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::HRESULT),
+    get_property_num : Proc(ISpProperties*, Win32cr::Foundation::PWSTR, Int32*, Win32cr::Foundation::HRESULT),
+    set_property_string : Proc(ISpProperties*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    get_property_string : Proc(ISpProperties*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("5b4fb971-b115-4de1-ad97-e482e3bf6ee4")]
+  record ISpProperties, lpVtbl : ISpPropertiesVtbl* do
+    GUID = LibC::GUID.new(0x5b4fb971_u32, 0xb115_u16, 0x4de1_u16, StaticArray[0xad_u8, 0x97_u8, 0xe4_u8, 0x82_u8, 0xe3_u8, 0xbf_u8, 0x6e_u8, 0xe4_u8])
+    def query_interface(this : ISpProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpProperties*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpProperties*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_property_num(this : ISpProperties*, pName : Win32cr::Foundation::PWSTR, lValue : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_property_num.call(this, pName, lValue)
+    end
+    def get_property_num(this : ISpProperties*, pName : Win32cr::Foundation::PWSTR, plValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_property_num.call(this, pName, plValue)
+    end
+    def set_property_string(this : ISpProperties*, pName : Win32cr::Foundation::PWSTR, pValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_property_string.call(this, pName, pValue)
+    end
+    def get_property_string(this : ISpProperties*, pName : Win32cr::Foundation::PWSTR, ppCoMemValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_property_string.call(this, pName, ppCoMemValue)
+    end
+
+  end
+
+  @[Extern]
+  record ISpRecognizerVtbl,
+    query_interface : Proc(ISpRecognizer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpRecognizer*, UInt32),
+    release : Proc(ISpRecognizer*, UInt32),
+    set_property_num : Proc(ISpRecognizer*, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::HRESULT),
+    get_property_num : Proc(ISpRecognizer*, Win32cr::Foundation::PWSTR, Int32*, Win32cr::Foundation::HRESULT),
+    set_property_string : Proc(ISpRecognizer*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    get_property_string : Proc(ISpRecognizer*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_recognizer : Proc(ISpRecognizer*, Void*, Win32cr::Foundation::HRESULT),
+    get_recognizer : Proc(ISpRecognizer*, Void**, Win32cr::Foundation::HRESULT),
+    set_input : Proc(ISpRecognizer*, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_input_object_token : Proc(ISpRecognizer*, Void**, Win32cr::Foundation::HRESULT),
+    get_input_stream : Proc(ISpRecognizer*, Void**, Win32cr::Foundation::HRESULT),
+    create_reco_context : Proc(ISpRecognizer*, Void**, Win32cr::Foundation::HRESULT),
+    get_reco_profile : Proc(ISpRecognizer*, Void**, Win32cr::Foundation::HRESULT),
+    set_reco_profile : Proc(ISpRecognizer*, Void*, Win32cr::Foundation::HRESULT),
+    is_shared_instance : Proc(ISpRecognizer*, Win32cr::Foundation::HRESULT),
+    get_reco_state : Proc(ISpRecognizer*, Win32cr::Media::Speech::SPRECOSTATE*, Win32cr::Foundation::HRESULT),
+    set_reco_state : Proc(ISpRecognizer*, Win32cr::Media::Speech::SPRECOSTATE, Win32cr::Foundation::HRESULT),
+    get_status : Proc(ISpRecognizer*, Win32cr::Media::Speech::SPRECOGNIZERSTATUS*, Win32cr::Foundation::HRESULT),
+    get_format : Proc(ISpRecognizer*, Win32cr::Media::Speech::SPWAVEFORMATTYPE, LibC::GUID*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    is_ui_supported : Proc(ISpRecognizer*, Win32cr::Foundation::PWSTR, Void*, UInt32, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    display_ui : Proc(ISpRecognizer*, Win32cr::Foundation::HWND, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    emulate_recognition : Proc(ISpRecognizer*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c2b5f241-daa0-4507-9e16-5a1eaa2b7a5c")]
+  record ISpRecognizer, lpVtbl : ISpRecognizerVtbl* do
+    GUID = LibC::GUID.new(0xc2b5f241_u32, 0xdaa0_u16, 0x4507_u16, StaticArray[0x9e_u8, 0x16_u8, 0x5a_u8, 0x1e_u8, 0xaa_u8, 0x2b_u8, 0x7a_u8, 0x5c_u8])
+    def query_interface(this : ISpRecognizer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpRecognizer*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpRecognizer*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_property_num(this : ISpRecognizer*, pName : Win32cr::Foundation::PWSTR, lValue : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_property_num.call(this, pName, lValue)
+    end
+    def get_property_num(this : ISpRecognizer*, pName : Win32cr::Foundation::PWSTR, plValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_property_num.call(this, pName, plValue)
+    end
+    def set_property_string(this : ISpRecognizer*, pName : Win32cr::Foundation::PWSTR, pValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_property_string.call(this, pName, pValue)
+    end
+    def get_property_string(this : ISpRecognizer*, pName : Win32cr::Foundation::PWSTR, ppCoMemValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_property_string.call(this, pName, ppCoMemValue)
+    end
+    def set_recognizer(this : ISpRecognizer*, pRecognizer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_recognizer.call(this, pRecognizer)
+    end
+    def get_recognizer(this : ISpRecognizer*, ppRecognizer : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recognizer.call(this, ppRecognizer)
+    end
+    def set_input(this : ISpRecognizer*, pUnkInput : Void*, fAllowFormatChanges : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_input.call(this, pUnkInput, fAllowFormatChanges)
+    end
+    def get_input_object_token(this : ISpRecognizer*, ppToken : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_input_object_token.call(this, ppToken)
+    end
+    def get_input_stream(this : ISpRecognizer*, ppStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_input_stream.call(this, ppStream)
+    end
+    def create_reco_context(this : ISpRecognizer*, ppNewCtxt : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_reco_context.call(this, ppNewCtxt)
+    end
+    def get_reco_profile(this : ISpRecognizer*, ppToken : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_reco_profile.call(this, ppToken)
+    end
+    def set_reco_profile(this : ISpRecognizer*, pToken : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_reco_profile.call(this, pToken)
+    end
+    def is_shared_instance(this : ISpRecognizer*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_shared_instance.call(this)
+    end
+    def get_reco_state(this : ISpRecognizer*, pState : Win32cr::Media::Speech::SPRECOSTATE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_reco_state.call(this, pState)
+    end
+    def set_reco_state(this : ISpRecognizer*, new_state : Win32cr::Media::Speech::SPRECOSTATE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_reco_state.call(this, new_state)
+    end
+    def get_status(this : ISpRecognizer*, pStatus : Win32cr::Media::Speech::SPRECOGNIZERSTATUS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_status.call(this, pStatus)
+    end
+    def get_format(this : ISpRecognizer*, wave_format_type : Win32cr::Media::Speech::SPWAVEFORMATTYPE, pFormatId : LibC::GUID*, ppCoMemWFEX : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_format.call(this, wave_format_type, pFormatId, ppCoMemWFEX)
+    end
+    def is_ui_supported(this : ISpRecognizer*, pszTypeOfUI : Win32cr::Foundation::PWSTR, pvExtraData : Void*, cbExtraData : UInt32, pfSupported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_ui_supported.call(this, pszTypeOfUI, pvExtraData, cbExtraData, pfSupported)
+    end
+    def display_ui(this : ISpRecognizer*, hwndParent : Win32cr::Foundation::HWND, pszTitle : Win32cr::Foundation::PWSTR, pszTypeOfUI : Win32cr::Foundation::PWSTR, pvExtraData : Void*, cbExtraData : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.display_ui.call(this, hwndParent, pszTitle, pszTypeOfUI, pvExtraData, cbExtraData)
+    end
+    def emulate_recognition(this : ISpRecognizer*, pPhrase : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.emulate_recognition.call(this, pPhrase)
+    end
+
+  end
+
+  @[Extern]
+  record ISpSerializeStateVtbl,
+    query_interface : Proc(ISpSerializeState*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpSerializeState*, UInt32),
+    release : Proc(ISpSerializeState*, UInt32),
+    get_serialized_state : Proc(ISpSerializeState*, UInt8**, UInt32*, UInt32, Win32cr::Foundation::HRESULT),
+    set_serialized_state : Proc(ISpSerializeState*, UInt8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("21b501a0-0ec7-46c9-92c3-a2bc784c54b9")]
+  record ISpSerializeState, lpVtbl : ISpSerializeStateVtbl* do
+    GUID = LibC::GUID.new(0x21b501a0_u32, 0xec7_u16, 0x46c9_u16, StaticArray[0x92_u8, 0xc3_u8, 0xa2_u8, 0xbc_u8, 0x78_u8, 0x4c_u8, 0x54_u8, 0xb9_u8])
+    def query_interface(this : ISpSerializeState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpSerializeState*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpSerializeState*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_serialized_state(this : ISpSerializeState*, ppbData : UInt8**, pulSize : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_serialized_state.call(this, ppbData, pulSize, dwReserved)
+    end
+    def set_serialized_state(this : ISpSerializeState*, pbData : UInt8*, ulSize : UInt32, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_serialized_state.call(this, pbData, ulSize, dwReserved)
+    end
+
+  end
+
+  @[Extern]
+  record ISpRecognizer2Vtbl,
+    query_interface : Proc(ISpRecognizer2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpRecognizer2*, UInt32),
+    release : Proc(ISpRecognizer2*, UInt32),
+    emulate_recognition_ex : Proc(ISpRecognizer2*, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    set_training_state : Proc(ISpRecognizer2*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    reset_acoustic_model_adaptation : Proc(ISpRecognizer2*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("8fc6d974-c81e-4098-93c5-0147f61ed4d3")]
+  record ISpRecognizer2, lpVtbl : ISpRecognizer2Vtbl* do
+    GUID = LibC::GUID.new(0x8fc6d974_u32, 0xc81e_u16, 0x4098_u16, StaticArray[0x93_u8, 0xc5_u8, 0x1_u8, 0x47_u8, 0xf6_u8, 0x1e_u8, 0xd4_u8, 0xd3_u8])
+    def query_interface(this : ISpRecognizer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpRecognizer2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpRecognizer2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def emulate_recognition_ex(this : ISpRecognizer2*, pPhrase : Void*, dwCompareFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.emulate_recognition_ex.call(this, pPhrase, dwCompareFlags)
+    end
+    def set_training_state(this : ISpRecognizer2*, fDoingTraining : Win32cr::Foundation::BOOL, fAdaptFromTrainingData : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_training_state.call(this, fDoingTraining, fAdaptFromTrainingData)
+    end
+    def reset_acoustic_model_adaptation(this : ISpRecognizer2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset_acoustic_model_adaptation.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ISpEnginePronunciationVtbl,
+    query_interface : Proc(ISpEnginePronunciation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpEnginePronunciation*, UInt32),
+    release : Proc(ISpEnginePronunciation*, UInt32),
+    normalize : Proc(ISpEnginePronunciation*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt16, Win32cr::Media::Speech::SPNORMALIZATIONLIST*, Win32cr::Foundation::HRESULT),
+    get_pronunciations : Proc(ISpEnginePronunciation*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt16, Win32cr::Media::Speech::SPWORDPRONUNCIATIONLIST*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c360ce4b-76d1-4214-ad68-52657d5083da")]
+  record ISpEnginePronunciation, lpVtbl : ISpEnginePronunciationVtbl* do
+    GUID = LibC::GUID.new(0xc360ce4b_u32, 0x76d1_u16, 0x4214_u16, StaticArray[0xad_u8, 0x68_u8, 0x52_u8, 0x65_u8, 0x7d_u8, 0x50_u8, 0x83_u8, 0xda_u8])
+    def query_interface(this : ISpEnginePronunciation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpEnginePronunciation*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpEnginePronunciation*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def normalize(this : ISpEnginePronunciation*, pszWord : Win32cr::Foundation::PWSTR, pszLeftContext : Win32cr::Foundation::PWSTR, pszRightContext : Win32cr::Foundation::PWSTR, lang_id : UInt16, pNormalizationList : Win32cr::Media::Speech::SPNORMALIZATIONLIST*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.normalize.call(this, pszWord, pszLeftContext, pszRightContext, lang_id, pNormalizationList)
+    end
+    def get_pronunciations(this : ISpEnginePronunciation*, pszWord : Win32cr::Foundation::PWSTR, pszLeftContext : Win32cr::Foundation::PWSTR, pszRightContext : Win32cr::Foundation::PWSTR, lang_id : UInt16, pEnginePronunciationList : Win32cr::Media::Speech::SPWORDPRONUNCIATIONLIST*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pronunciations.call(this, pszWord, pszLeftContext, pszRightContext, lang_id, pEnginePronunciationList)
+    end
+
+  end
+
+  @[Extern]
+  record ISpDisplayAlternatesVtbl,
+    query_interface : Proc(ISpDisplayAlternates*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpDisplayAlternates*, UInt32),
+    release : Proc(ISpDisplayAlternates*, UInt32),
+    get_display_alternates : Proc(ISpDisplayAlternates*, Win32cr::Media::Speech::SPDISPLAYPHRASE*, UInt32, Win32cr::Media::Speech::SPDISPLAYPHRASE**, UInt32*, Win32cr::Foundation::HRESULT),
+    set_full_stop_trail_space : Proc(ISpDisplayAlternates*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c8d7c7e2-0dde-44b7-afe3-b0c991fbeb5e")]
+  record ISpDisplayAlternates, lpVtbl : ISpDisplayAlternatesVtbl* do
+    GUID = LibC::GUID.new(0xc8d7c7e2_u32, 0xdde_u16, 0x44b7_u16, StaticArray[0xaf_u8, 0xe3_u8, 0xb0_u8, 0xc9_u8, 0x91_u8, 0xfb_u8, 0xeb_u8, 0x5e_u8])
+    def query_interface(this : ISpDisplayAlternates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpDisplayAlternates*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpDisplayAlternates*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_display_alternates(this : ISpDisplayAlternates*, pPhrase : Win32cr::Media::Speech::SPDISPLAYPHRASE*, cRequestCount : UInt32, ppCoMemPhrases : Win32cr::Media::Speech::SPDISPLAYPHRASE**, pcPhrasesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_display_alternates.call(this, pPhrase, cRequestCount, ppCoMemPhrases, pcPhrasesReturned)
+    end
+    def set_full_stop_trail_space(this : ISpDisplayAlternates*, ulTrailSpace : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_full_stop_trail_space.call(this, ulTrailSpace)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechDataKeyVtbl,
+    query_interface : Proc(ISpeechDataKey*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechDataKey*, UInt32),
+    release : Proc(ISpeechDataKey*, UInt32),
+    get_type_info_count : Proc(ISpeechDataKey*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechDataKey*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechDataKey*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechDataKey*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_binary_value : Proc(ISpeechDataKey*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_binary_value : Proc(ISpeechDataKey*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_string_value : Proc(ISpeechDataKey*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_string_value : Proc(ISpeechDataKey*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    set_long_value : Proc(ISpeechDataKey*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
+    get_long_value : Proc(ISpeechDataKey*, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
+    open_key : Proc(ISpeechDataKey*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_key : Proc(ISpeechDataKey*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    delete_key : Proc(ISpeechDataKey*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    delete_value : Proc(ISpeechDataKey*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    enum_keys : Proc(ISpeechDataKey*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    enum_values : Proc(ISpeechDataKey*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("ce17c09b-4efa-44d5-a4c9-59d9585ab0cd")]
+  record ISpeechDataKey, lpVtbl : ISpeechDataKeyVtbl* do
+    GUID = LibC::GUID.new(0xce17c09b_u32, 0x4efa_u16, 0x44d5_u16, StaticArray[0xa4_u8, 0xc9_u8, 0x59_u8, 0xd9_u8, 0x58_u8, 0x5a_u8, 0xb0_u8, 0xcd_u8])
+    def query_interface(this : ISpeechDataKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechDataKey*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechDataKey*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechDataKey*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechDataKey*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechDataKey*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechDataKey*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def set_binary_value(this : ISpeechDataKey*, value_name : Win32cr::Foundation::BSTR, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_binary_value.call(this, value_name, value)
+    end
+    def get_binary_value(this : ISpeechDataKey*, value_name : Win32cr::Foundation::BSTR, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_binary_value.call(this, value_name, value)
+    end
+    def set_string_value(this : ISpeechDataKey*, value_name : Win32cr::Foundation::BSTR, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_string_value.call(this, value_name, value)
+    end
+    def get_string_value(this : ISpeechDataKey*, value_name : Win32cr::Foundation::BSTR, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_string_value.call(this, value_name, value)
+    end
+    def set_long_value(this : ISpeechDataKey*, value_name : Win32cr::Foundation::BSTR, value : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_long_value.call(this, value_name, value)
+    end
+    def get_long_value(this : ISpeechDataKey*, value_name : Win32cr::Foundation::BSTR, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_long_value.call(this, value_name, value)
+    end
+    def open_key(this : ISpeechDataKey*, sub_key_name : Win32cr::Foundation::BSTR, sub_key : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_key.call(this, sub_key_name, sub_key)
+    end
+    def create_key(this : ISpeechDataKey*, sub_key_name : Win32cr::Foundation::BSTR, sub_key : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_key.call(this, sub_key_name, sub_key)
+    end
+    def delete_key(this : ISpeechDataKey*, sub_key_name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_key.call(this, sub_key_name)
+    end
+    def delete_value(this : ISpeechDataKey*, value_name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_value.call(this, value_name)
+    end
+    def enum_keys(this : ISpeechDataKey*, index : Int32, sub_key_name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_keys.call(this, index, sub_key_name)
+    end
+    def enum_values(this : ISpeechDataKey*, index : Int32, value_name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_values.call(this, index, value_name)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechObjectTokenVtbl,
+    query_interface : Proc(ISpeechObjectToken*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechObjectToken*, UInt32),
+    release : Proc(ISpeechObjectToken*, UInt32),
+    get_type_info_count : Proc(ISpeechObjectToken*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechObjectToken*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechObjectToken*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechObjectToken*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Id : Proc(ISpeechObjectToken*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_DataKey : Proc(ISpeechObjectToken*, Void**, Win32cr::Foundation::HRESULT),
+    get_Category : Proc(ISpeechObjectToken*, Void**, Win32cr::Foundation::HRESULT),
+    get_description : Proc(ISpeechObjectToken*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    set_id : Proc(ISpeechObjectToken*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    get_attribute : Proc(ISpeechObjectToken*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    create_instance : Proc(ISpeechObjectToken*, Void*, Win32cr::Media::Speech::SpeechTokenContext, Void**, Win32cr::Foundation::HRESULT),
+    remove : Proc(ISpeechObjectToken*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_storage_file_name : Proc(ISpeechObjectToken*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Media::Speech::SpeechTokenShellFolder, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    remove_storage_file_name : Proc(ISpeechObjectToken*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    is_ui_supported : Proc(ISpeechObjectToken*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    display_ui : Proc(ISpeechObjectToken*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Void*, Win32cr::Foundation::HRESULT),
+    matches_attributes : Proc(ISpeechObjectToken*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c74a3adc-b727-4500-a84a-b526721c8b8c")]
+  record ISpeechObjectToken, lpVtbl : ISpeechObjectTokenVtbl* do
+    GUID = LibC::GUID.new(0xc74a3adc_u32, 0xb727_u16, 0x4500_u16, StaticArray[0xa8_u8, 0x4a_u8, 0xb5_u8, 0x26_u8, 0x72_u8, 0x1c_u8, 0x8b_u8, 0x8c_u8])
+    def query_interface(this : ISpeechObjectToken*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechObjectToken*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechObjectToken*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechObjectToken*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechObjectToken*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechObjectToken*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechObjectToken*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Id(this : ISpeechObjectToken*, object_id : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Id.call(this, object_id)
+    end
+    def get_DataKey(this : ISpeechObjectToken*, data_key : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataKey.call(this, data_key)
+    end
+    def get_Category(this : ISpeechObjectToken*, category : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Category.call(this, category)
+    end
+    def get_description(this : ISpeechObjectToken*, locale : Int32, description : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_description.call(this, locale, description)
+    end
+    def set_id(this : ISpeechObjectToken*, id : Win32cr::Foundation::BSTR, category_id : Win32cr::Foundation::BSTR, create_if_not_exist : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_id.call(this, id, category_id, create_if_not_exist)
+    end
+    def get_attribute(this : ISpeechObjectToken*, attribute_name : Win32cr::Foundation::BSTR, attribute_value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_attribute.call(this, attribute_name, attribute_value)
+    end
+    def create_instance(this : ISpeechObjectToken*, pUnkOuter : Void*, cls_context : Win32cr::Media::Speech::SpeechTokenContext, object : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_instance.call(this, pUnkOuter, cls_context, object)
+    end
+    def remove(this : ISpeechObjectToken*, object_storage_clsid : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, object_storage_clsid)
+    end
+    def get_storage_file_name(this : ISpeechObjectToken*, object_storage_clsid : Win32cr::Foundation::BSTR, key_name : Win32cr::Foundation::BSTR, file_name : Win32cr::Foundation::BSTR, folder : Win32cr::Media::Speech::SpeechTokenShellFolder, file_path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_storage_file_name.call(this, object_storage_clsid, key_name, file_name, folder, file_path)
+    end
+    def remove_storage_file_name(this : ISpeechObjectToken*, object_storage_clsid : Win32cr::Foundation::BSTR, key_name : Win32cr::Foundation::BSTR, delete_file_a : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_storage_file_name.call(this, object_storage_clsid, key_name, delete_file_a)
+    end
+    def is_ui_supported(this : ISpeechObjectToken*, type_of_ui : Win32cr::Foundation::BSTR, extra_data : Win32cr::System::Com::VARIANT*, object : Void*, supported : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_ui_supported.call(this, type_of_ui, extra_data, object, supported)
+    end
+    def display_ui(this : ISpeechObjectToken*, hWnd : Int32, title : Win32cr::Foundation::BSTR, type_of_ui : Win32cr::Foundation::BSTR, extra_data : Win32cr::System::Com::VARIANT*, object : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.display_ui.call(this, hWnd, title, type_of_ui, extra_data, object)
+    end
+    def matches_attributes(this : ISpeechObjectToken*, attributes : Win32cr::Foundation::BSTR, matches : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.matches_attributes.call(this, attributes, matches)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechObjectTokensVtbl,
+    query_interface : Proc(ISpeechObjectTokens*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechObjectTokens*, UInt32),
+    release : Proc(ISpeechObjectTokens*, UInt32),
+    get_type_info_count : Proc(ISpeechObjectTokens*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechObjectTokens*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechObjectTokens*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechObjectTokens*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ISpeechObjectTokens*, Int32*, Win32cr::Foundation::HRESULT),
+    item : Proc(ISpeechObjectTokens*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ISpeechObjectTokens*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("9285b776-2e7b-4bc0-b53e-580eb6fa967f")]
+  record ISpeechObjectTokens, lpVtbl : ISpeechObjectTokensVtbl* do
+    GUID = LibC::GUID.new(0x9285b776_u32, 0x2e7b_u16, 0x4bc0_u16, StaticArray[0xb5_u8, 0x3e_u8, 0x58_u8, 0xe_u8, 0xb6_u8, 0xfa_u8, 0x96_u8, 0x7f_u8])
+    def query_interface(this : ISpeechObjectTokens*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechObjectTokens*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechObjectTokens*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechObjectTokens*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechObjectTokens*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechObjectTokens*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechObjectTokens*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : ISpeechObjectTokens*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def item(this : ISpeechObjectTokens*, index : Int32, token : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.item.call(this, index, token)
+    end
+    def get__NewEnum(this : ISpeechObjectTokens*, ppEnumVARIANT : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, ppEnumVARIANT)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechObjectTokenCategoryVtbl,
+    query_interface : Proc(ISpeechObjectTokenCategory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechObjectTokenCategory*, UInt32),
+    release : Proc(ISpeechObjectTokenCategory*, UInt32),
+    get_type_info_count : Proc(ISpeechObjectTokenCategory*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechObjectTokenCategory*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechObjectTokenCategory*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechObjectTokenCategory*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Id : Proc(ISpeechObjectTokenCategory*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Default : Proc(ISpeechObjectTokenCategory*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Default : Proc(ISpeechObjectTokenCategory*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    set_id : Proc(ISpeechObjectTokenCategory*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    get_data_key : Proc(ISpeechObjectTokenCategory*, Win32cr::Media::Speech::SpeechDataKeyLocation, Void**, Win32cr::Foundation::HRESULT),
+    enumerate_tokens : Proc(ISpeechObjectTokenCategory*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("ca7eac50-2d01-4145-86d4-5ae7d70f4469")]
+  record ISpeechObjectTokenCategory, lpVtbl : ISpeechObjectTokenCategoryVtbl* do
+    GUID = LibC::GUID.new(0xca7eac50_u32, 0x2d01_u16, 0x4145_u16, StaticArray[0x86_u8, 0xd4_u8, 0x5a_u8, 0xe7_u8, 0xd7_u8, 0xf_u8, 0x44_u8, 0x69_u8])
+    def query_interface(this : ISpeechObjectTokenCategory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechObjectTokenCategory*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechObjectTokenCategory*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechObjectTokenCategory*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechObjectTokenCategory*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechObjectTokenCategory*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechObjectTokenCategory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Id(this : ISpeechObjectTokenCategory*, id : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Id.call(this, id)
+    end
+    def put_Default(this : ISpeechObjectTokenCategory*, token_id : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Default.call(this, token_id)
+    end
+    def get_Default(this : ISpeechObjectTokenCategory*, token_id : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Default.call(this, token_id)
+    end
+    def set_id(this : ISpeechObjectTokenCategory*, id : Win32cr::Foundation::BSTR, create_if_not_exist : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_id.call(this, id, create_if_not_exist)
+    end
+    def get_data_key(this : ISpeechObjectTokenCategory*, location : Win32cr::Media::Speech::SpeechDataKeyLocation, data_key : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data_key.call(this, location, data_key)
+    end
+    def enumerate_tokens(this : ISpeechObjectTokenCategory*, required_attributes : Win32cr::Foundation::BSTR, optional_attributes : Win32cr::Foundation::BSTR, tokens : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enumerate_tokens.call(this, required_attributes, optional_attributes, tokens)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechAudioBufferInfoVtbl,
+    query_interface : Proc(ISpeechAudioBufferInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechAudioBufferInfo*, UInt32),
+    release : Proc(ISpeechAudioBufferInfo*, UInt32),
+    get_type_info_count : Proc(ISpeechAudioBufferInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechAudioBufferInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechAudioBufferInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechAudioBufferInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_MinNotification : Proc(ISpeechAudioBufferInfo*, Int32*, Win32cr::Foundation::HRESULT),
+    put_MinNotification : Proc(ISpeechAudioBufferInfo*, Int32, Win32cr::Foundation::HRESULT),
+    get_BufferSize : Proc(ISpeechAudioBufferInfo*, Int32*, Win32cr::Foundation::HRESULT),
+    put_BufferSize : Proc(ISpeechAudioBufferInfo*, Int32, Win32cr::Foundation::HRESULT),
+    get_EventBias : Proc(ISpeechAudioBufferInfo*, Int32*, Win32cr::Foundation::HRESULT),
+    put_EventBias : Proc(ISpeechAudioBufferInfo*, Int32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("11b103d8-1142-4edf-a093-82fb3915f8cc")]
+  record ISpeechAudioBufferInfo, lpVtbl : ISpeechAudioBufferInfoVtbl* do
+    GUID = LibC::GUID.new(0x11b103d8_u32, 0x1142_u16, 0x4edf_u16, StaticArray[0xa0_u8, 0x93_u8, 0x82_u8, 0xfb_u8, 0x39_u8, 0x15_u8, 0xf8_u8, 0xcc_u8])
+    def query_interface(this : ISpeechAudioBufferInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechAudioBufferInfo*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechAudioBufferInfo*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechAudioBufferInfo*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechAudioBufferInfo*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechAudioBufferInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechAudioBufferInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_MinNotification(this : ISpeechAudioBufferInfo*, min_notification : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MinNotification.call(this, min_notification)
+    end
+    def put_MinNotification(this : ISpeechAudioBufferInfo*, min_notification : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MinNotification.call(this, min_notification)
+    end
+    def get_BufferSize(this : ISpeechAudioBufferInfo*, buffer_size : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BufferSize.call(this, buffer_size)
+    end
+    def put_BufferSize(this : ISpeechAudioBufferInfo*, buffer_size : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BufferSize.call(this, buffer_size)
+    end
+    def get_EventBias(this : ISpeechAudioBufferInfo*, event_bias : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventBias.call(this, event_bias)
+    end
+    def put_EventBias(this : ISpeechAudioBufferInfo*, event_bias : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EventBias.call(this, event_bias)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechAudioStatusVtbl,
+    query_interface : Proc(ISpeechAudioStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechAudioStatus*, UInt32),
+    release : Proc(ISpeechAudioStatus*, UInt32),
+    get_type_info_count : Proc(ISpeechAudioStatus*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechAudioStatus*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechAudioStatus*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechAudioStatus*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_FreeBufferSpace : Proc(ISpeechAudioStatus*, Int32*, Win32cr::Foundation::HRESULT),
+    get_NonBlockingIO : Proc(ISpeechAudioStatus*, Int32*, Win32cr::Foundation::HRESULT),
+    get_State : Proc(ISpeechAudioStatus*, Win32cr::Media::Speech::SpeechAudioState*, Win32cr::Foundation::HRESULT),
+    get_CurrentSeekPosition : Proc(ISpeechAudioStatus*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CurrentDevicePosition : Proc(ISpeechAudioStatus*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c62d9c91-7458-47f6-862d-1ef86fb0b278")]
+  record ISpeechAudioStatus, lpVtbl : ISpeechAudioStatusVtbl* do
+    GUID = LibC::GUID.new(0xc62d9c91_u32, 0x7458_u16, 0x47f6_u16, StaticArray[0x86_u8, 0x2d_u8, 0x1e_u8, 0xf8_u8, 0x6f_u8, 0xb0_u8, 0xb2_u8, 0x78_u8])
+    def query_interface(this : ISpeechAudioStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechAudioStatus*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechAudioStatus*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechAudioStatus*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechAudioStatus*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechAudioStatus*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechAudioStatus*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_FreeBufferSpace(this : ISpeechAudioStatus*, free_buffer_space : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FreeBufferSpace.call(this, free_buffer_space)
+    end
+    def get_NonBlockingIO(this : ISpeechAudioStatus*, non_blocking_io : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NonBlockingIO.call(this, non_blocking_io)
+    end
+    def get_State(this : ISpeechAudioStatus*, state : Win32cr::Media::Speech::SpeechAudioState*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_State.call(this, state)
+    end
+    def get_CurrentSeekPosition(this : ISpeechAudioStatus*, current_seek_position : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentSeekPosition.call(this, current_seek_position)
+    end
+    def get_CurrentDevicePosition(this : ISpeechAudioStatus*, current_device_position : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentDevicePosition.call(this, current_device_position)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechAudioFormatVtbl,
+    query_interface : Proc(ISpeechAudioFormat*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechAudioFormat*, UInt32),
+    release : Proc(ISpeechAudioFormat*, UInt32),
+    get_type_info_count : Proc(ISpeechAudioFormat*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechAudioFormat*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechAudioFormat*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechAudioFormat*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Type : Proc(ISpeechAudioFormat*, Win32cr::Media::Speech::SpeechAudioFormatType*, Win32cr::Foundation::HRESULT),
+    put_Type : Proc(ISpeechAudioFormat*, Win32cr::Media::Speech::SpeechAudioFormatType, Win32cr::Foundation::HRESULT),
+    get_Guid : Proc(ISpeechAudioFormat*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Guid : Proc(ISpeechAudioFormat*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_wave_format_ex : Proc(ISpeechAudioFormat*, Void**, Win32cr::Foundation::HRESULT),
+    set_wave_format_ex : Proc(ISpeechAudioFormat*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("e6e9c590-3e18-40e3-8299-061f98bde7c7")]
+  record ISpeechAudioFormat, lpVtbl : ISpeechAudioFormatVtbl* do
+    GUID = LibC::GUID.new(0xe6e9c590_u32, 0x3e18_u16, 0x40e3_u16, StaticArray[0x82_u8, 0x99_u8, 0x6_u8, 0x1f_u8, 0x98_u8, 0xbd_u8, 0xe7_u8, 0xc7_u8])
+    def query_interface(this : ISpeechAudioFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechAudioFormat*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechAudioFormat*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechAudioFormat*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechAudioFormat*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechAudioFormat*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechAudioFormat*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Type(this : ISpeechAudioFormat*, audio_format : Win32cr::Media::Speech::SpeechAudioFormatType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Type.call(this, audio_format)
+    end
+    def put_Type(this : ISpeechAudioFormat*, audio_format : Win32cr::Media::Speech::SpeechAudioFormatType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Type.call(this, audio_format)
+    end
+    def get_Guid(this : ISpeechAudioFormat*, guid : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Guid.call(this, guid)
+    end
+    def put_Guid(this : ISpeechAudioFormat*, guid : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Guid.call(this, guid)
+    end
+    def get_wave_format_ex(this : ISpeechAudioFormat*, speech_wave_format_ex : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_wave_format_ex.call(this, speech_wave_format_ex)
+    end
+    def set_wave_format_ex(this : ISpeechAudioFormat*, speech_wave_format_ex : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_wave_format_ex.call(this, speech_wave_format_ex)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechWaveFormatExVtbl,
+    query_interface : Proc(ISpeechWaveFormatEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechWaveFormatEx*, UInt32),
+    release : Proc(ISpeechWaveFormatEx*, UInt32),
+    get_type_info_count : Proc(ISpeechWaveFormatEx*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechWaveFormatEx*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechWaveFormatEx*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechWaveFormatEx*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_FormatTag : Proc(ISpeechWaveFormatEx*, Int16*, Win32cr::Foundation::HRESULT),
+    put_FormatTag : Proc(ISpeechWaveFormatEx*, Int16, Win32cr::Foundation::HRESULT),
+    get_Channels : Proc(ISpeechWaveFormatEx*, Int16*, Win32cr::Foundation::HRESULT),
+    put_Channels : Proc(ISpeechWaveFormatEx*, Int16, Win32cr::Foundation::HRESULT),
+    get_SamplesPerSec : Proc(ISpeechWaveFormatEx*, Int32*, Win32cr::Foundation::HRESULT),
+    put_SamplesPerSec : Proc(ISpeechWaveFormatEx*, Int32, Win32cr::Foundation::HRESULT),
+    get_AvgBytesPerSec : Proc(ISpeechWaveFormatEx*, Int32*, Win32cr::Foundation::HRESULT),
+    put_AvgBytesPerSec : Proc(ISpeechWaveFormatEx*, Int32, Win32cr::Foundation::HRESULT),
+    get_BlockAlign : Proc(ISpeechWaveFormatEx*, Int16*, Win32cr::Foundation::HRESULT),
+    put_BlockAlign : Proc(ISpeechWaveFormatEx*, Int16, Win32cr::Foundation::HRESULT),
+    get_BitsPerSample : Proc(ISpeechWaveFormatEx*, Int16*, Win32cr::Foundation::HRESULT),
+    put_BitsPerSample : Proc(ISpeechWaveFormatEx*, Int16, Win32cr::Foundation::HRESULT),
+    get_ExtraData : Proc(ISpeechWaveFormatEx*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_ExtraData : Proc(ISpeechWaveFormatEx*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("7a1ef0d5-1581-4741-88e4-209a49f11a10")]
+  record ISpeechWaveFormatEx, lpVtbl : ISpeechWaveFormatExVtbl* do
+    GUID = LibC::GUID.new(0x7a1ef0d5_u32, 0x1581_u16, 0x4741_u16, StaticArray[0x88_u8, 0xe4_u8, 0x20_u8, 0x9a_u8, 0x49_u8, 0xf1_u8, 0x1a_u8, 0x10_u8])
+    def query_interface(this : ISpeechWaveFormatEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechWaveFormatEx*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechWaveFormatEx*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechWaveFormatEx*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechWaveFormatEx*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechWaveFormatEx*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechWaveFormatEx*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_FormatTag(this : ISpeechWaveFormatEx*, format_tag : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FormatTag.call(this, format_tag)
+    end
+    def put_FormatTag(this : ISpeechWaveFormatEx*, format_tag : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FormatTag.call(this, format_tag)
+    end
+    def get_Channels(this : ISpeechWaveFormatEx*, channels : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Channels.call(this, channels)
+    end
+    def put_Channels(this : ISpeechWaveFormatEx*, channels : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Channels.call(this, channels)
+    end
+    def get_SamplesPerSec(this : ISpeechWaveFormatEx*, samples_per_sec : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SamplesPerSec.call(this, samples_per_sec)
+    end
+    def put_SamplesPerSec(this : ISpeechWaveFormatEx*, samples_per_sec : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SamplesPerSec.call(this, samples_per_sec)
+    end
+    def get_AvgBytesPerSec(this : ISpeechWaveFormatEx*, avg_bytes_per_sec : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AvgBytesPerSec.call(this, avg_bytes_per_sec)
+    end
+    def put_AvgBytesPerSec(this : ISpeechWaveFormatEx*, avg_bytes_per_sec : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_AvgBytesPerSec.call(this, avg_bytes_per_sec)
+    end
+    def get_BlockAlign(this : ISpeechWaveFormatEx*, block_align : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BlockAlign.call(this, block_align)
+    end
+    def put_BlockAlign(this : ISpeechWaveFormatEx*, block_align : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BlockAlign.call(this, block_align)
+    end
+    def get_BitsPerSample(this : ISpeechWaveFormatEx*, bits_per_sample : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BitsPerSample.call(this, bits_per_sample)
+    end
+    def put_BitsPerSample(this : ISpeechWaveFormatEx*, bits_per_sample : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BitsPerSample.call(this, bits_per_sample)
+    end
+    def get_ExtraData(this : ISpeechWaveFormatEx*, extra_data : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ExtraData.call(this, extra_data)
+    end
+    def put_ExtraData(this : ISpeechWaveFormatEx*, extra_data : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ExtraData.call(this, extra_data)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechBaseStreamVtbl,
+    query_interface : Proc(ISpeechBaseStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechBaseStream*, UInt32),
+    release : Proc(ISpeechBaseStream*, UInt32),
+    get_type_info_count : Proc(ISpeechBaseStream*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechBaseStream*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechBaseStream*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechBaseStream*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Format : Proc(ISpeechBaseStream*, Void**, Win32cr::Foundation::HRESULT),
+    putref_Format : Proc(ISpeechBaseStream*, Void*, Win32cr::Foundation::HRESULT),
+    read : Proc(ISpeechBaseStream*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    write : Proc(ISpeechBaseStream*, Win32cr::System::Com::VARIANT, Int32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(ISpeechBaseStream*, Win32cr::System::Com::VARIANT, Win32cr::Media::Speech::SpeechStreamSeekPositionType, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("6450336f-7d49-4ced-8097-49d6dee37294")]
+  record ISpeechBaseStream, lpVtbl : ISpeechBaseStreamVtbl* do
+    GUID = LibC::GUID.new(0x6450336f_u32, 0x7d49_u16, 0x4ced_u16, StaticArray[0x80_u8, 0x97_u8, 0x49_u8, 0xd6_u8, 0xde_u8, 0xe3_u8, 0x72_u8, 0x94_u8])
+    def query_interface(this : ISpeechBaseStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechBaseStream*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechBaseStream*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechBaseStream*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechBaseStream*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechBaseStream*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechBaseStream*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Format(this : ISpeechBaseStream*, audio_format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Format.call(this, audio_format)
+    end
+    def putref_Format(this : ISpeechBaseStream*, audio_format : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_Format.call(this, audio_format)
+    end
+    def read(this : ISpeechBaseStream*, buffer : Win32cr::System::Com::VARIANT*, number_of_bytes : Int32, bytes_read : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, buffer, number_of_bytes, bytes_read)
+    end
+    def write(this : ISpeechBaseStream*, buffer : Win32cr::System::Com::VARIANT, bytes_written : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, buffer, bytes_written)
+    end
+    def seek(this : ISpeechBaseStream*, position : Win32cr::System::Com::VARIANT, origin : Win32cr::Media::Speech::SpeechStreamSeekPositionType, new_position : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, position, origin, new_position)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechFileStreamVtbl,
+    query_interface : Proc(ISpeechFileStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechFileStream*, UInt32),
+    release : Proc(ISpeechFileStream*, UInt32),
+    get_type_info_count : Proc(ISpeechFileStream*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechFileStream*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechFileStream*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechFileStream*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Format : Proc(ISpeechFileStream*, Void**, Win32cr::Foundation::HRESULT),
+    putref_Format : Proc(ISpeechFileStream*, Void*, Win32cr::Foundation::HRESULT),
+    read : Proc(ISpeechFileStream*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    write : Proc(ISpeechFileStream*, Win32cr::System::Com::VARIANT, Int32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(ISpeechFileStream*, Win32cr::System::Com::VARIANT, Win32cr::Media::Speech::SpeechStreamSeekPositionType, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    open : Proc(ISpeechFileStream*, Win32cr::Foundation::BSTR, Win32cr::Media::Speech::SpeechStreamFileMode, Int16, Win32cr::Foundation::HRESULT),
+    close : Proc(ISpeechFileStream*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("af67f125-ab39-4e93-b4a2-cc2e66e182a7")]
+  record ISpeechFileStream, lpVtbl : ISpeechFileStreamVtbl* do
+    GUID = LibC::GUID.new(0xaf67f125_u32, 0xab39_u16, 0x4e93_u16, StaticArray[0xb4_u8, 0xa2_u8, 0xcc_u8, 0x2e_u8, 0x66_u8, 0xe1_u8, 0x82_u8, 0xa7_u8])
+    def query_interface(this : ISpeechFileStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechFileStream*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechFileStream*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechFileStream*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechFileStream*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechFileStream*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechFileStream*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Format(this : ISpeechFileStream*, audio_format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Format.call(this, audio_format)
+    end
+    def putref_Format(this : ISpeechFileStream*, audio_format : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_Format.call(this, audio_format)
+    end
+    def read(this : ISpeechFileStream*, buffer : Win32cr::System::Com::VARIANT*, number_of_bytes : Int32, bytes_read : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, buffer, number_of_bytes, bytes_read)
+    end
+    def write(this : ISpeechFileStream*, buffer : Win32cr::System::Com::VARIANT, bytes_written : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, buffer, bytes_written)
+    end
+    def seek(this : ISpeechFileStream*, position : Win32cr::System::Com::VARIANT, origin : Win32cr::Media::Speech::SpeechStreamSeekPositionType, new_position : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, position, origin, new_position)
+    end
+    def open(this : ISpeechFileStream*, file_name : Win32cr::Foundation::BSTR, file_mode : Win32cr::Media::Speech::SpeechStreamFileMode, do_events : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open.call(this, file_name, file_mode, do_events)
+    end
+    def close(this : ISpeechFileStream*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.close.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechMemoryStreamVtbl,
+    query_interface : Proc(ISpeechMemoryStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechMemoryStream*, UInt32),
+    release : Proc(ISpeechMemoryStream*, UInt32),
+    get_type_info_count : Proc(ISpeechMemoryStream*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechMemoryStream*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechMemoryStream*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechMemoryStream*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Format : Proc(ISpeechMemoryStream*, Void**, Win32cr::Foundation::HRESULT),
+    putref_Format : Proc(ISpeechMemoryStream*, Void*, Win32cr::Foundation::HRESULT),
+    read : Proc(ISpeechMemoryStream*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    write : Proc(ISpeechMemoryStream*, Win32cr::System::Com::VARIANT, Int32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(ISpeechMemoryStream*, Win32cr::System::Com::VARIANT, Win32cr::Media::Speech::SpeechStreamSeekPositionType, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_data : Proc(ISpeechMemoryStream*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_data : Proc(ISpeechMemoryStream*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("eeb14b68-808b-4abe-a5ea-b51da7588008")]
+  record ISpeechMemoryStream, lpVtbl : ISpeechMemoryStreamVtbl* do
+    GUID = LibC::GUID.new(0xeeb14b68_u32, 0x808b_u16, 0x4abe_u16, StaticArray[0xa5_u8, 0xea_u8, 0xb5_u8, 0x1d_u8, 0xa7_u8, 0x58_u8, 0x80_u8, 0x8_u8])
+    def query_interface(this : ISpeechMemoryStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechMemoryStream*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechMemoryStream*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechMemoryStream*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechMemoryStream*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechMemoryStream*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechMemoryStream*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Format(this : ISpeechMemoryStream*, audio_format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Format.call(this, audio_format)
+    end
+    def putref_Format(this : ISpeechMemoryStream*, audio_format : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_Format.call(this, audio_format)
+    end
+    def read(this : ISpeechMemoryStream*, buffer : Win32cr::System::Com::VARIANT*, number_of_bytes : Int32, bytes_read : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, buffer, number_of_bytes, bytes_read)
+    end
+    def write(this : ISpeechMemoryStream*, buffer : Win32cr::System::Com::VARIANT, bytes_written : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, buffer, bytes_written)
+    end
+    def seek(this : ISpeechMemoryStream*, position : Win32cr::System::Com::VARIANT, origin : Win32cr::Media::Speech::SpeechStreamSeekPositionType, new_position : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, position, origin, new_position)
+    end
+    def set_data(this : ISpeechMemoryStream*, data : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_data.call(this, data)
+    end
+    def get_data(this : ISpeechMemoryStream*, pData : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data.call(this, pData)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechCustomStreamVtbl,
+    query_interface : Proc(ISpeechCustomStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechCustomStream*, UInt32),
+    release : Proc(ISpeechCustomStream*, UInt32),
+    get_type_info_count : Proc(ISpeechCustomStream*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechCustomStream*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechCustomStream*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechCustomStream*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Format : Proc(ISpeechCustomStream*, Void**, Win32cr::Foundation::HRESULT),
+    putref_Format : Proc(ISpeechCustomStream*, Void*, Win32cr::Foundation::HRESULT),
+    read : Proc(ISpeechCustomStream*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    write : Proc(ISpeechCustomStream*, Win32cr::System::Com::VARIANT, Int32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(ISpeechCustomStream*, Win32cr::System::Com::VARIANT, Win32cr::Media::Speech::SpeechStreamSeekPositionType, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_BaseStream : Proc(ISpeechCustomStream*, Void**, Win32cr::Foundation::HRESULT),
+    putref_BaseStream : Proc(ISpeechCustomStream*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("1a9e9f4f-104f-4db8-a115-efd7fd0c97ae")]
+  record ISpeechCustomStream, lpVtbl : ISpeechCustomStreamVtbl* do
+    GUID = LibC::GUID.new(0x1a9e9f4f_u32, 0x104f_u16, 0x4db8_u16, StaticArray[0xa1_u8, 0x15_u8, 0xef_u8, 0xd7_u8, 0xfd_u8, 0xc_u8, 0x97_u8, 0xae_u8])
+    def query_interface(this : ISpeechCustomStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechCustomStream*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechCustomStream*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechCustomStream*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechCustomStream*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechCustomStream*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechCustomStream*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Format(this : ISpeechCustomStream*, audio_format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Format.call(this, audio_format)
+    end
+    def putref_Format(this : ISpeechCustomStream*, audio_format : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_Format.call(this, audio_format)
+    end
+    def read(this : ISpeechCustomStream*, buffer : Win32cr::System::Com::VARIANT*, number_of_bytes : Int32, bytes_read : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, buffer, number_of_bytes, bytes_read)
+    end
+    def write(this : ISpeechCustomStream*, buffer : Win32cr::System::Com::VARIANT, bytes_written : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, buffer, bytes_written)
+    end
+    def seek(this : ISpeechCustomStream*, position : Win32cr::System::Com::VARIANT, origin : Win32cr::Media::Speech::SpeechStreamSeekPositionType, new_position : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, position, origin, new_position)
+    end
+    def get_BaseStream(this : ISpeechCustomStream*, ppUnkStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BaseStream.call(this, ppUnkStream)
+    end
+    def putref_BaseStream(this : ISpeechCustomStream*, pUnkStream : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_BaseStream.call(this, pUnkStream)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechAudioVtbl,
+    query_interface : Proc(ISpeechAudio*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechAudio*, UInt32),
+    release : Proc(ISpeechAudio*, UInt32),
+    get_type_info_count : Proc(ISpeechAudio*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechAudio*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechAudio*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechAudio*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Format : Proc(ISpeechAudio*, Void**, Win32cr::Foundation::HRESULT),
+    putref_Format : Proc(ISpeechAudio*, Void*, Win32cr::Foundation::HRESULT),
+    read : Proc(ISpeechAudio*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    write : Proc(ISpeechAudio*, Win32cr::System::Com::VARIANT, Int32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(ISpeechAudio*, Win32cr::System::Com::VARIANT, Win32cr::Media::Speech::SpeechStreamSeekPositionType, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Status : Proc(ISpeechAudio*, Void**, Win32cr::Foundation::HRESULT),
+    get_BufferInfo : Proc(ISpeechAudio*, Void**, Win32cr::Foundation::HRESULT),
+    get_DefaultFormat : Proc(ISpeechAudio*, Void**, Win32cr::Foundation::HRESULT),
+    get_Volume : Proc(ISpeechAudio*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Volume : Proc(ISpeechAudio*, Int32, Win32cr::Foundation::HRESULT),
+    get_BufferNotifySize : Proc(ISpeechAudio*, Int32*, Win32cr::Foundation::HRESULT),
+    put_BufferNotifySize : Proc(ISpeechAudio*, Int32, Win32cr::Foundation::HRESULT),
+    get_EventHandle : Proc(ISpeechAudio*, Int32*, Win32cr::Foundation::HRESULT),
+    set_state : Proc(ISpeechAudio*, Win32cr::Media::Speech::SpeechAudioState, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("cff8e175-019e-11d3-a08e-00c04f8ef9b5")]
+  record ISpeechAudio, lpVtbl : ISpeechAudioVtbl* do
+    GUID = LibC::GUID.new(0xcff8e175_u32, 0x19e_u16, 0x11d3_u16, StaticArray[0xa0_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xf9_u8, 0xb5_u8])
+    def query_interface(this : ISpeechAudio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechAudio*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechAudio*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechAudio*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechAudio*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechAudio*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechAudio*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Format(this : ISpeechAudio*, audio_format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Format.call(this, audio_format)
+    end
+    def putref_Format(this : ISpeechAudio*, audio_format : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_Format.call(this, audio_format)
+    end
+    def read(this : ISpeechAudio*, buffer : Win32cr::System::Com::VARIANT*, number_of_bytes : Int32, bytes_read : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, buffer, number_of_bytes, bytes_read)
+    end
+    def write(this : ISpeechAudio*, buffer : Win32cr::System::Com::VARIANT, bytes_written : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, buffer, bytes_written)
+    end
+    def seek(this : ISpeechAudio*, position : Win32cr::System::Com::VARIANT, origin : Win32cr::Media::Speech::SpeechStreamSeekPositionType, new_position : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, position, origin, new_position)
+    end
+    def get_Status(this : ISpeechAudio*, status : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Status.call(this, status)
+    end
+    def get_BufferInfo(this : ISpeechAudio*, buffer_info : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BufferInfo.call(this, buffer_info)
+    end
+    def get_DefaultFormat(this : ISpeechAudio*, stream_format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DefaultFormat.call(this, stream_format)
+    end
+    def get_Volume(this : ISpeechAudio*, volume : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Volume.call(this, volume)
+    end
+    def put_Volume(this : ISpeechAudio*, volume : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Volume.call(this, volume)
+    end
+    def get_BufferNotifySize(this : ISpeechAudio*, buffer_notify_size : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BufferNotifySize.call(this, buffer_notify_size)
+    end
+    def put_BufferNotifySize(this : ISpeechAudio*, buffer_notify_size : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BufferNotifySize.call(this, buffer_notify_size)
+    end
+    def get_EventHandle(this : ISpeechAudio*, event_handle : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventHandle.call(this, event_handle)
+    end
+    def set_state(this : ISpeechAudio*, state : Win32cr::Media::Speech::SpeechAudioState) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_state.call(this, state)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechMMSysAudioVtbl,
+    query_interface : Proc(ISpeechMMSysAudio*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechMMSysAudio*, UInt32),
+    release : Proc(ISpeechMMSysAudio*, UInt32),
+    get_type_info_count : Proc(ISpeechMMSysAudio*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechMMSysAudio*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechMMSysAudio*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechMMSysAudio*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Format : Proc(ISpeechMMSysAudio*, Void**, Win32cr::Foundation::HRESULT),
+    putref_Format : Proc(ISpeechMMSysAudio*, Void*, Win32cr::Foundation::HRESULT),
+    read : Proc(ISpeechMMSysAudio*, Win32cr::System::Com::VARIANT*, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    write : Proc(ISpeechMMSysAudio*, Win32cr::System::Com::VARIANT, Int32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(ISpeechMMSysAudio*, Win32cr::System::Com::VARIANT, Win32cr::Media::Speech::SpeechStreamSeekPositionType, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Status : Proc(ISpeechMMSysAudio*, Void**, Win32cr::Foundation::HRESULT),
+    get_BufferInfo : Proc(ISpeechMMSysAudio*, Void**, Win32cr::Foundation::HRESULT),
+    get_DefaultFormat : Proc(ISpeechMMSysAudio*, Void**, Win32cr::Foundation::HRESULT),
+    get_Volume : Proc(ISpeechMMSysAudio*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Volume : Proc(ISpeechMMSysAudio*, Int32, Win32cr::Foundation::HRESULT),
+    get_BufferNotifySize : Proc(ISpeechMMSysAudio*, Int32*, Win32cr::Foundation::HRESULT),
+    put_BufferNotifySize : Proc(ISpeechMMSysAudio*, Int32, Win32cr::Foundation::HRESULT),
+    get_EventHandle : Proc(ISpeechMMSysAudio*, Int32*, Win32cr::Foundation::HRESULT),
+    set_state : Proc(ISpeechMMSysAudio*, Win32cr::Media::Speech::SpeechAudioState, Win32cr::Foundation::HRESULT),
+    get_DeviceId : Proc(ISpeechMMSysAudio*, Int32*, Win32cr::Foundation::HRESULT),
+    put_DeviceId : Proc(ISpeechMMSysAudio*, Int32, Win32cr::Foundation::HRESULT),
+    get_LineId : Proc(ISpeechMMSysAudio*, Int32*, Win32cr::Foundation::HRESULT),
+    put_LineId : Proc(ISpeechMMSysAudio*, Int32, Win32cr::Foundation::HRESULT),
+    get_MMHandle : Proc(ISpeechMMSysAudio*, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("3c76af6d-1fd7-4831-81d1-3b71d5a13c44")]
+  record ISpeechMMSysAudio, lpVtbl : ISpeechMMSysAudioVtbl* do
+    GUID = LibC::GUID.new(0x3c76af6d_u32, 0x1fd7_u16, 0x4831_u16, StaticArray[0x81_u8, 0xd1_u8, 0x3b_u8, 0x71_u8, 0xd5_u8, 0xa1_u8, 0x3c_u8, 0x44_u8])
+    def query_interface(this : ISpeechMMSysAudio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechMMSysAudio*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechMMSysAudio*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechMMSysAudio*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechMMSysAudio*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechMMSysAudio*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechMMSysAudio*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Format(this : ISpeechMMSysAudio*, audio_format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Format.call(this, audio_format)
+    end
+    def putref_Format(this : ISpeechMMSysAudio*, audio_format : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_Format.call(this, audio_format)
+    end
+    def read(this : ISpeechMMSysAudio*, buffer : Win32cr::System::Com::VARIANT*, number_of_bytes : Int32, bytes_read : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, buffer, number_of_bytes, bytes_read)
+    end
+    def write(this : ISpeechMMSysAudio*, buffer : Win32cr::System::Com::VARIANT, bytes_written : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, buffer, bytes_written)
+    end
+    def seek(this : ISpeechMMSysAudio*, position : Win32cr::System::Com::VARIANT, origin : Win32cr::Media::Speech::SpeechStreamSeekPositionType, new_position : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, position, origin, new_position)
+    end
+    def get_Status(this : ISpeechMMSysAudio*, status : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Status.call(this, status)
+    end
+    def get_BufferInfo(this : ISpeechMMSysAudio*, buffer_info : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BufferInfo.call(this, buffer_info)
+    end
+    def get_DefaultFormat(this : ISpeechMMSysAudio*, stream_format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DefaultFormat.call(this, stream_format)
+    end
+    def get_Volume(this : ISpeechMMSysAudio*, volume : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Volume.call(this, volume)
+    end
+    def put_Volume(this : ISpeechMMSysAudio*, volume : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Volume.call(this, volume)
+    end
+    def get_BufferNotifySize(this : ISpeechMMSysAudio*, buffer_notify_size : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BufferNotifySize.call(this, buffer_notify_size)
+    end
+    def put_BufferNotifySize(this : ISpeechMMSysAudio*, buffer_notify_size : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BufferNotifySize.call(this, buffer_notify_size)
+    end
+    def get_EventHandle(this : ISpeechMMSysAudio*, event_handle : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventHandle.call(this, event_handle)
+    end
+    def set_state(this : ISpeechMMSysAudio*, state : Win32cr::Media::Speech::SpeechAudioState) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_state.call(this, state)
+    end
+    def get_DeviceId(this : ISpeechMMSysAudio*, device_id : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DeviceId.call(this, device_id)
+    end
+    def put_DeviceId(this : ISpeechMMSysAudio*, device_id : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DeviceId.call(this, device_id)
+    end
+    def get_LineId(this : ISpeechMMSysAudio*, line_id : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LineId.call(this, line_id)
+    end
+    def put_LineId(this : ISpeechMMSysAudio*, line_id : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LineId.call(this, line_id)
+    end
+    def get_MMHandle(this : ISpeechMMSysAudio*, handle : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MMHandle.call(this, handle)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechVoiceVtbl,
+    query_interface : Proc(ISpeechVoice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechVoice*, UInt32),
+    release : Proc(ISpeechVoice*, UInt32),
+    get_type_info_count : Proc(ISpeechVoice*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechVoice*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechVoice*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechVoice*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Status : Proc(ISpeechVoice*, Void**, Win32cr::Foundation::HRESULT),
+    get_Voice : Proc(ISpeechVoice*, Void**, Win32cr::Foundation::HRESULT),
+    putref_Voice : Proc(ISpeechVoice*, Void*, Win32cr::Foundation::HRESULT),
+    get_AudioOutput : Proc(ISpeechVoice*, Void**, Win32cr::Foundation::HRESULT),
+    putref_AudioOutput : Proc(ISpeechVoice*, Void*, Win32cr::Foundation::HRESULT),
+    get_AudioOutputStream : Proc(ISpeechVoice*, Void**, Win32cr::Foundation::HRESULT),
+    putref_AudioOutputStream : Proc(ISpeechVoice*, Void*, Win32cr::Foundation::HRESULT),
+    get_Rate : Proc(ISpeechVoice*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Rate : Proc(ISpeechVoice*, Int32, Win32cr::Foundation::HRESULT),
+    get_Volume : Proc(ISpeechVoice*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Volume : Proc(ISpeechVoice*, Int32, Win32cr::Foundation::HRESULT),
+    put_AllowAudioOutputFormatChangesOnNextSet : Proc(ISpeechVoice*, Int16, Win32cr::Foundation::HRESULT),
+    get_AllowAudioOutputFormatChangesOnNextSet : Proc(ISpeechVoice*, Int16*, Win32cr::Foundation::HRESULT),
+    get_EventInterests : Proc(ISpeechVoice*, Win32cr::Media::Speech::SpeechVoiceEvents*, Win32cr::Foundation::HRESULT),
+    put_EventInterests : Proc(ISpeechVoice*, Win32cr::Media::Speech::SpeechVoiceEvents, Win32cr::Foundation::HRESULT),
+    put_Priority : Proc(ISpeechVoice*, Win32cr::Media::Speech::SpeechVoicePriority, Win32cr::Foundation::HRESULT),
+    get_Priority : Proc(ISpeechVoice*, Win32cr::Media::Speech::SpeechVoicePriority*, Win32cr::Foundation::HRESULT),
+    put_AlertBoundary : Proc(ISpeechVoice*, Win32cr::Media::Speech::SpeechVoiceEvents, Win32cr::Foundation::HRESULT),
+    get_AlertBoundary : Proc(ISpeechVoice*, Win32cr::Media::Speech::SpeechVoiceEvents*, Win32cr::Foundation::HRESULT),
+    put_SynchronousSpeakTimeout : Proc(ISpeechVoice*, Int32, Win32cr::Foundation::HRESULT),
+    get_SynchronousSpeakTimeout : Proc(ISpeechVoice*, Int32*, Win32cr::Foundation::HRESULT),
+    speak : Proc(ISpeechVoice*, Win32cr::Foundation::BSTR, Win32cr::Media::Speech::SpeechVoiceSpeakFlags, Int32*, Win32cr::Foundation::HRESULT),
+    speak_stream : Proc(ISpeechVoice*, Void*, Win32cr::Media::Speech::SpeechVoiceSpeakFlags, Int32*, Win32cr::Foundation::HRESULT),
+    pause : Proc(ISpeechVoice*, Win32cr::Foundation::HRESULT),
+    resume : Proc(ISpeechVoice*, Win32cr::Foundation::HRESULT),
+    skip : Proc(ISpeechVoice*, Win32cr::Foundation::BSTR, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    get_voices : Proc(ISpeechVoice*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_audio_outputs : Proc(ISpeechVoice*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    wait_until_done : Proc(ISpeechVoice*, Int32, Int16*, Win32cr::Foundation::HRESULT),
+    speak_complete_event : Proc(ISpeechVoice*, Int32*, Win32cr::Foundation::HRESULT),
+    is_ui_supported : Proc(ISpeechVoice*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Int16*, Win32cr::Foundation::HRESULT),
+    display_ui : Proc(ISpeechVoice*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("269316d8-57bd-11d2-9eee-00c04f797396")]
+  record ISpeechVoice, lpVtbl : ISpeechVoiceVtbl* do
+    GUID = LibC::GUID.new(0x269316d8_u32, 0x57bd_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xee_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
+    def query_interface(this : ISpeechVoice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechVoice*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechVoice*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechVoice*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechVoice*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechVoice*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechVoice*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Status(this : ISpeechVoice*, status : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Status.call(this, status)
+    end
+    def get_Voice(this : ISpeechVoice*, voice : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Voice.call(this, voice)
+    end
+    def putref_Voice(this : ISpeechVoice*, voice : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_Voice.call(this, voice)
+    end
+    def get_AudioOutput(this : ISpeechVoice*, audio_output : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioOutput.call(this, audio_output)
+    end
+    def putref_AudioOutput(this : ISpeechVoice*, audio_output : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_AudioOutput.call(this, audio_output)
+    end
+    def get_AudioOutputStream(this : ISpeechVoice*, audio_output_stream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioOutputStream.call(this, audio_output_stream)
+    end
+    def putref_AudioOutputStream(this : ISpeechVoice*, audio_output_stream : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_AudioOutputStream.call(this, audio_output_stream)
+    end
+    def get_Rate(this : ISpeechVoice*, rate : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Rate.call(this, rate)
+    end
+    def put_Rate(this : ISpeechVoice*, rate : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Rate.call(this, rate)
+    end
+    def get_Volume(this : ISpeechVoice*, volume : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Volume.call(this, volume)
+    end
+    def put_Volume(this : ISpeechVoice*, volume : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Volume.call(this, volume)
+    end
+    def put_AllowAudioOutputFormatChangesOnNextSet(this : ISpeechVoice*, allow : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_AllowAudioOutputFormatChangesOnNextSet.call(this, allow)
+    end
+    def get_AllowAudioOutputFormatChangesOnNextSet(this : ISpeechVoice*, allow : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AllowAudioOutputFormatChangesOnNextSet.call(this, allow)
+    end
+    def get_EventInterests(this : ISpeechVoice*, event_interest_flags : Win32cr::Media::Speech::SpeechVoiceEvents*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventInterests.call(this, event_interest_flags)
+    end
+    def put_EventInterests(this : ISpeechVoice*, event_interest_flags : Win32cr::Media::Speech::SpeechVoiceEvents) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EventInterests.call(this, event_interest_flags)
+    end
+    def put_Priority(this : ISpeechVoice*, priority : Win32cr::Media::Speech::SpeechVoicePriority) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Priority.call(this, priority)
+    end
+    def get_Priority(this : ISpeechVoice*, priority : Win32cr::Media::Speech::SpeechVoicePriority*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Priority.call(this, priority)
+    end
+    def put_AlertBoundary(this : ISpeechVoice*, boundary : Win32cr::Media::Speech::SpeechVoiceEvents) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_AlertBoundary.call(this, boundary)
+    end
+    def get_AlertBoundary(this : ISpeechVoice*, boundary : Win32cr::Media::Speech::SpeechVoiceEvents*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AlertBoundary.call(this, boundary)
+    end
+    def put_SynchronousSpeakTimeout(this : ISpeechVoice*, msTimeout : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SynchronousSpeakTimeout.call(this, msTimeout)
+    end
+    def get_SynchronousSpeakTimeout(this : ISpeechVoice*, msTimeout : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SynchronousSpeakTimeout.call(this, msTimeout)
+    end
+    def speak(this : ISpeechVoice*, text : Win32cr::Foundation::BSTR, flags : Win32cr::Media::Speech::SpeechVoiceSpeakFlags, stream_number : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.speak.call(this, text, flags, stream_number)
+    end
+    def speak_stream(this : ISpeechVoice*, stream : Void*, flags : Win32cr::Media::Speech::SpeechVoiceSpeakFlags, stream_number : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.speak_stream.call(this, stream, flags, stream_number)
+    end
+    def pause(this : ISpeechVoice*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pause.call(this)
+    end
+    def resume(this : ISpeechVoice*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.resume.call(this)
+    end
+    def skip(this : ISpeechVoice*, type__ : Win32cr::Foundation::BSTR, num_items : Int32, num_skipped : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.skip.call(this, type__, num_items, num_skipped)
+    end
+    def get_voices(this : ISpeechVoice*, required_attributes : Win32cr::Foundation::BSTR, optional_attributes : Win32cr::Foundation::BSTR, object_tokens : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_voices.call(this, required_attributes, optional_attributes, object_tokens)
+    end
+    def get_audio_outputs(this : ISpeechVoice*, required_attributes : Win32cr::Foundation::BSTR, optional_attributes : Win32cr::Foundation::BSTR, object_tokens : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio_outputs.call(this, required_attributes, optional_attributes, object_tokens)
+    end
+    def wait_until_done(this : ISpeechVoice*, msTimeout : Int32, done : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.wait_until_done.call(this, msTimeout, done)
+    end
+    def speak_complete_event(this : ISpeechVoice*, handle : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.speak_complete_event.call(this, handle)
+    end
+    def is_ui_supported(this : ISpeechVoice*, type_of_ui : Win32cr::Foundation::BSTR, extra_data : Win32cr::System::Com::VARIANT*, supported : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_ui_supported.call(this, type_of_ui, extra_data, supported)
+    end
+    def display_ui(this : ISpeechVoice*, hWndParent : Int32, title : Win32cr::Foundation::BSTR, type_of_ui : Win32cr::Foundation::BSTR, extra_data : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.display_ui.call(this, hWndParent, title, type_of_ui, extra_data)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechVoiceStatusVtbl,
+    query_interface : Proc(ISpeechVoiceStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechVoiceStatus*, UInt32),
+    release : Proc(ISpeechVoiceStatus*, UInt32),
+    get_type_info_count : Proc(ISpeechVoiceStatus*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechVoiceStatus*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechVoiceStatus*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechVoiceStatus*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_CurrentStreamNumber : Proc(ISpeechVoiceStatus*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastStreamNumberQueued : Proc(ISpeechVoiceStatus*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastHResult : Proc(ISpeechVoiceStatus*, Int32*, Win32cr::Foundation::HRESULT),
+    get_RunningState : Proc(ISpeechVoiceStatus*, Win32cr::Media::Speech::SpeechRunState*, Win32cr::Foundation::HRESULT),
+    get_InputWordPosition : Proc(ISpeechVoiceStatus*, Int32*, Win32cr::Foundation::HRESULT),
+    get_InputWordLength : Proc(ISpeechVoiceStatus*, Int32*, Win32cr::Foundation::HRESULT),
+    get_InputSentencePosition : Proc(ISpeechVoiceStatus*, Int32*, Win32cr::Foundation::HRESULT),
+    get_InputSentenceLength : Proc(ISpeechVoiceStatus*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastBookmark : Proc(ISpeechVoiceStatus*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_LastBookmarkId : Proc(ISpeechVoiceStatus*, Int32*, Win32cr::Foundation::HRESULT),
+    get_PhonemeId : Proc(ISpeechVoiceStatus*, Int16*, Win32cr::Foundation::HRESULT),
+    get_VisemeId : Proc(ISpeechVoiceStatus*, Int16*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("8be47b07-57f6-11d2-9eee-00c04f797396")]
+  record ISpeechVoiceStatus, lpVtbl : ISpeechVoiceStatusVtbl* do
+    GUID = LibC::GUID.new(0x8be47b07_u32, 0x57f6_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xee_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x73_u8, 0x96_u8])
+    def query_interface(this : ISpeechVoiceStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechVoiceStatus*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechVoiceStatus*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechVoiceStatus*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechVoiceStatus*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechVoiceStatus*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechVoiceStatus*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_CurrentStreamNumber(this : ISpeechVoiceStatus*, stream_number : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentStreamNumber.call(this, stream_number)
+    end
+    def get_LastStreamNumberQueued(this : ISpeechVoiceStatus*, stream_number : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastStreamNumberQueued.call(this, stream_number)
+    end
+    def get_LastHResult(this : ISpeechVoiceStatus*, h_result : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastHResult.call(this, h_result)
+    end
+    def get_RunningState(this : ISpeechVoiceStatus*, state : Win32cr::Media::Speech::SpeechRunState*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RunningState.call(this, state)
+    end
+    def get_InputWordPosition(this : ISpeechVoiceStatus*, position : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_InputWordPosition.call(this, position)
+    end
+    def get_InputWordLength(this : ISpeechVoiceStatus*, length : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_InputWordLength.call(this, length)
+    end
+    def get_InputSentencePosition(this : ISpeechVoiceStatus*, position : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_InputSentencePosition.call(this, position)
+    end
+    def get_InputSentenceLength(this : ISpeechVoiceStatus*, length : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_InputSentenceLength.call(this, length)
+    end
+    def get_LastBookmark(this : ISpeechVoiceStatus*, bookmark : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastBookmark.call(this, bookmark)
+    end
+    def get_LastBookmarkId(this : ISpeechVoiceStatus*, bookmark_id : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastBookmarkId.call(this, bookmark_id)
+    end
+    def get_PhonemeId(this : ISpeechVoiceStatus*, phone_id : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PhonemeId.call(this, phone_id)
+    end
+    def get_VisemeId(this : ISpeechVoiceStatus*, viseme_id : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VisemeId.call(this, viseme_id)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechVoiceEventsVtbl,
+    query_interface : Proc(ISpeechVoiceEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechVoiceEvents*, UInt32),
+    release : Proc(ISpeechVoiceEvents*, UInt32),
+    get_type_info_count : Proc(ISpeechVoiceEvents*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechVoiceEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechVoiceEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechVoiceEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("a372acd1-3bef-4bbd-8ffb-cb3e2b416af8")]
+  record ISpeechVoiceEvents, lpVtbl : ISpeechVoiceEventsVtbl* do
+    GUID = LibC::GUID.new(0xa372acd1_u32, 0x3bef_u16, 0x4bbd_u16, StaticArray[0x8f_u8, 0xfb_u8, 0xcb_u8, 0x3e_u8, 0x2b_u8, 0x41_u8, 0x6a_u8, 0xf8_u8])
+    def query_interface(this : ISpeechVoiceEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechVoiceEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechVoiceEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechVoiceEvents*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechVoiceEvents*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechVoiceEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechVoiceEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechRecognizerVtbl,
+    query_interface : Proc(ISpeechRecognizer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechRecognizer*, UInt32),
+    release : Proc(ISpeechRecognizer*, UInt32),
+    get_type_info_count : Proc(ISpeechRecognizer*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechRecognizer*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechRecognizer*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechRecognizer*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    putref_Recognizer : Proc(ISpeechRecognizer*, Void*, Win32cr::Foundation::HRESULT),
+    get_Recognizer : Proc(ISpeechRecognizer*, Void**, Win32cr::Foundation::HRESULT),
+    put_AllowAudioInputFormatChangesOnNextSet : Proc(ISpeechRecognizer*, Int16, Win32cr::Foundation::HRESULT),
+    get_AllowAudioInputFormatChangesOnNextSet : Proc(ISpeechRecognizer*, Int16*, Win32cr::Foundation::HRESULT),
+    putref_AudioInput : Proc(ISpeechRecognizer*, Void*, Win32cr::Foundation::HRESULT),
+    get_AudioInput : Proc(ISpeechRecognizer*, Void**, Win32cr::Foundation::HRESULT),
+    putref_AudioInputStream : Proc(ISpeechRecognizer*, Void*, Win32cr::Foundation::HRESULT),
+    get_AudioInputStream : Proc(ISpeechRecognizer*, Void**, Win32cr::Foundation::HRESULT),
+    get_IsShared : Proc(ISpeechRecognizer*, Int16*, Win32cr::Foundation::HRESULT),
+    put_State : Proc(ISpeechRecognizer*, Win32cr::Media::Speech::SpeechRecognizerState, Win32cr::Foundation::HRESULT),
+    get_State : Proc(ISpeechRecognizer*, Win32cr::Media::Speech::SpeechRecognizerState*, Win32cr::Foundation::HRESULT),
+    get_Status : Proc(ISpeechRecognizer*, Void**, Win32cr::Foundation::HRESULT),
+    putref_Profile : Proc(ISpeechRecognizer*, Void*, Win32cr::Foundation::HRESULT),
+    get_Profile : Proc(ISpeechRecognizer*, Void**, Win32cr::Foundation::HRESULT),
+    emulate_recognition : Proc(ISpeechRecognizer*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Int32, Win32cr::Foundation::HRESULT),
+    create_reco_context : Proc(ISpeechRecognizer*, Void**, Win32cr::Foundation::HRESULT),
+    get_format : Proc(ISpeechRecognizer*, Win32cr::Media::Speech::SpeechFormatType, Void**, Win32cr::Foundation::HRESULT),
+    set_property_number : Proc(ISpeechRecognizer*, Win32cr::Foundation::BSTR, Int32, Int16*, Win32cr::Foundation::HRESULT),
+    get_property_number : Proc(ISpeechRecognizer*, Win32cr::Foundation::BSTR, Int32*, Int16*, Win32cr::Foundation::HRESULT),
+    set_property_string : Proc(ISpeechRecognizer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    get_property_string : Proc(ISpeechRecognizer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Int16*, Win32cr::Foundation::HRESULT),
+    is_ui_supported : Proc(ISpeechRecognizer*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Int16*, Win32cr::Foundation::HRESULT),
+    display_ui : Proc(ISpeechRecognizer*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_recognizers : Proc(ISpeechRecognizer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_audio_inputs : Proc(ISpeechRecognizer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_profiles : Proc(ISpeechRecognizer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2d5f1c0c-bd75-4b08-9478-3b11fea2586c")]
+  record ISpeechRecognizer, lpVtbl : ISpeechRecognizerVtbl* do
+    GUID = LibC::GUID.new(0x2d5f1c0c_u32, 0xbd75_u16, 0x4b08_u16, StaticArray[0x94_u8, 0x78_u8, 0x3b_u8, 0x11_u8, 0xfe_u8, 0xa2_u8, 0x58_u8, 0x6c_u8])
+    def query_interface(this : ISpeechRecognizer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechRecognizer*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechRecognizer*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechRecognizer*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechRecognizer*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechRecognizer*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechRecognizer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def putref_Recognizer(this : ISpeechRecognizer*, recognizer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_Recognizer.call(this, recognizer)
+    end
+    def get_Recognizer(this : ISpeechRecognizer*, recognizer : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Recognizer.call(this, recognizer)
+    end
+    def put_AllowAudioInputFormatChangesOnNextSet(this : ISpeechRecognizer*, allow : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_AllowAudioInputFormatChangesOnNextSet.call(this, allow)
+    end
+    def get_AllowAudioInputFormatChangesOnNextSet(this : ISpeechRecognizer*, allow : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AllowAudioInputFormatChangesOnNextSet.call(this, allow)
+    end
+    def putref_AudioInput(this : ISpeechRecognizer*, audio_input : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_AudioInput.call(this, audio_input)
+    end
+    def get_AudioInput(this : ISpeechRecognizer*, audio_input : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioInput.call(this, audio_input)
+    end
+    def putref_AudioInputStream(this : ISpeechRecognizer*, audio_input_stream : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_AudioInputStream.call(this, audio_input_stream)
+    end
+    def get_AudioInputStream(this : ISpeechRecognizer*, audio_input_stream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioInputStream.call(this, audio_input_stream)
+    end
+    def get_IsShared(this : ISpeechRecognizer*, shared : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsShared.call(this, shared)
+    end
+    def put_State(this : ISpeechRecognizer*, state : Win32cr::Media::Speech::SpeechRecognizerState) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_State.call(this, state)
+    end
+    def get_State(this : ISpeechRecognizer*, state : Win32cr::Media::Speech::SpeechRecognizerState*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_State.call(this, state)
+    end
+    def get_Status(this : ISpeechRecognizer*, status : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Status.call(this, status)
+    end
+    def putref_Profile(this : ISpeechRecognizer*, profile : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_Profile.call(this, profile)
+    end
+    def get_Profile(this : ISpeechRecognizer*, profile : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Profile.call(this, profile)
+    end
+    def emulate_recognition(this : ISpeechRecognizer*, text_elements : Win32cr::System::Com::VARIANT, element_display_attributes : Win32cr::System::Com::VARIANT*, language_id : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.emulate_recognition.call(this, text_elements, element_display_attributes, language_id)
+    end
+    def create_reco_context(this : ISpeechRecognizer*, new_context : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_reco_context.call(this, new_context)
+    end
+    def get_format(this : ISpeechRecognizer*, type__ : Win32cr::Media::Speech::SpeechFormatType, format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_format.call(this, type__, format)
+    end
+    def set_property_number(this : ISpeechRecognizer*, name : Win32cr::Foundation::BSTR, value : Int32, supported : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_property_number.call(this, name, value, supported)
+    end
+    def get_property_number(this : ISpeechRecognizer*, name : Win32cr::Foundation::BSTR, value : Int32*, supported : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_property_number.call(this, name, value, supported)
+    end
+    def set_property_string(this : ISpeechRecognizer*, name : Win32cr::Foundation::BSTR, value : Win32cr::Foundation::BSTR, supported : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_property_string.call(this, name, value, supported)
+    end
+    def get_property_string(this : ISpeechRecognizer*, name : Win32cr::Foundation::BSTR, value : Win32cr::Foundation::BSTR*, supported : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_property_string.call(this, name, value, supported)
+    end
+    def is_ui_supported(this : ISpeechRecognizer*, type_of_ui : Win32cr::Foundation::BSTR, extra_data : Win32cr::System::Com::VARIANT*, supported : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_ui_supported.call(this, type_of_ui, extra_data, supported)
+    end
+    def display_ui(this : ISpeechRecognizer*, hWndParent : Int32, title : Win32cr::Foundation::BSTR, type_of_ui : Win32cr::Foundation::BSTR, extra_data : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.display_ui.call(this, hWndParent, title, type_of_ui, extra_data)
+    end
+    def get_recognizers(this : ISpeechRecognizer*, required_attributes : Win32cr::Foundation::BSTR, optional_attributes : Win32cr::Foundation::BSTR, object_tokens : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recognizers.call(this, required_attributes, optional_attributes, object_tokens)
+    end
+    def get_audio_inputs(this : ISpeechRecognizer*, required_attributes : Win32cr::Foundation::BSTR, optional_attributes : Win32cr::Foundation::BSTR, object_tokens : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio_inputs.call(this, required_attributes, optional_attributes, object_tokens)
+    end
+    def get_profiles(this : ISpeechRecognizer*, required_attributes : Win32cr::Foundation::BSTR, optional_attributes : Win32cr::Foundation::BSTR, object_tokens : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_profiles.call(this, required_attributes, optional_attributes, object_tokens)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechRecognizerStatusVtbl,
+    query_interface : Proc(ISpeechRecognizerStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechRecognizerStatus*, UInt32),
+    release : Proc(ISpeechRecognizerStatus*, UInt32),
+    get_type_info_count : Proc(ISpeechRecognizerStatus*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechRecognizerStatus*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechRecognizerStatus*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechRecognizerStatus*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_AudioStatus : Proc(ISpeechRecognizerStatus*, Void**, Win32cr::Foundation::HRESULT),
+    get_CurrentStreamPosition : Proc(ISpeechRecognizerStatus*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CurrentStreamNumber : Proc(ISpeechRecognizerStatus*, Int32*, Win32cr::Foundation::HRESULT),
+    get_NumberOfActiveRules : Proc(ISpeechRecognizerStatus*, Int32*, Win32cr::Foundation::HRESULT),
+    get_ClsidEngine : Proc(ISpeechRecognizerStatus*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_SupportedLanguages : Proc(ISpeechRecognizerStatus*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("bff9e781-53ec-484e-bb8a-0e1b5551e35c")]
+  record ISpeechRecognizerStatus, lpVtbl : ISpeechRecognizerStatusVtbl* do
+    GUID = LibC::GUID.new(0xbff9e781_u32, 0x53ec_u16, 0x484e_u16, StaticArray[0xbb_u8, 0x8a_u8, 0xe_u8, 0x1b_u8, 0x55_u8, 0x51_u8, 0xe3_u8, 0x5c_u8])
+    def query_interface(this : ISpeechRecognizerStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechRecognizerStatus*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechRecognizerStatus*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechRecognizerStatus*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechRecognizerStatus*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechRecognizerStatus*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechRecognizerStatus*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_AudioStatus(this : ISpeechRecognizerStatus*, audio_status : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioStatus.call(this, audio_status)
+    end
+    def get_CurrentStreamPosition(this : ISpeechRecognizerStatus*, pCurrentStreamPos : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentStreamPosition.call(this, pCurrentStreamPos)
+    end
+    def get_CurrentStreamNumber(this : ISpeechRecognizerStatus*, stream_number : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentStreamNumber.call(this, stream_number)
+    end
+    def get_NumberOfActiveRules(this : ISpeechRecognizerStatus*, number_of_active_rules : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NumberOfActiveRules.call(this, number_of_active_rules)
+    end
+    def get_ClsidEngine(this : ISpeechRecognizerStatus*, clsid_engine : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ClsidEngine.call(this, clsid_engine)
+    end
+    def get_SupportedLanguages(this : ISpeechRecognizerStatus*, supported_languages : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedLanguages.call(this, supported_languages)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechRecoContextVtbl,
+    query_interface : Proc(ISpeechRecoContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechRecoContext*, UInt32),
+    release : Proc(ISpeechRecoContext*, UInt32),
+    get_type_info_count : Proc(ISpeechRecoContext*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechRecoContext*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechRecoContext*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechRecoContext*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Recognizer : Proc(ISpeechRecoContext*, Void**, Win32cr::Foundation::HRESULT),
+    get_AudioInputInterferenceStatus : Proc(ISpeechRecoContext*, Win32cr::Media::Speech::SpeechInterference*, Win32cr::Foundation::HRESULT),
+    get_RequestedUIType : Proc(ISpeechRecoContext*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    putref_Voice : Proc(ISpeechRecoContext*, Void*, Win32cr::Foundation::HRESULT),
+    get_Voice : Proc(ISpeechRecoContext*, Void**, Win32cr::Foundation::HRESULT),
+    put_AllowVoiceFormatMatchingOnNextSet : Proc(ISpeechRecoContext*, Int16, Win32cr::Foundation::HRESULT),
+    get_AllowVoiceFormatMatchingOnNextSet : Proc(ISpeechRecoContext*, Int16*, Win32cr::Foundation::HRESULT),
+    put_VoicePurgeEvent : Proc(ISpeechRecoContext*, Win32cr::Media::Speech::SpeechRecoEvents, Win32cr::Foundation::HRESULT),
+    get_VoicePurgeEvent : Proc(ISpeechRecoContext*, Win32cr::Media::Speech::SpeechRecoEvents*, Win32cr::Foundation::HRESULT),
+    put_EventInterests : Proc(ISpeechRecoContext*, Win32cr::Media::Speech::SpeechRecoEvents, Win32cr::Foundation::HRESULT),
+    get_EventInterests : Proc(ISpeechRecoContext*, Win32cr::Media::Speech::SpeechRecoEvents*, Win32cr::Foundation::HRESULT),
+    put_CmdMaxAlternates : Proc(ISpeechRecoContext*, Int32, Win32cr::Foundation::HRESULT),
+    get_CmdMaxAlternates : Proc(ISpeechRecoContext*, Int32*, Win32cr::Foundation::HRESULT),
+    put_State : Proc(ISpeechRecoContext*, Win32cr::Media::Speech::SpeechRecoContextState, Win32cr::Foundation::HRESULT),
+    get_State : Proc(ISpeechRecoContext*, Win32cr::Media::Speech::SpeechRecoContextState*, Win32cr::Foundation::HRESULT),
+    put_RetainedAudio : Proc(ISpeechRecoContext*, Win32cr::Media::Speech::SpeechRetainedAudioOptions, Win32cr::Foundation::HRESULT),
+    get_RetainedAudio : Proc(ISpeechRecoContext*, Win32cr::Media::Speech::SpeechRetainedAudioOptions*, Win32cr::Foundation::HRESULT),
+    putref_RetainedAudioFormat : Proc(ISpeechRecoContext*, Void*, Win32cr::Foundation::HRESULT),
+    get_RetainedAudioFormat : Proc(ISpeechRecoContext*, Void**, Win32cr::Foundation::HRESULT),
+    pause : Proc(ISpeechRecoContext*, Win32cr::Foundation::HRESULT),
+    resume : Proc(ISpeechRecoContext*, Win32cr::Foundation::HRESULT),
+    create_grammar : Proc(ISpeechRecoContext*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_result_from_memory : Proc(ISpeechRecoContext*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    bookmark : Proc(ISpeechRecoContext*, Win32cr::Media::Speech::SpeechBookmarkOptions, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    set_adaptation_data : Proc(ISpeechRecoContext*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("580aa49d-7e1e-4809-b8e2-57da806104b8")]
+  record ISpeechRecoContext, lpVtbl : ISpeechRecoContextVtbl* do
+    GUID = LibC::GUID.new(0x580aa49d_u32, 0x7e1e_u16, 0x4809_u16, StaticArray[0xb8_u8, 0xe2_u8, 0x57_u8, 0xda_u8, 0x80_u8, 0x61_u8, 0x4_u8, 0xb8_u8])
+    def query_interface(this : ISpeechRecoContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechRecoContext*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechRecoContext*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechRecoContext*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechRecoContext*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechRecoContext*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechRecoContext*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Recognizer(this : ISpeechRecoContext*, recognizer : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Recognizer.call(this, recognizer)
+    end
+    def get_AudioInputInterferenceStatus(this : ISpeechRecoContext*, interference : Win32cr::Media::Speech::SpeechInterference*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioInputInterferenceStatus.call(this, interference)
+    end
+    def get_RequestedUIType(this : ISpeechRecoContext*, ui_type : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RequestedUIType.call(this, ui_type)
+    end
+    def putref_Voice(this : ISpeechRecoContext*, voice : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_Voice.call(this, voice)
+    end
+    def get_Voice(this : ISpeechRecoContext*, voice : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Voice.call(this, voice)
+    end
+    def put_AllowVoiceFormatMatchingOnNextSet(this : ISpeechRecoContext*, allow : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_AllowVoiceFormatMatchingOnNextSet.call(this, allow)
+    end
+    def get_AllowVoiceFormatMatchingOnNextSet(this : ISpeechRecoContext*, pAllow : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AllowVoiceFormatMatchingOnNextSet.call(this, pAllow)
+    end
+    def put_VoicePurgeEvent(this : ISpeechRecoContext*, event_interest : Win32cr::Media::Speech::SpeechRecoEvents) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_VoicePurgeEvent.call(this, event_interest)
+    end
+    def get_VoicePurgeEvent(this : ISpeechRecoContext*, event_interest : Win32cr::Media::Speech::SpeechRecoEvents*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VoicePurgeEvent.call(this, event_interest)
+    end
+    def put_EventInterests(this : ISpeechRecoContext*, event_interest : Win32cr::Media::Speech::SpeechRecoEvents) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EventInterests.call(this, event_interest)
+    end
+    def get_EventInterests(this : ISpeechRecoContext*, event_interest : Win32cr::Media::Speech::SpeechRecoEvents*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventInterests.call(this, event_interest)
+    end
+    def put_CmdMaxAlternates(this : ISpeechRecoContext*, max_alternates : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_CmdMaxAlternates.call(this, max_alternates)
+    end
+    def get_CmdMaxAlternates(this : ISpeechRecoContext*, max_alternates : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CmdMaxAlternates.call(this, max_alternates)
+    end
+    def put_State(this : ISpeechRecoContext*, state : Win32cr::Media::Speech::SpeechRecoContextState) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_State.call(this, state)
+    end
+    def get_State(this : ISpeechRecoContext*, state : Win32cr::Media::Speech::SpeechRecoContextState*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_State.call(this, state)
+    end
+    def put_RetainedAudio(this : ISpeechRecoContext*, option : Win32cr::Media::Speech::SpeechRetainedAudioOptions) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_RetainedAudio.call(this, option)
+    end
+    def get_RetainedAudio(this : ISpeechRecoContext*, option : Win32cr::Media::Speech::SpeechRetainedAudioOptions*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RetainedAudio.call(this, option)
+    end
+    def putref_RetainedAudioFormat(this : ISpeechRecoContext*, format : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_RetainedAudioFormat.call(this, format)
+    end
+    def get_RetainedAudioFormat(this : ISpeechRecoContext*, format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RetainedAudioFormat.call(this, format)
+    end
+    def pause(this : ISpeechRecoContext*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pause.call(this)
+    end
+    def resume(this : ISpeechRecoContext*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.resume.call(this)
+    end
+    def create_grammar(this : ISpeechRecoContext*, grammar_id : Win32cr::System::Com::VARIANT, grammar : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_grammar.call(this, grammar_id, grammar)
+    end
+    def create_result_from_memory(this : ISpeechRecoContext*, result_block : Win32cr::System::Com::VARIANT*, result : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_result_from_memory.call(this, result_block, result)
+    end
+    def bookmark(this : ISpeechRecoContext*, options : Win32cr::Media::Speech::SpeechBookmarkOptions, stream_pos : Win32cr::System::Com::VARIANT, bookmark_id : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.bookmark.call(this, options, stream_pos, bookmark_id)
+    end
+    def set_adaptation_data(this : ISpeechRecoContext*, adaptation_string : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_adaptation_data.call(this, adaptation_string)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechRecoGrammarVtbl,
+    query_interface : Proc(ISpeechRecoGrammar*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechRecoGrammar*, UInt32),
+    release : Proc(ISpeechRecoGrammar*, UInt32),
+    get_type_info_count : Proc(ISpeechRecoGrammar*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechRecoGrammar*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechRecoGrammar*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechRecoGrammar*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Id : Proc(ISpeechRecoGrammar*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_RecoContext : Proc(ISpeechRecoGrammar*, Void**, Win32cr::Foundation::HRESULT),
+    put_State : Proc(ISpeechRecoGrammar*, Win32cr::Media::Speech::SpeechGrammarState, Win32cr::Foundation::HRESULT),
+    get_State : Proc(ISpeechRecoGrammar*, Win32cr::Media::Speech::SpeechGrammarState*, Win32cr::Foundation::HRESULT),
+    get_Rules : Proc(ISpeechRecoGrammar*, Void**, Win32cr::Foundation::HRESULT),
+    reset : Proc(ISpeechRecoGrammar*, Int32, Win32cr::Foundation::HRESULT),
+    cmd_load_from_file : Proc(ISpeechRecoGrammar*, Win32cr::Foundation::BSTR, Win32cr::Media::Speech::SpeechLoadOption, Win32cr::Foundation::HRESULT),
+    cmd_load_from_object : Proc(ISpeechRecoGrammar*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Media::Speech::SpeechLoadOption, Win32cr::Foundation::HRESULT),
+    cmd_load_from_resource : Proc(ISpeechRecoGrammar*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Int32, Win32cr::Media::Speech::SpeechLoadOption, Win32cr::Foundation::HRESULT),
+    cmd_load_from_memory : Proc(ISpeechRecoGrammar*, Win32cr::System::Com::VARIANT, Win32cr::Media::Speech::SpeechLoadOption, Win32cr::Foundation::HRESULT),
+    cmd_load_from_proprietary_grammar : Proc(ISpeechRecoGrammar*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Media::Speech::SpeechLoadOption, Win32cr::Foundation::HRESULT),
+    cmd_set_rule_state : Proc(ISpeechRecoGrammar*, Win32cr::Foundation::BSTR, Win32cr::Media::Speech::SpeechRuleState, Win32cr::Foundation::HRESULT),
+    cmd_set_rule_id_state : Proc(ISpeechRecoGrammar*, Int32, Win32cr::Media::Speech::SpeechRuleState, Win32cr::Foundation::HRESULT),
+    dictation_load : Proc(ISpeechRecoGrammar*, Win32cr::Foundation::BSTR, Win32cr::Media::Speech::SpeechLoadOption, Win32cr::Foundation::HRESULT),
+    dictation_unload : Proc(ISpeechRecoGrammar*, Win32cr::Foundation::HRESULT),
+    dictation_set_state : Proc(ISpeechRecoGrammar*, Win32cr::Media::Speech::SpeechRuleState, Win32cr::Foundation::HRESULT),
+    set_word_sequence_data : Proc(ISpeechRecoGrammar*, Win32cr::Foundation::BSTR, Int32, Void*, Win32cr::Foundation::HRESULT),
+    set_text_selection : Proc(ISpeechRecoGrammar*, Void*, Win32cr::Foundation::HRESULT),
+    is_pronounceable : Proc(ISpeechRecoGrammar*, Win32cr::Foundation::BSTR, Win32cr::Media::Speech::SpeechWordPronounceable*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b6d6f79f-2158-4e50-b5bc-9a9ccd852a09")]
+  record ISpeechRecoGrammar, lpVtbl : ISpeechRecoGrammarVtbl* do
+    GUID = LibC::GUID.new(0xb6d6f79f_u32, 0x2158_u16, 0x4e50_u16, StaticArray[0xb5_u8, 0xbc_u8, 0x9a_u8, 0x9c_u8, 0xcd_u8, 0x85_u8, 0x2a_u8, 0x9_u8])
+    def query_interface(this : ISpeechRecoGrammar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechRecoGrammar*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechRecoGrammar*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechRecoGrammar*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechRecoGrammar*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechRecoGrammar*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechRecoGrammar*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Id(this : ISpeechRecoGrammar*, id : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Id.call(this, id)
+    end
+    def get_RecoContext(this : ISpeechRecoGrammar*, reco_context : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RecoContext.call(this, reco_context)
+    end
+    def put_State(this : ISpeechRecoGrammar*, state : Win32cr::Media::Speech::SpeechGrammarState) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_State.call(this, state)
+    end
+    def get_State(this : ISpeechRecoGrammar*, state : Win32cr::Media::Speech::SpeechGrammarState*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_State.call(this, state)
+    end
+    def get_Rules(this : ISpeechRecoGrammar*, rules : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Rules.call(this, rules)
+    end
+    def reset(this : ISpeechRecoGrammar*, new_language : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this, new_language)
+    end
+    def cmd_load_from_file(this : ISpeechRecoGrammar*, file_name : Win32cr::Foundation::BSTR, load_option : Win32cr::Media::Speech::SpeechLoadOption) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cmd_load_from_file.call(this, file_name, load_option)
+    end
+    def cmd_load_from_object(this : ISpeechRecoGrammar*, class_id : Win32cr::Foundation::BSTR, grammar_name : Win32cr::Foundation::BSTR, load_option : Win32cr::Media::Speech::SpeechLoadOption) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cmd_load_from_object.call(this, class_id, grammar_name, load_option)
+    end
+    def cmd_load_from_resource(this : ISpeechRecoGrammar*, hModule : Int32, resource_name : Win32cr::System::Com::VARIANT, resource_type : Win32cr::System::Com::VARIANT, language_id : Int32, load_option : Win32cr::Media::Speech::SpeechLoadOption) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cmd_load_from_resource.call(this, hModule, resource_name, resource_type, language_id, load_option)
+    end
+    def cmd_load_from_memory(this : ISpeechRecoGrammar*, grammar_data : Win32cr::System::Com::VARIANT, load_option : Win32cr::Media::Speech::SpeechLoadOption) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cmd_load_from_memory.call(this, grammar_data, load_option)
+    end
+    def cmd_load_from_proprietary_grammar(this : ISpeechRecoGrammar*, proprietary_guid : Win32cr::Foundation::BSTR, proprietary_string : Win32cr::Foundation::BSTR, proprietary_data : Win32cr::System::Com::VARIANT, load_option : Win32cr::Media::Speech::SpeechLoadOption) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cmd_load_from_proprietary_grammar.call(this, proprietary_guid, proprietary_string, proprietary_data, load_option)
+    end
+    def cmd_set_rule_state(this : ISpeechRecoGrammar*, name : Win32cr::Foundation::BSTR, state : Win32cr::Media::Speech::SpeechRuleState) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cmd_set_rule_state.call(this, name, state)
+    end
+    def cmd_set_rule_id_state(this : ISpeechRecoGrammar*, rule_id : Int32, state : Win32cr::Media::Speech::SpeechRuleState) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cmd_set_rule_id_state.call(this, rule_id, state)
+    end
+    def dictation_load(this : ISpeechRecoGrammar*, topic_name : Win32cr::Foundation::BSTR, load_option : Win32cr::Media::Speech::SpeechLoadOption) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.dictation_load.call(this, topic_name, load_option)
+    end
+    def dictation_unload(this : ISpeechRecoGrammar*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.dictation_unload.call(this)
+    end
+    def dictation_set_state(this : ISpeechRecoGrammar*, state : Win32cr::Media::Speech::SpeechRuleState) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.dictation_set_state.call(this, state)
+    end
+    def set_word_sequence_data(this : ISpeechRecoGrammar*, text : Win32cr::Foundation::BSTR, text_length : Int32, info : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_word_sequence_data.call(this, text, text_length, info)
+    end
+    def set_text_selection(this : ISpeechRecoGrammar*, info : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_text_selection.call(this, info)
+    end
+    def is_pronounceable(this : ISpeechRecoGrammar*, word : Win32cr::Foundation::BSTR, word_pronounceable : Win32cr::Media::Speech::SpeechWordPronounceable*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_pronounceable.call(this, word, word_pronounceable)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechRecoContextEventsVtbl,
+    query_interface : Proc(ISpeechRecoContextEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechRecoContextEvents*, UInt32),
+    release : Proc(ISpeechRecoContextEvents*, UInt32),
+    get_type_info_count : Proc(ISpeechRecoContextEvents*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechRecoContextEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechRecoContextEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechRecoContextEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("7b8fcb42-0e9d-4f00-a048-7b04d6179d3d")]
+  record ISpeechRecoContextEvents, lpVtbl : ISpeechRecoContextEventsVtbl* do
+    GUID = LibC::GUID.new(0x7b8fcb42_u32, 0xe9d_u16, 0x4f00_u16, StaticArray[0xa0_u8, 0x48_u8, 0x7b_u8, 0x4_u8, 0xd6_u8, 0x17_u8, 0x9d_u8, 0x3d_u8])
+    def query_interface(this : ISpeechRecoContextEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechRecoContextEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechRecoContextEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechRecoContextEvents*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechRecoContextEvents*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechRecoContextEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechRecoContextEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechGrammarRuleVtbl,
+    query_interface : Proc(ISpeechGrammarRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechGrammarRule*, UInt32),
+    release : Proc(ISpeechGrammarRule*, UInt32),
+    get_type_info_count : Proc(ISpeechGrammarRule*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechGrammarRule*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechGrammarRule*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechGrammarRule*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Attributes : Proc(ISpeechGrammarRule*, Win32cr::Media::Speech::SpeechRuleAttributes*, Win32cr::Foundation::HRESULT),
+    get_InitialState : Proc(ISpeechGrammarRule*, Void**, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(ISpeechGrammarRule*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Id : Proc(ISpeechGrammarRule*, Int32*, Win32cr::Foundation::HRESULT),
+    clear : Proc(ISpeechGrammarRule*, Win32cr::Foundation::HRESULT),
+    add_resource : Proc(ISpeechGrammarRule*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    add_state : Proc(ISpeechGrammarRule*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("afe719cf-5dd1-44f2-999c-7a399f1cfccc")]
+  record ISpeechGrammarRule, lpVtbl : ISpeechGrammarRuleVtbl* do
+    GUID = LibC::GUID.new(0xafe719cf_u32, 0x5dd1_u16, 0x44f2_u16, StaticArray[0x99_u8, 0x9c_u8, 0x7a_u8, 0x39_u8, 0x9f_u8, 0x1c_u8, 0xfc_u8, 0xcc_u8])
+    def query_interface(this : ISpeechGrammarRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechGrammarRule*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechGrammarRule*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechGrammarRule*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechGrammarRule*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechGrammarRule*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechGrammarRule*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Attributes(this : ISpeechGrammarRule*, attributes : Win32cr::Media::Speech::SpeechRuleAttributes*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Attributes.call(this, attributes)
+    end
+    def get_InitialState(this : ISpeechGrammarRule*, state : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_InitialState.call(this, state)
+    end
+    def get_Name(this : ISpeechGrammarRule*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, name)
+    end
+    def get_Id(this : ISpeechGrammarRule*, id : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Id.call(this, id)
+    end
+    def clear(this : ISpeechGrammarRule*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear.call(this)
+    end
+    def add_resource(this : ISpeechGrammarRule*, resource_name : Win32cr::Foundation::BSTR, resource_value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_resource.call(this, resource_name, resource_value)
+    end
+    def add_state(this : ISpeechGrammarRule*, state : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_state.call(this, state)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechGrammarRulesVtbl,
+    query_interface : Proc(ISpeechGrammarRules*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechGrammarRules*, UInt32),
+    release : Proc(ISpeechGrammarRules*, UInt32),
+    get_type_info_count : Proc(ISpeechGrammarRules*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechGrammarRules*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechGrammarRules*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechGrammarRules*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ISpeechGrammarRules*, Int32*, Win32cr::Foundation::HRESULT),
+    find_rule : Proc(ISpeechGrammarRules*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    item : Proc(ISpeechGrammarRules*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ISpeechGrammarRules*, Void**, Win32cr::Foundation::HRESULT),
+    get_Dynamic : Proc(ISpeechGrammarRules*, Int16*, Win32cr::Foundation::HRESULT),
+    add : Proc(ISpeechGrammarRules*, Win32cr::Foundation::BSTR, Win32cr::Media::Speech::SpeechRuleAttributes, Int32, Void**, Win32cr::Foundation::HRESULT),
+    commit : Proc(ISpeechGrammarRules*, Win32cr::Foundation::HRESULT),
+    commit_and_save : Proc(ISpeechGrammarRules*, Win32cr::Foundation::BSTR*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("6ffa3b44-fc2d-40d1-8afc-32911c7f1ad1")]
+  record ISpeechGrammarRules, lpVtbl : ISpeechGrammarRulesVtbl* do
+    GUID = LibC::GUID.new(0x6ffa3b44_u32, 0xfc2d_u16, 0x40d1_u16, StaticArray[0x8a_u8, 0xfc_u8, 0x32_u8, 0x91_u8, 0x1c_u8, 0x7f_u8, 0x1a_u8, 0xd1_u8])
+    def query_interface(this : ISpeechGrammarRules*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechGrammarRules*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechGrammarRules*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechGrammarRules*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechGrammarRules*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechGrammarRules*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechGrammarRules*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : ISpeechGrammarRules*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def find_rule(this : ISpeechGrammarRules*, rule_name_or_id : Win32cr::System::Com::VARIANT, rule : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.find_rule.call(this, rule_name_or_id, rule)
+    end
+    def item(this : ISpeechGrammarRules*, index : Int32, rule : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.item.call(this, index, rule)
+    end
+    def get__NewEnum(this : ISpeechGrammarRules*, enum_variant : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, enum_variant)
+    end
+    def get_Dynamic(this : ISpeechGrammarRules*, dynamic : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Dynamic.call(this, dynamic)
+    end
+    def add(this : ISpeechGrammarRules*, rule_name : Win32cr::Foundation::BSTR, attributes : Win32cr::Media::Speech::SpeechRuleAttributes, rule_id : Int32, rule : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, rule_name, attributes, rule_id, rule)
+    end
+    def commit(this : ISpeechGrammarRules*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this)
+    end
+    def commit_and_save(this : ISpeechGrammarRules*, error_text : Win32cr::Foundation::BSTR*, save_stream : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit_and_save.call(this, error_text, save_stream)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechGrammarRuleStateVtbl,
+    query_interface : Proc(ISpeechGrammarRuleState*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechGrammarRuleState*, UInt32),
+    release : Proc(ISpeechGrammarRuleState*, UInt32),
+    get_type_info_count : Proc(ISpeechGrammarRuleState*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechGrammarRuleState*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechGrammarRuleState*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechGrammarRuleState*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Rule : Proc(ISpeechGrammarRuleState*, Void**, Win32cr::Foundation::HRESULT),
+    get_Transitions : Proc(ISpeechGrammarRuleState*, Void**, Win32cr::Foundation::HRESULT),
+    add_word_transition : Proc(ISpeechGrammarRuleState*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Media::Speech::SpeechGrammarWordType, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT*, Float32, Win32cr::Foundation::HRESULT),
+    add_rule_transition : Proc(ISpeechGrammarRuleState*, Void*, Void*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT*, Float32, Win32cr::Foundation::HRESULT),
+    add_special_transition : Proc(ISpeechGrammarRuleState*, Void*, Win32cr::Media::Speech::SpeechSpecialTransitionType, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT*, Float32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("d4286f2c-ee67-45ae-b928-28d695362eda")]
+  record ISpeechGrammarRuleState, lpVtbl : ISpeechGrammarRuleStateVtbl* do
+    GUID = LibC::GUID.new(0xd4286f2c_u32, 0xee67_u16, 0x45ae_u16, StaticArray[0xb9_u8, 0x28_u8, 0x28_u8, 0xd6_u8, 0x95_u8, 0x36_u8, 0x2e_u8, 0xda_u8])
+    def query_interface(this : ISpeechGrammarRuleState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechGrammarRuleState*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechGrammarRuleState*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechGrammarRuleState*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechGrammarRuleState*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechGrammarRuleState*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechGrammarRuleState*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Rule(this : ISpeechGrammarRuleState*, rule : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Rule.call(this, rule)
+    end
+    def get_Transitions(this : ISpeechGrammarRuleState*, transitions : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Transitions.call(this, transitions)
+    end
+    def add_word_transition(this : ISpeechGrammarRuleState*, dest_state : Void*, words : Win32cr::Foundation::BSTR, separators : Win32cr::Foundation::BSTR, type__ : Win32cr::Media::Speech::SpeechGrammarWordType, property_name : Win32cr::Foundation::BSTR, property_id : Int32, property_value : Win32cr::System::Com::VARIANT*, weight : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_word_transition.call(this, dest_state, words, separators, type__, property_name, property_id, property_value, weight)
+    end
+    def add_rule_transition(this : ISpeechGrammarRuleState*, destination_state : Void*, rule : Void*, property_name : Win32cr::Foundation::BSTR, property_id : Int32, property_value : Win32cr::System::Com::VARIANT*, weight : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_rule_transition.call(this, destination_state, rule, property_name, property_id, property_value, weight)
+    end
+    def add_special_transition(this : ISpeechGrammarRuleState*, destination_state : Void*, type__ : Win32cr::Media::Speech::SpeechSpecialTransitionType, property_name : Win32cr::Foundation::BSTR, property_id : Int32, property_value : Win32cr::System::Com::VARIANT*, weight : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_special_transition.call(this, destination_state, type__, property_name, property_id, property_value, weight)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechGrammarRuleStateTransitionVtbl,
+    query_interface : Proc(ISpeechGrammarRuleStateTransition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechGrammarRuleStateTransition*, UInt32),
+    release : Proc(ISpeechGrammarRuleStateTransition*, UInt32),
+    get_type_info_count : Proc(ISpeechGrammarRuleStateTransition*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechGrammarRuleStateTransition*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechGrammarRuleStateTransition*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechGrammarRuleStateTransition*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Type : Proc(ISpeechGrammarRuleStateTransition*, Win32cr::Media::Speech::SpeechGrammarRuleStateTransitionType*, Win32cr::Foundation::HRESULT),
+    get_Text : Proc(ISpeechGrammarRuleStateTransition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Rule : Proc(ISpeechGrammarRuleStateTransition*, Void**, Win32cr::Foundation::HRESULT),
+    get_Weight : Proc(ISpeechGrammarRuleStateTransition*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PropertyName : Proc(ISpeechGrammarRuleStateTransition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_PropertyId : Proc(ISpeechGrammarRuleStateTransition*, Int32*, Win32cr::Foundation::HRESULT),
+    get_PropertyValue : Proc(ISpeechGrammarRuleStateTransition*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_NextState : Proc(ISpeechGrammarRuleStateTransition*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("cafd1db1-41d1-4a06-9863-e2e81da17a9a")]
+  record ISpeechGrammarRuleStateTransition, lpVtbl : ISpeechGrammarRuleStateTransitionVtbl* do
+    GUID = LibC::GUID.new(0xcafd1db1_u32, 0x41d1_u16, 0x4a06_u16, StaticArray[0x98_u8, 0x63_u8, 0xe2_u8, 0xe8_u8, 0x1d_u8, 0xa1_u8, 0x7a_u8, 0x9a_u8])
+    def query_interface(this : ISpeechGrammarRuleStateTransition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechGrammarRuleStateTransition*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechGrammarRuleStateTransition*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechGrammarRuleStateTransition*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechGrammarRuleStateTransition*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechGrammarRuleStateTransition*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechGrammarRuleStateTransition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Type(this : ISpeechGrammarRuleStateTransition*, type__ : Win32cr::Media::Speech::SpeechGrammarRuleStateTransitionType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Type.call(this, type__)
+    end
+    def get_Text(this : ISpeechGrammarRuleStateTransition*, text : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Text.call(this, text)
+    end
+    def get_Rule(this : ISpeechGrammarRuleStateTransition*, rule : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Rule.call(this, rule)
+    end
+    def get_Weight(this : ISpeechGrammarRuleStateTransition*, weight : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Weight.call(this, weight)
+    end
+    def get_PropertyName(this : ISpeechGrammarRuleStateTransition*, property_name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PropertyName.call(this, property_name)
+    end
+    def get_PropertyId(this : ISpeechGrammarRuleStateTransition*, property_id : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PropertyId.call(this, property_id)
+    end
+    def get_PropertyValue(this : ISpeechGrammarRuleStateTransition*, property_value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PropertyValue.call(this, property_value)
+    end
+    def get_NextState(this : ISpeechGrammarRuleStateTransition*, next_state : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NextState.call(this, next_state)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechGrammarRuleStateTransitionsVtbl,
+    query_interface : Proc(ISpeechGrammarRuleStateTransitions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechGrammarRuleStateTransitions*, UInt32),
+    release : Proc(ISpeechGrammarRuleStateTransitions*, UInt32),
+    get_type_info_count : Proc(ISpeechGrammarRuleStateTransitions*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechGrammarRuleStateTransitions*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechGrammarRuleStateTransitions*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechGrammarRuleStateTransitions*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ISpeechGrammarRuleStateTransitions*, Int32*, Win32cr::Foundation::HRESULT),
+    item : Proc(ISpeechGrammarRuleStateTransitions*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ISpeechGrammarRuleStateTransitions*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("eabce657-75bc-44a2-aa7f-c56476742963")]
+  record ISpeechGrammarRuleStateTransitions, lpVtbl : ISpeechGrammarRuleStateTransitionsVtbl* do
+    GUID = LibC::GUID.new(0xeabce657_u32, 0x75bc_u16, 0x44a2_u16, StaticArray[0xaa_u8, 0x7f_u8, 0xc5_u8, 0x64_u8, 0x76_u8, 0x74_u8, 0x29_u8, 0x63_u8])
+    def query_interface(this : ISpeechGrammarRuleStateTransitions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechGrammarRuleStateTransitions*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechGrammarRuleStateTransitions*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechGrammarRuleStateTransitions*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechGrammarRuleStateTransitions*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechGrammarRuleStateTransitions*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechGrammarRuleStateTransitions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : ISpeechGrammarRuleStateTransitions*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def item(this : ISpeechGrammarRuleStateTransitions*, index : Int32, transition : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.item.call(this, index, transition)
+    end
+    def get__NewEnum(this : ISpeechGrammarRuleStateTransitions*, enum_variant : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, enum_variant)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechTextSelectionInformationVtbl,
+    query_interface : Proc(ISpeechTextSelectionInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechTextSelectionInformation*, UInt32),
+    release : Proc(ISpeechTextSelectionInformation*, UInt32),
+    get_type_info_count : Proc(ISpeechTextSelectionInformation*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechTextSelectionInformation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechTextSelectionInformation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechTextSelectionInformation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_ActiveOffset : Proc(ISpeechTextSelectionInformation*, Int32, Win32cr::Foundation::HRESULT),
+    get_ActiveOffset : Proc(ISpeechTextSelectionInformation*, Int32*, Win32cr::Foundation::HRESULT),
+    put_ActiveLength : Proc(ISpeechTextSelectionInformation*, Int32, Win32cr::Foundation::HRESULT),
+    get_ActiveLength : Proc(ISpeechTextSelectionInformation*, Int32*, Win32cr::Foundation::HRESULT),
+    put_SelectionOffset : Proc(ISpeechTextSelectionInformation*, Int32, Win32cr::Foundation::HRESULT),
+    get_SelectionOffset : Proc(ISpeechTextSelectionInformation*, Int32*, Win32cr::Foundation::HRESULT),
+    put_SelectionLength : Proc(ISpeechTextSelectionInformation*, Int32, Win32cr::Foundation::HRESULT),
+    get_SelectionLength : Proc(ISpeechTextSelectionInformation*, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("3b9c7e7a-6eee-4ded-9092-11657279adbe")]
+  record ISpeechTextSelectionInformation, lpVtbl : ISpeechTextSelectionInformationVtbl* do
+    GUID = LibC::GUID.new(0x3b9c7e7a_u32, 0x6eee_u16, 0x4ded_u16, StaticArray[0x90_u8, 0x92_u8, 0x11_u8, 0x65_u8, 0x72_u8, 0x79_u8, 0xad_u8, 0xbe_u8])
+    def query_interface(this : ISpeechTextSelectionInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechTextSelectionInformation*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechTextSelectionInformation*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechTextSelectionInformation*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechTextSelectionInformation*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechTextSelectionInformation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechTextSelectionInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def put_ActiveOffset(this : ISpeechTextSelectionInformation*, active_offset : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ActiveOffset.call(this, active_offset)
+    end
+    def get_ActiveOffset(this : ISpeechTextSelectionInformation*, active_offset : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ActiveOffset.call(this, active_offset)
+    end
+    def put_ActiveLength(this : ISpeechTextSelectionInformation*, active_length : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ActiveLength.call(this, active_length)
+    end
+    def get_ActiveLength(this : ISpeechTextSelectionInformation*, active_length : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ActiveLength.call(this, active_length)
+    end
+    def put_SelectionOffset(this : ISpeechTextSelectionInformation*, selection_offset : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SelectionOffset.call(this, selection_offset)
+    end
+    def get_SelectionOffset(this : ISpeechTextSelectionInformation*, selection_offset : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SelectionOffset.call(this, selection_offset)
+    end
+    def put_SelectionLength(this : ISpeechTextSelectionInformation*, selection_length : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SelectionLength.call(this, selection_length)
+    end
+    def get_SelectionLength(this : ISpeechTextSelectionInformation*, selection_length : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SelectionLength.call(this, selection_length)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechRecoResultVtbl,
+    query_interface : Proc(ISpeechRecoResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechRecoResult*, UInt32),
+    release : Proc(ISpeechRecoResult*, UInt32),
+    get_type_info_count : Proc(ISpeechRecoResult*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechRecoResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechRecoResult*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechRecoResult*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_RecoContext : Proc(ISpeechRecoResult*, Void**, Win32cr::Foundation::HRESULT),
+    get_Times : Proc(ISpeechRecoResult*, Void**, Win32cr::Foundation::HRESULT),
+    putref_AudioFormat : Proc(ISpeechRecoResult*, Void*, Win32cr::Foundation::HRESULT),
+    get_AudioFormat : Proc(ISpeechRecoResult*, Void**, Win32cr::Foundation::HRESULT),
+    get_PhraseInfo : Proc(ISpeechRecoResult*, Void**, Win32cr::Foundation::HRESULT),
+    alternates : Proc(ISpeechRecoResult*, Int32, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
+    audio : Proc(ISpeechRecoResult*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
+    speak_audio : Proc(ISpeechRecoResult*, Int32, Int32, Win32cr::Media::Speech::SpeechVoiceSpeakFlags, Int32*, Win32cr::Foundation::HRESULT),
+    save_to_memory : Proc(ISpeechRecoResult*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    discard_result_info : Proc(ISpeechRecoResult*, Win32cr::Media::Speech::SpeechDiscardType, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("ed2879cf-ced9-4ee6-a534-de0191d5468d")]
+  record ISpeechRecoResult, lpVtbl : ISpeechRecoResultVtbl* do
+    GUID = LibC::GUID.new(0xed2879cf_u32, 0xced9_u16, 0x4ee6_u16, StaticArray[0xa5_u8, 0x34_u8, 0xde_u8, 0x1_u8, 0x91_u8, 0xd5_u8, 0x46_u8, 0x8d_u8])
+    def query_interface(this : ISpeechRecoResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechRecoResult*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechRecoResult*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechRecoResult*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechRecoResult*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechRecoResult*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechRecoResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_RecoContext(this : ISpeechRecoResult*, reco_context : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RecoContext.call(this, reco_context)
+    end
+    def get_Times(this : ISpeechRecoResult*, times : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Times.call(this, times)
+    end
+    def putref_AudioFormat(this : ISpeechRecoResult*, format : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_AudioFormat.call(this, format)
+    end
+    def get_AudioFormat(this : ISpeechRecoResult*, format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioFormat.call(this, format)
+    end
+    def get_PhraseInfo(this : ISpeechRecoResult*, phrase_info : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PhraseInfo.call(this, phrase_info)
+    end
+    def alternates(this : ISpeechRecoResult*, request_count : Int32, start_element : Int32, elements : Int32, alternates : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.alternates.call(this, request_count, start_element, elements, alternates)
+    end
+    def audio(this : ISpeechRecoResult*, start_element : Int32, elements : Int32, stream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.audio.call(this, start_element, elements, stream)
+    end
+    def speak_audio(this : ISpeechRecoResult*, start_element : Int32, elements : Int32, flags : Win32cr::Media::Speech::SpeechVoiceSpeakFlags, stream_number : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.speak_audio.call(this, start_element, elements, flags, stream_number)
+    end
+    def save_to_memory(this : ISpeechRecoResult*, result_block : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_to_memory.call(this, result_block)
+    end
+    def discard_result_info(this : ISpeechRecoResult*, value_types : Win32cr::Media::Speech::SpeechDiscardType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.discard_result_info.call(this, value_types)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechRecoResult2Vtbl,
+    query_interface : Proc(ISpeechRecoResult2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechRecoResult2*, UInt32),
+    release : Proc(ISpeechRecoResult2*, UInt32),
+    get_type_info_count : Proc(ISpeechRecoResult2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechRecoResult2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechRecoResult2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechRecoResult2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_RecoContext : Proc(ISpeechRecoResult2*, Void**, Win32cr::Foundation::HRESULT),
+    get_Times : Proc(ISpeechRecoResult2*, Void**, Win32cr::Foundation::HRESULT),
+    putref_AudioFormat : Proc(ISpeechRecoResult2*, Void*, Win32cr::Foundation::HRESULT),
+    get_AudioFormat : Proc(ISpeechRecoResult2*, Void**, Win32cr::Foundation::HRESULT),
+    get_PhraseInfo : Proc(ISpeechRecoResult2*, Void**, Win32cr::Foundation::HRESULT),
+    alternates : Proc(ISpeechRecoResult2*, Int32, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
+    audio : Proc(ISpeechRecoResult2*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
+    speak_audio : Proc(ISpeechRecoResult2*, Int32, Int32, Win32cr::Media::Speech::SpeechVoiceSpeakFlags, Int32*, Win32cr::Foundation::HRESULT),
+    save_to_memory : Proc(ISpeechRecoResult2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    discard_result_info : Proc(ISpeechRecoResult2*, Win32cr::Media::Speech::SpeechDiscardType, Win32cr::Foundation::HRESULT),
+    set_text_feedback : Proc(ISpeechRecoResult2*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("8e0a246d-d3c8-45de-8657-04290c458c3c")]
+  record ISpeechRecoResult2, lpVtbl : ISpeechRecoResult2Vtbl* do
+    GUID = LibC::GUID.new(0x8e0a246d_u32, 0xd3c8_u16, 0x45de_u16, StaticArray[0x86_u8, 0x57_u8, 0x4_u8, 0x29_u8, 0xc_u8, 0x45_u8, 0x8c_u8, 0x3c_u8])
+    def query_interface(this : ISpeechRecoResult2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechRecoResult2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechRecoResult2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechRecoResult2*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechRecoResult2*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechRecoResult2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechRecoResult2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_RecoContext(this : ISpeechRecoResult2*, reco_context : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RecoContext.call(this, reco_context)
+    end
+    def get_Times(this : ISpeechRecoResult2*, times : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Times.call(this, times)
+    end
+    def putref_AudioFormat(this : ISpeechRecoResult2*, format : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_AudioFormat.call(this, format)
+    end
+    def get_AudioFormat(this : ISpeechRecoResult2*, format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioFormat.call(this, format)
+    end
+    def get_PhraseInfo(this : ISpeechRecoResult2*, phrase_info : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PhraseInfo.call(this, phrase_info)
+    end
+    def alternates(this : ISpeechRecoResult2*, request_count : Int32, start_element : Int32, elements : Int32, alternates : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.alternates.call(this, request_count, start_element, elements, alternates)
+    end
+    def audio(this : ISpeechRecoResult2*, start_element : Int32, elements : Int32, stream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.audio.call(this, start_element, elements, stream)
+    end
+    def speak_audio(this : ISpeechRecoResult2*, start_element : Int32, elements : Int32, flags : Win32cr::Media::Speech::SpeechVoiceSpeakFlags, stream_number : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.speak_audio.call(this, start_element, elements, flags, stream_number)
+    end
+    def save_to_memory(this : ISpeechRecoResult2*, result_block : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_to_memory.call(this, result_block)
+    end
+    def discard_result_info(this : ISpeechRecoResult2*, value_types : Win32cr::Media::Speech::SpeechDiscardType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.discard_result_info.call(this, value_types)
+    end
+    def set_text_feedback(this : ISpeechRecoResult2*, feedback : Win32cr::Foundation::BSTR, was_successful : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_text_feedback.call(this, feedback, was_successful)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechRecoResultTimesVtbl,
+    query_interface : Proc(ISpeechRecoResultTimes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechRecoResultTimes*, UInt32),
+    release : Proc(ISpeechRecoResultTimes*, UInt32),
+    get_type_info_count : Proc(ISpeechRecoResultTimes*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechRecoResultTimes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechRecoResultTimes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechRecoResultTimes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_StreamTime : Proc(ISpeechRecoResultTimes*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Length : Proc(ISpeechRecoResultTimes*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_TickCount : Proc(ISpeechRecoResultTimes*, Int32*, Win32cr::Foundation::HRESULT),
+    get_OffsetFromStart : Proc(ISpeechRecoResultTimes*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("62b3b8fb-f6e7-41be-bdcb-056b1c29efc0")]
+  record ISpeechRecoResultTimes, lpVtbl : ISpeechRecoResultTimesVtbl* do
+    GUID = LibC::GUID.new(0x62b3b8fb_u32, 0xf6e7_u16, 0x41be_u16, StaticArray[0xbd_u8, 0xcb_u8, 0x5_u8, 0x6b_u8, 0x1c_u8, 0x29_u8, 0xef_u8, 0xc0_u8])
+    def query_interface(this : ISpeechRecoResultTimes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechRecoResultTimes*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechRecoResultTimes*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechRecoResultTimes*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechRecoResultTimes*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechRecoResultTimes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechRecoResultTimes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_StreamTime(this : ISpeechRecoResultTimes*, time : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StreamTime.call(this, time)
+    end
+    def get_Length(this : ISpeechRecoResultTimes*, length : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Length.call(this, length)
+    end
+    def get_TickCount(this : ISpeechRecoResultTimes*, tick_count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TickCount.call(this, tick_count)
+    end
+    def get_OffsetFromStart(this : ISpeechRecoResultTimes*, offset_from_start : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_OffsetFromStart.call(this, offset_from_start)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechPhraseAlternateVtbl,
+    query_interface : Proc(ISpeechPhraseAlternate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechPhraseAlternate*, UInt32),
+    release : Proc(ISpeechPhraseAlternate*, UInt32),
+    get_type_info_count : Proc(ISpeechPhraseAlternate*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechPhraseAlternate*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechPhraseAlternate*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechPhraseAlternate*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_RecoResult : Proc(ISpeechPhraseAlternate*, Void**, Win32cr::Foundation::HRESULT),
+    get_StartElementInResult : Proc(ISpeechPhraseAlternate*, Int32*, Win32cr::Foundation::HRESULT),
+    get_NumberOfElementsInResult : Proc(ISpeechPhraseAlternate*, Int32*, Win32cr::Foundation::HRESULT),
+    get_PhraseInfo : Proc(ISpeechPhraseAlternate*, Void**, Win32cr::Foundation::HRESULT),
+    commit : Proc(ISpeechPhraseAlternate*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27864a2a-2b9f-4cb8-92d3-0d2722fd1e73")]
+  record ISpeechPhraseAlternate, lpVtbl : ISpeechPhraseAlternateVtbl* do
+    GUID = LibC::GUID.new(0x27864a2a_u32, 0x2b9f_u16, 0x4cb8_u16, StaticArray[0x92_u8, 0xd3_u8, 0xd_u8, 0x27_u8, 0x22_u8, 0xfd_u8, 0x1e_u8, 0x73_u8])
+    def query_interface(this : ISpeechPhraseAlternate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechPhraseAlternate*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechPhraseAlternate*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechPhraseAlternate*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechPhraseAlternate*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechPhraseAlternate*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechPhraseAlternate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_RecoResult(this : ISpeechPhraseAlternate*, reco_result : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RecoResult.call(this, reco_result)
+    end
+    def get_StartElementInResult(this : ISpeechPhraseAlternate*, start_element : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartElementInResult.call(this, start_element)
+    end
+    def get_NumberOfElementsInResult(this : ISpeechPhraseAlternate*, number_of_elements : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NumberOfElementsInResult.call(this, number_of_elements)
+    end
+    def get_PhraseInfo(this : ISpeechPhraseAlternate*, phrase_info : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PhraseInfo.call(this, phrase_info)
+    end
+    def commit(this : ISpeechPhraseAlternate*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechPhraseAlternatesVtbl,
+    query_interface : Proc(ISpeechPhraseAlternates*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechPhraseAlternates*, UInt32),
+    release : Proc(ISpeechPhraseAlternates*, UInt32),
+    get_type_info_count : Proc(ISpeechPhraseAlternates*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechPhraseAlternates*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechPhraseAlternates*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechPhraseAlternates*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ISpeechPhraseAlternates*, Int32*, Win32cr::Foundation::HRESULT),
+    item : Proc(ISpeechPhraseAlternates*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ISpeechPhraseAlternates*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b238b6d5-f276-4c3d-a6c1-2974801c3cc2")]
+  record ISpeechPhraseAlternates, lpVtbl : ISpeechPhraseAlternatesVtbl* do
+    GUID = LibC::GUID.new(0xb238b6d5_u32, 0xf276_u16, 0x4c3d_u16, StaticArray[0xa6_u8, 0xc1_u8, 0x29_u8, 0x74_u8, 0x80_u8, 0x1c_u8, 0x3c_u8, 0xc2_u8])
+    def query_interface(this : ISpeechPhraseAlternates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechPhraseAlternates*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechPhraseAlternates*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechPhraseAlternates*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechPhraseAlternates*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechPhraseAlternates*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechPhraseAlternates*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : ISpeechPhraseAlternates*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def item(this : ISpeechPhraseAlternates*, index : Int32, phrase_alternate : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.item.call(this, index, phrase_alternate)
+    end
+    def get__NewEnum(this : ISpeechPhraseAlternates*, enum_variant : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, enum_variant)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechPhraseInfoVtbl,
+    query_interface : Proc(ISpeechPhraseInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechPhraseInfo*, UInt32),
+    release : Proc(ISpeechPhraseInfo*, UInt32),
+    get_type_info_count : Proc(ISpeechPhraseInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechPhraseInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechPhraseInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechPhraseInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_LanguageId : Proc(ISpeechPhraseInfo*, Int32*, Win32cr::Foundation::HRESULT),
+    get_GrammarId : Proc(ISpeechPhraseInfo*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_StartTime : Proc(ISpeechPhraseInfo*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_AudioStreamPosition : Proc(ISpeechPhraseInfo*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_AudioSizeBytes : Proc(ISpeechPhraseInfo*, Int32*, Win32cr::Foundation::HRESULT),
+    get_RetainedSizeBytes : Proc(ISpeechPhraseInfo*, Int32*, Win32cr::Foundation::HRESULT),
+    get_AudioSizeTime : Proc(ISpeechPhraseInfo*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Rule : Proc(ISpeechPhraseInfo*, Void**, Win32cr::Foundation::HRESULT),
+    get_Properties : Proc(ISpeechPhraseInfo*, Void**, Win32cr::Foundation::HRESULT),
+    get_Elements : Proc(ISpeechPhraseInfo*, Void**, Win32cr::Foundation::HRESULT),
+    get_Replacements : Proc(ISpeechPhraseInfo*, Void**, Win32cr::Foundation::HRESULT),
+    get_EngineId : Proc(ISpeechPhraseInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_EnginePrivateData : Proc(ISpeechPhraseInfo*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    save_to_memory : Proc(ISpeechPhraseInfo*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_text : Proc(ISpeechPhraseInfo*, Int32, Int32, Int16, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_display_attributes : Proc(ISpeechPhraseInfo*, Int32, Int32, Int16, Win32cr::Media::Speech::SpeechDisplayAttributes*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("961559cf-4e67-4662-8bf0-d93f1fcd61b3")]
+  record ISpeechPhraseInfo, lpVtbl : ISpeechPhraseInfoVtbl* do
+    GUID = LibC::GUID.new(0x961559cf_u32, 0x4e67_u16, 0x4662_u16, StaticArray[0x8b_u8, 0xf0_u8, 0xd9_u8, 0x3f_u8, 0x1f_u8, 0xcd_u8, 0x61_u8, 0xb3_u8])
+    def query_interface(this : ISpeechPhraseInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechPhraseInfo*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechPhraseInfo*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechPhraseInfo*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechPhraseInfo*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechPhraseInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechPhraseInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_LanguageId(this : ISpeechPhraseInfo*, language_id : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LanguageId.call(this, language_id)
+    end
+    def get_GrammarId(this : ISpeechPhraseInfo*, grammar_id : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_GrammarId.call(this, grammar_id)
+    end
+    def get_StartTime(this : ISpeechPhraseInfo*, start_time : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartTime.call(this, start_time)
+    end
+    def get_AudioStreamPosition(this : ISpeechPhraseInfo*, audio_stream_position : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioStreamPosition.call(this, audio_stream_position)
+    end
+    def get_AudioSizeBytes(this : ISpeechPhraseInfo*, pAudioSizeBytes : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioSizeBytes.call(this, pAudioSizeBytes)
+    end
+    def get_RetainedSizeBytes(this : ISpeechPhraseInfo*, retained_size_bytes : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RetainedSizeBytes.call(this, retained_size_bytes)
+    end
+    def get_AudioSizeTime(this : ISpeechPhraseInfo*, audio_size_time : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioSizeTime.call(this, audio_size_time)
+    end
+    def get_Rule(this : ISpeechPhraseInfo*, rule : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Rule.call(this, rule)
+    end
+    def get_Properties(this : ISpeechPhraseInfo*, properties : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Properties.call(this, properties)
+    end
+    def get_Elements(this : ISpeechPhraseInfo*, elements : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Elements.call(this, elements)
+    end
+    def get_Replacements(this : ISpeechPhraseInfo*, replacements : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Replacements.call(this, replacements)
+    end
+    def get_EngineId(this : ISpeechPhraseInfo*, engine_id_guid : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EngineId.call(this, engine_id_guid)
+    end
+    def get_EnginePrivateData(this : ISpeechPhraseInfo*, private_data : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EnginePrivateData.call(this, private_data)
+    end
+    def save_to_memory(this : ISpeechPhraseInfo*, phrase_block : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_to_memory.call(this, phrase_block)
+    end
+    def get_text(this : ISpeechPhraseInfo*, start_element : Int32, elements : Int32, use_replacements : Int16, text : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_text.call(this, start_element, elements, use_replacements, text)
+    end
+    def get_display_attributes(this : ISpeechPhraseInfo*, start_element : Int32, elements : Int32, use_replacements : Int16, display_attributes : Win32cr::Media::Speech::SpeechDisplayAttributes*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_display_attributes.call(this, start_element, elements, use_replacements, display_attributes)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechPhraseElementVtbl,
+    query_interface : Proc(ISpeechPhraseElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechPhraseElement*, UInt32),
+    release : Proc(ISpeechPhraseElement*, UInt32),
+    get_type_info_count : Proc(ISpeechPhraseElement*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechPhraseElement*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechPhraseElement*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechPhraseElement*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_AudioTimeOffset : Proc(ISpeechPhraseElement*, Int32*, Win32cr::Foundation::HRESULT),
+    get_AudioSizeTime : Proc(ISpeechPhraseElement*, Int32*, Win32cr::Foundation::HRESULT),
+    get_AudioStreamOffset : Proc(ISpeechPhraseElement*, Int32*, Win32cr::Foundation::HRESULT),
+    get_AudioSizeBytes : Proc(ISpeechPhraseElement*, Int32*, Win32cr::Foundation::HRESULT),
+    get_RetainedStreamOffset : Proc(ISpeechPhraseElement*, Int32*, Win32cr::Foundation::HRESULT),
+    get_RetainedSizeBytes : Proc(ISpeechPhraseElement*, Int32*, Win32cr::Foundation::HRESULT),
+    get_DisplayText : Proc(ISpeechPhraseElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_LexicalForm : Proc(ISpeechPhraseElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Pronunciation : Proc(ISpeechPhraseElement*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DisplayAttributes : Proc(ISpeechPhraseElement*, Win32cr::Media::Speech::SpeechDisplayAttributes*, Win32cr::Foundation::HRESULT),
+    get_RequiredConfidence : Proc(ISpeechPhraseElement*, Win32cr::Media::Speech::SpeechEngineConfidence*, Win32cr::Foundation::HRESULT),
+    get_ActualConfidence : Proc(ISpeechPhraseElement*, Win32cr::Media::Speech::SpeechEngineConfidence*, Win32cr::Foundation::HRESULT),
+    get_EngineConfidence : Proc(ISpeechPhraseElement*, Float32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("e6176f96-e373-4801-b223-3b62c068c0b4")]
+  record ISpeechPhraseElement, lpVtbl : ISpeechPhraseElementVtbl* do
+    GUID = LibC::GUID.new(0xe6176f96_u32, 0xe373_u16, 0x4801_u16, StaticArray[0xb2_u8, 0x23_u8, 0x3b_u8, 0x62_u8, 0xc0_u8, 0x68_u8, 0xc0_u8, 0xb4_u8])
+    def query_interface(this : ISpeechPhraseElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechPhraseElement*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechPhraseElement*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechPhraseElement*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechPhraseElement*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechPhraseElement*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechPhraseElement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_AudioTimeOffset(this : ISpeechPhraseElement*, audio_time_offset : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioTimeOffset.call(this, audio_time_offset)
+    end
+    def get_AudioSizeTime(this : ISpeechPhraseElement*, audio_size_time : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioSizeTime.call(this, audio_size_time)
+    end
+    def get_AudioStreamOffset(this : ISpeechPhraseElement*, audio_stream_offset : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioStreamOffset.call(this, audio_stream_offset)
+    end
+    def get_AudioSizeBytes(this : ISpeechPhraseElement*, audio_size_bytes : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioSizeBytes.call(this, audio_size_bytes)
+    end
+    def get_RetainedStreamOffset(this : ISpeechPhraseElement*, retained_stream_offset : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RetainedStreamOffset.call(this, retained_stream_offset)
+    end
+    def get_RetainedSizeBytes(this : ISpeechPhraseElement*, retained_size_bytes : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RetainedSizeBytes.call(this, retained_size_bytes)
+    end
+    def get_DisplayText(this : ISpeechPhraseElement*, display_text : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisplayText.call(this, display_text)
+    end
+    def get_LexicalForm(this : ISpeechPhraseElement*, lexical_form : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LexicalForm.call(this, lexical_form)
+    end
+    def get_Pronunciation(this : ISpeechPhraseElement*, pronunciation : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Pronunciation.call(this, pronunciation)
+    end
+    def get_DisplayAttributes(this : ISpeechPhraseElement*, display_attributes : Win32cr::Media::Speech::SpeechDisplayAttributes*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisplayAttributes.call(this, display_attributes)
+    end
+    def get_RequiredConfidence(this : ISpeechPhraseElement*, required_confidence : Win32cr::Media::Speech::SpeechEngineConfidence*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RequiredConfidence.call(this, required_confidence)
+    end
+    def get_ActualConfidence(this : ISpeechPhraseElement*, actual_confidence : Win32cr::Media::Speech::SpeechEngineConfidence*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ActualConfidence.call(this, actual_confidence)
+    end
+    def get_EngineConfidence(this : ISpeechPhraseElement*, engine_confidence : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EngineConfidence.call(this, engine_confidence)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechPhraseElementsVtbl,
+    query_interface : Proc(ISpeechPhraseElements*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechPhraseElements*, UInt32),
+    release : Proc(ISpeechPhraseElements*, UInt32),
+    get_type_info_count : Proc(ISpeechPhraseElements*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechPhraseElements*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechPhraseElements*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechPhraseElements*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ISpeechPhraseElements*, Int32*, Win32cr::Foundation::HRESULT),
+    item : Proc(ISpeechPhraseElements*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ISpeechPhraseElements*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("0626b328-3478-467d-a0b3-d0853b93dda3")]
+  record ISpeechPhraseElements, lpVtbl : ISpeechPhraseElementsVtbl* do
+    GUID = LibC::GUID.new(0x626b328_u32, 0x3478_u16, 0x467d_u16, StaticArray[0xa0_u8, 0xb3_u8, 0xd0_u8, 0x85_u8, 0x3b_u8, 0x93_u8, 0xdd_u8, 0xa3_u8])
+    def query_interface(this : ISpeechPhraseElements*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechPhraseElements*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechPhraseElements*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechPhraseElements*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechPhraseElements*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechPhraseElements*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechPhraseElements*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : ISpeechPhraseElements*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def item(this : ISpeechPhraseElements*, index : Int32, element : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.item.call(this, index, element)
+    end
+    def get__NewEnum(this : ISpeechPhraseElements*, enum_variant : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, enum_variant)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechPhraseReplacementVtbl,
+    query_interface : Proc(ISpeechPhraseReplacement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechPhraseReplacement*, UInt32),
+    release : Proc(ISpeechPhraseReplacement*, UInt32),
+    get_type_info_count : Proc(ISpeechPhraseReplacement*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechPhraseReplacement*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechPhraseReplacement*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechPhraseReplacement*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_DisplayAttributes : Proc(ISpeechPhraseReplacement*, Win32cr::Media::Speech::SpeechDisplayAttributes*, Win32cr::Foundation::HRESULT),
+    get_Text : Proc(ISpeechPhraseReplacement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_FirstElement : Proc(ISpeechPhraseReplacement*, Int32*, Win32cr::Foundation::HRESULT),
+    get_NumberOfElements : Proc(ISpeechPhraseReplacement*, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2890a410-53a7-4fb5-94ec-06d4998e3d02")]
+  record ISpeechPhraseReplacement, lpVtbl : ISpeechPhraseReplacementVtbl* do
+    GUID = LibC::GUID.new(0x2890a410_u32, 0x53a7_u16, 0x4fb5_u16, StaticArray[0x94_u8, 0xec_u8, 0x6_u8, 0xd4_u8, 0x99_u8, 0x8e_u8, 0x3d_u8, 0x2_u8])
+    def query_interface(this : ISpeechPhraseReplacement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechPhraseReplacement*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechPhraseReplacement*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechPhraseReplacement*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechPhraseReplacement*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechPhraseReplacement*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechPhraseReplacement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_DisplayAttributes(this : ISpeechPhraseReplacement*, display_attributes : Win32cr::Media::Speech::SpeechDisplayAttributes*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisplayAttributes.call(this, display_attributes)
+    end
+    def get_Text(this : ISpeechPhraseReplacement*, text : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Text.call(this, text)
+    end
+    def get_FirstElement(this : ISpeechPhraseReplacement*, first_element : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FirstElement.call(this, first_element)
+    end
+    def get_NumberOfElements(this : ISpeechPhraseReplacement*, number_of_elements : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NumberOfElements.call(this, number_of_elements)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechPhraseReplacementsVtbl,
+    query_interface : Proc(ISpeechPhraseReplacements*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechPhraseReplacements*, UInt32),
+    release : Proc(ISpeechPhraseReplacements*, UInt32),
+    get_type_info_count : Proc(ISpeechPhraseReplacements*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechPhraseReplacements*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechPhraseReplacements*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechPhraseReplacements*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ISpeechPhraseReplacements*, Int32*, Win32cr::Foundation::HRESULT),
+    item : Proc(ISpeechPhraseReplacements*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ISpeechPhraseReplacements*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("38bc662f-2257-4525-959e-2069d2596c05")]
+  record ISpeechPhraseReplacements, lpVtbl : ISpeechPhraseReplacementsVtbl* do
+    GUID = LibC::GUID.new(0x38bc662f_u32, 0x2257_u16, 0x4525_u16, StaticArray[0x95_u8, 0x9e_u8, 0x20_u8, 0x69_u8, 0xd2_u8, 0x59_u8, 0x6c_u8, 0x5_u8])
+    def query_interface(this : ISpeechPhraseReplacements*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechPhraseReplacements*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechPhraseReplacements*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechPhraseReplacements*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechPhraseReplacements*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechPhraseReplacements*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechPhraseReplacements*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : ISpeechPhraseReplacements*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def item(this : ISpeechPhraseReplacements*, index : Int32, reps : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.item.call(this, index, reps)
+    end
+    def get__NewEnum(this : ISpeechPhraseReplacements*, enum_variant : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, enum_variant)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechPhrasePropertyVtbl,
+    query_interface : Proc(ISpeechPhraseProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechPhraseProperty*, UInt32),
+    release : Proc(ISpeechPhraseProperty*, UInt32),
+    get_type_info_count : Proc(ISpeechPhraseProperty*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechPhraseProperty*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechPhraseProperty*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechPhraseProperty*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(ISpeechPhraseProperty*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Id : Proc(ISpeechPhraseProperty*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Value : Proc(ISpeechPhraseProperty*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_FirstElement : Proc(ISpeechPhraseProperty*, Int32*, Win32cr::Foundation::HRESULT),
+    get_NumberOfElements : Proc(ISpeechPhraseProperty*, Int32*, Win32cr::Foundation::HRESULT),
+    get_EngineConfidence : Proc(ISpeechPhraseProperty*, Float32*, Win32cr::Foundation::HRESULT),
+    get_Confidence : Proc(ISpeechPhraseProperty*, Win32cr::Media::Speech::SpeechEngineConfidence*, Win32cr::Foundation::HRESULT),
+    get_Parent : Proc(ISpeechPhraseProperty*, Void**, Win32cr::Foundation::HRESULT),
+    get_Children : Proc(ISpeechPhraseProperty*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("ce563d48-961e-4732-a2e1-378a42b430be")]
+  record ISpeechPhraseProperty, lpVtbl : ISpeechPhrasePropertyVtbl* do
+    GUID = LibC::GUID.new(0xce563d48_u32, 0x961e_u16, 0x4732_u16, StaticArray[0xa2_u8, 0xe1_u8, 0x37_u8, 0x8a_u8, 0x42_u8, 0xb4_u8, 0x30_u8, 0xbe_u8])
+    def query_interface(this : ISpeechPhraseProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechPhraseProperty*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechPhraseProperty*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechPhraseProperty*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechPhraseProperty*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechPhraseProperty*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechPhraseProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Name(this : ISpeechPhraseProperty*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, name)
+    end
+    def get_Id(this : ISpeechPhraseProperty*, id : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Id.call(this, id)
+    end
+    def get_Value(this : ISpeechPhraseProperty*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Value.call(this, value)
+    end
+    def get_FirstElement(this : ISpeechPhraseProperty*, first_element : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FirstElement.call(this, first_element)
+    end
+    def get_NumberOfElements(this : ISpeechPhraseProperty*, number_of_elements : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NumberOfElements.call(this, number_of_elements)
+    end
+    def get_EngineConfidence(this : ISpeechPhraseProperty*, confidence : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EngineConfidence.call(this, confidence)
+    end
+    def get_Confidence(this : ISpeechPhraseProperty*, confidence : Win32cr::Media::Speech::SpeechEngineConfidence*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Confidence.call(this, confidence)
+    end
+    def get_Parent(this : ISpeechPhraseProperty*, parent_property : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Parent.call(this, parent_property)
+    end
+    def get_Children(this : ISpeechPhraseProperty*, children : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Children.call(this, children)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechPhrasePropertiesVtbl,
+    query_interface : Proc(ISpeechPhraseProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechPhraseProperties*, UInt32),
+    release : Proc(ISpeechPhraseProperties*, UInt32),
+    get_type_info_count : Proc(ISpeechPhraseProperties*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechPhraseProperties*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechPhraseProperties*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechPhraseProperties*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ISpeechPhraseProperties*, Int32*, Win32cr::Foundation::HRESULT),
+    item : Proc(ISpeechPhraseProperties*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ISpeechPhraseProperties*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("08166b47-102e-4b23-a599-bdb98dbfd1f4")]
+  record ISpeechPhraseProperties, lpVtbl : ISpeechPhrasePropertiesVtbl* do
+    GUID = LibC::GUID.new(0x8166b47_u32, 0x102e_u16, 0x4b23_u16, StaticArray[0xa5_u8, 0x99_u8, 0xbd_u8, 0xb9_u8, 0x8d_u8, 0xbf_u8, 0xd1_u8, 0xf4_u8])
+    def query_interface(this : ISpeechPhraseProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechPhraseProperties*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechPhraseProperties*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechPhraseProperties*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechPhraseProperties*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechPhraseProperties*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechPhraseProperties*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : ISpeechPhraseProperties*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def item(this : ISpeechPhraseProperties*, index : Int32, property : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.item.call(this, index, property)
+    end
+    def get__NewEnum(this : ISpeechPhraseProperties*, enum_variant : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, enum_variant)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechPhraseRuleVtbl,
+    query_interface : Proc(ISpeechPhraseRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechPhraseRule*, UInt32),
+    release : Proc(ISpeechPhraseRule*, UInt32),
+    get_type_info_count : Proc(ISpeechPhraseRule*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechPhraseRule*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechPhraseRule*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechPhraseRule*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(ISpeechPhraseRule*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Id : Proc(ISpeechPhraseRule*, Int32*, Win32cr::Foundation::HRESULT),
+    get_FirstElement : Proc(ISpeechPhraseRule*, Int32*, Win32cr::Foundation::HRESULT),
+    get_NumberOfElements : Proc(ISpeechPhraseRule*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Parent : Proc(ISpeechPhraseRule*, Void**, Win32cr::Foundation::HRESULT),
+    get_Children : Proc(ISpeechPhraseRule*, Void**, Win32cr::Foundation::HRESULT),
+    get_Confidence : Proc(ISpeechPhraseRule*, Win32cr::Media::Speech::SpeechEngineConfidence*, Win32cr::Foundation::HRESULT),
+    get_EngineConfidence : Proc(ISpeechPhraseRule*, Float32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("a7bfe112-a4a0-48d9-b602-c313843f6964")]
+  record ISpeechPhraseRule, lpVtbl : ISpeechPhraseRuleVtbl* do
+    GUID = LibC::GUID.new(0xa7bfe112_u32, 0xa4a0_u16, 0x48d9_u16, StaticArray[0xb6_u8, 0x2_u8, 0xc3_u8, 0x13_u8, 0x84_u8, 0x3f_u8, 0x69_u8, 0x64_u8])
+    def query_interface(this : ISpeechPhraseRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechPhraseRule*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechPhraseRule*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechPhraseRule*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechPhraseRule*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechPhraseRule*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechPhraseRule*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Name(this : ISpeechPhraseRule*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, name)
+    end
+    def get_Id(this : ISpeechPhraseRule*, id : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Id.call(this, id)
+    end
+    def get_FirstElement(this : ISpeechPhraseRule*, first_element : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FirstElement.call(this, first_element)
+    end
+    def get_NumberOfElements(this : ISpeechPhraseRule*, number_of_elements : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NumberOfElements.call(this, number_of_elements)
+    end
+    def get_Parent(this : ISpeechPhraseRule*, parent : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Parent.call(this, parent)
+    end
+    def get_Children(this : ISpeechPhraseRule*, children : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Children.call(this, children)
+    end
+    def get_Confidence(this : ISpeechPhraseRule*, actual_confidence : Win32cr::Media::Speech::SpeechEngineConfidence*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Confidence.call(this, actual_confidence)
+    end
+    def get_EngineConfidence(this : ISpeechPhraseRule*, engine_confidence : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EngineConfidence.call(this, engine_confidence)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechPhraseRulesVtbl,
+    query_interface : Proc(ISpeechPhraseRules*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechPhraseRules*, UInt32),
+    release : Proc(ISpeechPhraseRules*, UInt32),
+    get_type_info_count : Proc(ISpeechPhraseRules*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechPhraseRules*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechPhraseRules*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechPhraseRules*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ISpeechPhraseRules*, Int32*, Win32cr::Foundation::HRESULT),
+    item : Proc(ISpeechPhraseRules*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ISpeechPhraseRules*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("9047d593-01dd-4b72-81a3-e4a0ca69f407")]
+  record ISpeechPhraseRules, lpVtbl : ISpeechPhraseRulesVtbl* do
+    GUID = LibC::GUID.new(0x9047d593_u32, 0x1dd_u16, 0x4b72_u16, StaticArray[0x81_u8, 0xa3_u8, 0xe4_u8, 0xa0_u8, 0xca_u8, 0x69_u8, 0xf4_u8, 0x7_u8])
+    def query_interface(this : ISpeechPhraseRules*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechPhraseRules*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechPhraseRules*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechPhraseRules*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechPhraseRules*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechPhraseRules*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechPhraseRules*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : ISpeechPhraseRules*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def item(this : ISpeechPhraseRules*, index : Int32, rule : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.item.call(this, index, rule)
+    end
+    def get__NewEnum(this : ISpeechPhraseRules*, enum_variant : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, enum_variant)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechLexiconVtbl,
+    query_interface : Proc(ISpeechLexicon*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechLexicon*, UInt32),
+    release : Proc(ISpeechLexicon*, UInt32),
+    get_type_info_count : Proc(ISpeechLexicon*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechLexicon*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechLexicon*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechLexicon*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_GenerationId : Proc(ISpeechLexicon*, Int32*, Win32cr::Foundation::HRESULT),
+    get_words : Proc(ISpeechLexicon*, Win32cr::Media::Speech::SpeechLexiconType, Int32*, Void**, Win32cr::Foundation::HRESULT),
+    add_pronunciation : Proc(ISpeechLexicon*, Win32cr::Foundation::BSTR, Int32, Win32cr::Media::Speech::SpeechPartOfSpeech, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    add_pronunciation_by_phone_ids : Proc(ISpeechLexicon*, Win32cr::Foundation::BSTR, Int32, Win32cr::Media::Speech::SpeechPartOfSpeech, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    remove_pronunciation : Proc(ISpeechLexicon*, Win32cr::Foundation::BSTR, Int32, Win32cr::Media::Speech::SpeechPartOfSpeech, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove_pronunciation_by_phone_ids : Proc(ISpeechLexicon*, Win32cr::Foundation::BSTR, Int32, Win32cr::Media::Speech::SpeechPartOfSpeech, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_pronunciations : Proc(ISpeechLexicon*, Win32cr::Foundation::BSTR, Int32, Win32cr::Media::Speech::SpeechLexiconType, Void**, Win32cr::Foundation::HRESULT),
+    get_generation_change : Proc(ISpeechLexicon*, Int32*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("3da7627a-c7ae-4b23-8708-638c50362c25")]
+  record ISpeechLexicon, lpVtbl : ISpeechLexiconVtbl* do
+    GUID = LibC::GUID.new(0x3da7627a_u32, 0xc7ae_u16, 0x4b23_u16, StaticArray[0x87_u8, 0x8_u8, 0x63_u8, 0x8c_u8, 0x50_u8, 0x36_u8, 0x2c_u8, 0x25_u8])
+    def query_interface(this : ISpeechLexicon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechLexicon*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechLexicon*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechLexicon*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechLexicon*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechLexicon*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechLexicon*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_GenerationId(this : ISpeechLexicon*, generation_id : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_GenerationId.call(this, generation_id)
+    end
+    def get_words(this : ISpeechLexicon*, flags : Win32cr::Media::Speech::SpeechLexiconType, generation_id : Int32*, words : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_words.call(this, flags, generation_id, words)
+    end
+    def add_pronunciation(this : ISpeechLexicon*, bstrWord : Win32cr::Foundation::BSTR, lang_id : Int32, part_of_speech : Win32cr::Media::Speech::SpeechPartOfSpeech, bstrPronunciation : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_pronunciation.call(this, bstrWord, lang_id, part_of_speech, bstrPronunciation)
+    end
+    def add_pronunciation_by_phone_ids(this : ISpeechLexicon*, bstrWord : Win32cr::Foundation::BSTR, lang_id : Int32, part_of_speech : Win32cr::Media::Speech::SpeechPartOfSpeech, phone_ids : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_pronunciation_by_phone_ids.call(this, bstrWord, lang_id, part_of_speech, phone_ids)
+    end
+    def remove_pronunciation(this : ISpeechLexicon*, bstrWord : Win32cr::Foundation::BSTR, lang_id : Int32, part_of_speech : Win32cr::Media::Speech::SpeechPartOfSpeech, bstrPronunciation : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_pronunciation.call(this, bstrWord, lang_id, part_of_speech, bstrPronunciation)
+    end
+    def remove_pronunciation_by_phone_ids(this : ISpeechLexicon*, bstrWord : Win32cr::Foundation::BSTR, lang_id : Int32, part_of_speech : Win32cr::Media::Speech::SpeechPartOfSpeech, phone_ids : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_pronunciation_by_phone_ids.call(this, bstrWord, lang_id, part_of_speech, phone_ids)
+    end
+    def get_pronunciations(this : ISpeechLexicon*, bstrWord : Win32cr::Foundation::BSTR, lang_id : Int32, type_flags : Win32cr::Media::Speech::SpeechLexiconType, ppPronunciations : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pronunciations.call(this, bstrWord, lang_id, type_flags, ppPronunciations)
+    end
+    def get_generation_change(this : ISpeechLexicon*, generation_id : Int32*, ppWords : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_generation_change.call(this, generation_id, ppWords)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechLexiconWordsVtbl,
+    query_interface : Proc(ISpeechLexiconWords*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechLexiconWords*, UInt32),
+    release : Proc(ISpeechLexiconWords*, UInt32),
+    get_type_info_count : Proc(ISpeechLexiconWords*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechLexiconWords*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechLexiconWords*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechLexiconWords*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ISpeechLexiconWords*, Int32*, Win32cr::Foundation::HRESULT),
+    item : Proc(ISpeechLexiconWords*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ISpeechLexiconWords*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("8d199862-415e-47d5-ac4f-faa608b424e6")]
+  record ISpeechLexiconWords, lpVtbl : ISpeechLexiconWordsVtbl* do
+    GUID = LibC::GUID.new(0x8d199862_u32, 0x415e_u16, 0x47d5_u16, StaticArray[0xac_u8, 0x4f_u8, 0xfa_u8, 0xa6_u8, 0x8_u8, 0xb4_u8, 0x24_u8, 0xe6_u8])
+    def query_interface(this : ISpeechLexiconWords*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechLexiconWords*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechLexiconWords*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechLexiconWords*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechLexiconWords*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechLexiconWords*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechLexiconWords*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : ISpeechLexiconWords*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def item(this : ISpeechLexiconWords*, index : Int32, word : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.item.call(this, index, word)
+    end
+    def get__NewEnum(this : ISpeechLexiconWords*, enum_variant : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, enum_variant)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechLexiconWordVtbl,
+    query_interface : Proc(ISpeechLexiconWord*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechLexiconWord*, UInt32),
+    release : Proc(ISpeechLexiconWord*, UInt32),
+    get_type_info_count : Proc(ISpeechLexiconWord*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechLexiconWord*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechLexiconWord*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechLexiconWord*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_LangId : Proc(ISpeechLexiconWord*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Type : Proc(ISpeechLexiconWord*, Win32cr::Media::Speech::SpeechWordType*, Win32cr::Foundation::HRESULT),
+    get_Word : Proc(ISpeechLexiconWord*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Pronunciations : Proc(ISpeechLexiconWord*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("4e5b933c-c9be-48ed-8842-1ee51bb1d4ff")]
+  record ISpeechLexiconWord, lpVtbl : ISpeechLexiconWordVtbl* do
+    GUID = LibC::GUID.new(0x4e5b933c_u32, 0xc9be_u16, 0x48ed_u16, StaticArray[0x88_u8, 0x42_u8, 0x1e_u8, 0xe5_u8, 0x1b_u8, 0xb1_u8, 0xd4_u8, 0xff_u8])
+    def query_interface(this : ISpeechLexiconWord*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechLexiconWord*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechLexiconWord*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechLexiconWord*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechLexiconWord*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechLexiconWord*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechLexiconWord*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_LangId(this : ISpeechLexiconWord*, lang_id : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LangId.call(this, lang_id)
+    end
+    def get_Type(this : ISpeechLexiconWord*, word_type : Win32cr::Media::Speech::SpeechWordType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Type.call(this, word_type)
+    end
+    def get_Word(this : ISpeechLexiconWord*, word : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Word.call(this, word)
+    end
+    def get_Pronunciations(this : ISpeechLexiconWord*, pronunciations : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Pronunciations.call(this, pronunciations)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechLexiconPronunciationsVtbl,
+    query_interface : Proc(ISpeechLexiconPronunciations*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechLexiconPronunciations*, UInt32),
+    release : Proc(ISpeechLexiconPronunciations*, UInt32),
+    get_type_info_count : Proc(ISpeechLexiconPronunciations*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechLexiconPronunciations*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechLexiconPronunciations*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechLexiconPronunciations*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ISpeechLexiconPronunciations*, Int32*, Win32cr::Foundation::HRESULT),
+    item : Proc(ISpeechLexiconPronunciations*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ISpeechLexiconPronunciations*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("72829128-5682-4704-a0d4-3e2bb6f2ead3")]
+  record ISpeechLexiconPronunciations, lpVtbl : ISpeechLexiconPronunciationsVtbl* do
+    GUID = LibC::GUID.new(0x72829128_u32, 0x5682_u16, 0x4704_u16, StaticArray[0xa0_u8, 0xd4_u8, 0x3e_u8, 0x2b_u8, 0xb6_u8, 0xf2_u8, 0xea_u8, 0xd3_u8])
+    def query_interface(this : ISpeechLexiconPronunciations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechLexiconPronunciations*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechLexiconPronunciations*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechLexiconPronunciations*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechLexiconPronunciations*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechLexiconPronunciations*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechLexiconPronunciations*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : ISpeechLexiconPronunciations*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def item(this : ISpeechLexiconPronunciations*, index : Int32, pronunciation : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.item.call(this, index, pronunciation)
+    end
+    def get__NewEnum(this : ISpeechLexiconPronunciations*, enum_variant : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, enum_variant)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechLexiconPronunciationVtbl,
+    query_interface : Proc(ISpeechLexiconPronunciation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechLexiconPronunciation*, UInt32),
+    release : Proc(ISpeechLexiconPronunciation*, UInt32),
+    get_type_info_count : Proc(ISpeechLexiconPronunciation*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechLexiconPronunciation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechLexiconPronunciation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechLexiconPronunciation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Type : Proc(ISpeechLexiconPronunciation*, Win32cr::Media::Speech::SpeechLexiconType*, Win32cr::Foundation::HRESULT),
+    get_LangId : Proc(ISpeechLexiconPronunciation*, Int32*, Win32cr::Foundation::HRESULT),
+    get_PartOfSpeech : Proc(ISpeechLexiconPronunciation*, Win32cr::Media::Speech::SpeechPartOfSpeech*, Win32cr::Foundation::HRESULT),
+    get_PhoneIds : Proc(ISpeechLexiconPronunciation*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Symbolic : Proc(ISpeechLexiconPronunciation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("95252c5d-9e43-4f4a-9899-48ee73352f9f")]
+  record ISpeechLexiconPronunciation, lpVtbl : ISpeechLexiconPronunciationVtbl* do
+    GUID = LibC::GUID.new(0x95252c5d_u32, 0x9e43_u16, 0x4f4a_u16, StaticArray[0x98_u8, 0x99_u8, 0x48_u8, 0xee_u8, 0x73_u8, 0x35_u8, 0x2f_u8, 0x9f_u8])
+    def query_interface(this : ISpeechLexiconPronunciation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechLexiconPronunciation*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechLexiconPronunciation*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechLexiconPronunciation*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechLexiconPronunciation*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechLexiconPronunciation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechLexiconPronunciation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Type(this : ISpeechLexiconPronunciation*, lexicon_type : Win32cr::Media::Speech::SpeechLexiconType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Type.call(this, lexicon_type)
+    end
+    def get_LangId(this : ISpeechLexiconPronunciation*, lang_id : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LangId.call(this, lang_id)
+    end
+    def get_PartOfSpeech(this : ISpeechLexiconPronunciation*, part_of_speech : Win32cr::Media::Speech::SpeechPartOfSpeech*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PartOfSpeech.call(this, part_of_speech)
+    end
+    def get_PhoneIds(this : ISpeechLexiconPronunciation*, phone_ids : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PhoneIds.call(this, phone_ids)
+    end
+    def get_Symbolic(this : ISpeechLexiconPronunciation*, symbolic : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Symbolic.call(this, symbolic)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechXMLRecoResultVtbl,
+    query_interface : Proc(ISpeechXMLRecoResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechXMLRecoResult*, UInt32),
+    release : Proc(ISpeechXMLRecoResult*, UInt32),
+    get_type_info_count : Proc(ISpeechXMLRecoResult*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechXMLRecoResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechXMLRecoResult*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechXMLRecoResult*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_RecoContext : Proc(ISpeechXMLRecoResult*, Void**, Win32cr::Foundation::HRESULT),
+    get_Times : Proc(ISpeechXMLRecoResult*, Void**, Win32cr::Foundation::HRESULT),
+    putref_AudioFormat : Proc(ISpeechXMLRecoResult*, Void*, Win32cr::Foundation::HRESULT),
+    get_AudioFormat : Proc(ISpeechXMLRecoResult*, Void**, Win32cr::Foundation::HRESULT),
+    get_PhraseInfo : Proc(ISpeechXMLRecoResult*, Void**, Win32cr::Foundation::HRESULT),
+    alternates : Proc(ISpeechXMLRecoResult*, Int32, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
+    audio : Proc(ISpeechXMLRecoResult*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
+    speak_audio : Proc(ISpeechXMLRecoResult*, Int32, Int32, Win32cr::Media::Speech::SpeechVoiceSpeakFlags, Int32*, Win32cr::Foundation::HRESULT),
+    save_to_memory : Proc(ISpeechXMLRecoResult*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    discard_result_info : Proc(ISpeechXMLRecoResult*, Win32cr::Media::Speech::SpeechDiscardType, Win32cr::Foundation::HRESULT),
+    get_xml_result : Proc(ISpeechXMLRecoResult*, Win32cr::Media::Speech::SPXMLRESULTOPTIONS, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_xml_error_info : Proc(ISpeechXMLRecoResult*, Int32*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Int32*, Int16*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("aaec54af-8f85-4924-944d-b79d39d72e19")]
+  record ISpeechXMLRecoResult, lpVtbl : ISpeechXMLRecoResultVtbl* do
+    GUID = LibC::GUID.new(0xaaec54af_u32, 0x8f85_u16, 0x4924_u16, StaticArray[0x94_u8, 0x4d_u8, 0xb7_u8, 0x9d_u8, 0x39_u8, 0xd7_u8, 0x2e_u8, 0x19_u8])
+    def query_interface(this : ISpeechXMLRecoResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechXMLRecoResult*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechXMLRecoResult*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechXMLRecoResult*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechXMLRecoResult*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechXMLRecoResult*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechXMLRecoResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_RecoContext(this : ISpeechXMLRecoResult*, reco_context : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RecoContext.call(this, reco_context)
+    end
+    def get_Times(this : ISpeechXMLRecoResult*, times : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Times.call(this, times)
+    end
+    def putref_AudioFormat(this : ISpeechXMLRecoResult*, format : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_AudioFormat.call(this, format)
+    end
+    def get_AudioFormat(this : ISpeechXMLRecoResult*, format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioFormat.call(this, format)
+    end
+    def get_PhraseInfo(this : ISpeechXMLRecoResult*, phrase_info : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PhraseInfo.call(this, phrase_info)
+    end
+    def alternates(this : ISpeechXMLRecoResult*, request_count : Int32, start_element : Int32, elements : Int32, alternates : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.alternates.call(this, request_count, start_element, elements, alternates)
+    end
+    def audio(this : ISpeechXMLRecoResult*, start_element : Int32, elements : Int32, stream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.audio.call(this, start_element, elements, stream)
+    end
+    def speak_audio(this : ISpeechXMLRecoResult*, start_element : Int32, elements : Int32, flags : Win32cr::Media::Speech::SpeechVoiceSpeakFlags, stream_number : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.speak_audio.call(this, start_element, elements, flags, stream_number)
+    end
+    def save_to_memory(this : ISpeechXMLRecoResult*, result_block : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_to_memory.call(this, result_block)
+    end
+    def discard_result_info(this : ISpeechXMLRecoResult*, value_types : Win32cr::Media::Speech::SpeechDiscardType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.discard_result_info.call(this, value_types)
+    end
+    def get_xml_result(this : ISpeechXMLRecoResult*, options : Win32cr::Media::Speech::SPXMLRESULTOPTIONS, pResult : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_xml_result.call(this, options, pResult)
+    end
+    def get_xml_error_info(this : ISpeechXMLRecoResult*, line_number : Int32*, script_line : Win32cr::Foundation::BSTR*, source : Win32cr::Foundation::BSTR*, description : Win32cr::Foundation::BSTR*, result_code : Int32*, is_error : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_xml_error_info.call(this, line_number, script_line, source, description, result_code, is_error)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechRecoResultDispatchVtbl,
+    query_interface : Proc(ISpeechRecoResultDispatch*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechRecoResultDispatch*, UInt32),
+    release : Proc(ISpeechRecoResultDispatch*, UInt32),
+    get_type_info_count : Proc(ISpeechRecoResultDispatch*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechRecoResultDispatch*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechRecoResultDispatch*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechRecoResultDispatch*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_RecoContext : Proc(ISpeechRecoResultDispatch*, Void**, Win32cr::Foundation::HRESULT),
+    get_Times : Proc(ISpeechRecoResultDispatch*, Void**, Win32cr::Foundation::HRESULT),
+    putref_AudioFormat : Proc(ISpeechRecoResultDispatch*, Void*, Win32cr::Foundation::HRESULT),
+    get_AudioFormat : Proc(ISpeechRecoResultDispatch*, Void**, Win32cr::Foundation::HRESULT),
+    get_PhraseInfo : Proc(ISpeechRecoResultDispatch*, Void**, Win32cr::Foundation::HRESULT),
+    alternates : Proc(ISpeechRecoResultDispatch*, Int32, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
+    audio : Proc(ISpeechRecoResultDispatch*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
+    speak_audio : Proc(ISpeechRecoResultDispatch*, Int32, Int32, Win32cr::Media::Speech::SpeechVoiceSpeakFlags, Int32*, Win32cr::Foundation::HRESULT),
+    save_to_memory : Proc(ISpeechRecoResultDispatch*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    discard_result_info : Proc(ISpeechRecoResultDispatch*, Win32cr::Media::Speech::SpeechDiscardType, Win32cr::Foundation::HRESULT),
+    get_xml_result : Proc(ISpeechRecoResultDispatch*, Win32cr::Media::Speech::SPXMLRESULTOPTIONS, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_xml_error_info : Proc(ISpeechRecoResultDispatch*, Int32*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT*, Int16*, Win32cr::Foundation::HRESULT),
+    set_text_feedback : Proc(ISpeechRecoResultDispatch*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("6d60eb64-aced-40a6-bbf3-4e557f71dee2")]
+  record ISpeechRecoResultDispatch, lpVtbl : ISpeechRecoResultDispatchVtbl* do
+    GUID = LibC::GUID.new(0x6d60eb64_u32, 0xaced_u16, 0x40a6_u16, StaticArray[0xbb_u8, 0xf3_u8, 0x4e_u8, 0x55_u8, 0x7f_u8, 0x71_u8, 0xde_u8, 0xe2_u8])
+    def query_interface(this : ISpeechRecoResultDispatch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechRecoResultDispatch*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechRecoResultDispatch*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechRecoResultDispatch*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechRecoResultDispatch*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechRecoResultDispatch*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechRecoResultDispatch*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_RecoContext(this : ISpeechRecoResultDispatch*, reco_context : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RecoContext.call(this, reco_context)
+    end
+    def get_Times(this : ISpeechRecoResultDispatch*, times : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Times.call(this, times)
+    end
+    def putref_AudioFormat(this : ISpeechRecoResultDispatch*, format : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_AudioFormat.call(this, format)
+    end
+    def get_AudioFormat(this : ISpeechRecoResultDispatch*, format : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioFormat.call(this, format)
+    end
+    def get_PhraseInfo(this : ISpeechRecoResultDispatch*, phrase_info : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PhraseInfo.call(this, phrase_info)
+    end
+    def alternates(this : ISpeechRecoResultDispatch*, request_count : Int32, start_element : Int32, elements : Int32, alternates : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.alternates.call(this, request_count, start_element, elements, alternates)
+    end
+    def audio(this : ISpeechRecoResultDispatch*, start_element : Int32, elements : Int32, stream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.audio.call(this, start_element, elements, stream)
+    end
+    def speak_audio(this : ISpeechRecoResultDispatch*, start_element : Int32, elements : Int32, flags : Win32cr::Media::Speech::SpeechVoiceSpeakFlags, stream_number : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.speak_audio.call(this, start_element, elements, flags, stream_number)
+    end
+    def save_to_memory(this : ISpeechRecoResultDispatch*, result_block : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_to_memory.call(this, result_block)
+    end
+    def discard_result_info(this : ISpeechRecoResultDispatch*, value_types : Win32cr::Media::Speech::SpeechDiscardType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.discard_result_info.call(this, value_types)
+    end
+    def get_xml_result(this : ISpeechRecoResultDispatch*, options : Win32cr::Media::Speech::SPXMLRESULTOPTIONS, pResult : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_xml_result.call(this, options, pResult)
+    end
+    def get_xml_error_info(this : ISpeechRecoResultDispatch*, line_number : Int32*, script_line : Win32cr::Foundation::BSTR*, source : Win32cr::Foundation::BSTR*, description : Win32cr::Foundation::BSTR*, result_code : Win32cr::Foundation::HRESULT*, is_error : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_xml_error_info.call(this, line_number, script_line, source, description, result_code, is_error)
+    end
+    def set_text_feedback(this : ISpeechRecoResultDispatch*, feedback : Win32cr::Foundation::BSTR, was_successful : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_text_feedback.call(this, feedback, was_successful)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechPhraseInfoBuilderVtbl,
+    query_interface : Proc(ISpeechPhraseInfoBuilder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechPhraseInfoBuilder*, UInt32),
+    release : Proc(ISpeechPhraseInfoBuilder*, UInt32),
+    get_type_info_count : Proc(ISpeechPhraseInfoBuilder*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechPhraseInfoBuilder*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechPhraseInfoBuilder*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechPhraseInfoBuilder*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    restore_phrase_from_memory : Proc(ISpeechPhraseInfoBuilder*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("3b151836-df3a-4e0a-846c-d2adc9334333")]
+  record ISpeechPhraseInfoBuilder, lpVtbl : ISpeechPhraseInfoBuilderVtbl* do
+    GUID = LibC::GUID.new(0x3b151836_u32, 0xdf3a_u16, 0x4e0a_u16, StaticArray[0x84_u8, 0x6c_u8, 0xd2_u8, 0xad_u8, 0xc9_u8, 0x33_u8, 0x43_u8, 0x33_u8])
+    def query_interface(this : ISpeechPhraseInfoBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechPhraseInfoBuilder*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechPhraseInfoBuilder*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechPhraseInfoBuilder*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechPhraseInfoBuilder*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechPhraseInfoBuilder*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechPhraseInfoBuilder*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def restore_phrase_from_memory(this : ISpeechPhraseInfoBuilder*, phrase_in_memory : Win32cr::System::Com::VARIANT*, phrase_info : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.restore_phrase_from_memory.call(this, phrase_in_memory, phrase_info)
+    end
+
+  end
+
+  @[Extern]
+  record ISpeechPhoneConverterVtbl,
+    query_interface : Proc(ISpeechPhoneConverter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpeechPhoneConverter*, UInt32),
+    release : Proc(ISpeechPhoneConverter*, UInt32),
+    get_type_info_count : Proc(ISpeechPhoneConverter*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISpeechPhoneConverter*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISpeechPhoneConverter*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISpeechPhoneConverter*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_LanguageId : Proc(ISpeechPhoneConverter*, Int32*, Win32cr::Foundation::HRESULT),
+    put_LanguageId : Proc(ISpeechPhoneConverter*, Int32, Win32cr::Foundation::HRESULT),
+    phone_to_id : Proc(ISpeechPhoneConverter*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    id_to_phone : Proc(ISpeechPhoneConverter*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c3e4f353-433f-43d6-89a1-6a62a7054c3d")]
+  record ISpeechPhoneConverter, lpVtbl : ISpeechPhoneConverterVtbl* do
+    GUID = LibC::GUID.new(0xc3e4f353_u32, 0x433f_u16, 0x43d6_u16, StaticArray[0x89_u8, 0xa1_u8, 0x6a_u8, 0x62_u8, 0xa7_u8, 0x5_u8, 0x4c_u8, 0x3d_u8])
+    def query_interface(this : ISpeechPhoneConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpeechPhoneConverter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpeechPhoneConverter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISpeechPhoneConverter*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISpeechPhoneConverter*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISpeechPhoneConverter*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISpeechPhoneConverter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_LanguageId(this : ISpeechPhoneConverter*, language_id : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LanguageId.call(this, language_id)
+    end
+    def put_LanguageId(this : ISpeechPhoneConverter*, language_id : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LanguageId.call(this, language_id)
+    end
+    def phone_to_id(this : ISpeechPhoneConverter*, phonemes : Win32cr::Foundation::BSTR, id_array : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.phone_to_id.call(this, phonemes, id_array)
+    end
+    def id_to_phone(this : ISpeechPhoneConverter*, id_array : Win32cr::System::Com::VARIANT, phonemes : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.id_to_phone.call(this, id_array, phonemes)
+    end
+
   end
+
 end

@@ -1,22 +1,12 @@
-require "../system/com.cr"
-require "../foundation.cr"
-require "../system/ole.cr"
-require "../system/com/structuredstorage.cr"
-require "../system/addressbook.cr"
+require "./../system/com.cr"
+require "./../foundation.cr"
+require "./../system/ole.cr"
+require "./../system/com/structured_storage.cr"
+require "./../system/address_book.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:mapi32.dll")]
-{% else %}
-@[Link("mapi32")]
-{% end %}
-lib LibWin32
+module Win32cr::Storage::Imapi
+  alias MSGCALLRELEASE = Proc(UInt32, Void*, Void)*
+
   IMAPI_SECTOR_SIZE = 2048_u32
   IMAPI2_DEFAULT_COMMAND_TIMEOUT = 10_u32
   DISPID_DDISCMASTER2EVENTS_DEVICEADDED = 256_u32
@@ -200,6 +190,8 @@ lib LibWin32
   DISPID_DFILESYSTEMIMAGEIMPORTEVENTS_UPDATEIMPORT = 257_u32
   IMAPI2FS_MajorVersion = 1_u32
   IMAPI2FS_MinorVersion = 0_u32
+  IMAPI2FS_FullVersion_STR = "1.0"
+  IMAPI2FS_FullVersion_WSTR = "1.0"
   MP_MSGCLASS_SYSTEM = 1_u32
   MP_MSGCLASS_REPLICATION = 2_u32
   MP_MSGCLASS_DELIVERY_REPORT = 3_u32
@@ -263,6 +255,7 @@ lib LibWin32
   CATID_SMTP_GET_AUX_DOMAIN_INFO_FLAGS = "84ff368a-fab3-43d7-bcdf-692c5b46e6b1"
   CLSID_SmtpCat = "b23c35b7-9219-11d2-9e17-00c04fa322ba"
   CATID_SMTP_DSN = "22b55731-f5f8-4d23-bd8f-87b52371a73a"
+  SZ_PROGID_SMTPCAT = "Smtp.Cat"
   IMAPI_S_PROPERTIESIGNORED = 262656_i32
   IMAPI_S_BUFFER_TO_SMALL = 262657_i32
   IMAPI_E_NOTOPENED = -2147220981_i32
@@ -301,5275 +294,5280 @@ lib LibWin32
   IMAPI_E_CANNOT_WRITE_TO_MEDIA = -2147220948_i32
   IMAPI_E_TRACK_NOT_BIG_ENOUGH = -2147220947_i32
   IMAPI_E_BOOTIMAGE_AND_NONBLANK_DISC = -2147220946_i32
+
   CLSID_MsftDiscMaster2 = LibC::GUID.new(0x2735412e_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+
   CLSID_MsftDiscRecorder2 = LibC::GUID.new(0x2735412d_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+
   CLSID_MsftWriteEngine2 = LibC::GUID.new(0x2735412c_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+
   CLSID_MsftDiscFormat2Erase = LibC::GUID.new(0x2735412b_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+
   CLSID_MsftDiscFormat2Data = LibC::GUID.new(0x2735412a_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+
   CLSID_MsftDiscFormat2TrackAtOnce = LibC::GUID.new(0x27354129_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+
   CLSID_MsftDiscFormat2RawCD = LibC::GUID.new(0x27354128_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+
   CLSID_MsftStreamZero = LibC::GUID.new(0x27354127_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+
   CLSID_MsftStreamPrng001 = LibC::GUID.new(0x27354126_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+
   CLSID_MsftStreamConcatenate = LibC::GUID.new(0x27354125_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+
   CLSID_MsftStreamInterleave = LibC::GUID.new(0x27354124_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+
   CLSID_MsftWriteSpeedDescriptor = LibC::GUID.new(0x27354123_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+
   CLSID_MsftMultisessionSequential = LibC::GUID.new(0x27354122_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+
   CLSID_MsftMultisessionRandomWrite = LibC::GUID.new(0xb507ca24_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
+
   CLSID_MsftRawCDImageCreator = LibC::GUID.new(0x25983561_u32, 0x9d65_u16, 0x49ce_u16, StaticArray[0xb3_u8, 0x35_u8, 0x40_u8, 0x63_u8, 0xd_u8, 0x90_u8, 0x12_u8, 0x27_u8])
+
   CLSID_BootOptions = LibC::GUID.new(0x2c941fce_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+
   CLSID_FsiStream = LibC::GUID.new(0x2c941fcd_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+
   CLSID_FileSystemImageResult = LibC::GUID.new(0x2c941fcc_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+
   CLSID_ProgressItem = LibC::GUID.new(0x2c941fcb_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+
   CLSID_EnumProgressItems = LibC::GUID.new(0x2c941fca_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+
   CLSID_ProgressItems = LibC::GUID.new(0x2c941fc9_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+
   CLSID_FsiDirectoryItem = LibC::GUID.new(0x2c941fc8_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+
   CLSID_FsiFileItem = LibC::GUID.new(0x2c941fc7_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+
   CLSID_EnumFsiItems = LibC::GUID.new(0x2c941fc6_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+
   CLSID_FsiNamedStreams = LibC::GUID.new(0xc6b6f8ed_u32, 0x6d19_u16, 0x44b4_u16, StaticArray[0xb5_u8, 0x39_u8, 0xb1_u8, 0x59_u8, 0xb7_u8, 0x93_u8, 0xa3_u8, 0x2d_u8])
+
   CLSID_MsftFileSystemImage = LibC::GUID.new(0x2c941fc5_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+
   CLSID_MsftIsoImageManager = LibC::GUID.new(0xceee3b62_u32, 0x8f56_u16, 0x4056_u16, StaticArray[0x86_u8, 0x9b_u8, 0xef_u8, 0x16_u8, 0x91_u8, 0x7e_u8, 0x3e_u8, 0xfc_u8])
+
   CLSID_BlockRange = LibC::GUID.new(0xb507ca27_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
+
   CLSID_BlockRangeList = LibC::GUID.new(0xb507ca28_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
+
   CLSID_MSDiscRecorderObj = LibC::GUID.new(0x520cca61_u32, 0x51a5_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
+
   CLSID_MSDiscMasterObj = LibC::GUID.new(0x520cca63_u32, 0x51a5_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
+
   CLSID_MSEnumDiscRecordersObj = LibC::GUID.new(0x8a03567a_u32, 0x63cb_u16, 0x4ba8_u16, StaticArray[0xba_u8, 0xf6_u8, 0x52_u8, 0x11_u8, 0x98_u8, 0x16_u8, 0xd1_u8, 0xef_u8])
+
   CLSID_tagIMMPID_MP_STRUCT = LibC::GUID.new(0x13384cf0_u32, 0xb3c4_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0x92_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc8_u8, 0xb_u8])
+
   CLSID_tagIMMPID_RP_STRUCT = LibC::GUID.new(0x79e82048_u32, 0xd320_u16, 0x11d1_u16, StaticArray[0x9f_u8, 0xf4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x73_u8, 0x48_u8])
+
   CLSID_tagIMMPID_MPV_STRUCT = LibC::GUID.new(0xcbe69706_u32, 0xc9bd_u16, 0x11d1_u16, StaticArray[0x9f_u8, 0xf2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x73_u8, 0x48_u8])
+
   CLSID_tagIMMPID_RPV_STRUCT = LibC::GUID.new(0x79e82049_u32, 0xd320_u16, 0x11d1_u16, StaticArray[0x9f_u8, 0xf4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x73_u8, 0x48_u8])
+
   CLSID_tagIMMPID_NMP_STRUCT = LibC::GUID.new(0x7433a9aa_u32, 0x20e2_u16, 0x11d2_u16, StaticArray[0x94_u8, 0xd6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x79_u8, 0xf1_u8])
+
   CLSID_tagIMMPID_CPV_STRUCT = LibC::GUID.new(0xa2a76b2a_u32, 0xe52d_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x5b_u8, 0x82_u8])
 
-  type MSGSESS = Void
-
-  alias MSGCALLRELEASE = Proc(UInt32, IMessage, Void)
-
-
   enum DISC_RECORDER_STATE_FLAGS : UInt32
-    RECORDER_BURNING = 2
-    RECORDER_DOING_NOTHING = 0
-    RECORDER_OPENED = 1
-  end
-
-  enum IMAPI_MEDIA_PHYSICAL_TYPE : Int32
-    IMAPI_MEDIA_TYPE_UNKNOWN = 0
-    IMAPI_MEDIA_TYPE_CDROM = 1
-    IMAPI_MEDIA_TYPE_CDR = 2
-    IMAPI_MEDIA_TYPE_CDRW = 3
-    IMAPI_MEDIA_TYPE_DVDROM = 4
-    IMAPI_MEDIA_TYPE_DVDRAM = 5
-    IMAPI_MEDIA_TYPE_DVDPLUSR = 6
-    IMAPI_MEDIA_TYPE_DVDPLUSRW = 7
-    IMAPI_MEDIA_TYPE_DVDPLUSR_DUALLAYER = 8
-    IMAPI_MEDIA_TYPE_DVDDASHR = 9
-    IMAPI_MEDIA_TYPE_DVDDASHRW = 10
-    IMAPI_MEDIA_TYPE_DVDDASHR_DUALLAYER = 11
-    IMAPI_MEDIA_TYPE_DISK = 12
-    IMAPI_MEDIA_TYPE_DVDPLUSRW_DUALLAYER = 13
-    IMAPI_MEDIA_TYPE_HDDVDROM = 14
-    IMAPI_MEDIA_TYPE_HDDVDR = 15
-    IMAPI_MEDIA_TYPE_HDDVDRAM = 16
-    IMAPI_MEDIA_TYPE_BDROM = 17
-    IMAPI_MEDIA_TYPE_BDR = 18
-    IMAPI_MEDIA_TYPE_BDRE = 19
-    IMAPI_MEDIA_TYPE_MAX = 19
-  end
-
-  enum IMAPI_MEDIA_WRITE_PROTECT_STATE : Int32
-    IMAPI_WRITEPROTECTED_UNTIL_POWERDOWN = 1
-    IMAPI_WRITEPROTECTED_BY_CARTRIDGE = 2
-    IMAPI_WRITEPROTECTED_BY_MEDIA_SPECIFIC_REASON = 4
-    IMAPI_WRITEPROTECTED_BY_SOFTWARE_WRITE_PROTECT = 8
-    IMAPI_WRITEPROTECTED_BY_DISC_CONTROL_BLOCK = 16
-    IMAPI_WRITEPROTECTED_READ_ONLY_MEDIA = 16384
-  end
-
-  enum IMAPI_READ_TRACK_ADDRESS_TYPE : Int32
-    IMAPI_READ_TRACK_ADDRESS_TYPE_LBA = 0
-    IMAPI_READ_TRACK_ADDRESS_TYPE_TRACK = 1
-    IMAPI_READ_TRACK_ADDRESS_TYPE_SESSION = 2
-  end
-
-  enum IMAPI_MODE_PAGE_REQUEST_TYPE : Int32
-    IMAPI_MODE_PAGE_REQUEST_TYPE_CURRENT_VALUES = 0
-    IMAPI_MODE_PAGE_REQUEST_TYPE_CHANGEABLE_VALUES = 1
-    IMAPI_MODE_PAGE_REQUEST_TYPE_DEFAULT_VALUES = 2
-    IMAPI_MODE_PAGE_REQUEST_TYPE_SAVED_VALUES = 3
-  end
-
-  enum IMAPI_MODE_PAGE_TYPE : Int32
-    IMAPI_MODE_PAGE_TYPE_READ_WRITE_ERROR_RECOVERY = 1
-    IMAPI_MODE_PAGE_TYPE_MRW = 3
-    IMAPI_MODE_PAGE_TYPE_WRITE_PARAMETERS = 5
-    IMAPI_MODE_PAGE_TYPE_CACHING = 8
-    IMAPI_MODE_PAGE_TYPE_INFORMATIONAL_EXCEPTIONS = 28
-    IMAPI_MODE_PAGE_TYPE_TIMEOUT_AND_PROTECT = 29
-    IMAPI_MODE_PAGE_TYPE_POWER_CONDITION = 26
-    IMAPI_MODE_PAGE_TYPE_LEGACY_CAPABILITIES = 42
-  end
-
-  enum IMAPI_FEATURE_PAGE_TYPE : Int32
-    IMAPI_FEATURE_PAGE_TYPE_PROFILE_LIST = 0
-    IMAPI_FEATURE_PAGE_TYPE_CORE = 1
-    IMAPI_FEATURE_PAGE_TYPE_MORPHING = 2
-    IMAPI_FEATURE_PAGE_TYPE_REMOVABLE_MEDIUM = 3
-    IMAPI_FEATURE_PAGE_TYPE_WRITE_PROTECT = 4
-    IMAPI_FEATURE_PAGE_TYPE_RANDOMLY_READABLE = 16
-    IMAPI_FEATURE_PAGE_TYPE_CD_MULTIREAD = 29
-    IMAPI_FEATURE_PAGE_TYPE_CD_READ = 30
-    IMAPI_FEATURE_PAGE_TYPE_DVD_READ = 31
-    IMAPI_FEATURE_PAGE_TYPE_RANDOMLY_WRITABLE = 32
-    IMAPI_FEATURE_PAGE_TYPE_INCREMENTAL_STREAMING_WRITABLE = 33
-    IMAPI_FEATURE_PAGE_TYPE_SECTOR_ERASABLE = 34
-    IMAPI_FEATURE_PAGE_TYPE_FORMATTABLE = 35
-    IMAPI_FEATURE_PAGE_TYPE_HARDWARE_DEFECT_MANAGEMENT = 36
-    IMAPI_FEATURE_PAGE_TYPE_WRITE_ONCE = 37
-    IMAPI_FEATURE_PAGE_TYPE_RESTRICTED_OVERWRITE = 38
-    IMAPI_FEATURE_PAGE_TYPE_CDRW_CAV_WRITE = 39
-    IMAPI_FEATURE_PAGE_TYPE_MRW = 40
-    IMAPI_FEATURE_PAGE_TYPE_ENHANCED_DEFECT_REPORTING = 41
-    IMAPI_FEATURE_PAGE_TYPE_DVD_PLUS_RW = 42
-    IMAPI_FEATURE_PAGE_TYPE_DVD_PLUS_R = 43
-    IMAPI_FEATURE_PAGE_TYPE_RIGID_RESTRICTED_OVERWRITE = 44
-    IMAPI_FEATURE_PAGE_TYPE_CD_TRACK_AT_ONCE = 45
-    IMAPI_FEATURE_PAGE_TYPE_CD_MASTERING = 46
-    IMAPI_FEATURE_PAGE_TYPE_DVD_DASH_WRITE = 47
-    IMAPI_FEATURE_PAGE_TYPE_DOUBLE_DENSITY_CD_READ = 48
-    IMAPI_FEATURE_PAGE_TYPE_DOUBLE_DENSITY_CD_R_WRITE = 49
-    IMAPI_FEATURE_PAGE_TYPE_DOUBLE_DENSITY_CD_RW_WRITE = 50
-    IMAPI_FEATURE_PAGE_TYPE_LAYER_JUMP_RECORDING = 51
-    IMAPI_FEATURE_PAGE_TYPE_CD_RW_MEDIA_WRITE_SUPPORT = 55
-    IMAPI_FEATURE_PAGE_TYPE_BD_PSEUDO_OVERWRITE = 56
-    IMAPI_FEATURE_PAGE_TYPE_DVD_PLUS_R_DUAL_LAYER = 59
-    IMAPI_FEATURE_PAGE_TYPE_BD_READ = 64
-    IMAPI_FEATURE_PAGE_TYPE_BD_WRITE = 65
-    IMAPI_FEATURE_PAGE_TYPE_HD_DVD_READ = 80
-    IMAPI_FEATURE_PAGE_TYPE_HD_DVD_WRITE = 81
-    IMAPI_FEATURE_PAGE_TYPE_POWER_MANAGEMENT = 256
-    IMAPI_FEATURE_PAGE_TYPE_SMART = 257
-    IMAPI_FEATURE_PAGE_TYPE_EMBEDDED_CHANGER = 258
-    IMAPI_FEATURE_PAGE_TYPE_CD_ANALOG_PLAY = 259
-    IMAPI_FEATURE_PAGE_TYPE_MICROCODE_UPDATE = 260
-    IMAPI_FEATURE_PAGE_TYPE_TIMEOUT = 261
-    IMAPI_FEATURE_PAGE_TYPE_DVD_CSS = 262
-    IMAPI_FEATURE_PAGE_TYPE_REAL_TIME_STREAMING = 263
-    IMAPI_FEATURE_PAGE_TYPE_LOGICAL_UNIT_SERIAL_NUMBER = 264
-    IMAPI_FEATURE_PAGE_TYPE_MEDIA_SERIAL_NUMBER = 265
-    IMAPI_FEATURE_PAGE_TYPE_DISC_CONTROL_BLOCKS = 266
-    IMAPI_FEATURE_PAGE_TYPE_DVD_CPRM = 267
-    IMAPI_FEATURE_PAGE_TYPE_FIRMWARE_INFORMATION = 268
-    IMAPI_FEATURE_PAGE_TYPE_AACS = 269
-    IMAPI_FEATURE_PAGE_TYPE_VCPS = 272
-  end
-
-  enum IMAPI_PROFILE_TYPE : Int32
-    IMAPI_PROFILE_TYPE_INVALID = 0
-    IMAPI_PROFILE_TYPE_NON_REMOVABLE_DISK = 1
-    IMAPI_PROFILE_TYPE_REMOVABLE_DISK = 2
-    IMAPI_PROFILE_TYPE_MO_ERASABLE = 3
-    IMAPI_PROFILE_TYPE_MO_WRITE_ONCE = 4
-    IMAPI_PROFILE_TYPE_AS_MO = 5
-    IMAPI_PROFILE_TYPE_CDROM = 8
-    IMAPI_PROFILE_TYPE_CD_RECORDABLE = 9
-    IMAPI_PROFILE_TYPE_CD_REWRITABLE = 10
-    IMAPI_PROFILE_TYPE_DVDROM = 16
-    IMAPI_PROFILE_TYPE_DVD_DASH_RECORDABLE = 17
-    IMAPI_PROFILE_TYPE_DVD_RAM = 18
-    IMAPI_PROFILE_TYPE_DVD_DASH_REWRITABLE = 19
-    IMAPI_PROFILE_TYPE_DVD_DASH_RW_SEQUENTIAL = 20
-    IMAPI_PROFILE_TYPE_DVD_DASH_R_DUAL_SEQUENTIAL = 21
-    IMAPI_PROFILE_TYPE_DVD_DASH_R_DUAL_LAYER_JUMP = 22
-    IMAPI_PROFILE_TYPE_DVD_PLUS_RW = 26
-    IMAPI_PROFILE_TYPE_DVD_PLUS_R = 27
-    IMAPI_PROFILE_TYPE_DDCDROM = 32
-    IMAPI_PROFILE_TYPE_DDCD_RECORDABLE = 33
-    IMAPI_PROFILE_TYPE_DDCD_REWRITABLE = 34
-    IMAPI_PROFILE_TYPE_DVD_PLUS_RW_DUAL = 42
-    IMAPI_PROFILE_TYPE_DVD_PLUS_R_DUAL = 43
-    IMAPI_PROFILE_TYPE_BD_ROM = 64
-    IMAPI_PROFILE_TYPE_BD_R_SEQUENTIAL = 65
-    IMAPI_PROFILE_TYPE_BD_R_RANDOM_RECORDING = 66
-    IMAPI_PROFILE_TYPE_BD_REWRITABLE = 67
-    IMAPI_PROFILE_TYPE_HD_DVD_ROM = 80
-    IMAPI_PROFILE_TYPE_HD_DVD_RECORDABLE = 81
-    IMAPI_PROFILE_TYPE_HD_DVD_RAM = 82
-    IMAPI_PROFILE_TYPE_NON_STANDARD = 65535
-  end
-
-  enum IMAPI_FORMAT2_DATA_WRITE_ACTION : Int32
-    IMAPI_FORMAT2_DATA_WRITE_ACTION_VALIDATING_MEDIA = 0
-    IMAPI_FORMAT2_DATA_WRITE_ACTION_FORMATTING_MEDIA = 1
-    IMAPI_FORMAT2_DATA_WRITE_ACTION_INITIALIZING_HARDWARE = 2
-    IMAPI_FORMAT2_DATA_WRITE_ACTION_CALIBRATING_POWER = 3
-    IMAPI_FORMAT2_DATA_WRITE_ACTION_WRITING_DATA = 4
-    IMAPI_FORMAT2_DATA_WRITE_ACTION_FINALIZATION = 5
-    IMAPI_FORMAT2_DATA_WRITE_ACTION_COMPLETED = 6
-    IMAPI_FORMAT2_DATA_WRITE_ACTION_VERIFYING = 7
-  end
-
-  enum IMAPI_FORMAT2_DATA_MEDIA_STATE : Int32
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_UNKNOWN = 0
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_INFORMATIONAL_MASK = 15
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_UNSUPPORTED_MASK = 64512
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_OVERWRITE_ONLY = 1
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_RANDOMLY_WRITABLE = 1
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_BLANK = 2
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_APPENDABLE = 4
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_FINAL_SESSION = 8
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_DAMAGED = 1024
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_ERASE_REQUIRED = 2048
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_NON_EMPTY_SESSION = 4096
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_WRITE_PROTECTED = 8192
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_FINALIZED = 16384
-    IMAPI_FORMAT2_DATA_MEDIA_STATE_UNSUPPORTED_MEDIA = 32768
-  end
-
-  enum IMAPI_FORMAT2_TAO_WRITE_ACTION : Int32
-    IMAPI_FORMAT2_TAO_WRITE_ACTION_UNKNOWN = 0
-    IMAPI_FORMAT2_TAO_WRITE_ACTION_PREPARING = 1
-    IMAPI_FORMAT2_TAO_WRITE_ACTION_WRITING = 2
-    IMAPI_FORMAT2_TAO_WRITE_ACTION_FINISHING = 3
-    IMAPI_FORMAT2_TAO_WRITE_ACTION_VERIFYING = 4
-  end
-
-  enum IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE : Int32
-    IMAPI_FORMAT2_RAW_CD_SUBCODE_PQ_ONLY = 1
-    IMAPI_FORMAT2_RAW_CD_SUBCODE_IS_COOKED = 2
-    IMAPI_FORMAT2_RAW_CD_SUBCODE_IS_RAW = 3
-  end
-
-  enum IMAPI_FORMAT2_RAW_CD_WRITE_ACTION : Int32
-    IMAPI_FORMAT2_RAW_CD_WRITE_ACTION_UNKNOWN = 0
-    IMAPI_FORMAT2_RAW_CD_WRITE_ACTION_PREPARING = 1
-    IMAPI_FORMAT2_RAW_CD_WRITE_ACTION_WRITING = 2
-    IMAPI_FORMAT2_RAW_CD_WRITE_ACTION_FINISHING = 3
-  end
-
-  enum IMAPI_CD_SECTOR_TYPE : Int32
-    IMAPI_CD_SECTOR_AUDIO = 0
-    IMAPI_CD_SECTOR_MODE_ZERO = 1
-    IMAPI_CD_SECTOR_MODE1 = 2
-    IMAPI_CD_SECTOR_MODE2FORM0 = 3
-    IMAPI_CD_SECTOR_MODE2FORM1 = 4
-    IMAPI_CD_SECTOR_MODE2FORM2 = 5
-    IMAPI_CD_SECTOR_MODE1RAW = 6
-    IMAPI_CD_SECTOR_MODE2FORM0RAW = 7
-    IMAPI_CD_SECTOR_MODE2FORM1RAW = 8
-    IMAPI_CD_SECTOR_MODE2FORM2RAW = 9
-  end
-
-  enum IMAPI_CD_TRACK_DIGITAL_COPY_SETTING : Int32
-    IMAPI_CD_TRACK_DIGITAL_COPY_PERMITTED = 0
-    IMAPI_CD_TRACK_DIGITAL_COPY_PROHIBITED = 1
-    IMAPI_CD_TRACK_DIGITAL_COPY_SCMS = 2
-  end
-
-  enum IMAPI_BURN_VERIFICATION_LEVEL : Int32
-    IMAPI_BURN_VERIFICATION_NONE = 0
-    IMAPI_BURN_VERIFICATION_QUICK = 1
-    IMAPI_BURN_VERIFICATION_FULL = 2
-  end
-
-  enum FsiItemType : Int32
-    FsiItemNotFound = 0
-    FsiItemDirectory = 1
-    FsiItemFile = 2
-  end
-
-  enum FsiFileSystems : Int32
-    FsiFileSystemNone = 0
-    FsiFileSystemISO9660 = 1
-    FsiFileSystemJoliet = 2
-    FsiFileSystemUDF = 4
-    FsiFileSystemUnknown = 1073741824
-  end
-
-  enum EmulationType : Int32
-    EmulationNone = 0
-    Emulation12MFloppy = 1
-    Emulation144MFloppy = 2
-    Emulation288MFloppy = 3
-    EmulationHardDisk = 4
-  end
-
-  enum PlatformId : Int32
-    PlatformX86 = 0
-    PlatformPowerPC = 1
-    PlatformMac = 2
-    PlatformEFI = 239
-  end
-
-  enum MEDIA_TYPES : Int32
-    MEDIA_CDDA_CDROM = 1
-    MEDIA_CD_ROM_XA = 2
-    MEDIA_CD_I = 3
-    MEDIA_CD_EXTRA = 4
-    MEDIA_CD_OTHER = 5
-    MEDIA_SPECIAL = 6
-  end
-
-  enum MEDIA_FLAGS : Int32
-    MEDIA_BLANK = 1
-    MEDIA_RW = 2
-    MEDIA_WRITABLE = 4
-    MEDIA_FORMAT_UNUSABLE_BY_IMAPI = 8
-  end
-
-  enum RECORDER_TYPES : Int32
-    RECORDER_CDR = 1
-    RECORDER_CDRW = 2
-  end
-
-  enum IMMPID_MP_ENUM : Int32
-    IMMPID_MP_BEFORE__ = 4095
-    IMMPID_MP_RECIPIENT_LIST = 4096
-    IMMPID_MP_CONTENT_FILE_NAME = 4097
-    IMMPID_MP_SENDER_ADDRESS_SMTP = 4098
-    IMMPID_MP_SENDER_ADDRESS_X500 = 4099
-    IMMPID_MP_SENDER_ADDRESS_X400 = 4100
-    IMMPID_MP_SENDER_ADDRESS_LEGACY_EX_DN = 4101
-    IMMPID_MP_DOMAIN_LIST = 4102
-    IMMPID_MP_PICKUP_FILE_NAME = 4103
-    IMMPID_MP_AUTHENTICATED_USER_NAME = 4104
-    IMMPID_MP_CONNECTION_IP_ADDRESS = 4105
-    IMMPID_MP_HELO_DOMAIN = 4106
-    IMMPID_MP_EIGHTBIT_MIME_OPTION = 4107
-    IMMPID_MP_CHUNKING_OPTION = 4108
-    IMMPID_MP_BINARYMIME_OPTION = 4109
-    IMMPID_MP_REMOTE_AUTHENTICATION_TYPE = 4110
-    IMMPID_MP_ERROR_CODE = 4111
-    IMMPID_MP_DSN_ENVID_VALUE = 4112
-    IMMPID_MP_DSN_RET_VALUE = 4113
-    IMMPID_MP_REMOTE_SERVER_DSN_CAPABLE = 4114
-    IMMPID_MP_ARRIVAL_TIME = 4115
-    IMMPID_MP_MESSAGE_STATUS = 4116
-    IMMPID_MP_EXPIRE_DELAY = 4117
-    IMMPID_MP_EXPIRE_NDR = 4118
-    IMMPID_MP_LOCAL_EXPIRE_DELAY = 4119
-    IMMPID_MP_LOCAL_EXPIRE_NDR = 4120
-    IMMPID_MP_ARRIVAL_FILETIME = 4121
-    IMMPID_MP_HR_CAT_STATUS = 4122
-    IMMPID_MP_MSG_GUID = 4123
-    IMMPID_MP_SUPERSEDES_MSG_GUID = 4124
-    IMMPID_MP_SCANNED_FOR_CRLF_DOT_CRLF = 4125
-    IMMPID_MP_FOUND_EMBEDDED_CRLF_DOT_CRLF = 4126
-    IMMPID_MP_MSG_SIZE_HINT = 4127
-    IMMPID_MP_RFC822_MSG_ID = 4128
-    IMMPID_MP_RFC822_MSG_SUBJECT = 4129
-    IMMPID_MP_RFC822_FROM_ADDRESS = 4130
-    IMMPID_MP_RFC822_TO_ADDRESS = 4131
-    IMMPID_MP_RFC822_CC_ADDRESS = 4132
-    IMMPID_MP_RFC822_BCC_ADDRESS = 4133
-    IMMPID_MP_CONNECTION_SERVER_IP_ADDRESS = 4134
-    IMMPID_MP_SERVER_NAME = 4135
-    IMMPID_MP_SERVER_VERSION = 4136
-    IMMPID_MP_NUM_RECIPIENTS = 4137
-    IMMPID_MP_X_PRIORITY = 4138
-    IMMPID_MP_FROM_ADDRESS = 4139
-    IMMPID_MP_SENDER_ADDRESS = 4140
-    IMMPID_MP_DEFERRED_DELIVERY_FILETIME = 4141
-    IMMPID_MP_SENDER_ADDRESS_OTHER = 4142
-    IMMPID_MP_ORIGINAL_ARRIVAL_TIME = 4143
-    IMMPID_MP_MSGCLASS = 4144
-    IMMPID_MP_CONTENT_TYPE = 4145
-    IMMPID_MP_ENCRYPTION_TYPE = 4146
-    IMMPID_MP_CONNECTION_SERVER_PORT = 4147
-    IMMPID_MP_CLIENT_AUTH_USER = 4148
-    IMMPID_MP_CLIENT_AUTH_TYPE = 4149
-    IMMPID_MP_CRC_GLOBAL = 4150
-    IMMPID_MP_CRC_RECIPS = 4151
-    IMMPID_MP_INBOUND_MAIL_FROM_AUTH = 4152
-    IMMPID_MP_AFTER__ = 4153
-  end
-
-  enum IMMPID_RP_ENUM : Int32
-    IMMPID_RP_BEFORE__ = 8191
-    IMMPID_RP_DSN_NOTIFY_SUCCESS = 8192
-    IMMPID_RP_DSN_NOTIFY_INVALID = 8193
-    IMMPID_RP_ADDRESS_TYPE = 8194
-    IMMPID_RP_ADDRESS = 8195
-    IMMPID_RP_ADDRESS_TYPE_SMTP = 8196
-    IMMPID_RP_ERROR_CODE = 8197
-    IMMPID_RP_ERROR_STRING = 8198
-    IMMPID_RP_DSN_NOTIFY_VALUE = 8199
-    IMMPID_RP_DSN_ORCPT_VALUE = 8200
-    IMMPID_RP_ADDRESS_SMTP = 8201
-    IMMPID_RP_ADDRESS_X400 = 8202
-    IMMPID_RP_ADDRESS_X500 = 8203
-    IMMPID_RP_LEGACY_EX_DN = 8204
-    IMMPID_RP_RECIPIENT_FLAGS = 8205
-    IMMPID_RP_SMTP_STATUS_STRING = 8206
-    IMMPID_RP_DSN_PRE_CAT_ADDRESS = 8207
-    IMMPID_RP_MDB_GUID = 8208
-    IMMPID_RP_USER_GUID = 8209
-    IMMPID_RP_DOMAIN = 8210
-    IMMPID_RP_ADDRESS_OTHER = 8211
-    IMMPID_RP_DISPLAY_NAME = 8212
-    IMMPID_RP_AFTER__ = 8213
-  end
-
-  enum IMMPID_MPV_ENUM : Int32
-    IMMPID_MPV_BEFORE__ = 12287
-    IMMPID_MPV_STORE_DRIVER_HANDLE = 12288
-    IMMPID_MPV_MESSAGE_CREATION_FLAGS = 12289
-    IMMPID_MPV_MESSAGE_OPEN_HANDLES = 12290
-    IMMPID_MPV_TOTAL_OPEN_HANDLES = 12291
-    IMMPID_MPV_TOTAL_OPEN_PROPERTY_STREAM_HANDLES = 12292
-    IMMPID_MPV_TOTAL_OPEN_CONTENT_HANDLES = 12293
-    IMMPID_MPV_AFTER__ = 12294
-  end
-
-  enum IMMPID_RPV_ENUM : Int32
-    IMMPID_RPV_BEFORE__ = 16383
-    IMMPID_RPV_DONT_DELIVER = 16384
-    IMMPID_RPV_NO_NAME_COLLISIONS = 16385
-    IMMPID_RPV_AFTER__ = 16386
-  end
-
-  enum IMMPID_NMP_ENUM : Int32
-    IMMPID_NMP_BEFORE__ = 24575
-    IMMPID_NMP_SECONDARY_GROUPS = 24576
-    IMMPID_NMP_SECONDARY_ARTNUM = 24577
-    IMMPID_NMP_PRIMARY_GROUP = 24578
-    IMMPID_NMP_PRIMARY_ARTID = 24579
-    IMMPID_NMP_POST_TOKEN = 24580
-    IMMPID_NMP_NEWSGROUP_LIST = 24581
-    IMMPID_NMP_HEADERS = 24582
-    IMMPID_NMP_NNTP_PROCESSING = 24583
-    IMMPID_NMP_NNTP_APPROVED_HEADER = 24584
-    IMMPID_NMP_AFTER__ = 24585
-  end
-
-  enum IMMPID_CPV_ENUM : Int32
-    IMMPID_CPV_BEFORE__ = 32767
-    IMMPID_CP_START = 32768
-    IMMPID_CPV_AFTER__ = 32769
-  end
-
-  struct SPropAttrArray
-    c_values : UInt32
-    a_prop_attr : UInt32[0]*
-  end
-  struct IMMP_MPV_STORE_DRIVER_HANDLE
-    guid_signature : Guid
-  end
-  struct Tagimmpid_guidlist_item
-    pguid : Guid*
-    dw_start : UInt32
-    dw_last : UInt32
-  end
-
-
-  struct IDiscMaster2VTbl
-    query_interface : Proc(IDiscMaster2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscMaster2*, UInt32)
-    release : Proc(IDiscMaster2*, UInt32)
-    get_type_info_count : Proc(IDiscMaster2*, UInt32*, HRESULT)
-    get_type_info : Proc(IDiscMaster2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDiscMaster2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDiscMaster2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IDiscMaster2*, IEnumVARIANT*, HRESULT)
-    get_item : Proc(IDiscMaster2*, Int32, UInt8**, HRESULT)
-    get_count : Proc(IDiscMaster2*, Int32*, HRESULT)
-    get_is_supported_environment : Proc(IDiscMaster2*, Int16*, HRESULT)
-  end
-
-  IDiscMaster2_GUID = "27354130-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IDiscMaster2 = LibC::GUID.new(0x27354130_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IDiscMaster2
-    lpVtbl : IDiscMaster2VTbl*
-  end
-
-  struct DDiscMaster2EventsVTbl
-    query_interface : Proc(DDiscMaster2Events*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DDiscMaster2Events*, UInt32)
-    release : Proc(DDiscMaster2Events*, UInt32)
-    get_type_info_count : Proc(DDiscMaster2Events*, UInt32*, HRESULT)
-    get_type_info : Proc(DDiscMaster2Events*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DDiscMaster2Events*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DDiscMaster2Events*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    notify_device_added : Proc(DDiscMaster2Events*, IDispatch, UInt8*, HRESULT)
-    notify_device_removed : Proc(DDiscMaster2Events*, IDispatch, UInt8*, HRESULT)
-  end
-
-  DDiscMaster2Events_GUID = "27354131-7f64-5b0f-8f00-5d77afbe261e"
-  IID_DDiscMaster2Events = LibC::GUID.new(0x27354131_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct DDiscMaster2Events
-    lpVtbl : DDiscMaster2EventsVTbl*
-  end
-
-  struct IDiscRecorder2ExVTbl
-    query_interface : Proc(IDiscRecorder2Ex*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscRecorder2Ex*, UInt32)
-    release : Proc(IDiscRecorder2Ex*, UInt32)
-    send_command_no_data : Proc(IDiscRecorder2Ex*, UInt8*, UInt32, UInt8*, UInt32, HRESULT)
-    send_command_send_data_to_device : Proc(IDiscRecorder2Ex*, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, HRESULT)
-    send_command_get_data_from_device : Proc(IDiscRecorder2Ex*, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32*, HRESULT)
-    read_dvd_structure : Proc(IDiscRecorder2Ex*, UInt32, UInt32, UInt32, UInt32, UInt8**, UInt32*, HRESULT)
-    send_dvd_structure : Proc(IDiscRecorder2Ex*, UInt32, UInt8*, UInt32, HRESULT)
-    get_adapter_descriptor : Proc(IDiscRecorder2Ex*, UInt8**, UInt32*, HRESULT)
-    get_device_descriptor : Proc(IDiscRecorder2Ex*, UInt8**, UInt32*, HRESULT)
-    get_disc_information : Proc(IDiscRecorder2Ex*, UInt8**, UInt32*, HRESULT)
-    get_track_information : Proc(IDiscRecorder2Ex*, UInt32, IMAPI_READ_TRACK_ADDRESS_TYPE, UInt8**, UInt32*, HRESULT)
-    get_feature_page : Proc(IDiscRecorder2Ex*, IMAPI_FEATURE_PAGE_TYPE, BOOLEAN, UInt8**, UInt32*, HRESULT)
-    get_mode_page : Proc(IDiscRecorder2Ex*, IMAPI_MODE_PAGE_TYPE, IMAPI_MODE_PAGE_REQUEST_TYPE, UInt8**, UInt32*, HRESULT)
-    set_mode_page : Proc(IDiscRecorder2Ex*, IMAPI_MODE_PAGE_REQUEST_TYPE, UInt8*, UInt32, HRESULT)
-    get_supported_feature_pages : Proc(IDiscRecorder2Ex*, BOOLEAN, IMAPI_FEATURE_PAGE_TYPE**, UInt32*, HRESULT)
-    get_supported_profiles : Proc(IDiscRecorder2Ex*, BOOLEAN, IMAPI_PROFILE_TYPE**, UInt32*, HRESULT)
-    get_supported_mode_pages : Proc(IDiscRecorder2Ex*, IMAPI_MODE_PAGE_REQUEST_TYPE, IMAPI_MODE_PAGE_TYPE**, UInt32*, HRESULT)
-    get_byte_alignment_mask : Proc(IDiscRecorder2Ex*, UInt32*, HRESULT)
-    get_maximum_non_page_aligned_transfer_size : Proc(IDiscRecorder2Ex*, UInt32*, HRESULT)
-    get_maximum_page_aligned_transfer_size : Proc(IDiscRecorder2Ex*, UInt32*, HRESULT)
-  end
-
-  IDiscRecorder2Ex_GUID = "27354132-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IDiscRecorder2Ex = LibC::GUID.new(0x27354132_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IDiscRecorder2Ex
-    lpVtbl : IDiscRecorder2ExVTbl*
-  end
-
-  struct IDiscRecorder2VTbl
-    query_interface : Proc(IDiscRecorder2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscRecorder2*, UInt32)
-    release : Proc(IDiscRecorder2*, UInt32)
-    get_type_info_count : Proc(IDiscRecorder2*, UInt32*, HRESULT)
-    get_type_info : Proc(IDiscRecorder2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDiscRecorder2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDiscRecorder2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    eject_media : Proc(IDiscRecorder2*, HRESULT)
-    close_tray : Proc(IDiscRecorder2*, HRESULT)
-    acquire_exclusive_access : Proc(IDiscRecorder2*, Int16, UInt8*, HRESULT)
-    release_exclusive_access : Proc(IDiscRecorder2*, HRESULT)
-    disable_mcn : Proc(IDiscRecorder2*, HRESULT)
-    enable_mcn : Proc(IDiscRecorder2*, HRESULT)
-    initialize_disc_recorder : Proc(IDiscRecorder2*, UInt8*, HRESULT)
-    get_active_disc_recorder : Proc(IDiscRecorder2*, UInt8**, HRESULT)
-    get_vendor_id : Proc(IDiscRecorder2*, UInt8**, HRESULT)
-    get_product_id : Proc(IDiscRecorder2*, UInt8**, HRESULT)
-    get_product_revision : Proc(IDiscRecorder2*, UInt8**, HRESULT)
-    get_volume_name : Proc(IDiscRecorder2*, UInt8**, HRESULT)
-    get_volume_path_names : Proc(IDiscRecorder2*, SAFEARRAY**, HRESULT)
-    get_device_can_load_media : Proc(IDiscRecorder2*, Int16*, HRESULT)
-    get_legacy_device_number : Proc(IDiscRecorder2*, Int32*, HRESULT)
-    get_supported_feature_pages : Proc(IDiscRecorder2*, SAFEARRAY**, HRESULT)
-    get_current_feature_pages : Proc(IDiscRecorder2*, SAFEARRAY**, HRESULT)
-    get_supported_profiles : Proc(IDiscRecorder2*, SAFEARRAY**, HRESULT)
-    get_current_profiles : Proc(IDiscRecorder2*, SAFEARRAY**, HRESULT)
-    get_supported_mode_pages : Proc(IDiscRecorder2*, SAFEARRAY**, HRESULT)
-    get_exclusive_access_owner : Proc(IDiscRecorder2*, UInt8**, HRESULT)
-  end
-
-  IDiscRecorder2_GUID = "27354133-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IDiscRecorder2 = LibC::GUID.new(0x27354133_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IDiscRecorder2
-    lpVtbl : IDiscRecorder2VTbl*
-  end
-
-  struct IWriteEngine2VTbl
-    query_interface : Proc(IWriteEngine2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWriteEngine2*, UInt32)
-    release : Proc(IWriteEngine2*, UInt32)
-    get_type_info_count : Proc(IWriteEngine2*, UInt32*, HRESULT)
-    get_type_info : Proc(IWriteEngine2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWriteEngine2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWriteEngine2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    write_section : Proc(IWriteEngine2*, IStream, Int32, Int32, HRESULT)
-    cancel_write : Proc(IWriteEngine2*, HRESULT)
-    put_recorder : Proc(IWriteEngine2*, IDiscRecorder2Ex, HRESULT)
-    get_recorder : Proc(IWriteEngine2*, IDiscRecorder2Ex*, HRESULT)
-    put_use_streaming_write12 : Proc(IWriteEngine2*, Int16, HRESULT)
-    get_use_streaming_write12 : Proc(IWriteEngine2*, Int16*, HRESULT)
-    put_starting_sectors_per_second : Proc(IWriteEngine2*, Int32, HRESULT)
-    get_starting_sectors_per_second : Proc(IWriteEngine2*, Int32*, HRESULT)
-    put_ending_sectors_per_second : Proc(IWriteEngine2*, Int32, HRESULT)
-    get_ending_sectors_per_second : Proc(IWriteEngine2*, Int32*, HRESULT)
-    put_bytes_per_sector : Proc(IWriteEngine2*, Int32, HRESULT)
-    get_bytes_per_sector : Proc(IWriteEngine2*, Int32*, HRESULT)
-    get_write_in_progress : Proc(IWriteEngine2*, Int16*, HRESULT)
-  end
-
-  IWriteEngine2_GUID = "27354135-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IWriteEngine2 = LibC::GUID.new(0x27354135_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IWriteEngine2
-    lpVtbl : IWriteEngine2VTbl*
-  end
-
-  struct IWriteEngine2EventArgsVTbl
-    query_interface : Proc(IWriteEngine2EventArgs*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWriteEngine2EventArgs*, UInt32)
-    release : Proc(IWriteEngine2EventArgs*, UInt32)
-    get_type_info_count : Proc(IWriteEngine2EventArgs*, UInt32*, HRESULT)
-    get_type_info : Proc(IWriteEngine2EventArgs*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWriteEngine2EventArgs*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWriteEngine2EventArgs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_start_lba : Proc(IWriteEngine2EventArgs*, Int32*, HRESULT)
-    get_sector_count : Proc(IWriteEngine2EventArgs*, Int32*, HRESULT)
-    get_last_read_lba : Proc(IWriteEngine2EventArgs*, Int32*, HRESULT)
-    get_last_written_lba : Proc(IWriteEngine2EventArgs*, Int32*, HRESULT)
-    get_total_system_buffer : Proc(IWriteEngine2EventArgs*, Int32*, HRESULT)
-    get_used_system_buffer : Proc(IWriteEngine2EventArgs*, Int32*, HRESULT)
-    get_free_system_buffer : Proc(IWriteEngine2EventArgs*, Int32*, HRESULT)
-  end
-
-  IWriteEngine2EventArgs_GUID = "27354136-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IWriteEngine2EventArgs = LibC::GUID.new(0x27354136_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IWriteEngine2EventArgs
-    lpVtbl : IWriteEngine2EventArgsVTbl*
-  end
-
-  struct DWriteEngine2EventsVTbl
-    query_interface : Proc(DWriteEngine2Events*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DWriteEngine2Events*, UInt32)
-    release : Proc(DWriteEngine2Events*, UInt32)
-    get_type_info_count : Proc(DWriteEngine2Events*, UInt32*, HRESULT)
-    get_type_info : Proc(DWriteEngine2Events*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DWriteEngine2Events*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DWriteEngine2Events*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    update : Proc(DWriteEngine2Events*, IDispatch, IDispatch, HRESULT)
-  end
-
-  DWriteEngine2Events_GUID = "27354137-7f64-5b0f-8f00-5d77afbe261e"
-  IID_DWriteEngine2Events = LibC::GUID.new(0x27354137_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct DWriteEngine2Events
-    lpVtbl : DWriteEngine2EventsVTbl*
-  end
-
-  struct IDiscFormat2VTbl
-    query_interface : Proc(IDiscFormat2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscFormat2*, UInt32)
-    release : Proc(IDiscFormat2*, UInt32)
-    get_type_info_count : Proc(IDiscFormat2*, UInt32*, HRESULT)
-    get_type_info : Proc(IDiscFormat2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDiscFormat2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDiscFormat2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    is_recorder_supported : Proc(IDiscFormat2*, IDiscRecorder2, Int16*, HRESULT)
-    is_current_media_supported : Proc(IDiscFormat2*, IDiscRecorder2, Int16*, HRESULT)
-    get_media_physically_blank : Proc(IDiscFormat2*, Int16*, HRESULT)
-    get_media_heuristically_blank : Proc(IDiscFormat2*, Int16*, HRESULT)
-    get_supported_media_types : Proc(IDiscFormat2*, SAFEARRAY**, HRESULT)
-  end
-
-  IDiscFormat2_GUID = "27354152-8f64-5b0f-8f00-5d77afbe261e"
-  IID_IDiscFormat2 = LibC::GUID.new(0x27354152_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IDiscFormat2
-    lpVtbl : IDiscFormat2VTbl*
-  end
-
-  struct IDiscFormat2EraseVTbl
-    query_interface : Proc(IDiscFormat2Erase*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscFormat2Erase*, UInt32)
-    release : Proc(IDiscFormat2Erase*, UInt32)
-    get_type_info_count : Proc(IDiscFormat2Erase*, UInt32*, HRESULT)
-    get_type_info : Proc(IDiscFormat2Erase*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDiscFormat2Erase*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDiscFormat2Erase*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    is_recorder_supported : Proc(IDiscFormat2Erase*, IDiscRecorder2, Int16*, HRESULT)
-    is_current_media_supported : Proc(IDiscFormat2Erase*, IDiscRecorder2, Int16*, HRESULT)
-    get_media_physically_blank : Proc(IDiscFormat2Erase*, Int16*, HRESULT)
-    get_media_heuristically_blank : Proc(IDiscFormat2Erase*, Int16*, HRESULT)
-    get_supported_media_types : Proc(IDiscFormat2Erase*, SAFEARRAY**, HRESULT)
-    put_recorder : Proc(IDiscFormat2Erase*, IDiscRecorder2, HRESULT)
-    get_recorder : Proc(IDiscFormat2Erase*, IDiscRecorder2*, HRESULT)
-    put_full_erase : Proc(IDiscFormat2Erase*, Int16, HRESULT)
-    get_full_erase : Proc(IDiscFormat2Erase*, Int16*, HRESULT)
-    get_current_physical_media_type : Proc(IDiscFormat2Erase*, IMAPI_MEDIA_PHYSICAL_TYPE*, HRESULT)
-    put_client_name : Proc(IDiscFormat2Erase*, UInt8*, HRESULT)
-    get_client_name : Proc(IDiscFormat2Erase*, UInt8**, HRESULT)
-    erase_media : Proc(IDiscFormat2Erase*, HRESULT)
-  end
-
-  IDiscFormat2Erase_GUID = "27354156-8f64-5b0f-8f00-5d77afbe261e"
-  IID_IDiscFormat2Erase = LibC::GUID.new(0x27354156_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IDiscFormat2Erase
-    lpVtbl : IDiscFormat2EraseVTbl*
-  end
-
-  struct DDiscFormat2EraseEventsVTbl
-    query_interface : Proc(DDiscFormat2EraseEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DDiscFormat2EraseEvents*, UInt32)
-    release : Proc(DDiscFormat2EraseEvents*, UInt32)
-    get_type_info_count : Proc(DDiscFormat2EraseEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(DDiscFormat2EraseEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DDiscFormat2EraseEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DDiscFormat2EraseEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    update : Proc(DDiscFormat2EraseEvents*, IDispatch, Int32, Int32, HRESULT)
-  end
-
-  DDiscFormat2EraseEvents_GUID = "2735413a-7f64-5b0f-8f00-5d77afbe261e"
-  IID_DDiscFormat2EraseEvents = LibC::GUID.new(0x2735413a_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct DDiscFormat2EraseEvents
-    lpVtbl : DDiscFormat2EraseEventsVTbl*
-  end
-
-  struct IDiscFormat2DataVTbl
-    query_interface : Proc(IDiscFormat2Data*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscFormat2Data*, UInt32)
-    release : Proc(IDiscFormat2Data*, UInt32)
-    get_type_info_count : Proc(IDiscFormat2Data*, UInt32*, HRESULT)
-    get_type_info : Proc(IDiscFormat2Data*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDiscFormat2Data*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDiscFormat2Data*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    is_recorder_supported : Proc(IDiscFormat2Data*, IDiscRecorder2, Int16*, HRESULT)
-    is_current_media_supported : Proc(IDiscFormat2Data*, IDiscRecorder2, Int16*, HRESULT)
-    get_media_physically_blank : Proc(IDiscFormat2Data*, Int16*, HRESULT)
-    get_media_heuristically_blank : Proc(IDiscFormat2Data*, Int16*, HRESULT)
-    get_supported_media_types : Proc(IDiscFormat2Data*, SAFEARRAY**, HRESULT)
-    put_recorder : Proc(IDiscFormat2Data*, IDiscRecorder2, HRESULT)
-    get_recorder : Proc(IDiscFormat2Data*, IDiscRecorder2*, HRESULT)
-    put_buffer_underrun_free_disabled : Proc(IDiscFormat2Data*, Int16, HRESULT)
-    get_buffer_underrun_free_disabled : Proc(IDiscFormat2Data*, Int16*, HRESULT)
-    put_postgap_already_in_image : Proc(IDiscFormat2Data*, Int16, HRESULT)
-    get_postgap_already_in_image : Proc(IDiscFormat2Data*, Int16*, HRESULT)
-    get_current_media_status : Proc(IDiscFormat2Data*, IMAPI_FORMAT2_DATA_MEDIA_STATE*, HRESULT)
-    get_write_protect_status : Proc(IDiscFormat2Data*, IMAPI_MEDIA_WRITE_PROTECT_STATE*, HRESULT)
-    get_total_sectors_on_media : Proc(IDiscFormat2Data*, Int32*, HRESULT)
-    get_free_sectors_on_media : Proc(IDiscFormat2Data*, Int32*, HRESULT)
-    get_next_writable_address : Proc(IDiscFormat2Data*, Int32*, HRESULT)
-    get_start_address_of_previous_session : Proc(IDiscFormat2Data*, Int32*, HRESULT)
-    get_last_written_address_of_previous_session : Proc(IDiscFormat2Data*, Int32*, HRESULT)
-    put_force_media_to_be_closed : Proc(IDiscFormat2Data*, Int16, HRESULT)
-    get_force_media_to_be_closed : Proc(IDiscFormat2Data*, Int16*, HRESULT)
-    put_disable_consumer_dvd_compatibility_mode : Proc(IDiscFormat2Data*, Int16, HRESULT)
-    get_disable_consumer_dvd_compatibility_mode : Proc(IDiscFormat2Data*, Int16*, HRESULT)
-    get_current_physical_media_type : Proc(IDiscFormat2Data*, IMAPI_MEDIA_PHYSICAL_TYPE*, HRESULT)
-    put_client_name : Proc(IDiscFormat2Data*, UInt8*, HRESULT)
-    get_client_name : Proc(IDiscFormat2Data*, UInt8**, HRESULT)
-    get_requested_write_speed : Proc(IDiscFormat2Data*, Int32*, HRESULT)
-    get_requested_rotation_type_is_pure_cav : Proc(IDiscFormat2Data*, Int16*, HRESULT)
-    get_current_write_speed : Proc(IDiscFormat2Data*, Int32*, HRESULT)
-    get_current_rotation_type_is_pure_cav : Proc(IDiscFormat2Data*, Int16*, HRESULT)
-    get_supported_write_speeds : Proc(IDiscFormat2Data*, SAFEARRAY**, HRESULT)
-    get_supported_write_speed_descriptors : Proc(IDiscFormat2Data*, SAFEARRAY**, HRESULT)
-    put_force_overwrite : Proc(IDiscFormat2Data*, Int16, HRESULT)
-    get_force_overwrite : Proc(IDiscFormat2Data*, Int16*, HRESULT)
-    get_multisession_interfaces : Proc(IDiscFormat2Data*, SAFEARRAY**, HRESULT)
-    write : Proc(IDiscFormat2Data*, IStream, HRESULT)
-    cancel_write : Proc(IDiscFormat2Data*, HRESULT)
-    set_write_speed : Proc(IDiscFormat2Data*, Int32, Int16, HRESULT)
-  end
-
-  IDiscFormat2Data_GUID = "27354153-9f64-5b0f-8f00-5d77afbe261e"
-  IID_IDiscFormat2Data = LibC::GUID.new(0x27354153_u32, 0x9f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IDiscFormat2Data
-    lpVtbl : IDiscFormat2DataVTbl*
-  end
-
-  struct DDiscFormat2DataEventsVTbl
-    query_interface : Proc(DDiscFormat2DataEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DDiscFormat2DataEvents*, UInt32)
-    release : Proc(DDiscFormat2DataEvents*, UInt32)
-    get_type_info_count : Proc(DDiscFormat2DataEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(DDiscFormat2DataEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DDiscFormat2DataEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DDiscFormat2DataEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    update : Proc(DDiscFormat2DataEvents*, IDispatch, IDispatch, HRESULT)
-  end
-
-  DDiscFormat2DataEvents_GUID = "2735413c-7f64-5b0f-8f00-5d77afbe261e"
-  IID_DDiscFormat2DataEvents = LibC::GUID.new(0x2735413c_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct DDiscFormat2DataEvents
-    lpVtbl : DDiscFormat2DataEventsVTbl*
-  end
-
-  struct IDiscFormat2DataEventArgsVTbl
-    query_interface : Proc(IDiscFormat2DataEventArgs*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscFormat2DataEventArgs*, UInt32)
-    release : Proc(IDiscFormat2DataEventArgs*, UInt32)
-    get_type_info_count : Proc(IDiscFormat2DataEventArgs*, UInt32*, HRESULT)
-    get_type_info : Proc(IDiscFormat2DataEventArgs*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDiscFormat2DataEventArgs*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDiscFormat2DataEventArgs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_start_lba : Proc(IDiscFormat2DataEventArgs*, Int32*, HRESULT)
-    get_sector_count : Proc(IDiscFormat2DataEventArgs*, Int32*, HRESULT)
-    get_last_read_lba : Proc(IDiscFormat2DataEventArgs*, Int32*, HRESULT)
-    get_last_written_lba : Proc(IDiscFormat2DataEventArgs*, Int32*, HRESULT)
-    get_total_system_buffer : Proc(IDiscFormat2DataEventArgs*, Int32*, HRESULT)
-    get_used_system_buffer : Proc(IDiscFormat2DataEventArgs*, Int32*, HRESULT)
-    get_free_system_buffer : Proc(IDiscFormat2DataEventArgs*, Int32*, HRESULT)
-    get_elapsed_time : Proc(IDiscFormat2DataEventArgs*, Int32*, HRESULT)
-    get_remaining_time : Proc(IDiscFormat2DataEventArgs*, Int32*, HRESULT)
-    get_total_time : Proc(IDiscFormat2DataEventArgs*, Int32*, HRESULT)
-    get_current_action : Proc(IDiscFormat2DataEventArgs*, IMAPI_FORMAT2_DATA_WRITE_ACTION*, HRESULT)
-  end
-
-  IDiscFormat2DataEventArgs_GUID = "2735413d-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IDiscFormat2DataEventArgs = LibC::GUID.new(0x2735413d_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IDiscFormat2DataEventArgs
-    lpVtbl : IDiscFormat2DataEventArgsVTbl*
-  end
-
-  struct IDiscFormat2TrackAtOnceVTbl
-    query_interface : Proc(IDiscFormat2TrackAtOnce*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscFormat2TrackAtOnce*, UInt32)
-    release : Proc(IDiscFormat2TrackAtOnce*, UInt32)
-    get_type_info_count : Proc(IDiscFormat2TrackAtOnce*, UInt32*, HRESULT)
-    get_type_info : Proc(IDiscFormat2TrackAtOnce*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDiscFormat2TrackAtOnce*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDiscFormat2TrackAtOnce*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    is_recorder_supported : Proc(IDiscFormat2TrackAtOnce*, IDiscRecorder2, Int16*, HRESULT)
-    is_current_media_supported : Proc(IDiscFormat2TrackAtOnce*, IDiscRecorder2, Int16*, HRESULT)
-    get_media_physically_blank : Proc(IDiscFormat2TrackAtOnce*, Int16*, HRESULT)
-    get_media_heuristically_blank : Proc(IDiscFormat2TrackAtOnce*, Int16*, HRESULT)
-    get_supported_media_types : Proc(IDiscFormat2TrackAtOnce*, SAFEARRAY**, HRESULT)
-    prepare_media : Proc(IDiscFormat2TrackAtOnce*, HRESULT)
-    add_audio_track : Proc(IDiscFormat2TrackAtOnce*, IStream, HRESULT)
-    cancel_add_track : Proc(IDiscFormat2TrackAtOnce*, HRESULT)
-    release_media : Proc(IDiscFormat2TrackAtOnce*, HRESULT)
-    set_write_speed : Proc(IDiscFormat2TrackAtOnce*, Int32, Int16, HRESULT)
-    put_recorder : Proc(IDiscFormat2TrackAtOnce*, IDiscRecorder2, HRESULT)
-    get_recorder : Proc(IDiscFormat2TrackAtOnce*, IDiscRecorder2*, HRESULT)
-    put_buffer_underrun_free_disabled : Proc(IDiscFormat2TrackAtOnce*, Int16, HRESULT)
-    get_buffer_underrun_free_disabled : Proc(IDiscFormat2TrackAtOnce*, Int16*, HRESULT)
-    get_number_of_existing_tracks : Proc(IDiscFormat2TrackAtOnce*, Int32*, HRESULT)
-    get_total_sectors_on_media : Proc(IDiscFormat2TrackAtOnce*, Int32*, HRESULT)
-    get_free_sectors_on_media : Proc(IDiscFormat2TrackAtOnce*, Int32*, HRESULT)
-    get_used_sectors_on_media : Proc(IDiscFormat2TrackAtOnce*, Int32*, HRESULT)
-    put_do_not_finalize_media : Proc(IDiscFormat2TrackAtOnce*, Int16, HRESULT)
-    get_do_not_finalize_media : Proc(IDiscFormat2TrackAtOnce*, Int16*, HRESULT)
-    get_expected_table_of_contents : Proc(IDiscFormat2TrackAtOnce*, SAFEARRAY**, HRESULT)
-    get_current_physical_media_type : Proc(IDiscFormat2TrackAtOnce*, IMAPI_MEDIA_PHYSICAL_TYPE*, HRESULT)
-    put_client_name : Proc(IDiscFormat2TrackAtOnce*, UInt8*, HRESULT)
-    get_client_name : Proc(IDiscFormat2TrackAtOnce*, UInt8**, HRESULT)
-    get_requested_write_speed : Proc(IDiscFormat2TrackAtOnce*, Int32*, HRESULT)
-    get_requested_rotation_type_is_pure_cav : Proc(IDiscFormat2TrackAtOnce*, Int16*, HRESULT)
-    get_current_write_speed : Proc(IDiscFormat2TrackAtOnce*, Int32*, HRESULT)
-    get_current_rotation_type_is_pure_cav : Proc(IDiscFormat2TrackAtOnce*, Int16*, HRESULT)
-    get_supported_write_speeds : Proc(IDiscFormat2TrackAtOnce*, SAFEARRAY**, HRESULT)
-    get_supported_write_speed_descriptors : Proc(IDiscFormat2TrackAtOnce*, SAFEARRAY**, HRESULT)
-  end
-
-  IDiscFormat2TrackAtOnce_GUID = "27354154-8f64-5b0f-8f00-5d77afbe261e"
-  IID_IDiscFormat2TrackAtOnce = LibC::GUID.new(0x27354154_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IDiscFormat2TrackAtOnce
-    lpVtbl : IDiscFormat2TrackAtOnceVTbl*
-  end
-
-  struct DDiscFormat2TrackAtOnceEventsVTbl
-    query_interface : Proc(DDiscFormat2TrackAtOnceEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DDiscFormat2TrackAtOnceEvents*, UInt32)
-    release : Proc(DDiscFormat2TrackAtOnceEvents*, UInt32)
-    get_type_info_count : Proc(DDiscFormat2TrackAtOnceEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(DDiscFormat2TrackAtOnceEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DDiscFormat2TrackAtOnceEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DDiscFormat2TrackAtOnceEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    update : Proc(DDiscFormat2TrackAtOnceEvents*, IDispatch, IDispatch, HRESULT)
-  end
-
-  DDiscFormat2TrackAtOnceEvents_GUID = "2735413f-7f64-5b0f-8f00-5d77afbe261e"
-  IID_DDiscFormat2TrackAtOnceEvents = LibC::GUID.new(0x2735413f_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct DDiscFormat2TrackAtOnceEvents
-    lpVtbl : DDiscFormat2TrackAtOnceEventsVTbl*
-  end
-
-  struct IDiscFormat2TrackAtOnceEventArgsVTbl
-    query_interface : Proc(IDiscFormat2TrackAtOnceEventArgs*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscFormat2TrackAtOnceEventArgs*, UInt32)
-    release : Proc(IDiscFormat2TrackAtOnceEventArgs*, UInt32)
-    get_type_info_count : Proc(IDiscFormat2TrackAtOnceEventArgs*, UInt32*, HRESULT)
-    get_type_info : Proc(IDiscFormat2TrackAtOnceEventArgs*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDiscFormat2TrackAtOnceEventArgs*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_start_lba : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, HRESULT)
-    get_sector_count : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, HRESULT)
-    get_last_read_lba : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, HRESULT)
-    get_last_written_lba : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, HRESULT)
-    get_total_system_buffer : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, HRESULT)
-    get_used_system_buffer : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, HRESULT)
-    get_free_system_buffer : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, HRESULT)
-    get_current_track_number : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, HRESULT)
-    get_current_action : Proc(IDiscFormat2TrackAtOnceEventArgs*, IMAPI_FORMAT2_TAO_WRITE_ACTION*, HRESULT)
-    get_elapsed_time : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, HRESULT)
-    get_remaining_time : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, HRESULT)
-  end
-
-  IDiscFormat2TrackAtOnceEventArgs_GUID = "27354140-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IDiscFormat2TrackAtOnceEventArgs = LibC::GUID.new(0x27354140_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IDiscFormat2TrackAtOnceEventArgs
-    lpVtbl : IDiscFormat2TrackAtOnceEventArgsVTbl*
-  end
-
-  struct IDiscFormat2RawCDVTbl
-    query_interface : Proc(IDiscFormat2RawCD*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscFormat2RawCD*, UInt32)
-    release : Proc(IDiscFormat2RawCD*, UInt32)
-    get_type_info_count : Proc(IDiscFormat2RawCD*, UInt32*, HRESULT)
-    get_type_info : Proc(IDiscFormat2RawCD*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDiscFormat2RawCD*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDiscFormat2RawCD*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    is_recorder_supported : Proc(IDiscFormat2RawCD*, IDiscRecorder2, Int16*, HRESULT)
-    is_current_media_supported : Proc(IDiscFormat2RawCD*, IDiscRecorder2, Int16*, HRESULT)
-    get_media_physically_blank : Proc(IDiscFormat2RawCD*, Int16*, HRESULT)
-    get_media_heuristically_blank : Proc(IDiscFormat2RawCD*, Int16*, HRESULT)
-    get_supported_media_types : Proc(IDiscFormat2RawCD*, SAFEARRAY**, HRESULT)
-    prepare_media : Proc(IDiscFormat2RawCD*, HRESULT)
-    write_media : Proc(IDiscFormat2RawCD*, IStream, HRESULT)
-    write_media2 : Proc(IDiscFormat2RawCD*, IStream, Int32, HRESULT)
-    cancel_write : Proc(IDiscFormat2RawCD*, HRESULT)
-    release_media : Proc(IDiscFormat2RawCD*, HRESULT)
-    set_write_speed : Proc(IDiscFormat2RawCD*, Int32, Int16, HRESULT)
-    put_recorder : Proc(IDiscFormat2RawCD*, IDiscRecorder2, HRESULT)
-    get_recorder : Proc(IDiscFormat2RawCD*, IDiscRecorder2*, HRESULT)
-    put_buffer_underrun_free_disabled : Proc(IDiscFormat2RawCD*, Int16, HRESULT)
-    get_buffer_underrun_free_disabled : Proc(IDiscFormat2RawCD*, Int16*, HRESULT)
-    get_start_of_next_session : Proc(IDiscFormat2RawCD*, Int32*, HRESULT)
-    get_last_possible_start_of_leadout : Proc(IDiscFormat2RawCD*, Int32*, HRESULT)
-    get_current_physical_media_type : Proc(IDiscFormat2RawCD*, IMAPI_MEDIA_PHYSICAL_TYPE*, HRESULT)
-    get_supported_sector_types : Proc(IDiscFormat2RawCD*, SAFEARRAY**, HRESULT)
-    put_requested_sector_type : Proc(IDiscFormat2RawCD*, IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE, HRESULT)
-    get_requested_sector_type : Proc(IDiscFormat2RawCD*, IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE*, HRESULT)
-    put_client_name : Proc(IDiscFormat2RawCD*, UInt8*, HRESULT)
-    get_client_name : Proc(IDiscFormat2RawCD*, UInt8**, HRESULT)
-    get_requested_write_speed : Proc(IDiscFormat2RawCD*, Int32*, HRESULT)
-    get_requested_rotation_type_is_pure_cav : Proc(IDiscFormat2RawCD*, Int16*, HRESULT)
-    get_current_write_speed : Proc(IDiscFormat2RawCD*, Int32*, HRESULT)
-    get_current_rotation_type_is_pure_cav : Proc(IDiscFormat2RawCD*, Int16*, HRESULT)
-    get_supported_write_speeds : Proc(IDiscFormat2RawCD*, SAFEARRAY**, HRESULT)
-    get_supported_write_speed_descriptors : Proc(IDiscFormat2RawCD*, SAFEARRAY**, HRESULT)
-  end
-
-  IDiscFormat2RawCD_GUID = "27354155-8f64-5b0f-8f00-5d77afbe261e"
-  IID_IDiscFormat2RawCD = LibC::GUID.new(0x27354155_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IDiscFormat2RawCD
-    lpVtbl : IDiscFormat2RawCDVTbl*
-  end
-
-  struct DDiscFormat2RawCDEventsVTbl
-    query_interface : Proc(DDiscFormat2RawCDEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DDiscFormat2RawCDEvents*, UInt32)
-    release : Proc(DDiscFormat2RawCDEvents*, UInt32)
-    get_type_info_count : Proc(DDiscFormat2RawCDEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(DDiscFormat2RawCDEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DDiscFormat2RawCDEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DDiscFormat2RawCDEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    update : Proc(DDiscFormat2RawCDEvents*, IDispatch, IDispatch, HRESULT)
-  end
-
-  DDiscFormat2RawCDEvents_GUID = "27354142-7f64-5b0f-8f00-5d77afbe261e"
-  IID_DDiscFormat2RawCDEvents = LibC::GUID.new(0x27354142_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct DDiscFormat2RawCDEvents
-    lpVtbl : DDiscFormat2RawCDEventsVTbl*
-  end
-
-  struct IDiscFormat2RawCDEventArgsVTbl
-    query_interface : Proc(IDiscFormat2RawCDEventArgs*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscFormat2RawCDEventArgs*, UInt32)
-    release : Proc(IDiscFormat2RawCDEventArgs*, UInt32)
-    get_type_info_count : Proc(IDiscFormat2RawCDEventArgs*, UInt32*, HRESULT)
-    get_type_info : Proc(IDiscFormat2RawCDEventArgs*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDiscFormat2RawCDEventArgs*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDiscFormat2RawCDEventArgs*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_start_lba : Proc(IDiscFormat2RawCDEventArgs*, Int32*, HRESULT)
-    get_sector_count : Proc(IDiscFormat2RawCDEventArgs*, Int32*, HRESULT)
-    get_last_read_lba : Proc(IDiscFormat2RawCDEventArgs*, Int32*, HRESULT)
-    get_last_written_lba : Proc(IDiscFormat2RawCDEventArgs*, Int32*, HRESULT)
-    get_total_system_buffer : Proc(IDiscFormat2RawCDEventArgs*, Int32*, HRESULT)
-    get_used_system_buffer : Proc(IDiscFormat2RawCDEventArgs*, Int32*, HRESULT)
-    get_free_system_buffer : Proc(IDiscFormat2RawCDEventArgs*, Int32*, HRESULT)
-    get_current_action : Proc(IDiscFormat2RawCDEventArgs*, IMAPI_FORMAT2_RAW_CD_WRITE_ACTION*, HRESULT)
-    get_elapsed_time : Proc(IDiscFormat2RawCDEventArgs*, Int32*, HRESULT)
-    get_remaining_time : Proc(IDiscFormat2RawCDEventArgs*, Int32*, HRESULT)
-  end
-
-  IDiscFormat2RawCDEventArgs_GUID = "27354143-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IDiscFormat2RawCDEventArgs = LibC::GUID.new(0x27354143_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IDiscFormat2RawCDEventArgs
-    lpVtbl : IDiscFormat2RawCDEventArgsVTbl*
-  end
-
-  struct IBurnVerificationVTbl
-    query_interface : Proc(IBurnVerification*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBurnVerification*, UInt32)
-    release : Proc(IBurnVerification*, UInt32)
-    put_burn_verification_level : Proc(IBurnVerification*, IMAPI_BURN_VERIFICATION_LEVEL, HRESULT)
-    get_burn_verification_level : Proc(IBurnVerification*, IMAPI_BURN_VERIFICATION_LEVEL*, HRESULT)
-  end
-
-  IBurnVerification_GUID = "d2ffd834-958b-426d-8470-2a13879c6a91"
-  IID_IBurnVerification = LibC::GUID.new(0xd2ffd834_u32, 0x958b_u16, 0x426d_u16, StaticArray[0x84_u8, 0x70_u8, 0x2a_u8, 0x13_u8, 0x87_u8, 0x9c_u8, 0x6a_u8, 0x91_u8])
-  struct IBurnVerification
-    lpVtbl : IBurnVerificationVTbl*
-  end
-
-  struct IWriteSpeedDescriptorVTbl
-    query_interface : Proc(IWriteSpeedDescriptor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IWriteSpeedDescriptor*, UInt32)
-    release : Proc(IWriteSpeedDescriptor*, UInt32)
-    get_type_info_count : Proc(IWriteSpeedDescriptor*, UInt32*, HRESULT)
-    get_type_info : Proc(IWriteSpeedDescriptor*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IWriteSpeedDescriptor*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IWriteSpeedDescriptor*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_media_type : Proc(IWriteSpeedDescriptor*, IMAPI_MEDIA_PHYSICAL_TYPE*, HRESULT)
-    get_rotation_type_is_pure_cav : Proc(IWriteSpeedDescriptor*, Int16*, HRESULT)
-    get_write_speed : Proc(IWriteSpeedDescriptor*, Int32*, HRESULT)
-  end
-
-  IWriteSpeedDescriptor_GUID = "27354144-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IWriteSpeedDescriptor = LibC::GUID.new(0x27354144_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IWriteSpeedDescriptor
-    lpVtbl : IWriteSpeedDescriptorVTbl*
-  end
-
-  struct IMultisessionVTbl
-    query_interface : Proc(IMultisession*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMultisession*, UInt32)
-    release : Proc(IMultisession*, UInt32)
-    get_type_info_count : Proc(IMultisession*, UInt32*, HRESULT)
-    get_type_info : Proc(IMultisession*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IMultisession*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IMultisession*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_is_supported_on_current_media_state : Proc(IMultisession*, Int16*, HRESULT)
-    put_in_use : Proc(IMultisession*, Int16, HRESULT)
-    get_in_use : Proc(IMultisession*, Int16*, HRESULT)
-    get_import_recorder : Proc(IMultisession*, IDiscRecorder2*, HRESULT)
-  end
-
-  IMultisession_GUID = "27354150-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IMultisession = LibC::GUID.new(0x27354150_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IMultisession
-    lpVtbl : IMultisessionVTbl*
-  end
-
-  struct IMultisessionSequentialVTbl
-    query_interface : Proc(IMultisessionSequential*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMultisessionSequential*, UInt32)
-    release : Proc(IMultisessionSequential*, UInt32)
-    get_type_info_count : Proc(IMultisessionSequential*, UInt32*, HRESULT)
-    get_type_info : Proc(IMultisessionSequential*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IMultisessionSequential*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IMultisessionSequential*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_is_supported_on_current_media_state : Proc(IMultisessionSequential*, Int16*, HRESULT)
-    put_in_use : Proc(IMultisessionSequential*, Int16, HRESULT)
-    get_in_use : Proc(IMultisessionSequential*, Int16*, HRESULT)
-    get_import_recorder : Proc(IMultisessionSequential*, IDiscRecorder2*, HRESULT)
-    get_is_first_data_session : Proc(IMultisessionSequential*, Int16*, HRESULT)
-    get_start_address_of_previous_session : Proc(IMultisessionSequential*, Int32*, HRESULT)
-    get_last_written_address_of_previous_session : Proc(IMultisessionSequential*, Int32*, HRESULT)
-    get_next_writable_address : Proc(IMultisessionSequential*, Int32*, HRESULT)
-    get_free_sectors_on_media : Proc(IMultisessionSequential*, Int32*, HRESULT)
-  end
-
-  IMultisessionSequential_GUID = "27354151-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IMultisessionSequential = LibC::GUID.new(0x27354151_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IMultisessionSequential
-    lpVtbl : IMultisessionSequentialVTbl*
-  end
-
-  struct IMultisessionSequential2VTbl
-    query_interface : Proc(IMultisessionSequential2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMultisessionSequential2*, UInt32)
-    release : Proc(IMultisessionSequential2*, UInt32)
-    get_type_info_count : Proc(IMultisessionSequential2*, UInt32*, HRESULT)
-    get_type_info : Proc(IMultisessionSequential2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IMultisessionSequential2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IMultisessionSequential2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_is_supported_on_current_media_state : Proc(IMultisessionSequential2*, Int16*, HRESULT)
-    put_in_use : Proc(IMultisessionSequential2*, Int16, HRESULT)
-    get_in_use : Proc(IMultisessionSequential2*, Int16*, HRESULT)
-    get_import_recorder : Proc(IMultisessionSequential2*, IDiscRecorder2*, HRESULT)
-    get_is_first_data_session : Proc(IMultisessionSequential2*, Int16*, HRESULT)
-    get_start_address_of_previous_session : Proc(IMultisessionSequential2*, Int32*, HRESULT)
-    get_last_written_address_of_previous_session : Proc(IMultisessionSequential2*, Int32*, HRESULT)
-    get_next_writable_address : Proc(IMultisessionSequential2*, Int32*, HRESULT)
-    get_free_sectors_on_media : Proc(IMultisessionSequential2*, Int32*, HRESULT)
-    get_write_unit_size : Proc(IMultisessionSequential2*, Int32*, HRESULT)
-  end
-
-  IMultisessionSequential2_GUID = "b507ca22-2204-11dd-966a-001aa01bbc58"
-  IID_IMultisessionSequential2 = LibC::GUID.new(0xb507ca22_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
-  struct IMultisessionSequential2
-    lpVtbl : IMultisessionSequential2VTbl*
-  end
-
-  struct IMultisessionRandomWriteVTbl
-    query_interface : Proc(IMultisessionRandomWrite*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMultisessionRandomWrite*, UInt32)
-    release : Proc(IMultisessionRandomWrite*, UInt32)
-    get_type_info_count : Proc(IMultisessionRandomWrite*, UInt32*, HRESULT)
-    get_type_info : Proc(IMultisessionRandomWrite*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IMultisessionRandomWrite*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IMultisessionRandomWrite*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_is_supported_on_current_media_state : Proc(IMultisessionRandomWrite*, Int16*, HRESULT)
-    put_in_use : Proc(IMultisessionRandomWrite*, Int16, HRESULT)
-    get_in_use : Proc(IMultisessionRandomWrite*, Int16*, HRESULT)
-    get_import_recorder : Proc(IMultisessionRandomWrite*, IDiscRecorder2*, HRESULT)
-    get_write_unit_size : Proc(IMultisessionRandomWrite*, Int32*, HRESULT)
-    get_last_written_address : Proc(IMultisessionRandomWrite*, Int32*, HRESULT)
-    get_total_sectors_on_media : Proc(IMultisessionRandomWrite*, Int32*, HRESULT)
-  end
-
-  IMultisessionRandomWrite_GUID = "b507ca23-2204-11dd-966a-001aa01bbc58"
-  IID_IMultisessionRandomWrite = LibC::GUID.new(0xb507ca23_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
-  struct IMultisessionRandomWrite
-    lpVtbl : IMultisessionRandomWriteVTbl*
-  end
-
-  struct IStreamPseudoRandomBasedVTbl
-    query_interface : Proc(IStreamPseudoRandomBased*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStreamPseudoRandomBased*, UInt32)
-    release : Proc(IStreamPseudoRandomBased*, UInt32)
-    read : Proc(IStreamPseudoRandomBased*, Void*, UInt32, UInt32*, HRESULT)
-    write : Proc(IStreamPseudoRandomBased*, Void*, UInt32, UInt32*, HRESULT)
-    seek : Proc(IStreamPseudoRandomBased*, LARGE_INTEGER, STREAM_SEEK, ULARGE_INTEGER*, HRESULT)
-    set_size : Proc(IStreamPseudoRandomBased*, ULARGE_INTEGER, HRESULT)
-    copy_to : Proc(IStreamPseudoRandomBased*, IStream, ULARGE_INTEGER, ULARGE_INTEGER*, ULARGE_INTEGER*, HRESULT)
-    commit : Proc(IStreamPseudoRandomBased*, UInt32, HRESULT)
-    revert : Proc(IStreamPseudoRandomBased*, HRESULT)
-    lock_region : Proc(IStreamPseudoRandomBased*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    unlock_region : Proc(IStreamPseudoRandomBased*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    stat : Proc(IStreamPseudoRandomBased*, STATSTG*, UInt32, HRESULT)
-    clone : Proc(IStreamPseudoRandomBased*, IStream*, HRESULT)
-    put_seed : Proc(IStreamPseudoRandomBased*, UInt32, HRESULT)
-    get_seed : Proc(IStreamPseudoRandomBased*, UInt32*, HRESULT)
-    put_extended_seed : Proc(IStreamPseudoRandomBased*, UInt32*, UInt32, HRESULT)
-    get_extended_seed : Proc(IStreamPseudoRandomBased*, UInt32**, UInt32*, HRESULT)
-  end
-
-  IStreamPseudoRandomBased_GUID = "27354145-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IStreamPseudoRandomBased = LibC::GUID.new(0x27354145_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IStreamPseudoRandomBased
-    lpVtbl : IStreamPseudoRandomBasedVTbl*
-  end
-
-  struct IStreamConcatenateVTbl
-    query_interface : Proc(IStreamConcatenate*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStreamConcatenate*, UInt32)
-    release : Proc(IStreamConcatenate*, UInt32)
-    read : Proc(IStreamConcatenate*, Void*, UInt32, UInt32*, HRESULT)
-    write : Proc(IStreamConcatenate*, Void*, UInt32, UInt32*, HRESULT)
-    seek : Proc(IStreamConcatenate*, LARGE_INTEGER, STREAM_SEEK, ULARGE_INTEGER*, HRESULT)
-    set_size : Proc(IStreamConcatenate*, ULARGE_INTEGER, HRESULT)
-    copy_to : Proc(IStreamConcatenate*, IStream, ULARGE_INTEGER, ULARGE_INTEGER*, ULARGE_INTEGER*, HRESULT)
-    commit : Proc(IStreamConcatenate*, UInt32, HRESULT)
-    revert : Proc(IStreamConcatenate*, HRESULT)
-    lock_region : Proc(IStreamConcatenate*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    unlock_region : Proc(IStreamConcatenate*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    stat : Proc(IStreamConcatenate*, STATSTG*, UInt32, HRESULT)
-    clone : Proc(IStreamConcatenate*, IStream*, HRESULT)
-    initialize : Proc(IStreamConcatenate*, IStream, IStream, HRESULT)
-    initialize2 : Proc(IStreamConcatenate*, IStream*, UInt32, HRESULT)
-    append : Proc(IStreamConcatenate*, IStream, HRESULT)
-    append2 : Proc(IStreamConcatenate*, IStream*, UInt32, HRESULT)
-  end
-
-  IStreamConcatenate_GUID = "27354146-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IStreamConcatenate = LibC::GUID.new(0x27354146_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IStreamConcatenate
-    lpVtbl : IStreamConcatenateVTbl*
-  end
-
-  struct IStreamInterleaveVTbl
-    query_interface : Proc(IStreamInterleave*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IStreamInterleave*, UInt32)
-    release : Proc(IStreamInterleave*, UInt32)
-    read : Proc(IStreamInterleave*, Void*, UInt32, UInt32*, HRESULT)
-    write : Proc(IStreamInterleave*, Void*, UInt32, UInt32*, HRESULT)
-    seek : Proc(IStreamInterleave*, LARGE_INTEGER, STREAM_SEEK, ULARGE_INTEGER*, HRESULT)
-    set_size : Proc(IStreamInterleave*, ULARGE_INTEGER, HRESULT)
-    copy_to : Proc(IStreamInterleave*, IStream, ULARGE_INTEGER, ULARGE_INTEGER*, ULARGE_INTEGER*, HRESULT)
-    commit : Proc(IStreamInterleave*, UInt32, HRESULT)
-    revert : Proc(IStreamInterleave*, HRESULT)
-    lock_region : Proc(IStreamInterleave*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    unlock_region : Proc(IStreamInterleave*, ULARGE_INTEGER, ULARGE_INTEGER, UInt32, HRESULT)
-    stat : Proc(IStreamInterleave*, STATSTG*, UInt32, HRESULT)
-    clone : Proc(IStreamInterleave*, IStream*, HRESULT)
-    initialize : Proc(IStreamInterleave*, IStream*, UInt32*, UInt32, HRESULT)
-  end
-
-  IStreamInterleave_GUID = "27354147-7f64-5b0f-8f00-5d77afbe261e"
-  IID_IStreamInterleave = LibC::GUID.new(0x27354147_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
-  struct IStreamInterleave
-    lpVtbl : IStreamInterleaveVTbl*
-  end
-
-  struct IRawCDImageCreatorVTbl
-    query_interface : Proc(IRawCDImageCreator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRawCDImageCreator*, UInt32)
-    release : Proc(IRawCDImageCreator*, UInt32)
-    get_type_info_count : Proc(IRawCDImageCreator*, UInt32*, HRESULT)
-    get_type_info : Proc(IRawCDImageCreator*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IRawCDImageCreator*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IRawCDImageCreator*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    create_result_image : Proc(IRawCDImageCreator*, IStream*, HRESULT)
-    add_track : Proc(IRawCDImageCreator*, IMAPI_CD_SECTOR_TYPE, IStream, Int32*, HRESULT)
-    add_special_pregap : Proc(IRawCDImageCreator*, IStream, HRESULT)
-    add_subcode_rw_generator : Proc(IRawCDImageCreator*, IStream, HRESULT)
-    put_resulting_image_type : Proc(IRawCDImageCreator*, IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE, HRESULT)
-    get_resulting_image_type : Proc(IRawCDImageCreator*, IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE*, HRESULT)
-    get_start_of_leadout : Proc(IRawCDImageCreator*, Int32*, HRESULT)
-    put_start_of_leadout_limit : Proc(IRawCDImageCreator*, Int32, HRESULT)
-    get_start_of_leadout_limit : Proc(IRawCDImageCreator*, Int32*, HRESULT)
-    put_disable_gapless_audio : Proc(IRawCDImageCreator*, Int16, HRESULT)
-    get_disable_gapless_audio : Proc(IRawCDImageCreator*, Int16*, HRESULT)
-    put_media_catalog_number : Proc(IRawCDImageCreator*, UInt8*, HRESULT)
-    get_media_catalog_number : Proc(IRawCDImageCreator*, UInt8**, HRESULT)
-    put_starting_track_number : Proc(IRawCDImageCreator*, Int32, HRESULT)
-    get_starting_track_number : Proc(IRawCDImageCreator*, Int32*, HRESULT)
-    get_track_info : Proc(IRawCDImageCreator*, Int32, IRawCDImageTrackInfo*, HRESULT)
-    get_number_of_existing_tracks : Proc(IRawCDImageCreator*, Int32*, HRESULT)
-    get_last_used_user_sector_in_image : Proc(IRawCDImageCreator*, Int32*, HRESULT)
-    get_expected_table_of_contents : Proc(IRawCDImageCreator*, SAFEARRAY**, HRESULT)
-  end
-
-  IRawCDImageCreator_GUID = "25983550-9d65-49ce-b335-40630d901227"
-  IID_IRawCDImageCreator = LibC::GUID.new(0x25983550_u32, 0x9d65_u16, 0x49ce_u16, StaticArray[0xb3_u8, 0x35_u8, 0x40_u8, 0x63_u8, 0xd_u8, 0x90_u8, 0x12_u8, 0x27_u8])
-  struct IRawCDImageCreator
-    lpVtbl : IRawCDImageCreatorVTbl*
-  end
-
-  struct IRawCDImageTrackInfoVTbl
-    query_interface : Proc(IRawCDImageTrackInfo*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRawCDImageTrackInfo*, UInt32)
-    release : Proc(IRawCDImageTrackInfo*, UInt32)
-    get_type_info_count : Proc(IRawCDImageTrackInfo*, UInt32*, HRESULT)
-    get_type_info : Proc(IRawCDImageTrackInfo*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IRawCDImageTrackInfo*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IRawCDImageTrackInfo*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_starting_lba : Proc(IRawCDImageTrackInfo*, Int32*, HRESULT)
-    get_sector_count : Proc(IRawCDImageTrackInfo*, Int32*, HRESULT)
-    get_track_number : Proc(IRawCDImageTrackInfo*, Int32*, HRESULT)
-    get_sector_type : Proc(IRawCDImageTrackInfo*, IMAPI_CD_SECTOR_TYPE*, HRESULT)
-    get_isrc : Proc(IRawCDImageTrackInfo*, UInt8**, HRESULT)
-    put_isrc : Proc(IRawCDImageTrackInfo*, UInt8*, HRESULT)
-    get_digital_audio_copy_setting : Proc(IRawCDImageTrackInfo*, IMAPI_CD_TRACK_DIGITAL_COPY_SETTING*, HRESULT)
-    put_digital_audio_copy_setting : Proc(IRawCDImageTrackInfo*, IMAPI_CD_TRACK_DIGITAL_COPY_SETTING, HRESULT)
-    get_audio_has_preemphasis : Proc(IRawCDImageTrackInfo*, Int16*, HRESULT)
-    put_audio_has_preemphasis : Proc(IRawCDImageTrackInfo*, Int16, HRESULT)
-    get_track_indexes : Proc(IRawCDImageTrackInfo*, SAFEARRAY**, HRESULT)
-    add_track_index : Proc(IRawCDImageTrackInfo*, Int32, HRESULT)
-    clear_track_index : Proc(IRawCDImageTrackInfo*, Int32, HRESULT)
-  end
-
-  IRawCDImageTrackInfo_GUID = "25983551-9d65-49ce-b335-40630d901227"
-  IID_IRawCDImageTrackInfo = LibC::GUID.new(0x25983551_u32, 0x9d65_u16, 0x49ce_u16, StaticArray[0xb3_u8, 0x35_u8, 0x40_u8, 0x63_u8, 0xd_u8, 0x90_u8, 0x12_u8, 0x27_u8])
-  struct IRawCDImageTrackInfo
-    lpVtbl : IRawCDImageTrackInfoVTbl*
-  end
-
-  struct IBlockRangeVTbl
-    query_interface : Proc(IBlockRange*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBlockRange*, UInt32)
-    release : Proc(IBlockRange*, UInt32)
-    get_type_info_count : Proc(IBlockRange*, UInt32*, HRESULT)
-    get_type_info : Proc(IBlockRange*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IBlockRange*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IBlockRange*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_start_lba : Proc(IBlockRange*, Int32*, HRESULT)
-    get_end_lba : Proc(IBlockRange*, Int32*, HRESULT)
-  end
-
-  IBlockRange_GUID = "b507ca25-2204-11dd-966a-001aa01bbc58"
-  IID_IBlockRange = LibC::GUID.new(0xb507ca25_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
-  struct IBlockRange
-    lpVtbl : IBlockRangeVTbl*
-  end
-
-  struct IBlockRangeListVTbl
-    query_interface : Proc(IBlockRangeList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBlockRangeList*, UInt32)
-    release : Proc(IBlockRangeList*, UInt32)
-    get_type_info_count : Proc(IBlockRangeList*, UInt32*, HRESULT)
-    get_type_info : Proc(IBlockRangeList*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IBlockRangeList*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IBlockRangeList*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_block_ranges : Proc(IBlockRangeList*, SAFEARRAY**, HRESULT)
-  end
-
-  IBlockRangeList_GUID = "b507ca26-2204-11dd-966a-001aa01bbc58"
-  IID_IBlockRangeList = LibC::GUID.new(0xb507ca26_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
-  struct IBlockRangeList
-    lpVtbl : IBlockRangeListVTbl*
-  end
-
-  struct IBootOptionsVTbl
-    query_interface : Proc(IBootOptions*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IBootOptions*, UInt32)
-    release : Proc(IBootOptions*, UInt32)
-    get_type_info_count : Proc(IBootOptions*, UInt32*, HRESULT)
-    get_type_info : Proc(IBootOptions*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IBootOptions*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IBootOptions*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_boot_image : Proc(IBootOptions*, IStream*, HRESULT)
-    get_manufacturer : Proc(IBootOptions*, UInt8**, HRESULT)
-    put_manufacturer : Proc(IBootOptions*, UInt8*, HRESULT)
-    get_platform_id : Proc(IBootOptions*, PlatformId*, HRESULT)
-    put_platform_id : Proc(IBootOptions*, PlatformId, HRESULT)
-    get_emulation : Proc(IBootOptions*, EmulationType*, HRESULT)
-    put_emulation : Proc(IBootOptions*, EmulationType, HRESULT)
-    get_image_size : Proc(IBootOptions*, UInt32*, HRESULT)
-    assign_boot_image : Proc(IBootOptions*, IStream, HRESULT)
-  end
-
-  IBootOptions_GUID = "2c941fd4-975b-59be-a960-9a2a262853a5"
-  IID_IBootOptions = LibC::GUID.new(0x2c941fd4_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  struct IBootOptions
-    lpVtbl : IBootOptionsVTbl*
-  end
-
-  struct IProgressItemVTbl
-    query_interface : Proc(IProgressItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IProgressItem*, UInt32)
-    release : Proc(IProgressItem*, UInt32)
-    get_type_info_count : Proc(IProgressItem*, UInt32*, HRESULT)
-    get_type_info : Proc(IProgressItem*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IProgressItem*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IProgressItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_description : Proc(IProgressItem*, UInt8**, HRESULT)
-    get_first_block : Proc(IProgressItem*, UInt32*, HRESULT)
-    get_last_block : Proc(IProgressItem*, UInt32*, HRESULT)
-    get_block_count : Proc(IProgressItem*, UInt32*, HRESULT)
-  end
-
-  IProgressItem_GUID = "2c941fd5-975b-59be-a960-9a2a262853a5"
-  IID_IProgressItem = LibC::GUID.new(0x2c941fd5_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  struct IProgressItem
-    lpVtbl : IProgressItemVTbl*
-  end
-
-  struct IEnumProgressItemsVTbl
-    query_interface : Proc(IEnumProgressItems*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumProgressItems*, UInt32)
-    release : Proc(IEnumProgressItems*, UInt32)
-    next : Proc(IEnumProgressItems*, UInt32, IProgressItem*, UInt32*, HRESULT)
-    skip : Proc(IEnumProgressItems*, UInt32, HRESULT)
-    reset : Proc(IEnumProgressItems*, HRESULT)
-    clone : Proc(IEnumProgressItems*, IEnumProgressItems*, HRESULT)
-  end
-
-  IEnumProgressItems_GUID = "2c941fd6-975b-59be-a960-9a2a262853a5"
-  IID_IEnumProgressItems = LibC::GUID.new(0x2c941fd6_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  struct IEnumProgressItems
-    lpVtbl : IEnumProgressItemsVTbl*
-  end
-
-  struct IProgressItemsVTbl
-    query_interface : Proc(IProgressItems*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IProgressItems*, UInt32)
-    release : Proc(IProgressItems*, UInt32)
-    get_type_info_count : Proc(IProgressItems*, UInt32*, HRESULT)
-    get_type_info : Proc(IProgressItems*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IProgressItems*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IProgressItems*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IProgressItems*, IEnumVARIANT*, HRESULT)
-    get_item : Proc(IProgressItems*, Int32, IProgressItem*, HRESULT)
-    get_count : Proc(IProgressItems*, Int32*, HRESULT)
-    progress_item_from_block : Proc(IProgressItems*, UInt32, IProgressItem*, HRESULT)
-    progress_item_from_description : Proc(IProgressItems*, UInt8*, IProgressItem*, HRESULT)
-    get_enum_progress_items : Proc(IProgressItems*, IEnumProgressItems*, HRESULT)
-  end
-
-  IProgressItems_GUID = "2c941fd7-975b-59be-a960-9a2a262853a5"
-  IID_IProgressItems = LibC::GUID.new(0x2c941fd7_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  struct IProgressItems
-    lpVtbl : IProgressItemsVTbl*
-  end
-
-  struct IFileSystemImageResultVTbl
-    query_interface : Proc(IFileSystemImageResult*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFileSystemImageResult*, UInt32)
-    release : Proc(IFileSystemImageResult*, UInt32)
-    get_type_info_count : Proc(IFileSystemImageResult*, UInt32*, HRESULT)
-    get_type_info : Proc(IFileSystemImageResult*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFileSystemImageResult*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFileSystemImageResult*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_image_stream : Proc(IFileSystemImageResult*, IStream*, HRESULT)
-    get_progress_items : Proc(IFileSystemImageResult*, IProgressItems*, HRESULT)
-    get_total_blocks : Proc(IFileSystemImageResult*, Int32*, HRESULT)
-    get_block_size : Proc(IFileSystemImageResult*, Int32*, HRESULT)
-    get_disc_id : Proc(IFileSystemImageResult*, UInt8**, HRESULT)
-  end
-
-  IFileSystemImageResult_GUID = "2c941fd8-975b-59be-a960-9a2a262853a5"
-  IID_IFileSystemImageResult = LibC::GUID.new(0x2c941fd8_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  struct IFileSystemImageResult
-    lpVtbl : IFileSystemImageResultVTbl*
-  end
-
-  struct IFileSystemImageResult2VTbl
-    query_interface : Proc(IFileSystemImageResult2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFileSystemImageResult2*, UInt32)
-    release : Proc(IFileSystemImageResult2*, UInt32)
-    get_type_info_count : Proc(IFileSystemImageResult2*, UInt32*, HRESULT)
-    get_type_info : Proc(IFileSystemImageResult2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFileSystemImageResult2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFileSystemImageResult2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_image_stream : Proc(IFileSystemImageResult2*, IStream*, HRESULT)
-    get_progress_items : Proc(IFileSystemImageResult2*, IProgressItems*, HRESULT)
-    get_total_blocks : Proc(IFileSystemImageResult2*, Int32*, HRESULT)
-    get_block_size : Proc(IFileSystemImageResult2*, Int32*, HRESULT)
-    get_disc_id : Proc(IFileSystemImageResult2*, UInt8**, HRESULT)
-    get_modified_blocks : Proc(IFileSystemImageResult2*, IBlockRangeList*, HRESULT)
-  end
-
-  IFileSystemImageResult2_GUID = "b507ca29-2204-11dd-966a-001aa01bbc58"
-  IID_IFileSystemImageResult2 = LibC::GUID.new(0xb507ca29_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
-  struct IFileSystemImageResult2
-    lpVtbl : IFileSystemImageResult2VTbl*
-  end
-
-  struct IFsiItemVTbl
-    query_interface : Proc(IFsiItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFsiItem*, UInt32)
-    release : Proc(IFsiItem*, UInt32)
-    get_type_info_count : Proc(IFsiItem*, UInt32*, HRESULT)
-    get_type_info : Proc(IFsiItem*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFsiItem*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFsiItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IFsiItem*, UInt8**, HRESULT)
-    get_full_path : Proc(IFsiItem*, UInt8**, HRESULT)
-    get_creation_time : Proc(IFsiItem*, Float64*, HRESULT)
-    put_creation_time : Proc(IFsiItem*, Float64, HRESULT)
-    get_last_accessed_time : Proc(IFsiItem*, Float64*, HRESULT)
-    put_last_accessed_time : Proc(IFsiItem*, Float64, HRESULT)
-    get_last_modified_time : Proc(IFsiItem*, Float64*, HRESULT)
-    put_last_modified_time : Proc(IFsiItem*, Float64, HRESULT)
-    get_is_hidden : Proc(IFsiItem*, Int16*, HRESULT)
-    put_is_hidden : Proc(IFsiItem*, Int16, HRESULT)
-    file_system_name : Proc(IFsiItem*, FsiFileSystems, UInt8**, HRESULT)
-    file_system_path : Proc(IFsiItem*, FsiFileSystems, UInt8**, HRESULT)
-  end
-
-  IFsiItem_GUID = "2c941fd9-975b-59be-a960-9a2a262853a5"
-  IID_IFsiItem = LibC::GUID.new(0x2c941fd9_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  struct IFsiItem
-    lpVtbl : IFsiItemVTbl*
-  end
-
-  struct IEnumFsiItemsVTbl
-    query_interface : Proc(IEnumFsiItems*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumFsiItems*, UInt32)
-    release : Proc(IEnumFsiItems*, UInt32)
-    next : Proc(IEnumFsiItems*, UInt32, IFsiItem*, UInt32*, HRESULT)
-    skip : Proc(IEnumFsiItems*, UInt32, HRESULT)
-    reset : Proc(IEnumFsiItems*, HRESULT)
-    clone : Proc(IEnumFsiItems*, IEnumFsiItems*, HRESULT)
-  end
-
-  IEnumFsiItems_GUID = "2c941fda-975b-59be-a960-9a2a262853a5"
-  IID_IEnumFsiItems = LibC::GUID.new(0x2c941fda_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  struct IEnumFsiItems
-    lpVtbl : IEnumFsiItemsVTbl*
-  end
-
-  struct IFsiFileItemVTbl
-    query_interface : Proc(IFsiFileItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFsiFileItem*, UInt32)
-    release : Proc(IFsiFileItem*, UInt32)
-    get_type_info_count : Proc(IFsiFileItem*, UInt32*, HRESULT)
-    get_type_info : Proc(IFsiFileItem*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFsiFileItem*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFsiFileItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IFsiFileItem*, UInt8**, HRESULT)
-    get_full_path : Proc(IFsiFileItem*, UInt8**, HRESULT)
-    get_creation_time : Proc(IFsiFileItem*, Float64*, HRESULT)
-    put_creation_time : Proc(IFsiFileItem*, Float64, HRESULT)
-    get_last_accessed_time : Proc(IFsiFileItem*, Float64*, HRESULT)
-    put_last_accessed_time : Proc(IFsiFileItem*, Float64, HRESULT)
-    get_last_modified_time : Proc(IFsiFileItem*, Float64*, HRESULT)
-    put_last_modified_time : Proc(IFsiFileItem*, Float64, HRESULT)
-    get_is_hidden : Proc(IFsiFileItem*, Int16*, HRESULT)
-    put_is_hidden : Proc(IFsiFileItem*, Int16, HRESULT)
-    file_system_name : Proc(IFsiFileItem*, FsiFileSystems, UInt8**, HRESULT)
-    file_system_path : Proc(IFsiFileItem*, FsiFileSystems, UInt8**, HRESULT)
-    get_data_size : Proc(IFsiFileItem*, Int64*, HRESULT)
-    get_data_size32_bit_low : Proc(IFsiFileItem*, Int32*, HRESULT)
-    get_data_size32_bit_high : Proc(IFsiFileItem*, Int32*, HRESULT)
-    get_data : Proc(IFsiFileItem*, IStream*, HRESULT)
-    put_data : Proc(IFsiFileItem*, IStream, HRESULT)
-  end
-
-  IFsiFileItem_GUID = "2c941fdb-975b-59be-a960-9a2a262853a5"
-  IID_IFsiFileItem = LibC::GUID.new(0x2c941fdb_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  struct IFsiFileItem
-    lpVtbl : IFsiFileItemVTbl*
-  end
-
-  struct IFsiFileItem2VTbl
-    query_interface : Proc(IFsiFileItem2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFsiFileItem2*, UInt32)
-    release : Proc(IFsiFileItem2*, UInt32)
-    get_type_info_count : Proc(IFsiFileItem2*, UInt32*, HRESULT)
-    get_type_info : Proc(IFsiFileItem2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFsiFileItem2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFsiFileItem2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IFsiFileItem2*, UInt8**, HRESULT)
-    get_full_path : Proc(IFsiFileItem2*, UInt8**, HRESULT)
-    get_creation_time : Proc(IFsiFileItem2*, Float64*, HRESULT)
-    put_creation_time : Proc(IFsiFileItem2*, Float64, HRESULT)
-    get_last_accessed_time : Proc(IFsiFileItem2*, Float64*, HRESULT)
-    put_last_accessed_time : Proc(IFsiFileItem2*, Float64, HRESULT)
-    get_last_modified_time : Proc(IFsiFileItem2*, Float64*, HRESULT)
-    put_last_modified_time : Proc(IFsiFileItem2*, Float64, HRESULT)
-    get_is_hidden : Proc(IFsiFileItem2*, Int16*, HRESULT)
-    put_is_hidden : Proc(IFsiFileItem2*, Int16, HRESULT)
-    file_system_name : Proc(IFsiFileItem2*, FsiFileSystems, UInt8**, HRESULT)
-    file_system_path : Proc(IFsiFileItem2*, FsiFileSystems, UInt8**, HRESULT)
-    get_data_size : Proc(IFsiFileItem2*, Int64*, HRESULT)
-    get_data_size32_bit_low : Proc(IFsiFileItem2*, Int32*, HRESULT)
-    get_data_size32_bit_high : Proc(IFsiFileItem2*, Int32*, HRESULT)
-    get_data : Proc(IFsiFileItem2*, IStream*, HRESULT)
-    put_data : Proc(IFsiFileItem2*, IStream, HRESULT)
-    get_fsi_named_streams : Proc(IFsiFileItem2*, IFsiNamedStreams*, HRESULT)
-    get_is_named_stream : Proc(IFsiFileItem2*, Int16*, HRESULT)
-    add_stream : Proc(IFsiFileItem2*, UInt8*, IStream, HRESULT)
-    remove_stream : Proc(IFsiFileItem2*, UInt8*, HRESULT)
-    get_is_real_time : Proc(IFsiFileItem2*, Int16*, HRESULT)
-    put_is_real_time : Proc(IFsiFileItem2*, Int16, HRESULT)
-  end
-
-  IFsiFileItem2_GUID = "199d0c19-11e1-40eb-8ec2-c8c822a07792"
-  IID_IFsiFileItem2 = LibC::GUID.new(0x199d0c19_u32, 0x11e1_u16, 0x40eb_u16, StaticArray[0x8e_u8, 0xc2_u8, 0xc8_u8, 0xc8_u8, 0x22_u8, 0xa0_u8, 0x77_u8, 0x92_u8])
-  struct IFsiFileItem2
-    lpVtbl : IFsiFileItem2VTbl*
-  end
-
-  struct IFsiNamedStreamsVTbl
-    query_interface : Proc(IFsiNamedStreams*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFsiNamedStreams*, UInt32)
-    release : Proc(IFsiNamedStreams*, UInt32)
-    get_type_info_count : Proc(IFsiNamedStreams*, UInt32*, HRESULT)
-    get_type_info : Proc(IFsiNamedStreams*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFsiNamedStreams*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFsiNamedStreams*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IFsiNamedStreams*, IEnumVARIANT*, HRESULT)
-    get_item : Proc(IFsiNamedStreams*, Int32, IFsiFileItem2*, HRESULT)
-    get_count : Proc(IFsiNamedStreams*, Int32*, HRESULT)
-    get_enum_named_streams : Proc(IFsiNamedStreams*, IEnumFsiItems*, HRESULT)
-  end
-
-  IFsiNamedStreams_GUID = "ed79ba56-5294-4250-8d46-f9aecee23459"
-  IID_IFsiNamedStreams = LibC::GUID.new(0xed79ba56_u32, 0x5294_u16, 0x4250_u16, StaticArray[0x8d_u8, 0x46_u8, 0xf9_u8, 0xae_u8, 0xce_u8, 0xe2_u8, 0x34_u8, 0x59_u8])
-  struct IFsiNamedStreams
-    lpVtbl : IFsiNamedStreamsVTbl*
-  end
-
-  struct IFsiDirectoryItemVTbl
-    query_interface : Proc(IFsiDirectoryItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFsiDirectoryItem*, UInt32)
-    release : Proc(IFsiDirectoryItem*, UInt32)
-    get_type_info_count : Proc(IFsiDirectoryItem*, UInt32*, HRESULT)
-    get_type_info : Proc(IFsiDirectoryItem*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFsiDirectoryItem*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFsiDirectoryItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IFsiDirectoryItem*, UInt8**, HRESULT)
-    get_full_path : Proc(IFsiDirectoryItem*, UInt8**, HRESULT)
-    get_creation_time : Proc(IFsiDirectoryItem*, Float64*, HRESULT)
-    put_creation_time : Proc(IFsiDirectoryItem*, Float64, HRESULT)
-    get_last_accessed_time : Proc(IFsiDirectoryItem*, Float64*, HRESULT)
-    put_last_accessed_time : Proc(IFsiDirectoryItem*, Float64, HRESULT)
-    get_last_modified_time : Proc(IFsiDirectoryItem*, Float64*, HRESULT)
-    put_last_modified_time : Proc(IFsiDirectoryItem*, Float64, HRESULT)
-    get_is_hidden : Proc(IFsiDirectoryItem*, Int16*, HRESULT)
-    put_is_hidden : Proc(IFsiDirectoryItem*, Int16, HRESULT)
-    file_system_name : Proc(IFsiDirectoryItem*, FsiFileSystems, UInt8**, HRESULT)
-    file_system_path : Proc(IFsiDirectoryItem*, FsiFileSystems, UInt8**, HRESULT)
-    get__new_enum : Proc(IFsiDirectoryItem*, IEnumVARIANT*, HRESULT)
-    get_item : Proc(IFsiDirectoryItem*, UInt8*, IFsiItem*, HRESULT)
-    get_count : Proc(IFsiDirectoryItem*, Int32*, HRESULT)
-    get_enum_fsi_items : Proc(IFsiDirectoryItem*, IEnumFsiItems*, HRESULT)
-    add_directory : Proc(IFsiDirectoryItem*, UInt8*, HRESULT)
-    add_file : Proc(IFsiDirectoryItem*, UInt8*, IStream, HRESULT)
-    add_tree : Proc(IFsiDirectoryItem*, UInt8*, Int16, HRESULT)
-    add : Proc(IFsiDirectoryItem*, IFsiItem, HRESULT)
-    remove : Proc(IFsiDirectoryItem*, UInt8*, HRESULT)
-    remove_tree : Proc(IFsiDirectoryItem*, UInt8*, HRESULT)
-  end
-
-  IFsiDirectoryItem_GUID = "2c941fdc-975b-59be-a960-9a2a262853a5"
-  IID_IFsiDirectoryItem = LibC::GUID.new(0x2c941fdc_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  struct IFsiDirectoryItem
-    lpVtbl : IFsiDirectoryItemVTbl*
-  end
-
-  struct IFsiDirectoryItem2VTbl
-    query_interface : Proc(IFsiDirectoryItem2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFsiDirectoryItem2*, UInt32)
-    release : Proc(IFsiDirectoryItem2*, UInt32)
-    get_type_info_count : Proc(IFsiDirectoryItem2*, UInt32*, HRESULT)
-    get_type_info : Proc(IFsiDirectoryItem2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFsiDirectoryItem2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFsiDirectoryItem2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IFsiDirectoryItem2*, UInt8**, HRESULT)
-    get_full_path : Proc(IFsiDirectoryItem2*, UInt8**, HRESULT)
-    get_creation_time : Proc(IFsiDirectoryItem2*, Float64*, HRESULT)
-    put_creation_time : Proc(IFsiDirectoryItem2*, Float64, HRESULT)
-    get_last_accessed_time : Proc(IFsiDirectoryItem2*, Float64*, HRESULT)
-    put_last_accessed_time : Proc(IFsiDirectoryItem2*, Float64, HRESULT)
-    get_last_modified_time : Proc(IFsiDirectoryItem2*, Float64*, HRESULT)
-    put_last_modified_time : Proc(IFsiDirectoryItem2*, Float64, HRESULT)
-    get_is_hidden : Proc(IFsiDirectoryItem2*, Int16*, HRESULT)
-    put_is_hidden : Proc(IFsiDirectoryItem2*, Int16, HRESULT)
-    file_system_name : Proc(IFsiDirectoryItem2*, FsiFileSystems, UInt8**, HRESULT)
-    file_system_path : Proc(IFsiDirectoryItem2*, FsiFileSystems, UInt8**, HRESULT)
-    get__new_enum : Proc(IFsiDirectoryItem2*, IEnumVARIANT*, HRESULT)
-    get_item : Proc(IFsiDirectoryItem2*, UInt8*, IFsiItem*, HRESULT)
-    get_count : Proc(IFsiDirectoryItem2*, Int32*, HRESULT)
-    get_enum_fsi_items : Proc(IFsiDirectoryItem2*, IEnumFsiItems*, HRESULT)
-    add_directory : Proc(IFsiDirectoryItem2*, UInt8*, HRESULT)
-    add_file : Proc(IFsiDirectoryItem2*, UInt8*, IStream, HRESULT)
-    add_tree : Proc(IFsiDirectoryItem2*, UInt8*, Int16, HRESULT)
-    add : Proc(IFsiDirectoryItem2*, IFsiItem, HRESULT)
-    remove : Proc(IFsiDirectoryItem2*, UInt8*, HRESULT)
-    remove_tree : Proc(IFsiDirectoryItem2*, UInt8*, HRESULT)
-    add_tree_with_named_streams : Proc(IFsiDirectoryItem2*, UInt8*, Int16, HRESULT)
-  end
-
-  IFsiDirectoryItem2_GUID = "f7fb4b9b-6d96-4d7b-9115-201b144811ef"
-  IID_IFsiDirectoryItem2 = LibC::GUID.new(0xf7fb4b9b_u32, 0x6d96_u16, 0x4d7b_u16, StaticArray[0x91_u8, 0x15_u8, 0x20_u8, 0x1b_u8, 0x14_u8, 0x48_u8, 0x11_u8, 0xef_u8])
-  struct IFsiDirectoryItem2
-    lpVtbl : IFsiDirectoryItem2VTbl*
-  end
-
-  struct IFileSystemImageVTbl
-    query_interface : Proc(IFileSystemImage*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFileSystemImage*, UInt32)
-    release : Proc(IFileSystemImage*, UInt32)
-    get_type_info_count : Proc(IFileSystemImage*, UInt32*, HRESULT)
-    get_type_info : Proc(IFileSystemImage*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFileSystemImage*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFileSystemImage*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_root : Proc(IFileSystemImage*, IFsiDirectoryItem*, HRESULT)
-    get_session_start_block : Proc(IFileSystemImage*, Int32*, HRESULT)
-    put_session_start_block : Proc(IFileSystemImage*, Int32, HRESULT)
-    get_free_media_blocks : Proc(IFileSystemImage*, Int32*, HRESULT)
-    put_free_media_blocks : Proc(IFileSystemImage*, Int32, HRESULT)
-    set_max_media_blocks_from_device : Proc(IFileSystemImage*, IDiscRecorder2, HRESULT)
-    get_used_blocks : Proc(IFileSystemImage*, Int32*, HRESULT)
-    get_volume_name : Proc(IFileSystemImage*, UInt8**, HRESULT)
-    put_volume_name : Proc(IFileSystemImage*, UInt8*, HRESULT)
-    get_imported_volume_name : Proc(IFileSystemImage*, UInt8**, HRESULT)
-    get_boot_image_options : Proc(IFileSystemImage*, IBootOptions*, HRESULT)
-    put_boot_image_options : Proc(IFileSystemImage*, IBootOptions, HRESULT)
-    get_file_count : Proc(IFileSystemImage*, Int32*, HRESULT)
-    get_directory_count : Proc(IFileSystemImage*, Int32*, HRESULT)
-    get_working_directory : Proc(IFileSystemImage*, UInt8**, HRESULT)
-    put_working_directory : Proc(IFileSystemImage*, UInt8*, HRESULT)
-    get_change_point : Proc(IFileSystemImage*, Int32*, HRESULT)
-    get_strict_file_system_compliance : Proc(IFileSystemImage*, Int16*, HRESULT)
-    put_strict_file_system_compliance : Proc(IFileSystemImage*, Int16, HRESULT)
-    get_use_restricted_character_set : Proc(IFileSystemImage*, Int16*, HRESULT)
-    put_use_restricted_character_set : Proc(IFileSystemImage*, Int16, HRESULT)
-    get_file_systems_to_create : Proc(IFileSystemImage*, FsiFileSystems*, HRESULT)
-    put_file_systems_to_create : Proc(IFileSystemImage*, FsiFileSystems, HRESULT)
-    get_file_systems_supported : Proc(IFileSystemImage*, FsiFileSystems*, HRESULT)
-    put_udf_revision : Proc(IFileSystemImage*, Int32, HRESULT)
-    get_udf_revision : Proc(IFileSystemImage*, Int32*, HRESULT)
-    get_udf_revisions_supported : Proc(IFileSystemImage*, SAFEARRAY**, HRESULT)
-    choose_image_defaults : Proc(IFileSystemImage*, IDiscRecorder2, HRESULT)
-    choose_image_defaults_for_media_type : Proc(IFileSystemImage*, IMAPI_MEDIA_PHYSICAL_TYPE, HRESULT)
-    put_iso9660_interchange_level : Proc(IFileSystemImage*, Int32, HRESULT)
-    get_iso9660_interchange_level : Proc(IFileSystemImage*, Int32*, HRESULT)
-    get_iso9660_interchange_levels_supported : Proc(IFileSystemImage*, SAFEARRAY**, HRESULT)
-    create_result_image : Proc(IFileSystemImage*, IFileSystemImageResult*, HRESULT)
-    exists : Proc(IFileSystemImage*, UInt8*, FsiItemType*, HRESULT)
-    calculate_disc_identifier : Proc(IFileSystemImage*, UInt8**, HRESULT)
-    identify_file_systems_on_disc : Proc(IFileSystemImage*, IDiscRecorder2, FsiFileSystems*, HRESULT)
-    get_default_file_system_for_import : Proc(IFileSystemImage*, FsiFileSystems, FsiFileSystems*, HRESULT)
-    import_file_system : Proc(IFileSystemImage*, FsiFileSystems*, HRESULT)
-    import_specific_file_system : Proc(IFileSystemImage*, FsiFileSystems, HRESULT)
-    rollback_to_change_point : Proc(IFileSystemImage*, Int32, HRESULT)
-    lock_in_change_point : Proc(IFileSystemImage*, HRESULT)
-    create_directory_item : Proc(IFileSystemImage*, UInt8*, IFsiDirectoryItem*, HRESULT)
-    create_file_item : Proc(IFileSystemImage*, UInt8*, IFsiFileItem*, HRESULT)
-    get_volume_name_udf : Proc(IFileSystemImage*, UInt8**, HRESULT)
-    get_volume_name_joliet : Proc(IFileSystemImage*, UInt8**, HRESULT)
-    get_volume_name_iso9660 : Proc(IFileSystemImage*, UInt8**, HRESULT)
-    get_stage_files : Proc(IFileSystemImage*, Int16*, HRESULT)
-    put_stage_files : Proc(IFileSystemImage*, Int16, HRESULT)
-    get_multisession_interfaces : Proc(IFileSystemImage*, SAFEARRAY**, HRESULT)
-    put_multisession_interfaces : Proc(IFileSystemImage*, SAFEARRAY*, HRESULT)
-  end
-
-  IFileSystemImage_GUID = "2c941fe1-975b-59be-a960-9a2a262853a5"
-  IID_IFileSystemImage = LibC::GUID.new(0x2c941fe1_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  struct IFileSystemImage
-    lpVtbl : IFileSystemImageVTbl*
-  end
-
-  struct IFileSystemImage2VTbl
-    query_interface : Proc(IFileSystemImage2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFileSystemImage2*, UInt32)
-    release : Proc(IFileSystemImage2*, UInt32)
-    get_type_info_count : Proc(IFileSystemImage2*, UInt32*, HRESULT)
-    get_type_info : Proc(IFileSystemImage2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFileSystemImage2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFileSystemImage2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_root : Proc(IFileSystemImage2*, IFsiDirectoryItem*, HRESULT)
-    get_session_start_block : Proc(IFileSystemImage2*, Int32*, HRESULT)
-    put_session_start_block : Proc(IFileSystemImage2*, Int32, HRESULT)
-    get_free_media_blocks : Proc(IFileSystemImage2*, Int32*, HRESULT)
-    put_free_media_blocks : Proc(IFileSystemImage2*, Int32, HRESULT)
-    set_max_media_blocks_from_device : Proc(IFileSystemImage2*, IDiscRecorder2, HRESULT)
-    get_used_blocks : Proc(IFileSystemImage2*, Int32*, HRESULT)
-    get_volume_name : Proc(IFileSystemImage2*, UInt8**, HRESULT)
-    put_volume_name : Proc(IFileSystemImage2*, UInt8*, HRESULT)
-    get_imported_volume_name : Proc(IFileSystemImage2*, UInt8**, HRESULT)
-    get_boot_image_options : Proc(IFileSystemImage2*, IBootOptions*, HRESULT)
-    put_boot_image_options : Proc(IFileSystemImage2*, IBootOptions, HRESULT)
-    get_file_count : Proc(IFileSystemImage2*, Int32*, HRESULT)
-    get_directory_count : Proc(IFileSystemImage2*, Int32*, HRESULT)
-    get_working_directory : Proc(IFileSystemImage2*, UInt8**, HRESULT)
-    put_working_directory : Proc(IFileSystemImage2*, UInt8*, HRESULT)
-    get_change_point : Proc(IFileSystemImage2*, Int32*, HRESULT)
-    get_strict_file_system_compliance : Proc(IFileSystemImage2*, Int16*, HRESULT)
-    put_strict_file_system_compliance : Proc(IFileSystemImage2*, Int16, HRESULT)
-    get_use_restricted_character_set : Proc(IFileSystemImage2*, Int16*, HRESULT)
-    put_use_restricted_character_set : Proc(IFileSystemImage2*, Int16, HRESULT)
-    get_file_systems_to_create : Proc(IFileSystemImage2*, FsiFileSystems*, HRESULT)
-    put_file_systems_to_create : Proc(IFileSystemImage2*, FsiFileSystems, HRESULT)
-    get_file_systems_supported : Proc(IFileSystemImage2*, FsiFileSystems*, HRESULT)
-    put_udf_revision : Proc(IFileSystemImage2*, Int32, HRESULT)
-    get_udf_revision : Proc(IFileSystemImage2*, Int32*, HRESULT)
-    get_udf_revisions_supported : Proc(IFileSystemImage2*, SAFEARRAY**, HRESULT)
-    choose_image_defaults : Proc(IFileSystemImage2*, IDiscRecorder2, HRESULT)
-    choose_image_defaults_for_media_type : Proc(IFileSystemImage2*, IMAPI_MEDIA_PHYSICAL_TYPE, HRESULT)
-    put_iso9660_interchange_level : Proc(IFileSystemImage2*, Int32, HRESULT)
-    get_iso9660_interchange_level : Proc(IFileSystemImage2*, Int32*, HRESULT)
-    get_iso9660_interchange_levels_supported : Proc(IFileSystemImage2*, SAFEARRAY**, HRESULT)
-    create_result_image : Proc(IFileSystemImage2*, IFileSystemImageResult*, HRESULT)
-    exists : Proc(IFileSystemImage2*, UInt8*, FsiItemType*, HRESULT)
-    calculate_disc_identifier : Proc(IFileSystemImage2*, UInt8**, HRESULT)
-    identify_file_systems_on_disc : Proc(IFileSystemImage2*, IDiscRecorder2, FsiFileSystems*, HRESULT)
-    get_default_file_system_for_import : Proc(IFileSystemImage2*, FsiFileSystems, FsiFileSystems*, HRESULT)
-    import_file_system : Proc(IFileSystemImage2*, FsiFileSystems*, HRESULT)
-    import_specific_file_system : Proc(IFileSystemImage2*, FsiFileSystems, HRESULT)
-    rollback_to_change_point : Proc(IFileSystemImage2*, Int32, HRESULT)
-    lock_in_change_point : Proc(IFileSystemImage2*, HRESULT)
-    create_directory_item : Proc(IFileSystemImage2*, UInt8*, IFsiDirectoryItem*, HRESULT)
-    create_file_item : Proc(IFileSystemImage2*, UInt8*, IFsiFileItem*, HRESULT)
-    get_volume_name_udf : Proc(IFileSystemImage2*, UInt8**, HRESULT)
-    get_volume_name_joliet : Proc(IFileSystemImage2*, UInt8**, HRESULT)
-    get_volume_name_iso9660 : Proc(IFileSystemImage2*, UInt8**, HRESULT)
-    get_stage_files : Proc(IFileSystemImage2*, Int16*, HRESULT)
-    put_stage_files : Proc(IFileSystemImage2*, Int16, HRESULT)
-    get_multisession_interfaces : Proc(IFileSystemImage2*, SAFEARRAY**, HRESULT)
-    put_multisession_interfaces : Proc(IFileSystemImage2*, SAFEARRAY*, HRESULT)
-    get_boot_image_options_array : Proc(IFileSystemImage2*, SAFEARRAY**, HRESULT)
-    put_boot_image_options_array : Proc(IFileSystemImage2*, SAFEARRAY*, HRESULT)
-  end
-
-  IFileSystemImage2_GUID = "d7644b2c-1537-4767-b62f-f1387b02ddfd"
-  IID_IFileSystemImage2 = LibC::GUID.new(0xd7644b2c_u32, 0x1537_u16, 0x4767_u16, StaticArray[0xb6_u8, 0x2f_u8, 0xf1_u8, 0x38_u8, 0x7b_u8, 0x2_u8, 0xdd_u8, 0xfd_u8])
-  struct IFileSystemImage2
-    lpVtbl : IFileSystemImage2VTbl*
-  end
-
-  struct IFileSystemImage3VTbl
-    query_interface : Proc(IFileSystemImage3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFileSystemImage3*, UInt32)
-    release : Proc(IFileSystemImage3*, UInt32)
-    get_type_info_count : Proc(IFileSystemImage3*, UInt32*, HRESULT)
-    get_type_info : Proc(IFileSystemImage3*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFileSystemImage3*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFileSystemImage3*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_root : Proc(IFileSystemImage3*, IFsiDirectoryItem*, HRESULT)
-    get_session_start_block : Proc(IFileSystemImage3*, Int32*, HRESULT)
-    put_session_start_block : Proc(IFileSystemImage3*, Int32, HRESULT)
-    get_free_media_blocks : Proc(IFileSystemImage3*, Int32*, HRESULT)
-    put_free_media_blocks : Proc(IFileSystemImage3*, Int32, HRESULT)
-    set_max_media_blocks_from_device : Proc(IFileSystemImage3*, IDiscRecorder2, HRESULT)
-    get_used_blocks : Proc(IFileSystemImage3*, Int32*, HRESULT)
-    get_volume_name : Proc(IFileSystemImage3*, UInt8**, HRESULT)
-    put_volume_name : Proc(IFileSystemImage3*, UInt8*, HRESULT)
-    get_imported_volume_name : Proc(IFileSystemImage3*, UInt8**, HRESULT)
-    get_boot_image_options : Proc(IFileSystemImage3*, IBootOptions*, HRESULT)
-    put_boot_image_options : Proc(IFileSystemImage3*, IBootOptions, HRESULT)
-    get_file_count : Proc(IFileSystemImage3*, Int32*, HRESULT)
-    get_directory_count : Proc(IFileSystemImage3*, Int32*, HRESULT)
-    get_working_directory : Proc(IFileSystemImage3*, UInt8**, HRESULT)
-    put_working_directory : Proc(IFileSystemImage3*, UInt8*, HRESULT)
-    get_change_point : Proc(IFileSystemImage3*, Int32*, HRESULT)
-    get_strict_file_system_compliance : Proc(IFileSystemImage3*, Int16*, HRESULT)
-    put_strict_file_system_compliance : Proc(IFileSystemImage3*, Int16, HRESULT)
-    get_use_restricted_character_set : Proc(IFileSystemImage3*, Int16*, HRESULT)
-    put_use_restricted_character_set : Proc(IFileSystemImage3*, Int16, HRESULT)
-    get_file_systems_to_create : Proc(IFileSystemImage3*, FsiFileSystems*, HRESULT)
-    put_file_systems_to_create : Proc(IFileSystemImage3*, FsiFileSystems, HRESULT)
-    get_file_systems_supported : Proc(IFileSystemImage3*, FsiFileSystems*, HRESULT)
-    put_udf_revision : Proc(IFileSystemImage3*, Int32, HRESULT)
-    get_udf_revision : Proc(IFileSystemImage3*, Int32*, HRESULT)
-    get_udf_revisions_supported : Proc(IFileSystemImage3*, SAFEARRAY**, HRESULT)
-    choose_image_defaults : Proc(IFileSystemImage3*, IDiscRecorder2, HRESULT)
-    choose_image_defaults_for_media_type : Proc(IFileSystemImage3*, IMAPI_MEDIA_PHYSICAL_TYPE, HRESULT)
-    put_iso9660_interchange_level : Proc(IFileSystemImage3*, Int32, HRESULT)
-    get_iso9660_interchange_level : Proc(IFileSystemImage3*, Int32*, HRESULT)
-    get_iso9660_interchange_levels_supported : Proc(IFileSystemImage3*, SAFEARRAY**, HRESULT)
-    create_result_image : Proc(IFileSystemImage3*, IFileSystemImageResult*, HRESULT)
-    exists : Proc(IFileSystemImage3*, UInt8*, FsiItemType*, HRESULT)
-    calculate_disc_identifier : Proc(IFileSystemImage3*, UInt8**, HRESULT)
-    identify_file_systems_on_disc : Proc(IFileSystemImage3*, IDiscRecorder2, FsiFileSystems*, HRESULT)
-    get_default_file_system_for_import : Proc(IFileSystemImage3*, FsiFileSystems, FsiFileSystems*, HRESULT)
-    import_file_system : Proc(IFileSystemImage3*, FsiFileSystems*, HRESULT)
-    import_specific_file_system : Proc(IFileSystemImage3*, FsiFileSystems, HRESULT)
-    rollback_to_change_point : Proc(IFileSystemImage3*, Int32, HRESULT)
-    lock_in_change_point : Proc(IFileSystemImage3*, HRESULT)
-    create_directory_item : Proc(IFileSystemImage3*, UInt8*, IFsiDirectoryItem*, HRESULT)
-    create_file_item : Proc(IFileSystemImage3*, UInt8*, IFsiFileItem*, HRESULT)
-    get_volume_name_udf : Proc(IFileSystemImage3*, UInt8**, HRESULT)
-    get_volume_name_joliet : Proc(IFileSystemImage3*, UInt8**, HRESULT)
-    get_volume_name_iso9660 : Proc(IFileSystemImage3*, UInt8**, HRESULT)
-    get_stage_files : Proc(IFileSystemImage3*, Int16*, HRESULT)
-    put_stage_files : Proc(IFileSystemImage3*, Int16, HRESULT)
-    get_multisession_interfaces : Proc(IFileSystemImage3*, SAFEARRAY**, HRESULT)
-    put_multisession_interfaces : Proc(IFileSystemImage3*, SAFEARRAY*, HRESULT)
-    get_boot_image_options_array : Proc(IFileSystemImage3*, SAFEARRAY**, HRESULT)
-    put_boot_image_options_array : Proc(IFileSystemImage3*, SAFEARRAY*, HRESULT)
-    get_create_redundant_udf_metadata_files : Proc(IFileSystemImage3*, Int16*, HRESULT)
-    put_create_redundant_udf_metadata_files : Proc(IFileSystemImage3*, Int16, HRESULT)
-    probe_specific_file_system : Proc(IFileSystemImage3*, FsiFileSystems, Int16*, HRESULT)
-  end
-
-  IFileSystemImage3_GUID = "7cff842c-7e97-4807-8304-910dd8f7c051"
-  IID_IFileSystemImage3 = LibC::GUID.new(0x7cff842c_u32, 0x7e97_u16, 0x4807_u16, StaticArray[0x83_u8, 0x4_u8, 0x91_u8, 0xd_u8, 0xd8_u8, 0xf7_u8, 0xc0_u8, 0x51_u8])
-  struct IFileSystemImage3
-    lpVtbl : IFileSystemImage3VTbl*
-  end
-
-  struct DFileSystemImageEventsVTbl
-    query_interface : Proc(DFileSystemImageEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DFileSystemImageEvents*, UInt32)
-    release : Proc(DFileSystemImageEvents*, UInt32)
-    get_type_info_count : Proc(DFileSystemImageEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(DFileSystemImageEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DFileSystemImageEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DFileSystemImageEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    update : Proc(DFileSystemImageEvents*, IDispatch, UInt8*, Int32, Int32, HRESULT)
-  end
-
-  DFileSystemImageEvents_GUID = "2c941fdf-975b-59be-a960-9a2a262853a5"
-  IID_DFileSystemImageEvents = LibC::GUID.new(0x2c941fdf_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
-  struct DFileSystemImageEvents
-    lpVtbl : DFileSystemImageEventsVTbl*
-  end
-
-  struct DFileSystemImageImportEventsVTbl
-    query_interface : Proc(DFileSystemImageImportEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DFileSystemImageImportEvents*, UInt32)
-    release : Proc(DFileSystemImageImportEvents*, UInt32)
-    get_type_info_count : Proc(DFileSystemImageImportEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(DFileSystemImageImportEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DFileSystemImageImportEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DFileSystemImageImportEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    update_import : Proc(DFileSystemImageImportEvents*, IDispatch, FsiFileSystems, UInt8*, Int32, Int32, Int32, Int32, HRESULT)
-  end
-
-  DFileSystemImageImportEvents_GUID = "d25c30f9-4087-4366-9e24-e55be286424b"
-  IID_DFileSystemImageImportEvents = LibC::GUID.new(0xd25c30f9_u32, 0x4087_u16, 0x4366_u16, StaticArray[0x9e_u8, 0x24_u8, 0xe5_u8, 0x5b_u8, 0xe2_u8, 0x86_u8, 0x42_u8, 0x4b_u8])
-  struct DFileSystemImageImportEvents
-    lpVtbl : DFileSystemImageImportEventsVTbl*
-  end
-
-  struct IIsoImageManagerVTbl
-    query_interface : Proc(IIsoImageManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IIsoImageManager*, UInt32)
-    release : Proc(IIsoImageManager*, UInt32)
-    get_type_info_count : Proc(IIsoImageManager*, UInt32*, HRESULT)
-    get_type_info : Proc(IIsoImageManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IIsoImageManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IIsoImageManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_path : Proc(IIsoImageManager*, UInt8**, HRESULT)
-    get_stream : Proc(IIsoImageManager*, IStream*, HRESULT)
-    set_path : Proc(IIsoImageManager*, UInt8*, HRESULT)
-    set_stream : Proc(IIsoImageManager*, IStream, HRESULT)
-    validate : Proc(IIsoImageManager*, HRESULT)
-  end
-
-  IIsoImageManager_GUID = "6ca38be5-fbbb-4800-95a1-a438865eb0d4"
-  IID_IIsoImageManager = LibC::GUID.new(0x6ca38be5_u32, 0xfbbb_u16, 0x4800_u16, StaticArray[0x95_u8, 0xa1_u8, 0xa4_u8, 0x38_u8, 0x86_u8, 0x5e_u8, 0xb0_u8, 0xd4_u8])
-  struct IIsoImageManager
-    lpVtbl : IIsoImageManagerVTbl*
-  end
-
-  struct IDiscRecorderVTbl
-    query_interface : Proc(IDiscRecorder*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscRecorder*, UInt32)
-    release : Proc(IDiscRecorder*, UInt32)
-    init : Proc(IDiscRecorder*, UInt8*, UInt32, UInt32, HRESULT)
-    get_recorder_guid : Proc(IDiscRecorder*, UInt8*, UInt32, UInt32*, HRESULT)
-    get_recorder_type : Proc(IDiscRecorder*, RECORDER_TYPES*, HRESULT)
-    get_display_names : Proc(IDiscRecorder*, UInt8**, UInt8**, UInt8**, HRESULT)
-    get_base_pn_pid : Proc(IDiscRecorder*, UInt8**, HRESULT)
-    get_path : Proc(IDiscRecorder*, UInt8**, HRESULT)
-    get_recorder_properties : Proc(IDiscRecorder*, IPropertyStorage*, HRESULT)
-    set_recorder_properties : Proc(IDiscRecorder*, IPropertyStorage, HRESULT)
-    get_recorder_state : Proc(IDiscRecorder*, DISC_RECORDER_STATE_FLAGS*, HRESULT)
-    open_exclusive : Proc(IDiscRecorder*, HRESULT)
-    query_media_type : Proc(IDiscRecorder*, MEDIA_TYPES*, MEDIA_FLAGS*, HRESULT)
-    query_media_info : Proc(IDiscRecorder*, UInt8*, UInt8*, UInt32*, UInt32*, UInt32*, HRESULT)
-    eject : Proc(IDiscRecorder*, HRESULT)
-    erase : Proc(IDiscRecorder*, UInt8, HRESULT)
-    close : Proc(IDiscRecorder*, HRESULT)
-  end
-
-  IDiscRecorder_GUID = "85ac9776-ca88-4cf2-894e-09598c078a41"
-  IID_IDiscRecorder = LibC::GUID.new(0x85ac9776_u32, 0xca88_u16, 0x4cf2_u16, StaticArray[0x89_u8, 0x4e_u8, 0x9_u8, 0x59_u8, 0x8c_u8, 0x7_u8, 0x8a_u8, 0x41_u8])
-  struct IDiscRecorder
-    lpVtbl : IDiscRecorderVTbl*
-  end
-
-  struct IEnumDiscRecordersVTbl
-    query_interface : Proc(IEnumDiscRecorders*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumDiscRecorders*, UInt32)
-    release : Proc(IEnumDiscRecorders*, UInt32)
-    next : Proc(IEnumDiscRecorders*, UInt32, IDiscRecorder*, UInt32*, HRESULT)
-    skip : Proc(IEnumDiscRecorders*, UInt32, HRESULT)
-    reset : Proc(IEnumDiscRecorders*, HRESULT)
-    clone : Proc(IEnumDiscRecorders*, IEnumDiscRecorders*, HRESULT)
-  end
-
-  IEnumDiscRecorders_GUID = "9b1921e1-54ac-11d3-9144-00104ba11c5e"
-  IID_IEnumDiscRecorders = LibC::GUID.new(0x9b1921e1_u32, 0x54ac_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
-  struct IEnumDiscRecorders
-    lpVtbl : IEnumDiscRecordersVTbl*
-  end
-
-  struct IEnumDiscMasterFormatsVTbl
-    query_interface : Proc(IEnumDiscMasterFormats*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumDiscMasterFormats*, UInt32)
-    release : Proc(IEnumDiscMasterFormats*, UInt32)
-    next : Proc(IEnumDiscMasterFormats*, UInt32, Guid*, UInt32*, HRESULT)
-    skip : Proc(IEnumDiscMasterFormats*, UInt32, HRESULT)
-    reset : Proc(IEnumDiscMasterFormats*, HRESULT)
-    clone : Proc(IEnumDiscMasterFormats*, IEnumDiscMasterFormats*, HRESULT)
-  end
-
-  IEnumDiscMasterFormats_GUID = "ddf445e1-54ba-11d3-9144-00104ba11c5e"
-  IID_IEnumDiscMasterFormats = LibC::GUID.new(0xddf445e1_u32, 0x54ba_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
-  struct IEnumDiscMasterFormats
-    lpVtbl : IEnumDiscMasterFormatsVTbl*
-  end
-
-  struct IRedbookDiscMasterVTbl
-    query_interface : Proc(IRedbookDiscMaster*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IRedbookDiscMaster*, UInt32)
-    release : Proc(IRedbookDiscMaster*, UInt32)
-    get_total_audio_tracks : Proc(IRedbookDiscMaster*, Int32*, HRESULT)
-    get_total_audio_blocks : Proc(IRedbookDiscMaster*, Int32*, HRESULT)
-    get_used_audio_blocks : Proc(IRedbookDiscMaster*, Int32*, HRESULT)
-    get_available_audio_track_blocks : Proc(IRedbookDiscMaster*, Int32*, HRESULT)
-    get_audio_block_size : Proc(IRedbookDiscMaster*, Int32*, HRESULT)
-    create_audio_track : Proc(IRedbookDiscMaster*, Int32, HRESULT)
-    add_audio_track_blocks : Proc(IRedbookDiscMaster*, UInt8*, Int32, HRESULT)
-    close_audio_track : Proc(IRedbookDiscMaster*, HRESULT)
-  end
-
-  IRedbookDiscMaster_GUID = "e3bc42cd-4e5c-11d3-9144-00104ba11c5e"
-  IID_IRedbookDiscMaster = LibC::GUID.new(0xe3bc42cd_u32, 0x4e5c_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
-  struct IRedbookDiscMaster
-    lpVtbl : IRedbookDiscMasterVTbl*
-  end
-
-  struct IJolietDiscMasterVTbl
-    query_interface : Proc(IJolietDiscMaster*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IJolietDiscMaster*, UInt32)
-    release : Proc(IJolietDiscMaster*, UInt32)
-    get_total_data_blocks : Proc(IJolietDiscMaster*, Int32*, HRESULT)
-    get_used_data_blocks : Proc(IJolietDiscMaster*, Int32*, HRESULT)
-    get_data_block_size : Proc(IJolietDiscMaster*, Int32*, HRESULT)
-    add_data : Proc(IJolietDiscMaster*, IStorage, Int32, HRESULT)
-    get_joliet_properties : Proc(IJolietDiscMaster*, IPropertyStorage*, HRESULT)
-    set_joliet_properties : Proc(IJolietDiscMaster*, IPropertyStorage, HRESULT)
-  end
-
-  IJolietDiscMaster_GUID = "e3bc42ce-4e5c-11d3-9144-00104ba11c5e"
-  IID_IJolietDiscMaster = LibC::GUID.new(0xe3bc42ce_u32, 0x4e5c_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
-  struct IJolietDiscMaster
-    lpVtbl : IJolietDiscMasterVTbl*
-  end
-
-  struct IDiscMasterProgressEventsVTbl
-    query_interface : Proc(IDiscMasterProgressEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscMasterProgressEvents*, UInt32)
-    release : Proc(IDiscMasterProgressEvents*, UInt32)
-    query_cancel : Proc(IDiscMasterProgressEvents*, UInt8*, HRESULT)
-    notify_pn_p_activity : Proc(IDiscMasterProgressEvents*, HRESULT)
-    notify_add_progress : Proc(IDiscMasterProgressEvents*, Int32, Int32, HRESULT)
-    notify_block_progress : Proc(IDiscMasterProgressEvents*, Int32, Int32, HRESULT)
-    notify_track_progress : Proc(IDiscMasterProgressEvents*, Int32, Int32, HRESULT)
-    notify_preparing_burn : Proc(IDiscMasterProgressEvents*, Int32, HRESULT)
-    notify_closing_disc : Proc(IDiscMasterProgressEvents*, Int32, HRESULT)
-    notify_burn_complete : Proc(IDiscMasterProgressEvents*, HRESULT, HRESULT)
-    notify_erase_complete : Proc(IDiscMasterProgressEvents*, HRESULT, HRESULT)
-  end
-
-  IDiscMasterProgressEvents_GUID = "ec9e51c1-4e5d-11d3-9144-00104ba11c5e"
-  IID_IDiscMasterProgressEvents = LibC::GUID.new(0xec9e51c1_u32, 0x4e5d_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
-  struct IDiscMasterProgressEvents
-    lpVtbl : IDiscMasterProgressEventsVTbl*
-  end
-
-  struct IDiscMasterVTbl
-    query_interface : Proc(IDiscMaster*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDiscMaster*, UInt32)
-    release : Proc(IDiscMaster*, UInt32)
-    open : Proc(IDiscMaster*, HRESULT)
-    enum_disc_master_formats : Proc(IDiscMaster*, IEnumDiscMasterFormats*, HRESULT)
-    get_active_disc_master_format : Proc(IDiscMaster*, Guid*, HRESULT)
-    set_active_disc_master_format : Proc(IDiscMaster*, Guid*, Void**, HRESULT)
-    enum_disc_recorders : Proc(IDiscMaster*, IEnumDiscRecorders*, HRESULT)
-    get_active_disc_recorder : Proc(IDiscMaster*, IDiscRecorder*, HRESULT)
-    set_active_disc_recorder : Proc(IDiscMaster*, IDiscRecorder, HRESULT)
-    clear_format_content : Proc(IDiscMaster*, HRESULT)
-    progress_advise : Proc(IDiscMaster*, IDiscMasterProgressEvents, LibC::UINT_PTR*, HRESULT)
-    progress_unadvise : Proc(IDiscMaster*, LibC::UINT_PTR, HRESULT)
-    record_disc : Proc(IDiscMaster*, UInt8, UInt8, HRESULT)
-    close : Proc(IDiscMaster*, HRESULT)
-  end
-
-  IDiscMaster_GUID = "520cca62-51a5-11d3-9144-00104ba11c5e"
-  IID_IDiscMaster = LibC::GUID.new(0x520cca62_u32, 0x51a5_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
-  struct IDiscMaster
-    lpVtbl : IDiscMasterVTbl*
-  end
-
-
-  # Params # lpmalloc : IMalloc [In],ulflags : UInt32 [In],lppmsgsess : MSGSESS** [In]
-  fun OpenIMsgSession(lpmalloc : IMalloc, ulflags : UInt32, lppmsgsess : MSGSESS**) : Int32
-
-  # Params # lpmsgsess : MSGSESS* [In]
-  fun CloseIMsgSession(lpmsgsess : MSGSESS*) : Void
-
-  # Params # lpmsgsess : MSGSESS* [In],lpallocatebuffer : LPALLOCATEBUFFER [In],lpallocatemore : LPALLOCATEMORE [In],lpfreebuffer : LPFREEBUFFER [In],lpmalloc : IMalloc [In],lpmapisup : Void* [In],lpstg : IStorage [In],lpfmsgcallrelease : MSGCALLRELEASE* [In],ulcallerdata : UInt32 [In],ulflags : UInt32 [In],lppmsg : IMessage* [In]
-  fun OpenIMsgOnIStg(lpmsgsess : MSGSESS*, lpallocatebuffer : LPALLOCATEBUFFER, lpallocatemore : LPALLOCATEMORE, lpfreebuffer : LPFREEBUFFER, lpmalloc : IMalloc, lpmapisup : Void*, lpstg : IStorage, lpfmsgcallrelease : MSGCALLRELEASE*, ulcallerdata : UInt32, ulflags : UInt32, lppmsg : IMessage*) : Int32
-
-  # Params # lpobject : Void* [In],lpproptagarray : SPropTagArray* [In],lpppropattrarray : SPropAttrArray** [In]
-  fun GetAttribIMsgOnIStg(lpobject : Void*, lpproptagarray : SPropTagArray*, lpppropattrarray : SPropAttrArray**) : HRESULT
-
-  # Params # lpobject : Void* [In],lpproptags : SPropTagArray* [In],lppropattrs : SPropAttrArray* [In],lpppropproblems : SPropProblemArray** [In]
-  fun SetAttribIMsgOnIStg(lpobject : Void*, lpproptags : SPropTagArray*, lppropattrs : SPropAttrArray*, lpppropproblems : SPropProblemArray**) : HRESULT
-
-  # Params # stgscode : Int32 [In]
-  fun MapStorageSCode(stgscode : Int32) : Int32
-end
-struct LibWin32::IDiscMaster2
-  def query_interface(this : IDiscMaster2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscMaster2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscMaster2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDiscMaster2*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDiscMaster2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDiscMaster2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDiscMaster2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get__new_enum(this : IDiscMaster2*, ppunk : IEnumVARIANT*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, ppunk)
-  end
-  def get_item(this : IDiscMaster2*, index : Int32, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_item.call(this, index, value)
-  end
-  def get_count(this : IDiscMaster2*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, value)
-  end
-  def get_is_supported_environment(this : IDiscMaster2*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_is_supported_environment.call(this, value)
-  end
-end
-struct LibWin32::DDiscMaster2Events
-  def query_interface(this : DDiscMaster2Events*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : DDiscMaster2Events*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : DDiscMaster2Events*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : DDiscMaster2Events*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : DDiscMaster2Events*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : DDiscMaster2Events*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : DDiscMaster2Events*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def notify_device_added(this : DDiscMaster2Events*, object : IDispatch, uniqueid : UInt8*) : HRESULT
-    @lpVtbl.value.notify_device_added.call(this, object, uniqueid)
-  end
-  def notify_device_removed(this : DDiscMaster2Events*, object : IDispatch, uniqueid : UInt8*) : HRESULT
-    @lpVtbl.value.notify_device_removed.call(this, object, uniqueid)
-  end
-end
-struct LibWin32::IDiscRecorder2Ex
-  def query_interface(this : IDiscRecorder2Ex*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscRecorder2Ex*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscRecorder2Ex*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def send_command_no_data(this : IDiscRecorder2Ex*, cdb : UInt8*, cdbsize : UInt32, sensebuffer : UInt8*, timeout : UInt32) : HRESULT
-    @lpVtbl.value.send_command_no_data.call(this, cdb, cdbsize, sensebuffer, timeout)
-  end
-  def send_command_send_data_to_device(this : IDiscRecorder2Ex*, cdb : UInt8*, cdbsize : UInt32, sensebuffer : UInt8*, timeout : UInt32, buffer : UInt8*, buffersize : UInt32) : HRESULT
-    @lpVtbl.value.send_command_send_data_to_device.call(this, cdb, cdbsize, sensebuffer, timeout, buffer, buffersize)
-  end
-  def send_command_get_data_from_device(this : IDiscRecorder2Ex*, cdb : UInt8*, cdbsize : UInt32, sensebuffer : UInt8*, timeout : UInt32, buffer : UInt8*, buffersize : UInt32, bufferfetched : UInt32*) : HRESULT
-    @lpVtbl.value.send_command_get_data_from_device.call(this, cdb, cdbsize, sensebuffer, timeout, buffer, buffersize, bufferfetched)
-  end
-  def read_dvd_structure(this : IDiscRecorder2Ex*, format : UInt32, address : UInt32, layer : UInt32, agid : UInt32, data : UInt8**, count : UInt32*) : HRESULT
-    @lpVtbl.value.read_dvd_structure.call(this, format, address, layer, agid, data, count)
-  end
-  def send_dvd_structure(this : IDiscRecorder2Ex*, format : UInt32, data : UInt8*, count : UInt32) : HRESULT
-    @lpVtbl.value.send_dvd_structure.call(this, format, data, count)
-  end
-  def get_adapter_descriptor(this : IDiscRecorder2Ex*, data : UInt8**, bytesize : UInt32*) : HRESULT
-    @lpVtbl.value.get_adapter_descriptor.call(this, data, bytesize)
-  end
-  def get_device_descriptor(this : IDiscRecorder2Ex*, data : UInt8**, bytesize : UInt32*) : HRESULT
-    @lpVtbl.value.get_device_descriptor.call(this, data, bytesize)
-  end
-  def get_disc_information(this : IDiscRecorder2Ex*, discinformation : UInt8**, bytesize : UInt32*) : HRESULT
-    @lpVtbl.value.get_disc_information.call(this, discinformation, bytesize)
-  end
-  def get_track_information(this : IDiscRecorder2Ex*, address : UInt32, addresstype : IMAPI_READ_TRACK_ADDRESS_TYPE, trackinformation : UInt8**, bytesize : UInt32*) : HRESULT
-    @lpVtbl.value.get_track_information.call(this, address, addresstype, trackinformation, bytesize)
-  end
-  def get_feature_page(this : IDiscRecorder2Ex*, requestedfeature : IMAPI_FEATURE_PAGE_TYPE, currentfeatureonly : BOOLEAN, featuredata : UInt8**, bytesize : UInt32*) : HRESULT
-    @lpVtbl.value.get_feature_page.call(this, requestedfeature, currentfeatureonly, featuredata, bytesize)
-  end
-  def get_mode_page(this : IDiscRecorder2Ex*, requestedmodepage : IMAPI_MODE_PAGE_TYPE, requesttype : IMAPI_MODE_PAGE_REQUEST_TYPE, modepagedata : UInt8**, bytesize : UInt32*) : HRESULT
-    @lpVtbl.value.get_mode_page.call(this, requestedmodepage, requesttype, modepagedata, bytesize)
-  end
-  def set_mode_page(this : IDiscRecorder2Ex*, requesttype : IMAPI_MODE_PAGE_REQUEST_TYPE, data : UInt8*, bytesize : UInt32) : HRESULT
-    @lpVtbl.value.set_mode_page.call(this, requesttype, data, bytesize)
-  end
-  def get_supported_feature_pages(this : IDiscRecorder2Ex*, currentfeatureonly : BOOLEAN, featuredata : IMAPI_FEATURE_PAGE_TYPE**, bytesize : UInt32*) : HRESULT
-    @lpVtbl.value.get_supported_feature_pages.call(this, currentfeatureonly, featuredata, bytesize)
-  end
-  def get_supported_profiles(this : IDiscRecorder2Ex*, currentonly : BOOLEAN, profiletypes : IMAPI_PROFILE_TYPE**, validprofiles : UInt32*) : HRESULT
-    @lpVtbl.value.get_supported_profiles.call(this, currentonly, profiletypes, validprofiles)
-  end
-  def get_supported_mode_pages(this : IDiscRecorder2Ex*, requesttype : IMAPI_MODE_PAGE_REQUEST_TYPE, modepagetypes : IMAPI_MODE_PAGE_TYPE**, validpages : UInt32*) : HRESULT
-    @lpVtbl.value.get_supported_mode_pages.call(this, requesttype, modepagetypes, validpages)
-  end
-  def get_byte_alignment_mask(this : IDiscRecorder2Ex*, value : UInt32*) : HRESULT
-    @lpVtbl.value.get_byte_alignment_mask.call(this, value)
-  end
-  def get_maximum_non_page_aligned_transfer_size(this : IDiscRecorder2Ex*, value : UInt32*) : HRESULT
-    @lpVtbl.value.get_maximum_non_page_aligned_transfer_size.call(this, value)
-  end
-  def get_maximum_page_aligned_transfer_size(this : IDiscRecorder2Ex*, value : UInt32*) : HRESULT
-    @lpVtbl.value.get_maximum_page_aligned_transfer_size.call(this, value)
-  end
-end
-struct LibWin32::IDiscRecorder2
-  def query_interface(this : IDiscRecorder2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscRecorder2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscRecorder2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDiscRecorder2*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDiscRecorder2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDiscRecorder2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDiscRecorder2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def eject_media(this : IDiscRecorder2*) : HRESULT
-    @lpVtbl.value.eject_media.call(this)
-  end
-  def close_tray(this : IDiscRecorder2*) : HRESULT
-    @lpVtbl.value.close_tray.call(this)
-  end
-  def acquire_exclusive_access(this : IDiscRecorder2*, force : Int16, midl__idiscrecorder20000 : UInt8*) : HRESULT
-    @lpVtbl.value.acquire_exclusive_access.call(this, force, midl__idiscrecorder20000)
-  end
-  def release_exclusive_access(this : IDiscRecorder2*) : HRESULT
-    @lpVtbl.value.release_exclusive_access.call(this)
-  end
-  def disable_mcn(this : IDiscRecorder2*) : HRESULT
-    @lpVtbl.value.disable_mcn.call(this)
-  end
-  def enable_mcn(this : IDiscRecorder2*) : HRESULT
-    @lpVtbl.value.enable_mcn.call(this)
-  end
-  def initialize_disc_recorder(this : IDiscRecorder2*, recorderuniqueid : UInt8*) : HRESULT
-    @lpVtbl.value.initialize_disc_recorder.call(this, recorderuniqueid)
-  end
-  def get_active_disc_recorder(this : IDiscRecorder2*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_active_disc_recorder.call(this, value)
-  end
-  def get_vendor_id(this : IDiscRecorder2*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_vendor_id.call(this, value)
-  end
-  def get_product_id(this : IDiscRecorder2*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_product_id.call(this, value)
-  end
-  def get_product_revision(this : IDiscRecorder2*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_product_revision.call(this, value)
-  end
-  def get_volume_name(this : IDiscRecorder2*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_volume_name.call(this, value)
-  end
-  def get_volume_path_names(this : IDiscRecorder2*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_volume_path_names.call(this, value)
-  end
-  def get_device_can_load_media(this : IDiscRecorder2*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_device_can_load_media.call(this, value)
-  end
-  def get_legacy_device_number(this : IDiscRecorder2*, legacydevicenumber : Int32*) : HRESULT
-    @lpVtbl.value.get_legacy_device_number.call(this, legacydevicenumber)
-  end
-  def get_supported_feature_pages(this : IDiscRecorder2*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_feature_pages.call(this, value)
-  end
-  def get_current_feature_pages(this : IDiscRecorder2*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_current_feature_pages.call(this, value)
-  end
-  def get_supported_profiles(this : IDiscRecorder2*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_profiles.call(this, value)
-  end
-  def get_current_profiles(this : IDiscRecorder2*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_current_profiles.call(this, value)
-  end
-  def get_supported_mode_pages(this : IDiscRecorder2*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_mode_pages.call(this, value)
-  end
-  def get_exclusive_access_owner(this : IDiscRecorder2*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_exclusive_access_owner.call(this, value)
-  end
-end
-struct LibWin32::IWriteEngine2
-  def query_interface(this : IWriteEngine2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWriteEngine2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWriteEngine2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IWriteEngine2*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IWriteEngine2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IWriteEngine2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IWriteEngine2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def write_section(this : IWriteEngine2*, data : IStream, startingblockaddress : Int32, numberofblocks : Int32) : HRESULT
-    @lpVtbl.value.write_section.call(this, data, startingblockaddress, numberofblocks)
-  end
-  def cancel_write(this : IWriteEngine2*) : HRESULT
-    @lpVtbl.value.cancel_write.call(this)
-  end
-  def put_recorder(this : IWriteEngine2*, value : IDiscRecorder2Ex) : HRESULT
-    @lpVtbl.value.put_recorder.call(this, value)
-  end
-  def get_recorder(this : IWriteEngine2*, value : IDiscRecorder2Ex*) : HRESULT
-    @lpVtbl.value.get_recorder.call(this, value)
-  end
-  def put_use_streaming_write12(this : IWriteEngine2*, value : Int16) : HRESULT
-    @lpVtbl.value.put_use_streaming_write12.call(this, value)
-  end
-  def get_use_streaming_write12(this : IWriteEngine2*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_use_streaming_write12.call(this, value)
-  end
-  def put_starting_sectors_per_second(this : IWriteEngine2*, value : Int32) : HRESULT
-    @lpVtbl.value.put_starting_sectors_per_second.call(this, value)
-  end
-  def get_starting_sectors_per_second(this : IWriteEngine2*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_starting_sectors_per_second.call(this, value)
-  end
-  def put_ending_sectors_per_second(this : IWriteEngine2*, value : Int32) : HRESULT
-    @lpVtbl.value.put_ending_sectors_per_second.call(this, value)
-  end
-  def get_ending_sectors_per_second(this : IWriteEngine2*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_ending_sectors_per_second.call(this, value)
-  end
-  def put_bytes_per_sector(this : IWriteEngine2*, value : Int32) : HRESULT
-    @lpVtbl.value.put_bytes_per_sector.call(this, value)
-  end
-  def get_bytes_per_sector(this : IWriteEngine2*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_bytes_per_sector.call(this, value)
-  end
-  def get_write_in_progress(this : IWriteEngine2*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_write_in_progress.call(this, value)
-  end
-end
-struct LibWin32::IWriteEngine2EventArgs
-  def query_interface(this : IWriteEngine2EventArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWriteEngine2EventArgs*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWriteEngine2EventArgs*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IWriteEngine2EventArgs*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IWriteEngine2EventArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IWriteEngine2EventArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IWriteEngine2EventArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_start_lba(this : IWriteEngine2EventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_start_lba.call(this, value)
-  end
-  def get_sector_count(this : IWriteEngine2EventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_sector_count.call(this, value)
-  end
-  def get_last_read_lba(this : IWriteEngine2EventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_read_lba.call(this, value)
-  end
-  def get_last_written_lba(this : IWriteEngine2EventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_written_lba.call(this, value)
-  end
-  def get_total_system_buffer(this : IWriteEngine2EventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_total_system_buffer.call(this, value)
-  end
-  def get_used_system_buffer(this : IWriteEngine2EventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_used_system_buffer.call(this, value)
-  end
-  def get_free_system_buffer(this : IWriteEngine2EventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_free_system_buffer.call(this, value)
-  end
-end
-struct LibWin32::DWriteEngine2Events
-  def query_interface(this : DWriteEngine2Events*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : DWriteEngine2Events*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : DWriteEngine2Events*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : DWriteEngine2Events*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : DWriteEngine2Events*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : DWriteEngine2Events*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : DWriteEngine2Events*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def update(this : DWriteEngine2Events*, object : IDispatch, progress : IDispatch) : HRESULT
-    @lpVtbl.value.update.call(this, object, progress)
-  end
-end
-struct LibWin32::IDiscFormat2
-  def query_interface(this : IDiscFormat2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscFormat2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscFormat2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDiscFormat2*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDiscFormat2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDiscFormat2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDiscFormat2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def is_recorder_supported(this : IDiscFormat2*, recorder : IDiscRecorder2, value : Int16*) : HRESULT
-    @lpVtbl.value.is_recorder_supported.call(this, recorder, value)
-  end
-  def is_current_media_supported(this : IDiscFormat2*, recorder : IDiscRecorder2, value : Int16*) : HRESULT
-    @lpVtbl.value.is_current_media_supported.call(this, recorder, value)
-  end
-  def get_media_physically_blank(this : IDiscFormat2*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_media_physically_blank.call(this, value)
-  end
-  def get_media_heuristically_blank(this : IDiscFormat2*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_media_heuristically_blank.call(this, value)
-  end
-  def get_supported_media_types(this : IDiscFormat2*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_media_types.call(this, value)
-  end
-end
-struct LibWin32::IDiscFormat2Erase
-  def query_interface(this : IDiscFormat2Erase*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscFormat2Erase*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscFormat2Erase*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDiscFormat2Erase*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDiscFormat2Erase*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDiscFormat2Erase*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDiscFormat2Erase*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def is_recorder_supported(this : IDiscFormat2Erase*, recorder : IDiscRecorder2, value : Int16*) : HRESULT
-    @lpVtbl.value.is_recorder_supported.call(this, recorder, value)
-  end
-  def is_current_media_supported(this : IDiscFormat2Erase*, recorder : IDiscRecorder2, value : Int16*) : HRESULT
-    @lpVtbl.value.is_current_media_supported.call(this, recorder, value)
-  end
-  def get_media_physically_blank(this : IDiscFormat2Erase*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_media_physically_blank.call(this, value)
-  end
-  def get_media_heuristically_blank(this : IDiscFormat2Erase*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_media_heuristically_blank.call(this, value)
-  end
-  def get_supported_media_types(this : IDiscFormat2Erase*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_media_types.call(this, value)
-  end
-  def put_recorder(this : IDiscFormat2Erase*, value : IDiscRecorder2) : HRESULT
-    @lpVtbl.value.put_recorder.call(this, value)
-  end
-  def get_recorder(this : IDiscFormat2Erase*, value : IDiscRecorder2*) : HRESULT
-    @lpVtbl.value.get_recorder.call(this, value)
-  end
-  def put_full_erase(this : IDiscFormat2Erase*, value : Int16) : HRESULT
-    @lpVtbl.value.put_full_erase.call(this, value)
-  end
-  def get_full_erase(this : IDiscFormat2Erase*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_full_erase.call(this, value)
-  end
-  def get_current_physical_media_type(this : IDiscFormat2Erase*, value : IMAPI_MEDIA_PHYSICAL_TYPE*) : HRESULT
-    @lpVtbl.value.get_current_physical_media_type.call(this, value)
-  end
-  def put_client_name(this : IDiscFormat2Erase*, value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_name.call(this, value)
-  end
-  def get_client_name(this : IDiscFormat2Erase*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_name.call(this, value)
-  end
-  def erase_media(this : IDiscFormat2Erase*) : HRESULT
-    @lpVtbl.value.erase_media.call(this)
-  end
-end
-struct LibWin32::DDiscFormat2EraseEvents
-  def query_interface(this : DDiscFormat2EraseEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : DDiscFormat2EraseEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : DDiscFormat2EraseEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : DDiscFormat2EraseEvents*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : DDiscFormat2EraseEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : DDiscFormat2EraseEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : DDiscFormat2EraseEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def update(this : DDiscFormat2EraseEvents*, object : IDispatch, elapsedseconds : Int32, estimatedtotalseconds : Int32) : HRESULT
-    @lpVtbl.value.update.call(this, object, elapsedseconds, estimatedtotalseconds)
-  end
-end
-struct LibWin32::IDiscFormat2Data
-  def query_interface(this : IDiscFormat2Data*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscFormat2Data*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscFormat2Data*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDiscFormat2Data*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDiscFormat2Data*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDiscFormat2Data*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDiscFormat2Data*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def is_recorder_supported(this : IDiscFormat2Data*, recorder : IDiscRecorder2, value : Int16*) : HRESULT
-    @lpVtbl.value.is_recorder_supported.call(this, recorder, value)
-  end
-  def is_current_media_supported(this : IDiscFormat2Data*, recorder : IDiscRecorder2, value : Int16*) : HRESULT
-    @lpVtbl.value.is_current_media_supported.call(this, recorder, value)
-  end
-  def get_media_physically_blank(this : IDiscFormat2Data*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_media_physically_blank.call(this, value)
-  end
-  def get_media_heuristically_blank(this : IDiscFormat2Data*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_media_heuristically_blank.call(this, value)
-  end
-  def get_supported_media_types(this : IDiscFormat2Data*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_media_types.call(this, value)
-  end
-  def put_recorder(this : IDiscFormat2Data*, value : IDiscRecorder2) : HRESULT
-    @lpVtbl.value.put_recorder.call(this, value)
-  end
-  def get_recorder(this : IDiscFormat2Data*, value : IDiscRecorder2*) : HRESULT
-    @lpVtbl.value.get_recorder.call(this, value)
-  end
-  def put_buffer_underrun_free_disabled(this : IDiscFormat2Data*, value : Int16) : HRESULT
-    @lpVtbl.value.put_buffer_underrun_free_disabled.call(this, value)
-  end
-  def get_buffer_underrun_free_disabled(this : IDiscFormat2Data*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_buffer_underrun_free_disabled.call(this, value)
-  end
-  def put_postgap_already_in_image(this : IDiscFormat2Data*, value : Int16) : HRESULT
-    @lpVtbl.value.put_postgap_already_in_image.call(this, value)
-  end
-  def get_postgap_already_in_image(this : IDiscFormat2Data*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_postgap_already_in_image.call(this, value)
-  end
-  def get_current_media_status(this : IDiscFormat2Data*, value : IMAPI_FORMAT2_DATA_MEDIA_STATE*) : HRESULT
-    @lpVtbl.value.get_current_media_status.call(this, value)
-  end
-  def get_write_protect_status(this : IDiscFormat2Data*, value : IMAPI_MEDIA_WRITE_PROTECT_STATE*) : HRESULT
-    @lpVtbl.value.get_write_protect_status.call(this, value)
-  end
-  def get_total_sectors_on_media(this : IDiscFormat2Data*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_total_sectors_on_media.call(this, value)
-  end
-  def get_free_sectors_on_media(this : IDiscFormat2Data*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_free_sectors_on_media.call(this, value)
-  end
-  def get_next_writable_address(this : IDiscFormat2Data*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_next_writable_address.call(this, value)
-  end
-  def get_start_address_of_previous_session(this : IDiscFormat2Data*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_start_address_of_previous_session.call(this, value)
-  end
-  def get_last_written_address_of_previous_session(this : IDiscFormat2Data*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_written_address_of_previous_session.call(this, value)
-  end
-  def put_force_media_to_be_closed(this : IDiscFormat2Data*, value : Int16) : HRESULT
-    @lpVtbl.value.put_force_media_to_be_closed.call(this, value)
-  end
-  def get_force_media_to_be_closed(this : IDiscFormat2Data*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_force_media_to_be_closed.call(this, value)
-  end
-  def put_disable_consumer_dvd_compatibility_mode(this : IDiscFormat2Data*, value : Int16) : HRESULT
-    @lpVtbl.value.put_disable_consumer_dvd_compatibility_mode.call(this, value)
-  end
-  def get_disable_consumer_dvd_compatibility_mode(this : IDiscFormat2Data*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_disable_consumer_dvd_compatibility_mode.call(this, value)
-  end
-  def get_current_physical_media_type(this : IDiscFormat2Data*, value : IMAPI_MEDIA_PHYSICAL_TYPE*) : HRESULT
-    @lpVtbl.value.get_current_physical_media_type.call(this, value)
-  end
-  def put_client_name(this : IDiscFormat2Data*, value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_name.call(this, value)
-  end
-  def get_client_name(this : IDiscFormat2Data*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_name.call(this, value)
-  end
-  def get_requested_write_speed(this : IDiscFormat2Data*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_requested_write_speed.call(this, value)
-  end
-  def get_requested_rotation_type_is_pure_cav(this : IDiscFormat2Data*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_requested_rotation_type_is_pure_cav.call(this, value)
-  end
-  def get_current_write_speed(this : IDiscFormat2Data*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_current_write_speed.call(this, value)
-  end
-  def get_current_rotation_type_is_pure_cav(this : IDiscFormat2Data*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_current_rotation_type_is_pure_cav.call(this, value)
-  end
-  def get_supported_write_speeds(this : IDiscFormat2Data*, supportedspeeds : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_write_speeds.call(this, supportedspeeds)
-  end
-  def get_supported_write_speed_descriptors(this : IDiscFormat2Data*, supportedspeeddescriptors : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_write_speed_descriptors.call(this, supportedspeeddescriptors)
-  end
-  def put_force_overwrite(this : IDiscFormat2Data*, value : Int16) : HRESULT
-    @lpVtbl.value.put_force_overwrite.call(this, value)
-  end
-  def get_force_overwrite(this : IDiscFormat2Data*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_force_overwrite.call(this, value)
-  end
-  def get_multisession_interfaces(this : IDiscFormat2Data*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_multisession_interfaces.call(this, value)
-  end
-  def write(this : IDiscFormat2Data*, data : IStream) : HRESULT
-    @lpVtbl.value.write.call(this, data)
-  end
-  def cancel_write(this : IDiscFormat2Data*) : HRESULT
-    @lpVtbl.value.cancel_write.call(this)
-  end
-  def set_write_speed(this : IDiscFormat2Data*, requestedsectorspersecond : Int32, rotationtypeispurecav : Int16) : HRESULT
-    @lpVtbl.value.set_write_speed.call(this, requestedsectorspersecond, rotationtypeispurecav)
-  end
-end
-struct LibWin32::DDiscFormat2DataEvents
-  def query_interface(this : DDiscFormat2DataEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : DDiscFormat2DataEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : DDiscFormat2DataEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : DDiscFormat2DataEvents*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : DDiscFormat2DataEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : DDiscFormat2DataEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : DDiscFormat2DataEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def update(this : DDiscFormat2DataEvents*, object : IDispatch, progress : IDispatch) : HRESULT
-    @lpVtbl.value.update.call(this, object, progress)
-  end
-end
-struct LibWin32::IDiscFormat2DataEventArgs
-  def query_interface(this : IDiscFormat2DataEventArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscFormat2DataEventArgs*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscFormat2DataEventArgs*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDiscFormat2DataEventArgs*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDiscFormat2DataEventArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDiscFormat2DataEventArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDiscFormat2DataEventArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_start_lba(this : IDiscFormat2DataEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_start_lba.call(this, value)
-  end
-  def get_sector_count(this : IDiscFormat2DataEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_sector_count.call(this, value)
-  end
-  def get_last_read_lba(this : IDiscFormat2DataEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_read_lba.call(this, value)
-  end
-  def get_last_written_lba(this : IDiscFormat2DataEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_written_lba.call(this, value)
-  end
-  def get_total_system_buffer(this : IDiscFormat2DataEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_total_system_buffer.call(this, value)
-  end
-  def get_used_system_buffer(this : IDiscFormat2DataEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_used_system_buffer.call(this, value)
-  end
-  def get_free_system_buffer(this : IDiscFormat2DataEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_free_system_buffer.call(this, value)
-  end
-  def get_elapsed_time(this : IDiscFormat2DataEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_elapsed_time.call(this, value)
-  end
-  def get_remaining_time(this : IDiscFormat2DataEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_remaining_time.call(this, value)
-  end
-  def get_total_time(this : IDiscFormat2DataEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_total_time.call(this, value)
-  end
-  def get_current_action(this : IDiscFormat2DataEventArgs*, value : IMAPI_FORMAT2_DATA_WRITE_ACTION*) : HRESULT
-    @lpVtbl.value.get_current_action.call(this, value)
-  end
-end
-struct LibWin32::IDiscFormat2TrackAtOnce
-  def query_interface(this : IDiscFormat2TrackAtOnce*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscFormat2TrackAtOnce*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscFormat2TrackAtOnce*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDiscFormat2TrackAtOnce*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDiscFormat2TrackAtOnce*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDiscFormat2TrackAtOnce*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDiscFormat2TrackAtOnce*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def is_recorder_supported(this : IDiscFormat2TrackAtOnce*, recorder : IDiscRecorder2, value : Int16*) : HRESULT
-    @lpVtbl.value.is_recorder_supported.call(this, recorder, value)
-  end
-  def is_current_media_supported(this : IDiscFormat2TrackAtOnce*, recorder : IDiscRecorder2, value : Int16*) : HRESULT
-    @lpVtbl.value.is_current_media_supported.call(this, recorder, value)
-  end
-  def get_media_physically_blank(this : IDiscFormat2TrackAtOnce*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_media_physically_blank.call(this, value)
-  end
-  def get_media_heuristically_blank(this : IDiscFormat2TrackAtOnce*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_media_heuristically_blank.call(this, value)
-  end
-  def get_supported_media_types(this : IDiscFormat2TrackAtOnce*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_media_types.call(this, value)
-  end
-  def prepare_media(this : IDiscFormat2TrackAtOnce*) : HRESULT
-    @lpVtbl.value.prepare_media.call(this)
-  end
-  def add_audio_track(this : IDiscFormat2TrackAtOnce*, data : IStream) : HRESULT
-    @lpVtbl.value.add_audio_track.call(this, data)
-  end
-  def cancel_add_track(this : IDiscFormat2TrackAtOnce*) : HRESULT
-    @lpVtbl.value.cancel_add_track.call(this)
-  end
-  def release_media(this : IDiscFormat2TrackAtOnce*) : HRESULT
-    @lpVtbl.value.release_media.call(this)
-  end
-  def set_write_speed(this : IDiscFormat2TrackAtOnce*, requestedsectorspersecond : Int32, rotationtypeispurecav : Int16) : HRESULT
-    @lpVtbl.value.set_write_speed.call(this, requestedsectorspersecond, rotationtypeispurecav)
-  end
-  def put_recorder(this : IDiscFormat2TrackAtOnce*, value : IDiscRecorder2) : HRESULT
-    @lpVtbl.value.put_recorder.call(this, value)
-  end
-  def get_recorder(this : IDiscFormat2TrackAtOnce*, value : IDiscRecorder2*) : HRESULT
-    @lpVtbl.value.get_recorder.call(this, value)
-  end
-  def put_buffer_underrun_free_disabled(this : IDiscFormat2TrackAtOnce*, value : Int16) : HRESULT
-    @lpVtbl.value.put_buffer_underrun_free_disabled.call(this, value)
-  end
-  def get_buffer_underrun_free_disabled(this : IDiscFormat2TrackAtOnce*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_buffer_underrun_free_disabled.call(this, value)
-  end
-  def get_number_of_existing_tracks(this : IDiscFormat2TrackAtOnce*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_number_of_existing_tracks.call(this, value)
-  end
-  def get_total_sectors_on_media(this : IDiscFormat2TrackAtOnce*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_total_sectors_on_media.call(this, value)
-  end
-  def get_free_sectors_on_media(this : IDiscFormat2TrackAtOnce*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_free_sectors_on_media.call(this, value)
-  end
-  def get_used_sectors_on_media(this : IDiscFormat2TrackAtOnce*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_used_sectors_on_media.call(this, value)
-  end
-  def put_do_not_finalize_media(this : IDiscFormat2TrackAtOnce*, value : Int16) : HRESULT
-    @lpVtbl.value.put_do_not_finalize_media.call(this, value)
-  end
-  def get_do_not_finalize_media(this : IDiscFormat2TrackAtOnce*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_do_not_finalize_media.call(this, value)
-  end
-  def get_expected_table_of_contents(this : IDiscFormat2TrackAtOnce*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_expected_table_of_contents.call(this, value)
-  end
-  def get_current_physical_media_type(this : IDiscFormat2TrackAtOnce*, value : IMAPI_MEDIA_PHYSICAL_TYPE*) : HRESULT
-    @lpVtbl.value.get_current_physical_media_type.call(this, value)
-  end
-  def put_client_name(this : IDiscFormat2TrackAtOnce*, value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_name.call(this, value)
-  end
-  def get_client_name(this : IDiscFormat2TrackAtOnce*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_name.call(this, value)
-  end
-  def get_requested_write_speed(this : IDiscFormat2TrackAtOnce*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_requested_write_speed.call(this, value)
-  end
-  def get_requested_rotation_type_is_pure_cav(this : IDiscFormat2TrackAtOnce*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_requested_rotation_type_is_pure_cav.call(this, value)
-  end
-  def get_current_write_speed(this : IDiscFormat2TrackAtOnce*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_current_write_speed.call(this, value)
-  end
-  def get_current_rotation_type_is_pure_cav(this : IDiscFormat2TrackAtOnce*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_current_rotation_type_is_pure_cav.call(this, value)
-  end
-  def get_supported_write_speeds(this : IDiscFormat2TrackAtOnce*, supportedspeeds : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_write_speeds.call(this, supportedspeeds)
-  end
-  def get_supported_write_speed_descriptors(this : IDiscFormat2TrackAtOnce*, supportedspeeddescriptors : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_write_speed_descriptors.call(this, supportedspeeddescriptors)
-  end
-end
-struct LibWin32::DDiscFormat2TrackAtOnceEvents
-  def query_interface(this : DDiscFormat2TrackAtOnceEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : DDiscFormat2TrackAtOnceEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : DDiscFormat2TrackAtOnceEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : DDiscFormat2TrackAtOnceEvents*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : DDiscFormat2TrackAtOnceEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : DDiscFormat2TrackAtOnceEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : DDiscFormat2TrackAtOnceEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def update(this : DDiscFormat2TrackAtOnceEvents*, object : IDispatch, progress : IDispatch) : HRESULT
-    @lpVtbl.value.update.call(this, object, progress)
-  end
-end
-struct LibWin32::IDiscFormat2TrackAtOnceEventArgs
-  def query_interface(this : IDiscFormat2TrackAtOnceEventArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscFormat2TrackAtOnceEventArgs*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscFormat2TrackAtOnceEventArgs*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDiscFormat2TrackAtOnceEventArgs*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDiscFormat2TrackAtOnceEventArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDiscFormat2TrackAtOnceEventArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDiscFormat2TrackAtOnceEventArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_start_lba(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_start_lba.call(this, value)
-  end
-  def get_sector_count(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_sector_count.call(this, value)
-  end
-  def get_last_read_lba(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_read_lba.call(this, value)
-  end
-  def get_last_written_lba(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_written_lba.call(this, value)
-  end
-  def get_total_system_buffer(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_total_system_buffer.call(this, value)
-  end
-  def get_used_system_buffer(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_used_system_buffer.call(this, value)
-  end
-  def get_free_system_buffer(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_free_system_buffer.call(this, value)
-  end
-  def get_current_track_number(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_current_track_number.call(this, value)
-  end
-  def get_current_action(this : IDiscFormat2TrackAtOnceEventArgs*, value : IMAPI_FORMAT2_TAO_WRITE_ACTION*) : HRESULT
-    @lpVtbl.value.get_current_action.call(this, value)
-  end
-  def get_elapsed_time(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_elapsed_time.call(this, value)
-  end
-  def get_remaining_time(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_remaining_time.call(this, value)
-  end
-end
-struct LibWin32::IDiscFormat2RawCD
-  def query_interface(this : IDiscFormat2RawCD*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscFormat2RawCD*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscFormat2RawCD*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDiscFormat2RawCD*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDiscFormat2RawCD*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDiscFormat2RawCD*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDiscFormat2RawCD*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def is_recorder_supported(this : IDiscFormat2RawCD*, recorder : IDiscRecorder2, value : Int16*) : HRESULT
-    @lpVtbl.value.is_recorder_supported.call(this, recorder, value)
-  end
-  def is_current_media_supported(this : IDiscFormat2RawCD*, recorder : IDiscRecorder2, value : Int16*) : HRESULT
-    @lpVtbl.value.is_current_media_supported.call(this, recorder, value)
-  end
-  def get_media_physically_blank(this : IDiscFormat2RawCD*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_media_physically_blank.call(this, value)
-  end
-  def get_media_heuristically_blank(this : IDiscFormat2RawCD*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_media_heuristically_blank.call(this, value)
-  end
-  def get_supported_media_types(this : IDiscFormat2RawCD*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_media_types.call(this, value)
-  end
-  def prepare_media(this : IDiscFormat2RawCD*) : HRESULT
-    @lpVtbl.value.prepare_media.call(this)
-  end
-  def write_media(this : IDiscFormat2RawCD*, data : IStream) : HRESULT
-    @lpVtbl.value.write_media.call(this, data)
-  end
-  def write_media2(this : IDiscFormat2RawCD*, data : IStream, streamleadinsectors : Int32) : HRESULT
-    @lpVtbl.value.write_media2.call(this, data, streamleadinsectors)
-  end
-  def cancel_write(this : IDiscFormat2RawCD*) : HRESULT
-    @lpVtbl.value.cancel_write.call(this)
-  end
-  def release_media(this : IDiscFormat2RawCD*) : HRESULT
-    @lpVtbl.value.release_media.call(this)
-  end
-  def set_write_speed(this : IDiscFormat2RawCD*, requestedsectorspersecond : Int32, rotationtypeispurecav : Int16) : HRESULT
-    @lpVtbl.value.set_write_speed.call(this, requestedsectorspersecond, rotationtypeispurecav)
-  end
-  def put_recorder(this : IDiscFormat2RawCD*, value : IDiscRecorder2) : HRESULT
-    @lpVtbl.value.put_recorder.call(this, value)
-  end
-  def get_recorder(this : IDiscFormat2RawCD*, value : IDiscRecorder2*) : HRESULT
-    @lpVtbl.value.get_recorder.call(this, value)
-  end
-  def put_buffer_underrun_free_disabled(this : IDiscFormat2RawCD*, value : Int16) : HRESULT
-    @lpVtbl.value.put_buffer_underrun_free_disabled.call(this, value)
-  end
-  def get_buffer_underrun_free_disabled(this : IDiscFormat2RawCD*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_buffer_underrun_free_disabled.call(this, value)
-  end
-  def get_start_of_next_session(this : IDiscFormat2RawCD*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_start_of_next_session.call(this, value)
-  end
-  def get_last_possible_start_of_leadout(this : IDiscFormat2RawCD*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_possible_start_of_leadout.call(this, value)
-  end
-  def get_current_physical_media_type(this : IDiscFormat2RawCD*, value : IMAPI_MEDIA_PHYSICAL_TYPE*) : HRESULT
-    @lpVtbl.value.get_current_physical_media_type.call(this, value)
-  end
-  def get_supported_sector_types(this : IDiscFormat2RawCD*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_sector_types.call(this, value)
-  end
-  def put_requested_sector_type(this : IDiscFormat2RawCD*, value : IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE) : HRESULT
-    @lpVtbl.value.put_requested_sector_type.call(this, value)
-  end
-  def get_requested_sector_type(this : IDiscFormat2RawCD*, value : IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE*) : HRESULT
-    @lpVtbl.value.get_requested_sector_type.call(this, value)
-  end
-  def put_client_name(this : IDiscFormat2RawCD*, value : UInt8*) : HRESULT
-    @lpVtbl.value.put_client_name.call(this, value)
-  end
-  def get_client_name(this : IDiscFormat2RawCD*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_client_name.call(this, value)
-  end
-  def get_requested_write_speed(this : IDiscFormat2RawCD*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_requested_write_speed.call(this, value)
-  end
-  def get_requested_rotation_type_is_pure_cav(this : IDiscFormat2RawCD*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_requested_rotation_type_is_pure_cav.call(this, value)
-  end
-  def get_current_write_speed(this : IDiscFormat2RawCD*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_current_write_speed.call(this, value)
-  end
-  def get_current_rotation_type_is_pure_cav(this : IDiscFormat2RawCD*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_current_rotation_type_is_pure_cav.call(this, value)
-  end
-  def get_supported_write_speeds(this : IDiscFormat2RawCD*, supportedspeeds : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_write_speeds.call(this, supportedspeeds)
-  end
-  def get_supported_write_speed_descriptors(this : IDiscFormat2RawCD*, supportedspeeddescriptors : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_supported_write_speed_descriptors.call(this, supportedspeeddescriptors)
-  end
-end
-struct LibWin32::DDiscFormat2RawCDEvents
-  def query_interface(this : DDiscFormat2RawCDEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : DDiscFormat2RawCDEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : DDiscFormat2RawCDEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : DDiscFormat2RawCDEvents*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : DDiscFormat2RawCDEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : DDiscFormat2RawCDEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : DDiscFormat2RawCDEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def update(this : DDiscFormat2RawCDEvents*, object : IDispatch, progress : IDispatch) : HRESULT
-    @lpVtbl.value.update.call(this, object, progress)
-  end
-end
-struct LibWin32::IDiscFormat2RawCDEventArgs
-  def query_interface(this : IDiscFormat2RawCDEventArgs*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscFormat2RawCDEventArgs*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscFormat2RawCDEventArgs*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDiscFormat2RawCDEventArgs*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDiscFormat2RawCDEventArgs*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDiscFormat2RawCDEventArgs*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDiscFormat2RawCDEventArgs*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_start_lba(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_start_lba.call(this, value)
-  end
-  def get_sector_count(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_sector_count.call(this, value)
-  end
-  def get_last_read_lba(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_read_lba.call(this, value)
-  end
-  def get_last_written_lba(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_written_lba.call(this, value)
-  end
-  def get_total_system_buffer(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_total_system_buffer.call(this, value)
-  end
-  def get_used_system_buffer(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_used_system_buffer.call(this, value)
-  end
-  def get_free_system_buffer(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_free_system_buffer.call(this, value)
-  end
-  def get_current_action(this : IDiscFormat2RawCDEventArgs*, value : IMAPI_FORMAT2_RAW_CD_WRITE_ACTION*) : HRESULT
-    @lpVtbl.value.get_current_action.call(this, value)
-  end
-  def get_elapsed_time(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_elapsed_time.call(this, value)
-  end
-  def get_remaining_time(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_remaining_time.call(this, value)
-  end
-end
-struct LibWin32::IBurnVerification
-  def query_interface(this : IBurnVerification*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IBurnVerification*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IBurnVerification*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def put_burn_verification_level(this : IBurnVerification*, value : IMAPI_BURN_VERIFICATION_LEVEL) : HRESULT
-    @lpVtbl.value.put_burn_verification_level.call(this, value)
-  end
-  def get_burn_verification_level(this : IBurnVerification*, value : IMAPI_BURN_VERIFICATION_LEVEL*) : HRESULT
-    @lpVtbl.value.get_burn_verification_level.call(this, value)
-  end
-end
-struct LibWin32::IWriteSpeedDescriptor
-  def query_interface(this : IWriteSpeedDescriptor*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IWriteSpeedDescriptor*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IWriteSpeedDescriptor*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IWriteSpeedDescriptor*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IWriteSpeedDescriptor*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IWriteSpeedDescriptor*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IWriteSpeedDescriptor*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_media_type(this : IWriteSpeedDescriptor*, value : IMAPI_MEDIA_PHYSICAL_TYPE*) : HRESULT
-    @lpVtbl.value.get_media_type.call(this, value)
-  end
-  def get_rotation_type_is_pure_cav(this : IWriteSpeedDescriptor*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_rotation_type_is_pure_cav.call(this, value)
-  end
-  def get_write_speed(this : IWriteSpeedDescriptor*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_write_speed.call(this, value)
-  end
-end
-struct LibWin32::IMultisession
-  def query_interface(this : IMultisession*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMultisession*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMultisession*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IMultisession*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IMultisession*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IMultisession*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IMultisession*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_is_supported_on_current_media_state(this : IMultisession*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_is_supported_on_current_media_state.call(this, value)
-  end
-  def put_in_use(this : IMultisession*, value : Int16) : HRESULT
-    @lpVtbl.value.put_in_use.call(this, value)
-  end
-  def get_in_use(this : IMultisession*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_in_use.call(this, value)
-  end
-  def get_import_recorder(this : IMultisession*, value : IDiscRecorder2*) : HRESULT
-    @lpVtbl.value.get_import_recorder.call(this, value)
-  end
-end
-struct LibWin32::IMultisessionSequential
-  def query_interface(this : IMultisessionSequential*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMultisessionSequential*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMultisessionSequential*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IMultisessionSequential*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IMultisessionSequential*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IMultisessionSequential*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IMultisessionSequential*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_is_supported_on_current_media_state(this : IMultisessionSequential*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_is_supported_on_current_media_state.call(this, value)
-  end
-  def put_in_use(this : IMultisessionSequential*, value : Int16) : HRESULT
-    @lpVtbl.value.put_in_use.call(this, value)
-  end
-  def get_in_use(this : IMultisessionSequential*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_in_use.call(this, value)
-  end
-  def get_import_recorder(this : IMultisessionSequential*, value : IDiscRecorder2*) : HRESULT
-    @lpVtbl.value.get_import_recorder.call(this, value)
-  end
-  def get_is_first_data_session(this : IMultisessionSequential*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_is_first_data_session.call(this, value)
-  end
-  def get_start_address_of_previous_session(this : IMultisessionSequential*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_start_address_of_previous_session.call(this, value)
-  end
-  def get_last_written_address_of_previous_session(this : IMultisessionSequential*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_written_address_of_previous_session.call(this, value)
-  end
-  def get_next_writable_address(this : IMultisessionSequential*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_next_writable_address.call(this, value)
-  end
-  def get_free_sectors_on_media(this : IMultisessionSequential*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_free_sectors_on_media.call(this, value)
-  end
-end
-struct LibWin32::IMultisessionSequential2
-  def query_interface(this : IMultisessionSequential2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMultisessionSequential2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMultisessionSequential2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IMultisessionSequential2*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IMultisessionSequential2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IMultisessionSequential2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IMultisessionSequential2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_is_supported_on_current_media_state(this : IMultisessionSequential2*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_is_supported_on_current_media_state.call(this, value)
-  end
-  def put_in_use(this : IMultisessionSequential2*, value : Int16) : HRESULT
-    @lpVtbl.value.put_in_use.call(this, value)
-  end
-  def get_in_use(this : IMultisessionSequential2*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_in_use.call(this, value)
-  end
-  def get_import_recorder(this : IMultisessionSequential2*, value : IDiscRecorder2*) : HRESULT
-    @lpVtbl.value.get_import_recorder.call(this, value)
-  end
-  def get_is_first_data_session(this : IMultisessionSequential2*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_is_first_data_session.call(this, value)
-  end
-  def get_start_address_of_previous_session(this : IMultisessionSequential2*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_start_address_of_previous_session.call(this, value)
-  end
-  def get_last_written_address_of_previous_session(this : IMultisessionSequential2*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_written_address_of_previous_session.call(this, value)
-  end
-  def get_next_writable_address(this : IMultisessionSequential2*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_next_writable_address.call(this, value)
-  end
-  def get_free_sectors_on_media(this : IMultisessionSequential2*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_free_sectors_on_media.call(this, value)
-  end
-  def get_write_unit_size(this : IMultisessionSequential2*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_write_unit_size.call(this, value)
-  end
-end
-struct LibWin32::IMultisessionRandomWrite
-  def query_interface(this : IMultisessionRandomWrite*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMultisessionRandomWrite*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMultisessionRandomWrite*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IMultisessionRandomWrite*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IMultisessionRandomWrite*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IMultisessionRandomWrite*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IMultisessionRandomWrite*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_is_supported_on_current_media_state(this : IMultisessionRandomWrite*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_is_supported_on_current_media_state.call(this, value)
-  end
-  def put_in_use(this : IMultisessionRandomWrite*, value : Int16) : HRESULT
-    @lpVtbl.value.put_in_use.call(this, value)
-  end
-  def get_in_use(this : IMultisessionRandomWrite*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_in_use.call(this, value)
-  end
-  def get_import_recorder(this : IMultisessionRandomWrite*, value : IDiscRecorder2*) : HRESULT
-    @lpVtbl.value.get_import_recorder.call(this, value)
-  end
-  def get_write_unit_size(this : IMultisessionRandomWrite*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_write_unit_size.call(this, value)
-  end
-  def get_last_written_address(this : IMultisessionRandomWrite*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_written_address.call(this, value)
-  end
-  def get_total_sectors_on_media(this : IMultisessionRandomWrite*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_total_sectors_on_media.call(this, value)
-  end
-end
-struct LibWin32::IStreamPseudoRandomBased
-  def query_interface(this : IStreamPseudoRandomBased*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IStreamPseudoRandomBased*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IStreamPseudoRandomBased*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def read(this : IStreamPseudoRandomBased*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
-    @lpVtbl.value.read.call(this, pv, cb, pcbread)
-  end
-  def write(this : IStreamPseudoRandomBased*, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
-    @lpVtbl.value.write.call(this, pv, cb, pcbwritten)
-  end
-  def seek(this : IStreamPseudoRandomBased*, dlibmove : LARGE_INTEGER, dworigin : STREAM_SEEK, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek.call(this, dlibmove, dworigin, plibnewposition)
-  end
-  def set_size(this : IStreamPseudoRandomBased*, libnewsize : ULARGE_INTEGER) : HRESULT
-    @lpVtbl.value.set_size.call(this, libnewsize)
-  end
-  def copy_to(this : IStreamPseudoRandomBased*, pstm : IStream, cb : ULARGE_INTEGER, pcbread : ULARGE_INTEGER*, pcbwritten : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.copy_to.call(this, pstm, cb, pcbread, pcbwritten)
-  end
-  def commit(this : IStreamPseudoRandomBased*, grfcommitflags : UInt32) : HRESULT
-    @lpVtbl.value.commit.call(this, grfcommitflags)
-  end
-  def revert(this : IStreamPseudoRandomBased*) : HRESULT
-    @lpVtbl.value.revert.call(this)
-  end
-  def lock_region(this : IStreamPseudoRandomBased*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.lock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def unlock_region(this : IStreamPseudoRandomBased*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.unlock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def stat(this : IStreamPseudoRandomBased*, pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
-    @lpVtbl.value.stat.call(this, pstatstg, grfstatflag)
-  end
-  def clone(this : IStreamPseudoRandomBased*, ppstm : IStream*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppstm)
-  end
-  def put_seed(this : IStreamPseudoRandomBased*, value : UInt32) : HRESULT
-    @lpVtbl.value.put_seed.call(this, value)
-  end
-  def get_seed(this : IStreamPseudoRandomBased*, value : UInt32*) : HRESULT
-    @lpVtbl.value.get_seed.call(this, value)
-  end
-  def put_extended_seed(this : IStreamPseudoRandomBased*, values : UInt32*, ecount : UInt32) : HRESULT
-    @lpVtbl.value.put_extended_seed.call(this, values, ecount)
-  end
-  def get_extended_seed(this : IStreamPseudoRandomBased*, values : UInt32**, ecount : UInt32*) : HRESULT
-    @lpVtbl.value.get_extended_seed.call(this, values, ecount)
-  end
-end
-struct LibWin32::IStreamConcatenate
-  def query_interface(this : IStreamConcatenate*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IStreamConcatenate*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IStreamConcatenate*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def read(this : IStreamConcatenate*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
-    @lpVtbl.value.read.call(this, pv, cb, pcbread)
-  end
-  def write(this : IStreamConcatenate*, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
-    @lpVtbl.value.write.call(this, pv, cb, pcbwritten)
-  end
-  def seek(this : IStreamConcatenate*, dlibmove : LARGE_INTEGER, dworigin : STREAM_SEEK, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek.call(this, dlibmove, dworigin, plibnewposition)
-  end
-  def set_size(this : IStreamConcatenate*, libnewsize : ULARGE_INTEGER) : HRESULT
-    @lpVtbl.value.set_size.call(this, libnewsize)
-  end
-  def copy_to(this : IStreamConcatenate*, pstm : IStream, cb : ULARGE_INTEGER, pcbread : ULARGE_INTEGER*, pcbwritten : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.copy_to.call(this, pstm, cb, pcbread, pcbwritten)
-  end
-  def commit(this : IStreamConcatenate*, grfcommitflags : UInt32) : HRESULT
-    @lpVtbl.value.commit.call(this, grfcommitflags)
-  end
-  def revert(this : IStreamConcatenate*) : HRESULT
-    @lpVtbl.value.revert.call(this)
-  end
-  def lock_region(this : IStreamConcatenate*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.lock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def unlock_region(this : IStreamConcatenate*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.unlock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def stat(this : IStreamConcatenate*, pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
-    @lpVtbl.value.stat.call(this, pstatstg, grfstatflag)
-  end
-  def clone(this : IStreamConcatenate*, ppstm : IStream*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppstm)
-  end
-  def initialize(this : IStreamConcatenate*, stream1 : IStream, stream2 : IStream) : HRESULT
-    @lpVtbl.value.initialize.call(this, stream1, stream2)
-  end
-  def initialize2(this : IStreamConcatenate*, streams : IStream*, streamcount : UInt32) : HRESULT
-    @lpVtbl.value.initialize2.call(this, streams, streamcount)
-  end
-  def append(this : IStreamConcatenate*, stream : IStream) : HRESULT
-    @lpVtbl.value.append.call(this, stream)
-  end
-  def append2(this : IStreamConcatenate*, streams : IStream*, streamcount : UInt32) : HRESULT
-    @lpVtbl.value.append2.call(this, streams, streamcount)
-  end
-end
-struct LibWin32::IStreamInterleave
-  def query_interface(this : IStreamInterleave*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IStreamInterleave*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IStreamInterleave*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def read(this : IStreamInterleave*, pv : Void*, cb : UInt32, pcbread : UInt32*) : HRESULT
-    @lpVtbl.value.read.call(this, pv, cb, pcbread)
-  end
-  def write(this : IStreamInterleave*, pv : Void*, cb : UInt32, pcbwritten : UInt32*) : HRESULT
-    @lpVtbl.value.write.call(this, pv, cb, pcbwritten)
-  end
-  def seek(this : IStreamInterleave*, dlibmove : LARGE_INTEGER, dworigin : STREAM_SEEK, plibnewposition : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.seek.call(this, dlibmove, dworigin, plibnewposition)
-  end
-  def set_size(this : IStreamInterleave*, libnewsize : ULARGE_INTEGER) : HRESULT
-    @lpVtbl.value.set_size.call(this, libnewsize)
-  end
-  def copy_to(this : IStreamInterleave*, pstm : IStream, cb : ULARGE_INTEGER, pcbread : ULARGE_INTEGER*, pcbwritten : ULARGE_INTEGER*) : HRESULT
-    @lpVtbl.value.copy_to.call(this, pstm, cb, pcbread, pcbwritten)
-  end
-  def commit(this : IStreamInterleave*, grfcommitflags : UInt32) : HRESULT
-    @lpVtbl.value.commit.call(this, grfcommitflags)
-  end
-  def revert(this : IStreamInterleave*) : HRESULT
-    @lpVtbl.value.revert.call(this)
-  end
-  def lock_region(this : IStreamInterleave*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.lock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def unlock_region(this : IStreamInterleave*, liboffset : ULARGE_INTEGER, cb : ULARGE_INTEGER, dwlocktype : UInt32) : HRESULT
-    @lpVtbl.value.unlock_region.call(this, liboffset, cb, dwlocktype)
-  end
-  def stat(this : IStreamInterleave*, pstatstg : STATSTG*, grfstatflag : UInt32) : HRESULT
-    @lpVtbl.value.stat.call(this, pstatstg, grfstatflag)
-  end
-  def clone(this : IStreamInterleave*, ppstm : IStream*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppstm)
-  end
-  def initialize(this : IStreamInterleave*, streams : IStream*, interleavesizes : UInt32*, streamcount : UInt32) : HRESULT
-    @lpVtbl.value.initialize.call(this, streams, interleavesizes, streamcount)
-  end
-end
-struct LibWin32::IRawCDImageCreator
-  def query_interface(this : IRawCDImageCreator*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IRawCDImageCreator*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IRawCDImageCreator*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IRawCDImageCreator*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IRawCDImageCreator*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IRawCDImageCreator*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IRawCDImageCreator*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def create_result_image(this : IRawCDImageCreator*, resultstream : IStream*) : HRESULT
-    @lpVtbl.value.create_result_image.call(this, resultstream)
-  end
-  def add_track(this : IRawCDImageCreator*, datatype : IMAPI_CD_SECTOR_TYPE, data : IStream, trackindex : Int32*) : HRESULT
-    @lpVtbl.value.add_track.call(this, datatype, data, trackindex)
-  end
-  def add_special_pregap(this : IRawCDImageCreator*, data : IStream) : HRESULT
-    @lpVtbl.value.add_special_pregap.call(this, data)
-  end
-  def add_subcode_rw_generator(this : IRawCDImageCreator*, subcode : IStream) : HRESULT
-    @lpVtbl.value.add_subcode_rw_generator.call(this, subcode)
-  end
-  def put_resulting_image_type(this : IRawCDImageCreator*, value : IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE) : HRESULT
-    @lpVtbl.value.put_resulting_image_type.call(this, value)
-  end
-  def get_resulting_image_type(this : IRawCDImageCreator*, value : IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE*) : HRESULT
-    @lpVtbl.value.get_resulting_image_type.call(this, value)
-  end
-  def get_start_of_leadout(this : IRawCDImageCreator*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_start_of_leadout.call(this, value)
-  end
-  def put_start_of_leadout_limit(this : IRawCDImageCreator*, value : Int32) : HRESULT
-    @lpVtbl.value.put_start_of_leadout_limit.call(this, value)
-  end
-  def get_start_of_leadout_limit(this : IRawCDImageCreator*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_start_of_leadout_limit.call(this, value)
-  end
-  def put_disable_gapless_audio(this : IRawCDImageCreator*, value : Int16) : HRESULT
-    @lpVtbl.value.put_disable_gapless_audio.call(this, value)
-  end
-  def get_disable_gapless_audio(this : IRawCDImageCreator*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_disable_gapless_audio.call(this, value)
-  end
-  def put_media_catalog_number(this : IRawCDImageCreator*, value : UInt8*) : HRESULT
-    @lpVtbl.value.put_media_catalog_number.call(this, value)
-  end
-  def get_media_catalog_number(this : IRawCDImageCreator*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_media_catalog_number.call(this, value)
-  end
-  def put_starting_track_number(this : IRawCDImageCreator*, value : Int32) : HRESULT
-    @lpVtbl.value.put_starting_track_number.call(this, value)
-  end
-  def get_starting_track_number(this : IRawCDImageCreator*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_starting_track_number.call(this, value)
-  end
-  def get_track_info(this : IRawCDImageCreator*, trackindex : Int32, value : IRawCDImageTrackInfo*) : HRESULT
-    @lpVtbl.value.get_track_info.call(this, trackindex, value)
-  end
-  def get_number_of_existing_tracks(this : IRawCDImageCreator*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_number_of_existing_tracks.call(this, value)
-  end
-  def get_last_used_user_sector_in_image(this : IRawCDImageCreator*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_last_used_user_sector_in_image.call(this, value)
-  end
-  def get_expected_table_of_contents(this : IRawCDImageCreator*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_expected_table_of_contents.call(this, value)
-  end
-end
-struct LibWin32::IRawCDImageTrackInfo
-  def query_interface(this : IRawCDImageTrackInfo*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IRawCDImageTrackInfo*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IRawCDImageTrackInfo*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IRawCDImageTrackInfo*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IRawCDImageTrackInfo*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IRawCDImageTrackInfo*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IRawCDImageTrackInfo*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_starting_lba(this : IRawCDImageTrackInfo*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_starting_lba.call(this, value)
-  end
-  def get_sector_count(this : IRawCDImageTrackInfo*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_sector_count.call(this, value)
-  end
-  def get_track_number(this : IRawCDImageTrackInfo*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_track_number.call(this, value)
-  end
-  def get_sector_type(this : IRawCDImageTrackInfo*, value : IMAPI_CD_SECTOR_TYPE*) : HRESULT
-    @lpVtbl.value.get_sector_type.call(this, value)
-  end
-  def get_isrc(this : IRawCDImageTrackInfo*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_isrc.call(this, value)
-  end
-  def put_isrc(this : IRawCDImageTrackInfo*, value : UInt8*) : HRESULT
-    @lpVtbl.value.put_isrc.call(this, value)
-  end
-  def get_digital_audio_copy_setting(this : IRawCDImageTrackInfo*, value : IMAPI_CD_TRACK_DIGITAL_COPY_SETTING*) : HRESULT
-    @lpVtbl.value.get_digital_audio_copy_setting.call(this, value)
-  end
-  def put_digital_audio_copy_setting(this : IRawCDImageTrackInfo*, value : IMAPI_CD_TRACK_DIGITAL_COPY_SETTING) : HRESULT
-    @lpVtbl.value.put_digital_audio_copy_setting.call(this, value)
-  end
-  def get_audio_has_preemphasis(this : IRawCDImageTrackInfo*, value : Int16*) : HRESULT
-    @lpVtbl.value.get_audio_has_preemphasis.call(this, value)
-  end
-  def put_audio_has_preemphasis(this : IRawCDImageTrackInfo*, value : Int16) : HRESULT
-    @lpVtbl.value.put_audio_has_preemphasis.call(this, value)
-  end
-  def get_track_indexes(this : IRawCDImageTrackInfo*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_track_indexes.call(this, value)
-  end
-  def add_track_index(this : IRawCDImageTrackInfo*, lbaoffset : Int32) : HRESULT
-    @lpVtbl.value.add_track_index.call(this, lbaoffset)
-  end
-  def clear_track_index(this : IRawCDImageTrackInfo*, lbaoffset : Int32) : HRESULT
-    @lpVtbl.value.clear_track_index.call(this, lbaoffset)
-  end
-end
-struct LibWin32::IBlockRange
-  def query_interface(this : IBlockRange*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IBlockRange*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IBlockRange*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IBlockRange*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IBlockRange*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IBlockRange*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IBlockRange*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_start_lba(this : IBlockRange*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_start_lba.call(this, value)
-  end
-  def get_end_lba(this : IBlockRange*, value : Int32*) : HRESULT
-    @lpVtbl.value.get_end_lba.call(this, value)
-  end
-end
-struct LibWin32::IBlockRangeList
-  def query_interface(this : IBlockRangeList*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IBlockRangeList*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IBlockRangeList*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IBlockRangeList*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IBlockRangeList*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IBlockRangeList*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IBlockRangeList*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_block_ranges(this : IBlockRangeList*, value : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_block_ranges.call(this, value)
-  end
-end
-struct LibWin32::IBootOptions
-  def query_interface(this : IBootOptions*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IBootOptions*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IBootOptions*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IBootOptions*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IBootOptions*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IBootOptions*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IBootOptions*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_boot_image(this : IBootOptions*, pval : IStream*) : HRESULT
-    @lpVtbl.value.get_boot_image.call(this, pval)
-  end
-  def get_manufacturer(this : IBootOptions*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_manufacturer.call(this, pval)
-  end
-  def put_manufacturer(this : IBootOptions*, newval : UInt8*) : HRESULT
-    @lpVtbl.value.put_manufacturer.call(this, newval)
-  end
-  def get_platform_id(this : IBootOptions*, pval : PlatformId*) : HRESULT
-    @lpVtbl.value.get_platform_id.call(this, pval)
-  end
-  def put_platform_id(this : IBootOptions*, newval : PlatformId) : HRESULT
-    @lpVtbl.value.put_platform_id.call(this, newval)
-  end
-  def get_emulation(this : IBootOptions*, pval : EmulationType*) : HRESULT
-    @lpVtbl.value.get_emulation.call(this, pval)
-  end
-  def put_emulation(this : IBootOptions*, newval : EmulationType) : HRESULT
-    @lpVtbl.value.put_emulation.call(this, newval)
-  end
-  def get_image_size(this : IBootOptions*, pval : UInt32*) : HRESULT
-    @lpVtbl.value.get_image_size.call(this, pval)
-  end
-  def assign_boot_image(this : IBootOptions*, newval : IStream) : HRESULT
-    @lpVtbl.value.assign_boot_image.call(this, newval)
-  end
-end
-struct LibWin32::IProgressItem
-  def query_interface(this : IProgressItem*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IProgressItem*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IProgressItem*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IProgressItem*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IProgressItem*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IProgressItem*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IProgressItem*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_description(this : IProgressItem*, desc : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.call(this, desc)
-  end
-  def get_first_block(this : IProgressItem*, block : UInt32*) : HRESULT
-    @lpVtbl.value.get_first_block.call(this, block)
-  end
-  def get_last_block(this : IProgressItem*, block : UInt32*) : HRESULT
-    @lpVtbl.value.get_last_block.call(this, block)
-  end
-  def get_block_count(this : IProgressItem*, blocks : UInt32*) : HRESULT
-    @lpVtbl.value.get_block_count.call(this, blocks)
-  end
-end
-struct LibWin32::IEnumProgressItems
-  def query_interface(this : IEnumProgressItems*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEnumProgressItems*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEnumProgressItems*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def next(this : IEnumProgressItems*, celt : UInt32, rgelt : IProgressItem*, pceltfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
-  end
-  def skip(this : IEnumProgressItems*, celt : UInt32) : HRESULT
-    @lpVtbl.value.skip.call(this, celt)
-  end
-  def reset(this : IEnumProgressItems*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def clone(this : IEnumProgressItems*, ppenum : IEnumProgressItems*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppenum)
-  end
-end
-struct LibWin32::IProgressItems
-  def query_interface(this : IProgressItems*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IProgressItems*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IProgressItems*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IProgressItems*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IProgressItems*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IProgressItems*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IProgressItems*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get__new_enum(this : IProgressItems*, newenum : IEnumVARIANT*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, newenum)
-  end
-  def get_item(this : IProgressItems*, index : Int32, item : IProgressItem*) : HRESULT
-    @lpVtbl.value.get_item.call(this, index, item)
-  end
-  def get_count(this : IProgressItems*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def progress_item_from_block(this : IProgressItems*, block : UInt32, item : IProgressItem*) : HRESULT
-    @lpVtbl.value.progress_item_from_block.call(this, block, item)
-  end
-  def progress_item_from_description(this : IProgressItems*, description : UInt8*, item : IProgressItem*) : HRESULT
-    @lpVtbl.value.progress_item_from_description.call(this, description, item)
-  end
-  def get_enum_progress_items(this : IProgressItems*, newenum : IEnumProgressItems*) : HRESULT
-    @lpVtbl.value.get_enum_progress_items.call(this, newenum)
-  end
-end
-struct LibWin32::IFileSystemImageResult
-  def query_interface(this : IFileSystemImageResult*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFileSystemImageResult*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFileSystemImageResult*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFileSystemImageResult*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFileSystemImageResult*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFileSystemImageResult*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFileSystemImageResult*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_image_stream(this : IFileSystemImageResult*, pval : IStream*) : HRESULT
-    @lpVtbl.value.get_image_stream.call(this, pval)
-  end
-  def get_progress_items(this : IFileSystemImageResult*, pval : IProgressItems*) : HRESULT
-    @lpVtbl.value.get_progress_items.call(this, pval)
-  end
-  def get_total_blocks(this : IFileSystemImageResult*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_total_blocks.call(this, pval)
-  end
-  def get_block_size(this : IFileSystemImageResult*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_block_size.call(this, pval)
-  end
-  def get_disc_id(this : IFileSystemImageResult*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_disc_id.call(this, pval)
-  end
-end
-struct LibWin32::IFileSystemImageResult2
-  def query_interface(this : IFileSystemImageResult2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFileSystemImageResult2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFileSystemImageResult2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFileSystemImageResult2*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFileSystemImageResult2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFileSystemImageResult2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFileSystemImageResult2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_image_stream(this : IFileSystemImageResult2*, pval : IStream*) : HRESULT
-    @lpVtbl.value.get_image_stream.call(this, pval)
-  end
-  def get_progress_items(this : IFileSystemImageResult2*, pval : IProgressItems*) : HRESULT
-    @lpVtbl.value.get_progress_items.call(this, pval)
-  end
-  def get_total_blocks(this : IFileSystemImageResult2*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_total_blocks.call(this, pval)
-  end
-  def get_block_size(this : IFileSystemImageResult2*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_block_size.call(this, pval)
-  end
-  def get_disc_id(this : IFileSystemImageResult2*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_disc_id.call(this, pval)
-  end
-  def get_modified_blocks(this : IFileSystemImageResult2*, pval : IBlockRangeList*) : HRESULT
-    @lpVtbl.value.get_modified_blocks.call(this, pval)
-  end
-end
-struct LibWin32::IFsiItem
-  def query_interface(this : IFsiItem*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFsiItem*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFsiItem*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFsiItem*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFsiItem*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFsiItem*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFsiItem*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_name(this : IFsiItem*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, pval)
-  end
-  def get_full_path(this : IFsiItem*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_full_path.call(this, pval)
-  end
-  def get_creation_time(this : IFsiItem*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_creation_time.call(this, pval)
-  end
-  def put_creation_time(this : IFsiItem*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_creation_time.call(this, newval)
-  end
-  def get_last_accessed_time(this : IFsiItem*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_accessed_time.call(this, pval)
-  end
-  def put_last_accessed_time(this : IFsiItem*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_last_accessed_time.call(this, newval)
-  end
-  def get_last_modified_time(this : IFsiItem*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_modified_time.call(this, pval)
-  end
-  def put_last_modified_time(this : IFsiItem*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_last_modified_time.call(this, newval)
-  end
-  def get_is_hidden(this : IFsiItem*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.call(this, pval)
-  end
-  def put_is_hidden(this : IFsiItem*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.call(this, newval)
-  end
-  def file_system_name(this : IFsiItem*, filesystem : FsiFileSystems, pval : UInt8**) : HRESULT
-    @lpVtbl.value.file_system_name.call(this, filesystem, pval)
-  end
-  def file_system_path(this : IFsiItem*, filesystem : FsiFileSystems, pval : UInt8**) : HRESULT
-    @lpVtbl.value.file_system_path.call(this, filesystem, pval)
-  end
-end
-struct LibWin32::IEnumFsiItems
-  def query_interface(this : IEnumFsiItems*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEnumFsiItems*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEnumFsiItems*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def next(this : IEnumFsiItems*, celt : UInt32, rgelt : IFsiItem*, pceltfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.call(this, celt, rgelt, pceltfetched)
-  end
-  def skip(this : IEnumFsiItems*, celt : UInt32) : HRESULT
-    @lpVtbl.value.skip.call(this, celt)
-  end
-  def reset(this : IEnumFsiItems*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def clone(this : IEnumFsiItems*, ppenum : IEnumFsiItems*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppenum)
-  end
-end
-struct LibWin32::IFsiFileItem
-  def query_interface(this : IFsiFileItem*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFsiFileItem*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFsiFileItem*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFsiFileItem*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFsiFileItem*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFsiFileItem*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFsiFileItem*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_name(this : IFsiFileItem*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, pval)
-  end
-  def get_full_path(this : IFsiFileItem*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_full_path.call(this, pval)
-  end
-  def get_creation_time(this : IFsiFileItem*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_creation_time.call(this, pval)
-  end
-  def put_creation_time(this : IFsiFileItem*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_creation_time.call(this, newval)
-  end
-  def get_last_accessed_time(this : IFsiFileItem*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_accessed_time.call(this, pval)
-  end
-  def put_last_accessed_time(this : IFsiFileItem*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_last_accessed_time.call(this, newval)
-  end
-  def get_last_modified_time(this : IFsiFileItem*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_modified_time.call(this, pval)
-  end
-  def put_last_modified_time(this : IFsiFileItem*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_last_modified_time.call(this, newval)
-  end
-  def get_is_hidden(this : IFsiFileItem*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.call(this, pval)
-  end
-  def put_is_hidden(this : IFsiFileItem*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.call(this, newval)
-  end
-  def file_system_name(this : IFsiFileItem*, filesystem : FsiFileSystems, pval : UInt8**) : HRESULT
-    @lpVtbl.value.file_system_name.call(this, filesystem, pval)
-  end
-  def file_system_path(this : IFsiFileItem*, filesystem : FsiFileSystems, pval : UInt8**) : HRESULT
-    @lpVtbl.value.file_system_path.call(this, filesystem, pval)
-  end
-  def get_data_size(this : IFsiFileItem*, pval : Int64*) : HRESULT
-    @lpVtbl.value.get_data_size.call(this, pval)
-  end
-  def get_data_size32_bit_low(this : IFsiFileItem*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_data_size32_bit_low.call(this, pval)
-  end
-  def get_data_size32_bit_high(this : IFsiFileItem*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_data_size32_bit_high.call(this, pval)
-  end
-  def get_data(this : IFsiFileItem*, pval : IStream*) : HRESULT
-    @lpVtbl.value.get_data.call(this, pval)
-  end
-  def put_data(this : IFsiFileItem*, newval : IStream) : HRESULT
-    @lpVtbl.value.put_data.call(this, newval)
-  end
-end
-struct LibWin32::IFsiFileItem2
-  def query_interface(this : IFsiFileItem2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFsiFileItem2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFsiFileItem2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFsiFileItem2*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFsiFileItem2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFsiFileItem2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFsiFileItem2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_name(this : IFsiFileItem2*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, pval)
-  end
-  def get_full_path(this : IFsiFileItem2*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_full_path.call(this, pval)
-  end
-  def get_creation_time(this : IFsiFileItem2*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_creation_time.call(this, pval)
-  end
-  def put_creation_time(this : IFsiFileItem2*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_creation_time.call(this, newval)
-  end
-  def get_last_accessed_time(this : IFsiFileItem2*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_accessed_time.call(this, pval)
-  end
-  def put_last_accessed_time(this : IFsiFileItem2*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_last_accessed_time.call(this, newval)
-  end
-  def get_last_modified_time(this : IFsiFileItem2*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_modified_time.call(this, pval)
-  end
-  def put_last_modified_time(this : IFsiFileItem2*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_last_modified_time.call(this, newval)
-  end
-  def get_is_hidden(this : IFsiFileItem2*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.call(this, pval)
-  end
-  def put_is_hidden(this : IFsiFileItem2*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.call(this, newval)
-  end
-  def file_system_name(this : IFsiFileItem2*, filesystem : FsiFileSystems, pval : UInt8**) : HRESULT
-    @lpVtbl.value.file_system_name.call(this, filesystem, pval)
-  end
-  def file_system_path(this : IFsiFileItem2*, filesystem : FsiFileSystems, pval : UInt8**) : HRESULT
-    @lpVtbl.value.file_system_path.call(this, filesystem, pval)
-  end
-  def get_data_size(this : IFsiFileItem2*, pval : Int64*) : HRESULT
-    @lpVtbl.value.get_data_size.call(this, pval)
-  end
-  def get_data_size32_bit_low(this : IFsiFileItem2*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_data_size32_bit_low.call(this, pval)
-  end
-  def get_data_size32_bit_high(this : IFsiFileItem2*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_data_size32_bit_high.call(this, pval)
-  end
-  def get_data(this : IFsiFileItem2*, pval : IStream*) : HRESULT
-    @lpVtbl.value.get_data.call(this, pval)
-  end
-  def put_data(this : IFsiFileItem2*, newval : IStream) : HRESULT
-    @lpVtbl.value.put_data.call(this, newval)
-  end
-  def get_fsi_named_streams(this : IFsiFileItem2*, streams : IFsiNamedStreams*) : HRESULT
-    @lpVtbl.value.get_fsi_named_streams.call(this, streams)
-  end
-  def get_is_named_stream(this : IFsiFileItem2*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_named_stream.call(this, pval)
-  end
-  def add_stream(this : IFsiFileItem2*, name : UInt8*, streamdata : IStream) : HRESULT
-    @lpVtbl.value.add_stream.call(this, name, streamdata)
-  end
-  def remove_stream(this : IFsiFileItem2*, name : UInt8*) : HRESULT
-    @lpVtbl.value.remove_stream.call(this, name)
-  end
-  def get_is_real_time(this : IFsiFileItem2*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_real_time.call(this, pval)
-  end
-  def put_is_real_time(this : IFsiFileItem2*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_is_real_time.call(this, newval)
-  end
-end
-struct LibWin32::IFsiNamedStreams
-  def query_interface(this : IFsiNamedStreams*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFsiNamedStreams*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFsiNamedStreams*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFsiNamedStreams*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFsiNamedStreams*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFsiNamedStreams*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFsiNamedStreams*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get__new_enum(this : IFsiNamedStreams*, newenum : IEnumVARIANT*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, newenum)
-  end
-  def get_item(this : IFsiNamedStreams*, index : Int32, item : IFsiFileItem2*) : HRESULT
-    @lpVtbl.value.get_item.call(this, index, item)
-  end
-  def get_count(this : IFsiNamedStreams*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def get_enum_named_streams(this : IFsiNamedStreams*, newenum : IEnumFsiItems*) : HRESULT
-    @lpVtbl.value.get_enum_named_streams.call(this, newenum)
-  end
-end
-struct LibWin32::IFsiDirectoryItem
-  def query_interface(this : IFsiDirectoryItem*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFsiDirectoryItem*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFsiDirectoryItem*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFsiDirectoryItem*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFsiDirectoryItem*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFsiDirectoryItem*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFsiDirectoryItem*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_name(this : IFsiDirectoryItem*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, pval)
-  end
-  def get_full_path(this : IFsiDirectoryItem*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_full_path.call(this, pval)
-  end
-  def get_creation_time(this : IFsiDirectoryItem*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_creation_time.call(this, pval)
-  end
-  def put_creation_time(this : IFsiDirectoryItem*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_creation_time.call(this, newval)
-  end
-  def get_last_accessed_time(this : IFsiDirectoryItem*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_accessed_time.call(this, pval)
-  end
-  def put_last_accessed_time(this : IFsiDirectoryItem*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_last_accessed_time.call(this, newval)
-  end
-  def get_last_modified_time(this : IFsiDirectoryItem*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_modified_time.call(this, pval)
-  end
-  def put_last_modified_time(this : IFsiDirectoryItem*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_last_modified_time.call(this, newval)
-  end
-  def get_is_hidden(this : IFsiDirectoryItem*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.call(this, pval)
-  end
-  def put_is_hidden(this : IFsiDirectoryItem*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.call(this, newval)
-  end
-  def file_system_name(this : IFsiDirectoryItem*, filesystem : FsiFileSystems, pval : UInt8**) : HRESULT
-    @lpVtbl.value.file_system_name.call(this, filesystem, pval)
-  end
-  def file_system_path(this : IFsiDirectoryItem*, filesystem : FsiFileSystems, pval : UInt8**) : HRESULT
-    @lpVtbl.value.file_system_path.call(this, filesystem, pval)
-  end
-  def get__new_enum(this : IFsiDirectoryItem*, newenum : IEnumVARIANT*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, newenum)
-  end
-  def get_item(this : IFsiDirectoryItem*, path : UInt8*, item : IFsiItem*) : HRESULT
-    @lpVtbl.value.get_item.call(this, path, item)
-  end
-  def get_count(this : IFsiDirectoryItem*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def get_enum_fsi_items(this : IFsiDirectoryItem*, newenum : IEnumFsiItems*) : HRESULT
-    @lpVtbl.value.get_enum_fsi_items.call(this, newenum)
-  end
-  def add_directory(this : IFsiDirectoryItem*, path : UInt8*) : HRESULT
-    @lpVtbl.value.add_directory.call(this, path)
-  end
-  def add_file(this : IFsiDirectoryItem*, path : UInt8*, filedata : IStream) : HRESULT
-    @lpVtbl.value.add_file.call(this, path, filedata)
-  end
-  def add_tree(this : IFsiDirectoryItem*, sourcedirectory : UInt8*, includebasedirectory : Int16) : HRESULT
-    @lpVtbl.value.add_tree.call(this, sourcedirectory, includebasedirectory)
-  end
-  def add(this : IFsiDirectoryItem*, item : IFsiItem) : HRESULT
-    @lpVtbl.value.add.call(this, item)
-  end
-  def remove(this : IFsiDirectoryItem*, path : UInt8*) : HRESULT
-    @lpVtbl.value.remove.call(this, path)
-  end
-  def remove_tree(this : IFsiDirectoryItem*, path : UInt8*) : HRESULT
-    @lpVtbl.value.remove_tree.call(this, path)
-  end
-end
-struct LibWin32::IFsiDirectoryItem2
-  def query_interface(this : IFsiDirectoryItem2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFsiDirectoryItem2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFsiDirectoryItem2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFsiDirectoryItem2*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFsiDirectoryItem2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFsiDirectoryItem2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFsiDirectoryItem2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_name(this : IFsiDirectoryItem2*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, pval)
-  end
-  def get_full_path(this : IFsiDirectoryItem2*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_full_path.call(this, pval)
-  end
-  def get_creation_time(this : IFsiDirectoryItem2*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_creation_time.call(this, pval)
-  end
-  def put_creation_time(this : IFsiDirectoryItem2*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_creation_time.call(this, newval)
-  end
-  def get_last_accessed_time(this : IFsiDirectoryItem2*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_accessed_time.call(this, pval)
-  end
-  def put_last_accessed_time(this : IFsiDirectoryItem2*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_last_accessed_time.call(this, newval)
-  end
-  def get_last_modified_time(this : IFsiDirectoryItem2*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_last_modified_time.call(this, pval)
-  end
-  def put_last_modified_time(this : IFsiDirectoryItem2*, newval : Float64) : HRESULT
-    @lpVtbl.value.put_last_modified_time.call(this, newval)
-  end
-  def get_is_hidden(this : IFsiDirectoryItem2*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_is_hidden.call(this, pval)
-  end
-  def put_is_hidden(this : IFsiDirectoryItem2*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_is_hidden.call(this, newval)
-  end
-  def file_system_name(this : IFsiDirectoryItem2*, filesystem : FsiFileSystems, pval : UInt8**) : HRESULT
-    @lpVtbl.value.file_system_name.call(this, filesystem, pval)
-  end
-  def file_system_path(this : IFsiDirectoryItem2*, filesystem : FsiFileSystems, pval : UInt8**) : HRESULT
-    @lpVtbl.value.file_system_path.call(this, filesystem, pval)
-  end
-  def get__new_enum(this : IFsiDirectoryItem2*, newenum : IEnumVARIANT*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, newenum)
-  end
-  def get_item(this : IFsiDirectoryItem2*, path : UInt8*, item : IFsiItem*) : HRESULT
-    @lpVtbl.value.get_item.call(this, path, item)
-  end
-  def get_count(this : IFsiDirectoryItem2*, count : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def get_enum_fsi_items(this : IFsiDirectoryItem2*, newenum : IEnumFsiItems*) : HRESULT
-    @lpVtbl.value.get_enum_fsi_items.call(this, newenum)
-  end
-  def add_directory(this : IFsiDirectoryItem2*, path : UInt8*) : HRESULT
-    @lpVtbl.value.add_directory.call(this, path)
-  end
-  def add_file(this : IFsiDirectoryItem2*, path : UInt8*, filedata : IStream) : HRESULT
-    @lpVtbl.value.add_file.call(this, path, filedata)
-  end
-  def add_tree(this : IFsiDirectoryItem2*, sourcedirectory : UInt8*, includebasedirectory : Int16) : HRESULT
-    @lpVtbl.value.add_tree.call(this, sourcedirectory, includebasedirectory)
-  end
-  def add(this : IFsiDirectoryItem2*, item : IFsiItem) : HRESULT
-    @lpVtbl.value.add.call(this, item)
-  end
-  def remove(this : IFsiDirectoryItem2*, path : UInt8*) : HRESULT
-    @lpVtbl.value.remove.call(this, path)
-  end
-  def remove_tree(this : IFsiDirectoryItem2*, path : UInt8*) : HRESULT
-    @lpVtbl.value.remove_tree.call(this, path)
-  end
-  def add_tree_with_named_streams(this : IFsiDirectoryItem2*, sourcedirectory : UInt8*, includebasedirectory : Int16) : HRESULT
-    @lpVtbl.value.add_tree_with_named_streams.call(this, sourcedirectory, includebasedirectory)
-  end
-end
-struct LibWin32::IFileSystemImage
-  def query_interface(this : IFileSystemImage*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFileSystemImage*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFileSystemImage*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFileSystemImage*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFileSystemImage*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFileSystemImage*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFileSystemImage*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_root(this : IFileSystemImage*, pval : IFsiDirectoryItem*) : HRESULT
-    @lpVtbl.value.get_root.call(this, pval)
-  end
-  def get_session_start_block(this : IFileSystemImage*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_session_start_block.call(this, pval)
-  end
-  def put_session_start_block(this : IFileSystemImage*, newval : Int32) : HRESULT
-    @lpVtbl.value.put_session_start_block.call(this, newval)
-  end
-  def get_free_media_blocks(this : IFileSystemImage*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_free_media_blocks.call(this, pval)
-  end
-  def put_free_media_blocks(this : IFileSystemImage*, newval : Int32) : HRESULT
-    @lpVtbl.value.put_free_media_blocks.call(this, newval)
-  end
-  def set_max_media_blocks_from_device(this : IFileSystemImage*, discrecorder : IDiscRecorder2) : HRESULT
-    @lpVtbl.value.set_max_media_blocks_from_device.call(this, discrecorder)
-  end
-  def get_used_blocks(this : IFileSystemImage*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_used_blocks.call(this, pval)
-  end
-  def get_volume_name(this : IFileSystemImage*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_volume_name.call(this, pval)
-  end
-  def put_volume_name(this : IFileSystemImage*, newval : UInt8*) : HRESULT
-    @lpVtbl.value.put_volume_name.call(this, newval)
-  end
-  def get_imported_volume_name(this : IFileSystemImage*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_imported_volume_name.call(this, pval)
-  end
-  def get_boot_image_options(this : IFileSystemImage*, pval : IBootOptions*) : HRESULT
-    @lpVtbl.value.get_boot_image_options.call(this, pval)
-  end
-  def put_boot_image_options(this : IFileSystemImage*, newval : IBootOptions) : HRESULT
-    @lpVtbl.value.put_boot_image_options.call(this, newval)
-  end
-  def get_file_count(this : IFileSystemImage*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_file_count.call(this, pval)
-  end
-  def get_directory_count(this : IFileSystemImage*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_directory_count.call(this, pval)
-  end
-  def get_working_directory(this : IFileSystemImage*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_working_directory.call(this, pval)
-  end
-  def put_working_directory(this : IFileSystemImage*, newval : UInt8*) : HRESULT
-    @lpVtbl.value.put_working_directory.call(this, newval)
-  end
-  def get_change_point(this : IFileSystemImage*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_change_point.call(this, pval)
-  end
-  def get_strict_file_system_compliance(this : IFileSystemImage*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_strict_file_system_compliance.call(this, pval)
-  end
-  def put_strict_file_system_compliance(this : IFileSystemImage*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_strict_file_system_compliance.call(this, newval)
-  end
-  def get_use_restricted_character_set(this : IFileSystemImage*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_use_restricted_character_set.call(this, pval)
-  end
-  def put_use_restricted_character_set(this : IFileSystemImage*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_use_restricted_character_set.call(this, newval)
-  end
-  def get_file_systems_to_create(this : IFileSystemImage*, pval : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.get_file_systems_to_create.call(this, pval)
-  end
-  def put_file_systems_to_create(this : IFileSystemImage*, newval : FsiFileSystems) : HRESULT
-    @lpVtbl.value.put_file_systems_to_create.call(this, newval)
-  end
-  def get_file_systems_supported(this : IFileSystemImage*, pval : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.get_file_systems_supported.call(this, pval)
-  end
-  def put_udf_revision(this : IFileSystemImage*, newval : Int32) : HRESULT
-    @lpVtbl.value.put_udf_revision.call(this, newval)
-  end
-  def get_udf_revision(this : IFileSystemImage*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_udf_revision.call(this, pval)
-  end
-  def get_udf_revisions_supported(this : IFileSystemImage*, pval : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_udf_revisions_supported.call(this, pval)
-  end
-  def choose_image_defaults(this : IFileSystemImage*, discrecorder : IDiscRecorder2) : HRESULT
-    @lpVtbl.value.choose_image_defaults.call(this, discrecorder)
-  end
-  def choose_image_defaults_for_media_type(this : IFileSystemImage*, value : IMAPI_MEDIA_PHYSICAL_TYPE) : HRESULT
-    @lpVtbl.value.choose_image_defaults_for_media_type.call(this, value)
-  end
-  def put_iso9660_interchange_level(this : IFileSystemImage*, newval : Int32) : HRESULT
-    @lpVtbl.value.put_iso9660_interchange_level.call(this, newval)
-  end
-  def get_iso9660_interchange_level(this : IFileSystemImage*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_iso9660_interchange_level.call(this, pval)
-  end
-  def get_iso9660_interchange_levels_supported(this : IFileSystemImage*, pval : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_iso9660_interchange_levels_supported.call(this, pval)
-  end
-  def create_result_image(this : IFileSystemImage*, resultstream : IFileSystemImageResult*) : HRESULT
-    @lpVtbl.value.create_result_image.call(this, resultstream)
-  end
-  def exists(this : IFileSystemImage*, fullpath : UInt8*, itemtype : FsiItemType*) : HRESULT
-    @lpVtbl.value.exists.call(this, fullpath, itemtype)
-  end
-  def calculate_disc_identifier(this : IFileSystemImage*, discidentifier : UInt8**) : HRESULT
-    @lpVtbl.value.calculate_disc_identifier.call(this, discidentifier)
-  end
-  def identify_file_systems_on_disc(this : IFileSystemImage*, discrecorder : IDiscRecorder2, filesystems : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.identify_file_systems_on_disc.call(this, discrecorder, filesystems)
-  end
-  def get_default_file_system_for_import(this : IFileSystemImage*, filesystems : FsiFileSystems, importdefault : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.get_default_file_system_for_import.call(this, filesystems, importdefault)
-  end
-  def import_file_system(this : IFileSystemImage*, importedfilesystem : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.import_file_system.call(this, importedfilesystem)
-  end
-  def import_specific_file_system(this : IFileSystemImage*, filesystemtouse : FsiFileSystems) : HRESULT
-    @lpVtbl.value.import_specific_file_system.call(this, filesystemtouse)
-  end
-  def rollback_to_change_point(this : IFileSystemImage*, changepoint : Int32) : HRESULT
-    @lpVtbl.value.rollback_to_change_point.call(this, changepoint)
-  end
-  def lock_in_change_point(this : IFileSystemImage*) : HRESULT
-    @lpVtbl.value.lock_in_change_point.call(this)
-  end
-  def create_directory_item(this : IFileSystemImage*, name : UInt8*, newitem : IFsiDirectoryItem*) : HRESULT
-    @lpVtbl.value.create_directory_item.call(this, name, newitem)
-  end
-  def create_file_item(this : IFileSystemImage*, name : UInt8*, newitem : IFsiFileItem*) : HRESULT
-    @lpVtbl.value.create_file_item.call(this, name, newitem)
-  end
-  def get_volume_name_udf(this : IFileSystemImage*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_volume_name_udf.call(this, pval)
-  end
-  def get_volume_name_joliet(this : IFileSystemImage*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_volume_name_joliet.call(this, pval)
-  end
-  def get_volume_name_iso9660(this : IFileSystemImage*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_volume_name_iso9660.call(this, pval)
-  end
-  def get_stage_files(this : IFileSystemImage*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_stage_files.call(this, pval)
-  end
-  def put_stage_files(this : IFileSystemImage*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_stage_files.call(this, newval)
-  end
-  def get_multisession_interfaces(this : IFileSystemImage*, pval : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_multisession_interfaces.call(this, pval)
-  end
-  def put_multisession_interfaces(this : IFileSystemImage*, newval : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_multisession_interfaces.call(this, newval)
-  end
-end
-struct LibWin32::IFileSystemImage2
-  def query_interface(this : IFileSystemImage2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFileSystemImage2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFileSystemImage2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFileSystemImage2*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFileSystemImage2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFileSystemImage2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFileSystemImage2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_root(this : IFileSystemImage2*, pval : IFsiDirectoryItem*) : HRESULT
-    @lpVtbl.value.get_root.call(this, pval)
-  end
-  def get_session_start_block(this : IFileSystemImage2*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_session_start_block.call(this, pval)
-  end
-  def put_session_start_block(this : IFileSystemImage2*, newval : Int32) : HRESULT
-    @lpVtbl.value.put_session_start_block.call(this, newval)
-  end
-  def get_free_media_blocks(this : IFileSystemImage2*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_free_media_blocks.call(this, pval)
-  end
-  def put_free_media_blocks(this : IFileSystemImage2*, newval : Int32) : HRESULT
-    @lpVtbl.value.put_free_media_blocks.call(this, newval)
-  end
-  def set_max_media_blocks_from_device(this : IFileSystemImage2*, discrecorder : IDiscRecorder2) : HRESULT
-    @lpVtbl.value.set_max_media_blocks_from_device.call(this, discrecorder)
-  end
-  def get_used_blocks(this : IFileSystemImage2*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_used_blocks.call(this, pval)
-  end
-  def get_volume_name(this : IFileSystemImage2*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_volume_name.call(this, pval)
-  end
-  def put_volume_name(this : IFileSystemImage2*, newval : UInt8*) : HRESULT
-    @lpVtbl.value.put_volume_name.call(this, newval)
-  end
-  def get_imported_volume_name(this : IFileSystemImage2*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_imported_volume_name.call(this, pval)
-  end
-  def get_boot_image_options(this : IFileSystemImage2*, pval : IBootOptions*) : HRESULT
-    @lpVtbl.value.get_boot_image_options.call(this, pval)
-  end
-  def put_boot_image_options(this : IFileSystemImage2*, newval : IBootOptions) : HRESULT
-    @lpVtbl.value.put_boot_image_options.call(this, newval)
-  end
-  def get_file_count(this : IFileSystemImage2*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_file_count.call(this, pval)
-  end
-  def get_directory_count(this : IFileSystemImage2*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_directory_count.call(this, pval)
-  end
-  def get_working_directory(this : IFileSystemImage2*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_working_directory.call(this, pval)
-  end
-  def put_working_directory(this : IFileSystemImage2*, newval : UInt8*) : HRESULT
-    @lpVtbl.value.put_working_directory.call(this, newval)
-  end
-  def get_change_point(this : IFileSystemImage2*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_change_point.call(this, pval)
-  end
-  def get_strict_file_system_compliance(this : IFileSystemImage2*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_strict_file_system_compliance.call(this, pval)
-  end
-  def put_strict_file_system_compliance(this : IFileSystemImage2*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_strict_file_system_compliance.call(this, newval)
-  end
-  def get_use_restricted_character_set(this : IFileSystemImage2*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_use_restricted_character_set.call(this, pval)
-  end
-  def put_use_restricted_character_set(this : IFileSystemImage2*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_use_restricted_character_set.call(this, newval)
-  end
-  def get_file_systems_to_create(this : IFileSystemImage2*, pval : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.get_file_systems_to_create.call(this, pval)
-  end
-  def put_file_systems_to_create(this : IFileSystemImage2*, newval : FsiFileSystems) : HRESULT
-    @lpVtbl.value.put_file_systems_to_create.call(this, newval)
-  end
-  def get_file_systems_supported(this : IFileSystemImage2*, pval : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.get_file_systems_supported.call(this, pval)
-  end
-  def put_udf_revision(this : IFileSystemImage2*, newval : Int32) : HRESULT
-    @lpVtbl.value.put_udf_revision.call(this, newval)
-  end
-  def get_udf_revision(this : IFileSystemImage2*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_udf_revision.call(this, pval)
-  end
-  def get_udf_revisions_supported(this : IFileSystemImage2*, pval : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_udf_revisions_supported.call(this, pval)
-  end
-  def choose_image_defaults(this : IFileSystemImage2*, discrecorder : IDiscRecorder2) : HRESULT
-    @lpVtbl.value.choose_image_defaults.call(this, discrecorder)
-  end
-  def choose_image_defaults_for_media_type(this : IFileSystemImage2*, value : IMAPI_MEDIA_PHYSICAL_TYPE) : HRESULT
-    @lpVtbl.value.choose_image_defaults_for_media_type.call(this, value)
-  end
-  def put_iso9660_interchange_level(this : IFileSystemImage2*, newval : Int32) : HRESULT
-    @lpVtbl.value.put_iso9660_interchange_level.call(this, newval)
-  end
-  def get_iso9660_interchange_level(this : IFileSystemImage2*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_iso9660_interchange_level.call(this, pval)
-  end
-  def get_iso9660_interchange_levels_supported(this : IFileSystemImage2*, pval : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_iso9660_interchange_levels_supported.call(this, pval)
-  end
-  def create_result_image(this : IFileSystemImage2*, resultstream : IFileSystemImageResult*) : HRESULT
-    @lpVtbl.value.create_result_image.call(this, resultstream)
-  end
-  def exists(this : IFileSystemImage2*, fullpath : UInt8*, itemtype : FsiItemType*) : HRESULT
-    @lpVtbl.value.exists.call(this, fullpath, itemtype)
-  end
-  def calculate_disc_identifier(this : IFileSystemImage2*, discidentifier : UInt8**) : HRESULT
-    @lpVtbl.value.calculate_disc_identifier.call(this, discidentifier)
-  end
-  def identify_file_systems_on_disc(this : IFileSystemImage2*, discrecorder : IDiscRecorder2, filesystems : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.identify_file_systems_on_disc.call(this, discrecorder, filesystems)
-  end
-  def get_default_file_system_for_import(this : IFileSystemImage2*, filesystems : FsiFileSystems, importdefault : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.get_default_file_system_for_import.call(this, filesystems, importdefault)
-  end
-  def import_file_system(this : IFileSystemImage2*, importedfilesystem : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.import_file_system.call(this, importedfilesystem)
-  end
-  def import_specific_file_system(this : IFileSystemImage2*, filesystemtouse : FsiFileSystems) : HRESULT
-    @lpVtbl.value.import_specific_file_system.call(this, filesystemtouse)
-  end
-  def rollback_to_change_point(this : IFileSystemImage2*, changepoint : Int32) : HRESULT
-    @lpVtbl.value.rollback_to_change_point.call(this, changepoint)
-  end
-  def lock_in_change_point(this : IFileSystemImage2*) : HRESULT
-    @lpVtbl.value.lock_in_change_point.call(this)
-  end
-  def create_directory_item(this : IFileSystemImage2*, name : UInt8*, newitem : IFsiDirectoryItem*) : HRESULT
-    @lpVtbl.value.create_directory_item.call(this, name, newitem)
-  end
-  def create_file_item(this : IFileSystemImage2*, name : UInt8*, newitem : IFsiFileItem*) : HRESULT
-    @lpVtbl.value.create_file_item.call(this, name, newitem)
-  end
-  def get_volume_name_udf(this : IFileSystemImage2*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_volume_name_udf.call(this, pval)
-  end
-  def get_volume_name_joliet(this : IFileSystemImage2*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_volume_name_joliet.call(this, pval)
-  end
-  def get_volume_name_iso9660(this : IFileSystemImage2*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_volume_name_iso9660.call(this, pval)
-  end
-  def get_stage_files(this : IFileSystemImage2*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_stage_files.call(this, pval)
-  end
-  def put_stage_files(this : IFileSystemImage2*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_stage_files.call(this, newval)
-  end
-  def get_multisession_interfaces(this : IFileSystemImage2*, pval : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_multisession_interfaces.call(this, pval)
-  end
-  def put_multisession_interfaces(this : IFileSystemImage2*, newval : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_multisession_interfaces.call(this, newval)
-  end
-  def get_boot_image_options_array(this : IFileSystemImage2*, pval : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_boot_image_options_array.call(this, pval)
-  end
-  def put_boot_image_options_array(this : IFileSystemImage2*, newval : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_boot_image_options_array.call(this, newval)
-  end
-end
-struct LibWin32::IFileSystemImage3
-  def query_interface(this : IFileSystemImage3*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFileSystemImage3*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFileSystemImage3*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFileSystemImage3*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFileSystemImage3*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFileSystemImage3*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFileSystemImage3*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_root(this : IFileSystemImage3*, pval : IFsiDirectoryItem*) : HRESULT
-    @lpVtbl.value.get_root.call(this, pval)
-  end
-  def get_session_start_block(this : IFileSystemImage3*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_session_start_block.call(this, pval)
-  end
-  def put_session_start_block(this : IFileSystemImage3*, newval : Int32) : HRESULT
-    @lpVtbl.value.put_session_start_block.call(this, newval)
-  end
-  def get_free_media_blocks(this : IFileSystemImage3*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_free_media_blocks.call(this, pval)
-  end
-  def put_free_media_blocks(this : IFileSystemImage3*, newval : Int32) : HRESULT
-    @lpVtbl.value.put_free_media_blocks.call(this, newval)
-  end
-  def set_max_media_blocks_from_device(this : IFileSystemImage3*, discrecorder : IDiscRecorder2) : HRESULT
-    @lpVtbl.value.set_max_media_blocks_from_device.call(this, discrecorder)
-  end
-  def get_used_blocks(this : IFileSystemImage3*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_used_blocks.call(this, pval)
-  end
-  def get_volume_name(this : IFileSystemImage3*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_volume_name.call(this, pval)
-  end
-  def put_volume_name(this : IFileSystemImage3*, newval : UInt8*) : HRESULT
-    @lpVtbl.value.put_volume_name.call(this, newval)
-  end
-  def get_imported_volume_name(this : IFileSystemImage3*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_imported_volume_name.call(this, pval)
-  end
-  def get_boot_image_options(this : IFileSystemImage3*, pval : IBootOptions*) : HRESULT
-    @lpVtbl.value.get_boot_image_options.call(this, pval)
-  end
-  def put_boot_image_options(this : IFileSystemImage3*, newval : IBootOptions) : HRESULT
-    @lpVtbl.value.put_boot_image_options.call(this, newval)
-  end
-  def get_file_count(this : IFileSystemImage3*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_file_count.call(this, pval)
-  end
-  def get_directory_count(this : IFileSystemImage3*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_directory_count.call(this, pval)
-  end
-  def get_working_directory(this : IFileSystemImage3*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_working_directory.call(this, pval)
-  end
-  def put_working_directory(this : IFileSystemImage3*, newval : UInt8*) : HRESULT
-    @lpVtbl.value.put_working_directory.call(this, newval)
-  end
-  def get_change_point(this : IFileSystemImage3*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_change_point.call(this, pval)
-  end
-  def get_strict_file_system_compliance(this : IFileSystemImage3*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_strict_file_system_compliance.call(this, pval)
-  end
-  def put_strict_file_system_compliance(this : IFileSystemImage3*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_strict_file_system_compliance.call(this, newval)
-  end
-  def get_use_restricted_character_set(this : IFileSystemImage3*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_use_restricted_character_set.call(this, pval)
-  end
-  def put_use_restricted_character_set(this : IFileSystemImage3*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_use_restricted_character_set.call(this, newval)
-  end
-  def get_file_systems_to_create(this : IFileSystemImage3*, pval : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.get_file_systems_to_create.call(this, pval)
-  end
-  def put_file_systems_to_create(this : IFileSystemImage3*, newval : FsiFileSystems) : HRESULT
-    @lpVtbl.value.put_file_systems_to_create.call(this, newval)
-  end
-  def get_file_systems_supported(this : IFileSystemImage3*, pval : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.get_file_systems_supported.call(this, pval)
-  end
-  def put_udf_revision(this : IFileSystemImage3*, newval : Int32) : HRESULT
-    @lpVtbl.value.put_udf_revision.call(this, newval)
-  end
-  def get_udf_revision(this : IFileSystemImage3*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_udf_revision.call(this, pval)
-  end
-  def get_udf_revisions_supported(this : IFileSystemImage3*, pval : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_udf_revisions_supported.call(this, pval)
-  end
-  def choose_image_defaults(this : IFileSystemImage3*, discrecorder : IDiscRecorder2) : HRESULT
-    @lpVtbl.value.choose_image_defaults.call(this, discrecorder)
-  end
-  def choose_image_defaults_for_media_type(this : IFileSystemImage3*, value : IMAPI_MEDIA_PHYSICAL_TYPE) : HRESULT
-    @lpVtbl.value.choose_image_defaults_for_media_type.call(this, value)
-  end
-  def put_iso9660_interchange_level(this : IFileSystemImage3*, newval : Int32) : HRESULT
-    @lpVtbl.value.put_iso9660_interchange_level.call(this, newval)
-  end
-  def get_iso9660_interchange_level(this : IFileSystemImage3*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_iso9660_interchange_level.call(this, pval)
-  end
-  def get_iso9660_interchange_levels_supported(this : IFileSystemImage3*, pval : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_iso9660_interchange_levels_supported.call(this, pval)
-  end
-  def create_result_image(this : IFileSystemImage3*, resultstream : IFileSystemImageResult*) : HRESULT
-    @lpVtbl.value.create_result_image.call(this, resultstream)
-  end
-  def exists(this : IFileSystemImage3*, fullpath : UInt8*, itemtype : FsiItemType*) : HRESULT
-    @lpVtbl.value.exists.call(this, fullpath, itemtype)
-  end
-  def calculate_disc_identifier(this : IFileSystemImage3*, discidentifier : UInt8**) : HRESULT
-    @lpVtbl.value.calculate_disc_identifier.call(this, discidentifier)
-  end
-  def identify_file_systems_on_disc(this : IFileSystemImage3*, discrecorder : IDiscRecorder2, filesystems : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.identify_file_systems_on_disc.call(this, discrecorder, filesystems)
-  end
-  def get_default_file_system_for_import(this : IFileSystemImage3*, filesystems : FsiFileSystems, importdefault : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.get_default_file_system_for_import.call(this, filesystems, importdefault)
-  end
-  def import_file_system(this : IFileSystemImage3*, importedfilesystem : FsiFileSystems*) : HRESULT
-    @lpVtbl.value.import_file_system.call(this, importedfilesystem)
-  end
-  def import_specific_file_system(this : IFileSystemImage3*, filesystemtouse : FsiFileSystems) : HRESULT
-    @lpVtbl.value.import_specific_file_system.call(this, filesystemtouse)
-  end
-  def rollback_to_change_point(this : IFileSystemImage3*, changepoint : Int32) : HRESULT
-    @lpVtbl.value.rollback_to_change_point.call(this, changepoint)
-  end
-  def lock_in_change_point(this : IFileSystemImage3*) : HRESULT
-    @lpVtbl.value.lock_in_change_point.call(this)
-  end
-  def create_directory_item(this : IFileSystemImage3*, name : UInt8*, newitem : IFsiDirectoryItem*) : HRESULT
-    @lpVtbl.value.create_directory_item.call(this, name, newitem)
-  end
-  def create_file_item(this : IFileSystemImage3*, name : UInt8*, newitem : IFsiFileItem*) : HRESULT
-    @lpVtbl.value.create_file_item.call(this, name, newitem)
-  end
-  def get_volume_name_udf(this : IFileSystemImage3*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_volume_name_udf.call(this, pval)
-  end
-  def get_volume_name_joliet(this : IFileSystemImage3*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_volume_name_joliet.call(this, pval)
-  end
-  def get_volume_name_iso9660(this : IFileSystemImage3*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_volume_name_iso9660.call(this, pval)
-  end
-  def get_stage_files(this : IFileSystemImage3*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_stage_files.call(this, pval)
-  end
-  def put_stage_files(this : IFileSystemImage3*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_stage_files.call(this, newval)
-  end
-  def get_multisession_interfaces(this : IFileSystemImage3*, pval : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_multisession_interfaces.call(this, pval)
-  end
-  def put_multisession_interfaces(this : IFileSystemImage3*, newval : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_multisession_interfaces.call(this, newval)
-  end
-  def get_boot_image_options_array(this : IFileSystemImage3*, pval : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_boot_image_options_array.call(this, pval)
-  end
-  def put_boot_image_options_array(this : IFileSystemImage3*, newval : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_boot_image_options_array.call(this, newval)
-  end
-  def get_create_redundant_udf_metadata_files(this : IFileSystemImage3*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_create_redundant_udf_metadata_files.call(this, pval)
-  end
-  def put_create_redundant_udf_metadata_files(this : IFileSystemImage3*, newval : Int16) : HRESULT
-    @lpVtbl.value.put_create_redundant_udf_metadata_files.call(this, newval)
-  end
-  def probe_specific_file_system(this : IFileSystemImage3*, filesystemtoprobe : FsiFileSystems, isappendable : Int16*) : HRESULT
-    @lpVtbl.value.probe_specific_file_system.call(this, filesystemtoprobe, isappendable)
-  end
-end
-struct LibWin32::DFileSystemImageEvents
-  def query_interface(this : DFileSystemImageEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : DFileSystemImageEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : DFileSystemImageEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : DFileSystemImageEvents*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : DFileSystemImageEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : DFileSystemImageEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : DFileSystemImageEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def update(this : DFileSystemImageEvents*, object : IDispatch, currentfile : UInt8*, copiedsectors : Int32, totalsectors : Int32) : HRESULT
-    @lpVtbl.value.update.call(this, object, currentfile, copiedsectors, totalsectors)
-  end
-end
-struct LibWin32::DFileSystemImageImportEvents
-  def query_interface(this : DFileSystemImageImportEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : DFileSystemImageImportEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : DFileSystemImageImportEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : DFileSystemImageImportEvents*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : DFileSystemImageImportEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : DFileSystemImageImportEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : DFileSystemImageImportEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def update_import(this : DFileSystemImageImportEvents*, object : IDispatch, filesystem : FsiFileSystems, currentitem : UInt8*, importeddirectoryitems : Int32, totaldirectoryitems : Int32, importedfileitems : Int32, totalfileitems : Int32) : HRESULT
-    @lpVtbl.value.update_import.call(this, object, filesystem, currentitem, importeddirectoryitems, totaldirectoryitems, importedfileitems, totalfileitems)
-  end
-end
-struct LibWin32::IIsoImageManager
-  def query_interface(this : IIsoImageManager*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IIsoImageManager*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IIsoImageManager*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IIsoImageManager*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IIsoImageManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IIsoImageManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IIsoImageManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_path(this : IIsoImageManager*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_path.call(this, pval)
-  end
-  def get_stream(this : IIsoImageManager*, data : IStream*) : HRESULT
-    @lpVtbl.value.get_stream.call(this, data)
-  end
-  def set_path(this : IIsoImageManager*, val : UInt8*) : HRESULT
-    @lpVtbl.value.set_path.call(this, val)
-  end
-  def set_stream(this : IIsoImageManager*, data : IStream) : HRESULT
-    @lpVtbl.value.set_stream.call(this, data)
-  end
-  def validate(this : IIsoImageManager*) : HRESULT
-    @lpVtbl.value.validate.call(this)
-  end
-end
-struct LibWin32::IDiscRecorder
-  def query_interface(this : IDiscRecorder*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscRecorder*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscRecorder*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def init(this : IDiscRecorder*, pbyuniqueid : UInt8*, nulidsize : UInt32, nuldrivenumber : UInt32) : HRESULT
-    @lpVtbl.value.init.call(this, pbyuniqueid, nulidsize, nuldrivenumber)
-  end
-  def get_recorder_guid(this : IDiscRecorder*, pbyuniqueid : UInt8*, ulbuffersize : UInt32, pulreturnsizerequired : UInt32*) : HRESULT
-    @lpVtbl.value.get_recorder_guid.call(this, pbyuniqueid, ulbuffersize, pulreturnsizerequired)
-  end
-  def get_recorder_type(this : IDiscRecorder*, ftypecode : RECORDER_TYPES*) : HRESULT
-    @lpVtbl.value.get_recorder_type.call(this, ftypecode)
-  end
-  def get_display_names(this : IDiscRecorder*, pbstrvendorid : UInt8**, pbstrproductid : UInt8**, pbstrrevision : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_names.call(this, pbstrvendorid, pbstrproductid, pbstrrevision)
-  end
-  def get_base_pn_pid(this : IDiscRecorder*, pbstrbasepnpid : UInt8**) : HRESULT
-    @lpVtbl.value.get_base_pn_pid.call(this, pbstrbasepnpid)
-  end
-  def get_path(this : IDiscRecorder*, pbstrpath : UInt8**) : HRESULT
-    @lpVtbl.value.get_path.call(this, pbstrpath)
-  end
-  def get_recorder_properties(this : IDiscRecorder*, pppropstg : IPropertyStorage*) : HRESULT
-    @lpVtbl.value.get_recorder_properties.call(this, pppropstg)
-  end
-  def set_recorder_properties(this : IDiscRecorder*, ppropstg : IPropertyStorage) : HRESULT
-    @lpVtbl.value.set_recorder_properties.call(this, ppropstg)
-  end
-  def get_recorder_state(this : IDiscRecorder*, puldevstateflags : DISC_RECORDER_STATE_FLAGS*) : HRESULT
-    @lpVtbl.value.get_recorder_state.call(this, puldevstateflags)
-  end
-  def open_exclusive(this : IDiscRecorder*) : HRESULT
-    @lpVtbl.value.open_exclusive.call(this)
-  end
-  def query_media_type(this : IDiscRecorder*, fmediatype : MEDIA_TYPES*, fmediaflags : MEDIA_FLAGS*) : HRESULT
-    @lpVtbl.value.query_media_type.call(this, fmediatype, fmediaflags)
-  end
-  def query_media_info(this : IDiscRecorder*, pbsessions : UInt8*, pblasttrack : UInt8*, ulstartaddress : UInt32*, ulnextwritable : UInt32*, ulfreeblocks : UInt32*) : HRESULT
-    @lpVtbl.value.query_media_info.call(this, pbsessions, pblasttrack, ulstartaddress, ulnextwritable, ulfreeblocks)
-  end
-  def eject(this : IDiscRecorder*) : HRESULT
-    @lpVtbl.value.eject.call(this)
-  end
-  def erase(this : IDiscRecorder*, bfullerase : UInt8) : HRESULT
-    @lpVtbl.value.erase.call(this, bfullerase)
-  end
-  def close(this : IDiscRecorder*) : HRESULT
-    @lpVtbl.value.close.call(this)
-  end
-end
-struct LibWin32::IEnumDiscRecorders
-  def query_interface(this : IEnumDiscRecorders*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEnumDiscRecorders*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEnumDiscRecorders*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def next(this : IEnumDiscRecorders*, crecorders : UInt32, pprecorder : IDiscRecorder*, pcfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.call(this, crecorders, pprecorder, pcfetched)
-  end
-  def skip(this : IEnumDiscRecorders*, crecorders : UInt32) : HRESULT
-    @lpVtbl.value.skip.call(this, crecorders)
-  end
-  def reset(this : IEnumDiscRecorders*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def clone(this : IEnumDiscRecorders*, ppenum : IEnumDiscRecorders*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppenum)
-  end
-end
-struct LibWin32::IEnumDiscMasterFormats
-  def query_interface(this : IEnumDiscMasterFormats*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEnumDiscMasterFormats*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEnumDiscMasterFormats*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def next(this : IEnumDiscMasterFormats*, cformats : UInt32, lpiidformatid : Guid*, pcfetched : UInt32*) : HRESULT
-    @lpVtbl.value.next.call(this, cformats, lpiidformatid, pcfetched)
-  end
-  def skip(this : IEnumDiscMasterFormats*, cformats : UInt32) : HRESULT
-    @lpVtbl.value.skip.call(this, cformats)
-  end
-  def reset(this : IEnumDiscMasterFormats*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def clone(this : IEnumDiscMasterFormats*, ppenum : IEnumDiscMasterFormats*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppenum)
-  end
-end
-struct LibWin32::IRedbookDiscMaster
-  def query_interface(this : IRedbookDiscMaster*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IRedbookDiscMaster*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IRedbookDiscMaster*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_total_audio_tracks(this : IRedbookDiscMaster*, pntracks : Int32*) : HRESULT
-    @lpVtbl.value.get_total_audio_tracks.call(this, pntracks)
-  end
-  def get_total_audio_blocks(this : IRedbookDiscMaster*, pnblocks : Int32*) : HRESULT
-    @lpVtbl.value.get_total_audio_blocks.call(this, pnblocks)
-  end
-  def get_used_audio_blocks(this : IRedbookDiscMaster*, pnblocks : Int32*) : HRESULT
-    @lpVtbl.value.get_used_audio_blocks.call(this, pnblocks)
-  end
-  def get_available_audio_track_blocks(this : IRedbookDiscMaster*, pnblocks : Int32*) : HRESULT
-    @lpVtbl.value.get_available_audio_track_blocks.call(this, pnblocks)
-  end
-  def get_audio_block_size(this : IRedbookDiscMaster*, pnblockbytes : Int32*) : HRESULT
-    @lpVtbl.value.get_audio_block_size.call(this, pnblockbytes)
-  end
-  def create_audio_track(this : IRedbookDiscMaster*, nblocks : Int32) : HRESULT
-    @lpVtbl.value.create_audio_track.call(this, nblocks)
-  end
-  def add_audio_track_blocks(this : IRedbookDiscMaster*, pby : UInt8*, cb : Int32) : HRESULT
-    @lpVtbl.value.add_audio_track_blocks.call(this, pby, cb)
-  end
-  def close_audio_track(this : IRedbookDiscMaster*) : HRESULT
-    @lpVtbl.value.close_audio_track.call(this)
-  end
-end
-struct LibWin32::IJolietDiscMaster
-  def query_interface(this : IJolietDiscMaster*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IJolietDiscMaster*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IJolietDiscMaster*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_total_data_blocks(this : IJolietDiscMaster*, pnblocks : Int32*) : HRESULT
-    @lpVtbl.value.get_total_data_blocks.call(this, pnblocks)
-  end
-  def get_used_data_blocks(this : IJolietDiscMaster*, pnblocks : Int32*) : HRESULT
-    @lpVtbl.value.get_used_data_blocks.call(this, pnblocks)
-  end
-  def get_data_block_size(this : IJolietDiscMaster*, pnblockbytes : Int32*) : HRESULT
-    @lpVtbl.value.get_data_block_size.call(this, pnblockbytes)
-  end
-  def add_data(this : IJolietDiscMaster*, pstorage : IStorage, lfileoverwrite : Int32) : HRESULT
-    @lpVtbl.value.add_data.call(this, pstorage, lfileoverwrite)
-  end
-  def get_joliet_properties(this : IJolietDiscMaster*, pppropstg : IPropertyStorage*) : HRESULT
-    @lpVtbl.value.get_joliet_properties.call(this, pppropstg)
-  end
-  def set_joliet_properties(this : IJolietDiscMaster*, ppropstg : IPropertyStorage) : HRESULT
-    @lpVtbl.value.set_joliet_properties.call(this, ppropstg)
-  end
-end
-struct LibWin32::IDiscMasterProgressEvents
-  def query_interface(this : IDiscMasterProgressEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscMasterProgressEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscMasterProgressEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def query_cancel(this : IDiscMasterProgressEvents*, pbcancel : UInt8*) : HRESULT
-    @lpVtbl.value.query_cancel.call(this, pbcancel)
-  end
-  def notify_pn_p_activity(this : IDiscMasterProgressEvents*) : HRESULT
-    @lpVtbl.value.notify_pn_p_activity.call(this)
-  end
-  def notify_add_progress(this : IDiscMasterProgressEvents*, ncompletedsteps : Int32, ntotalsteps : Int32) : HRESULT
-    @lpVtbl.value.notify_add_progress.call(this, ncompletedsteps, ntotalsteps)
-  end
-  def notify_block_progress(this : IDiscMasterProgressEvents*, ncompleted : Int32, ntotal : Int32) : HRESULT
-    @lpVtbl.value.notify_block_progress.call(this, ncompleted, ntotal)
-  end
-  def notify_track_progress(this : IDiscMasterProgressEvents*, ncurrenttrack : Int32, ntotaltracks : Int32) : HRESULT
-    @lpVtbl.value.notify_track_progress.call(this, ncurrenttrack, ntotaltracks)
-  end
-  def notify_preparing_burn(this : IDiscMasterProgressEvents*, nestimatedseconds : Int32) : HRESULT
-    @lpVtbl.value.notify_preparing_burn.call(this, nestimatedseconds)
-  end
-  def notify_closing_disc(this : IDiscMasterProgressEvents*, nestimatedseconds : Int32) : HRESULT
-    @lpVtbl.value.notify_closing_disc.call(this, nestimatedseconds)
-  end
-  def notify_burn_complete(this : IDiscMasterProgressEvents*, status : HRESULT) : HRESULT
-    @lpVtbl.value.notify_burn_complete.call(this, status)
-  end
-  def notify_erase_complete(this : IDiscMasterProgressEvents*, status : HRESULT) : HRESULT
-    @lpVtbl.value.notify_erase_complete.call(this, status)
-  end
-end
-struct LibWin32::IDiscMaster
-  def query_interface(this : IDiscMaster*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDiscMaster*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDiscMaster*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def open(this : IDiscMaster*) : HRESULT
-    @lpVtbl.value.open.call(this)
-  end
-  def enum_disc_master_formats(this : IDiscMaster*, ppenum : IEnumDiscMasterFormats*) : HRESULT
-    @lpVtbl.value.enum_disc_master_formats.call(this, ppenum)
-  end
-  def get_active_disc_master_format(this : IDiscMaster*, lpiid : Guid*) : HRESULT
-    @lpVtbl.value.get_active_disc_master_format.call(this, lpiid)
-  end
-  def set_active_disc_master_format(this : IDiscMaster*, riid : Guid*, ppunk : Void**) : HRESULT
-    @lpVtbl.value.set_active_disc_master_format.call(this, riid, ppunk)
-  end
-  def enum_disc_recorders(this : IDiscMaster*, ppenum : IEnumDiscRecorders*) : HRESULT
-    @lpVtbl.value.enum_disc_recorders.call(this, ppenum)
-  end
-  def get_active_disc_recorder(this : IDiscMaster*, pprecorder : IDiscRecorder*) : HRESULT
-    @lpVtbl.value.get_active_disc_recorder.call(this, pprecorder)
-  end
-  def set_active_disc_recorder(this : IDiscMaster*, precorder : IDiscRecorder) : HRESULT
-    @lpVtbl.value.set_active_disc_recorder.call(this, precorder)
-  end
-  def clear_format_content(this : IDiscMaster*) : HRESULT
-    @lpVtbl.value.clear_format_content.call(this)
-  end
-  def progress_advise(this : IDiscMaster*, pevents : IDiscMasterProgressEvents, pvcookie : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.progress_advise.call(this, pevents, pvcookie)
-  end
-  def progress_unadvise(this : IDiscMaster*, vcookie : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.progress_unadvise.call(this, vcookie)
-  end
-  def record_disc(this : IDiscMaster*, bsimulate : UInt8, bejectafterburn : UInt8) : HRESULT
-    @lpVtbl.value.record_disc.call(this, bsimulate, bejectafterburn)
-  end
-  def close(this : IDiscMaster*) : HRESULT
-    @lpVtbl.value.close.call(this)
+    RECORDER_BURNING = 2_u32
+    RECORDER_DOING_NOTHING = 0_u32
+    RECORDER_OPENED = 1_u32
+  end
+  enum IMAPI_MEDIA_PHYSICAL_TYPE
+    IMAPI_MEDIA_TYPE_UNKNOWN = 0_i32
+    IMAPI_MEDIA_TYPE_CDROM = 1_i32
+    IMAPI_MEDIA_TYPE_CDR = 2_i32
+    IMAPI_MEDIA_TYPE_CDRW = 3_i32
+    IMAPI_MEDIA_TYPE_DVDROM = 4_i32
+    IMAPI_MEDIA_TYPE_DVDRAM = 5_i32
+    IMAPI_MEDIA_TYPE_DVDPLUSR = 6_i32
+    IMAPI_MEDIA_TYPE_DVDPLUSRW = 7_i32
+    IMAPI_MEDIA_TYPE_DVDPLUSR_DUALLAYER = 8_i32
+    IMAPI_MEDIA_TYPE_DVDDASHR = 9_i32
+    IMAPI_MEDIA_TYPE_DVDDASHRW = 10_i32
+    IMAPI_MEDIA_TYPE_DVDDASHR_DUALLAYER = 11_i32
+    IMAPI_MEDIA_TYPE_DISK = 12_i32
+    IMAPI_MEDIA_TYPE_DVDPLUSRW_DUALLAYER = 13_i32
+    IMAPI_MEDIA_TYPE_HDDVDROM = 14_i32
+    IMAPI_MEDIA_TYPE_HDDVDR = 15_i32
+    IMAPI_MEDIA_TYPE_HDDVDRAM = 16_i32
+    IMAPI_MEDIA_TYPE_BDROM = 17_i32
+    IMAPI_MEDIA_TYPE_BDR = 18_i32
+    IMAPI_MEDIA_TYPE_BDRE = 19_i32
+    IMAPI_MEDIA_TYPE_MAX = 19_i32
+  end
+  enum IMAPI_MEDIA_WRITE_PROTECT_STATE
+    IMAPI_WRITEPROTECTED_UNTIL_POWERDOWN = 1_i32
+    IMAPI_WRITEPROTECTED_BY_CARTRIDGE = 2_i32
+    IMAPI_WRITEPROTECTED_BY_MEDIA_SPECIFIC_REASON = 4_i32
+    IMAPI_WRITEPROTECTED_BY_SOFTWARE_WRITE_PROTECT = 8_i32
+    IMAPI_WRITEPROTECTED_BY_DISC_CONTROL_BLOCK = 16_i32
+    IMAPI_WRITEPROTECTED_READ_ONLY_MEDIA = 16384_i32
+  end
+  enum IMAPI_READ_TRACK_ADDRESS_TYPE
+    IMAPI_READ_TRACK_ADDRESS_TYPE_LBA = 0_i32
+    IMAPI_READ_TRACK_ADDRESS_TYPE_TRACK = 1_i32
+    IMAPI_READ_TRACK_ADDRESS_TYPE_SESSION = 2_i32
+  end
+  enum IMAPI_MODE_PAGE_REQUEST_TYPE
+    IMAPI_MODE_PAGE_REQUEST_TYPE_CURRENT_VALUES = 0_i32
+    IMAPI_MODE_PAGE_REQUEST_TYPE_CHANGEABLE_VALUES = 1_i32
+    IMAPI_MODE_PAGE_REQUEST_TYPE_DEFAULT_VALUES = 2_i32
+    IMAPI_MODE_PAGE_REQUEST_TYPE_SAVED_VALUES = 3_i32
+  end
+  enum IMAPI_MODE_PAGE_TYPE
+    IMAPI_MODE_PAGE_TYPE_READ_WRITE_ERROR_RECOVERY = 1_i32
+    IMAPI_MODE_PAGE_TYPE_MRW = 3_i32
+    IMAPI_MODE_PAGE_TYPE_WRITE_PARAMETERS = 5_i32
+    IMAPI_MODE_PAGE_TYPE_CACHING = 8_i32
+    IMAPI_MODE_PAGE_TYPE_INFORMATIONAL_EXCEPTIONS = 28_i32
+    IMAPI_MODE_PAGE_TYPE_TIMEOUT_AND_PROTECT = 29_i32
+    IMAPI_MODE_PAGE_TYPE_POWER_CONDITION = 26_i32
+    IMAPI_MODE_PAGE_TYPE_LEGACY_CAPABILITIES = 42_i32
+  end
+  enum IMAPI_FEATURE_PAGE_TYPE
+    IMAPI_FEATURE_PAGE_TYPE_PROFILE_LIST = 0_i32
+    IMAPI_FEATURE_PAGE_TYPE_CORE = 1_i32
+    IMAPI_FEATURE_PAGE_TYPE_MORPHING = 2_i32
+    IMAPI_FEATURE_PAGE_TYPE_REMOVABLE_MEDIUM = 3_i32
+    IMAPI_FEATURE_PAGE_TYPE_WRITE_PROTECT = 4_i32
+    IMAPI_FEATURE_PAGE_TYPE_RANDOMLY_READABLE = 16_i32
+    IMAPI_FEATURE_PAGE_TYPE_CD_MULTIREAD = 29_i32
+    IMAPI_FEATURE_PAGE_TYPE_CD_READ = 30_i32
+    IMAPI_FEATURE_PAGE_TYPE_DVD_READ = 31_i32
+    IMAPI_FEATURE_PAGE_TYPE_RANDOMLY_WRITABLE = 32_i32
+    IMAPI_FEATURE_PAGE_TYPE_INCREMENTAL_STREAMING_WRITABLE = 33_i32
+    IMAPI_FEATURE_PAGE_TYPE_SECTOR_ERASABLE = 34_i32
+    IMAPI_FEATURE_PAGE_TYPE_FORMATTABLE = 35_i32
+    IMAPI_FEATURE_PAGE_TYPE_HARDWARE_DEFECT_MANAGEMENT = 36_i32
+    IMAPI_FEATURE_PAGE_TYPE_WRITE_ONCE = 37_i32
+    IMAPI_FEATURE_PAGE_TYPE_RESTRICTED_OVERWRITE = 38_i32
+    IMAPI_FEATURE_PAGE_TYPE_CDRW_CAV_WRITE = 39_i32
+    IMAPI_FEATURE_PAGE_TYPE_MRW = 40_i32
+    IMAPI_FEATURE_PAGE_TYPE_ENHANCED_DEFECT_REPORTING = 41_i32
+    IMAPI_FEATURE_PAGE_TYPE_DVD_PLUS_RW = 42_i32
+    IMAPI_FEATURE_PAGE_TYPE_DVD_PLUS_R = 43_i32
+    IMAPI_FEATURE_PAGE_TYPE_RIGID_RESTRICTED_OVERWRITE = 44_i32
+    IMAPI_FEATURE_PAGE_TYPE_CD_TRACK_AT_ONCE = 45_i32
+    IMAPI_FEATURE_PAGE_TYPE_CD_MASTERING = 46_i32
+    IMAPI_FEATURE_PAGE_TYPE_DVD_DASH_WRITE = 47_i32
+    IMAPI_FEATURE_PAGE_TYPE_DOUBLE_DENSITY_CD_READ = 48_i32
+    IMAPI_FEATURE_PAGE_TYPE_DOUBLE_DENSITY_CD_R_WRITE = 49_i32
+    IMAPI_FEATURE_PAGE_TYPE_DOUBLE_DENSITY_CD_RW_WRITE = 50_i32
+    IMAPI_FEATURE_PAGE_TYPE_LAYER_JUMP_RECORDING = 51_i32
+    IMAPI_FEATURE_PAGE_TYPE_CD_RW_MEDIA_WRITE_SUPPORT = 55_i32
+    IMAPI_FEATURE_PAGE_TYPE_BD_PSEUDO_OVERWRITE = 56_i32
+    IMAPI_FEATURE_PAGE_TYPE_DVD_PLUS_R_DUAL_LAYER = 59_i32
+    IMAPI_FEATURE_PAGE_TYPE_BD_READ = 64_i32
+    IMAPI_FEATURE_PAGE_TYPE_BD_WRITE = 65_i32
+    IMAPI_FEATURE_PAGE_TYPE_HD_DVD_READ = 80_i32
+    IMAPI_FEATURE_PAGE_TYPE_HD_DVD_WRITE = 81_i32
+    IMAPI_FEATURE_PAGE_TYPE_POWER_MANAGEMENT = 256_i32
+    IMAPI_FEATURE_PAGE_TYPE_SMART = 257_i32
+    IMAPI_FEATURE_PAGE_TYPE_EMBEDDED_CHANGER = 258_i32
+    IMAPI_FEATURE_PAGE_TYPE_CD_ANALOG_PLAY = 259_i32
+    IMAPI_FEATURE_PAGE_TYPE_MICROCODE_UPDATE = 260_i32
+    IMAPI_FEATURE_PAGE_TYPE_TIMEOUT = 261_i32
+    IMAPI_FEATURE_PAGE_TYPE_DVD_CSS = 262_i32
+    IMAPI_FEATURE_PAGE_TYPE_REAL_TIME_STREAMING = 263_i32
+    IMAPI_FEATURE_PAGE_TYPE_LOGICAL_UNIT_SERIAL_NUMBER = 264_i32
+    IMAPI_FEATURE_PAGE_TYPE_MEDIA_SERIAL_NUMBER = 265_i32
+    IMAPI_FEATURE_PAGE_TYPE_DISC_CONTROL_BLOCKS = 266_i32
+    IMAPI_FEATURE_PAGE_TYPE_DVD_CPRM = 267_i32
+    IMAPI_FEATURE_PAGE_TYPE_FIRMWARE_INFORMATION = 268_i32
+    IMAPI_FEATURE_PAGE_TYPE_AACS = 269_i32
+    IMAPI_FEATURE_PAGE_TYPE_VCPS = 272_i32
+  end
+  enum IMAPI_PROFILE_TYPE
+    IMAPI_PROFILE_TYPE_INVALID = 0_i32
+    IMAPI_PROFILE_TYPE_NON_REMOVABLE_DISK = 1_i32
+    IMAPI_PROFILE_TYPE_REMOVABLE_DISK = 2_i32
+    IMAPI_PROFILE_TYPE_MO_ERASABLE = 3_i32
+    IMAPI_PROFILE_TYPE_MO_WRITE_ONCE = 4_i32
+    IMAPI_PROFILE_TYPE_AS_MO = 5_i32
+    IMAPI_PROFILE_TYPE_CDROM = 8_i32
+    IMAPI_PROFILE_TYPE_CD_RECORDABLE = 9_i32
+    IMAPI_PROFILE_TYPE_CD_REWRITABLE = 10_i32
+    IMAPI_PROFILE_TYPE_DVDROM = 16_i32
+    IMAPI_PROFILE_TYPE_DVD_DASH_RECORDABLE = 17_i32
+    IMAPI_PROFILE_TYPE_DVD_RAM = 18_i32
+    IMAPI_PROFILE_TYPE_DVD_DASH_REWRITABLE = 19_i32
+    IMAPI_PROFILE_TYPE_DVD_DASH_RW_SEQUENTIAL = 20_i32
+    IMAPI_PROFILE_TYPE_DVD_DASH_R_DUAL_SEQUENTIAL = 21_i32
+    IMAPI_PROFILE_TYPE_DVD_DASH_R_DUAL_LAYER_JUMP = 22_i32
+    IMAPI_PROFILE_TYPE_DVD_PLUS_RW = 26_i32
+    IMAPI_PROFILE_TYPE_DVD_PLUS_R = 27_i32
+    IMAPI_PROFILE_TYPE_DDCDROM = 32_i32
+    IMAPI_PROFILE_TYPE_DDCD_RECORDABLE = 33_i32
+    IMAPI_PROFILE_TYPE_DDCD_REWRITABLE = 34_i32
+    IMAPI_PROFILE_TYPE_DVD_PLUS_RW_DUAL = 42_i32
+    IMAPI_PROFILE_TYPE_DVD_PLUS_R_DUAL = 43_i32
+    IMAPI_PROFILE_TYPE_BD_ROM = 64_i32
+    IMAPI_PROFILE_TYPE_BD_R_SEQUENTIAL = 65_i32
+    IMAPI_PROFILE_TYPE_BD_R_RANDOM_RECORDING = 66_i32
+    IMAPI_PROFILE_TYPE_BD_REWRITABLE = 67_i32
+    IMAPI_PROFILE_TYPE_HD_DVD_ROM = 80_i32
+    IMAPI_PROFILE_TYPE_HD_DVD_RECORDABLE = 81_i32
+    IMAPI_PROFILE_TYPE_HD_DVD_RAM = 82_i32
+    IMAPI_PROFILE_TYPE_NON_STANDARD = 65535_i32
+  end
+  enum IMAPI_FORMAT2_DATA_WRITE_ACTION
+    IMAPI_FORMAT2_DATA_WRITE_ACTION_VALIDATING_MEDIA = 0_i32
+    IMAPI_FORMAT2_DATA_WRITE_ACTION_FORMATTING_MEDIA = 1_i32
+    IMAPI_FORMAT2_DATA_WRITE_ACTION_INITIALIZING_HARDWARE = 2_i32
+    IMAPI_FORMAT2_DATA_WRITE_ACTION_CALIBRATING_POWER = 3_i32
+    IMAPI_FORMAT2_DATA_WRITE_ACTION_WRITING_DATA = 4_i32
+    IMAPI_FORMAT2_DATA_WRITE_ACTION_FINALIZATION = 5_i32
+    IMAPI_FORMAT2_DATA_WRITE_ACTION_COMPLETED = 6_i32
+    IMAPI_FORMAT2_DATA_WRITE_ACTION_VERIFYING = 7_i32
+  end
+  enum IMAPI_FORMAT2_DATA_MEDIA_STATE
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_UNKNOWN = 0_i32
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_INFORMATIONAL_MASK = 15_i32
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_UNSUPPORTED_MASK = 64512_i32
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_OVERWRITE_ONLY = 1_i32
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_RANDOMLY_WRITABLE = 1_i32
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_BLANK = 2_i32
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_APPENDABLE = 4_i32
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_FINAL_SESSION = 8_i32
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_DAMAGED = 1024_i32
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_ERASE_REQUIRED = 2048_i32
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_NON_EMPTY_SESSION = 4096_i32
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_WRITE_PROTECTED = 8192_i32
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_FINALIZED = 16384_i32
+    IMAPI_FORMAT2_DATA_MEDIA_STATE_UNSUPPORTED_MEDIA = 32768_i32
+  end
+  enum IMAPI_FORMAT2_TAO_WRITE_ACTION
+    IMAPI_FORMAT2_TAO_WRITE_ACTION_UNKNOWN = 0_i32
+    IMAPI_FORMAT2_TAO_WRITE_ACTION_PREPARING = 1_i32
+    IMAPI_FORMAT2_TAO_WRITE_ACTION_WRITING = 2_i32
+    IMAPI_FORMAT2_TAO_WRITE_ACTION_FINISHING = 3_i32
+    IMAPI_FORMAT2_TAO_WRITE_ACTION_VERIFYING = 4_i32
+  end
+  enum IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE
+    IMAPI_FORMAT2_RAW_CD_SUBCODE_PQ_ONLY = 1_i32
+    IMAPI_FORMAT2_RAW_CD_SUBCODE_IS_COOKED = 2_i32
+    IMAPI_FORMAT2_RAW_CD_SUBCODE_IS_RAW = 3_i32
+  end
+  enum IMAPI_FORMAT2_RAW_CD_WRITE_ACTION
+    IMAPI_FORMAT2_RAW_CD_WRITE_ACTION_UNKNOWN = 0_i32
+    IMAPI_FORMAT2_RAW_CD_WRITE_ACTION_PREPARING = 1_i32
+    IMAPI_FORMAT2_RAW_CD_WRITE_ACTION_WRITING = 2_i32
+    IMAPI_FORMAT2_RAW_CD_WRITE_ACTION_FINISHING = 3_i32
+  end
+  enum IMAPI_CD_SECTOR_TYPE
+    IMAPI_CD_SECTOR_AUDIO = 0_i32
+    IMAPI_CD_SECTOR_MODE_ZERO = 1_i32
+    IMAPI_CD_SECTOR_MODE1 = 2_i32
+    IMAPI_CD_SECTOR_MODE2FORM0 = 3_i32
+    IMAPI_CD_SECTOR_MODE2FORM1 = 4_i32
+    IMAPI_CD_SECTOR_MODE2FORM2 = 5_i32
+    IMAPI_CD_SECTOR_MODE1RAW = 6_i32
+    IMAPI_CD_SECTOR_MODE2FORM0RAW = 7_i32
+    IMAPI_CD_SECTOR_MODE2FORM1RAW = 8_i32
+    IMAPI_CD_SECTOR_MODE2FORM2RAW = 9_i32
+  end
+  enum IMAPI_CD_TRACK_DIGITAL_COPY_SETTING
+    IMAPI_CD_TRACK_DIGITAL_COPY_PERMITTED = 0_i32
+    IMAPI_CD_TRACK_DIGITAL_COPY_PROHIBITED = 1_i32
+    IMAPI_CD_TRACK_DIGITAL_COPY_SCMS = 2_i32
+  end
+  enum IMAPI_BURN_VERIFICATION_LEVEL
+    IMAPI_BURN_VERIFICATION_NONE = 0_i32
+    IMAPI_BURN_VERIFICATION_QUICK = 1_i32
+    IMAPI_BURN_VERIFICATION_FULL = 2_i32
+  end
+  enum FsiItemType
+    FsiItemNotFound = 0_i32
+    FsiItemDirectory = 1_i32
+    FsiItemFile = 2_i32
+  end
+  enum FsiFileSystems
+    FsiFileSystemNone = 0_i32
+    FsiFileSystemISO9660 = 1_i32
+    FsiFileSystemJoliet = 2_i32
+    FsiFileSystemUDF = 4_i32
+    FsiFileSystemUnknown = 1073741824_i32
+  end
+  enum EmulationType
+    EmulationNone = 0_i32
+    Emulation12MFloppy = 1_i32
+    Emulation144MFloppy = 2_i32
+    Emulation288MFloppy = 3_i32
+    EmulationHardDisk = 4_i32
+  end
+  enum PlatformId
+    PlatformX86 = 0_i32
+    PlatformPowerPC = 1_i32
+    PlatformMac = 2_i32
+    PlatformEFI = 239_i32
+  end
+  enum MEDIA_TYPES
+    MEDIA_CDDA_CDROM = 1_i32
+    MEDIA_CD_ROM_XA = 2_i32
+    MEDIA_CD_I = 3_i32
+    MEDIA_CD_EXTRA = 4_i32
+    MEDIA_CD_OTHER = 5_i32
+    MEDIA_SPECIAL = 6_i32
+  end
+  enum MEDIA_FLAGS
+    MEDIA_BLANK = 1_i32
+    MEDIA_RW = 2_i32
+    MEDIA_WRITABLE = 4_i32
+    MEDIA_FORMAT_UNUSABLE_BY_IMAPI = 8_i32
+  end
+  enum RECORDER_TYPES
+    RECORDER_CDR = 1_i32
+    RECORDER_CDRW = 2_i32
+  end
+  enum IMMPID_MP_ENUM
+    IMMPID_MP_BEFORE__ = 4095_i32
+    IMMPID_MP_RECIPIENT_LIST = 4096_i32
+    IMMPID_MP_CONTENT_FILE_NAME = 4097_i32
+    IMMPID_MP_SENDER_ADDRESS_SMTP = 4098_i32
+    IMMPID_MP_SENDER_ADDRESS_X500 = 4099_i32
+    IMMPID_MP_SENDER_ADDRESS_X400 = 4100_i32
+    IMMPID_MP_SENDER_ADDRESS_LEGACY_EX_DN = 4101_i32
+    IMMPID_MP_DOMAIN_LIST = 4102_i32
+    IMMPID_MP_PICKUP_FILE_NAME = 4103_i32
+    IMMPID_MP_AUTHENTICATED_USER_NAME = 4104_i32
+    IMMPID_MP_CONNECTION_IP_ADDRESS = 4105_i32
+    IMMPID_MP_HELO_DOMAIN = 4106_i32
+    IMMPID_MP_EIGHTBIT_MIME_OPTION = 4107_i32
+    IMMPID_MP_CHUNKING_OPTION = 4108_i32
+    IMMPID_MP_BINARYMIME_OPTION = 4109_i32
+    IMMPID_MP_REMOTE_AUTHENTICATION_TYPE = 4110_i32
+    IMMPID_MP_ERROR_CODE = 4111_i32
+    IMMPID_MP_DSN_ENVID_VALUE = 4112_i32
+    IMMPID_MP_DSN_RET_VALUE = 4113_i32
+    IMMPID_MP_REMOTE_SERVER_DSN_CAPABLE = 4114_i32
+    IMMPID_MP_ARRIVAL_TIME = 4115_i32
+    IMMPID_MP_MESSAGE_STATUS = 4116_i32
+    IMMPID_MP_EXPIRE_DELAY = 4117_i32
+    IMMPID_MP_EXPIRE_NDR = 4118_i32
+    IMMPID_MP_LOCAL_EXPIRE_DELAY = 4119_i32
+    IMMPID_MP_LOCAL_EXPIRE_NDR = 4120_i32
+    IMMPID_MP_ARRIVAL_FILETIME = 4121_i32
+    IMMPID_MP_HR_CAT_STATUS = 4122_i32
+    IMMPID_MP_MSG_GUID = 4123_i32
+    IMMPID_MP_SUPERSEDES_MSG_GUID = 4124_i32
+    IMMPID_MP_SCANNED_FOR_CRLF_DOT_CRLF = 4125_i32
+    IMMPID_MP_FOUND_EMBEDDED_CRLF_DOT_CRLF = 4126_i32
+    IMMPID_MP_MSG_SIZE_HINT = 4127_i32
+    IMMPID_MP_RFC822_MSG_ID = 4128_i32
+    IMMPID_MP_RFC822_MSG_SUBJECT = 4129_i32
+    IMMPID_MP_RFC822_FROM_ADDRESS = 4130_i32
+    IMMPID_MP_RFC822_TO_ADDRESS = 4131_i32
+    IMMPID_MP_RFC822_CC_ADDRESS = 4132_i32
+    IMMPID_MP_RFC822_BCC_ADDRESS = 4133_i32
+    IMMPID_MP_CONNECTION_SERVER_IP_ADDRESS = 4134_i32
+    IMMPID_MP_SERVER_NAME = 4135_i32
+    IMMPID_MP_SERVER_VERSION = 4136_i32
+    IMMPID_MP_NUM_RECIPIENTS = 4137_i32
+    IMMPID_MP_X_PRIORITY = 4138_i32
+    IMMPID_MP_FROM_ADDRESS = 4139_i32
+    IMMPID_MP_SENDER_ADDRESS = 4140_i32
+    IMMPID_MP_DEFERRED_DELIVERY_FILETIME = 4141_i32
+    IMMPID_MP_SENDER_ADDRESS_OTHER = 4142_i32
+    IMMPID_MP_ORIGINAL_ARRIVAL_TIME = 4143_i32
+    IMMPID_MP_MSGCLASS = 4144_i32
+    IMMPID_MP_CONTENT_TYPE = 4145_i32
+    IMMPID_MP_ENCRYPTION_TYPE = 4146_i32
+    IMMPID_MP_CONNECTION_SERVER_PORT = 4147_i32
+    IMMPID_MP_CLIENT_AUTH_USER = 4148_i32
+    IMMPID_MP_CLIENT_AUTH_TYPE = 4149_i32
+    IMMPID_MP_CRC_GLOBAL = 4150_i32
+    IMMPID_MP_CRC_RECIPS = 4151_i32
+    IMMPID_MP_INBOUND_MAIL_FROM_AUTH = 4152_i32
+    IMMPID_MP_AFTER__ = 4153_i32
+  end
+  enum IMMPID_RP_ENUM
+    IMMPID_RP_BEFORE__ = 8191_i32
+    IMMPID_RP_DSN_NOTIFY_SUCCESS = 8192_i32
+    IMMPID_RP_DSN_NOTIFY_INVALID = 8193_i32
+    IMMPID_RP_ADDRESS_TYPE = 8194_i32
+    IMMPID_RP_ADDRESS = 8195_i32
+    IMMPID_RP_ADDRESS_TYPE_SMTP = 8196_i32
+    IMMPID_RP_ERROR_CODE = 8197_i32
+    IMMPID_RP_ERROR_STRING = 8198_i32
+    IMMPID_RP_DSN_NOTIFY_VALUE = 8199_i32
+    IMMPID_RP_DSN_ORCPT_VALUE = 8200_i32
+    IMMPID_RP_ADDRESS_SMTP = 8201_i32
+    IMMPID_RP_ADDRESS_X400 = 8202_i32
+    IMMPID_RP_ADDRESS_X500 = 8203_i32
+    IMMPID_RP_LEGACY_EX_DN = 8204_i32
+    IMMPID_RP_RECIPIENT_FLAGS = 8205_i32
+    IMMPID_RP_SMTP_STATUS_STRING = 8206_i32
+    IMMPID_RP_DSN_PRE_CAT_ADDRESS = 8207_i32
+    IMMPID_RP_MDB_GUID = 8208_i32
+    IMMPID_RP_USER_GUID = 8209_i32
+    IMMPID_RP_DOMAIN = 8210_i32
+    IMMPID_RP_ADDRESS_OTHER = 8211_i32
+    IMMPID_RP_DISPLAY_NAME = 8212_i32
+    IMMPID_RP_AFTER__ = 8213_i32
+  end
+  enum IMMPID_MPV_ENUM
+    IMMPID_MPV_BEFORE__ = 12287_i32
+    IMMPID_MPV_STORE_DRIVER_HANDLE = 12288_i32
+    IMMPID_MPV_MESSAGE_CREATION_FLAGS = 12289_i32
+    IMMPID_MPV_MESSAGE_OPEN_HANDLES = 12290_i32
+    IMMPID_MPV_TOTAL_OPEN_HANDLES = 12291_i32
+    IMMPID_MPV_TOTAL_OPEN_PROPERTY_STREAM_HANDLES = 12292_i32
+    IMMPID_MPV_TOTAL_OPEN_CONTENT_HANDLES = 12293_i32
+    IMMPID_MPV_AFTER__ = 12294_i32
+  end
+  enum IMMPID_RPV_ENUM
+    IMMPID_RPV_BEFORE__ = 16383_i32
+    IMMPID_RPV_DONT_DELIVER = 16384_i32
+    IMMPID_RPV_NO_NAME_COLLISIONS = 16385_i32
+    IMMPID_RPV_AFTER__ = 16386_i32
+  end
+  enum IMMPID_NMP_ENUM
+    IMMPID_NMP_BEFORE__ = 24575_i32
+    IMMPID_NMP_SECONDARY_GROUPS = 24576_i32
+    IMMPID_NMP_SECONDARY_ARTNUM = 24577_i32
+    IMMPID_NMP_PRIMARY_GROUP = 24578_i32
+    IMMPID_NMP_PRIMARY_ARTID = 24579_i32
+    IMMPID_NMP_POST_TOKEN = 24580_i32
+    IMMPID_NMP_NEWSGROUP_LIST = 24581_i32
+    IMMPID_NMP_HEADERS = 24582_i32
+    IMMPID_NMP_NNTP_PROCESSING = 24583_i32
+    IMMPID_NMP_NNTP_APPROVED_HEADER = 24584_i32
+    IMMPID_NMP_AFTER__ = 24585_i32
+  end
+  enum IMMPID_CPV_ENUM
+    IMMPID_CPV_BEFORE__ = 32767_i32
+    IMMPID_CP_START = 32768_i32
+    IMMPID_CPV_AFTER__ = 32769_i32
+  end
+
+  @[Extern]
+  record MSGSESS
+  @[Extern]
+  record SPropAttrArray,
+    cValues : UInt32,
+    aPropAttr : UInt32*
+
+  @[Extern]
+  record IMMP_MPV_STORE_DRIVER_HANDLE,
+    guidSignature : LibC::GUID
+
+  @[Extern]
+  record IMMPID_GUIDLIST_ITEM,
+    pguid : LibC::GUID*,
+    dwStart : UInt32,
+    dwLast : UInt32
+
+  @[Extern]
+  record IDiscMaster2Vtbl,
+    query_interface : Proc(IDiscMaster2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscMaster2*, UInt32),
+    release : Proc(IDiscMaster2*, UInt32),
+    get_type_info_count : Proc(IDiscMaster2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDiscMaster2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDiscMaster2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDiscMaster2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(IDiscMaster2*, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IDiscMaster2*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(IDiscMaster2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_IsSupportedEnvironment : Proc(IDiscMaster2*, Int16*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354130-7f64-5b0f-8f00-5d77afbe261e")]
+  record IDiscMaster2, lpVtbl : IDiscMaster2Vtbl* do
+    GUID = LibC::GUID.new(0x27354130_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IDiscMaster2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscMaster2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscMaster2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDiscMaster2*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDiscMaster2*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDiscMaster2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDiscMaster2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get__NewEnum(this : IDiscMaster2*, ppunk : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, ppunk)
+    end
+    def get_Item(this : IDiscMaster2*, index : Int32, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, index, value)
+    end
+    def get_Count(this : IDiscMaster2*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, value)
+    end
+    def get_IsSupportedEnvironment(this : IDiscMaster2*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsSupportedEnvironment.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record DDiscMaster2EventsVtbl,
+    query_interface : Proc(DDiscMaster2Events*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(DDiscMaster2Events*, UInt32),
+    release : Proc(DDiscMaster2Events*, UInt32),
+    get_type_info_count : Proc(DDiscMaster2Events*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(DDiscMaster2Events*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(DDiscMaster2Events*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(DDiscMaster2Events*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    notify_device_added : Proc(DDiscMaster2Events*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    notify_device_removed : Proc(DDiscMaster2Events*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354131-7f64-5b0f-8f00-5d77afbe261e")]
+  record DDiscMaster2Events, lpVtbl : DDiscMaster2EventsVtbl* do
+    GUID = LibC::GUID.new(0x27354131_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : DDiscMaster2Events*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : DDiscMaster2Events*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : DDiscMaster2Events*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : DDiscMaster2Events*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : DDiscMaster2Events*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : DDiscMaster2Events*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : DDiscMaster2Events*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def notify_device_added(this : DDiscMaster2Events*, object : Void*, uniqueId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_device_added.call(this, object, uniqueId)
+    end
+    def notify_device_removed(this : DDiscMaster2Events*, object : Void*, uniqueId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_device_removed.call(this, object, uniqueId)
+    end
+
+  end
+
+  @[Extern]
+  record IDiscRecorder2ExVtbl,
+    query_interface : Proc(IDiscRecorder2Ex*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscRecorder2Ex*, UInt32),
+    release : Proc(IDiscRecorder2Ex*, UInt32),
+    send_command_no_data : Proc(IDiscRecorder2Ex*, UInt8*, UInt32, UInt8*, UInt32, Win32cr::Foundation::HRESULT),
+    send_command_send_data_to_device : Proc(IDiscRecorder2Ex*, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, Win32cr::Foundation::HRESULT),
+    send_command_get_data_from_device : Proc(IDiscRecorder2Ex*, UInt8*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    read_dvd_structure : Proc(IDiscRecorder2Ex*, UInt32, UInt32, UInt32, UInt32, UInt8**, UInt32*, Win32cr::Foundation::HRESULT),
+    send_dvd_structure : Proc(IDiscRecorder2Ex*, UInt32, UInt8*, UInt32, Win32cr::Foundation::HRESULT),
+    get_adapter_descriptor : Proc(IDiscRecorder2Ex*, UInt8**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_device_descriptor : Proc(IDiscRecorder2Ex*, UInt8**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_disc_information : Proc(IDiscRecorder2Ex*, UInt8**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_track_information : Proc(IDiscRecorder2Ex*, UInt32, Win32cr::Storage::Imapi::IMAPI_READ_TRACK_ADDRESS_TYPE, UInt8**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_feature_page : Proc(IDiscRecorder2Ex*, Win32cr::Storage::Imapi::IMAPI_FEATURE_PAGE_TYPE, Win32cr::Foundation::BOOLEAN, UInt8**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_mode_page : Proc(IDiscRecorder2Ex*, Win32cr::Storage::Imapi::IMAPI_MODE_PAGE_TYPE, Win32cr::Storage::Imapi::IMAPI_MODE_PAGE_REQUEST_TYPE, UInt8**, UInt32*, Win32cr::Foundation::HRESULT),
+    set_mode_page : Proc(IDiscRecorder2Ex*, Win32cr::Storage::Imapi::IMAPI_MODE_PAGE_REQUEST_TYPE, UInt8*, UInt32, Win32cr::Foundation::HRESULT),
+    get_supported_feature_pages : Proc(IDiscRecorder2Ex*, Win32cr::Foundation::BOOLEAN, Win32cr::Storage::Imapi::IMAPI_FEATURE_PAGE_TYPE**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_supported_profiles : Proc(IDiscRecorder2Ex*, Win32cr::Foundation::BOOLEAN, Win32cr::Storage::Imapi::IMAPI_PROFILE_TYPE**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_supported_mode_pages : Proc(IDiscRecorder2Ex*, Win32cr::Storage::Imapi::IMAPI_MODE_PAGE_REQUEST_TYPE, Win32cr::Storage::Imapi::IMAPI_MODE_PAGE_TYPE**, UInt32*, Win32cr::Foundation::HRESULT),
+    get_byte_alignment_mask : Proc(IDiscRecorder2Ex*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_maximum_non_page_aligned_transfer_size : Proc(IDiscRecorder2Ex*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_maximum_page_aligned_transfer_size : Proc(IDiscRecorder2Ex*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354132-7f64-5b0f-8f00-5d77afbe261e")]
+  record IDiscRecorder2Ex, lpVtbl : IDiscRecorder2ExVtbl* do
+    GUID = LibC::GUID.new(0x27354132_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IDiscRecorder2Ex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscRecorder2Ex*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscRecorder2Ex*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def send_command_no_data(this : IDiscRecorder2Ex*, cdb : UInt8*, cdb_size : UInt32, sense_buffer : UInt8*, timeout : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.send_command_no_data.call(this, cdb, cdb_size, sense_buffer, timeout)
+    end
+    def send_command_send_data_to_device(this : IDiscRecorder2Ex*, cdb : UInt8*, cdb_size : UInt32, sense_buffer : UInt8*, timeout : UInt32, buffer : UInt8*, buffer_size : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.send_command_send_data_to_device.call(this, cdb, cdb_size, sense_buffer, timeout, buffer, buffer_size)
+    end
+    def send_command_get_data_from_device(this : IDiscRecorder2Ex*, cdb : UInt8*, cdb_size : UInt32, sense_buffer : UInt8*, timeout : UInt32, buffer : UInt8*, buffer_size : UInt32, buffer_fetched : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.send_command_get_data_from_device.call(this, cdb, cdb_size, sense_buffer, timeout, buffer, buffer_size, buffer_fetched)
+    end
+    def read_dvd_structure(this : IDiscRecorder2Ex*, format : UInt32, address : UInt32, layer : UInt32, agid : UInt32, data : UInt8**, count : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read_dvd_structure.call(this, format, address, layer, agid, data, count)
+    end
+    def send_dvd_structure(this : IDiscRecorder2Ex*, format : UInt32, data : UInt8*, count : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.send_dvd_structure.call(this, format, data, count)
+    end
+    def get_adapter_descriptor(this : IDiscRecorder2Ex*, data : UInt8**, byteSize : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_adapter_descriptor.call(this, data, byteSize)
+    end
+    def get_device_descriptor(this : IDiscRecorder2Ex*, data : UInt8**, byteSize : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_descriptor.call(this, data, byteSize)
+    end
+    def get_disc_information(this : IDiscRecorder2Ex*, discInformation : UInt8**, byteSize : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_disc_information.call(this, discInformation, byteSize)
+    end
+    def get_track_information(this : IDiscRecorder2Ex*, address : UInt32, addressType : Win32cr::Storage::Imapi::IMAPI_READ_TRACK_ADDRESS_TYPE, trackInformation : UInt8**, byteSize : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_track_information.call(this, address, addressType, trackInformation, byteSize)
+    end
+    def get_feature_page(this : IDiscRecorder2Ex*, requestedFeature : Win32cr::Storage::Imapi::IMAPI_FEATURE_PAGE_TYPE, currentFeatureOnly : Win32cr::Foundation::BOOLEAN, featureData : UInt8**, byteSize : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_feature_page.call(this, requestedFeature, currentFeatureOnly, featureData, byteSize)
+    end
+    def get_mode_page(this : IDiscRecorder2Ex*, requestedModePage : Win32cr::Storage::Imapi::IMAPI_MODE_PAGE_TYPE, requestType : Win32cr::Storage::Imapi::IMAPI_MODE_PAGE_REQUEST_TYPE, modePageData : UInt8**, byteSize : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_mode_page.call(this, requestedModePage, requestType, modePageData, byteSize)
+    end
+    def set_mode_page(this : IDiscRecorder2Ex*, requestType : Win32cr::Storage::Imapi::IMAPI_MODE_PAGE_REQUEST_TYPE, data : UInt8*, byteSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_mode_page.call(this, requestType, data, byteSize)
+    end
+    def get_supported_feature_pages(this : IDiscRecorder2Ex*, currentFeatureOnly : Win32cr::Foundation::BOOLEAN, featureData : Win32cr::Storage::Imapi::IMAPI_FEATURE_PAGE_TYPE**, byteSize : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_supported_feature_pages.call(this, currentFeatureOnly, featureData, byteSize)
+    end
+    def get_supported_profiles(this : IDiscRecorder2Ex*, currentOnly : Win32cr::Foundation::BOOLEAN, profileTypes : Win32cr::Storage::Imapi::IMAPI_PROFILE_TYPE**, validProfiles : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_supported_profiles.call(this, currentOnly, profileTypes, validProfiles)
+    end
+    def get_supported_mode_pages(this : IDiscRecorder2Ex*, requestType : Win32cr::Storage::Imapi::IMAPI_MODE_PAGE_REQUEST_TYPE, modePageTypes : Win32cr::Storage::Imapi::IMAPI_MODE_PAGE_TYPE**, validPages : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_supported_mode_pages.call(this, requestType, modePageTypes, validPages)
+    end
+    def get_byte_alignment_mask(this : IDiscRecorder2Ex*, value : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_byte_alignment_mask.call(this, value)
+    end
+    def get_maximum_non_page_aligned_transfer_size(this : IDiscRecorder2Ex*, value : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_maximum_non_page_aligned_transfer_size.call(this, value)
+    end
+    def get_maximum_page_aligned_transfer_size(this : IDiscRecorder2Ex*, value : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_maximum_page_aligned_transfer_size.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IDiscRecorder2Vtbl,
+    query_interface : Proc(IDiscRecorder2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscRecorder2*, UInt32),
+    release : Proc(IDiscRecorder2*, UInt32),
+    get_type_info_count : Proc(IDiscRecorder2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDiscRecorder2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDiscRecorder2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDiscRecorder2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    eject_media : Proc(IDiscRecorder2*, Win32cr::Foundation::HRESULT),
+    close_tray : Proc(IDiscRecorder2*, Win32cr::Foundation::HRESULT),
+    acquire_exclusive_access : Proc(IDiscRecorder2*, Int16, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    release_exclusive_access : Proc(IDiscRecorder2*, Win32cr::Foundation::HRESULT),
+    disable_mcn : Proc(IDiscRecorder2*, Win32cr::Foundation::HRESULT),
+    enable_mcn : Proc(IDiscRecorder2*, Win32cr::Foundation::HRESULT),
+    initialize_disc_recorder : Proc(IDiscRecorder2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_ActiveDiscRecorder : Proc(IDiscRecorder2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_VendorId : Proc(IDiscRecorder2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_ProductId : Proc(IDiscRecorder2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_ProductRevision : Proc(IDiscRecorder2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_VolumeName : Proc(IDiscRecorder2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_VolumePathNames : Proc(IDiscRecorder2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    get_DeviceCanLoadMedia : Proc(IDiscRecorder2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_LegacyDeviceNumber : Proc(IDiscRecorder2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_SupportedFeaturePages : Proc(IDiscRecorder2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    get_CurrentFeaturePages : Proc(IDiscRecorder2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    get_SupportedProfiles : Proc(IDiscRecorder2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    get_CurrentProfiles : Proc(IDiscRecorder2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    get_SupportedModePages : Proc(IDiscRecorder2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    get_ExclusiveAccessOwner : Proc(IDiscRecorder2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354133-7f64-5b0f-8f00-5d77afbe261e")]
+  record IDiscRecorder2, lpVtbl : IDiscRecorder2Vtbl* do
+    GUID = LibC::GUID.new(0x27354133_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IDiscRecorder2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscRecorder2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscRecorder2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDiscRecorder2*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDiscRecorder2*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDiscRecorder2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDiscRecorder2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def eject_media(this : IDiscRecorder2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.eject_media.call(this)
+    end
+    def close_tray(this : IDiscRecorder2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.close_tray.call(this)
+    end
+    def acquire_exclusive_access(this : IDiscRecorder2*, force : Int16, __midl__i_disc_recorder20000 : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.acquire_exclusive_access.call(this, force, __midl__i_disc_recorder20000)
+    end
+    def release_exclusive_access(this : IDiscRecorder2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.release_exclusive_access.call(this)
+    end
+    def disable_mcn(this : IDiscRecorder2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disable_mcn.call(this)
+    end
+    def enable_mcn(this : IDiscRecorder2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enable_mcn.call(this)
+    end
+    def initialize_disc_recorder(this : IDiscRecorder2*, recorderUniqueId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_disc_recorder.call(this, recorderUniqueId)
+    end
+    def get_ActiveDiscRecorder(this : IDiscRecorder2*, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ActiveDiscRecorder.call(this, value)
+    end
+    def get_VendorId(this : IDiscRecorder2*, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VendorId.call(this, value)
+    end
+    def get_ProductId(this : IDiscRecorder2*, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ProductId.call(this, value)
+    end
+    def get_ProductRevision(this : IDiscRecorder2*, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ProductRevision.call(this, value)
+    end
+    def get_VolumeName(this : IDiscRecorder2*, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumeName.call(this, value)
+    end
+    def get_VolumePathNames(this : IDiscRecorder2*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumePathNames.call(this, value)
+    end
+    def get_DeviceCanLoadMedia(this : IDiscRecorder2*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DeviceCanLoadMedia.call(this, value)
+    end
+    def get_LegacyDeviceNumber(this : IDiscRecorder2*, legacyDeviceNumber : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LegacyDeviceNumber.call(this, legacyDeviceNumber)
+    end
+    def get_SupportedFeaturePages(this : IDiscRecorder2*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedFeaturePages.call(this, value)
+    end
+    def get_CurrentFeaturePages(this : IDiscRecorder2*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentFeaturePages.call(this, value)
+    end
+    def get_SupportedProfiles(this : IDiscRecorder2*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedProfiles.call(this, value)
+    end
+    def get_CurrentProfiles(this : IDiscRecorder2*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentProfiles.call(this, value)
+    end
+    def get_SupportedModePages(this : IDiscRecorder2*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedModePages.call(this, value)
+    end
+    def get_ExclusiveAccessOwner(this : IDiscRecorder2*, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ExclusiveAccessOwner.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IWriteEngine2Vtbl,
+    query_interface : Proc(IWriteEngine2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWriteEngine2*, UInt32),
+    release : Proc(IWriteEngine2*, UInt32),
+    get_type_info_count : Proc(IWriteEngine2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IWriteEngine2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IWriteEngine2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IWriteEngine2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    write_section : Proc(IWriteEngine2*, Void*, Int32, Int32, Win32cr::Foundation::HRESULT),
+    cancel_write : Proc(IWriteEngine2*, Win32cr::Foundation::HRESULT),
+    put_Recorder : Proc(IWriteEngine2*, Void*, Win32cr::Foundation::HRESULT),
+    get_Recorder : Proc(IWriteEngine2*, Void**, Win32cr::Foundation::HRESULT),
+    put_UseStreamingWrite12 : Proc(IWriteEngine2*, Int16, Win32cr::Foundation::HRESULT),
+    get_UseStreamingWrite12 : Proc(IWriteEngine2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_StartingSectorsPerSecond : Proc(IWriteEngine2*, Int32, Win32cr::Foundation::HRESULT),
+    get_StartingSectorsPerSecond : Proc(IWriteEngine2*, Int32*, Win32cr::Foundation::HRESULT),
+    put_EndingSectorsPerSecond : Proc(IWriteEngine2*, Int32, Win32cr::Foundation::HRESULT),
+    get_EndingSectorsPerSecond : Proc(IWriteEngine2*, Int32*, Win32cr::Foundation::HRESULT),
+    put_BytesPerSector : Proc(IWriteEngine2*, Int32, Win32cr::Foundation::HRESULT),
+    get_BytesPerSector : Proc(IWriteEngine2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_WriteInProgress : Proc(IWriteEngine2*, Int16*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354135-7f64-5b0f-8f00-5d77afbe261e")]
+  record IWriteEngine2, lpVtbl : IWriteEngine2Vtbl* do
+    GUID = LibC::GUID.new(0x27354135_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IWriteEngine2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWriteEngine2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWriteEngine2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IWriteEngine2*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IWriteEngine2*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IWriteEngine2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IWriteEngine2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def write_section(this : IWriteEngine2*, data : Void*, startingBlockAddress : Int32, numberOfBlocks : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write_section.call(this, data, startingBlockAddress, numberOfBlocks)
+    end
+    def cancel_write(this : IWriteEngine2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cancel_write.call(this)
+    end
+    def put_Recorder(this : IWriteEngine2*, value : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Recorder.call(this, value)
+    end
+    def get_Recorder(this : IWriteEngine2*, value : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Recorder.call(this, value)
+    end
+    def put_UseStreamingWrite12(this : IWriteEngine2*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_UseStreamingWrite12.call(this, value)
+    end
+    def get_UseStreamingWrite12(this : IWriteEngine2*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UseStreamingWrite12.call(this, value)
+    end
+    def put_StartingSectorsPerSecond(this : IWriteEngine2*, value : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_StartingSectorsPerSecond.call(this, value)
+    end
+    def get_StartingSectorsPerSecond(this : IWriteEngine2*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartingSectorsPerSecond.call(this, value)
+    end
+    def put_EndingSectorsPerSecond(this : IWriteEngine2*, value : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EndingSectorsPerSecond.call(this, value)
+    end
+    def get_EndingSectorsPerSecond(this : IWriteEngine2*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EndingSectorsPerSecond.call(this, value)
+    end
+    def put_BytesPerSector(this : IWriteEngine2*, value : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BytesPerSector.call(this, value)
+    end
+    def get_BytesPerSector(this : IWriteEngine2*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BytesPerSector.call(this, value)
+    end
+    def get_WriteInProgress(this : IWriteEngine2*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_WriteInProgress.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IWriteEngine2EventArgsVtbl,
+    query_interface : Proc(IWriteEngine2EventArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWriteEngine2EventArgs*, UInt32),
+    release : Proc(IWriteEngine2EventArgs*, UInt32),
+    get_type_info_count : Proc(IWriteEngine2EventArgs*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IWriteEngine2EventArgs*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IWriteEngine2EventArgs*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IWriteEngine2EventArgs*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_StartLba : Proc(IWriteEngine2EventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_SectorCount : Proc(IWriteEngine2EventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastReadLba : Proc(IWriteEngine2EventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastWrittenLba : Proc(IWriteEngine2EventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_TotalSystemBuffer : Proc(IWriteEngine2EventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_UsedSystemBuffer : Proc(IWriteEngine2EventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_FreeSystemBuffer : Proc(IWriteEngine2EventArgs*, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354136-7f64-5b0f-8f00-5d77afbe261e")]
+  record IWriteEngine2EventArgs, lpVtbl : IWriteEngine2EventArgsVtbl* do
+    GUID = LibC::GUID.new(0x27354136_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IWriteEngine2EventArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWriteEngine2EventArgs*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWriteEngine2EventArgs*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IWriteEngine2EventArgs*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IWriteEngine2EventArgs*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IWriteEngine2EventArgs*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IWriteEngine2EventArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_StartLba(this : IWriteEngine2EventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartLba.call(this, value)
+    end
+    def get_SectorCount(this : IWriteEngine2EventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SectorCount.call(this, value)
+    end
+    def get_LastReadLba(this : IWriteEngine2EventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastReadLba.call(this, value)
+    end
+    def get_LastWrittenLba(this : IWriteEngine2EventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastWrittenLba.call(this, value)
+    end
+    def get_TotalSystemBuffer(this : IWriteEngine2EventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TotalSystemBuffer.call(this, value)
+    end
+    def get_UsedSystemBuffer(this : IWriteEngine2EventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UsedSystemBuffer.call(this, value)
+    end
+    def get_FreeSystemBuffer(this : IWriteEngine2EventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FreeSystemBuffer.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record DWriteEngine2EventsVtbl,
+    query_interface : Proc(DWriteEngine2Events*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(DWriteEngine2Events*, UInt32),
+    release : Proc(DWriteEngine2Events*, UInt32),
+    get_type_info_count : Proc(DWriteEngine2Events*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(DWriteEngine2Events*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(DWriteEngine2Events*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(DWriteEngine2Events*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    update : Proc(DWriteEngine2Events*, Void*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354137-7f64-5b0f-8f00-5d77afbe261e")]
+  record DWriteEngine2Events, lpVtbl : DWriteEngine2EventsVtbl* do
+    GUID = LibC::GUID.new(0x27354137_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : DWriteEngine2Events*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : DWriteEngine2Events*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : DWriteEngine2Events*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : DWriteEngine2Events*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : DWriteEngine2Events*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : DWriteEngine2Events*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : DWriteEngine2Events*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def update(this : DWriteEngine2Events*, object : Void*, progress : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.update.call(this, object, progress)
+    end
+
+  end
+
+  @[Extern]
+  record IDiscFormat2Vtbl,
+    query_interface : Proc(IDiscFormat2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscFormat2*, UInt32),
+    release : Proc(IDiscFormat2*, UInt32),
+    get_type_info_count : Proc(IDiscFormat2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDiscFormat2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDiscFormat2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDiscFormat2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    is_recorder_supported : Proc(IDiscFormat2*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    is_current_media_supported : Proc(IDiscFormat2*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MediaPhysicallyBlank : Proc(IDiscFormat2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MediaHeuristicallyBlank : Proc(IDiscFormat2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_SupportedMediaTypes : Proc(IDiscFormat2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354152-8f64-5b0f-8f00-5d77afbe261e")]
+  record IDiscFormat2, lpVtbl : IDiscFormat2Vtbl* do
+    GUID = LibC::GUID.new(0x27354152_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IDiscFormat2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscFormat2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscFormat2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDiscFormat2*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDiscFormat2*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDiscFormat2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDiscFormat2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def is_recorder_supported(this : IDiscFormat2*, recorder : Void*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_recorder_supported.call(this, recorder, value)
+    end
+    def is_current_media_supported(this : IDiscFormat2*, recorder : Void*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_current_media_supported.call(this, recorder, value)
+    end
+    def get_MediaPhysicallyBlank(this : IDiscFormat2*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MediaPhysicallyBlank.call(this, value)
+    end
+    def get_MediaHeuristicallyBlank(this : IDiscFormat2*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MediaHeuristicallyBlank.call(this, value)
+    end
+    def get_SupportedMediaTypes(this : IDiscFormat2*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedMediaTypes.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IDiscFormat2EraseVtbl,
+    query_interface : Proc(IDiscFormat2Erase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscFormat2Erase*, UInt32),
+    release : Proc(IDiscFormat2Erase*, UInt32),
+    get_type_info_count : Proc(IDiscFormat2Erase*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDiscFormat2Erase*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDiscFormat2Erase*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDiscFormat2Erase*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    is_recorder_supported : Proc(IDiscFormat2Erase*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    is_current_media_supported : Proc(IDiscFormat2Erase*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MediaPhysicallyBlank : Proc(IDiscFormat2Erase*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MediaHeuristicallyBlank : Proc(IDiscFormat2Erase*, Int16*, Win32cr::Foundation::HRESULT),
+    get_SupportedMediaTypes : Proc(IDiscFormat2Erase*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_Recorder : Proc(IDiscFormat2Erase*, Void*, Win32cr::Foundation::HRESULT),
+    get_Recorder : Proc(IDiscFormat2Erase*, Void**, Win32cr::Foundation::HRESULT),
+    put_FullErase : Proc(IDiscFormat2Erase*, Int16, Win32cr::Foundation::HRESULT),
+    get_FullErase : Proc(IDiscFormat2Erase*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CurrentPhysicalMediaType : Proc(IDiscFormat2Erase*, Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE*, Win32cr::Foundation::HRESULT),
+    put_ClientName : Proc(IDiscFormat2Erase*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_ClientName : Proc(IDiscFormat2Erase*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    erase_media : Proc(IDiscFormat2Erase*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354156-8f64-5b0f-8f00-5d77afbe261e")]
+  record IDiscFormat2Erase, lpVtbl : IDiscFormat2EraseVtbl* do
+    GUID = LibC::GUID.new(0x27354156_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IDiscFormat2Erase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscFormat2Erase*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscFormat2Erase*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDiscFormat2Erase*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDiscFormat2Erase*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDiscFormat2Erase*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDiscFormat2Erase*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def is_recorder_supported(this : IDiscFormat2Erase*, recorder : Void*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_recorder_supported.call(this, recorder, value)
+    end
+    def is_current_media_supported(this : IDiscFormat2Erase*, recorder : Void*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_current_media_supported.call(this, recorder, value)
+    end
+    def get_MediaPhysicallyBlank(this : IDiscFormat2Erase*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MediaPhysicallyBlank.call(this, value)
+    end
+    def get_MediaHeuristicallyBlank(this : IDiscFormat2Erase*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MediaHeuristicallyBlank.call(this, value)
+    end
+    def get_SupportedMediaTypes(this : IDiscFormat2Erase*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedMediaTypes.call(this, value)
+    end
+    def put_Recorder(this : IDiscFormat2Erase*, value : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Recorder.call(this, value)
+    end
+    def get_Recorder(this : IDiscFormat2Erase*, value : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Recorder.call(this, value)
+    end
+    def put_FullErase(this : IDiscFormat2Erase*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FullErase.call(this, value)
+    end
+    def get_FullErase(this : IDiscFormat2Erase*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FullErase.call(this, value)
+    end
+    def get_CurrentPhysicalMediaType(this : IDiscFormat2Erase*, value : Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentPhysicalMediaType.call(this, value)
+    end
+    def put_ClientName(this : IDiscFormat2Erase*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ClientName.call(this, value)
+    end
+    def get_ClientName(this : IDiscFormat2Erase*, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ClientName.call(this, value)
+    end
+    def erase_media(this : IDiscFormat2Erase*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.erase_media.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record DDiscFormat2EraseEventsVtbl,
+    query_interface : Proc(DDiscFormat2EraseEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(DDiscFormat2EraseEvents*, UInt32),
+    release : Proc(DDiscFormat2EraseEvents*, UInt32),
+    get_type_info_count : Proc(DDiscFormat2EraseEvents*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(DDiscFormat2EraseEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(DDiscFormat2EraseEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(DDiscFormat2EraseEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    update : Proc(DDiscFormat2EraseEvents*, Void*, Int32, Int32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2735413a-7f64-5b0f-8f00-5d77afbe261e")]
+  record DDiscFormat2EraseEvents, lpVtbl : DDiscFormat2EraseEventsVtbl* do
+    GUID = LibC::GUID.new(0x2735413a_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : DDiscFormat2EraseEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : DDiscFormat2EraseEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : DDiscFormat2EraseEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : DDiscFormat2EraseEvents*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : DDiscFormat2EraseEvents*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : DDiscFormat2EraseEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : DDiscFormat2EraseEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def update(this : DDiscFormat2EraseEvents*, object : Void*, elapsedSeconds : Int32, estimatedTotalSeconds : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.update.call(this, object, elapsedSeconds, estimatedTotalSeconds)
+    end
+
+  end
+
+  @[Extern]
+  record IDiscFormat2DataVtbl,
+    query_interface : Proc(IDiscFormat2Data*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscFormat2Data*, UInt32),
+    release : Proc(IDiscFormat2Data*, UInt32),
+    get_type_info_count : Proc(IDiscFormat2Data*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDiscFormat2Data*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDiscFormat2Data*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDiscFormat2Data*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    is_recorder_supported : Proc(IDiscFormat2Data*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    is_current_media_supported : Proc(IDiscFormat2Data*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MediaPhysicallyBlank : Proc(IDiscFormat2Data*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MediaHeuristicallyBlank : Proc(IDiscFormat2Data*, Int16*, Win32cr::Foundation::HRESULT),
+    get_SupportedMediaTypes : Proc(IDiscFormat2Data*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_Recorder : Proc(IDiscFormat2Data*, Void*, Win32cr::Foundation::HRESULT),
+    get_Recorder : Proc(IDiscFormat2Data*, Void**, Win32cr::Foundation::HRESULT),
+    put_BufferUnderrunFreeDisabled : Proc(IDiscFormat2Data*, Int16, Win32cr::Foundation::HRESULT),
+    get_BufferUnderrunFreeDisabled : Proc(IDiscFormat2Data*, Int16*, Win32cr::Foundation::HRESULT),
+    put_PostgapAlreadyInImage : Proc(IDiscFormat2Data*, Int16, Win32cr::Foundation::HRESULT),
+    get_PostgapAlreadyInImage : Proc(IDiscFormat2Data*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CurrentMediaStatus : Proc(IDiscFormat2Data*, Win32cr::Storage::Imapi::IMAPI_FORMAT2_DATA_MEDIA_STATE*, Win32cr::Foundation::HRESULT),
+    get_WriteProtectStatus : Proc(IDiscFormat2Data*, Win32cr::Storage::Imapi::IMAPI_MEDIA_WRITE_PROTECT_STATE*, Win32cr::Foundation::HRESULT),
+    get_TotalSectorsOnMedia : Proc(IDiscFormat2Data*, Int32*, Win32cr::Foundation::HRESULT),
+    get_FreeSectorsOnMedia : Proc(IDiscFormat2Data*, Int32*, Win32cr::Foundation::HRESULT),
+    get_NextWritableAddress : Proc(IDiscFormat2Data*, Int32*, Win32cr::Foundation::HRESULT),
+    get_StartAddressOfPreviousSession : Proc(IDiscFormat2Data*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastWrittenAddressOfPreviousSession : Proc(IDiscFormat2Data*, Int32*, Win32cr::Foundation::HRESULT),
+    put_ForceMediaToBeClosed : Proc(IDiscFormat2Data*, Int16, Win32cr::Foundation::HRESULT),
+    get_ForceMediaToBeClosed : Proc(IDiscFormat2Data*, Int16*, Win32cr::Foundation::HRESULT),
+    put_DisableConsumerDvdCompatibilityMode : Proc(IDiscFormat2Data*, Int16, Win32cr::Foundation::HRESULT),
+    get_DisableConsumerDvdCompatibilityMode : Proc(IDiscFormat2Data*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CurrentPhysicalMediaType : Proc(IDiscFormat2Data*, Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE*, Win32cr::Foundation::HRESULT),
+    put_ClientName : Proc(IDiscFormat2Data*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_ClientName : Proc(IDiscFormat2Data*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_RequestedWriteSpeed : Proc(IDiscFormat2Data*, Int32*, Win32cr::Foundation::HRESULT),
+    get_RequestedRotationTypeIsPureCAV : Proc(IDiscFormat2Data*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CurrentWriteSpeed : Proc(IDiscFormat2Data*, Int32*, Win32cr::Foundation::HRESULT),
+    get_CurrentRotationTypeIsPureCAV : Proc(IDiscFormat2Data*, Int16*, Win32cr::Foundation::HRESULT),
+    get_SupportedWriteSpeeds : Proc(IDiscFormat2Data*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    get_SupportedWriteSpeedDescriptors : Proc(IDiscFormat2Data*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_ForceOverwrite : Proc(IDiscFormat2Data*, Int16, Win32cr::Foundation::HRESULT),
+    get_ForceOverwrite : Proc(IDiscFormat2Data*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MultisessionInterfaces : Proc(IDiscFormat2Data*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    write : Proc(IDiscFormat2Data*, Void*, Win32cr::Foundation::HRESULT),
+    cancel_write : Proc(IDiscFormat2Data*, Win32cr::Foundation::HRESULT),
+    set_write_speed : Proc(IDiscFormat2Data*, Int32, Int16, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354153-9f64-5b0f-8f00-5d77afbe261e")]
+  record IDiscFormat2Data, lpVtbl : IDiscFormat2DataVtbl* do
+    GUID = LibC::GUID.new(0x27354153_u32, 0x9f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IDiscFormat2Data*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscFormat2Data*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscFormat2Data*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDiscFormat2Data*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDiscFormat2Data*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDiscFormat2Data*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDiscFormat2Data*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def is_recorder_supported(this : IDiscFormat2Data*, recorder : Void*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_recorder_supported.call(this, recorder, value)
+    end
+    def is_current_media_supported(this : IDiscFormat2Data*, recorder : Void*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_current_media_supported.call(this, recorder, value)
+    end
+    def get_MediaPhysicallyBlank(this : IDiscFormat2Data*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MediaPhysicallyBlank.call(this, value)
+    end
+    def get_MediaHeuristicallyBlank(this : IDiscFormat2Data*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MediaHeuristicallyBlank.call(this, value)
+    end
+    def get_SupportedMediaTypes(this : IDiscFormat2Data*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedMediaTypes.call(this, value)
+    end
+    def put_Recorder(this : IDiscFormat2Data*, value : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Recorder.call(this, value)
+    end
+    def get_Recorder(this : IDiscFormat2Data*, value : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Recorder.call(this, value)
+    end
+    def put_BufferUnderrunFreeDisabled(this : IDiscFormat2Data*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BufferUnderrunFreeDisabled.call(this, value)
+    end
+    def get_BufferUnderrunFreeDisabled(this : IDiscFormat2Data*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BufferUnderrunFreeDisabled.call(this, value)
+    end
+    def put_PostgapAlreadyInImage(this : IDiscFormat2Data*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_PostgapAlreadyInImage.call(this, value)
+    end
+    def get_PostgapAlreadyInImage(this : IDiscFormat2Data*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PostgapAlreadyInImage.call(this, value)
+    end
+    def get_CurrentMediaStatus(this : IDiscFormat2Data*, value : Win32cr::Storage::Imapi::IMAPI_FORMAT2_DATA_MEDIA_STATE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentMediaStatus.call(this, value)
+    end
+    def get_WriteProtectStatus(this : IDiscFormat2Data*, value : Win32cr::Storage::Imapi::IMAPI_MEDIA_WRITE_PROTECT_STATE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_WriteProtectStatus.call(this, value)
+    end
+    def get_TotalSectorsOnMedia(this : IDiscFormat2Data*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TotalSectorsOnMedia.call(this, value)
+    end
+    def get_FreeSectorsOnMedia(this : IDiscFormat2Data*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FreeSectorsOnMedia.call(this, value)
+    end
+    def get_NextWritableAddress(this : IDiscFormat2Data*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NextWritableAddress.call(this, value)
+    end
+    def get_StartAddressOfPreviousSession(this : IDiscFormat2Data*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartAddressOfPreviousSession.call(this, value)
+    end
+    def get_LastWrittenAddressOfPreviousSession(this : IDiscFormat2Data*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastWrittenAddressOfPreviousSession.call(this, value)
+    end
+    def put_ForceMediaToBeClosed(this : IDiscFormat2Data*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ForceMediaToBeClosed.call(this, value)
+    end
+    def get_ForceMediaToBeClosed(this : IDiscFormat2Data*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ForceMediaToBeClosed.call(this, value)
+    end
+    def put_DisableConsumerDvdCompatibilityMode(this : IDiscFormat2Data*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DisableConsumerDvdCompatibilityMode.call(this, value)
+    end
+    def get_DisableConsumerDvdCompatibilityMode(this : IDiscFormat2Data*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisableConsumerDvdCompatibilityMode.call(this, value)
+    end
+    def get_CurrentPhysicalMediaType(this : IDiscFormat2Data*, value : Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentPhysicalMediaType.call(this, value)
+    end
+    def put_ClientName(this : IDiscFormat2Data*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ClientName.call(this, value)
+    end
+    def get_ClientName(this : IDiscFormat2Data*, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ClientName.call(this, value)
+    end
+    def get_RequestedWriteSpeed(this : IDiscFormat2Data*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RequestedWriteSpeed.call(this, value)
+    end
+    def get_RequestedRotationTypeIsPureCAV(this : IDiscFormat2Data*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RequestedRotationTypeIsPureCAV.call(this, value)
+    end
+    def get_CurrentWriteSpeed(this : IDiscFormat2Data*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentWriteSpeed.call(this, value)
+    end
+    def get_CurrentRotationTypeIsPureCAV(this : IDiscFormat2Data*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentRotationTypeIsPureCAV.call(this, value)
+    end
+    def get_SupportedWriteSpeeds(this : IDiscFormat2Data*, supportedSpeeds : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedWriteSpeeds.call(this, supportedSpeeds)
+    end
+    def get_SupportedWriteSpeedDescriptors(this : IDiscFormat2Data*, supportedSpeedDescriptors : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedWriteSpeedDescriptors.call(this, supportedSpeedDescriptors)
+    end
+    def put_ForceOverwrite(this : IDiscFormat2Data*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ForceOverwrite.call(this, value)
+    end
+    def get_ForceOverwrite(this : IDiscFormat2Data*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ForceOverwrite.call(this, value)
+    end
+    def get_MultisessionInterfaces(this : IDiscFormat2Data*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MultisessionInterfaces.call(this, value)
+    end
+    def write(this : IDiscFormat2Data*, data : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, data)
+    end
+    def cancel_write(this : IDiscFormat2Data*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cancel_write.call(this)
+    end
+    def set_write_speed(this : IDiscFormat2Data*, requested_sectors_per_second : Int32, rotation_type_is_pure_cav : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_write_speed.call(this, requested_sectors_per_second, rotation_type_is_pure_cav)
+    end
+
+  end
+
+  @[Extern]
+  record DDiscFormat2DataEventsVtbl,
+    query_interface : Proc(DDiscFormat2DataEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(DDiscFormat2DataEvents*, UInt32),
+    release : Proc(DDiscFormat2DataEvents*, UInt32),
+    get_type_info_count : Proc(DDiscFormat2DataEvents*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(DDiscFormat2DataEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(DDiscFormat2DataEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(DDiscFormat2DataEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    update : Proc(DDiscFormat2DataEvents*, Void*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2735413c-7f64-5b0f-8f00-5d77afbe261e")]
+  record DDiscFormat2DataEvents, lpVtbl : DDiscFormat2DataEventsVtbl* do
+    GUID = LibC::GUID.new(0x2735413c_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : DDiscFormat2DataEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : DDiscFormat2DataEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : DDiscFormat2DataEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : DDiscFormat2DataEvents*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : DDiscFormat2DataEvents*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : DDiscFormat2DataEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : DDiscFormat2DataEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def update(this : DDiscFormat2DataEvents*, object : Void*, progress : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.update.call(this, object, progress)
+    end
+
+  end
+
+  @[Extern]
+  record IDiscFormat2DataEventArgsVtbl,
+    query_interface : Proc(IDiscFormat2DataEventArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscFormat2DataEventArgs*, UInt32),
+    release : Proc(IDiscFormat2DataEventArgs*, UInt32),
+    get_type_info_count : Proc(IDiscFormat2DataEventArgs*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDiscFormat2DataEventArgs*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDiscFormat2DataEventArgs*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDiscFormat2DataEventArgs*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_StartLba : Proc(IDiscFormat2DataEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_SectorCount : Proc(IDiscFormat2DataEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastReadLba : Proc(IDiscFormat2DataEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastWrittenLba : Proc(IDiscFormat2DataEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_TotalSystemBuffer : Proc(IDiscFormat2DataEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_UsedSystemBuffer : Proc(IDiscFormat2DataEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_FreeSystemBuffer : Proc(IDiscFormat2DataEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_ElapsedTime : Proc(IDiscFormat2DataEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_RemainingTime : Proc(IDiscFormat2DataEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_TotalTime : Proc(IDiscFormat2DataEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_CurrentAction : Proc(IDiscFormat2DataEventArgs*, Win32cr::Storage::Imapi::IMAPI_FORMAT2_DATA_WRITE_ACTION*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2735413d-7f64-5b0f-8f00-5d77afbe261e")]
+  record IDiscFormat2DataEventArgs, lpVtbl : IDiscFormat2DataEventArgsVtbl* do
+    GUID = LibC::GUID.new(0x2735413d_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IDiscFormat2DataEventArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscFormat2DataEventArgs*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscFormat2DataEventArgs*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDiscFormat2DataEventArgs*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDiscFormat2DataEventArgs*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDiscFormat2DataEventArgs*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDiscFormat2DataEventArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_StartLba(this : IDiscFormat2DataEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartLba.call(this, value)
+    end
+    def get_SectorCount(this : IDiscFormat2DataEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SectorCount.call(this, value)
+    end
+    def get_LastReadLba(this : IDiscFormat2DataEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastReadLba.call(this, value)
+    end
+    def get_LastWrittenLba(this : IDiscFormat2DataEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastWrittenLba.call(this, value)
+    end
+    def get_TotalSystemBuffer(this : IDiscFormat2DataEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TotalSystemBuffer.call(this, value)
+    end
+    def get_UsedSystemBuffer(this : IDiscFormat2DataEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UsedSystemBuffer.call(this, value)
+    end
+    def get_FreeSystemBuffer(this : IDiscFormat2DataEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FreeSystemBuffer.call(this, value)
+    end
+    def get_ElapsedTime(this : IDiscFormat2DataEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ElapsedTime.call(this, value)
+    end
+    def get_RemainingTime(this : IDiscFormat2DataEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RemainingTime.call(this, value)
+    end
+    def get_TotalTime(this : IDiscFormat2DataEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TotalTime.call(this, value)
+    end
+    def get_CurrentAction(this : IDiscFormat2DataEventArgs*, value : Win32cr::Storage::Imapi::IMAPI_FORMAT2_DATA_WRITE_ACTION*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentAction.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IDiscFormat2TrackAtOnceVtbl,
+    query_interface : Proc(IDiscFormat2TrackAtOnce*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscFormat2TrackAtOnce*, UInt32),
+    release : Proc(IDiscFormat2TrackAtOnce*, UInt32),
+    get_type_info_count : Proc(IDiscFormat2TrackAtOnce*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDiscFormat2TrackAtOnce*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDiscFormat2TrackAtOnce*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDiscFormat2TrackAtOnce*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    is_recorder_supported : Proc(IDiscFormat2TrackAtOnce*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    is_current_media_supported : Proc(IDiscFormat2TrackAtOnce*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MediaPhysicallyBlank : Proc(IDiscFormat2TrackAtOnce*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MediaHeuristicallyBlank : Proc(IDiscFormat2TrackAtOnce*, Int16*, Win32cr::Foundation::HRESULT),
+    get_SupportedMediaTypes : Proc(IDiscFormat2TrackAtOnce*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    prepare_media : Proc(IDiscFormat2TrackAtOnce*, Win32cr::Foundation::HRESULT),
+    add_audio_track : Proc(IDiscFormat2TrackAtOnce*, Void*, Win32cr::Foundation::HRESULT),
+    cancel_add_track : Proc(IDiscFormat2TrackAtOnce*, Win32cr::Foundation::HRESULT),
+    release_media : Proc(IDiscFormat2TrackAtOnce*, Win32cr::Foundation::HRESULT),
+    set_write_speed : Proc(IDiscFormat2TrackAtOnce*, Int32, Int16, Win32cr::Foundation::HRESULT),
+    put_Recorder : Proc(IDiscFormat2TrackAtOnce*, Void*, Win32cr::Foundation::HRESULT),
+    get_Recorder : Proc(IDiscFormat2TrackAtOnce*, Void**, Win32cr::Foundation::HRESULT),
+    put_BufferUnderrunFreeDisabled : Proc(IDiscFormat2TrackAtOnce*, Int16, Win32cr::Foundation::HRESULT),
+    get_BufferUnderrunFreeDisabled : Proc(IDiscFormat2TrackAtOnce*, Int16*, Win32cr::Foundation::HRESULT),
+    get_NumberOfExistingTracks : Proc(IDiscFormat2TrackAtOnce*, Int32*, Win32cr::Foundation::HRESULT),
+    get_TotalSectorsOnMedia : Proc(IDiscFormat2TrackAtOnce*, Int32*, Win32cr::Foundation::HRESULT),
+    get_FreeSectorsOnMedia : Proc(IDiscFormat2TrackAtOnce*, Int32*, Win32cr::Foundation::HRESULT),
+    get_UsedSectorsOnMedia : Proc(IDiscFormat2TrackAtOnce*, Int32*, Win32cr::Foundation::HRESULT),
+    put_DoNotFinalizeMedia : Proc(IDiscFormat2TrackAtOnce*, Int16, Win32cr::Foundation::HRESULT),
+    get_DoNotFinalizeMedia : Proc(IDiscFormat2TrackAtOnce*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ExpectedTableOfContents : Proc(IDiscFormat2TrackAtOnce*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    get_CurrentPhysicalMediaType : Proc(IDiscFormat2TrackAtOnce*, Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE*, Win32cr::Foundation::HRESULT),
+    put_ClientName : Proc(IDiscFormat2TrackAtOnce*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_ClientName : Proc(IDiscFormat2TrackAtOnce*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_RequestedWriteSpeed : Proc(IDiscFormat2TrackAtOnce*, Int32*, Win32cr::Foundation::HRESULT),
+    get_RequestedRotationTypeIsPureCAV : Proc(IDiscFormat2TrackAtOnce*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CurrentWriteSpeed : Proc(IDiscFormat2TrackAtOnce*, Int32*, Win32cr::Foundation::HRESULT),
+    get_CurrentRotationTypeIsPureCAV : Proc(IDiscFormat2TrackAtOnce*, Int16*, Win32cr::Foundation::HRESULT),
+    get_SupportedWriteSpeeds : Proc(IDiscFormat2TrackAtOnce*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    get_SupportedWriteSpeedDescriptors : Proc(IDiscFormat2TrackAtOnce*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354154-8f64-5b0f-8f00-5d77afbe261e")]
+  record IDiscFormat2TrackAtOnce, lpVtbl : IDiscFormat2TrackAtOnceVtbl* do
+    GUID = LibC::GUID.new(0x27354154_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IDiscFormat2TrackAtOnce*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscFormat2TrackAtOnce*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscFormat2TrackAtOnce*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDiscFormat2TrackAtOnce*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDiscFormat2TrackAtOnce*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDiscFormat2TrackAtOnce*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDiscFormat2TrackAtOnce*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def is_recorder_supported(this : IDiscFormat2TrackAtOnce*, recorder : Void*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_recorder_supported.call(this, recorder, value)
+    end
+    def is_current_media_supported(this : IDiscFormat2TrackAtOnce*, recorder : Void*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_current_media_supported.call(this, recorder, value)
+    end
+    def get_MediaPhysicallyBlank(this : IDiscFormat2TrackAtOnce*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MediaPhysicallyBlank.call(this, value)
+    end
+    def get_MediaHeuristicallyBlank(this : IDiscFormat2TrackAtOnce*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MediaHeuristicallyBlank.call(this, value)
+    end
+    def get_SupportedMediaTypes(this : IDiscFormat2TrackAtOnce*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedMediaTypes.call(this, value)
+    end
+    def prepare_media(this : IDiscFormat2TrackAtOnce*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.prepare_media.call(this)
+    end
+    def add_audio_track(this : IDiscFormat2TrackAtOnce*, data : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_audio_track.call(this, data)
+    end
+    def cancel_add_track(this : IDiscFormat2TrackAtOnce*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cancel_add_track.call(this)
+    end
+    def release_media(this : IDiscFormat2TrackAtOnce*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.release_media.call(this)
+    end
+    def set_write_speed(this : IDiscFormat2TrackAtOnce*, requested_sectors_per_second : Int32, rotation_type_is_pure_cav : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_write_speed.call(this, requested_sectors_per_second, rotation_type_is_pure_cav)
+    end
+    def put_Recorder(this : IDiscFormat2TrackAtOnce*, value : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Recorder.call(this, value)
+    end
+    def get_Recorder(this : IDiscFormat2TrackAtOnce*, value : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Recorder.call(this, value)
+    end
+    def put_BufferUnderrunFreeDisabled(this : IDiscFormat2TrackAtOnce*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BufferUnderrunFreeDisabled.call(this, value)
+    end
+    def get_BufferUnderrunFreeDisabled(this : IDiscFormat2TrackAtOnce*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BufferUnderrunFreeDisabled.call(this, value)
+    end
+    def get_NumberOfExistingTracks(this : IDiscFormat2TrackAtOnce*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NumberOfExistingTracks.call(this, value)
+    end
+    def get_TotalSectorsOnMedia(this : IDiscFormat2TrackAtOnce*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TotalSectorsOnMedia.call(this, value)
+    end
+    def get_FreeSectorsOnMedia(this : IDiscFormat2TrackAtOnce*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FreeSectorsOnMedia.call(this, value)
+    end
+    def get_UsedSectorsOnMedia(this : IDiscFormat2TrackAtOnce*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UsedSectorsOnMedia.call(this, value)
+    end
+    def put_DoNotFinalizeMedia(this : IDiscFormat2TrackAtOnce*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DoNotFinalizeMedia.call(this, value)
+    end
+    def get_DoNotFinalizeMedia(this : IDiscFormat2TrackAtOnce*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DoNotFinalizeMedia.call(this, value)
+    end
+    def get_ExpectedTableOfContents(this : IDiscFormat2TrackAtOnce*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ExpectedTableOfContents.call(this, value)
+    end
+    def get_CurrentPhysicalMediaType(this : IDiscFormat2TrackAtOnce*, value : Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentPhysicalMediaType.call(this, value)
+    end
+    def put_ClientName(this : IDiscFormat2TrackAtOnce*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ClientName.call(this, value)
+    end
+    def get_ClientName(this : IDiscFormat2TrackAtOnce*, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ClientName.call(this, value)
+    end
+    def get_RequestedWriteSpeed(this : IDiscFormat2TrackAtOnce*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RequestedWriteSpeed.call(this, value)
+    end
+    def get_RequestedRotationTypeIsPureCAV(this : IDiscFormat2TrackAtOnce*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RequestedRotationTypeIsPureCAV.call(this, value)
+    end
+    def get_CurrentWriteSpeed(this : IDiscFormat2TrackAtOnce*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentWriteSpeed.call(this, value)
+    end
+    def get_CurrentRotationTypeIsPureCAV(this : IDiscFormat2TrackAtOnce*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentRotationTypeIsPureCAV.call(this, value)
+    end
+    def get_SupportedWriteSpeeds(this : IDiscFormat2TrackAtOnce*, supportedSpeeds : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedWriteSpeeds.call(this, supportedSpeeds)
+    end
+    def get_SupportedWriteSpeedDescriptors(this : IDiscFormat2TrackAtOnce*, supportedSpeedDescriptors : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedWriteSpeedDescriptors.call(this, supportedSpeedDescriptors)
+    end
+
+  end
+
+  @[Extern]
+  record DDiscFormat2TrackAtOnceEventsVtbl,
+    query_interface : Proc(DDiscFormat2TrackAtOnceEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(DDiscFormat2TrackAtOnceEvents*, UInt32),
+    release : Proc(DDiscFormat2TrackAtOnceEvents*, UInt32),
+    get_type_info_count : Proc(DDiscFormat2TrackAtOnceEvents*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(DDiscFormat2TrackAtOnceEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(DDiscFormat2TrackAtOnceEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(DDiscFormat2TrackAtOnceEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    update : Proc(DDiscFormat2TrackAtOnceEvents*, Void*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2735413f-7f64-5b0f-8f00-5d77afbe261e")]
+  record DDiscFormat2TrackAtOnceEvents, lpVtbl : DDiscFormat2TrackAtOnceEventsVtbl* do
+    GUID = LibC::GUID.new(0x2735413f_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : DDiscFormat2TrackAtOnceEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : DDiscFormat2TrackAtOnceEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : DDiscFormat2TrackAtOnceEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : DDiscFormat2TrackAtOnceEvents*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : DDiscFormat2TrackAtOnceEvents*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : DDiscFormat2TrackAtOnceEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : DDiscFormat2TrackAtOnceEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def update(this : DDiscFormat2TrackAtOnceEvents*, object : Void*, progress : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.update.call(this, object, progress)
+    end
+
+  end
+
+  @[Extern]
+  record IDiscFormat2TrackAtOnceEventArgsVtbl,
+    query_interface : Proc(IDiscFormat2TrackAtOnceEventArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscFormat2TrackAtOnceEventArgs*, UInt32),
+    release : Proc(IDiscFormat2TrackAtOnceEventArgs*, UInt32),
+    get_type_info_count : Proc(IDiscFormat2TrackAtOnceEventArgs*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDiscFormat2TrackAtOnceEventArgs*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDiscFormat2TrackAtOnceEventArgs*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_StartLba : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_SectorCount : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastReadLba : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastWrittenLba : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_TotalSystemBuffer : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_UsedSystemBuffer : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_FreeSystemBuffer : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_CurrentTrackNumber : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_CurrentAction : Proc(IDiscFormat2TrackAtOnceEventArgs*, Win32cr::Storage::Imapi::IMAPI_FORMAT2_TAO_WRITE_ACTION*, Win32cr::Foundation::HRESULT),
+    get_ElapsedTime : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_RemainingTime : Proc(IDiscFormat2TrackAtOnceEventArgs*, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354140-7f64-5b0f-8f00-5d77afbe261e")]
+  record IDiscFormat2TrackAtOnceEventArgs, lpVtbl : IDiscFormat2TrackAtOnceEventArgsVtbl* do
+    GUID = LibC::GUID.new(0x27354140_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IDiscFormat2TrackAtOnceEventArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscFormat2TrackAtOnceEventArgs*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscFormat2TrackAtOnceEventArgs*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDiscFormat2TrackAtOnceEventArgs*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDiscFormat2TrackAtOnceEventArgs*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDiscFormat2TrackAtOnceEventArgs*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDiscFormat2TrackAtOnceEventArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_StartLba(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartLba.call(this, value)
+    end
+    def get_SectorCount(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SectorCount.call(this, value)
+    end
+    def get_LastReadLba(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastReadLba.call(this, value)
+    end
+    def get_LastWrittenLba(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastWrittenLba.call(this, value)
+    end
+    def get_TotalSystemBuffer(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TotalSystemBuffer.call(this, value)
+    end
+    def get_UsedSystemBuffer(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UsedSystemBuffer.call(this, value)
+    end
+    def get_FreeSystemBuffer(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FreeSystemBuffer.call(this, value)
+    end
+    def get_CurrentTrackNumber(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentTrackNumber.call(this, value)
+    end
+    def get_CurrentAction(this : IDiscFormat2TrackAtOnceEventArgs*, value : Win32cr::Storage::Imapi::IMAPI_FORMAT2_TAO_WRITE_ACTION*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentAction.call(this, value)
+    end
+    def get_ElapsedTime(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ElapsedTime.call(this, value)
+    end
+    def get_RemainingTime(this : IDiscFormat2TrackAtOnceEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RemainingTime.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IDiscFormat2RawCDVtbl,
+    query_interface : Proc(IDiscFormat2RawCD*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscFormat2RawCD*, UInt32),
+    release : Proc(IDiscFormat2RawCD*, UInt32),
+    get_type_info_count : Proc(IDiscFormat2RawCD*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDiscFormat2RawCD*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDiscFormat2RawCD*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDiscFormat2RawCD*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    is_recorder_supported : Proc(IDiscFormat2RawCD*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    is_current_media_supported : Proc(IDiscFormat2RawCD*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MediaPhysicallyBlank : Proc(IDiscFormat2RawCD*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MediaHeuristicallyBlank : Proc(IDiscFormat2RawCD*, Int16*, Win32cr::Foundation::HRESULT),
+    get_SupportedMediaTypes : Proc(IDiscFormat2RawCD*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    prepare_media : Proc(IDiscFormat2RawCD*, Win32cr::Foundation::HRESULT),
+    write_media : Proc(IDiscFormat2RawCD*, Void*, Win32cr::Foundation::HRESULT),
+    write_media2 : Proc(IDiscFormat2RawCD*, Void*, Int32, Win32cr::Foundation::HRESULT),
+    cancel_write : Proc(IDiscFormat2RawCD*, Win32cr::Foundation::HRESULT),
+    release_media : Proc(IDiscFormat2RawCD*, Win32cr::Foundation::HRESULT),
+    set_write_speed : Proc(IDiscFormat2RawCD*, Int32, Int16, Win32cr::Foundation::HRESULT),
+    put_Recorder : Proc(IDiscFormat2RawCD*, Void*, Win32cr::Foundation::HRESULT),
+    get_Recorder : Proc(IDiscFormat2RawCD*, Void**, Win32cr::Foundation::HRESULT),
+    put_BufferUnderrunFreeDisabled : Proc(IDiscFormat2RawCD*, Int16, Win32cr::Foundation::HRESULT),
+    get_BufferUnderrunFreeDisabled : Proc(IDiscFormat2RawCD*, Int16*, Win32cr::Foundation::HRESULT),
+    get_StartOfNextSession : Proc(IDiscFormat2RawCD*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastPossibleStartOfLeadout : Proc(IDiscFormat2RawCD*, Int32*, Win32cr::Foundation::HRESULT),
+    get_CurrentPhysicalMediaType : Proc(IDiscFormat2RawCD*, Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE*, Win32cr::Foundation::HRESULT),
+    get_SupportedSectorTypes : Proc(IDiscFormat2RawCD*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_RequestedSectorType : Proc(IDiscFormat2RawCD*, Win32cr::Storage::Imapi::IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE, Win32cr::Foundation::HRESULT),
+    get_RequestedSectorType : Proc(IDiscFormat2RawCD*, Win32cr::Storage::Imapi::IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE*, Win32cr::Foundation::HRESULT),
+    put_ClientName : Proc(IDiscFormat2RawCD*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_ClientName : Proc(IDiscFormat2RawCD*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_RequestedWriteSpeed : Proc(IDiscFormat2RawCD*, Int32*, Win32cr::Foundation::HRESULT),
+    get_RequestedRotationTypeIsPureCAV : Proc(IDiscFormat2RawCD*, Int16*, Win32cr::Foundation::HRESULT),
+    get_CurrentWriteSpeed : Proc(IDiscFormat2RawCD*, Int32*, Win32cr::Foundation::HRESULT),
+    get_CurrentRotationTypeIsPureCAV : Proc(IDiscFormat2RawCD*, Int16*, Win32cr::Foundation::HRESULT),
+    get_SupportedWriteSpeeds : Proc(IDiscFormat2RawCD*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    get_SupportedWriteSpeedDescriptors : Proc(IDiscFormat2RawCD*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354155-8f64-5b0f-8f00-5d77afbe261e")]
+  record IDiscFormat2RawCD, lpVtbl : IDiscFormat2RawCDVtbl* do
+    GUID = LibC::GUID.new(0x27354155_u32, 0x8f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IDiscFormat2RawCD*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscFormat2RawCD*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscFormat2RawCD*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDiscFormat2RawCD*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDiscFormat2RawCD*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDiscFormat2RawCD*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDiscFormat2RawCD*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def is_recorder_supported(this : IDiscFormat2RawCD*, recorder : Void*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_recorder_supported.call(this, recorder, value)
+    end
+    def is_current_media_supported(this : IDiscFormat2RawCD*, recorder : Void*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_current_media_supported.call(this, recorder, value)
+    end
+    def get_MediaPhysicallyBlank(this : IDiscFormat2RawCD*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MediaPhysicallyBlank.call(this, value)
+    end
+    def get_MediaHeuristicallyBlank(this : IDiscFormat2RawCD*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MediaHeuristicallyBlank.call(this, value)
+    end
+    def get_SupportedMediaTypes(this : IDiscFormat2RawCD*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedMediaTypes.call(this, value)
+    end
+    def prepare_media(this : IDiscFormat2RawCD*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.prepare_media.call(this)
+    end
+    def write_media(this : IDiscFormat2RawCD*, data : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write_media.call(this, data)
+    end
+    def write_media2(this : IDiscFormat2RawCD*, data : Void*, streamLeadInSectors : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write_media2.call(this, data, streamLeadInSectors)
+    end
+    def cancel_write(this : IDiscFormat2RawCD*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.cancel_write.call(this)
+    end
+    def release_media(this : IDiscFormat2RawCD*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.release_media.call(this)
+    end
+    def set_write_speed(this : IDiscFormat2RawCD*, requested_sectors_per_second : Int32, rotation_type_is_pure_cav : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_write_speed.call(this, requested_sectors_per_second, rotation_type_is_pure_cav)
+    end
+    def put_Recorder(this : IDiscFormat2RawCD*, value : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Recorder.call(this, value)
+    end
+    def get_Recorder(this : IDiscFormat2RawCD*, value : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Recorder.call(this, value)
+    end
+    def put_BufferUnderrunFreeDisabled(this : IDiscFormat2RawCD*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BufferUnderrunFreeDisabled.call(this, value)
+    end
+    def get_BufferUnderrunFreeDisabled(this : IDiscFormat2RawCD*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BufferUnderrunFreeDisabled.call(this, value)
+    end
+    def get_StartOfNextSession(this : IDiscFormat2RawCD*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartOfNextSession.call(this, value)
+    end
+    def get_LastPossibleStartOfLeadout(this : IDiscFormat2RawCD*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastPossibleStartOfLeadout.call(this, value)
+    end
+    def get_CurrentPhysicalMediaType(this : IDiscFormat2RawCD*, value : Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentPhysicalMediaType.call(this, value)
+    end
+    def get_SupportedSectorTypes(this : IDiscFormat2RawCD*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedSectorTypes.call(this, value)
+    end
+    def put_RequestedSectorType(this : IDiscFormat2RawCD*, value : Win32cr::Storage::Imapi::IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_RequestedSectorType.call(this, value)
+    end
+    def get_RequestedSectorType(this : IDiscFormat2RawCD*, value : Win32cr::Storage::Imapi::IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RequestedSectorType.call(this, value)
+    end
+    def put_ClientName(this : IDiscFormat2RawCD*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ClientName.call(this, value)
+    end
+    def get_ClientName(this : IDiscFormat2RawCD*, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ClientName.call(this, value)
+    end
+    def get_RequestedWriteSpeed(this : IDiscFormat2RawCD*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RequestedWriteSpeed.call(this, value)
+    end
+    def get_RequestedRotationTypeIsPureCAV(this : IDiscFormat2RawCD*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RequestedRotationTypeIsPureCAV.call(this, value)
+    end
+    def get_CurrentWriteSpeed(this : IDiscFormat2RawCD*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentWriteSpeed.call(this, value)
+    end
+    def get_CurrentRotationTypeIsPureCAV(this : IDiscFormat2RawCD*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentRotationTypeIsPureCAV.call(this, value)
+    end
+    def get_SupportedWriteSpeeds(this : IDiscFormat2RawCD*, supportedSpeeds : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedWriteSpeeds.call(this, supportedSpeeds)
+    end
+    def get_SupportedWriteSpeedDescriptors(this : IDiscFormat2RawCD*, supportedSpeedDescriptors : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SupportedWriteSpeedDescriptors.call(this, supportedSpeedDescriptors)
+    end
+
+  end
+
+  @[Extern]
+  record DDiscFormat2RawCDEventsVtbl,
+    query_interface : Proc(DDiscFormat2RawCDEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(DDiscFormat2RawCDEvents*, UInt32),
+    release : Proc(DDiscFormat2RawCDEvents*, UInt32),
+    get_type_info_count : Proc(DDiscFormat2RawCDEvents*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(DDiscFormat2RawCDEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(DDiscFormat2RawCDEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(DDiscFormat2RawCDEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    update : Proc(DDiscFormat2RawCDEvents*, Void*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354142-7f64-5b0f-8f00-5d77afbe261e")]
+  record DDiscFormat2RawCDEvents, lpVtbl : DDiscFormat2RawCDEventsVtbl* do
+    GUID = LibC::GUID.new(0x27354142_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : DDiscFormat2RawCDEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : DDiscFormat2RawCDEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : DDiscFormat2RawCDEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : DDiscFormat2RawCDEvents*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : DDiscFormat2RawCDEvents*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : DDiscFormat2RawCDEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : DDiscFormat2RawCDEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def update(this : DDiscFormat2RawCDEvents*, object : Void*, progress : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.update.call(this, object, progress)
+    end
+
+  end
+
+  @[Extern]
+  record IDiscFormat2RawCDEventArgsVtbl,
+    query_interface : Proc(IDiscFormat2RawCDEventArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscFormat2RawCDEventArgs*, UInt32),
+    release : Proc(IDiscFormat2RawCDEventArgs*, UInt32),
+    get_type_info_count : Proc(IDiscFormat2RawCDEventArgs*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDiscFormat2RawCDEventArgs*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDiscFormat2RawCDEventArgs*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDiscFormat2RawCDEventArgs*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_StartLba : Proc(IDiscFormat2RawCDEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_SectorCount : Proc(IDiscFormat2RawCDEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastReadLba : Proc(IDiscFormat2RawCDEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastWrittenLba : Proc(IDiscFormat2RawCDEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_TotalSystemBuffer : Proc(IDiscFormat2RawCDEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_UsedSystemBuffer : Proc(IDiscFormat2RawCDEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_FreeSystemBuffer : Proc(IDiscFormat2RawCDEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_CurrentAction : Proc(IDiscFormat2RawCDEventArgs*, Win32cr::Storage::Imapi::IMAPI_FORMAT2_RAW_CD_WRITE_ACTION*, Win32cr::Foundation::HRESULT),
+    get_ElapsedTime : Proc(IDiscFormat2RawCDEventArgs*, Int32*, Win32cr::Foundation::HRESULT),
+    get_RemainingTime : Proc(IDiscFormat2RawCDEventArgs*, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354143-7f64-5b0f-8f00-5d77afbe261e")]
+  record IDiscFormat2RawCDEventArgs, lpVtbl : IDiscFormat2RawCDEventArgsVtbl* do
+    GUID = LibC::GUID.new(0x27354143_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IDiscFormat2RawCDEventArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscFormat2RawCDEventArgs*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscFormat2RawCDEventArgs*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDiscFormat2RawCDEventArgs*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDiscFormat2RawCDEventArgs*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDiscFormat2RawCDEventArgs*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDiscFormat2RawCDEventArgs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_StartLba(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartLba.call(this, value)
+    end
+    def get_SectorCount(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SectorCount.call(this, value)
+    end
+    def get_LastReadLba(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastReadLba.call(this, value)
+    end
+    def get_LastWrittenLba(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastWrittenLba.call(this, value)
+    end
+    def get_TotalSystemBuffer(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TotalSystemBuffer.call(this, value)
+    end
+    def get_UsedSystemBuffer(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UsedSystemBuffer.call(this, value)
+    end
+    def get_FreeSystemBuffer(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FreeSystemBuffer.call(this, value)
+    end
+    def get_CurrentAction(this : IDiscFormat2RawCDEventArgs*, value : Win32cr::Storage::Imapi::IMAPI_FORMAT2_RAW_CD_WRITE_ACTION*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CurrentAction.call(this, value)
+    end
+    def get_ElapsedTime(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ElapsedTime.call(this, value)
+    end
+    def get_RemainingTime(this : IDiscFormat2RawCDEventArgs*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RemainingTime.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IBurnVerificationVtbl,
+    query_interface : Proc(IBurnVerification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IBurnVerification*, UInt32),
+    release : Proc(IBurnVerification*, UInt32),
+    put_BurnVerificationLevel : Proc(IBurnVerification*, Win32cr::Storage::Imapi::IMAPI_BURN_VERIFICATION_LEVEL, Win32cr::Foundation::HRESULT),
+    get_BurnVerificationLevel : Proc(IBurnVerification*, Win32cr::Storage::Imapi::IMAPI_BURN_VERIFICATION_LEVEL*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("d2ffd834-958b-426d-8470-2a13879c6a91")]
+  record IBurnVerification, lpVtbl : IBurnVerificationVtbl* do
+    GUID = LibC::GUID.new(0xd2ffd834_u32, 0x958b_u16, 0x426d_u16, StaticArray[0x84_u8, 0x70_u8, 0x2a_u8, 0x13_u8, 0x87_u8, 0x9c_u8, 0x6a_u8, 0x91_u8])
+    def query_interface(this : IBurnVerification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IBurnVerification*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IBurnVerification*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def put_BurnVerificationLevel(this : IBurnVerification*, value : Win32cr::Storage::Imapi::IMAPI_BURN_VERIFICATION_LEVEL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BurnVerificationLevel.call(this, value)
+    end
+    def get_BurnVerificationLevel(this : IBurnVerification*, value : Win32cr::Storage::Imapi::IMAPI_BURN_VERIFICATION_LEVEL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BurnVerificationLevel.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IWriteSpeedDescriptorVtbl,
+    query_interface : Proc(IWriteSpeedDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IWriteSpeedDescriptor*, UInt32),
+    release : Proc(IWriteSpeedDescriptor*, UInt32),
+    get_type_info_count : Proc(IWriteSpeedDescriptor*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IWriteSpeedDescriptor*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IWriteSpeedDescriptor*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IWriteSpeedDescriptor*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_MediaType : Proc(IWriteSpeedDescriptor*, Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE*, Win32cr::Foundation::HRESULT),
+    get_RotationTypeIsPureCAV : Proc(IWriteSpeedDescriptor*, Int16*, Win32cr::Foundation::HRESULT),
+    get_WriteSpeed : Proc(IWriteSpeedDescriptor*, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354144-7f64-5b0f-8f00-5d77afbe261e")]
+  record IWriteSpeedDescriptor, lpVtbl : IWriteSpeedDescriptorVtbl* do
+    GUID = LibC::GUID.new(0x27354144_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IWriteSpeedDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IWriteSpeedDescriptor*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IWriteSpeedDescriptor*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IWriteSpeedDescriptor*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IWriteSpeedDescriptor*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IWriteSpeedDescriptor*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IWriteSpeedDescriptor*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_MediaType(this : IWriteSpeedDescriptor*, value : Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MediaType.call(this, value)
+    end
+    def get_RotationTypeIsPureCAV(this : IWriteSpeedDescriptor*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RotationTypeIsPureCAV.call(this, value)
+    end
+    def get_WriteSpeed(this : IWriteSpeedDescriptor*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_WriteSpeed.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IMultisessionVtbl,
+    query_interface : Proc(IMultisession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMultisession*, UInt32),
+    release : Proc(IMultisession*, UInt32),
+    get_type_info_count : Proc(IMultisession*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IMultisession*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IMultisession*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IMultisession*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_IsSupportedOnCurrentMediaState : Proc(IMultisession*, Int16*, Win32cr::Foundation::HRESULT),
+    put_InUse : Proc(IMultisession*, Int16, Win32cr::Foundation::HRESULT),
+    get_InUse : Proc(IMultisession*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ImportRecorder : Proc(IMultisession*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354150-7f64-5b0f-8f00-5d77afbe261e")]
+  record IMultisession, lpVtbl : IMultisessionVtbl* do
+    GUID = LibC::GUID.new(0x27354150_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IMultisession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMultisession*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMultisession*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IMultisession*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IMultisession*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IMultisession*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IMultisession*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_IsSupportedOnCurrentMediaState(this : IMultisession*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsSupportedOnCurrentMediaState.call(this, value)
+    end
+    def put_InUse(this : IMultisession*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_InUse.call(this, value)
+    end
+    def get_InUse(this : IMultisession*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_InUse.call(this, value)
+    end
+    def get_ImportRecorder(this : IMultisession*, value : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ImportRecorder.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IMultisessionSequentialVtbl,
+    query_interface : Proc(IMultisessionSequential*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMultisessionSequential*, UInt32),
+    release : Proc(IMultisessionSequential*, UInt32),
+    get_type_info_count : Proc(IMultisessionSequential*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IMultisessionSequential*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IMultisessionSequential*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IMultisessionSequential*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_IsSupportedOnCurrentMediaState : Proc(IMultisessionSequential*, Int16*, Win32cr::Foundation::HRESULT),
+    put_InUse : Proc(IMultisessionSequential*, Int16, Win32cr::Foundation::HRESULT),
+    get_InUse : Proc(IMultisessionSequential*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ImportRecorder : Proc(IMultisessionSequential*, Void**, Win32cr::Foundation::HRESULT),
+    get_IsFirstDataSession : Proc(IMultisessionSequential*, Int16*, Win32cr::Foundation::HRESULT),
+    get_StartAddressOfPreviousSession : Proc(IMultisessionSequential*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastWrittenAddressOfPreviousSession : Proc(IMultisessionSequential*, Int32*, Win32cr::Foundation::HRESULT),
+    get_NextWritableAddress : Proc(IMultisessionSequential*, Int32*, Win32cr::Foundation::HRESULT),
+    get_FreeSectorsOnMedia : Proc(IMultisessionSequential*, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354151-7f64-5b0f-8f00-5d77afbe261e")]
+  record IMultisessionSequential, lpVtbl : IMultisessionSequentialVtbl* do
+    GUID = LibC::GUID.new(0x27354151_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IMultisessionSequential*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMultisessionSequential*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMultisessionSequential*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IMultisessionSequential*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IMultisessionSequential*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IMultisessionSequential*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IMultisessionSequential*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_IsSupportedOnCurrentMediaState(this : IMultisessionSequential*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsSupportedOnCurrentMediaState.call(this, value)
+    end
+    def put_InUse(this : IMultisessionSequential*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_InUse.call(this, value)
+    end
+    def get_InUse(this : IMultisessionSequential*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_InUse.call(this, value)
+    end
+    def get_ImportRecorder(this : IMultisessionSequential*, value : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ImportRecorder.call(this, value)
+    end
+    def get_IsFirstDataSession(this : IMultisessionSequential*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsFirstDataSession.call(this, value)
+    end
+    def get_StartAddressOfPreviousSession(this : IMultisessionSequential*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartAddressOfPreviousSession.call(this, value)
+    end
+    def get_LastWrittenAddressOfPreviousSession(this : IMultisessionSequential*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastWrittenAddressOfPreviousSession.call(this, value)
+    end
+    def get_NextWritableAddress(this : IMultisessionSequential*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NextWritableAddress.call(this, value)
+    end
+    def get_FreeSectorsOnMedia(this : IMultisessionSequential*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FreeSectorsOnMedia.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IMultisessionSequential2Vtbl,
+    query_interface : Proc(IMultisessionSequential2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMultisessionSequential2*, UInt32),
+    release : Proc(IMultisessionSequential2*, UInt32),
+    get_type_info_count : Proc(IMultisessionSequential2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IMultisessionSequential2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IMultisessionSequential2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IMultisessionSequential2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_IsSupportedOnCurrentMediaState : Proc(IMultisessionSequential2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_InUse : Proc(IMultisessionSequential2*, Int16, Win32cr::Foundation::HRESULT),
+    get_InUse : Proc(IMultisessionSequential2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ImportRecorder : Proc(IMultisessionSequential2*, Void**, Win32cr::Foundation::HRESULT),
+    get_IsFirstDataSession : Proc(IMultisessionSequential2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_StartAddressOfPreviousSession : Proc(IMultisessionSequential2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastWrittenAddressOfPreviousSession : Proc(IMultisessionSequential2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_NextWritableAddress : Proc(IMultisessionSequential2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_FreeSectorsOnMedia : Proc(IMultisessionSequential2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_WriteUnitSize : Proc(IMultisessionSequential2*, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b507ca22-2204-11dd-966a-001aa01bbc58")]
+  record IMultisessionSequential2, lpVtbl : IMultisessionSequential2Vtbl* do
+    GUID = LibC::GUID.new(0xb507ca22_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
+    def query_interface(this : IMultisessionSequential2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMultisessionSequential2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMultisessionSequential2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IMultisessionSequential2*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IMultisessionSequential2*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IMultisessionSequential2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IMultisessionSequential2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_IsSupportedOnCurrentMediaState(this : IMultisessionSequential2*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsSupportedOnCurrentMediaState.call(this, value)
+    end
+    def put_InUse(this : IMultisessionSequential2*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_InUse.call(this, value)
+    end
+    def get_InUse(this : IMultisessionSequential2*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_InUse.call(this, value)
+    end
+    def get_ImportRecorder(this : IMultisessionSequential2*, value : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ImportRecorder.call(this, value)
+    end
+    def get_IsFirstDataSession(this : IMultisessionSequential2*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsFirstDataSession.call(this, value)
+    end
+    def get_StartAddressOfPreviousSession(this : IMultisessionSequential2*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartAddressOfPreviousSession.call(this, value)
+    end
+    def get_LastWrittenAddressOfPreviousSession(this : IMultisessionSequential2*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastWrittenAddressOfPreviousSession.call(this, value)
+    end
+    def get_NextWritableAddress(this : IMultisessionSequential2*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NextWritableAddress.call(this, value)
+    end
+    def get_FreeSectorsOnMedia(this : IMultisessionSequential2*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FreeSectorsOnMedia.call(this, value)
+    end
+    def get_WriteUnitSize(this : IMultisessionSequential2*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_WriteUnitSize.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IMultisessionRandomWriteVtbl,
+    query_interface : Proc(IMultisessionRandomWrite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMultisessionRandomWrite*, UInt32),
+    release : Proc(IMultisessionRandomWrite*, UInt32),
+    get_type_info_count : Proc(IMultisessionRandomWrite*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IMultisessionRandomWrite*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IMultisessionRandomWrite*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IMultisessionRandomWrite*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_IsSupportedOnCurrentMediaState : Proc(IMultisessionRandomWrite*, Int16*, Win32cr::Foundation::HRESULT),
+    put_InUse : Proc(IMultisessionRandomWrite*, Int16, Win32cr::Foundation::HRESULT),
+    get_InUse : Proc(IMultisessionRandomWrite*, Int16*, Win32cr::Foundation::HRESULT),
+    get_ImportRecorder : Proc(IMultisessionRandomWrite*, Void**, Win32cr::Foundation::HRESULT),
+    get_WriteUnitSize : Proc(IMultisessionRandomWrite*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastWrittenAddress : Proc(IMultisessionRandomWrite*, Int32*, Win32cr::Foundation::HRESULT),
+    get_TotalSectorsOnMedia : Proc(IMultisessionRandomWrite*, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b507ca23-2204-11dd-966a-001aa01bbc58")]
+  record IMultisessionRandomWrite, lpVtbl : IMultisessionRandomWriteVtbl* do
+    GUID = LibC::GUID.new(0xb507ca23_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
+    def query_interface(this : IMultisessionRandomWrite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMultisessionRandomWrite*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMultisessionRandomWrite*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IMultisessionRandomWrite*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IMultisessionRandomWrite*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IMultisessionRandomWrite*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IMultisessionRandomWrite*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_IsSupportedOnCurrentMediaState(this : IMultisessionRandomWrite*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsSupportedOnCurrentMediaState.call(this, value)
+    end
+    def put_InUse(this : IMultisessionRandomWrite*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_InUse.call(this, value)
+    end
+    def get_InUse(this : IMultisessionRandomWrite*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_InUse.call(this, value)
+    end
+    def get_ImportRecorder(this : IMultisessionRandomWrite*, value : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ImportRecorder.call(this, value)
+    end
+    def get_WriteUnitSize(this : IMultisessionRandomWrite*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_WriteUnitSize.call(this, value)
+    end
+    def get_LastWrittenAddress(this : IMultisessionRandomWrite*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastWrittenAddress.call(this, value)
+    end
+    def get_TotalSectorsOnMedia(this : IMultisessionRandomWrite*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TotalSectorsOnMedia.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IStreamPseudoRandomBasedVtbl,
+    query_interface : Proc(IStreamPseudoRandomBased*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IStreamPseudoRandomBased*, UInt32),
+    release : Proc(IStreamPseudoRandomBased*, UInt32),
+    read : Proc(IStreamPseudoRandomBased*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    write : Proc(IStreamPseudoRandomBased*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(IStreamPseudoRandomBased*, Win32cr::Foundation::LARGE_INTEGER, Win32cr::System::Com::STREAM_SEEK, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    set_size : Proc(IStreamPseudoRandomBased*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(IStreamPseudoRandomBased*, Void*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    commit : Proc(IStreamPseudoRandomBased*, Win32cr::System::Com::STGC, Win32cr::Foundation::HRESULT),
+    revert : Proc(IStreamPseudoRandomBased*, Win32cr::Foundation::HRESULT),
+    lock_region : Proc(IStreamPseudoRandomBased*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    unlock_region : Proc(IStreamPseudoRandomBased*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    stat : Proc(IStreamPseudoRandomBased*, Win32cr::System::Com::STATSTG*, UInt32, Win32cr::Foundation::HRESULT),
+    clone : Proc(IStreamPseudoRandomBased*, Void**, Win32cr::Foundation::HRESULT),
+    put_Seed : Proc(IStreamPseudoRandomBased*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Seed : Proc(IStreamPseudoRandomBased*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_ExtendedSeed : Proc(IStreamPseudoRandomBased*, UInt32*, UInt32, Win32cr::Foundation::HRESULT),
+    get_ExtendedSeed : Proc(IStreamPseudoRandomBased*, UInt32**, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354145-7f64-5b0f-8f00-5d77afbe261e")]
+  record IStreamPseudoRandomBased, lpVtbl : IStreamPseudoRandomBasedVtbl* do
+    GUID = LibC::GUID.new(0x27354145_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IStreamPseudoRandomBased*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IStreamPseudoRandomBased*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IStreamPseudoRandomBased*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def read(this : IStreamPseudoRandomBased*, pv : Void*, cb : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, pv, cb, pcbRead)
+    end
+    def write(this : IStreamPseudoRandomBased*, pv : Void*, cb : UInt32, pcbWritten : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, pv, cb, pcbWritten)
+    end
+    def seek(this : IStreamPseudoRandomBased*, dlibMove : Win32cr::Foundation::LARGE_INTEGER, dwOrigin : Win32cr::System::Com::STREAM_SEEK, plibNewPosition : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, dlibMove, dwOrigin, plibNewPosition)
+    end
+    def set_size(this : IStreamPseudoRandomBased*, libNewSize : Win32cr::Foundation::ULARGE_INTEGER) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_size.call(this, libNewSize)
+    end
+    def copy_to(this : IStreamPseudoRandomBased*, pstm : Void*, cb : Win32cr::Foundation::ULARGE_INTEGER, pcbRead : Win32cr::Foundation::ULARGE_INTEGER*, pcbWritten : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_to.call(this, pstm, cb, pcbRead, pcbWritten)
+    end
+    def commit(this : IStreamPseudoRandomBased*, grfCommitFlags : Win32cr::System::Com::STGC) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this, grfCommitFlags)
+    end
+    def revert(this : IStreamPseudoRandomBased*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert.call(this)
+    end
+    def lock_region(this : IStreamPseudoRandomBased*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.lock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def unlock_region(this : IStreamPseudoRandomBased*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unlock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def stat(this : IStreamPseudoRandomBased*, pstatstg : Win32cr::System::Com::STATSTG*, grfStatFlag : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stat.call(this, pstatstg, grfStatFlag)
+    end
+    def clone(this : IStreamPseudoRandomBased*, ppstm : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppstm)
+    end
+    def put_Seed(this : IStreamPseudoRandomBased*, value : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Seed.call(this, value)
+    end
+    def get_Seed(this : IStreamPseudoRandomBased*, value : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Seed.call(this, value)
+    end
+    def put_ExtendedSeed(this : IStreamPseudoRandomBased*, values : UInt32*, eCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ExtendedSeed.call(this, values, eCount)
+    end
+    def get_ExtendedSeed(this : IStreamPseudoRandomBased*, values : UInt32**, eCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ExtendedSeed.call(this, values, eCount)
+    end
+
+  end
+
+  @[Extern]
+  record IStreamConcatenateVtbl,
+    query_interface : Proc(IStreamConcatenate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IStreamConcatenate*, UInt32),
+    release : Proc(IStreamConcatenate*, UInt32),
+    read : Proc(IStreamConcatenate*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    write : Proc(IStreamConcatenate*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(IStreamConcatenate*, Win32cr::Foundation::LARGE_INTEGER, Win32cr::System::Com::STREAM_SEEK, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    set_size : Proc(IStreamConcatenate*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(IStreamConcatenate*, Void*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    commit : Proc(IStreamConcatenate*, Win32cr::System::Com::STGC, Win32cr::Foundation::HRESULT),
+    revert : Proc(IStreamConcatenate*, Win32cr::Foundation::HRESULT),
+    lock_region : Proc(IStreamConcatenate*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    unlock_region : Proc(IStreamConcatenate*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    stat : Proc(IStreamConcatenate*, Win32cr::System::Com::STATSTG*, UInt32, Win32cr::Foundation::HRESULT),
+    clone : Proc(IStreamConcatenate*, Void**, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IStreamConcatenate*, Void*, Void*, Win32cr::Foundation::HRESULT),
+    initialize2 : Proc(IStreamConcatenate*, Void**, UInt32, Win32cr::Foundation::HRESULT),
+    append : Proc(IStreamConcatenate*, Void*, Win32cr::Foundation::HRESULT),
+    append2 : Proc(IStreamConcatenate*, Void**, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354146-7f64-5b0f-8f00-5d77afbe261e")]
+  record IStreamConcatenate, lpVtbl : IStreamConcatenateVtbl* do
+    GUID = LibC::GUID.new(0x27354146_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IStreamConcatenate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IStreamConcatenate*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IStreamConcatenate*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def read(this : IStreamConcatenate*, pv : Void*, cb : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, pv, cb, pcbRead)
+    end
+    def write(this : IStreamConcatenate*, pv : Void*, cb : UInt32, pcbWritten : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, pv, cb, pcbWritten)
+    end
+    def seek(this : IStreamConcatenate*, dlibMove : Win32cr::Foundation::LARGE_INTEGER, dwOrigin : Win32cr::System::Com::STREAM_SEEK, plibNewPosition : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, dlibMove, dwOrigin, plibNewPosition)
+    end
+    def set_size(this : IStreamConcatenate*, libNewSize : Win32cr::Foundation::ULARGE_INTEGER) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_size.call(this, libNewSize)
+    end
+    def copy_to(this : IStreamConcatenate*, pstm : Void*, cb : Win32cr::Foundation::ULARGE_INTEGER, pcbRead : Win32cr::Foundation::ULARGE_INTEGER*, pcbWritten : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_to.call(this, pstm, cb, pcbRead, pcbWritten)
+    end
+    def commit(this : IStreamConcatenate*, grfCommitFlags : Win32cr::System::Com::STGC) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this, grfCommitFlags)
+    end
+    def revert(this : IStreamConcatenate*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert.call(this)
+    end
+    def lock_region(this : IStreamConcatenate*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.lock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def unlock_region(this : IStreamConcatenate*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unlock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def stat(this : IStreamConcatenate*, pstatstg : Win32cr::System::Com::STATSTG*, grfStatFlag : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stat.call(this, pstatstg, grfStatFlag)
+    end
+    def clone(this : IStreamConcatenate*, ppstm : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppstm)
+    end
+    def initialize__(this : IStreamConcatenate*, stream1 : Void*, stream2 : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, stream1, stream2)
+    end
+    def initialize2(this : IStreamConcatenate*, streams : Void**, streamCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize2.call(this, streams, streamCount)
+    end
+    def append(this : IStreamConcatenate*, stream : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.append.call(this, stream)
+    end
+    def append2(this : IStreamConcatenate*, streams : Void**, streamCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.append2.call(this, streams, streamCount)
+    end
+
+  end
+
+  @[Extern]
+  record IStreamInterleaveVtbl,
+    query_interface : Proc(IStreamInterleave*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IStreamInterleave*, UInt32),
+    release : Proc(IStreamInterleave*, UInt32),
+    read : Proc(IStreamInterleave*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    write : Proc(IStreamInterleave*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    seek : Proc(IStreamInterleave*, Win32cr::Foundation::LARGE_INTEGER, Win32cr::System::Com::STREAM_SEEK, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    set_size : Proc(IStreamInterleave*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::HRESULT),
+    copy_to : Proc(IStreamInterleave*, Void*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    commit : Proc(IStreamInterleave*, Win32cr::System::Com::STGC, Win32cr::Foundation::HRESULT),
+    revert : Proc(IStreamInterleave*, Win32cr::Foundation::HRESULT),
+    lock_region : Proc(IStreamInterleave*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    unlock_region : Proc(IStreamInterleave*, Win32cr::Foundation::ULARGE_INTEGER, Win32cr::Foundation::ULARGE_INTEGER, UInt32, Win32cr::Foundation::HRESULT),
+    stat : Proc(IStreamInterleave*, Win32cr::System::Com::STATSTG*, UInt32, Win32cr::Foundation::HRESULT),
+    clone : Proc(IStreamInterleave*, Void**, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IStreamInterleave*, Void**, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("27354147-7f64-5b0f-8f00-5d77afbe261e")]
+  record IStreamInterleave, lpVtbl : IStreamInterleaveVtbl* do
+    GUID = LibC::GUID.new(0x27354147_u32, 0x7f64_u16, 0x5b0f_u16, StaticArray[0x8f_u8, 0x0_u8, 0x5d_u8, 0x77_u8, 0xaf_u8, 0xbe_u8, 0x26_u8, 0x1e_u8])
+    def query_interface(this : IStreamInterleave*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IStreamInterleave*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IStreamInterleave*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def read(this : IStreamInterleave*, pv : Void*, cb : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read.call(this, pv, cb, pcbRead)
+    end
+    def write(this : IStreamInterleave*, pv : Void*, cb : UInt32, pcbWritten : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write.call(this, pv, cb, pcbWritten)
+    end
+    def seek(this : IStreamInterleave*, dlibMove : Win32cr::Foundation::LARGE_INTEGER, dwOrigin : Win32cr::System::Com::STREAM_SEEK, plibNewPosition : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.seek.call(this, dlibMove, dwOrigin, plibNewPosition)
+    end
+    def set_size(this : IStreamInterleave*, libNewSize : Win32cr::Foundation::ULARGE_INTEGER) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_size.call(this, libNewSize)
+    end
+    def copy_to(this : IStreamInterleave*, pstm : Void*, cb : Win32cr::Foundation::ULARGE_INTEGER, pcbRead : Win32cr::Foundation::ULARGE_INTEGER*, pcbWritten : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_to.call(this, pstm, cb, pcbRead, pcbWritten)
+    end
+    def commit(this : IStreamInterleave*, grfCommitFlags : Win32cr::System::Com::STGC) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this, grfCommitFlags)
+    end
+    def revert(this : IStreamInterleave*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.revert.call(this)
+    end
+    def lock_region(this : IStreamInterleave*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.lock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def unlock_region(this : IStreamInterleave*, libOffset : Win32cr::Foundation::ULARGE_INTEGER, cb : Win32cr::Foundation::ULARGE_INTEGER, dwLockType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unlock_region.call(this, libOffset, cb, dwLockType)
+    end
+    def stat(this : IStreamInterleave*, pstatstg : Win32cr::System::Com::STATSTG*, grfStatFlag : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stat.call(this, pstatstg, grfStatFlag)
+    end
+    def clone(this : IStreamInterleave*, ppstm : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppstm)
+    end
+    def initialize__(this : IStreamInterleave*, streams : Void**, interleaveSizes : UInt32*, streamCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, streams, interleaveSizes, streamCount)
+    end
+
+  end
+
+  @[Extern]
+  record IRawCDImageCreatorVtbl,
+    query_interface : Proc(IRawCDImageCreator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IRawCDImageCreator*, UInt32),
+    release : Proc(IRawCDImageCreator*, UInt32),
+    get_type_info_count : Proc(IRawCDImageCreator*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IRawCDImageCreator*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IRawCDImageCreator*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IRawCDImageCreator*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    create_result_image : Proc(IRawCDImageCreator*, Void**, Win32cr::Foundation::HRESULT),
+    add_track : Proc(IRawCDImageCreator*, Win32cr::Storage::Imapi::IMAPI_CD_SECTOR_TYPE, Void*, Int32*, Win32cr::Foundation::HRESULT),
+    add_special_pregap : Proc(IRawCDImageCreator*, Void*, Win32cr::Foundation::HRESULT),
+    add_subcode_rw_generator : Proc(IRawCDImageCreator*, Void*, Win32cr::Foundation::HRESULT),
+    put_ResultingImageType : Proc(IRawCDImageCreator*, Win32cr::Storage::Imapi::IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE, Win32cr::Foundation::HRESULT),
+    get_ResultingImageType : Proc(IRawCDImageCreator*, Win32cr::Storage::Imapi::IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE*, Win32cr::Foundation::HRESULT),
+    get_StartOfLeadout : Proc(IRawCDImageCreator*, Int32*, Win32cr::Foundation::HRESULT),
+    put_StartOfLeadoutLimit : Proc(IRawCDImageCreator*, Int32, Win32cr::Foundation::HRESULT),
+    get_StartOfLeadoutLimit : Proc(IRawCDImageCreator*, Int32*, Win32cr::Foundation::HRESULT),
+    put_DisableGaplessAudio : Proc(IRawCDImageCreator*, Int16, Win32cr::Foundation::HRESULT),
+    get_DisableGaplessAudio : Proc(IRawCDImageCreator*, Int16*, Win32cr::Foundation::HRESULT),
+    put_MediaCatalogNumber : Proc(IRawCDImageCreator*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_MediaCatalogNumber : Proc(IRawCDImageCreator*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_StartingTrackNumber : Proc(IRawCDImageCreator*, Int32, Win32cr::Foundation::HRESULT),
+    get_StartingTrackNumber : Proc(IRawCDImageCreator*, Int32*, Win32cr::Foundation::HRESULT),
+    get_TrackInfo : Proc(IRawCDImageCreator*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    get_NumberOfExistingTracks : Proc(IRawCDImageCreator*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LastUsedUserSectorInImage : Proc(IRawCDImageCreator*, Int32*, Win32cr::Foundation::HRESULT),
+    get_ExpectedTableOfContents : Proc(IRawCDImageCreator*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("25983550-9d65-49ce-b335-40630d901227")]
+  record IRawCDImageCreator, lpVtbl : IRawCDImageCreatorVtbl* do
+    GUID = LibC::GUID.new(0x25983550_u32, 0x9d65_u16, 0x49ce_u16, StaticArray[0xb3_u8, 0x35_u8, 0x40_u8, 0x63_u8, 0xd_u8, 0x90_u8, 0x12_u8, 0x27_u8])
+    def query_interface(this : IRawCDImageCreator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IRawCDImageCreator*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IRawCDImageCreator*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IRawCDImageCreator*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IRawCDImageCreator*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IRawCDImageCreator*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IRawCDImageCreator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def create_result_image(this : IRawCDImageCreator*, resultStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_result_image.call(this, resultStream)
+    end
+    def add_track(this : IRawCDImageCreator*, dataType : Win32cr::Storage::Imapi::IMAPI_CD_SECTOR_TYPE, data : Void*, trackIndex : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_track.call(this, dataType, data, trackIndex)
+    end
+    def add_special_pregap(this : IRawCDImageCreator*, data : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_special_pregap.call(this, data)
+    end
+    def add_subcode_rw_generator(this : IRawCDImageCreator*, subcode : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_subcode_rw_generator.call(this, subcode)
+    end
+    def put_ResultingImageType(this : IRawCDImageCreator*, value : Win32cr::Storage::Imapi::IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ResultingImageType.call(this, value)
+    end
+    def get_ResultingImageType(this : IRawCDImageCreator*, value : Win32cr::Storage::Imapi::IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ResultingImageType.call(this, value)
+    end
+    def get_StartOfLeadout(this : IRawCDImageCreator*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartOfLeadout.call(this, value)
+    end
+    def put_StartOfLeadoutLimit(this : IRawCDImageCreator*, value : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_StartOfLeadoutLimit.call(this, value)
+    end
+    def get_StartOfLeadoutLimit(this : IRawCDImageCreator*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartOfLeadoutLimit.call(this, value)
+    end
+    def put_DisableGaplessAudio(this : IRawCDImageCreator*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DisableGaplessAudio.call(this, value)
+    end
+    def get_DisableGaplessAudio(this : IRawCDImageCreator*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisableGaplessAudio.call(this, value)
+    end
+    def put_MediaCatalogNumber(this : IRawCDImageCreator*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MediaCatalogNumber.call(this, value)
+    end
+    def get_MediaCatalogNumber(this : IRawCDImageCreator*, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MediaCatalogNumber.call(this, value)
+    end
+    def put_StartingTrackNumber(this : IRawCDImageCreator*, value : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_StartingTrackNumber.call(this, value)
+    end
+    def get_StartingTrackNumber(this : IRawCDImageCreator*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartingTrackNumber.call(this, value)
+    end
+    def get_TrackInfo(this : IRawCDImageCreator*, trackIndex : Int32, value : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TrackInfo.call(this, trackIndex, value)
+    end
+    def get_NumberOfExistingTracks(this : IRawCDImageCreator*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NumberOfExistingTracks.call(this, value)
+    end
+    def get_LastUsedUserSectorInImage(this : IRawCDImageCreator*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastUsedUserSectorInImage.call(this, value)
+    end
+    def get_ExpectedTableOfContents(this : IRawCDImageCreator*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ExpectedTableOfContents.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IRawCDImageTrackInfoVtbl,
+    query_interface : Proc(IRawCDImageTrackInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IRawCDImageTrackInfo*, UInt32),
+    release : Proc(IRawCDImageTrackInfo*, UInt32),
+    get_type_info_count : Proc(IRawCDImageTrackInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IRawCDImageTrackInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IRawCDImageTrackInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IRawCDImageTrackInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_StartingLba : Proc(IRawCDImageTrackInfo*, Int32*, Win32cr::Foundation::HRESULT),
+    get_SectorCount : Proc(IRawCDImageTrackInfo*, Int32*, Win32cr::Foundation::HRESULT),
+    get_TrackNumber : Proc(IRawCDImageTrackInfo*, Int32*, Win32cr::Foundation::HRESULT),
+    get_SectorType : Proc(IRawCDImageTrackInfo*, Win32cr::Storage::Imapi::IMAPI_CD_SECTOR_TYPE*, Win32cr::Foundation::HRESULT),
+    get_ISRC : Proc(IRawCDImageTrackInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_ISRC : Proc(IRawCDImageTrackInfo*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_DigitalAudioCopySetting : Proc(IRawCDImageTrackInfo*, Win32cr::Storage::Imapi::IMAPI_CD_TRACK_DIGITAL_COPY_SETTING*, Win32cr::Foundation::HRESULT),
+    put_DigitalAudioCopySetting : Proc(IRawCDImageTrackInfo*, Win32cr::Storage::Imapi::IMAPI_CD_TRACK_DIGITAL_COPY_SETTING, Win32cr::Foundation::HRESULT),
+    get_AudioHasPreemphasis : Proc(IRawCDImageTrackInfo*, Int16*, Win32cr::Foundation::HRESULT),
+    put_AudioHasPreemphasis : Proc(IRawCDImageTrackInfo*, Int16, Win32cr::Foundation::HRESULT),
+    get_TrackIndexes : Proc(IRawCDImageTrackInfo*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    add_track_index : Proc(IRawCDImageTrackInfo*, Int32, Win32cr::Foundation::HRESULT),
+    clear_track_index : Proc(IRawCDImageTrackInfo*, Int32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("25983551-9d65-49ce-b335-40630d901227")]
+  record IRawCDImageTrackInfo, lpVtbl : IRawCDImageTrackInfoVtbl* do
+    GUID = LibC::GUID.new(0x25983551_u32, 0x9d65_u16, 0x49ce_u16, StaticArray[0xb3_u8, 0x35_u8, 0x40_u8, 0x63_u8, 0xd_u8, 0x90_u8, 0x12_u8, 0x27_u8])
+    def query_interface(this : IRawCDImageTrackInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IRawCDImageTrackInfo*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IRawCDImageTrackInfo*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IRawCDImageTrackInfo*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IRawCDImageTrackInfo*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IRawCDImageTrackInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IRawCDImageTrackInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_StartingLba(this : IRawCDImageTrackInfo*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartingLba.call(this, value)
+    end
+    def get_SectorCount(this : IRawCDImageTrackInfo*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SectorCount.call(this, value)
+    end
+    def get_TrackNumber(this : IRawCDImageTrackInfo*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TrackNumber.call(this, value)
+    end
+    def get_SectorType(this : IRawCDImageTrackInfo*, value : Win32cr::Storage::Imapi::IMAPI_CD_SECTOR_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SectorType.call(this, value)
+    end
+    def get_ISRC(this : IRawCDImageTrackInfo*, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ISRC.call(this, value)
+    end
+    def put_ISRC(this : IRawCDImageTrackInfo*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ISRC.call(this, value)
+    end
+    def get_DigitalAudioCopySetting(this : IRawCDImageTrackInfo*, value : Win32cr::Storage::Imapi::IMAPI_CD_TRACK_DIGITAL_COPY_SETTING*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DigitalAudioCopySetting.call(this, value)
+    end
+    def put_DigitalAudioCopySetting(this : IRawCDImageTrackInfo*, value : Win32cr::Storage::Imapi::IMAPI_CD_TRACK_DIGITAL_COPY_SETTING) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DigitalAudioCopySetting.call(this, value)
+    end
+    def get_AudioHasPreemphasis(this : IRawCDImageTrackInfo*, value : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AudioHasPreemphasis.call(this, value)
+    end
+    def put_AudioHasPreemphasis(this : IRawCDImageTrackInfo*, value : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_AudioHasPreemphasis.call(this, value)
+    end
+    def get_TrackIndexes(this : IRawCDImageTrackInfo*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TrackIndexes.call(this, value)
+    end
+    def add_track_index(this : IRawCDImageTrackInfo*, lbaOffset : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_track_index.call(this, lbaOffset)
+    end
+    def clear_track_index(this : IRawCDImageTrackInfo*, lbaOffset : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear_track_index.call(this, lbaOffset)
+    end
+
+  end
+
+  @[Extern]
+  record IBlockRangeVtbl,
+    query_interface : Proc(IBlockRange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IBlockRange*, UInt32),
+    release : Proc(IBlockRange*, UInt32),
+    get_type_info_count : Proc(IBlockRange*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IBlockRange*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IBlockRange*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IBlockRange*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_StartLba : Proc(IBlockRange*, Int32*, Win32cr::Foundation::HRESULT),
+    get_EndLba : Proc(IBlockRange*, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b507ca25-2204-11dd-966a-001aa01bbc58")]
+  record IBlockRange, lpVtbl : IBlockRangeVtbl* do
+    GUID = LibC::GUID.new(0xb507ca25_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
+    def query_interface(this : IBlockRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IBlockRange*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IBlockRange*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IBlockRange*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IBlockRange*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IBlockRange*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IBlockRange*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_StartLba(this : IBlockRange*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartLba.call(this, value)
+    end
+    def get_EndLba(this : IBlockRange*, value : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EndLba.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IBlockRangeListVtbl,
+    query_interface : Proc(IBlockRangeList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IBlockRangeList*, UInt32),
+    release : Proc(IBlockRangeList*, UInt32),
+    get_type_info_count : Proc(IBlockRangeList*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IBlockRangeList*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IBlockRangeList*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IBlockRangeList*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_BlockRanges : Proc(IBlockRangeList*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b507ca26-2204-11dd-966a-001aa01bbc58")]
+  record IBlockRangeList, lpVtbl : IBlockRangeListVtbl* do
+    GUID = LibC::GUID.new(0xb507ca26_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
+    def query_interface(this : IBlockRangeList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IBlockRangeList*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IBlockRangeList*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IBlockRangeList*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IBlockRangeList*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IBlockRangeList*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IBlockRangeList*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_BlockRanges(this : IBlockRangeList*, value : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BlockRanges.call(this, value)
+    end
+
+  end
+
+  @[Extern]
+  record IBootOptionsVtbl,
+    query_interface : Proc(IBootOptions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IBootOptions*, UInt32),
+    release : Proc(IBootOptions*, UInt32),
+    get_type_info_count : Proc(IBootOptions*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IBootOptions*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IBootOptions*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IBootOptions*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_BootImage : Proc(IBootOptions*, Void**, Win32cr::Foundation::HRESULT),
+    get_Manufacturer : Proc(IBootOptions*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Manufacturer : Proc(IBootOptions*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_PlatformId : Proc(IBootOptions*, Win32cr::Storage::Imapi::PlatformId*, Win32cr::Foundation::HRESULT),
+    put_PlatformId : Proc(IBootOptions*, Win32cr::Storage::Imapi::PlatformId, Win32cr::Foundation::HRESULT),
+    get_Emulation : Proc(IBootOptions*, Win32cr::Storage::Imapi::EmulationType*, Win32cr::Foundation::HRESULT),
+    put_Emulation : Proc(IBootOptions*, Win32cr::Storage::Imapi::EmulationType, Win32cr::Foundation::HRESULT),
+    get_ImageSize : Proc(IBootOptions*, UInt32*, Win32cr::Foundation::HRESULT),
+    assign_boot_image : Proc(IBootOptions*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2c941fd4-975b-59be-a960-9a2a262853a5")]
+  record IBootOptions, lpVtbl : IBootOptionsVtbl* do
+    GUID = LibC::GUID.new(0x2c941fd4_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+    def query_interface(this : IBootOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IBootOptions*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IBootOptions*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IBootOptions*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IBootOptions*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IBootOptions*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IBootOptions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_BootImage(this : IBootOptions*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BootImage.call(this, pVal)
+    end
+    def get_Manufacturer(this : IBootOptions*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Manufacturer.call(this, pVal)
+    end
+    def put_Manufacturer(this : IBootOptions*, newVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Manufacturer.call(this, newVal)
+    end
+    def get_PlatformId(this : IBootOptions*, pVal : Win32cr::Storage::Imapi::PlatformId*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PlatformId.call(this, pVal)
+    end
+    def put_PlatformId(this : IBootOptions*, newVal : Win32cr::Storage::Imapi::PlatformId) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_PlatformId.call(this, newVal)
+    end
+    def get_Emulation(this : IBootOptions*, pVal : Win32cr::Storage::Imapi::EmulationType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Emulation.call(this, pVal)
+    end
+    def put_Emulation(this : IBootOptions*, newVal : Win32cr::Storage::Imapi::EmulationType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Emulation.call(this, newVal)
+    end
+    def get_ImageSize(this : IBootOptions*, pVal : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ImageSize.call(this, pVal)
+    end
+    def assign_boot_image(this : IBootOptions*, newVal : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.assign_boot_image.call(this, newVal)
+    end
+
+  end
+
+  @[Extern]
+  record IProgressItemVtbl,
+    query_interface : Proc(IProgressItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IProgressItem*, UInt32),
+    release : Proc(IProgressItem*, UInt32),
+    get_type_info_count : Proc(IProgressItem*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IProgressItem*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IProgressItem*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IProgressItem*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Description : Proc(IProgressItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_FirstBlock : Proc(IProgressItem*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_LastBlock : Proc(IProgressItem*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_BlockCount : Proc(IProgressItem*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2c941fd5-975b-59be-a960-9a2a262853a5")]
+  record IProgressItem, lpVtbl : IProgressItemVtbl* do
+    GUID = LibC::GUID.new(0x2c941fd5_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+    def query_interface(this : IProgressItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IProgressItem*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IProgressItem*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IProgressItem*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IProgressItem*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IProgressItem*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IProgressItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Description(this : IProgressItem*, desc : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Description.call(this, desc)
+    end
+    def get_FirstBlock(this : IProgressItem*, block : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FirstBlock.call(this, block)
+    end
+    def get_LastBlock(this : IProgressItem*, block : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastBlock.call(this, block)
+    end
+    def get_BlockCount(this : IProgressItem*, blocks : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BlockCount.call(this, blocks)
+    end
+
+  end
+
+  @[Extern]
+  record IEnumProgressItemsVtbl,
+    query_interface : Proc(IEnumProgressItems*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEnumProgressItems*, UInt32),
+    release : Proc(IEnumProgressItems*, UInt32),
+    next__ : Proc(IEnumProgressItems*, UInt32, Void**, UInt32*, Win32cr::Foundation::HRESULT),
+    skip : Proc(IEnumProgressItems*, UInt32, Win32cr::Foundation::HRESULT),
+    reset : Proc(IEnumProgressItems*, Win32cr::Foundation::HRESULT),
+    clone : Proc(IEnumProgressItems*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2c941fd6-975b-59be-a960-9a2a262853a5")]
+  record IEnumProgressItems, lpVtbl : IEnumProgressItemsVtbl* do
+    GUID = LibC::GUID.new(0x2c941fd6_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+    def query_interface(this : IEnumProgressItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEnumProgressItems*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEnumProgressItems*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def next__(this : IEnumProgressItems*, celt : UInt32, rgelt : Void**, pceltFetched : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.next__.call(this, celt, rgelt, pceltFetched)
+    end
+    def skip(this : IEnumProgressItems*, celt : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.skip.call(this, celt)
+    end
+    def reset(this : IEnumProgressItems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def clone(this : IEnumProgressItems*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppEnum)
+    end
+
+  end
+
+  @[Extern]
+  record IProgressItemsVtbl,
+    query_interface : Proc(IProgressItems*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IProgressItems*, UInt32),
+    release : Proc(IProgressItems*, UInt32),
+    get_type_info_count : Proc(IProgressItems*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IProgressItems*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IProgressItems*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IProgressItems*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(IProgressItems*, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IProgressItems*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(IProgressItems*, Int32*, Win32cr::Foundation::HRESULT),
+    progress_item_from_block : Proc(IProgressItems*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    progress_item_from_description : Proc(IProgressItems*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_EnumProgressItems : Proc(IProgressItems*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2c941fd7-975b-59be-a960-9a2a262853a5")]
+  record IProgressItems, lpVtbl : IProgressItemsVtbl* do
+    GUID = LibC::GUID.new(0x2c941fd7_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+    def query_interface(this : IProgressItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IProgressItems*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IProgressItems*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IProgressItems*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IProgressItems*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IProgressItems*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IProgressItems*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get__NewEnum(this : IProgressItems*, new_enum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, new_enum)
+    end
+    def get_Item(this : IProgressItems*, index : Int32, item : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, index, item)
+    end
+    def get_Count(this : IProgressItems*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def progress_item_from_block(this : IProgressItems*, block : UInt32, item : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.progress_item_from_block.call(this, block, item)
+    end
+    def progress_item_from_description(this : IProgressItems*, description : Win32cr::Foundation::BSTR, item : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.progress_item_from_description.call(this, description, item)
+    end
+    def get_EnumProgressItems(this : IProgressItems*, new_enum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EnumProgressItems.call(this, new_enum)
+    end
+
+  end
+
+  @[Extern]
+  record IFileSystemImageResultVtbl,
+    query_interface : Proc(IFileSystemImageResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFileSystemImageResult*, UInt32),
+    release : Proc(IFileSystemImageResult*, UInt32),
+    get_type_info_count : Proc(IFileSystemImageResult*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFileSystemImageResult*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFileSystemImageResult*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFileSystemImageResult*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ImageStream : Proc(IFileSystemImageResult*, Void**, Win32cr::Foundation::HRESULT),
+    get_ProgressItems : Proc(IFileSystemImageResult*, Void**, Win32cr::Foundation::HRESULT),
+    get_TotalBlocks : Proc(IFileSystemImageResult*, Int32*, Win32cr::Foundation::HRESULT),
+    get_BlockSize : Proc(IFileSystemImageResult*, Int32*, Win32cr::Foundation::HRESULT),
+    get_DiscId : Proc(IFileSystemImageResult*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2c941fd8-975b-59be-a960-9a2a262853a5")]
+  record IFileSystemImageResult, lpVtbl : IFileSystemImageResultVtbl* do
+    GUID = LibC::GUID.new(0x2c941fd8_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+    def query_interface(this : IFileSystemImageResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFileSystemImageResult*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFileSystemImageResult*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFileSystemImageResult*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFileSystemImageResult*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFileSystemImageResult*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFileSystemImageResult*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_ImageStream(this : IFileSystemImageResult*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ImageStream.call(this, pVal)
+    end
+    def get_ProgressItems(this : IFileSystemImageResult*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ProgressItems.call(this, pVal)
+    end
+    def get_TotalBlocks(this : IFileSystemImageResult*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TotalBlocks.call(this, pVal)
+    end
+    def get_BlockSize(this : IFileSystemImageResult*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BlockSize.call(this, pVal)
+    end
+    def get_DiscId(this : IFileSystemImageResult*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DiscId.call(this, pVal)
+    end
+
+  end
+
+  @[Extern]
+  record IFileSystemImageResult2Vtbl,
+    query_interface : Proc(IFileSystemImageResult2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFileSystemImageResult2*, UInt32),
+    release : Proc(IFileSystemImageResult2*, UInt32),
+    get_type_info_count : Proc(IFileSystemImageResult2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFileSystemImageResult2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFileSystemImageResult2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFileSystemImageResult2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ImageStream : Proc(IFileSystemImageResult2*, Void**, Win32cr::Foundation::HRESULT),
+    get_ProgressItems : Proc(IFileSystemImageResult2*, Void**, Win32cr::Foundation::HRESULT),
+    get_TotalBlocks : Proc(IFileSystemImageResult2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_BlockSize : Proc(IFileSystemImageResult2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_DiscId : Proc(IFileSystemImageResult2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_ModifiedBlocks : Proc(IFileSystemImageResult2*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b507ca29-2204-11dd-966a-001aa01bbc58")]
+  record IFileSystemImageResult2, lpVtbl : IFileSystemImageResult2Vtbl* do
+    GUID = LibC::GUID.new(0xb507ca29_u32, 0x2204_u16, 0x11dd_u16, StaticArray[0x96_u8, 0x6a_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
+    def query_interface(this : IFileSystemImageResult2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFileSystemImageResult2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFileSystemImageResult2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFileSystemImageResult2*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFileSystemImageResult2*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFileSystemImageResult2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFileSystemImageResult2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_ImageStream(this : IFileSystemImageResult2*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ImageStream.call(this, pVal)
+    end
+    def get_ProgressItems(this : IFileSystemImageResult2*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ProgressItems.call(this, pVal)
+    end
+    def get_TotalBlocks(this : IFileSystemImageResult2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TotalBlocks.call(this, pVal)
+    end
+    def get_BlockSize(this : IFileSystemImageResult2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BlockSize.call(this, pVal)
+    end
+    def get_DiscId(this : IFileSystemImageResult2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DiscId.call(this, pVal)
+    end
+    def get_ModifiedBlocks(this : IFileSystemImageResult2*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ModifiedBlocks.call(this, pVal)
+    end
+
+  end
+
+  @[Extern]
+  record IFsiItemVtbl,
+    query_interface : Proc(IFsiItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFsiItem*, UInt32),
+    release : Proc(IFsiItem*, UInt32),
+    get_type_info_count : Proc(IFsiItem*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFsiItem*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFsiItem*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFsiItem*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(IFsiItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_FullPath : Proc(IFsiItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_CreationTime : Proc(IFsiItem*, Float64*, Win32cr::Foundation::HRESULT),
+    put_CreationTime : Proc(IFsiItem*, Float64, Win32cr::Foundation::HRESULT),
+    get_LastAccessedTime : Proc(IFsiItem*, Float64*, Win32cr::Foundation::HRESULT),
+    put_LastAccessedTime : Proc(IFsiItem*, Float64, Win32cr::Foundation::HRESULT),
+    get_LastModifiedTime : Proc(IFsiItem*, Float64*, Win32cr::Foundation::HRESULT),
+    put_LastModifiedTime : Proc(IFsiItem*, Float64, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IFsiItem*, Int16*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IFsiItem*, Int16, Win32cr::Foundation::HRESULT),
+    file_system_name : Proc(IFsiItem*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    file_system_path : Proc(IFsiItem*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2c941fd9-975b-59be-a960-9a2a262853a5")]
+  record IFsiItem, lpVtbl : IFsiItemVtbl* do
+    GUID = LibC::GUID.new(0x2c941fd9_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+    def query_interface(this : IFsiItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFsiItem*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFsiItem*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFsiItem*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFsiItem*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFsiItem*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFsiItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Name(this : IFsiItem*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, pVal)
+    end
+    def get_FullPath(this : IFsiItem*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FullPath.call(this, pVal)
+    end
+    def get_CreationTime(this : IFsiItem*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CreationTime.call(this, pVal)
+    end
+    def put_CreationTime(this : IFsiItem*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_CreationTime.call(this, newVal)
+    end
+    def get_LastAccessedTime(this : IFsiItem*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastAccessedTime.call(this, pVal)
+    end
+    def put_LastAccessedTime(this : IFsiItem*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LastAccessedTime.call(this, newVal)
+    end
+    def get_LastModifiedTime(this : IFsiItem*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastModifiedTime.call(this, pVal)
+    end
+    def put_LastModifiedTime(this : IFsiItem*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LastModifiedTime.call(this, newVal)
+    end
+    def get_IsHidden(this : IFsiItem*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsHidden.call(this, pVal)
+    end
+    def put_IsHidden(this : IFsiItem*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_IsHidden.call(this, newVal)
+    end
+    def file_system_name(this : IFsiItem*, fileSystem : Win32cr::Storage::Imapi::FsiFileSystems, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.file_system_name.call(this, fileSystem, pVal)
+    end
+    def file_system_path(this : IFsiItem*, fileSystem : Win32cr::Storage::Imapi::FsiFileSystems, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.file_system_path.call(this, fileSystem, pVal)
+    end
+
+  end
+
+  @[Extern]
+  record IEnumFsiItemsVtbl,
+    query_interface : Proc(IEnumFsiItems*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEnumFsiItems*, UInt32),
+    release : Proc(IEnumFsiItems*, UInt32),
+    next__ : Proc(IEnumFsiItems*, UInt32, Void**, UInt32*, Win32cr::Foundation::HRESULT),
+    skip : Proc(IEnumFsiItems*, UInt32, Win32cr::Foundation::HRESULT),
+    reset : Proc(IEnumFsiItems*, Win32cr::Foundation::HRESULT),
+    clone : Proc(IEnumFsiItems*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2c941fda-975b-59be-a960-9a2a262853a5")]
+  record IEnumFsiItems, lpVtbl : IEnumFsiItemsVtbl* do
+    GUID = LibC::GUID.new(0x2c941fda_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+    def query_interface(this : IEnumFsiItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEnumFsiItems*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEnumFsiItems*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def next__(this : IEnumFsiItems*, celt : UInt32, rgelt : Void**, pceltFetched : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.next__.call(this, celt, rgelt, pceltFetched)
+    end
+    def skip(this : IEnumFsiItems*, celt : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.skip.call(this, celt)
+    end
+    def reset(this : IEnumFsiItems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def clone(this : IEnumFsiItems*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppEnum)
+    end
+
+  end
+
+  @[Extern]
+  record IFsiFileItemVtbl,
+    query_interface : Proc(IFsiFileItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFsiFileItem*, UInt32),
+    release : Proc(IFsiFileItem*, UInt32),
+    get_type_info_count : Proc(IFsiFileItem*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFsiFileItem*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFsiFileItem*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFsiFileItem*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(IFsiFileItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_FullPath : Proc(IFsiFileItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_CreationTime : Proc(IFsiFileItem*, Float64*, Win32cr::Foundation::HRESULT),
+    put_CreationTime : Proc(IFsiFileItem*, Float64, Win32cr::Foundation::HRESULT),
+    get_LastAccessedTime : Proc(IFsiFileItem*, Float64*, Win32cr::Foundation::HRESULT),
+    put_LastAccessedTime : Proc(IFsiFileItem*, Float64, Win32cr::Foundation::HRESULT),
+    get_LastModifiedTime : Proc(IFsiFileItem*, Float64*, Win32cr::Foundation::HRESULT),
+    put_LastModifiedTime : Proc(IFsiFileItem*, Float64, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IFsiFileItem*, Int16*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IFsiFileItem*, Int16, Win32cr::Foundation::HRESULT),
+    file_system_name : Proc(IFsiFileItem*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    file_system_path : Proc(IFsiFileItem*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_DataSize : Proc(IFsiFileItem*, Int64*, Win32cr::Foundation::HRESULT),
+    get_DataSize32BitLow : Proc(IFsiFileItem*, Int32*, Win32cr::Foundation::HRESULT),
+    get_DataSize32BitHigh : Proc(IFsiFileItem*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Data : Proc(IFsiFileItem*, Void**, Win32cr::Foundation::HRESULT),
+    put_Data : Proc(IFsiFileItem*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2c941fdb-975b-59be-a960-9a2a262853a5")]
+  record IFsiFileItem, lpVtbl : IFsiFileItemVtbl* do
+    GUID = LibC::GUID.new(0x2c941fdb_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+    def query_interface(this : IFsiFileItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFsiFileItem*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFsiFileItem*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFsiFileItem*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFsiFileItem*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFsiFileItem*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFsiFileItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Name(this : IFsiFileItem*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, pVal)
+    end
+    def get_FullPath(this : IFsiFileItem*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FullPath.call(this, pVal)
+    end
+    def get_CreationTime(this : IFsiFileItem*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CreationTime.call(this, pVal)
+    end
+    def put_CreationTime(this : IFsiFileItem*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_CreationTime.call(this, newVal)
+    end
+    def get_LastAccessedTime(this : IFsiFileItem*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastAccessedTime.call(this, pVal)
+    end
+    def put_LastAccessedTime(this : IFsiFileItem*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LastAccessedTime.call(this, newVal)
+    end
+    def get_LastModifiedTime(this : IFsiFileItem*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastModifiedTime.call(this, pVal)
+    end
+    def put_LastModifiedTime(this : IFsiFileItem*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LastModifiedTime.call(this, newVal)
+    end
+    def get_IsHidden(this : IFsiFileItem*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsHidden.call(this, pVal)
+    end
+    def put_IsHidden(this : IFsiFileItem*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_IsHidden.call(this, newVal)
+    end
+    def file_system_name(this : IFsiFileItem*, fileSystem : Win32cr::Storage::Imapi::FsiFileSystems, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.file_system_name.call(this, fileSystem, pVal)
+    end
+    def file_system_path(this : IFsiFileItem*, fileSystem : Win32cr::Storage::Imapi::FsiFileSystems, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.file_system_path.call(this, fileSystem, pVal)
+    end
+    def get_DataSize(this : IFsiFileItem*, pVal : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataSize.call(this, pVal)
+    end
+    def get_DataSize32BitLow(this : IFsiFileItem*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataSize32BitLow.call(this, pVal)
+    end
+    def get_DataSize32BitHigh(this : IFsiFileItem*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataSize32BitHigh.call(this, pVal)
+    end
+    def get_Data(this : IFsiFileItem*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Data.call(this, pVal)
+    end
+    def put_Data(this : IFsiFileItem*, newVal : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Data.call(this, newVal)
+    end
+
+  end
+
+  @[Extern]
+  record IFsiFileItem2Vtbl,
+    query_interface : Proc(IFsiFileItem2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFsiFileItem2*, UInt32),
+    release : Proc(IFsiFileItem2*, UInt32),
+    get_type_info_count : Proc(IFsiFileItem2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFsiFileItem2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFsiFileItem2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFsiFileItem2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(IFsiFileItem2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_FullPath : Proc(IFsiFileItem2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_CreationTime : Proc(IFsiFileItem2*, Float64*, Win32cr::Foundation::HRESULT),
+    put_CreationTime : Proc(IFsiFileItem2*, Float64, Win32cr::Foundation::HRESULT),
+    get_LastAccessedTime : Proc(IFsiFileItem2*, Float64*, Win32cr::Foundation::HRESULT),
+    put_LastAccessedTime : Proc(IFsiFileItem2*, Float64, Win32cr::Foundation::HRESULT),
+    get_LastModifiedTime : Proc(IFsiFileItem2*, Float64*, Win32cr::Foundation::HRESULT),
+    put_LastModifiedTime : Proc(IFsiFileItem2*, Float64, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IFsiFileItem2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IFsiFileItem2*, Int16, Win32cr::Foundation::HRESULT),
+    file_system_name : Proc(IFsiFileItem2*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    file_system_path : Proc(IFsiFileItem2*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_DataSize : Proc(IFsiFileItem2*, Int64*, Win32cr::Foundation::HRESULT),
+    get_DataSize32BitLow : Proc(IFsiFileItem2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_DataSize32BitHigh : Proc(IFsiFileItem2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Data : Proc(IFsiFileItem2*, Void**, Win32cr::Foundation::HRESULT),
+    put_Data : Proc(IFsiFileItem2*, Void*, Win32cr::Foundation::HRESULT),
+    get_FsiNamedStreams : Proc(IFsiFileItem2*, Void**, Win32cr::Foundation::HRESULT),
+    get_IsNamedStream : Proc(IFsiFileItem2*, Int16*, Win32cr::Foundation::HRESULT),
+    add_stream : Proc(IFsiFileItem2*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
+    remove_stream : Proc(IFsiFileItem2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_IsRealTime : Proc(IFsiFileItem2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_IsRealTime : Proc(IFsiFileItem2*, Int16, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("199d0c19-11e1-40eb-8ec2-c8c822a07792")]
+  record IFsiFileItem2, lpVtbl : IFsiFileItem2Vtbl* do
+    GUID = LibC::GUID.new(0x199d0c19_u32, 0x11e1_u16, 0x40eb_u16, StaticArray[0x8e_u8, 0xc2_u8, 0xc8_u8, 0xc8_u8, 0x22_u8, 0xa0_u8, 0x77_u8, 0x92_u8])
+    def query_interface(this : IFsiFileItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFsiFileItem2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFsiFileItem2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFsiFileItem2*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFsiFileItem2*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFsiFileItem2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFsiFileItem2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Name(this : IFsiFileItem2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, pVal)
+    end
+    def get_FullPath(this : IFsiFileItem2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FullPath.call(this, pVal)
+    end
+    def get_CreationTime(this : IFsiFileItem2*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CreationTime.call(this, pVal)
+    end
+    def put_CreationTime(this : IFsiFileItem2*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_CreationTime.call(this, newVal)
+    end
+    def get_LastAccessedTime(this : IFsiFileItem2*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastAccessedTime.call(this, pVal)
+    end
+    def put_LastAccessedTime(this : IFsiFileItem2*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LastAccessedTime.call(this, newVal)
+    end
+    def get_LastModifiedTime(this : IFsiFileItem2*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastModifiedTime.call(this, pVal)
+    end
+    def put_LastModifiedTime(this : IFsiFileItem2*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LastModifiedTime.call(this, newVal)
+    end
+    def get_IsHidden(this : IFsiFileItem2*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsHidden.call(this, pVal)
+    end
+    def put_IsHidden(this : IFsiFileItem2*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_IsHidden.call(this, newVal)
+    end
+    def file_system_name(this : IFsiFileItem2*, fileSystem : Win32cr::Storage::Imapi::FsiFileSystems, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.file_system_name.call(this, fileSystem, pVal)
+    end
+    def file_system_path(this : IFsiFileItem2*, fileSystem : Win32cr::Storage::Imapi::FsiFileSystems, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.file_system_path.call(this, fileSystem, pVal)
+    end
+    def get_DataSize(this : IFsiFileItem2*, pVal : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataSize.call(this, pVal)
+    end
+    def get_DataSize32BitLow(this : IFsiFileItem2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataSize32BitLow.call(this, pVal)
+    end
+    def get_DataSize32BitHigh(this : IFsiFileItem2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataSize32BitHigh.call(this, pVal)
+    end
+    def get_Data(this : IFsiFileItem2*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Data.call(this, pVal)
+    end
+    def put_Data(this : IFsiFileItem2*, newVal : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Data.call(this, newVal)
+    end
+    def get_FsiNamedStreams(this : IFsiFileItem2*, streams : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FsiNamedStreams.call(this, streams)
+    end
+    def get_IsNamedStream(this : IFsiFileItem2*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsNamedStream.call(this, pVal)
+    end
+    def add_stream(this : IFsiFileItem2*, name : Win32cr::Foundation::BSTR, streamData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_stream.call(this, name, streamData)
+    end
+    def remove_stream(this : IFsiFileItem2*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_stream.call(this, name)
+    end
+    def get_IsRealTime(this : IFsiFileItem2*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsRealTime.call(this, pVal)
+    end
+    def put_IsRealTime(this : IFsiFileItem2*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_IsRealTime.call(this, newVal)
+    end
+
+  end
+
+  @[Extern]
+  record IFsiNamedStreamsVtbl,
+    query_interface : Proc(IFsiNamedStreams*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFsiNamedStreams*, UInt32),
+    release : Proc(IFsiNamedStreams*, UInt32),
+    get_type_info_count : Proc(IFsiNamedStreams*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFsiNamedStreams*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFsiNamedStreams*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFsiNamedStreams*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(IFsiNamedStreams*, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFsiNamedStreams*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(IFsiNamedStreams*, Int32*, Win32cr::Foundation::HRESULT),
+    get_EnumNamedStreams : Proc(IFsiNamedStreams*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("ed79ba56-5294-4250-8d46-f9aecee23459")]
+  record IFsiNamedStreams, lpVtbl : IFsiNamedStreamsVtbl* do
+    GUID = LibC::GUID.new(0xed79ba56_u32, 0x5294_u16, 0x4250_u16, StaticArray[0x8d_u8, 0x46_u8, 0xf9_u8, 0xae_u8, 0xce_u8, 0xe2_u8, 0x34_u8, 0x59_u8])
+    def query_interface(this : IFsiNamedStreams*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFsiNamedStreams*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFsiNamedStreams*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFsiNamedStreams*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFsiNamedStreams*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFsiNamedStreams*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFsiNamedStreams*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get__NewEnum(this : IFsiNamedStreams*, new_enum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, new_enum)
+    end
+    def get_Item(this : IFsiNamedStreams*, index : Int32, item : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, index, item)
+    end
+    def get_Count(this : IFsiNamedStreams*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def get_EnumNamedStreams(this : IFsiNamedStreams*, new_enum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EnumNamedStreams.call(this, new_enum)
+    end
+
+  end
+
+  @[Extern]
+  record IFsiDirectoryItemVtbl,
+    query_interface : Proc(IFsiDirectoryItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFsiDirectoryItem*, UInt32),
+    release : Proc(IFsiDirectoryItem*, UInt32),
+    get_type_info_count : Proc(IFsiDirectoryItem*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFsiDirectoryItem*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFsiDirectoryItem*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFsiDirectoryItem*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(IFsiDirectoryItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_FullPath : Proc(IFsiDirectoryItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_CreationTime : Proc(IFsiDirectoryItem*, Float64*, Win32cr::Foundation::HRESULT),
+    put_CreationTime : Proc(IFsiDirectoryItem*, Float64, Win32cr::Foundation::HRESULT),
+    get_LastAccessedTime : Proc(IFsiDirectoryItem*, Float64*, Win32cr::Foundation::HRESULT),
+    put_LastAccessedTime : Proc(IFsiDirectoryItem*, Float64, Win32cr::Foundation::HRESULT),
+    get_LastModifiedTime : Proc(IFsiDirectoryItem*, Float64*, Win32cr::Foundation::HRESULT),
+    put_LastModifiedTime : Proc(IFsiDirectoryItem*, Float64, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IFsiDirectoryItem*, Int16*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IFsiDirectoryItem*, Int16, Win32cr::Foundation::HRESULT),
+    file_system_name : Proc(IFsiDirectoryItem*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    file_system_path : Proc(IFsiDirectoryItem*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(IFsiDirectoryItem*, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFsiDirectoryItem*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(IFsiDirectoryItem*, Int32*, Win32cr::Foundation::HRESULT),
+    get_EnumFsiItems : Proc(IFsiDirectoryItem*, Void**, Win32cr::Foundation::HRESULT),
+    add_directory : Proc(IFsiDirectoryItem*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    add_file : Proc(IFsiDirectoryItem*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
+    add_tree : Proc(IFsiDirectoryItem*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    add : Proc(IFsiDirectoryItem*, Void*, Win32cr::Foundation::HRESULT),
+    remove : Proc(IFsiDirectoryItem*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove_tree : Proc(IFsiDirectoryItem*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2c941fdc-975b-59be-a960-9a2a262853a5")]
+  record IFsiDirectoryItem, lpVtbl : IFsiDirectoryItemVtbl* do
+    GUID = LibC::GUID.new(0x2c941fdc_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+    def query_interface(this : IFsiDirectoryItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFsiDirectoryItem*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFsiDirectoryItem*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFsiDirectoryItem*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFsiDirectoryItem*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFsiDirectoryItem*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFsiDirectoryItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Name(this : IFsiDirectoryItem*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, pVal)
+    end
+    def get_FullPath(this : IFsiDirectoryItem*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FullPath.call(this, pVal)
+    end
+    def get_CreationTime(this : IFsiDirectoryItem*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CreationTime.call(this, pVal)
+    end
+    def put_CreationTime(this : IFsiDirectoryItem*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_CreationTime.call(this, newVal)
+    end
+    def get_LastAccessedTime(this : IFsiDirectoryItem*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastAccessedTime.call(this, pVal)
+    end
+    def put_LastAccessedTime(this : IFsiDirectoryItem*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LastAccessedTime.call(this, newVal)
+    end
+    def get_LastModifiedTime(this : IFsiDirectoryItem*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastModifiedTime.call(this, pVal)
+    end
+    def put_LastModifiedTime(this : IFsiDirectoryItem*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LastModifiedTime.call(this, newVal)
+    end
+    def get_IsHidden(this : IFsiDirectoryItem*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsHidden.call(this, pVal)
+    end
+    def put_IsHidden(this : IFsiDirectoryItem*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_IsHidden.call(this, newVal)
+    end
+    def file_system_name(this : IFsiDirectoryItem*, fileSystem : Win32cr::Storage::Imapi::FsiFileSystems, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.file_system_name.call(this, fileSystem, pVal)
+    end
+    def file_system_path(this : IFsiDirectoryItem*, fileSystem : Win32cr::Storage::Imapi::FsiFileSystems, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.file_system_path.call(this, fileSystem, pVal)
+    end
+    def get__NewEnum(this : IFsiDirectoryItem*, new_enum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, new_enum)
+    end
+    def get_Item(this : IFsiDirectoryItem*, path : Win32cr::Foundation::BSTR, item : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, path, item)
+    end
+    def get_Count(this : IFsiDirectoryItem*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def get_EnumFsiItems(this : IFsiDirectoryItem*, new_enum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EnumFsiItems.call(this, new_enum)
+    end
+    def add_directory(this : IFsiDirectoryItem*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_directory.call(this, path)
+    end
+    def add_file(this : IFsiDirectoryItem*, path : Win32cr::Foundation::BSTR, fileData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_file.call(this, path, fileData)
+    end
+    def add_tree(this : IFsiDirectoryItem*, sourceDirectory : Win32cr::Foundation::BSTR, includeBaseDirectory : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_tree.call(this, sourceDirectory, includeBaseDirectory)
+    end
+    def add(this : IFsiDirectoryItem*, item : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, item)
+    end
+    def remove(this : IFsiDirectoryItem*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, path)
+    end
+    def remove_tree(this : IFsiDirectoryItem*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_tree.call(this, path)
+    end
+
+  end
+
+  @[Extern]
+  record IFsiDirectoryItem2Vtbl,
+    query_interface : Proc(IFsiDirectoryItem2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFsiDirectoryItem2*, UInt32),
+    release : Proc(IFsiDirectoryItem2*, UInt32),
+    get_type_info_count : Proc(IFsiDirectoryItem2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFsiDirectoryItem2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFsiDirectoryItem2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFsiDirectoryItem2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(IFsiDirectoryItem2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_FullPath : Proc(IFsiDirectoryItem2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_CreationTime : Proc(IFsiDirectoryItem2*, Float64*, Win32cr::Foundation::HRESULT),
+    put_CreationTime : Proc(IFsiDirectoryItem2*, Float64, Win32cr::Foundation::HRESULT),
+    get_LastAccessedTime : Proc(IFsiDirectoryItem2*, Float64*, Win32cr::Foundation::HRESULT),
+    put_LastAccessedTime : Proc(IFsiDirectoryItem2*, Float64, Win32cr::Foundation::HRESULT),
+    get_LastModifiedTime : Proc(IFsiDirectoryItem2*, Float64*, Win32cr::Foundation::HRESULT),
+    put_LastModifiedTime : Proc(IFsiDirectoryItem2*, Float64, Win32cr::Foundation::HRESULT),
+    get_IsHidden : Proc(IFsiDirectoryItem2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_IsHidden : Proc(IFsiDirectoryItem2*, Int16, Win32cr::Foundation::HRESULT),
+    file_system_name : Proc(IFsiDirectoryItem2*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    file_system_path : Proc(IFsiDirectoryItem2*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(IFsiDirectoryItem2*, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFsiDirectoryItem2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(IFsiDirectoryItem2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_EnumFsiItems : Proc(IFsiDirectoryItem2*, Void**, Win32cr::Foundation::HRESULT),
+    add_directory : Proc(IFsiDirectoryItem2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    add_file : Proc(IFsiDirectoryItem2*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
+    add_tree : Proc(IFsiDirectoryItem2*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    add : Proc(IFsiDirectoryItem2*, Void*, Win32cr::Foundation::HRESULT),
+    remove : Proc(IFsiDirectoryItem2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove_tree : Proc(IFsiDirectoryItem2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    add_tree_with_named_streams : Proc(IFsiDirectoryItem2*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f7fb4b9b-6d96-4d7b-9115-201b144811ef")]
+  record IFsiDirectoryItem2, lpVtbl : IFsiDirectoryItem2Vtbl* do
+    GUID = LibC::GUID.new(0xf7fb4b9b_u32, 0x6d96_u16, 0x4d7b_u16, StaticArray[0x91_u8, 0x15_u8, 0x20_u8, 0x1b_u8, 0x14_u8, 0x48_u8, 0x11_u8, 0xef_u8])
+    def query_interface(this : IFsiDirectoryItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFsiDirectoryItem2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFsiDirectoryItem2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFsiDirectoryItem2*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFsiDirectoryItem2*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFsiDirectoryItem2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFsiDirectoryItem2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Name(this : IFsiDirectoryItem2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, pVal)
+    end
+    def get_FullPath(this : IFsiDirectoryItem2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FullPath.call(this, pVal)
+    end
+    def get_CreationTime(this : IFsiDirectoryItem2*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CreationTime.call(this, pVal)
+    end
+    def put_CreationTime(this : IFsiDirectoryItem2*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_CreationTime.call(this, newVal)
+    end
+    def get_LastAccessedTime(this : IFsiDirectoryItem2*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastAccessedTime.call(this, pVal)
+    end
+    def put_LastAccessedTime(this : IFsiDirectoryItem2*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LastAccessedTime.call(this, newVal)
+    end
+    def get_LastModifiedTime(this : IFsiDirectoryItem2*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LastModifiedTime.call(this, pVal)
+    end
+    def put_LastModifiedTime(this : IFsiDirectoryItem2*, newVal : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LastModifiedTime.call(this, newVal)
+    end
+    def get_IsHidden(this : IFsiDirectoryItem2*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsHidden.call(this, pVal)
+    end
+    def put_IsHidden(this : IFsiDirectoryItem2*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_IsHidden.call(this, newVal)
+    end
+    def file_system_name(this : IFsiDirectoryItem2*, fileSystem : Win32cr::Storage::Imapi::FsiFileSystems, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.file_system_name.call(this, fileSystem, pVal)
+    end
+    def file_system_path(this : IFsiDirectoryItem2*, fileSystem : Win32cr::Storage::Imapi::FsiFileSystems, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.file_system_path.call(this, fileSystem, pVal)
+    end
+    def get__NewEnum(this : IFsiDirectoryItem2*, new_enum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, new_enum)
+    end
+    def get_Item(this : IFsiDirectoryItem2*, path : Win32cr::Foundation::BSTR, item : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, path, item)
+    end
+    def get_Count(this : IFsiDirectoryItem2*, count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def get_EnumFsiItems(this : IFsiDirectoryItem2*, new_enum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EnumFsiItems.call(this, new_enum)
+    end
+    def add_directory(this : IFsiDirectoryItem2*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_directory.call(this, path)
+    end
+    def add_file(this : IFsiDirectoryItem2*, path : Win32cr::Foundation::BSTR, fileData : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_file.call(this, path, fileData)
+    end
+    def add_tree(this : IFsiDirectoryItem2*, sourceDirectory : Win32cr::Foundation::BSTR, includeBaseDirectory : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_tree.call(this, sourceDirectory, includeBaseDirectory)
+    end
+    def add(this : IFsiDirectoryItem2*, item : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, item)
+    end
+    def remove(this : IFsiDirectoryItem2*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, path)
+    end
+    def remove_tree(this : IFsiDirectoryItem2*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_tree.call(this, path)
+    end
+    def add_tree_with_named_streams(this : IFsiDirectoryItem2*, sourceDirectory : Win32cr::Foundation::BSTR, includeBaseDirectory : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_tree_with_named_streams.call(this, sourceDirectory, includeBaseDirectory)
+    end
+
+  end
+
+  @[Extern]
+  record IFileSystemImageVtbl,
+    query_interface : Proc(IFileSystemImage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFileSystemImage*, UInt32),
+    release : Proc(IFileSystemImage*, UInt32),
+    get_type_info_count : Proc(IFileSystemImage*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFileSystemImage*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFileSystemImage*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFileSystemImage*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Root : Proc(IFileSystemImage*, Void**, Win32cr::Foundation::HRESULT),
+    get_SessionStartBlock : Proc(IFileSystemImage*, Int32*, Win32cr::Foundation::HRESULT),
+    put_SessionStartBlock : Proc(IFileSystemImage*, Int32, Win32cr::Foundation::HRESULT),
+    get_FreeMediaBlocks : Proc(IFileSystemImage*, Int32*, Win32cr::Foundation::HRESULT),
+    put_FreeMediaBlocks : Proc(IFileSystemImage*, Int32, Win32cr::Foundation::HRESULT),
+    set_max_media_blocks_from_device : Proc(IFileSystemImage*, Void*, Win32cr::Foundation::HRESULT),
+    get_UsedBlocks : Proc(IFileSystemImage*, Int32*, Win32cr::Foundation::HRESULT),
+    get_VolumeName : Proc(IFileSystemImage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_VolumeName : Proc(IFileSystemImage*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_ImportedVolumeName : Proc(IFileSystemImage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_BootImageOptions : Proc(IFileSystemImage*, Void**, Win32cr::Foundation::HRESULT),
+    put_BootImageOptions : Proc(IFileSystemImage*, Void*, Win32cr::Foundation::HRESULT),
+    get_FileCount : Proc(IFileSystemImage*, Int32*, Win32cr::Foundation::HRESULT),
+    get_DirectoryCount : Proc(IFileSystemImage*, Int32*, Win32cr::Foundation::HRESULT),
+    get_WorkingDirectory : Proc(IFileSystemImage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_WorkingDirectory : Proc(IFileSystemImage*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_ChangePoint : Proc(IFileSystemImage*, Int32*, Win32cr::Foundation::HRESULT),
+    get_StrictFileSystemCompliance : Proc(IFileSystemImage*, Int16*, Win32cr::Foundation::HRESULT),
+    put_StrictFileSystemCompliance : Proc(IFileSystemImage*, Int16, Win32cr::Foundation::HRESULT),
+    get_UseRestrictedCharacterSet : Proc(IFileSystemImage*, Int16*, Win32cr::Foundation::HRESULT),
+    put_UseRestrictedCharacterSet : Proc(IFileSystemImage*, Int16, Win32cr::Foundation::HRESULT),
+    get_FileSystemsToCreate : Proc(IFileSystemImage*, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    put_FileSystemsToCreate : Proc(IFileSystemImage*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::HRESULT),
+    get_FileSystemsSupported : Proc(IFileSystemImage*, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    put_UDFRevision : Proc(IFileSystemImage*, Int32, Win32cr::Foundation::HRESULT),
+    get_UDFRevision : Proc(IFileSystemImage*, Int32*, Win32cr::Foundation::HRESULT),
+    get_UDFRevisionsSupported : Proc(IFileSystemImage*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    choose_image_defaults : Proc(IFileSystemImage*, Void*, Win32cr::Foundation::HRESULT),
+    choose_image_defaults_for_media_type : Proc(IFileSystemImage*, Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE, Win32cr::Foundation::HRESULT),
+    put_ISO9660InterchangeLevel : Proc(IFileSystemImage*, Int32, Win32cr::Foundation::HRESULT),
+    get_ISO9660InterchangeLevel : Proc(IFileSystemImage*, Int32*, Win32cr::Foundation::HRESULT),
+    get_ISO9660InterchangeLevelsSupported : Proc(IFileSystemImage*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    create_result_image : Proc(IFileSystemImage*, Void**, Win32cr::Foundation::HRESULT),
+    exists : Proc(IFileSystemImage*, Win32cr::Foundation::BSTR, Win32cr::Storage::Imapi::FsiItemType*, Win32cr::Foundation::HRESULT),
+    calculate_disc_identifier : Proc(IFileSystemImage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    identify_file_systems_on_disc : Proc(IFileSystemImage*, Void*, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    get_default_file_system_for_import : Proc(IFileSystemImage*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    import_file_system : Proc(IFileSystemImage*, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    import_specific_file_system : Proc(IFileSystemImage*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::HRESULT),
+    rollback_to_change_point : Proc(IFileSystemImage*, Int32, Win32cr::Foundation::HRESULT),
+    lock_in_change_point : Proc(IFileSystemImage*, Win32cr::Foundation::HRESULT),
+    create_directory_item : Proc(IFileSystemImage*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_file_item : Proc(IFileSystemImage*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_VolumeNameUDF : Proc(IFileSystemImage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_VolumeNameJoliet : Proc(IFileSystemImage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_VolumeNameISO9660 : Proc(IFileSystemImage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_StageFiles : Proc(IFileSystemImage*, Int16*, Win32cr::Foundation::HRESULT),
+    put_StageFiles : Proc(IFileSystemImage*, Int16, Win32cr::Foundation::HRESULT),
+    get_MultisessionInterfaces : Proc(IFileSystemImage*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_MultisessionInterfaces : Proc(IFileSystemImage*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2c941fe1-975b-59be-a960-9a2a262853a5")]
+  record IFileSystemImage, lpVtbl : IFileSystemImageVtbl* do
+    GUID = LibC::GUID.new(0x2c941fe1_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+    def query_interface(this : IFileSystemImage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFileSystemImage*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFileSystemImage*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFileSystemImage*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFileSystemImage*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFileSystemImage*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFileSystemImage*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Root(this : IFileSystemImage*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Root.call(this, pVal)
+    end
+    def get_SessionStartBlock(this : IFileSystemImage*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SessionStartBlock.call(this, pVal)
+    end
+    def put_SessionStartBlock(this : IFileSystemImage*, newVal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SessionStartBlock.call(this, newVal)
+    end
+    def get_FreeMediaBlocks(this : IFileSystemImage*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FreeMediaBlocks.call(this, pVal)
+    end
+    def put_FreeMediaBlocks(this : IFileSystemImage*, newVal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FreeMediaBlocks.call(this, newVal)
+    end
+    def set_max_media_blocks_from_device(this : IFileSystemImage*, discRecorder : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_max_media_blocks_from_device.call(this, discRecorder)
+    end
+    def get_UsedBlocks(this : IFileSystemImage*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UsedBlocks.call(this, pVal)
+    end
+    def get_VolumeName(this : IFileSystemImage*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumeName.call(this, pVal)
+    end
+    def put_VolumeName(this : IFileSystemImage*, newVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_VolumeName.call(this, newVal)
+    end
+    def get_ImportedVolumeName(this : IFileSystemImage*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ImportedVolumeName.call(this, pVal)
+    end
+    def get_BootImageOptions(this : IFileSystemImage*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BootImageOptions.call(this, pVal)
+    end
+    def put_BootImageOptions(this : IFileSystemImage*, newVal : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BootImageOptions.call(this, newVal)
+    end
+    def get_FileCount(this : IFileSystemImage*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileCount.call(this, pVal)
+    end
+    def get_DirectoryCount(this : IFileSystemImage*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DirectoryCount.call(this, pVal)
+    end
+    def get_WorkingDirectory(this : IFileSystemImage*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_WorkingDirectory.call(this, pVal)
+    end
+    def put_WorkingDirectory(this : IFileSystemImage*, newVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_WorkingDirectory.call(this, newVal)
+    end
+    def get_ChangePoint(this : IFileSystemImage*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ChangePoint.call(this, pVal)
+    end
+    def get_StrictFileSystemCompliance(this : IFileSystemImage*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StrictFileSystemCompliance.call(this, pVal)
+    end
+    def put_StrictFileSystemCompliance(this : IFileSystemImage*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_StrictFileSystemCompliance.call(this, newVal)
+    end
+    def get_UseRestrictedCharacterSet(this : IFileSystemImage*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UseRestrictedCharacterSet.call(this, pVal)
+    end
+    def put_UseRestrictedCharacterSet(this : IFileSystemImage*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_UseRestrictedCharacterSet.call(this, newVal)
+    end
+    def get_FileSystemsToCreate(this : IFileSystemImage*, pVal : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileSystemsToCreate.call(this, pVal)
+    end
+    def put_FileSystemsToCreate(this : IFileSystemImage*, newVal : Win32cr::Storage::Imapi::FsiFileSystems) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileSystemsToCreate.call(this, newVal)
+    end
+    def get_FileSystemsSupported(this : IFileSystemImage*, pVal : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileSystemsSupported.call(this, pVal)
+    end
+    def put_UDFRevision(this : IFileSystemImage*, newVal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_UDFRevision.call(this, newVal)
+    end
+    def get_UDFRevision(this : IFileSystemImage*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UDFRevision.call(this, pVal)
+    end
+    def get_UDFRevisionsSupported(this : IFileSystemImage*, pVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UDFRevisionsSupported.call(this, pVal)
+    end
+    def choose_image_defaults(this : IFileSystemImage*, discRecorder : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.choose_image_defaults.call(this, discRecorder)
+    end
+    def choose_image_defaults_for_media_type(this : IFileSystemImage*, value : Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.choose_image_defaults_for_media_type.call(this, value)
+    end
+    def put_ISO9660InterchangeLevel(this : IFileSystemImage*, newVal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ISO9660InterchangeLevel.call(this, newVal)
+    end
+    def get_ISO9660InterchangeLevel(this : IFileSystemImage*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ISO9660InterchangeLevel.call(this, pVal)
+    end
+    def get_ISO9660InterchangeLevelsSupported(this : IFileSystemImage*, pVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ISO9660InterchangeLevelsSupported.call(this, pVal)
+    end
+    def create_result_image(this : IFileSystemImage*, resultStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_result_image.call(this, resultStream)
+    end
+    def exists(this : IFileSystemImage*, fullPath : Win32cr::Foundation::BSTR, itemType : Win32cr::Storage::Imapi::FsiItemType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.exists.call(this, fullPath, itemType)
+    end
+    def calculate_disc_identifier(this : IFileSystemImage*, discIdentifier : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.calculate_disc_identifier.call(this, discIdentifier)
+    end
+    def identify_file_systems_on_disc(this : IFileSystemImage*, discRecorder : Void*, fileSystems : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.identify_file_systems_on_disc.call(this, discRecorder, fileSystems)
+    end
+    def get_default_file_system_for_import(this : IFileSystemImage*, fileSystems : Win32cr::Storage::Imapi::FsiFileSystems, importDefault : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_default_file_system_for_import.call(this, fileSystems, importDefault)
+    end
+    def import_file_system(this : IFileSystemImage*, importedFileSystem : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.import_file_system.call(this, importedFileSystem)
+    end
+    def import_specific_file_system(this : IFileSystemImage*, fileSystemToUse : Win32cr::Storage::Imapi::FsiFileSystems) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.import_specific_file_system.call(this, fileSystemToUse)
+    end
+    def rollback_to_change_point(this : IFileSystemImage*, changePoint : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.rollback_to_change_point.call(this, changePoint)
+    end
+    def lock_in_change_point(this : IFileSystemImage*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.lock_in_change_point.call(this)
+    end
+    def create_directory_item(this : IFileSystemImage*, name : Win32cr::Foundation::BSTR, newItem : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_directory_item.call(this, name, newItem)
+    end
+    def create_file_item(this : IFileSystemImage*, name : Win32cr::Foundation::BSTR, newItem : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_file_item.call(this, name, newItem)
+    end
+    def get_VolumeNameUDF(this : IFileSystemImage*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumeNameUDF.call(this, pVal)
+    end
+    def get_VolumeNameJoliet(this : IFileSystemImage*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumeNameJoliet.call(this, pVal)
+    end
+    def get_VolumeNameISO9660(this : IFileSystemImage*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumeNameISO9660.call(this, pVal)
+    end
+    def get_StageFiles(this : IFileSystemImage*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StageFiles.call(this, pVal)
+    end
+    def put_StageFiles(this : IFileSystemImage*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_StageFiles.call(this, newVal)
+    end
+    def get_MultisessionInterfaces(this : IFileSystemImage*, pVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MultisessionInterfaces.call(this, pVal)
+    end
+    def put_MultisessionInterfaces(this : IFileSystemImage*, newVal : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MultisessionInterfaces.call(this, newVal)
+    end
+
+  end
+
+  @[Extern]
+  record IFileSystemImage2Vtbl,
+    query_interface : Proc(IFileSystemImage2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFileSystemImage2*, UInt32),
+    release : Proc(IFileSystemImage2*, UInt32),
+    get_type_info_count : Proc(IFileSystemImage2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFileSystemImage2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFileSystemImage2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFileSystemImage2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Root : Proc(IFileSystemImage2*, Void**, Win32cr::Foundation::HRESULT),
+    get_SessionStartBlock : Proc(IFileSystemImage2*, Int32*, Win32cr::Foundation::HRESULT),
+    put_SessionStartBlock : Proc(IFileSystemImage2*, Int32, Win32cr::Foundation::HRESULT),
+    get_FreeMediaBlocks : Proc(IFileSystemImage2*, Int32*, Win32cr::Foundation::HRESULT),
+    put_FreeMediaBlocks : Proc(IFileSystemImage2*, Int32, Win32cr::Foundation::HRESULT),
+    set_max_media_blocks_from_device : Proc(IFileSystemImage2*, Void*, Win32cr::Foundation::HRESULT),
+    get_UsedBlocks : Proc(IFileSystemImage2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_VolumeName : Proc(IFileSystemImage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_VolumeName : Proc(IFileSystemImage2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_ImportedVolumeName : Proc(IFileSystemImage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_BootImageOptions : Proc(IFileSystemImage2*, Void**, Win32cr::Foundation::HRESULT),
+    put_BootImageOptions : Proc(IFileSystemImage2*, Void*, Win32cr::Foundation::HRESULT),
+    get_FileCount : Proc(IFileSystemImage2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_DirectoryCount : Proc(IFileSystemImage2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_WorkingDirectory : Proc(IFileSystemImage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_WorkingDirectory : Proc(IFileSystemImage2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_ChangePoint : Proc(IFileSystemImage2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_StrictFileSystemCompliance : Proc(IFileSystemImage2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_StrictFileSystemCompliance : Proc(IFileSystemImage2*, Int16, Win32cr::Foundation::HRESULT),
+    get_UseRestrictedCharacterSet : Proc(IFileSystemImage2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_UseRestrictedCharacterSet : Proc(IFileSystemImage2*, Int16, Win32cr::Foundation::HRESULT),
+    get_FileSystemsToCreate : Proc(IFileSystemImage2*, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    put_FileSystemsToCreate : Proc(IFileSystemImage2*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::HRESULT),
+    get_FileSystemsSupported : Proc(IFileSystemImage2*, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    put_UDFRevision : Proc(IFileSystemImage2*, Int32, Win32cr::Foundation::HRESULT),
+    get_UDFRevision : Proc(IFileSystemImage2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_UDFRevisionsSupported : Proc(IFileSystemImage2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    choose_image_defaults : Proc(IFileSystemImage2*, Void*, Win32cr::Foundation::HRESULT),
+    choose_image_defaults_for_media_type : Proc(IFileSystemImage2*, Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE, Win32cr::Foundation::HRESULT),
+    put_ISO9660InterchangeLevel : Proc(IFileSystemImage2*, Int32, Win32cr::Foundation::HRESULT),
+    get_ISO9660InterchangeLevel : Proc(IFileSystemImage2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_ISO9660InterchangeLevelsSupported : Proc(IFileSystemImage2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    create_result_image : Proc(IFileSystemImage2*, Void**, Win32cr::Foundation::HRESULT),
+    exists : Proc(IFileSystemImage2*, Win32cr::Foundation::BSTR, Win32cr::Storage::Imapi::FsiItemType*, Win32cr::Foundation::HRESULT),
+    calculate_disc_identifier : Proc(IFileSystemImage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    identify_file_systems_on_disc : Proc(IFileSystemImage2*, Void*, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    get_default_file_system_for_import : Proc(IFileSystemImage2*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    import_file_system : Proc(IFileSystemImage2*, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    import_specific_file_system : Proc(IFileSystemImage2*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::HRESULT),
+    rollback_to_change_point : Proc(IFileSystemImage2*, Int32, Win32cr::Foundation::HRESULT),
+    lock_in_change_point : Proc(IFileSystemImage2*, Win32cr::Foundation::HRESULT),
+    create_directory_item : Proc(IFileSystemImage2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_file_item : Proc(IFileSystemImage2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_VolumeNameUDF : Proc(IFileSystemImage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_VolumeNameJoliet : Proc(IFileSystemImage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_VolumeNameISO9660 : Proc(IFileSystemImage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_StageFiles : Proc(IFileSystemImage2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_StageFiles : Proc(IFileSystemImage2*, Int16, Win32cr::Foundation::HRESULT),
+    get_MultisessionInterfaces : Proc(IFileSystemImage2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_MultisessionInterfaces : Proc(IFileSystemImage2*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
+    get_BootImageOptionsArray : Proc(IFileSystemImage2*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_BootImageOptionsArray : Proc(IFileSystemImage2*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("d7644b2c-1537-4767-b62f-f1387b02ddfd")]
+  record IFileSystemImage2, lpVtbl : IFileSystemImage2Vtbl* do
+    GUID = LibC::GUID.new(0xd7644b2c_u32, 0x1537_u16, 0x4767_u16, StaticArray[0xb6_u8, 0x2f_u8, 0xf1_u8, 0x38_u8, 0x7b_u8, 0x2_u8, 0xdd_u8, 0xfd_u8])
+    def query_interface(this : IFileSystemImage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFileSystemImage2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFileSystemImage2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFileSystemImage2*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFileSystemImage2*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFileSystemImage2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFileSystemImage2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Root(this : IFileSystemImage2*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Root.call(this, pVal)
+    end
+    def get_SessionStartBlock(this : IFileSystemImage2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SessionStartBlock.call(this, pVal)
+    end
+    def put_SessionStartBlock(this : IFileSystemImage2*, newVal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SessionStartBlock.call(this, newVal)
+    end
+    def get_FreeMediaBlocks(this : IFileSystemImage2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FreeMediaBlocks.call(this, pVal)
+    end
+    def put_FreeMediaBlocks(this : IFileSystemImage2*, newVal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FreeMediaBlocks.call(this, newVal)
+    end
+    def set_max_media_blocks_from_device(this : IFileSystemImage2*, discRecorder : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_max_media_blocks_from_device.call(this, discRecorder)
+    end
+    def get_UsedBlocks(this : IFileSystemImage2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UsedBlocks.call(this, pVal)
+    end
+    def get_VolumeName(this : IFileSystemImage2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumeName.call(this, pVal)
+    end
+    def put_VolumeName(this : IFileSystemImage2*, newVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_VolumeName.call(this, newVal)
+    end
+    def get_ImportedVolumeName(this : IFileSystemImage2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ImportedVolumeName.call(this, pVal)
+    end
+    def get_BootImageOptions(this : IFileSystemImage2*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BootImageOptions.call(this, pVal)
+    end
+    def put_BootImageOptions(this : IFileSystemImage2*, newVal : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BootImageOptions.call(this, newVal)
+    end
+    def get_FileCount(this : IFileSystemImage2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileCount.call(this, pVal)
+    end
+    def get_DirectoryCount(this : IFileSystemImage2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DirectoryCount.call(this, pVal)
+    end
+    def get_WorkingDirectory(this : IFileSystemImage2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_WorkingDirectory.call(this, pVal)
+    end
+    def put_WorkingDirectory(this : IFileSystemImage2*, newVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_WorkingDirectory.call(this, newVal)
+    end
+    def get_ChangePoint(this : IFileSystemImage2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ChangePoint.call(this, pVal)
+    end
+    def get_StrictFileSystemCompliance(this : IFileSystemImage2*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StrictFileSystemCompliance.call(this, pVal)
+    end
+    def put_StrictFileSystemCompliance(this : IFileSystemImage2*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_StrictFileSystemCompliance.call(this, newVal)
+    end
+    def get_UseRestrictedCharacterSet(this : IFileSystemImage2*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UseRestrictedCharacterSet.call(this, pVal)
+    end
+    def put_UseRestrictedCharacterSet(this : IFileSystemImage2*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_UseRestrictedCharacterSet.call(this, newVal)
+    end
+    def get_FileSystemsToCreate(this : IFileSystemImage2*, pVal : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileSystemsToCreate.call(this, pVal)
+    end
+    def put_FileSystemsToCreate(this : IFileSystemImage2*, newVal : Win32cr::Storage::Imapi::FsiFileSystems) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileSystemsToCreate.call(this, newVal)
+    end
+    def get_FileSystemsSupported(this : IFileSystemImage2*, pVal : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileSystemsSupported.call(this, pVal)
+    end
+    def put_UDFRevision(this : IFileSystemImage2*, newVal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_UDFRevision.call(this, newVal)
+    end
+    def get_UDFRevision(this : IFileSystemImage2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UDFRevision.call(this, pVal)
+    end
+    def get_UDFRevisionsSupported(this : IFileSystemImage2*, pVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UDFRevisionsSupported.call(this, pVal)
+    end
+    def choose_image_defaults(this : IFileSystemImage2*, discRecorder : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.choose_image_defaults.call(this, discRecorder)
+    end
+    def choose_image_defaults_for_media_type(this : IFileSystemImage2*, value : Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.choose_image_defaults_for_media_type.call(this, value)
+    end
+    def put_ISO9660InterchangeLevel(this : IFileSystemImage2*, newVal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ISO9660InterchangeLevel.call(this, newVal)
+    end
+    def get_ISO9660InterchangeLevel(this : IFileSystemImage2*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ISO9660InterchangeLevel.call(this, pVal)
+    end
+    def get_ISO9660InterchangeLevelsSupported(this : IFileSystemImage2*, pVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ISO9660InterchangeLevelsSupported.call(this, pVal)
+    end
+    def create_result_image(this : IFileSystemImage2*, resultStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_result_image.call(this, resultStream)
+    end
+    def exists(this : IFileSystemImage2*, fullPath : Win32cr::Foundation::BSTR, itemType : Win32cr::Storage::Imapi::FsiItemType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.exists.call(this, fullPath, itemType)
+    end
+    def calculate_disc_identifier(this : IFileSystemImage2*, discIdentifier : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.calculate_disc_identifier.call(this, discIdentifier)
+    end
+    def identify_file_systems_on_disc(this : IFileSystemImage2*, discRecorder : Void*, fileSystems : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.identify_file_systems_on_disc.call(this, discRecorder, fileSystems)
+    end
+    def get_default_file_system_for_import(this : IFileSystemImage2*, fileSystems : Win32cr::Storage::Imapi::FsiFileSystems, importDefault : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_default_file_system_for_import.call(this, fileSystems, importDefault)
+    end
+    def import_file_system(this : IFileSystemImage2*, importedFileSystem : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.import_file_system.call(this, importedFileSystem)
+    end
+    def import_specific_file_system(this : IFileSystemImage2*, fileSystemToUse : Win32cr::Storage::Imapi::FsiFileSystems) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.import_specific_file_system.call(this, fileSystemToUse)
+    end
+    def rollback_to_change_point(this : IFileSystemImage2*, changePoint : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.rollback_to_change_point.call(this, changePoint)
+    end
+    def lock_in_change_point(this : IFileSystemImage2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.lock_in_change_point.call(this)
+    end
+    def create_directory_item(this : IFileSystemImage2*, name : Win32cr::Foundation::BSTR, newItem : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_directory_item.call(this, name, newItem)
+    end
+    def create_file_item(this : IFileSystemImage2*, name : Win32cr::Foundation::BSTR, newItem : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_file_item.call(this, name, newItem)
+    end
+    def get_VolumeNameUDF(this : IFileSystemImage2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumeNameUDF.call(this, pVal)
+    end
+    def get_VolumeNameJoliet(this : IFileSystemImage2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumeNameJoliet.call(this, pVal)
+    end
+    def get_VolumeNameISO9660(this : IFileSystemImage2*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumeNameISO9660.call(this, pVal)
+    end
+    def get_StageFiles(this : IFileSystemImage2*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StageFiles.call(this, pVal)
+    end
+    def put_StageFiles(this : IFileSystemImage2*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_StageFiles.call(this, newVal)
+    end
+    def get_MultisessionInterfaces(this : IFileSystemImage2*, pVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MultisessionInterfaces.call(this, pVal)
+    end
+    def put_MultisessionInterfaces(this : IFileSystemImage2*, newVal : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MultisessionInterfaces.call(this, newVal)
+    end
+    def get_BootImageOptionsArray(this : IFileSystemImage2*, pVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BootImageOptionsArray.call(this, pVal)
+    end
+    def put_BootImageOptionsArray(this : IFileSystemImage2*, newVal : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BootImageOptionsArray.call(this, newVal)
+    end
+
+  end
+
+  @[Extern]
+  record IFileSystemImage3Vtbl,
+    query_interface : Proc(IFileSystemImage3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFileSystemImage3*, UInt32),
+    release : Proc(IFileSystemImage3*, UInt32),
+    get_type_info_count : Proc(IFileSystemImage3*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFileSystemImage3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFileSystemImage3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFileSystemImage3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Root : Proc(IFileSystemImage3*, Void**, Win32cr::Foundation::HRESULT),
+    get_SessionStartBlock : Proc(IFileSystemImage3*, Int32*, Win32cr::Foundation::HRESULT),
+    put_SessionStartBlock : Proc(IFileSystemImage3*, Int32, Win32cr::Foundation::HRESULT),
+    get_FreeMediaBlocks : Proc(IFileSystemImage3*, Int32*, Win32cr::Foundation::HRESULT),
+    put_FreeMediaBlocks : Proc(IFileSystemImage3*, Int32, Win32cr::Foundation::HRESULT),
+    set_max_media_blocks_from_device : Proc(IFileSystemImage3*, Void*, Win32cr::Foundation::HRESULT),
+    get_UsedBlocks : Proc(IFileSystemImage3*, Int32*, Win32cr::Foundation::HRESULT),
+    get_VolumeName : Proc(IFileSystemImage3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_VolumeName : Proc(IFileSystemImage3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_ImportedVolumeName : Proc(IFileSystemImage3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_BootImageOptions : Proc(IFileSystemImage3*, Void**, Win32cr::Foundation::HRESULT),
+    put_BootImageOptions : Proc(IFileSystemImage3*, Void*, Win32cr::Foundation::HRESULT),
+    get_FileCount : Proc(IFileSystemImage3*, Int32*, Win32cr::Foundation::HRESULT),
+    get_DirectoryCount : Proc(IFileSystemImage3*, Int32*, Win32cr::Foundation::HRESULT),
+    get_WorkingDirectory : Proc(IFileSystemImage3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_WorkingDirectory : Proc(IFileSystemImage3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_ChangePoint : Proc(IFileSystemImage3*, Int32*, Win32cr::Foundation::HRESULT),
+    get_StrictFileSystemCompliance : Proc(IFileSystemImage3*, Int16*, Win32cr::Foundation::HRESULT),
+    put_StrictFileSystemCompliance : Proc(IFileSystemImage3*, Int16, Win32cr::Foundation::HRESULT),
+    get_UseRestrictedCharacterSet : Proc(IFileSystemImage3*, Int16*, Win32cr::Foundation::HRESULT),
+    put_UseRestrictedCharacterSet : Proc(IFileSystemImage3*, Int16, Win32cr::Foundation::HRESULT),
+    get_FileSystemsToCreate : Proc(IFileSystemImage3*, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    put_FileSystemsToCreate : Proc(IFileSystemImage3*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::HRESULT),
+    get_FileSystemsSupported : Proc(IFileSystemImage3*, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    put_UDFRevision : Proc(IFileSystemImage3*, Int32, Win32cr::Foundation::HRESULT),
+    get_UDFRevision : Proc(IFileSystemImage3*, Int32*, Win32cr::Foundation::HRESULT),
+    get_UDFRevisionsSupported : Proc(IFileSystemImage3*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    choose_image_defaults : Proc(IFileSystemImage3*, Void*, Win32cr::Foundation::HRESULT),
+    choose_image_defaults_for_media_type : Proc(IFileSystemImage3*, Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE, Win32cr::Foundation::HRESULT),
+    put_ISO9660InterchangeLevel : Proc(IFileSystemImage3*, Int32, Win32cr::Foundation::HRESULT),
+    get_ISO9660InterchangeLevel : Proc(IFileSystemImage3*, Int32*, Win32cr::Foundation::HRESULT),
+    get_ISO9660InterchangeLevelsSupported : Proc(IFileSystemImage3*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    create_result_image : Proc(IFileSystemImage3*, Void**, Win32cr::Foundation::HRESULT),
+    exists : Proc(IFileSystemImage3*, Win32cr::Foundation::BSTR, Win32cr::Storage::Imapi::FsiItemType*, Win32cr::Foundation::HRESULT),
+    calculate_disc_identifier : Proc(IFileSystemImage3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    identify_file_systems_on_disc : Proc(IFileSystemImage3*, Void*, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    get_default_file_system_for_import : Proc(IFileSystemImage3*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    import_file_system : Proc(IFileSystemImage3*, Win32cr::Storage::Imapi::FsiFileSystems*, Win32cr::Foundation::HRESULT),
+    import_specific_file_system : Proc(IFileSystemImage3*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::HRESULT),
+    rollback_to_change_point : Proc(IFileSystemImage3*, Int32, Win32cr::Foundation::HRESULT),
+    lock_in_change_point : Proc(IFileSystemImage3*, Win32cr::Foundation::HRESULT),
+    create_directory_item : Proc(IFileSystemImage3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_file_item : Proc(IFileSystemImage3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_VolumeNameUDF : Proc(IFileSystemImage3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_VolumeNameJoliet : Proc(IFileSystemImage3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_VolumeNameISO9660 : Proc(IFileSystemImage3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_StageFiles : Proc(IFileSystemImage3*, Int16*, Win32cr::Foundation::HRESULT),
+    put_StageFiles : Proc(IFileSystemImage3*, Int16, Win32cr::Foundation::HRESULT),
+    get_MultisessionInterfaces : Proc(IFileSystemImage3*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_MultisessionInterfaces : Proc(IFileSystemImage3*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
+    get_BootImageOptionsArray : Proc(IFileSystemImage3*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_BootImageOptionsArray : Proc(IFileSystemImage3*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
+    get_CreateRedundantUdfMetadataFiles : Proc(IFileSystemImage3*, Int16*, Win32cr::Foundation::HRESULT),
+    put_CreateRedundantUdfMetadataFiles : Proc(IFileSystemImage3*, Int16, Win32cr::Foundation::HRESULT),
+    probe_specific_file_system : Proc(IFileSystemImage3*, Win32cr::Storage::Imapi::FsiFileSystems, Int16*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("7cff842c-7e97-4807-8304-910dd8f7c051")]
+  record IFileSystemImage3, lpVtbl : IFileSystemImage3Vtbl* do
+    GUID = LibC::GUID.new(0x7cff842c_u32, 0x7e97_u16, 0x4807_u16, StaticArray[0x83_u8, 0x4_u8, 0x91_u8, 0xd_u8, 0xd8_u8, 0xf7_u8, 0xc0_u8, 0x51_u8])
+    def query_interface(this : IFileSystemImage3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFileSystemImage3*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFileSystemImage3*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFileSystemImage3*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFileSystemImage3*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFileSystemImage3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFileSystemImage3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Root(this : IFileSystemImage3*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Root.call(this, pVal)
+    end
+    def get_SessionStartBlock(this : IFileSystemImage3*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SessionStartBlock.call(this, pVal)
+    end
+    def put_SessionStartBlock(this : IFileSystemImage3*, newVal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SessionStartBlock.call(this, newVal)
+    end
+    def get_FreeMediaBlocks(this : IFileSystemImage3*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FreeMediaBlocks.call(this, pVal)
+    end
+    def put_FreeMediaBlocks(this : IFileSystemImage3*, newVal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FreeMediaBlocks.call(this, newVal)
+    end
+    def set_max_media_blocks_from_device(this : IFileSystemImage3*, discRecorder : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_max_media_blocks_from_device.call(this, discRecorder)
+    end
+    def get_UsedBlocks(this : IFileSystemImage3*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UsedBlocks.call(this, pVal)
+    end
+    def get_VolumeName(this : IFileSystemImage3*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumeName.call(this, pVal)
+    end
+    def put_VolumeName(this : IFileSystemImage3*, newVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_VolumeName.call(this, newVal)
+    end
+    def get_ImportedVolumeName(this : IFileSystemImage3*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ImportedVolumeName.call(this, pVal)
+    end
+    def get_BootImageOptions(this : IFileSystemImage3*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BootImageOptions.call(this, pVal)
+    end
+    def put_BootImageOptions(this : IFileSystemImage3*, newVal : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BootImageOptions.call(this, newVal)
+    end
+    def get_FileCount(this : IFileSystemImage3*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileCount.call(this, pVal)
+    end
+    def get_DirectoryCount(this : IFileSystemImage3*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DirectoryCount.call(this, pVal)
+    end
+    def get_WorkingDirectory(this : IFileSystemImage3*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_WorkingDirectory.call(this, pVal)
+    end
+    def put_WorkingDirectory(this : IFileSystemImage3*, newVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_WorkingDirectory.call(this, newVal)
+    end
+    def get_ChangePoint(this : IFileSystemImage3*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ChangePoint.call(this, pVal)
+    end
+    def get_StrictFileSystemCompliance(this : IFileSystemImage3*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StrictFileSystemCompliance.call(this, pVal)
+    end
+    def put_StrictFileSystemCompliance(this : IFileSystemImage3*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_StrictFileSystemCompliance.call(this, newVal)
+    end
+    def get_UseRestrictedCharacterSet(this : IFileSystemImage3*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UseRestrictedCharacterSet.call(this, pVal)
+    end
+    def put_UseRestrictedCharacterSet(this : IFileSystemImage3*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_UseRestrictedCharacterSet.call(this, newVal)
+    end
+    def get_FileSystemsToCreate(this : IFileSystemImage3*, pVal : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileSystemsToCreate.call(this, pVal)
+    end
+    def put_FileSystemsToCreate(this : IFileSystemImage3*, newVal : Win32cr::Storage::Imapi::FsiFileSystems) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileSystemsToCreate.call(this, newVal)
+    end
+    def get_FileSystemsSupported(this : IFileSystemImage3*, pVal : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileSystemsSupported.call(this, pVal)
+    end
+    def put_UDFRevision(this : IFileSystemImage3*, newVal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_UDFRevision.call(this, newVal)
+    end
+    def get_UDFRevision(this : IFileSystemImage3*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UDFRevision.call(this, pVal)
+    end
+    def get_UDFRevisionsSupported(this : IFileSystemImage3*, pVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UDFRevisionsSupported.call(this, pVal)
+    end
+    def choose_image_defaults(this : IFileSystemImage3*, discRecorder : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.choose_image_defaults.call(this, discRecorder)
+    end
+    def choose_image_defaults_for_media_type(this : IFileSystemImage3*, value : Win32cr::Storage::Imapi::IMAPI_MEDIA_PHYSICAL_TYPE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.choose_image_defaults_for_media_type.call(this, value)
+    end
+    def put_ISO9660InterchangeLevel(this : IFileSystemImage3*, newVal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ISO9660InterchangeLevel.call(this, newVal)
+    end
+    def get_ISO9660InterchangeLevel(this : IFileSystemImage3*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ISO9660InterchangeLevel.call(this, pVal)
+    end
+    def get_ISO9660InterchangeLevelsSupported(this : IFileSystemImage3*, pVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ISO9660InterchangeLevelsSupported.call(this, pVal)
+    end
+    def create_result_image(this : IFileSystemImage3*, resultStream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_result_image.call(this, resultStream)
+    end
+    def exists(this : IFileSystemImage3*, fullPath : Win32cr::Foundation::BSTR, itemType : Win32cr::Storage::Imapi::FsiItemType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.exists.call(this, fullPath, itemType)
+    end
+    def calculate_disc_identifier(this : IFileSystemImage3*, discIdentifier : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.calculate_disc_identifier.call(this, discIdentifier)
+    end
+    def identify_file_systems_on_disc(this : IFileSystemImage3*, discRecorder : Void*, fileSystems : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.identify_file_systems_on_disc.call(this, discRecorder, fileSystems)
+    end
+    def get_default_file_system_for_import(this : IFileSystemImage3*, fileSystems : Win32cr::Storage::Imapi::FsiFileSystems, importDefault : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_default_file_system_for_import.call(this, fileSystems, importDefault)
+    end
+    def import_file_system(this : IFileSystemImage3*, importedFileSystem : Win32cr::Storage::Imapi::FsiFileSystems*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.import_file_system.call(this, importedFileSystem)
+    end
+    def import_specific_file_system(this : IFileSystemImage3*, fileSystemToUse : Win32cr::Storage::Imapi::FsiFileSystems) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.import_specific_file_system.call(this, fileSystemToUse)
+    end
+    def rollback_to_change_point(this : IFileSystemImage3*, changePoint : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.rollback_to_change_point.call(this, changePoint)
+    end
+    def lock_in_change_point(this : IFileSystemImage3*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.lock_in_change_point.call(this)
+    end
+    def create_directory_item(this : IFileSystemImage3*, name : Win32cr::Foundation::BSTR, newItem : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_directory_item.call(this, name, newItem)
+    end
+    def create_file_item(this : IFileSystemImage3*, name : Win32cr::Foundation::BSTR, newItem : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_file_item.call(this, name, newItem)
+    end
+    def get_VolumeNameUDF(this : IFileSystemImage3*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumeNameUDF.call(this, pVal)
+    end
+    def get_VolumeNameJoliet(this : IFileSystemImage3*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumeNameJoliet.call(this, pVal)
+    end
+    def get_VolumeNameISO9660(this : IFileSystemImage3*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_VolumeNameISO9660.call(this, pVal)
+    end
+    def get_StageFiles(this : IFileSystemImage3*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StageFiles.call(this, pVal)
+    end
+    def put_StageFiles(this : IFileSystemImage3*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_StageFiles.call(this, newVal)
+    end
+    def get_MultisessionInterfaces(this : IFileSystemImage3*, pVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MultisessionInterfaces.call(this, pVal)
+    end
+    def put_MultisessionInterfaces(this : IFileSystemImage3*, newVal : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MultisessionInterfaces.call(this, newVal)
+    end
+    def get_BootImageOptionsArray(this : IFileSystemImage3*, pVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BootImageOptionsArray.call(this, pVal)
+    end
+    def put_BootImageOptionsArray(this : IFileSystemImage3*, newVal : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BootImageOptionsArray.call(this, newVal)
+    end
+    def get_CreateRedundantUdfMetadataFiles(this : IFileSystemImage3*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CreateRedundantUdfMetadataFiles.call(this, pVal)
+    end
+    def put_CreateRedundantUdfMetadataFiles(this : IFileSystemImage3*, newVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_CreateRedundantUdfMetadataFiles.call(this, newVal)
+    end
+    def probe_specific_file_system(this : IFileSystemImage3*, fileSystemToProbe : Win32cr::Storage::Imapi::FsiFileSystems, isAppendable : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.probe_specific_file_system.call(this, fileSystemToProbe, isAppendable)
+    end
+
+  end
+
+  @[Extern]
+  record DFileSystemImageEventsVtbl,
+    query_interface : Proc(DFileSystemImageEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(DFileSystemImageEvents*, UInt32),
+    release : Proc(DFileSystemImageEvents*, UInt32),
+    get_type_info_count : Proc(DFileSystemImageEvents*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(DFileSystemImageEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(DFileSystemImageEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(DFileSystemImageEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    update : Proc(DFileSystemImageEvents*, Void*, Win32cr::Foundation::BSTR, Int32, Int32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2c941fdf-975b-59be-a960-9a2a262853a5")]
+  record DFileSystemImageEvents, lpVtbl : DFileSystemImageEventsVtbl* do
+    GUID = LibC::GUID.new(0x2c941fdf_u32, 0x975b_u16, 0x59be_u16, StaticArray[0xa9_u8, 0x60_u8, 0x9a_u8, 0x2a_u8, 0x26_u8, 0x28_u8, 0x53_u8, 0xa5_u8])
+    def query_interface(this : DFileSystemImageEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : DFileSystemImageEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : DFileSystemImageEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : DFileSystemImageEvents*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : DFileSystemImageEvents*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : DFileSystemImageEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : DFileSystemImageEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def update(this : DFileSystemImageEvents*, object : Void*, currentFile : Win32cr::Foundation::BSTR, copiedSectors : Int32, totalSectors : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.update.call(this, object, currentFile, copiedSectors, totalSectors)
+    end
+
+  end
+
+  @[Extern]
+  record DFileSystemImageImportEventsVtbl,
+    query_interface : Proc(DFileSystemImageImportEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(DFileSystemImageImportEvents*, UInt32),
+    release : Proc(DFileSystemImageImportEvents*, UInt32),
+    get_type_info_count : Proc(DFileSystemImageImportEvents*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(DFileSystemImageImportEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(DFileSystemImageImportEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(DFileSystemImageImportEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    update_import : Proc(DFileSystemImageImportEvents*, Void*, Win32cr::Storage::Imapi::FsiFileSystems, Win32cr::Foundation::BSTR, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("d25c30f9-4087-4366-9e24-e55be286424b")]
+  record DFileSystemImageImportEvents, lpVtbl : DFileSystemImageImportEventsVtbl* do
+    GUID = LibC::GUID.new(0xd25c30f9_u32, 0x4087_u16, 0x4366_u16, StaticArray[0x9e_u8, 0x24_u8, 0xe5_u8, 0x5b_u8, 0xe2_u8, 0x86_u8, 0x42_u8, 0x4b_u8])
+    def query_interface(this : DFileSystemImageImportEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : DFileSystemImageImportEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : DFileSystemImageImportEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : DFileSystemImageImportEvents*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : DFileSystemImageImportEvents*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : DFileSystemImageImportEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : DFileSystemImageImportEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def update_import(this : DFileSystemImageImportEvents*, object : Void*, fileSystem : Win32cr::Storage::Imapi::FsiFileSystems, currentItem : Win32cr::Foundation::BSTR, importedDirectoryItems : Int32, totalDirectoryItems : Int32, importedFileItems : Int32, totalFileItems : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.update_import.call(this, object, fileSystem, currentItem, importedDirectoryItems, totalDirectoryItems, importedFileItems, totalFileItems)
+    end
+
+  end
+
+  @[Extern]
+  record IIsoImageManagerVtbl,
+    query_interface : Proc(IIsoImageManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IIsoImageManager*, UInt32),
+    release : Proc(IIsoImageManager*, UInt32),
+    get_type_info_count : Proc(IIsoImageManager*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IIsoImageManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IIsoImageManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IIsoImageManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Path : Proc(IIsoImageManager*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Stream : Proc(IIsoImageManager*, Void**, Win32cr::Foundation::HRESULT),
+    set_path : Proc(IIsoImageManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_stream : Proc(IIsoImageManager*, Void*, Win32cr::Foundation::HRESULT),
+    validate : Proc(IIsoImageManager*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("6ca38be5-fbbb-4800-95a1-a438865eb0d4")]
+  record IIsoImageManager, lpVtbl : IIsoImageManagerVtbl* do
+    GUID = LibC::GUID.new(0x6ca38be5_u32, 0xfbbb_u16, 0x4800_u16, StaticArray[0x95_u8, 0xa1_u8, 0xa4_u8, 0x38_u8, 0x86_u8, 0x5e_u8, 0xb0_u8, 0xd4_u8])
+    def query_interface(this : IIsoImageManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IIsoImageManager*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IIsoImageManager*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IIsoImageManager*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IIsoImageManager*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IIsoImageManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IIsoImageManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Path(this : IIsoImageManager*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Path.call(this, pVal)
+    end
+    def get_Stream(this : IIsoImageManager*, data : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Stream.call(this, data)
+    end
+    def set_path(this : IIsoImageManager*, val : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_path.call(this, val)
+    end
+    def set_stream(this : IIsoImageManager*, data : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_stream.call(this, data)
+    end
+    def validate(this : IIsoImageManager*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.validate.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record IDiscRecorderVtbl,
+    query_interface : Proc(IDiscRecorder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscRecorder*, UInt32),
+    release : Proc(IDiscRecorder*, UInt32),
+    init : Proc(IDiscRecorder*, UInt8*, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    get_recorder_guid : Proc(IDiscRecorder*, UInt8*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_recorder_type : Proc(IDiscRecorder*, Win32cr::Storage::Imapi::RECORDER_TYPES*, Win32cr::Foundation::HRESULT),
+    get_display_names : Proc(IDiscRecorder*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_base_pn_pid : Proc(IDiscRecorder*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_path : Proc(IDiscRecorder*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_recorder_properties : Proc(IDiscRecorder*, Void**, Win32cr::Foundation::HRESULT),
+    set_recorder_properties : Proc(IDiscRecorder*, Void*, Win32cr::Foundation::HRESULT),
+    get_recorder_state : Proc(IDiscRecorder*, Win32cr::Storage::Imapi::DISC_RECORDER_STATE_FLAGS*, Win32cr::Foundation::HRESULT),
+    open_exclusive : Proc(IDiscRecorder*, Win32cr::Foundation::HRESULT),
+    query_media_type : Proc(IDiscRecorder*, Win32cr::Storage::Imapi::MEDIA_TYPES*, Win32cr::Storage::Imapi::MEDIA_FLAGS*, Win32cr::Foundation::HRESULT),
+    query_media_info : Proc(IDiscRecorder*, UInt8*, UInt8*, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    eject : Proc(IDiscRecorder*, Win32cr::Foundation::HRESULT),
+    erase : Proc(IDiscRecorder*, UInt8, Win32cr::Foundation::HRESULT),
+    close : Proc(IDiscRecorder*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("85ac9776-ca88-4cf2-894e-09598c078a41")]
+  record IDiscRecorder, lpVtbl : IDiscRecorderVtbl* do
+    GUID = LibC::GUID.new(0x85ac9776_u32, 0xca88_u16, 0x4cf2_u16, StaticArray[0x89_u8, 0x4e_u8, 0x9_u8, 0x59_u8, 0x8c_u8, 0x7_u8, 0x8a_u8, 0x41_u8])
+    def query_interface(this : IDiscRecorder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscRecorder*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscRecorder*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def init(this : IDiscRecorder*, pbyUniqueID : UInt8*, nulIDSize : UInt32, nulDriveNumber : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.init.call(this, pbyUniqueID, nulIDSize, nulDriveNumber)
+    end
+    def get_recorder_guid(this : IDiscRecorder*, pbyUniqueID : UInt8*, ulBufferSize : UInt32, pulReturnSizeRequired : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recorder_guid.call(this, pbyUniqueID, ulBufferSize, pulReturnSizeRequired)
+    end
+    def get_recorder_type(this : IDiscRecorder*, fTypeCode : Win32cr::Storage::Imapi::RECORDER_TYPES*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recorder_type.call(this, fTypeCode)
+    end
+    def get_display_names(this : IDiscRecorder*, pbstrVendorID : Win32cr::Foundation::BSTR*, pbstrProductID : Win32cr::Foundation::BSTR*, pbstrRevision : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_display_names.call(this, pbstrVendorID, pbstrProductID, pbstrRevision)
+    end
+    def get_base_pn_pid(this : IDiscRecorder*, pbstrBasePnPID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_base_pn_pid.call(this, pbstrBasePnPID)
+    end
+    def get_path(this : IDiscRecorder*, pbstrPath : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_path.call(this, pbstrPath)
+    end
+    def get_recorder_properties(this : IDiscRecorder*, ppPropStg : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recorder_properties.call(this, ppPropStg)
+    end
+    def set_recorder_properties(this : IDiscRecorder*, pPropStg : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_recorder_properties.call(this, pPropStg)
+    end
+    def get_recorder_state(this : IDiscRecorder*, pulDevStateFlags : Win32cr::Storage::Imapi::DISC_RECORDER_STATE_FLAGS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_recorder_state.call(this, pulDevStateFlags)
+    end
+    def open_exclusive(this : IDiscRecorder*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_exclusive.call(this)
+    end
+    def query_media_type(this : IDiscRecorder*, fMediaType : Win32cr::Storage::Imapi::MEDIA_TYPES*, fMediaFlags : Win32cr::Storage::Imapi::MEDIA_FLAGS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_media_type.call(this, fMediaType, fMediaFlags)
+    end
+    def query_media_info(this : IDiscRecorder*, pbSessions : UInt8*, pbLastTrack : UInt8*, ulStartAddress : UInt32*, ulNextWritable : UInt32*, ulFreeBlocks : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_media_info.call(this, pbSessions, pbLastTrack, ulStartAddress, ulNextWritable, ulFreeBlocks)
+    end
+    def eject(this : IDiscRecorder*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.eject.call(this)
+    end
+    def erase(this : IDiscRecorder*, bFullErase : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.erase.call(this, bFullErase)
+    end
+    def close(this : IDiscRecorder*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.close.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record IEnumDiscRecordersVtbl,
+    query_interface : Proc(IEnumDiscRecorders*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEnumDiscRecorders*, UInt32),
+    release : Proc(IEnumDiscRecorders*, UInt32),
+    next__ : Proc(IEnumDiscRecorders*, UInt32, Void**, UInt32*, Win32cr::Foundation::HRESULT),
+    skip : Proc(IEnumDiscRecorders*, UInt32, Win32cr::Foundation::HRESULT),
+    reset : Proc(IEnumDiscRecorders*, Win32cr::Foundation::HRESULT),
+    clone : Proc(IEnumDiscRecorders*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("9b1921e1-54ac-11d3-9144-00104ba11c5e")]
+  record IEnumDiscRecorders, lpVtbl : IEnumDiscRecordersVtbl* do
+    GUID = LibC::GUID.new(0x9b1921e1_u32, 0x54ac_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
+    def query_interface(this : IEnumDiscRecorders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEnumDiscRecorders*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEnumDiscRecorders*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def next__(this : IEnumDiscRecorders*, cRecorders : UInt32, ppRecorder : Void**, pcFetched : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.next__.call(this, cRecorders, ppRecorder, pcFetched)
+    end
+    def skip(this : IEnumDiscRecorders*, cRecorders : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.skip.call(this, cRecorders)
+    end
+    def reset(this : IEnumDiscRecorders*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def clone(this : IEnumDiscRecorders*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppEnum)
+    end
+
+  end
+
+  @[Extern]
+  record IEnumDiscMasterFormatsVtbl,
+    query_interface : Proc(IEnumDiscMasterFormats*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEnumDiscMasterFormats*, UInt32),
+    release : Proc(IEnumDiscMasterFormats*, UInt32),
+    next__ : Proc(IEnumDiscMasterFormats*, UInt32, LibC::GUID*, UInt32*, Win32cr::Foundation::HRESULT),
+    skip : Proc(IEnumDiscMasterFormats*, UInt32, Win32cr::Foundation::HRESULT),
+    reset : Proc(IEnumDiscMasterFormats*, Win32cr::Foundation::HRESULT),
+    clone : Proc(IEnumDiscMasterFormats*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("ddf445e1-54ba-11d3-9144-00104ba11c5e")]
+  record IEnumDiscMasterFormats, lpVtbl : IEnumDiscMasterFormatsVtbl* do
+    GUID = LibC::GUID.new(0xddf445e1_u32, 0x54ba_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
+    def query_interface(this : IEnumDiscMasterFormats*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEnumDiscMasterFormats*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEnumDiscMasterFormats*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def next__(this : IEnumDiscMasterFormats*, cFormats : UInt32, lpiidFormatID : LibC::GUID*, pcFetched : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.next__.call(this, cFormats, lpiidFormatID, pcFetched)
+    end
+    def skip(this : IEnumDiscMasterFormats*, cFormats : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.skip.call(this, cFormats)
+    end
+    def reset(this : IEnumDiscMasterFormats*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def clone(this : IEnumDiscMasterFormats*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppEnum)
+    end
+
+  end
+
+  @[Extern]
+  record IRedbookDiscMasterVtbl,
+    query_interface : Proc(IRedbookDiscMaster*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IRedbookDiscMaster*, UInt32),
+    release : Proc(IRedbookDiscMaster*, UInt32),
+    get_total_audio_tracks : Proc(IRedbookDiscMaster*, Int32*, Win32cr::Foundation::HRESULT),
+    get_total_audio_blocks : Proc(IRedbookDiscMaster*, Int32*, Win32cr::Foundation::HRESULT),
+    get_used_audio_blocks : Proc(IRedbookDiscMaster*, Int32*, Win32cr::Foundation::HRESULT),
+    get_available_audio_track_blocks : Proc(IRedbookDiscMaster*, Int32*, Win32cr::Foundation::HRESULT),
+    get_audio_block_size : Proc(IRedbookDiscMaster*, Int32*, Win32cr::Foundation::HRESULT),
+    create_audio_track : Proc(IRedbookDiscMaster*, Int32, Win32cr::Foundation::HRESULT),
+    add_audio_track_blocks : Proc(IRedbookDiscMaster*, UInt8*, Int32, Win32cr::Foundation::HRESULT),
+    close_audio_track : Proc(IRedbookDiscMaster*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("e3bc42cd-4e5c-11d3-9144-00104ba11c5e")]
+  record IRedbookDiscMaster, lpVtbl : IRedbookDiscMasterVtbl* do
+    GUID = LibC::GUID.new(0xe3bc42cd_u32, 0x4e5c_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
+    def query_interface(this : IRedbookDiscMaster*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IRedbookDiscMaster*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IRedbookDiscMaster*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_total_audio_tracks(this : IRedbookDiscMaster*, pnTracks : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_total_audio_tracks.call(this, pnTracks)
+    end
+    def get_total_audio_blocks(this : IRedbookDiscMaster*, pnBlocks : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_total_audio_blocks.call(this, pnBlocks)
+    end
+    def get_used_audio_blocks(this : IRedbookDiscMaster*, pnBlocks : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_used_audio_blocks.call(this, pnBlocks)
+    end
+    def get_available_audio_track_blocks(this : IRedbookDiscMaster*, pnBlocks : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_available_audio_track_blocks.call(this, pnBlocks)
+    end
+    def get_audio_block_size(this : IRedbookDiscMaster*, pnBlockBytes : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio_block_size.call(this, pnBlockBytes)
+    end
+    def create_audio_track(this : IRedbookDiscMaster*, nBlocks : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_audio_track.call(this, nBlocks)
+    end
+    def add_audio_track_blocks(this : IRedbookDiscMaster*, pby : UInt8*, cb : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_audio_track_blocks.call(this, pby, cb)
+    end
+    def close_audio_track(this : IRedbookDiscMaster*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.close_audio_track.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record IJolietDiscMasterVtbl,
+    query_interface : Proc(IJolietDiscMaster*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IJolietDiscMaster*, UInt32),
+    release : Proc(IJolietDiscMaster*, UInt32),
+    get_total_data_blocks : Proc(IJolietDiscMaster*, Int32*, Win32cr::Foundation::HRESULT),
+    get_used_data_blocks : Proc(IJolietDiscMaster*, Int32*, Win32cr::Foundation::HRESULT),
+    get_data_block_size : Proc(IJolietDiscMaster*, Int32*, Win32cr::Foundation::HRESULT),
+    add_data : Proc(IJolietDiscMaster*, Void*, Int32, Win32cr::Foundation::HRESULT),
+    get_joliet_properties : Proc(IJolietDiscMaster*, Void**, Win32cr::Foundation::HRESULT),
+    set_joliet_properties : Proc(IJolietDiscMaster*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("e3bc42ce-4e5c-11d3-9144-00104ba11c5e")]
+  record IJolietDiscMaster, lpVtbl : IJolietDiscMasterVtbl* do
+    GUID = LibC::GUID.new(0xe3bc42ce_u32, 0x4e5c_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
+    def query_interface(this : IJolietDiscMaster*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IJolietDiscMaster*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IJolietDiscMaster*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_total_data_blocks(this : IJolietDiscMaster*, pnBlocks : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_total_data_blocks.call(this, pnBlocks)
+    end
+    def get_used_data_blocks(this : IJolietDiscMaster*, pnBlocks : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_used_data_blocks.call(this, pnBlocks)
+    end
+    def get_data_block_size(this : IJolietDiscMaster*, pnBlockBytes : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data_block_size.call(this, pnBlockBytes)
+    end
+    def add_data(this : IJolietDiscMaster*, pStorage : Void*, lFileOverwrite : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_data.call(this, pStorage, lFileOverwrite)
+    end
+    def get_joliet_properties(this : IJolietDiscMaster*, ppPropStg : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_joliet_properties.call(this, ppPropStg)
+    end
+    def set_joliet_properties(this : IJolietDiscMaster*, pPropStg : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_joliet_properties.call(this, pPropStg)
+    end
+
+  end
+
+  @[Extern]
+  record IDiscMasterProgressEventsVtbl,
+    query_interface : Proc(IDiscMasterProgressEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscMasterProgressEvents*, UInt32),
+    release : Proc(IDiscMasterProgressEvents*, UInt32),
+    query_cancel : Proc(IDiscMasterProgressEvents*, UInt8*, Win32cr::Foundation::HRESULT),
+    notify_pn_p_activity : Proc(IDiscMasterProgressEvents*, Win32cr::Foundation::HRESULT),
+    notify_add_progress : Proc(IDiscMasterProgressEvents*, Int32, Int32, Win32cr::Foundation::HRESULT),
+    notify_block_progress : Proc(IDiscMasterProgressEvents*, Int32, Int32, Win32cr::Foundation::HRESULT),
+    notify_track_progress : Proc(IDiscMasterProgressEvents*, Int32, Int32, Win32cr::Foundation::HRESULT),
+    notify_preparing_burn : Proc(IDiscMasterProgressEvents*, Int32, Win32cr::Foundation::HRESULT),
+    notify_closing_disc : Proc(IDiscMasterProgressEvents*, Int32, Win32cr::Foundation::HRESULT),
+    notify_burn_complete : Proc(IDiscMasterProgressEvents*, Win32cr::Foundation::HRESULT, Win32cr::Foundation::HRESULT),
+    notify_erase_complete : Proc(IDiscMasterProgressEvents*, Win32cr::Foundation::HRESULT, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("ec9e51c1-4e5d-11d3-9144-00104ba11c5e")]
+  record IDiscMasterProgressEvents, lpVtbl : IDiscMasterProgressEventsVtbl* do
+    GUID = LibC::GUID.new(0xec9e51c1_u32, 0x4e5d_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
+    def query_interface(this : IDiscMasterProgressEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscMasterProgressEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscMasterProgressEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def query_cancel(this : IDiscMasterProgressEvents*, pbCancel : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_cancel.call(this, pbCancel)
+    end
+    def notify_pn_p_activity(this : IDiscMasterProgressEvents*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_pn_p_activity.call(this)
+    end
+    def notify_add_progress(this : IDiscMasterProgressEvents*, nCompletedSteps : Int32, nTotalSteps : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_add_progress.call(this, nCompletedSteps, nTotalSteps)
+    end
+    def notify_block_progress(this : IDiscMasterProgressEvents*, nCompleted : Int32, nTotal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_block_progress.call(this, nCompleted, nTotal)
+    end
+    def notify_track_progress(this : IDiscMasterProgressEvents*, nCurrentTrack : Int32, nTotalTracks : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_track_progress.call(this, nCurrentTrack, nTotalTracks)
+    end
+    def notify_preparing_burn(this : IDiscMasterProgressEvents*, nEstimatedSeconds : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_preparing_burn.call(this, nEstimatedSeconds)
+    end
+    def notify_closing_disc(this : IDiscMasterProgressEvents*, nEstimatedSeconds : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_closing_disc.call(this, nEstimatedSeconds)
+    end
+    def notify_burn_complete(this : IDiscMasterProgressEvents*, status : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_burn_complete.call(this, status)
+    end
+    def notify_erase_complete(this : IDiscMasterProgressEvents*, status : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.notify_erase_complete.call(this, status)
+    end
+
+  end
+
+  @[Extern]
+  record IDiscMasterVtbl,
+    query_interface : Proc(IDiscMaster*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDiscMaster*, UInt32),
+    release : Proc(IDiscMaster*, UInt32),
+    open : Proc(IDiscMaster*, Win32cr::Foundation::HRESULT),
+    enum_disc_master_formats : Proc(IDiscMaster*, Void**, Win32cr::Foundation::HRESULT),
+    get_active_disc_master_format : Proc(IDiscMaster*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_active_disc_master_format : Proc(IDiscMaster*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    enum_disc_recorders : Proc(IDiscMaster*, Void**, Win32cr::Foundation::HRESULT),
+    get_active_disc_recorder : Proc(IDiscMaster*, Void**, Win32cr::Foundation::HRESULT),
+    set_active_disc_recorder : Proc(IDiscMaster*, Void*, Win32cr::Foundation::HRESULT),
+    clear_format_content : Proc(IDiscMaster*, Win32cr::Foundation::HRESULT),
+    progress_advise : Proc(IDiscMaster*, Void*, LibC::UIntPtrT*, Win32cr::Foundation::HRESULT),
+    progress_unadvise : Proc(IDiscMaster*, LibC::UIntPtrT, Win32cr::Foundation::HRESULT),
+    record_disc : Proc(IDiscMaster*, UInt8, UInt8, Win32cr::Foundation::HRESULT),
+    close : Proc(IDiscMaster*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("520cca62-51a5-11d3-9144-00104ba11c5e")]
+  record IDiscMaster, lpVtbl : IDiscMasterVtbl* do
+    GUID = LibC::GUID.new(0x520cca62_u32, 0x51a5_u16, 0x11d3_u16, StaticArray[0x91_u8, 0x44_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xa1_u8, 0x1c_u8, 0x5e_u8])
+    def query_interface(this : IDiscMaster*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDiscMaster*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDiscMaster*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def open(this : IDiscMaster*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open.call(this)
+    end
+    def enum_disc_master_formats(this : IDiscMaster*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_disc_master_formats.call(this, ppEnum)
+    end
+    def get_active_disc_master_format(this : IDiscMaster*, lpiid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_active_disc_master_format.call(this, lpiid)
+    end
+    def set_active_disc_master_format(this : IDiscMaster*, riid : LibC::GUID*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_active_disc_master_format.call(this, riid, ppUnk)
+    end
+    def enum_disc_recorders(this : IDiscMaster*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_disc_recorders.call(this, ppEnum)
+    end
+    def get_active_disc_recorder(this : IDiscMaster*, ppRecorder : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_active_disc_recorder.call(this, ppRecorder)
+    end
+    def set_active_disc_recorder(this : IDiscMaster*, pRecorder : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_active_disc_recorder.call(this, pRecorder)
+    end
+    def clear_format_content(this : IDiscMaster*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear_format_content.call(this)
+    end
+    def progress_advise(this : IDiscMaster*, pEvents : Void*, pvCookie : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.progress_advise.call(this, pEvents, pvCookie)
+    end
+    def progress_unadvise(this : IDiscMaster*, vCookie : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.progress_unadvise.call(this, vCookie)
+    end
+    def record_disc(this : IDiscMaster*, bSimulate : UInt8, bEjectAfterBurn : UInt8) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.record_disc.call(this, bSimulate, bEjectAfterBurn)
+    end
+    def close(this : IDiscMaster*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.close.call(this)
+    end
+
+  end
+
+  @[Link("mapi32")]
+  lib C
+    fun OpenIMsgSession(lpMalloc : Void*, ulFlags : UInt32, lppMsgSess : Win32cr::Storage::Imapi::MSGSESS**) : Int32
+
+    fun CloseIMsgSession(lpMsgSess : Win32cr::Storage::Imapi::MSGSESS*) : Void
+
+    fun OpenIMsgOnIStg(lpMsgSess : Win32cr::Storage::Imapi::MSGSESS*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpAllocateMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpMalloc : Void*, lpMapiSup : Void*, lpStg : Void*, lpfMsgCallRelease : Win32cr::Storage::Imapi::MSGCALLRELEASE*, ulCallerData : UInt32, ulFlags : UInt32, lppMsg : Void**) : Int32
+
+    fun GetAttribIMsgOnIStg(lpObject : Void*, lpPropTagArray : Win32cr::System::AddressBook::SPropTagArray*, lppPropAttrArray : Win32cr::Storage::Imapi::SPropAttrArray**) : Win32cr::Foundation::HRESULT
+
+    fun SetAttribIMsgOnIStg(lpObject : Void*, lpPropTags : Win32cr::System::AddressBook::SPropTagArray*, lpPropAttrs : Win32cr::Storage::Imapi::SPropAttrArray*, lppPropProblems : Win32cr::System::AddressBook::SPropProblemArray**) : Win32cr::Foundation::HRESULT
+
+    fun MapStorageSCode(stg_s_code : Int32) : Int32
+
   end
 end

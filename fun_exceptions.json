@@ -1,0 +1,6 @@
+[
+    "GetProcessHeap",
+    "HeapAlloc",
+    "HeapReAlloc",
+    "HeapFree"
+]

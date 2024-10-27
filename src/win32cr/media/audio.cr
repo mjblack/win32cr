@@ -1,32 +1,12 @@
-require "../media/multimedia.cr"
-require "../foundation.cr"
-require "../system/com.cr"
-require "../media.cr"
-require "../system/com/structuredstorage.cr"
-require "../ui/shell/propertiessystem.cr"
-require "../ui/windowsandmessaging.cr"
+require "./multimedia.cr"
+require "./../foundation.cr"
+require "./../system/com.cr"
+require "./../media.cr"
+require "./../system/com/structured_storage.cr"
+require "./../ui/shell/properties_system.cr"
+require "./../ui/windows_and_messaging.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:ole32.dll")]
-@[Link(ldflags: "/DELAYLOAD:winmm.dll")]
-@[Link(ldflags: "/DELAYLOAD:mmdevapi.dll")]
-@[Link(ldflags: "/DELAYLOAD:windows.media.mediacontrol.dll")]
-@[Link(ldflags: "/DELAYLOAD:msacm32.dll")]
-{% else %}
-@[Link("ole32")]
-@[Link("winmm")]
-@[Link("mmdevapi")]
-@[Link("windows.media.mediacontrol")]
-@[Link("msacm32")]
-{% end %}
-lib LibWin32
+module Win32cr::Media::Audio
   alias HMIDI = LibC::IntPtrT
   alias HMIDIIN = LibC::IntPtrT
   alias HMIDIOUT = LibC::IntPtrT
@@ -40,6 +20,39 @@ lib LibWin32
   alias HACMDRIVER = LibC::IntPtrT
   alias HACMSTREAM = LibC::IntPtrT
   alias HACMOBJ = LibC::IntPtrT
+  alias LPWAVECALLBACK = Proc(Win32cr::Media::Multimedia::HDRVR, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)*
+
+  alias LPMIDICALLBACK = Proc(Win32cr::Media::Multimedia::HDRVR, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)*
+
+  alias PAudioStateMonitorCallback = Proc(Void*, Void*, Void)*
+
+  alias ACMDRIVERENUMCB = Proc(Win32cr::Media::Audio::HACMDRIVERID, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias LPACMDRIVERPROC = Proc(LibC::UIntPtrT, Win32cr::Media::Audio::HACMDRIVERID, UInt32, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LPARAM, Win32cr::Foundation::LRESULT)*
+
+  alias ACMFORMATTAGENUMCBA = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFORMATTAGDETAILSA*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias ACMFORMATTAGENUMCBW = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFORMATTAGDETAILSW*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias ACMFORMATENUMCBA = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFORMATDETAILSA*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias ACMFORMATENUMCBW = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::Tacmformatdetailsw*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias ACMFORMATCHOOSEHOOKPROCA = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)*
+
+  alias ACMFORMATCHOOSEHOOKPROCW = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)*
+
+  alias ACMFILTERTAGENUMCBA = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFILTERTAGDETAILSA*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias ACMFILTERTAGENUMCBW = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFILTERTAGDETAILSW*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias ACMFILTERENUMCBA = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFILTERDETAILSA*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias ACMFILTERENUMCBW = Proc(Win32cr::Media::Audio::HACMDRIVERID, Win32cr::Media::Audio::ACMFILTERDETAILSW*, LibC::UIntPtrT, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias ACMFILTERCHOOSEHOOKPROCA = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)*
+
+  alias ACMFILTERCHOOSEHOOKPROCW = Proc(Win32cr::Foundation::HWND, UInt32, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, UInt32)*
 
   MIXERCONTROL_CONTROLTYPE_CUSTOM = 0_u32
   MIXERCONTROL_CONTROLTYPE_BOOLEANMETER = 268500992_u32
@@ -148,24 +161,24 @@ lib LibWin32
   DEVICE_STATE_NOTPRESENT = 4_u32
   DEVICE_STATE_UNPLUGGED = 8_u32
   DEVICE_STATEMASK_ALL = 15_u32
-  PKEY_AudioEndpoint_FormFactor = PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 0_u32)
-  PKEY_AudioEndpoint_ControlPanelPageProvider = PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 1_u32)
-  PKEY_AudioEndpoint_Association = PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 2_u32)
-  PKEY_AudioEndpoint_PhysicalSpeakers = PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 3_u32)
-  PKEY_AudioEndpoint_GUID = PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 4_u32)
-  PKEY_AudioEndpoint_Disable_SysFx = PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 5_u32)
+  PKEY_AudioEndpoint_FormFactor = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 0_u32)
+  PKEY_AudioEndpoint_ControlPanelPageProvider = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 1_u32)
+  PKEY_AudioEndpoint_Association = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 2_u32)
+  PKEY_AudioEndpoint_PhysicalSpeakers = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 3_u32)
+  PKEY_AudioEndpoint_GUID = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 4_u32)
+  PKEY_AudioEndpoint_Disable_SysFx = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 5_u32)
   ENDPOINT_SYSFX_ENABLED = 0_u32
   ENDPOINT_SYSFX_DISABLED = 1_u32
-  PKEY_AudioEndpoint_FullRangeSpeakers = PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 6_u32)
-  PKEY_AudioEndpoint_Supports_EventDriven_Mode = PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 7_u32)
-  PKEY_AudioEndpoint_JackSubType = PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 8_u32)
-  PKEY_AudioEndpoint_Default_VolumeInDb = PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 9_u32)
-  PKEY_AudioEngine_DeviceFormat = PROPERTYKEY.new(LibC::GUID.new(0xf19f064d_u32, 0x82c_u16, 0x4e27_u16, StaticArray[0xbc_u8, 0x73_u8, 0x68_u8, 0x82_u8, 0xa1_u8, 0xbb_u8, 0x8e_u8, 0x4c_u8]), 0_u32)
-  PKEY_AudioEngine_OEMFormat = PROPERTYKEY.new(LibC::GUID.new(0xe4870e26_u32, 0x3cc5_u16, 0x4cd2_u16, StaticArray[0xba_u8, 0x46_u8, 0xca_u8, 0xa_u8, 0x9a_u8, 0x70_u8, 0xed_u8, 0x4_u8]), 3_u32)
-  PKEY_AudioEndpointLogo_IconEffects = PROPERTYKEY.new(LibC::GUID.new(0xf1ab780d_u32, 0x2010_u16, 0x4ed3_u16, StaticArray[0xa3_u8, 0xa6_u8, 0x8b_u8, 0x87_u8, 0xf0_u8, 0xf0_u8, 0xc4_u8, 0x76_u8]), 0_u32)
-  PKEY_AudioEndpointLogo_IconPath = PROPERTYKEY.new(LibC::GUID.new(0xf1ab780d_u32, 0x2010_u16, 0x4ed3_u16, StaticArray[0xa3_u8, 0xa6_u8, 0x8b_u8, 0x87_u8, 0xf0_u8, 0xf0_u8, 0xc4_u8, 0x76_u8]), 1_u32)
-  PKEY_AudioEndpointSettings_MenuText = PROPERTYKEY.new(LibC::GUID.new(0x14242002_u32, 0x320_u16, 0x4de4_u16, StaticArray[0x95_u8, 0x55_u8, 0xa7_u8, 0xd8_u8, 0x2b_u8, 0x73_u8, 0xc2_u8, 0x86_u8]), 0_u32)
-  PKEY_AudioEndpointSettings_LaunchContract = PROPERTYKEY.new(LibC::GUID.new(0x14242002_u32, 0x320_u16, 0x4de4_u16, StaticArray[0x95_u8, 0x55_u8, 0xa7_u8, 0xd8_u8, 0x2b_u8, 0x73_u8, 0xc2_u8, 0x86_u8]), 1_u32)
+  PKEY_AudioEndpoint_FullRangeSpeakers = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 6_u32)
+  PKEY_AudioEndpoint_Supports_EventDriven_Mode = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 7_u32)
+  PKEY_AudioEndpoint_JackSubType = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 8_u32)
+  PKEY_AudioEndpoint_Default_VolumeInDb = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x1da5d803_u32, 0xd492_u16, 0x4edd_u16, StaticArray[0x8c_u8, 0x23_u8, 0xe0_u8, 0xc0_u8, 0xff_u8, 0xee_u8, 0x7f_u8, 0xe_u8]), 9_u32)
+  PKEY_AudioEngine_DeviceFormat = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf19f064d_u32, 0x82c_u16, 0x4e27_u16, StaticArray[0xbc_u8, 0x73_u8, 0x68_u8, 0x82_u8, 0xa1_u8, 0xbb_u8, 0x8e_u8, 0x4c_u8]), 0_u32)
+  PKEY_AudioEngine_OEMFormat = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xe4870e26_u32, 0x3cc5_u16, 0x4cd2_u16, StaticArray[0xba_u8, 0x46_u8, 0xca_u8, 0xa_u8, 0x9a_u8, 0x70_u8, 0xed_u8, 0x4_u8]), 3_u32)
+  PKEY_AudioEndpointLogo_IconEffects = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf1ab780d_u32, 0x2010_u16, 0x4ed3_u16, StaticArray[0xa3_u8, 0xa6_u8, 0x8b_u8, 0x87_u8, 0xf0_u8, 0xf0_u8, 0xc4_u8, 0x76_u8]), 0_u32)
+  PKEY_AudioEndpointLogo_IconPath = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf1ab780d_u32, 0x2010_u16, 0x4ed3_u16, StaticArray[0xa3_u8, 0xa6_u8, 0x8b_u8, 0x87_u8, 0xf0_u8, 0xf0_u8, 0xc4_u8, 0x76_u8]), 1_u32)
+  PKEY_AudioEndpointSettings_MenuText = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x14242002_u32, 0x320_u16, 0x4de4_u16, StaticArray[0x95_u8, 0x55_u8, 0xa7_u8, 0xd8_u8, 0x2b_u8, 0x73_u8, 0xc2_u8, 0x86_u8]), 0_u32)
+  PKEY_AudioEndpointSettings_LaunchContract = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x14242002_u32, 0x320_u16, 0x4de4_u16, StaticArray[0x95_u8, 0x55_u8, 0xa7_u8, 0xd8_u8, 0x2b_u8, 0x73_u8, 0xc2_u8, 0x86_u8]), 1_u32)
   DEVINTERFACE_AUDIO_RENDER = "e6327cad-dcec-4949-ae8a-991e976a79d2"
   DEVINTERFACE_AUDIO_CAPTURE = "2eef81be-33fa-4800-9670-1cd474972c3f"
   DEVINTERFACE_MIDI_OUTPUT = "6dc23320-ab33-4ce4-80d4-bbb3ebbf2814"
@@ -199,6 +212,7 @@ lib LibWin32
   SPTLAUD_MD_CLNT_E_FORMAT_MISMATCH = -2004286941_i32
   SPTLAUD_MD_CLNT_E_BUFFER_STILL_ATTACHED = -2004286940_i32
   SPTLAUD_MD_CLNT_E_ITEMS_LOCKED_FOR_WRITING = -2004286939_i32
+  VIRTUAL_AUDIO_DEVICE_PROCESS_LOOPBACK = "VAD\\Process_Loopback"
   WAVERR_BADFORMAT = 32_u32
   WAVERR_STILLPLAYING = 33_u32
   WAVERR_UNPREPARED = 34_u32
@@ -438,6 +452,15 @@ lib LibWin32
   ACM_FORMATSUGGESTF_NSAMPLESPERSEC = 262144_i32
   ACM_FORMATSUGGESTF_WBITSPERSAMPLE = 524288_i32
   ACM_FORMATSUGGESTF_TYPEMASK = 16711680_i32
+  ACMHELPMSGSTRINGA = "acmchoose_help"
+  ACMHELPMSGSTRINGW = "acmchoose_help"
+  ACMHELPMSGCONTEXTMENUA = "acmchoose_contextmenu"
+  ACMHELPMSGCONTEXTMENUW = "acmchoose_contextmenu"
+  ACMHELPMSGCONTEXTHELPA = "acmchoose_contexthelp"
+  ACMHELPMSGCONTEXTHELPW = "acmchoose_contexthelp"
+  ACMHELPMSGSTRING = "acmchoose_help"
+  ACMHELPMSGCONTEXTMENU = "acmchoose_contextmenu"
+  ACMHELPMSGCONTEXTHELP = "acmchoose_contexthelp"
   MM_ACM_FORMATCHOOSE = 32768_u32
   FORMATCHOOSE_MESSAGE = 0_u32
   FORMATCHOOSE_FORMATTAG_VERIFY = 0_u32
@@ -516,4753 +539,4725 @@ lib LibWin32
   ACMDM_STREAM_PREPARE = 24657_u32
   ACMDM_STREAM_UNPREPARE = 24658_u32
   ACMDM_STREAM_UPDATE = 24659_u32
+
   CLSID_MMDeviceEnumerator = LibC::GUID.new(0xbcde0395_u32, 0xe52f_u16, 0x467c_u16, StaticArray[0x8e_u8, 0x3d_u8, 0xc4_u8, 0x57_u8, 0x92_u8, 0x91_u8, 0x69_u8, 0x2e_u8])
+
   CLSID_DeviceTopology = LibC::GUID.new(0x1df639d0_u32, 0x5ec1_u16, 0x47aa_u16, StaticArray[0x93_u8, 0x79_u8, 0x82_u8, 0x8d_u8, 0xc1_u8, 0xaa_u8, 0x8c_u8, 0x59_u8])
 
-  alias LPWAVECALLBACK = Proc(HDRVR, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, Void)
-  alias LPMIDICALLBACK = Proc(HDRVR, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, Void)
-  alias PAudioStateMonitorCallback = Proc(IAudioStateMonitor, Void*, Void)
-  alias ACMDRIVERENUMCB = Proc(HACMDRIVERID, LibC::UINT_PTR, UInt32, LibC::BOOL)
-  alias LPACMDRIVERPROC = Proc(LibC::UINT_PTR, HACMDRIVERID, UInt32, LPARAM, LPARAM, LRESULT)
-  alias ACMFORMATTAGENUMCBA = Proc(HACMDRIVERID, ACMFORMATTAGDETAILSA*, LibC::UINT_PTR, UInt32, LibC::BOOL)
-  alias ACMFORMATTAGENUMCBW = Proc(HACMDRIVERID, ACMFORMATTAGDETAILSW*, LibC::UINT_PTR, UInt32, LibC::BOOL)
-  alias ACMFORMATENUMCBA = Proc(HACMDRIVERID, ACMFORMATDETAILSA*, LibC::UINT_PTR, UInt32, LibC::BOOL)
-  alias ACMFORMATENUMCBW = Proc(HACMDRIVERID, Tacmformatdetailsw*, LibC::UINT_PTR, UInt32, LibC::BOOL)
-  alias ACMFORMATCHOOSEHOOKPROCA = Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, UInt32)
-  alias ACMFORMATCHOOSEHOOKPROCW = Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, UInt32)
-  alias ACMFILTERTAGENUMCBA = Proc(HACMDRIVERID, ACMFILTERTAGDETAILSA*, LibC::UINT_PTR, UInt32, LibC::BOOL)
-  alias ACMFILTERTAGENUMCBW = Proc(HACMDRIVERID, ACMFILTERTAGDETAILSW*, LibC::UINT_PTR, UInt32, LibC::BOOL)
-  alias ACMFILTERENUMCBA = Proc(HACMDRIVERID, ACMFILTERDETAILSA*, LibC::UINT_PTR, UInt32, LibC::BOOL)
-  alias ACMFILTERENUMCBW = Proc(HACMDRIVERID, ACMFILTERDETAILSW*, LibC::UINT_PTR, UInt32, LibC::BOOL)
-  alias ACMFILTERCHOOSEHOOKPROCA = Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, UInt32)
-  alias ACMFILTERCHOOSEHOOKPROCW = Proc(LibC::HANDLE, UInt32, LibC::UINT_PTR, LPARAM, UInt32)
-
-
+  @[Flags]
   enum MIDI_WAVE_OPEN_TYPE : UInt32
-    CALLBACK_TYPEMASK = 458752
-    CALLBACK_NULL = 0
-    CALLBACK_WINDOW = 65536
-    CALLBACK_TASK = 131072
-    CALLBACK_FUNCTION = 196608
-    CALLBACK_THREAD = 131072
-    CALLBACK_EVENT = 327680
-    WAVE_FORMAT_QUERY = 1
-    WAVE_ALLOWSYNC = 2
-    WAVE_MAPPED = 4
-    WAVE_FORMAT_DIRECT = 8
-    WAVE_FORMAT_DIRECT_QUERY = 9
-    WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 16
-    MIDI_IO_STATUS = 32
+    CALLBACK_TYPEMASK = 458752_u32
+    CALLBACK_NULL = 0_u32
+    CALLBACK_WINDOW = 65536_u32
+    CALLBACK_TASK = 131072_u32
+    CALLBACK_FUNCTION = 196608_u32
+    CALLBACK_THREAD = 131072_u32
+    CALLBACK_EVENT = 327680_u32
+    WAVE_FORMAT_QUERY = 1_u32
+    WAVE_ALLOWSYNC = 2_u32
+    WAVE_MAPPED = 4_u32
+    WAVE_FORMAT_DIRECT = 8_u32
+    WAVE_FORMAT_DIRECT_QUERY = 9_u32
+    WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 16_u32
+    MIDI_IO_STATUS = 32_u32
   end
-
   enum MIXERLINE_COMPONENTTYPE : UInt32
-    MIXERLINE_COMPONENTTYPE_DST_DIGITAL = 1
-    MIXERLINE_COMPONENTTYPE_DST_HEADPHONES = 5
-    MIXERLINE_COMPONENTTYPE_DST_LINE = 2
-    MIXERLINE_COMPONENTTYPE_DST_MONITOR = 3
-    MIXERLINE_COMPONENTTYPE_DST_SPEAKERS = 4
-    MIXERLINE_COMPONENTTYPE_DST_TELEPHONE = 6
-    MIXERLINE_COMPONENTTYPE_DST_UNDEFINED = 0
-    MIXERLINE_COMPONENTTYPE_DST_VOICEIN = 8
-    MIXERLINE_COMPONENTTYPE_DST_WAVEIN = 7
-    MIXERLINE_COMPONENTTYPE_SRC_ANALOG = 4106
-    MIXERLINE_COMPONENTTYPE_SRC_AUXILIARY = 4105
-    MIXERLINE_COMPONENTTYPE_SRC_COMPACTDISC = 4101
-    MIXERLINE_COMPONENTTYPE_SRC_DIGITAL = 4097
-    MIXERLINE_COMPONENTTYPE_SRC_LINE = 4098
-    MIXERLINE_COMPONENTTYPE_SRC_MICROPHONE = 4099
-    MIXERLINE_COMPONENTTYPE_SRC_PCSPEAKER = 4103
-    MIXERLINE_COMPONENTTYPE_SRC_SYNTHESIZER = 4100
-    MIXERLINE_COMPONENTTYPE_SRC_TELEPHONE = 4102
-    MIXERLINE_COMPONENTTYPE_SRC_UNDEFINED = 4096
-    MIXERLINE_COMPONENTTYPE_SRC_WAVEOUT = 4104
+    MIXERLINE_COMPONENTTYPE_DST_DIGITAL = 1_u32
+    MIXERLINE_COMPONENTTYPE_DST_HEADPHONES = 5_u32
+    MIXERLINE_COMPONENTTYPE_DST_LINE = 2_u32
+    MIXERLINE_COMPONENTTYPE_DST_MONITOR = 3_u32
+    MIXERLINE_COMPONENTTYPE_DST_SPEAKERS = 4_u32
+    MIXERLINE_COMPONENTTYPE_DST_TELEPHONE = 6_u32
+    MIXERLINE_COMPONENTTYPE_DST_UNDEFINED = 0_u32
+    MIXERLINE_COMPONENTTYPE_DST_VOICEIN = 8_u32
+    MIXERLINE_COMPONENTTYPE_DST_WAVEIN = 7_u32
+    MIXERLINE_COMPONENTTYPE_SRC_ANALOG = 4106_u32
+    MIXERLINE_COMPONENTTYPE_SRC_AUXILIARY = 4105_u32
+    MIXERLINE_COMPONENTTYPE_SRC_COMPACTDISC = 4101_u32
+    MIXERLINE_COMPONENTTYPE_SRC_DIGITAL = 4097_u32
+    MIXERLINE_COMPONENTTYPE_SRC_LINE = 4098_u32
+    MIXERLINE_COMPONENTTYPE_SRC_MICROPHONE = 4099_u32
+    MIXERLINE_COMPONENTTYPE_SRC_PCSPEAKER = 4103_u32
+    MIXERLINE_COMPONENTTYPE_SRC_SYNTHESIZER = 4100_u32
+    MIXERLINE_COMPONENTTYPE_SRC_TELEPHONE = 4102_u32
+    MIXERLINE_COMPONENTTYPE_SRC_UNDEFINED = 4096_u32
+    MIXERLINE_COMPONENTTYPE_SRC_WAVEOUT = 4104_u32
   end
-
-  enum AUDCLNT_SHAREMODE : Int32
-    AUDCLNT_SHAREMODE_SHARED = 0
-    AUDCLNT_SHAREMODE_EXCLUSIVE = 1
+  enum AUDCLNT_SHAREMODE
+    AUDCLNT_SHAREMODE_SHARED = 0_i32
+    AUDCLNT_SHAREMODE_EXCLUSIVE = 1_i32
   end
-
-  enum AUDIO_STREAM_CATEGORY : Int32
-    AudioCategory_Other = 0
-    AudioCategory_ForegroundOnlyMedia = 1
-    AudioCategory_Communications = 3
-    AudioCategory_Alerts = 4
-    AudioCategory_SoundEffects = 5
-    AudioCategory_GameEffects = 6
-    AudioCategory_GameMedia = 7
-    AudioCategory_GameChat = 8
-    AudioCategory_Speech = 9
-    AudioCategory_Movie = 10
-    AudioCategory_Media = 11
-    AudioCategory_FarFieldSpeech = 12
-    AudioCategory_UniformSpeech = 13
-    AudioCategory_VoiceTyping = 14
+  enum AUDIO_STREAM_CATEGORY
+    AudioCategory_Other = 0_i32
+    AudioCategory_ForegroundOnlyMedia = 1_i32
+    AudioCategory_Communications = 3_i32
+    AudioCategory_Alerts = 4_i32
+    AudioCategory_SoundEffects = 5_i32
+    AudioCategory_GameEffects = 6_i32
+    AudioCategory_GameMedia = 7_i32
+    AudioCategory_GameChat = 8_i32
+    AudioCategory_Speech = 9_i32
+    AudioCategory_Movie = 10_i32
+    AudioCategory_Media = 11_i32
+    AudioCategory_FarFieldSpeech = 12_i32
+    AudioCategory_UniformSpeech = 13_i32
+    AudioCategory_VoiceTyping = 14_i32
   end
-
-  enum AudioSessionState : Int32
-    AudioSessionStateInactive = 0
-    AudioSessionStateActive = 1
-    AudioSessionStateExpired = 2
+  enum AudioSessionState
+    AudioSessionStateInactive = 0_i32
+    AudioSessionStateActive = 1_i32
+    AudioSessionStateExpired = 2_i32
   end
-
-  enum AUDCLNT_BUFFERFLAGS : Int32
-    AUDCLNT_BUFFERFLAGS_DATA_DISCONTINUITY = 1
-    AUDCLNT_BUFFERFLAGS_SILENT = 2
-    AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR = 4
+  enum AUDCLNT_BUFFERFLAGS
+    AUDCLNT_BUFFERFLAGS_DATA_DISCONTINUITY = 1_i32
+    AUDCLNT_BUFFERFLAGS_SILENT = 2_i32
+    AUDCLNT_BUFFERFLAGS_TIMESTAMP_ERROR = 4_i32
   end
-
+  @[Flags]
   enum AUDCLNT_STREAMOPTIONS : UInt32
-    AUDCLNT_STREAMOPTIONS_NONE = 0
-    AUDCLNT_STREAMOPTIONS_RAW = 1
-    AUDCLNT_STREAMOPTIONS_MATCH_FORMAT = 2
-    AUDCLNT_STREAMOPTIONS_AMBISONICS = 4
+    AUDCLNT_STREAMOPTIONS_NONE = 0_u32
+    AUDCLNT_STREAMOPTIONS_RAW = 1_u32
+    AUDCLNT_STREAMOPTIONS_MATCH_FORMAT = 2_u32
+    AUDCLNT_STREAMOPTIONS_AMBISONICS = 4_u32
   end
-
+  @[Flags]
   enum AUDIO_DUCKING_OPTIONS : UInt32
-    AUDIO_DUCKING_OPTIONS_DEFAULT = 0
-    AUDIO_DUCKING_OPTIONS_DO_NOT_DUCK_OTHER_STREAMS = 1
+    AUDIO_DUCKING_OPTIONS_DEFAULT = 0_u32
+    AUDIO_DUCKING_OPTIONS_DO_NOT_DUCK_OTHER_STREAMS = 1_u32
   end
-
-  enum AUDIO_EFFECT_STATE : Int32
-    AUDIO_EFFECT_STATE_OFF = 0
-    AUDIO_EFFECT_STATE_ON = 1
+  enum AUDIO_EFFECT_STATE
+    AUDIO_EFFECT_STATE_OFF = 0_i32
+    AUDIO_EFFECT_STATE_ON = 1_i32
   end
-
-  enum AMBISONICS_TYPE : Int32
-    AMBISONICS_TYPE_FULL3D = 0
+  enum AMBISONICS_TYPE
+    AMBISONICS_TYPE_FULL3D = 0_i32
   end
-
-  enum AMBISONICS_CHANNEL_ORDERING : Int32
-    AMBISONICS_CHANNEL_ORDERING_ACN = 0
+  enum AMBISONICS_CHANNEL_ORDERING
+    AMBISONICS_CHANNEL_ORDERING_ACN = 0_i32
   end
-
-  enum AMBISONICS_NORMALIZATION : Int32
-    AMBISONICS_NORMALIZATION_SN3D = 0
-    AMBISONICS_NORMALIZATION_N3D = 1
+  enum AMBISONICS_NORMALIZATION
+    AMBISONICS_NORMALIZATION_SN3D = 0_i32
+    AMBISONICS_NORMALIZATION_N3D = 1_i32
   end
-
+  @[Flags]
   enum AudioObjectType : UInt32
-    AudioObjectType_None = 0
-    AudioObjectType_Dynamic = 1
-    AudioObjectType_FrontLeft = 2
-    AudioObjectType_FrontRight = 4
-    AudioObjectType_FrontCenter = 8
-    AudioObjectType_LowFrequency = 16
-    AudioObjectType_SideLeft = 32
-    AudioObjectType_SideRight = 64
-    AudioObjectType_BackLeft = 128
-    AudioObjectType_BackRight = 256
-    AudioObjectType_TopFrontLeft = 512
-    AudioObjectType_TopFrontRight = 1024
-    AudioObjectType_TopBackLeft = 2048
-    AudioObjectType_TopBackRight = 4096
-    AudioObjectType_BottomFrontLeft = 8192
-    AudioObjectType_BottomFrontRight = 16384
-    AudioObjectType_BottomBackLeft = 32768
-    AudioObjectType_BottomBackRight = 65536
-    AudioObjectType_BackCenter = 131072
+    AudioObjectType_None = 0_u32
+    AudioObjectType_Dynamic = 1_u32
+    AudioObjectType_FrontLeft = 2_u32
+    AudioObjectType_FrontRight = 4_u32
+    AudioObjectType_FrontCenter = 8_u32
+    AudioObjectType_LowFrequency = 16_u32
+    AudioObjectType_SideLeft = 32_u32
+    AudioObjectType_SideRight = 64_u32
+    AudioObjectType_BackLeft = 128_u32
+    AudioObjectType_BackRight = 256_u32
+    AudioObjectType_TopFrontLeft = 512_u32
+    AudioObjectType_TopFrontRight = 1024_u32
+    AudioObjectType_TopBackLeft = 2048_u32
+    AudioObjectType_TopBackRight = 4096_u32
+    AudioObjectType_BottomFrontLeft = 8192_u32
+    AudioObjectType_BottomFrontRight = 16384_u32
+    AudioObjectType_BottomBackLeft = 32768_u32
+    AudioObjectType_BottomBackRight = 65536_u32
+    AudioObjectType_BackCenter = 131072_u32
   end
-
+  @[Flags]
   enum SPATIAL_AUDIO_STREAM_OPTIONS : UInt32
-    SPATIAL_AUDIO_STREAM_OPTIONS_NONE = 0
-    SPATIAL_AUDIO_STREAM_OPTIONS_OFFLOAD = 1
+    SPATIAL_AUDIO_STREAM_OPTIONS_NONE = 0_u32
+    SPATIAL_AUDIO_STREAM_OPTIONS_OFFLOAD = 1_u32
+  end
+  enum SpatialAudioHrtfDirectivityType
+    SpatialAudioHrtfDirectivity_OmniDirectional = 0_i32
+    SpatialAudioHrtfDirectivity_Cardioid = 1_i32
+    SpatialAudioHrtfDirectivity_Cone = 2_i32
+  end
+  enum SpatialAudioHrtfEnvironmentType
+    SpatialAudioHrtfEnvironment_Small = 0_i32
+    SpatialAudioHrtfEnvironment_Medium = 1_i32
+    SpatialAudioHrtfEnvironment_Large = 2_i32
+    SpatialAudioHrtfEnvironment_Outdoors = 3_i32
+    SpatialAudioHrtfEnvironment_Average = 4_i32
+  end
+  enum SpatialAudioHrtfDistanceDecayType
+    SpatialAudioHrtfDistanceDecay_NaturalDecay = 0_i32
+    SpatialAudioHrtfDistanceDecay_CustomDecay = 1_i32
+  end
+  enum EDataFlow
+    Erender = 0_i32
+    Ecapture = 1_i32
+    Eall = 2_i32
+    EDataFlow_enum_count = 3_i32
+  end
+  enum ERole
+    Econsole = 0_i32
+    Emultimedia = 1_i32
+    Ecommunications = 2_i32
+    ERole_enum_count = 3_i32
+  end
+  enum EndpointFormFactor
+    RemoteNetworkDevice = 0_i32
+    Speakers = 1_i32
+    LineLevel = 2_i32
+    Headphones = 3_i32
+    Microphone = 4_i32
+    Headset = 5_i32
+    Handset = 6_i32
+    UnknownDigitalPassthrough = 7_i32
+    SPDIF = 8_i32
+    DigitalAudioDisplayDevice = 9_i32
+    UnknownFormFactor = 10_i32
+    EndpointFormFactor_enum_count = 11_i32
+  end
+  enum MIDL___MIDL_itf_mmdeviceapi_0000_0008_0002
+    AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_DEFAULT = 0_i32
+    AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_USER = 1_i32
+    AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_VOLATILE = 2_i32
+    AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_ENUM_COUNT = 3_i32
+  end
+  enum DataFlow
+    In = 0_i32
+    Out = 1_i32
+  end
+  enum PartType
+    Connector = 0_i32
+    Subunit = 1_i32
+  end
+  enum ConnectorType
+    Unknown_Connector = 0_i32
+    Physical_Internal = 1_i32
+    Physical_External = 2_i32
+    Software_IO = 3_i32
+    Software_Fixed = 4_i32
+    Network = 5_i32
+  end
+  enum AudioSessionDisconnectReason
+    DisconnectReasonDeviceRemoval = 0_i32
+    DisconnectReasonServerShutdown = 1_i32
+    DisconnectReasonFormatChanged = 2_i32
+    DisconnectReasonSessionLogoff = 3_i32
+    DisconnectReasonSessionDisconnected = 4_i32
+    DisconnectReasonExclusiveModeOverride = 5_i32
+  end
+  enum SpatialAudioMetadataWriterOverflowMode
+    SpatialAudioMetadataWriterOverflow_Fail = 0_i32
+    SpatialAudioMetadataWriterOverflow_MergeWithNew = 1_i32
+    SpatialAudioMetadataWriterOverflow_MergeWithLast = 2_i32
+  end
+  enum SpatialAudioMetadataCopyMode
+    SpatialAudioMetadataCopy_Overwrite = 0_i32
+    SpatialAudioMetadataCopy_Append = 1_i32
+    SpatialAudioMetadataCopy_AppendMergeWithLast = 2_i32
+    SpatialAudioMetadataCopy_AppendMergeWithFirst = 3_i32
+  end
+  enum PROCESS_LOOPBACK_MODE
+    PROCESS_LOOPBACK_MODE_INCLUDE_TARGET_PROCESS_TREE = 0_i32
+    PROCESS_LOOPBACK_MODE_EXCLUDE_TARGET_PROCESS_TREE = 1_i32
+  end
+  enum AUDIOCLIENT_ACTIVATION_TYPE
+    AUDIOCLIENT_ACTIVATION_TYPE_DEFAULT = 0_i32
+    AUDIOCLIENT_ACTIVATION_TYPE_PROCESS_LOOPBACK = 1_i32
+  end
+  enum AudioStateMonitorSoundLevel
+    Muted = 0_i32
+    Low = 1_i32
+    Full = 2_i32
   end
 
-  enum SpatialAudioHrtfDirectivityType : Int32
-    SpatialAudioHrtfDirectivity_OmniDirectional = 0
-    SpatialAudioHrtfDirectivity_Cardioid = 1
-    SpatialAudioHrtfDirectivity_Cone = 2
+  @[Extern]
+  record AUDIO_VOLUME_NOTIFICATION_DATA,
+    guidEventContext : LibC::GUID,
+    bMuted : Win32cr::Foundation::BOOL,
+    fMasterVolume : Float32,
+    nChannels : UInt32,
+    afChannelVolumes : Float32*
+
+  @[Extern]
+  record WAVEFORMATEXTENSIBLE,
+    format : Win32cr::Media::Audio::WAVEFORMATEX,
+    samples : Samples_e__Union,
+    dwChannelMask : UInt32,
+    sub_format : LibC::GUID do
+
+    # Nested Type Samples_e__Union
+    @[Extern(union: true)]
+    record Samples_e__Union,
+      wValidBitsPerSample : UInt16,
+      wSamplesPerBlock : UInt16,
+      wReserved : UInt16
+
   end
 
-  enum SpatialAudioHrtfEnvironmentType : Int32
-    SpatialAudioHrtfEnvironment_Small = 0
-    SpatialAudioHrtfEnvironment_Medium = 1
-    SpatialAudioHrtfEnvironment_Large = 2
-    SpatialAudioHrtfEnvironment_Outdoors = 3
-    SpatialAudioHrtfEnvironment_Average = 4
+  @[Extern]
+  record WAVEFILTER,
+    cbStruct : UInt32,
+    dwFilterTag : UInt32,
+    fdwFilter : UInt32,
+    dwReserved : UInt32[5]
+
+  @[Extern]
+  record VOLUMEWAVEFILTER,
+    wfltr : Win32cr::Media::Audio::WAVEFILTER,
+    dwVolume : UInt32
+
+  @[Extern]
+  record ECHOWAVEFILTER,
+    wfltr : Win32cr::Media::Audio::WAVEFILTER,
+    dwVolume : UInt32,
+    dwDelay : UInt32
+
+  @[Extern]
+  record WAVEHDR,
+    lpData : Win32cr::Foundation::PSTR,
+    dwBufferLength : UInt32,
+    dwBytesRecorded : UInt32,
+    dwUser : LibC::UIntPtrT,
+    dwFlags : UInt32,
+    dwLoops : UInt32,
+    lpNext : Win32cr::Media::Audio::WAVEHDR*,
+    reserved : LibC::UIntPtrT
+
+  @[Extern]
+  record WAVEOUTCAPSA,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : Win32cr::Foundation::CHAR[32],
+    dwFormats : UInt32,
+    wChannels : UInt16,
+    wReserved1 : UInt16,
+    dwSupport : UInt32
+
+  @[Extern]
+  record WAVEOUTCAPSW,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : UInt16[32],
+    dwFormats : UInt32,
+    wChannels : UInt16,
+    wReserved1 : UInt16,
+    dwSupport : UInt32
+
+  @[Extern]
+  record WAVEOUTCAPS2A,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : Win32cr::Foundation::CHAR[32],
+    dwFormats : UInt32,
+    wChannels : UInt16,
+    wReserved1 : UInt16,
+    dwSupport : UInt32,
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record WAVEOUTCAPS2W,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : UInt16[32],
+    dwFormats : UInt32,
+    wChannels : UInt16,
+    wReserved1 : UInt16,
+    dwSupport : UInt32,
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record WAVEINCAPSA,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : Win32cr::Foundation::CHAR[32],
+    dwFormats : UInt32,
+    wChannels : UInt16,
+    wReserved1 : UInt16
+
+  @[Extern]
+  record WAVEINCAPSW,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : UInt16[32],
+    dwFormats : UInt32,
+    wChannels : UInt16,
+    wReserved1 : UInt16
+
+  @[Extern]
+  record WAVEINCAPS2A,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : Win32cr::Foundation::CHAR[32],
+    dwFormats : UInt32,
+    wChannels : UInt16,
+    wReserved1 : UInt16,
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record WAVEINCAPS2W,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : UInt16[32],
+    dwFormats : UInt32,
+    wChannels : UInt16,
+    wReserved1 : UInt16,
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record WAVEFORMAT,
+    wFormatTag : UInt16,
+    nChannels : UInt16,
+    nSamplesPerSec : UInt32,
+    nAvgBytesPerSec : UInt32,
+    nBlockAlign : UInt16
+
+  @[Extern]
+  record PCMWAVEFORMAT,
+    wf : Win32cr::Media::Audio::WAVEFORMAT,
+    wBitsPerSample : UInt16
+
+  @[Extern]
+  record WAVEFORMATEX,
+    wFormatTag : UInt16,
+    nChannels : UInt16,
+    nSamplesPerSec : UInt32,
+    nAvgBytesPerSec : UInt32,
+    nBlockAlign : UInt16,
+    wBitsPerSample : UInt16,
+    cbSize : UInt16
+
+  @[Extern]
+  record MIDIOUTCAPSA,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : Win32cr::Foundation::CHAR[32],
+    wTechnology : UInt16,
+    wVoices : UInt16,
+    wNotes : UInt16,
+    wChannelMask : UInt16,
+    dwSupport : UInt32
+
+  @[Extern]
+  record MIDIOUTCAPSW,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : UInt16[32],
+    wTechnology : UInt16,
+    wVoices : UInt16,
+    wNotes : UInt16,
+    wChannelMask : UInt16,
+    dwSupport : UInt32
+
+  @[Extern]
+  record MIDIOUTCAPS2A,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : Win32cr::Foundation::CHAR[32],
+    wTechnology : UInt16,
+    wVoices : UInt16,
+    wNotes : UInt16,
+    wChannelMask : UInt16,
+    dwSupport : UInt32,
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record MIDIOUTCAPS2W,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : UInt16[32],
+    wTechnology : UInt16,
+    wVoices : UInt16,
+    wNotes : UInt16,
+    wChannelMask : UInt16,
+    dwSupport : UInt32,
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record MIDIINCAPSA,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : Win32cr::Foundation::CHAR[32],
+    dwSupport : UInt32
+
+  @[Extern]
+  record MIDIINCAPSW,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : UInt16[32],
+    dwSupport : UInt32
+
+  @[Extern]
+  record MIDIINCAPS2A,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : Win32cr::Foundation::CHAR[32],
+    dwSupport : UInt32,
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record MIDIINCAPS2W,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : UInt16[32],
+    dwSupport : UInt32,
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record MIDIHDR,
+    lpData : Win32cr::Foundation::PSTR,
+    dwBufferLength : UInt32,
+    dwBytesRecorded : UInt32,
+    dwUser : LibC::UIntPtrT,
+    dwFlags : UInt32,
+    lpNext : Win32cr::Media::Audio::MIDIHDR*,
+    reserved : LibC::UIntPtrT,
+    dwOffset : UInt32,
+    dwReserved : LibC::UIntPtrT[8]
+
+  @[Extern]
+  record MIDIEVENT,
+    dwDeltaTime : UInt32,
+    dwStreamID : UInt32,
+    dwEvent : UInt32,
+    dwParms : UInt32*
+
+  @[Extern]
+  record MIDISTRMBUFFVER,
+    dwVersion : UInt32,
+    dwMid : UInt32,
+    dwOEMVersion : UInt32
+
+  @[Extern]
+  record MIDIPROPTIMEDIV,
+    cbStruct : UInt32,
+    dwTimeDiv : UInt32
+
+  @[Extern]
+  record MIDIPROPTEMPO,
+    cbStruct : UInt32,
+    dwTempo : UInt32
+
+  @[Extern]
+  record AUXCAPSA,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : Win32cr::Foundation::CHAR[32],
+    wTechnology : UInt16,
+    wReserved1 : UInt16,
+    dwSupport : UInt32
+
+  @[Extern]
+  record AUXCAPSW,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : UInt16[32],
+    wTechnology : UInt16,
+    wReserved1 : UInt16,
+    dwSupport : UInt32
+
+  @[Extern]
+  record AUXCAPS2A,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : Win32cr::Foundation::CHAR[32],
+    wTechnology : UInt16,
+    wReserved1 : UInt16,
+    dwSupport : UInt32,
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record AUXCAPS2W,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : UInt16[32],
+    wTechnology : UInt16,
+    wReserved1 : UInt16,
+    dwSupport : UInt32,
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record MIXERCAPSA,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : Win32cr::Foundation::CHAR[32],
+    fdwSupport : UInt32,
+    cDestinations : UInt32
+
+  @[Extern]
+  record MIXERCAPSW,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : UInt16[32],
+    fdwSupport : UInt32,
+    cDestinations : UInt32
+
+  @[Extern]
+  record MIXERCAPS2A,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : Win32cr::Foundation::CHAR[32],
+    fdwSupport : UInt32,
+    cDestinations : UInt32,
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record MIXERCAPS2W,
+    wMid : UInt16,
+    wPid : UInt16,
+    vDriverVersion : UInt32,
+    szPname : UInt16[32],
+    fdwSupport : UInt32,
+    cDestinations : UInt32,
+    manufacturer_guid : LibC::GUID,
+    product_guid : LibC::GUID,
+    name_guid : LibC::GUID
+
+  @[Extern]
+  record MIXERLINEA,
+    cbStruct : UInt32,
+    dwDestination : UInt32,
+    dwSource : UInt32,
+    dwLineID : UInt32,
+    fdwLine : UInt32,
+    dwUser : LibC::UIntPtrT,
+    dwComponentType : Win32cr::Media::Audio::MIXERLINE_COMPONENTTYPE,
+    cChannels : UInt32,
+    cConnections : UInt32,
+    cControls : UInt32,
+    szShortName : Win32cr::Foundation::CHAR[16],
+    szName : Win32cr::Foundation::CHAR[64],
+    target : Target_e__Struct do
+
+    # Nested Type Target_e__Struct
+    @[Extern]
+    record Target_e__Struct,
+      dwType : UInt32,
+      dwDeviceID : UInt32,
+      wMid : UInt16,
+      wPid : UInt16,
+      vDriverVersion : UInt32,
+      szPname : Win32cr::Foundation::CHAR[32]
+
   end
 
-  enum SpatialAudioHrtfDistanceDecayType : Int32
-    SpatialAudioHrtfDistanceDecay_NaturalDecay = 0
-    SpatialAudioHrtfDistanceDecay_CustomDecay = 1
+  @[Extern]
+  record MIXERLINEW,
+    cbStruct : UInt32,
+    dwDestination : UInt32,
+    dwSource : UInt32,
+    dwLineID : UInt32,
+    fdwLine : UInt32,
+    dwUser : LibC::UIntPtrT,
+    dwComponentType : Win32cr::Media::Audio::MIXERLINE_COMPONENTTYPE,
+    cChannels : UInt32,
+    cConnections : UInt32,
+    cControls : UInt32,
+    szShortName : UInt16[16],
+    szName : UInt16[64],
+    target : Target_e__Struct do
+
+    # Nested Type Target_e__Struct
+    @[Extern]
+    record Target_e__Struct,
+      dwType : UInt32,
+      dwDeviceID : UInt32,
+      wMid : UInt16,
+      wPid : UInt16,
+      vDriverVersion : UInt32,
+      szPname : UInt16[32]
+
   end
 
-  enum EDataFlow : Int32
-    Erender = 0
-    Ecapture = 1
-    Eall = 2
-    EDataFlow_enum_count = 3
+  @[Extern]
+  record MIXERCONTROLA,
+    cbStruct : UInt32,
+    dwControlID : UInt32,
+    dwControlType : UInt32,
+    fdwControl : UInt32,
+    cMultipleItems : UInt32,
+    szShortName : Win32cr::Foundation::CHAR[16],
+    szName : Win32cr::Foundation::CHAR[64],
+    bounds : Bounds_e__Union,
+    metrics : Metrics_e__Union do
+
+    # Nested Type Bounds_e__Union
+    @[Extern(union: true)]
+    record Bounds_e__Union,
+      anonymous1 : Anonymous1_e__Struct,
+      anonymous2 : Anonymous2_e__Struct,
+      dwReserved : UInt32[6] do
+
+      # Nested Type Anonymous2_e__Struct
+      @[Extern]
+      record Anonymous2_e__Struct,
+        dwMinimum : UInt32,
+        dwMaximum : UInt32
+
+
+      # Nested Type Anonymous1_e__Struct
+      @[Extern]
+      record Anonymous1_e__Struct,
+        lMinimum : Int32,
+        lMaximum : Int32
+
+    end
+
+
+    # Nested Type Metrics_e__Union
+    @[Extern(union: true)]
+    record Metrics_e__Union,
+      cSteps : UInt32,
+      cbCustomData : UInt32,
+      dwReserved : UInt32[6]
+
   end
 
-  enum ERole : Int32
-    Econsole = 0
-    Emultimedia = 1
-    Ecommunications = 2
-    ERole_enum_count = 3
+  @[Extern]
+  record MIXERCONTROLW,
+    cbStruct : UInt32,
+    dwControlID : UInt32,
+    dwControlType : UInt32,
+    fdwControl : UInt32,
+    cMultipleItems : UInt32,
+    szShortName : UInt16[16],
+    szName : UInt16[64],
+    bounds : Bounds_e__Union,
+    metrics : Metrics_e__Union do
+
+    # Nested Type Bounds_e__Union
+    @[Extern(union: true)]
+    record Bounds_e__Union,
+      anonymous1 : Anonymous1_e__Struct,
+      anonymous2 : Anonymous2_e__Struct,
+      dwReserved : UInt32[6] do
+
+      # Nested Type Anonymous1_e__Struct
+      @[Extern]
+      record Anonymous1_e__Struct,
+        lMinimum : Int32,
+        lMaximum : Int32
+
+
+      # Nested Type Anonymous2_e__Struct
+      @[Extern]
+      record Anonymous2_e__Struct,
+        dwMinimum : UInt32,
+        dwMaximum : UInt32
+
+    end
+
+
+    # Nested Type Metrics_e__Union
+    @[Extern(union: true)]
+    record Metrics_e__Union,
+      cSteps : UInt32,
+      cbCustomData : UInt32,
+      dwReserved : UInt32[6]
+
   end
 
-  enum EndpointFormFactor : Int32
-    RemoteNetworkDevice = 0
-    Speakers = 1
-    LineLevel = 2
-    Headphones = 3
-    Microphone = 4
-    Headset = 5
-    Handset = 6
-    UnknownDigitalPassthrough = 7
-    SPDIF = 8
-    DigitalAudioDisplayDevice = 9
-    UnknownFormFactor = 10
-    EndpointFormFactor_enum_count = 11
+  @[Extern]
+  record MIXERLINECONTROLSA,
+    cbStruct : UInt32,
+    dwLineID : UInt32,
+    anonymous : Anonymous_e__Union,
+    cControls : UInt32,
+    cbmxctrl : UInt32,
+    pamxctrl : Win32cr::Media::Audio::MIXERCONTROLA* do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      dwControlID : UInt32,
+      dwControlType : UInt32
+
   end
 
-  enum MIDL___MIDL_itf_mmdeviceapi_0000_0008_0002 : Int32
-    AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_DEFAULT = 0
-    AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_USER = 1
-    AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_VOLATILE = 2
-    AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE_ENUM_COUNT = 3
+  @[Extern]
+  record MIXERLINECONTROLSW,
+    cbStruct : UInt32,
+    dwLineID : UInt32,
+    anonymous : Anonymous_e__Union,
+    cControls : UInt32,
+    cbmxctrl : UInt32,
+    pamxctrl : Win32cr::Media::Audio::MIXERCONTROLW* do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      dwControlID : UInt32,
+      dwControlType : UInt32
+
   end
 
-  enum DataFlow : Int32
-    In = 0
-    Out = 1
+  @[Extern]
+  record MIXERCONTROLDETAILS,
+    cbStruct : UInt32,
+    dwControlID : UInt32,
+    cChannels : UInt32,
+    anonymous : Anonymous_e__Union,
+    cbDetails : UInt32,
+    paDetails : Void* do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      hwndOwner : Win32cr::Foundation::HWND,
+      cMultipleItems : UInt32
+
   end
 
-  enum PartType : Int32
-    Connector = 0
-    Subunit = 1
-  end
+  @[Extern]
+  record MIXERCONTROLDETAILS_LISTTEXTA,
+    dwParam1 : UInt32,
+    dwParam2 : UInt32,
+    szName : Win32cr::Foundation::CHAR[64]
 
-  enum ConnectorType : Int32
-    Unknown_Connector = 0
-    Physical_Internal = 1
-    Physical_External = 2
-    Software_IO = 3
-    Software_Fixed = 4
-    Network = 5
-  end
+  @[Extern]
+  record MIXERCONTROLDETAILS_LISTTEXTW,
+    dwParam1 : UInt32,
+    dwParam2 : UInt32,
+    szName : UInt16[64]
 
-  enum AudioSessionDisconnectReason : Int32
-    DisconnectReasonDeviceRemoval = 0
-    DisconnectReasonServerShutdown = 1
-    DisconnectReasonFormatChanged = 2
-    DisconnectReasonSessionLogoff = 3
-    DisconnectReasonSessionDisconnected = 4
-    DisconnectReasonExclusiveModeOverride = 5
-  end
+  @[Extern]
+  record MIXERCONTROLDETAILS_BOOLEAN,
+    fValue : Int32
 
-  enum SpatialAudioMetadataWriterOverflowMode : Int32
-    SpatialAudioMetadataWriterOverflow_Fail = 0
-    SpatialAudioMetadataWriterOverflow_MergeWithNew = 1
-    SpatialAudioMetadataWriterOverflow_MergeWithLast = 2
-  end
+  @[Extern]
+  record MIXERCONTROLDETAILS_SIGNED,
+    lValue : Int32
 
-  enum SpatialAudioMetadataCopyMode : Int32
-    SpatialAudioMetadataCopy_Overwrite = 0
-    SpatialAudioMetadataCopy_Append = 1
-    SpatialAudioMetadataCopy_AppendMergeWithLast = 2
-    SpatialAudioMetadataCopy_AppendMergeWithFirst = 3
-  end
+  @[Extern]
+  record MIXERCONTROLDETAILS_UNSIGNED,
+    dwValue : UInt32
 
-  enum PROCESS_LOOPBACK_MODE : Int32
-    PROCESS_LOOPBACK_MODE_INCLUDE_TARGET_PROCESS_TREE = 0
-    PROCESS_LOOPBACK_MODE_EXCLUDE_TARGET_PROCESS_TREE = 1
-  end
+  @[Extern]
+  record AudioClientProperties,
+    cbSize : UInt32,
+    bIsOffload : Win32cr::Foundation::BOOL,
+    eCategory : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
+    options : Win32cr::Media::Audio::AUDCLNT_STREAMOPTIONS
 
-  enum AUDIOCLIENT_ACTIVATION_TYPE : Int32
-    AUDIOCLIENT_ACTIVATION_TYPE_DEFAULT = 0
-    AUDIOCLIENT_ACTIVATION_TYPE_PROCESS_LOOPBACK = 1
-  end
+  @[Extern]
+  record AudioClient3ActivationParams,
+    tracingContextId : LibC::GUID
 
-  enum AudioStateMonitorSoundLevel : Int32
-    Muted = 0
-    Low = 1
-    Full = 2
-  end
+  @[Extern]
+  record AUDIO_EFFECT,
+    id : LibC::GUID,
+    canSetState : Win32cr::Foundation::BOOL,
+    state : Win32cr::Media::Audio::AUDIO_EFFECT_STATE
 
-  union WAVEFORMATEXTENSIBLE_Samples_e__Union
-    w_valid_bits_per_sample : UInt16
-    w_samples_per_block : UInt16
-    w_reserved : UInt16
-  end
-  union MIXERCONTROLA_Bounds_e__Union
-    anonymous1 : MIXERCONTROLA_Bounds_e__Union_Anonymous1_e__Struct
-    anonymous2 : MIXERCONTROLA_Bounds_e__Union_Anonymous2_e__Struct
-    dw_reserved : UInt32[6]*
-  end
-  union MIXERCONTROLA_Metrics_e__Union
-    c_steps : UInt32
-    cb_custom_data : UInt32
-    dw_reserved : UInt32[6]*
-  end
-  union MIXERCONTROLW_Bounds_e__Union
-    anonymous1 : MIXERCONTROLW_Bounds_e__Union_Anonymous1_e__Struct
-    anonymous2 : MIXERCONTROLW_Bounds_e__Union_Anonymous2_e__Struct
-    dw_reserved : UInt32[6]*
-  end
-  union MIXERCONTROLW_Metrics_e__Union
-    c_steps : UInt32
-    cb_custom_data : UInt32
-    dw_reserved : UInt32[6]*
-  end
-  union MIXERLINECONTROLSA_Anonymous_e__Union
-    dw_control_id : UInt32
-    dw_control_type : UInt32
-  end
-  union MIXERLINECONTROLSW_Anonymous_e__Union
-    dw_control_id : UInt32
-    dw_control_type : UInt32
-  end
-  union MIXERCONTROLDETAILS_Anonymous_e__Union
-    hwnd_owner : HANDLE
-    c_multiple_items : UInt32
-  end
-  union SpatialAudioHrtfDirectivityUnion
-    cone : SpatialAudioHrtfDirectivityCone
-    cardiod : SpatialAudioHrtfDirectivityCardioid
-    omni : SpatialAudioHrtfDirectivity
-  end
-  union AUDIOCLIENT_ACTIVATION_PARAMS_Anonymous_e__Union
-    process_loopback_params : AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS
-  end
+  @[Extern]
+  record AMBISONICS_PARAMS,
+    u32Size : UInt32,
+    u32Version : UInt32,
+    u32Type : Win32cr::Media::Audio::AMBISONICS_TYPE,
+    u32ChannelOrdering : Win32cr::Media::Audio::AMBISONICS_CHANNEL_ORDERING,
+    u32Normalization : Win32cr::Media::Audio::AMBISONICS_NORMALIZATION,
+    u32Order : UInt32,
+    u32NumChannels : UInt32,
+    pu32ChannelMap : UInt32*
 
-  struct AUDIO_VOLUME_NOTIFICATION_DATA
-    guid_event_context : Guid
-    b_muted : LibC::BOOL
-    f_master_volume : Float32
-    n_channels : UInt32
-    af_channel_volumes : Float32[0]*
-  end
-  struct WAVEFORMATEXTENSIBLE
-    format : WAVEFORMATEX
-    samples : WAVEFORMATEXTENSIBLE_Samples_e__Union
-    dw_channel_mask : UInt32
-    sub_format : Guid
-  end
-  struct WAVEFILTER
-    cb_struct : UInt32
-    dw_filter_tag : UInt32
-    fdw_filter : UInt32
-    dw_reserved : UInt32[5]*
-  end
-  struct VOLUMEWAVEFILTER
-    wfltr : WAVEFILTER
-    dw_volume : UInt32
-  end
-  struct ECHOWAVEFILTER
-    wfltr : WAVEFILTER
-    dw_volume : UInt32
-    dw_delay : UInt32
-  end
-  struct WAVEHDR
-    lp_data : PSTR
-    dw_buffer_length : UInt32
-    dw_bytes_recorded : UInt32
-    dw_user : LibC::UINT_PTR
-    dw_flags : UInt32
-    dw_loops : UInt32
-    lp_next : WAVEHDR*
-    reserved : LibC::UINT_PTR
-  end
-  struct WAVEOUTCAPSA
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : CHAR[32]*
-    dw_formats : UInt32
-    w_channels : UInt16
-    w_reserved1 : UInt16
-    dw_support : UInt32
-  end
-  struct WAVEOUTCAPSW
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : Char[32]*
-    dw_formats : UInt32
-    w_channels : UInt16
-    w_reserved1 : UInt16
-    dw_support : UInt32
-  end
-  struct WAVEOUTCAPS2A
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : CHAR[32]*
-    dw_formats : UInt32
-    w_channels : UInt16
-    w_reserved1 : UInt16
-    dw_support : UInt32
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct WAVEOUTCAPS2W
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : Char[32]*
-    dw_formats : UInt32
-    w_channels : UInt16
-    w_reserved1 : UInt16
-    dw_support : UInt32
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct WAVEINCAPSA
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : CHAR[32]*
-    dw_formats : UInt32
-    w_channels : UInt16
-    w_reserved1 : UInt16
-  end
-  struct WAVEINCAPSW
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : Char[32]*
-    dw_formats : UInt32
-    w_channels : UInt16
-    w_reserved1 : UInt16
-  end
-  struct WAVEINCAPS2A
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : CHAR[32]*
-    dw_formats : UInt32
-    w_channels : UInt16
-    w_reserved1 : UInt16
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct WAVEINCAPS2W
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : Char[32]*
-    dw_formats : UInt32
-    w_channels : UInt16
-    w_reserved1 : UInt16
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct WAVEFORMAT
-    w_format_tag : UInt16
-    n_channels : UInt16
-    n_samples_per_sec : UInt32
-    n_avg_bytes_per_sec : UInt32
-    n_block_align : UInt16
-  end
-  struct PCMWAVEFORMAT
-    wf : WAVEFORMAT
-    w_bits_per_sample : UInt16
-  end
-  struct WAVEFORMATEX
-    w_format_tag : UInt16
-    n_channels : UInt16
-    n_samples_per_sec : UInt32
-    n_avg_bytes_per_sec : UInt32
-    n_block_align : UInt16
-    w_bits_per_sample : UInt16
-    cb_size : UInt16
-  end
-  struct MIDIOUTCAPSA
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : CHAR[32]*
-    w_technology : UInt16
-    w_voices : UInt16
-    w_notes : UInt16
-    w_channel_mask : UInt16
-    dw_support : UInt32
-  end
-  struct MIDIOUTCAPSW
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : Char[32]*
-    w_technology : UInt16
-    w_voices : UInt16
-    w_notes : UInt16
-    w_channel_mask : UInt16
-    dw_support : UInt32
-  end
-  struct MIDIOUTCAPS2A
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : CHAR[32]*
-    w_technology : UInt16
-    w_voices : UInt16
-    w_notes : UInt16
-    w_channel_mask : UInt16
-    dw_support : UInt32
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct MIDIOUTCAPS2W
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : Char[32]*
-    w_technology : UInt16
-    w_voices : UInt16
-    w_notes : UInt16
-    w_channel_mask : UInt16
-    dw_support : UInt32
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct MIDIINCAPSA
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : CHAR[32]*
-    dw_support : UInt32
-  end
-  struct MIDIINCAPSW
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : Char[32]*
-    dw_support : UInt32
-  end
-  struct MIDIINCAPS2A
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : CHAR[32]*
-    dw_support : UInt32
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct MIDIINCAPS2W
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : Char[32]*
-    dw_support : UInt32
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct MIDIHDR
-    lp_data : PSTR
-    dw_buffer_length : UInt32
-    dw_bytes_recorded : UInt32
-    dw_user : LibC::UINT_PTR
-    dw_flags : UInt32
-    lp_next : MIDIHDR*
-    reserved : LibC::UINT_PTR
-    dw_offset : UInt32
-    dw_reserved : LibC::UINT_PTR[8]*
-  end
-  struct MIDIEVENT
-    dw_delta_time : UInt32
-    dw_stream_id : UInt32
-    dw_event : UInt32
-    dw_parms : UInt32[0]*
-  end
-  struct MIDISTRMBUFFVER
-    dw_version : UInt32
-    dw_mid : UInt32
-    dw_oem_version : UInt32
-  end
-  struct MIDIPROPTIMEDIV
-    cb_struct : UInt32
-    dw_time_div : UInt32
-  end
-  struct MIDIPROPTEMPO
-    cb_struct : UInt32
-    dw_tempo : UInt32
-  end
-  struct AUXCAPSA
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : CHAR[32]*
-    w_technology : UInt16
-    w_reserved1 : UInt16
-    dw_support : UInt32
-  end
-  struct AUXCAPSW
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : Char[32]*
-    w_technology : UInt16
-    w_reserved1 : UInt16
-    dw_support : UInt32
-  end
-  struct AUXCAPS2A
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : CHAR[32]*
-    w_technology : UInt16
-    w_reserved1 : UInt16
-    dw_support : UInt32
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct AUXCAPS2W
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : Char[32]*
-    w_technology : UInt16
-    w_reserved1 : UInt16
-    dw_support : UInt32
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct MIXERCAPSA
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : CHAR[32]*
-    fdw_support : UInt32
-    c_destinations : UInt32
-  end
-  struct MIXERCAPSW
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : Char[32]*
-    fdw_support : UInt32
-    c_destinations : UInt32
-  end
-  struct MIXERCAPS2A
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : CHAR[32]*
-    fdw_support : UInt32
-    c_destinations : UInt32
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct MIXERCAPS2W
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : Char[32]*
-    fdw_support : UInt32
-    c_destinations : UInt32
-    manufacturer_guid : Guid
-    product_guid : Guid
-    name_guid : Guid
-  end
-  struct MIXERLINEA
-    cb_struct : UInt32
-    dw_destination : UInt32
-    dw_source : UInt32
-    dw_line_id : UInt32
-    fdw_line : UInt32
-    dw_user : LibC::UINT_PTR
-    dw_component_type : MIXERLINE_COMPONENTTYPE
-    c_channels : UInt32
-    c_connections : UInt32
-    c_controls : UInt32
-    sz_short_name : CHAR[16]*
-    sz_name : CHAR[64]*
-    target : MIXERLINEA_Target_e__Struct
-  end
-  struct MIXERLINEA_Target_e__Struct
-    dw_type : UInt32
-    dw_device_id : UInt32
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : CHAR[32]*
-  end
-  struct MIXERLINEW
-    cb_struct : UInt32
-    dw_destination : UInt32
-    dw_source : UInt32
-    dw_line_id : UInt32
-    fdw_line : UInt32
-    dw_user : LibC::UINT_PTR
-    dw_component_type : MIXERLINE_COMPONENTTYPE
-    c_channels : UInt32
-    c_connections : UInt32
-    c_controls : UInt32
-    sz_short_name : Char[16]*
-    sz_name : Char[64]*
-    target : MIXERLINEW_Target_e__Struct
-  end
-  struct MIXERLINEW_Target_e__Struct
-    dw_type : UInt32
-    dw_device_id : UInt32
-    w_mid : UInt16
-    w_pid : UInt16
-    v_driver_version : UInt32
-    sz_pname : Char[32]*
-  end
-  struct MIXERCONTROLA
-    cb_struct : UInt32
-    dw_control_id : UInt32
-    dw_control_type : UInt32
-    fdw_control : UInt32
-    c_multiple_items : UInt32
-    sz_short_name : CHAR[16]*
-    sz_name : CHAR[64]*
-    bounds : MIXERCONTROLA_Bounds_e__Union
-    metrics : MIXERCONTROLA_Metrics_e__Union
-  end
-  struct MIXERCONTROLA_Bounds_e__Union_Anonymous2_e__Struct
-    dw_minimum : UInt32
-    dw_maximum : UInt32
-  end
-  struct MIXERCONTROLA_Bounds_e__Union_Anonymous1_e__Struct
-    l_minimum : Int32
-    l_maximum : Int32
-  end
-  struct MIXERCONTROLW
-    cb_struct : UInt32
-    dw_control_id : UInt32
-    dw_control_type : UInt32
-    fdw_control : UInt32
-    c_multiple_items : UInt32
-    sz_short_name : Char[16]*
-    sz_name : Char[64]*
-    bounds : MIXERCONTROLW_Bounds_e__Union
-    metrics : MIXERCONTROLW_Metrics_e__Union
-  end
-  struct MIXERCONTROLW_Bounds_e__Union_Anonymous1_e__Struct
-    l_minimum : Int32
-    l_maximum : Int32
-  end
-  struct MIXERCONTROLW_Bounds_e__Union_Anonymous2_e__Struct
-    dw_minimum : UInt32
-    dw_maximum : UInt32
-  end
-  struct MIXERLINECONTROLSA
-    cb_struct : UInt32
-    dw_line_id : UInt32
-    anonymous : MIXERLINECONTROLSA_Anonymous_e__Union
-    c_controls : UInt32
-    cbmxctrl : UInt32
-    pamxctrl : MIXERCONTROLA*
-  end
-  struct MIXERLINECONTROLSW
-    cb_struct : UInt32
-    dw_line_id : UInt32
-    anonymous : MIXERLINECONTROLSW_Anonymous_e__Union
-    c_controls : UInt32
-    cbmxctrl : UInt32
-    pamxctrl : MIXERCONTROLW*
-  end
-  struct MIXERCONTROLDETAILS
-    cb_struct : UInt32
-    dw_control_id : UInt32
-    c_channels : UInt32
-    anonymous : MIXERCONTROLDETAILS_Anonymous_e__Union
-    cb_details : UInt32
-    pa_details : Void*
-  end
-  struct MIXERCONTROLDETAILS_LISTTEXTA
-    dw_param1 : UInt32
-    dw_param2 : UInt32
-    sz_name : CHAR[64]*
-  end
-  struct MIXERCONTROLDETAILS_LISTTEXTW
-    dw_param1 : UInt32
-    dw_param2 : UInt32
-    sz_name : Char[64]*
-  end
-  struct MIXERCONTROLDETAILS_BOOLEAN
-    f_value : Int32
-  end
-  struct MIXERCONTROLDETAILS_SIGNED
-    l_value : Int32
-  end
-  struct MIXERCONTROLDETAILS_UNSIGNED
-    dw_value : UInt32
-  end
-  struct AudioClientProperties
-    cb_size : UInt32
-    b_is_offload : LibC::BOOL
-    e_category : AUDIO_STREAM_CATEGORY
-    options : AUDCLNT_STREAMOPTIONS
-  end
-  struct AudioClient3ActivationParams
-    tracing_context_id : Guid
-  end
-  struct AUDIO_EFFECT
-    id : Guid
-    can_set_state : LibC::BOOL
-    state : AUDIO_EFFECT_STATE
-  end
-  struct AMBISONICS_PARAMS
-    u32_size : UInt32
-    u32_version : UInt32
-    u32_type : AMBISONICS_TYPE
-    u32_channel_ordering : AMBISONICS_CHANNEL_ORDERING
-    u32_normalization : AMBISONICS_NORMALIZATION
-    u32_order : UInt32
-    u32_num_channels : UInt32
-    pu32_channel_map : UInt32*
-  end
-  struct SpatialAudioObjectRenderStreamActivationParams
-    object_format : WAVEFORMATEX*
-    static_object_type_mask : AudioObjectType
-    min_dynamic_object_count : UInt32
-    max_dynamic_object_count : UInt32
-    category : AUDIO_STREAM_CATEGORY
-    event_handle : LibC::HANDLE
-    notify_object : ISpatialAudioObjectRenderStreamNotify
-  end
-  struct SpatialAudioObjectRenderStreamActivationParams2
-    object_format : WAVEFORMATEX*
-    static_object_type_mask : AudioObjectType
-    min_dynamic_object_count : UInt32
-    max_dynamic_object_count : UInt32
-    category : AUDIO_STREAM_CATEGORY
-    event_handle : LibC::HANDLE
-    notify_object : ISpatialAudioObjectRenderStreamNotify
-    options : SPATIAL_AUDIO_STREAM_OPTIONS
-  end
-  struct SpatialAudioClientActivationParams
-    tracing_context_id : Guid
-    app_id : Guid
-    major_version : Int32
-    minor_version1 : Int32
-    minor_version2 : Int32
-    minor_version3 : Int32
-  end
-  struct SpatialAudioHrtfDirectivity
-    type : SpatialAudioHrtfDirectivityType
+  @[Extern]
+  record SpatialAudioObjectRenderStreamActivationParams,
+    object_format : Win32cr::Media::Audio::WAVEFORMATEX*,
+    static_object_type_mask : Win32cr::Media::Audio::AudioObjectType,
+    min_dynamic_object_count : UInt32,
+    max_dynamic_object_count : UInt32,
+    category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
+    event_handle : Win32cr::Foundation::HANDLE,
+    notify_object : Void*
+
+  @[Extern]
+  record SpatialAudioObjectRenderStreamActivationParams2,
+    object_format : Win32cr::Media::Audio::WAVEFORMATEX*,
+    static_object_type_mask : Win32cr::Media::Audio::AudioObjectType,
+    min_dynamic_object_count : UInt32,
+    max_dynamic_object_count : UInt32,
+    category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
+    event_handle : Win32cr::Foundation::HANDLE,
+    notify_object : Void*,
+    options : Win32cr::Media::Audio::SPATIAL_AUDIO_STREAM_OPTIONS
+
+  @[Extern]
+  record SpatialAudioClientActivationParams,
+    tracingContextId : LibC::GUID,
+    appId : LibC::GUID,
+    majorVersion : Int32,
+    minorVersion1 : Int32,
+    minorVersion2 : Int32,
+    minorVersion3 : Int32
+
+  @[Extern]
+  record SpatialAudioHrtfDirectivity,
+    type__ : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityType,
     scaling : Float32
-  end
-  struct SpatialAudioHrtfDirectivityCardioid
-    directivity : SpatialAudioHrtfDirectivity
+
+  @[Extern]
+  record SpatialAudioHrtfDirectivityCardioid,
+    directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivity,
     order : Float32
-  end
-  struct SpatialAudioHrtfDirectivityCone
-    directivity : SpatialAudioHrtfDirectivity
-    inner_angle : Float32
+
+  @[Extern]
+  record SpatialAudioHrtfDirectivityCone,
+    directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivity,
+    inner_angle : Float32,
     outer_angle : Float32
-  end
-  struct SpatialAudioHrtfDistanceDecay
-    type : SpatialAudioHrtfDistanceDecayType
-    max_gain : Float32
-    min_gain : Float32
-    unity_gain_distance : Float32
+
+  @[Extern(union: true)]
+  record SpatialAudioHrtfDirectivityUnion,
+    cone : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityCone,
+    cardiod : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityCardioid,
+    omni : Win32cr::Media::Audio::SpatialAudioHrtfDirectivity
+
+  @[Extern]
+  record SpatialAudioHrtfDistanceDecay,
+    type__ : Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecayType,
+    max_gain : Float32,
+    min_gain : Float32,
+    unity_gain_distance : Float32,
     cutoff_distance : Float32
-  end
-  struct SpatialAudioHrtfActivationParams
-    object_format : WAVEFORMATEX*
-    static_object_type_mask : AudioObjectType
-    min_dynamic_object_count : UInt32
-    max_dynamic_object_count : UInt32
-    category : AUDIO_STREAM_CATEGORY
-    event_handle : LibC::HANDLE
-    notify_object : ISpatialAudioObjectRenderStreamNotify
-    distance_decay : SpatialAudioHrtfDistanceDecay*
-    directivity : SpatialAudioHrtfDirectivityUnion*
-    environment : SpatialAudioHrtfEnvironmentType*
+
+  @[Extern]
+  record SpatialAudioHrtfActivationParams,
+    object_format : Win32cr::Media::Audio::WAVEFORMATEX*,
+    static_object_type_mask : Win32cr::Media::Audio::AudioObjectType,
+    min_dynamic_object_count : UInt32,
+    max_dynamic_object_count : UInt32,
+    category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
+    event_handle : Win32cr::Foundation::HANDLE,
+    notify_object : Void*,
+    distance_decay : Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecay*,
+    directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityUnion*,
+    environment : Win32cr::Media::Audio::SpatialAudioHrtfEnvironmentType*,
     orientation : Float32*
-  end
-  struct SpatialAudioHrtfActivationParams2
-    object_format : WAVEFORMATEX*
-    static_object_type_mask : AudioObjectType
-    min_dynamic_object_count : UInt32
-    max_dynamic_object_count : UInt32
-    category : AUDIO_STREAM_CATEGORY
-    event_handle : LibC::HANDLE
-    notify_object : ISpatialAudioObjectRenderStreamNotify
-    distance_decay : SpatialAudioHrtfDistanceDecay*
-    directivity : SpatialAudioHrtfDirectivityUnion*
-    environment : SpatialAudioHrtfEnvironmentType*
-    orientation : Float32*
-    options : SPATIAL_AUDIO_STREAM_OPTIONS
-  end
-  struct DIRECTX_AUDIO_ACTIVATION_PARAMS
-    cb_direct_x_audio_activation_params : UInt32
-    guid_audio_session : Guid
-    dw_audio_stream_flags : UInt32
-  end
-  struct AudioExtensionParams
-    add_page_param : LPARAM
-    p_endpoint : IMMDevice
-    p_pnp_interface : IMMDevice
-    p_pnp_devnode : IMMDevice
-  end
-  struct SpatialAudioMetadataItemsInfo
-    frame_count : UInt16
-    item_count : UInt16
-    max_item_count : UInt16
+
+  @[Extern]
+  record SpatialAudioHrtfActivationParams2,
+    object_format : Win32cr::Media::Audio::WAVEFORMATEX*,
+    static_object_type_mask : Win32cr::Media::Audio::AudioObjectType,
+    min_dynamic_object_count : UInt32,
+    max_dynamic_object_count : UInt32,
+    category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
+    event_handle : Win32cr::Foundation::HANDLE,
+    notify_object : Void*,
+    distance_decay : Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecay*,
+    directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityUnion*,
+    environment : Win32cr::Media::Audio::SpatialAudioHrtfEnvironmentType*,
+    orientation : Float32*,
+    options : Win32cr::Media::Audio::SPATIAL_AUDIO_STREAM_OPTIONS
+
+  @[Extern]
+  record DIRECTX_AUDIO_ACTIVATION_PARAMS,
+    cbDirectXAudioActivationParams : UInt32,
+    guidAudioSession : LibC::GUID,
+    dwAudioStreamFlags : UInt32
+
+  @[Extern]
+  record AudioExtensionParams,
+    add_page_param : Win32cr::Foundation::LPARAM,
+    pEndpoint : Void*,
+    pPnpInterface : Void*,
+    pPnpDevnode : Void*
+
+  @[Extern]
+  record SpatialAudioMetadataItemsInfo,
+    frame_count : UInt16,
+    item_count : UInt16,
+    max_item_count : UInt16,
     max_value_buffer_length : UInt32
-  end
-  struct SpatialAudioObjectRenderStreamForMetadataActivationParams
-    object_format : WAVEFORMATEX*
-    static_object_type_mask : AudioObjectType
-    min_dynamic_object_count : UInt32
-    max_dynamic_object_count : UInt32
-    category : AUDIO_STREAM_CATEGORY
-    event_handle : LibC::HANDLE
-    metadata_format_id : Guid
-    max_metadata_item_count : UInt16
-    metadata_activation_params : PROPVARIANT*
-    notify_object : ISpatialAudioObjectRenderStreamNotify
-  end
-  struct SpatialAudioObjectRenderStreamForMetadataActivationParams2
-    object_format : WAVEFORMATEX*
-    static_object_type_mask : AudioObjectType
-    min_dynamic_object_count : UInt32
-    max_dynamic_object_count : UInt32
-    category : AUDIO_STREAM_CATEGORY
-    event_handle : LibC::HANDLE
-    metadata_format_id : Guid
-    max_metadata_item_count : UInt32
-    metadata_activation_params : PROPVARIANT*
-    notify_object : ISpatialAudioObjectRenderStreamNotify
-    options : SPATIAL_AUDIO_STREAM_OPTIONS
-  end
-  struct AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS
-    target_process_id : UInt32
-    process_loopback_mode : PROCESS_LOOPBACK_MODE
-  end
-  struct AUDIOCLIENT_ACTIVATION_PARAMS
-    activation_type : AUDIOCLIENT_ACTIVATION_TYPE
-    anonymous : AUDIOCLIENT_ACTIVATION_PARAMS_Anonymous_e__Union
-  end
-  struct ACMDRIVERDETAILSA
-    cb_struct : UInt32
-    fcc_type : UInt32
-    fcc_comp : UInt32
-    w_mid : UInt16
-    w_pid : UInt16
-    vdw_acm : UInt32
-    vdw_driver : UInt32
-    fdw_support : UInt32
-    c_format_tags : UInt32
-    c_filter_tags : UInt32
-    hicon : HANDLE
-    sz_short_name : CHAR[32]*
-    sz_long_name : CHAR[128]*
-    sz_copyright : CHAR[80]*
-    sz_licensing : CHAR[128]*
-    sz_features : CHAR[512]*
-  end
-  struct ACMDRIVERDETAILSW
-    cb_struct : UInt32
-    fcc_type : UInt32
-    fcc_comp : UInt32
-    w_mid : UInt16
-    w_pid : UInt16
-    vdw_acm : UInt32
-    vdw_driver : UInt32
-    fdw_support : UInt32
-    c_format_tags : UInt32
-    c_filter_tags : UInt32
-    hicon : HANDLE
-    sz_short_name : Char[32]*
-    sz_long_name : Char[128]*
-    sz_copyright : Char[80]*
-    sz_licensing : Char[128]*
-    sz_features : Char[512]*
-  end
-  struct ACMFORMATTAGDETAILSA
-    cb_struct : UInt32
-    dw_format_tag_index : UInt32
-    dw_format_tag : UInt32
-    cb_format_size : UInt32
-    fdw_support : UInt32
-    c_standard_formats : UInt32
-    sz_format_tag : CHAR[48]*
-  end
-  struct ACMFORMATTAGDETAILSW
-    cb_struct : UInt32
-    dw_format_tag_index : UInt32
-    dw_format_tag : UInt32
-    cb_format_size : UInt32
-    fdw_support : UInt32
-    c_standard_formats : UInt32
-    sz_format_tag : Char[48]*
-  end
-  struct ACMFORMATDETAILSA
-    cb_struct : UInt32
-    dw_format_index : UInt32
-    dw_format_tag : UInt32
-    fdw_support : UInt32
-    pwfx : WAVEFORMATEX*
-    cbwfx : UInt32
-    sz_format : CHAR[128]*
-  end
-  struct Tacmformatdetailsw
-    cb_struct : UInt32
-    dw_format_index : UInt32
-    dw_format_tag : UInt32
-    fdw_support : UInt32
-    pwfx : WAVEFORMATEX*
-    cbwfx : UInt32
-    sz_format : Char[128]*
-  end
-  struct ACMFORMATCHOOSEA
-    cb_struct : UInt32
-    fdw_style : UInt32
-    hwnd_owner : HANDLE
-    pwfx : WAVEFORMATEX*
-    cbwfx : UInt32
-    psz_title : PSTR
-    sz_format_tag : CHAR[48]*
-    sz_format : CHAR[128]*
-    psz_name : PSTR
-    cch_name : UInt32
-    fdw_enum : UInt32
-    pwfx_enum : WAVEFORMATEX*
-    h_instance : HINSTANCE
-    psz_template_name : PSTR
-    l_cust_data : LPARAM
-    pfn_hook : ACMFORMATCHOOSEHOOKPROCA
-  end
-  struct ACMFORMATCHOOSEW
-    cb_struct : UInt32
-    fdw_style : UInt32
-    hwnd_owner : HANDLE
-    pwfx : WAVEFORMATEX*
-    cbwfx : UInt32
-    psz_title : LibC::LPWSTR
-    sz_format_tag : Char[48]*
-    sz_format : Char[128]*
-    psz_name : LibC::LPWSTR
-    cch_name : UInt32
-    fdw_enum : UInt32
-    pwfx_enum : WAVEFORMATEX*
-    h_instance : HINSTANCE
-    psz_template_name : LibC::LPWSTR
-    l_cust_data : LPARAM
-    pfn_hook : ACMFORMATCHOOSEHOOKPROCW
-  end
-  struct ACMFILTERTAGDETAILSA
-    cb_struct : UInt32
-    dw_filter_tag_index : UInt32
-    dw_filter_tag : UInt32
-    cb_filter_size : UInt32
-    fdw_support : UInt32
-    c_standard_filters : UInt32
-    sz_filter_tag : CHAR[48]*
-  end
-  struct ACMFILTERTAGDETAILSW
-    cb_struct : UInt32
-    dw_filter_tag_index : UInt32
-    dw_filter_tag : UInt32
-    cb_filter_size : UInt32
-    fdw_support : UInt32
-    c_standard_filters : UInt32
-    sz_filter_tag : Char[48]*
-  end
-  struct ACMFILTERDETAILSA
-    cb_struct : UInt32
-    dw_filter_index : UInt32
-    dw_filter_tag : UInt32
-    fdw_support : UInt32
-    pwfltr : WAVEFILTER*
-    cbwfltr : UInt32
-    sz_filter : CHAR[128]*
-  end
-  struct ACMFILTERDETAILSW
-    cb_struct : UInt32
-    dw_filter_index : UInt32
-    dw_filter_tag : UInt32
-    fdw_support : UInt32
-    pwfltr : WAVEFILTER*
-    cbwfltr : UInt32
-    sz_filter : Char[128]*
-  end
-  struct ACMFILTERCHOOSEA
-    cb_struct : UInt32
-    fdw_style : UInt32
-    hwnd_owner : HANDLE
-    pwfltr : WAVEFILTER*
-    cbwfltr : UInt32
-    psz_title : PSTR
-    sz_filter_tag : CHAR[48]*
-    sz_filter : CHAR[128]*
-    psz_name : PSTR
-    cch_name : UInt32
-    fdw_enum : UInt32
-    pwfltr_enum : WAVEFILTER*
-    h_instance : HINSTANCE
-    psz_template_name : PSTR
-    l_cust_data : LPARAM
-    pfn_hook : ACMFILTERCHOOSEHOOKPROCA
-  end
-  struct ACMFILTERCHOOSEW
-    cb_struct : UInt32
-    fdw_style : UInt32
-    hwnd_owner : HANDLE
-    pwfltr : WAVEFILTER*
-    cbwfltr : UInt32
-    psz_title : LibC::LPWSTR
-    sz_filter_tag : Char[48]*
-    sz_filter : Char[128]*
-    psz_name : LibC::LPWSTR
-    cch_name : UInt32
-    fdw_enum : UInt32
-    pwfltr_enum : WAVEFILTER*
-    h_instance : HINSTANCE
-    psz_template_name : LibC::LPWSTR
-    l_cust_data : LPARAM
-    pfn_hook : ACMFILTERCHOOSEHOOKPROCW
-  end
-  struct ACMSTREAMHEADER
-    cb_struct : UInt32
-    fdw_status : UInt32
-    dw_user : LibC::UINT_PTR
-    pb_src : UInt8*
-    cb_src_length : UInt32
-    cb_src_length_used : UInt32
-    dw_src_user : LibC::UINT_PTR
-    pb_dst : UInt8*
-    cb_dst_length : UInt32
-    cb_dst_length_used : UInt32
-    dw_dst_user : LibC::UINT_PTR
-    dw_reserved_driver : UInt32[15]*
-  end
-  struct Tacmdrvopendesca
-    cb_struct : UInt32
-    fcc_type : UInt32
-    fcc_comp : UInt32
-    dw_version : UInt32
-    dw_flags : UInt32
-    dw_error : UInt32
-    psz_section_name : PSTR
-    psz_alias_name : PSTR
-    dn_dev_node : UInt32
-  end
-  struct Tacmdrvopendescw
-    cb_struct : UInt32
-    fcc_type : UInt32
-    fcc_comp : UInt32
-    dw_version : UInt32
-    dw_flags : UInt32
-    dw_error : UInt32
-    psz_section_name : LibC::LPWSTR
-    psz_alias_name : LibC::LPWSTR
-    dn_dev_node : UInt32
-  end
-  struct ACMDRVSTREAMINSTANCE
-    cb_struct : UInt32
-    pwfx_src : WAVEFORMATEX*
-    pwfx_dst : WAVEFORMATEX*
-    pwfltr : WAVEFILTER*
-    dw_callback : LibC::UINT_PTR
-    dw_instance : LibC::UINT_PTR
-    fdw_open : UInt32
-    fdw_driver : UInt32
-    dw_driver : LibC::UINT_PTR
-    has : HACMSTREAM
-  end
-  struct ACMDRVSTREAMHEADER
-    cb_struct : UInt32
-    fdw_status : UInt32
-    dw_user : LibC::UINT_PTR
-    pb_src : UInt8*
-    cb_src_length : UInt32
-    cb_src_length_used : UInt32
-    dw_src_user : LibC::UINT_PTR
-    pb_dst : UInt8*
-    cb_dst_length : UInt32
-    cb_dst_length_used : UInt32
-    dw_dst_user : LibC::UINT_PTR
-    fdw_convert : UInt32
-    padsh_next : ACMDRVSTREAMHEADER*
-    fdw_driver : UInt32
-    dw_driver : LibC::UINT_PTR
-    fdw_prepared : UInt32
-    dw_prepared : LibC::UINT_PTR
-    pb_prepared_src : UInt8*
-    cb_prepared_src_length : UInt32
-    pb_prepared_dst : UInt8*
-    cb_prepared_dst_length : UInt32
-  end
-  struct ACMDRVSTREAMSIZE
-    cb_struct : UInt32
-    fdw_size : UInt32
-    cb_src_length : UInt32
-    cb_dst_length : UInt32
-  end
-  struct ACMDRVFORMATSUGGEST
-    cb_struct : UInt32
-    fdw_suggest : UInt32
-    pwfx_src : WAVEFORMATEX*
-    cbwfx_src : UInt32
-    pwfx_dst : WAVEFORMATEX*
-    cbwfx_dst : UInt32
-  end
-
-
-  struct IMessageFilterVTbl
-    query_interface : Proc(IMessageFilter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMessageFilter*, UInt32)
-    release : Proc(IMessageFilter*, UInt32)
-    handle_in_coming_call : Proc(IMessageFilter*, UInt32, HTASK, UInt32, INTERFACEINFO*, UInt32)
-    retry_rejected_call : Proc(IMessageFilter*, HTASK, UInt32, UInt32, UInt32)
-    message_pending : Proc(IMessageFilter*, HTASK, UInt32, UInt32, UInt32)
-  end
-
-  IMessageFilter_GUID = "00000016-0000-0000-c000-000000000046"
-  IID_IMessageFilter = LibC::GUID.new(0x16_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
-  struct IMessageFilter
-    lpVtbl : IMessageFilterVTbl*
-  end
-
-  struct IAudioClientVTbl
-    query_interface : Proc(IAudioClient*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioClient*, UInt32)
-    release : Proc(IAudioClient*, UInt32)
-    initialize : Proc(IAudioClient*, AUDCLNT_SHAREMODE, UInt32, Int64, Int64, WAVEFORMATEX*, Guid*, HRESULT)
-    get_buffer_size : Proc(IAudioClient*, UInt32*, HRESULT)
-    get_stream_latency : Proc(IAudioClient*, Int64*, HRESULT)
-    get_current_padding : Proc(IAudioClient*, UInt32*, HRESULT)
-    is_format_supported : Proc(IAudioClient*, AUDCLNT_SHAREMODE, WAVEFORMATEX*, WAVEFORMATEX**, HRESULT)
-    get_mix_format : Proc(IAudioClient*, WAVEFORMATEX**, HRESULT)
-    get_device_period : Proc(IAudioClient*, Int64*, Int64*, HRESULT)
-    start : Proc(IAudioClient*, HRESULT)
-    stop : Proc(IAudioClient*, HRESULT)
-    reset : Proc(IAudioClient*, HRESULT)
-    set_event_handle : Proc(IAudioClient*, LibC::HANDLE, HRESULT)
-    get_service : Proc(IAudioClient*, Guid*, Void**, HRESULT)
-  end
-
-  IAudioClient_GUID = "1cb9ad4c-dbfa-4c32-b178-c2f568a703b2"
-  IID_IAudioClient = LibC::GUID.new(0x1cb9ad4c_u32, 0xdbfa_u16, 0x4c32_u16, StaticArray[0xb1_u8, 0x78_u8, 0xc2_u8, 0xf5_u8, 0x68_u8, 0xa7_u8, 0x3_u8, 0xb2_u8])
-  struct IAudioClient
-    lpVtbl : IAudioClientVTbl*
-  end
-
-  struct IAudioClient2VTbl
-    query_interface : Proc(IAudioClient2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioClient2*, UInt32)
-    release : Proc(IAudioClient2*, UInt32)
-    initialize : Proc(IAudioClient2*, AUDCLNT_SHAREMODE, UInt32, Int64, Int64, WAVEFORMATEX*, Guid*, HRESULT)
-    get_buffer_size : Proc(IAudioClient2*, UInt32*, HRESULT)
-    get_stream_latency : Proc(IAudioClient2*, Int64*, HRESULT)
-    get_current_padding : Proc(IAudioClient2*, UInt32*, HRESULT)
-    is_format_supported : Proc(IAudioClient2*, AUDCLNT_SHAREMODE, WAVEFORMATEX*, WAVEFORMATEX**, HRESULT)
-    get_mix_format : Proc(IAudioClient2*, WAVEFORMATEX**, HRESULT)
-    get_device_period : Proc(IAudioClient2*, Int64*, Int64*, HRESULT)
-    start : Proc(IAudioClient2*, HRESULT)
-    stop : Proc(IAudioClient2*, HRESULT)
-    reset : Proc(IAudioClient2*, HRESULT)
-    set_event_handle : Proc(IAudioClient2*, LibC::HANDLE, HRESULT)
-    get_service : Proc(IAudioClient2*, Guid*, Void**, HRESULT)
-    is_offload_capable : Proc(IAudioClient2*, AUDIO_STREAM_CATEGORY, LibC::BOOL*, HRESULT)
-    set_client_properties : Proc(IAudioClient2*, AudioClientProperties*, HRESULT)
-    get_buffer_size_limits : Proc(IAudioClient2*, WAVEFORMATEX*, LibC::BOOL, Int64*, Int64*, HRESULT)
-  end
-
-  IAudioClient2_GUID = "726778cd-f60a-4eda-82de-e47610cd78aa"
-  IID_IAudioClient2 = LibC::GUID.new(0x726778cd_u32, 0xf60a_u16, 0x4eda_u16, StaticArray[0x82_u8, 0xde_u8, 0xe4_u8, 0x76_u8, 0x10_u8, 0xcd_u8, 0x78_u8, 0xaa_u8])
-  struct IAudioClient2
-    lpVtbl : IAudioClient2VTbl*
-  end
-
-  struct IAudioClient3VTbl
-    query_interface : Proc(IAudioClient3*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioClient3*, UInt32)
-    release : Proc(IAudioClient3*, UInt32)
-    initialize : Proc(IAudioClient3*, AUDCLNT_SHAREMODE, UInt32, Int64, Int64, WAVEFORMATEX*, Guid*, HRESULT)
-    get_buffer_size : Proc(IAudioClient3*, UInt32*, HRESULT)
-    get_stream_latency : Proc(IAudioClient3*, Int64*, HRESULT)
-    get_current_padding : Proc(IAudioClient3*, UInt32*, HRESULT)
-    is_format_supported : Proc(IAudioClient3*, AUDCLNT_SHAREMODE, WAVEFORMATEX*, WAVEFORMATEX**, HRESULT)
-    get_mix_format : Proc(IAudioClient3*, WAVEFORMATEX**, HRESULT)
-    get_device_period : Proc(IAudioClient3*, Int64*, Int64*, HRESULT)
-    start : Proc(IAudioClient3*, HRESULT)
-    stop : Proc(IAudioClient3*, HRESULT)
-    reset : Proc(IAudioClient3*, HRESULT)
-    set_event_handle : Proc(IAudioClient3*, LibC::HANDLE, HRESULT)
-    get_service : Proc(IAudioClient3*, Guid*, Void**, HRESULT)
-    is_offload_capable : Proc(IAudioClient3*, AUDIO_STREAM_CATEGORY, LibC::BOOL*, HRESULT)
-    set_client_properties : Proc(IAudioClient3*, AudioClientProperties*, HRESULT)
-    get_buffer_size_limits : Proc(IAudioClient3*, WAVEFORMATEX*, LibC::BOOL, Int64*, Int64*, HRESULT)
-    get_shared_mode_engine_period : Proc(IAudioClient3*, WAVEFORMATEX*, UInt32*, UInt32*, UInt32*, UInt32*, HRESULT)
-    get_current_shared_mode_engine_period : Proc(IAudioClient3*, WAVEFORMATEX**, UInt32*, HRESULT)
-    initialize_shared_audio_stream : Proc(IAudioClient3*, UInt32, UInt32, WAVEFORMATEX*, Guid*, HRESULT)
-  end
-
-  IAudioClient3_GUID = "7ed4ee07-8e67-4cd4-8c1a-2b7a5987ad42"
-  IID_IAudioClient3 = LibC::GUID.new(0x7ed4ee07_u32, 0x8e67_u16, 0x4cd4_u16, StaticArray[0x8c_u8, 0x1a_u8, 0x2b_u8, 0x7a_u8, 0x59_u8, 0x87_u8, 0xad_u8, 0x42_u8])
-  struct IAudioClient3
-    lpVtbl : IAudioClient3VTbl*
-  end
-
-  struct IAudioRenderClientVTbl
-    query_interface : Proc(IAudioRenderClient*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioRenderClient*, UInt32)
-    release : Proc(IAudioRenderClient*, UInt32)
-    get_buffer : Proc(IAudioRenderClient*, UInt32, UInt8**, HRESULT)
-    release_buffer : Proc(IAudioRenderClient*, UInt32, UInt32, HRESULT)
-  end
-
-  IAudioRenderClient_GUID = "f294acfc-3146-4483-a7bf-addca7c260e2"
-  IID_IAudioRenderClient = LibC::GUID.new(0xf294acfc_u32, 0x3146_u16, 0x4483_u16, StaticArray[0xa7_u8, 0xbf_u8, 0xad_u8, 0xdc_u8, 0xa7_u8, 0xc2_u8, 0x60_u8, 0xe2_u8])
-  struct IAudioRenderClient
-    lpVtbl : IAudioRenderClientVTbl*
-  end
-
-  struct IAudioCaptureClientVTbl
-    query_interface : Proc(IAudioCaptureClient*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioCaptureClient*, UInt32)
-    release : Proc(IAudioCaptureClient*, UInt32)
-    get_buffer : Proc(IAudioCaptureClient*, UInt8**, UInt32*, UInt32*, UInt64*, UInt64*, HRESULT)
-    release_buffer : Proc(IAudioCaptureClient*, UInt32, HRESULT)
-    get_next_packet_size : Proc(IAudioCaptureClient*, UInt32*, HRESULT)
-  end
-
-  IAudioCaptureClient_GUID = "c8adbd64-e71e-48a0-a4de-185c395cd317"
-  IID_IAudioCaptureClient = LibC::GUID.new(0xc8adbd64_u32, 0xe71e_u16, 0x48a0_u16, StaticArray[0xa4_u8, 0xde_u8, 0x18_u8, 0x5c_u8, 0x39_u8, 0x5c_u8, 0xd3_u8, 0x17_u8])
-  struct IAudioCaptureClient
-    lpVtbl : IAudioCaptureClientVTbl*
-  end
-
-  struct IAudioClockVTbl
-    query_interface : Proc(IAudioClock*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioClock*, UInt32)
-    release : Proc(IAudioClock*, UInt32)
-    get_frequency : Proc(IAudioClock*, UInt64*, HRESULT)
-    get_position : Proc(IAudioClock*, UInt64*, UInt64*, HRESULT)
-    get_characteristics : Proc(IAudioClock*, UInt32*, HRESULT)
-  end
-
-  IAudioClock_GUID = "cd63314f-3fba-4a1b-812c-ef96358728e7"
-  IID_IAudioClock = LibC::GUID.new(0xcd63314f_u32, 0x3fba_u16, 0x4a1b_u16, StaticArray[0x81_u8, 0x2c_u8, 0xef_u8, 0x96_u8, 0x35_u8, 0x87_u8, 0x28_u8, 0xe7_u8])
-  struct IAudioClock
-    lpVtbl : IAudioClockVTbl*
-  end
-
-  struct IAudioClock2VTbl
-    query_interface : Proc(IAudioClock2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioClock2*, UInt32)
-    release : Proc(IAudioClock2*, UInt32)
-    get_device_position : Proc(IAudioClock2*, UInt64*, UInt64*, HRESULT)
-  end
-
-  IAudioClock2_GUID = "6f49ff73-6727-49ac-a008-d98cf5e70048"
-  IID_IAudioClock2 = LibC::GUID.new(0x6f49ff73_u32, 0x6727_u16, 0x49ac_u16, StaticArray[0xa0_u8, 0x8_u8, 0xd9_u8, 0x8c_u8, 0xf5_u8, 0xe7_u8, 0x0_u8, 0x48_u8])
-  struct IAudioClock2
-    lpVtbl : IAudioClock2VTbl*
-  end
-
-  struct IAudioClockAdjustmentVTbl
-    query_interface : Proc(IAudioClockAdjustment*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioClockAdjustment*, UInt32)
-    release : Proc(IAudioClockAdjustment*, UInt32)
-    set_sample_rate : Proc(IAudioClockAdjustment*, Float32, HRESULT)
-  end
-
-  IAudioClockAdjustment_GUID = "f6e4c0a0-46d9-4fb8-be21-57a3ef2b626c"
-  IID_IAudioClockAdjustment = LibC::GUID.new(0xf6e4c0a0_u32, 0x46d9_u16, 0x4fb8_u16, StaticArray[0xbe_u8, 0x21_u8, 0x57_u8, 0xa3_u8, 0xef_u8, 0x2b_u8, 0x62_u8, 0x6c_u8])
-  struct IAudioClockAdjustment
-    lpVtbl : IAudioClockAdjustmentVTbl*
-  end
-
-  struct ISimpleAudioVolumeVTbl
-    query_interface : Proc(ISimpleAudioVolume*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISimpleAudioVolume*, UInt32)
-    release : Proc(ISimpleAudioVolume*, UInt32)
-    set_master_volume : Proc(ISimpleAudioVolume*, Float32, Guid*, HRESULT)
-    get_master_volume : Proc(ISimpleAudioVolume*, Float32*, HRESULT)
-    set_mute : Proc(ISimpleAudioVolume*, LibC::BOOL, Guid*, HRESULT)
-    get_mute : Proc(ISimpleAudioVolume*, LibC::BOOL*, HRESULT)
-  end
-
-  ISimpleAudioVolume_GUID = "87ce5498-68d6-44e5-9215-6da47ef883d8"
-  IID_ISimpleAudioVolume = LibC::GUID.new(0x87ce5498_u32, 0x68d6_u16, 0x44e5_u16, StaticArray[0x92_u8, 0x15_u8, 0x6d_u8, 0xa4_u8, 0x7e_u8, 0xf8_u8, 0x83_u8, 0xd8_u8])
-  struct ISimpleAudioVolume
-    lpVtbl : ISimpleAudioVolumeVTbl*
-  end
-
-  struct IAudioClientDuckingControlVTbl
-    query_interface : Proc(IAudioClientDuckingControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioClientDuckingControl*, UInt32)
-    release : Proc(IAudioClientDuckingControl*, UInt32)
-    set_ducking_options_for_current_stream : Proc(IAudioClientDuckingControl*, AUDIO_DUCKING_OPTIONS, HRESULT)
-  end
-
-  IAudioClientDuckingControl_GUID = "c789d381-a28c-4168-b28f-d3a837924dc3"
-  IID_IAudioClientDuckingControl = LibC::GUID.new(0xc789d381_u32, 0xa28c_u16, 0x4168_u16, StaticArray[0xb2_u8, 0x8f_u8, 0xd3_u8, 0xa8_u8, 0x37_u8, 0x92_u8, 0x4d_u8, 0xc3_u8])
-  struct IAudioClientDuckingControl
-    lpVtbl : IAudioClientDuckingControlVTbl*
-  end
-
-  struct IAudioEffectsChangedNotificationClientVTbl
-    query_interface : Proc(IAudioEffectsChangedNotificationClient*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioEffectsChangedNotificationClient*, UInt32)
-    release : Proc(IAudioEffectsChangedNotificationClient*, UInt32)
-    on_audio_effects_changed : Proc(IAudioEffectsChangedNotificationClient*, HRESULT)
-  end
-
-  IAudioEffectsChangedNotificationClient_GUID = "a5ded44f-3c5d-4b2b-bd1e-5dc1ee20bbf6"
-  IID_IAudioEffectsChangedNotificationClient = LibC::GUID.new(0xa5ded44f_u32, 0x3c5d_u16, 0x4b2b_u16, StaticArray[0xbd_u8, 0x1e_u8, 0x5d_u8, 0xc1_u8, 0xee_u8, 0x20_u8, 0xbb_u8, 0xf6_u8])
-  struct IAudioEffectsChangedNotificationClient
-    lpVtbl : IAudioEffectsChangedNotificationClientVTbl*
-  end
-
-  struct IAudioEffectsManagerVTbl
-    query_interface : Proc(IAudioEffectsManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioEffectsManager*, UInt32)
-    release : Proc(IAudioEffectsManager*, UInt32)
-    register_audio_effects_changed_notification_callback : Proc(IAudioEffectsManager*, IAudioEffectsChangedNotificationClient, HRESULT)
-    unregister_audio_effects_changed_notification_callback : Proc(IAudioEffectsManager*, IAudioEffectsChangedNotificationClient, HRESULT)
-    get_audio_effects : Proc(IAudioEffectsManager*, AUDIO_EFFECT**, UInt32*, HRESULT)
-    set_audio_effect_state : Proc(IAudioEffectsManager*, Guid, AUDIO_EFFECT_STATE, HRESULT)
-  end
-
-  IAudioEffectsManager_GUID = "4460b3ae-4b44-4527-8676-7548a8acd260"
-  IID_IAudioEffectsManager = LibC::GUID.new(0x4460b3ae_u32, 0x4b44_u16, 0x4527_u16, StaticArray[0x86_u8, 0x76_u8, 0x75_u8, 0x48_u8, 0xa8_u8, 0xac_u8, 0xd2_u8, 0x60_u8])
-  struct IAudioEffectsManager
-    lpVtbl : IAudioEffectsManagerVTbl*
-  end
-
-  struct IAudioStreamVolumeVTbl
-    query_interface : Proc(IAudioStreamVolume*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioStreamVolume*, UInt32)
-    release : Proc(IAudioStreamVolume*, UInt32)
-    get_channel_count : Proc(IAudioStreamVolume*, UInt32*, HRESULT)
-    set_channel_volume : Proc(IAudioStreamVolume*, UInt32, Float32, HRESULT)
-    get_channel_volume : Proc(IAudioStreamVolume*, UInt32, Float32*, HRESULT)
-    set_all_volumes : Proc(IAudioStreamVolume*, UInt32, Float32*, HRESULT)
-    get_all_volumes : Proc(IAudioStreamVolume*, UInt32, Float32*, HRESULT)
-  end
-
-  IAudioStreamVolume_GUID = "93014887-242d-4068-8a15-cf5e93b90fe3"
-  IID_IAudioStreamVolume = LibC::GUID.new(0x93014887_u32, 0x242d_u16, 0x4068_u16, StaticArray[0x8a_u8, 0x15_u8, 0xcf_u8, 0x5e_u8, 0x93_u8, 0xb9_u8, 0xf_u8, 0xe3_u8])
-  struct IAudioStreamVolume
-    lpVtbl : IAudioStreamVolumeVTbl*
-  end
-
-  struct IAudioAmbisonicsControlVTbl
-    query_interface : Proc(IAudioAmbisonicsControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioAmbisonicsControl*, UInt32)
-    release : Proc(IAudioAmbisonicsControl*, UInt32)
-    set_data : Proc(IAudioAmbisonicsControl*, AMBISONICS_PARAMS*, UInt32, HRESULT)
-    set_head_tracking : Proc(IAudioAmbisonicsControl*, LibC::BOOL, HRESULT)
-    get_head_tracking : Proc(IAudioAmbisonicsControl*, LibC::BOOL*, HRESULT)
-    set_rotation : Proc(IAudioAmbisonicsControl*, Float32, Float32, Float32, Float32, HRESULT)
-  end
-
-  IAudioAmbisonicsControl_GUID = "28724c91-df35-4856-9f76-d6a26413f3df"
-  IID_IAudioAmbisonicsControl = LibC::GUID.new(0x28724c91_u32, 0xdf35_u16, 0x4856_u16, StaticArray[0x9f_u8, 0x76_u8, 0xd6_u8, 0xa2_u8, 0x64_u8, 0x13_u8, 0xf3_u8, 0xdf_u8])
-  struct IAudioAmbisonicsControl
-    lpVtbl : IAudioAmbisonicsControlVTbl*
-  end
-
-  struct IChannelAudioVolumeVTbl
-    query_interface : Proc(IChannelAudioVolume*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IChannelAudioVolume*, UInt32)
-    release : Proc(IChannelAudioVolume*, UInt32)
-    get_channel_count : Proc(IChannelAudioVolume*, UInt32*, HRESULT)
-    set_channel_volume : Proc(IChannelAudioVolume*, UInt32, Float32, Guid*, HRESULT)
-    get_channel_volume : Proc(IChannelAudioVolume*, UInt32, Float32*, HRESULT)
-    set_all_volumes : Proc(IChannelAudioVolume*, UInt32, Float32*, Guid*, HRESULT)
-    get_all_volumes : Proc(IChannelAudioVolume*, UInt32, Float32*, HRESULT)
-  end
-
-  IChannelAudioVolume_GUID = "1c158861-b533-4b30-b1cf-e853e51c59b8"
-  IID_IChannelAudioVolume = LibC::GUID.new(0x1c158861_u32, 0xb533_u16, 0x4b30_u16, StaticArray[0xb1_u8, 0xcf_u8, 0xe8_u8, 0x53_u8, 0xe5_u8, 0x1c_u8, 0x59_u8, 0xb8_u8])
-  struct IChannelAudioVolume
-    lpVtbl : IChannelAudioVolumeVTbl*
-  end
-
-  struct IAudioFormatEnumeratorVTbl
-    query_interface : Proc(IAudioFormatEnumerator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioFormatEnumerator*, UInt32)
-    release : Proc(IAudioFormatEnumerator*, UInt32)
-    get_count : Proc(IAudioFormatEnumerator*, UInt32*, HRESULT)
-    get_format : Proc(IAudioFormatEnumerator*, UInt32, WAVEFORMATEX**, HRESULT)
-  end
-
-  IAudioFormatEnumerator_GUID = "dcdaa858-895a-4a22-a5eb-67bda506096d"
-  IID_IAudioFormatEnumerator = LibC::GUID.new(0xdcdaa858_u32, 0x895a_u16, 0x4a22_u16, StaticArray[0xa5_u8, 0xeb_u8, 0x67_u8, 0xbd_u8, 0xa5_u8, 0x6_u8, 0x9_u8, 0x6d_u8])
-  struct IAudioFormatEnumerator
-    lpVtbl : IAudioFormatEnumeratorVTbl*
-  end
-
-  struct ISpatialAudioObjectBaseVTbl
-    query_interface : Proc(ISpatialAudioObjectBase*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioObjectBase*, UInt32)
-    release : Proc(ISpatialAudioObjectBase*, UInt32)
-    get_buffer : Proc(ISpatialAudioObjectBase*, UInt8**, UInt32*, HRESULT)
-    set_end_of_stream : Proc(ISpatialAudioObjectBase*, UInt32, HRESULT)
-    is_active : Proc(ISpatialAudioObjectBase*, LibC::BOOL*, HRESULT)
-    get_audio_object_type : Proc(ISpatialAudioObjectBase*, AudioObjectType*, HRESULT)
-  end
-
-  ISpatialAudioObjectBase_GUID = "cce0b8f2-8d4d-4efb-a8cf-3d6ecf1c30e0"
-  IID_ISpatialAudioObjectBase = LibC::GUID.new(0xcce0b8f2_u32, 0x8d4d_u16, 0x4efb_u16, StaticArray[0xa8_u8, 0xcf_u8, 0x3d_u8, 0x6e_u8, 0xcf_u8, 0x1c_u8, 0x30_u8, 0xe0_u8])
-  struct ISpatialAudioObjectBase
-    lpVtbl : ISpatialAudioObjectBaseVTbl*
-  end
-
-  struct ISpatialAudioObjectVTbl
-    query_interface : Proc(ISpatialAudioObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioObject*, UInt32)
-    release : Proc(ISpatialAudioObject*, UInt32)
-    get_buffer : Proc(ISpatialAudioObject*, UInt8**, UInt32*, HRESULT)
-    set_end_of_stream : Proc(ISpatialAudioObject*, UInt32, HRESULT)
-    is_active : Proc(ISpatialAudioObject*, LibC::BOOL*, HRESULT)
-    get_audio_object_type : Proc(ISpatialAudioObject*, AudioObjectType*, HRESULT)
-    set_position : Proc(ISpatialAudioObject*, Float32, Float32, Float32, HRESULT)
-    set_volume : Proc(ISpatialAudioObject*, Float32, HRESULT)
-  end
-
-  ISpatialAudioObject_GUID = "dde28967-521b-46e5-8f00-bd6f2bc8ab1d"
-  IID_ISpatialAudioObject = LibC::GUID.new(0xdde28967_u32, 0x521b_u16, 0x46e5_u16, StaticArray[0x8f_u8, 0x0_u8, 0xbd_u8, 0x6f_u8, 0x2b_u8, 0xc8_u8, 0xab_u8, 0x1d_u8])
-  struct ISpatialAudioObject
-    lpVtbl : ISpatialAudioObjectVTbl*
-  end
-
-  struct ISpatialAudioObjectRenderStreamBaseVTbl
-    query_interface : Proc(ISpatialAudioObjectRenderStreamBase*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioObjectRenderStreamBase*, UInt32)
-    release : Proc(ISpatialAudioObjectRenderStreamBase*, UInt32)
-    get_available_dynamic_object_count : Proc(ISpatialAudioObjectRenderStreamBase*, UInt32*, HRESULT)
-    get_service : Proc(ISpatialAudioObjectRenderStreamBase*, Guid*, Void**, HRESULT)
-    start : Proc(ISpatialAudioObjectRenderStreamBase*, HRESULT)
-    stop : Proc(ISpatialAudioObjectRenderStreamBase*, HRESULT)
-    reset : Proc(ISpatialAudioObjectRenderStreamBase*, HRESULT)
-    begin_updating_audio_objects : Proc(ISpatialAudioObjectRenderStreamBase*, UInt32*, UInt32*, HRESULT)
-    end_updating_audio_objects : Proc(ISpatialAudioObjectRenderStreamBase*, HRESULT)
-  end
-
-  ISpatialAudioObjectRenderStreamBase_GUID = "feaaf403-c1d8-450d-aa05-e0ccee7502a8"
-  IID_ISpatialAudioObjectRenderStreamBase = LibC::GUID.new(0xfeaaf403_u32, 0xc1d8_u16, 0x450d_u16, StaticArray[0xaa_u8, 0x5_u8, 0xe0_u8, 0xcc_u8, 0xee_u8, 0x75_u8, 0x2_u8, 0xa8_u8])
-  struct ISpatialAudioObjectRenderStreamBase
-    lpVtbl : ISpatialAudioObjectRenderStreamBaseVTbl*
-  end
-
-  struct ISpatialAudioObjectRenderStreamVTbl
-    query_interface : Proc(ISpatialAudioObjectRenderStream*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioObjectRenderStream*, UInt32)
-    release : Proc(ISpatialAudioObjectRenderStream*, UInt32)
-    get_available_dynamic_object_count : Proc(ISpatialAudioObjectRenderStream*, UInt32*, HRESULT)
-    get_service : Proc(ISpatialAudioObjectRenderStream*, Guid*, Void**, HRESULT)
-    start : Proc(ISpatialAudioObjectRenderStream*, HRESULT)
-    stop : Proc(ISpatialAudioObjectRenderStream*, HRESULT)
-    reset : Proc(ISpatialAudioObjectRenderStream*, HRESULT)
-    begin_updating_audio_objects : Proc(ISpatialAudioObjectRenderStream*, UInt32*, UInt32*, HRESULT)
-    end_updating_audio_objects : Proc(ISpatialAudioObjectRenderStream*, HRESULT)
-    activate_spatial_audio_object : Proc(ISpatialAudioObjectRenderStream*, AudioObjectType, ISpatialAudioObject*, HRESULT)
-  end
-
-  ISpatialAudioObjectRenderStream_GUID = "bab5f473-b423-477b-85f5-b5a332a04153"
-  IID_ISpatialAudioObjectRenderStream = LibC::GUID.new(0xbab5f473_u32, 0xb423_u16, 0x477b_u16, StaticArray[0x85_u8, 0xf5_u8, 0xb5_u8, 0xa3_u8, 0x32_u8, 0xa0_u8, 0x41_u8, 0x53_u8])
-  struct ISpatialAudioObjectRenderStream
-    lpVtbl : ISpatialAudioObjectRenderStreamVTbl*
-  end
-
-  struct ISpatialAudioObjectRenderStreamNotifyVTbl
-    query_interface : Proc(ISpatialAudioObjectRenderStreamNotify*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioObjectRenderStreamNotify*, UInt32)
-    release : Proc(ISpatialAudioObjectRenderStreamNotify*, UInt32)
-    on_available_dynamic_object_count_change : Proc(ISpatialAudioObjectRenderStreamNotify*, ISpatialAudioObjectRenderStreamBase, Int64, UInt32, HRESULT)
-  end
-
-  ISpatialAudioObjectRenderStreamNotify_GUID = "dddf83e6-68d7-4c70-883f-a1836afb4a50"
-  IID_ISpatialAudioObjectRenderStreamNotify = LibC::GUID.new(0xdddf83e6_u32, 0x68d7_u16, 0x4c70_u16, StaticArray[0x88_u8, 0x3f_u8, 0xa1_u8, 0x83_u8, 0x6a_u8, 0xfb_u8, 0x4a_u8, 0x50_u8])
-  struct ISpatialAudioObjectRenderStreamNotify
-    lpVtbl : ISpatialAudioObjectRenderStreamNotifyVTbl*
-  end
-
-  struct ISpatialAudioClientVTbl
-    query_interface : Proc(ISpatialAudioClient*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioClient*, UInt32)
-    release : Proc(ISpatialAudioClient*, UInt32)
-    get_static_object_position : Proc(ISpatialAudioClient*, AudioObjectType, Float32*, Float32*, Float32*, HRESULT)
-    get_native_static_object_type_mask : Proc(ISpatialAudioClient*, AudioObjectType*, HRESULT)
-    get_max_dynamic_object_count : Proc(ISpatialAudioClient*, UInt32*, HRESULT)
-    get_supported_audio_object_format_enumerator : Proc(ISpatialAudioClient*, IAudioFormatEnumerator*, HRESULT)
-    get_max_frame_count : Proc(ISpatialAudioClient*, WAVEFORMATEX*, UInt32*, HRESULT)
-    is_audio_object_format_supported : Proc(ISpatialAudioClient*, WAVEFORMATEX*, HRESULT)
-    is_spatial_audio_stream_available : Proc(ISpatialAudioClient*, Guid*, PROPVARIANT*, HRESULT)
-    activate_spatial_audio_stream : Proc(ISpatialAudioClient*, PROPVARIANT*, Guid*, Void**, HRESULT)
-  end
-
-  ISpatialAudioClient_GUID = "bbf8e066-aaaa-49be-9a4d-fd2a858ea27f"
-  IID_ISpatialAudioClient = LibC::GUID.new(0xbbf8e066_u32, 0xaaaa_u16, 0x49be_u16, StaticArray[0x9a_u8, 0x4d_u8, 0xfd_u8, 0x2a_u8, 0x85_u8, 0x8e_u8, 0xa2_u8, 0x7f_u8])
-  struct ISpatialAudioClient
-    lpVtbl : ISpatialAudioClientVTbl*
-  end
-
-  struct ISpatialAudioClient2VTbl
-    query_interface : Proc(ISpatialAudioClient2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioClient2*, UInt32)
-    release : Proc(ISpatialAudioClient2*, UInt32)
-    get_static_object_position : Proc(ISpatialAudioClient2*, AudioObjectType, Float32*, Float32*, Float32*, HRESULT)
-    get_native_static_object_type_mask : Proc(ISpatialAudioClient2*, AudioObjectType*, HRESULT)
-    get_max_dynamic_object_count : Proc(ISpatialAudioClient2*, UInt32*, HRESULT)
-    get_supported_audio_object_format_enumerator : Proc(ISpatialAudioClient2*, IAudioFormatEnumerator*, HRESULT)
-    get_max_frame_count : Proc(ISpatialAudioClient2*, WAVEFORMATEX*, UInt32*, HRESULT)
-    is_audio_object_format_supported : Proc(ISpatialAudioClient2*, WAVEFORMATEX*, HRESULT)
-    is_spatial_audio_stream_available : Proc(ISpatialAudioClient2*, Guid*, PROPVARIANT*, HRESULT)
-    activate_spatial_audio_stream : Proc(ISpatialAudioClient2*, PROPVARIANT*, Guid*, Void**, HRESULT)
-    is_offload_capable : Proc(ISpatialAudioClient2*, AUDIO_STREAM_CATEGORY, LibC::BOOL*, HRESULT)
-    get_max_frame_count_for_category : Proc(ISpatialAudioClient2*, AUDIO_STREAM_CATEGORY, LibC::BOOL, WAVEFORMATEX*, UInt32*, HRESULT)
-  end
-
-  ISpatialAudioClient2_GUID = "caabe452-a66a-4bee-a93e-e320463f6a53"
-  IID_ISpatialAudioClient2 = LibC::GUID.new(0xcaabe452_u32, 0xa66a_u16, 0x4bee_u16, StaticArray[0xa9_u8, 0x3e_u8, 0xe3_u8, 0x20_u8, 0x46_u8, 0x3f_u8, 0x6a_u8, 0x53_u8])
-  struct ISpatialAudioClient2
-    lpVtbl : ISpatialAudioClient2VTbl*
-  end
-
-  struct ISpatialAudioObjectForHrtfVTbl
-    query_interface : Proc(ISpatialAudioObjectForHrtf*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioObjectForHrtf*, UInt32)
-    release : Proc(ISpatialAudioObjectForHrtf*, UInt32)
-    get_buffer : Proc(ISpatialAudioObjectForHrtf*, UInt8**, UInt32*, HRESULT)
-    set_end_of_stream : Proc(ISpatialAudioObjectForHrtf*, UInt32, HRESULT)
-    is_active : Proc(ISpatialAudioObjectForHrtf*, LibC::BOOL*, HRESULT)
-    get_audio_object_type : Proc(ISpatialAudioObjectForHrtf*, AudioObjectType*, HRESULT)
-    set_position : Proc(ISpatialAudioObjectForHrtf*, Float32, Float32, Float32, HRESULT)
-    set_gain : Proc(ISpatialAudioObjectForHrtf*, Float32, HRESULT)
-    set_orientation : Proc(ISpatialAudioObjectForHrtf*, Float32**, HRESULT)
-    set_environment : Proc(ISpatialAudioObjectForHrtf*, SpatialAudioHrtfEnvironmentType, HRESULT)
-    set_distance_decay : Proc(ISpatialAudioObjectForHrtf*, SpatialAudioHrtfDistanceDecay*, HRESULT)
-    set_directivity : Proc(ISpatialAudioObjectForHrtf*, SpatialAudioHrtfDirectivityUnion*, HRESULT)
-  end
-
-  ISpatialAudioObjectForHrtf_GUID = "d7436ade-1978-4e14-aba0-555bd8eb83b4"
-  IID_ISpatialAudioObjectForHrtf = LibC::GUID.new(0xd7436ade_u32, 0x1978_u16, 0x4e14_u16, StaticArray[0xab_u8, 0xa0_u8, 0x55_u8, 0x5b_u8, 0xd8_u8, 0xeb_u8, 0x83_u8, 0xb4_u8])
-  struct ISpatialAudioObjectForHrtf
-    lpVtbl : ISpatialAudioObjectForHrtfVTbl*
-  end
-
-  struct ISpatialAudioObjectRenderStreamForHrtfVTbl
-    query_interface : Proc(ISpatialAudioObjectRenderStreamForHrtf*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioObjectRenderStreamForHrtf*, UInt32)
-    release : Proc(ISpatialAudioObjectRenderStreamForHrtf*, UInt32)
-    get_available_dynamic_object_count : Proc(ISpatialAudioObjectRenderStreamForHrtf*, UInt32*, HRESULT)
-    get_service : Proc(ISpatialAudioObjectRenderStreamForHrtf*, Guid*, Void**, HRESULT)
-    start : Proc(ISpatialAudioObjectRenderStreamForHrtf*, HRESULT)
-    stop : Proc(ISpatialAudioObjectRenderStreamForHrtf*, HRESULT)
-    reset : Proc(ISpatialAudioObjectRenderStreamForHrtf*, HRESULT)
-    begin_updating_audio_objects : Proc(ISpatialAudioObjectRenderStreamForHrtf*, UInt32*, UInt32*, HRESULT)
-    end_updating_audio_objects : Proc(ISpatialAudioObjectRenderStreamForHrtf*, HRESULT)
-    activate_spatial_audio_object_for_hrtf : Proc(ISpatialAudioObjectRenderStreamForHrtf*, AudioObjectType, ISpatialAudioObjectForHrtf*, HRESULT)
-  end
-
-  ISpatialAudioObjectRenderStreamForHrtf_GUID = "e08deef9-5363-406e-9fdc-080ee247bbe0"
-  IID_ISpatialAudioObjectRenderStreamForHrtf = LibC::GUID.new(0xe08deef9_u32, 0x5363_u16, 0x406e_u16, StaticArray[0x9f_u8, 0xdc_u8, 0x8_u8, 0xe_u8, 0xe2_u8, 0x47_u8, 0xbb_u8, 0xe0_u8])
-  struct ISpatialAudioObjectRenderStreamForHrtf
-    lpVtbl : ISpatialAudioObjectRenderStreamForHrtfVTbl*
-  end
-
-  struct IMMNotificationClientVTbl
-    query_interface : Proc(IMMNotificationClient*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMMNotificationClient*, UInt32)
-    release : Proc(IMMNotificationClient*, UInt32)
-    on_device_state_changed : Proc(IMMNotificationClient*, LibC::LPWSTR, UInt32, HRESULT)
-    on_device_added : Proc(IMMNotificationClient*, LibC::LPWSTR, HRESULT)
-    on_device_removed : Proc(IMMNotificationClient*, LibC::LPWSTR, HRESULT)
-    on_default_device_changed : Proc(IMMNotificationClient*, EDataFlow, ERole, LibC::LPWSTR, HRESULT)
-    on_property_value_changed : Proc(IMMNotificationClient*, LibC::LPWSTR, PROPERTYKEY, HRESULT)
-  end
-
-  IMMNotificationClient_GUID = "7991eec9-7e89-4d85-8390-6c703cec60c0"
-  IID_IMMNotificationClient = LibC::GUID.new(0x7991eec9_u32, 0x7e89_u16, 0x4d85_u16, StaticArray[0x83_u8, 0x90_u8, 0x6c_u8, 0x70_u8, 0x3c_u8, 0xec_u8, 0x60_u8, 0xc0_u8])
-  struct IMMNotificationClient
-    lpVtbl : IMMNotificationClientVTbl*
-  end
-
-  struct IMMDeviceVTbl
-    query_interface : Proc(IMMDevice*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMMDevice*, UInt32)
-    release : Proc(IMMDevice*, UInt32)
-    activate : Proc(IMMDevice*, Guid*, UInt32, PROPVARIANT*, Void**, HRESULT)
-    open_property_store : Proc(IMMDevice*, UInt32, IPropertyStore*, HRESULT)
-    get_id : Proc(IMMDevice*, LibC::LPWSTR*, HRESULT)
-    get_state : Proc(IMMDevice*, UInt32*, HRESULT)
-  end
-
-  IMMDevice_GUID = "d666063f-1587-4e43-81f1-b948e807363f"
-  IID_IMMDevice = LibC::GUID.new(0xd666063f_u32, 0x1587_u16, 0x4e43_u16, StaticArray[0x81_u8, 0xf1_u8, 0xb9_u8, 0x48_u8, 0xe8_u8, 0x7_u8, 0x36_u8, 0x3f_u8])
-  struct IMMDevice
-    lpVtbl : IMMDeviceVTbl*
-  end
-
-  struct IMMDeviceCollectionVTbl
-    query_interface : Proc(IMMDeviceCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMMDeviceCollection*, UInt32)
-    release : Proc(IMMDeviceCollection*, UInt32)
-    get_count : Proc(IMMDeviceCollection*, UInt32*, HRESULT)
-    item : Proc(IMMDeviceCollection*, UInt32, IMMDevice*, HRESULT)
-  end
-
-  IMMDeviceCollection_GUID = "0bd7a1be-7a1a-44db-8397-cc5392387b5e"
-  IID_IMMDeviceCollection = LibC::GUID.new(0xbd7a1be_u32, 0x7a1a_u16, 0x44db_u16, StaticArray[0x83_u8, 0x97_u8, 0xcc_u8, 0x53_u8, 0x92_u8, 0x38_u8, 0x7b_u8, 0x5e_u8])
-  struct IMMDeviceCollection
-    lpVtbl : IMMDeviceCollectionVTbl*
-  end
-
-  struct IMMEndpointVTbl
-    query_interface : Proc(IMMEndpoint*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMMEndpoint*, UInt32)
-    release : Proc(IMMEndpoint*, UInt32)
-    get_data_flow : Proc(IMMEndpoint*, EDataFlow*, HRESULT)
-  end
-
-  IMMEndpoint_GUID = "1be09788-6894-4089-8586-9a2a6c265ac5"
-  IID_IMMEndpoint = LibC::GUID.new(0x1be09788_u32, 0x6894_u16, 0x4089_u16, StaticArray[0x85_u8, 0x86_u8, 0x9a_u8, 0x2a_u8, 0x6c_u8, 0x26_u8, 0x5a_u8, 0xc5_u8])
-  struct IMMEndpoint
-    lpVtbl : IMMEndpointVTbl*
-  end
-
-  struct IMMDeviceEnumeratorVTbl
-    query_interface : Proc(IMMDeviceEnumerator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMMDeviceEnumerator*, UInt32)
-    release : Proc(IMMDeviceEnumerator*, UInt32)
-    enum_audio_endpoints : Proc(IMMDeviceEnumerator*, EDataFlow, UInt32, IMMDeviceCollection*, HRESULT)
-    get_default_audio_endpoint : Proc(IMMDeviceEnumerator*, EDataFlow, ERole, IMMDevice*, HRESULT)
-    get_device : Proc(IMMDeviceEnumerator*, LibC::LPWSTR, IMMDevice*, HRESULT)
-    register_endpoint_notification_callback : Proc(IMMDeviceEnumerator*, IMMNotificationClient, HRESULT)
-    unregister_endpoint_notification_callback : Proc(IMMDeviceEnumerator*, IMMNotificationClient, HRESULT)
-  end
-
-  IMMDeviceEnumerator_GUID = "a95664d2-9614-4f35-a746-de8db63617e6"
-  IID_IMMDeviceEnumerator = LibC::GUID.new(0xa95664d2_u32, 0x9614_u16, 0x4f35_u16, StaticArray[0xa7_u8, 0x46_u8, 0xde_u8, 0x8d_u8, 0xb6_u8, 0x36_u8, 0x17_u8, 0xe6_u8])
-  struct IMMDeviceEnumerator
-    lpVtbl : IMMDeviceEnumeratorVTbl*
-  end
-
-  struct IMMDeviceActivatorVTbl
-    query_interface : Proc(IMMDeviceActivator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMMDeviceActivator*, UInt32)
-    release : Proc(IMMDeviceActivator*, UInt32)
-    activate : Proc(IMMDeviceActivator*, Guid*, IMMDevice, PROPVARIANT*, Void**, HRESULT)
-  end
-
-  IMMDeviceActivator_GUID = "3b0d0ea4-d0a9-4b0e-935b-09516746fac0"
-  IID_IMMDeviceActivator = LibC::GUID.new(0x3b0d0ea4_u32, 0xd0a9_u16, 0x4b0e_u16, StaticArray[0x93_u8, 0x5b_u8, 0x9_u8, 0x51_u8, 0x67_u8, 0x46_u8, 0xfa_u8, 0xc0_u8])
-  struct IMMDeviceActivator
-    lpVtbl : IMMDeviceActivatorVTbl*
-  end
-
-  struct IActivateAudioInterfaceCompletionHandlerVTbl
-    query_interface : Proc(IActivateAudioInterfaceCompletionHandler*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IActivateAudioInterfaceCompletionHandler*, UInt32)
-    release : Proc(IActivateAudioInterfaceCompletionHandler*, UInt32)
-    activate_completed : Proc(IActivateAudioInterfaceCompletionHandler*, IActivateAudioInterfaceAsyncOperation, HRESULT)
-  end
-
-  IActivateAudioInterfaceCompletionHandler_GUID = "41d949ab-9862-444a-80f6-c261334da5eb"
-  IID_IActivateAudioInterfaceCompletionHandler = LibC::GUID.new(0x41d949ab_u32, 0x9862_u16, 0x444a_u16, StaticArray[0x80_u8, 0xf6_u8, 0xc2_u8, 0x61_u8, 0x33_u8, 0x4d_u8, 0xa5_u8, 0xeb_u8])
-  struct IActivateAudioInterfaceCompletionHandler
-    lpVtbl : IActivateAudioInterfaceCompletionHandlerVTbl*
-  end
-
-  struct IActivateAudioInterfaceAsyncOperationVTbl
-    query_interface : Proc(IActivateAudioInterfaceAsyncOperation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IActivateAudioInterfaceAsyncOperation*, UInt32)
-    release : Proc(IActivateAudioInterfaceAsyncOperation*, UInt32)
-    get_activate_result : Proc(IActivateAudioInterfaceAsyncOperation*, HRESULT*, IUnknown*, HRESULT)
-  end
-
-  IActivateAudioInterfaceAsyncOperation_GUID = "72a22d78-cde4-431d-b8cc-843a71199b6d"
-  IID_IActivateAudioInterfaceAsyncOperation = LibC::GUID.new(0x72a22d78_u32, 0xcde4_u16, 0x431d_u16, StaticArray[0xb8_u8, 0xcc_u8, 0x84_u8, 0x3a_u8, 0x71_u8, 0x19_u8, 0x9b_u8, 0x6d_u8])
-  struct IActivateAudioInterfaceAsyncOperation
-    lpVtbl : IActivateAudioInterfaceAsyncOperationVTbl*
-  end
-
-  struct IAudioSystemEffectsPropertyChangeNotificationClientVTbl
-    query_interface : Proc(IAudioSystemEffectsPropertyChangeNotificationClient*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioSystemEffectsPropertyChangeNotificationClient*, UInt32)
-    release : Proc(IAudioSystemEffectsPropertyChangeNotificationClient*, UInt32)
-    on_property_changed : Proc(IAudioSystemEffectsPropertyChangeNotificationClient*, MIDL___MIDL_itf_mmdeviceapi_0000_0008_0002, PROPERTYKEY, HRESULT)
-  end
-
-  IAudioSystemEffectsPropertyChangeNotificationClient_GUID = "20049d40-56d5-400e-a2ef-385599feed49"
-  IID_IAudioSystemEffectsPropertyChangeNotificationClient = LibC::GUID.new(0x20049d40_u32, 0x56d5_u16, 0x400e_u16, StaticArray[0xa2_u8, 0xef_u8, 0x38_u8, 0x55_u8, 0x99_u8, 0xfe_u8, 0xed_u8, 0x49_u8])
-  struct IAudioSystemEffectsPropertyChangeNotificationClient
-    lpVtbl : IAudioSystemEffectsPropertyChangeNotificationClientVTbl*
-  end
-
-  struct IAudioSystemEffectsPropertyStoreVTbl
-    query_interface : Proc(IAudioSystemEffectsPropertyStore*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioSystemEffectsPropertyStore*, UInt32)
-    release : Proc(IAudioSystemEffectsPropertyStore*, UInt32)
-    open_default_property_store : Proc(IAudioSystemEffectsPropertyStore*, UInt32, IPropertyStore*, HRESULT)
-    open_user_property_store : Proc(IAudioSystemEffectsPropertyStore*, UInt32, IPropertyStore*, HRESULT)
-    open_volatile_property_store : Proc(IAudioSystemEffectsPropertyStore*, UInt32, IPropertyStore*, HRESULT)
-    reset_user_property_store : Proc(IAudioSystemEffectsPropertyStore*, HRESULT)
-    reset_volatile_property_store : Proc(IAudioSystemEffectsPropertyStore*, HRESULT)
-    register_property_change_notification : Proc(IAudioSystemEffectsPropertyStore*, IAudioSystemEffectsPropertyChangeNotificationClient, HRESULT)
-    unregister_property_change_notification : Proc(IAudioSystemEffectsPropertyStore*, IAudioSystemEffectsPropertyChangeNotificationClient, HRESULT)
-  end
-
-  IAudioSystemEffectsPropertyStore_GUID = "302ae7f9-d7e0-43e4-971b-1f8293613d2a"
-  IID_IAudioSystemEffectsPropertyStore = LibC::GUID.new(0x302ae7f9_u32, 0xd7e0_u16, 0x43e4_u16, StaticArray[0x97_u8, 0x1b_u8, 0x1f_u8, 0x82_u8, 0x93_u8, 0x61_u8, 0x3d_u8, 0x2a_u8])
-  struct IAudioSystemEffectsPropertyStore
-    lpVtbl : IAudioSystemEffectsPropertyStoreVTbl*
-  end
-
-  struct IPerChannelDbLevelVTbl
-    query_interface : Proc(IPerChannelDbLevel*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPerChannelDbLevel*, UInt32)
-    release : Proc(IPerChannelDbLevel*, UInt32)
-    get_channel_count : Proc(IPerChannelDbLevel*, UInt32*, HRESULT)
-    get_level_range : Proc(IPerChannelDbLevel*, UInt32, Float32*, Float32*, Float32*, HRESULT)
-    get_level : Proc(IPerChannelDbLevel*, UInt32, Float32*, HRESULT)
-    set_level : Proc(IPerChannelDbLevel*, UInt32, Float32, Guid*, HRESULT)
-    set_level_uniform : Proc(IPerChannelDbLevel*, Float32, Guid*, HRESULT)
-    set_level_all_channels : Proc(IPerChannelDbLevel*, Float32*, UInt32, Guid*, HRESULT)
-  end
-
-  IPerChannelDbLevel_GUID = "c2f8e001-f205-4bc9-99bc-c13b1e048ccb"
-  IID_IPerChannelDbLevel = LibC::GUID.new(0xc2f8e001_u32, 0xf205_u16, 0x4bc9_u16, StaticArray[0x99_u8, 0xbc_u8, 0xc1_u8, 0x3b_u8, 0x1e_u8, 0x4_u8, 0x8c_u8, 0xcb_u8])
-  struct IPerChannelDbLevel
-    lpVtbl : IPerChannelDbLevelVTbl*
-  end
-
-  struct IAudioVolumeLevelVTbl
-    query_interface : Proc(IAudioVolumeLevel*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioVolumeLevel*, UInt32)
-    release : Proc(IAudioVolumeLevel*, UInt32)
-    get_channel_count : Proc(IAudioVolumeLevel*, UInt32*, HRESULT)
-    get_level_range : Proc(IAudioVolumeLevel*, UInt32, Float32*, Float32*, Float32*, HRESULT)
-    get_level : Proc(IAudioVolumeLevel*, UInt32, Float32*, HRESULT)
-    set_level : Proc(IAudioVolumeLevel*, UInt32, Float32, Guid*, HRESULT)
-    set_level_uniform : Proc(IAudioVolumeLevel*, Float32, Guid*, HRESULT)
-    set_level_all_channels : Proc(IAudioVolumeLevel*, Float32*, UInt32, Guid*, HRESULT)
-  end
-
-  IAudioVolumeLevel_GUID = "7fb7b48f-531d-44a2-bcb3-5ad5a134b3dc"
-  IID_IAudioVolumeLevel = LibC::GUID.new(0x7fb7b48f_u32, 0x531d_u16, 0x44a2_u16, StaticArray[0xbc_u8, 0xb3_u8, 0x5a_u8, 0xd5_u8, 0xa1_u8, 0x34_u8, 0xb3_u8, 0xdc_u8])
-  struct IAudioVolumeLevel
-    lpVtbl : IAudioVolumeLevelVTbl*
-  end
-
-  struct IAudioChannelConfigVTbl
-    query_interface : Proc(IAudioChannelConfig*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioChannelConfig*, UInt32)
-    release : Proc(IAudioChannelConfig*, UInt32)
-    set_channel_config : Proc(IAudioChannelConfig*, UInt32, Guid*, HRESULT)
-    get_channel_config : Proc(IAudioChannelConfig*, UInt32*, HRESULT)
-  end
-
-  IAudioChannelConfig_GUID = "bb11c46f-ec28-493c-b88a-5db88062ce98"
-  IID_IAudioChannelConfig = LibC::GUID.new(0xbb11c46f_u32, 0xec28_u16, 0x493c_u16, StaticArray[0xb8_u8, 0x8a_u8, 0x5d_u8, 0xb8_u8, 0x80_u8, 0x62_u8, 0xce_u8, 0x98_u8])
-  struct IAudioChannelConfig
-    lpVtbl : IAudioChannelConfigVTbl*
-  end
-
-  struct IAudioLoudnessVTbl
-    query_interface : Proc(IAudioLoudness*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioLoudness*, UInt32)
-    release : Proc(IAudioLoudness*, UInt32)
-    get_enabled : Proc(IAudioLoudness*, LibC::BOOL*, HRESULT)
-    set_enabled : Proc(IAudioLoudness*, LibC::BOOL, Guid*, HRESULT)
-  end
-
-  IAudioLoudness_GUID = "7d8b1437-dd53-4350-9c1b-1ee2890bd938"
-  IID_IAudioLoudness = LibC::GUID.new(0x7d8b1437_u32, 0xdd53_u16, 0x4350_u16, StaticArray[0x9c_u8, 0x1b_u8, 0x1e_u8, 0xe2_u8, 0x89_u8, 0xb_u8, 0xd9_u8, 0x38_u8])
-  struct IAudioLoudness
-    lpVtbl : IAudioLoudnessVTbl*
-  end
-
-  struct IAudioInputSelectorVTbl
-    query_interface : Proc(IAudioInputSelector*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioInputSelector*, UInt32)
-    release : Proc(IAudioInputSelector*, UInt32)
-    get_selection : Proc(IAudioInputSelector*, UInt32*, HRESULT)
-    set_selection : Proc(IAudioInputSelector*, UInt32, Guid*, HRESULT)
-  end
-
-  IAudioInputSelector_GUID = "4f03dc02-5e6e-4653-8f72-a030c123d598"
-  IID_IAudioInputSelector = LibC::GUID.new(0x4f03dc02_u32, 0x5e6e_u16, 0x4653_u16, StaticArray[0x8f_u8, 0x72_u8, 0xa0_u8, 0x30_u8, 0xc1_u8, 0x23_u8, 0xd5_u8, 0x98_u8])
-  struct IAudioInputSelector
-    lpVtbl : IAudioInputSelectorVTbl*
-  end
-
-  struct IAudioOutputSelectorVTbl
-    query_interface : Proc(IAudioOutputSelector*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioOutputSelector*, UInt32)
-    release : Proc(IAudioOutputSelector*, UInt32)
-    get_selection : Proc(IAudioOutputSelector*, UInt32*, HRESULT)
-    set_selection : Proc(IAudioOutputSelector*, UInt32, Guid*, HRESULT)
-  end
-
-  IAudioOutputSelector_GUID = "bb515f69-94a7-429e-8b9c-271b3f11a3ab"
-  IID_IAudioOutputSelector = LibC::GUID.new(0xbb515f69_u32, 0x94a7_u16, 0x429e_u16, StaticArray[0x8b_u8, 0x9c_u8, 0x27_u8, 0x1b_u8, 0x3f_u8, 0x11_u8, 0xa3_u8, 0xab_u8])
-  struct IAudioOutputSelector
-    lpVtbl : IAudioOutputSelectorVTbl*
-  end
-
-  struct IAudioMuteVTbl
-    query_interface : Proc(IAudioMute*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioMute*, UInt32)
-    release : Proc(IAudioMute*, UInt32)
-    set_mute : Proc(IAudioMute*, LibC::BOOL, Guid*, HRESULT)
-    get_mute : Proc(IAudioMute*, LibC::BOOL*, HRESULT)
-  end
-
-  IAudioMute_GUID = "df45aeea-b74a-4b6b-afad-2366b6aa012e"
-  IID_IAudioMute = LibC::GUID.new(0xdf45aeea_u32, 0xb74a_u16, 0x4b6b_u16, StaticArray[0xaf_u8, 0xad_u8, 0x23_u8, 0x66_u8, 0xb6_u8, 0xaa_u8, 0x1_u8, 0x2e_u8])
-  struct IAudioMute
-    lpVtbl : IAudioMuteVTbl*
-  end
-
-  struct IAudioBassVTbl
-    query_interface : Proc(IAudioBass*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioBass*, UInt32)
-    release : Proc(IAudioBass*, UInt32)
-    get_channel_count : Proc(IAudioBass*, UInt32*, HRESULT)
-    get_level_range : Proc(IAudioBass*, UInt32, Float32*, Float32*, Float32*, HRESULT)
-    get_level : Proc(IAudioBass*, UInt32, Float32*, HRESULT)
-    set_level : Proc(IAudioBass*, UInt32, Float32, Guid*, HRESULT)
-    set_level_uniform : Proc(IAudioBass*, Float32, Guid*, HRESULT)
-    set_level_all_channels : Proc(IAudioBass*, Float32*, UInt32, Guid*, HRESULT)
-  end
-
-  IAudioBass_GUID = "a2b1a1d9-4db3-425d-a2b2-bd335cb3e2e5"
-  IID_IAudioBass = LibC::GUID.new(0xa2b1a1d9_u32, 0x4db3_u16, 0x425d_u16, StaticArray[0xa2_u8, 0xb2_u8, 0xbd_u8, 0x33_u8, 0x5c_u8, 0xb3_u8, 0xe2_u8, 0xe5_u8])
-  struct IAudioBass
-    lpVtbl : IAudioBassVTbl*
-  end
-
-  struct IAudioMidrangeVTbl
-    query_interface : Proc(IAudioMidrange*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioMidrange*, UInt32)
-    release : Proc(IAudioMidrange*, UInt32)
-    get_channel_count : Proc(IAudioMidrange*, UInt32*, HRESULT)
-    get_level_range : Proc(IAudioMidrange*, UInt32, Float32*, Float32*, Float32*, HRESULT)
-    get_level : Proc(IAudioMidrange*, UInt32, Float32*, HRESULT)
-    set_level : Proc(IAudioMidrange*, UInt32, Float32, Guid*, HRESULT)
-    set_level_uniform : Proc(IAudioMidrange*, Float32, Guid*, HRESULT)
-    set_level_all_channels : Proc(IAudioMidrange*, Float32*, UInt32, Guid*, HRESULT)
-  end
-
-  IAudioMidrange_GUID = "5e54b6d7-b44b-40d9-9a9e-e691d9ce6edf"
-  IID_IAudioMidrange = LibC::GUID.new(0x5e54b6d7_u32, 0xb44b_u16, 0x40d9_u16, StaticArray[0x9a_u8, 0x9e_u8, 0xe6_u8, 0x91_u8, 0xd9_u8, 0xce_u8, 0x6e_u8, 0xdf_u8])
-  struct IAudioMidrange
-    lpVtbl : IAudioMidrangeVTbl*
-  end
-
-  struct IAudioTrebleVTbl
-    query_interface : Proc(IAudioTreble*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioTreble*, UInt32)
-    release : Proc(IAudioTreble*, UInt32)
-    get_channel_count : Proc(IAudioTreble*, UInt32*, HRESULT)
-    get_level_range : Proc(IAudioTreble*, UInt32, Float32*, Float32*, Float32*, HRESULT)
-    get_level : Proc(IAudioTreble*, UInt32, Float32*, HRESULT)
-    set_level : Proc(IAudioTreble*, UInt32, Float32, Guid*, HRESULT)
-    set_level_uniform : Proc(IAudioTreble*, Float32, Guid*, HRESULT)
-    set_level_all_channels : Proc(IAudioTreble*, Float32*, UInt32, Guid*, HRESULT)
-  end
-
-  IAudioTreble_GUID = "0a717812-694e-4907-b74b-bafa5cfdca7b"
-  IID_IAudioTreble = LibC::GUID.new(0xa717812_u32, 0x694e_u16, 0x4907_u16, StaticArray[0xb7_u8, 0x4b_u8, 0xba_u8, 0xfa_u8, 0x5c_u8, 0xfd_u8, 0xca_u8, 0x7b_u8])
-  struct IAudioTreble
-    lpVtbl : IAudioTrebleVTbl*
-  end
-
-  struct IAudioAutoGainControlVTbl
-    query_interface : Proc(IAudioAutoGainControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioAutoGainControl*, UInt32)
-    release : Proc(IAudioAutoGainControl*, UInt32)
-    get_enabled : Proc(IAudioAutoGainControl*, LibC::BOOL*, HRESULT)
-    set_enabled : Proc(IAudioAutoGainControl*, LibC::BOOL, Guid*, HRESULT)
-  end
-
-  IAudioAutoGainControl_GUID = "85401fd4-6de4-4b9d-9869-2d6753a82f3c"
-  IID_IAudioAutoGainControl = LibC::GUID.new(0x85401fd4_u32, 0x6de4_u16, 0x4b9d_u16, StaticArray[0x98_u8, 0x69_u8, 0x2d_u8, 0x67_u8, 0x53_u8, 0xa8_u8, 0x2f_u8, 0x3c_u8])
-  struct IAudioAutoGainControl
-    lpVtbl : IAudioAutoGainControlVTbl*
-  end
-
-  struct IAudioPeakMeterVTbl
-    query_interface : Proc(IAudioPeakMeter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioPeakMeter*, UInt32)
-    release : Proc(IAudioPeakMeter*, UInt32)
-    get_channel_count : Proc(IAudioPeakMeter*, UInt32*, HRESULT)
-    get_level : Proc(IAudioPeakMeter*, UInt32, Float32*, HRESULT)
-  end
-
-  IAudioPeakMeter_GUID = "dd79923c-0599-45e0-b8b6-c8df7db6e796"
-  IID_IAudioPeakMeter = LibC::GUID.new(0xdd79923c_u32, 0x599_u16, 0x45e0_u16, StaticArray[0xb8_u8, 0xb6_u8, 0xc8_u8, 0xdf_u8, 0x7d_u8, 0xb6_u8, 0xe7_u8, 0x96_u8])
-  struct IAudioPeakMeter
-    lpVtbl : IAudioPeakMeterVTbl*
-  end
-
-  struct IDeviceSpecificPropertyVTbl
-    query_interface : Proc(IDeviceSpecificProperty*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDeviceSpecificProperty*, UInt32)
-    release : Proc(IDeviceSpecificProperty*, UInt32)
-    get_type : Proc(IDeviceSpecificProperty*, UInt16*, HRESULT)
-    get_value : Proc(IDeviceSpecificProperty*, Void*, UInt32*, HRESULT)
-    set_value : Proc(IDeviceSpecificProperty*, Void*, UInt32, Guid*, HRESULT)
-    get4_b_range : Proc(IDeviceSpecificProperty*, Int32*, Int32*, Int32*, HRESULT)
-  end
-
-  IDeviceSpecificProperty_GUID = "3b22bcbf-2586-4af0-8583-205d391b807c"
-  IID_IDeviceSpecificProperty = LibC::GUID.new(0x3b22bcbf_u32, 0x2586_u16, 0x4af0_u16, StaticArray[0x85_u8, 0x83_u8, 0x20_u8, 0x5d_u8, 0x39_u8, 0x1b_u8, 0x80_u8, 0x7c_u8])
-  struct IDeviceSpecificProperty
-    lpVtbl : IDeviceSpecificPropertyVTbl*
-  end
-
-  struct IPartsListVTbl
-    query_interface : Proc(IPartsList*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPartsList*, UInt32)
-    release : Proc(IPartsList*, UInt32)
-    get_count : Proc(IPartsList*, UInt32*, HRESULT)
-    get_part : Proc(IPartsList*, UInt32, IPart*, HRESULT)
-  end
-
-  IPartsList_GUID = "6daa848c-5eb0-45cc-aea5-998a2cda1ffb"
-  IID_IPartsList = LibC::GUID.new(0x6daa848c_u32, 0x5eb0_u16, 0x45cc_u16, StaticArray[0xae_u8, 0xa5_u8, 0x99_u8, 0x8a_u8, 0x2c_u8, 0xda_u8, 0x1f_u8, 0xfb_u8])
-  struct IPartsList
-    lpVtbl : IPartsListVTbl*
-  end
-
-  struct IPartVTbl
-    query_interface : Proc(IPart*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPart*, UInt32)
-    release : Proc(IPart*, UInt32)
-    get_name : Proc(IPart*, LibC::LPWSTR*, HRESULT)
-    get_local_id : Proc(IPart*, UInt32*, HRESULT)
-    get_global_id : Proc(IPart*, LibC::LPWSTR*, HRESULT)
-    get_part_type : Proc(IPart*, PartType*, HRESULT)
-    get_sub_type : Proc(IPart*, Guid*, HRESULT)
-    get_control_interface_count : Proc(IPart*, UInt32*, HRESULT)
-    get_control_interface : Proc(IPart*, UInt32, IControlInterface*, HRESULT)
-    enum_parts_incoming : Proc(IPart*, IPartsList*, HRESULT)
-    enum_parts_outgoing : Proc(IPart*, IPartsList*, HRESULT)
-    get_topology_object : Proc(IPart*, IDeviceTopology*, HRESULT)
-    activate : Proc(IPart*, UInt32, Guid*, Void**, HRESULT)
-    register_control_change_callback : Proc(IPart*, Guid*, IControlChangeNotify, HRESULT)
-    unregister_control_change_callback : Proc(IPart*, IControlChangeNotify, HRESULT)
-  end
-
-  IPart_GUID = "ae2de0e4-5bca-4f2d-aa46-5d13f8fdb3a9"
-  IID_IPart = LibC::GUID.new(0xae2de0e4_u32, 0x5bca_u16, 0x4f2d_u16, StaticArray[0xaa_u8, 0x46_u8, 0x5d_u8, 0x13_u8, 0xf8_u8, 0xfd_u8, 0xb3_u8, 0xa9_u8])
-  struct IPart
-    lpVtbl : IPartVTbl*
-  end
-
-  struct IConnectorVTbl
-    query_interface : Proc(IConnector*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IConnector*, UInt32)
-    release : Proc(IConnector*, UInt32)
-    get_type : Proc(IConnector*, ConnectorType*, HRESULT)
-    get_data_flow : Proc(IConnector*, DataFlow*, HRESULT)
-    connect_to : Proc(IConnector*, IConnector, HRESULT)
-    disconnect : Proc(IConnector*, HRESULT)
-    is_connected : Proc(IConnector*, LibC::BOOL*, HRESULT)
-    get_connected_to : Proc(IConnector*, IConnector*, HRESULT)
-    get_connector_id_connected_to : Proc(IConnector*, LibC::LPWSTR*, HRESULT)
-    get_device_id_connected_to : Proc(IConnector*, LibC::LPWSTR*, HRESULT)
-  end
-
-  IConnector_GUID = "9c2c4058-23f5-41de-877a-df3af236a09e"
-  IID_IConnector = LibC::GUID.new(0x9c2c4058_u32, 0x23f5_u16, 0x41de_u16, StaticArray[0x87_u8, 0x7a_u8, 0xdf_u8, 0x3a_u8, 0xf2_u8, 0x36_u8, 0xa0_u8, 0x9e_u8])
-  struct IConnector
-    lpVtbl : IConnectorVTbl*
-  end
-
-  struct ISubunitVTbl
-    query_interface : Proc(ISubunit*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISubunit*, UInt32)
+
+  @[Extern]
+  record SpatialAudioObjectRenderStreamForMetadataActivationParams,
+    object_format : Win32cr::Media::Audio::WAVEFORMATEX*,
+    static_object_type_mask : Win32cr::Media::Audio::AudioObjectType,
+    min_dynamic_object_count : UInt32,
+    max_dynamic_object_count : UInt32,
+    category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
+    event_handle : Win32cr::Foundation::HANDLE,
+    metadata_format_id : LibC::GUID,
+    max_metadata_item_count : UInt16,
+    metadata_activation_params : Win32cr::System::Com::StructuredStorage::PROPVARIANT*,
+    notify_object : Void*
+
+  @[Extern]
+  record SpatialAudioObjectRenderStreamForMetadataActivationParams2,
+    object_format : Win32cr::Media::Audio::WAVEFORMATEX*,
+    static_object_type_mask : Win32cr::Media::Audio::AudioObjectType,
+    min_dynamic_object_count : UInt32,
+    max_dynamic_object_count : UInt32,
+    category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY,
+    event_handle : Win32cr::Foundation::HANDLE,
+    metadata_format_id : LibC::GUID,
+    max_metadata_item_count : UInt32,
+    metadata_activation_params : Win32cr::System::Com::StructuredStorage::PROPVARIANT*,
+    notify_object : Void*,
+    options : Win32cr::Media::Audio::SPATIAL_AUDIO_STREAM_OPTIONS
+
+  @[Extern]
+  record AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS,
+    target_process_id : UInt32,
+    process_loopback_mode : Win32cr::Media::Audio::PROCESS_LOOPBACK_MODE
+
+  @[Extern]
+  record AUDIOCLIENT_ACTIVATION_PARAMS,
+    activation_type : Win32cr::Media::Audio::AUDIOCLIENT_ACTIVATION_TYPE,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      process_loopback_params : Win32cr::Media::Audio::AUDIOCLIENT_PROCESS_LOOPBACK_PARAMS
+
+  end
+
+  @[Extern]
+  record ACMDRIVERDETAILSA,
+    cbStruct : UInt32,
+    fccType : UInt32,
+    fccComp : UInt32,
+    wMid : UInt16,
+    wPid : UInt16,
+    vdwACM : UInt32,
+    vdwDriver : UInt32,
+    fdwSupport : UInt32,
+    cFormatTags : UInt32,
+    cFilterTags : UInt32,
+    hicon : Win32cr::UI::WindowsAndMessaging::HICON,
+    szShortName : Win32cr::Foundation::CHAR[32],
+    szLongName : Win32cr::Foundation::CHAR[128],
+    szCopyright : Win32cr::Foundation::CHAR[80],
+    szLicensing : Win32cr::Foundation::CHAR[128],
+    szFeatures : Win32cr::Foundation::CHAR[512]
+
+  @[Extern]
+  record ACMDRIVERDETAILSW,
+    cbStruct : UInt32,
+    fccType : UInt32,
+    fccComp : UInt32,
+    wMid : UInt16,
+    wPid : UInt16,
+    vdwACM : UInt32,
+    vdwDriver : UInt32,
+    fdwSupport : UInt32,
+    cFormatTags : UInt32,
+    cFilterTags : UInt32,
+    hicon : Win32cr::UI::WindowsAndMessaging::HICON,
+    szShortName : UInt16[32],
+    szLongName : UInt16[128],
+    szCopyright : UInt16[80],
+    szLicensing : UInt16[128],
+    szFeatures : UInt16[512]
+
+  @[Extern]
+  record ACMFORMATTAGDETAILSA,
+    cbStruct : UInt32,
+    dwFormatTagIndex : UInt32,
+    dwFormatTag : UInt32,
+    cbFormatSize : UInt32,
+    fdwSupport : UInt32,
+    cStandardFormats : UInt32,
+    szFormatTag : Win32cr::Foundation::CHAR[48]
+
+  @[Extern]
+  record ACMFORMATTAGDETAILSW,
+    cbStruct : UInt32,
+    dwFormatTagIndex : UInt32,
+    dwFormatTag : UInt32,
+    cbFormatSize : UInt32,
+    fdwSupport : UInt32,
+    cStandardFormats : UInt32,
+    szFormatTag : UInt16[48]
+
+  @[Extern]
+  record ACMFORMATDETAILSA,
+    cbStruct : UInt32,
+    dwFormatIndex : UInt32,
+    dwFormatTag : UInt32,
+    fdwSupport : UInt32,
+    pwfx : Win32cr::Media::Audio::WAVEFORMATEX*,
+    cbwfx : UInt32,
+    szFormat : Win32cr::Foundation::CHAR[128]
+
+  @[Extern]
+  record Tacmformatdetailsw,
+    cbStruct : UInt32,
+    dwFormatIndex : UInt32,
+    dwFormatTag : UInt32,
+    fdwSupport : UInt32,
+    pwfx : Win32cr::Media::Audio::WAVEFORMATEX*,
+    cbwfx : UInt32,
+    szFormat : UInt16[128]
+
+  @[Extern]
+  record ACMFORMATCHOOSEA,
+    cbStruct : UInt32,
+    fdwStyle : UInt32,
+    hwndOwner : Win32cr::Foundation::HWND,
+    pwfx : Win32cr::Media::Audio::WAVEFORMATEX*,
+    cbwfx : UInt32,
+    pszTitle : Win32cr::Foundation::PSTR,
+    szFormatTag : Win32cr::Foundation::CHAR[48],
+    szFormat : Win32cr::Foundation::CHAR[128],
+    pszName : Win32cr::Foundation::PSTR,
+    cchName : UInt32,
+    fdwEnum : UInt32,
+    pwfxEnum : Win32cr::Media::Audio::WAVEFORMATEX*,
+    hInstance : Win32cr::Foundation::HINSTANCE,
+    pszTemplateName : Win32cr::Foundation::PSTR,
+    lCustData : Win32cr::Foundation::LPARAM,
+    pfnHook : Win32cr::Media::Audio::ACMFORMATCHOOSEHOOKPROCA
+
+  @[Extern]
+  record ACMFORMATCHOOSEW,
+    cbStruct : UInt32,
+    fdwStyle : UInt32,
+    hwndOwner : Win32cr::Foundation::HWND,
+    pwfx : Win32cr::Media::Audio::WAVEFORMATEX*,
+    cbwfx : UInt32,
+    pszTitle : Win32cr::Foundation::PWSTR,
+    szFormatTag : UInt16[48],
+    szFormat : UInt16[128],
+    pszName : Win32cr::Foundation::PWSTR,
+    cchName : UInt32,
+    fdwEnum : UInt32,
+    pwfxEnum : Win32cr::Media::Audio::WAVEFORMATEX*,
+    hInstance : Win32cr::Foundation::HINSTANCE,
+    pszTemplateName : Win32cr::Foundation::PWSTR,
+    lCustData : Win32cr::Foundation::LPARAM,
+    pfnHook : Win32cr::Media::Audio::ACMFORMATCHOOSEHOOKPROCW
+
+  @[Extern]
+  record ACMFILTERTAGDETAILSA,
+    cbStruct : UInt32,
+    dwFilterTagIndex : UInt32,
+    dwFilterTag : UInt32,
+    cbFilterSize : UInt32,
+    fdwSupport : UInt32,
+    cStandardFilters : UInt32,
+    szFilterTag : Win32cr::Foundation::CHAR[48]
+
+  @[Extern]
+  record ACMFILTERTAGDETAILSW,
+    cbStruct : UInt32,
+    dwFilterTagIndex : UInt32,
+    dwFilterTag : UInt32,
+    cbFilterSize : UInt32,
+    fdwSupport : UInt32,
+    cStandardFilters : UInt32,
+    szFilterTag : UInt16[48]
+
+  @[Extern]
+  record ACMFILTERDETAILSA,
+    cbStruct : UInt32,
+    dwFilterIndex : UInt32,
+    dwFilterTag : UInt32,
+    fdwSupport : UInt32,
+    pwfltr : Win32cr::Media::Audio::WAVEFILTER*,
+    cbwfltr : UInt32,
+    szFilter : Win32cr::Foundation::CHAR[128]
+
+  @[Extern]
+  record ACMFILTERDETAILSW,
+    cbStruct : UInt32,
+    dwFilterIndex : UInt32,
+    dwFilterTag : UInt32,
+    fdwSupport : UInt32,
+    pwfltr : Win32cr::Media::Audio::WAVEFILTER*,
+    cbwfltr : UInt32,
+    szFilter : UInt16[128]
+
+  @[Extern]
+  record ACMFILTERCHOOSEA,
+    cbStruct : UInt32,
+    fdwStyle : UInt32,
+    hwndOwner : Win32cr::Foundation::HWND,
+    pwfltr : Win32cr::Media::Audio::WAVEFILTER*,
+    cbwfltr : UInt32,
+    pszTitle : Win32cr::Foundation::PSTR,
+    szFilterTag : Win32cr::Foundation::CHAR[48],
+    szFilter : Win32cr::Foundation::CHAR[128],
+    pszName : Win32cr::Foundation::PSTR,
+    cchName : UInt32,
+    fdwEnum : UInt32,
+    pwfltrEnum : Win32cr::Media::Audio::WAVEFILTER*,
+    hInstance : Win32cr::Foundation::HINSTANCE,
+    pszTemplateName : Win32cr::Foundation::PSTR,
+    lCustData : Win32cr::Foundation::LPARAM,
+    pfnHook : Win32cr::Media::Audio::ACMFILTERCHOOSEHOOKPROCA
+
+  @[Extern]
+  record ACMFILTERCHOOSEW,
+    cbStruct : UInt32,
+    fdwStyle : UInt32,
+    hwndOwner : Win32cr::Foundation::HWND,
+    pwfltr : Win32cr::Media::Audio::WAVEFILTER*,
+    cbwfltr : UInt32,
+    pszTitle : Win32cr::Foundation::PWSTR,
+    szFilterTag : UInt16[48],
+    szFilter : UInt16[128],
+    pszName : Win32cr::Foundation::PWSTR,
+    cchName : UInt32,
+    fdwEnum : UInt32,
+    pwfltrEnum : Win32cr::Media::Audio::WAVEFILTER*,
+    hInstance : Win32cr::Foundation::HINSTANCE,
+    pszTemplateName : Win32cr::Foundation::PWSTR,
+    lCustData : Win32cr::Foundation::LPARAM,
+    pfnHook : Win32cr::Media::Audio::ACMFILTERCHOOSEHOOKPROCW
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  record ACMSTREAMHEADER,
+    cbStruct : UInt32,
+    fdwStatus : UInt32,
+    dwUser : LibC::UIntPtrT,
+    pbSrc : UInt8*,
+    cbSrcLength : UInt32,
+    cbSrcLengthUsed : UInt32,
+    dwSrcUser : LibC::UIntPtrT,
+    pbDst : UInt8*,
+    cbDstLength : UInt32,
+    cbDstLengthUsed : UInt32,
+    dwDstUser : LibC::UIntPtrT,
+    dwReservedDriver : UInt32[15]
+  {% end %}
+
+  @[Extern]
+  record Tacmdrvopendesca,
+    cbStruct : UInt32,
+    fccType : UInt32,
+    fccComp : UInt32,
+    dwVersion : UInt32,
+    dwFlags : UInt32,
+    dwError : UInt32,
+    pszSectionName : Win32cr::Foundation::PSTR,
+    pszAliasName : Win32cr::Foundation::PSTR,
+    dnDevNode : UInt32
+
+  @[Extern]
+  record Tacmdrvopendescw,
+    cbStruct : UInt32,
+    fccType : UInt32,
+    fccComp : UInt32,
+    dwVersion : UInt32,
+    dwFlags : UInt32,
+    dwError : UInt32,
+    pszSectionName : Win32cr::Foundation::PWSTR,
+    pszAliasName : Win32cr::Foundation::PWSTR,
+    dnDevNode : UInt32
+
+  @[Extern]
+  record ACMDRVSTREAMINSTANCE,
+    cbStruct : UInt32,
+    pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*,
+    pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*,
+    pwfltr : Win32cr::Media::Audio::WAVEFILTER*,
+    dwCallback : LibC::UIntPtrT,
+    dwInstance : LibC::UIntPtrT,
+    fdwOpen : UInt32,
+    fdwDriver : UInt32,
+    dwDriver : LibC::UIntPtrT,
+    has : Win32cr::Media::Audio::HACMSTREAM
+
+  @[Extern]
+  record ACMDRVSTREAMHEADER,
+    cbStruct : UInt32,
+    fdwStatus : UInt32,
+    dwUser : LibC::UIntPtrT,
+    pbSrc : UInt8*,
+    cbSrcLength : UInt32,
+    cbSrcLengthUsed : UInt32,
+    dwSrcUser : LibC::UIntPtrT,
+    pbDst : UInt8*,
+    cbDstLength : UInt32,
+    cbDstLengthUsed : UInt32,
+    dwDstUser : LibC::UIntPtrT,
+    fdwConvert : UInt32,
+    padshNext : Win32cr::Media::Audio::ACMDRVSTREAMHEADER*,
+    fdwDriver : UInt32,
+    dwDriver : LibC::UIntPtrT,
+    fdwPrepared : UInt32,
+    dwPrepared : LibC::UIntPtrT,
+    pbPreparedSrc : UInt8*,
+    cbPreparedSrcLength : UInt32,
+    pbPreparedDst : UInt8*,
+    cbPreparedDstLength : UInt32
+
+  @[Extern]
+  record ACMDRVSTREAMSIZE,
+    cbStruct : UInt32,
+    fdwSize : UInt32,
+    cbSrcLength : UInt32,
+    cbDstLength : UInt32
+
+  @[Extern]
+  record ACMDRVFORMATSUGGEST,
+    cbStruct : UInt32,
+    fdwSuggest : UInt32,
+    pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*,
+    cbwfxSrc : UInt32,
+    pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*,
+    cbwfxDst : UInt32
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  record ACMSTREAMHEADER,
+    cbStruct : UInt32,
+    fdwStatus : UInt32,
+    dwUser : LibC::UIntPtrT,
+    pbSrc : UInt8*,
+    cbSrcLength : UInt32,
+    cbSrcLengthUsed : UInt32,
+    dwSrcUser : LibC::UIntPtrT,
+    pbDst : UInt8*,
+    cbDstLength : UInt32,
+    cbDstLengthUsed : UInt32,
+    dwDstUser : LibC::UIntPtrT,
+    dwReservedDriver : UInt32[10]
+  {% end %}
+
+  @[Extern]
+  record IMessageFilterVtbl,
+    query_interface : Proc(IMessageFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMessageFilter*, UInt32),
+    release : Proc(IMessageFilter*, UInt32),
+    handle_in_coming_call : Proc(IMessageFilter*, UInt32, Win32cr::Media::HTASK, UInt32, Win32cr::System::Com::INTERFACEINFO*, UInt32),
+    retry_rejected_call : Proc(IMessageFilter*, Win32cr::Media::HTASK, UInt32, UInt32, UInt32),
+    message_pending : Proc(IMessageFilter*, Win32cr::Media::HTASK, UInt32, UInt32, UInt32)
+
+
+  @[Extern]
+  #@[Com("00000016-0000-0000-c000-000000000046")]
+  record IMessageFilter, lpVtbl : IMessageFilterVtbl* do
+    GUID = LibC::GUID.new(0x16_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
+    def query_interface(this : IMessageFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMessageFilter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMessageFilter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def handle_in_coming_call(this : IMessageFilter*, dwCallType : UInt32, htaskCaller : Win32cr::Media::HTASK, dwTickCount : UInt32, lpInterfaceInfo : Win32cr::System::Com::INTERFACEINFO*) : UInt32
+      @lpVtbl.try &.value.handle_in_coming_call.call(this, dwCallType, htaskCaller, dwTickCount, lpInterfaceInfo)
+    end
+    def retry_rejected_call(this : IMessageFilter*, htaskCallee : Win32cr::Media::HTASK, dwTickCount : UInt32, dwRejectType : UInt32) : UInt32
+      @lpVtbl.try &.value.retry_rejected_call.call(this, htaskCallee, dwTickCount, dwRejectType)
+    end
+    def message_pending(this : IMessageFilter*, htaskCallee : Win32cr::Media::HTASK, dwTickCount : UInt32, dwPendingType : UInt32) : UInt32
+      @lpVtbl.try &.value.message_pending.call(this, htaskCallee, dwTickCount, dwPendingType)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioClientVtbl,
+    query_interface : Proc(IAudioClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioClient*, UInt32),
+    release : Proc(IAudioClient*, UInt32),
+    initialize__ : Proc(IAudioClient*, Win32cr::Media::Audio::AUDCLNT_SHAREMODE, UInt32, Int64, Int64, Win32cr::Media::Audio::WAVEFORMATEX*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_buffer_size : Proc(IAudioClient*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_stream_latency : Proc(IAudioClient*, Int64*, Win32cr::Foundation::HRESULT),
+    get_current_padding : Proc(IAudioClient*, UInt32*, Win32cr::Foundation::HRESULT),
+    is_format_supported : Proc(IAudioClient*, Win32cr::Media::Audio::AUDCLNT_SHAREMODE, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    get_mix_format : Proc(IAudioClient*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    get_device_period : Proc(IAudioClient*, Int64*, Int64*, Win32cr::Foundation::HRESULT),
+    start : Proc(IAudioClient*, Win32cr::Foundation::HRESULT),
+    stop : Proc(IAudioClient*, Win32cr::Foundation::HRESULT),
+    reset : Proc(IAudioClient*, Win32cr::Foundation::HRESULT),
+    set_event_handle : Proc(IAudioClient*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HRESULT),
+    get_service : Proc(IAudioClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("1cb9ad4c-dbfa-4c32-b178-c2f568a703b2")]
+  record IAudioClient, lpVtbl : IAudioClientVtbl* do
+    GUID = LibC::GUID.new(0x1cb9ad4c_u32, 0xdbfa_u16, 0x4c32_u16, StaticArray[0xb1_u8, 0x78_u8, 0xc2_u8, 0xf5_u8, 0x68_u8, 0xa7_u8, 0x3_u8, 0xb2_u8])
+    def query_interface(this : IAudioClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioClient*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioClient*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def initialize__(this : IAudioClient*, share_mode : Win32cr::Media::Audio::AUDCLNT_SHAREMODE, stream_flags : UInt32, hnsBufferDuration : Int64, hnsPeriodicity : Int64, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*, audio_session_guid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, share_mode, stream_flags, hnsBufferDuration, hnsPeriodicity, pFormat, audio_session_guid)
+    end
+    def get_buffer_size(this : IAudioClient*, pNumBufferFrames : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer_size.call(this, pNumBufferFrames)
+    end
+    def get_stream_latency(this : IAudioClient*, phnsLatency : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_stream_latency.call(this, phnsLatency)
+    end
+    def get_current_padding(this : IAudioClient*, pNumPaddingFrames : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_current_padding.call(this, pNumPaddingFrames)
+    end
+    def is_format_supported(this : IAudioClient*, share_mode : Win32cr::Media::Audio::AUDCLNT_SHAREMODE, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*, ppClosestMatch : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_format_supported.call(this, share_mode, pFormat, ppClosestMatch)
+    end
+    def get_mix_format(this : IAudioClient*, ppDeviceFormat : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_mix_format.call(this, ppDeviceFormat)
+    end
+    def get_device_period(this : IAudioClient*, phnsDefaultDevicePeriod : Int64*, phnsMinimumDevicePeriod : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_period.call(this, phnsDefaultDevicePeriod, phnsMinimumDevicePeriod)
+    end
+    def start(this : IAudioClient*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.start.call(this)
+    end
+    def stop(this : IAudioClient*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stop.call(this)
+    end
+    def reset(this : IAudioClient*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def set_event_handle(this : IAudioClient*, eventHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_event_handle.call(this, eventHandle)
+    end
+    def get_service(this : IAudioClient*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_service.call(this, riid, ppv)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioClient2Vtbl,
+    query_interface : Proc(IAudioClient2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioClient2*, UInt32),
+    release : Proc(IAudioClient2*, UInt32),
+    initialize__ : Proc(IAudioClient2*, Win32cr::Media::Audio::AUDCLNT_SHAREMODE, UInt32, Int64, Int64, Win32cr::Media::Audio::WAVEFORMATEX*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_buffer_size : Proc(IAudioClient2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_stream_latency : Proc(IAudioClient2*, Int64*, Win32cr::Foundation::HRESULT),
+    get_current_padding : Proc(IAudioClient2*, UInt32*, Win32cr::Foundation::HRESULT),
+    is_format_supported : Proc(IAudioClient2*, Win32cr::Media::Audio::AUDCLNT_SHAREMODE, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    get_mix_format : Proc(IAudioClient2*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    get_device_period : Proc(IAudioClient2*, Int64*, Int64*, Win32cr::Foundation::HRESULT),
+    start : Proc(IAudioClient2*, Win32cr::Foundation::HRESULT),
+    stop : Proc(IAudioClient2*, Win32cr::Foundation::HRESULT),
+    reset : Proc(IAudioClient2*, Win32cr::Foundation::HRESULT),
+    set_event_handle : Proc(IAudioClient2*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HRESULT),
+    get_service : Proc(IAudioClient2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    is_offload_capable : Proc(IAudioClient2*, Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    set_client_properties : Proc(IAudioClient2*, Win32cr::Media::Audio::AudioClientProperties*, Win32cr::Foundation::HRESULT),
+    get_buffer_size_limits : Proc(IAudioClient2*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::BOOL, Int64*, Int64*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("726778cd-f60a-4eda-82de-e47610cd78aa")]
+  record IAudioClient2, lpVtbl : IAudioClient2Vtbl* do
+    GUID = LibC::GUID.new(0x726778cd_u32, 0xf60a_u16, 0x4eda_u16, StaticArray[0x82_u8, 0xde_u8, 0xe4_u8, 0x76_u8, 0x10_u8, 0xcd_u8, 0x78_u8, 0xaa_u8])
+    def query_interface(this : IAudioClient2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioClient2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioClient2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def initialize__(this : IAudioClient2*, share_mode : Win32cr::Media::Audio::AUDCLNT_SHAREMODE, stream_flags : UInt32, hnsBufferDuration : Int64, hnsPeriodicity : Int64, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*, audio_session_guid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, share_mode, stream_flags, hnsBufferDuration, hnsPeriodicity, pFormat, audio_session_guid)
+    end
+    def get_buffer_size(this : IAudioClient2*, pNumBufferFrames : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer_size.call(this, pNumBufferFrames)
+    end
+    def get_stream_latency(this : IAudioClient2*, phnsLatency : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_stream_latency.call(this, phnsLatency)
+    end
+    def get_current_padding(this : IAudioClient2*, pNumPaddingFrames : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_current_padding.call(this, pNumPaddingFrames)
+    end
+    def is_format_supported(this : IAudioClient2*, share_mode : Win32cr::Media::Audio::AUDCLNT_SHAREMODE, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*, ppClosestMatch : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_format_supported.call(this, share_mode, pFormat, ppClosestMatch)
+    end
+    def get_mix_format(this : IAudioClient2*, ppDeviceFormat : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_mix_format.call(this, ppDeviceFormat)
+    end
+    def get_device_period(this : IAudioClient2*, phnsDefaultDevicePeriod : Int64*, phnsMinimumDevicePeriod : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_period.call(this, phnsDefaultDevicePeriod, phnsMinimumDevicePeriod)
+    end
+    def start(this : IAudioClient2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.start.call(this)
+    end
+    def stop(this : IAudioClient2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stop.call(this)
+    end
+    def reset(this : IAudioClient2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def set_event_handle(this : IAudioClient2*, eventHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_event_handle.call(this, eventHandle)
+    end
+    def get_service(this : IAudioClient2*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_service.call(this, riid, ppv)
+    end
+    def is_offload_capable(this : IAudioClient2*, category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, pbOffloadCapable : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_offload_capable.call(this, category, pbOffloadCapable)
+    end
+    def set_client_properties(this : IAudioClient2*, pProperties : Win32cr::Media::Audio::AudioClientProperties*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_client_properties.call(this, pProperties)
+    end
+    def get_buffer_size_limits(this : IAudioClient2*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*, bEventDriven : Win32cr::Foundation::BOOL, phnsMinBufferDuration : Int64*, phnsMaxBufferDuration : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer_size_limits.call(this, pFormat, bEventDriven, phnsMinBufferDuration, phnsMaxBufferDuration)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioClient3Vtbl,
+    query_interface : Proc(IAudioClient3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioClient3*, UInt32),
+    release : Proc(IAudioClient3*, UInt32),
+    initialize__ : Proc(IAudioClient3*, Win32cr::Media::Audio::AUDCLNT_SHAREMODE, UInt32, Int64, Int64, Win32cr::Media::Audio::WAVEFORMATEX*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_buffer_size : Proc(IAudioClient3*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_stream_latency : Proc(IAudioClient3*, Int64*, Win32cr::Foundation::HRESULT),
+    get_current_padding : Proc(IAudioClient3*, UInt32*, Win32cr::Foundation::HRESULT),
+    is_format_supported : Proc(IAudioClient3*, Win32cr::Media::Audio::AUDCLNT_SHAREMODE, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    get_mix_format : Proc(IAudioClient3*, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT),
+    get_device_period : Proc(IAudioClient3*, Int64*, Int64*, Win32cr::Foundation::HRESULT),
+    start : Proc(IAudioClient3*, Win32cr::Foundation::HRESULT),
+    stop : Proc(IAudioClient3*, Win32cr::Foundation::HRESULT),
+    reset : Proc(IAudioClient3*, Win32cr::Foundation::HRESULT),
+    set_event_handle : Proc(IAudioClient3*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HRESULT),
+    get_service : Proc(IAudioClient3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    is_offload_capable : Proc(IAudioClient3*, Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    set_client_properties : Proc(IAudioClient3*, Win32cr::Media::Audio::AudioClientProperties*, Win32cr::Foundation::HRESULT),
+    get_buffer_size_limits : Proc(IAudioClient3*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::BOOL, Int64*, Int64*, Win32cr::Foundation::HRESULT),
+    get_shared_mode_engine_period : Proc(IAudioClient3*, Win32cr::Media::Audio::WAVEFORMATEX*, UInt32*, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_current_shared_mode_engine_period : Proc(IAudioClient3*, Win32cr::Media::Audio::WAVEFORMATEX**, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_shared_audio_stream : Proc(IAudioClient3*, UInt32, UInt32, Win32cr::Media::Audio::WAVEFORMATEX*, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("7ed4ee07-8e67-4cd4-8c1a-2b7a5987ad42")]
+  record IAudioClient3, lpVtbl : IAudioClient3Vtbl* do
+    GUID = LibC::GUID.new(0x7ed4ee07_u32, 0x8e67_u16, 0x4cd4_u16, StaticArray[0x8c_u8, 0x1a_u8, 0x2b_u8, 0x7a_u8, 0x59_u8, 0x87_u8, 0xad_u8, 0x42_u8])
+    def query_interface(this : IAudioClient3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioClient3*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioClient3*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def initialize__(this : IAudioClient3*, share_mode : Win32cr::Media::Audio::AUDCLNT_SHAREMODE, stream_flags : UInt32, hnsBufferDuration : Int64, hnsPeriodicity : Int64, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*, audio_session_guid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, share_mode, stream_flags, hnsBufferDuration, hnsPeriodicity, pFormat, audio_session_guid)
+    end
+    def get_buffer_size(this : IAudioClient3*, pNumBufferFrames : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer_size.call(this, pNumBufferFrames)
+    end
+    def get_stream_latency(this : IAudioClient3*, phnsLatency : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_stream_latency.call(this, phnsLatency)
+    end
+    def get_current_padding(this : IAudioClient3*, pNumPaddingFrames : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_current_padding.call(this, pNumPaddingFrames)
+    end
+    def is_format_supported(this : IAudioClient3*, share_mode : Win32cr::Media::Audio::AUDCLNT_SHAREMODE, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*, ppClosestMatch : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_format_supported.call(this, share_mode, pFormat, ppClosestMatch)
+    end
+    def get_mix_format(this : IAudioClient3*, ppDeviceFormat : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_mix_format.call(this, ppDeviceFormat)
+    end
+    def get_device_period(this : IAudioClient3*, phnsDefaultDevicePeriod : Int64*, phnsMinimumDevicePeriod : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_period.call(this, phnsDefaultDevicePeriod, phnsMinimumDevicePeriod)
+    end
+    def start(this : IAudioClient3*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.start.call(this)
+    end
+    def stop(this : IAudioClient3*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stop.call(this)
+    end
+    def reset(this : IAudioClient3*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def set_event_handle(this : IAudioClient3*, eventHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_event_handle.call(this, eventHandle)
+    end
+    def get_service(this : IAudioClient3*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_service.call(this, riid, ppv)
+    end
+    def is_offload_capable(this : IAudioClient3*, category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, pbOffloadCapable : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_offload_capable.call(this, category, pbOffloadCapable)
+    end
+    def set_client_properties(this : IAudioClient3*, pProperties : Win32cr::Media::Audio::AudioClientProperties*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_client_properties.call(this, pProperties)
+    end
+    def get_buffer_size_limits(this : IAudioClient3*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*, bEventDriven : Win32cr::Foundation::BOOL, phnsMinBufferDuration : Int64*, phnsMaxBufferDuration : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer_size_limits.call(this, pFormat, bEventDriven, phnsMinBufferDuration, phnsMaxBufferDuration)
+    end
+    def get_shared_mode_engine_period(this : IAudioClient3*, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*, pDefaultPeriodInFrames : UInt32*, pFundamentalPeriodInFrames : UInt32*, pMinPeriodInFrames : UInt32*, pMaxPeriodInFrames : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_shared_mode_engine_period.call(this, pFormat, pDefaultPeriodInFrames, pFundamentalPeriodInFrames, pMinPeriodInFrames, pMaxPeriodInFrames)
+    end
+    def get_current_shared_mode_engine_period(this : IAudioClient3*, ppFormat : Win32cr::Media::Audio::WAVEFORMATEX**, pCurrentPeriodInFrames : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_current_shared_mode_engine_period.call(this, ppFormat, pCurrentPeriodInFrames)
+    end
+    def initialize_shared_audio_stream(this : IAudioClient3*, stream_flags : UInt32, period_in_frames : UInt32, pFormat : Win32cr::Media::Audio::WAVEFORMATEX*, audio_session_guid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_shared_audio_stream.call(this, stream_flags, period_in_frames, pFormat, audio_session_guid)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioRenderClientVtbl,
+    query_interface : Proc(IAudioRenderClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioRenderClient*, UInt32),
+    release : Proc(IAudioRenderClient*, UInt32),
+    get_buffer : Proc(IAudioRenderClient*, UInt32, UInt8**, Win32cr::Foundation::HRESULT),
+    release_buffer : Proc(IAudioRenderClient*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f294acfc-3146-4483-a7bf-addca7c260e2")]
+  record IAudioRenderClient, lpVtbl : IAudioRenderClientVtbl* do
+    GUID = LibC::GUID.new(0xf294acfc_u32, 0x3146_u16, 0x4483_u16, StaticArray[0xa7_u8, 0xbf_u8, 0xad_u8, 0xdc_u8, 0xa7_u8, 0xc2_u8, 0x60_u8, 0xe2_u8])
+    def query_interface(this : IAudioRenderClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioRenderClient*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioRenderClient*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_buffer(this : IAudioRenderClient*, num_frames_requested : UInt32, ppData : UInt8**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer.call(this, num_frames_requested, ppData)
+    end
+    def release_buffer(this : IAudioRenderClient*, num_frames_written : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.release_buffer.call(this, num_frames_written, dwFlags)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioCaptureClientVtbl,
+    query_interface : Proc(IAudioCaptureClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioCaptureClient*, UInt32),
+    release : Proc(IAudioCaptureClient*, UInt32),
+    get_buffer : Proc(IAudioCaptureClient*, UInt8**, UInt32*, UInt32*, UInt64*, UInt64*, Win32cr::Foundation::HRESULT),
+    release_buffer : Proc(IAudioCaptureClient*, UInt32, Win32cr::Foundation::HRESULT),
+    get_next_packet_size : Proc(IAudioCaptureClient*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c8adbd64-e71e-48a0-a4de-185c395cd317")]
+  record IAudioCaptureClient, lpVtbl : IAudioCaptureClientVtbl* do
+    GUID = LibC::GUID.new(0xc8adbd64_u32, 0xe71e_u16, 0x48a0_u16, StaticArray[0xa4_u8, 0xde_u8, 0x18_u8, 0x5c_u8, 0x39_u8, 0x5c_u8, 0xd3_u8, 0x17_u8])
+    def query_interface(this : IAudioCaptureClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioCaptureClient*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioCaptureClient*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_buffer(this : IAudioCaptureClient*, ppData : UInt8**, pNumFramesToRead : UInt32*, pdwFlags : UInt32*, pu64DevicePosition : UInt64*, pu64QPCPosition : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer.call(this, ppData, pNumFramesToRead, pdwFlags, pu64DevicePosition, pu64QPCPosition)
+    end
+    def release_buffer(this : IAudioCaptureClient*, num_frames_read : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.release_buffer.call(this, num_frames_read)
+    end
+    def get_next_packet_size(this : IAudioCaptureClient*, pNumFramesInNextPacket : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_next_packet_size.call(this, pNumFramesInNextPacket)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioClockVtbl,
+    query_interface : Proc(IAudioClock*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioClock*, UInt32),
+    release : Proc(IAudioClock*, UInt32),
+    get_frequency : Proc(IAudioClock*, UInt64*, Win32cr::Foundation::HRESULT),
+    get_position : Proc(IAudioClock*, UInt64*, UInt64*, Win32cr::Foundation::HRESULT),
+    get_characteristics : Proc(IAudioClock*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("cd63314f-3fba-4a1b-812c-ef96358728e7")]
+  record IAudioClock, lpVtbl : IAudioClockVtbl* do
+    GUID = LibC::GUID.new(0xcd63314f_u32, 0x3fba_u16, 0x4a1b_u16, StaticArray[0x81_u8, 0x2c_u8, 0xef_u8, 0x96_u8, 0x35_u8, 0x87_u8, 0x28_u8, 0xe7_u8])
+    def query_interface(this : IAudioClock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioClock*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioClock*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_frequency(this : IAudioClock*, pu64Frequency : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_frequency.call(this, pu64Frequency)
+    end
+    def get_position(this : IAudioClock*, pu64Position : UInt64*, pu64QPCPosition : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_position.call(this, pu64Position, pu64QPCPosition)
+    end
+    def get_characteristics(this : IAudioClock*, pdwCharacteristics : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_characteristics.call(this, pdwCharacteristics)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioClock2Vtbl,
+    query_interface : Proc(IAudioClock2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioClock2*, UInt32),
+    release : Proc(IAudioClock2*, UInt32),
+    get_device_position : Proc(IAudioClock2*, UInt64*, UInt64*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("6f49ff73-6727-49ac-a008-d98cf5e70048")]
+  record IAudioClock2, lpVtbl : IAudioClock2Vtbl* do
+    GUID = LibC::GUID.new(0x6f49ff73_u32, 0x6727_u16, 0x49ac_u16, StaticArray[0xa0_u8, 0x8_u8, 0xd9_u8, 0x8c_u8, 0xf5_u8, 0xe7_u8, 0x0_u8, 0x48_u8])
+    def query_interface(this : IAudioClock2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioClock2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioClock2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_device_position(this : IAudioClock2*, device_position : UInt64*, qpc_position : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_position.call(this, device_position, qpc_position)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioClockAdjustmentVtbl,
+    query_interface : Proc(IAudioClockAdjustment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioClockAdjustment*, UInt32),
+    release : Proc(IAudioClockAdjustment*, UInt32),
+    set_sample_rate : Proc(IAudioClockAdjustment*, Float32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f6e4c0a0-46d9-4fb8-be21-57a3ef2b626c")]
+  record IAudioClockAdjustment, lpVtbl : IAudioClockAdjustmentVtbl* do
+    GUID = LibC::GUID.new(0xf6e4c0a0_u32, 0x46d9_u16, 0x4fb8_u16, StaticArray[0xbe_u8, 0x21_u8, 0x57_u8, 0xa3_u8, 0xef_u8, 0x2b_u8, 0x62_u8, 0x6c_u8])
+    def query_interface(this : IAudioClockAdjustment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioClockAdjustment*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioClockAdjustment*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_sample_rate(this : IAudioClockAdjustment*, flSampleRate : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_sample_rate.call(this, flSampleRate)
+    end
+
+  end
+
+  @[Extern]
+  record ISimpleAudioVolumeVtbl,
+    query_interface : Proc(ISimpleAudioVolume*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISimpleAudioVolume*, UInt32),
+    release : Proc(ISimpleAudioVolume*, UInt32),
+    set_master_volume : Proc(ISimpleAudioVolume*, Float32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_master_volume : Proc(ISimpleAudioVolume*, Float32*, Win32cr::Foundation::HRESULT),
+    set_mute : Proc(ISimpleAudioVolume*, Win32cr::Foundation::BOOL, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_mute : Proc(ISimpleAudioVolume*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("87ce5498-68d6-44e5-9215-6da47ef883d8")]
+  record ISimpleAudioVolume, lpVtbl : ISimpleAudioVolumeVtbl* do
+    GUID = LibC::GUID.new(0x87ce5498_u32, 0x68d6_u16, 0x44e5_u16, StaticArray[0x92_u8, 0x15_u8, 0x6d_u8, 0xa4_u8, 0x7e_u8, 0xf8_u8, 0x83_u8, 0xd8_u8])
+    def query_interface(this : ISimpleAudioVolume*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISimpleAudioVolume*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISimpleAudioVolume*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_master_volume(this : ISimpleAudioVolume*, fLevel : Float32, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_master_volume.call(this, fLevel, event_context)
+    end
+    def get_master_volume(this : ISimpleAudioVolume*, pfLevel : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_master_volume.call(this, pfLevel)
+    end
+    def set_mute(this : ISimpleAudioVolume*, bMute : Win32cr::Foundation::BOOL, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_mute.call(this, bMute, event_context)
+    end
+    def get_mute(this : ISimpleAudioVolume*, pbMute : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_mute.call(this, pbMute)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioClientDuckingControlVtbl,
+    query_interface : Proc(IAudioClientDuckingControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioClientDuckingControl*, UInt32),
+    release : Proc(IAudioClientDuckingControl*, UInt32),
+    set_ducking_options_for_current_stream : Proc(IAudioClientDuckingControl*, Win32cr::Media::Audio::AUDIO_DUCKING_OPTIONS, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c789d381-a28c-4168-b28f-d3a837924dc3")]
+  record IAudioClientDuckingControl, lpVtbl : IAudioClientDuckingControlVtbl* do
+    GUID = LibC::GUID.new(0xc789d381_u32, 0xa28c_u16, 0x4168_u16, StaticArray[0xb2_u8, 0x8f_u8, 0xd3_u8, 0xa8_u8, 0x37_u8, 0x92_u8, 0x4d_u8, 0xc3_u8])
+    def query_interface(this : IAudioClientDuckingControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioClientDuckingControl*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioClientDuckingControl*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_ducking_options_for_current_stream(this : IAudioClientDuckingControl*, options : Win32cr::Media::Audio::AUDIO_DUCKING_OPTIONS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_ducking_options_for_current_stream.call(this, options)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioEffectsChangedNotificationClientVtbl,
+    query_interface : Proc(IAudioEffectsChangedNotificationClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioEffectsChangedNotificationClient*, UInt32),
+    release : Proc(IAudioEffectsChangedNotificationClient*, UInt32),
+    on_audio_effects_changed : Proc(IAudioEffectsChangedNotificationClient*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("a5ded44f-3c5d-4b2b-bd1e-5dc1ee20bbf6")]
+  record IAudioEffectsChangedNotificationClient, lpVtbl : IAudioEffectsChangedNotificationClientVtbl* do
+    GUID = LibC::GUID.new(0xa5ded44f_u32, 0x3c5d_u16, 0x4b2b_u16, StaticArray[0xbd_u8, 0x1e_u8, 0x5d_u8, 0xc1_u8, 0xee_u8, 0x20_u8, 0xbb_u8, 0xf6_u8])
+    def query_interface(this : IAudioEffectsChangedNotificationClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioEffectsChangedNotificationClient*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioEffectsChangedNotificationClient*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_audio_effects_changed(this : IAudioEffectsChangedNotificationClient*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_audio_effects_changed.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioEffectsManagerVtbl,
+    query_interface : Proc(IAudioEffectsManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioEffectsManager*, UInt32),
+    release : Proc(IAudioEffectsManager*, UInt32),
+    register_audio_effects_changed_notification_callback : Proc(IAudioEffectsManager*, Void*, Win32cr::Foundation::HRESULT),
+    unregister_audio_effects_changed_notification_callback : Proc(IAudioEffectsManager*, Void*, Win32cr::Foundation::HRESULT),
+    get_audio_effects : Proc(IAudioEffectsManager*, Win32cr::Media::Audio::AUDIO_EFFECT**, UInt32*, Win32cr::Foundation::HRESULT),
+    set_audio_effect_state : Proc(IAudioEffectsManager*, LibC::GUID, Win32cr::Media::Audio::AUDIO_EFFECT_STATE, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("4460b3ae-4b44-4527-8676-7548a8acd260")]
+  record IAudioEffectsManager, lpVtbl : IAudioEffectsManagerVtbl* do
+    GUID = LibC::GUID.new(0x4460b3ae_u32, 0x4b44_u16, 0x4527_u16, StaticArray[0x86_u8, 0x76_u8, 0x75_u8, 0x48_u8, 0xa8_u8, 0xac_u8, 0xd2_u8, 0x60_u8])
+    def query_interface(this : IAudioEffectsManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioEffectsManager*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioEffectsManager*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def register_audio_effects_changed_notification_callback(this : IAudioEffectsManager*, client : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_audio_effects_changed_notification_callback.call(this, client)
+    end
+    def unregister_audio_effects_changed_notification_callback(this : IAudioEffectsManager*, client : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_audio_effects_changed_notification_callback.call(this, client)
+    end
+    def get_audio_effects(this : IAudioEffectsManager*, effects : Win32cr::Media::Audio::AUDIO_EFFECT**, numEffects : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio_effects.call(this, effects, numEffects)
+    end
+    def set_audio_effect_state(this : IAudioEffectsManager*, effectId : LibC::GUID, state : Win32cr::Media::Audio::AUDIO_EFFECT_STATE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_audio_effect_state.call(this, effectId, state)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioStreamVolumeVtbl,
+    query_interface : Proc(IAudioStreamVolume*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioStreamVolume*, UInt32),
+    release : Proc(IAudioStreamVolume*, UInt32),
+    get_channel_count : Proc(IAudioStreamVolume*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_channel_volume : Proc(IAudioStreamVolume*, UInt32, Float32, Win32cr::Foundation::HRESULT),
+    get_channel_volume : Proc(IAudioStreamVolume*, UInt32, Float32*, Win32cr::Foundation::HRESULT),
+    set_all_volumes : Proc(IAudioStreamVolume*, UInt32, Float32*, Win32cr::Foundation::HRESULT),
+    get_all_volumes : Proc(IAudioStreamVolume*, UInt32, Float32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("93014887-242d-4068-8a15-cf5e93b90fe3")]
+  record IAudioStreamVolume, lpVtbl : IAudioStreamVolumeVtbl* do
+    GUID = LibC::GUID.new(0x93014887_u32, 0x242d_u16, 0x4068_u16, StaticArray[0x8a_u8, 0x15_u8, 0xcf_u8, 0x5e_u8, 0x93_u8, 0xb9_u8, 0xf_u8, 0xe3_u8])
+    def query_interface(this : IAudioStreamVolume*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioStreamVolume*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioStreamVolume*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_channel_count(this : IAudioStreamVolume*, pdwCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_count.call(this, pdwCount)
+    end
+    def set_channel_volume(this : IAudioStreamVolume*, dwIndex : UInt32, fLevel : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_channel_volume.call(this, dwIndex, fLevel)
+    end
+    def get_channel_volume(this : IAudioStreamVolume*, dwIndex : UInt32, pfLevel : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_volume.call(this, dwIndex, pfLevel)
+    end
+    def set_all_volumes(this : IAudioStreamVolume*, dwCount : UInt32, pfVolumes : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_all_volumes.call(this, dwCount, pfVolumes)
+    end
+    def get_all_volumes(this : IAudioStreamVolume*, dwCount : UInt32, pfVolumes : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_all_volumes.call(this, dwCount, pfVolumes)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioAmbisonicsControlVtbl,
+    query_interface : Proc(IAudioAmbisonicsControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioAmbisonicsControl*, UInt32),
+    release : Proc(IAudioAmbisonicsControl*, UInt32),
+    set_data : Proc(IAudioAmbisonicsControl*, Win32cr::Media::Audio::AMBISONICS_PARAMS*, UInt32, Win32cr::Foundation::HRESULT),
+    set_head_tracking : Proc(IAudioAmbisonicsControl*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_head_tracking : Proc(IAudioAmbisonicsControl*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    set_rotation : Proc(IAudioAmbisonicsControl*, Float32, Float32, Float32, Float32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("28724c91-df35-4856-9f76-d6a26413f3df")]
+  record IAudioAmbisonicsControl, lpVtbl : IAudioAmbisonicsControlVtbl* do
+    GUID = LibC::GUID.new(0x28724c91_u32, 0xdf35_u16, 0x4856_u16, StaticArray[0x9f_u8, 0x76_u8, 0xd6_u8, 0xa2_u8, 0x64_u8, 0x13_u8, 0xf3_u8, 0xdf_u8])
+    def query_interface(this : IAudioAmbisonicsControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioAmbisonicsControl*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioAmbisonicsControl*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_data(this : IAudioAmbisonicsControl*, pAmbisonicsParams : Win32cr::Media::Audio::AMBISONICS_PARAMS*, cbAmbisonicsParams : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_data.call(this, pAmbisonicsParams, cbAmbisonicsParams)
+    end
+    def set_head_tracking(this : IAudioAmbisonicsControl*, bEnableHeadTracking : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_head_tracking.call(this, bEnableHeadTracking)
+    end
+    def get_head_tracking(this : IAudioAmbisonicsControl*, pbEnableHeadTracking : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_head_tracking.call(this, pbEnableHeadTracking)
+    end
+    def set_rotation(this : IAudioAmbisonicsControl*, x : Float32, y : Float32, z : Float32, w : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_rotation.call(this, x, y, z, w)
+    end
+
+  end
+
+  @[Extern]
+  record IChannelAudioVolumeVtbl,
+    query_interface : Proc(IChannelAudioVolume*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IChannelAudioVolume*, UInt32),
+    release : Proc(IChannelAudioVolume*, UInt32),
+    get_channel_count : Proc(IChannelAudioVolume*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_channel_volume : Proc(IChannelAudioVolume*, UInt32, Float32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_channel_volume : Proc(IChannelAudioVolume*, UInt32, Float32*, Win32cr::Foundation::HRESULT),
+    set_all_volumes : Proc(IChannelAudioVolume*, UInt32, Float32*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_all_volumes : Proc(IChannelAudioVolume*, UInt32, Float32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("1c158861-b533-4b30-b1cf-e853e51c59b8")]
+  record IChannelAudioVolume, lpVtbl : IChannelAudioVolumeVtbl* do
+    GUID = LibC::GUID.new(0x1c158861_u32, 0xb533_u16, 0x4b30_u16, StaticArray[0xb1_u8, 0xcf_u8, 0xe8_u8, 0x53_u8, 0xe5_u8, 0x1c_u8, 0x59_u8, 0xb8_u8])
+    def query_interface(this : IChannelAudioVolume*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IChannelAudioVolume*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IChannelAudioVolume*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_channel_count(this : IChannelAudioVolume*, pdwCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_count.call(this, pdwCount)
+    end
+    def set_channel_volume(this : IChannelAudioVolume*, dwIndex : UInt32, fLevel : Float32, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_channel_volume.call(this, dwIndex, fLevel, event_context)
+    end
+    def get_channel_volume(this : IChannelAudioVolume*, dwIndex : UInt32, pfLevel : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_volume.call(this, dwIndex, pfLevel)
+    end
+    def set_all_volumes(this : IChannelAudioVolume*, dwCount : UInt32, pfVolumes : Float32*, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_all_volumes.call(this, dwCount, pfVolumes, event_context)
+    end
+    def get_all_volumes(this : IChannelAudioVolume*, dwCount : UInt32, pfVolumes : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_all_volumes.call(this, dwCount, pfVolumes)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioFormatEnumeratorVtbl,
+    query_interface : Proc(IAudioFormatEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioFormatEnumerator*, UInt32),
+    release : Proc(IAudioFormatEnumerator*, UInt32),
+    get_count : Proc(IAudioFormatEnumerator*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_format : Proc(IAudioFormatEnumerator*, UInt32, Win32cr::Media::Audio::WAVEFORMATEX**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("dcdaa858-895a-4a22-a5eb-67bda506096d")]
+  record IAudioFormatEnumerator, lpVtbl : IAudioFormatEnumeratorVtbl* do
+    GUID = LibC::GUID.new(0xdcdaa858_u32, 0x895a_u16, 0x4a22_u16, StaticArray[0xa5_u8, 0xeb_u8, 0x67_u8, 0xbd_u8, 0xa5_u8, 0x6_u8, 0x9_u8, 0x6d_u8])
+    def query_interface(this : IAudioFormatEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioFormatEnumerator*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioFormatEnumerator*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_count(this : IAudioFormatEnumerator*, count : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_count.call(this, count)
+    end
+    def get_format(this : IAudioFormatEnumerator*, index : UInt32, format : Win32cr::Media::Audio::WAVEFORMATEX**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_format.call(this, index, format)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioObjectBaseVtbl,
+    query_interface : Proc(ISpatialAudioObjectBase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioObjectBase*, UInt32),
+    release : Proc(ISpatialAudioObjectBase*, UInt32),
+    get_buffer : Proc(ISpatialAudioObjectBase*, UInt8**, UInt32*, Win32cr::Foundation::HRESULT),
+    set_end_of_stream : Proc(ISpatialAudioObjectBase*, UInt32, Win32cr::Foundation::HRESULT),
+    is_active : Proc(ISpatialAudioObjectBase*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_audio_object_type : Proc(ISpatialAudioObjectBase*, Win32cr::Media::Audio::AudioObjectType*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("cce0b8f2-8d4d-4efb-a8cf-3d6ecf1c30e0")]
+  record ISpatialAudioObjectBase, lpVtbl : ISpatialAudioObjectBaseVtbl* do
+    GUID = LibC::GUID.new(0xcce0b8f2_u32, 0x8d4d_u16, 0x4efb_u16, StaticArray[0xa8_u8, 0xcf_u8, 0x3d_u8, 0x6e_u8, 0xcf_u8, 0x1c_u8, 0x30_u8, 0xe0_u8])
+    def query_interface(this : ISpatialAudioObjectBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioObjectBase*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioObjectBase*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_buffer(this : ISpatialAudioObjectBase*, buffer : UInt8**, bufferLength : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer.call(this, buffer, bufferLength)
+    end
+    def set_end_of_stream(this : ISpatialAudioObjectBase*, frameCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_end_of_stream.call(this, frameCount)
+    end
+    def is_active(this : ISpatialAudioObjectBase*, isActive : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_active.call(this, isActive)
+    end
+    def get_audio_object_type(this : ISpatialAudioObjectBase*, audioObjectType : Win32cr::Media::Audio::AudioObjectType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio_object_type.call(this, audioObjectType)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioObjectVtbl,
+    query_interface : Proc(ISpatialAudioObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioObject*, UInt32),
+    release : Proc(ISpatialAudioObject*, UInt32),
+    get_buffer : Proc(ISpatialAudioObject*, UInt8**, UInt32*, Win32cr::Foundation::HRESULT),
+    set_end_of_stream : Proc(ISpatialAudioObject*, UInt32, Win32cr::Foundation::HRESULT),
+    is_active : Proc(ISpatialAudioObject*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_audio_object_type : Proc(ISpatialAudioObject*, Win32cr::Media::Audio::AudioObjectType*, Win32cr::Foundation::HRESULT),
+    set_position : Proc(ISpatialAudioObject*, Float32, Float32, Float32, Win32cr::Foundation::HRESULT),
+    set_volume : Proc(ISpatialAudioObject*, Float32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("dde28967-521b-46e5-8f00-bd6f2bc8ab1d")]
+  record ISpatialAudioObject, lpVtbl : ISpatialAudioObjectVtbl* do
+    GUID = LibC::GUID.new(0xdde28967_u32, 0x521b_u16, 0x46e5_u16, StaticArray[0x8f_u8, 0x0_u8, 0xbd_u8, 0x6f_u8, 0x2b_u8, 0xc8_u8, 0xab_u8, 0x1d_u8])
+    def query_interface(this : ISpatialAudioObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioObject*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioObject*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_buffer(this : ISpatialAudioObject*, buffer : UInt8**, bufferLength : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer.call(this, buffer, bufferLength)
+    end
+    def set_end_of_stream(this : ISpatialAudioObject*, frameCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_end_of_stream.call(this, frameCount)
+    end
+    def is_active(this : ISpatialAudioObject*, isActive : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_active.call(this, isActive)
+    end
+    def get_audio_object_type(this : ISpatialAudioObject*, audioObjectType : Win32cr::Media::Audio::AudioObjectType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio_object_type.call(this, audioObjectType)
+    end
+    def set_position(this : ISpatialAudioObject*, x : Float32, y : Float32, z : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_position.call(this, x, y, z)
+    end
+    def set_volume(this : ISpatialAudioObject*, volume : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_volume.call(this, volume)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioObjectRenderStreamBaseVtbl,
+    query_interface : Proc(ISpatialAudioObjectRenderStreamBase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioObjectRenderStreamBase*, UInt32),
+    release : Proc(ISpatialAudioObjectRenderStreamBase*, UInt32),
+    get_available_dynamic_object_count : Proc(ISpatialAudioObjectRenderStreamBase*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_service : Proc(ISpatialAudioObjectRenderStreamBase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    start : Proc(ISpatialAudioObjectRenderStreamBase*, Win32cr::Foundation::HRESULT),
+    stop : Proc(ISpatialAudioObjectRenderStreamBase*, Win32cr::Foundation::HRESULT),
+    reset : Proc(ISpatialAudioObjectRenderStreamBase*, Win32cr::Foundation::HRESULT),
+    begin_updating_audio_objects : Proc(ISpatialAudioObjectRenderStreamBase*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    end_updating_audio_objects : Proc(ISpatialAudioObjectRenderStreamBase*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("feaaf403-c1d8-450d-aa05-e0ccee7502a8")]
+  record ISpatialAudioObjectRenderStreamBase, lpVtbl : ISpatialAudioObjectRenderStreamBaseVtbl* do
+    GUID = LibC::GUID.new(0xfeaaf403_u32, 0xc1d8_u16, 0x450d_u16, StaticArray[0xaa_u8, 0x5_u8, 0xe0_u8, 0xcc_u8, 0xee_u8, 0x75_u8, 0x2_u8, 0xa8_u8])
+    def query_interface(this : ISpatialAudioObjectRenderStreamBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioObjectRenderStreamBase*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioObjectRenderStreamBase*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_available_dynamic_object_count(this : ISpatialAudioObjectRenderStreamBase*, value : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_available_dynamic_object_count.call(this, value)
+    end
+    def get_service(this : ISpatialAudioObjectRenderStreamBase*, riid : LibC::GUID*, service : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_service.call(this, riid, service)
+    end
+    def start(this : ISpatialAudioObjectRenderStreamBase*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.start.call(this)
+    end
+    def stop(this : ISpatialAudioObjectRenderStreamBase*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stop.call(this)
+    end
+    def reset(this : ISpatialAudioObjectRenderStreamBase*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def begin_updating_audio_objects(this : ISpatialAudioObjectRenderStreamBase*, availableDynamicObjectCount : UInt32*, frameCountPerBuffer : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.begin_updating_audio_objects.call(this, availableDynamicObjectCount, frameCountPerBuffer)
+    end
+    def end_updating_audio_objects(this : ISpatialAudioObjectRenderStreamBase*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.end_updating_audio_objects.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioObjectRenderStreamVtbl,
+    query_interface : Proc(ISpatialAudioObjectRenderStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioObjectRenderStream*, UInt32),
+    release : Proc(ISpatialAudioObjectRenderStream*, UInt32),
+    get_available_dynamic_object_count : Proc(ISpatialAudioObjectRenderStream*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_service : Proc(ISpatialAudioObjectRenderStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    start : Proc(ISpatialAudioObjectRenderStream*, Win32cr::Foundation::HRESULT),
+    stop : Proc(ISpatialAudioObjectRenderStream*, Win32cr::Foundation::HRESULT),
+    reset : Proc(ISpatialAudioObjectRenderStream*, Win32cr::Foundation::HRESULT),
+    begin_updating_audio_objects : Proc(ISpatialAudioObjectRenderStream*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    end_updating_audio_objects : Proc(ISpatialAudioObjectRenderStream*, Win32cr::Foundation::HRESULT),
+    activate_spatial_audio_object : Proc(ISpatialAudioObjectRenderStream*, Win32cr::Media::Audio::AudioObjectType, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("bab5f473-b423-477b-85f5-b5a332a04153")]
+  record ISpatialAudioObjectRenderStream, lpVtbl : ISpatialAudioObjectRenderStreamVtbl* do
+    GUID = LibC::GUID.new(0xbab5f473_u32, 0xb423_u16, 0x477b_u16, StaticArray[0x85_u8, 0xf5_u8, 0xb5_u8, 0xa3_u8, 0x32_u8, 0xa0_u8, 0x41_u8, 0x53_u8])
+    def query_interface(this : ISpatialAudioObjectRenderStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioObjectRenderStream*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioObjectRenderStream*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_available_dynamic_object_count(this : ISpatialAudioObjectRenderStream*, value : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_available_dynamic_object_count.call(this, value)
+    end
+    def get_service(this : ISpatialAudioObjectRenderStream*, riid : LibC::GUID*, service : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_service.call(this, riid, service)
+    end
+    def start(this : ISpatialAudioObjectRenderStream*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.start.call(this)
+    end
+    def stop(this : ISpatialAudioObjectRenderStream*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stop.call(this)
+    end
+    def reset(this : ISpatialAudioObjectRenderStream*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def begin_updating_audio_objects(this : ISpatialAudioObjectRenderStream*, availableDynamicObjectCount : UInt32*, frameCountPerBuffer : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.begin_updating_audio_objects.call(this, availableDynamicObjectCount, frameCountPerBuffer)
+    end
+    def end_updating_audio_objects(this : ISpatialAudioObjectRenderStream*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.end_updating_audio_objects.call(this)
+    end
+    def activate_spatial_audio_object(this : ISpatialAudioObjectRenderStream*, type__ : Win32cr::Media::Audio::AudioObjectType, audioObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate_spatial_audio_object.call(this, type__, audioObject)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioObjectRenderStreamNotifyVtbl,
+    query_interface : Proc(ISpatialAudioObjectRenderStreamNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioObjectRenderStreamNotify*, UInt32),
+    release : Proc(ISpatialAudioObjectRenderStreamNotify*, UInt32),
+    on_available_dynamic_object_count_change : Proc(ISpatialAudioObjectRenderStreamNotify*, Void*, Int64, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("dddf83e6-68d7-4c70-883f-a1836afb4a50")]
+  record ISpatialAudioObjectRenderStreamNotify, lpVtbl : ISpatialAudioObjectRenderStreamNotifyVtbl* do
+    GUID = LibC::GUID.new(0xdddf83e6_u32, 0x68d7_u16, 0x4c70_u16, StaticArray[0x88_u8, 0x3f_u8, 0xa1_u8, 0x83_u8, 0x6a_u8, 0xfb_u8, 0x4a_u8, 0x50_u8])
+    def query_interface(this : ISpatialAudioObjectRenderStreamNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioObjectRenderStreamNotify*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioObjectRenderStreamNotify*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_available_dynamic_object_count_change(this : ISpatialAudioObjectRenderStreamNotify*, sender : Void*, hnsComplianceDeadlineTime : Int64, availableDynamicObjectCountChange : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_available_dynamic_object_count_change.call(this, sender, hnsComplianceDeadlineTime, availableDynamicObjectCountChange)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioClientVtbl,
+    query_interface : Proc(ISpatialAudioClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioClient*, UInt32),
+    release : Proc(ISpatialAudioClient*, UInt32),
+    get_static_object_position : Proc(ISpatialAudioClient*, Win32cr::Media::Audio::AudioObjectType, Float32*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
+    get_native_static_object_type_mask : Proc(ISpatialAudioClient*, Win32cr::Media::Audio::AudioObjectType*, Win32cr::Foundation::HRESULT),
+    get_max_dynamic_object_count : Proc(ISpatialAudioClient*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_supported_audio_object_format_enumerator : Proc(ISpatialAudioClient*, Void**, Win32cr::Foundation::HRESULT),
+    get_max_frame_count : Proc(ISpatialAudioClient*, Win32cr::Media::Audio::WAVEFORMATEX*, UInt32*, Win32cr::Foundation::HRESULT),
+    is_audio_object_format_supported : Proc(ISpatialAudioClient*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
+    is_spatial_audio_stream_available : Proc(ISpatialAudioClient*, LibC::GUID*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    activate_spatial_audio_stream : Proc(ISpatialAudioClient*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("bbf8e066-aaaa-49be-9a4d-fd2a858ea27f")]
+  record ISpatialAudioClient, lpVtbl : ISpatialAudioClientVtbl* do
+    GUID = LibC::GUID.new(0xbbf8e066_u32, 0xaaaa_u16, 0x49be_u16, StaticArray[0x9a_u8, 0x4d_u8, 0xfd_u8, 0x2a_u8, 0x85_u8, 0x8e_u8, 0xa2_u8, 0x7f_u8])
+    def query_interface(this : ISpatialAudioClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioClient*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioClient*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_static_object_position(this : ISpatialAudioClient*, type__ : Win32cr::Media::Audio::AudioObjectType, x : Float32*, y : Float32*, z : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_static_object_position.call(this, type__, x, y, z)
+    end
+    def get_native_static_object_type_mask(this : ISpatialAudioClient*, mask : Win32cr::Media::Audio::AudioObjectType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_native_static_object_type_mask.call(this, mask)
+    end
+    def get_max_dynamic_object_count(this : ISpatialAudioClient*, value : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_max_dynamic_object_count.call(this, value)
+    end
+    def get_supported_audio_object_format_enumerator(this : ISpatialAudioClient*, enumerator : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_supported_audio_object_format_enumerator.call(this, enumerator)
+    end
+    def get_max_frame_count(this : ISpatialAudioClient*, objectFormat : Win32cr::Media::Audio::WAVEFORMATEX*, frameCountPerBuffer : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_max_frame_count.call(this, objectFormat, frameCountPerBuffer)
+    end
+    def is_audio_object_format_supported(this : ISpatialAudioClient*, objectFormat : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_audio_object_format_supported.call(this, objectFormat)
+    end
+    def is_spatial_audio_stream_available(this : ISpatialAudioClient*, streamUuid : LibC::GUID*, auxiliaryInfo : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_spatial_audio_stream_available.call(this, streamUuid, auxiliaryInfo)
+    end
+    def activate_spatial_audio_stream(this : ISpatialAudioClient*, activationParams : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, riid : LibC::GUID*, stream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate_spatial_audio_stream.call(this, activationParams, riid, stream)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioClient2Vtbl,
+    query_interface : Proc(ISpatialAudioClient2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioClient2*, UInt32),
+    release : Proc(ISpatialAudioClient2*, UInt32),
+    get_static_object_position : Proc(ISpatialAudioClient2*, Win32cr::Media::Audio::AudioObjectType, Float32*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
+    get_native_static_object_type_mask : Proc(ISpatialAudioClient2*, Win32cr::Media::Audio::AudioObjectType*, Win32cr::Foundation::HRESULT),
+    get_max_dynamic_object_count : Proc(ISpatialAudioClient2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_supported_audio_object_format_enumerator : Proc(ISpatialAudioClient2*, Void**, Win32cr::Foundation::HRESULT),
+    get_max_frame_count : Proc(ISpatialAudioClient2*, Win32cr::Media::Audio::WAVEFORMATEX*, UInt32*, Win32cr::Foundation::HRESULT),
+    is_audio_object_format_supported : Proc(ISpatialAudioClient2*, Win32cr::Media::Audio::WAVEFORMATEX*, Win32cr::Foundation::HRESULT),
+    is_spatial_audio_stream_available : Proc(ISpatialAudioClient2*, LibC::GUID*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    activate_spatial_audio_stream : Proc(ISpatialAudioClient2*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    is_offload_capable : Proc(ISpatialAudioClient2*, Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_max_frame_count_for_category : Proc(ISpatialAudioClient2*, Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, Win32cr::Foundation::BOOL, Win32cr::Media::Audio::WAVEFORMATEX*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("caabe452-a66a-4bee-a93e-e320463f6a53")]
+  record ISpatialAudioClient2, lpVtbl : ISpatialAudioClient2Vtbl* do
+    GUID = LibC::GUID.new(0xcaabe452_u32, 0xa66a_u16, 0x4bee_u16, StaticArray[0xa9_u8, 0x3e_u8, 0xe3_u8, 0x20_u8, 0x46_u8, 0x3f_u8, 0x6a_u8, 0x53_u8])
+    def query_interface(this : ISpatialAudioClient2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioClient2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioClient2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_static_object_position(this : ISpatialAudioClient2*, type__ : Win32cr::Media::Audio::AudioObjectType, x : Float32*, y : Float32*, z : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_static_object_position.call(this, type__, x, y, z)
+    end
+    def get_native_static_object_type_mask(this : ISpatialAudioClient2*, mask : Win32cr::Media::Audio::AudioObjectType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_native_static_object_type_mask.call(this, mask)
+    end
+    def get_max_dynamic_object_count(this : ISpatialAudioClient2*, value : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_max_dynamic_object_count.call(this, value)
+    end
+    def get_supported_audio_object_format_enumerator(this : ISpatialAudioClient2*, enumerator : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_supported_audio_object_format_enumerator.call(this, enumerator)
+    end
+    def get_max_frame_count(this : ISpatialAudioClient2*, objectFormat : Win32cr::Media::Audio::WAVEFORMATEX*, frameCountPerBuffer : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_max_frame_count.call(this, objectFormat, frameCountPerBuffer)
+    end
+    def is_audio_object_format_supported(this : ISpatialAudioClient2*, objectFormat : Win32cr::Media::Audio::WAVEFORMATEX*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_audio_object_format_supported.call(this, objectFormat)
+    end
+    def is_spatial_audio_stream_available(this : ISpatialAudioClient2*, streamUuid : LibC::GUID*, auxiliaryInfo : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_spatial_audio_stream_available.call(this, streamUuid, auxiliaryInfo)
+    end
+    def activate_spatial_audio_stream(this : ISpatialAudioClient2*, activationParams : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, riid : LibC::GUID*, stream : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate_spatial_audio_stream.call(this, activationParams, riid, stream)
+    end
+    def is_offload_capable(this : ISpatialAudioClient2*, category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, isOffloadCapable : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_offload_capable.call(this, category, isOffloadCapable)
+    end
+    def get_max_frame_count_for_category(this : ISpatialAudioClient2*, category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, offloadEnabled : Win32cr::Foundation::BOOL, objectFormat : Win32cr::Media::Audio::WAVEFORMATEX*, frameCountPerBuffer : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_max_frame_count_for_category.call(this, category, offloadEnabled, objectFormat, frameCountPerBuffer)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioObjectForHrtfVtbl,
+    query_interface : Proc(ISpatialAudioObjectForHrtf*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioObjectForHrtf*, UInt32),
+    release : Proc(ISpatialAudioObjectForHrtf*, UInt32),
+    get_buffer : Proc(ISpatialAudioObjectForHrtf*, UInt8**, UInt32*, Win32cr::Foundation::HRESULT),
+    set_end_of_stream : Proc(ISpatialAudioObjectForHrtf*, UInt32, Win32cr::Foundation::HRESULT),
+    is_active : Proc(ISpatialAudioObjectForHrtf*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_audio_object_type : Proc(ISpatialAudioObjectForHrtf*, Win32cr::Media::Audio::AudioObjectType*, Win32cr::Foundation::HRESULT),
+    set_position : Proc(ISpatialAudioObjectForHrtf*, Float32, Float32, Float32, Win32cr::Foundation::HRESULT),
+    set_gain : Proc(ISpatialAudioObjectForHrtf*, Float32, Win32cr::Foundation::HRESULT),
+    set_orientation : Proc(ISpatialAudioObjectForHrtf*, Float32**, Win32cr::Foundation::HRESULT),
+    set_environment : Proc(ISpatialAudioObjectForHrtf*, Win32cr::Media::Audio::SpatialAudioHrtfEnvironmentType, Win32cr::Foundation::HRESULT),
+    set_distance_decay : Proc(ISpatialAudioObjectForHrtf*, Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecay*, Win32cr::Foundation::HRESULT),
+    set_directivity : Proc(ISpatialAudioObjectForHrtf*, Win32cr::Media::Audio::SpatialAudioHrtfDirectivityUnion*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("d7436ade-1978-4e14-aba0-555bd8eb83b4")]
+  record ISpatialAudioObjectForHrtf, lpVtbl : ISpatialAudioObjectForHrtfVtbl* do
+    GUID = LibC::GUID.new(0xd7436ade_u32, 0x1978_u16, 0x4e14_u16, StaticArray[0xab_u8, 0xa0_u8, 0x55_u8, 0x5b_u8, 0xd8_u8, 0xeb_u8, 0x83_u8, 0xb4_u8])
+    def query_interface(this : ISpatialAudioObjectForHrtf*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioObjectForHrtf*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioObjectForHrtf*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_buffer(this : ISpatialAudioObjectForHrtf*, buffer : UInt8**, bufferLength : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer.call(this, buffer, bufferLength)
+    end
+    def set_end_of_stream(this : ISpatialAudioObjectForHrtf*, frameCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_end_of_stream.call(this, frameCount)
+    end
+    def is_active(this : ISpatialAudioObjectForHrtf*, isActive : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_active.call(this, isActive)
+    end
+    def get_audio_object_type(this : ISpatialAudioObjectForHrtf*, audioObjectType : Win32cr::Media::Audio::AudioObjectType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio_object_type.call(this, audioObjectType)
+    end
+    def set_position(this : ISpatialAudioObjectForHrtf*, x : Float32, y : Float32, z : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_position.call(this, x, y, z)
+    end
+    def set_gain(this : ISpatialAudioObjectForHrtf*, gain : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_gain.call(this, gain)
+    end
+    def set_orientation(this : ISpatialAudioObjectForHrtf*, orientation : Float32**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_orientation.call(this, orientation)
+    end
+    def set_environment(this : ISpatialAudioObjectForHrtf*, environment : Win32cr::Media::Audio::SpatialAudioHrtfEnvironmentType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_environment.call(this, environment)
+    end
+    def set_distance_decay(this : ISpatialAudioObjectForHrtf*, distanceDecay : Win32cr::Media::Audio::SpatialAudioHrtfDistanceDecay*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_distance_decay.call(this, distanceDecay)
+    end
+    def set_directivity(this : ISpatialAudioObjectForHrtf*, directivity : Win32cr::Media::Audio::SpatialAudioHrtfDirectivityUnion*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_directivity.call(this, directivity)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioObjectRenderStreamForHrtfVtbl,
+    query_interface : Proc(ISpatialAudioObjectRenderStreamForHrtf*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioObjectRenderStreamForHrtf*, UInt32),
+    release : Proc(ISpatialAudioObjectRenderStreamForHrtf*, UInt32),
+    get_available_dynamic_object_count : Proc(ISpatialAudioObjectRenderStreamForHrtf*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_service : Proc(ISpatialAudioObjectRenderStreamForHrtf*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    start : Proc(ISpatialAudioObjectRenderStreamForHrtf*, Win32cr::Foundation::HRESULT),
+    stop : Proc(ISpatialAudioObjectRenderStreamForHrtf*, Win32cr::Foundation::HRESULT),
+    reset : Proc(ISpatialAudioObjectRenderStreamForHrtf*, Win32cr::Foundation::HRESULT),
+    begin_updating_audio_objects : Proc(ISpatialAudioObjectRenderStreamForHrtf*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    end_updating_audio_objects : Proc(ISpatialAudioObjectRenderStreamForHrtf*, Win32cr::Foundation::HRESULT),
+    activate_spatial_audio_object_for_hrtf : Proc(ISpatialAudioObjectRenderStreamForHrtf*, Win32cr::Media::Audio::AudioObjectType, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("e08deef9-5363-406e-9fdc-080ee247bbe0")]
+  record ISpatialAudioObjectRenderStreamForHrtf, lpVtbl : ISpatialAudioObjectRenderStreamForHrtfVtbl* do
+    GUID = LibC::GUID.new(0xe08deef9_u32, 0x5363_u16, 0x406e_u16, StaticArray[0x9f_u8, 0xdc_u8, 0x8_u8, 0xe_u8, 0xe2_u8, 0x47_u8, 0xbb_u8, 0xe0_u8])
+    def query_interface(this : ISpatialAudioObjectRenderStreamForHrtf*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioObjectRenderStreamForHrtf*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioObjectRenderStreamForHrtf*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_available_dynamic_object_count(this : ISpatialAudioObjectRenderStreamForHrtf*, value : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_available_dynamic_object_count.call(this, value)
+    end
+    def get_service(this : ISpatialAudioObjectRenderStreamForHrtf*, riid : LibC::GUID*, service : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_service.call(this, riid, service)
+    end
+    def start(this : ISpatialAudioObjectRenderStreamForHrtf*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.start.call(this)
+    end
+    def stop(this : ISpatialAudioObjectRenderStreamForHrtf*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stop.call(this)
+    end
+    def reset(this : ISpatialAudioObjectRenderStreamForHrtf*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def begin_updating_audio_objects(this : ISpatialAudioObjectRenderStreamForHrtf*, availableDynamicObjectCount : UInt32*, frameCountPerBuffer : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.begin_updating_audio_objects.call(this, availableDynamicObjectCount, frameCountPerBuffer)
+    end
+    def end_updating_audio_objects(this : ISpatialAudioObjectRenderStreamForHrtf*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.end_updating_audio_objects.call(this)
+    end
+    def activate_spatial_audio_object_for_hrtf(this : ISpatialAudioObjectRenderStreamForHrtf*, type__ : Win32cr::Media::Audio::AudioObjectType, audioObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate_spatial_audio_object_for_hrtf.call(this, type__, audioObject)
+    end
+
+  end
+
+  @[Extern]
+  record IMMNotificationClientVtbl,
+    query_interface : Proc(IMMNotificationClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMMNotificationClient*, UInt32),
+    release : Proc(IMMNotificationClient*, UInt32),
+    on_device_state_changed : Proc(IMMNotificationClient*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    on_device_added : Proc(IMMNotificationClient*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    on_device_removed : Proc(IMMNotificationClient*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    on_default_device_changed : Proc(IMMNotificationClient*, Win32cr::Media::Audio::EDataFlow, Win32cr::Media::Audio::ERole, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    on_property_value_changed : Proc(IMMNotificationClient*, Win32cr::Foundation::PWSTR, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("7991eec9-7e89-4d85-8390-6c703cec60c0")]
+  record IMMNotificationClient, lpVtbl : IMMNotificationClientVtbl* do
+    GUID = LibC::GUID.new(0x7991eec9_u32, 0x7e89_u16, 0x4d85_u16, StaticArray[0x83_u8, 0x90_u8, 0x6c_u8, 0x70_u8, 0x3c_u8, 0xec_u8, 0x60_u8, 0xc0_u8])
+    def query_interface(this : IMMNotificationClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMMNotificationClient*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMMNotificationClient*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_device_state_changed(this : IMMNotificationClient*, pwstrDeviceId : Win32cr::Foundation::PWSTR, dwNewState : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_device_state_changed.call(this, pwstrDeviceId, dwNewState)
+    end
+    def on_device_added(this : IMMNotificationClient*, pwstrDeviceId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_device_added.call(this, pwstrDeviceId)
+    end
+    def on_device_removed(this : IMMNotificationClient*, pwstrDeviceId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_device_removed.call(this, pwstrDeviceId)
+    end
+    def on_default_device_changed(this : IMMNotificationClient*, flow : Win32cr::Media::Audio::EDataFlow, role : Win32cr::Media::Audio::ERole, pwstrDefaultDeviceId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_default_device_changed.call(this, flow, role, pwstrDefaultDeviceId)
+    end
+    def on_property_value_changed(this : IMMNotificationClient*, pwstrDeviceId : Win32cr::Foundation::PWSTR, key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_property_value_changed.call(this, pwstrDeviceId, key)
+    end
+
+  end
+
+  @[Extern]
+  record IMMDeviceVtbl,
+    query_interface : Proc(IMMDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMMDevice*, UInt32),
+    release : Proc(IMMDevice*, UInt32),
+    activate : Proc(IMMDevice*, LibC::GUID*, Win32cr::System::Com::CLSCTX, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    open_property_store : Proc(IMMDevice*, Win32cr::System::Com::StructuredStorage::STGM, Void**, Win32cr::Foundation::HRESULT),
+    get_id : Proc(IMMDevice*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_state : Proc(IMMDevice*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("d666063f-1587-4e43-81f1-b948e807363f")]
+  record IMMDevice, lpVtbl : IMMDeviceVtbl* do
+    GUID = LibC::GUID.new(0xd666063f_u32, 0x1587_u16, 0x4e43_u16, StaticArray[0x81_u8, 0xf1_u8, 0xb9_u8, 0x48_u8, 0xe8_u8, 0x7_u8, 0x36_u8, 0x3f_u8])
+    def query_interface(this : IMMDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMMDevice*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMMDevice*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def activate(this : IMMDevice*, iid : LibC::GUID*, dwClsCtx : Win32cr::System::Com::CLSCTX, pActivationParams : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ppInterface : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate.call(this, iid, dwClsCtx, pActivationParams, ppInterface)
+    end
+    def open_property_store(this : IMMDevice*, stgmAccess : Win32cr::System::Com::StructuredStorage::STGM, ppProperties : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_property_store.call(this, stgmAccess, ppProperties)
+    end
+    def get_id(this : IMMDevice*, ppstrId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_id.call(this, ppstrId)
+    end
+    def get_state(this : IMMDevice*, pdwState : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_state.call(this, pdwState)
+    end
+
+  end
+
+  @[Extern]
+  record IMMDeviceCollectionVtbl,
+    query_interface : Proc(IMMDeviceCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMMDeviceCollection*, UInt32),
+    release : Proc(IMMDeviceCollection*, UInt32),
+    get_count : Proc(IMMDeviceCollection*, UInt32*, Win32cr::Foundation::HRESULT),
+    item : Proc(IMMDeviceCollection*, UInt32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("0bd7a1be-7a1a-44db-8397-cc5392387b5e")]
+  record IMMDeviceCollection, lpVtbl : IMMDeviceCollectionVtbl* do
+    GUID = LibC::GUID.new(0xbd7a1be_u32, 0x7a1a_u16, 0x44db_u16, StaticArray[0x83_u8, 0x97_u8, 0xcc_u8, 0x53_u8, 0x92_u8, 0x38_u8, 0x7b_u8, 0x5e_u8])
+    def query_interface(this : IMMDeviceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMMDeviceCollection*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMMDeviceCollection*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_count(this : IMMDeviceCollection*, pcDevices : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_count.call(this, pcDevices)
+    end
+    def item(this : IMMDeviceCollection*, nDevice : UInt32, ppDevice : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.item.call(this, nDevice, ppDevice)
+    end
+
+  end
+
+  @[Extern]
+  record IMMEndpointVtbl,
+    query_interface : Proc(IMMEndpoint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMMEndpoint*, UInt32),
+    release : Proc(IMMEndpoint*, UInt32),
+    get_data_flow : Proc(IMMEndpoint*, Win32cr::Media::Audio::EDataFlow*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("1be09788-6894-4089-8586-9a2a6c265ac5")]
+  record IMMEndpoint, lpVtbl : IMMEndpointVtbl* do
+    GUID = LibC::GUID.new(0x1be09788_u32, 0x6894_u16, 0x4089_u16, StaticArray[0x85_u8, 0x86_u8, 0x9a_u8, 0x2a_u8, 0x6c_u8, 0x26_u8, 0x5a_u8, 0xc5_u8])
+    def query_interface(this : IMMEndpoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMMEndpoint*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMMEndpoint*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_data_flow(this : IMMEndpoint*, pDataFlow : Win32cr::Media::Audio::EDataFlow*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data_flow.call(this, pDataFlow)
+    end
+
+  end
+
+  @[Extern]
+  record IMMDeviceEnumeratorVtbl,
+    query_interface : Proc(IMMDeviceEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMMDeviceEnumerator*, UInt32),
+    release : Proc(IMMDeviceEnumerator*, UInt32),
+    enum_audio_endpoints : Proc(IMMDeviceEnumerator*, Win32cr::Media::Audio::EDataFlow, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_default_audio_endpoint : Proc(IMMDeviceEnumerator*, Win32cr::Media::Audio::EDataFlow, Win32cr::Media::Audio::ERole, Void**, Win32cr::Foundation::HRESULT),
+    get_device : Proc(IMMDeviceEnumerator*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
+    register_endpoint_notification_callback : Proc(IMMDeviceEnumerator*, Void*, Win32cr::Foundation::HRESULT),
+    unregister_endpoint_notification_callback : Proc(IMMDeviceEnumerator*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("a95664d2-9614-4f35-a746-de8db63617e6")]
+  record IMMDeviceEnumerator, lpVtbl : IMMDeviceEnumeratorVtbl* do
+    GUID = LibC::GUID.new(0xa95664d2_u32, 0x9614_u16, 0x4f35_u16, StaticArray[0xa7_u8, 0x46_u8, 0xde_u8, 0x8d_u8, 0xb6_u8, 0x36_u8, 0x17_u8, 0xe6_u8])
+    def query_interface(this : IMMDeviceEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMMDeviceEnumerator*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMMDeviceEnumerator*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def enum_audio_endpoints(this : IMMDeviceEnumerator*, dataFlow : Win32cr::Media::Audio::EDataFlow, dwStateMask : UInt32, ppDevices : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_audio_endpoints.call(this, dataFlow, dwStateMask, ppDevices)
+    end
+    def get_default_audio_endpoint(this : IMMDeviceEnumerator*, dataFlow : Win32cr::Media::Audio::EDataFlow, role : Win32cr::Media::Audio::ERole, ppEndpoint : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_default_audio_endpoint.call(this, dataFlow, role, ppEndpoint)
+    end
+    def get_device(this : IMMDeviceEnumerator*, pwstrId : Win32cr::Foundation::PWSTR, ppDevice : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device.call(this, pwstrId, ppDevice)
+    end
+    def register_endpoint_notification_callback(this : IMMDeviceEnumerator*, pClient : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_endpoint_notification_callback.call(this, pClient)
+    end
+    def unregister_endpoint_notification_callback(this : IMMDeviceEnumerator*, pClient : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_endpoint_notification_callback.call(this, pClient)
+    end
+
+  end
+
+  @[Extern]
+  record IMMDeviceActivatorVtbl,
+    query_interface : Proc(IMMDeviceActivator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMMDeviceActivator*, UInt32),
+    release : Proc(IMMDeviceActivator*, UInt32),
+    activate : Proc(IMMDeviceActivator*, LibC::GUID*, Void*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("3b0d0ea4-d0a9-4b0e-935b-09516746fac0")]
+  record IMMDeviceActivator, lpVtbl : IMMDeviceActivatorVtbl* do
+    GUID = LibC::GUID.new(0x3b0d0ea4_u32, 0xd0a9_u16, 0x4b0e_u16, StaticArray[0x93_u8, 0x5b_u8, 0x9_u8, 0x51_u8, 0x67_u8, 0x46_u8, 0xfa_u8, 0xc0_u8])
+    def query_interface(this : IMMDeviceActivator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMMDeviceActivator*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMMDeviceActivator*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def activate(this : IMMDeviceActivator*, iid : LibC::GUID*, pDevice : Void*, pActivationParams : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ppInterface : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate.call(this, iid, pDevice, pActivationParams, ppInterface)
+    end
+
+  end
+
+  @[Extern]
+  record IActivateAudioInterfaceCompletionHandlerVtbl,
+    query_interface : Proc(IActivateAudioInterfaceCompletionHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IActivateAudioInterfaceCompletionHandler*, UInt32),
+    release : Proc(IActivateAudioInterfaceCompletionHandler*, UInt32),
+    activate_completed : Proc(IActivateAudioInterfaceCompletionHandler*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("41d949ab-9862-444a-80f6-c261334da5eb")]
+  record IActivateAudioInterfaceCompletionHandler, lpVtbl : IActivateAudioInterfaceCompletionHandlerVtbl* do
+    GUID = LibC::GUID.new(0x41d949ab_u32, 0x9862_u16, 0x444a_u16, StaticArray[0x80_u8, 0xf6_u8, 0xc2_u8, 0x61_u8, 0x33_u8, 0x4d_u8, 0xa5_u8, 0xeb_u8])
+    def query_interface(this : IActivateAudioInterfaceCompletionHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IActivateAudioInterfaceCompletionHandler*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IActivateAudioInterfaceCompletionHandler*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def activate_completed(this : IActivateAudioInterfaceCompletionHandler*, activateOperation : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate_completed.call(this, activateOperation)
+    end
+
+  end
+
+  @[Extern]
+  record IActivateAudioInterfaceAsyncOperationVtbl,
+    query_interface : Proc(IActivateAudioInterfaceAsyncOperation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IActivateAudioInterfaceAsyncOperation*, UInt32),
+    release : Proc(IActivateAudioInterfaceAsyncOperation*, UInt32),
+    get_activate_result : Proc(IActivateAudioInterfaceAsyncOperation*, Win32cr::Foundation::HRESULT*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("72a22d78-cde4-431d-b8cc-843a71199b6d")]
+  record IActivateAudioInterfaceAsyncOperation, lpVtbl : IActivateAudioInterfaceAsyncOperationVtbl* do
+    GUID = LibC::GUID.new(0x72a22d78_u32, 0xcde4_u16, 0x431d_u16, StaticArray[0xb8_u8, 0xcc_u8, 0x84_u8, 0x3a_u8, 0x71_u8, 0x19_u8, 0x9b_u8, 0x6d_u8])
+    def query_interface(this : IActivateAudioInterfaceAsyncOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IActivateAudioInterfaceAsyncOperation*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IActivateAudioInterfaceAsyncOperation*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_activate_result(this : IActivateAudioInterfaceAsyncOperation*, activateResult : Win32cr::Foundation::HRESULT*, activatedInterface : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_activate_result.call(this, activateResult, activatedInterface)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioSystemEffectsPropertyChangeNotificationClientVtbl,
+    query_interface : Proc(IAudioSystemEffectsPropertyChangeNotificationClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioSystemEffectsPropertyChangeNotificationClient*, UInt32),
+    release : Proc(IAudioSystemEffectsPropertyChangeNotificationClient*, UInt32),
+    on_property_changed : Proc(IAudioSystemEffectsPropertyChangeNotificationClient*, Win32cr::Media::Audio::MIDL___MIDL_itf_mmdeviceapi_0000_0008_0002, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("20049d40-56d5-400e-a2ef-385599feed49")]
+  record IAudioSystemEffectsPropertyChangeNotificationClient, lpVtbl : IAudioSystemEffectsPropertyChangeNotificationClientVtbl* do
+    GUID = LibC::GUID.new(0x20049d40_u32, 0x56d5_u16, 0x400e_u16, StaticArray[0xa2_u8, 0xef_u8, 0x38_u8, 0x55_u8, 0x99_u8, 0xfe_u8, 0xed_u8, 0x49_u8])
+    def query_interface(this : IAudioSystemEffectsPropertyChangeNotificationClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioSystemEffectsPropertyChangeNotificationClient*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioSystemEffectsPropertyChangeNotificationClient*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_property_changed(this : IAudioSystemEffectsPropertyChangeNotificationClient*, type__ : Win32cr::Media::Audio::MIDL___MIDL_itf_mmdeviceapi_0000_0008_0002, key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_property_changed.call(this, type__, key)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioSystemEffectsPropertyStoreVtbl,
+    query_interface : Proc(IAudioSystemEffectsPropertyStore*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioSystemEffectsPropertyStore*, UInt32),
+    release : Proc(IAudioSystemEffectsPropertyStore*, UInt32),
+    open_default_property_store : Proc(IAudioSystemEffectsPropertyStore*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    open_user_property_store : Proc(IAudioSystemEffectsPropertyStore*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    open_volatile_property_store : Proc(IAudioSystemEffectsPropertyStore*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    reset_user_property_store : Proc(IAudioSystemEffectsPropertyStore*, Win32cr::Foundation::HRESULT),
+    reset_volatile_property_store : Proc(IAudioSystemEffectsPropertyStore*, Win32cr::Foundation::HRESULT),
+    register_property_change_notification : Proc(IAudioSystemEffectsPropertyStore*, Void*, Win32cr::Foundation::HRESULT),
+    unregister_property_change_notification : Proc(IAudioSystemEffectsPropertyStore*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("302ae7f9-d7e0-43e4-971b-1f8293613d2a")]
+  record IAudioSystemEffectsPropertyStore, lpVtbl : IAudioSystemEffectsPropertyStoreVtbl* do
+    GUID = LibC::GUID.new(0x302ae7f9_u32, 0xd7e0_u16, 0x43e4_u16, StaticArray[0x97_u8, 0x1b_u8, 0x1f_u8, 0x82_u8, 0x93_u8, 0x61_u8, 0x3d_u8, 0x2a_u8])
+    def query_interface(this : IAudioSystemEffectsPropertyStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioSystemEffectsPropertyStore*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioSystemEffectsPropertyStore*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def open_default_property_store(this : IAudioSystemEffectsPropertyStore*, stgmAccess : UInt32, propStore : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_default_property_store.call(this, stgmAccess, propStore)
+    end
+    def open_user_property_store(this : IAudioSystemEffectsPropertyStore*, stgmAccess : UInt32, propStore : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_user_property_store.call(this, stgmAccess, propStore)
+    end
+    def open_volatile_property_store(this : IAudioSystemEffectsPropertyStore*, stgmAccess : UInt32, propStore : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open_volatile_property_store.call(this, stgmAccess, propStore)
+    end
+    def reset_user_property_store(this : IAudioSystemEffectsPropertyStore*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset_user_property_store.call(this)
+    end
+    def reset_volatile_property_store(this : IAudioSystemEffectsPropertyStore*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset_volatile_property_store.call(this)
+    end
+    def register_property_change_notification(this : IAudioSystemEffectsPropertyStore*, callback : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_property_change_notification.call(this, callback)
+    end
+    def unregister_property_change_notification(this : IAudioSystemEffectsPropertyStore*, callback : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_property_change_notification.call(this, callback)
+    end
+
+  end
+
+  @[Extern]
+  record IPerChannelDbLevelVtbl,
+    query_interface : Proc(IPerChannelDbLevel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IPerChannelDbLevel*, UInt32),
+    release : Proc(IPerChannelDbLevel*, UInt32),
+    get_channel_count : Proc(IPerChannelDbLevel*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_level_range : Proc(IPerChannelDbLevel*, UInt32, Float32*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
+    get_level : Proc(IPerChannelDbLevel*, UInt32, Float32*, Win32cr::Foundation::HRESULT),
+    set_level : Proc(IPerChannelDbLevel*, UInt32, Float32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_level_uniform : Proc(IPerChannelDbLevel*, Float32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_level_all_channels : Proc(IPerChannelDbLevel*, Float32*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c2f8e001-f205-4bc9-99bc-c13b1e048ccb")]
+  record IPerChannelDbLevel, lpVtbl : IPerChannelDbLevelVtbl* do
+    GUID = LibC::GUID.new(0xc2f8e001_u32, 0xf205_u16, 0x4bc9_u16, StaticArray[0x99_u8, 0xbc_u8, 0xc1_u8, 0x3b_u8, 0x1e_u8, 0x4_u8, 0x8c_u8, 0xcb_u8])
+    def query_interface(this : IPerChannelDbLevel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IPerChannelDbLevel*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IPerChannelDbLevel*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_channel_count(this : IPerChannelDbLevel*, pcChannels : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_count.call(this, pcChannels)
+    end
+    def get_level_range(this : IPerChannelDbLevel*, nChannel : UInt32, pfMinLevelDB : Float32*, pfMaxLevelDB : Float32*, pfStepping : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_level_range.call(this, nChannel, pfMinLevelDB, pfMaxLevelDB, pfStepping)
+    end
+    def get_level(this : IPerChannelDbLevel*, nChannel : UInt32, pfLevelDB : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_level.call(this, nChannel, pfLevelDB)
+    end
+    def set_level(this : IPerChannelDbLevel*, nChannel : UInt32, fLevelDB : Float32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level.call(this, nChannel, fLevelDB, pguidEventContext)
+    end
+    def set_level_uniform(this : IPerChannelDbLevel*, fLevelDB : Float32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level_uniform.call(this, fLevelDB, pguidEventContext)
+    end
+    def set_level_all_channels(this : IPerChannelDbLevel*, aLevelsDB : Float32*, cChannels : UInt32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level_all_channels.call(this, aLevelsDB, cChannels, pguidEventContext)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioVolumeLevelVtbl,
+    query_interface : Proc(IAudioVolumeLevel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioVolumeLevel*, UInt32),
+    release : Proc(IAudioVolumeLevel*, UInt32),
+    get_channel_count : Proc(IAudioVolumeLevel*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_level_range : Proc(IAudioVolumeLevel*, UInt32, Float32*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
+    get_level : Proc(IAudioVolumeLevel*, UInt32, Float32*, Win32cr::Foundation::HRESULT),
+    set_level : Proc(IAudioVolumeLevel*, UInt32, Float32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_level_uniform : Proc(IAudioVolumeLevel*, Float32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_level_all_channels : Proc(IAudioVolumeLevel*, Float32*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("7fb7b48f-531d-44a2-bcb3-5ad5a134b3dc")]
+  record IAudioVolumeLevel, lpVtbl : IAudioVolumeLevelVtbl* do
+    GUID = LibC::GUID.new(0x7fb7b48f_u32, 0x531d_u16, 0x44a2_u16, StaticArray[0xbc_u8, 0xb3_u8, 0x5a_u8, 0xd5_u8, 0xa1_u8, 0x34_u8, 0xb3_u8, 0xdc_u8])
+    def query_interface(this : IAudioVolumeLevel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioVolumeLevel*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioVolumeLevel*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_channel_count(this : IAudioVolumeLevel*, pcChannels : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_count.call(this, pcChannels)
+    end
+    def get_level_range(this : IAudioVolumeLevel*, nChannel : UInt32, pfMinLevelDB : Float32*, pfMaxLevelDB : Float32*, pfStepping : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_level_range.call(this, nChannel, pfMinLevelDB, pfMaxLevelDB, pfStepping)
+    end
+    def get_level(this : IAudioVolumeLevel*, nChannel : UInt32, pfLevelDB : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_level.call(this, nChannel, pfLevelDB)
+    end
+    def set_level(this : IAudioVolumeLevel*, nChannel : UInt32, fLevelDB : Float32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level.call(this, nChannel, fLevelDB, pguidEventContext)
+    end
+    def set_level_uniform(this : IAudioVolumeLevel*, fLevelDB : Float32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level_uniform.call(this, fLevelDB, pguidEventContext)
+    end
+    def set_level_all_channels(this : IAudioVolumeLevel*, aLevelsDB : Float32*, cChannels : UInt32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level_all_channels.call(this, aLevelsDB, cChannels, pguidEventContext)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioChannelConfigVtbl,
+    query_interface : Proc(IAudioChannelConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioChannelConfig*, UInt32),
+    release : Proc(IAudioChannelConfig*, UInt32),
+    set_channel_config : Proc(IAudioChannelConfig*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_channel_config : Proc(IAudioChannelConfig*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("bb11c46f-ec28-493c-b88a-5db88062ce98")]
+  record IAudioChannelConfig, lpVtbl : IAudioChannelConfigVtbl* do
+    GUID = LibC::GUID.new(0xbb11c46f_u32, 0xec28_u16, 0x493c_u16, StaticArray[0xb8_u8, 0x8a_u8, 0x5d_u8, 0xb8_u8, 0x80_u8, 0x62_u8, 0xce_u8, 0x98_u8])
+    def query_interface(this : IAudioChannelConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioChannelConfig*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioChannelConfig*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_channel_config(this : IAudioChannelConfig*, dwConfig : UInt32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_channel_config.call(this, dwConfig, pguidEventContext)
+    end
+    def get_channel_config(this : IAudioChannelConfig*, pdwConfig : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_config.call(this, pdwConfig)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioLoudnessVtbl,
+    query_interface : Proc(IAudioLoudness*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioLoudness*, UInt32),
+    release : Proc(IAudioLoudness*, UInt32),
+    get_enabled : Proc(IAudioLoudness*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    set_enabled : Proc(IAudioLoudness*, Win32cr::Foundation::BOOL, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("7d8b1437-dd53-4350-9c1b-1ee2890bd938")]
+  record IAudioLoudness, lpVtbl : IAudioLoudnessVtbl* do
+    GUID = LibC::GUID.new(0x7d8b1437_u32, 0xdd53_u16, 0x4350_u16, StaticArray[0x9c_u8, 0x1b_u8, 0x1e_u8, 0xe2_u8, 0x89_u8, 0xb_u8, 0xd9_u8, 0x38_u8])
+    def query_interface(this : IAudioLoudness*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioLoudness*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioLoudness*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_enabled(this : IAudioLoudness*, pbEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_enabled.call(this, pbEnabled)
+    end
+    def set_enabled(this : IAudioLoudness*, bEnable : Win32cr::Foundation::BOOL, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_enabled.call(this, bEnable, pguidEventContext)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioInputSelectorVtbl,
+    query_interface : Proc(IAudioInputSelector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioInputSelector*, UInt32),
+    release : Proc(IAudioInputSelector*, UInt32),
+    get_selection : Proc(IAudioInputSelector*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_selection : Proc(IAudioInputSelector*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("4f03dc02-5e6e-4653-8f72-a030c123d598")]
+  record IAudioInputSelector, lpVtbl : IAudioInputSelectorVtbl* do
+    GUID = LibC::GUID.new(0x4f03dc02_u32, 0x5e6e_u16, 0x4653_u16, StaticArray[0x8f_u8, 0x72_u8, 0xa0_u8, 0x30_u8, 0xc1_u8, 0x23_u8, 0xd5_u8, 0x98_u8])
+    def query_interface(this : IAudioInputSelector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioInputSelector*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioInputSelector*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_selection(this : IAudioInputSelector*, pnIdSelected : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_selection.call(this, pnIdSelected)
+    end
+    def set_selection(this : IAudioInputSelector*, nIdSelect : UInt32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_selection.call(this, nIdSelect, pguidEventContext)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioOutputSelectorVtbl,
+    query_interface : Proc(IAudioOutputSelector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioOutputSelector*, UInt32),
+    release : Proc(IAudioOutputSelector*, UInt32),
+    get_selection : Proc(IAudioOutputSelector*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_selection : Proc(IAudioOutputSelector*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("bb515f69-94a7-429e-8b9c-271b3f11a3ab")]
+  record IAudioOutputSelector, lpVtbl : IAudioOutputSelectorVtbl* do
+    GUID = LibC::GUID.new(0xbb515f69_u32, 0x94a7_u16, 0x429e_u16, StaticArray[0x8b_u8, 0x9c_u8, 0x27_u8, 0x1b_u8, 0x3f_u8, 0x11_u8, 0xa3_u8, 0xab_u8])
+    def query_interface(this : IAudioOutputSelector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioOutputSelector*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioOutputSelector*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_selection(this : IAudioOutputSelector*, pnIdSelected : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_selection.call(this, pnIdSelected)
+    end
+    def set_selection(this : IAudioOutputSelector*, nIdSelect : UInt32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_selection.call(this, nIdSelect, pguidEventContext)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioMuteVtbl,
+    query_interface : Proc(IAudioMute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioMute*, UInt32),
+    release : Proc(IAudioMute*, UInt32),
+    set_mute : Proc(IAudioMute*, Win32cr::Foundation::BOOL, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_mute : Proc(IAudioMute*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("df45aeea-b74a-4b6b-afad-2366b6aa012e")]
+  record IAudioMute, lpVtbl : IAudioMuteVtbl* do
+    GUID = LibC::GUID.new(0xdf45aeea_u32, 0xb74a_u16, 0x4b6b_u16, StaticArray[0xaf_u8, 0xad_u8, 0x23_u8, 0x66_u8, 0xb6_u8, 0xaa_u8, 0x1_u8, 0x2e_u8])
+    def query_interface(this : IAudioMute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioMute*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioMute*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_mute(this : IAudioMute*, bMuted : Win32cr::Foundation::BOOL, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_mute.call(this, bMuted, pguidEventContext)
+    end
+    def get_mute(this : IAudioMute*, pbMuted : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_mute.call(this, pbMuted)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioBassVtbl,
+    query_interface : Proc(IAudioBass*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioBass*, UInt32),
+    release : Proc(IAudioBass*, UInt32),
+    get_channel_count : Proc(IAudioBass*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_level_range : Proc(IAudioBass*, UInt32, Float32*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
+    get_level : Proc(IAudioBass*, UInt32, Float32*, Win32cr::Foundation::HRESULT),
+    set_level : Proc(IAudioBass*, UInt32, Float32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_level_uniform : Proc(IAudioBass*, Float32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_level_all_channels : Proc(IAudioBass*, Float32*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("a2b1a1d9-4db3-425d-a2b2-bd335cb3e2e5")]
+  record IAudioBass, lpVtbl : IAudioBassVtbl* do
+    GUID = LibC::GUID.new(0xa2b1a1d9_u32, 0x4db3_u16, 0x425d_u16, StaticArray[0xa2_u8, 0xb2_u8, 0xbd_u8, 0x33_u8, 0x5c_u8, 0xb3_u8, 0xe2_u8, 0xe5_u8])
+    def query_interface(this : IAudioBass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioBass*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioBass*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_channel_count(this : IAudioBass*, pcChannels : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_count.call(this, pcChannels)
+    end
+    def get_level_range(this : IAudioBass*, nChannel : UInt32, pfMinLevelDB : Float32*, pfMaxLevelDB : Float32*, pfStepping : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_level_range.call(this, nChannel, pfMinLevelDB, pfMaxLevelDB, pfStepping)
+    end
+    def get_level(this : IAudioBass*, nChannel : UInt32, pfLevelDB : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_level.call(this, nChannel, pfLevelDB)
+    end
+    def set_level(this : IAudioBass*, nChannel : UInt32, fLevelDB : Float32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level.call(this, nChannel, fLevelDB, pguidEventContext)
+    end
+    def set_level_uniform(this : IAudioBass*, fLevelDB : Float32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level_uniform.call(this, fLevelDB, pguidEventContext)
+    end
+    def set_level_all_channels(this : IAudioBass*, aLevelsDB : Float32*, cChannels : UInt32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level_all_channels.call(this, aLevelsDB, cChannels, pguidEventContext)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioMidrangeVtbl,
+    query_interface : Proc(IAudioMidrange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioMidrange*, UInt32),
+    release : Proc(IAudioMidrange*, UInt32),
+    get_channel_count : Proc(IAudioMidrange*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_level_range : Proc(IAudioMidrange*, UInt32, Float32*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
+    get_level : Proc(IAudioMidrange*, UInt32, Float32*, Win32cr::Foundation::HRESULT),
+    set_level : Proc(IAudioMidrange*, UInt32, Float32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_level_uniform : Proc(IAudioMidrange*, Float32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_level_all_channels : Proc(IAudioMidrange*, Float32*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("5e54b6d7-b44b-40d9-9a9e-e691d9ce6edf")]
+  record IAudioMidrange, lpVtbl : IAudioMidrangeVtbl* do
+    GUID = LibC::GUID.new(0x5e54b6d7_u32, 0xb44b_u16, 0x40d9_u16, StaticArray[0x9a_u8, 0x9e_u8, 0xe6_u8, 0x91_u8, 0xd9_u8, 0xce_u8, 0x6e_u8, 0xdf_u8])
+    def query_interface(this : IAudioMidrange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioMidrange*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioMidrange*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_channel_count(this : IAudioMidrange*, pcChannels : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_count.call(this, pcChannels)
+    end
+    def get_level_range(this : IAudioMidrange*, nChannel : UInt32, pfMinLevelDB : Float32*, pfMaxLevelDB : Float32*, pfStepping : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_level_range.call(this, nChannel, pfMinLevelDB, pfMaxLevelDB, pfStepping)
+    end
+    def get_level(this : IAudioMidrange*, nChannel : UInt32, pfLevelDB : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_level.call(this, nChannel, pfLevelDB)
+    end
+    def set_level(this : IAudioMidrange*, nChannel : UInt32, fLevelDB : Float32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level.call(this, nChannel, fLevelDB, pguidEventContext)
+    end
+    def set_level_uniform(this : IAudioMidrange*, fLevelDB : Float32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level_uniform.call(this, fLevelDB, pguidEventContext)
+    end
+    def set_level_all_channels(this : IAudioMidrange*, aLevelsDB : Float32*, cChannels : UInt32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level_all_channels.call(this, aLevelsDB, cChannels, pguidEventContext)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioTrebleVtbl,
+    query_interface : Proc(IAudioTreble*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioTreble*, UInt32),
+    release : Proc(IAudioTreble*, UInt32),
+    get_channel_count : Proc(IAudioTreble*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_level_range : Proc(IAudioTreble*, UInt32, Float32*, Float32*, Float32*, Win32cr::Foundation::HRESULT),
+    get_level : Proc(IAudioTreble*, UInt32, Float32*, Win32cr::Foundation::HRESULT),
+    set_level : Proc(IAudioTreble*, UInt32, Float32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_level_uniform : Proc(IAudioTreble*, Float32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_level_all_channels : Proc(IAudioTreble*, Float32*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("0a717812-694e-4907-b74b-bafa5cfdca7b")]
+  record IAudioTreble, lpVtbl : IAudioTrebleVtbl* do
+    GUID = LibC::GUID.new(0xa717812_u32, 0x694e_u16, 0x4907_u16, StaticArray[0xb7_u8, 0x4b_u8, 0xba_u8, 0xfa_u8, 0x5c_u8, 0xfd_u8, 0xca_u8, 0x7b_u8])
+    def query_interface(this : IAudioTreble*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioTreble*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioTreble*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_channel_count(this : IAudioTreble*, pcChannels : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_count.call(this, pcChannels)
+    end
+    def get_level_range(this : IAudioTreble*, nChannel : UInt32, pfMinLevelDB : Float32*, pfMaxLevelDB : Float32*, pfStepping : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_level_range.call(this, nChannel, pfMinLevelDB, pfMaxLevelDB, pfStepping)
+    end
+    def get_level(this : IAudioTreble*, nChannel : UInt32, pfLevelDB : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_level.call(this, nChannel, pfLevelDB)
+    end
+    def set_level(this : IAudioTreble*, nChannel : UInt32, fLevelDB : Float32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level.call(this, nChannel, fLevelDB, pguidEventContext)
+    end
+    def set_level_uniform(this : IAudioTreble*, fLevelDB : Float32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level_uniform.call(this, fLevelDB, pguidEventContext)
+    end
+    def set_level_all_channels(this : IAudioTreble*, aLevelsDB : Float32*, cChannels : UInt32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_level_all_channels.call(this, aLevelsDB, cChannels, pguidEventContext)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioAutoGainControlVtbl,
+    query_interface : Proc(IAudioAutoGainControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioAutoGainControl*, UInt32),
+    release : Proc(IAudioAutoGainControl*, UInt32),
+    get_enabled : Proc(IAudioAutoGainControl*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    set_enabled : Proc(IAudioAutoGainControl*, Win32cr::Foundation::BOOL, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("85401fd4-6de4-4b9d-9869-2d6753a82f3c")]
+  record IAudioAutoGainControl, lpVtbl : IAudioAutoGainControlVtbl* do
+    GUID = LibC::GUID.new(0x85401fd4_u32, 0x6de4_u16, 0x4b9d_u16, StaticArray[0x98_u8, 0x69_u8, 0x2d_u8, 0x67_u8, 0x53_u8, 0xa8_u8, 0x2f_u8, 0x3c_u8])
+    def query_interface(this : IAudioAutoGainControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioAutoGainControl*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioAutoGainControl*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_enabled(this : IAudioAutoGainControl*, pbEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_enabled.call(this, pbEnabled)
+    end
+    def set_enabled(this : IAudioAutoGainControl*, bEnable : Win32cr::Foundation::BOOL, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_enabled.call(this, bEnable, pguidEventContext)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioPeakMeterVtbl,
+    query_interface : Proc(IAudioPeakMeter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioPeakMeter*, UInt32),
+    release : Proc(IAudioPeakMeter*, UInt32),
+    get_channel_count : Proc(IAudioPeakMeter*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_level : Proc(IAudioPeakMeter*, UInt32, Float32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("dd79923c-0599-45e0-b8b6-c8df7db6e796")]
+  record IAudioPeakMeter, lpVtbl : IAudioPeakMeterVtbl* do
+    GUID = LibC::GUID.new(0xdd79923c_u32, 0x599_u16, 0x45e0_u16, StaticArray[0xb8_u8, 0xb6_u8, 0xc8_u8, 0xdf_u8, 0x7d_u8, 0xb6_u8, 0xe7_u8, 0x96_u8])
+    def query_interface(this : IAudioPeakMeter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioPeakMeter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioPeakMeter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_channel_count(this : IAudioPeakMeter*, pcChannels : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_channel_count.call(this, pcChannels)
+    end
+    def get_level(this : IAudioPeakMeter*, nChannel : UInt32, pfLevel : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_level.call(this, nChannel, pfLevel)
+    end
+
+  end
+
+  @[Extern]
+  record IDeviceSpecificPropertyVtbl,
+    query_interface : Proc(IDeviceSpecificProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDeviceSpecificProperty*, UInt32),
+    release : Proc(IDeviceSpecificProperty*, UInt32),
+    get_type : Proc(IDeviceSpecificProperty*, UInt16*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(IDeviceSpecificProperty*, Void*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_value : Proc(IDeviceSpecificProperty*, Void*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get4_b_range : Proc(IDeviceSpecificProperty*, Int32*, Int32*, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("3b22bcbf-2586-4af0-8583-205d391b807c")]
+  record IDeviceSpecificProperty, lpVtbl : IDeviceSpecificPropertyVtbl* do
+    GUID = LibC::GUID.new(0x3b22bcbf_u32, 0x2586_u16, 0x4af0_u16, StaticArray[0x85_u8, 0x83_u8, 0x20_u8, 0x5d_u8, 0x39_u8, 0x1b_u8, 0x80_u8, 0x7c_u8])
+    def query_interface(this : IDeviceSpecificProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDeviceSpecificProperty*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDeviceSpecificProperty*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type(this : IDeviceSpecificProperty*, pVType : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type.call(this, pVType)
+    end
+    def get_value(this : IDeviceSpecificProperty*, pvValue : Void*, pcbValue : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_value.call(this, pvValue, pcbValue)
+    end
+    def set_value(this : IDeviceSpecificProperty*, pvValue : Void*, cbValue : UInt32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_value.call(this, pvValue, cbValue, pguidEventContext)
+    end
+    def get4_b_range(this : IDeviceSpecificProperty*, plMin : Int32*, plMax : Int32*, plStepping : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get4_b_range.call(this, plMin, plMax, plStepping)
+    end
+
+  end
+
+  @[Extern]
+  record IPartsListVtbl,
+    query_interface : Proc(IPartsList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IPartsList*, UInt32),
+    release : Proc(IPartsList*, UInt32),
+    get_count : Proc(IPartsList*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_part : Proc(IPartsList*, UInt32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("6daa848c-5eb0-45cc-aea5-998a2cda1ffb")]
+  record IPartsList, lpVtbl : IPartsListVtbl* do
+    GUID = LibC::GUID.new(0x6daa848c_u32, 0x5eb0_u16, 0x45cc_u16, StaticArray[0xae_u8, 0xa5_u8, 0x99_u8, 0x8a_u8, 0x2c_u8, 0xda_u8, 0x1f_u8, 0xfb_u8])
+    def query_interface(this : IPartsList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IPartsList*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IPartsList*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_count(this : IPartsList*, pCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_count.call(this, pCount)
+    end
+    def get_part(this : IPartsList*, nIndex : UInt32, ppPart : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_part.call(this, nIndex, ppPart)
+    end
+
+  end
+
+  @[Extern]
+  record IPartVtbl,
+    query_interface : Proc(IPart*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IPart*, UInt32),
+    release : Proc(IPart*, UInt32),
+    get_name : Proc(IPart*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_local_id : Proc(IPart*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_global_id : Proc(IPart*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_part_type : Proc(IPart*, Win32cr::Media::Audio::PartType*, Win32cr::Foundation::HRESULT),
+    get_sub_type : Proc(IPart*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_control_interface_count : Proc(IPart*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_control_interface : Proc(IPart*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    enum_parts_incoming : Proc(IPart*, Void**, Win32cr::Foundation::HRESULT),
+    enum_parts_outgoing : Proc(IPart*, Void**, Win32cr::Foundation::HRESULT),
+    get_topology_object : Proc(IPart*, Void**, Win32cr::Foundation::HRESULT),
+    activate : Proc(IPart*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    register_control_change_callback : Proc(IPart*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
+    unregister_control_change_callback : Proc(IPart*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("ae2de0e4-5bca-4f2d-aa46-5d13f8fdb3a9")]
+  record IPart, lpVtbl : IPartVtbl* do
+    GUID = LibC::GUID.new(0xae2de0e4_u32, 0x5bca_u16, 0x4f2d_u16, StaticArray[0xaa_u8, 0x46_u8, 0x5d_u8, 0x13_u8, 0xf8_u8, 0xfd_u8, 0xb3_u8, 0xa9_u8])
+    def query_interface(this : IPart*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IPart*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IPart*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_name(this : IPart*, ppwstrName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_name.call(this, ppwstrName)
+    end
+    def get_local_id(this : IPart*, pnId : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_local_id.call(this, pnId)
+    end
+    def get_global_id(this : IPart*, ppwstrGlobalId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_global_id.call(this, ppwstrGlobalId)
+    end
+    def get_part_type(this : IPart*, pPartType : Win32cr::Media::Audio::PartType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_part_type.call(this, pPartType)
+    end
+    def get_sub_type(this : IPart*, pSubType : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_sub_type.call(this, pSubType)
+    end
+    def get_control_interface_count(this : IPart*, pCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_control_interface_count.call(this, pCount)
+    end
+    def get_control_interface(this : IPart*, nIndex : UInt32, ppInterfaceDesc : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_control_interface.call(this, nIndex, ppInterfaceDesc)
+    end
+    def enum_parts_incoming(this : IPart*, ppParts : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_parts_incoming.call(this, ppParts)
+    end
+    def enum_parts_outgoing(this : IPart*, ppParts : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.enum_parts_outgoing.call(this, ppParts)
+    end
+    def get_topology_object(this : IPart*, ppTopology : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_topology_object.call(this, ppTopology)
+    end
+    def activate(this : IPart*, dwClsContext : UInt32, refiid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate.call(this, dwClsContext, refiid, ppvObject)
+    end
+    def register_control_change_callback(this : IPart*, riid : LibC::GUID*, pNotify : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_control_change_callback.call(this, riid, pNotify)
+    end
+    def unregister_control_change_callback(this : IPart*, pNotify : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_control_change_callback.call(this, pNotify)
+    end
+
+  end
+
+  @[Extern]
+  record IConnectorVtbl,
+    query_interface : Proc(IConnector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IConnector*, UInt32),
+    release : Proc(IConnector*, UInt32),
+    get_type : Proc(IConnector*, Win32cr::Media::Audio::ConnectorType*, Win32cr::Foundation::HRESULT),
+    get_data_flow : Proc(IConnector*, Win32cr::Media::Audio::DataFlow*, Win32cr::Foundation::HRESULT),
+    connect_to : Proc(IConnector*, Void*, Win32cr::Foundation::HRESULT),
+    disconnect : Proc(IConnector*, Win32cr::Foundation::HRESULT),
+    is_connected : Proc(IConnector*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_connected_to : Proc(IConnector*, Void**, Win32cr::Foundation::HRESULT),
+    get_connector_id_connected_to : Proc(IConnector*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_device_id_connected_to : Proc(IConnector*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("9c2c4058-23f5-41de-877a-df3af236a09e")]
+  record IConnector, lpVtbl : IConnectorVtbl* do
+    GUID = LibC::GUID.new(0x9c2c4058_u32, 0x23f5_u16, 0x41de_u16, StaticArray[0x87_u8, 0x7a_u8, 0xdf_u8, 0x3a_u8, 0xf2_u8, 0x36_u8, 0xa0_u8, 0x9e_u8])
+    def query_interface(this : IConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IConnector*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IConnector*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type(this : IConnector*, pType : Win32cr::Media::Audio::ConnectorType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type.call(this, pType)
+    end
+    def get_data_flow(this : IConnector*, pFlow : Win32cr::Media::Audio::DataFlow*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data_flow.call(this, pFlow)
+    end
+    def connect_to(this : IConnector*, pConnectTo : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.connect_to.call(this, pConnectTo)
+    end
+    def disconnect(this : IConnector*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disconnect.call(this)
+    end
+    def is_connected(this : IConnector*, pbConnected : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_connected.call(this, pbConnected)
+    end
+    def get_connected_to(this : IConnector*, ppConTo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_connected_to.call(this, ppConTo)
+    end
+    def get_connector_id_connected_to(this : IConnector*, ppwstrConnectorId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_connector_id_connected_to.call(this, ppwstrConnectorId)
+    end
+    def get_device_id_connected_to(this : IConnector*, ppwstrDeviceId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_id_connected_to.call(this, ppwstrDeviceId)
+    end
+
+  end
+
+  @[Extern]
+  record ISubunitVtbl,
+    query_interface : Proc(ISubunit*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISubunit*, UInt32),
     release : Proc(ISubunit*, UInt32)
-  end
-
-  ISubunit_GUID = "82149a85-dba6-4487-86bb-ea8f7fefcc71"
-  IID_ISubunit = LibC::GUID.new(0x82149a85_u32, 0xdba6_u16, 0x4487_u16, StaticArray[0x86_u8, 0xbb_u8, 0xea_u8, 0x8f_u8, 0x7f_u8, 0xef_u8, 0xcc_u8, 0x71_u8])
-  struct ISubunit
-    lpVtbl : ISubunitVTbl*
-  end
-
-  struct IControlInterfaceVTbl
-    query_interface : Proc(IControlInterface*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IControlInterface*, UInt32)
-    release : Proc(IControlInterface*, UInt32)
-    get_name : Proc(IControlInterface*, LibC::LPWSTR*, HRESULT)
-    get_iid : Proc(IControlInterface*, Guid*, HRESULT)
-  end
-
-  IControlInterface_GUID = "45d37c3f-5140-444a-ae24-400789f3cbf3"
-  IID_IControlInterface = LibC::GUID.new(0x45d37c3f_u32, 0x5140_u16, 0x444a_u16, StaticArray[0xae_u8, 0x24_u8, 0x40_u8, 0x7_u8, 0x89_u8, 0xf3_u8, 0xcb_u8, 0xf3_u8])
-  struct IControlInterface
-    lpVtbl : IControlInterfaceVTbl*
-  end
-
-  struct IControlChangeNotifyVTbl
-    query_interface : Proc(IControlChangeNotify*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IControlChangeNotify*, UInt32)
-    release : Proc(IControlChangeNotify*, UInt32)
-    on_notify : Proc(IControlChangeNotify*, UInt32, Guid*, HRESULT)
-  end
-
-  IControlChangeNotify_GUID = "a09513ed-c709-4d21-bd7b-5f34c47f3947"
-  IID_IControlChangeNotify = LibC::GUID.new(0xa09513ed_u32, 0xc709_u16, 0x4d21_u16, StaticArray[0xbd_u8, 0x7b_u8, 0x5f_u8, 0x34_u8, 0xc4_u8, 0x7f_u8, 0x39_u8, 0x47_u8])
-  struct IControlChangeNotify
-    lpVtbl : IControlChangeNotifyVTbl*
-  end
-
-  struct IDeviceTopologyVTbl
-    query_interface : Proc(IDeviceTopology*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDeviceTopology*, UInt32)
-    release : Proc(IDeviceTopology*, UInt32)
-    get_connector_count : Proc(IDeviceTopology*, UInt32*, HRESULT)
-    get_connector : Proc(IDeviceTopology*, UInt32, IConnector*, HRESULT)
-    get_subunit_count : Proc(IDeviceTopology*, UInt32*, HRESULT)
-    get_subunit : Proc(IDeviceTopology*, UInt32, ISubunit*, HRESULT)
-    get_part_by_id : Proc(IDeviceTopology*, UInt32, IPart*, HRESULT)
-    get_device_id : Proc(IDeviceTopology*, LibC::LPWSTR*, HRESULT)
-    get_signal_path : Proc(IDeviceTopology*, IPart, IPart, LibC::BOOL, IPartsList*, HRESULT)
-  end
-
-  IDeviceTopology_GUID = "2a07407e-6497-4a18-9787-32f79bd0d98f"
-  IID_IDeviceTopology = LibC::GUID.new(0x2a07407e_u32, 0x6497_u16, 0x4a18_u16, StaticArray[0x97_u8, 0x87_u8, 0x32_u8, 0xf7_u8, 0x9b_u8, 0xd0_u8, 0xd9_u8, 0x8f_u8])
-  struct IDeviceTopology
-    lpVtbl : IDeviceTopologyVTbl*
-  end
-
-  struct IAudioSessionEventsVTbl
-    query_interface : Proc(IAudioSessionEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioSessionEvents*, UInt32)
-    release : Proc(IAudioSessionEvents*, UInt32)
-    on_display_name_changed : Proc(IAudioSessionEvents*, LibC::LPWSTR, Guid*, HRESULT)
-    on_icon_path_changed : Proc(IAudioSessionEvents*, LibC::LPWSTR, Guid*, HRESULT)
-    on_simple_volume_changed : Proc(IAudioSessionEvents*, Float32, LibC::BOOL, Guid*, HRESULT)
-    on_channel_volume_changed : Proc(IAudioSessionEvents*, UInt32, Float32*, UInt32, Guid*, HRESULT)
-    on_grouping_param_changed : Proc(IAudioSessionEvents*, Guid*, Guid*, HRESULT)
-    on_state_changed : Proc(IAudioSessionEvents*, AudioSessionState, HRESULT)
-    on_session_disconnected : Proc(IAudioSessionEvents*, AudioSessionDisconnectReason, HRESULT)
-  end
-
-  IAudioSessionEvents_GUID = "24918acc-64b3-37c1-8ca9-74a66e9957a8"
-  IID_IAudioSessionEvents = LibC::GUID.new(0x24918acc_u32, 0x64b3_u16, 0x37c1_u16, StaticArray[0x8c_u8, 0xa9_u8, 0x74_u8, 0xa6_u8, 0x6e_u8, 0x99_u8, 0x57_u8, 0xa8_u8])
-  struct IAudioSessionEvents
-    lpVtbl : IAudioSessionEventsVTbl*
-  end
-
-  struct IAudioSessionControlVTbl
-    query_interface : Proc(IAudioSessionControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioSessionControl*, UInt32)
-    release : Proc(IAudioSessionControl*, UInt32)
-    get_state : Proc(IAudioSessionControl*, AudioSessionState*, HRESULT)
-    get_display_name : Proc(IAudioSessionControl*, LibC::LPWSTR*, HRESULT)
-    set_display_name : Proc(IAudioSessionControl*, LibC::LPWSTR, Guid*, HRESULT)
-    get_icon_path : Proc(IAudioSessionControl*, LibC::LPWSTR*, HRESULT)
-    set_icon_path : Proc(IAudioSessionControl*, LibC::LPWSTR, Guid*, HRESULT)
-    get_grouping_param : Proc(IAudioSessionControl*, Guid*, HRESULT)
-    set_grouping_param : Proc(IAudioSessionControl*, Guid*, Guid*, HRESULT)
-    register_audio_session_notification : Proc(IAudioSessionControl*, IAudioSessionEvents, HRESULT)
-    unregister_audio_session_notification : Proc(IAudioSessionControl*, IAudioSessionEvents, HRESULT)
-  end
-
-  IAudioSessionControl_GUID = "f4b1a599-7266-4319-a8ca-e70acb11e8cd"
-  IID_IAudioSessionControl = LibC::GUID.new(0xf4b1a599_u32, 0x7266_u16, 0x4319_u16, StaticArray[0xa8_u8, 0xca_u8, 0xe7_u8, 0xa_u8, 0xcb_u8, 0x11_u8, 0xe8_u8, 0xcd_u8])
-  struct IAudioSessionControl
-    lpVtbl : IAudioSessionControlVTbl*
-  end
-
-  struct IAudioSessionControl2VTbl
-    query_interface : Proc(IAudioSessionControl2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioSessionControl2*, UInt32)
-    release : Proc(IAudioSessionControl2*, UInt32)
-    get_state : Proc(IAudioSessionControl2*, AudioSessionState*, HRESULT)
-    get_display_name : Proc(IAudioSessionControl2*, LibC::LPWSTR*, HRESULT)
-    set_display_name : Proc(IAudioSessionControl2*, LibC::LPWSTR, Guid*, HRESULT)
-    get_icon_path : Proc(IAudioSessionControl2*, LibC::LPWSTR*, HRESULT)
-    set_icon_path : Proc(IAudioSessionControl2*, LibC::LPWSTR, Guid*, HRESULT)
-    get_grouping_param : Proc(IAudioSessionControl2*, Guid*, HRESULT)
-    set_grouping_param : Proc(IAudioSessionControl2*, Guid*, Guid*, HRESULT)
-    register_audio_session_notification : Proc(IAudioSessionControl2*, IAudioSessionEvents, HRESULT)
-    unregister_audio_session_notification : Proc(IAudioSessionControl2*, IAudioSessionEvents, HRESULT)
-    get_session_identifier : Proc(IAudioSessionControl2*, LibC::LPWSTR*, HRESULT)
-    get_session_instance_identifier : Proc(IAudioSessionControl2*, LibC::LPWSTR*, HRESULT)
-    get_process_id : Proc(IAudioSessionControl2*, UInt32*, HRESULT)
-    is_system_sounds_session : Proc(IAudioSessionControl2*, HRESULT)
-    set_ducking_preference : Proc(IAudioSessionControl2*, LibC::BOOL, HRESULT)
-  end
-
-  IAudioSessionControl2_GUID = "bfb7ff88-7239-4fc9-8fa2-07c950be9c6d"
-  IID_IAudioSessionControl2 = LibC::GUID.new(0xbfb7ff88_u32, 0x7239_u16, 0x4fc9_u16, StaticArray[0x8f_u8, 0xa2_u8, 0x7_u8, 0xc9_u8, 0x50_u8, 0xbe_u8, 0x9c_u8, 0x6d_u8])
-  struct IAudioSessionControl2
-    lpVtbl : IAudioSessionControl2VTbl*
-  end
-
-  struct IAudioSessionManagerVTbl
-    query_interface : Proc(IAudioSessionManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioSessionManager*, UInt32)
-    release : Proc(IAudioSessionManager*, UInt32)
-    get_audio_session_control : Proc(IAudioSessionManager*, Guid*, UInt32, IAudioSessionControl*, HRESULT)
-    get_simple_audio_volume : Proc(IAudioSessionManager*, Guid*, UInt32, ISimpleAudioVolume*, HRESULT)
-  end
-
-  IAudioSessionManager_GUID = "bfa971f1-4d5e-40bb-935e-967039bfbee4"
-  IID_IAudioSessionManager = LibC::GUID.new(0xbfa971f1_u32, 0x4d5e_u16, 0x40bb_u16, StaticArray[0x93_u8, 0x5e_u8, 0x96_u8, 0x70_u8, 0x39_u8, 0xbf_u8, 0xbe_u8, 0xe4_u8])
-  struct IAudioSessionManager
-    lpVtbl : IAudioSessionManagerVTbl*
-  end
-
-  struct IAudioVolumeDuckNotificationVTbl
-    query_interface : Proc(IAudioVolumeDuckNotification*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioVolumeDuckNotification*, UInt32)
-    release : Proc(IAudioVolumeDuckNotification*, UInt32)
-    on_volume_duck_notification : Proc(IAudioVolumeDuckNotification*, LibC::LPWSTR, UInt32, HRESULT)
-    on_volume_unduck_notification : Proc(IAudioVolumeDuckNotification*, LibC::LPWSTR, HRESULT)
-  end
-
-  IAudioVolumeDuckNotification_GUID = "c3b284d4-6d39-4359-b3cf-b56ddb3bb39c"
-  IID_IAudioVolumeDuckNotification = LibC::GUID.new(0xc3b284d4_u32, 0x6d39_u16, 0x4359_u16, StaticArray[0xb3_u8, 0xcf_u8, 0xb5_u8, 0x6d_u8, 0xdb_u8, 0x3b_u8, 0xb3_u8, 0x9c_u8])
-  struct IAudioVolumeDuckNotification
-    lpVtbl : IAudioVolumeDuckNotificationVTbl*
-  end
-
-  struct IAudioSessionNotificationVTbl
-    query_interface : Proc(IAudioSessionNotification*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioSessionNotification*, UInt32)
-    release : Proc(IAudioSessionNotification*, UInt32)
-    on_session_created : Proc(IAudioSessionNotification*, IAudioSessionControl, HRESULT)
-  end
-
-  IAudioSessionNotification_GUID = "641dd20b-4d41-49cc-aba3-174b9477bb08"
-  IID_IAudioSessionNotification = LibC::GUID.new(0x641dd20b_u32, 0x4d41_u16, 0x49cc_u16, StaticArray[0xab_u8, 0xa3_u8, 0x17_u8, 0x4b_u8, 0x94_u8, 0x77_u8, 0xbb_u8, 0x8_u8])
-  struct IAudioSessionNotification
-    lpVtbl : IAudioSessionNotificationVTbl*
-  end
-
-  struct IAudioSessionEnumeratorVTbl
-    query_interface : Proc(IAudioSessionEnumerator*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioSessionEnumerator*, UInt32)
-    release : Proc(IAudioSessionEnumerator*, UInt32)
-    get_count : Proc(IAudioSessionEnumerator*, Int32*, HRESULT)
-    get_session : Proc(IAudioSessionEnumerator*, Int32, IAudioSessionControl*, HRESULT)
-  end
-
-  IAudioSessionEnumerator_GUID = "e2f5bb11-0570-40ca-acdd-3aa01277dee8"
-  IID_IAudioSessionEnumerator = LibC::GUID.new(0xe2f5bb11_u32, 0x570_u16, 0x40ca_u16, StaticArray[0xac_u8, 0xdd_u8, 0x3a_u8, 0xa0_u8, 0x12_u8, 0x77_u8, 0xde_u8, 0xe8_u8])
-  struct IAudioSessionEnumerator
-    lpVtbl : IAudioSessionEnumeratorVTbl*
-  end
-
-  struct IAudioSessionManager2VTbl
-    query_interface : Proc(IAudioSessionManager2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioSessionManager2*, UInt32)
-    release : Proc(IAudioSessionManager2*, UInt32)
-    get_audio_session_control : Proc(IAudioSessionManager2*, Guid*, UInt32, IAudioSessionControl*, HRESULT)
-    get_simple_audio_volume : Proc(IAudioSessionManager2*, Guid*, UInt32, ISimpleAudioVolume*, HRESULT)
-    get_session_enumerator : Proc(IAudioSessionManager2*, IAudioSessionEnumerator*, HRESULT)
-    register_session_notification : Proc(IAudioSessionManager2*, IAudioSessionNotification, HRESULT)
-    unregister_session_notification : Proc(IAudioSessionManager2*, IAudioSessionNotification, HRESULT)
-    register_duck_notification : Proc(IAudioSessionManager2*, LibC::LPWSTR, IAudioVolumeDuckNotification, HRESULT)
-    unregister_duck_notification : Proc(IAudioSessionManager2*, IAudioVolumeDuckNotification, HRESULT)
-  end
-
-  IAudioSessionManager2_GUID = "77aa99a0-1bd6-484f-8bc7-2c654c9a9b6f"
-  IID_IAudioSessionManager2 = LibC::GUID.new(0x77aa99a0_u32, 0x1bd6_u16, 0x484f_u16, StaticArray[0x8b_u8, 0xc7_u8, 0x2c_u8, 0x65_u8, 0x4c_u8, 0x9a_u8, 0x9b_u8, 0x6f_u8])
-  struct IAudioSessionManager2
-    lpVtbl : IAudioSessionManager2VTbl*
-  end
-
-  struct ISpatialAudioMetadataItemsVTbl
-    query_interface : Proc(ISpatialAudioMetadataItems*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioMetadataItems*, UInt32)
-    release : Proc(ISpatialAudioMetadataItems*, UInt32)
-    get_frame_count : Proc(ISpatialAudioMetadataItems*, UInt16*, HRESULT)
-    get_item_count : Proc(ISpatialAudioMetadataItems*, UInt16*, HRESULT)
-    get_max_item_count : Proc(ISpatialAudioMetadataItems*, UInt16*, HRESULT)
-    get_max_value_buffer_length : Proc(ISpatialAudioMetadataItems*, UInt32*, HRESULT)
-    get_info : Proc(ISpatialAudioMetadataItems*, SpatialAudioMetadataItemsInfo*, HRESULT)
-  end
-
-  ISpatialAudioMetadataItems_GUID = "bcd7c78f-3098-4f22-b547-a2f25a381269"
-  IID_ISpatialAudioMetadataItems = LibC::GUID.new(0xbcd7c78f_u32, 0x3098_u16, 0x4f22_u16, StaticArray[0xb5_u8, 0x47_u8, 0xa2_u8, 0xf2_u8, 0x5a_u8, 0x38_u8, 0x12_u8, 0x69_u8])
-  struct ISpatialAudioMetadataItems
-    lpVtbl : ISpatialAudioMetadataItemsVTbl*
-  end
-
-  struct ISpatialAudioMetadataWriterVTbl
-    query_interface : Proc(ISpatialAudioMetadataWriter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioMetadataWriter*, UInt32)
-    release : Proc(ISpatialAudioMetadataWriter*, UInt32)
-    open : Proc(ISpatialAudioMetadataWriter*, ISpatialAudioMetadataItems, HRESULT)
-    write_next_item : Proc(ISpatialAudioMetadataWriter*, UInt16, HRESULT)
-    write_next_item_command : Proc(ISpatialAudioMetadataWriter*, UInt8, Void*, UInt32, HRESULT)
-    close : Proc(ISpatialAudioMetadataWriter*, HRESULT)
-  end
-
-  ISpatialAudioMetadataWriter_GUID = "1b17ca01-2955-444d-a430-537dc589a844"
-  IID_ISpatialAudioMetadataWriter = LibC::GUID.new(0x1b17ca01_u32, 0x2955_u16, 0x444d_u16, StaticArray[0xa4_u8, 0x30_u8, 0x53_u8, 0x7d_u8, 0xc5_u8, 0x89_u8, 0xa8_u8, 0x44_u8])
-  struct ISpatialAudioMetadataWriter
-    lpVtbl : ISpatialAudioMetadataWriterVTbl*
-  end
-
-  struct ISpatialAudioMetadataReaderVTbl
-    query_interface : Proc(ISpatialAudioMetadataReader*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioMetadataReader*, UInt32)
-    release : Proc(ISpatialAudioMetadataReader*, UInt32)
-    open : Proc(ISpatialAudioMetadataReader*, ISpatialAudioMetadataItems, HRESULT)
-    read_next_item : Proc(ISpatialAudioMetadataReader*, UInt8*, UInt16*, HRESULT)
-    read_next_item_command : Proc(ISpatialAudioMetadataReader*, UInt8*, Void*, UInt32, UInt32*, HRESULT)
-    close : Proc(ISpatialAudioMetadataReader*, HRESULT)
-  end
-
-  ISpatialAudioMetadataReader_GUID = "b78e86a2-31d9-4c32-94d2-7df40fc7ebec"
-  IID_ISpatialAudioMetadataReader = LibC::GUID.new(0xb78e86a2_u32, 0x31d9_u16, 0x4c32_u16, StaticArray[0x94_u8, 0xd2_u8, 0x7d_u8, 0xf4_u8, 0xf_u8, 0xc7_u8, 0xeb_u8, 0xec_u8])
-  struct ISpatialAudioMetadataReader
-    lpVtbl : ISpatialAudioMetadataReaderVTbl*
-  end
-
-  struct ISpatialAudioMetadataCopierVTbl
-    query_interface : Proc(ISpatialAudioMetadataCopier*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioMetadataCopier*, UInt32)
-    release : Proc(ISpatialAudioMetadataCopier*, UInt32)
-    open : Proc(ISpatialAudioMetadataCopier*, ISpatialAudioMetadataItems, HRESULT)
-    copy_metadata_for_frames : Proc(ISpatialAudioMetadataCopier*, UInt16, SpatialAudioMetadataCopyMode, ISpatialAudioMetadataItems, UInt16*, HRESULT)
-    close : Proc(ISpatialAudioMetadataCopier*, HRESULT)
-  end
-
-  ISpatialAudioMetadataCopier_GUID = "d224b233-e251-4fd0-9ca2-d5ecf9a68404"
-  IID_ISpatialAudioMetadataCopier = LibC::GUID.new(0xd224b233_u32, 0xe251_u16, 0x4fd0_u16, StaticArray[0x9c_u8, 0xa2_u8, 0xd5_u8, 0xec_u8, 0xf9_u8, 0xa6_u8, 0x84_u8, 0x4_u8])
-  struct ISpatialAudioMetadataCopier
-    lpVtbl : ISpatialAudioMetadataCopierVTbl*
-  end
-
-  struct ISpatialAudioMetadataItemsBufferVTbl
-    query_interface : Proc(ISpatialAudioMetadataItemsBuffer*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioMetadataItemsBuffer*, UInt32)
-    release : Proc(ISpatialAudioMetadataItemsBuffer*, UInt32)
-    attach_to_buffer : Proc(ISpatialAudioMetadataItemsBuffer*, UInt8*, UInt32, HRESULT)
-    attach_to_populated_buffer : Proc(ISpatialAudioMetadataItemsBuffer*, UInt8*, UInt32, HRESULT)
-    detach_buffer : Proc(ISpatialAudioMetadataItemsBuffer*, HRESULT)
-  end
-
-  ISpatialAudioMetadataItemsBuffer_GUID = "42640a16-e1bd-42d9-9ff6-031ab71a2dba"
-  IID_ISpatialAudioMetadataItemsBuffer = LibC::GUID.new(0x42640a16_u32, 0xe1bd_u16, 0x42d9_u16, StaticArray[0x9f_u8, 0xf6_u8, 0x3_u8, 0x1a_u8, 0xb7_u8, 0x1a_u8, 0x2d_u8, 0xba_u8])
-  struct ISpatialAudioMetadataItemsBuffer
-    lpVtbl : ISpatialAudioMetadataItemsBufferVTbl*
-  end
-
-  struct ISpatialAudioMetadataClientVTbl
-    query_interface : Proc(ISpatialAudioMetadataClient*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioMetadataClient*, UInt32)
-    release : Proc(ISpatialAudioMetadataClient*, UInt32)
-    activate_spatial_audio_metadata_items : Proc(ISpatialAudioMetadataClient*, UInt16, UInt16, ISpatialAudioMetadataItemsBuffer*, ISpatialAudioMetadataItems*, HRESULT)
-    get_spatial_audio_metadata_items_buffer_length : Proc(ISpatialAudioMetadataClient*, UInt16, UInt32*, HRESULT)
-    activate_spatial_audio_metadata_writer : Proc(ISpatialAudioMetadataClient*, SpatialAudioMetadataWriterOverflowMode, ISpatialAudioMetadataWriter*, HRESULT)
-    activate_spatial_audio_metadata_copier : Proc(ISpatialAudioMetadataClient*, ISpatialAudioMetadataCopier*, HRESULT)
-    activate_spatial_audio_metadata_reader : Proc(ISpatialAudioMetadataClient*, ISpatialAudioMetadataReader*, HRESULT)
-  end
-
-  ISpatialAudioMetadataClient_GUID = "777d4a3b-f6ff-4a26-85dc-68d7cdeda1d4"
-  IID_ISpatialAudioMetadataClient = LibC::GUID.new(0x777d4a3b_u32, 0xf6ff_u16, 0x4a26_u16, StaticArray[0x85_u8, 0xdc_u8, 0x68_u8, 0xd7_u8, 0xcd_u8, 0xed_u8, 0xa1_u8, 0xd4_u8])
-  struct ISpatialAudioMetadataClient
-    lpVtbl : ISpatialAudioMetadataClientVTbl*
-  end
-
-  struct ISpatialAudioObjectForMetadataCommandsVTbl
-    query_interface : Proc(ISpatialAudioObjectForMetadataCommands*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioObjectForMetadataCommands*, UInt32)
-    release : Proc(ISpatialAudioObjectForMetadataCommands*, UInt32)
-    get_buffer : Proc(ISpatialAudioObjectForMetadataCommands*, UInt8**, UInt32*, HRESULT)
-    set_end_of_stream : Proc(ISpatialAudioObjectForMetadataCommands*, UInt32, HRESULT)
-    is_active : Proc(ISpatialAudioObjectForMetadataCommands*, LibC::BOOL*, HRESULT)
-    get_audio_object_type : Proc(ISpatialAudioObjectForMetadataCommands*, AudioObjectType*, HRESULT)
-    write_next_metadata_command : Proc(ISpatialAudioObjectForMetadataCommands*, UInt8, Void*, UInt32, HRESULT)
-  end
-
-  ISpatialAudioObjectForMetadataCommands_GUID = "0df2c94b-f5f9-472d-af6b-c46e0ac9cd05"
-  IID_ISpatialAudioObjectForMetadataCommands = LibC::GUID.new(0xdf2c94b_u32, 0xf5f9_u16, 0x472d_u16, StaticArray[0xaf_u8, 0x6b_u8, 0xc4_u8, 0x6e_u8, 0xa_u8, 0xc9_u8, 0xcd_u8, 0x5_u8])
-  struct ISpatialAudioObjectForMetadataCommands
-    lpVtbl : ISpatialAudioObjectForMetadataCommandsVTbl*
-  end
-
-  struct ISpatialAudioObjectForMetadataItemsVTbl
-    query_interface : Proc(ISpatialAudioObjectForMetadataItems*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioObjectForMetadataItems*, UInt32)
-    release : Proc(ISpatialAudioObjectForMetadataItems*, UInt32)
-    get_buffer : Proc(ISpatialAudioObjectForMetadataItems*, UInt8**, UInt32*, HRESULT)
-    set_end_of_stream : Proc(ISpatialAudioObjectForMetadataItems*, UInt32, HRESULT)
-    is_active : Proc(ISpatialAudioObjectForMetadataItems*, LibC::BOOL*, HRESULT)
-    get_audio_object_type : Proc(ISpatialAudioObjectForMetadataItems*, AudioObjectType*, HRESULT)
-    get_spatial_audio_metadata_items : Proc(ISpatialAudioObjectForMetadataItems*, ISpatialAudioMetadataItems*, HRESULT)
-  end
-
-  ISpatialAudioObjectForMetadataItems_GUID = "ddea49ff-3bc0-4377-8aad-9fbcfd808566"
-  IID_ISpatialAudioObjectForMetadataItems = LibC::GUID.new(0xddea49ff_u32, 0x3bc0_u16, 0x4377_u16, StaticArray[0x8a_u8, 0xad_u8, 0x9f_u8, 0xbc_u8, 0xfd_u8, 0x80_u8, 0x85_u8, 0x66_u8])
-  struct ISpatialAudioObjectForMetadataItems
-    lpVtbl : ISpatialAudioObjectForMetadataItemsVTbl*
-  end
-
-  struct ISpatialAudioObjectRenderStreamForMetadataVTbl
-    query_interface : Proc(ISpatialAudioObjectRenderStreamForMetadata*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISpatialAudioObjectRenderStreamForMetadata*, UInt32)
-    release : Proc(ISpatialAudioObjectRenderStreamForMetadata*, UInt32)
-    get_available_dynamic_object_count : Proc(ISpatialAudioObjectRenderStreamForMetadata*, UInt32*, HRESULT)
-    get_service : Proc(ISpatialAudioObjectRenderStreamForMetadata*, Guid*, Void**, HRESULT)
-    start : Proc(ISpatialAudioObjectRenderStreamForMetadata*, HRESULT)
-    stop : Proc(ISpatialAudioObjectRenderStreamForMetadata*, HRESULT)
-    reset : Proc(ISpatialAudioObjectRenderStreamForMetadata*, HRESULT)
-    begin_updating_audio_objects : Proc(ISpatialAudioObjectRenderStreamForMetadata*, UInt32*, UInt32*, HRESULT)
-    end_updating_audio_objects : Proc(ISpatialAudioObjectRenderStreamForMetadata*, HRESULT)
-    activate_spatial_audio_object_for_metadata_commands : Proc(ISpatialAudioObjectRenderStreamForMetadata*, AudioObjectType, ISpatialAudioObjectForMetadataCommands*, HRESULT)
-    activate_spatial_audio_object_for_metadata_items : Proc(ISpatialAudioObjectRenderStreamForMetadata*, AudioObjectType, ISpatialAudioObjectForMetadataItems*, HRESULT)
-  end
-
-  ISpatialAudioObjectRenderStreamForMetadata_GUID = "bbc9c907-48d5-4a2e-a0c7-f7f0d67c1fb1"
-  IID_ISpatialAudioObjectRenderStreamForMetadata = LibC::GUID.new(0xbbc9c907_u32, 0x48d5_u16, 0x4a2e_u16, StaticArray[0xa0_u8, 0xc7_u8, 0xf7_u8, 0xf0_u8, 0xd6_u8, 0x7c_u8, 0x1f_u8, 0xb1_u8])
-  struct ISpatialAudioObjectRenderStreamForMetadata
-    lpVtbl : ISpatialAudioObjectRenderStreamForMetadataVTbl*
-  end
-
-  struct IAudioStateMonitorVTbl
-    query_interface : Proc(IAudioStateMonitor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAudioStateMonitor*, UInt32)
-    release : Proc(IAudioStateMonitor*, UInt32)
-    register_callback : Proc(IAudioStateMonitor*, PAudioStateMonitorCallback, Void*, Int64*, HRESULT)
-    unregister_callback : Proc(IAudioStateMonitor*, Int64, Void)
-    get_sound_level : Proc(IAudioStateMonitor*, AudioStateMonitorSoundLevel)
-  end
-
-  IAudioStateMonitor_GUID = "63bd8738-e30d-4c77-bf5c-834e87c657e2"
-  IID_IAudioStateMonitor = LibC::GUID.new(0x63bd8738_u32, 0xe30d_u16, 0x4c77_u16, StaticArray[0xbf_u8, 0x5c_u8, 0x83_u8, 0x4e_u8, 0x87_u8, 0xc6_u8, 0x57_u8, 0xe2_u8])
-  struct IAudioStateMonitor
-    lpVtbl : IAudioStateMonitorVTbl*
-  end
-
-
-  # Params # lpmessagefilter : IMessageFilter [In],lplpmessagefilter : IMessageFilter* [In]
-  fun CoRegisterMessageFilter(lpmessagefilter : IMessageFilter, lplpmessagefilter : IMessageFilter*) : HRESULT
-
-  # Params # pszsound : PSTR [In],fusound : UInt32 [In]
-  fun sndPlaySoundA(pszsound : PSTR, fusound : UInt32) : LibC::BOOL
-
-  # Params # pszsound : LibC::LPWSTR [In],fusound : UInt32 [In]
-  fun sndPlaySoundW(pszsound : LibC::LPWSTR, fusound : UInt32) : LibC::BOOL
-
-  # Params # pszsound : PSTR [In],hmod : HINSTANCE [In],fdwsound : UInt32 [In]
-  fun PlaySoundA(pszsound : PSTR, hmod : HINSTANCE, fdwsound : UInt32) : LibC::BOOL
-
-  # Params # pszsound : LibC::LPWSTR [In],hmod : HINSTANCE [In],fdwsound : UInt32 [In]
-  fun PlaySoundW(pszsound : LibC::LPWSTR, hmod : HINSTANCE, fdwsound : UInt32) : LibC::BOOL
-
-  # Params # 
-  fun waveOutGetNumDevs : UInt32
-
-  # Params # udeviceid : LibC::UINT_PTR [In],pwoc : WAVEOUTCAPSA* [In],cbwoc : UInt32 [In]
-  fun waveOutGetDevCapsA(udeviceid : LibC::UINT_PTR, pwoc : WAVEOUTCAPSA*, cbwoc : UInt32) : UInt32
-
-  # Params # udeviceid : LibC::UINT_PTR [In],pwoc : WAVEOUTCAPSW* [In],cbwoc : UInt32 [In]
-  fun waveOutGetDevCapsW(udeviceid : LibC::UINT_PTR, pwoc : WAVEOUTCAPSW*, cbwoc : UInt32) : UInt32
-
-  # Params # hwo : HWAVEOUT [In],pdwvolume : UInt32* [In]
-  fun waveOutGetVolume(hwo : HWAVEOUT, pdwvolume : UInt32*) : UInt32
-
-  # Params # hwo : HWAVEOUT [In],dwvolume : UInt32 [In]
-  fun waveOutSetVolume(hwo : HWAVEOUT, dwvolume : UInt32) : UInt32
-
-  # Params # mmrerror : UInt32 [In],psztext : UInt8* [In],cchtext : UInt32 [In]
-  fun waveOutGetErrorTextA(mmrerror : UInt32, psztext : UInt8*, cchtext : UInt32) : UInt32
-
-  # Params # mmrerror : UInt32 [In],psztext : Char* [In],cchtext : UInt32 [In]
-  fun waveOutGetErrorTextW(mmrerror : UInt32, psztext : Char*, cchtext : UInt32) : UInt32
-
-  # Params # phwo : HWAVEOUT* [In],udeviceid : UInt32 [In],pwfx : WAVEFORMATEX* [In],dwcallback : LibC::UINT_PTR [In],dwinstance : LibC::UINT_PTR [In],fdwopen : MIDI_WAVE_OPEN_TYPE [In]
-  fun waveOutOpen(phwo : HWAVEOUT*, udeviceid : UInt32, pwfx : WAVEFORMATEX*, dwcallback : LibC::UINT_PTR, dwinstance : LibC::UINT_PTR, fdwopen : MIDI_WAVE_OPEN_TYPE) : UInt32
-
-  # Params # hwo : HWAVEOUT [In]
-  fun waveOutClose(hwo : HWAVEOUT) : UInt32
-
-  # Params # hwo : HWAVEOUT [In],pwh : WAVEHDR* [In],cbwh : UInt32 [In]
-  fun waveOutPrepareHeader(hwo : HWAVEOUT, pwh : WAVEHDR*, cbwh : UInt32) : UInt32
-
-  # Params # hwo : HWAVEOUT [In],pwh : WAVEHDR* [In],cbwh : UInt32 [In]
-  fun waveOutUnprepareHeader(hwo : HWAVEOUT, pwh : WAVEHDR*, cbwh : UInt32) : UInt32
-
-  # Params # hwo : HWAVEOUT [In],pwh : WAVEHDR* [In],cbwh : UInt32 [In]
-  fun waveOutWrite(hwo : HWAVEOUT, pwh : WAVEHDR*, cbwh : UInt32) : UInt32
-
-  # Params # hwo : HWAVEOUT [In]
-  fun waveOutPause(hwo : HWAVEOUT) : UInt32
-
-  # Params # hwo : HWAVEOUT [In]
-  fun waveOutRestart(hwo : HWAVEOUT) : UInt32
-
-  # Params # hwo : HWAVEOUT [In]
-  fun waveOutReset(hwo : HWAVEOUT) : UInt32
-
-  # Params # hwo : HWAVEOUT [In]
-  fun waveOutBreakLoop(hwo : HWAVEOUT) : UInt32
-
-  # Params # hwo : HWAVEOUT [In],pmmt : MMTIME* [In],cbmmt : UInt32 [In]
-  fun waveOutGetPosition(hwo : HWAVEOUT, pmmt : MMTIME*, cbmmt : UInt32) : UInt32
-
-  # Params # hwo : HWAVEOUT [In],pdwpitch : UInt32* [In]
-  fun waveOutGetPitch(hwo : HWAVEOUT, pdwpitch : UInt32*) : UInt32
-
-  # Params # hwo : HWAVEOUT [In],dwpitch : UInt32 [In]
-  fun waveOutSetPitch(hwo : HWAVEOUT, dwpitch : UInt32) : UInt32
-
-  # Params # hwo : HWAVEOUT [In],pdwrate : UInt32* [In]
-  fun waveOutGetPlaybackRate(hwo : HWAVEOUT, pdwrate : UInt32*) : UInt32
-
-  # Params # hwo : HWAVEOUT [In],dwrate : UInt32 [In]
-  fun waveOutSetPlaybackRate(hwo : HWAVEOUT, dwrate : UInt32) : UInt32
-
-  # Params # hwo : HWAVEOUT [In],pudeviceid : UInt32* [In]
-  fun waveOutGetID(hwo : HWAVEOUT, pudeviceid : UInt32*) : UInt32
-
-  # Params # hwo : HWAVEOUT [In],umsg : UInt32 [In],dw1 : LibC::UINT_PTR [In],dw2 : LibC::UINT_PTR [In]
-  fun waveOutMessage(hwo : HWAVEOUT, umsg : UInt32, dw1 : LibC::UINT_PTR, dw2 : LibC::UINT_PTR) : UInt32
-
-  # Params # 
-  fun waveInGetNumDevs : UInt32
-
-  # Params # udeviceid : LibC::UINT_PTR [In],pwic : WAVEINCAPSA* [In],cbwic : UInt32 [In]
-  fun waveInGetDevCapsA(udeviceid : LibC::UINT_PTR, pwic : WAVEINCAPSA*, cbwic : UInt32) : UInt32
-
-  # Params # udeviceid : LibC::UINT_PTR [In],pwic : WAVEINCAPSW* [In],cbwic : UInt32 [In]
-  fun waveInGetDevCapsW(udeviceid : LibC::UINT_PTR, pwic : WAVEINCAPSW*, cbwic : UInt32) : UInt32
-
-  # Params # mmrerror : UInt32 [In],psztext : UInt8* [In],cchtext : UInt32 [In]
-  fun waveInGetErrorTextA(mmrerror : UInt32, psztext : UInt8*, cchtext : UInt32) : UInt32
-
-  # Params # mmrerror : UInt32 [In],psztext : Char* [In],cchtext : UInt32 [In]
-  fun waveInGetErrorTextW(mmrerror : UInt32, psztext : Char*, cchtext : UInt32) : UInt32
-
-  # Params # phwi : HWAVEIN* [In],udeviceid : UInt32 [In],pwfx : WAVEFORMATEX* [In],dwcallback : LibC::UINT_PTR [In],dwinstance : LibC::UINT_PTR [In],fdwopen : MIDI_WAVE_OPEN_TYPE [In]
-  fun waveInOpen(phwi : HWAVEIN*, udeviceid : UInt32, pwfx : WAVEFORMATEX*, dwcallback : LibC::UINT_PTR, dwinstance : LibC::UINT_PTR, fdwopen : MIDI_WAVE_OPEN_TYPE) : UInt32
-
-  # Params # hwi : HWAVEIN [In]
-  fun waveInClose(hwi : HWAVEIN) : UInt32
-
-  # Params # hwi : HWAVEIN [In],pwh : WAVEHDR* [In],cbwh : UInt32 [In]
-  fun waveInPrepareHeader(hwi : HWAVEIN, pwh : WAVEHDR*, cbwh : UInt32) : UInt32
-
-  # Params # hwi : HWAVEIN [In],pwh : WAVEHDR* [In],cbwh : UInt32 [In]
-  fun waveInUnprepareHeader(hwi : HWAVEIN, pwh : WAVEHDR*, cbwh : UInt32) : UInt32
-
-  # Params # hwi : HWAVEIN [In],pwh : WAVEHDR* [In],cbwh : UInt32 [In]
-  fun waveInAddBuffer(hwi : HWAVEIN, pwh : WAVEHDR*, cbwh : UInt32) : UInt32
-
-  # Params # hwi : HWAVEIN [In]
-  fun waveInStart(hwi : HWAVEIN) : UInt32
-
-  # Params # hwi : HWAVEIN [In]
-  fun waveInStop(hwi : HWAVEIN) : UInt32
 
-  # Params # hwi : HWAVEIN [In]
-  fun waveInReset(hwi : HWAVEIN) : UInt32
 
-  # Params # hwi : HWAVEIN [In],pmmt : MMTIME* [In],cbmmt : UInt32 [In]
-  fun waveInGetPosition(hwi : HWAVEIN, pmmt : MMTIME*, cbmmt : UInt32) : UInt32
+  @[Extern]
+  #@[Com("82149a85-dba6-4487-86bb-ea8f7fefcc71")]
+  record ISubunit, lpVtbl : ISubunitVtbl* do
+    GUID = LibC::GUID.new(0x82149a85_u32, 0xdba6_u16, 0x4487_u16, StaticArray[0x86_u8, 0xbb_u8, 0xea_u8, 0x8f_u8, 0x7f_u8, 0xef_u8, 0xcc_u8, 0x71_u8])
+    def query_interface(this : ISubunit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISubunit*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISubunit*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record IControlInterfaceVtbl,
+    query_interface : Proc(IControlInterface*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IControlInterface*, UInt32),
+    release : Proc(IControlInterface*, UInt32),
+    get_name : Proc(IControlInterface*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_iid : Proc(IControlInterface*, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("45d37c3f-5140-444a-ae24-400789f3cbf3")]
+  record IControlInterface, lpVtbl : IControlInterfaceVtbl* do
+    GUID = LibC::GUID.new(0x45d37c3f_u32, 0x5140_u16, 0x444a_u16, StaticArray[0xae_u8, 0x24_u8, 0x40_u8, 0x7_u8, 0x89_u8, 0xf3_u8, 0xcb_u8, 0xf3_u8])
+    def query_interface(this : IControlInterface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IControlInterface*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IControlInterface*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_name(this : IControlInterface*, ppwstrName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_name.call(this, ppwstrName)
+    end
+    def get_iid(this : IControlInterface*, pIID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_iid.call(this, pIID)
+    end
+
+  end
+
+  @[Extern]
+  record IControlChangeNotifyVtbl,
+    query_interface : Proc(IControlChangeNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IControlChangeNotify*, UInt32),
+    release : Proc(IControlChangeNotify*, UInt32),
+    on_notify : Proc(IControlChangeNotify*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("a09513ed-c709-4d21-bd7b-5f34c47f3947")]
+  record IControlChangeNotify, lpVtbl : IControlChangeNotifyVtbl* do
+    GUID = LibC::GUID.new(0xa09513ed_u32, 0xc709_u16, 0x4d21_u16, StaticArray[0xbd_u8, 0x7b_u8, 0x5f_u8, 0x34_u8, 0xc4_u8, 0x7f_u8, 0x39_u8, 0x47_u8])
+    def query_interface(this : IControlChangeNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IControlChangeNotify*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IControlChangeNotify*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_notify(this : IControlChangeNotify*, dwSenderProcessId : UInt32, pguidEventContext : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_notify.call(this, dwSenderProcessId, pguidEventContext)
+    end
+
+  end
+
+  @[Extern]
+  record IDeviceTopologyVtbl,
+    query_interface : Proc(IDeviceTopology*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDeviceTopology*, UInt32),
+    release : Proc(IDeviceTopology*, UInt32),
+    get_connector_count : Proc(IDeviceTopology*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_connector : Proc(IDeviceTopology*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_subunit_count : Proc(IDeviceTopology*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_subunit : Proc(IDeviceTopology*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_part_by_id : Proc(IDeviceTopology*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_device_id : Proc(IDeviceTopology*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_signal_path : Proc(IDeviceTopology*, Void*, Void*, Win32cr::Foundation::BOOL, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2a07407e-6497-4a18-9787-32f79bd0d98f")]
+  record IDeviceTopology, lpVtbl : IDeviceTopologyVtbl* do
+    GUID = LibC::GUID.new(0x2a07407e_u32, 0x6497_u16, 0x4a18_u16, StaticArray[0x97_u8, 0x87_u8, 0x32_u8, 0xf7_u8, 0x9b_u8, 0xd0_u8, 0xd9_u8, 0x8f_u8])
+    def query_interface(this : IDeviceTopology*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDeviceTopology*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDeviceTopology*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_connector_count(this : IDeviceTopology*, pCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_connector_count.call(this, pCount)
+    end
+    def get_connector(this : IDeviceTopology*, nIndex : UInt32, ppConnector : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_connector.call(this, nIndex, ppConnector)
+    end
+    def get_subunit_count(this : IDeviceTopology*, pCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_subunit_count.call(this, pCount)
+    end
+    def get_subunit(this : IDeviceTopology*, nIndex : UInt32, ppSubunit : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_subunit.call(this, nIndex, ppSubunit)
+    end
+    def get_part_by_id(this : IDeviceTopology*, nId : UInt32, ppPart : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_part_by_id.call(this, nId, ppPart)
+    end
+    def get_device_id(this : IDeviceTopology*, ppwstrDeviceId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_device_id.call(this, ppwstrDeviceId)
+    end
+    def get_signal_path(this : IDeviceTopology*, pIPartFrom : Void*, pIPartTo : Void*, bRejectMixedPaths : Win32cr::Foundation::BOOL, ppParts : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_signal_path.call(this, pIPartFrom, pIPartTo, bRejectMixedPaths, ppParts)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioSessionEventsVtbl,
+    query_interface : Proc(IAudioSessionEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioSessionEvents*, UInt32),
+    release : Proc(IAudioSessionEvents*, UInt32),
+    on_display_name_changed : Proc(IAudioSessionEvents*, Win32cr::Foundation::PWSTR, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    on_icon_path_changed : Proc(IAudioSessionEvents*, Win32cr::Foundation::PWSTR, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    on_simple_volume_changed : Proc(IAudioSessionEvents*, Float32, Win32cr::Foundation::BOOL, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    on_channel_volume_changed : Proc(IAudioSessionEvents*, UInt32, Float32*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    on_grouping_param_changed : Proc(IAudioSessionEvents*, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    on_state_changed : Proc(IAudioSessionEvents*, Win32cr::Media::Audio::AudioSessionState, Win32cr::Foundation::HRESULT),
+    on_session_disconnected : Proc(IAudioSessionEvents*, Win32cr::Media::Audio::AudioSessionDisconnectReason, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("24918acc-64b3-37c1-8ca9-74a66e9957a8")]
+  record IAudioSessionEvents, lpVtbl : IAudioSessionEventsVtbl* do
+    GUID = LibC::GUID.new(0x24918acc_u32, 0x64b3_u16, 0x37c1_u16, StaticArray[0x8c_u8, 0xa9_u8, 0x74_u8, 0xa6_u8, 0x6e_u8, 0x99_u8, 0x57_u8, 0xa8_u8])
+    def query_interface(this : IAudioSessionEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioSessionEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioSessionEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_display_name_changed(this : IAudioSessionEvents*, new_display_name : Win32cr::Foundation::PWSTR, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_display_name_changed.call(this, new_display_name, event_context)
+    end
+    def on_icon_path_changed(this : IAudioSessionEvents*, new_icon_path : Win32cr::Foundation::PWSTR, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_icon_path_changed.call(this, new_icon_path, event_context)
+    end
+    def on_simple_volume_changed(this : IAudioSessionEvents*, new_volume : Float32, new_mute : Win32cr::Foundation::BOOL, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_simple_volume_changed.call(this, new_volume, new_mute, event_context)
+    end
+    def on_channel_volume_changed(this : IAudioSessionEvents*, channel_count : UInt32, new_channel_volume_array : Float32*, changed_channel : UInt32, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_channel_volume_changed.call(this, channel_count, new_channel_volume_array, changed_channel, event_context)
+    end
+    def on_grouping_param_changed(this : IAudioSessionEvents*, new_grouping_param : LibC::GUID*, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_grouping_param_changed.call(this, new_grouping_param, event_context)
+    end
+    def on_state_changed(this : IAudioSessionEvents*, new_state : Win32cr::Media::Audio::AudioSessionState) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_state_changed.call(this, new_state)
+    end
+    def on_session_disconnected(this : IAudioSessionEvents*, disconnect_reason : Win32cr::Media::Audio::AudioSessionDisconnectReason) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_session_disconnected.call(this, disconnect_reason)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioSessionControlVtbl,
+    query_interface : Proc(IAudioSessionControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioSessionControl*, UInt32),
+    release : Proc(IAudioSessionControl*, UInt32),
+    get_state : Proc(IAudioSessionControl*, Win32cr::Media::Audio::AudioSessionState*, Win32cr::Foundation::HRESULT),
+    get_display_name : Proc(IAudioSessionControl*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_display_name : Proc(IAudioSessionControl*, Win32cr::Foundation::PWSTR, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_icon_path : Proc(IAudioSessionControl*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_icon_path : Proc(IAudioSessionControl*, Win32cr::Foundation::PWSTR, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_grouping_param : Proc(IAudioSessionControl*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_grouping_param : Proc(IAudioSessionControl*, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    register_audio_session_notification : Proc(IAudioSessionControl*, Void*, Win32cr::Foundation::HRESULT),
+    unregister_audio_session_notification : Proc(IAudioSessionControl*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f4b1a599-7266-4319-a8ca-e70acb11e8cd")]
+  record IAudioSessionControl, lpVtbl : IAudioSessionControlVtbl* do
+    GUID = LibC::GUID.new(0xf4b1a599_u32, 0x7266_u16, 0x4319_u16, StaticArray[0xa8_u8, 0xca_u8, 0xe7_u8, 0xa_u8, 0xcb_u8, 0x11_u8, 0xe8_u8, 0xcd_u8])
+    def query_interface(this : IAudioSessionControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioSessionControl*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioSessionControl*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_state(this : IAudioSessionControl*, pRetVal : Win32cr::Media::Audio::AudioSessionState*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_state.call(this, pRetVal)
+    end
+    def get_display_name(this : IAudioSessionControl*, pRetVal : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_display_name.call(this, pRetVal)
+    end
+    def set_display_name(this : IAudioSessionControl*, value : Win32cr::Foundation::PWSTR, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_display_name.call(this, value, event_context)
+    end
+    def get_icon_path(this : IAudioSessionControl*, pRetVal : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_icon_path.call(this, pRetVal)
+    end
+    def set_icon_path(this : IAudioSessionControl*, value : Win32cr::Foundation::PWSTR, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_icon_path.call(this, value, event_context)
+    end
+    def get_grouping_param(this : IAudioSessionControl*, pRetVal : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_grouping_param.call(this, pRetVal)
+    end
+    def set_grouping_param(this : IAudioSessionControl*, override : LibC::GUID*, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_grouping_param.call(this, override, event_context)
+    end
+    def register_audio_session_notification(this : IAudioSessionControl*, new_notifications : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_audio_session_notification.call(this, new_notifications)
+    end
+    def unregister_audio_session_notification(this : IAudioSessionControl*, new_notifications : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_audio_session_notification.call(this, new_notifications)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioSessionControl2Vtbl,
+    query_interface : Proc(IAudioSessionControl2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioSessionControl2*, UInt32),
+    release : Proc(IAudioSessionControl2*, UInt32),
+    get_state : Proc(IAudioSessionControl2*, Win32cr::Media::Audio::AudioSessionState*, Win32cr::Foundation::HRESULT),
+    get_display_name : Proc(IAudioSessionControl2*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_display_name : Proc(IAudioSessionControl2*, Win32cr::Foundation::PWSTR, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_icon_path : Proc(IAudioSessionControl2*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    set_icon_path : Proc(IAudioSessionControl2*, Win32cr::Foundation::PWSTR, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_grouping_param : Proc(IAudioSessionControl2*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    set_grouping_param : Proc(IAudioSessionControl2*, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    register_audio_session_notification : Proc(IAudioSessionControl2*, Void*, Win32cr::Foundation::HRESULT),
+    unregister_audio_session_notification : Proc(IAudioSessionControl2*, Void*, Win32cr::Foundation::HRESULT),
+    get_session_identifier : Proc(IAudioSessionControl2*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_session_instance_identifier : Proc(IAudioSessionControl2*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    get_process_id : Proc(IAudioSessionControl2*, UInt32*, Win32cr::Foundation::HRESULT),
+    is_system_sounds_session : Proc(IAudioSessionControl2*, Win32cr::Foundation::HRESULT),
+    set_ducking_preference : Proc(IAudioSessionControl2*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("bfb7ff88-7239-4fc9-8fa2-07c950be9c6d")]
+  record IAudioSessionControl2, lpVtbl : IAudioSessionControl2Vtbl* do
+    GUID = LibC::GUID.new(0xbfb7ff88_u32, 0x7239_u16, 0x4fc9_u16, StaticArray[0x8f_u8, 0xa2_u8, 0x7_u8, 0xc9_u8, 0x50_u8, 0xbe_u8, 0x9c_u8, 0x6d_u8])
+    def query_interface(this : IAudioSessionControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioSessionControl2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioSessionControl2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_state(this : IAudioSessionControl2*, pRetVal : Win32cr::Media::Audio::AudioSessionState*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_state.call(this, pRetVal)
+    end
+    def get_display_name(this : IAudioSessionControl2*, pRetVal : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_display_name.call(this, pRetVal)
+    end
+    def set_display_name(this : IAudioSessionControl2*, value : Win32cr::Foundation::PWSTR, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_display_name.call(this, value, event_context)
+    end
+    def get_icon_path(this : IAudioSessionControl2*, pRetVal : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_icon_path.call(this, pRetVal)
+    end
+    def set_icon_path(this : IAudioSessionControl2*, value : Win32cr::Foundation::PWSTR, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_icon_path.call(this, value, event_context)
+    end
+    def get_grouping_param(this : IAudioSessionControl2*, pRetVal : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_grouping_param.call(this, pRetVal)
+    end
+    def set_grouping_param(this : IAudioSessionControl2*, override : LibC::GUID*, event_context : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_grouping_param.call(this, override, event_context)
+    end
+    def register_audio_session_notification(this : IAudioSessionControl2*, new_notifications : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_audio_session_notification.call(this, new_notifications)
+    end
+    def unregister_audio_session_notification(this : IAudioSessionControl2*, new_notifications : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_audio_session_notification.call(this, new_notifications)
+    end
+    def get_session_identifier(this : IAudioSessionControl2*, pRetVal : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_session_identifier.call(this, pRetVal)
+    end
+    def get_session_instance_identifier(this : IAudioSessionControl2*, pRetVal : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_session_instance_identifier.call(this, pRetVal)
+    end
+    def get_process_id(this : IAudioSessionControl2*, pRetVal : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_process_id.call(this, pRetVal)
+    end
+    def is_system_sounds_session(this : IAudioSessionControl2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_system_sounds_session.call(this)
+    end
+    def set_ducking_preference(this : IAudioSessionControl2*, optOut : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_ducking_preference.call(this, optOut)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioSessionManagerVtbl,
+    query_interface : Proc(IAudioSessionManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioSessionManager*, UInt32),
+    release : Proc(IAudioSessionManager*, UInt32),
+    get_audio_session_control : Proc(IAudioSessionManager*, LibC::GUID*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_simple_audio_volume : Proc(IAudioSessionManager*, LibC::GUID*, UInt32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("bfa971f1-4d5e-40bb-935e-967039bfbee4")]
+  record IAudioSessionManager, lpVtbl : IAudioSessionManagerVtbl* do
+    GUID = LibC::GUID.new(0xbfa971f1_u32, 0x4d5e_u16, 0x40bb_u16, StaticArray[0x93_u8, 0x5e_u8, 0x96_u8, 0x70_u8, 0x39_u8, 0xbf_u8, 0xbe_u8, 0xe4_u8])
+    def query_interface(this : IAudioSessionManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioSessionManager*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioSessionManager*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_audio_session_control(this : IAudioSessionManager*, audio_session_guid : LibC::GUID*, stream_flags : UInt32, session_control : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio_session_control.call(this, audio_session_guid, stream_flags, session_control)
+    end
+    def get_simple_audio_volume(this : IAudioSessionManager*, audio_session_guid : LibC::GUID*, stream_flags : UInt32, audio_volume : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_simple_audio_volume.call(this, audio_session_guid, stream_flags, audio_volume)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioVolumeDuckNotificationVtbl,
+    query_interface : Proc(IAudioVolumeDuckNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioVolumeDuckNotification*, UInt32),
+    release : Proc(IAudioVolumeDuckNotification*, UInt32),
+    on_volume_duck_notification : Proc(IAudioVolumeDuckNotification*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
+    on_volume_unduck_notification : Proc(IAudioVolumeDuckNotification*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c3b284d4-6d39-4359-b3cf-b56ddb3bb39c")]
+  record IAudioVolumeDuckNotification, lpVtbl : IAudioVolumeDuckNotificationVtbl* do
+    GUID = LibC::GUID.new(0xc3b284d4_u32, 0x6d39_u16, 0x4359_u16, StaticArray[0xb3_u8, 0xcf_u8, 0xb5_u8, 0x6d_u8, 0xdb_u8, 0x3b_u8, 0xb3_u8, 0x9c_u8])
+    def query_interface(this : IAudioVolumeDuckNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioVolumeDuckNotification*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioVolumeDuckNotification*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_volume_duck_notification(this : IAudioVolumeDuckNotification*, sessionID : Win32cr::Foundation::PWSTR, countCommunicationSessions : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_volume_duck_notification.call(this, sessionID, countCommunicationSessions)
+    end
+    def on_volume_unduck_notification(this : IAudioVolumeDuckNotification*, sessionID : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_volume_unduck_notification.call(this, sessionID)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioSessionNotificationVtbl,
+    query_interface : Proc(IAudioSessionNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioSessionNotification*, UInt32),
+    release : Proc(IAudioSessionNotification*, UInt32),
+    on_session_created : Proc(IAudioSessionNotification*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("641dd20b-4d41-49cc-aba3-174b9477bb08")]
+  record IAudioSessionNotification, lpVtbl : IAudioSessionNotificationVtbl* do
+    GUID = LibC::GUID.new(0x641dd20b_u32, 0x4d41_u16, 0x49cc_u16, StaticArray[0xab_u8, 0xa3_u8, 0x17_u8, 0x4b_u8, 0x94_u8, 0x77_u8, 0xbb_u8, 0x8_u8])
+    def query_interface(this : IAudioSessionNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioSessionNotification*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioSessionNotification*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_session_created(this : IAudioSessionNotification*, new_session : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_session_created.call(this, new_session)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioSessionEnumeratorVtbl,
+    query_interface : Proc(IAudioSessionEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioSessionEnumerator*, UInt32),
+    release : Proc(IAudioSessionEnumerator*, UInt32),
+    get_count : Proc(IAudioSessionEnumerator*, Int32*, Win32cr::Foundation::HRESULT),
+    get_session : Proc(IAudioSessionEnumerator*, Int32, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("e2f5bb11-0570-40ca-acdd-3aa01277dee8")]
+  record IAudioSessionEnumerator, lpVtbl : IAudioSessionEnumeratorVtbl* do
+    GUID = LibC::GUID.new(0xe2f5bb11_u32, 0x570_u16, 0x40ca_u16, StaticArray[0xac_u8, 0xdd_u8, 0x3a_u8, 0xa0_u8, 0x12_u8, 0x77_u8, 0xde_u8, 0xe8_u8])
+    def query_interface(this : IAudioSessionEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioSessionEnumerator*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioSessionEnumerator*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_count(this : IAudioSessionEnumerator*, session_count : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_count.call(this, session_count)
+    end
+    def get_session(this : IAudioSessionEnumerator*, session_count : Int32, session : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_session.call(this, session_count, session)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioSessionManager2Vtbl,
+    query_interface : Proc(IAudioSessionManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioSessionManager2*, UInt32),
+    release : Proc(IAudioSessionManager2*, UInt32),
+    get_audio_session_control : Proc(IAudioSessionManager2*, LibC::GUID*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_simple_audio_volume : Proc(IAudioSessionManager2*, LibC::GUID*, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_session_enumerator : Proc(IAudioSessionManager2*, Void**, Win32cr::Foundation::HRESULT),
+    register_session_notification : Proc(IAudioSessionManager2*, Void*, Win32cr::Foundation::HRESULT),
+    unregister_session_notification : Proc(IAudioSessionManager2*, Void*, Win32cr::Foundation::HRESULT),
+    register_duck_notification : Proc(IAudioSessionManager2*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::HRESULT),
+    unregister_duck_notification : Proc(IAudioSessionManager2*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("77aa99a0-1bd6-484f-8bc7-2c654c9a9b6f")]
+  record IAudioSessionManager2, lpVtbl : IAudioSessionManager2Vtbl* do
+    GUID = LibC::GUID.new(0x77aa99a0_u32, 0x1bd6_u16, 0x484f_u16, StaticArray[0x8b_u8, 0xc7_u8, 0x2c_u8, 0x65_u8, 0x4c_u8, 0x9a_u8, 0x9b_u8, 0x6f_u8])
+    def query_interface(this : IAudioSessionManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioSessionManager2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioSessionManager2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_audio_session_control(this : IAudioSessionManager2*, audio_session_guid : LibC::GUID*, stream_flags : UInt32, session_control : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio_session_control.call(this, audio_session_guid, stream_flags, session_control)
+    end
+    def get_simple_audio_volume(this : IAudioSessionManager2*, audio_session_guid : LibC::GUID*, stream_flags : UInt32, audio_volume : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_simple_audio_volume.call(this, audio_session_guid, stream_flags, audio_volume)
+    end
+    def get_session_enumerator(this : IAudioSessionManager2*, session_enum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_session_enumerator.call(this, session_enum)
+    end
+    def register_session_notification(this : IAudioSessionManager2*, session_notification : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_session_notification.call(this, session_notification)
+    end
+    def unregister_session_notification(this : IAudioSessionManager2*, session_notification : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_session_notification.call(this, session_notification)
+    end
+    def register_duck_notification(this : IAudioSessionManager2*, sessionID : Win32cr::Foundation::PWSTR, duckNotification : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_duck_notification.call(this, sessionID, duckNotification)
+    end
+    def unregister_duck_notification(this : IAudioSessionManager2*, duckNotification : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_duck_notification.call(this, duckNotification)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioMetadataItemsVtbl,
+    query_interface : Proc(ISpatialAudioMetadataItems*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioMetadataItems*, UInt32),
+    release : Proc(ISpatialAudioMetadataItems*, UInt32),
+    get_frame_count : Proc(ISpatialAudioMetadataItems*, UInt16*, Win32cr::Foundation::HRESULT),
+    get_item_count : Proc(ISpatialAudioMetadataItems*, UInt16*, Win32cr::Foundation::HRESULT),
+    get_max_item_count : Proc(ISpatialAudioMetadataItems*, UInt16*, Win32cr::Foundation::HRESULT),
+    get_max_value_buffer_length : Proc(ISpatialAudioMetadataItems*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_info : Proc(ISpatialAudioMetadataItems*, Win32cr::Media::Audio::SpatialAudioMetadataItemsInfo*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("bcd7c78f-3098-4f22-b547-a2f25a381269")]
+  record ISpatialAudioMetadataItems, lpVtbl : ISpatialAudioMetadataItemsVtbl* do
+    GUID = LibC::GUID.new(0xbcd7c78f_u32, 0x3098_u16, 0x4f22_u16, StaticArray[0xb5_u8, 0x47_u8, 0xa2_u8, 0xf2_u8, 0x5a_u8, 0x38_u8, 0x12_u8, 0x69_u8])
+    def query_interface(this : ISpatialAudioMetadataItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioMetadataItems*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioMetadataItems*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_frame_count(this : ISpatialAudioMetadataItems*, frameCount : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_frame_count.call(this, frameCount)
+    end
+    def get_item_count(this : ISpatialAudioMetadataItems*, itemCount : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_item_count.call(this, itemCount)
+    end
+    def get_max_item_count(this : ISpatialAudioMetadataItems*, maxItemCount : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_max_item_count.call(this, maxItemCount)
+    end
+    def get_max_value_buffer_length(this : ISpatialAudioMetadataItems*, maxValueBufferLength : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_max_value_buffer_length.call(this, maxValueBufferLength)
+    end
+    def get_info(this : ISpatialAudioMetadataItems*, info : Win32cr::Media::Audio::SpatialAudioMetadataItemsInfo*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_info.call(this, info)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioMetadataWriterVtbl,
+    query_interface : Proc(ISpatialAudioMetadataWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioMetadataWriter*, UInt32),
+    release : Proc(ISpatialAudioMetadataWriter*, UInt32),
+    open : Proc(ISpatialAudioMetadataWriter*, Void*, Win32cr::Foundation::HRESULT),
+    write_next_item : Proc(ISpatialAudioMetadataWriter*, UInt16, Win32cr::Foundation::HRESULT),
+    write_next_item_command : Proc(ISpatialAudioMetadataWriter*, UInt8, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    close : Proc(ISpatialAudioMetadataWriter*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("1b17ca01-2955-444d-a430-537dc589a844")]
+  record ISpatialAudioMetadataWriter, lpVtbl : ISpatialAudioMetadataWriterVtbl* do
+    GUID = LibC::GUID.new(0x1b17ca01_u32, 0x2955_u16, 0x444d_u16, StaticArray[0xa4_u8, 0x30_u8, 0x53_u8, 0x7d_u8, 0xc5_u8, 0x89_u8, 0xa8_u8, 0x44_u8])
+    def query_interface(this : ISpatialAudioMetadataWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioMetadataWriter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioMetadataWriter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def open(this : ISpatialAudioMetadataWriter*, metadataItems : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open.call(this, metadataItems)
+    end
+    def write_next_item(this : ISpatialAudioMetadataWriter*, frameOffset : UInt16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write_next_item.call(this, frameOffset)
+    end
+    def write_next_item_command(this : ISpatialAudioMetadataWriter*, commandID : UInt8, valueBuffer : Void*, valueBufferLength : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write_next_item_command.call(this, commandID, valueBuffer, valueBufferLength)
+    end
+    def close(this : ISpatialAudioMetadataWriter*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.close.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioMetadataReaderVtbl,
+    query_interface : Proc(ISpatialAudioMetadataReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioMetadataReader*, UInt32),
+    release : Proc(ISpatialAudioMetadataReader*, UInt32),
+    open : Proc(ISpatialAudioMetadataReader*, Void*, Win32cr::Foundation::HRESULT),
+    read_next_item : Proc(ISpatialAudioMetadataReader*, UInt8*, UInt16*, Win32cr::Foundation::HRESULT),
+    read_next_item_command : Proc(ISpatialAudioMetadataReader*, UInt8*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    close : Proc(ISpatialAudioMetadataReader*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b78e86a2-31d9-4c32-94d2-7df40fc7ebec")]
+  record ISpatialAudioMetadataReader, lpVtbl : ISpatialAudioMetadataReaderVtbl* do
+    GUID = LibC::GUID.new(0xb78e86a2_u32, 0x31d9_u16, 0x4c32_u16, StaticArray[0x94_u8, 0xd2_u8, 0x7d_u8, 0xf4_u8, 0xf_u8, 0xc7_u8, 0xeb_u8, 0xec_u8])
+    def query_interface(this : ISpatialAudioMetadataReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioMetadataReader*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioMetadataReader*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def open(this : ISpatialAudioMetadataReader*, metadataItems : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open.call(this, metadataItems)
+    end
+    def read_next_item(this : ISpatialAudioMetadataReader*, commandCount : UInt8*, frameOffset : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read_next_item.call(this, commandCount, frameOffset)
+    end
+    def read_next_item_command(this : ISpatialAudioMetadataReader*, commandID : UInt8*, valueBuffer : Void*, maxValueBufferLength : UInt32, valueBufferLength : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.read_next_item_command.call(this, commandID, valueBuffer, maxValueBufferLength, valueBufferLength)
+    end
+    def close(this : ISpatialAudioMetadataReader*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.close.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioMetadataCopierVtbl,
+    query_interface : Proc(ISpatialAudioMetadataCopier*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioMetadataCopier*, UInt32),
+    release : Proc(ISpatialAudioMetadataCopier*, UInt32),
+    open : Proc(ISpatialAudioMetadataCopier*, Void*, Win32cr::Foundation::HRESULT),
+    copy_metadata_for_frames : Proc(ISpatialAudioMetadataCopier*, UInt16, Win32cr::Media::Audio::SpatialAudioMetadataCopyMode, Void*, UInt16*, Win32cr::Foundation::HRESULT),
+    close : Proc(ISpatialAudioMetadataCopier*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("d224b233-e251-4fd0-9ca2-d5ecf9a68404")]
+  record ISpatialAudioMetadataCopier, lpVtbl : ISpatialAudioMetadataCopierVtbl* do
+    GUID = LibC::GUID.new(0xd224b233_u32, 0xe251_u16, 0x4fd0_u16, StaticArray[0x9c_u8, 0xa2_u8, 0xd5_u8, 0xec_u8, 0xf9_u8, 0xa6_u8, 0x84_u8, 0x4_u8])
+    def query_interface(this : ISpatialAudioMetadataCopier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioMetadataCopier*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioMetadataCopier*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def open(this : ISpatialAudioMetadataCopier*, metadataItems : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.open.call(this, metadataItems)
+    end
+    def copy_metadata_for_frames(this : ISpatialAudioMetadataCopier*, copyFrameCount : UInt16, copyMode : Win32cr::Media::Audio::SpatialAudioMetadataCopyMode, dstMetadataItems : Void*, itemsCopied : UInt16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy_metadata_for_frames.call(this, copyFrameCount, copyMode, dstMetadataItems, itemsCopied)
+    end
+    def close(this : ISpatialAudioMetadataCopier*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.close.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioMetadataItemsBufferVtbl,
+    query_interface : Proc(ISpatialAudioMetadataItemsBuffer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioMetadataItemsBuffer*, UInt32),
+    release : Proc(ISpatialAudioMetadataItemsBuffer*, UInt32),
+    attach_to_buffer : Proc(ISpatialAudioMetadataItemsBuffer*, UInt8*, UInt32, Win32cr::Foundation::HRESULT),
+    attach_to_populated_buffer : Proc(ISpatialAudioMetadataItemsBuffer*, UInt8*, UInt32, Win32cr::Foundation::HRESULT),
+    detach_buffer : Proc(ISpatialAudioMetadataItemsBuffer*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("42640a16-e1bd-42d9-9ff6-031ab71a2dba")]
+  record ISpatialAudioMetadataItemsBuffer, lpVtbl : ISpatialAudioMetadataItemsBufferVtbl* do
+    GUID = LibC::GUID.new(0x42640a16_u32, 0xe1bd_u16, 0x42d9_u16, StaticArray[0x9f_u8, 0xf6_u8, 0x3_u8, 0x1a_u8, 0xb7_u8, 0x1a_u8, 0x2d_u8, 0xba_u8])
+    def query_interface(this : ISpatialAudioMetadataItemsBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioMetadataItemsBuffer*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioMetadataItemsBuffer*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def attach_to_buffer(this : ISpatialAudioMetadataItemsBuffer*, buffer : UInt8*, bufferLength : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.attach_to_buffer.call(this, buffer, bufferLength)
+    end
+    def attach_to_populated_buffer(this : ISpatialAudioMetadataItemsBuffer*, buffer : UInt8*, bufferLength : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.attach_to_populated_buffer.call(this, buffer, bufferLength)
+    end
+    def detach_buffer(this : ISpatialAudioMetadataItemsBuffer*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.detach_buffer.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioMetadataClientVtbl,
+    query_interface : Proc(ISpatialAudioMetadataClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioMetadataClient*, UInt32),
+    release : Proc(ISpatialAudioMetadataClient*, UInt32),
+    activate_spatial_audio_metadata_items : Proc(ISpatialAudioMetadataClient*, UInt16, UInt16, Void**, Void**, Win32cr::Foundation::HRESULT),
+    get_spatial_audio_metadata_items_buffer_length : Proc(ISpatialAudioMetadataClient*, UInt16, UInt32*, Win32cr::Foundation::HRESULT),
+    activate_spatial_audio_metadata_writer : Proc(ISpatialAudioMetadataClient*, Win32cr::Media::Audio::SpatialAudioMetadataWriterOverflowMode, Void**, Win32cr::Foundation::HRESULT),
+    activate_spatial_audio_metadata_copier : Proc(ISpatialAudioMetadataClient*, Void**, Win32cr::Foundation::HRESULT),
+    activate_spatial_audio_metadata_reader : Proc(ISpatialAudioMetadataClient*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("777d4a3b-f6ff-4a26-85dc-68d7cdeda1d4")]
+  record ISpatialAudioMetadataClient, lpVtbl : ISpatialAudioMetadataClientVtbl* do
+    GUID = LibC::GUID.new(0x777d4a3b_u32, 0xf6ff_u16, 0x4a26_u16, StaticArray[0x85_u8, 0xdc_u8, 0x68_u8, 0xd7_u8, 0xcd_u8, 0xed_u8, 0xa1_u8, 0xd4_u8])
+    def query_interface(this : ISpatialAudioMetadataClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioMetadataClient*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioMetadataClient*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def activate_spatial_audio_metadata_items(this : ISpatialAudioMetadataClient*, maxItemCount : UInt16, frameCount : UInt16, metadataItemsBuffer : Void**, metadataItems : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate_spatial_audio_metadata_items.call(this, maxItemCount, frameCount, metadataItemsBuffer, metadataItems)
+    end
+    def get_spatial_audio_metadata_items_buffer_length(this : ISpatialAudioMetadataClient*, maxItemCount : UInt16, bufferLength : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_spatial_audio_metadata_items_buffer_length.call(this, maxItemCount, bufferLength)
+    end
+    def activate_spatial_audio_metadata_writer(this : ISpatialAudioMetadataClient*, overflowMode : Win32cr::Media::Audio::SpatialAudioMetadataWriterOverflowMode, metadataWriter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate_spatial_audio_metadata_writer.call(this, overflowMode, metadataWriter)
+    end
+    def activate_spatial_audio_metadata_copier(this : ISpatialAudioMetadataClient*, metadataCopier : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate_spatial_audio_metadata_copier.call(this, metadataCopier)
+    end
+    def activate_spatial_audio_metadata_reader(this : ISpatialAudioMetadataClient*, metadataReader : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate_spatial_audio_metadata_reader.call(this, metadataReader)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioObjectForMetadataCommandsVtbl,
+    query_interface : Proc(ISpatialAudioObjectForMetadataCommands*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioObjectForMetadataCommands*, UInt32),
+    release : Proc(ISpatialAudioObjectForMetadataCommands*, UInt32),
+    get_buffer : Proc(ISpatialAudioObjectForMetadataCommands*, UInt8**, UInt32*, Win32cr::Foundation::HRESULT),
+    set_end_of_stream : Proc(ISpatialAudioObjectForMetadataCommands*, UInt32, Win32cr::Foundation::HRESULT),
+    is_active : Proc(ISpatialAudioObjectForMetadataCommands*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_audio_object_type : Proc(ISpatialAudioObjectForMetadataCommands*, Win32cr::Media::Audio::AudioObjectType*, Win32cr::Foundation::HRESULT),
+    write_next_metadata_command : Proc(ISpatialAudioObjectForMetadataCommands*, UInt8, Void*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("0df2c94b-f5f9-472d-af6b-c46e0ac9cd05")]
+  record ISpatialAudioObjectForMetadataCommands, lpVtbl : ISpatialAudioObjectForMetadataCommandsVtbl* do
+    GUID = LibC::GUID.new(0xdf2c94b_u32, 0xf5f9_u16, 0x472d_u16, StaticArray[0xaf_u8, 0x6b_u8, 0xc4_u8, 0x6e_u8, 0xa_u8, 0xc9_u8, 0xcd_u8, 0x5_u8])
+    def query_interface(this : ISpatialAudioObjectForMetadataCommands*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioObjectForMetadataCommands*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioObjectForMetadataCommands*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_buffer(this : ISpatialAudioObjectForMetadataCommands*, buffer : UInt8**, bufferLength : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer.call(this, buffer, bufferLength)
+    end
+    def set_end_of_stream(this : ISpatialAudioObjectForMetadataCommands*, frameCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_end_of_stream.call(this, frameCount)
+    end
+    def is_active(this : ISpatialAudioObjectForMetadataCommands*, isActive : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_active.call(this, isActive)
+    end
+    def get_audio_object_type(this : ISpatialAudioObjectForMetadataCommands*, audioObjectType : Win32cr::Media::Audio::AudioObjectType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio_object_type.call(this, audioObjectType)
+    end
+    def write_next_metadata_command(this : ISpatialAudioObjectForMetadataCommands*, commandID : UInt8, valueBuffer : Void*, valueBufferLength : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.write_next_metadata_command.call(this, commandID, valueBuffer, valueBufferLength)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioObjectForMetadataItemsVtbl,
+    query_interface : Proc(ISpatialAudioObjectForMetadataItems*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioObjectForMetadataItems*, UInt32),
+    release : Proc(ISpatialAudioObjectForMetadataItems*, UInt32),
+    get_buffer : Proc(ISpatialAudioObjectForMetadataItems*, UInt8**, UInt32*, Win32cr::Foundation::HRESULT),
+    set_end_of_stream : Proc(ISpatialAudioObjectForMetadataItems*, UInt32, Win32cr::Foundation::HRESULT),
+    is_active : Proc(ISpatialAudioObjectForMetadataItems*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    get_audio_object_type : Proc(ISpatialAudioObjectForMetadataItems*, Win32cr::Media::Audio::AudioObjectType*, Win32cr::Foundation::HRESULT),
+    get_spatial_audio_metadata_items : Proc(ISpatialAudioObjectForMetadataItems*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("ddea49ff-3bc0-4377-8aad-9fbcfd808566")]
+  record ISpatialAudioObjectForMetadataItems, lpVtbl : ISpatialAudioObjectForMetadataItemsVtbl* do
+    GUID = LibC::GUID.new(0xddea49ff_u32, 0x3bc0_u16, 0x4377_u16, StaticArray[0x8a_u8, 0xad_u8, 0x9f_u8, 0xbc_u8, 0xfd_u8, 0x80_u8, 0x85_u8, 0x66_u8])
+    def query_interface(this : ISpatialAudioObjectForMetadataItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioObjectForMetadataItems*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioObjectForMetadataItems*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_buffer(this : ISpatialAudioObjectForMetadataItems*, buffer : UInt8**, bufferLength : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_buffer.call(this, buffer, bufferLength)
+    end
+    def set_end_of_stream(this : ISpatialAudioObjectForMetadataItems*, frameCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_end_of_stream.call(this, frameCount)
+    end
+    def is_active(this : ISpatialAudioObjectForMetadataItems*, isActive : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_active.call(this, isActive)
+    end
+    def get_audio_object_type(this : ISpatialAudioObjectForMetadataItems*, audioObjectType : Win32cr::Media::Audio::AudioObjectType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_audio_object_type.call(this, audioObjectType)
+    end
+    def get_spatial_audio_metadata_items(this : ISpatialAudioObjectForMetadataItems*, metadataItems : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_spatial_audio_metadata_items.call(this, metadataItems)
+    end
+
+  end
+
+  @[Extern]
+  record ISpatialAudioObjectRenderStreamForMetadataVtbl,
+    query_interface : Proc(ISpatialAudioObjectRenderStreamForMetadata*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISpatialAudioObjectRenderStreamForMetadata*, UInt32),
+    release : Proc(ISpatialAudioObjectRenderStreamForMetadata*, UInt32),
+    get_available_dynamic_object_count : Proc(ISpatialAudioObjectRenderStreamForMetadata*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_service : Proc(ISpatialAudioObjectRenderStreamForMetadata*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    start : Proc(ISpatialAudioObjectRenderStreamForMetadata*, Win32cr::Foundation::HRESULT),
+    stop : Proc(ISpatialAudioObjectRenderStreamForMetadata*, Win32cr::Foundation::HRESULT),
+    reset : Proc(ISpatialAudioObjectRenderStreamForMetadata*, Win32cr::Foundation::HRESULT),
+    begin_updating_audio_objects : Proc(ISpatialAudioObjectRenderStreamForMetadata*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    end_updating_audio_objects : Proc(ISpatialAudioObjectRenderStreamForMetadata*, Win32cr::Foundation::HRESULT),
+    activate_spatial_audio_object_for_metadata_commands : Proc(ISpatialAudioObjectRenderStreamForMetadata*, Win32cr::Media::Audio::AudioObjectType, Void**, Win32cr::Foundation::HRESULT),
+    activate_spatial_audio_object_for_metadata_items : Proc(ISpatialAudioObjectRenderStreamForMetadata*, Win32cr::Media::Audio::AudioObjectType, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("bbc9c907-48d5-4a2e-a0c7-f7f0d67c1fb1")]
+  record ISpatialAudioObjectRenderStreamForMetadata, lpVtbl : ISpatialAudioObjectRenderStreamForMetadataVtbl* do
+    GUID = LibC::GUID.new(0xbbc9c907_u32, 0x48d5_u16, 0x4a2e_u16, StaticArray[0xa0_u8, 0xc7_u8, 0xf7_u8, 0xf0_u8, 0xd6_u8, 0x7c_u8, 0x1f_u8, 0xb1_u8])
+    def query_interface(this : ISpatialAudioObjectRenderStreamForMetadata*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISpatialAudioObjectRenderStreamForMetadata*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISpatialAudioObjectRenderStreamForMetadata*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_available_dynamic_object_count(this : ISpatialAudioObjectRenderStreamForMetadata*, value : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_available_dynamic_object_count.call(this, value)
+    end
+    def get_service(this : ISpatialAudioObjectRenderStreamForMetadata*, riid : LibC::GUID*, service : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_service.call(this, riid, service)
+    end
+    def start(this : ISpatialAudioObjectRenderStreamForMetadata*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.start.call(this)
+    end
+    def stop(this : ISpatialAudioObjectRenderStreamForMetadata*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stop.call(this)
+    end
+    def reset(this : ISpatialAudioObjectRenderStreamForMetadata*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def begin_updating_audio_objects(this : ISpatialAudioObjectRenderStreamForMetadata*, availableDynamicObjectCount : UInt32*, frameCountPerBuffer : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.begin_updating_audio_objects.call(this, availableDynamicObjectCount, frameCountPerBuffer)
+    end
+    def end_updating_audio_objects(this : ISpatialAudioObjectRenderStreamForMetadata*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.end_updating_audio_objects.call(this)
+    end
+    def activate_spatial_audio_object_for_metadata_commands(this : ISpatialAudioObjectRenderStreamForMetadata*, type__ : Win32cr::Media::Audio::AudioObjectType, audioObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate_spatial_audio_object_for_metadata_commands.call(this, type__, audioObject)
+    end
+    def activate_spatial_audio_object_for_metadata_items(this : ISpatialAudioObjectRenderStreamForMetadata*, type__ : Win32cr::Media::Audio::AudioObjectType, audioObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.activate_spatial_audio_object_for_metadata_items.call(this, type__, audioObject)
+    end
+
+  end
+
+  @[Extern]
+  record IAudioStateMonitorVtbl,
+    query_interface : Proc(IAudioStateMonitor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioStateMonitor*, UInt32),
+    release : Proc(IAudioStateMonitor*, UInt32),
+    register_callback : Proc(IAudioStateMonitor*, Win32cr::Media::Audio::PAudioStateMonitorCallback, Void*, Int64*, Win32cr::Foundation::HRESULT),
+    unregister_callback : Proc(IAudioStateMonitor*, Int64, Void),
+    get_sound_level : Proc(IAudioStateMonitor*, Win32cr::Media::Audio::AudioStateMonitorSoundLevel)
+
+
+  @[Extern]
+  #@[Com("63bd8738-e30d-4c77-bf5c-834e87c657e2")]
+  record IAudioStateMonitor, lpVtbl : IAudioStateMonitorVtbl* do
+    GUID = LibC::GUID.new(0x63bd8738_u32, 0xe30d_u16, 0x4c77_u16, StaticArray[0xbf_u8, 0x5c_u8, 0x83_u8, 0x4e_u8, 0x87_u8, 0xc6_u8, 0x57_u8, 0xe2_u8])
+    def query_interface(this : IAudioStateMonitor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioStateMonitor*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioStateMonitor*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def register_callback(this : IAudioStateMonitor*, callback : Win32cr::Media::Audio::PAudioStateMonitorCallback, context : Void*, registration : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_callback.call(this, callback, context, registration)
+    end
+    def unregister_callback(this : IAudioStateMonitor*, registration : Int64) : Void
+      @lpVtbl.try &.value.unregister_callback.call(this, registration)
+    end
+    def get_sound_level(this : IAudioStateMonitor*) : Win32cr::Media::Audio::AudioStateMonitorSoundLevel
+      @lpVtbl.try &.value.get_sound_level.call(this)
+    end
+
+  end
+
+  @[Link("ole32")]
+  @[Link("winmm")]
+  @[Link("mmdevapi")]
+  @[Link("windows.media.mediacontrol")]
+  @[Link("msacm32")]
+  lib C
+    fun CoRegisterMessageFilter(lpMessageFilter : Void*, lplpMessageFilter : Void**) : Win32cr::Foundation::HRESULT
+
+    fun sndPlaySoundA(pszSound : Win32cr::Foundation::PSTR, fuSound : UInt32) : Win32cr::Foundation::BOOL
+
+    fun sndPlaySoundW(pszSound : Win32cr::Foundation::PWSTR, fuSound : UInt32) : Win32cr::Foundation::BOOL
+
+    fun PlaySoundA(pszSound : Win32cr::Foundation::PSTR, hmod : Win32cr::Foundation::HINSTANCE, fdwSound : UInt32) : Win32cr::Foundation::BOOL
+
+    fun PlaySoundW(pszSound : Win32cr::Foundation::PWSTR, hmod : Win32cr::Foundation::HINSTANCE, fdwSound : UInt32) : Win32cr::Foundation::BOOL
+
+    fun waveOutGetNumDevs : UInt32
+
+    fun waveOutGetDevCapsA(uDeviceID : LibC::UIntPtrT, pwoc : Win32cr::Media::Audio::WAVEOUTCAPSA*, cbwoc : UInt32) : UInt32
+
+    fun waveOutGetDevCapsW(uDeviceID : LibC::UIntPtrT, pwoc : Win32cr::Media::Audio::WAVEOUTCAPSW*, cbwoc : UInt32) : UInt32
+
+    fun waveOutGetVolume(hwo : Win32cr::Media::Audio::HWAVEOUT, pdwVolume : UInt32*) : UInt32
+
+    fun waveOutSetVolume(hwo : Win32cr::Media::Audio::HWAVEOUT, dwVolume : UInt32) : UInt32
+
+    fun waveOutGetErrorTextA(mmrError : UInt32, pszText : UInt8*, cchText : UInt32) : UInt32
+
+    fun waveOutGetErrorTextW(mmrError : UInt32, pszText : UInt16*, cchText : UInt32) : UInt32
+
+    fun waveOutOpen(phwo : Win32cr::Media::Audio::HWAVEOUT*, uDeviceID : UInt32, pwfx : Win32cr::Media::Audio::WAVEFORMATEX*, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : Win32cr::Media::Audio::MIDI_WAVE_OPEN_TYPE) : UInt32
+
+    fun waveOutClose(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
+
+    fun waveOutPrepareHeader(hwo : Win32cr::Media::Audio::HWAVEOUT, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
+
+    fun waveOutUnprepareHeader(hwo : Win32cr::Media::Audio::HWAVEOUT, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
+
+    fun waveOutWrite(hwo : Win32cr::Media::Audio::HWAVEOUT, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
+
+    fun waveOutPause(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
+
+    fun waveOutRestart(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
+
+    fun waveOutReset(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
+
+    fun waveOutBreakLoop(hwo : Win32cr::Media::Audio::HWAVEOUT) : UInt32
+
+    fun waveOutGetPosition(hwo : Win32cr::Media::Audio::HWAVEOUT, pmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
+
+    fun waveOutGetPitch(hwo : Win32cr::Media::Audio::HWAVEOUT, pdwPitch : UInt32*) : UInt32
+
+    fun waveOutSetPitch(hwo : Win32cr::Media::Audio::HWAVEOUT, dwPitch : UInt32) : UInt32
+
+    fun waveOutGetPlaybackRate(hwo : Win32cr::Media::Audio::HWAVEOUT, pdwRate : UInt32*) : UInt32
+
+    fun waveOutSetPlaybackRate(hwo : Win32cr::Media::Audio::HWAVEOUT, dwRate : UInt32) : UInt32
+
+    fun waveOutGetID(hwo : Win32cr::Media::Audio::HWAVEOUT, puDeviceID : UInt32*) : UInt32
+
+    fun waveOutMessage(hwo : Win32cr::Media::Audio::HWAVEOUT, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
+
+    fun waveInGetNumDevs : UInt32
+
+    fun waveInGetDevCapsA(uDeviceID : LibC::UIntPtrT, pwic : Win32cr::Media::Audio::WAVEINCAPSA*, cbwic : UInt32) : UInt32
+
+    fun waveInGetDevCapsW(uDeviceID : LibC::UIntPtrT, pwic : Win32cr::Media::Audio::WAVEINCAPSW*, cbwic : UInt32) : UInt32
+
+    fun waveInGetErrorTextA(mmrError : UInt32, pszText : UInt8*, cchText : UInt32) : UInt32
+
+    fun waveInGetErrorTextW(mmrError : UInt32, pszText : UInt16*, cchText : UInt32) : UInt32
+
+    fun waveInOpen(phwi : Win32cr::Media::Audio::HWAVEIN*, uDeviceID : UInt32, pwfx : Win32cr::Media::Audio::WAVEFORMATEX*, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : Win32cr::Media::Audio::MIDI_WAVE_OPEN_TYPE) : UInt32
+
+    fun waveInClose(hwi : Win32cr::Media::Audio::HWAVEIN) : UInt32
+
+    fun waveInPrepareHeader(hwi : Win32cr::Media::Audio::HWAVEIN, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
+
+    fun waveInUnprepareHeader(hwi : Win32cr::Media::Audio::HWAVEIN, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
+
+    fun waveInAddBuffer(hwi : Win32cr::Media::Audio::HWAVEIN, pwh : Win32cr::Media::Audio::WAVEHDR*, cbwh : UInt32) : UInt32
+
+    fun waveInStart(hwi : Win32cr::Media::Audio::HWAVEIN) : UInt32
+
+    fun waveInStop(hwi : Win32cr::Media::Audio::HWAVEIN) : UInt32
+
+    fun waveInReset(hwi : Win32cr::Media::Audio::HWAVEIN) : UInt32
+
+    fun waveInGetPosition(hwi : Win32cr::Media::Audio::HWAVEIN, pmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
+
+    fun waveInGetID(hwi : Win32cr::Media::Audio::HWAVEIN, puDeviceID : UInt32*) : UInt32
+
+    fun waveInMessage(hwi : Win32cr::Media::Audio::HWAVEIN, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
+
+    fun midiOutGetNumDevs : UInt32
+
+    fun midiStreamOpen(phms : Win32cr::Media::Audio::HMIDISTRM*, puDeviceID : UInt32*, cMidi : UInt32, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : UInt32) : UInt32
+
+    fun midiStreamClose(hms : Win32cr::Media::Audio::HMIDISTRM) : UInt32
+
+    fun midiStreamProperty(hms : Win32cr::Media::Audio::HMIDISTRM, lppropdata : UInt8*, dwProperty : UInt32) : UInt32
+
+    fun midiStreamPosition(hms : Win32cr::Media::Audio::HMIDISTRM, lpmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
+
+    fun midiStreamOut(hms : Win32cr::Media::Audio::HMIDISTRM, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+
+    fun midiStreamPause(hms : Win32cr::Media::Audio::HMIDISTRM) : UInt32
+
+    fun midiStreamRestart(hms : Win32cr::Media::Audio::HMIDISTRM) : UInt32
+
+    fun midiStreamStop(hms : Win32cr::Media::Audio::HMIDISTRM) : UInt32
+
+    fun midiConnect(hmi : Win32cr::Media::Audio::HMIDI, hmo : Win32cr::Media::Audio::HMIDIOUT, pReserved : Void*) : UInt32
+
+    fun midiDisconnect(hmi : Win32cr::Media::Audio::HMIDI, hmo : Win32cr::Media::Audio::HMIDIOUT, pReserved : Void*) : UInt32
+
+    fun midiOutGetDevCapsA(uDeviceID : LibC::UIntPtrT, pmoc : Win32cr::Media::Audio::MIDIOUTCAPSA*, cbmoc : UInt32) : UInt32
+
+    fun midiOutGetDevCapsW(uDeviceID : LibC::UIntPtrT, pmoc : Win32cr::Media::Audio::MIDIOUTCAPSW*, cbmoc : UInt32) : UInt32
+
+    fun midiOutGetVolume(hmo : Win32cr::Media::Audio::HMIDIOUT, pdwVolume : UInt32*) : UInt32
+
+    fun midiOutSetVolume(hmo : Win32cr::Media::Audio::HMIDIOUT, dwVolume : UInt32) : UInt32
+
+    fun midiOutGetErrorTextA(mmrError : UInt32, pszText : UInt8*, cchText : UInt32) : UInt32
+
+    fun midiOutGetErrorTextW(mmrError : UInt32, pszText : UInt16*, cchText : UInt32) : UInt32
+
+    fun midiOutOpen(phmo : Win32cr::Media::Audio::HMIDIOUT*, uDeviceID : UInt32, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : Win32cr::Media::Audio::MIDI_WAVE_OPEN_TYPE) : UInt32
+
+    fun midiOutClose(hmo : Win32cr::Media::Audio::HMIDIOUT) : UInt32
+
+    fun midiOutPrepareHeader(hmo : Win32cr::Media::Audio::HMIDIOUT, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+
+    fun midiOutUnprepareHeader(hmo : Win32cr::Media::Audio::HMIDIOUT, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+
+    fun midiOutShortMsg(hmo : Win32cr::Media::Audio::HMIDIOUT, dwMsg : UInt32) : UInt32
+
+    fun midiOutLongMsg(hmo : Win32cr::Media::Audio::HMIDIOUT, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+
+    fun midiOutReset(hmo : Win32cr::Media::Audio::HMIDIOUT) : UInt32
+
+    fun midiOutCachePatches(hmo : Win32cr::Media::Audio::HMIDIOUT, uBank : UInt32, pwpa : UInt16*, fuCache : UInt32) : UInt32
+
+    fun midiOutCacheDrumPatches(hmo : Win32cr::Media::Audio::HMIDIOUT, uPatch : UInt32, pwkya : UInt16*, fuCache : UInt32) : UInt32
+
+    fun midiOutGetID(hmo : Win32cr::Media::Audio::HMIDIOUT, puDeviceID : UInt32*) : UInt32
+
+    fun midiOutMessage(hmo : Win32cr::Media::Audio::HMIDIOUT, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
+
+    fun midiInGetNumDevs : UInt32
+
+    fun midiInGetDevCapsA(uDeviceID : LibC::UIntPtrT, pmic : Win32cr::Media::Audio::MIDIINCAPSA*, cbmic : UInt32) : UInt32
+
+    fun midiInGetDevCapsW(uDeviceID : LibC::UIntPtrT, pmic : Win32cr::Media::Audio::MIDIINCAPSW*, cbmic : UInt32) : UInt32
+
+    fun midiInGetErrorTextA(mmrError : UInt32, pszText : UInt8*, cchText : UInt32) : UInt32
+
+    fun midiInGetErrorTextW(mmrError : UInt32, pszText : UInt16*, cchText : UInt32) : UInt32
+
+    fun midiInOpen(phmi : Win32cr::Media::Audio::HMIDIIN*, uDeviceID : UInt32, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : Win32cr::Media::Audio::MIDI_WAVE_OPEN_TYPE) : UInt32
+
+    fun midiInClose(hmi : Win32cr::Media::Audio::HMIDIIN) : UInt32
+
+    fun midiInPrepareHeader(hmi : Win32cr::Media::Audio::HMIDIIN, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+
+    fun midiInUnprepareHeader(hmi : Win32cr::Media::Audio::HMIDIIN, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+
+    fun midiInAddBuffer(hmi : Win32cr::Media::Audio::HMIDIIN, pmh : Win32cr::Media::Audio::MIDIHDR*, cbmh : UInt32) : UInt32
+
+    fun midiInStart(hmi : Win32cr::Media::Audio::HMIDIIN) : UInt32
+
+    fun midiInStop(hmi : Win32cr::Media::Audio::HMIDIIN) : UInt32
+
+    fun midiInReset(hmi : Win32cr::Media::Audio::HMIDIIN) : UInt32
+
+    fun midiInGetID(hmi : Win32cr::Media::Audio::HMIDIIN, puDeviceID : UInt32*) : UInt32
+
+    fun midiInMessage(hmi : Win32cr::Media::Audio::HMIDIIN, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
+
+    fun auxGetNumDevs : UInt32
+
+    fun auxGetDevCapsA(uDeviceID : LibC::UIntPtrT, pac : Win32cr::Media::Audio::AUXCAPSA*, cbac : UInt32) : UInt32
+
+    fun auxGetDevCapsW(uDeviceID : LibC::UIntPtrT, pac : Win32cr::Media::Audio::AUXCAPSW*, cbac : UInt32) : UInt32
+
+    fun auxSetVolume(uDeviceID : UInt32, dwVolume : UInt32) : UInt32
+
+    fun auxGetVolume(uDeviceID : UInt32, pdwVolume : UInt32*) : UInt32
+
+    fun auxOutMessage(uDeviceID : UInt32, uMsg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : UInt32
+
+    fun mixerGetNumDevs : UInt32
+
+    fun mixerGetDevCapsA(uMxId : LibC::UIntPtrT, pmxcaps : Win32cr::Media::Audio::MIXERCAPSA*, cbmxcaps : UInt32) : UInt32
+
+    fun mixerGetDevCapsW(uMxId : LibC::UIntPtrT, pmxcaps : Win32cr::Media::Audio::MIXERCAPSW*, cbmxcaps : UInt32) : UInt32
+
+    fun mixerOpen(phmx : LibC::IntPtrT*, uMxId : UInt32, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : UInt32) : UInt32
+
+    fun mixerClose(hmx : Win32cr::Media::Audio::HMIXER) : UInt32
+
+    fun mixerMessage(hmx : Win32cr::Media::Audio::HMIXER, uMsg : UInt32, dwParam1 : LibC::UIntPtrT, dwParam2 : LibC::UIntPtrT) : UInt32
+
+    fun mixerGetLineInfoA(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxl : Win32cr::Media::Audio::MIXERLINEA*, fdwInfo : UInt32) : UInt32
+
+    fun mixerGetLineInfoW(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxl : Win32cr::Media::Audio::MIXERLINEW*, fdwInfo : UInt32) : UInt32
+
+    fun mixerGetID(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, puMxId : UInt32*, fdwId : UInt32) : UInt32
+
+    fun mixerGetLineControlsA(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxlc : Win32cr::Media::Audio::MIXERLINECONTROLSA*, fdwControls : UInt32) : UInt32
+
+    fun mixerGetLineControlsW(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxlc : Win32cr::Media::Audio::MIXERLINECONTROLSW*, fdwControls : UInt32) : UInt32
+
+    fun mixerGetControlDetailsA(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxcd : Win32cr::Media::Audio::MIXERCONTROLDETAILS*, fdwDetails : UInt32) : UInt32
+
+    fun mixerGetControlDetailsW(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxcd : Win32cr::Media::Audio::MIXERCONTROLDETAILS*, fdwDetails : UInt32) : UInt32
+
+    fun mixerSetControlDetails(hmxobj : Win32cr::Media::Audio::HMIXEROBJ, pmxcd : Win32cr::Media::Audio::MIXERCONTROLDETAILS*, fdwDetails : UInt32) : UInt32
+
+    fun ActivateAudioInterfaceAsync(deviceInterfacePath : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, activationParams : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, completionHandler : Void*, activationOperation : Void**) : Win32cr::Foundation::HRESULT
+
+    fun CreateRenderAudioStateMonitor(audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+
+    fun CreateRenderAudioStateMonitorForCategory(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+
+    fun CreateRenderAudioStateMonitorForCategoryAndDeviceRole(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, role : Win32cr::Media::Audio::ERole, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+
+    fun CreateRenderAudioStateMonitorForCategoryAndDeviceId(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, deviceId : Win32cr::Foundation::PWSTR, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+
+    fun CreateCaptureAudioStateMonitor(audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+
+    fun CreateCaptureAudioStateMonitorForCategory(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+
+    fun CreateCaptureAudioStateMonitorForCategoryAndDeviceRole(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, role : Win32cr::Media::Audio::ERole, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+
+    fun CreateCaptureAudioStateMonitorForCategoryAndDeviceId(category : Win32cr::Media::Audio::AUDIO_STREAM_CATEGORY, deviceId : Win32cr::Foundation::PWSTR, audioStateMonitor : Void**) : Win32cr::Foundation::HRESULT
+
+    fun acmGetVersion : UInt32
+
+    fun acmMetrics(hao : Win32cr::Media::Audio::HACMOBJ, uMetric : UInt32, pMetric : Void*) : UInt32
+
+    fun acmDriverEnum(fnCallback : Win32cr::Media::Audio::ACMDRIVERENUMCB, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+
+    fun acmDriverID(hao : Win32cr::Media::Audio::HACMOBJ, phadid : LibC::IntPtrT*, fdwDriverID : UInt32) : UInt32
+
+    fun acmDriverAddA(phadid : LibC::IntPtrT*, hinstModule : Win32cr::Foundation::HINSTANCE, lParam : Win32cr::Foundation::LPARAM, dwPriority : UInt32, fdwAdd : UInt32) : UInt32
+
+    fun acmDriverAddW(phadid : LibC::IntPtrT*, hinstModule : Win32cr::Foundation::HINSTANCE, lParam : Win32cr::Foundation::LPARAM, dwPriority : UInt32, fdwAdd : UInt32) : UInt32
+
+    fun acmDriverRemove(hadid : Win32cr::Media::Audio::HACMDRIVERID, fdwRemove : UInt32) : UInt32
+
+    fun acmDriverOpen(phad : LibC::IntPtrT*, hadid : Win32cr::Media::Audio::HACMDRIVERID, fdwOpen : UInt32) : UInt32
+
+    fun acmDriverClose(had : Win32cr::Media::Audio::HACMDRIVER, fdwClose : UInt32) : UInt32
+
+    fun acmDriverMessage(had : Win32cr::Media::Audio::HACMDRIVER, uMsg : UInt32, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+
+    fun acmDriverPriority(hadid : Win32cr::Media::Audio::HACMDRIVERID, dwPriority : UInt32, fdwPriority : UInt32) : UInt32
+
+    fun acmDriverDetailsA(hadid : Win32cr::Media::Audio::HACMDRIVERID, padd : Win32cr::Media::Audio::ACMDRIVERDETAILSA*, fdwDetails : UInt32) : UInt32
+
+    fun acmDriverDetailsW(hadid : Win32cr::Media::Audio::HACMDRIVERID, padd : Win32cr::Media::Audio::ACMDRIVERDETAILSW*, fdwDetails : UInt32) : UInt32
+
+    fun acmFormatTagDetailsA(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFORMATTAGDETAILSA*, fdwDetails : UInt32) : UInt32
+
+    fun acmFormatTagDetailsW(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFORMATTAGDETAILSW*, fdwDetails : UInt32) : UInt32
+
+    fun acmFormatTagEnumA(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFORMATTAGDETAILSA*, fnCallback : Win32cr::Media::Audio::ACMFORMATTAGENUMCBA, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+
+    fun acmFormatTagEnumW(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFORMATTAGDETAILSW*, fnCallback : Win32cr::Media::Audio::ACMFORMATTAGENUMCBW, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+
+    fun acmFormatDetailsA(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFORMATDETAILSA*, fdwDetails : UInt32) : UInt32
+
+    fun acmFormatDetailsW(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::Tacmformatdetailsw*, fdwDetails : UInt32) : UInt32
+
+    fun acmFormatEnumA(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFORMATDETAILSA*, fnCallback : Win32cr::Media::Audio::ACMFORMATENUMCBA, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+
+    fun acmFormatEnumW(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::Tacmformatdetailsw*, fnCallback : Win32cr::Media::Audio::ACMFORMATENUMCBW, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+
+    fun acmFormatSuggest(had : Win32cr::Media::Audio::HACMDRIVER, pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*, pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*, cbwfxDst : UInt32, fdwSuggest : UInt32) : UInt32
+
+    fun acmFormatChooseA(pafmtc : Win32cr::Media::Audio::ACMFORMATCHOOSEA*) : UInt32
+
+    fun acmFormatChooseW(pafmtc : Win32cr::Media::Audio::ACMFORMATCHOOSEW*) : UInt32
+
+    fun acmFilterTagDetailsA(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFILTERTAGDETAILSA*, fdwDetails : UInt32) : UInt32
+
+    fun acmFilterTagDetailsW(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFILTERTAGDETAILSW*, fdwDetails : UInt32) : UInt32
+
+    fun acmFilterTagEnumA(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFILTERTAGDETAILSA*, fnCallback : Win32cr::Media::Audio::ACMFILTERTAGENUMCBA, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+
+    fun acmFilterTagEnumW(had : Win32cr::Media::Audio::HACMDRIVER, paftd : Win32cr::Media::Audio::ACMFILTERTAGDETAILSW*, fnCallback : Win32cr::Media::Audio::ACMFILTERTAGENUMCBW, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+
+    fun acmFilterDetailsA(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFILTERDETAILSA*, fdwDetails : UInt32) : UInt32
+
+    fun acmFilterDetailsW(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFILTERDETAILSW*, fdwDetails : UInt32) : UInt32
+
+    fun acmFilterEnumA(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFILTERDETAILSA*, fnCallback : Win32cr::Media::Audio::ACMFILTERENUMCBA, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+
+    fun acmFilterEnumW(had : Win32cr::Media::Audio::HACMDRIVER, pafd : Win32cr::Media::Audio::ACMFILTERDETAILSW*, fnCallback : Win32cr::Media::Audio::ACMFILTERENUMCBW, dwInstance : LibC::UIntPtrT, fdwEnum : UInt32) : UInt32
+
+    fun acmFilterChooseA(pafltrc : Win32cr::Media::Audio::ACMFILTERCHOOSEA*) : UInt32
+
+    fun acmFilterChooseW(pafltrc : Win32cr::Media::Audio::ACMFILTERCHOOSEW*) : UInt32
+
+    fun acmStreamOpen(phas : LibC::IntPtrT*, had : Win32cr::Media::Audio::HACMDRIVER, pwfxSrc : Win32cr::Media::Audio::WAVEFORMATEX*, pwfxDst : Win32cr::Media::Audio::WAVEFORMATEX*, pwfltr : Win32cr::Media::Audio::WAVEFILTER*, dwCallback : LibC::UIntPtrT, dwInstance : LibC::UIntPtrT, fdwOpen : UInt32) : UInt32
+
+    fun acmStreamClose(has : Win32cr::Media::Audio::HACMSTREAM, fdwClose : UInt32) : UInt32
+
+    fun acmStreamSize(has : Win32cr::Media::Audio::HACMSTREAM, cbInput : UInt32, pdwOutputBytes : UInt32*, fdwSize : UInt32) : UInt32
+
+    fun acmStreamReset(has : Win32cr::Media::Audio::HACMSTREAM, fdwReset : UInt32) : UInt32
+
+    fun acmStreamMessage(has : Win32cr::Media::Audio::HACMSTREAM, uMsg : UInt32, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : UInt32
+
+    fun acmStreamConvert(has : Win32cr::Media::Audio::HACMSTREAM, pash : Win32cr::Media::Audio::ACMSTREAMHEADER*, fdwConvert : UInt32) : UInt32
+
+    fun acmStreamPrepareHeader(has : Win32cr::Media::Audio::HACMSTREAM, pash : Win32cr::Media::Audio::ACMSTREAMHEADER*, fdwPrepare : UInt32) : UInt32
+
+    fun acmStreamUnprepareHeader(has : Win32cr::Media::Audio::HACMSTREAM, pash : Win32cr::Media::Audio::ACMSTREAMHEADER*, fdwUnprepare : UInt32) : UInt32
 
-  # Params # hwi : HWAVEIN [In],pudeviceid : UInt32* [In]
-  fun waveInGetID(hwi : HWAVEIN, pudeviceid : UInt32*) : UInt32
-
-  # Params # hwi : HWAVEIN [In],umsg : UInt32 [In],dw1 : LibC::UINT_PTR [In],dw2 : LibC::UINT_PTR [In]
-  fun waveInMessage(hwi : HWAVEIN, umsg : UInt32, dw1 : LibC::UINT_PTR, dw2 : LibC::UINT_PTR) : UInt32
-
-  # Params # 
-  fun midiOutGetNumDevs : UInt32
-
-  # Params # phms : HMIDISTRM* [In],pudeviceid : UInt32* [In],cmidi : UInt32 [In],dwcallback : LibC::UINT_PTR [In],dwinstance : LibC::UINT_PTR [In],fdwopen : UInt32 [In]
-  fun midiStreamOpen(phms : HMIDISTRM*, pudeviceid : UInt32*, cmidi : UInt32, dwcallback : LibC::UINT_PTR, dwinstance : LibC::UINT_PTR, fdwopen : UInt32) : UInt32
-
-  # Params # hms : HMIDISTRM [In]
-  fun midiStreamClose(hms : HMIDISTRM) : UInt32
-
-  # Params # hms : HMIDISTRM [In],lppropdata : UInt8* [In],dwproperty : UInt32 [In]
-  fun midiStreamProperty(hms : HMIDISTRM, lppropdata : UInt8*, dwproperty : UInt32) : UInt32
-
-  # Params # hms : HMIDISTRM [In],lpmmt : MMTIME* [In],cbmmt : UInt32 [In]
-  fun midiStreamPosition(hms : HMIDISTRM, lpmmt : MMTIME*, cbmmt : UInt32) : UInt32
-
-  # Params # hms : HMIDISTRM [In],pmh : MIDIHDR* [In],cbmh : UInt32 [In]
-  fun midiStreamOut(hms : HMIDISTRM, pmh : MIDIHDR*, cbmh : UInt32) : UInt32
-
-  # Params # hms : HMIDISTRM [In]
-  fun midiStreamPause(hms : HMIDISTRM) : UInt32
-
-  # Params # hms : HMIDISTRM [In]
-  fun midiStreamRestart(hms : HMIDISTRM) : UInt32
-
-  # Params # hms : HMIDISTRM [In]
-  fun midiStreamStop(hms : HMIDISTRM) : UInt32
-
-  # Params # hmi : HMIDI [In],hmo : HMIDIOUT [In],preserved : Void* [In]
-  fun midiConnect(hmi : HMIDI, hmo : HMIDIOUT, preserved : Void*) : UInt32
-
-  # Params # hmi : HMIDI [In],hmo : HMIDIOUT [In],preserved : Void* [In]
-  fun midiDisconnect(hmi : HMIDI, hmo : HMIDIOUT, preserved : Void*) : UInt32
-
-  # Params # udeviceid : LibC::UINT_PTR [In],pmoc : MIDIOUTCAPSA* [In],cbmoc : UInt32 [In]
-  fun midiOutGetDevCapsA(udeviceid : LibC::UINT_PTR, pmoc : MIDIOUTCAPSA*, cbmoc : UInt32) : UInt32
-
-  # Params # udeviceid : LibC::UINT_PTR [In],pmoc : MIDIOUTCAPSW* [In],cbmoc : UInt32 [In]
-  fun midiOutGetDevCapsW(udeviceid : LibC::UINT_PTR, pmoc : MIDIOUTCAPSW*, cbmoc : UInt32) : UInt32
-
-  # Params # hmo : HMIDIOUT [In],pdwvolume : UInt32* [In]
-  fun midiOutGetVolume(hmo : HMIDIOUT, pdwvolume : UInt32*) : UInt32
-
-  # Params # hmo : HMIDIOUT [In],dwvolume : UInt32 [In]
-  fun midiOutSetVolume(hmo : HMIDIOUT, dwvolume : UInt32) : UInt32
-
-  # Params # mmrerror : UInt32 [In],psztext : UInt8* [In],cchtext : UInt32 [In]
-  fun midiOutGetErrorTextA(mmrerror : UInt32, psztext : UInt8*, cchtext : UInt32) : UInt32
-
-  # Params # mmrerror : UInt32 [In],psztext : Char* [In],cchtext : UInt32 [In]
-  fun midiOutGetErrorTextW(mmrerror : UInt32, psztext : Char*, cchtext : UInt32) : UInt32
-
-  # Params # phmo : HMIDIOUT* [In],udeviceid : UInt32 [In],dwcallback : LibC::UINT_PTR [In],dwinstance : LibC::UINT_PTR [In],fdwopen : MIDI_WAVE_OPEN_TYPE [In]
-  fun midiOutOpen(phmo : HMIDIOUT*, udeviceid : UInt32, dwcallback : LibC::UINT_PTR, dwinstance : LibC::UINT_PTR, fdwopen : MIDI_WAVE_OPEN_TYPE) : UInt32
-
-  # Params # hmo : HMIDIOUT [In]
-  fun midiOutClose(hmo : HMIDIOUT) : UInt32
-
-  # Params # hmo : HMIDIOUT [In],pmh : MIDIHDR* [In],cbmh : UInt32 [In]
-  fun midiOutPrepareHeader(hmo : HMIDIOUT, pmh : MIDIHDR*, cbmh : UInt32) : UInt32
-
-  # Params # hmo : HMIDIOUT [In],pmh : MIDIHDR* [In],cbmh : UInt32 [In]
-  fun midiOutUnprepareHeader(hmo : HMIDIOUT, pmh : MIDIHDR*, cbmh : UInt32) : UInt32
-
-  # Params # hmo : HMIDIOUT [In],dwmsg : UInt32 [In]
-  fun midiOutShortMsg(hmo : HMIDIOUT, dwmsg : UInt32) : UInt32
-
-  # Params # hmo : HMIDIOUT [In],pmh : MIDIHDR* [In],cbmh : UInt32 [In]
-  fun midiOutLongMsg(hmo : HMIDIOUT, pmh : MIDIHDR*, cbmh : UInt32) : UInt32
-
-  # Params # hmo : HMIDIOUT [In]
-  fun midiOutReset(hmo : HMIDIOUT) : UInt32
-
-  # Params # hmo : HMIDIOUT [In],ubank : UInt32 [In],pwpa : UInt16* [In],fucache : UInt32 [In]
-  fun midiOutCachePatches(hmo : HMIDIOUT, ubank : UInt32, pwpa : UInt16*, fucache : UInt32) : UInt32
-
-  # Params # hmo : HMIDIOUT [In],upatch : UInt32 [In],pwkya : UInt16* [In],fucache : UInt32 [In]
-  fun midiOutCacheDrumPatches(hmo : HMIDIOUT, upatch : UInt32, pwkya : UInt16*, fucache : UInt32) : UInt32
-
-  # Params # hmo : HMIDIOUT [In],pudeviceid : UInt32* [In]
-  fun midiOutGetID(hmo : HMIDIOUT, pudeviceid : UInt32*) : UInt32
-
-  # Params # hmo : HMIDIOUT [In],umsg : UInt32 [In],dw1 : LibC::UINT_PTR [In],dw2 : LibC::UINT_PTR [In]
-  fun midiOutMessage(hmo : HMIDIOUT, umsg : UInt32, dw1 : LibC::UINT_PTR, dw2 : LibC::UINT_PTR) : UInt32
-
-  # Params # 
-  fun midiInGetNumDevs : UInt32
-
-  # Params # udeviceid : LibC::UINT_PTR [In],pmic : MIDIINCAPSA* [In],cbmic : UInt32 [In]
-  fun midiInGetDevCapsA(udeviceid : LibC::UINT_PTR, pmic : MIDIINCAPSA*, cbmic : UInt32) : UInt32
-
-  # Params # udeviceid : LibC::UINT_PTR [In],pmic : MIDIINCAPSW* [In],cbmic : UInt32 [In]
-  fun midiInGetDevCapsW(udeviceid : LibC::UINT_PTR, pmic : MIDIINCAPSW*, cbmic : UInt32) : UInt32
-
-  # Params # mmrerror : UInt32 [In],psztext : UInt8* [In],cchtext : UInt32 [In]
-  fun midiInGetErrorTextA(mmrerror : UInt32, psztext : UInt8*, cchtext : UInt32) : UInt32
-
-  # Params # mmrerror : UInt32 [In],psztext : Char* [In],cchtext : UInt32 [In]
-  fun midiInGetErrorTextW(mmrerror : UInt32, psztext : Char*, cchtext : UInt32) : UInt32
-
-  # Params # phmi : HMIDIIN* [In],udeviceid : UInt32 [In],dwcallback : LibC::UINT_PTR [In],dwinstance : LibC::UINT_PTR [In],fdwopen : MIDI_WAVE_OPEN_TYPE [In]
-  fun midiInOpen(phmi : HMIDIIN*, udeviceid : UInt32, dwcallback : LibC::UINT_PTR, dwinstance : LibC::UINT_PTR, fdwopen : MIDI_WAVE_OPEN_TYPE) : UInt32
-
-  # Params # hmi : HMIDIIN [In]
-  fun midiInClose(hmi : HMIDIIN) : UInt32
-
-  # Params # hmi : HMIDIIN [In],pmh : MIDIHDR* [In],cbmh : UInt32 [In]
-  fun midiInPrepareHeader(hmi : HMIDIIN, pmh : MIDIHDR*, cbmh : UInt32) : UInt32
-
-  # Params # hmi : HMIDIIN [In],pmh : MIDIHDR* [In],cbmh : UInt32 [In]
-  fun midiInUnprepareHeader(hmi : HMIDIIN, pmh : MIDIHDR*, cbmh : UInt32) : UInt32
-
-  # Params # hmi : HMIDIIN [In],pmh : MIDIHDR* [In],cbmh : UInt32 [In]
-  fun midiInAddBuffer(hmi : HMIDIIN, pmh : MIDIHDR*, cbmh : UInt32) : UInt32
-
-  # Params # hmi : HMIDIIN [In]
-  fun midiInStart(hmi : HMIDIIN) : UInt32
-
-  # Params # hmi : HMIDIIN [In]
-  fun midiInStop(hmi : HMIDIIN) : UInt32
-
-  # Params # hmi : HMIDIIN [In]
-  fun midiInReset(hmi : HMIDIIN) : UInt32
-
-  # Params # hmi : HMIDIIN [In],pudeviceid : UInt32* [In]
-  fun midiInGetID(hmi : HMIDIIN, pudeviceid : UInt32*) : UInt32
-
-  # Params # hmi : HMIDIIN [In],umsg : UInt32 [In],dw1 : LibC::UINT_PTR [In],dw2 : LibC::UINT_PTR [In]
-  fun midiInMessage(hmi : HMIDIIN, umsg : UInt32, dw1 : LibC::UINT_PTR, dw2 : LibC::UINT_PTR) : UInt32
-
-  # Params # 
-  fun auxGetNumDevs : UInt32
-
-  # Params # udeviceid : LibC::UINT_PTR [In],pac : AUXCAPSA* [In],cbac : UInt32 [In]
-  fun auxGetDevCapsA(udeviceid : LibC::UINT_PTR, pac : AUXCAPSA*, cbac : UInt32) : UInt32
-
-  # Params # udeviceid : LibC::UINT_PTR [In],pac : AUXCAPSW* [In],cbac : UInt32 [In]
-  fun auxGetDevCapsW(udeviceid : LibC::UINT_PTR, pac : AUXCAPSW*, cbac : UInt32) : UInt32
-
-  # Params # udeviceid : UInt32 [In],dwvolume : UInt32 [In]
-  fun auxSetVolume(udeviceid : UInt32, dwvolume : UInt32) : UInt32
-
-  # Params # udeviceid : UInt32 [In],pdwvolume : UInt32* [In]
-  fun auxGetVolume(udeviceid : UInt32, pdwvolume : UInt32*) : UInt32
-
-  # Params # udeviceid : UInt32 [In],umsg : UInt32 [In],dw1 : LibC::UINT_PTR [In],dw2 : LibC::UINT_PTR [In]
-  fun auxOutMessage(udeviceid : UInt32, umsg : UInt32, dw1 : LibC::UINT_PTR, dw2 : LibC::UINT_PTR) : UInt32
-
-  # Params # 
-  fun mixerGetNumDevs : UInt32
-
-  # Params # umxid : LibC::UINT_PTR [In],pmxcaps : MIXERCAPSA* [In],cbmxcaps : UInt32 [In]
-  fun mixerGetDevCapsA(umxid : LibC::UINT_PTR, pmxcaps : MIXERCAPSA*, cbmxcaps : UInt32) : UInt32
-
-  # Params # umxid : LibC::UINT_PTR [In],pmxcaps : MIXERCAPSW* [In],cbmxcaps : UInt32 [In]
-  fun mixerGetDevCapsW(umxid : LibC::UINT_PTR, pmxcaps : MIXERCAPSW*, cbmxcaps : UInt32) : UInt32
-
-  # Params # phmx : LibC::IntPtrT* [In],umxid : UInt32 [In],dwcallback : LibC::UINT_PTR [In],dwinstance : LibC::UINT_PTR [In],fdwopen : UInt32 [In]
-  fun mixerOpen(phmx : LibC::IntPtrT*, umxid : UInt32, dwcallback : LibC::UINT_PTR, dwinstance : LibC::UINT_PTR, fdwopen : UInt32) : UInt32
-
-  # Params # hmx : HMIXER [In]
-  fun mixerClose(hmx : HMIXER) : UInt32
-
-  # Params # hmx : HMIXER [In],umsg : UInt32 [In],dwparam1 : LibC::UINT_PTR [In],dwparam2 : LibC::UINT_PTR [In]
-  fun mixerMessage(hmx : HMIXER, umsg : UInt32, dwparam1 : LibC::UINT_PTR, dwparam2 : LibC::UINT_PTR) : UInt32
-
-  # Params # hmxobj : HMIXEROBJ [In],pmxl : MIXERLINEA* [In],fdwinfo : UInt32 [In]
-  fun mixerGetLineInfoA(hmxobj : HMIXEROBJ, pmxl : MIXERLINEA*, fdwinfo : UInt32) : UInt32
-
-  # Params # hmxobj : HMIXEROBJ [In],pmxl : MIXERLINEW* [In],fdwinfo : UInt32 [In]
-  fun mixerGetLineInfoW(hmxobj : HMIXEROBJ, pmxl : MIXERLINEW*, fdwinfo : UInt32) : UInt32
-
-  # Params # hmxobj : HMIXEROBJ [In],pumxid : UInt32* [In],fdwid : UInt32 [In]
-  fun mixerGetID(hmxobj : HMIXEROBJ, pumxid : UInt32*, fdwid : UInt32) : UInt32
-
-  # Params # hmxobj : HMIXEROBJ [In],pmxlc : MIXERLINECONTROLSA* [In],fdwcontrols : UInt32 [In]
-  fun mixerGetLineControlsA(hmxobj : HMIXEROBJ, pmxlc : MIXERLINECONTROLSA*, fdwcontrols : UInt32) : UInt32
-
-  # Params # hmxobj : HMIXEROBJ [In],pmxlc : MIXERLINECONTROLSW* [In],fdwcontrols : UInt32 [In]
-  fun mixerGetLineControlsW(hmxobj : HMIXEROBJ, pmxlc : MIXERLINECONTROLSW*, fdwcontrols : UInt32) : UInt32
-
-  # Params # hmxobj : HMIXEROBJ [In],pmxcd : MIXERCONTROLDETAILS* [In],fdwdetails : UInt32 [In]
-  fun mixerGetControlDetailsA(hmxobj : HMIXEROBJ, pmxcd : MIXERCONTROLDETAILS*, fdwdetails : UInt32) : UInt32
-
-  # Params # hmxobj : HMIXEROBJ [In],pmxcd : MIXERCONTROLDETAILS* [In],fdwdetails : UInt32 [In]
-  fun mixerGetControlDetailsW(hmxobj : HMIXEROBJ, pmxcd : MIXERCONTROLDETAILS*, fdwdetails : UInt32) : UInt32
-
-  # Params # hmxobj : HMIXEROBJ [In],pmxcd : MIXERCONTROLDETAILS* [In],fdwdetails : UInt32 [In]
-  fun mixerSetControlDetails(hmxobj : HMIXEROBJ, pmxcd : MIXERCONTROLDETAILS*, fdwdetails : UInt32) : UInt32
-
-  # Params # deviceinterfacepath : LibC::LPWSTR [In],riid : Guid* [In],activationparams : PROPVARIANT* [In],completionhandler : IActivateAudioInterfaceCompletionHandler [In],activationoperation : IActivateAudioInterfaceAsyncOperation* [In]
-  fun ActivateAudioInterfaceAsync(deviceinterfacepath : LibC::LPWSTR, riid : Guid*, activationparams : PROPVARIANT*, completionhandler : IActivateAudioInterfaceCompletionHandler, activationoperation : IActivateAudioInterfaceAsyncOperation*) : HRESULT
-
-  # Params # audiostatemonitor : IAudioStateMonitor* [In]
-  fun CreateRenderAudioStateMonitor(audiostatemonitor : IAudioStateMonitor*) : HRESULT
-
-  # Params # category : AUDIO_STREAM_CATEGORY [In],audiostatemonitor : IAudioStateMonitor* [In]
-  fun CreateRenderAudioStateMonitorForCategory(category : AUDIO_STREAM_CATEGORY, audiostatemonitor : IAudioStateMonitor*) : HRESULT
-
-  # Params # category : AUDIO_STREAM_CATEGORY [In],role : ERole [In],audiostatemonitor : IAudioStateMonitor* [In]
-  fun CreateRenderAudioStateMonitorForCategoryAndDeviceRole(category : AUDIO_STREAM_CATEGORY, role : ERole, audiostatemonitor : IAudioStateMonitor*) : HRESULT
-
-  # Params # category : AUDIO_STREAM_CATEGORY [In],deviceid : LibC::LPWSTR [In],audiostatemonitor : IAudioStateMonitor* [In]
-  fun CreateRenderAudioStateMonitorForCategoryAndDeviceId(category : AUDIO_STREAM_CATEGORY, deviceid : LibC::LPWSTR, audiostatemonitor : IAudioStateMonitor*) : HRESULT
-
-  # Params # audiostatemonitor : IAudioStateMonitor* [In]
-  fun CreateCaptureAudioStateMonitor(audiostatemonitor : IAudioStateMonitor*) : HRESULT
-
-  # Params # category : AUDIO_STREAM_CATEGORY [In],audiostatemonitor : IAudioStateMonitor* [In]
-  fun CreateCaptureAudioStateMonitorForCategory(category : AUDIO_STREAM_CATEGORY, audiostatemonitor : IAudioStateMonitor*) : HRESULT
-
-  # Params # category : AUDIO_STREAM_CATEGORY [In],role : ERole [In],audiostatemonitor : IAudioStateMonitor* [In]
-  fun CreateCaptureAudioStateMonitorForCategoryAndDeviceRole(category : AUDIO_STREAM_CATEGORY, role : ERole, audiostatemonitor : IAudioStateMonitor*) : HRESULT
-
-  # Params # category : AUDIO_STREAM_CATEGORY [In],deviceid : LibC::LPWSTR [In],audiostatemonitor : IAudioStateMonitor* [In]
-  fun CreateCaptureAudioStateMonitorForCategoryAndDeviceId(category : AUDIO_STREAM_CATEGORY, deviceid : LibC::LPWSTR, audiostatemonitor : IAudioStateMonitor*) : HRESULT
-
-  # Params # 
-  fun acmGetVersion : UInt32
-
-  # Params # hao : HACMOBJ [In],umetric : UInt32 [In],pmetric : Void* [In]
-  fun acmMetrics(hao : HACMOBJ, umetric : UInt32, pmetric : Void*) : UInt32
-
-  # Params # fncallback : ACMDRIVERENUMCB [In],dwinstance : LibC::UINT_PTR [In],fdwenum : UInt32 [In]
-  fun acmDriverEnum(fncallback : ACMDRIVERENUMCB, dwinstance : LibC::UINT_PTR, fdwenum : UInt32) : UInt32
-
-  # Params # hao : HACMOBJ [In],phadid : LibC::IntPtrT* [In],fdwdriverid : UInt32 [In]
-  fun acmDriverID(hao : HACMOBJ, phadid : LibC::IntPtrT*, fdwdriverid : UInt32) : UInt32
-
-  # Params # phadid : LibC::IntPtrT* [In],hinstmodule : HINSTANCE [In],lparam : LPARAM [In],dwpriority : UInt32 [In],fdwadd : UInt32 [In]
-  fun acmDriverAddA(phadid : LibC::IntPtrT*, hinstmodule : HINSTANCE, lparam : LPARAM, dwpriority : UInt32, fdwadd : UInt32) : UInt32
-
-  # Params # phadid : LibC::IntPtrT* [In],hinstmodule : HINSTANCE [In],lparam : LPARAM [In],dwpriority : UInt32 [In],fdwadd : UInt32 [In]
-  fun acmDriverAddW(phadid : LibC::IntPtrT*, hinstmodule : HINSTANCE, lparam : LPARAM, dwpriority : UInt32, fdwadd : UInt32) : UInt32
-
-  # Params # hadid : HACMDRIVERID [In],fdwremove : UInt32 [In]
-  fun acmDriverRemove(hadid : HACMDRIVERID, fdwremove : UInt32) : UInt32
-
-  # Params # phad : LibC::IntPtrT* [In],hadid : HACMDRIVERID [In],fdwopen : UInt32 [In]
-  fun acmDriverOpen(phad : LibC::IntPtrT*, hadid : HACMDRIVERID, fdwopen : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],fdwclose : UInt32 [In]
-  fun acmDriverClose(had : HACMDRIVER, fdwclose : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],umsg : UInt32 [In],lparam1 : LPARAM [In],lparam2 : LPARAM [In]
-  fun acmDriverMessage(had : HACMDRIVER, umsg : UInt32, lparam1 : LPARAM, lparam2 : LPARAM) : LRESULT
-
-  # Params # hadid : HACMDRIVERID [In],dwpriority : UInt32 [In],fdwpriority : UInt32 [In]
-  fun acmDriverPriority(hadid : HACMDRIVERID, dwpriority : UInt32, fdwpriority : UInt32) : UInt32
-
-  # Params # hadid : HACMDRIVERID [In],padd : ACMDRIVERDETAILSA* [In],fdwdetails : UInt32 [In]
-  fun acmDriverDetailsA(hadid : HACMDRIVERID, padd : ACMDRIVERDETAILSA*, fdwdetails : UInt32) : UInt32
-
-  # Params # hadid : HACMDRIVERID [In],padd : ACMDRIVERDETAILSW* [In],fdwdetails : UInt32 [In]
-  fun acmDriverDetailsW(hadid : HACMDRIVERID, padd : ACMDRIVERDETAILSW*, fdwdetails : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],paftd : ACMFORMATTAGDETAILSA* [In],fdwdetails : UInt32 [In]
-  fun acmFormatTagDetailsA(had : HACMDRIVER, paftd : ACMFORMATTAGDETAILSA*, fdwdetails : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],paftd : ACMFORMATTAGDETAILSW* [In],fdwdetails : UInt32 [In]
-  fun acmFormatTagDetailsW(had : HACMDRIVER, paftd : ACMFORMATTAGDETAILSW*, fdwdetails : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],paftd : ACMFORMATTAGDETAILSA* [In],fncallback : ACMFORMATTAGENUMCBA [In],dwinstance : LibC::UINT_PTR [In],fdwenum : UInt32 [In]
-  fun acmFormatTagEnumA(had : HACMDRIVER, paftd : ACMFORMATTAGDETAILSA*, fncallback : ACMFORMATTAGENUMCBA, dwinstance : LibC::UINT_PTR, fdwenum : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],paftd : ACMFORMATTAGDETAILSW* [In],fncallback : ACMFORMATTAGENUMCBW [In],dwinstance : LibC::UINT_PTR [In],fdwenum : UInt32 [In]
-  fun acmFormatTagEnumW(had : HACMDRIVER, paftd : ACMFORMATTAGDETAILSW*, fncallback : ACMFORMATTAGENUMCBW, dwinstance : LibC::UINT_PTR, fdwenum : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],pafd : ACMFORMATDETAILSA* [In],fdwdetails : UInt32 [In]
-  fun acmFormatDetailsA(had : HACMDRIVER, pafd : ACMFORMATDETAILSA*, fdwdetails : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],pafd : Tacmformatdetailsw* [In],fdwdetails : UInt32 [In]
-  fun acmFormatDetailsW(had : HACMDRIVER, pafd : Tacmformatdetailsw*, fdwdetails : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],pafd : ACMFORMATDETAILSA* [In],fncallback : ACMFORMATENUMCBA [In],dwinstance : LibC::UINT_PTR [In],fdwenum : UInt32 [In]
-  fun acmFormatEnumA(had : HACMDRIVER, pafd : ACMFORMATDETAILSA*, fncallback : ACMFORMATENUMCBA, dwinstance : LibC::UINT_PTR, fdwenum : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],pafd : Tacmformatdetailsw* [In],fncallback : ACMFORMATENUMCBW [In],dwinstance : LibC::UINT_PTR [In],fdwenum : UInt32 [In]
-  fun acmFormatEnumW(had : HACMDRIVER, pafd : Tacmformatdetailsw*, fncallback : ACMFORMATENUMCBW, dwinstance : LibC::UINT_PTR, fdwenum : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],pwfxsrc : WAVEFORMATEX* [In],pwfxdst : WAVEFORMATEX* [In],cbwfxdst : UInt32 [In],fdwsuggest : UInt32 [In]
-  fun acmFormatSuggest(had : HACMDRIVER, pwfxsrc : WAVEFORMATEX*, pwfxdst : WAVEFORMATEX*, cbwfxdst : UInt32, fdwsuggest : UInt32) : UInt32
-
-  # Params # pafmtc : ACMFORMATCHOOSEA* [In]
-  fun acmFormatChooseA(pafmtc : ACMFORMATCHOOSEA*) : UInt32
-
-  # Params # pafmtc : ACMFORMATCHOOSEW* [In]
-  fun acmFormatChooseW(pafmtc : ACMFORMATCHOOSEW*) : UInt32
-
-  # Params # had : HACMDRIVER [In],paftd : ACMFILTERTAGDETAILSA* [In],fdwdetails : UInt32 [In]
-  fun acmFilterTagDetailsA(had : HACMDRIVER, paftd : ACMFILTERTAGDETAILSA*, fdwdetails : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],paftd : ACMFILTERTAGDETAILSW* [In],fdwdetails : UInt32 [In]
-  fun acmFilterTagDetailsW(had : HACMDRIVER, paftd : ACMFILTERTAGDETAILSW*, fdwdetails : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],paftd : ACMFILTERTAGDETAILSA* [In],fncallback : ACMFILTERTAGENUMCBA [In],dwinstance : LibC::UINT_PTR [In],fdwenum : UInt32 [In]
-  fun acmFilterTagEnumA(had : HACMDRIVER, paftd : ACMFILTERTAGDETAILSA*, fncallback : ACMFILTERTAGENUMCBA, dwinstance : LibC::UINT_PTR, fdwenum : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],paftd : ACMFILTERTAGDETAILSW* [In],fncallback : ACMFILTERTAGENUMCBW [In],dwinstance : LibC::UINT_PTR [In],fdwenum : UInt32 [In]
-  fun acmFilterTagEnumW(had : HACMDRIVER, paftd : ACMFILTERTAGDETAILSW*, fncallback : ACMFILTERTAGENUMCBW, dwinstance : LibC::UINT_PTR, fdwenum : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],pafd : ACMFILTERDETAILSA* [In],fdwdetails : UInt32 [In]
-  fun acmFilterDetailsA(had : HACMDRIVER, pafd : ACMFILTERDETAILSA*, fdwdetails : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],pafd : ACMFILTERDETAILSW* [In],fdwdetails : UInt32 [In]
-  fun acmFilterDetailsW(had : HACMDRIVER, pafd : ACMFILTERDETAILSW*, fdwdetails : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],pafd : ACMFILTERDETAILSA* [In],fncallback : ACMFILTERENUMCBA [In],dwinstance : LibC::UINT_PTR [In],fdwenum : UInt32 [In]
-  fun acmFilterEnumA(had : HACMDRIVER, pafd : ACMFILTERDETAILSA*, fncallback : ACMFILTERENUMCBA, dwinstance : LibC::UINT_PTR, fdwenum : UInt32) : UInt32
-
-  # Params # had : HACMDRIVER [In],pafd : ACMFILTERDETAILSW* [In],fncallback : ACMFILTERENUMCBW [In],dwinstance : LibC::UINT_PTR [In],fdwenum : UInt32 [In]
-  fun acmFilterEnumW(had : HACMDRIVER, pafd : ACMFILTERDETAILSW*, fncallback : ACMFILTERENUMCBW, dwinstance : LibC::UINT_PTR, fdwenum : UInt32) : UInt32
-
-  # Params # pafltrc : ACMFILTERCHOOSEA* [In]
-  fun acmFilterChooseA(pafltrc : ACMFILTERCHOOSEA*) : UInt32
-
-  # Params # pafltrc : ACMFILTERCHOOSEW* [In]
-  fun acmFilterChooseW(pafltrc : ACMFILTERCHOOSEW*) : UInt32
-
-  # Params # phas : LibC::IntPtrT* [In],had : HACMDRIVER [In],pwfxsrc : WAVEFORMATEX* [In],pwfxdst : WAVEFORMATEX* [In],pwfltr : WAVEFILTER* [In],dwcallback : LibC::UINT_PTR [In],dwinstance : LibC::UINT_PTR [In],fdwopen : UInt32 [In]
-  fun acmStreamOpen(phas : LibC::IntPtrT*, had : HACMDRIVER, pwfxsrc : WAVEFORMATEX*, pwfxdst : WAVEFORMATEX*, pwfltr : WAVEFILTER*, dwcallback : LibC::UINT_PTR, dwinstance : LibC::UINT_PTR, fdwopen : UInt32) : UInt32
-
-  # Params # has : HACMSTREAM [In],fdwclose : UInt32 [In]
-  fun acmStreamClose(has : HACMSTREAM, fdwclose : UInt32) : UInt32
-
-  # Params # has : HACMSTREAM [In],cbinput : UInt32 [In],pdwoutputbytes : UInt32* [In],fdwsize : UInt32 [In]
-  fun acmStreamSize(has : HACMSTREAM, cbinput : UInt32, pdwoutputbytes : UInt32*, fdwsize : UInt32) : UInt32
-
-  # Params # has : HACMSTREAM [In],fdwreset : UInt32 [In]
-  fun acmStreamReset(has : HACMSTREAM, fdwreset : UInt32) : UInt32
-
-  # Params # has : HACMSTREAM [In],umsg : UInt32 [In],lparam1 : LPARAM [In],lparam2 : LPARAM [In]
-  fun acmStreamMessage(has : HACMSTREAM, umsg : UInt32, lparam1 : LPARAM, lparam2 : LPARAM) : UInt32
-
-  # Params # has : HACMSTREAM [In],pash : ACMSTREAMHEADER* [In],fdwconvert : UInt32 [In]
-  fun acmStreamConvert(has : HACMSTREAM, pash : ACMSTREAMHEADER*, fdwconvert : UInt32) : UInt32
-
-  # Params # has : HACMSTREAM [In],pash : ACMSTREAMHEADER* [In],fdwprepare : UInt32 [In]
-  fun acmStreamPrepareHeader(has : HACMSTREAM, pash : ACMSTREAMHEADER*, fdwprepare : UInt32) : UInt32
-
-  # Params # has : HACMSTREAM [In],pash : ACMSTREAMHEADER* [In],fdwunprepare : UInt32 [In]
-  fun acmStreamUnprepareHeader(has : HACMSTREAM, pash : ACMSTREAMHEADER*, fdwunprepare : UInt32) : UInt32
-end
-struct LibWin32::IMessageFilter
-  def query_interface(this : IMessageFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMessageFilter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMessageFilter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def handle_in_coming_call(this : IMessageFilter*, dwcalltype : UInt32, htaskcaller : HTASK, dwtickcount : UInt32, lpinterfaceinfo : INTERFACEINFO*) : UInt32
-    @lpVtbl.value.handle_in_coming_call.call(this, dwcalltype, htaskcaller, dwtickcount, lpinterfaceinfo)
-  end
-  def retry_rejected_call(this : IMessageFilter*, htaskcallee : HTASK, dwtickcount : UInt32, dwrejecttype : UInt32) : UInt32
-    @lpVtbl.value.retry_rejected_call.call(this, htaskcallee, dwtickcount, dwrejecttype)
-  end
-  def message_pending(this : IMessageFilter*, htaskcallee : HTASK, dwtickcount : UInt32, dwpendingtype : UInt32) : UInt32
-    @lpVtbl.value.message_pending.call(this, htaskcallee, dwtickcount, dwpendingtype)
-  end
-end
-struct LibWin32::IAudioClient
-  def query_interface(this : IAudioClient*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioClient*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioClient*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def initialize(this : IAudioClient*, sharemode : AUDCLNT_SHAREMODE, streamflags : UInt32, hnsbufferduration : Int64, hnsperiodicity : Int64, pformat : WAVEFORMATEX*, audiosessionguid : Guid*) : HRESULT
-    @lpVtbl.value.initialize.call(this, sharemode, streamflags, hnsbufferduration, hnsperiodicity, pformat, audiosessionguid)
-  end
-  def get_buffer_size(this : IAudioClient*, pnumbufferframes : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffer_size.call(this, pnumbufferframes)
-  end
-  def get_stream_latency(this : IAudioClient*, phnslatency : Int64*) : HRESULT
-    @lpVtbl.value.get_stream_latency.call(this, phnslatency)
-  end
-  def get_current_padding(this : IAudioClient*, pnumpaddingframes : UInt32*) : HRESULT
-    @lpVtbl.value.get_current_padding.call(this, pnumpaddingframes)
-  end
-  def is_format_supported(this : IAudioClient*, sharemode : AUDCLNT_SHAREMODE, pformat : WAVEFORMATEX*, ppclosestmatch : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.is_format_supported.call(this, sharemode, pformat, ppclosestmatch)
-  end
-  def get_mix_format(this : IAudioClient*, ppdeviceformat : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.get_mix_format.call(this, ppdeviceformat)
-  end
-  def get_device_period(this : IAudioClient*, phnsdefaultdeviceperiod : Int64*, phnsminimumdeviceperiod : Int64*) : HRESULT
-    @lpVtbl.value.get_device_period.call(this, phnsdefaultdeviceperiod, phnsminimumdeviceperiod)
-  end
-  def start(this : IAudioClient*) : HRESULT
-    @lpVtbl.value.start.call(this)
-  end
-  def stop(this : IAudioClient*) : HRESULT
-    @lpVtbl.value.stop.call(this)
-  end
-  def reset(this : IAudioClient*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def set_event_handle(this : IAudioClient*, eventhandle : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.set_event_handle.call(this, eventhandle)
-  end
-  def get_service(this : IAudioClient*, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_service.call(this, riid, ppv)
-  end
-end
-struct LibWin32::IAudioClient2
-  def query_interface(this : IAudioClient2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioClient2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioClient2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def initialize(this : IAudioClient2*, sharemode : AUDCLNT_SHAREMODE, streamflags : UInt32, hnsbufferduration : Int64, hnsperiodicity : Int64, pformat : WAVEFORMATEX*, audiosessionguid : Guid*) : HRESULT
-    @lpVtbl.value.initialize.call(this, sharemode, streamflags, hnsbufferduration, hnsperiodicity, pformat, audiosessionguid)
-  end
-  def get_buffer_size(this : IAudioClient2*, pnumbufferframes : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffer_size.call(this, pnumbufferframes)
-  end
-  def get_stream_latency(this : IAudioClient2*, phnslatency : Int64*) : HRESULT
-    @lpVtbl.value.get_stream_latency.call(this, phnslatency)
-  end
-  def get_current_padding(this : IAudioClient2*, pnumpaddingframes : UInt32*) : HRESULT
-    @lpVtbl.value.get_current_padding.call(this, pnumpaddingframes)
-  end
-  def is_format_supported(this : IAudioClient2*, sharemode : AUDCLNT_SHAREMODE, pformat : WAVEFORMATEX*, ppclosestmatch : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.is_format_supported.call(this, sharemode, pformat, ppclosestmatch)
-  end
-  def get_mix_format(this : IAudioClient2*, ppdeviceformat : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.get_mix_format.call(this, ppdeviceformat)
-  end
-  def get_device_period(this : IAudioClient2*, phnsdefaultdeviceperiod : Int64*, phnsminimumdeviceperiod : Int64*) : HRESULT
-    @lpVtbl.value.get_device_period.call(this, phnsdefaultdeviceperiod, phnsminimumdeviceperiod)
-  end
-  def start(this : IAudioClient2*) : HRESULT
-    @lpVtbl.value.start.call(this)
-  end
-  def stop(this : IAudioClient2*) : HRESULT
-    @lpVtbl.value.stop.call(this)
-  end
-  def reset(this : IAudioClient2*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def set_event_handle(this : IAudioClient2*, eventhandle : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.set_event_handle.call(this, eventhandle)
-  end
-  def get_service(this : IAudioClient2*, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_service.call(this, riid, ppv)
-  end
-  def is_offload_capable(this : IAudioClient2*, category : AUDIO_STREAM_CATEGORY, pboffloadcapable : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_offload_capable.call(this, category, pboffloadcapable)
-  end
-  def set_client_properties(this : IAudioClient2*, pproperties : AudioClientProperties*) : HRESULT
-    @lpVtbl.value.set_client_properties.call(this, pproperties)
-  end
-  def get_buffer_size_limits(this : IAudioClient2*, pformat : WAVEFORMATEX*, beventdriven : LibC::BOOL, phnsminbufferduration : Int64*, phnsmaxbufferduration : Int64*) : HRESULT
-    @lpVtbl.value.get_buffer_size_limits.call(this, pformat, beventdriven, phnsminbufferduration, phnsmaxbufferduration)
-  end
-end
-struct LibWin32::IAudioClient3
-  def query_interface(this : IAudioClient3*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioClient3*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioClient3*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def initialize(this : IAudioClient3*, sharemode : AUDCLNT_SHAREMODE, streamflags : UInt32, hnsbufferduration : Int64, hnsperiodicity : Int64, pformat : WAVEFORMATEX*, audiosessionguid : Guid*) : HRESULT
-    @lpVtbl.value.initialize.call(this, sharemode, streamflags, hnsbufferduration, hnsperiodicity, pformat, audiosessionguid)
-  end
-  def get_buffer_size(this : IAudioClient3*, pnumbufferframes : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffer_size.call(this, pnumbufferframes)
-  end
-  def get_stream_latency(this : IAudioClient3*, phnslatency : Int64*) : HRESULT
-    @lpVtbl.value.get_stream_latency.call(this, phnslatency)
-  end
-  def get_current_padding(this : IAudioClient3*, pnumpaddingframes : UInt32*) : HRESULT
-    @lpVtbl.value.get_current_padding.call(this, pnumpaddingframes)
-  end
-  def is_format_supported(this : IAudioClient3*, sharemode : AUDCLNT_SHAREMODE, pformat : WAVEFORMATEX*, ppclosestmatch : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.is_format_supported.call(this, sharemode, pformat, ppclosestmatch)
-  end
-  def get_mix_format(this : IAudioClient3*, ppdeviceformat : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.get_mix_format.call(this, ppdeviceformat)
-  end
-  def get_device_period(this : IAudioClient3*, phnsdefaultdeviceperiod : Int64*, phnsminimumdeviceperiod : Int64*) : HRESULT
-    @lpVtbl.value.get_device_period.call(this, phnsdefaultdeviceperiod, phnsminimumdeviceperiod)
-  end
-  def start(this : IAudioClient3*) : HRESULT
-    @lpVtbl.value.start.call(this)
-  end
-  def stop(this : IAudioClient3*) : HRESULT
-    @lpVtbl.value.stop.call(this)
-  end
-  def reset(this : IAudioClient3*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def set_event_handle(this : IAudioClient3*, eventhandle : LibC::HANDLE) : HRESULT
-    @lpVtbl.value.set_event_handle.call(this, eventhandle)
-  end
-  def get_service(this : IAudioClient3*, riid : Guid*, ppv : Void**) : HRESULT
-    @lpVtbl.value.get_service.call(this, riid, ppv)
-  end
-  def is_offload_capable(this : IAudioClient3*, category : AUDIO_STREAM_CATEGORY, pboffloadcapable : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_offload_capable.call(this, category, pboffloadcapable)
-  end
-  def set_client_properties(this : IAudioClient3*, pproperties : AudioClientProperties*) : HRESULT
-    @lpVtbl.value.set_client_properties.call(this, pproperties)
-  end
-  def get_buffer_size_limits(this : IAudioClient3*, pformat : WAVEFORMATEX*, beventdriven : LibC::BOOL, phnsminbufferduration : Int64*, phnsmaxbufferduration : Int64*) : HRESULT
-    @lpVtbl.value.get_buffer_size_limits.call(this, pformat, beventdriven, phnsminbufferduration, phnsmaxbufferduration)
-  end
-  def get_shared_mode_engine_period(this : IAudioClient3*, pformat : WAVEFORMATEX*, pdefaultperiodinframes : UInt32*, pfundamentalperiodinframes : UInt32*, pminperiodinframes : UInt32*, pmaxperiodinframes : UInt32*) : HRESULT
-    @lpVtbl.value.get_shared_mode_engine_period.call(this, pformat, pdefaultperiodinframes, pfundamentalperiodinframes, pminperiodinframes, pmaxperiodinframes)
-  end
-  def get_current_shared_mode_engine_period(this : IAudioClient3*, ppformat : WAVEFORMATEX**, pcurrentperiodinframes : UInt32*) : HRESULT
-    @lpVtbl.value.get_current_shared_mode_engine_period.call(this, ppformat, pcurrentperiodinframes)
-  end
-  def initialize_shared_audio_stream(this : IAudioClient3*, streamflags : UInt32, periodinframes : UInt32, pformat : WAVEFORMATEX*, audiosessionguid : Guid*) : HRESULT
-    @lpVtbl.value.initialize_shared_audio_stream.call(this, streamflags, periodinframes, pformat, audiosessionguid)
-  end
-end
-struct LibWin32::IAudioRenderClient
-  def query_interface(this : IAudioRenderClient*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioRenderClient*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioRenderClient*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_buffer(this : IAudioRenderClient*, numframesrequested : UInt32, ppdata : UInt8**) : HRESULT
-    @lpVtbl.value.get_buffer.call(this, numframesrequested, ppdata)
-  end
-  def release_buffer(this : IAudioRenderClient*, numframeswritten : UInt32, dwflags : UInt32) : HRESULT
-    @lpVtbl.value.release_buffer.call(this, numframeswritten, dwflags)
-  end
-end
-struct LibWin32::IAudioCaptureClient
-  def query_interface(this : IAudioCaptureClient*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioCaptureClient*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioCaptureClient*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_buffer(this : IAudioCaptureClient*, ppdata : UInt8**, pnumframestoread : UInt32*, pdwflags : UInt32*, pu64deviceposition : UInt64*, pu64qpcposition : UInt64*) : HRESULT
-    @lpVtbl.value.get_buffer.call(this, ppdata, pnumframestoread, pdwflags, pu64deviceposition, pu64qpcposition)
-  end
-  def release_buffer(this : IAudioCaptureClient*, numframesread : UInt32) : HRESULT
-    @lpVtbl.value.release_buffer.call(this, numframesread)
-  end
-  def get_next_packet_size(this : IAudioCaptureClient*, pnumframesinnextpacket : UInt32*) : HRESULT
-    @lpVtbl.value.get_next_packet_size.call(this, pnumframesinnextpacket)
-  end
-end
-struct LibWin32::IAudioClock
-  def query_interface(this : IAudioClock*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioClock*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioClock*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_frequency(this : IAudioClock*, pu64frequency : UInt64*) : HRESULT
-    @lpVtbl.value.get_frequency.call(this, pu64frequency)
-  end
-  def get_position(this : IAudioClock*, pu64position : UInt64*, pu64qpcposition : UInt64*) : HRESULT
-    @lpVtbl.value.get_position.call(this, pu64position, pu64qpcposition)
-  end
-  def get_characteristics(this : IAudioClock*, pdwcharacteristics : UInt32*) : HRESULT
-    @lpVtbl.value.get_characteristics.call(this, pdwcharacteristics)
-  end
-end
-struct LibWin32::IAudioClock2
-  def query_interface(this : IAudioClock2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioClock2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioClock2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_device_position(this : IAudioClock2*, deviceposition : UInt64*, qpcposition : UInt64*) : HRESULT
-    @lpVtbl.value.get_device_position.call(this, deviceposition, qpcposition)
-  end
-end
-struct LibWin32::IAudioClockAdjustment
-  def query_interface(this : IAudioClockAdjustment*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioClockAdjustment*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioClockAdjustment*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_sample_rate(this : IAudioClockAdjustment*, flsamplerate : Float32) : HRESULT
-    @lpVtbl.value.set_sample_rate.call(this, flsamplerate)
-  end
-end
-struct LibWin32::ISimpleAudioVolume
-  def query_interface(this : ISimpleAudioVolume*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISimpleAudioVolume*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISimpleAudioVolume*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_master_volume(this : ISimpleAudioVolume*, flevel : Float32, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_master_volume.call(this, flevel, eventcontext)
-  end
-  def get_master_volume(this : ISimpleAudioVolume*, pflevel : Float32*) : HRESULT
-    @lpVtbl.value.get_master_volume.call(this, pflevel)
-  end
-  def set_mute(this : ISimpleAudioVolume*, bmute : LibC::BOOL, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_mute.call(this, bmute, eventcontext)
-  end
-  def get_mute(this : ISimpleAudioVolume*, pbmute : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_mute.call(this, pbmute)
-  end
-end
-struct LibWin32::IAudioClientDuckingControl
-  def query_interface(this : IAudioClientDuckingControl*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioClientDuckingControl*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioClientDuckingControl*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_ducking_options_for_current_stream(this : IAudioClientDuckingControl*, options : AUDIO_DUCKING_OPTIONS) : HRESULT
-    @lpVtbl.value.set_ducking_options_for_current_stream.call(this, options)
-  end
-end
-struct LibWin32::IAudioEffectsChangedNotificationClient
-  def query_interface(this : IAudioEffectsChangedNotificationClient*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioEffectsChangedNotificationClient*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioEffectsChangedNotificationClient*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def on_audio_effects_changed(this : IAudioEffectsChangedNotificationClient*) : HRESULT
-    @lpVtbl.value.on_audio_effects_changed.call(this)
-  end
-end
-struct LibWin32::IAudioEffectsManager
-  def query_interface(this : IAudioEffectsManager*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioEffectsManager*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioEffectsManager*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def register_audio_effects_changed_notification_callback(this : IAudioEffectsManager*, client : IAudioEffectsChangedNotificationClient) : HRESULT
-    @lpVtbl.value.register_audio_effects_changed_notification_callback.call(this, client)
-  end
-  def unregister_audio_effects_changed_notification_callback(this : IAudioEffectsManager*, client : IAudioEffectsChangedNotificationClient) : HRESULT
-    @lpVtbl.value.unregister_audio_effects_changed_notification_callback.call(this, client)
-  end
-  def get_audio_effects(this : IAudioEffectsManager*, effects : AUDIO_EFFECT**, numeffects : UInt32*) : HRESULT
-    @lpVtbl.value.get_audio_effects.call(this, effects, numeffects)
-  end
-  def set_audio_effect_state(this : IAudioEffectsManager*, effectid : Guid, state : AUDIO_EFFECT_STATE) : HRESULT
-    @lpVtbl.value.set_audio_effect_state.call(this, effectid, state)
-  end
-end
-struct LibWin32::IAudioStreamVolume
-  def query_interface(this : IAudioStreamVolume*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioStreamVolume*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioStreamVolume*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_channel_count(this : IAudioStreamVolume*, pdwcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_count.call(this, pdwcount)
-  end
-  def set_channel_volume(this : IAudioStreamVolume*, dwindex : UInt32, flevel : Float32) : HRESULT
-    @lpVtbl.value.set_channel_volume.call(this, dwindex, flevel)
-  end
-  def get_channel_volume(this : IAudioStreamVolume*, dwindex : UInt32, pflevel : Float32*) : HRESULT
-    @lpVtbl.value.get_channel_volume.call(this, dwindex, pflevel)
-  end
-  def set_all_volumes(this : IAudioStreamVolume*, dwcount : UInt32, pfvolumes : Float32*) : HRESULT
-    @lpVtbl.value.set_all_volumes.call(this, dwcount, pfvolumes)
-  end
-  def get_all_volumes(this : IAudioStreamVolume*, dwcount : UInt32, pfvolumes : Float32*) : HRESULT
-    @lpVtbl.value.get_all_volumes.call(this, dwcount, pfvolumes)
-  end
-end
-struct LibWin32::IAudioAmbisonicsControl
-  def query_interface(this : IAudioAmbisonicsControl*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioAmbisonicsControl*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioAmbisonicsControl*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_data(this : IAudioAmbisonicsControl*, pambisonicsparams : AMBISONICS_PARAMS*, cbambisonicsparams : UInt32) : HRESULT
-    @lpVtbl.value.set_data.call(this, pambisonicsparams, cbambisonicsparams)
-  end
-  def set_head_tracking(this : IAudioAmbisonicsControl*, benableheadtracking : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_head_tracking.call(this, benableheadtracking)
-  end
-  def get_head_tracking(this : IAudioAmbisonicsControl*, pbenableheadtracking : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_head_tracking.call(this, pbenableheadtracking)
-  end
-  def set_rotation(this : IAudioAmbisonicsControl*, x : Float32, y : Float32, z : Float32, w : Float32) : HRESULT
-    @lpVtbl.value.set_rotation.call(this, x, y, z, w)
-  end
-end
-struct LibWin32::IChannelAudioVolume
-  def query_interface(this : IChannelAudioVolume*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IChannelAudioVolume*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IChannelAudioVolume*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_channel_count(this : IChannelAudioVolume*, pdwcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_count.call(this, pdwcount)
-  end
-  def set_channel_volume(this : IChannelAudioVolume*, dwindex : UInt32, flevel : Float32, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_channel_volume.call(this, dwindex, flevel, eventcontext)
-  end
-  def get_channel_volume(this : IChannelAudioVolume*, dwindex : UInt32, pflevel : Float32*) : HRESULT
-    @lpVtbl.value.get_channel_volume.call(this, dwindex, pflevel)
-  end
-  def set_all_volumes(this : IChannelAudioVolume*, dwcount : UInt32, pfvolumes : Float32*, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_all_volumes.call(this, dwcount, pfvolumes, eventcontext)
-  end
-  def get_all_volumes(this : IChannelAudioVolume*, dwcount : UInt32, pfvolumes : Float32*) : HRESULT
-    @lpVtbl.value.get_all_volumes.call(this, dwcount, pfvolumes)
-  end
-end
-struct LibWin32::IAudioFormatEnumerator
-  def query_interface(this : IAudioFormatEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioFormatEnumerator*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioFormatEnumerator*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_count(this : IAudioFormatEnumerator*, count : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def get_format(this : IAudioFormatEnumerator*, index : UInt32, format : WAVEFORMATEX**) : HRESULT
-    @lpVtbl.value.get_format.call(this, index, format)
-  end
-end
-struct LibWin32::ISpatialAudioObjectBase
-  def query_interface(this : ISpatialAudioObjectBase*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioObjectBase*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioObjectBase*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_buffer(this : ISpatialAudioObjectBase*, buffer : UInt8**, bufferlength : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffer.call(this, buffer, bufferlength)
-  end
-  def set_end_of_stream(this : ISpatialAudioObjectBase*, framecount : UInt32) : HRESULT
-    @lpVtbl.value.set_end_of_stream.call(this, framecount)
-  end
-  def is_active(this : ISpatialAudioObjectBase*, isactive : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_active.call(this, isactive)
-  end
-  def get_audio_object_type(this : ISpatialAudioObjectBase*, audioobjecttype : AudioObjectType*) : HRESULT
-    @lpVtbl.value.get_audio_object_type.call(this, audioobjecttype)
-  end
-end
-struct LibWin32::ISpatialAudioObject
-  def query_interface(this : ISpatialAudioObject*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioObject*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioObject*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_buffer(this : ISpatialAudioObject*, buffer : UInt8**, bufferlength : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffer.call(this, buffer, bufferlength)
-  end
-  def set_end_of_stream(this : ISpatialAudioObject*, framecount : UInt32) : HRESULT
-    @lpVtbl.value.set_end_of_stream.call(this, framecount)
-  end
-  def is_active(this : ISpatialAudioObject*, isactive : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_active.call(this, isactive)
-  end
-  def get_audio_object_type(this : ISpatialAudioObject*, audioobjecttype : AudioObjectType*) : HRESULT
-    @lpVtbl.value.get_audio_object_type.call(this, audioobjecttype)
-  end
-  def set_position(this : ISpatialAudioObject*, x : Float32, y : Float32, z : Float32) : HRESULT
-    @lpVtbl.value.set_position.call(this, x, y, z)
-  end
-  def set_volume(this : ISpatialAudioObject*, volume : Float32) : HRESULT
-    @lpVtbl.value.set_volume.call(this, volume)
-  end
-end
-struct LibWin32::ISpatialAudioObjectRenderStreamBase
-  def query_interface(this : ISpatialAudioObjectRenderStreamBase*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioObjectRenderStreamBase*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioObjectRenderStreamBase*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_available_dynamic_object_count(this : ISpatialAudioObjectRenderStreamBase*, value : UInt32*) : HRESULT
-    @lpVtbl.value.get_available_dynamic_object_count.call(this, value)
-  end
-  def get_service(this : ISpatialAudioObjectRenderStreamBase*, riid : Guid*, service : Void**) : HRESULT
-    @lpVtbl.value.get_service.call(this, riid, service)
-  end
-  def start(this : ISpatialAudioObjectRenderStreamBase*) : HRESULT
-    @lpVtbl.value.start.call(this)
-  end
-  def stop(this : ISpatialAudioObjectRenderStreamBase*) : HRESULT
-    @lpVtbl.value.stop.call(this)
-  end
-  def reset(this : ISpatialAudioObjectRenderStreamBase*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def begin_updating_audio_objects(this : ISpatialAudioObjectRenderStreamBase*, availabledynamicobjectcount : UInt32*, framecountperbuffer : UInt32*) : HRESULT
-    @lpVtbl.value.begin_updating_audio_objects.call(this, availabledynamicobjectcount, framecountperbuffer)
-  end
-  def end_updating_audio_objects(this : ISpatialAudioObjectRenderStreamBase*) : HRESULT
-    @lpVtbl.value.end_updating_audio_objects.call(this)
-  end
-end
-struct LibWin32::ISpatialAudioObjectRenderStream
-  def query_interface(this : ISpatialAudioObjectRenderStream*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioObjectRenderStream*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioObjectRenderStream*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_available_dynamic_object_count(this : ISpatialAudioObjectRenderStream*, value : UInt32*) : HRESULT
-    @lpVtbl.value.get_available_dynamic_object_count.call(this, value)
-  end
-  def get_service(this : ISpatialAudioObjectRenderStream*, riid : Guid*, service : Void**) : HRESULT
-    @lpVtbl.value.get_service.call(this, riid, service)
-  end
-  def start(this : ISpatialAudioObjectRenderStream*) : HRESULT
-    @lpVtbl.value.start.call(this)
-  end
-  def stop(this : ISpatialAudioObjectRenderStream*) : HRESULT
-    @lpVtbl.value.stop.call(this)
-  end
-  def reset(this : ISpatialAudioObjectRenderStream*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def begin_updating_audio_objects(this : ISpatialAudioObjectRenderStream*, availabledynamicobjectcount : UInt32*, framecountperbuffer : UInt32*) : HRESULT
-    @lpVtbl.value.begin_updating_audio_objects.call(this, availabledynamicobjectcount, framecountperbuffer)
-  end
-  def end_updating_audio_objects(this : ISpatialAudioObjectRenderStream*) : HRESULT
-    @lpVtbl.value.end_updating_audio_objects.call(this)
-  end
-  def activate_spatial_audio_object(this : ISpatialAudioObjectRenderStream*, type : AudioObjectType, audioobject : ISpatialAudioObject*) : HRESULT
-    @lpVtbl.value.activate_spatial_audio_object.call(this, type, audioobject)
-  end
-end
-struct LibWin32::ISpatialAudioObjectRenderStreamNotify
-  def query_interface(this : ISpatialAudioObjectRenderStreamNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioObjectRenderStreamNotify*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioObjectRenderStreamNotify*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def on_available_dynamic_object_count_change(this : ISpatialAudioObjectRenderStreamNotify*, sender : ISpatialAudioObjectRenderStreamBase, hnscompliancedeadlinetime : Int64, availabledynamicobjectcountchange : UInt32) : HRESULT
-    @lpVtbl.value.on_available_dynamic_object_count_change.call(this, sender, hnscompliancedeadlinetime, availabledynamicobjectcountchange)
-  end
-end
-struct LibWin32::ISpatialAudioClient
-  def query_interface(this : ISpatialAudioClient*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioClient*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioClient*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_static_object_position(this : ISpatialAudioClient*, type : AudioObjectType, x : Float32*, y : Float32*, z : Float32*) : HRESULT
-    @lpVtbl.value.get_static_object_position.call(this, type, x, y, z)
-  end
-  def get_native_static_object_type_mask(this : ISpatialAudioClient*, mask : AudioObjectType*) : HRESULT
-    @lpVtbl.value.get_native_static_object_type_mask.call(this, mask)
-  end
-  def get_max_dynamic_object_count(this : ISpatialAudioClient*, value : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_dynamic_object_count.call(this, value)
-  end
-  def get_supported_audio_object_format_enumerator(this : ISpatialAudioClient*, enumerator : IAudioFormatEnumerator*) : HRESULT
-    @lpVtbl.value.get_supported_audio_object_format_enumerator.call(this, enumerator)
-  end
-  def get_max_frame_count(this : ISpatialAudioClient*, objectformat : WAVEFORMATEX*, framecountperbuffer : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_frame_count.call(this, objectformat, framecountperbuffer)
-  end
-  def is_audio_object_format_supported(this : ISpatialAudioClient*, objectformat : WAVEFORMATEX*) : HRESULT
-    @lpVtbl.value.is_audio_object_format_supported.call(this, objectformat)
-  end
-  def is_spatial_audio_stream_available(this : ISpatialAudioClient*, streamuuid : Guid*, auxiliaryinfo : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.is_spatial_audio_stream_available.call(this, streamuuid, auxiliaryinfo)
-  end
-  def activate_spatial_audio_stream(this : ISpatialAudioClient*, activationparams : PROPVARIANT*, riid : Guid*, stream : Void**) : HRESULT
-    @lpVtbl.value.activate_spatial_audio_stream.call(this, activationparams, riid, stream)
-  end
-end
-struct LibWin32::ISpatialAudioClient2
-  def query_interface(this : ISpatialAudioClient2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioClient2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioClient2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_static_object_position(this : ISpatialAudioClient2*, type : AudioObjectType, x : Float32*, y : Float32*, z : Float32*) : HRESULT
-    @lpVtbl.value.get_static_object_position.call(this, type, x, y, z)
-  end
-  def get_native_static_object_type_mask(this : ISpatialAudioClient2*, mask : AudioObjectType*) : HRESULT
-    @lpVtbl.value.get_native_static_object_type_mask.call(this, mask)
-  end
-  def get_max_dynamic_object_count(this : ISpatialAudioClient2*, value : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_dynamic_object_count.call(this, value)
-  end
-  def get_supported_audio_object_format_enumerator(this : ISpatialAudioClient2*, enumerator : IAudioFormatEnumerator*) : HRESULT
-    @lpVtbl.value.get_supported_audio_object_format_enumerator.call(this, enumerator)
-  end
-  def get_max_frame_count(this : ISpatialAudioClient2*, objectformat : WAVEFORMATEX*, framecountperbuffer : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_frame_count.call(this, objectformat, framecountperbuffer)
-  end
-  def is_audio_object_format_supported(this : ISpatialAudioClient2*, objectformat : WAVEFORMATEX*) : HRESULT
-    @lpVtbl.value.is_audio_object_format_supported.call(this, objectformat)
-  end
-  def is_spatial_audio_stream_available(this : ISpatialAudioClient2*, streamuuid : Guid*, auxiliaryinfo : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.is_spatial_audio_stream_available.call(this, streamuuid, auxiliaryinfo)
-  end
-  def activate_spatial_audio_stream(this : ISpatialAudioClient2*, activationparams : PROPVARIANT*, riid : Guid*, stream : Void**) : HRESULT
-    @lpVtbl.value.activate_spatial_audio_stream.call(this, activationparams, riid, stream)
-  end
-  def is_offload_capable(this : ISpatialAudioClient2*, category : AUDIO_STREAM_CATEGORY, isoffloadcapable : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_offload_capable.call(this, category, isoffloadcapable)
-  end
-  def get_max_frame_count_for_category(this : ISpatialAudioClient2*, category : AUDIO_STREAM_CATEGORY, offloadenabled : LibC::BOOL, objectformat : WAVEFORMATEX*, framecountperbuffer : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_frame_count_for_category.call(this, category, offloadenabled, objectformat, framecountperbuffer)
-  end
-end
-struct LibWin32::ISpatialAudioObjectForHrtf
-  def query_interface(this : ISpatialAudioObjectForHrtf*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioObjectForHrtf*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioObjectForHrtf*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_buffer(this : ISpatialAudioObjectForHrtf*, buffer : UInt8**, bufferlength : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffer.call(this, buffer, bufferlength)
-  end
-  def set_end_of_stream(this : ISpatialAudioObjectForHrtf*, framecount : UInt32) : HRESULT
-    @lpVtbl.value.set_end_of_stream.call(this, framecount)
-  end
-  def is_active(this : ISpatialAudioObjectForHrtf*, isactive : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_active.call(this, isactive)
-  end
-  def get_audio_object_type(this : ISpatialAudioObjectForHrtf*, audioobjecttype : AudioObjectType*) : HRESULT
-    @lpVtbl.value.get_audio_object_type.call(this, audioobjecttype)
-  end
-  def set_position(this : ISpatialAudioObjectForHrtf*, x : Float32, y : Float32, z : Float32) : HRESULT
-    @lpVtbl.value.set_position.call(this, x, y, z)
-  end
-  def set_gain(this : ISpatialAudioObjectForHrtf*, gain : Float32) : HRESULT
-    @lpVtbl.value.set_gain.call(this, gain)
-  end
-  def set_orientation(this : ISpatialAudioObjectForHrtf*, orientation : Float32**) : HRESULT
-    @lpVtbl.value.set_orientation.call(this, orientation)
-  end
-  def set_environment(this : ISpatialAudioObjectForHrtf*, environment : SpatialAudioHrtfEnvironmentType) : HRESULT
-    @lpVtbl.value.set_environment.call(this, environment)
-  end
-  def set_distance_decay(this : ISpatialAudioObjectForHrtf*, distancedecay : SpatialAudioHrtfDistanceDecay*) : HRESULT
-    @lpVtbl.value.set_distance_decay.call(this, distancedecay)
-  end
-  def set_directivity(this : ISpatialAudioObjectForHrtf*, directivity : SpatialAudioHrtfDirectivityUnion*) : HRESULT
-    @lpVtbl.value.set_directivity.call(this, directivity)
-  end
-end
-struct LibWin32::ISpatialAudioObjectRenderStreamForHrtf
-  def query_interface(this : ISpatialAudioObjectRenderStreamForHrtf*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioObjectRenderStreamForHrtf*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioObjectRenderStreamForHrtf*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_available_dynamic_object_count(this : ISpatialAudioObjectRenderStreamForHrtf*, value : UInt32*) : HRESULT
-    @lpVtbl.value.get_available_dynamic_object_count.call(this, value)
-  end
-  def get_service(this : ISpatialAudioObjectRenderStreamForHrtf*, riid : Guid*, service : Void**) : HRESULT
-    @lpVtbl.value.get_service.call(this, riid, service)
-  end
-  def start(this : ISpatialAudioObjectRenderStreamForHrtf*) : HRESULT
-    @lpVtbl.value.start.call(this)
-  end
-  def stop(this : ISpatialAudioObjectRenderStreamForHrtf*) : HRESULT
-    @lpVtbl.value.stop.call(this)
-  end
-  def reset(this : ISpatialAudioObjectRenderStreamForHrtf*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def begin_updating_audio_objects(this : ISpatialAudioObjectRenderStreamForHrtf*, availabledynamicobjectcount : UInt32*, framecountperbuffer : UInt32*) : HRESULT
-    @lpVtbl.value.begin_updating_audio_objects.call(this, availabledynamicobjectcount, framecountperbuffer)
-  end
-  def end_updating_audio_objects(this : ISpatialAudioObjectRenderStreamForHrtf*) : HRESULT
-    @lpVtbl.value.end_updating_audio_objects.call(this)
-  end
-  def activate_spatial_audio_object_for_hrtf(this : ISpatialAudioObjectRenderStreamForHrtf*, type : AudioObjectType, audioobject : ISpatialAudioObjectForHrtf*) : HRESULT
-    @lpVtbl.value.activate_spatial_audio_object_for_hrtf.call(this, type, audioobject)
-  end
-end
-struct LibWin32::IMMNotificationClient
-  def query_interface(this : IMMNotificationClient*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMMNotificationClient*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMMNotificationClient*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def on_device_state_changed(this : IMMNotificationClient*, pwstrdeviceid : LibC::LPWSTR, dwnewstate : UInt32) : HRESULT
-    @lpVtbl.value.on_device_state_changed.call(this, pwstrdeviceid, dwnewstate)
-  end
-  def on_device_added(this : IMMNotificationClient*, pwstrdeviceid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.on_device_added.call(this, pwstrdeviceid)
-  end
-  def on_device_removed(this : IMMNotificationClient*, pwstrdeviceid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.on_device_removed.call(this, pwstrdeviceid)
-  end
-  def on_default_device_changed(this : IMMNotificationClient*, flow : EDataFlow, role : ERole, pwstrdefaultdeviceid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.on_default_device_changed.call(this, flow, role, pwstrdefaultdeviceid)
-  end
-  def on_property_value_changed(this : IMMNotificationClient*, pwstrdeviceid : LibC::LPWSTR, key : PROPERTYKEY) : HRESULT
-    @lpVtbl.value.on_property_value_changed.call(this, pwstrdeviceid, key)
-  end
-end
-struct LibWin32::IMMDevice
-  def query_interface(this : IMMDevice*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMMDevice*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMMDevice*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def activate(this : IMMDevice*, iid : Guid*, dwclsctx : UInt32, pactivationparams : PROPVARIANT*, ppinterface : Void**) : HRESULT
-    @lpVtbl.value.activate.call(this, iid, dwclsctx, pactivationparams, ppinterface)
-  end
-  def open_property_store(this : IMMDevice*, stgmaccess : UInt32, ppproperties : IPropertyStore*) : HRESULT
-    @lpVtbl.value.open_property_store.call(this, stgmaccess, ppproperties)
-  end
-  def get_id(this : IMMDevice*, ppstrid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_id.call(this, ppstrid)
-  end
-  def get_state(this : IMMDevice*, pdwstate : UInt32*) : HRESULT
-    @lpVtbl.value.get_state.call(this, pdwstate)
-  end
-end
-struct LibWin32::IMMDeviceCollection
-  def query_interface(this : IMMDeviceCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMMDeviceCollection*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMMDeviceCollection*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_count(this : IMMDeviceCollection*, pcdevices : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, pcdevices)
-  end
-  def item(this : IMMDeviceCollection*, ndevice : UInt32, ppdevice : IMMDevice*) : HRESULT
-    @lpVtbl.value.item.call(this, ndevice, ppdevice)
-  end
-end
-struct LibWin32::IMMEndpoint
-  def query_interface(this : IMMEndpoint*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMMEndpoint*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMMEndpoint*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_data_flow(this : IMMEndpoint*, pdataflow : EDataFlow*) : HRESULT
-    @lpVtbl.value.get_data_flow.call(this, pdataflow)
-  end
-end
-struct LibWin32::IMMDeviceEnumerator
-  def query_interface(this : IMMDeviceEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMMDeviceEnumerator*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMMDeviceEnumerator*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def enum_audio_endpoints(this : IMMDeviceEnumerator*, dataflow : EDataFlow, dwstatemask : UInt32, ppdevices : IMMDeviceCollection*) : HRESULT
-    @lpVtbl.value.enum_audio_endpoints.call(this, dataflow, dwstatemask, ppdevices)
-  end
-  def get_default_audio_endpoint(this : IMMDeviceEnumerator*, dataflow : EDataFlow, role : ERole, ppendpoint : IMMDevice*) : HRESULT
-    @lpVtbl.value.get_default_audio_endpoint.call(this, dataflow, role, ppendpoint)
-  end
-  def get_device(this : IMMDeviceEnumerator*, pwstrid : LibC::LPWSTR, ppdevice : IMMDevice*) : HRESULT
-    @lpVtbl.value.get_device.call(this, pwstrid, ppdevice)
-  end
-  def register_endpoint_notification_callback(this : IMMDeviceEnumerator*, pclient : IMMNotificationClient) : HRESULT
-    @lpVtbl.value.register_endpoint_notification_callback.call(this, pclient)
-  end
-  def unregister_endpoint_notification_callback(this : IMMDeviceEnumerator*, pclient : IMMNotificationClient) : HRESULT
-    @lpVtbl.value.unregister_endpoint_notification_callback.call(this, pclient)
-  end
-end
-struct LibWin32::IMMDeviceActivator
-  def query_interface(this : IMMDeviceActivator*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMMDeviceActivator*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMMDeviceActivator*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def activate(this : IMMDeviceActivator*, iid : Guid*, pdevice : IMMDevice, pactivationparams : PROPVARIANT*, ppinterface : Void**) : HRESULT
-    @lpVtbl.value.activate.call(this, iid, pdevice, pactivationparams, ppinterface)
-  end
-end
-struct LibWin32::IActivateAudioInterfaceCompletionHandler
-  def query_interface(this : IActivateAudioInterfaceCompletionHandler*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IActivateAudioInterfaceCompletionHandler*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IActivateAudioInterfaceCompletionHandler*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def activate_completed(this : IActivateAudioInterfaceCompletionHandler*, activateoperation : IActivateAudioInterfaceAsyncOperation) : HRESULT
-    @lpVtbl.value.activate_completed.call(this, activateoperation)
-  end
-end
-struct LibWin32::IActivateAudioInterfaceAsyncOperation
-  def query_interface(this : IActivateAudioInterfaceAsyncOperation*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IActivateAudioInterfaceAsyncOperation*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IActivateAudioInterfaceAsyncOperation*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_activate_result(this : IActivateAudioInterfaceAsyncOperation*, activateresult : HRESULT*, activatedinterface : IUnknown*) : HRESULT
-    @lpVtbl.value.get_activate_result.call(this, activateresult, activatedinterface)
-  end
-end
-struct LibWin32::IAudioSystemEffectsPropertyChangeNotificationClient
-  def query_interface(this : IAudioSystemEffectsPropertyChangeNotificationClient*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioSystemEffectsPropertyChangeNotificationClient*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioSystemEffectsPropertyChangeNotificationClient*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def on_property_changed(this : IAudioSystemEffectsPropertyChangeNotificationClient*, type : MIDL___MIDL_itf_mmdeviceapi_0000_0008_0002, key : PROPERTYKEY) : HRESULT
-    @lpVtbl.value.on_property_changed.call(this, type, key)
-  end
-end
-struct LibWin32::IAudioSystemEffectsPropertyStore
-  def query_interface(this : IAudioSystemEffectsPropertyStore*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioSystemEffectsPropertyStore*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioSystemEffectsPropertyStore*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def open_default_property_store(this : IAudioSystemEffectsPropertyStore*, stgmaccess : UInt32, propstore : IPropertyStore*) : HRESULT
-    @lpVtbl.value.open_default_property_store.call(this, stgmaccess, propstore)
-  end
-  def open_user_property_store(this : IAudioSystemEffectsPropertyStore*, stgmaccess : UInt32, propstore : IPropertyStore*) : HRESULT
-    @lpVtbl.value.open_user_property_store.call(this, stgmaccess, propstore)
-  end
-  def open_volatile_property_store(this : IAudioSystemEffectsPropertyStore*, stgmaccess : UInt32, propstore : IPropertyStore*) : HRESULT
-    @lpVtbl.value.open_volatile_property_store.call(this, stgmaccess, propstore)
-  end
-  def reset_user_property_store(this : IAudioSystemEffectsPropertyStore*) : HRESULT
-    @lpVtbl.value.reset_user_property_store.call(this)
-  end
-  def reset_volatile_property_store(this : IAudioSystemEffectsPropertyStore*) : HRESULT
-    @lpVtbl.value.reset_volatile_property_store.call(this)
-  end
-  def register_property_change_notification(this : IAudioSystemEffectsPropertyStore*, callback : IAudioSystemEffectsPropertyChangeNotificationClient) : HRESULT
-    @lpVtbl.value.register_property_change_notification.call(this, callback)
-  end
-  def unregister_property_change_notification(this : IAudioSystemEffectsPropertyStore*, callback : IAudioSystemEffectsPropertyChangeNotificationClient) : HRESULT
-    @lpVtbl.value.unregister_property_change_notification.call(this, callback)
-  end
-end
-struct LibWin32::IPerChannelDbLevel
-  def query_interface(this : IPerChannelDbLevel*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IPerChannelDbLevel*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IPerChannelDbLevel*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_channel_count(this : IPerChannelDbLevel*, pcchannels : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_count.call(this, pcchannels)
-  end
-  def get_level_range(this : IPerChannelDbLevel*, nchannel : UInt32, pfminleveldb : Float32*, pfmaxleveldb : Float32*, pfstepping : Float32*) : HRESULT
-    @lpVtbl.value.get_level_range.call(this, nchannel, pfminleveldb, pfmaxleveldb, pfstepping)
-  end
-  def get_level(this : IPerChannelDbLevel*, nchannel : UInt32, pfleveldb : Float32*) : HRESULT
-    @lpVtbl.value.get_level.call(this, nchannel, pfleveldb)
-  end
-  def set_level(this : IPerChannelDbLevel*, nchannel : UInt32, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level.call(this, nchannel, fleveldb, pguideventcontext)
-  end
-  def set_level_uniform(this : IPerChannelDbLevel*, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level_uniform.call(this, fleveldb, pguideventcontext)
-  end
-  def set_level_all_channels(this : IPerChannelDbLevel*, alevelsdb : Float32*, cchannels : UInt32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level_all_channels.call(this, alevelsdb, cchannels, pguideventcontext)
-  end
-end
-struct LibWin32::IAudioVolumeLevel
-  def query_interface(this : IAudioVolumeLevel*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioVolumeLevel*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioVolumeLevel*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_channel_count(this : IAudioVolumeLevel*, pcchannels : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_count.call(this, pcchannels)
-  end
-  def get_level_range(this : IAudioVolumeLevel*, nchannel : UInt32, pfminleveldb : Float32*, pfmaxleveldb : Float32*, pfstepping : Float32*) : HRESULT
-    @lpVtbl.value.get_level_range.call(this, nchannel, pfminleveldb, pfmaxleveldb, pfstepping)
-  end
-  def get_level(this : IAudioVolumeLevel*, nchannel : UInt32, pfleveldb : Float32*) : HRESULT
-    @lpVtbl.value.get_level.call(this, nchannel, pfleveldb)
-  end
-  def set_level(this : IAudioVolumeLevel*, nchannel : UInt32, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level.call(this, nchannel, fleveldb, pguideventcontext)
-  end
-  def set_level_uniform(this : IAudioVolumeLevel*, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level_uniform.call(this, fleveldb, pguideventcontext)
-  end
-  def set_level_all_channels(this : IAudioVolumeLevel*, alevelsdb : Float32*, cchannels : UInt32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level_all_channels.call(this, alevelsdb, cchannels, pguideventcontext)
-  end
-end
-struct LibWin32::IAudioChannelConfig
-  def query_interface(this : IAudioChannelConfig*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioChannelConfig*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioChannelConfig*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_channel_config(this : IAudioChannelConfig*, dwconfig : UInt32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_channel_config.call(this, dwconfig, pguideventcontext)
-  end
-  def get_channel_config(this : IAudioChannelConfig*, pdwconfig : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_config.call(this, pdwconfig)
-  end
-end
-struct LibWin32::IAudioLoudness
-  def query_interface(this : IAudioLoudness*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioLoudness*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioLoudness*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_enabled(this : IAudioLoudness*, pbenabled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_enabled.call(this, pbenabled)
-  end
-  def set_enabled(this : IAudioLoudness*, benable : LibC::BOOL, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_enabled.call(this, benable, pguideventcontext)
-  end
-end
-struct LibWin32::IAudioInputSelector
-  def query_interface(this : IAudioInputSelector*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioInputSelector*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioInputSelector*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_selection(this : IAudioInputSelector*, pnidselected : UInt32*) : HRESULT
-    @lpVtbl.value.get_selection.call(this, pnidselected)
-  end
-  def set_selection(this : IAudioInputSelector*, nidselect : UInt32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_selection.call(this, nidselect, pguideventcontext)
-  end
-end
-struct LibWin32::IAudioOutputSelector
-  def query_interface(this : IAudioOutputSelector*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioOutputSelector*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioOutputSelector*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_selection(this : IAudioOutputSelector*, pnidselected : UInt32*) : HRESULT
-    @lpVtbl.value.get_selection.call(this, pnidselected)
-  end
-  def set_selection(this : IAudioOutputSelector*, nidselect : UInt32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_selection.call(this, nidselect, pguideventcontext)
-  end
-end
-struct LibWin32::IAudioMute
-  def query_interface(this : IAudioMute*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioMute*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioMute*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_mute(this : IAudioMute*, bmuted : LibC::BOOL, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_mute.call(this, bmuted, pguideventcontext)
-  end
-  def get_mute(this : IAudioMute*, pbmuted : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_mute.call(this, pbmuted)
-  end
-end
-struct LibWin32::IAudioBass
-  def query_interface(this : IAudioBass*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioBass*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioBass*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_channel_count(this : IAudioBass*, pcchannels : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_count.call(this, pcchannels)
-  end
-  def get_level_range(this : IAudioBass*, nchannel : UInt32, pfminleveldb : Float32*, pfmaxleveldb : Float32*, pfstepping : Float32*) : HRESULT
-    @lpVtbl.value.get_level_range.call(this, nchannel, pfminleveldb, pfmaxleveldb, pfstepping)
-  end
-  def get_level(this : IAudioBass*, nchannel : UInt32, pfleveldb : Float32*) : HRESULT
-    @lpVtbl.value.get_level.call(this, nchannel, pfleveldb)
-  end
-  def set_level(this : IAudioBass*, nchannel : UInt32, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level.call(this, nchannel, fleveldb, pguideventcontext)
-  end
-  def set_level_uniform(this : IAudioBass*, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level_uniform.call(this, fleveldb, pguideventcontext)
-  end
-  def set_level_all_channels(this : IAudioBass*, alevelsdb : Float32*, cchannels : UInt32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level_all_channels.call(this, alevelsdb, cchannels, pguideventcontext)
-  end
-end
-struct LibWin32::IAudioMidrange
-  def query_interface(this : IAudioMidrange*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioMidrange*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioMidrange*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_channel_count(this : IAudioMidrange*, pcchannels : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_count.call(this, pcchannels)
-  end
-  def get_level_range(this : IAudioMidrange*, nchannel : UInt32, pfminleveldb : Float32*, pfmaxleveldb : Float32*, pfstepping : Float32*) : HRESULT
-    @lpVtbl.value.get_level_range.call(this, nchannel, pfminleveldb, pfmaxleveldb, pfstepping)
-  end
-  def get_level(this : IAudioMidrange*, nchannel : UInt32, pfleveldb : Float32*) : HRESULT
-    @lpVtbl.value.get_level.call(this, nchannel, pfleveldb)
-  end
-  def set_level(this : IAudioMidrange*, nchannel : UInt32, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level.call(this, nchannel, fleveldb, pguideventcontext)
-  end
-  def set_level_uniform(this : IAudioMidrange*, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level_uniform.call(this, fleveldb, pguideventcontext)
-  end
-  def set_level_all_channels(this : IAudioMidrange*, alevelsdb : Float32*, cchannels : UInt32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level_all_channels.call(this, alevelsdb, cchannels, pguideventcontext)
-  end
-end
-struct LibWin32::IAudioTreble
-  def query_interface(this : IAudioTreble*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioTreble*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioTreble*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_channel_count(this : IAudioTreble*, pcchannels : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_count.call(this, pcchannels)
-  end
-  def get_level_range(this : IAudioTreble*, nchannel : UInt32, pfminleveldb : Float32*, pfmaxleveldb : Float32*, pfstepping : Float32*) : HRESULT
-    @lpVtbl.value.get_level_range.call(this, nchannel, pfminleveldb, pfmaxleveldb, pfstepping)
-  end
-  def get_level(this : IAudioTreble*, nchannel : UInt32, pfleveldb : Float32*) : HRESULT
-    @lpVtbl.value.get_level.call(this, nchannel, pfleveldb)
-  end
-  def set_level(this : IAudioTreble*, nchannel : UInt32, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level.call(this, nchannel, fleveldb, pguideventcontext)
-  end
-  def set_level_uniform(this : IAudioTreble*, fleveldb : Float32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level_uniform.call(this, fleveldb, pguideventcontext)
-  end
-  def set_level_all_channels(this : IAudioTreble*, alevelsdb : Float32*, cchannels : UInt32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_level_all_channels.call(this, alevelsdb, cchannels, pguideventcontext)
-  end
-end
-struct LibWin32::IAudioAutoGainControl
-  def query_interface(this : IAudioAutoGainControl*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioAutoGainControl*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioAutoGainControl*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_enabled(this : IAudioAutoGainControl*, pbenabled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_enabled.call(this, pbenabled)
-  end
-  def set_enabled(this : IAudioAutoGainControl*, benable : LibC::BOOL, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_enabled.call(this, benable, pguideventcontext)
-  end
-end
-struct LibWin32::IAudioPeakMeter
-  def query_interface(this : IAudioPeakMeter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioPeakMeter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioPeakMeter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_channel_count(this : IAudioPeakMeter*, pcchannels : UInt32*) : HRESULT
-    @lpVtbl.value.get_channel_count.call(this, pcchannels)
-  end
-  def get_level(this : IAudioPeakMeter*, nchannel : UInt32, pflevel : Float32*) : HRESULT
-    @lpVtbl.value.get_level.call(this, nchannel, pflevel)
-  end
-end
-struct LibWin32::IDeviceSpecificProperty
-  def query_interface(this : IDeviceSpecificProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDeviceSpecificProperty*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDeviceSpecificProperty*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type(this : IDeviceSpecificProperty*, pvtype : UInt16*) : HRESULT
-    @lpVtbl.value.get_type.call(this, pvtype)
-  end
-  def get_value(this : IDeviceSpecificProperty*, pvvalue : Void*, pcbvalue : UInt32*) : HRESULT
-    @lpVtbl.value.get_value.call(this, pvvalue, pcbvalue)
-  end
-  def set_value(this : IDeviceSpecificProperty*, pvvalue : Void*, cbvalue : UInt32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_value.call(this, pvvalue, cbvalue, pguideventcontext)
-  end
-  def get4_b_range(this : IDeviceSpecificProperty*, plmin : Int32*, plmax : Int32*, plstepping : Int32*) : HRESULT
-    @lpVtbl.value.get4_b_range.call(this, plmin, plmax, plstepping)
-  end
-end
-struct LibWin32::IPartsList
-  def query_interface(this : IPartsList*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IPartsList*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IPartsList*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_count(this : IPartsList*, pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, pcount)
-  end
-  def get_part(this : IPartsList*, nindex : UInt32, pppart : IPart*) : HRESULT
-    @lpVtbl.value.get_part.call(this, nindex, pppart)
-  end
-end
-struct LibWin32::IPart
-  def query_interface(this : IPart*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IPart*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IPart*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_name(this : IPart*, ppwstrname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_name.call(this, ppwstrname)
-  end
-  def get_local_id(this : IPart*, pnid : UInt32*) : HRESULT
-    @lpVtbl.value.get_local_id.call(this, pnid)
-  end
-  def get_global_id(this : IPart*, ppwstrglobalid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_global_id.call(this, ppwstrglobalid)
-  end
-  def get_part_type(this : IPart*, pparttype : PartType*) : HRESULT
-    @lpVtbl.value.get_part_type.call(this, pparttype)
-  end
-  def get_sub_type(this : IPart*, psubtype : Guid*) : HRESULT
-    @lpVtbl.value.get_sub_type.call(this, psubtype)
-  end
-  def get_control_interface_count(this : IPart*, pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_control_interface_count.call(this, pcount)
-  end
-  def get_control_interface(this : IPart*, nindex : UInt32, ppinterfacedesc : IControlInterface*) : HRESULT
-    @lpVtbl.value.get_control_interface.call(this, nindex, ppinterfacedesc)
-  end
-  def enum_parts_incoming(this : IPart*, ppparts : IPartsList*) : HRESULT
-    @lpVtbl.value.enum_parts_incoming.call(this, ppparts)
-  end
-  def enum_parts_outgoing(this : IPart*, ppparts : IPartsList*) : HRESULT
-    @lpVtbl.value.enum_parts_outgoing.call(this, ppparts)
-  end
-  def get_topology_object(this : IPart*, pptopology : IDeviceTopology*) : HRESULT
-    @lpVtbl.value.get_topology_object.call(this, pptopology)
-  end
-  def activate(this : IPart*, dwclscontext : UInt32, refiid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.activate.call(this, dwclscontext, refiid, ppvobject)
-  end
-  def register_control_change_callback(this : IPart*, riid : Guid*, pnotify : IControlChangeNotify) : HRESULT
-    @lpVtbl.value.register_control_change_callback.call(this, riid, pnotify)
-  end
-  def unregister_control_change_callback(this : IPart*, pnotify : IControlChangeNotify) : HRESULT
-    @lpVtbl.value.unregister_control_change_callback.call(this, pnotify)
-  end
-end
-struct LibWin32::IConnector
-  def query_interface(this : IConnector*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IConnector*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IConnector*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type(this : IConnector*, ptype : ConnectorType*) : HRESULT
-    @lpVtbl.value.get_type.call(this, ptype)
-  end
-  def get_data_flow(this : IConnector*, pflow : DataFlow*) : HRESULT
-    @lpVtbl.value.get_data_flow.call(this, pflow)
-  end
-  def connect_to(this : IConnector*, pconnectto : IConnector) : HRESULT
-    @lpVtbl.value.connect_to.call(this, pconnectto)
-  end
-  def disconnect(this : IConnector*) : HRESULT
-    @lpVtbl.value.disconnect.call(this)
-  end
-  def is_connected(this : IConnector*, pbconnected : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_connected.call(this, pbconnected)
-  end
-  def get_connected_to(this : IConnector*, ppconto : IConnector*) : HRESULT
-    @lpVtbl.value.get_connected_to.call(this, ppconto)
-  end
-  def get_connector_id_connected_to(this : IConnector*, ppwstrconnectorid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_connector_id_connected_to.call(this, ppwstrconnectorid)
-  end
-  def get_device_id_connected_to(this : IConnector*, ppwstrdeviceid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_device_id_connected_to.call(this, ppwstrdeviceid)
-  end
-end
-struct LibWin32::ISubunit
-  def query_interface(this : ISubunit*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISubunit*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISubunit*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-end
-struct LibWin32::IControlInterface
-  def query_interface(this : IControlInterface*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IControlInterface*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IControlInterface*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_name(this : IControlInterface*, ppwstrname : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_name.call(this, ppwstrname)
-  end
-  def get_iid(this : IControlInterface*, piid : Guid*) : HRESULT
-    @lpVtbl.value.get_iid.call(this, piid)
-  end
-end
-struct LibWin32::IControlChangeNotify
-  def query_interface(this : IControlChangeNotify*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IControlChangeNotify*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IControlChangeNotify*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def on_notify(this : IControlChangeNotify*, dwsenderprocessid : UInt32, pguideventcontext : Guid*) : HRESULT
-    @lpVtbl.value.on_notify.call(this, dwsenderprocessid, pguideventcontext)
-  end
-end
-struct LibWin32::IDeviceTopology
-  def query_interface(this : IDeviceTopology*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDeviceTopology*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDeviceTopology*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_connector_count(this : IDeviceTopology*, pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_connector_count.call(this, pcount)
-  end
-  def get_connector(this : IDeviceTopology*, nindex : UInt32, ppconnector : IConnector*) : HRESULT
-    @lpVtbl.value.get_connector.call(this, nindex, ppconnector)
-  end
-  def get_subunit_count(this : IDeviceTopology*, pcount : UInt32*) : HRESULT
-    @lpVtbl.value.get_subunit_count.call(this, pcount)
-  end
-  def get_subunit(this : IDeviceTopology*, nindex : UInt32, ppsubunit : ISubunit*) : HRESULT
-    @lpVtbl.value.get_subunit.call(this, nindex, ppsubunit)
-  end
-  def get_part_by_id(this : IDeviceTopology*, nid : UInt32, pppart : IPart*) : HRESULT
-    @lpVtbl.value.get_part_by_id.call(this, nid, pppart)
-  end
-  def get_device_id(this : IDeviceTopology*, ppwstrdeviceid : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_device_id.call(this, ppwstrdeviceid)
-  end
-  def get_signal_path(this : IDeviceTopology*, pipartfrom : IPart, pipartto : IPart, brejectmixedpaths : LibC::BOOL, ppparts : IPartsList*) : HRESULT
-    @lpVtbl.value.get_signal_path.call(this, pipartfrom, pipartto, brejectmixedpaths, ppparts)
-  end
-end
-struct LibWin32::IAudioSessionEvents
-  def query_interface(this : IAudioSessionEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioSessionEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioSessionEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def on_display_name_changed(this : IAudioSessionEvents*, newdisplayname : LibC::LPWSTR, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.on_display_name_changed.call(this, newdisplayname, eventcontext)
-  end
-  def on_icon_path_changed(this : IAudioSessionEvents*, newiconpath : LibC::LPWSTR, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.on_icon_path_changed.call(this, newiconpath, eventcontext)
-  end
-  def on_simple_volume_changed(this : IAudioSessionEvents*, newvolume : Float32, newmute : LibC::BOOL, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.on_simple_volume_changed.call(this, newvolume, newmute, eventcontext)
-  end
-  def on_channel_volume_changed(this : IAudioSessionEvents*, channelcount : UInt32, newchannelvolumearray : Float32*, changedchannel : UInt32, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.on_channel_volume_changed.call(this, channelcount, newchannelvolumearray, changedchannel, eventcontext)
-  end
-  def on_grouping_param_changed(this : IAudioSessionEvents*, newgroupingparam : Guid*, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.on_grouping_param_changed.call(this, newgroupingparam, eventcontext)
-  end
-  def on_state_changed(this : IAudioSessionEvents*, newstate : AudioSessionState) : HRESULT
-    @lpVtbl.value.on_state_changed.call(this, newstate)
-  end
-  def on_session_disconnected(this : IAudioSessionEvents*, disconnectreason : AudioSessionDisconnectReason) : HRESULT
-    @lpVtbl.value.on_session_disconnected.call(this, disconnectreason)
-  end
-end
-struct LibWin32::IAudioSessionControl
-  def query_interface(this : IAudioSessionControl*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioSessionControl*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioSessionControl*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_state(this : IAudioSessionControl*, pretval : AudioSessionState*) : HRESULT
-    @lpVtbl.value.get_state.call(this, pretval)
-  end
-  def get_display_name(this : IAudioSessionControl*, pretval : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_display_name.call(this, pretval)
-  end
-  def set_display_name(this : IAudioSessionControl*, value : LibC::LPWSTR, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_display_name.call(this, value, eventcontext)
-  end
-  def get_icon_path(this : IAudioSessionControl*, pretval : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_icon_path.call(this, pretval)
-  end
-  def set_icon_path(this : IAudioSessionControl*, value : LibC::LPWSTR, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_icon_path.call(this, value, eventcontext)
-  end
-  def get_grouping_param(this : IAudioSessionControl*, pretval : Guid*) : HRESULT
-    @lpVtbl.value.get_grouping_param.call(this, pretval)
-  end
-  def set_grouping_param(this : IAudioSessionControl*, override : Guid*, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_grouping_param.call(this, override, eventcontext)
-  end
-  def register_audio_session_notification(this : IAudioSessionControl*, newnotifications : IAudioSessionEvents) : HRESULT
-    @lpVtbl.value.register_audio_session_notification.call(this, newnotifications)
-  end
-  def unregister_audio_session_notification(this : IAudioSessionControl*, newnotifications : IAudioSessionEvents) : HRESULT
-    @lpVtbl.value.unregister_audio_session_notification.call(this, newnotifications)
-  end
-end
-struct LibWin32::IAudioSessionControl2
-  def query_interface(this : IAudioSessionControl2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioSessionControl2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioSessionControl2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_state(this : IAudioSessionControl2*, pretval : AudioSessionState*) : HRESULT
-    @lpVtbl.value.get_state.call(this, pretval)
-  end
-  def get_display_name(this : IAudioSessionControl2*, pretval : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_display_name.call(this, pretval)
-  end
-  def set_display_name(this : IAudioSessionControl2*, value : LibC::LPWSTR, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_display_name.call(this, value, eventcontext)
-  end
-  def get_icon_path(this : IAudioSessionControl2*, pretval : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_icon_path.call(this, pretval)
-  end
-  def set_icon_path(this : IAudioSessionControl2*, value : LibC::LPWSTR, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_icon_path.call(this, value, eventcontext)
-  end
-  def get_grouping_param(this : IAudioSessionControl2*, pretval : Guid*) : HRESULT
-    @lpVtbl.value.get_grouping_param.call(this, pretval)
-  end
-  def set_grouping_param(this : IAudioSessionControl2*, override : Guid*, eventcontext : Guid*) : HRESULT
-    @lpVtbl.value.set_grouping_param.call(this, override, eventcontext)
-  end
-  def register_audio_session_notification(this : IAudioSessionControl2*, newnotifications : IAudioSessionEvents) : HRESULT
-    @lpVtbl.value.register_audio_session_notification.call(this, newnotifications)
-  end
-  def unregister_audio_session_notification(this : IAudioSessionControl2*, newnotifications : IAudioSessionEvents) : HRESULT
-    @lpVtbl.value.unregister_audio_session_notification.call(this, newnotifications)
-  end
-  def get_session_identifier(this : IAudioSessionControl2*, pretval : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_session_identifier.call(this, pretval)
-  end
-  def get_session_instance_identifier(this : IAudioSessionControl2*, pretval : LibC::LPWSTR*) : HRESULT
-    @lpVtbl.value.get_session_instance_identifier.call(this, pretval)
-  end
-  def get_process_id(this : IAudioSessionControl2*, pretval : UInt32*) : HRESULT
-    @lpVtbl.value.get_process_id.call(this, pretval)
-  end
-  def is_system_sounds_session(this : IAudioSessionControl2*) : HRESULT
-    @lpVtbl.value.is_system_sounds_session.call(this)
-  end
-  def set_ducking_preference(this : IAudioSessionControl2*, optout : LibC::BOOL) : HRESULT
-    @lpVtbl.value.set_ducking_preference.call(this, optout)
-  end
-end
-struct LibWin32::IAudioSessionManager
-  def query_interface(this : IAudioSessionManager*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioSessionManager*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioSessionManager*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_audio_session_control(this : IAudioSessionManager*, audiosessionguid : Guid*, streamflags : UInt32, sessioncontrol : IAudioSessionControl*) : HRESULT
-    @lpVtbl.value.get_audio_session_control.call(this, audiosessionguid, streamflags, sessioncontrol)
-  end
-  def get_simple_audio_volume(this : IAudioSessionManager*, audiosessionguid : Guid*, streamflags : UInt32, audiovolume : ISimpleAudioVolume*) : HRESULT
-    @lpVtbl.value.get_simple_audio_volume.call(this, audiosessionguid, streamflags, audiovolume)
-  end
-end
-struct LibWin32::IAudioVolumeDuckNotification
-  def query_interface(this : IAudioVolumeDuckNotification*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioVolumeDuckNotification*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioVolumeDuckNotification*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def on_volume_duck_notification(this : IAudioVolumeDuckNotification*, sessionid : LibC::LPWSTR, countcommunicationsessions : UInt32) : HRESULT
-    @lpVtbl.value.on_volume_duck_notification.call(this, sessionid, countcommunicationsessions)
-  end
-  def on_volume_unduck_notification(this : IAudioVolumeDuckNotification*, sessionid : LibC::LPWSTR) : HRESULT
-    @lpVtbl.value.on_volume_unduck_notification.call(this, sessionid)
-  end
-end
-struct LibWin32::IAudioSessionNotification
-  def query_interface(this : IAudioSessionNotification*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioSessionNotification*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioSessionNotification*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def on_session_created(this : IAudioSessionNotification*, newsession : IAudioSessionControl) : HRESULT
-    @lpVtbl.value.on_session_created.call(this, newsession)
-  end
-end
-struct LibWin32::IAudioSessionEnumerator
-  def query_interface(this : IAudioSessionEnumerator*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioSessionEnumerator*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioSessionEnumerator*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_count(this : IAudioSessionEnumerator*, sessioncount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, sessioncount)
-  end
-  def get_session(this : IAudioSessionEnumerator*, sessioncount : Int32, session : IAudioSessionControl*) : HRESULT
-    @lpVtbl.value.get_session.call(this, sessioncount, session)
-  end
-end
-struct LibWin32::IAudioSessionManager2
-  def query_interface(this : IAudioSessionManager2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioSessionManager2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioSessionManager2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_audio_session_control(this : IAudioSessionManager2*, audiosessionguid : Guid*, streamflags : UInt32, sessioncontrol : IAudioSessionControl*) : HRESULT
-    @lpVtbl.value.get_audio_session_control.call(this, audiosessionguid, streamflags, sessioncontrol)
-  end
-  def get_simple_audio_volume(this : IAudioSessionManager2*, audiosessionguid : Guid*, streamflags : UInt32, audiovolume : ISimpleAudioVolume*) : HRESULT
-    @lpVtbl.value.get_simple_audio_volume.call(this, audiosessionguid, streamflags, audiovolume)
-  end
-  def get_session_enumerator(this : IAudioSessionManager2*, sessionenum : IAudioSessionEnumerator*) : HRESULT
-    @lpVtbl.value.get_session_enumerator.call(this, sessionenum)
-  end
-  def register_session_notification(this : IAudioSessionManager2*, sessionnotification : IAudioSessionNotification) : HRESULT
-    @lpVtbl.value.register_session_notification.call(this, sessionnotification)
-  end
-  def unregister_session_notification(this : IAudioSessionManager2*, sessionnotification : IAudioSessionNotification) : HRESULT
-    @lpVtbl.value.unregister_session_notification.call(this, sessionnotification)
-  end
-  def register_duck_notification(this : IAudioSessionManager2*, sessionid : LibC::LPWSTR, ducknotification : IAudioVolumeDuckNotification) : HRESULT
-    @lpVtbl.value.register_duck_notification.call(this, sessionid, ducknotification)
-  end
-  def unregister_duck_notification(this : IAudioSessionManager2*, ducknotification : IAudioVolumeDuckNotification) : HRESULT
-    @lpVtbl.value.unregister_duck_notification.call(this, ducknotification)
-  end
-end
-struct LibWin32::ISpatialAudioMetadataItems
-  def query_interface(this : ISpatialAudioMetadataItems*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioMetadataItems*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioMetadataItems*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_frame_count(this : ISpatialAudioMetadataItems*, framecount : UInt16*) : HRESULT
-    @lpVtbl.value.get_frame_count.call(this, framecount)
-  end
-  def get_item_count(this : ISpatialAudioMetadataItems*, itemcount : UInt16*) : HRESULT
-    @lpVtbl.value.get_item_count.call(this, itemcount)
-  end
-  def get_max_item_count(this : ISpatialAudioMetadataItems*, maxitemcount : UInt16*) : HRESULT
-    @lpVtbl.value.get_max_item_count.call(this, maxitemcount)
-  end
-  def get_max_value_buffer_length(this : ISpatialAudioMetadataItems*, maxvaluebufferlength : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_value_buffer_length.call(this, maxvaluebufferlength)
-  end
-  def get_info(this : ISpatialAudioMetadataItems*, info : SpatialAudioMetadataItemsInfo*) : HRESULT
-    @lpVtbl.value.get_info.call(this, info)
-  end
-end
-struct LibWin32::ISpatialAudioMetadataWriter
-  def query_interface(this : ISpatialAudioMetadataWriter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioMetadataWriter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioMetadataWriter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def open(this : ISpatialAudioMetadataWriter*, metadataitems : ISpatialAudioMetadataItems) : HRESULT
-    @lpVtbl.value.open.call(this, metadataitems)
-  end
-  def write_next_item(this : ISpatialAudioMetadataWriter*, frameoffset : UInt16) : HRESULT
-    @lpVtbl.value.write_next_item.call(this, frameoffset)
-  end
-  def write_next_item_command(this : ISpatialAudioMetadataWriter*, commandid : UInt8, valuebuffer : Void*, valuebufferlength : UInt32) : HRESULT
-    @lpVtbl.value.write_next_item_command.call(this, commandid, valuebuffer, valuebufferlength)
-  end
-  def close(this : ISpatialAudioMetadataWriter*) : HRESULT
-    @lpVtbl.value.close.call(this)
-  end
-end
-struct LibWin32::ISpatialAudioMetadataReader
-  def query_interface(this : ISpatialAudioMetadataReader*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioMetadataReader*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioMetadataReader*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def open(this : ISpatialAudioMetadataReader*, metadataitems : ISpatialAudioMetadataItems) : HRESULT
-    @lpVtbl.value.open.call(this, metadataitems)
-  end
-  def read_next_item(this : ISpatialAudioMetadataReader*, commandcount : UInt8*, frameoffset : UInt16*) : HRESULT
-    @lpVtbl.value.read_next_item.call(this, commandcount, frameoffset)
-  end
-  def read_next_item_command(this : ISpatialAudioMetadataReader*, commandid : UInt8*, valuebuffer : Void*, maxvaluebufferlength : UInt32, valuebufferlength : UInt32*) : HRESULT
-    @lpVtbl.value.read_next_item_command.call(this, commandid, valuebuffer, maxvaluebufferlength, valuebufferlength)
-  end
-  def close(this : ISpatialAudioMetadataReader*) : HRESULT
-    @lpVtbl.value.close.call(this)
-  end
-end
-struct LibWin32::ISpatialAudioMetadataCopier
-  def query_interface(this : ISpatialAudioMetadataCopier*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioMetadataCopier*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioMetadataCopier*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def open(this : ISpatialAudioMetadataCopier*, metadataitems : ISpatialAudioMetadataItems) : HRESULT
-    @lpVtbl.value.open.call(this, metadataitems)
-  end
-  def copy_metadata_for_frames(this : ISpatialAudioMetadataCopier*, copyframecount : UInt16, copymode : SpatialAudioMetadataCopyMode, dstmetadataitems : ISpatialAudioMetadataItems, itemscopied : UInt16*) : HRESULT
-    @lpVtbl.value.copy_metadata_for_frames.call(this, copyframecount, copymode, dstmetadataitems, itemscopied)
-  end
-  def close(this : ISpatialAudioMetadataCopier*) : HRESULT
-    @lpVtbl.value.close.call(this)
-  end
-end
-struct LibWin32::ISpatialAudioMetadataItemsBuffer
-  def query_interface(this : ISpatialAudioMetadataItemsBuffer*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioMetadataItemsBuffer*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioMetadataItemsBuffer*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def attach_to_buffer(this : ISpatialAudioMetadataItemsBuffer*, buffer : UInt8*, bufferlength : UInt32) : HRESULT
-    @lpVtbl.value.attach_to_buffer.call(this, buffer, bufferlength)
-  end
-  def attach_to_populated_buffer(this : ISpatialAudioMetadataItemsBuffer*, buffer : UInt8*, bufferlength : UInt32) : HRESULT
-    @lpVtbl.value.attach_to_populated_buffer.call(this, buffer, bufferlength)
-  end
-  def detach_buffer(this : ISpatialAudioMetadataItemsBuffer*) : HRESULT
-    @lpVtbl.value.detach_buffer.call(this)
-  end
-end
-struct LibWin32::ISpatialAudioMetadataClient
-  def query_interface(this : ISpatialAudioMetadataClient*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioMetadataClient*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioMetadataClient*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def activate_spatial_audio_metadata_items(this : ISpatialAudioMetadataClient*, maxitemcount : UInt16, framecount : UInt16, metadataitemsbuffer : ISpatialAudioMetadataItemsBuffer*, metadataitems : ISpatialAudioMetadataItems*) : HRESULT
-    @lpVtbl.value.activate_spatial_audio_metadata_items.call(this, maxitemcount, framecount, metadataitemsbuffer, metadataitems)
-  end
-  def get_spatial_audio_metadata_items_buffer_length(this : ISpatialAudioMetadataClient*, maxitemcount : UInt16, bufferlength : UInt32*) : HRESULT
-    @lpVtbl.value.get_spatial_audio_metadata_items_buffer_length.call(this, maxitemcount, bufferlength)
-  end
-  def activate_spatial_audio_metadata_writer(this : ISpatialAudioMetadataClient*, overflowmode : SpatialAudioMetadataWriterOverflowMode, metadatawriter : ISpatialAudioMetadataWriter*) : HRESULT
-    @lpVtbl.value.activate_spatial_audio_metadata_writer.call(this, overflowmode, metadatawriter)
-  end
-  def activate_spatial_audio_metadata_copier(this : ISpatialAudioMetadataClient*, metadatacopier : ISpatialAudioMetadataCopier*) : HRESULT
-    @lpVtbl.value.activate_spatial_audio_metadata_copier.call(this, metadatacopier)
-  end
-  def activate_spatial_audio_metadata_reader(this : ISpatialAudioMetadataClient*, metadatareader : ISpatialAudioMetadataReader*) : HRESULT
-    @lpVtbl.value.activate_spatial_audio_metadata_reader.call(this, metadatareader)
-  end
-end
-struct LibWin32::ISpatialAudioObjectForMetadataCommands
-  def query_interface(this : ISpatialAudioObjectForMetadataCommands*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioObjectForMetadataCommands*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioObjectForMetadataCommands*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_buffer(this : ISpatialAudioObjectForMetadataCommands*, buffer : UInt8**, bufferlength : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffer.call(this, buffer, bufferlength)
-  end
-  def set_end_of_stream(this : ISpatialAudioObjectForMetadataCommands*, framecount : UInt32) : HRESULT
-    @lpVtbl.value.set_end_of_stream.call(this, framecount)
-  end
-  def is_active(this : ISpatialAudioObjectForMetadataCommands*, isactive : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_active.call(this, isactive)
-  end
-  def get_audio_object_type(this : ISpatialAudioObjectForMetadataCommands*, audioobjecttype : AudioObjectType*) : HRESULT
-    @lpVtbl.value.get_audio_object_type.call(this, audioobjecttype)
-  end
-  def write_next_metadata_command(this : ISpatialAudioObjectForMetadataCommands*, commandid : UInt8, valuebuffer : Void*, valuebufferlength : UInt32) : HRESULT
-    @lpVtbl.value.write_next_metadata_command.call(this, commandid, valuebuffer, valuebufferlength)
-  end
-end
-struct LibWin32::ISpatialAudioObjectForMetadataItems
-  def query_interface(this : ISpatialAudioObjectForMetadataItems*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioObjectForMetadataItems*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioObjectForMetadataItems*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_buffer(this : ISpatialAudioObjectForMetadataItems*, buffer : UInt8**, bufferlength : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffer.call(this, buffer, bufferlength)
-  end
-  def set_end_of_stream(this : ISpatialAudioObjectForMetadataItems*, framecount : UInt32) : HRESULT
-    @lpVtbl.value.set_end_of_stream.call(this, framecount)
-  end
-  def is_active(this : ISpatialAudioObjectForMetadataItems*, isactive : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.is_active.call(this, isactive)
-  end
-  def get_audio_object_type(this : ISpatialAudioObjectForMetadataItems*, audioobjecttype : AudioObjectType*) : HRESULT
-    @lpVtbl.value.get_audio_object_type.call(this, audioobjecttype)
-  end
-  def get_spatial_audio_metadata_items(this : ISpatialAudioObjectForMetadataItems*, metadataitems : ISpatialAudioMetadataItems*) : HRESULT
-    @lpVtbl.value.get_spatial_audio_metadata_items.call(this, metadataitems)
-  end
-end
-struct LibWin32::ISpatialAudioObjectRenderStreamForMetadata
-  def query_interface(this : ISpatialAudioObjectRenderStreamForMetadata*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISpatialAudioObjectRenderStreamForMetadata*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISpatialAudioObjectRenderStreamForMetadata*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_available_dynamic_object_count(this : ISpatialAudioObjectRenderStreamForMetadata*, value : UInt32*) : HRESULT
-    @lpVtbl.value.get_available_dynamic_object_count.call(this, value)
-  end
-  def get_service(this : ISpatialAudioObjectRenderStreamForMetadata*, riid : Guid*, service : Void**) : HRESULT
-    @lpVtbl.value.get_service.call(this, riid, service)
-  end
-  def start(this : ISpatialAudioObjectRenderStreamForMetadata*) : HRESULT
-    @lpVtbl.value.start.call(this)
-  end
-  def stop(this : ISpatialAudioObjectRenderStreamForMetadata*) : HRESULT
-    @lpVtbl.value.stop.call(this)
-  end
-  def reset(this : ISpatialAudioObjectRenderStreamForMetadata*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def begin_updating_audio_objects(this : ISpatialAudioObjectRenderStreamForMetadata*, availabledynamicobjectcount : UInt32*, framecountperbuffer : UInt32*) : HRESULT
-    @lpVtbl.value.begin_updating_audio_objects.call(this, availabledynamicobjectcount, framecountperbuffer)
-  end
-  def end_updating_audio_objects(this : ISpatialAudioObjectRenderStreamForMetadata*) : HRESULT
-    @lpVtbl.value.end_updating_audio_objects.call(this)
-  end
-  def activate_spatial_audio_object_for_metadata_commands(this : ISpatialAudioObjectRenderStreamForMetadata*, type : AudioObjectType, audioobject : ISpatialAudioObjectForMetadataCommands*) : HRESULT
-    @lpVtbl.value.activate_spatial_audio_object_for_metadata_commands.call(this, type, audioobject)
-  end
-  def activate_spatial_audio_object_for_metadata_items(this : ISpatialAudioObjectRenderStreamForMetadata*, type : AudioObjectType, audioobject : ISpatialAudioObjectForMetadataItems*) : HRESULT
-    @lpVtbl.value.activate_spatial_audio_object_for_metadata_items.call(this, type, audioobject)
-  end
-end
-struct LibWin32::IAudioStateMonitor
-  def query_interface(this : IAudioStateMonitor*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAudioStateMonitor*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAudioStateMonitor*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def register_callback(this : IAudioStateMonitor*, callback : PAudioStateMonitorCallback, context : Void*, registration : Int64*) : HRESULT
-    @lpVtbl.value.register_callback.call(this, callback, context, registration)
-  end
-  def unregister_callback(this : IAudioStateMonitor*, registration : Int64) : Void
-    @lpVtbl.value.unregister_callback.call(this, registration)
-  end
-  def get_sound_level(this : IAudioStateMonitor*) : AudioStateMonitorSoundLevel
-    @lpVtbl.value.get_sound_level.call(this)
   end
 end

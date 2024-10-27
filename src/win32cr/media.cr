@@ -2,20 +2,11 @@ require "./media/multimedia.cr"
 require "./system/com.cr"
 require "./foundation.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:winmm.dll")]
-{% else %}
-@[Link("winmm")]
-{% end %}
-lib LibWin32
+module Win32cr::Media
   alias HTASK = LibC::IntPtrT
+  alias LPDRVCALLBACK = Proc(Win32cr::Media::Multimedia::HDRVR, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)*
+
+  alias LPTIMECALLBACK = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)*
 
   TIMERR_NOERROR = 0_u32
   TIMERR_NOCANDO = 97_u32
@@ -119,190 +110,199 @@ lib LibWin32
   TIME_CALLBACK_EVENT_PULSE = 32_u32
   TIME_KILL_SYNCHRONOUS = 256_u32
 
-  alias LPDRVCALLBACK = Proc(HDRVR, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, Void)
-  alias LPTIMECALLBACK = Proc(UInt32, UInt32, LibC::UINT_PTR, LibC::UINT_PTR, LibC::UINT_PTR, Void)
-
-
+  @[Flags]
   enum TIMECODE_SAMPLE_FLAGS : UInt32
-    ED_DEVCAP_TIMECODE_READ = 4121
-    ED_DEVCAP_ATN_READ = 5047
-    ED_DEVCAP_RTC_READ = 5050
+    ED_DEVCAP_TIMECODE_READ = 4121_u32
+    ED_DEVCAP_ATN_READ = 5047_u32
+    ED_DEVCAP_RTC_READ = 5050_u32
   end
 
-  union MMTIME_u_e__Union
-    ms : UInt32
-    sample : UInt32
-    cb : UInt32
-    ticks : UInt32
-    smpte : MMTIME_u_e__Union_smpte_e__Struct
-    midi : MMTIME_u_e__Union_midi_e__Struct
-  end
-  union TIMECODE
-    anonymous : TIMECODE_Anonymous_e__Struct
-    qw : UInt64
-  end
+  @[Extern]
+  record MMTIME,
+    wType : UInt32,
+    u : U_e__union do
 
-  struct MMTIME
-    w_type : UInt32
-    u : MMTIME_u_e__Union
-  end
-  struct MMTIME_u_e__Union_smpte_e__Struct
-    hour : UInt8
-    min : UInt8
-    sec : UInt8
-    frame : UInt8
-    fps : UInt8
-    dummy : UInt8
-    pad : UInt8[2]*
-  end
-  struct MMTIME_u_e__Union_midi_e__Struct
-    songptrpos : UInt32
-  end
-  struct TIMECAPS
-    w_period_min : UInt32
-    w_period_max : UInt32
-  end
-  struct TIMECODE_Anonymous_e__Struct
-    w_frame_rate : UInt16
-    w_frame_fract : UInt16
-    dw_frames : UInt32
-  end
-  struct TIMECODE_SAMPLE
-    qw_tick : Int64
-    timecode : TIMECODE
-    dw_user : UInt32
-    dw_flags : TIMECODE_SAMPLE_FLAGS
-  end
+    # Nested Type U_e__union
+    @[Extern(union: true)]
+    record U_e__union,
+      ms : UInt32,
+      sample : UInt32,
+      cb : UInt32,
+      ticks : UInt32,
+      smpte : Smpte_e__struct,
+      midi : Midi_e__struct do
+
+      # Nested Type Smpte_e__struct
+      @[Extern]
+      record Smpte_e__struct,
+        hour : UInt8,
+        min : UInt8,
+        sec : UInt8,
+        frame : UInt8,
+        fps : UInt8,
+        dummy : UInt8,
+        pad : UInt8[2]
 
 
-  struct IReferenceClockVTbl
-    query_interface : Proc(IReferenceClock*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IReferenceClock*, UInt32)
-    release : Proc(IReferenceClock*, UInt32)
-    get_time : Proc(IReferenceClock*, Int64*, HRESULT)
-    advise_time : Proc(IReferenceClock*, Int64, Int64, LibC::HANDLE, LibC::UINT_PTR*, HRESULT)
-    advise_periodic : Proc(IReferenceClock*, Int64, Int64, LibC::HANDLE, LibC::UINT_PTR*, HRESULT)
-    unadvise : Proc(IReferenceClock*, LibC::UINT_PTR, HRESULT)
+      # Nested Type Midi_e__struct
+      @[Extern]
+      record Midi_e__struct,
+        songptrpos : UInt32
+
+    end
+
   end
 
-  IReferenceClock_GUID = "56a86897-0ad4-11ce-b03a-0020af0ba770"
-  IID_IReferenceClock = LibC::GUID.new(0x56a86897_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
-  struct IReferenceClock
-    lpVtbl : IReferenceClockVTbl*
+  @[Extern]
+  record TIMECAPS,
+    wPeriodMin : UInt32,
+    wPeriodMax : UInt32
+
+  @[Extern(union: true)]
+  record TIMECODE,
+    anonymous : Anonymous_e__Struct,
+    qw : UInt64 do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      wFrameRate : UInt16,
+      wFrameFract : UInt16,
+      dwFrames : UInt32
+
   end
 
-  struct IReferenceClockTimerControlVTbl
-    query_interface : Proc(IReferenceClockTimerControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IReferenceClockTimerControl*, UInt32)
-    release : Proc(IReferenceClockTimerControl*, UInt32)
-    set_default_timer_resolution : Proc(IReferenceClockTimerControl*, Int64, HRESULT)
-    get_default_timer_resolution : Proc(IReferenceClockTimerControl*, Int64*, HRESULT)
-  end
+  @[Extern]
+  record TIMECODE_SAMPLE,
+    qwTick : Int64,
+    timecode : Win32cr::Media::TIMECODE,
+    dwUser : UInt32,
+    dwFlags : Win32cr::Media::TIMECODE_SAMPLE_FLAGS
 
-  IReferenceClockTimerControl_GUID = "ebec459c-2eca-4d42-a8af-30df557614b8"
-  IID_IReferenceClockTimerControl = LibC::GUID.new(0xebec459c_u32, 0x2eca_u16, 0x4d42_u16, StaticArray[0xa8_u8, 0xaf_u8, 0x30_u8, 0xdf_u8, 0x55_u8, 0x76_u8, 0x14_u8, 0xb8_u8])
-  struct IReferenceClockTimerControl
-    lpVtbl : IReferenceClockTimerControlVTbl*
-  end
-
-  struct IReferenceClock2VTbl
-    query_interface : Proc(IReferenceClock2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IReferenceClock2*, UInt32)
-    release : Proc(IReferenceClock2*, UInt32)
-    get_time : Proc(IReferenceClock2*, Int64*, HRESULT)
-    advise_time : Proc(IReferenceClock2*, Int64, Int64, LibC::HANDLE, LibC::UINT_PTR*, HRESULT)
-    advise_periodic : Proc(IReferenceClock2*, Int64, Int64, LibC::HANDLE, LibC::UINT_PTR*, HRESULT)
-    unadvise : Proc(IReferenceClock2*, LibC::UINT_PTR, HRESULT)
-  end
-
-  IReferenceClock2_GUID = "36b73885-c2c8-11cf-8b46-00805f6cef60"
-  IID_IReferenceClock2 = LibC::GUID.new(0x36b73885_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
-  struct IReferenceClock2
-    lpVtbl : IReferenceClock2VTbl*
-  end
+  @[Extern]
+  record IReferenceClockVtbl,
+    query_interface : Proc(IReferenceClock*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IReferenceClock*, UInt32),
+    release : Proc(IReferenceClock*, UInt32),
+    get_time : Proc(IReferenceClock*, Int64*, Win32cr::Foundation::HRESULT),
+    advise_time : Proc(IReferenceClock*, Int64, Int64, Win32cr::Foundation::HANDLE, LibC::UIntPtrT*, Win32cr::Foundation::HRESULT),
+    advise_periodic : Proc(IReferenceClock*, Int64, Int64, Win32cr::Foundation::HANDLE, LibC::UIntPtrT*, Win32cr::Foundation::HRESULT),
+    unadvise : Proc(IReferenceClock*, LibC::UIntPtrT, Win32cr::Foundation::HRESULT)
 
 
-  # Params # pmmt : MMTIME* [In],cbmmt : UInt32 [In]
-  fun timeGetSystemTime(pmmt : MMTIME*, cbmmt : UInt32) : UInt32
+  @[Extern]
+  #@[Com("56a86897-0ad4-11ce-b03a-0020af0ba770")]
+  record IReferenceClock, lpVtbl : IReferenceClockVtbl* do
+    GUID = LibC::GUID.new(0x56a86897_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
+    def query_interface(this : IReferenceClock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IReferenceClock*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IReferenceClock*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_time(this : IReferenceClock*, pTime : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_time.call(this, pTime)
+    end
+    def advise_time(this : IReferenceClock*, baseTime : Int64, streamTime : Int64, hEvent : Win32cr::Foundation::HANDLE, pdwAdviseCookie : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.advise_time.call(this, baseTime, streamTime, hEvent, pdwAdviseCookie)
+    end
+    def advise_periodic(this : IReferenceClock*, startTime : Int64, periodTime : Int64, hSemaphore : Win32cr::Foundation::HANDLE, pdwAdviseCookie : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.advise_periodic.call(this, startTime, periodTime, hSemaphore, pdwAdviseCookie)
+    end
+    def unadvise(this : IReferenceClock*, dwAdviseCookie : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unadvise.call(this, dwAdviseCookie)
+    end
 
-  # Params # 
-  fun timeGetTime : UInt32
+  end
 
-  # Params # ptc : TIMECAPS* [In],cbtc : UInt32 [In]
-  fun timeGetDevCaps(ptc : TIMECAPS*, cbtc : UInt32) : UInt32
+  @[Extern]
+  record IReferenceClockTimerControlVtbl,
+    query_interface : Proc(IReferenceClockTimerControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IReferenceClockTimerControl*, UInt32),
+    release : Proc(IReferenceClockTimerControl*, UInt32),
+    set_default_timer_resolution : Proc(IReferenceClockTimerControl*, Int64, Win32cr::Foundation::HRESULT),
+    get_default_timer_resolution : Proc(IReferenceClockTimerControl*, Int64*, Win32cr::Foundation::HRESULT)
 
-  # Params # uperiod : UInt32 [In]
-  fun timeBeginPeriod(uperiod : UInt32) : UInt32
 
-  # Params # uperiod : UInt32 [In]
-  fun timeEndPeriod(uperiod : UInt32) : UInt32
+  @[Extern]
+  #@[Com("ebec459c-2eca-4d42-a8af-30df557614b8")]
+  record IReferenceClockTimerControl, lpVtbl : IReferenceClockTimerControlVtbl* do
+    GUID = LibC::GUID.new(0xebec459c_u32, 0x2eca_u16, 0x4d42_u16, StaticArray[0xa8_u8, 0xaf_u8, 0x30_u8, 0xdf_u8, 0x55_u8, 0x76_u8, 0x14_u8, 0xb8_u8])
+    def query_interface(this : IReferenceClockTimerControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IReferenceClockTimerControl*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IReferenceClockTimerControl*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_default_timer_resolution(this : IReferenceClockTimerControl*, timerResolution : Int64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_default_timer_resolution.call(this, timerResolution)
+    end
+    def get_default_timer_resolution(this : IReferenceClockTimerControl*, pTimerResolution : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_default_timer_resolution.call(this, pTimerResolution)
+    end
 
-  # Params # udelay : UInt32 [In],uresolution : UInt32 [In],fptc : LPTIMECALLBACK [In],dwuser : LibC::UINT_PTR [In],fuevent : UInt32 [In]
-  fun timeSetEvent(udelay : UInt32, uresolution : UInt32, fptc : LPTIMECALLBACK, dwuser : LibC::UINT_PTR, fuevent : UInt32) : UInt32
+  end
 
-  # Params # utimerid : UInt32 [In]
-  fun timeKillEvent(utimerid : UInt32) : UInt32
-end
-struct LibWin32::IReferenceClock
-  def query_interface(this : IReferenceClock*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
+  @[Extern]
+  record IReferenceClock2Vtbl,
+    query_interface : Proc(IReferenceClock2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IReferenceClock2*, UInt32),
+    release : Proc(IReferenceClock2*, UInt32),
+    get_time : Proc(IReferenceClock2*, Int64*, Win32cr::Foundation::HRESULT),
+    advise_time : Proc(IReferenceClock2*, Int64, Int64, Win32cr::Foundation::HANDLE, LibC::UIntPtrT*, Win32cr::Foundation::HRESULT),
+    advise_periodic : Proc(IReferenceClock2*, Int64, Int64, Win32cr::Foundation::HANDLE, LibC::UIntPtrT*, Win32cr::Foundation::HRESULT),
+    unadvise : Proc(IReferenceClock2*, LibC::UIntPtrT, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("36b73885-c2c8-11cf-8b46-00805f6cef60")]
+  record IReferenceClock2, lpVtbl : IReferenceClock2Vtbl* do
+    GUID = LibC::GUID.new(0x36b73885_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
+    def query_interface(this : IReferenceClock2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IReferenceClock2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IReferenceClock2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_time(this : IReferenceClock2*, pTime : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_time.call(this, pTime)
+    end
+    def advise_time(this : IReferenceClock2*, baseTime : Int64, streamTime : Int64, hEvent : Win32cr::Foundation::HANDLE, pdwAdviseCookie : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.advise_time.call(this, baseTime, streamTime, hEvent, pdwAdviseCookie)
+    end
+    def advise_periodic(this : IReferenceClock2*, startTime : Int64, periodTime : Int64, hSemaphore : Win32cr::Foundation::HANDLE, pdwAdviseCookie : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.advise_periodic.call(this, startTime, periodTime, hSemaphore, pdwAdviseCookie)
+    end
+    def unadvise(this : IReferenceClock2*, dwAdviseCookie : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unadvise.call(this, dwAdviseCookie)
+    end
+
   end
-  def add_ref(this : IReferenceClock*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IReferenceClock*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_time(this : IReferenceClock*, ptime : Int64*) : HRESULT
-    @lpVtbl.value.get_time.call(this, ptime)
-  end
-  def advise_time(this : IReferenceClock*, basetime : Int64, streamtime : Int64, hevent : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.advise_time.call(this, basetime, streamtime, hevent, pdwadvisecookie)
-  end
-  def advise_periodic(this : IReferenceClock*, starttime : Int64, periodtime : Int64, hsemaphore : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.advise_periodic.call(this, starttime, periodtime, hsemaphore, pdwadvisecookie)
-  end
-  def unadvise(this : IReferenceClock*, dwadvisecookie : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.unadvise.call(this, dwadvisecookie)
-  end
-end
-struct LibWin32::IReferenceClockTimerControl
-  def query_interface(this : IReferenceClockTimerControl*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IReferenceClockTimerControl*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IReferenceClockTimerControl*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_default_timer_resolution(this : IReferenceClockTimerControl*, timerresolution : Int64) : HRESULT
-    @lpVtbl.value.set_default_timer_resolution.call(this, timerresolution)
-  end
-  def get_default_timer_resolution(this : IReferenceClockTimerControl*, ptimerresolution : Int64*) : HRESULT
-    @lpVtbl.value.get_default_timer_resolution.call(this, ptimerresolution)
-  end
-end
-struct LibWin32::IReferenceClock2
-  def query_interface(this : IReferenceClock2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IReferenceClock2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IReferenceClock2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_time(this : IReferenceClock2*, ptime : Int64*) : HRESULT
-    @lpVtbl.value.get_time.call(this, ptime)
-  end
-  def advise_time(this : IReferenceClock2*, basetime : Int64, streamtime : Int64, hevent : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.advise_time.call(this, basetime, streamtime, hevent, pdwadvisecookie)
-  end
-  def advise_periodic(this : IReferenceClock2*, starttime : Int64, periodtime : Int64, hsemaphore : LibC::HANDLE, pdwadvisecookie : LibC::UINT_PTR*) : HRESULT
-    @lpVtbl.value.advise_periodic.call(this, starttime, periodtime, hsemaphore, pdwadvisecookie)
-  end
-  def unadvise(this : IReferenceClock2*, dwadvisecookie : LibC::UINT_PTR) : HRESULT
-    @lpVtbl.value.unadvise.call(this, dwadvisecookie)
+
+  @[Link("winmm")]
+  lib C
+    fun timeGetSystemTime(pmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
+
+    fun timeGetTime : UInt32
+
+    fun timeGetDevCaps(ptc : Win32cr::Media::TIMECAPS*, cbtc : UInt32) : UInt32
+
+    fun timeBeginPeriod(uPeriod : UInt32) : UInt32
+
+    fun timeEndPeriod(uPeriod : UInt32) : UInt32
+
+    fun timeSetEvent(uDelay : UInt32, uResolution : UInt32, fptc : Win32cr::Media::LPTIMECALLBACK, dwUser : LibC::UIntPtrT, fuEvent : UInt32) : UInt32
+
+    fun timeKillEvent(uTimerID : UInt32) : UInt32
+
   end
 end

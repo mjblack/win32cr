@@ -1,18 +1,6 @@
-require "../foundation.cr"
+require "./../foundation.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:sfc.dll")]
-{% else %}
-@[Link("sfc")]
-{% end %}
-lib LibWin32
+module Win32cr::System::Restore
   MIN_EVENT = 100_u32
   BEGIN_NESTED_SYSTEM_CHANGE_NORP = 104_u32
   MAX_EVENT = 104_u32
@@ -35,50 +23,52 @@ lib LibWin32
   MAX_DESC = 64_u32
   MAX_DESC_W = 256_u32
 
-
   enum RESTOREPOINTINFO_TYPE : UInt32
-    APPLICATION_INSTALL = 0
-    APPLICATION_UNINSTALL = 1
-    DEVICE_DRIVER_INSTALL = 10
-    MODIFY_SETTINGS = 12
-    CANCELLED_OPERATION = 13
+    APPLICATION_INSTALL = 0_u32
+    APPLICATION_UNINSTALL = 1_u32
+    DEVICE_DRIVER_INSTALL = 10_u32
+    MODIFY_SETTINGS = 12_u32
+    CANCELLED_OPERATION = 13_u32
   end
-
   enum RESTOREPOINTINFO_EVENT_TYPE : UInt32
-    BEGIN_NESTED_SYSTEM_CHANGE = 102
-    BEGIN_SYSTEM_CHANGE = 100
-    END_NESTED_SYSTEM_CHANGE = 103
-    END_SYSTEM_CHANGE = 101
+    BEGIN_NESTED_SYSTEM_CHANGE = 102_u32
+    BEGIN_SYSTEM_CHANGE = 100_u32
+    END_NESTED_SYSTEM_CHANGE = 103_u32
+    END_SYSTEM_CHANGE = 101_u32
   end
 
-  struct RESTOREPOINTINFOA
-    dw_event_type : RESTOREPOINTINFO_EVENT_TYPE
-    dw_restore_pt_type : RESTOREPOINTINFO_TYPE
-    ll_sequence_number : Int64
-    sz_description : CHAR[64]*
-  end
-  struct RESTOREPOINTINFOW
-    dw_event_type : RESTOREPOINTINFO_EVENT_TYPE
-    dw_restore_pt_type : RESTOREPOINTINFO_TYPE
-    ll_sequence_number : Int64
-    sz_description : Char[256]*
-  end
-  struct RESTOREPTINFOEX
-    ft_creation : FILETIME
-    dw_event_type : UInt32
-    dw_restore_pt_type : UInt32
-    dw_rp_num : UInt32
-    sz_description : Char[256]*
-  end
-  struct STATEMGRSTATUS
-    n_status : UInt32
-    ll_sequence_number : Int64
-  end
+  @[Extern]
+  record RESTOREPOINTINFOA,
+    dwEventType : Win32cr::System::Restore::RESTOREPOINTINFO_EVENT_TYPE,
+    dwRestorePtType : Win32cr::System::Restore::RESTOREPOINTINFO_TYPE,
+    llSequenceNumber : Int64,
+    szDescription : Win32cr::Foundation::CHAR[64]
 
+  @[Extern]
+  record RESTOREPOINTINFOW,
+    dwEventType : Win32cr::System::Restore::RESTOREPOINTINFO_EVENT_TYPE,
+    dwRestorePtType : Win32cr::System::Restore::RESTOREPOINTINFO_TYPE,
+    llSequenceNumber : Int64,
+    szDescription : UInt16[256]
 
-  # Params # prestoreptspec : RESTOREPOINTINFOA* [In],psmgrstatus : STATEMGRSTATUS* [In]
-  fun SRSetRestorePointA(prestoreptspec : RESTOREPOINTINFOA*, psmgrstatus : STATEMGRSTATUS*) : LibC::BOOL
+  @[Extern]
+  record RESTOREPTINFOEX,
+    ftCreation : Win32cr::Foundation::FILETIME,
+    dwEventType : UInt32,
+    dwRestorePtType : UInt32,
+    dwRPNum : UInt32,
+    szDescription : UInt16[256]
 
-  # Params # prestoreptspec : RESTOREPOINTINFOW* [In],psmgrstatus : STATEMGRSTATUS* [In]
-  fun SRSetRestorePointW(prestoreptspec : RESTOREPOINTINFOW*, psmgrstatus : STATEMGRSTATUS*) : LibC::BOOL
+  @[Extern]
+  record STATEMGRSTATUS,
+    nStatus : UInt32,
+    llSequenceNumber : Int64
+
+  @[Link("sfc")]
+  lib C
+    fun SRSetRestorePointA(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOA*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
+
+    fun SRSetRestorePointW(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOW*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
+
+  end
 end

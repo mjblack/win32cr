@@ -1,26 +1,25 @@
-require "../foundation.cr"
-require "../system/com.cr"
-require "../system/ole.cr"
+require "./../foundation.cr"
+require "./com.cr"
+require "./ole.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:loadperf.dll")]
-@[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
-@[Link(ldflags: "/DELAYLOAD:pdh.dll")]
-{% else %}
-@[Link("loadperf")]
-@[Link("advapi32")]
-@[Link("pdh")]
-{% end %}
-lib LibWin32
+module Win32cr::System::Performance
   alias PerfProviderHandle = LibC::IntPtrT
   alias PerfQueryHandle = LibC::IntPtrT
+  alias PLA_CABEXTRACT_CALLBACK = Proc(Win32cr::Foundation::PWSTR, Void*, Void)*
+
+  alias PERFLIBREQUEST = Proc(UInt32, Void*, UInt32, UInt32)*
+
+  alias PERF_MEM_ALLOC = Proc(LibC::UIntPtrT, Void*, Void*)*
+
+  alias PERF_MEM_FREE = Proc(Void*, Void*, Void)*
+
+  alias PM_OPEN_PROC = Proc(Win32cr::Foundation::PWSTR, UInt32)*
+
+  alias PM_COLLECT_PROC = Proc(Win32cr::Foundation::PWSTR, Void**, UInt32*, UInt32*, UInt32)*
+
+  alias PM_CLOSE_PROC = Proc(UInt32)*
+
+  alias CounterPathCallBack = Proc(LibC::UIntPtrT, Int32)*
 
   MAX_COUNTER_PATH = 256_u32
   PDH_MAX_COUNTER_NAME = 1024_u32
@@ -53,6 +52,8 @@ lib LibWin32
   PERF_ATTRIB_DISPLAY_AS_REAL = 8_u64
   PERF_ATTRIB_DISPLAY_AS_HEX = 16_u64
   PERF_WILDCARD_COUNTER = 4294967295_u32
+  PERF_WILDCARD_INSTANCE = "*"
+  PERF_AGGREGATE_INSTANCE = "_Total"
   PERF_MAX_INSTANCE_NAME = 1024_u32
   PERF_ADD_COUNTER = 1_u32
   PERF_REMOVE_COUNTER = 2_u32
@@ -205,5313 +206,5293 @@ lib LibWin32
   PLA_CAPABILITY_LEGACY_SVC = 16_u32
   PLA_CAPABILITY_AUTOLOGGER = 32_u32
   S_PDH = "04d66358-c4a1-419b-8023-23b73902de2c"
+
   CLSID_DataCollectorSet = LibC::GUID.new(0x3837521_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_TraceSession = LibC::GUID.new(0x383751c_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_TraceSessionCollection = LibC::GUID.new(0x3837530_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_TraceDataProvider = LibC::GUID.new(0x3837513_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_TraceDataProviderCollection = LibC::GUID.new(0x3837511_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_DataCollectorSetCollection = LibC::GUID.new(0x3837525_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_LegacyDataCollectorSet = LibC::GUID.new(0x3837526_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_LegacyDataCollectorSetCollection = LibC::GUID.new(0x3837527_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_LegacyTraceSession = LibC::GUID.new(0x3837528_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_LegacyTraceSessionCollection = LibC::GUID.new(0x3837529_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_ServerDataCollectorSet = LibC::GUID.new(0x3837531_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_ServerDataCollectorSetCollection = LibC::GUID.new(0x3837532_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_SystemDataCollectorSet = LibC::GUID.new(0x3837546_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_SystemDataCollectorSetCollection = LibC::GUID.new(0x3837547_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_BootTraceSession = LibC::GUID.new(0x3837538_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_BootTraceSessionCollection = LibC::GUID.new(0x3837539_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+
   CLSID_SystemMonitor = LibC::GUID.new(0xc4d2d8e0_u32, 0xd1dd_u16, 0x11ce_u16, StaticArray[0x94_u8, 0xf_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+
   CLSID_CounterItem = LibC::GUID.new(0xc4d2d8e0_u32, 0xd1dd_u16, 0x11ce_u16, StaticArray[0x94_u8, 0xf_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x48_u8])
+
   CLSID_Counters = LibC::GUID.new(0xb2b066d2_u32, 0x2aac_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2f_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+
   CLSID_LogFileItem = LibC::GUID.new(0x16ec5be8_u32, 0xdf93_u16, 0x4237_u16, StaticArray[0x94_u8, 0xe4_u8, 0x9e_u8, 0xe9_u8, 0x18_u8, 0x11_u8, 0x1d_u8, 0x71_u8])
+
   CLSID_LogFiles = LibC::GUID.new(0x2735d9fd_u32, 0xf6b9_u16, 0x4f19_u16, StaticArray[0xa5_u8, 0xd9_u8, 0xe2_u8, 0xd0_u8, 0x68_u8, 0x58_u8, 0x4b_u8, 0xc5_u8])
+
   CLSID_CounterItem2 = LibC::GUID.new(0x43196c62_u32, 0xc31f_u16, 0x4ce3_u16, StaticArray[0xa0_u8, 0x2e_u8, 0x79_u8, 0xef_u8, 0xe0_u8, 0xf6_u8, 0xa5_u8, 0x25_u8])
+
   CLSID_SystemMonitor2 = LibC::GUID.new(0x7f30578c_u32, 0x5f38_u16, 0x4612_u16, StaticArray[0xac_u8, 0xfe_u8, 0x6e_u8, 0xd0_u8, 0x4c_u8, 0x7b_u8, 0x7a_u8, 0xf8_u8])
+
   CLSID_AppearPropPage = LibC::GUID.new(0xe49741e9_u32, 0x93a8_u16, 0x4ab1_u16, StaticArray[0x8e_u8, 0x96_u8, 0xbf_u8, 0x44_u8, 0x82_u8, 0x28_u8, 0x2e_u8, 0x9c_u8])
+
   CLSID_GeneralPropPage = LibC::GUID.new(0xc3e5d3d2_u32, 0x1a03_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2d_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+
   CLSID_GraphPropPage = LibC::GUID.new(0xc3e5d3d3_u32, 0x1a03_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2d_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+
   CLSID_SourcePropPage = LibC::GUID.new(0xcf32aa1_u32, 0x7571_u16, 0x11d0_u16, StaticArray[0x93_u8, 0xc4_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
+
   CLSID_CounterPropPage = LibC::GUID.new(0xcf948561_u32, 0xede8_u16, 0x11ce_u16, StaticArray[0x94_u8, 0x1e_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
 
-  alias PLA_CABEXTRACT_CALLBACK = Proc(LibC::LPWSTR, Void*, Void)
-  alias PERFLIBREQUEST = Proc(UInt32, Void*, UInt32, UInt32)
-  alias PERF_MEM_ALLOC = Proc(LibC::UINT_PTR, Void*, Void*)
-  alias PERF_MEM_FREE = Proc(Void*, Void*, Void)
-  alias PM_OPEN_PROC = Proc(LibC::LPWSTR, UInt32)
-  alias PM_COLLECT_PROC = Proc(LibC::LPWSTR, Void**, UInt32*, UInt32*, UInt32)
-  alias PM_CLOSE_PROC = Proc(UInt32)
-  alias CounterPathCallBack = Proc(LibC::UINT_PTR, Int32)
-
-
   enum PERF_DETAIL : UInt32
-    PERF_DETAIL_NOVICE = 100
-    PERF_DETAIL_ADVANCED = 200
-    PERF_DETAIL_EXPERT = 300
-    PERF_DETAIL_WIZARD = 400
+    PERF_DETAIL_NOVICE = 100_u32
+    PERF_DETAIL_ADVANCED = 200_u32
+    PERF_DETAIL_EXPERT = 300_u32
+    PERF_DETAIL_WIZARD = 400_u32
   end
-
   enum REAL_TIME_DATA_SOURCE_ID_FLAGS : UInt32
-    DATA_SOURCE_REGISTRY = 1
-    DATA_SOURCE_WBEM = 4
+    DATA_SOURCE_REGISTRY = 1_u32
+    DATA_SOURCE_WBEM = 4_u32
   end
-
   enum PDH_PATH_FLAGS : UInt32
-    PDH_PATH_WBEM_RESULT = 1
-    PDH_PATH_WBEM_INPUT = 2
-    PDH_PATH_WBEM_NONE = 0
+    PDH_PATH_WBEM_RESULT = 1_u32
+    PDH_PATH_WBEM_INPUT = 2_u32
+    PDH_PATH_WBEM_NONE = 0_u32
   end
-
   enum PDH_FMT : UInt32
-    PDH_FMT_DOUBLE = 512
-    PDH_FMT_LARGE = 1024
-    PDH_FMT_LONG = 256
+    PDH_FMT_DOUBLE = 512_u32
+    PDH_FMT_LARGE = 1024_u32
+    PDH_FMT_LONG = 256_u32
   end
-
   enum PDH_LOG_TYPE : UInt32
-    PDH_LOG_TYPE_UNDEFINED = 0
-    PDH_LOG_TYPE_CSV = 1
-    PDH_LOG_TYPE_SQL = 7
-    PDH_LOG_TYPE_TSV = 2
-    PDH_LOG_TYPE_BINARY = 8
-    PDH_LOG_TYPE_PERFMON = 6
+    PDH_LOG_TYPE_UNDEFINED = 0_u32
+    PDH_LOG_TYPE_CSV = 1_u32
+    PDH_LOG_TYPE_SQL = 7_u32
+    PDH_LOG_TYPE_TSV = 2_u32
+    PDH_LOG_TYPE_BINARY = 8_u32
+    PDH_LOG_TYPE_PERFMON = 6_u32
   end
-
   enum PDH_LOG : UInt32
-    PDH_LOG_READ_ACCESS = 65536
-    PDH_LOG_WRITE_ACCESS = 131072
-    PDH_LOG_UPDATE_ACCESS = 262144
+    PDH_LOG_READ_ACCESS = 65536_u32
+    PDH_LOG_WRITE_ACCESS = 131072_u32
+    PDH_LOG_UPDATE_ACCESS = 262144_u32
   end
-
   enum PDH_SELECT_DATA_SOURCE_FLAGS : UInt32
-    PDH_FLAGS_FILE_BROWSER_ONLY = 1
-    PDH_FLAGS_NONE = 0
+    PDH_FLAGS_FILE_BROWSER_ONLY = 1_u32
+    PDH_FLAGS_NONE = 0_u32
   end
-
   enum PDH_DLL_VERSION : UInt32
-    PDH_CVERSION_WIN50 = 1280
-    PDH_VERSION = 1283
+    PDH_CVERSION_WIN50 = 1280_u32
+    PDH_VERSION = 1283_u32
   end
-
   enum PERF_COUNTER_AGGREGATE_FUNC : UInt32
-    PERF_AGGREGATE_UNDEFINED = 0
-    PERF_AGGREGATE_TOTAL = 1
-    PERF_AGGREGATE_AVG = 2
-    PERF_AGGREGATE_MIN = 3
+    PERF_AGGREGATE_UNDEFINED = 0_u32
+    PERF_AGGREGATE_TOTAL = 1_u32
+    PERF_AGGREGATE_AVG = 2_u32
+    PERF_AGGREGATE_MIN = 3_u32
+  end
+  enum DataCollectorType
+    Plaperformancecounter = 0_i32
+    Platrace = 1_i32
+    Placonfiguration = 2_i32
+    Plaalert = 3_i32
+    Plaapitrace = 4_i32
+  end
+  enum FileFormat
+    Placommaseparated = 0_i32
+    Platabseparated = 1_i32
+    Plasql = 2_i32
+    Plabinary = 3_i32
+  end
+  enum AutoPathFormat
+    Planone = 0_i32
+    Plapattern = 1_i32
+    Placomputer = 2_i32
+    Plamonthdayhour = 256_i32
+    Plaserialnumber = 512_i32
+    Playeardayofyear = 1024_i32
+    Playearmonth = 2048_i32
+    Playearmonthday = 4096_i32
+    Playearmonthdayhour = 8192_i32
+    Plamonthdayhourminute = 16384_i32
+  end
+  enum DataCollectorSetStatus
+    Plastopped = 0_i32
+    Plarunning = 1_i32
+    Placompiling = 2_i32
+    Plapending = 3_i32
+    Plaundefined = 4_i32
+  end
+  enum ClockType
+    Platimestamp = 0_i32
+    Plaperformance = 1_i32
+    Plasystem = 2_i32
+    Placycle = 3_i32
+  end
+  enum StreamMode
+    Plafile = 1_i32
+    Plarealtime = 2_i32
+    Plaboth = 3_i32
+    Plabuffering = 4_i32
+  end
+  enum CommitMode
+    Placreatenew = 1_i32
+    Plamodify = 2_i32
+    Placreateormodify = 3_i32
+    Plaupdaterunninginstance = 16_i32
+    Plaflushtrace = 32_i32
+    Plavalidateonly = 4096_i32
+  end
+  enum ValueMapType
+    Plaindex = 1_i32
+    Plaflag = 2_i32
+    Plaflagarray = 3_i32
+    Plavalidation = 4_i32
+  end
+  enum WeekDays
+    Plarunonce = 0_i32
+    Plasunday = 1_i32
+    Plamonday = 2_i32
+    Platuesday = 4_i32
+    Plawednesday = 8_i32
+    Plathursday = 16_i32
+    Plafriday = 32_i32
+    Plasaturday = 64_i32
+    Plaeveryday = 127_i32
+  end
+  enum ResourcePolicy
+    Pladeletelargest = 0_i32
+    Pladeleteoldest = 1_i32
+  end
+  enum DataManagerSteps
+    Placreatereport = 1_i32
+    Plarunrules = 2_i32
+    Placreatehtml = 4_i32
+    Plafolderactions = 8_i32
+    Plaresourcefreeing = 16_i32
+  end
+  enum FolderActionSteps
+    Placreatecab = 1_i32
+    Pladeletedata = 2_i32
+    Plasendcab = 4_i32
+    Pladeletecab = 8_i32
+    Pladeletereport = 16_i32
+  end
+  enum PerfRegInfoType
+    PERF_REG_COUNTERSET_STRUCT = 1_i32
+    PERF_REG_COUNTER_STRUCT = 2_i32
+    PERF_REG_COUNTERSET_NAME_STRING = 3_i32
+    PERF_REG_COUNTERSET_HELP_STRING = 4_i32
+    PERF_REG_COUNTER_NAME_STRINGS = 5_i32
+    PERF_REG_COUNTER_HELP_STRINGS = 6_i32
+    PERF_REG_PROVIDER_NAME = 7_i32
+    PERF_REG_PROVIDER_GUID = 8_i32
+    PERF_REG_COUNTERSET_ENGLISH_NAME = 9_i32
+    PERF_REG_COUNTER_ENGLISH_NAMES = 10_i32
+  end
+  enum PerfCounterDataType
+    PERF_ERROR_RETURN = 0_i32
+    PERF_SINGLE_COUNTER = 1_i32
+    PERF_MULTIPLE_COUNTERS = 2_i32
+    PERF_MULTIPLE_INSTANCES = 4_i32
+    PERF_COUNTERSET = 6_i32
+  end
+  enum DisplayTypeConstants
+    Sysmonlinegraph = 1_i32
+    Sysmonhistogram = 2_i32
+    Sysmonreport = 3_i32
+    Sysmonchartarea = 4_i32
+    Sysmonchartstackedarea = 5_i32
+  end
+  enum ReportValueTypeConstants
+    Sysmondefaultvalue = 0_i32
+    Sysmoncurrentvalue = 1_i32
+    Sysmonaverage = 2_i32
+    Sysmonminimum = 3_i32
+    Sysmonmaximum = 4_i32
+  end
+  enum DataSourceTypeConstants
+    Sysmonnulldatasource = -1_i32
+    Sysmoncurrentactivity = 1_i32
+    Sysmonlogfiles = 2_i32
+    Sysmonsqllog = 3_i32
+  end
+  enum SysmonFileType
+    Sysmonfilehtml = 1_i32
+    Sysmonfilereport = 2_i32
+    Sysmonfilecsv = 3_i32
+    Sysmonfiletsv = 4_i32
+    Sysmonfileblg = 5_i32
+    Sysmonfileretiredblg = 6_i32
+    Sysmonfilegif = 7_i32
+  end
+  enum SysmonDataType
+    Sysmondataavg = 1_i32
+    Sysmondatamin = 2_i32
+    Sysmondatamax = 3_i32
+    Sysmondatatime = 4_i32
+    Sysmondatacount = 5_i32
+  end
+  enum SysmonBatchReason
+    Sysmonbatchnone = 0_i32
+    Sysmonbatchaddfiles = 1_i32
+    Sysmonbatchaddcounters = 2_i32
+    Sysmonbatchaddfilesautocounters = 3_i32
   end
 
-  enum DataCollectorType : Int32
-    Plaperformancecounter = 0
-    Platrace = 1
-    Placonfiguration = 2
-    Plaalert = 3
-    Plaapitrace = 4
-  end
-
-  enum FileFormat : Int32
-    Placommaseparated = 0
-    Platabseparated = 1
-    Plasql = 2
-    Plabinary = 3
-  end
-
-  enum AutoPathFormat : Int32
-    Planone = 0
-    Plapattern = 1
-    Placomputer = 2
-    Plamonthdayhour = 256
-    Plaserialnumber = 512
-    Playeardayofyear = 1024
-    Playearmonth = 2048
-    Playearmonthday = 4096
-    Playearmonthdayhour = 8192
-    Plamonthdayhourminute = 16384
-  end
-
-  enum DataCollectorSetStatus : Int32
-    Plastopped = 0
-    Plarunning = 1
-    Placompiling = 2
-    Plapending = 3
-    Plaundefined = 4
-  end
-
-  enum ClockType : Int32
-    Platimestamp = 0
-    Plaperformance = 1
-    Plasystem = 2
-    Placycle = 3
-  end
-
-  enum StreamMode : Int32
-    Plafile = 1
-    Plarealtime = 2
-    Plaboth = 3
-    Plabuffering = 4
-  end
-
-  enum CommitMode : Int32
-    Placreatenew = 1
-    Plamodify = 2
-    Placreateormodify = 3
-    Plaupdaterunninginstance = 16
-    Plaflushtrace = 32
-    Plavalidateonly = 4096
-  end
-
-  enum ValueMapType : Int32
-    Plaindex = 1
-    Plaflag = 2
-    Plaflagarray = 3
-    Plavalidation = 4
-  end
-
-  enum WeekDays : Int32
-    Plarunonce = 0
-    Plasunday = 1
-    Plamonday = 2
-    Platuesday = 4
-    Plawednesday = 8
-    Plathursday = 16
-    Plafriday = 32
-    Plasaturday = 64
-    Plaeveryday = 127
-  end
-
-  enum ResourcePolicy : Int32
-    Pladeletelargest = 0
-    Pladeleteoldest = 1
-  end
-
-  enum DataManagerSteps : Int32
-    Placreatereport = 1
-    Plarunrules = 2
-    Placreatehtml = 4
-    Plafolderactions = 8
-    Plaresourcefreeing = 16
-  end
-
-  enum FolderActionSteps : Int32
-    Placreatecab = 1
-    Pladeletedata = 2
-    Plasendcab = 4
-    Pladeletecab = 8
-    Pladeletereport = 16
-  end
-
-  enum PerfRegInfoType : Int32
-    PERF_REG_COUNTERSET_STRUCT = 1
-    PERF_REG_COUNTER_STRUCT = 2
-    PERF_REG_COUNTERSET_NAME_STRING = 3
-    PERF_REG_COUNTERSET_HELP_STRING = 4
-    PERF_REG_COUNTER_NAME_STRINGS = 5
-    PERF_REG_COUNTER_HELP_STRINGS = 6
-    PERF_REG_PROVIDER_NAME = 7
-    PERF_REG_PROVIDER_GUID = 8
-    PERF_REG_COUNTERSET_ENGLISH_NAME = 9
-    PERF_REG_COUNTER_ENGLISH_NAMES = 10
-  end
-
-  enum PerfCounterDataType : Int32
-    PERF_ERROR_RETURN = 0
-    PERF_SINGLE_COUNTER = 1
-    PERF_MULTIPLE_COUNTERS = 2
-    PERF_MULTIPLE_INSTANCES = 4
-    PERF_COUNTERSET = 6
-  end
-
-  enum DisplayTypeConstants : Int32
-    Sysmonlinegraph = 1
-    Sysmonhistogram = 2
-    Sysmonreport = 3
-    Sysmonchartarea = 4
-    Sysmonchartstackedarea = 5
-  end
-
-  enum ReportValueTypeConstants : Int32
-    Sysmondefaultvalue = 0
-    Sysmoncurrentvalue = 1
-    Sysmonaverage = 2
-    Sysmonminimum = 3
-    Sysmonmaximum = 4
-  end
-
-  enum DataSourceTypeConstants : Int32
-    Sysmonnulldatasource = -1
-    Sysmoncurrentactivity = 1
-    Sysmonlogfiles = 2
-    Sysmonsqllog = 3
-  end
-
-  enum SysmonFileType : Int32
-    Sysmonfilehtml = 1
-    Sysmonfilereport = 2
-    Sysmonfilecsv = 3
-    Sysmonfiletsv = 4
-    Sysmonfileblg = 5
-    Sysmonfileretiredblg = 6
-    Sysmonfilegif = 7
-  end
-
-  enum SysmonDataType : Int32
-    Sysmondataavg = 1
-    Sysmondatamin = 2
-    Sysmondatamax = 3
-    Sysmondatatime = 4
-    Sysmondatacount = 5
-  end
-
-  enum SysmonBatchReason : Int32
-    Sysmonbatchnone = 0
-    Sysmonbatchaddfiles = 1
-    Sysmonbatchaddcounters = 2
-    Sysmonbatchaddfilesautocounters = 3
-  end
-
-  union PDH_FMT_COUNTERVALUE_Anonymous_e__Union
-    long_value : Int32
-    double_value : Float64
-    large_value : Int64
-    ansi_string_value : PSTR
-    wide_string_value : LibC::LPWSTR
-  end
-  union PDH_COUNTER_INFO_A_Anonymous_e__Union
-    data_item_path : PDH_DATA_ITEM_PATH_ELEMENTS_A
-    counter_path : PDH_COUNTER_PATH_ELEMENTS_A
-    anonymous : PDH_COUNTER_INFO_A_Anonymous_e__Union_Anonymous_e__Struct
-  end
-  union PDH_COUNTER_INFO_W_Anonymous_e__Union
-    data_item_path : PDH_DATA_ITEM_PATH_ELEMENTS_W
-    counter_path : PDH_COUNTER_PATH_ELEMENTS_W
-    anonymous : PDH_COUNTER_INFO_W_Anonymous_e__Union_Anonymous_e__Struct
-  end
-  union PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union
-    anonymous1 : PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous1_e__Struct
-    anonymous2 : PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous2_e__Struct
-  end
-  union PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union
-    anonymous1 : PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous1_e__Struct
-    anonymous2 : PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous2_e__Struct
-  end
-
-  struct PERF_COUNTERSET_INFO
-    counter_set_guid : Guid
-    provider_guid : Guid
-    num_counters : UInt32
+  @[Extern]
+  record PERF_COUNTERSET_INFO,
+    counter_set_guid : LibC::GUID,
+    provider_guid : LibC::GUID,
+    num_counters : UInt32,
     instance_type : UInt32
-  end
-  struct PERF_COUNTER_INFO
-    counter_id : UInt32
-    type : UInt32
-    attrib : UInt64
-    size : UInt32
-    detail_level : UInt32
-    scale : Int32
+
+  @[Extern]
+  record PERF_COUNTER_INFO,
+    counter_id : UInt32,
+    type__ : UInt32,
+    attrib : UInt64,
+    size : UInt32,
+    detail_level : UInt32,
+    scale : Int32,
     offset : UInt32
-  end
-  struct PERF_COUNTERSET_INSTANCE
-    counter_set_guid : Guid
-    dw_size : UInt32
-    instance_id : UInt32
-    instance_name_offset : UInt32
+
+  @[Extern]
+  record PERF_COUNTERSET_INSTANCE,
+    counter_set_guid : LibC::GUID,
+    dwSize : UInt32,
+    instance_id : UInt32,
+    instance_name_offset : UInt32,
     instance_name_size : UInt32
-  end
-  struct PERF_COUNTER_IDENTITY
-    counter_set_guid : Guid
-    buffer_size : UInt32
-    counter_id : UInt32
-    instance_id : UInt32
-    machine_offset : UInt32
-    name_offset : UInt32
+
+  @[Extern]
+  record PERF_COUNTER_IDENTITY,
+    counter_set_guid : LibC::GUID,
+    buffer_size : UInt32,
+    counter_id : UInt32,
+    instance_id : UInt32,
+    machine_offset : UInt32,
+    name_offset : UInt32,
     reserved : UInt32
-  end
-  struct PERF_PROVIDER_CONTEXT
-    context_size : UInt32
-    reserved : UInt32
-    control_callback : PERFLIBREQUEST
-    mem_alloc_routine : PERF_MEM_ALLOC
-    mem_free_routine : PERF_MEM_FREE
-    p_mem_context : Void*
-  end
-  struct PERF_INSTANCE_HEADER
-    size : UInt32
+
+  @[Extern]
+  record PERF_PROVIDER_CONTEXT,
+    context_size : UInt32,
+    reserved : UInt32,
+    control_callback : Win32cr::System::Performance::PERFLIBREQUEST,
+    mem_alloc_routine : Win32cr::System::Performance::PERF_MEM_ALLOC,
+    mem_free_routine : Win32cr::System::Performance::PERF_MEM_FREE,
+    pMemContext : Void*
+
+  @[Extern]
+  record PERF_INSTANCE_HEADER,
+    size : UInt32,
     instance_id : UInt32
-  end
-  struct PERF_COUNTERSET_REG_INFO
-    counter_set_guid : Guid
-    counter_set_type : UInt32
-    detail_level : UInt32
-    num_counters : UInt32
+
+  @[Extern]
+  record PERF_COUNTERSET_REG_INFO,
+    counter_set_guid : LibC::GUID,
+    counter_set_type : UInt32,
+    detail_level : UInt32,
+    num_counters : UInt32,
     instance_type : UInt32
-  end
-  struct PERF_COUNTER_REG_INFO
-    counter_id : UInt32
-    type : UInt32
-    attrib : UInt64
-    detail_level : UInt32
-    default_scale : Int32
-    base_counter_id : UInt32
-    perf_time_id : UInt32
-    perf_freq_id : UInt32
-    multi_id : UInt32
-    aggregate_func : PERF_COUNTER_AGGREGATE_FUNC
+
+  @[Extern]
+  record PERF_COUNTER_REG_INFO,
+    counter_id : UInt32,
+    type__ : UInt32,
+    attrib : UInt64,
+    detail_level : UInt32,
+    default_scale : Int32,
+    base_counter_id : UInt32,
+    perf_time_id : UInt32,
+    perf_freq_id : UInt32,
+    multi_id : UInt32,
+    aggregate_func : Win32cr::System::Performance::PERF_COUNTER_AGGREGATE_FUNC,
     reserved : UInt32
-  end
-  struct PERF_STRING_BUFFER_HEADER
-    dw_size : UInt32
-    dw_counters : UInt32
-  end
-  struct PERF_STRING_COUNTER_HEADER
-    dw_counter_id : UInt32
-    dw_offset : UInt32
-  end
-  struct PERF_COUNTER_IDENTIFIER
-    counter_set_guid : Guid
-    status : UInt32
-    size : UInt32
-    counter_id : UInt32
-    instance_id : UInt32
-    index : UInt32
+
+  @[Extern]
+  record PERF_STRING_BUFFER_HEADER,
+    dwSize : UInt32,
+    dwCounters : UInt32
+
+  @[Extern]
+  record PERF_STRING_COUNTER_HEADER,
+    dwCounterId : UInt32,
+    dwOffset : UInt32
+
+  @[Extern]
+  record PERF_COUNTER_IDENTIFIER,
+    counter_set_guid : LibC::GUID,
+    status : UInt32,
+    size : UInt32,
+    counter_id : UInt32,
+    instance_id : UInt32,
+    index : UInt32,
     reserved : UInt32
-  end
-  struct PERF_DATA_HEADER
-    dw_total_size : UInt32
-    dw_num_counters : UInt32
-    perf_time_stamp : Int64
-    perf_time100_n_sec : Int64
-    perf_freq : Int64
-    system_time : SYSTEMTIME
-  end
-  struct PERF_COUNTER_HEADER
-    dw_status : UInt32
-    dw_type : PerfCounterDataType
-    dw_size : UInt32
+
+  @[Extern]
+  record PERF_DATA_HEADER,
+    dwTotalSize : UInt32,
+    dwNumCounters : UInt32,
+    perf_time_stamp : Int64,
+    perf_time100_n_sec : Int64,
+    perf_freq : Int64,
+    system_time : Win32cr::Foundation::SYSTEMTIME
+
+  @[Extern]
+  record PERF_COUNTER_HEADER,
+    dwStatus : UInt32,
+    dwType : Win32cr::System::Performance::PerfCounterDataType,
+    dwSize : UInt32,
     reserved : UInt32
-  end
-  struct PERF_MULTI_INSTANCES
-    dw_total_size : UInt32
-    dw_instances : UInt32
-  end
-  struct PERF_MULTI_COUNTERS
-    dw_size : UInt32
-    dw_counters : UInt32
-  end
-  struct PERF_COUNTER_DATA
-    dw_data_size : UInt32
-    dw_size : UInt32
-  end
-  struct PERF_DATA_BLOCK
-    signature : Char[4]*
-    little_endian : UInt32
-    version : UInt32
-    revision : UInt32
-    total_byte_length : UInt32
-    header_length : UInt32
-    num_object_types : UInt32
-    default_object : Int32
-    system_time : SYSTEMTIME
-    perf_time : LARGE_INTEGER
-    perf_freq : LARGE_INTEGER
-    perf_time100n_sec : LARGE_INTEGER
-    system_name_length : UInt32
+
+  @[Extern]
+  record PERF_MULTI_INSTANCES,
+    dwTotalSize : UInt32,
+    dwInstances : UInt32
+
+  @[Extern]
+  record PERF_MULTI_COUNTERS,
+    dwSize : UInt32,
+    dwCounters : UInt32
+
+  @[Extern]
+  record PERF_COUNTER_DATA,
+    dwDataSize : UInt32,
+    dwSize : UInt32
+
+  @[Extern]
+  record PERF_DATA_BLOCK,
+    signature : UInt16[4],
+    little_endian : UInt32,
+    version : UInt32,
+    revision : UInt32,
+    total_byte_length : UInt32,
+    header_length : UInt32,
+    num_object_types : UInt32,
+    default_object : Int32,
+    system_time : Win32cr::Foundation::SYSTEMTIME,
+    perf_time : Win32cr::Foundation::LARGE_INTEGER,
+    perf_freq : Win32cr::Foundation::LARGE_INTEGER,
+    perf_time100n_sec : Win32cr::Foundation::LARGE_INTEGER,
+    system_name_length : UInt32,
     system_name_offset : UInt32
-  end
-  struct PERF_OBJECT_TYPE
-    total_byte_length : UInt32
-    definition_length : UInt32
-    header_length : UInt32
-    object_name_title_index : UInt32
-    object_name_title : UInt32
-    object_help_title_index : UInt32
-    object_help_title : UInt32
-    detail_level : UInt32
-    num_counters : UInt32
-    default_counter : Int32
-    num_instances : Int32
-    code_page : UInt32
-    perf_time : LARGE_INTEGER
-    perf_freq : LARGE_INTEGER
-  end
-  struct PERF_COUNTER_DEFINITION
-    byte_length : UInt32
-    counter_name_title_index : UInt32
-    counter_name_title : UInt32
-    counter_help_title_index : UInt32
-    counter_help_title : UInt32
-    default_scale : Int32
-    detail_level : UInt32
-    counter_type : UInt32
-    counter_size : UInt32
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  record PERF_OBJECT_TYPE,
+    total_byte_length : UInt32,
+    definition_length : UInt32,
+    header_length : UInt32,
+    object_name_title_index : UInt32,
+    object_name_title : UInt32,
+    object_help_title_index : UInt32,
+    object_help_title : UInt32,
+    detail_level : UInt32,
+    num_counters : UInt32,
+    default_counter : Int32,
+    num_instances : Int32,
+    code_page : UInt32,
+    perf_time : Win32cr::Foundation::LARGE_INTEGER,
+    perf_freq : Win32cr::Foundation::LARGE_INTEGER
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  record PERF_COUNTER_DEFINITION,
+    byte_length : UInt32,
+    counter_name_title_index : UInt32,
+    counter_name_title : UInt32,
+    counter_help_title_index : UInt32,
+    counter_help_title : UInt32,
+    default_scale : Int32,
+    detail_level : UInt32,
+    counter_type : UInt32,
+    counter_size : UInt32,
     counter_offset : UInt32
-  end
-  struct PERF_INSTANCE_DEFINITION
-    byte_length : UInt32
-    parent_object_title_index : UInt32
-    parent_object_instance : UInt32
-    unique_id : Int32
-    name_offset : UInt32
+  {% end %}
+
+  @[Extern]
+  record PERF_INSTANCE_DEFINITION,
+    byte_length : UInt32,
+    parent_object_title_index : UInt32,
+    parent_object_instance : UInt32,
+    unique_id : Int32,
+    name_offset : UInt32,
     name_length : UInt32
-  end
-  struct PERF_COUNTER_BLOCK
+
+  @[Extern]
+  record PERF_COUNTER_BLOCK,
     byte_length : UInt32
-  end
-  struct PDH_RAW_COUNTER
-    c_status : UInt32
-    time_stamp : FILETIME
-    first_value : Int64
-    second_value : Int64
+
+  @[Extern]
+  record PDH_RAW_COUNTER,
+    c_status : UInt32,
+    time_stamp : Win32cr::Foundation::FILETIME,
+    first_value : Int64,
+    second_value : Int64,
     multi_count : UInt32
+
+  @[Extern]
+  record PDH_RAW_COUNTER_ITEM_A,
+    szName : Win32cr::Foundation::PSTR,
+    raw_value : Win32cr::System::Performance::PDH_RAW_COUNTER
+
+  @[Extern]
+  record PDH_RAW_COUNTER_ITEM_W,
+    szName : Win32cr::Foundation::PWSTR,
+    raw_value : Win32cr::System::Performance::PDH_RAW_COUNTER
+
+  @[Extern]
+  record PDH_FMT_COUNTERVALUE,
+    c_status : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      longValue : Int32,
+      doubleValue : Float64,
+      largeValue : Int64,
+      ansi_string_value : Win32cr::Foundation::PSTR,
+      wide_string_value : Win32cr::Foundation::PWSTR
+
   end
-  struct PDH_RAW_COUNTER_ITEM_A
-    sz_name : PSTR
-    raw_value : PDH_RAW_COUNTER
+
+  @[Extern]
+  record PDH_FMT_COUNTERVALUE_ITEM_A,
+    szName : Win32cr::Foundation::PSTR,
+    fmt_value : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE
+
+  @[Extern]
+  record PDH_FMT_COUNTERVALUE_ITEM_W,
+    szName : Win32cr::Foundation::PWSTR,
+    fmt_value : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE
+
+  @[Extern]
+  record PDH_STATISTICS,
+    dwFormat : UInt32,
+    count : UInt32,
+    min : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE,
+    max : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE,
+    mean : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE
+
+  @[Extern]
+  record PDH_COUNTER_PATH_ELEMENTS_A,
+    szMachineName : Win32cr::Foundation::PSTR,
+    szObjectName : Win32cr::Foundation::PSTR,
+    szInstanceName : Win32cr::Foundation::PSTR,
+    szParentInstance : Win32cr::Foundation::PSTR,
+    dwInstanceIndex : UInt32,
+    szCounterName : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record PDH_COUNTER_PATH_ELEMENTS_W,
+    szMachineName : Win32cr::Foundation::PWSTR,
+    szObjectName : Win32cr::Foundation::PWSTR,
+    szInstanceName : Win32cr::Foundation::PWSTR,
+    szParentInstance : Win32cr::Foundation::PWSTR,
+    dwInstanceIndex : UInt32,
+    szCounterName : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record PDH_DATA_ITEM_PATH_ELEMENTS_A,
+    szMachineName : Win32cr::Foundation::PSTR,
+    object_guid : LibC::GUID,
+    dwItemId : UInt32,
+    szInstanceName : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record PDH_DATA_ITEM_PATH_ELEMENTS_W,
+    szMachineName : Win32cr::Foundation::PWSTR,
+    object_guid : LibC::GUID,
+    dwItemId : UInt32,
+    szInstanceName : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record PDH_COUNTER_INFO_A,
+    dwLength : UInt32,
+    dwType : UInt32,
+    c_version : UInt32,
+    c_status : UInt32,
+    lScale : Int32,
+    lDefaultScale : Int32,
+    dwUserData : LibC::UIntPtrT,
+    dwQueryUserData : LibC::UIntPtrT,
+    szFullPath : Win32cr::Foundation::PSTR,
+    anonymous : Anonymous_e__Union,
+    szExplainText : Win32cr::Foundation::PSTR,
+    data_buffer : UInt32* do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      data_item_path : Win32cr::System::Performance::PDH_DATA_ITEM_PATH_ELEMENTS_A,
+      counter_path : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_A,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        szMachineName : Win32cr::Foundation::PSTR,
+        szObjectName : Win32cr::Foundation::PSTR,
+        szInstanceName : Win32cr::Foundation::PSTR,
+        szParentInstance : Win32cr::Foundation::PSTR,
+        dwInstanceIndex : UInt32,
+        szCounterName : Win32cr::Foundation::PSTR
+
+    end
+
   end
-  struct PDH_RAW_COUNTER_ITEM_W
-    sz_name : LibC::LPWSTR
-    raw_value : PDH_RAW_COUNTER
+
+  @[Extern]
+  record PDH_COUNTER_INFO_W,
+    dwLength : UInt32,
+    dwType : UInt32,
+    c_version : UInt32,
+    c_status : UInt32,
+    lScale : Int32,
+    lDefaultScale : Int32,
+    dwUserData : LibC::UIntPtrT,
+    dwQueryUserData : LibC::UIntPtrT,
+    szFullPath : Win32cr::Foundation::PWSTR,
+    anonymous : Anonymous_e__Union,
+    szExplainText : Win32cr::Foundation::PWSTR,
+    data_buffer : UInt32* do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      data_item_path : Win32cr::System::Performance::PDH_DATA_ITEM_PATH_ELEMENTS_W,
+      counter_path : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_W,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        szMachineName : Win32cr::Foundation::PWSTR,
+        szObjectName : Win32cr::Foundation::PWSTR,
+        szInstanceName : Win32cr::Foundation::PWSTR,
+        szParentInstance : Win32cr::Foundation::PWSTR,
+        dwInstanceIndex : UInt32,
+        szCounterName : Win32cr::Foundation::PWSTR
+
+    end
+
   end
-  struct PDH_FMT_COUNTERVALUE
-    c_status : UInt32
-    anonymous : PDH_FMT_COUNTERVALUE_Anonymous_e__Union
-  end
-  struct PDH_FMT_COUNTERVALUE_ITEM_A
-    sz_name : PSTR
-    fmt_value : PDH_FMT_COUNTERVALUE
-  end
-  struct PDH_FMT_COUNTERVALUE_ITEM_W
-    sz_name : LibC::LPWSTR
-    fmt_value : PDH_FMT_COUNTERVALUE
-  end
-  struct PDH_STATISTICS
-    dw_format : UInt32
-    count : UInt32
-    min : PDH_FMT_COUNTERVALUE
-    max : PDH_FMT_COUNTERVALUE
-    mean : PDH_FMT_COUNTERVALUE
-  end
-  struct PDH_COUNTER_PATH_ELEMENTS_A
-    sz_machine_name : PSTR
-    sz_object_name : PSTR
-    sz_instance_name : PSTR
-    sz_parent_instance : PSTR
-    dw_instance_index : UInt32
-    sz_counter_name : PSTR
-  end
-  struct PDH_COUNTER_PATH_ELEMENTS_W
-    sz_machine_name : LibC::LPWSTR
-    sz_object_name : LibC::LPWSTR
-    sz_instance_name : LibC::LPWSTR
-    sz_parent_instance : LibC::LPWSTR
-    dw_instance_index : UInt32
-    sz_counter_name : LibC::LPWSTR
-  end
-  struct PDH_DATA_ITEM_PATH_ELEMENTS_A
-    sz_machine_name : PSTR
-    object_guid : Guid
-    dw_item_id : UInt32
-    sz_instance_name : PSTR
-  end
-  struct PDH_DATA_ITEM_PATH_ELEMENTS_W
-    sz_machine_name : LibC::LPWSTR
-    object_guid : Guid
-    dw_item_id : UInt32
-    sz_instance_name : LibC::LPWSTR
-  end
-  struct PDH_COUNTER_INFO_A
-    dw_length : UInt32
-    dw_type : UInt32
-    c_version : UInt32
-    c_status : UInt32
-    l_scale : Int32
-    l_default_scale : Int32
-    dw_user_data : LibC::UINT_PTR
-    dw_query_user_data : LibC::UINT_PTR
-    sz_full_path : PSTR
-    anonymous : PDH_COUNTER_INFO_A_Anonymous_e__Union
-    sz_explain_text : PSTR
-    data_buffer : UInt32[0]*
-  end
-  struct PDH_COUNTER_INFO_A_Anonymous_e__Union_Anonymous_e__Struct
-    sz_machine_name : PSTR
-    sz_object_name : PSTR
-    sz_instance_name : PSTR
-    sz_parent_instance : PSTR
-    dw_instance_index : UInt32
-    sz_counter_name : PSTR
-  end
-  struct PDH_COUNTER_INFO_W
-    dw_length : UInt32
-    dw_type : UInt32
-    c_version : UInt32
-    c_status : UInt32
-    l_scale : Int32
-    l_default_scale : Int32
-    dw_user_data : LibC::UINT_PTR
-    dw_query_user_data : LibC::UINT_PTR
-    sz_full_path : LibC::LPWSTR
-    anonymous : PDH_COUNTER_INFO_W_Anonymous_e__Union
-    sz_explain_text : LibC::LPWSTR
-    data_buffer : UInt32[0]*
-  end
-  struct PDH_COUNTER_INFO_W_Anonymous_e__Union_Anonymous_e__Struct
-    sz_machine_name : LibC::LPWSTR
-    sz_object_name : LibC::LPWSTR
-    sz_instance_name : LibC::LPWSTR
-    sz_parent_instance : LibC::LPWSTR
-    dw_instance_index : UInt32
-    sz_counter_name : LibC::LPWSTR
-  end
-  struct PDH_TIME_INFO
-    start_time : Int64
-    end_time : Int64
+
+  @[Extern]
+  record PDH_TIME_INFO,
+    start_time : Int64,
+    end_time : Int64,
     sample_count : UInt32
-  end
-  struct PDH_RAW_LOG_RECORD
-    dw_structure_size : UInt32
-    dw_record_type : PDH_LOG_TYPE
-    dw_items : UInt32
-    raw_bytes : UInt8[0]*
-  end
-  struct PDH_LOG_SERVICE_QUERY_INFO_A
-    dw_size : UInt32
-    dw_flags : UInt32
-    dw_log_quota : UInt32
-    sz_log_file_caption : PSTR
-    sz_default_dir : PSTR
-    sz_base_file_name : PSTR
-    dw_file_type : UInt32
-    dw_reserved : UInt32
-    anonymous : PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union
-  end
-  struct PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous1_e__Struct
-    pdl_auto_name_interval : UInt32
-    pdl_auto_name_units : UInt32
-    pdl_command_filename : PSTR
-    pdl_counter_list : PSTR
-    pdl_auto_name_format : UInt32
-    pdl_sample_interval : UInt32
-    pdl_log_start_time : FILETIME
-    pdl_log_end_time : FILETIME
-  end
-  struct PDH_LOG_SERVICE_QUERY_INFO_A_Anonymous_e__Union_Anonymous2_e__Struct
-    tl_number_of_buffers : UInt32
-    tl_minimum_buffers : UInt32
-    tl_maximum_buffers : UInt32
-    tl_free_buffers : UInt32
-    tl_buffer_size : UInt32
-    tl_events_lost : UInt32
-    tl_logger_thread_id : UInt32
-    tl_buffers_written : UInt32
-    tl_log_handle : UInt32
-    tl_log_file_name : PSTR
-  end
-  struct PDH_LOG_SERVICE_QUERY_INFO_W
-    dw_size : UInt32
-    dw_flags : UInt32
-    dw_log_quota : UInt32
-    sz_log_file_caption : LibC::LPWSTR
-    sz_default_dir : LibC::LPWSTR
-    sz_base_file_name : LibC::LPWSTR
-    dw_file_type : UInt32
-    dw_reserved : UInt32
-    anonymous : PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union
-  end
-  struct PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous1_e__Struct
-    pdl_auto_name_interval : UInt32
-    pdl_auto_name_units : UInt32
-    pdl_command_filename : LibC::LPWSTR
-    pdl_counter_list : LibC::LPWSTR
-    pdl_auto_name_format : UInt32
-    pdl_sample_interval : UInt32
-    pdl_log_start_time : FILETIME
-    pdl_log_end_time : FILETIME
-  end
-  struct PDH_LOG_SERVICE_QUERY_INFO_W_Anonymous_e__Union_Anonymous2_e__Struct
-    tl_number_of_buffers : UInt32
-    tl_minimum_buffers : UInt32
-    tl_maximum_buffers : UInt32
-    tl_free_buffers : UInt32
-    tl_buffer_size : UInt32
-    tl_events_lost : UInt32
-    tl_logger_thread_id : UInt32
-    tl_buffers_written : UInt32
-    tl_log_handle : UInt32
-    tl_log_file_name : LibC::LPWSTR
-  end
-  struct PDH_BROWSE_DLG_CONFIG_HW
-    _bitfield : UInt32
-    h_wnd_owner : HANDLE
-    h_data_source : LibC::IntPtrT
-    sz_return_path_buffer : LibC::LPWSTR
-    cch_return_path_length : UInt32
-    p_call_back : CounterPathCallBack
-    dw_call_back_arg : LibC::UINT_PTR
-    call_back_status : Int32
-    dw_default_detail_level : PERF_DETAIL
-    sz_dialog_box_caption : LibC::LPWSTR
-  end
-  struct PDH_BROWSE_DLG_CONFIG_HA
-    _bitfield : UInt32
-    h_wnd_owner : HANDLE
-    h_data_source : LibC::IntPtrT
-    sz_return_path_buffer : PSTR
-    cch_return_path_length : UInt32
-    p_call_back : CounterPathCallBack
-    dw_call_back_arg : LibC::UINT_PTR
-    call_back_status : Int32
-    dw_default_detail_level : PERF_DETAIL
-    sz_dialog_box_caption : PSTR
-  end
-  struct PDH_BROWSE_DLG_CONFIG_W
-    _bitfield : UInt32
-    h_wnd_owner : HANDLE
-    sz_data_source : LibC::LPWSTR
-    sz_return_path_buffer : LibC::LPWSTR
-    cch_return_path_length : UInt32
-    p_call_back : CounterPathCallBack
-    dw_call_back_arg : LibC::UINT_PTR
-    call_back_status : Int32
-    dw_default_detail_level : PERF_DETAIL
-    sz_dialog_box_caption : LibC::LPWSTR
-  end
-  struct PDH_BROWSE_DLG_CONFIG_A
-    _bitfield : UInt32
-    h_wnd_owner : HANDLE
-    sz_data_source : PSTR
-    sz_return_path_buffer : PSTR
-    cch_return_path_length : UInt32
-    p_call_back : CounterPathCallBack
-    dw_call_back_arg : LibC::UINT_PTR
-    call_back_status : Int32
-    dw_default_detail_level : PERF_DETAIL
-    sz_dialog_box_caption : PSTR
-  end
-
-
-  struct IDataCollectorSetVTbl
-    query_interface : Proc(IDataCollectorSet*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDataCollectorSet*, UInt32)
-    release : Proc(IDataCollectorSet*, UInt32)
-    get_type_info_count : Proc(IDataCollectorSet*, UInt32*, HRESULT)
-    get_type_info : Proc(IDataCollectorSet*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDataCollectorSet*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDataCollectorSet*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_data_collectors : Proc(IDataCollectorSet*, IDataCollectorCollection*, HRESULT)
-    get_duration : Proc(IDataCollectorSet*, UInt32*, HRESULT)
-    put_duration : Proc(IDataCollectorSet*, UInt32, HRESULT)
-    get_description : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    put_description : Proc(IDataCollectorSet*, UInt8*, HRESULT)
-    get_description_unresolved : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    get_display_name : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    put_display_name : Proc(IDataCollectorSet*, UInt8*, HRESULT)
-    get_display_name_unresolved : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    get_keywords : Proc(IDataCollectorSet*, SAFEARRAY**, HRESULT)
-    put_keywords : Proc(IDataCollectorSet*, SAFEARRAY*, HRESULT)
-    get_latest_output_location : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    put_latest_output_location : Proc(IDataCollectorSet*, UInt8*, HRESULT)
-    get_name : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    get_output_location : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    get_root_path : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    put_root_path : Proc(IDataCollectorSet*, UInt8*, HRESULT)
-    get_segment : Proc(IDataCollectorSet*, Int16*, HRESULT)
-    put_segment : Proc(IDataCollectorSet*, Int16, HRESULT)
-    get_segment_max_duration : Proc(IDataCollectorSet*, UInt32*, HRESULT)
-    put_segment_max_duration : Proc(IDataCollectorSet*, UInt32, HRESULT)
-    get_segment_max_size : Proc(IDataCollectorSet*, UInt32*, HRESULT)
-    put_segment_max_size : Proc(IDataCollectorSet*, UInt32, HRESULT)
-    get_serial_number : Proc(IDataCollectorSet*, UInt32*, HRESULT)
-    put_serial_number : Proc(IDataCollectorSet*, UInt32, HRESULT)
-    get_server : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    get_status : Proc(IDataCollectorSet*, DataCollectorSetStatus*, HRESULT)
-    get_subdirectory : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    put_subdirectory : Proc(IDataCollectorSet*, UInt8*, HRESULT)
-    get_subdirectory_format : Proc(IDataCollectorSet*, AutoPathFormat*, HRESULT)
-    put_subdirectory_format : Proc(IDataCollectorSet*, AutoPathFormat, HRESULT)
-    get_subdirectory_format_pattern : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    put_subdirectory_format_pattern : Proc(IDataCollectorSet*, UInt8*, HRESULT)
-    get_task : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    put_task : Proc(IDataCollectorSet*, UInt8*, HRESULT)
-    get_task_run_as_self : Proc(IDataCollectorSet*, Int16*, HRESULT)
-    put_task_run_as_self : Proc(IDataCollectorSet*, Int16, HRESULT)
-    get_task_arguments : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    put_task_arguments : Proc(IDataCollectorSet*, UInt8*, HRESULT)
-    get_task_user_text_arguments : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    put_task_user_text_arguments : Proc(IDataCollectorSet*, UInt8*, HRESULT)
-    get_schedules : Proc(IDataCollectorSet*, IScheduleCollection*, HRESULT)
-    get_schedules_enabled : Proc(IDataCollectorSet*, Int16*, HRESULT)
-    put_schedules_enabled : Proc(IDataCollectorSet*, Int16, HRESULT)
-    get_user_account : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    get_xml : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    get_security : Proc(IDataCollectorSet*, UInt8**, HRESULT)
-    put_security : Proc(IDataCollectorSet*, UInt8*, HRESULT)
-    get_stop_on_completion : Proc(IDataCollectorSet*, Int16*, HRESULT)
-    put_stop_on_completion : Proc(IDataCollectorSet*, Int16, HRESULT)
-    get_data_manager : Proc(IDataCollectorSet*, IDataManager*, HRESULT)
-    set_credentials : Proc(IDataCollectorSet*, UInt8*, UInt8*, HRESULT)
-    query : Proc(IDataCollectorSet*, UInt8*, UInt8*, HRESULT)
-    commit : Proc(IDataCollectorSet*, UInt8*, UInt8*, CommitMode, IValueMap*, HRESULT)
-    delete : Proc(IDataCollectorSet*, HRESULT)
-    start : Proc(IDataCollectorSet*, Int16, HRESULT)
-    stop : Proc(IDataCollectorSet*, Int16, HRESULT)
-    set_xml : Proc(IDataCollectorSet*, UInt8*, IValueMap*, HRESULT)
-    set_value : Proc(IDataCollectorSet*, UInt8*, UInt8*, HRESULT)
-    get_value : Proc(IDataCollectorSet*, UInt8*, UInt8**, HRESULT)
-  end
-
-  IDataCollectorSet_GUID = "03837520-098b-11d8-9414-505054503030"
-  IID_IDataCollectorSet = LibC::GUID.new(0x3837520_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IDataCollectorSet
-    lpVtbl : IDataCollectorSetVTbl*
-  end
-
-  struct IDataManagerVTbl
-    query_interface : Proc(IDataManager*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDataManager*, UInt32)
-    release : Proc(IDataManager*, UInt32)
-    get_type_info_count : Proc(IDataManager*, UInt32*, HRESULT)
-    get_type_info : Proc(IDataManager*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDataManager*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDataManager*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_enabled : Proc(IDataManager*, Int16*, HRESULT)
-    put_enabled : Proc(IDataManager*, Int16, HRESULT)
-    get_check_before_running : Proc(IDataManager*, Int16*, HRESULT)
-    put_check_before_running : Proc(IDataManager*, Int16, HRESULT)
-    get_min_free_disk : Proc(IDataManager*, UInt32*, HRESULT)
-    put_min_free_disk : Proc(IDataManager*, UInt32, HRESULT)
-    get_max_size : Proc(IDataManager*, UInt32*, HRESULT)
-    put_max_size : Proc(IDataManager*, UInt32, HRESULT)
-    get_max_folder_count : Proc(IDataManager*, UInt32*, HRESULT)
-    put_max_folder_count : Proc(IDataManager*, UInt32, HRESULT)
-    get_resource_policy : Proc(IDataManager*, ResourcePolicy*, HRESULT)
-    put_resource_policy : Proc(IDataManager*, ResourcePolicy, HRESULT)
-    get_folder_actions : Proc(IDataManager*, IFolderActionCollection*, HRESULT)
-    get_report_schema : Proc(IDataManager*, UInt8**, HRESULT)
-    put_report_schema : Proc(IDataManager*, UInt8*, HRESULT)
-    get_report_file_name : Proc(IDataManager*, UInt8**, HRESULT)
-    put_report_file_name : Proc(IDataManager*, UInt8*, HRESULT)
-    get_rule_target_file_name : Proc(IDataManager*, UInt8**, HRESULT)
-    put_rule_target_file_name : Proc(IDataManager*, UInt8*, HRESULT)
-    get_events_file_name : Proc(IDataManager*, UInt8**, HRESULT)
-    put_events_file_name : Proc(IDataManager*, UInt8*, HRESULT)
-    get_rules : Proc(IDataManager*, UInt8**, HRESULT)
-    put_rules : Proc(IDataManager*, UInt8*, HRESULT)
-    run : Proc(IDataManager*, DataManagerSteps, UInt8*, IValueMap*, HRESULT)
-    extract : Proc(IDataManager*, UInt8*, UInt8*, HRESULT)
-  end
-
-  IDataManager_GUID = "03837541-098b-11d8-9414-505054503030"
-  IID_IDataManager = LibC::GUID.new(0x3837541_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IDataManager
-    lpVtbl : IDataManagerVTbl*
-  end
-
-  struct IFolderActionVTbl
-    query_interface : Proc(IFolderAction*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFolderAction*, UInt32)
-    release : Proc(IFolderAction*, UInt32)
-    get_type_info_count : Proc(IFolderAction*, UInt32*, HRESULT)
-    get_type_info : Proc(IFolderAction*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFolderAction*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFolderAction*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_age : Proc(IFolderAction*, UInt32*, HRESULT)
-    put_age : Proc(IFolderAction*, UInt32, HRESULT)
-    get_size : Proc(IFolderAction*, UInt32*, HRESULT)
-    put_size : Proc(IFolderAction*, UInt32, HRESULT)
-    get_actions : Proc(IFolderAction*, FolderActionSteps*, HRESULT)
-    put_actions : Proc(IFolderAction*, FolderActionSteps, HRESULT)
-    get_send_cab_to : Proc(IFolderAction*, UInt8**, HRESULT)
-    put_send_cab_to : Proc(IFolderAction*, UInt8*, HRESULT)
-  end
-
-  IFolderAction_GUID = "03837543-098b-11d8-9414-505054503030"
-  IID_IFolderAction = LibC::GUID.new(0x3837543_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IFolderAction
-    lpVtbl : IFolderActionVTbl*
-  end
-
-  struct IFolderActionCollectionVTbl
-    query_interface : Proc(IFolderActionCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFolderActionCollection*, UInt32)
-    release : Proc(IFolderActionCollection*, UInt32)
-    get_type_info_count : Proc(IFolderActionCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IFolderActionCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFolderActionCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFolderActionCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IFolderActionCollection*, UInt32*, HRESULT)
-    get_item : Proc(IFolderActionCollection*, VARIANT, IFolderAction*, HRESULT)
-    get__new_enum : Proc(IFolderActionCollection*, IUnknown*, HRESULT)
-    add : Proc(IFolderActionCollection*, IFolderAction, HRESULT)
-    remove : Proc(IFolderActionCollection*, VARIANT, HRESULT)
-    clear : Proc(IFolderActionCollection*, HRESULT)
-    add_range : Proc(IFolderActionCollection*, IFolderActionCollection, HRESULT)
-    create_folder_action : Proc(IFolderActionCollection*, IFolderAction*, HRESULT)
-  end
-
-  IFolderActionCollection_GUID = "03837544-098b-11d8-9414-505054503030"
-  IID_IFolderActionCollection = LibC::GUID.new(0x3837544_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IFolderActionCollection
-    lpVtbl : IFolderActionCollectionVTbl*
-  end
-
-  struct IDataCollectorVTbl
-    query_interface : Proc(IDataCollector*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDataCollector*, UInt32)
-    release : Proc(IDataCollector*, UInt32)
-    get_type_info_count : Proc(IDataCollector*, UInt32*, HRESULT)
-    get_type_info : Proc(IDataCollector*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDataCollector*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDataCollector*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_data_collector_set : Proc(IDataCollector*, IDataCollectorSet*, HRESULT)
-    put_data_collector_set : Proc(IDataCollector*, IDataCollectorSet, HRESULT)
-    get_data_collector_type : Proc(IDataCollector*, DataCollectorType*, HRESULT)
-    get_file_name : Proc(IDataCollector*, UInt8**, HRESULT)
-    put_file_name : Proc(IDataCollector*, UInt8*, HRESULT)
-    get_file_name_format : Proc(IDataCollector*, AutoPathFormat*, HRESULT)
-    put_file_name_format : Proc(IDataCollector*, AutoPathFormat, HRESULT)
-    get_file_name_format_pattern : Proc(IDataCollector*, UInt8**, HRESULT)
-    put_file_name_format_pattern : Proc(IDataCollector*, UInt8*, HRESULT)
-    get_latest_output_location : Proc(IDataCollector*, UInt8**, HRESULT)
-    put_latest_output_location : Proc(IDataCollector*, UInt8*, HRESULT)
-    get_log_append : Proc(IDataCollector*, Int16*, HRESULT)
-    put_log_append : Proc(IDataCollector*, Int16, HRESULT)
-    get_log_circular : Proc(IDataCollector*, Int16*, HRESULT)
-    put_log_circular : Proc(IDataCollector*, Int16, HRESULT)
-    get_log_overwrite : Proc(IDataCollector*, Int16*, HRESULT)
-    put_log_overwrite : Proc(IDataCollector*, Int16, HRESULT)
-    get_name : Proc(IDataCollector*, UInt8**, HRESULT)
-    put_name : Proc(IDataCollector*, UInt8*, HRESULT)
-    get_output_location : Proc(IDataCollector*, UInt8**, HRESULT)
-    get_index : Proc(IDataCollector*, Int32*, HRESULT)
-    put_index : Proc(IDataCollector*, Int32, HRESULT)
-    get_xml : Proc(IDataCollector*, UInt8**, HRESULT)
-    set_xml : Proc(IDataCollector*, UInt8*, IValueMap*, HRESULT)
-    create_output_location : Proc(IDataCollector*, Int16, UInt8**, HRESULT)
-  end
-
-  IDataCollector_GUID = "038374ff-098b-11d8-9414-505054503030"
-  IID_IDataCollector = LibC::GUID.new(0x38374ff_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IDataCollector
-    lpVtbl : IDataCollectorVTbl*
-  end
-
-  struct IPerformanceCounterDataCollectorVTbl
-    query_interface : Proc(IPerformanceCounterDataCollector*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPerformanceCounterDataCollector*, UInt32)
-    release : Proc(IPerformanceCounterDataCollector*, UInt32)
-    get_type_info_count : Proc(IPerformanceCounterDataCollector*, UInt32*, HRESULT)
-    get_type_info : Proc(IPerformanceCounterDataCollector*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IPerformanceCounterDataCollector*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IPerformanceCounterDataCollector*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_data_collector_set : Proc(IPerformanceCounterDataCollector*, IDataCollectorSet*, HRESULT)
-    put_data_collector_set : Proc(IPerformanceCounterDataCollector*, IDataCollectorSet, HRESULT)
-    get_data_collector_type : Proc(IPerformanceCounterDataCollector*, DataCollectorType*, HRESULT)
-    get_file_name : Proc(IPerformanceCounterDataCollector*, UInt8**, HRESULT)
-    put_file_name : Proc(IPerformanceCounterDataCollector*, UInt8*, HRESULT)
-    get_file_name_format : Proc(IPerformanceCounterDataCollector*, AutoPathFormat*, HRESULT)
-    put_file_name_format : Proc(IPerformanceCounterDataCollector*, AutoPathFormat, HRESULT)
-    get_file_name_format_pattern : Proc(IPerformanceCounterDataCollector*, UInt8**, HRESULT)
-    put_file_name_format_pattern : Proc(IPerformanceCounterDataCollector*, UInt8*, HRESULT)
-    get_latest_output_location : Proc(IPerformanceCounterDataCollector*, UInt8**, HRESULT)
-    put_latest_output_location : Proc(IPerformanceCounterDataCollector*, UInt8*, HRESULT)
-    get_log_append : Proc(IPerformanceCounterDataCollector*, Int16*, HRESULT)
-    put_log_append : Proc(IPerformanceCounterDataCollector*, Int16, HRESULT)
-    get_log_circular : Proc(IPerformanceCounterDataCollector*, Int16*, HRESULT)
-    put_log_circular : Proc(IPerformanceCounterDataCollector*, Int16, HRESULT)
-    get_log_overwrite : Proc(IPerformanceCounterDataCollector*, Int16*, HRESULT)
-    put_log_overwrite : Proc(IPerformanceCounterDataCollector*, Int16, HRESULT)
-    get_name : Proc(IPerformanceCounterDataCollector*, UInt8**, HRESULT)
-    put_name : Proc(IPerformanceCounterDataCollector*, UInt8*, HRESULT)
-    get_output_location : Proc(IPerformanceCounterDataCollector*, UInt8**, HRESULT)
-    get_index : Proc(IPerformanceCounterDataCollector*, Int32*, HRESULT)
-    put_index : Proc(IPerformanceCounterDataCollector*, Int32, HRESULT)
-    get_xml : Proc(IPerformanceCounterDataCollector*, UInt8**, HRESULT)
-    set_xml : Proc(IPerformanceCounterDataCollector*, UInt8*, IValueMap*, HRESULT)
-    create_output_location : Proc(IPerformanceCounterDataCollector*, Int16, UInt8**, HRESULT)
-    get_data_source_name : Proc(IPerformanceCounterDataCollector*, UInt8**, HRESULT)
-    put_data_source_name : Proc(IPerformanceCounterDataCollector*, UInt8*, HRESULT)
-    get_performance_counters : Proc(IPerformanceCounterDataCollector*, SAFEARRAY**, HRESULT)
-    put_performance_counters : Proc(IPerformanceCounterDataCollector*, SAFEARRAY*, HRESULT)
-    get_log_file_format : Proc(IPerformanceCounterDataCollector*, FileFormat*, HRESULT)
-    put_log_file_format : Proc(IPerformanceCounterDataCollector*, FileFormat, HRESULT)
-    get_sample_interval : Proc(IPerformanceCounterDataCollector*, UInt32*, HRESULT)
-    put_sample_interval : Proc(IPerformanceCounterDataCollector*, UInt32, HRESULT)
-    get_segment_max_records : Proc(IPerformanceCounterDataCollector*, UInt32*, HRESULT)
-    put_segment_max_records : Proc(IPerformanceCounterDataCollector*, UInt32, HRESULT)
-  end
-
-  IPerformanceCounterDataCollector_GUID = "03837506-098b-11d8-9414-505054503030"
-  IID_IPerformanceCounterDataCollector = LibC::GUID.new(0x3837506_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IPerformanceCounterDataCollector
-    lpVtbl : IPerformanceCounterDataCollectorVTbl*
-  end
-
-  struct ITraceDataCollectorVTbl
-    query_interface : Proc(ITraceDataCollector*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITraceDataCollector*, UInt32)
-    release : Proc(ITraceDataCollector*, UInt32)
-    get_type_info_count : Proc(ITraceDataCollector*, UInt32*, HRESULT)
-    get_type_info : Proc(ITraceDataCollector*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITraceDataCollector*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITraceDataCollector*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_data_collector_set : Proc(ITraceDataCollector*, IDataCollectorSet*, HRESULT)
-    put_data_collector_set : Proc(ITraceDataCollector*, IDataCollectorSet, HRESULT)
-    get_data_collector_type : Proc(ITraceDataCollector*, DataCollectorType*, HRESULT)
-    get_file_name : Proc(ITraceDataCollector*, UInt8**, HRESULT)
-    put_file_name : Proc(ITraceDataCollector*, UInt8*, HRESULT)
-    get_file_name_format : Proc(ITraceDataCollector*, AutoPathFormat*, HRESULT)
-    put_file_name_format : Proc(ITraceDataCollector*, AutoPathFormat, HRESULT)
-    get_file_name_format_pattern : Proc(ITraceDataCollector*, UInt8**, HRESULT)
-    put_file_name_format_pattern : Proc(ITraceDataCollector*, UInt8*, HRESULT)
-    get_latest_output_location : Proc(ITraceDataCollector*, UInt8**, HRESULT)
-    put_latest_output_location : Proc(ITraceDataCollector*, UInt8*, HRESULT)
-    get_log_append : Proc(ITraceDataCollector*, Int16*, HRESULT)
-    put_log_append : Proc(ITraceDataCollector*, Int16, HRESULT)
-    get_log_circular : Proc(ITraceDataCollector*, Int16*, HRESULT)
-    put_log_circular : Proc(ITraceDataCollector*, Int16, HRESULT)
-    get_log_overwrite : Proc(ITraceDataCollector*, Int16*, HRESULT)
-    put_log_overwrite : Proc(ITraceDataCollector*, Int16, HRESULT)
-    get_name : Proc(ITraceDataCollector*, UInt8**, HRESULT)
-    put_name : Proc(ITraceDataCollector*, UInt8*, HRESULT)
-    get_output_location : Proc(ITraceDataCollector*, UInt8**, HRESULT)
-    get_index : Proc(ITraceDataCollector*, Int32*, HRESULT)
-    put_index : Proc(ITraceDataCollector*, Int32, HRESULT)
-    get_xml : Proc(ITraceDataCollector*, UInt8**, HRESULT)
-    set_xml : Proc(ITraceDataCollector*, UInt8*, IValueMap*, HRESULT)
-    create_output_location : Proc(ITraceDataCollector*, Int16, UInt8**, HRESULT)
-    get_buffer_size : Proc(ITraceDataCollector*, UInt32*, HRESULT)
-    put_buffer_size : Proc(ITraceDataCollector*, UInt32, HRESULT)
-    get_buffers_lost : Proc(ITraceDataCollector*, UInt32*, HRESULT)
-    put_buffers_lost : Proc(ITraceDataCollector*, UInt32, HRESULT)
-    get_buffers_written : Proc(ITraceDataCollector*, UInt32*, HRESULT)
-    put_buffers_written : Proc(ITraceDataCollector*, UInt32, HRESULT)
-    get_clock_type : Proc(ITraceDataCollector*, ClockType*, HRESULT)
-    put_clock_type : Proc(ITraceDataCollector*, ClockType, HRESULT)
-    get_events_lost : Proc(ITraceDataCollector*, UInt32*, HRESULT)
-    put_events_lost : Proc(ITraceDataCollector*, UInt32, HRESULT)
-    get_extended_modes : Proc(ITraceDataCollector*, UInt32*, HRESULT)
-    put_extended_modes : Proc(ITraceDataCollector*, UInt32, HRESULT)
-    get_flush_timer : Proc(ITraceDataCollector*, UInt32*, HRESULT)
-    put_flush_timer : Proc(ITraceDataCollector*, UInt32, HRESULT)
-    get_free_buffers : Proc(ITraceDataCollector*, UInt32*, HRESULT)
-    put_free_buffers : Proc(ITraceDataCollector*, UInt32, HRESULT)
-    get_guid : Proc(ITraceDataCollector*, Guid*, HRESULT)
-    put_guid : Proc(ITraceDataCollector*, Guid, HRESULT)
-    get_is_kernel_trace : Proc(ITraceDataCollector*, Int16*, HRESULT)
-    get_maximum_buffers : Proc(ITraceDataCollector*, UInt32*, HRESULT)
-    put_maximum_buffers : Proc(ITraceDataCollector*, UInt32, HRESULT)
-    get_minimum_buffers : Proc(ITraceDataCollector*, UInt32*, HRESULT)
-    put_minimum_buffers : Proc(ITraceDataCollector*, UInt32, HRESULT)
-    get_number_of_buffers : Proc(ITraceDataCollector*, UInt32*, HRESULT)
-    put_number_of_buffers : Proc(ITraceDataCollector*, UInt32, HRESULT)
-    get_preallocate_file : Proc(ITraceDataCollector*, Int16*, HRESULT)
-    put_preallocate_file : Proc(ITraceDataCollector*, Int16, HRESULT)
-    get_process_mode : Proc(ITraceDataCollector*, Int16*, HRESULT)
-    put_process_mode : Proc(ITraceDataCollector*, Int16, HRESULT)
-    get_real_time_buffers_lost : Proc(ITraceDataCollector*, UInt32*, HRESULT)
-    put_real_time_buffers_lost : Proc(ITraceDataCollector*, UInt32, HRESULT)
-    get_session_id : Proc(ITraceDataCollector*, UInt64*, HRESULT)
-    put_session_id : Proc(ITraceDataCollector*, UInt64, HRESULT)
-    get_session_name : Proc(ITraceDataCollector*, UInt8**, HRESULT)
-    put_session_name : Proc(ITraceDataCollector*, UInt8*, HRESULT)
-    get_session_thread_id : Proc(ITraceDataCollector*, UInt32*, HRESULT)
-    put_session_thread_id : Proc(ITraceDataCollector*, UInt32, HRESULT)
-    get_stream_mode : Proc(ITraceDataCollector*, StreamMode*, HRESULT)
-    put_stream_mode : Proc(ITraceDataCollector*, StreamMode, HRESULT)
-    get_trace_data_providers : Proc(ITraceDataCollector*, ITraceDataProviderCollection*, HRESULT)
-  end
-
-  ITraceDataCollector_GUID = "0383750b-098b-11d8-9414-505054503030"
-  IID_ITraceDataCollector = LibC::GUID.new(0x383750b_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct ITraceDataCollector
-    lpVtbl : ITraceDataCollectorVTbl*
-  end
-
-  struct IConfigurationDataCollectorVTbl
-    query_interface : Proc(IConfigurationDataCollector*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IConfigurationDataCollector*, UInt32)
-    release : Proc(IConfigurationDataCollector*, UInt32)
-    get_type_info_count : Proc(IConfigurationDataCollector*, UInt32*, HRESULT)
-    get_type_info : Proc(IConfigurationDataCollector*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IConfigurationDataCollector*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IConfigurationDataCollector*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_data_collector_set : Proc(IConfigurationDataCollector*, IDataCollectorSet*, HRESULT)
-    put_data_collector_set : Proc(IConfigurationDataCollector*, IDataCollectorSet, HRESULT)
-    get_data_collector_type : Proc(IConfigurationDataCollector*, DataCollectorType*, HRESULT)
-    get_file_name : Proc(IConfigurationDataCollector*, UInt8**, HRESULT)
-    put_file_name : Proc(IConfigurationDataCollector*, UInt8*, HRESULT)
-    get_file_name_format : Proc(IConfigurationDataCollector*, AutoPathFormat*, HRESULT)
-    put_file_name_format : Proc(IConfigurationDataCollector*, AutoPathFormat, HRESULT)
-    get_file_name_format_pattern : Proc(IConfigurationDataCollector*, UInt8**, HRESULT)
-    put_file_name_format_pattern : Proc(IConfigurationDataCollector*, UInt8*, HRESULT)
-    get_latest_output_location : Proc(IConfigurationDataCollector*, UInt8**, HRESULT)
-    put_latest_output_location : Proc(IConfigurationDataCollector*, UInt8*, HRESULT)
-    get_log_append : Proc(IConfigurationDataCollector*, Int16*, HRESULT)
-    put_log_append : Proc(IConfigurationDataCollector*, Int16, HRESULT)
-    get_log_circular : Proc(IConfigurationDataCollector*, Int16*, HRESULT)
-    put_log_circular : Proc(IConfigurationDataCollector*, Int16, HRESULT)
-    get_log_overwrite : Proc(IConfigurationDataCollector*, Int16*, HRESULT)
-    put_log_overwrite : Proc(IConfigurationDataCollector*, Int16, HRESULT)
-    get_name : Proc(IConfigurationDataCollector*, UInt8**, HRESULT)
-    put_name : Proc(IConfigurationDataCollector*, UInt8*, HRESULT)
-    get_output_location : Proc(IConfigurationDataCollector*, UInt8**, HRESULT)
-    get_index : Proc(IConfigurationDataCollector*, Int32*, HRESULT)
-    put_index : Proc(IConfigurationDataCollector*, Int32, HRESULT)
-    get_xml : Proc(IConfigurationDataCollector*, UInt8**, HRESULT)
-    set_xml : Proc(IConfigurationDataCollector*, UInt8*, IValueMap*, HRESULT)
-    create_output_location : Proc(IConfigurationDataCollector*, Int16, UInt8**, HRESULT)
-    get_file_max_count : Proc(IConfigurationDataCollector*, UInt32*, HRESULT)
-    put_file_max_count : Proc(IConfigurationDataCollector*, UInt32, HRESULT)
-    get_file_max_recursive_depth : Proc(IConfigurationDataCollector*, UInt32*, HRESULT)
-    put_file_max_recursive_depth : Proc(IConfigurationDataCollector*, UInt32, HRESULT)
-    get_file_max_total_size : Proc(IConfigurationDataCollector*, UInt32*, HRESULT)
-    put_file_max_total_size : Proc(IConfigurationDataCollector*, UInt32, HRESULT)
-    get_files : Proc(IConfigurationDataCollector*, SAFEARRAY**, HRESULT)
-    put_files : Proc(IConfigurationDataCollector*, SAFEARRAY*, HRESULT)
-    get_management_queries : Proc(IConfigurationDataCollector*, SAFEARRAY**, HRESULT)
-    put_management_queries : Proc(IConfigurationDataCollector*, SAFEARRAY*, HRESULT)
-    get_query_network_adapters : Proc(IConfigurationDataCollector*, Int16*, HRESULT)
-    put_query_network_adapters : Proc(IConfigurationDataCollector*, Int16, HRESULT)
-    get_registry_keys : Proc(IConfigurationDataCollector*, SAFEARRAY**, HRESULT)
-    put_registry_keys : Proc(IConfigurationDataCollector*, SAFEARRAY*, HRESULT)
-    get_registry_max_recursive_depth : Proc(IConfigurationDataCollector*, UInt32*, HRESULT)
-    put_registry_max_recursive_depth : Proc(IConfigurationDataCollector*, UInt32, HRESULT)
-    get_system_state_file : Proc(IConfigurationDataCollector*, UInt8**, HRESULT)
-    put_system_state_file : Proc(IConfigurationDataCollector*, UInt8*, HRESULT)
-  end
-
-  IConfigurationDataCollector_GUID = "03837514-098b-11d8-9414-505054503030"
-  IID_IConfigurationDataCollector = LibC::GUID.new(0x3837514_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IConfigurationDataCollector
-    lpVtbl : IConfigurationDataCollectorVTbl*
-  end
-
-  struct IAlertDataCollectorVTbl
-    query_interface : Proc(IAlertDataCollector*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IAlertDataCollector*, UInt32)
-    release : Proc(IAlertDataCollector*, UInt32)
-    get_type_info_count : Proc(IAlertDataCollector*, UInt32*, HRESULT)
-    get_type_info : Proc(IAlertDataCollector*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IAlertDataCollector*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IAlertDataCollector*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_data_collector_set : Proc(IAlertDataCollector*, IDataCollectorSet*, HRESULT)
-    put_data_collector_set : Proc(IAlertDataCollector*, IDataCollectorSet, HRESULT)
-    get_data_collector_type : Proc(IAlertDataCollector*, DataCollectorType*, HRESULT)
-    get_file_name : Proc(IAlertDataCollector*, UInt8**, HRESULT)
-    put_file_name : Proc(IAlertDataCollector*, UInt8*, HRESULT)
-    get_file_name_format : Proc(IAlertDataCollector*, AutoPathFormat*, HRESULT)
-    put_file_name_format : Proc(IAlertDataCollector*, AutoPathFormat, HRESULT)
-    get_file_name_format_pattern : Proc(IAlertDataCollector*, UInt8**, HRESULT)
-    put_file_name_format_pattern : Proc(IAlertDataCollector*, UInt8*, HRESULT)
-    get_latest_output_location : Proc(IAlertDataCollector*, UInt8**, HRESULT)
-    put_latest_output_location : Proc(IAlertDataCollector*, UInt8*, HRESULT)
-    get_log_append : Proc(IAlertDataCollector*, Int16*, HRESULT)
-    put_log_append : Proc(IAlertDataCollector*, Int16, HRESULT)
-    get_log_circular : Proc(IAlertDataCollector*, Int16*, HRESULT)
-    put_log_circular : Proc(IAlertDataCollector*, Int16, HRESULT)
-    get_log_overwrite : Proc(IAlertDataCollector*, Int16*, HRESULT)
-    put_log_overwrite : Proc(IAlertDataCollector*, Int16, HRESULT)
-    get_name : Proc(IAlertDataCollector*, UInt8**, HRESULT)
-    put_name : Proc(IAlertDataCollector*, UInt8*, HRESULT)
-    get_output_location : Proc(IAlertDataCollector*, UInt8**, HRESULT)
-    get_index : Proc(IAlertDataCollector*, Int32*, HRESULT)
-    put_index : Proc(IAlertDataCollector*, Int32, HRESULT)
-    get_xml : Proc(IAlertDataCollector*, UInt8**, HRESULT)
-    set_xml : Proc(IAlertDataCollector*, UInt8*, IValueMap*, HRESULT)
-    create_output_location : Proc(IAlertDataCollector*, Int16, UInt8**, HRESULT)
-    get_alert_thresholds : Proc(IAlertDataCollector*, SAFEARRAY**, HRESULT)
-    put_alert_thresholds : Proc(IAlertDataCollector*, SAFEARRAY*, HRESULT)
-    get_event_log : Proc(IAlertDataCollector*, Int16*, HRESULT)
-    put_event_log : Proc(IAlertDataCollector*, Int16, HRESULT)
-    get_sample_interval : Proc(IAlertDataCollector*, UInt32*, HRESULT)
-    put_sample_interval : Proc(IAlertDataCollector*, UInt32, HRESULT)
-    get_task : Proc(IAlertDataCollector*, UInt8**, HRESULT)
-    put_task : Proc(IAlertDataCollector*, UInt8*, HRESULT)
-    get_task_run_as_self : Proc(IAlertDataCollector*, Int16*, HRESULT)
-    put_task_run_as_self : Proc(IAlertDataCollector*, Int16, HRESULT)
-    get_task_arguments : Proc(IAlertDataCollector*, UInt8**, HRESULT)
-    put_task_arguments : Proc(IAlertDataCollector*, UInt8*, HRESULT)
-    get_task_user_text_arguments : Proc(IAlertDataCollector*, UInt8**, HRESULT)
-    put_task_user_text_arguments : Proc(IAlertDataCollector*, UInt8*, HRESULT)
-    get_trigger_data_collector_set : Proc(IAlertDataCollector*, UInt8**, HRESULT)
-    put_trigger_data_collector_set : Proc(IAlertDataCollector*, UInt8*, HRESULT)
-  end
-
-  IAlertDataCollector_GUID = "03837516-098b-11d8-9414-505054503030"
-  IID_IAlertDataCollector = LibC::GUID.new(0x3837516_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IAlertDataCollector
-    lpVtbl : IAlertDataCollectorVTbl*
-  end
-
-  struct IApiTracingDataCollectorVTbl
-    query_interface : Proc(IApiTracingDataCollector*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IApiTracingDataCollector*, UInt32)
-    release : Proc(IApiTracingDataCollector*, UInt32)
-    get_type_info_count : Proc(IApiTracingDataCollector*, UInt32*, HRESULT)
-    get_type_info : Proc(IApiTracingDataCollector*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IApiTracingDataCollector*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IApiTracingDataCollector*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_data_collector_set : Proc(IApiTracingDataCollector*, IDataCollectorSet*, HRESULT)
-    put_data_collector_set : Proc(IApiTracingDataCollector*, IDataCollectorSet, HRESULT)
-    get_data_collector_type : Proc(IApiTracingDataCollector*, DataCollectorType*, HRESULT)
-    get_file_name : Proc(IApiTracingDataCollector*, UInt8**, HRESULT)
-    put_file_name : Proc(IApiTracingDataCollector*, UInt8*, HRESULT)
-    get_file_name_format : Proc(IApiTracingDataCollector*, AutoPathFormat*, HRESULT)
-    put_file_name_format : Proc(IApiTracingDataCollector*, AutoPathFormat, HRESULT)
-    get_file_name_format_pattern : Proc(IApiTracingDataCollector*, UInt8**, HRESULT)
-    put_file_name_format_pattern : Proc(IApiTracingDataCollector*, UInt8*, HRESULT)
-    get_latest_output_location : Proc(IApiTracingDataCollector*, UInt8**, HRESULT)
-    put_latest_output_location : Proc(IApiTracingDataCollector*, UInt8*, HRESULT)
-    get_log_append : Proc(IApiTracingDataCollector*, Int16*, HRESULT)
-    put_log_append : Proc(IApiTracingDataCollector*, Int16, HRESULT)
-    get_log_circular : Proc(IApiTracingDataCollector*, Int16*, HRESULT)
-    put_log_circular : Proc(IApiTracingDataCollector*, Int16, HRESULT)
-    get_log_overwrite : Proc(IApiTracingDataCollector*, Int16*, HRESULT)
-    put_log_overwrite : Proc(IApiTracingDataCollector*, Int16, HRESULT)
-    get_name : Proc(IApiTracingDataCollector*, UInt8**, HRESULT)
-    put_name : Proc(IApiTracingDataCollector*, UInt8*, HRESULT)
-    get_output_location : Proc(IApiTracingDataCollector*, UInt8**, HRESULT)
-    get_index : Proc(IApiTracingDataCollector*, Int32*, HRESULT)
-    put_index : Proc(IApiTracingDataCollector*, Int32, HRESULT)
-    get_xml : Proc(IApiTracingDataCollector*, UInt8**, HRESULT)
-    set_xml : Proc(IApiTracingDataCollector*, UInt8*, IValueMap*, HRESULT)
-    create_output_location : Proc(IApiTracingDataCollector*, Int16, UInt8**, HRESULT)
-    get_log_api_names_only : Proc(IApiTracingDataCollector*, Int16*, HRESULT)
-    put_log_api_names_only : Proc(IApiTracingDataCollector*, Int16, HRESULT)
-    get_log_apis_recursively : Proc(IApiTracingDataCollector*, Int16*, HRESULT)
-    put_log_apis_recursively : Proc(IApiTracingDataCollector*, Int16, HRESULT)
-    get_exe_path : Proc(IApiTracingDataCollector*, UInt8**, HRESULT)
-    put_exe_path : Proc(IApiTracingDataCollector*, UInt8*, HRESULT)
-    get_log_file_path : Proc(IApiTracingDataCollector*, UInt8**, HRESULT)
-    put_log_file_path : Proc(IApiTracingDataCollector*, UInt8*, HRESULT)
-    get_include_modules : Proc(IApiTracingDataCollector*, SAFEARRAY**, HRESULT)
-    put_include_modules : Proc(IApiTracingDataCollector*, SAFEARRAY*, HRESULT)
-    get_include_apis : Proc(IApiTracingDataCollector*, SAFEARRAY**, HRESULT)
-    put_include_apis : Proc(IApiTracingDataCollector*, SAFEARRAY*, HRESULT)
-    get_exclude_apis : Proc(IApiTracingDataCollector*, SAFEARRAY**, HRESULT)
-    put_exclude_apis : Proc(IApiTracingDataCollector*, SAFEARRAY*, HRESULT)
-  end
-
-  IApiTracingDataCollector_GUID = "0383751a-098b-11d8-9414-505054503030"
-  IID_IApiTracingDataCollector = LibC::GUID.new(0x383751a_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IApiTracingDataCollector
-    lpVtbl : IApiTracingDataCollectorVTbl*
-  end
-
-  struct IDataCollectorCollectionVTbl
-    query_interface : Proc(IDataCollectorCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDataCollectorCollection*, UInt32)
-    release : Proc(IDataCollectorCollection*, UInt32)
-    get_type_info_count : Proc(IDataCollectorCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IDataCollectorCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDataCollectorCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDataCollectorCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IDataCollectorCollection*, Int32*, HRESULT)
-    get_item : Proc(IDataCollectorCollection*, VARIANT, IDataCollector*, HRESULT)
-    get__new_enum : Proc(IDataCollectorCollection*, IUnknown*, HRESULT)
-    add : Proc(IDataCollectorCollection*, IDataCollector, HRESULT)
-    remove : Proc(IDataCollectorCollection*, VARIANT, HRESULT)
-    clear : Proc(IDataCollectorCollection*, HRESULT)
-    add_range : Proc(IDataCollectorCollection*, IDataCollectorCollection, HRESULT)
-    create_data_collector_from_xml : Proc(IDataCollectorCollection*, UInt8*, IValueMap*, IDataCollector*, HRESULT)
-    create_data_collector : Proc(IDataCollectorCollection*, DataCollectorType, IDataCollector*, HRESULT)
-  end
-
-  IDataCollectorCollection_GUID = "03837502-098b-11d8-9414-505054503030"
-  IID_IDataCollectorCollection = LibC::GUID.new(0x3837502_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IDataCollectorCollection
-    lpVtbl : IDataCollectorCollectionVTbl*
-  end
-
-  struct IDataCollectorSetCollectionVTbl
-    query_interface : Proc(IDataCollectorSetCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDataCollectorSetCollection*, UInt32)
-    release : Proc(IDataCollectorSetCollection*, UInt32)
-    get_type_info_count : Proc(IDataCollectorSetCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IDataCollectorSetCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDataCollectorSetCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDataCollectorSetCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IDataCollectorSetCollection*, Int32*, HRESULT)
-    get_item : Proc(IDataCollectorSetCollection*, VARIANT, IDataCollectorSet*, HRESULT)
-    get__new_enum : Proc(IDataCollectorSetCollection*, IUnknown*, HRESULT)
-    add : Proc(IDataCollectorSetCollection*, IDataCollectorSet, HRESULT)
-    remove : Proc(IDataCollectorSetCollection*, VARIANT, HRESULT)
-    clear : Proc(IDataCollectorSetCollection*, HRESULT)
-    add_range : Proc(IDataCollectorSetCollection*, IDataCollectorSetCollection, HRESULT)
-    get_data_collector_sets : Proc(IDataCollectorSetCollection*, UInt8*, UInt8*, HRESULT)
-  end
-
-  IDataCollectorSetCollection_GUID = "03837524-098b-11d8-9414-505054503030"
-  IID_IDataCollectorSetCollection = LibC::GUID.new(0x3837524_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IDataCollectorSetCollection
-    lpVtbl : IDataCollectorSetCollectionVTbl*
-  end
-
-  struct ITraceDataProviderVTbl
-    query_interface : Proc(ITraceDataProvider*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITraceDataProvider*, UInt32)
-    release : Proc(ITraceDataProvider*, UInt32)
-    get_type_info_count : Proc(ITraceDataProvider*, UInt32*, HRESULT)
-    get_type_info : Proc(ITraceDataProvider*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITraceDataProvider*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITraceDataProvider*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_display_name : Proc(ITraceDataProvider*, UInt8**, HRESULT)
-    put_display_name : Proc(ITraceDataProvider*, UInt8*, HRESULT)
-    get_guid : Proc(ITraceDataProvider*, Guid*, HRESULT)
-    put_guid : Proc(ITraceDataProvider*, Guid, HRESULT)
-    get_level : Proc(ITraceDataProvider*, IValueMap*, HRESULT)
-    get_keywords_any : Proc(ITraceDataProvider*, IValueMap*, HRESULT)
-    get_keywords_all : Proc(ITraceDataProvider*, IValueMap*, HRESULT)
-    get_properties : Proc(ITraceDataProvider*, IValueMap*, HRESULT)
-    get_filter_enabled : Proc(ITraceDataProvider*, Int16*, HRESULT)
-    put_filter_enabled : Proc(ITraceDataProvider*, Int16, HRESULT)
-    get_filter_type : Proc(ITraceDataProvider*, UInt32*, HRESULT)
-    put_filter_type : Proc(ITraceDataProvider*, UInt32, HRESULT)
-    get_filter_data : Proc(ITraceDataProvider*, SAFEARRAY**, HRESULT)
-    put_filter_data : Proc(ITraceDataProvider*, SAFEARRAY*, HRESULT)
-    query : Proc(ITraceDataProvider*, UInt8*, UInt8*, HRESULT)
-    resolve : Proc(ITraceDataProvider*, IDispatch, HRESULT)
-    set_security : Proc(ITraceDataProvider*, UInt8*, HRESULT)
-    get_security : Proc(ITraceDataProvider*, UInt32, UInt8**, HRESULT)
-    get_registered_processes : Proc(ITraceDataProvider*, IValueMap*, HRESULT)
-  end
-
-  ITraceDataProvider_GUID = "03837512-098b-11d8-9414-505054503030"
-  IID_ITraceDataProvider = LibC::GUID.new(0x3837512_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct ITraceDataProvider
-    lpVtbl : ITraceDataProviderVTbl*
-  end
-
-  struct ITraceDataProviderCollectionVTbl
-    query_interface : Proc(ITraceDataProviderCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ITraceDataProviderCollection*, UInt32)
-    release : Proc(ITraceDataProviderCollection*, UInt32)
-    get_type_info_count : Proc(ITraceDataProviderCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(ITraceDataProviderCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ITraceDataProviderCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ITraceDataProviderCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ITraceDataProviderCollection*, Int32*, HRESULT)
-    get_item : Proc(ITraceDataProviderCollection*, VARIANT, ITraceDataProvider*, HRESULT)
-    get__new_enum : Proc(ITraceDataProviderCollection*, IUnknown*, HRESULT)
-    add : Proc(ITraceDataProviderCollection*, ITraceDataProvider, HRESULT)
-    remove : Proc(ITraceDataProviderCollection*, VARIANT, HRESULT)
-    clear : Proc(ITraceDataProviderCollection*, HRESULT)
-    add_range : Proc(ITraceDataProviderCollection*, ITraceDataProviderCollection, HRESULT)
-    create_trace_data_provider : Proc(ITraceDataProviderCollection*, ITraceDataProvider*, HRESULT)
-    get_trace_data_providers : Proc(ITraceDataProviderCollection*, UInt8*, HRESULT)
-    get_trace_data_providers_by_process : Proc(ITraceDataProviderCollection*, UInt8*, UInt32, HRESULT)
-  end
-
-  ITraceDataProviderCollection_GUID = "03837510-098b-11d8-9414-505054503030"
-  IID_ITraceDataProviderCollection = LibC::GUID.new(0x3837510_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct ITraceDataProviderCollection
-    lpVtbl : ITraceDataProviderCollectionVTbl*
-  end
-
-  struct IScheduleVTbl
-    query_interface : Proc(ISchedule*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISchedule*, UInt32)
-    release : Proc(ISchedule*, UInt32)
-    get_type_info_count : Proc(ISchedule*, UInt32*, HRESULT)
-    get_type_info : Proc(ISchedule*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ISchedule*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ISchedule*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_start_date : Proc(ISchedule*, VARIANT*, HRESULT)
-    put_start_date : Proc(ISchedule*, VARIANT, HRESULT)
-    get_end_date : Proc(ISchedule*, VARIANT*, HRESULT)
-    put_end_date : Proc(ISchedule*, VARIANT, HRESULT)
-    get_start_time : Proc(ISchedule*, VARIANT*, HRESULT)
-    put_start_time : Proc(ISchedule*, VARIANT, HRESULT)
-    get_days : Proc(ISchedule*, WeekDays*, HRESULT)
-    put_days : Proc(ISchedule*, WeekDays, HRESULT)
-  end
-
-  ISchedule_GUID = "0383753a-098b-11d8-9414-505054503030"
-  IID_ISchedule = LibC::GUID.new(0x383753a_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct ISchedule
-    lpVtbl : IScheduleVTbl*
-  end
-
-  struct IScheduleCollectionVTbl
-    query_interface : Proc(IScheduleCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IScheduleCollection*, UInt32)
-    release : Proc(IScheduleCollection*, UInt32)
-    get_type_info_count : Proc(IScheduleCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IScheduleCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IScheduleCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IScheduleCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IScheduleCollection*, Int32*, HRESULT)
-    get_item : Proc(IScheduleCollection*, VARIANT, ISchedule*, HRESULT)
-    get__new_enum : Proc(IScheduleCollection*, IUnknown*, HRESULT)
-    add : Proc(IScheduleCollection*, ISchedule, HRESULT)
-    remove : Proc(IScheduleCollection*, VARIANT, HRESULT)
-    clear : Proc(IScheduleCollection*, HRESULT)
-    add_range : Proc(IScheduleCollection*, IScheduleCollection, HRESULT)
-    create_schedule : Proc(IScheduleCollection*, ISchedule*, HRESULT)
-  end
-
-  IScheduleCollection_GUID = "0383753d-098b-11d8-9414-505054503030"
-  IID_IScheduleCollection = LibC::GUID.new(0x383753d_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IScheduleCollection
-    lpVtbl : IScheduleCollectionVTbl*
-  end
-
-  struct IValueMapItemVTbl
-    query_interface : Proc(IValueMapItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IValueMapItem*, UInt32)
-    release : Proc(IValueMapItem*, UInt32)
-    get_type_info_count : Proc(IValueMapItem*, UInt32*, HRESULT)
-    get_type_info : Proc(IValueMapItem*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IValueMapItem*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IValueMapItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_description : Proc(IValueMapItem*, UInt8**, HRESULT)
-    put_description : Proc(IValueMapItem*, UInt8*, HRESULT)
-    get_enabled : Proc(IValueMapItem*, Int16*, HRESULT)
-    put_enabled : Proc(IValueMapItem*, Int16, HRESULT)
-    get_key : Proc(IValueMapItem*, UInt8**, HRESULT)
-    put_key : Proc(IValueMapItem*, UInt8*, HRESULT)
-    get_value : Proc(IValueMapItem*, VARIANT*, HRESULT)
-    put_value : Proc(IValueMapItem*, VARIANT, HRESULT)
-    get_value_map_type : Proc(IValueMapItem*, ValueMapType*, HRESULT)
-    put_value_map_type : Proc(IValueMapItem*, ValueMapType, HRESULT)
-  end
-
-  IValueMapItem_GUID = "03837533-098b-11d8-9414-505054503030"
-  IID_IValueMapItem = LibC::GUID.new(0x3837533_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IValueMapItem
-    lpVtbl : IValueMapItemVTbl*
-  end
-
-  struct IValueMapVTbl
-    query_interface : Proc(IValueMap*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IValueMap*, UInt32)
-    release : Proc(IValueMap*, UInt32)
-    get_type_info_count : Proc(IValueMap*, UInt32*, HRESULT)
-    get_type_info : Proc(IValueMap*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IValueMap*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IValueMap*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(IValueMap*, Int32*, HRESULT)
-    get_item : Proc(IValueMap*, VARIANT, IValueMapItem*, HRESULT)
-    get__new_enum : Proc(IValueMap*, IUnknown*, HRESULT)
-    get_description : Proc(IValueMap*, UInt8**, HRESULT)
-    put_description : Proc(IValueMap*, UInt8*, HRESULT)
-    get_value : Proc(IValueMap*, VARIANT*, HRESULT)
-    put_value : Proc(IValueMap*, VARIANT, HRESULT)
-    get_value_map_type : Proc(IValueMap*, ValueMapType*, HRESULT)
-    put_value_map_type : Proc(IValueMap*, ValueMapType, HRESULT)
-    add : Proc(IValueMap*, VARIANT, HRESULT)
-    remove : Proc(IValueMap*, VARIANT, HRESULT)
-    clear : Proc(IValueMap*, HRESULT)
-    add_range : Proc(IValueMap*, IValueMap, HRESULT)
-    create_value_map_item : Proc(IValueMap*, IValueMapItem*, HRESULT)
-  end
-
-  IValueMap_GUID = "03837534-098b-11d8-9414-505054503030"
-  IID_IValueMap = LibC::GUID.new(0x3837534_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
-  struct IValueMap
-    lpVtbl : IValueMapVTbl*
-  end
-
-  struct ICounterItemVTbl
-    query_interface : Proc(ICounterItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICounterItem*, UInt32)
-    release : Proc(ICounterItem*, UInt32)
-    get_value : Proc(ICounterItem*, Float64*, HRESULT)
-    put_color : Proc(ICounterItem*, UInt32, HRESULT)
-    get_color : Proc(ICounterItem*, UInt32*, HRESULT)
-    put_width : Proc(ICounterItem*, Int32, HRESULT)
-    get_width : Proc(ICounterItem*, Int32*, HRESULT)
-    put_line_style : Proc(ICounterItem*, Int32, HRESULT)
-    get_line_style : Proc(ICounterItem*, Int32*, HRESULT)
-    put_scale_factor : Proc(ICounterItem*, Int32, HRESULT)
-    get_scale_factor : Proc(ICounterItem*, Int32*, HRESULT)
-    get_path : Proc(ICounterItem*, UInt8**, HRESULT)
-    get_value2 : Proc(ICounterItem*, Float64*, Int32*, HRESULT)
-    get_statistics : Proc(ICounterItem*, Float64*, Float64*, Float64*, Int32*, HRESULT)
-  end
-
-  ICounterItem_GUID = "771a9520-ee28-11ce-941e-008029004347"
-  IID_ICounterItem = LibC::GUID.new(0x771a9520_u32, 0xee28_u16, 0x11ce_u16, StaticArray[0x94_u8, 0x1e_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
-  struct ICounterItem
-    lpVtbl : ICounterItemVTbl*
-  end
-
-  struct ICounterItem2VTbl
-    query_interface : Proc(ICounterItem2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICounterItem2*, UInt32)
-    release : Proc(ICounterItem2*, UInt32)
-    get_value : Proc(ICounterItem2*, Float64*, HRESULT)
-    put_color : Proc(ICounterItem2*, UInt32, HRESULT)
-    get_color : Proc(ICounterItem2*, UInt32*, HRESULT)
-    put_width : Proc(ICounterItem2*, Int32, HRESULT)
-    get_width : Proc(ICounterItem2*, Int32*, HRESULT)
-    put_line_style : Proc(ICounterItem2*, Int32, HRESULT)
-    get_line_style : Proc(ICounterItem2*, Int32*, HRESULT)
-    put_scale_factor : Proc(ICounterItem2*, Int32, HRESULT)
-    get_scale_factor : Proc(ICounterItem2*, Int32*, HRESULT)
-    get_path : Proc(ICounterItem2*, UInt8**, HRESULT)
-    get_value2 : Proc(ICounterItem2*, Float64*, Int32*, HRESULT)
-    get_statistics : Proc(ICounterItem2*, Float64*, Float64*, Float64*, Int32*, HRESULT)
-    put_selected : Proc(ICounterItem2*, Int16, HRESULT)
-    get_selected : Proc(ICounterItem2*, Int16*, HRESULT)
-    put_visible : Proc(ICounterItem2*, Int16, HRESULT)
-    get_visible : Proc(ICounterItem2*, Int16*, HRESULT)
-    get_data_at : Proc(ICounterItem2*, Int32, SysmonDataType, VARIANT*, HRESULT)
-  end
-
-  ICounterItem2_GUID = "eefcd4e1-ea1c-4435-b7f4-e341ba03b4f9"
-  IID_ICounterItem2 = LibC::GUID.new(0xeefcd4e1_u32, 0xea1c_u16, 0x4435_u16, StaticArray[0xb7_u8, 0xf4_u8, 0xe3_u8, 0x41_u8, 0xba_u8, 0x3_u8, 0xb4_u8, 0xf9_u8])
-  struct ICounterItem2
-    lpVtbl : ICounterItem2VTbl*
-  end
-
-  struct IICounterItemUnionVTbl
-    query_interface : Proc(IICounterItemUnion*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IICounterItemUnion*, UInt32)
-    release : Proc(IICounterItemUnion*, UInt32)
-    get_value : Proc(IICounterItemUnion*, Float64*, HRESULT)
-    put_color : Proc(IICounterItemUnion*, UInt32, HRESULT)
-    get_color : Proc(IICounterItemUnion*, UInt32*, HRESULT)
-    put_width : Proc(IICounterItemUnion*, Int32, HRESULT)
-    get_width : Proc(IICounterItemUnion*, Int32*, HRESULT)
-    put_line_style : Proc(IICounterItemUnion*, Int32, HRESULT)
-    get_line_style : Proc(IICounterItemUnion*, Int32*, HRESULT)
-    put_scale_factor : Proc(IICounterItemUnion*, Int32, HRESULT)
-    get_scale_factor : Proc(IICounterItemUnion*, Int32*, HRESULT)
-    get_path : Proc(IICounterItemUnion*, UInt8**, HRESULT)
-    get_value2 : Proc(IICounterItemUnion*, Float64*, Int32*, HRESULT)
-    get_statistics : Proc(IICounterItemUnion*, Float64*, Float64*, Float64*, Int32*, HRESULT)
-    put_selected : Proc(IICounterItemUnion*, Int16, HRESULT)
-    get_selected : Proc(IICounterItemUnion*, Int16*, HRESULT)
-    put_visible : Proc(IICounterItemUnion*, Int16, HRESULT)
-    get_visible : Proc(IICounterItemUnion*, Int16*, HRESULT)
-    get_data_at : Proc(IICounterItemUnion*, Int32, SysmonDataType, VARIANT*, HRESULT)
-  end
-
-  IICounterItemUnion_GUID = "de1a6b74-9182-4c41-8e2c-24c2cd30ee83"
-  IID_IICounterItemUnion = LibC::GUID.new(0xde1a6b74_u32, 0x9182_u16, 0x4c41_u16, StaticArray[0x8e_u8, 0x2c_u8, 0x24_u8, 0xc2_u8, 0xcd_u8, 0x30_u8, 0xee_u8, 0x83_u8])
-  struct IICounterItemUnion
-    lpVtbl : IICounterItemUnionVTbl*
-  end
-
-  struct DICounterItemVTbl
-    query_interface : Proc(DICounterItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DICounterItem*, UInt32)
-    release : Proc(DICounterItem*, UInt32)
-    get_type_info_count : Proc(DICounterItem*, UInt32*, HRESULT)
-    get_type_info : Proc(DICounterItem*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DICounterItem*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DICounterItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-  end
-
-  DICounterItem_GUID = "c08c4ff2-0e2e-11cf-942c-008029004347"
-  IID_DICounterItem = LibC::GUID.new(0xc08c4ff2_u32, 0xe2e_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2c_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
-  struct DICounterItem
-    lpVtbl : DICounterItemVTbl*
-  end
-
-  struct ICountersVTbl
-    query_interface : Proc(ICounters*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICounters*, UInt32)
-    release : Proc(ICounters*, UInt32)
-    get_type_info_count : Proc(ICounters*, UInt32*, HRESULT)
-    get_type_info : Proc(ICounters*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ICounters*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ICounters*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ICounters*, Int32*, HRESULT)
-    get__new_enum : Proc(ICounters*, IUnknown*, HRESULT)
-    get_item : Proc(ICounters*, VARIANT, DICounterItem*, HRESULT)
-    add : Proc(ICounters*, UInt8*, DICounterItem*, HRESULT)
-    remove : Proc(ICounters*, VARIANT, HRESULT)
-  end
-
-  ICounters_GUID = "79167962-28fc-11cf-942f-008029004347"
-  IID_ICounters = LibC::GUID.new(0x79167962_u32, 0x28fc_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2f_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
-  struct ICounters
-    lpVtbl : ICountersVTbl*
-  end
-
-  struct ILogFileItemVTbl
-    query_interface : Proc(ILogFileItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILogFileItem*, UInt32)
-    release : Proc(ILogFileItem*, UInt32)
-    get_path : Proc(ILogFileItem*, UInt8**, HRESULT)
-  end
-
-  ILogFileItem_GUID = "d6b518dd-05c7-418a-89e6-4f9ce8c6841e"
-  IID_ILogFileItem = LibC::GUID.new(0xd6b518dd_u32, 0x5c7_u16, 0x418a_u16, StaticArray[0x89_u8, 0xe6_u8, 0x4f_u8, 0x9c_u8, 0xe8_u8, 0xc6_u8, 0x84_u8, 0x1e_u8])
-  struct ILogFileItem
-    lpVtbl : ILogFileItemVTbl*
-  end
-
-  struct DILogFileItemVTbl
-    query_interface : Proc(DILogFileItem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DILogFileItem*, UInt32)
-    release : Proc(DILogFileItem*, UInt32)
-    get_type_info_count : Proc(DILogFileItem*, UInt32*, HRESULT)
-    get_type_info : Proc(DILogFileItem*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DILogFileItem*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DILogFileItem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-  end
-
-  DILogFileItem_GUID = "8d093ffc-f777-4917-82d1-833fbc54c58f"
-  IID_DILogFileItem = LibC::GUID.new(0x8d093ffc_u32, 0xf777_u16, 0x4917_u16, StaticArray[0x82_u8, 0xd1_u8, 0x83_u8, 0x3f_u8, 0xbc_u8, 0x54_u8, 0xc5_u8, 0x8f_u8])
-  struct DILogFileItem
-    lpVtbl : DILogFileItemVTbl*
-  end
-
-  struct ILogFilesVTbl
-    query_interface : Proc(ILogFiles*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILogFiles*, UInt32)
-    release : Proc(ILogFiles*, UInt32)
-    get_type_info_count : Proc(ILogFiles*, UInt32*, HRESULT)
-    get_type_info : Proc(ILogFiles*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ILogFiles*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ILogFiles*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_count : Proc(ILogFiles*, Int32*, HRESULT)
-    get__new_enum : Proc(ILogFiles*, IUnknown*, HRESULT)
-    get_item : Proc(ILogFiles*, VARIANT, DILogFileItem*, HRESULT)
-    add : Proc(ILogFiles*, UInt8*, DILogFileItem*, HRESULT)
-    remove : Proc(ILogFiles*, VARIANT, HRESULT)
-  end
-
-  ILogFiles_GUID = "6a2a97e6-6851-41ea-87ad-2a8225335865"
-  IID_ILogFiles = LibC::GUID.new(0x6a2a97e6_u32, 0x6851_u16, 0x41ea_u16, StaticArray[0x87_u8, 0xad_u8, 0x2a_u8, 0x82_u8, 0x25_u8, 0x33_u8, 0x58_u8, 0x65_u8])
-  struct ILogFiles
-    lpVtbl : ILogFilesVTbl*
-  end
-
-  struct ISystemMonitorVTbl
-    query_interface : Proc(ISystemMonitor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISystemMonitor*, UInt32)
-    release : Proc(ISystemMonitor*, UInt32)
-    get_appearance : Proc(ISystemMonitor*, Int32*, HRESULT)
-    put_appearance : Proc(ISystemMonitor*, Int32, HRESULT)
-    get_back_color : Proc(ISystemMonitor*, UInt32*, HRESULT)
-    put_back_color : Proc(ISystemMonitor*, UInt32, HRESULT)
-    get_border_style : Proc(ISystemMonitor*, Int32*, HRESULT)
-    put_border_style : Proc(ISystemMonitor*, Int32, HRESULT)
-    get_fore_color : Proc(ISystemMonitor*, UInt32*, HRESULT)
-    put_fore_color : Proc(ISystemMonitor*, UInt32, HRESULT)
-    get_font : Proc(ISystemMonitor*, IFontDisp*, HRESULT)
-    putref_font : Proc(ISystemMonitor*, IFontDisp, HRESULT)
-    get_counters : Proc(ISystemMonitor*, ICounters*, HRESULT)
-    put_show_vertical_grid : Proc(ISystemMonitor*, Int16, HRESULT)
-    get_show_vertical_grid : Proc(ISystemMonitor*, Int16*, HRESULT)
-    put_show_horizontal_grid : Proc(ISystemMonitor*, Int16, HRESULT)
-    get_show_horizontal_grid : Proc(ISystemMonitor*, Int16*, HRESULT)
-    put_show_legend : Proc(ISystemMonitor*, Int16, HRESULT)
-    get_show_legend : Proc(ISystemMonitor*, Int16*, HRESULT)
-    put_show_scale_labels : Proc(ISystemMonitor*, Int16, HRESULT)
-    get_show_scale_labels : Proc(ISystemMonitor*, Int16*, HRESULT)
-    put_show_value_bar : Proc(ISystemMonitor*, Int16, HRESULT)
-    get_show_value_bar : Proc(ISystemMonitor*, Int16*, HRESULT)
-    put_maximum_scale : Proc(ISystemMonitor*, Int32, HRESULT)
-    get_maximum_scale : Proc(ISystemMonitor*, Int32*, HRESULT)
-    put_minimum_scale : Proc(ISystemMonitor*, Int32, HRESULT)
-    get_minimum_scale : Proc(ISystemMonitor*, Int32*, HRESULT)
-    put_update_interval : Proc(ISystemMonitor*, Float32, HRESULT)
-    get_update_interval : Proc(ISystemMonitor*, Float32*, HRESULT)
-    put_display_type : Proc(ISystemMonitor*, DisplayTypeConstants, HRESULT)
-    get_display_type : Proc(ISystemMonitor*, DisplayTypeConstants*, HRESULT)
-    put_manual_update : Proc(ISystemMonitor*, Int16, HRESULT)
-    get_manual_update : Proc(ISystemMonitor*, Int16*, HRESULT)
-    put_graph_title : Proc(ISystemMonitor*, UInt8*, HRESULT)
-    get_graph_title : Proc(ISystemMonitor*, UInt8**, HRESULT)
-    put_y_axis_label : Proc(ISystemMonitor*, UInt8*, HRESULT)
-    get_y_axis_label : Proc(ISystemMonitor*, UInt8**, HRESULT)
-    collect_sample : Proc(ISystemMonitor*, HRESULT)
-    update_graph : Proc(ISystemMonitor*, HRESULT)
-    browse_counters : Proc(ISystemMonitor*, HRESULT)
-    display_properties : Proc(ISystemMonitor*, HRESULT)
-    counter : Proc(ISystemMonitor*, Int32, ICounterItem*, HRESULT)
-    add_counter : Proc(ISystemMonitor*, UInt8*, ICounterItem*, HRESULT)
-    delete_counter : Proc(ISystemMonitor*, ICounterItem, HRESULT)
-    get_back_color_ctl : Proc(ISystemMonitor*, UInt32*, HRESULT)
-    put_back_color_ctl : Proc(ISystemMonitor*, UInt32, HRESULT)
-    put_log_file_name : Proc(ISystemMonitor*, UInt8*, HRESULT)
-    get_log_file_name : Proc(ISystemMonitor*, UInt8**, HRESULT)
-    put_log_view_start : Proc(ISystemMonitor*, Float64, HRESULT)
-    get_log_view_start : Proc(ISystemMonitor*, Float64*, HRESULT)
-    put_log_view_stop : Proc(ISystemMonitor*, Float64, HRESULT)
-    get_log_view_stop : Proc(ISystemMonitor*, Float64*, HRESULT)
-    get_grid_color : Proc(ISystemMonitor*, UInt32*, HRESULT)
-    put_grid_color : Proc(ISystemMonitor*, UInt32, HRESULT)
-    get_time_bar_color : Proc(ISystemMonitor*, UInt32*, HRESULT)
-    put_time_bar_color : Proc(ISystemMonitor*, UInt32, HRESULT)
-    get_highlight : Proc(ISystemMonitor*, Int16*, HRESULT)
-    put_highlight : Proc(ISystemMonitor*, Int16, HRESULT)
-    get_show_toolbar : Proc(ISystemMonitor*, Int16*, HRESULT)
-    put_show_toolbar : Proc(ISystemMonitor*, Int16, HRESULT)
-    paste : Proc(ISystemMonitor*, HRESULT)
-    copy : Proc(ISystemMonitor*, HRESULT)
-    reset : Proc(ISystemMonitor*, HRESULT)
-    put_read_only : Proc(ISystemMonitor*, Int16, HRESULT)
-    get_read_only : Proc(ISystemMonitor*, Int16*, HRESULT)
-    put_report_value_type : Proc(ISystemMonitor*, ReportValueTypeConstants, HRESULT)
-    get_report_value_type : Proc(ISystemMonitor*, ReportValueTypeConstants*, HRESULT)
-    put_monitor_duplicate_instances : Proc(ISystemMonitor*, Int16, HRESULT)
-    get_monitor_duplicate_instances : Proc(ISystemMonitor*, Int16*, HRESULT)
-    put_display_filter : Proc(ISystemMonitor*, Int32, HRESULT)
-    get_display_filter : Proc(ISystemMonitor*, Int32*, HRESULT)
-    get_log_files : Proc(ISystemMonitor*, ILogFiles*, HRESULT)
-    put_data_source_type : Proc(ISystemMonitor*, DataSourceTypeConstants, HRESULT)
-    get_data_source_type : Proc(ISystemMonitor*, DataSourceTypeConstants*, HRESULT)
-    put_sql_dsn_name : Proc(ISystemMonitor*, UInt8*, HRESULT)
-    get_sql_dsn_name : Proc(ISystemMonitor*, UInt8**, HRESULT)
-    put_sql_log_set_name : Proc(ISystemMonitor*, UInt8*, HRESULT)
-    get_sql_log_set_name : Proc(ISystemMonitor*, UInt8**, HRESULT)
-  end
-
-  ISystemMonitor_GUID = "194eb241-c32c-11cf-9398-00aa00a3ddea"
-  IID_ISystemMonitor = LibC::GUID.new(0x194eb241_u32, 0xc32c_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
-  struct ISystemMonitor
-    lpVtbl : ISystemMonitorVTbl*
-  end
-
-  struct ISystemMonitor2VTbl
-    query_interface : Proc(ISystemMonitor2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISystemMonitor2*, UInt32)
-    release : Proc(ISystemMonitor2*, UInt32)
-    get_appearance : Proc(ISystemMonitor2*, Int32*, HRESULT)
-    put_appearance : Proc(ISystemMonitor2*, Int32, HRESULT)
-    get_back_color : Proc(ISystemMonitor2*, UInt32*, HRESULT)
-    put_back_color : Proc(ISystemMonitor2*, UInt32, HRESULT)
-    get_border_style : Proc(ISystemMonitor2*, Int32*, HRESULT)
-    put_border_style : Proc(ISystemMonitor2*, Int32, HRESULT)
-    get_fore_color : Proc(ISystemMonitor2*, UInt32*, HRESULT)
-    put_fore_color : Proc(ISystemMonitor2*, UInt32, HRESULT)
-    get_font : Proc(ISystemMonitor2*, IFontDisp*, HRESULT)
-    putref_font : Proc(ISystemMonitor2*, IFontDisp, HRESULT)
-    get_counters : Proc(ISystemMonitor2*, ICounters*, HRESULT)
-    put_show_vertical_grid : Proc(ISystemMonitor2*, Int16, HRESULT)
-    get_show_vertical_grid : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_show_horizontal_grid : Proc(ISystemMonitor2*, Int16, HRESULT)
-    get_show_horizontal_grid : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_show_legend : Proc(ISystemMonitor2*, Int16, HRESULT)
-    get_show_legend : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_show_scale_labels : Proc(ISystemMonitor2*, Int16, HRESULT)
-    get_show_scale_labels : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_show_value_bar : Proc(ISystemMonitor2*, Int16, HRESULT)
-    get_show_value_bar : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_maximum_scale : Proc(ISystemMonitor2*, Int32, HRESULT)
-    get_maximum_scale : Proc(ISystemMonitor2*, Int32*, HRESULT)
-    put_minimum_scale : Proc(ISystemMonitor2*, Int32, HRESULT)
-    get_minimum_scale : Proc(ISystemMonitor2*, Int32*, HRESULT)
-    put_update_interval : Proc(ISystemMonitor2*, Float32, HRESULT)
-    get_update_interval : Proc(ISystemMonitor2*, Float32*, HRESULT)
-    put_display_type : Proc(ISystemMonitor2*, DisplayTypeConstants, HRESULT)
-    get_display_type : Proc(ISystemMonitor2*, DisplayTypeConstants*, HRESULT)
-    put_manual_update : Proc(ISystemMonitor2*, Int16, HRESULT)
-    get_manual_update : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_graph_title : Proc(ISystemMonitor2*, UInt8*, HRESULT)
-    get_graph_title : Proc(ISystemMonitor2*, UInt8**, HRESULT)
-    put_y_axis_label : Proc(ISystemMonitor2*, UInt8*, HRESULT)
-    get_y_axis_label : Proc(ISystemMonitor2*, UInt8**, HRESULT)
-    collect_sample : Proc(ISystemMonitor2*, HRESULT)
-    update_graph : Proc(ISystemMonitor2*, HRESULT)
-    browse_counters : Proc(ISystemMonitor2*, HRESULT)
-    display_properties : Proc(ISystemMonitor2*, HRESULT)
-    counter : Proc(ISystemMonitor2*, Int32, ICounterItem*, HRESULT)
-    add_counter : Proc(ISystemMonitor2*, UInt8*, ICounterItem*, HRESULT)
-    delete_counter : Proc(ISystemMonitor2*, ICounterItem, HRESULT)
-    get_back_color_ctl : Proc(ISystemMonitor2*, UInt32*, HRESULT)
-    put_back_color_ctl : Proc(ISystemMonitor2*, UInt32, HRESULT)
-    put_log_file_name : Proc(ISystemMonitor2*, UInt8*, HRESULT)
-    get_log_file_name : Proc(ISystemMonitor2*, UInt8**, HRESULT)
-    put_log_view_start : Proc(ISystemMonitor2*, Float64, HRESULT)
-    get_log_view_start : Proc(ISystemMonitor2*, Float64*, HRESULT)
-    put_log_view_stop : Proc(ISystemMonitor2*, Float64, HRESULT)
-    get_log_view_stop : Proc(ISystemMonitor2*, Float64*, HRESULT)
-    get_grid_color : Proc(ISystemMonitor2*, UInt32*, HRESULT)
-    put_grid_color : Proc(ISystemMonitor2*, UInt32, HRESULT)
-    get_time_bar_color : Proc(ISystemMonitor2*, UInt32*, HRESULT)
-    put_time_bar_color : Proc(ISystemMonitor2*, UInt32, HRESULT)
-    get_highlight : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_highlight : Proc(ISystemMonitor2*, Int16, HRESULT)
-    get_show_toolbar : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_show_toolbar : Proc(ISystemMonitor2*, Int16, HRESULT)
-    paste : Proc(ISystemMonitor2*, HRESULT)
-    copy : Proc(ISystemMonitor2*, HRESULT)
-    reset : Proc(ISystemMonitor2*, HRESULT)
-    put_read_only : Proc(ISystemMonitor2*, Int16, HRESULT)
-    get_read_only : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_report_value_type : Proc(ISystemMonitor2*, ReportValueTypeConstants, HRESULT)
-    get_report_value_type : Proc(ISystemMonitor2*, ReportValueTypeConstants*, HRESULT)
-    put_monitor_duplicate_instances : Proc(ISystemMonitor2*, Int16, HRESULT)
-    get_monitor_duplicate_instances : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_display_filter : Proc(ISystemMonitor2*, Int32, HRESULT)
-    get_display_filter : Proc(ISystemMonitor2*, Int32*, HRESULT)
-    get_log_files : Proc(ISystemMonitor2*, ILogFiles*, HRESULT)
-    put_data_source_type : Proc(ISystemMonitor2*, DataSourceTypeConstants, HRESULT)
-    get_data_source_type : Proc(ISystemMonitor2*, DataSourceTypeConstants*, HRESULT)
-    put_sql_dsn_name : Proc(ISystemMonitor2*, UInt8*, HRESULT)
-    get_sql_dsn_name : Proc(ISystemMonitor2*, UInt8**, HRESULT)
-    put_sql_log_set_name : Proc(ISystemMonitor2*, UInt8*, HRESULT)
-    get_sql_log_set_name : Proc(ISystemMonitor2*, UInt8**, HRESULT)
-    put_enable_digit_grouping : Proc(ISystemMonitor2*, Int16, HRESULT)
-    get_enable_digit_grouping : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_enable_tool_tips : Proc(ISystemMonitor2*, Int16, HRESULT)
-    get_enable_tool_tips : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_show_time_axis_labels : Proc(ISystemMonitor2*, Int16, HRESULT)
-    get_show_time_axis_labels : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_chart_scroll : Proc(ISystemMonitor2*, Int16, HRESULT)
-    get_chart_scroll : Proc(ISystemMonitor2*, Int16*, HRESULT)
-    put_data_point_count : Proc(ISystemMonitor2*, Int32, HRESULT)
-    get_data_point_count : Proc(ISystemMonitor2*, Int32*, HRESULT)
-    scale_to_fit : Proc(ISystemMonitor2*, Int16, HRESULT)
-    save_as : Proc(ISystemMonitor2*, UInt8*, SysmonFileType, HRESULT)
-    relog : Proc(ISystemMonitor2*, UInt8*, SysmonFileType, Int32, HRESULT)
-    clear_data : Proc(ISystemMonitor2*, HRESULT)
-    get_log_source_start_time : Proc(ISystemMonitor2*, Float64*, HRESULT)
-    get_log_source_stop_time : Proc(ISystemMonitor2*, Float64*, HRESULT)
-    set_log_view_range : Proc(ISystemMonitor2*, Float64, Float64, HRESULT)
-    get_log_view_range : Proc(ISystemMonitor2*, Float64*, Float64*, HRESULT)
-    batching_lock : Proc(ISystemMonitor2*, Int16, SysmonBatchReason, HRESULT)
-    load_settings : Proc(ISystemMonitor2*, UInt8*, HRESULT)
-  end
-
-  ISystemMonitor2_GUID = "08e3206a-5fd2-4fde-a8a5-8cb3b63d2677"
-  IID_ISystemMonitor2 = LibC::GUID.new(0x8e3206a_u32, 0x5fd2_u16, 0x4fde_u16, StaticArray[0xa8_u8, 0xa5_u8, 0x8c_u8, 0xb3_u8, 0xb6_u8, 0x3d_u8, 0x26_u8, 0x77_u8])
-  struct ISystemMonitor2
-    lpVtbl : ISystemMonitor2VTbl*
-  end
-
-  struct IISystemMonitorUnionVTbl
-    query_interface : Proc(IISystemMonitorUnion*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IISystemMonitorUnion*, UInt32)
-    release : Proc(IISystemMonitorUnion*, UInt32)
-    get_appearance : Proc(IISystemMonitorUnion*, Int32*, HRESULT)
-    put_appearance : Proc(IISystemMonitorUnion*, Int32, HRESULT)
-    get_back_color : Proc(IISystemMonitorUnion*, UInt32*, HRESULT)
-    put_back_color : Proc(IISystemMonitorUnion*, UInt32, HRESULT)
-    get_border_style : Proc(IISystemMonitorUnion*, Int32*, HRESULT)
-    put_border_style : Proc(IISystemMonitorUnion*, Int32, HRESULT)
-    get_fore_color : Proc(IISystemMonitorUnion*, UInt32*, HRESULT)
-    put_fore_color : Proc(IISystemMonitorUnion*, UInt32, HRESULT)
-    get_font : Proc(IISystemMonitorUnion*, IFontDisp*, HRESULT)
-    putref_font : Proc(IISystemMonitorUnion*, IFontDisp, HRESULT)
-    get_counters : Proc(IISystemMonitorUnion*, ICounters*, HRESULT)
-    put_show_vertical_grid : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    get_show_vertical_grid : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_show_horizontal_grid : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    get_show_horizontal_grid : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_show_legend : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    get_show_legend : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_show_scale_labels : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    get_show_scale_labels : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_show_value_bar : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    get_show_value_bar : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_maximum_scale : Proc(IISystemMonitorUnion*, Int32, HRESULT)
-    get_maximum_scale : Proc(IISystemMonitorUnion*, Int32*, HRESULT)
-    put_minimum_scale : Proc(IISystemMonitorUnion*, Int32, HRESULT)
-    get_minimum_scale : Proc(IISystemMonitorUnion*, Int32*, HRESULT)
-    put_update_interval : Proc(IISystemMonitorUnion*, Float32, HRESULT)
-    get_update_interval : Proc(IISystemMonitorUnion*, Float32*, HRESULT)
-    put_display_type : Proc(IISystemMonitorUnion*, DisplayTypeConstants, HRESULT)
-    get_display_type : Proc(IISystemMonitorUnion*, DisplayTypeConstants*, HRESULT)
-    put_manual_update : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    get_manual_update : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_graph_title : Proc(IISystemMonitorUnion*, UInt8*, HRESULT)
-    get_graph_title : Proc(IISystemMonitorUnion*, UInt8**, HRESULT)
-    put_y_axis_label : Proc(IISystemMonitorUnion*, UInt8*, HRESULT)
-    get_y_axis_label : Proc(IISystemMonitorUnion*, UInt8**, HRESULT)
-    collect_sample : Proc(IISystemMonitorUnion*, HRESULT)
-    update_graph : Proc(IISystemMonitorUnion*, HRESULT)
-    browse_counters : Proc(IISystemMonitorUnion*, HRESULT)
-    display_properties : Proc(IISystemMonitorUnion*, HRESULT)
-    counter : Proc(IISystemMonitorUnion*, Int32, ICounterItem*, HRESULT)
-    add_counter : Proc(IISystemMonitorUnion*, UInt8*, ICounterItem*, HRESULT)
-    delete_counter : Proc(IISystemMonitorUnion*, ICounterItem, HRESULT)
-    get_back_color_ctl : Proc(IISystemMonitorUnion*, UInt32*, HRESULT)
-    put_back_color_ctl : Proc(IISystemMonitorUnion*, UInt32, HRESULT)
-    put_log_file_name : Proc(IISystemMonitorUnion*, UInt8*, HRESULT)
-    get_log_file_name : Proc(IISystemMonitorUnion*, UInt8**, HRESULT)
-    put_log_view_start : Proc(IISystemMonitorUnion*, Float64, HRESULT)
-    get_log_view_start : Proc(IISystemMonitorUnion*, Float64*, HRESULT)
-    put_log_view_stop : Proc(IISystemMonitorUnion*, Float64, HRESULT)
-    get_log_view_stop : Proc(IISystemMonitorUnion*, Float64*, HRESULT)
-    get_grid_color : Proc(IISystemMonitorUnion*, UInt32*, HRESULT)
-    put_grid_color : Proc(IISystemMonitorUnion*, UInt32, HRESULT)
-    get_time_bar_color : Proc(IISystemMonitorUnion*, UInt32*, HRESULT)
-    put_time_bar_color : Proc(IISystemMonitorUnion*, UInt32, HRESULT)
-    get_highlight : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_highlight : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    get_show_toolbar : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_show_toolbar : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    paste : Proc(IISystemMonitorUnion*, HRESULT)
-    copy : Proc(IISystemMonitorUnion*, HRESULT)
-    reset : Proc(IISystemMonitorUnion*, HRESULT)
-    put_read_only : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    get_read_only : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_report_value_type : Proc(IISystemMonitorUnion*, ReportValueTypeConstants, HRESULT)
-    get_report_value_type : Proc(IISystemMonitorUnion*, ReportValueTypeConstants*, HRESULT)
-    put_monitor_duplicate_instances : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    get_monitor_duplicate_instances : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_display_filter : Proc(IISystemMonitorUnion*, Int32, HRESULT)
-    get_display_filter : Proc(IISystemMonitorUnion*, Int32*, HRESULT)
-    get_log_files : Proc(IISystemMonitorUnion*, ILogFiles*, HRESULT)
-    put_data_source_type : Proc(IISystemMonitorUnion*, DataSourceTypeConstants, HRESULT)
-    get_data_source_type : Proc(IISystemMonitorUnion*, DataSourceTypeConstants*, HRESULT)
-    put_sql_dsn_name : Proc(IISystemMonitorUnion*, UInt8*, HRESULT)
-    get_sql_dsn_name : Proc(IISystemMonitorUnion*, UInt8**, HRESULT)
-    put_sql_log_set_name : Proc(IISystemMonitorUnion*, UInt8*, HRESULT)
-    get_sql_log_set_name : Proc(IISystemMonitorUnion*, UInt8**, HRESULT)
-    put_enable_digit_grouping : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    get_enable_digit_grouping : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_enable_tool_tips : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    get_enable_tool_tips : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_show_time_axis_labels : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    get_show_time_axis_labels : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_chart_scroll : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    get_chart_scroll : Proc(IISystemMonitorUnion*, Int16*, HRESULT)
-    put_data_point_count : Proc(IISystemMonitorUnion*, Int32, HRESULT)
-    get_data_point_count : Proc(IISystemMonitorUnion*, Int32*, HRESULT)
-    scale_to_fit : Proc(IISystemMonitorUnion*, Int16, HRESULT)
-    save_as : Proc(IISystemMonitorUnion*, UInt8*, SysmonFileType, HRESULT)
-    relog : Proc(IISystemMonitorUnion*, UInt8*, SysmonFileType, Int32, HRESULT)
-    clear_data : Proc(IISystemMonitorUnion*, HRESULT)
-    get_log_source_start_time : Proc(IISystemMonitorUnion*, Float64*, HRESULT)
-    get_log_source_stop_time : Proc(IISystemMonitorUnion*, Float64*, HRESULT)
-    set_log_view_range : Proc(IISystemMonitorUnion*, Float64, Float64, HRESULT)
-    get_log_view_range : Proc(IISystemMonitorUnion*, Float64*, Float64*, HRESULT)
-    batching_lock : Proc(IISystemMonitorUnion*, Int16, SysmonBatchReason, HRESULT)
-    load_settings : Proc(IISystemMonitorUnion*, UInt8*, HRESULT)
-  end
-
-  IISystemMonitorUnion_GUID = "c8a77338-265f-4de5-aa25-c7da1ce5a8f4"
-  IID_IISystemMonitorUnion = LibC::GUID.new(0xc8a77338_u32, 0x265f_u16, 0x4de5_u16, StaticArray[0xaa_u8, 0x25_u8, 0xc7_u8, 0xda_u8, 0x1c_u8, 0xe5_u8, 0xa8_u8, 0xf4_u8])
-  struct IISystemMonitorUnion
-    lpVtbl : IISystemMonitorUnionVTbl*
-  end
-
-  struct DISystemMonitorVTbl
-    query_interface : Proc(DISystemMonitor*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DISystemMonitor*, UInt32)
-    release : Proc(DISystemMonitor*, UInt32)
-    get_type_info_count : Proc(DISystemMonitor*, UInt32*, HRESULT)
-    get_type_info : Proc(DISystemMonitor*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DISystemMonitor*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DISystemMonitor*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-  end
-
-  DISystemMonitor_GUID = "13d73d81-c32e-11cf-9398-00aa00a3ddea"
-  IID_DISystemMonitor = LibC::GUID.new(0x13d73d81_u32, 0xc32e_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
-  struct DISystemMonitor
-    lpVtbl : DISystemMonitorVTbl*
-  end
-
-  struct DISystemMonitorInternalVTbl
-    query_interface : Proc(DISystemMonitorInternal*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DISystemMonitorInternal*, UInt32)
-    release : Proc(DISystemMonitorInternal*, UInt32)
-    get_type_info_count : Proc(DISystemMonitorInternal*, UInt32*, HRESULT)
-    get_type_info : Proc(DISystemMonitorInternal*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DISystemMonitorInternal*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DISystemMonitorInternal*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-  end
-
-  DISystemMonitorInternal_GUID = "194eb242-c32c-11cf-9398-00aa00a3ddea"
-  IID_DISystemMonitorInternal = LibC::GUID.new(0x194eb242_u32, 0xc32c_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
-  struct DISystemMonitorInternal
-    lpVtbl : DISystemMonitorInternalVTbl*
-  end
-
-  struct ISystemMonitorEventsVTbl
-    query_interface : Proc(ISystemMonitorEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ISystemMonitorEvents*, UInt32)
-    release : Proc(ISystemMonitorEvents*, UInt32)
-    on_counter_selected : Proc(ISystemMonitorEvents*, Int32, Void)
-    on_counter_added : Proc(ISystemMonitorEvents*, Int32, Void)
-    on_counter_deleted : Proc(ISystemMonitorEvents*, Int32, Void)
-    on_sample_collected : Proc(ISystemMonitorEvents*, Void)
+
+  @[Extern]
+  record PDH_RAW_LOG_RECORD,
+    dwStructureSize : UInt32,
+    dwRecordType : Win32cr::System::Performance::PDH_LOG_TYPE,
+    dwItems : UInt32,
+    raw_bytes : UInt8*
+
+  @[Extern]
+  record PDH_LOG_SERVICE_QUERY_INFO_A,
+    dwSize : UInt32,
+    dwFlags : UInt32,
+    dwLogQuota : UInt32,
+    szLogFileCaption : Win32cr::Foundation::PSTR,
+    szDefaultDir : Win32cr::Foundation::PSTR,
+    szBaseFileName : Win32cr::Foundation::PSTR,
+    dwFileType : UInt32,
+    dwReserved : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous1 : Anonymous1_e__Struct,
+      anonymous2 : Anonymous2_e__Struct do
+
+      # Nested Type Anonymous1_e__Struct
+      @[Extern]
+      record Anonymous1_e__Struct,
+        pdl_auto_name_interval : UInt32,
+        pdl_auto_name_units : UInt32,
+        pdl_command_filename : Win32cr::Foundation::PSTR,
+        pdl_counter_list : Win32cr::Foundation::PSTR,
+        pdl_auto_name_format : UInt32,
+        pdl_sample_interval : UInt32,
+        pdl_log_start_time : Win32cr::Foundation::FILETIME,
+        pdl_log_end_time : Win32cr::Foundation::FILETIME
+
+
+      # Nested Type Anonymous2_e__Struct
+      @[Extern]
+      record Anonymous2_e__Struct,
+        tl_number_of_buffers : UInt32,
+        tl_minimum_buffers : UInt32,
+        tl_maximum_buffers : UInt32,
+        tl_free_buffers : UInt32,
+        tl_buffer_size : UInt32,
+        tl_events_lost : UInt32,
+        tl_logger_thread_id : UInt32,
+        tl_buffers_written : UInt32,
+        tl_log_handle : UInt32,
+        tl_log_file_name : Win32cr::Foundation::PSTR
+
+    end
+
+  end
+
+  @[Extern]
+  record PDH_LOG_SERVICE_QUERY_INFO_W,
+    dwSize : UInt32,
+    dwFlags : UInt32,
+    dwLogQuota : UInt32,
+    szLogFileCaption : Win32cr::Foundation::PWSTR,
+    szDefaultDir : Win32cr::Foundation::PWSTR,
+    szBaseFileName : Win32cr::Foundation::PWSTR,
+    dwFileType : UInt32,
+    dwReserved : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous1 : Anonymous1_e__Struct,
+      anonymous2 : Anonymous2_e__Struct do
+
+      # Nested Type Anonymous1_e__Struct
+      @[Extern]
+      record Anonymous1_e__Struct,
+        pdl_auto_name_interval : UInt32,
+        pdl_auto_name_units : UInt32,
+        pdl_command_filename : Win32cr::Foundation::PWSTR,
+        pdl_counter_list : Win32cr::Foundation::PWSTR,
+        pdl_auto_name_format : UInt32,
+        pdl_sample_interval : UInt32,
+        pdl_log_start_time : Win32cr::Foundation::FILETIME,
+        pdl_log_end_time : Win32cr::Foundation::FILETIME
+
+
+      # Nested Type Anonymous2_e__Struct
+      @[Extern]
+      record Anonymous2_e__Struct,
+        tl_number_of_buffers : UInt32,
+        tl_minimum_buffers : UInt32,
+        tl_maximum_buffers : UInt32,
+        tl_free_buffers : UInt32,
+        tl_buffer_size : UInt32,
+        tl_events_lost : UInt32,
+        tl_logger_thread_id : UInt32,
+        tl_buffers_written : UInt32,
+        tl_log_handle : UInt32,
+        tl_log_file_name : Win32cr::Foundation::PWSTR
+
+    end
+
+  end
+
+  @[Extern]
+  record PDH_BROWSE_DLG_CONFIG_HW,
+    _bitfield : UInt32,
+    hWndOwner : Win32cr::Foundation::HWND,
+    hDataSource : LibC::IntPtrT,
+    szReturnPathBuffer : Win32cr::Foundation::PWSTR,
+    cchReturnPathLength : UInt32,
+    pCallBack : Win32cr::System::Performance::CounterPathCallBack,
+    dwCallBackArg : LibC::UIntPtrT,
+    call_back_status : Int32,
+    dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL,
+    szDialogBoxCaption : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record PDH_BROWSE_DLG_CONFIG_HA,
+    _bitfield : UInt32,
+    hWndOwner : Win32cr::Foundation::HWND,
+    hDataSource : LibC::IntPtrT,
+    szReturnPathBuffer : Win32cr::Foundation::PSTR,
+    cchReturnPathLength : UInt32,
+    pCallBack : Win32cr::System::Performance::CounterPathCallBack,
+    dwCallBackArg : LibC::UIntPtrT,
+    call_back_status : Int32,
+    dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL,
+    szDialogBoxCaption : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record PDH_BROWSE_DLG_CONFIG_W,
+    _bitfield : UInt32,
+    hWndOwner : Win32cr::Foundation::HWND,
+    szDataSource : Win32cr::Foundation::PWSTR,
+    szReturnPathBuffer : Win32cr::Foundation::PWSTR,
+    cchReturnPathLength : UInt32,
+    pCallBack : Win32cr::System::Performance::CounterPathCallBack,
+    dwCallBackArg : LibC::UIntPtrT,
+    call_back_status : Int32,
+    dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL,
+    szDialogBoxCaption : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record PDH_BROWSE_DLG_CONFIG_A,
+    _bitfield : UInt32,
+    hWndOwner : Win32cr::Foundation::HWND,
+    szDataSource : Win32cr::Foundation::PSTR,
+    szReturnPathBuffer : Win32cr::Foundation::PSTR,
+    cchReturnPathLength : UInt32,
+    pCallBack : Win32cr::System::Performance::CounterPathCallBack,
+    dwCallBackArg : LibC::UIntPtrT,
+    call_back_status : Int32,
+    dwDefaultDetailLevel : Win32cr::System::Performance::PERF_DETAIL,
+    szDialogBoxCaption : Win32cr::Foundation::PSTR
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  record PERF_OBJECT_TYPE,
+    total_byte_length : UInt32,
+    definition_length : UInt32,
+    header_length : UInt32,
+    object_name_title_index : UInt32,
+    object_name_title : Win32cr::Foundation::PWSTR,
+    object_help_title_index : UInt32,
+    object_help_title : Win32cr::Foundation::PWSTR,
+    detail_level : UInt32,
+    num_counters : UInt32,
+    default_counter : Int32,
+    num_instances : Int32,
+    code_page : UInt32,
+    perf_time : Win32cr::Foundation::LARGE_INTEGER,
+    perf_freq : Win32cr::Foundation::LARGE_INTEGER
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  record PERF_COUNTER_DEFINITION,
+    byte_length : UInt32,
+    counter_name_title_index : UInt32,
+    counter_name_title : Win32cr::Foundation::PWSTR,
+    counter_help_title_index : UInt32,
+    counter_help_title : Win32cr::Foundation::PWSTR,
+    default_scale : Int32,
+    detail_level : UInt32,
+    counter_type : UInt32,
+    counter_size : UInt32,
+    counter_offset : UInt32
+  {% end %}
+
+  @[Extern]
+  record IDataCollectorSetVtbl,
+    query_interface : Proc(IDataCollectorSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDataCollectorSet*, UInt32),
+    release : Proc(IDataCollectorSet*, UInt32),
+    get_type_info_count : Proc(IDataCollectorSet*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDataCollectorSet*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDataCollectorSet*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDataCollectorSet*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_DataCollectors : Proc(IDataCollectorSet*, Void**, Win32cr::Foundation::HRESULT),
+    get_Duration : Proc(IDataCollectorSet*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_Duration : Proc(IDataCollectorSet*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Description : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Description : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_DescriptionUnresolved : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_DisplayName : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_DisplayName : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_DisplayNameUnresolved : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Keywords : Proc(IDataCollectorSet*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_Keywords : Proc(IDataCollectorSet*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
+    get_LatestOutputLocation : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_LatestOutputLocation : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_OutputLocation : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_RootPath : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_RootPath : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Segment : Proc(IDataCollectorSet*, Int16*, Win32cr::Foundation::HRESULT),
+    put_Segment : Proc(IDataCollectorSet*, Int16, Win32cr::Foundation::HRESULT),
+    get_SegmentMaxDuration : Proc(IDataCollectorSet*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_SegmentMaxDuration : Proc(IDataCollectorSet*, UInt32, Win32cr::Foundation::HRESULT),
+    get_SegmentMaxSize : Proc(IDataCollectorSet*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_SegmentMaxSize : Proc(IDataCollectorSet*, UInt32, Win32cr::Foundation::HRESULT),
+    get_SerialNumber : Proc(IDataCollectorSet*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_SerialNumber : Proc(IDataCollectorSet*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Server : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Status : Proc(IDataCollectorSet*, Win32cr::System::Performance::DataCollectorSetStatus*, Win32cr::Foundation::HRESULT),
+    get_Subdirectory : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Subdirectory : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_SubdirectoryFormat : Proc(IDataCollectorSet*, Win32cr::System::Performance::AutoPathFormat*, Win32cr::Foundation::HRESULT),
+    put_SubdirectoryFormat : Proc(IDataCollectorSet*, Win32cr::System::Performance::AutoPathFormat, Win32cr::Foundation::HRESULT),
+    get_SubdirectoryFormatPattern : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_SubdirectoryFormatPattern : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Task : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Task : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_TaskRunAsSelf : Proc(IDataCollectorSet*, Int16*, Win32cr::Foundation::HRESULT),
+    put_TaskRunAsSelf : Proc(IDataCollectorSet*, Int16, Win32cr::Foundation::HRESULT),
+    get_TaskArguments : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_TaskArguments : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_TaskUserTextArguments : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_TaskUserTextArguments : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Schedules : Proc(IDataCollectorSet*, Void**, Win32cr::Foundation::HRESULT),
+    get_SchedulesEnabled : Proc(IDataCollectorSet*, Int16*, Win32cr::Foundation::HRESULT),
+    put_SchedulesEnabled : Proc(IDataCollectorSet*, Int16, Win32cr::Foundation::HRESULT),
+    get_UserAccount : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Xml : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Security : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Security : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_StopOnCompletion : Proc(IDataCollectorSet*, Int16*, Win32cr::Foundation::HRESULT),
+    put_StopOnCompletion : Proc(IDataCollectorSet*, Int16, Win32cr::Foundation::HRESULT),
+    get_DataManager : Proc(IDataCollectorSet*, Void**, Win32cr::Foundation::HRESULT),
+    set_credentials : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    query : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    commit : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Performance::CommitMode, Void**, Win32cr::Foundation::HRESULT),
+    delete : Proc(IDataCollectorSet*, Win32cr::Foundation::HRESULT),
+    start : Proc(IDataCollectorSet*, Int16, Win32cr::Foundation::HRESULT),
+    stop : Proc(IDataCollectorSet*, Int16, Win32cr::Foundation::HRESULT),
+    set_xml : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    set_value : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_value : Proc(IDataCollectorSet*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("03837520-098b-11d8-9414-505054503030")]
+  record IDataCollectorSet, lpVtbl : IDataCollectorSetVtbl* do
+    GUID = LibC::GUID.new(0x3837520_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IDataCollectorSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDataCollectorSet*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDataCollectorSet*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDataCollectorSet*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDataCollectorSet*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDataCollectorSet*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDataCollectorSet*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_DataCollectors(this : IDataCollectorSet*, collectors : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataCollectors.call(this, collectors)
+    end
+    def get_Duration(this : IDataCollectorSet*, seconds : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Duration.call(this, seconds)
+    end
+    def put_Duration(this : IDataCollectorSet*, seconds : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Duration.call(this, seconds)
+    end
+    def get_Description(this : IDataCollectorSet*, description : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Description.call(this, description)
+    end
+    def put_Description(this : IDataCollectorSet*, description : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Description.call(this, description)
+    end
+    def get_DescriptionUnresolved(this : IDataCollectorSet*, descr : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DescriptionUnresolved.call(this, descr)
+    end
+    def get_DisplayName(this : IDataCollectorSet*, display_name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisplayName.call(this, display_name)
+    end
+    def put_DisplayName(this : IDataCollectorSet*, display_name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DisplayName.call(this, display_name)
+    end
+    def get_DisplayNameUnresolved(this : IDataCollectorSet*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisplayNameUnresolved.call(this, name)
+    end
+    def get_Keywords(this : IDataCollectorSet*, keywords : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Keywords.call(this, keywords)
+    end
+    def put_Keywords(this : IDataCollectorSet*, keywords : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Keywords.call(this, keywords)
+    end
+    def get_LatestOutputLocation(this : IDataCollectorSet*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LatestOutputLocation.call(this, path)
+    end
+    def put_LatestOutputLocation(this : IDataCollectorSet*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LatestOutputLocation.call(this, path)
+    end
+    def get_Name(this : IDataCollectorSet*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, name)
+    end
+    def get_OutputLocation(this : IDataCollectorSet*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_OutputLocation.call(this, path)
+    end
+    def get_RootPath(this : IDataCollectorSet*, folder : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RootPath.call(this, folder)
+    end
+    def put_RootPath(this : IDataCollectorSet*, folder : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_RootPath.call(this, folder)
+    end
+    def get_Segment(this : IDataCollectorSet*, segment : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Segment.call(this, segment)
+    end
+    def put_Segment(this : IDataCollectorSet*, segment : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Segment.call(this, segment)
+    end
+    def get_SegmentMaxDuration(this : IDataCollectorSet*, seconds : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SegmentMaxDuration.call(this, seconds)
+    end
+    def put_SegmentMaxDuration(this : IDataCollectorSet*, seconds : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SegmentMaxDuration.call(this, seconds)
+    end
+    def get_SegmentMaxSize(this : IDataCollectorSet*, size : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SegmentMaxSize.call(this, size)
+    end
+    def put_SegmentMaxSize(this : IDataCollectorSet*, size : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SegmentMaxSize.call(this, size)
+    end
+    def get_SerialNumber(this : IDataCollectorSet*, index : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SerialNumber.call(this, index)
+    end
+    def put_SerialNumber(this : IDataCollectorSet*, index : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SerialNumber.call(this, index)
+    end
+    def get_Server(this : IDataCollectorSet*, server : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Server.call(this, server)
+    end
+    def get_Status(this : IDataCollectorSet*, status : Win32cr::System::Performance::DataCollectorSetStatus*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Status.call(this, status)
+    end
+    def get_Subdirectory(this : IDataCollectorSet*, folder : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Subdirectory.call(this, folder)
+    end
+    def put_Subdirectory(this : IDataCollectorSet*, folder : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Subdirectory.call(this, folder)
+    end
+    def get_SubdirectoryFormat(this : IDataCollectorSet*, format : Win32cr::System::Performance::AutoPathFormat*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SubdirectoryFormat.call(this, format)
+    end
+    def put_SubdirectoryFormat(this : IDataCollectorSet*, format : Win32cr::System::Performance::AutoPathFormat) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SubdirectoryFormat.call(this, format)
+    end
+    def get_SubdirectoryFormatPattern(this : IDataCollectorSet*, pattern : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SubdirectoryFormatPattern.call(this, pattern)
+    end
+    def put_SubdirectoryFormatPattern(this : IDataCollectorSet*, pattern : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SubdirectoryFormatPattern.call(this, pattern)
+    end
+    def get_Task(this : IDataCollectorSet*, task : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Task.call(this, task)
+    end
+    def put_Task(this : IDataCollectorSet*, task : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Task.call(this, task)
+    end
+    def get_TaskRunAsSelf(this : IDataCollectorSet*, run_as_self : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TaskRunAsSelf.call(this, run_as_self)
+    end
+    def put_TaskRunAsSelf(this : IDataCollectorSet*, run_as_self : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_TaskRunAsSelf.call(this, run_as_self)
+    end
+    def get_TaskArguments(this : IDataCollectorSet*, task : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TaskArguments.call(this, task)
+    end
+    def put_TaskArguments(this : IDataCollectorSet*, task : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_TaskArguments.call(this, task)
+    end
+    def get_TaskUserTextArguments(this : IDataCollectorSet*, user_text : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TaskUserTextArguments.call(this, user_text)
+    end
+    def put_TaskUserTextArguments(this : IDataCollectorSet*, user_text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_TaskUserTextArguments.call(this, user_text)
+    end
+    def get_Schedules(this : IDataCollectorSet*, ppSchedules : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Schedules.call(this, ppSchedules)
+    end
+    def get_SchedulesEnabled(this : IDataCollectorSet*, enabled : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SchedulesEnabled.call(this, enabled)
+    end
+    def put_SchedulesEnabled(this : IDataCollectorSet*, enabled : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SchedulesEnabled.call(this, enabled)
+    end
+    def get_UserAccount(this : IDataCollectorSet*, user : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UserAccount.call(this, user)
+    end
+    def get_Xml(this : IDataCollectorSet*, xml : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Xml.call(this, xml)
+    end
+    def get_Security(this : IDataCollectorSet*, pbstrSecurity : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Security.call(this, pbstrSecurity)
+    end
+    def put_Security(this : IDataCollectorSet*, bstrSecurity : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Security.call(this, bstrSecurity)
+    end
+    def get_StopOnCompletion(this : IDataCollectorSet*, stop : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StopOnCompletion.call(this, stop)
+    end
+    def put_StopOnCompletion(this : IDataCollectorSet*, stop : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_StopOnCompletion.call(this, stop)
+    end
+    def get_DataManager(this : IDataCollectorSet*, data_manager : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataManager.call(this, data_manager)
+    end
+    def set_credentials(this : IDataCollectorSet*, user : Win32cr::Foundation::BSTR, password : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_credentials.call(this, user, password)
+    end
+    def query(this : IDataCollectorSet*, name : Win32cr::Foundation::BSTR, server : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query.call(this, name, server)
+    end
+    def commit(this : IDataCollectorSet*, name : Win32cr::Foundation::BSTR, server : Win32cr::Foundation::BSTR, mode : Win32cr::System::Performance::CommitMode, validation : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this, name, server, mode, validation)
+    end
+    def delete(this : IDataCollectorSet*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete.call(this)
+    end
+    def start(this : IDataCollectorSet*, synchronous : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.start.call(this, synchronous)
+    end
+    def stop(this : IDataCollectorSet*, synchronous : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stop.call(this, synchronous)
+    end
+    def set_xml(this : IDataCollectorSet*, xml : Win32cr::Foundation::BSTR, validation : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_xml.call(this, xml, validation)
+    end
+    def set_value(this : IDataCollectorSet*, key : Win32cr::Foundation::BSTR, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_value.call(this, key, value)
+    end
+    def get_value(this : IDataCollectorSet*, key : Win32cr::Foundation::BSTR, value : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_value.call(this, key, value)
+    end
+
+  end
+
+  @[Extern]
+  record IDataManagerVtbl,
+    query_interface : Proc(IDataManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDataManager*, UInt32),
+    release : Proc(IDataManager*, UInt32),
+    get_type_info_count : Proc(IDataManager*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDataManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDataManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDataManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IDataManager*, Int16*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IDataManager*, Int16, Win32cr::Foundation::HRESULT),
+    get_CheckBeforeRunning : Proc(IDataManager*, Int16*, Win32cr::Foundation::HRESULT),
+    put_CheckBeforeRunning : Proc(IDataManager*, Int16, Win32cr::Foundation::HRESULT),
+    get_MinFreeDisk : Proc(IDataManager*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_MinFreeDisk : Proc(IDataManager*, UInt32, Win32cr::Foundation::HRESULT),
+    get_MaxSize : Proc(IDataManager*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_MaxSize : Proc(IDataManager*, UInt32, Win32cr::Foundation::HRESULT),
+    get_MaxFolderCount : Proc(IDataManager*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_MaxFolderCount : Proc(IDataManager*, UInt32, Win32cr::Foundation::HRESULT),
+    get_ResourcePolicy : Proc(IDataManager*, Win32cr::System::Performance::ResourcePolicy*, Win32cr::Foundation::HRESULT),
+    put_ResourcePolicy : Proc(IDataManager*, Win32cr::System::Performance::ResourcePolicy, Win32cr::Foundation::HRESULT),
+    get_FolderActions : Proc(IDataManager*, Void**, Win32cr::Foundation::HRESULT),
+    get_ReportSchema : Proc(IDataManager*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_ReportSchema : Proc(IDataManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_ReportFileName : Proc(IDataManager*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_ReportFileName : Proc(IDataManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_RuleTargetFileName : Proc(IDataManager*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_RuleTargetFileName : Proc(IDataManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_EventsFileName : Proc(IDataManager*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_EventsFileName : Proc(IDataManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Rules : Proc(IDataManager*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Rules : Proc(IDataManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    run : Proc(IDataManager*, Win32cr::System::Performance::DataManagerSteps, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    extract : Proc(IDataManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("03837541-098b-11d8-9414-505054503030")]
+  record IDataManager, lpVtbl : IDataManagerVtbl* do
+    GUID = LibC::GUID.new(0x3837541_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IDataManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDataManager*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDataManager*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDataManager*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDataManager*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDataManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDataManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Enabled(this : IDataManager*, pfEnabled : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Enabled.call(this, pfEnabled)
+    end
+    def put_Enabled(this : IDataManager*, fEnabled : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Enabled.call(this, fEnabled)
+    end
+    def get_CheckBeforeRunning(this : IDataManager*, pfCheck : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CheckBeforeRunning.call(this, pfCheck)
+    end
+    def put_CheckBeforeRunning(this : IDataManager*, fCheck : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_CheckBeforeRunning.call(this, fCheck)
+    end
+    def get_MinFreeDisk(this : IDataManager*, min_free_disk : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MinFreeDisk.call(this, min_free_disk)
+    end
+    def put_MinFreeDisk(this : IDataManager*, min_free_disk : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MinFreeDisk.call(this, min_free_disk)
+    end
+    def get_MaxSize(this : IDataManager*, pulMaxSize : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MaxSize.call(this, pulMaxSize)
+    end
+    def put_MaxSize(this : IDataManager*, ulMaxSize : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MaxSize.call(this, ulMaxSize)
+    end
+    def get_MaxFolderCount(this : IDataManager*, pulMaxFolderCount : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MaxFolderCount.call(this, pulMaxFolderCount)
+    end
+    def put_MaxFolderCount(this : IDataManager*, ulMaxFolderCount : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MaxFolderCount.call(this, ulMaxFolderCount)
+    end
+    def get_ResourcePolicy(this : IDataManager*, pPolicy : Win32cr::System::Performance::ResourcePolicy*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ResourcePolicy.call(this, pPolicy)
+    end
+    def put_ResourcePolicy(this : IDataManager*, policy : Win32cr::System::Performance::ResourcePolicy) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ResourcePolicy.call(this, policy)
+    end
+    def get_FolderActions(this : IDataManager*, actions : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FolderActions.call(this, actions)
+    end
+    def get_ReportSchema(this : IDataManager*, report_schema : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ReportSchema.call(this, report_schema)
+    end
+    def put_ReportSchema(this : IDataManager*, report_schema : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ReportSchema.call(this, report_schema)
+    end
+    def get_ReportFileName(this : IDataManager*, pbstrFilename : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ReportFileName.call(this, pbstrFilename)
+    end
+    def put_ReportFileName(this : IDataManager*, pbstrFilename : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ReportFileName.call(this, pbstrFilename)
+    end
+    def get_RuleTargetFileName(this : IDataManager*, filename : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RuleTargetFileName.call(this, filename)
+    end
+    def put_RuleTargetFileName(this : IDataManager*, filename : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_RuleTargetFileName.call(this, filename)
+    end
+    def get_EventsFileName(this : IDataManager*, pbstrFilename : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventsFileName.call(this, pbstrFilename)
+    end
+    def put_EventsFileName(this : IDataManager*, pbstrFilename : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EventsFileName.call(this, pbstrFilename)
+    end
+    def get_Rules(this : IDataManager*, pbstrXml : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Rules.call(this, pbstrXml)
+    end
+    def put_Rules(this : IDataManager*, bstrXml : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Rules.call(this, bstrXml)
+    end
+    def run(this : IDataManager*, steps : Win32cr::System::Performance::DataManagerSteps, bstrFolder : Win32cr::Foundation::BSTR, errors : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.run.call(this, steps, bstrFolder, errors)
+    end
+    def extract(this : IDataManager*, cab_filename : Win32cr::Foundation::BSTR, destination_path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.extract.call(this, cab_filename, destination_path)
+    end
+
+  end
+
+  @[Extern]
+  record IFolderActionVtbl,
+    query_interface : Proc(IFolderAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFolderAction*, UInt32),
+    release : Proc(IFolderAction*, UInt32),
+    get_type_info_count : Proc(IFolderAction*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFolderAction*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFolderAction*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFolderAction*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Age : Proc(IFolderAction*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_Age : Proc(IFolderAction*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Size : Proc(IFolderAction*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_Size : Proc(IFolderAction*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Actions : Proc(IFolderAction*, Win32cr::System::Performance::FolderActionSteps*, Win32cr::Foundation::HRESULT),
+    put_Actions : Proc(IFolderAction*, Win32cr::System::Performance::FolderActionSteps, Win32cr::Foundation::HRESULT),
+    get_SendCabTo : Proc(IFolderAction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_SendCabTo : Proc(IFolderAction*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("03837543-098b-11d8-9414-505054503030")]
+  record IFolderAction, lpVtbl : IFolderActionVtbl* do
+    GUID = LibC::GUID.new(0x3837543_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IFolderAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFolderAction*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFolderAction*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFolderAction*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFolderAction*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFolderAction*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFolderAction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Age(this : IFolderAction*, pulAge : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Age.call(this, pulAge)
+    end
+    def put_Age(this : IFolderAction*, ulAge : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Age.call(this, ulAge)
+    end
+    def get_Size(this : IFolderAction*, pulAge : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Size.call(this, pulAge)
+    end
+    def put_Size(this : IFolderAction*, ulAge : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Size.call(this, ulAge)
+    end
+    def get_Actions(this : IFolderAction*, steps : Win32cr::System::Performance::FolderActionSteps*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Actions.call(this, steps)
+    end
+    def put_Actions(this : IFolderAction*, steps : Win32cr::System::Performance::FolderActionSteps) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Actions.call(this, steps)
+    end
+    def get_SendCabTo(this : IFolderAction*, pbstrDestination : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SendCabTo.call(this, pbstrDestination)
+    end
+    def put_SendCabTo(this : IFolderAction*, bstrDestination : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SendCabTo.call(this, bstrDestination)
+    end
+
+  end
+
+  @[Extern]
+  record IFolderActionCollectionVtbl,
+    query_interface : Proc(IFolderActionCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFolderActionCollection*, UInt32),
+    release : Proc(IFolderActionCollection*, UInt32),
+    get_type_info_count : Proc(IFolderActionCollection*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFolderActionCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFolderActionCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFolderActionCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(IFolderActionCollection*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFolderActionCollection*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(IFolderActionCollection*, Void**, Win32cr::Foundation::HRESULT),
+    add : Proc(IFolderActionCollection*, Void*, Win32cr::Foundation::HRESULT),
+    remove : Proc(IFolderActionCollection*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    clear : Proc(IFolderActionCollection*, Win32cr::Foundation::HRESULT),
+    add_range : Proc(IFolderActionCollection*, Void*, Win32cr::Foundation::HRESULT),
+    create_folder_action : Proc(IFolderActionCollection*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("03837544-098b-11d8-9414-505054503030")]
+  record IFolderActionCollection, lpVtbl : IFolderActionCollectionVtbl* do
+    GUID = LibC::GUID.new(0x3837544_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IFolderActionCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFolderActionCollection*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFolderActionCollection*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFolderActionCollection*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFolderActionCollection*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFolderActionCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFolderActionCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : IFolderActionCollection*, count : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, count)
+    end
+    def get_Item(this : IFolderActionCollection*, index : Win32cr::System::Com::VARIANT, action : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, index, action)
+    end
+    def get__NewEnum(this : IFolderActionCollection*, enum__ : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, enum__)
+    end
+    def add(this : IFolderActionCollection*, action : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, action)
+    end
+    def remove(this : IFolderActionCollection*, index : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, index)
+    end
+    def clear(this : IFolderActionCollection*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear.call(this)
+    end
+    def add_range(this : IFolderActionCollection*, actions : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_range.call(this, actions)
+    end
+    def create_folder_action(this : IFolderActionCollection*, folder_action : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_folder_action.call(this, folder_action)
+    end
+
+  end
+
+  @[Extern]
+  record IDataCollectorVtbl,
+    query_interface : Proc(IDataCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDataCollector*, UInt32),
+    release : Proc(IDataCollector*, UInt32),
+    get_type_info_count : Proc(IDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDataCollector*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDataCollector*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDataCollector*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_DataCollectorSet : Proc(IDataCollector*, Void**, Win32cr::Foundation::HRESULT),
+    put_DataCollectorSet : Proc(IDataCollector*, Void*, Win32cr::Foundation::HRESULT),
+    get_DataCollectorType : Proc(IDataCollector*, Win32cr::System::Performance::DataCollectorType*, Win32cr::Foundation::HRESULT),
+    get_FileName : Proc(IDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FileName : Proc(IDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_FileNameFormat : Proc(IDataCollector*, Win32cr::System::Performance::AutoPathFormat*, Win32cr::Foundation::HRESULT),
+    put_FileNameFormat : Proc(IDataCollector*, Win32cr::System::Performance::AutoPathFormat, Win32cr::Foundation::HRESULT),
+    get_FileNameFormatPattern : Proc(IDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FileNameFormatPattern : Proc(IDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LatestOutputLocation : Proc(IDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_LatestOutputLocation : Proc(IDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LogAppend : Proc(IDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogAppend : Proc(IDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_LogCircular : Proc(IDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogCircular : Proc(IDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_LogOverwrite : Proc(IDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogOverwrite : Proc(IDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(IDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Name : Proc(IDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_OutputLocation : Proc(IDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Index : Proc(IDataCollector*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Index : Proc(IDataCollector*, Int32, Win32cr::Foundation::HRESULT),
+    get_Xml : Proc(IDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    set_xml : Proc(IDataCollector*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_output_location : Proc(IDataCollector*, Int16, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("038374ff-098b-11d8-9414-505054503030")]
+  record IDataCollector, lpVtbl : IDataCollectorVtbl* do
+    GUID = LibC::GUID.new(0x38374ff_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDataCollector*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDataCollector*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDataCollector*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDataCollector*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDataCollector*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDataCollector*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_DataCollectorSet(this : IDataCollector*, group : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataCollectorSet.call(this, group)
+    end
+    def put_DataCollectorSet(this : IDataCollector*, group : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DataCollectorSet.call(this, group)
+    end
+    def get_DataCollectorType(this : IDataCollector*, type__ : Win32cr::System::Performance::DataCollectorType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataCollectorType.call(this, type__)
+    end
+    def get_FileName(this : IDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileName.call(this, name)
+    end
+    def put_FileName(this : IDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileName.call(this, name)
+    end
+    def get_FileNameFormat(this : IDataCollector*, format : Win32cr::System::Performance::AutoPathFormat*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileNameFormat.call(this, format)
+    end
+    def put_FileNameFormat(this : IDataCollector*, format : Win32cr::System::Performance::AutoPathFormat) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileNameFormat.call(this, format)
+    end
+    def get_FileNameFormatPattern(this : IDataCollector*, pattern : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileNameFormatPattern.call(this, pattern)
+    end
+    def put_FileNameFormatPattern(this : IDataCollector*, pattern : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileNameFormatPattern.call(this, pattern)
+    end
+    def get_LatestOutputLocation(this : IDataCollector*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LatestOutputLocation.call(this, path)
+    end
+    def put_LatestOutputLocation(this : IDataCollector*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LatestOutputLocation.call(this, path)
+    end
+    def get_LogAppend(this : IDataCollector*, append : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogAppend.call(this, append)
+    end
+    def put_LogAppend(this : IDataCollector*, append : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogAppend.call(this, append)
+    end
+    def get_LogCircular(this : IDataCollector*, circular : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogCircular.call(this, circular)
+    end
+    def put_LogCircular(this : IDataCollector*, circular : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogCircular.call(this, circular)
+    end
+    def get_LogOverwrite(this : IDataCollector*, overwrite : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogOverwrite.call(this, overwrite)
+    end
+    def put_LogOverwrite(this : IDataCollector*, overwrite : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogOverwrite.call(this, overwrite)
+    end
+    def get_Name(this : IDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, name)
+    end
+    def put_Name(this : IDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Name.call(this, name)
+    end
+    def get_OutputLocation(this : IDataCollector*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_OutputLocation.call(this, path)
+    end
+    def get_Index(this : IDataCollector*, index : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Index.call(this, index)
+    end
+    def put_Index(this : IDataCollector*, index : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Index.call(this, index)
+    end
+    def get_Xml(this : IDataCollector*, xml : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Xml.call(this, xml)
+    end
+    def set_xml(this : IDataCollector*, xml : Win32cr::Foundation::BSTR, validation : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_xml.call(this, xml, validation)
+    end
+    def create_output_location(this : IDataCollector*, latest : Int16, location : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_output_location.call(this, latest, location)
+    end
+
+  end
+
+  @[Extern]
+  record IPerformanceCounterDataCollectorVtbl,
+    query_interface : Proc(IPerformanceCounterDataCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IPerformanceCounterDataCollector*, UInt32),
+    release : Proc(IPerformanceCounterDataCollector*, UInt32),
+    get_type_info_count : Proc(IPerformanceCounterDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IPerformanceCounterDataCollector*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IPerformanceCounterDataCollector*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IPerformanceCounterDataCollector*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_DataCollectorSet : Proc(IPerformanceCounterDataCollector*, Void**, Win32cr::Foundation::HRESULT),
+    put_DataCollectorSet : Proc(IPerformanceCounterDataCollector*, Void*, Win32cr::Foundation::HRESULT),
+    get_DataCollectorType : Proc(IPerformanceCounterDataCollector*, Win32cr::System::Performance::DataCollectorType*, Win32cr::Foundation::HRESULT),
+    get_FileName : Proc(IPerformanceCounterDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FileName : Proc(IPerformanceCounterDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_FileNameFormat : Proc(IPerformanceCounterDataCollector*, Win32cr::System::Performance::AutoPathFormat*, Win32cr::Foundation::HRESULT),
+    put_FileNameFormat : Proc(IPerformanceCounterDataCollector*, Win32cr::System::Performance::AutoPathFormat, Win32cr::Foundation::HRESULT),
+    get_FileNameFormatPattern : Proc(IPerformanceCounterDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FileNameFormatPattern : Proc(IPerformanceCounterDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LatestOutputLocation : Proc(IPerformanceCounterDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_LatestOutputLocation : Proc(IPerformanceCounterDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LogAppend : Proc(IPerformanceCounterDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogAppend : Proc(IPerformanceCounterDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_LogCircular : Proc(IPerformanceCounterDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogCircular : Proc(IPerformanceCounterDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_LogOverwrite : Proc(IPerformanceCounterDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogOverwrite : Proc(IPerformanceCounterDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(IPerformanceCounterDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Name : Proc(IPerformanceCounterDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_OutputLocation : Proc(IPerformanceCounterDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Index : Proc(IPerformanceCounterDataCollector*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Index : Proc(IPerformanceCounterDataCollector*, Int32, Win32cr::Foundation::HRESULT),
+    get_Xml : Proc(IPerformanceCounterDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    set_xml : Proc(IPerformanceCounterDataCollector*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_output_location : Proc(IPerformanceCounterDataCollector*, Int16, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_DataSourceName : Proc(IPerformanceCounterDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_DataSourceName : Proc(IPerformanceCounterDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_PerformanceCounters : Proc(IPerformanceCounterDataCollector*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_PerformanceCounters : Proc(IPerformanceCounterDataCollector*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
+    get_LogFileFormat : Proc(IPerformanceCounterDataCollector*, Win32cr::System::Performance::FileFormat*, Win32cr::Foundation::HRESULT),
+    put_LogFileFormat : Proc(IPerformanceCounterDataCollector*, Win32cr::System::Performance::FileFormat, Win32cr::Foundation::HRESULT),
+    get_SampleInterval : Proc(IPerformanceCounterDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_SampleInterval : Proc(IPerformanceCounterDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_SegmentMaxRecords : Proc(IPerformanceCounterDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_SegmentMaxRecords : Proc(IPerformanceCounterDataCollector*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("03837506-098b-11d8-9414-505054503030")]
+  record IPerformanceCounterDataCollector, lpVtbl : IPerformanceCounterDataCollectorVtbl* do
+    GUID = LibC::GUID.new(0x3837506_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IPerformanceCounterDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IPerformanceCounterDataCollector*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IPerformanceCounterDataCollector*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IPerformanceCounterDataCollector*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IPerformanceCounterDataCollector*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IPerformanceCounterDataCollector*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IPerformanceCounterDataCollector*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_DataCollectorSet(this : IPerformanceCounterDataCollector*, group : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataCollectorSet.call(this, group)
+    end
+    def put_DataCollectorSet(this : IPerformanceCounterDataCollector*, group : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DataCollectorSet.call(this, group)
+    end
+    def get_DataCollectorType(this : IPerformanceCounterDataCollector*, type__ : Win32cr::System::Performance::DataCollectorType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataCollectorType.call(this, type__)
+    end
+    def get_FileName(this : IPerformanceCounterDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileName.call(this, name)
+    end
+    def put_FileName(this : IPerformanceCounterDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileName.call(this, name)
+    end
+    def get_FileNameFormat(this : IPerformanceCounterDataCollector*, format : Win32cr::System::Performance::AutoPathFormat*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileNameFormat.call(this, format)
+    end
+    def put_FileNameFormat(this : IPerformanceCounterDataCollector*, format : Win32cr::System::Performance::AutoPathFormat) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileNameFormat.call(this, format)
+    end
+    def get_FileNameFormatPattern(this : IPerformanceCounterDataCollector*, pattern : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileNameFormatPattern.call(this, pattern)
+    end
+    def put_FileNameFormatPattern(this : IPerformanceCounterDataCollector*, pattern : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileNameFormatPattern.call(this, pattern)
+    end
+    def get_LatestOutputLocation(this : IPerformanceCounterDataCollector*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LatestOutputLocation.call(this, path)
+    end
+    def put_LatestOutputLocation(this : IPerformanceCounterDataCollector*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LatestOutputLocation.call(this, path)
+    end
+    def get_LogAppend(this : IPerformanceCounterDataCollector*, append : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogAppend.call(this, append)
+    end
+    def put_LogAppend(this : IPerformanceCounterDataCollector*, append : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogAppend.call(this, append)
+    end
+    def get_LogCircular(this : IPerformanceCounterDataCollector*, circular : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogCircular.call(this, circular)
+    end
+    def put_LogCircular(this : IPerformanceCounterDataCollector*, circular : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogCircular.call(this, circular)
+    end
+    def get_LogOverwrite(this : IPerformanceCounterDataCollector*, overwrite : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogOverwrite.call(this, overwrite)
+    end
+    def put_LogOverwrite(this : IPerformanceCounterDataCollector*, overwrite : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogOverwrite.call(this, overwrite)
+    end
+    def get_Name(this : IPerformanceCounterDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, name)
+    end
+    def put_Name(this : IPerformanceCounterDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Name.call(this, name)
+    end
+    def get_OutputLocation(this : IPerformanceCounterDataCollector*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_OutputLocation.call(this, path)
+    end
+    def get_Index(this : IPerformanceCounterDataCollector*, index : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Index.call(this, index)
+    end
+    def put_Index(this : IPerformanceCounterDataCollector*, index : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Index.call(this, index)
+    end
+    def get_Xml(this : IPerformanceCounterDataCollector*, xml : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Xml.call(this, xml)
+    end
+    def set_xml(this : IPerformanceCounterDataCollector*, xml : Win32cr::Foundation::BSTR, validation : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_xml.call(this, xml, validation)
+    end
+    def create_output_location(this : IPerformanceCounterDataCollector*, latest : Int16, location : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_output_location.call(this, latest, location)
+    end
+    def get_DataSourceName(this : IPerformanceCounterDataCollector*, dsn : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataSourceName.call(this, dsn)
+    end
+    def put_DataSourceName(this : IPerformanceCounterDataCollector*, dsn : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DataSourceName.call(this, dsn)
+    end
+    def get_PerformanceCounters(this : IPerformanceCounterDataCollector*, counters : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PerformanceCounters.call(this, counters)
+    end
+    def put_PerformanceCounters(this : IPerformanceCounterDataCollector*, counters : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_PerformanceCounters.call(this, counters)
+    end
+    def get_LogFileFormat(this : IPerformanceCounterDataCollector*, format : Win32cr::System::Performance::FileFormat*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogFileFormat.call(this, format)
+    end
+    def put_LogFileFormat(this : IPerformanceCounterDataCollector*, format : Win32cr::System::Performance::FileFormat) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogFileFormat.call(this, format)
+    end
+    def get_SampleInterval(this : IPerformanceCounterDataCollector*, interval : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SampleInterval.call(this, interval)
+    end
+    def put_SampleInterval(this : IPerformanceCounterDataCollector*, interval : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SampleInterval.call(this, interval)
+    end
+    def get_SegmentMaxRecords(this : IPerformanceCounterDataCollector*, records : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SegmentMaxRecords.call(this, records)
+    end
+    def put_SegmentMaxRecords(this : IPerformanceCounterDataCollector*, records : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SegmentMaxRecords.call(this, records)
+    end
+
+  end
+
+  @[Extern]
+  record ITraceDataCollectorVtbl,
+    query_interface : Proc(ITraceDataCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ITraceDataCollector*, UInt32),
+    release : Proc(ITraceDataCollector*, UInt32),
+    get_type_info_count : Proc(ITraceDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ITraceDataCollector*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ITraceDataCollector*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ITraceDataCollector*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_DataCollectorSet : Proc(ITraceDataCollector*, Void**, Win32cr::Foundation::HRESULT),
+    put_DataCollectorSet : Proc(ITraceDataCollector*, Void*, Win32cr::Foundation::HRESULT),
+    get_DataCollectorType : Proc(ITraceDataCollector*, Win32cr::System::Performance::DataCollectorType*, Win32cr::Foundation::HRESULT),
+    get_FileName : Proc(ITraceDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FileName : Proc(ITraceDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_FileNameFormat : Proc(ITraceDataCollector*, Win32cr::System::Performance::AutoPathFormat*, Win32cr::Foundation::HRESULT),
+    put_FileNameFormat : Proc(ITraceDataCollector*, Win32cr::System::Performance::AutoPathFormat, Win32cr::Foundation::HRESULT),
+    get_FileNameFormatPattern : Proc(ITraceDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FileNameFormatPattern : Proc(ITraceDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LatestOutputLocation : Proc(ITraceDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_LatestOutputLocation : Proc(ITraceDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LogAppend : Proc(ITraceDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogAppend : Proc(ITraceDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_LogCircular : Proc(ITraceDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogCircular : Proc(ITraceDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_LogOverwrite : Proc(ITraceDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogOverwrite : Proc(ITraceDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(ITraceDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Name : Proc(ITraceDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_OutputLocation : Proc(ITraceDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Index : Proc(ITraceDataCollector*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Index : Proc(ITraceDataCollector*, Int32, Win32cr::Foundation::HRESULT),
+    get_Xml : Proc(ITraceDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    set_xml : Proc(ITraceDataCollector*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_output_location : Proc(ITraceDataCollector*, Int16, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_BufferSize : Proc(ITraceDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_BufferSize : Proc(ITraceDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_BuffersLost : Proc(ITraceDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_BuffersLost : Proc(ITraceDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_BuffersWritten : Proc(ITraceDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_BuffersWritten : Proc(ITraceDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_ClockType : Proc(ITraceDataCollector*, Win32cr::System::Performance::ClockType*, Win32cr::Foundation::HRESULT),
+    put_ClockType : Proc(ITraceDataCollector*, Win32cr::System::Performance::ClockType, Win32cr::Foundation::HRESULT),
+    get_EventsLost : Proc(ITraceDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_EventsLost : Proc(ITraceDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_ExtendedModes : Proc(ITraceDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_ExtendedModes : Proc(ITraceDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_FlushTimer : Proc(ITraceDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_FlushTimer : Proc(ITraceDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_FreeBuffers : Proc(ITraceDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_FreeBuffers : Proc(ITraceDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Guid : Proc(ITraceDataCollector*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    put_Guid : Proc(ITraceDataCollector*, LibC::GUID, Win32cr::Foundation::HRESULT),
+    get_IsKernelTrace : Proc(ITraceDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    get_MaximumBuffers : Proc(ITraceDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_MaximumBuffers : Proc(ITraceDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_MinimumBuffers : Proc(ITraceDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_MinimumBuffers : Proc(ITraceDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_NumberOfBuffers : Proc(ITraceDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_NumberOfBuffers : Proc(ITraceDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_PreallocateFile : Proc(ITraceDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_PreallocateFile : Proc(ITraceDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_ProcessMode : Proc(ITraceDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ProcessMode : Proc(ITraceDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_RealTimeBuffersLost : Proc(ITraceDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_RealTimeBuffersLost : Proc(ITraceDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_SessionId : Proc(ITraceDataCollector*, UInt64*, Win32cr::Foundation::HRESULT),
+    put_SessionId : Proc(ITraceDataCollector*, UInt64, Win32cr::Foundation::HRESULT),
+    get_SessionName : Proc(ITraceDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_SessionName : Proc(ITraceDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_SessionThreadId : Proc(ITraceDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_SessionThreadId : Proc(ITraceDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_StreamMode : Proc(ITraceDataCollector*, Win32cr::System::Performance::StreamMode*, Win32cr::Foundation::HRESULT),
+    put_StreamMode : Proc(ITraceDataCollector*, Win32cr::System::Performance::StreamMode, Win32cr::Foundation::HRESULT),
+    get_TraceDataProviders : Proc(ITraceDataCollector*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("0383750b-098b-11d8-9414-505054503030")]
+  record ITraceDataCollector, lpVtbl : ITraceDataCollectorVtbl* do
+    GUID = LibC::GUID.new(0x383750b_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : ITraceDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ITraceDataCollector*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ITraceDataCollector*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ITraceDataCollector*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ITraceDataCollector*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ITraceDataCollector*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ITraceDataCollector*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_DataCollectorSet(this : ITraceDataCollector*, group : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataCollectorSet.call(this, group)
+    end
+    def put_DataCollectorSet(this : ITraceDataCollector*, group : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DataCollectorSet.call(this, group)
+    end
+    def get_DataCollectorType(this : ITraceDataCollector*, type__ : Win32cr::System::Performance::DataCollectorType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataCollectorType.call(this, type__)
+    end
+    def get_FileName(this : ITraceDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileName.call(this, name)
+    end
+    def put_FileName(this : ITraceDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileName.call(this, name)
+    end
+    def get_FileNameFormat(this : ITraceDataCollector*, format : Win32cr::System::Performance::AutoPathFormat*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileNameFormat.call(this, format)
+    end
+    def put_FileNameFormat(this : ITraceDataCollector*, format : Win32cr::System::Performance::AutoPathFormat) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileNameFormat.call(this, format)
+    end
+    def get_FileNameFormatPattern(this : ITraceDataCollector*, pattern : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileNameFormatPattern.call(this, pattern)
+    end
+    def put_FileNameFormatPattern(this : ITraceDataCollector*, pattern : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileNameFormatPattern.call(this, pattern)
+    end
+    def get_LatestOutputLocation(this : ITraceDataCollector*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LatestOutputLocation.call(this, path)
+    end
+    def put_LatestOutputLocation(this : ITraceDataCollector*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LatestOutputLocation.call(this, path)
+    end
+    def get_LogAppend(this : ITraceDataCollector*, append : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogAppend.call(this, append)
+    end
+    def put_LogAppend(this : ITraceDataCollector*, append : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogAppend.call(this, append)
+    end
+    def get_LogCircular(this : ITraceDataCollector*, circular : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogCircular.call(this, circular)
+    end
+    def put_LogCircular(this : ITraceDataCollector*, circular : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogCircular.call(this, circular)
+    end
+    def get_LogOverwrite(this : ITraceDataCollector*, overwrite : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogOverwrite.call(this, overwrite)
+    end
+    def put_LogOverwrite(this : ITraceDataCollector*, overwrite : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogOverwrite.call(this, overwrite)
+    end
+    def get_Name(this : ITraceDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, name)
+    end
+    def put_Name(this : ITraceDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Name.call(this, name)
+    end
+    def get_OutputLocation(this : ITraceDataCollector*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_OutputLocation.call(this, path)
+    end
+    def get_Index(this : ITraceDataCollector*, index : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Index.call(this, index)
+    end
+    def put_Index(this : ITraceDataCollector*, index : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Index.call(this, index)
+    end
+    def get_Xml(this : ITraceDataCollector*, xml : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Xml.call(this, xml)
+    end
+    def set_xml(this : ITraceDataCollector*, xml : Win32cr::Foundation::BSTR, validation : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_xml.call(this, xml, validation)
+    end
+    def create_output_location(this : ITraceDataCollector*, latest : Int16, location : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_output_location.call(this, latest, location)
+    end
+    def get_BufferSize(this : ITraceDataCollector*, size : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BufferSize.call(this, size)
+    end
+    def put_BufferSize(this : ITraceDataCollector*, size : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BufferSize.call(this, size)
+    end
+    def get_BuffersLost(this : ITraceDataCollector*, buffers : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BuffersLost.call(this, buffers)
+    end
+    def put_BuffersLost(this : ITraceDataCollector*, buffers : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BuffersLost.call(this, buffers)
+    end
+    def get_BuffersWritten(this : ITraceDataCollector*, buffers : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BuffersWritten.call(this, buffers)
+    end
+    def put_BuffersWritten(this : ITraceDataCollector*, buffers : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BuffersWritten.call(this, buffers)
+    end
+    def get_ClockType(this : ITraceDataCollector*, clock : Win32cr::System::Performance::ClockType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ClockType.call(this, clock)
+    end
+    def put_ClockType(this : ITraceDataCollector*, clock : Win32cr::System::Performance::ClockType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ClockType.call(this, clock)
+    end
+    def get_EventsLost(this : ITraceDataCollector*, events : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventsLost.call(this, events)
+    end
+    def put_EventsLost(this : ITraceDataCollector*, events : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EventsLost.call(this, events)
+    end
+    def get_ExtendedModes(this : ITraceDataCollector*, mode : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ExtendedModes.call(this, mode)
+    end
+    def put_ExtendedModes(this : ITraceDataCollector*, mode : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ExtendedModes.call(this, mode)
+    end
+    def get_FlushTimer(this : ITraceDataCollector*, seconds : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FlushTimer.call(this, seconds)
+    end
+    def put_FlushTimer(this : ITraceDataCollector*, seconds : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FlushTimer.call(this, seconds)
+    end
+    def get_FreeBuffers(this : ITraceDataCollector*, buffers : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FreeBuffers.call(this, buffers)
+    end
+    def put_FreeBuffers(this : ITraceDataCollector*, buffers : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FreeBuffers.call(this, buffers)
+    end
+    def get_Guid(this : ITraceDataCollector*, guid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Guid.call(this, guid)
+    end
+    def put_Guid(this : ITraceDataCollector*, guid : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Guid.call(this, guid)
+    end
+    def get_IsKernelTrace(this : ITraceDataCollector*, kernel : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IsKernelTrace.call(this, kernel)
+    end
+    def get_MaximumBuffers(this : ITraceDataCollector*, buffers : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MaximumBuffers.call(this, buffers)
+    end
+    def put_MaximumBuffers(this : ITraceDataCollector*, buffers : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MaximumBuffers.call(this, buffers)
+    end
+    def get_MinimumBuffers(this : ITraceDataCollector*, buffers : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MinimumBuffers.call(this, buffers)
+    end
+    def put_MinimumBuffers(this : ITraceDataCollector*, buffers : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MinimumBuffers.call(this, buffers)
+    end
+    def get_NumberOfBuffers(this : ITraceDataCollector*, buffers : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NumberOfBuffers.call(this, buffers)
+    end
+    def put_NumberOfBuffers(this : ITraceDataCollector*, buffers : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_NumberOfBuffers.call(this, buffers)
+    end
+    def get_PreallocateFile(this : ITraceDataCollector*, allocate : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PreallocateFile.call(this, allocate)
+    end
+    def put_PreallocateFile(this : ITraceDataCollector*, allocate : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_PreallocateFile.call(this, allocate)
+    end
+    def get_ProcessMode(this : ITraceDataCollector*, process : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ProcessMode.call(this, process)
+    end
+    def put_ProcessMode(this : ITraceDataCollector*, process : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ProcessMode.call(this, process)
+    end
+    def get_RealTimeBuffersLost(this : ITraceDataCollector*, buffers : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RealTimeBuffersLost.call(this, buffers)
+    end
+    def put_RealTimeBuffersLost(this : ITraceDataCollector*, buffers : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_RealTimeBuffersLost.call(this, buffers)
+    end
+    def get_SessionId(this : ITraceDataCollector*, id : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SessionId.call(this, id)
+    end
+    def put_SessionId(this : ITraceDataCollector*, id : UInt64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SessionId.call(this, id)
+    end
+    def get_SessionName(this : ITraceDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SessionName.call(this, name)
+    end
+    def put_SessionName(this : ITraceDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SessionName.call(this, name)
+    end
+    def get_SessionThreadId(this : ITraceDataCollector*, tid : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SessionThreadId.call(this, tid)
+    end
+    def put_SessionThreadId(this : ITraceDataCollector*, tid : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SessionThreadId.call(this, tid)
+    end
+    def get_StreamMode(this : ITraceDataCollector*, mode : Win32cr::System::Performance::StreamMode*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StreamMode.call(this, mode)
+    end
+    def put_StreamMode(this : ITraceDataCollector*, mode : Win32cr::System::Performance::StreamMode) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_StreamMode.call(this, mode)
+    end
+    def get_TraceDataProviders(this : ITraceDataCollector*, providers : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TraceDataProviders.call(this, providers)
+    end
+
+  end
+
+  @[Extern]
+  record IConfigurationDataCollectorVtbl,
+    query_interface : Proc(IConfigurationDataCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IConfigurationDataCollector*, UInt32),
+    release : Proc(IConfigurationDataCollector*, UInt32),
+    get_type_info_count : Proc(IConfigurationDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IConfigurationDataCollector*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IConfigurationDataCollector*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IConfigurationDataCollector*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_DataCollectorSet : Proc(IConfigurationDataCollector*, Void**, Win32cr::Foundation::HRESULT),
+    put_DataCollectorSet : Proc(IConfigurationDataCollector*, Void*, Win32cr::Foundation::HRESULT),
+    get_DataCollectorType : Proc(IConfigurationDataCollector*, Win32cr::System::Performance::DataCollectorType*, Win32cr::Foundation::HRESULT),
+    get_FileName : Proc(IConfigurationDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FileName : Proc(IConfigurationDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_FileNameFormat : Proc(IConfigurationDataCollector*, Win32cr::System::Performance::AutoPathFormat*, Win32cr::Foundation::HRESULT),
+    put_FileNameFormat : Proc(IConfigurationDataCollector*, Win32cr::System::Performance::AutoPathFormat, Win32cr::Foundation::HRESULT),
+    get_FileNameFormatPattern : Proc(IConfigurationDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FileNameFormatPattern : Proc(IConfigurationDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LatestOutputLocation : Proc(IConfigurationDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_LatestOutputLocation : Proc(IConfigurationDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LogAppend : Proc(IConfigurationDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogAppend : Proc(IConfigurationDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_LogCircular : Proc(IConfigurationDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogCircular : Proc(IConfigurationDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_LogOverwrite : Proc(IConfigurationDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogOverwrite : Proc(IConfigurationDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(IConfigurationDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Name : Proc(IConfigurationDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_OutputLocation : Proc(IConfigurationDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Index : Proc(IConfigurationDataCollector*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Index : Proc(IConfigurationDataCollector*, Int32, Win32cr::Foundation::HRESULT),
+    get_Xml : Proc(IConfigurationDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    set_xml : Proc(IConfigurationDataCollector*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_output_location : Proc(IConfigurationDataCollector*, Int16, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_FileMaxCount : Proc(IConfigurationDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_FileMaxCount : Proc(IConfigurationDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_FileMaxRecursiveDepth : Proc(IConfigurationDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_FileMaxRecursiveDepth : Proc(IConfigurationDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_FileMaxTotalSize : Proc(IConfigurationDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_FileMaxTotalSize : Proc(IConfigurationDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Files : Proc(IConfigurationDataCollector*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_Files : Proc(IConfigurationDataCollector*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
+    get_ManagementQueries : Proc(IConfigurationDataCollector*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_ManagementQueries : Proc(IConfigurationDataCollector*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
+    get_QueryNetworkAdapters : Proc(IConfigurationDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_QueryNetworkAdapters : Proc(IConfigurationDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_RegistryKeys : Proc(IConfigurationDataCollector*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_RegistryKeys : Proc(IConfigurationDataCollector*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
+    get_RegistryMaxRecursiveDepth : Proc(IConfigurationDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_RegistryMaxRecursiveDepth : Proc(IConfigurationDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_SystemStateFile : Proc(IConfigurationDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_SystemStateFile : Proc(IConfigurationDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("03837514-098b-11d8-9414-505054503030")]
+  record IConfigurationDataCollector, lpVtbl : IConfigurationDataCollectorVtbl* do
+    GUID = LibC::GUID.new(0x3837514_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IConfigurationDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IConfigurationDataCollector*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IConfigurationDataCollector*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IConfigurationDataCollector*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IConfigurationDataCollector*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IConfigurationDataCollector*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IConfigurationDataCollector*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_DataCollectorSet(this : IConfigurationDataCollector*, group : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataCollectorSet.call(this, group)
+    end
+    def put_DataCollectorSet(this : IConfigurationDataCollector*, group : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DataCollectorSet.call(this, group)
+    end
+    def get_DataCollectorType(this : IConfigurationDataCollector*, type__ : Win32cr::System::Performance::DataCollectorType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataCollectorType.call(this, type__)
+    end
+    def get_FileName(this : IConfigurationDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileName.call(this, name)
+    end
+    def put_FileName(this : IConfigurationDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileName.call(this, name)
+    end
+    def get_FileNameFormat(this : IConfigurationDataCollector*, format : Win32cr::System::Performance::AutoPathFormat*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileNameFormat.call(this, format)
+    end
+    def put_FileNameFormat(this : IConfigurationDataCollector*, format : Win32cr::System::Performance::AutoPathFormat) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileNameFormat.call(this, format)
+    end
+    def get_FileNameFormatPattern(this : IConfigurationDataCollector*, pattern : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileNameFormatPattern.call(this, pattern)
+    end
+    def put_FileNameFormatPattern(this : IConfigurationDataCollector*, pattern : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileNameFormatPattern.call(this, pattern)
+    end
+    def get_LatestOutputLocation(this : IConfigurationDataCollector*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LatestOutputLocation.call(this, path)
+    end
+    def put_LatestOutputLocation(this : IConfigurationDataCollector*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LatestOutputLocation.call(this, path)
+    end
+    def get_LogAppend(this : IConfigurationDataCollector*, append : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogAppend.call(this, append)
+    end
+    def put_LogAppend(this : IConfigurationDataCollector*, append : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogAppend.call(this, append)
+    end
+    def get_LogCircular(this : IConfigurationDataCollector*, circular : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogCircular.call(this, circular)
+    end
+    def put_LogCircular(this : IConfigurationDataCollector*, circular : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogCircular.call(this, circular)
+    end
+    def get_LogOverwrite(this : IConfigurationDataCollector*, overwrite : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogOverwrite.call(this, overwrite)
+    end
+    def put_LogOverwrite(this : IConfigurationDataCollector*, overwrite : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogOverwrite.call(this, overwrite)
+    end
+    def get_Name(this : IConfigurationDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, name)
+    end
+    def put_Name(this : IConfigurationDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Name.call(this, name)
+    end
+    def get_OutputLocation(this : IConfigurationDataCollector*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_OutputLocation.call(this, path)
+    end
+    def get_Index(this : IConfigurationDataCollector*, index : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Index.call(this, index)
+    end
+    def put_Index(this : IConfigurationDataCollector*, index : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Index.call(this, index)
+    end
+    def get_Xml(this : IConfigurationDataCollector*, xml : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Xml.call(this, xml)
+    end
+    def set_xml(this : IConfigurationDataCollector*, xml : Win32cr::Foundation::BSTR, validation : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_xml.call(this, xml, validation)
+    end
+    def create_output_location(this : IConfigurationDataCollector*, latest : Int16, location : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_output_location.call(this, latest, location)
+    end
+    def get_FileMaxCount(this : IConfigurationDataCollector*, count : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileMaxCount.call(this, count)
+    end
+    def put_FileMaxCount(this : IConfigurationDataCollector*, count : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileMaxCount.call(this, count)
+    end
+    def get_FileMaxRecursiveDepth(this : IConfigurationDataCollector*, depth : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileMaxRecursiveDepth.call(this, depth)
+    end
+    def put_FileMaxRecursiveDepth(this : IConfigurationDataCollector*, depth : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileMaxRecursiveDepth.call(this, depth)
+    end
+    def get_FileMaxTotalSize(this : IConfigurationDataCollector*, size : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileMaxTotalSize.call(this, size)
+    end
+    def put_FileMaxTotalSize(this : IConfigurationDataCollector*, size : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileMaxTotalSize.call(this, size)
+    end
+    def get_Files(this : IConfigurationDataCollector*, files : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Files.call(this, files)
+    end
+    def put_Files(this : IConfigurationDataCollector*, files : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Files.call(this, files)
+    end
+    def get_ManagementQueries(this : IConfigurationDataCollector*, queries : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ManagementQueries.call(this, queries)
+    end
+    def put_ManagementQueries(this : IConfigurationDataCollector*, queries : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ManagementQueries.call(this, queries)
+    end
+    def get_QueryNetworkAdapters(this : IConfigurationDataCollector*, network : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_QueryNetworkAdapters.call(this, network)
+    end
+    def put_QueryNetworkAdapters(this : IConfigurationDataCollector*, network : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_QueryNetworkAdapters.call(this, network)
+    end
+    def get_RegistryKeys(this : IConfigurationDataCollector*, query : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RegistryKeys.call(this, query)
+    end
+    def put_RegistryKeys(this : IConfigurationDataCollector*, query : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_RegistryKeys.call(this, query)
+    end
+    def get_RegistryMaxRecursiveDepth(this : IConfigurationDataCollector*, depth : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_RegistryMaxRecursiveDepth.call(this, depth)
+    end
+    def put_RegistryMaxRecursiveDepth(this : IConfigurationDataCollector*, depth : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_RegistryMaxRecursiveDepth.call(this, depth)
+    end
+    def get_SystemStateFile(this : IConfigurationDataCollector*, file_name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SystemStateFile.call(this, file_name)
+    end
+    def put_SystemStateFile(this : IConfigurationDataCollector*, file_name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SystemStateFile.call(this, file_name)
+    end
+
+  end
+
+  @[Extern]
+  record IAlertDataCollectorVtbl,
+    query_interface : Proc(IAlertDataCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAlertDataCollector*, UInt32),
+    release : Proc(IAlertDataCollector*, UInt32),
+    get_type_info_count : Proc(IAlertDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IAlertDataCollector*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IAlertDataCollector*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IAlertDataCollector*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_DataCollectorSet : Proc(IAlertDataCollector*, Void**, Win32cr::Foundation::HRESULT),
+    put_DataCollectorSet : Proc(IAlertDataCollector*, Void*, Win32cr::Foundation::HRESULT),
+    get_DataCollectorType : Proc(IAlertDataCollector*, Win32cr::System::Performance::DataCollectorType*, Win32cr::Foundation::HRESULT),
+    get_FileName : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FileName : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_FileNameFormat : Proc(IAlertDataCollector*, Win32cr::System::Performance::AutoPathFormat*, Win32cr::Foundation::HRESULT),
+    put_FileNameFormat : Proc(IAlertDataCollector*, Win32cr::System::Performance::AutoPathFormat, Win32cr::Foundation::HRESULT),
+    get_FileNameFormatPattern : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FileNameFormatPattern : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LatestOutputLocation : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_LatestOutputLocation : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LogAppend : Proc(IAlertDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogAppend : Proc(IAlertDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_LogCircular : Proc(IAlertDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogCircular : Proc(IAlertDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_LogOverwrite : Proc(IAlertDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogOverwrite : Proc(IAlertDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Name : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_OutputLocation : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Index : Proc(IAlertDataCollector*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Index : Proc(IAlertDataCollector*, Int32, Win32cr::Foundation::HRESULT),
+    get_Xml : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    set_xml : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_output_location : Proc(IAlertDataCollector*, Int16, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_AlertThresholds : Proc(IAlertDataCollector*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_AlertThresholds : Proc(IAlertDataCollector*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
+    get_EventLog : Proc(IAlertDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_EventLog : Proc(IAlertDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_SampleInterval : Proc(IAlertDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_SampleInterval : Proc(IAlertDataCollector*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Task : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Task : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_TaskRunAsSelf : Proc(IAlertDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_TaskRunAsSelf : Proc(IAlertDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_TaskArguments : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_TaskArguments : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_TaskUserTextArguments : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_TaskUserTextArguments : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_TriggerDataCollectorSet : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_TriggerDataCollectorSet : Proc(IAlertDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("03837516-098b-11d8-9414-505054503030")]
+  record IAlertDataCollector, lpVtbl : IAlertDataCollectorVtbl* do
+    GUID = LibC::GUID.new(0x3837516_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IAlertDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAlertDataCollector*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAlertDataCollector*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IAlertDataCollector*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IAlertDataCollector*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IAlertDataCollector*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IAlertDataCollector*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_DataCollectorSet(this : IAlertDataCollector*, group : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataCollectorSet.call(this, group)
+    end
+    def put_DataCollectorSet(this : IAlertDataCollector*, group : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DataCollectorSet.call(this, group)
+    end
+    def get_DataCollectorType(this : IAlertDataCollector*, type__ : Win32cr::System::Performance::DataCollectorType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataCollectorType.call(this, type__)
+    end
+    def get_FileName(this : IAlertDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileName.call(this, name)
+    end
+    def put_FileName(this : IAlertDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileName.call(this, name)
+    end
+    def get_FileNameFormat(this : IAlertDataCollector*, format : Win32cr::System::Performance::AutoPathFormat*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileNameFormat.call(this, format)
+    end
+    def put_FileNameFormat(this : IAlertDataCollector*, format : Win32cr::System::Performance::AutoPathFormat) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileNameFormat.call(this, format)
+    end
+    def get_FileNameFormatPattern(this : IAlertDataCollector*, pattern : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileNameFormatPattern.call(this, pattern)
+    end
+    def put_FileNameFormatPattern(this : IAlertDataCollector*, pattern : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileNameFormatPattern.call(this, pattern)
+    end
+    def get_LatestOutputLocation(this : IAlertDataCollector*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LatestOutputLocation.call(this, path)
+    end
+    def put_LatestOutputLocation(this : IAlertDataCollector*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LatestOutputLocation.call(this, path)
+    end
+    def get_LogAppend(this : IAlertDataCollector*, append : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogAppend.call(this, append)
+    end
+    def put_LogAppend(this : IAlertDataCollector*, append : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogAppend.call(this, append)
+    end
+    def get_LogCircular(this : IAlertDataCollector*, circular : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogCircular.call(this, circular)
+    end
+    def put_LogCircular(this : IAlertDataCollector*, circular : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogCircular.call(this, circular)
+    end
+    def get_LogOverwrite(this : IAlertDataCollector*, overwrite : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogOverwrite.call(this, overwrite)
+    end
+    def put_LogOverwrite(this : IAlertDataCollector*, overwrite : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogOverwrite.call(this, overwrite)
+    end
+    def get_Name(this : IAlertDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, name)
+    end
+    def put_Name(this : IAlertDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Name.call(this, name)
+    end
+    def get_OutputLocation(this : IAlertDataCollector*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_OutputLocation.call(this, path)
+    end
+    def get_Index(this : IAlertDataCollector*, index : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Index.call(this, index)
+    end
+    def put_Index(this : IAlertDataCollector*, index : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Index.call(this, index)
+    end
+    def get_Xml(this : IAlertDataCollector*, xml : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Xml.call(this, xml)
+    end
+    def set_xml(this : IAlertDataCollector*, xml : Win32cr::Foundation::BSTR, validation : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_xml.call(this, xml, validation)
+    end
+    def create_output_location(this : IAlertDataCollector*, latest : Int16, location : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_output_location.call(this, latest, location)
+    end
+    def get_AlertThresholds(this : IAlertDataCollector*, alerts : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AlertThresholds.call(this, alerts)
+    end
+    def put_AlertThresholds(this : IAlertDataCollector*, alerts : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_AlertThresholds.call(this, alerts)
+    end
+    def get_EventLog(this : IAlertDataCollector*, log : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventLog.call(this, log)
+    end
+    def put_EventLog(this : IAlertDataCollector*, log : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EventLog.call(this, log)
+    end
+    def get_SampleInterval(this : IAlertDataCollector*, interval : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SampleInterval.call(this, interval)
+    end
+    def put_SampleInterval(this : IAlertDataCollector*, interval : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SampleInterval.call(this, interval)
+    end
+    def get_Task(this : IAlertDataCollector*, task : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Task.call(this, task)
+    end
+    def put_Task(this : IAlertDataCollector*, task : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Task.call(this, task)
+    end
+    def get_TaskRunAsSelf(this : IAlertDataCollector*, run_as_self : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TaskRunAsSelf.call(this, run_as_self)
+    end
+    def put_TaskRunAsSelf(this : IAlertDataCollector*, run_as_self : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_TaskRunAsSelf.call(this, run_as_self)
+    end
+    def get_TaskArguments(this : IAlertDataCollector*, task : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TaskArguments.call(this, task)
+    end
+    def put_TaskArguments(this : IAlertDataCollector*, task : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_TaskArguments.call(this, task)
+    end
+    def get_TaskUserTextArguments(this : IAlertDataCollector*, task : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TaskUserTextArguments.call(this, task)
+    end
+    def put_TaskUserTextArguments(this : IAlertDataCollector*, task : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_TaskUserTextArguments.call(this, task)
+    end
+    def get_TriggerDataCollectorSet(this : IAlertDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TriggerDataCollectorSet.call(this, name)
+    end
+    def put_TriggerDataCollectorSet(this : IAlertDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_TriggerDataCollectorSet.call(this, name)
+    end
+
+  end
+
+  @[Extern]
+  record IApiTracingDataCollectorVtbl,
+    query_interface : Proc(IApiTracingDataCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IApiTracingDataCollector*, UInt32),
+    release : Proc(IApiTracingDataCollector*, UInt32),
+    get_type_info_count : Proc(IApiTracingDataCollector*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IApiTracingDataCollector*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IApiTracingDataCollector*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IApiTracingDataCollector*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_DataCollectorSet : Proc(IApiTracingDataCollector*, Void**, Win32cr::Foundation::HRESULT),
+    put_DataCollectorSet : Proc(IApiTracingDataCollector*, Void*, Win32cr::Foundation::HRESULT),
+    get_DataCollectorType : Proc(IApiTracingDataCollector*, Win32cr::System::Performance::DataCollectorType*, Win32cr::Foundation::HRESULT),
+    get_FileName : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FileName : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_FileNameFormat : Proc(IApiTracingDataCollector*, Win32cr::System::Performance::AutoPathFormat*, Win32cr::Foundation::HRESULT),
+    put_FileNameFormat : Proc(IApiTracingDataCollector*, Win32cr::System::Performance::AutoPathFormat, Win32cr::Foundation::HRESULT),
+    get_FileNameFormatPattern : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FileNameFormatPattern : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LatestOutputLocation : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_LatestOutputLocation : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LogAppend : Proc(IApiTracingDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogAppend : Proc(IApiTracingDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_LogCircular : Proc(IApiTracingDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogCircular : Proc(IApiTracingDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_LogOverwrite : Proc(IApiTracingDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogOverwrite : Proc(IApiTracingDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Name : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_OutputLocation : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_Index : Proc(IApiTracingDataCollector*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Index : Proc(IApiTracingDataCollector*, Int32, Win32cr::Foundation::HRESULT),
+    get_Xml : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    set_xml : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    create_output_location : Proc(IApiTracingDataCollector*, Int16, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_LogApiNamesOnly : Proc(IApiTracingDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogApiNamesOnly : Proc(IApiTracingDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_LogApisRecursively : Proc(IApiTracingDataCollector*, Int16*, Win32cr::Foundation::HRESULT),
+    put_LogApisRecursively : Proc(IApiTracingDataCollector*, Int16, Win32cr::Foundation::HRESULT),
+    get_ExePath : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_ExePath : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LogFilePath : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_LogFilePath : Proc(IApiTracingDataCollector*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_IncludeModules : Proc(IApiTracingDataCollector*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_IncludeModules : Proc(IApiTracingDataCollector*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
+    get_IncludeApis : Proc(IApiTracingDataCollector*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_IncludeApis : Proc(IApiTracingDataCollector*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
+    get_ExcludeApis : Proc(IApiTracingDataCollector*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_ExcludeApis : Proc(IApiTracingDataCollector*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("0383751a-098b-11d8-9414-505054503030")]
+  record IApiTracingDataCollector, lpVtbl : IApiTracingDataCollectorVtbl* do
+    GUID = LibC::GUID.new(0x383751a_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IApiTracingDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IApiTracingDataCollector*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IApiTracingDataCollector*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IApiTracingDataCollector*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IApiTracingDataCollector*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IApiTracingDataCollector*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IApiTracingDataCollector*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_DataCollectorSet(this : IApiTracingDataCollector*, group : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataCollectorSet.call(this, group)
+    end
+    def put_DataCollectorSet(this : IApiTracingDataCollector*, group : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DataCollectorSet.call(this, group)
+    end
+    def get_DataCollectorType(this : IApiTracingDataCollector*, type__ : Win32cr::System::Performance::DataCollectorType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataCollectorType.call(this, type__)
+    end
+    def get_FileName(this : IApiTracingDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileName.call(this, name)
+    end
+    def put_FileName(this : IApiTracingDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileName.call(this, name)
+    end
+    def get_FileNameFormat(this : IApiTracingDataCollector*, format : Win32cr::System::Performance::AutoPathFormat*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileNameFormat.call(this, format)
+    end
+    def put_FileNameFormat(this : IApiTracingDataCollector*, format : Win32cr::System::Performance::AutoPathFormat) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileNameFormat.call(this, format)
+    end
+    def get_FileNameFormatPattern(this : IApiTracingDataCollector*, pattern : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FileNameFormatPattern.call(this, pattern)
+    end
+    def put_FileNameFormatPattern(this : IApiTracingDataCollector*, pattern : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FileNameFormatPattern.call(this, pattern)
+    end
+    def get_LatestOutputLocation(this : IApiTracingDataCollector*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LatestOutputLocation.call(this, path)
+    end
+    def put_LatestOutputLocation(this : IApiTracingDataCollector*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LatestOutputLocation.call(this, path)
+    end
+    def get_LogAppend(this : IApiTracingDataCollector*, append : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogAppend.call(this, append)
+    end
+    def put_LogAppend(this : IApiTracingDataCollector*, append : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogAppend.call(this, append)
+    end
+    def get_LogCircular(this : IApiTracingDataCollector*, circular : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogCircular.call(this, circular)
+    end
+    def put_LogCircular(this : IApiTracingDataCollector*, circular : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogCircular.call(this, circular)
+    end
+    def get_LogOverwrite(this : IApiTracingDataCollector*, overwrite : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogOverwrite.call(this, overwrite)
+    end
+    def put_LogOverwrite(this : IApiTracingDataCollector*, overwrite : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogOverwrite.call(this, overwrite)
+    end
+    def get_Name(this : IApiTracingDataCollector*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, name)
+    end
+    def put_Name(this : IApiTracingDataCollector*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Name.call(this, name)
+    end
+    def get_OutputLocation(this : IApiTracingDataCollector*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_OutputLocation.call(this, path)
+    end
+    def get_Index(this : IApiTracingDataCollector*, index : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Index.call(this, index)
+    end
+    def put_Index(this : IApiTracingDataCollector*, index : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Index.call(this, index)
+    end
+    def get_Xml(this : IApiTracingDataCollector*, xml : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Xml.call(this, xml)
+    end
+    def set_xml(this : IApiTracingDataCollector*, xml : Win32cr::Foundation::BSTR, validation : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_xml.call(this, xml, validation)
+    end
+    def create_output_location(this : IApiTracingDataCollector*, latest : Int16, location : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_output_location.call(this, latest, location)
+    end
+    def get_LogApiNamesOnly(this : IApiTracingDataCollector*, logapinames : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogApiNamesOnly.call(this, logapinames)
+    end
+    def put_LogApiNamesOnly(this : IApiTracingDataCollector*, logapinames : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogApiNamesOnly.call(this, logapinames)
+    end
+    def get_LogApisRecursively(this : IApiTracingDataCollector*, logrecursively : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogApisRecursively.call(this, logrecursively)
+    end
+    def put_LogApisRecursively(this : IApiTracingDataCollector*, logrecursively : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogApisRecursively.call(this, logrecursively)
+    end
+    def get_ExePath(this : IApiTracingDataCollector*, exepath : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ExePath.call(this, exepath)
+    end
+    def put_ExePath(this : IApiTracingDataCollector*, exepath : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ExePath.call(this, exepath)
+    end
+    def get_LogFilePath(this : IApiTracingDataCollector*, logfilepath : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogFilePath.call(this, logfilepath)
+    end
+    def put_LogFilePath(this : IApiTracingDataCollector*, logfilepath : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogFilePath.call(this, logfilepath)
+    end
+    def get_IncludeModules(this : IApiTracingDataCollector*, includemodules : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IncludeModules.call(this, includemodules)
+    end
+    def put_IncludeModules(this : IApiTracingDataCollector*, includemodules : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_IncludeModules.call(this, includemodules)
+    end
+    def get_IncludeApis(this : IApiTracingDataCollector*, includeapis : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_IncludeApis.call(this, includeapis)
+    end
+    def put_IncludeApis(this : IApiTracingDataCollector*, includeapis : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_IncludeApis.call(this, includeapis)
+    end
+    def get_ExcludeApis(this : IApiTracingDataCollector*, excludeapis : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ExcludeApis.call(this, excludeapis)
+    end
+    def put_ExcludeApis(this : IApiTracingDataCollector*, excludeapis : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ExcludeApis.call(this, excludeapis)
+    end
+
+  end
+
+  @[Extern]
+  record IDataCollectorCollectionVtbl,
+    query_interface : Proc(IDataCollectorCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDataCollectorCollection*, UInt32),
+    release : Proc(IDataCollectorCollection*, UInt32),
+    get_type_info_count : Proc(IDataCollectorCollection*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDataCollectorCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDataCollectorCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDataCollectorCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(IDataCollectorCollection*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IDataCollectorCollection*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(IDataCollectorCollection*, Void**, Win32cr::Foundation::HRESULT),
+    add : Proc(IDataCollectorCollection*, Void*, Win32cr::Foundation::HRESULT),
+    remove : Proc(IDataCollectorCollection*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    clear : Proc(IDataCollectorCollection*, Win32cr::Foundation::HRESULT),
+    add_range : Proc(IDataCollectorCollection*, Void*, Win32cr::Foundation::HRESULT),
+    create_data_collector_from_xml : Proc(IDataCollectorCollection*, Win32cr::Foundation::BSTR, Void**, Void**, Win32cr::Foundation::HRESULT),
+    create_data_collector : Proc(IDataCollectorCollection*, Win32cr::System::Performance::DataCollectorType, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("03837502-098b-11d8-9414-505054503030")]
+  record IDataCollectorCollection, lpVtbl : IDataCollectorCollectionVtbl* do
+    GUID = LibC::GUID.new(0x3837502_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IDataCollectorCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDataCollectorCollection*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDataCollectorCollection*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDataCollectorCollection*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDataCollectorCollection*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDataCollectorCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDataCollectorCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : IDataCollectorCollection*, retVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, retVal)
+    end
+    def get_Item(this : IDataCollectorCollection*, index : Win32cr::System::Com::VARIANT, collector : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, index, collector)
+    end
+    def get__NewEnum(this : IDataCollectorCollection*, retVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, retVal)
+    end
+    def add(this : IDataCollectorCollection*, collector : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, collector)
+    end
+    def remove(this : IDataCollectorCollection*, collector : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, collector)
+    end
+    def clear(this : IDataCollectorCollection*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear.call(this)
+    end
+    def add_range(this : IDataCollectorCollection*, collectors : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_range.call(this, collectors)
+    end
+    def create_data_collector_from_xml(this : IDataCollectorCollection*, bstrXml : Win32cr::Foundation::BSTR, pValidation : Void**, pCollector : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_data_collector_from_xml.call(this, bstrXml, pValidation, pCollector)
+    end
+    def create_data_collector(this : IDataCollectorCollection*, type__ : Win32cr::System::Performance::DataCollectorType, collector : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_data_collector.call(this, type__, collector)
+    end
+
+  end
+
+  @[Extern]
+  record IDataCollectorSetCollectionVtbl,
+    query_interface : Proc(IDataCollectorSetCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDataCollectorSetCollection*, UInt32),
+    release : Proc(IDataCollectorSetCollection*, UInt32),
+    get_type_info_count : Proc(IDataCollectorSetCollection*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDataCollectorSetCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDataCollectorSetCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDataCollectorSetCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(IDataCollectorSetCollection*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IDataCollectorSetCollection*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(IDataCollectorSetCollection*, Void**, Win32cr::Foundation::HRESULT),
+    add : Proc(IDataCollectorSetCollection*, Void*, Win32cr::Foundation::HRESULT),
+    remove : Proc(IDataCollectorSetCollection*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    clear : Proc(IDataCollectorSetCollection*, Win32cr::Foundation::HRESULT),
+    add_range : Proc(IDataCollectorSetCollection*, Void*, Win32cr::Foundation::HRESULT),
+    get_data_collector_sets : Proc(IDataCollectorSetCollection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("03837524-098b-11d8-9414-505054503030")]
+  record IDataCollectorSetCollection, lpVtbl : IDataCollectorSetCollectionVtbl* do
+    GUID = LibC::GUID.new(0x3837524_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IDataCollectorSetCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDataCollectorSetCollection*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDataCollectorSetCollection*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDataCollectorSetCollection*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDataCollectorSetCollection*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDataCollectorSetCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDataCollectorSetCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : IDataCollectorSetCollection*, retVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, retVal)
+    end
+    def get_Item(this : IDataCollectorSetCollection*, index : Win32cr::System::Com::VARIANT, set : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, index, set)
+    end
+    def get__NewEnum(this : IDataCollectorSetCollection*, retVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, retVal)
+    end
+    def add(this : IDataCollectorSetCollection*, set : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, set)
+    end
+    def remove(this : IDataCollectorSetCollection*, set : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, set)
+    end
+    def clear(this : IDataCollectorSetCollection*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear.call(this)
+    end
+    def add_range(this : IDataCollectorSetCollection*, sets : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_range.call(this, sets)
+    end
+    def get_data_collector_sets(this : IDataCollectorSetCollection*, server : Win32cr::Foundation::BSTR, filter : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data_collector_sets.call(this, server, filter)
+    end
+
+  end
+
+  @[Extern]
+  record ITraceDataProviderVtbl,
+    query_interface : Proc(ITraceDataProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ITraceDataProvider*, UInt32),
+    release : Proc(ITraceDataProvider*, UInt32),
+    get_type_info_count : Proc(ITraceDataProvider*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ITraceDataProvider*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ITraceDataProvider*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ITraceDataProvider*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_DisplayName : Proc(ITraceDataProvider*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_DisplayName : Proc(ITraceDataProvider*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Guid : Proc(ITraceDataProvider*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    put_Guid : Proc(ITraceDataProvider*, LibC::GUID, Win32cr::Foundation::HRESULT),
+    get_Level : Proc(ITraceDataProvider*, Void**, Win32cr::Foundation::HRESULT),
+    get_KeywordsAny : Proc(ITraceDataProvider*, Void**, Win32cr::Foundation::HRESULT),
+    get_KeywordsAll : Proc(ITraceDataProvider*, Void**, Win32cr::Foundation::HRESULT),
+    get_Properties : Proc(ITraceDataProvider*, Void**, Win32cr::Foundation::HRESULT),
+    get_FilterEnabled : Proc(ITraceDataProvider*, Int16*, Win32cr::Foundation::HRESULT),
+    put_FilterEnabled : Proc(ITraceDataProvider*, Int16, Win32cr::Foundation::HRESULT),
+    get_FilterType : Proc(ITraceDataProvider*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_FilterType : Proc(ITraceDataProvider*, UInt32, Win32cr::Foundation::HRESULT),
+    get_FilterData : Proc(ITraceDataProvider*, Win32cr::System::Com::SAFEARRAY**, Win32cr::Foundation::HRESULT),
+    put_FilterData : Proc(ITraceDataProvider*, Win32cr::System::Com::SAFEARRAY*, Win32cr::Foundation::HRESULT),
+    query : Proc(ITraceDataProvider*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    resolve : Proc(ITraceDataProvider*, Void*, Win32cr::Foundation::HRESULT),
+    set_security : Proc(ITraceDataProvider*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_security : Proc(ITraceDataProvider*, UInt32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_registered_processes : Proc(ITraceDataProvider*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("03837512-098b-11d8-9414-505054503030")]
+  record ITraceDataProvider, lpVtbl : ITraceDataProviderVtbl* do
+    GUID = LibC::GUID.new(0x3837512_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : ITraceDataProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ITraceDataProvider*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ITraceDataProvider*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ITraceDataProvider*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ITraceDataProvider*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ITraceDataProvider*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ITraceDataProvider*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_DisplayName(this : ITraceDataProvider*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisplayName.call(this, name)
+    end
+    def put_DisplayName(this : ITraceDataProvider*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DisplayName.call(this, name)
+    end
+    def get_Guid(this : ITraceDataProvider*, guid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Guid.call(this, guid)
+    end
+    def put_Guid(this : ITraceDataProvider*, guid : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Guid.call(this, guid)
+    end
+    def get_Level(this : ITraceDataProvider*, ppLevel : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Level.call(this, ppLevel)
+    end
+    def get_KeywordsAny(this : ITraceDataProvider*, ppKeywords : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_KeywordsAny.call(this, ppKeywords)
+    end
+    def get_KeywordsAll(this : ITraceDataProvider*, ppKeywords : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_KeywordsAll.call(this, ppKeywords)
+    end
+    def get_Properties(this : ITraceDataProvider*, ppProperties : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Properties.call(this, ppProperties)
+    end
+    def get_FilterEnabled(this : ITraceDataProvider*, filter_enabled : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FilterEnabled.call(this, filter_enabled)
+    end
+    def put_FilterEnabled(this : ITraceDataProvider*, filter_enabled : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FilterEnabled.call(this, filter_enabled)
+    end
+    def get_FilterType(this : ITraceDataProvider*, pulType : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FilterType.call(this, pulType)
+    end
+    def put_FilterType(this : ITraceDataProvider*, ulType : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FilterType.call(this, ulType)
+    end
+    def get_FilterData(this : ITraceDataProvider*, ppData : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FilterData.call(this, ppData)
+    end
+    def put_FilterData(this : ITraceDataProvider*, pData : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FilterData.call(this, pData)
+    end
+    def query(this : ITraceDataProvider*, bstrName : Win32cr::Foundation::BSTR, bstrServer : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query.call(this, bstrName, bstrServer)
+    end
+    def resolve(this : ITraceDataProvider*, pFrom : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.resolve.call(this, pFrom)
+    end
+    def set_security(this : ITraceDataProvider*, sddl : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_security.call(this, sddl)
+    end
+    def get_security(this : ITraceDataProvider*, security_info : UInt32, sddl : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_security.call(this, security_info, sddl)
+    end
+    def get_registered_processes(this : ITraceDataProvider*, processes : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_registered_processes.call(this, processes)
+    end
+
+  end
+
+  @[Extern]
+  record ITraceDataProviderCollectionVtbl,
+    query_interface : Proc(ITraceDataProviderCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ITraceDataProviderCollection*, UInt32),
+    release : Proc(ITraceDataProviderCollection*, UInt32),
+    get_type_info_count : Proc(ITraceDataProviderCollection*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ITraceDataProviderCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ITraceDataProviderCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ITraceDataProviderCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ITraceDataProviderCollection*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ITraceDataProviderCollection*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ITraceDataProviderCollection*, Void**, Win32cr::Foundation::HRESULT),
+    add : Proc(ITraceDataProviderCollection*, Void*, Win32cr::Foundation::HRESULT),
+    remove : Proc(ITraceDataProviderCollection*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    clear : Proc(ITraceDataProviderCollection*, Win32cr::Foundation::HRESULT),
+    add_range : Proc(ITraceDataProviderCollection*, Void*, Win32cr::Foundation::HRESULT),
+    create_trace_data_provider : Proc(ITraceDataProviderCollection*, Void**, Win32cr::Foundation::HRESULT),
+    get_trace_data_providers : Proc(ITraceDataProviderCollection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_trace_data_providers_by_process : Proc(ITraceDataProviderCollection*, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("03837510-098b-11d8-9414-505054503030")]
+  record ITraceDataProviderCollection, lpVtbl : ITraceDataProviderCollectionVtbl* do
+    GUID = LibC::GUID.new(0x3837510_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : ITraceDataProviderCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ITraceDataProviderCollection*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ITraceDataProviderCollection*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ITraceDataProviderCollection*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ITraceDataProviderCollection*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ITraceDataProviderCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ITraceDataProviderCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : ITraceDataProviderCollection*, retVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, retVal)
+    end
+    def get_Item(this : ITraceDataProviderCollection*, index : Win32cr::System::Com::VARIANT, ppProvider : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, index, ppProvider)
+    end
+    def get__NewEnum(this : ITraceDataProviderCollection*, retVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, retVal)
+    end
+    def add(this : ITraceDataProviderCollection*, pProvider : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, pProvider)
+    end
+    def remove(this : ITraceDataProviderCollection*, vProvider : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, vProvider)
+    end
+    def clear(this : ITraceDataProviderCollection*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear.call(this)
+    end
+    def add_range(this : ITraceDataProviderCollection*, providers : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_range.call(this, providers)
+    end
+    def create_trace_data_provider(this : ITraceDataProviderCollection*, provider : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_trace_data_provider.call(this, provider)
+    end
+    def get_trace_data_providers(this : ITraceDataProviderCollection*, server : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_trace_data_providers.call(this, server)
+    end
+    def get_trace_data_providers_by_process(this : ITraceDataProviderCollection*, server : Win32cr::Foundation::BSTR, pid : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_trace_data_providers_by_process.call(this, server, pid)
+    end
+
+  end
+
+  @[Extern]
+  record IScheduleVtbl,
+    query_interface : Proc(ISchedule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISchedule*, UInt32),
+    release : Proc(ISchedule*, UInt32),
+    get_type_info_count : Proc(ISchedule*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ISchedule*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ISchedule*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ISchedule*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_StartDate : Proc(ISchedule*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_StartDate : Proc(ISchedule*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_EndDate : Proc(ISchedule*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_EndDate : Proc(ISchedule*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_StartTime : Proc(ISchedule*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_StartTime : Proc(ISchedule*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Days : Proc(ISchedule*, Win32cr::System::Performance::WeekDays*, Win32cr::Foundation::HRESULT),
+    put_Days : Proc(ISchedule*, Win32cr::System::Performance::WeekDays, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("0383753a-098b-11d8-9414-505054503030")]
+  record ISchedule, lpVtbl : IScheduleVtbl* do
+    GUID = LibC::GUID.new(0x383753a_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : ISchedule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISchedule*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISchedule*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ISchedule*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ISchedule*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ISchedule*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ISchedule*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_StartDate(this : ISchedule*, start : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartDate.call(this, start)
+    end
+    def put_StartDate(this : ISchedule*, start : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_StartDate.call(this, start)
+    end
+    def get_EndDate(this : ISchedule*, end__ : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EndDate.call(this, end__)
+    end
+    def put_EndDate(this : ISchedule*, end__ : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EndDate.call(this, end__)
+    end
+    def get_StartTime(this : ISchedule*, start : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StartTime.call(this, start)
+    end
+    def put_StartTime(this : ISchedule*, start : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_StartTime.call(this, start)
+    end
+    def get_Days(this : ISchedule*, days : Win32cr::System::Performance::WeekDays*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Days.call(this, days)
+    end
+    def put_Days(this : ISchedule*, days : Win32cr::System::Performance::WeekDays) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Days.call(this, days)
+    end
+
+  end
+
+  @[Extern]
+  record IScheduleCollectionVtbl,
+    query_interface : Proc(IScheduleCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IScheduleCollection*, UInt32),
+    release : Proc(IScheduleCollection*, UInt32),
+    get_type_info_count : Proc(IScheduleCollection*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IScheduleCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IScheduleCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IScheduleCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(IScheduleCollection*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IScheduleCollection*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(IScheduleCollection*, Void**, Win32cr::Foundation::HRESULT),
+    add : Proc(IScheduleCollection*, Void*, Win32cr::Foundation::HRESULT),
+    remove : Proc(IScheduleCollection*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    clear : Proc(IScheduleCollection*, Win32cr::Foundation::HRESULT),
+    add_range : Proc(IScheduleCollection*, Void*, Win32cr::Foundation::HRESULT),
+    create_schedule : Proc(IScheduleCollection*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("0383753d-098b-11d8-9414-505054503030")]
+  record IScheduleCollection, lpVtbl : IScheduleCollectionVtbl* do
+    GUID = LibC::GUID.new(0x383753d_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IScheduleCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IScheduleCollection*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IScheduleCollection*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IScheduleCollection*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IScheduleCollection*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IScheduleCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IScheduleCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : IScheduleCollection*, retVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, retVal)
+    end
+    def get_Item(this : IScheduleCollection*, index : Win32cr::System::Com::VARIANT, ppSchedule : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, index, ppSchedule)
+    end
+    def get__NewEnum(this : IScheduleCollection*, ienum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, ienum)
+    end
+    def add(this : IScheduleCollection*, pSchedule : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, pSchedule)
+    end
+    def remove(this : IScheduleCollection*, vSchedule : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, vSchedule)
+    end
+    def clear(this : IScheduleCollection*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear.call(this)
+    end
+    def add_range(this : IScheduleCollection*, pSchedules : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_range.call(this, pSchedules)
+    end
+    def create_schedule(this : IScheduleCollection*, schedule : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_schedule.call(this, schedule)
+    end
+
+  end
+
+  @[Extern]
+  record IValueMapItemVtbl,
+    query_interface : Proc(IValueMapItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IValueMapItem*, UInt32),
+    release : Proc(IValueMapItem*, UInt32),
+    get_type_info_count : Proc(IValueMapItem*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IValueMapItem*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IValueMapItem*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IValueMapItem*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Description : Proc(IValueMapItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Description : Proc(IValueMapItem*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IValueMapItem*, Int16*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IValueMapItem*, Int16, Win32cr::Foundation::HRESULT),
+    get_Key : Proc(IValueMapItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Key : Proc(IValueMapItem*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Value : Proc(IValueMapItem*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Value : Proc(IValueMapItem*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_ValueMapType : Proc(IValueMapItem*, Win32cr::System::Performance::ValueMapType*, Win32cr::Foundation::HRESULT),
+    put_ValueMapType : Proc(IValueMapItem*, Win32cr::System::Performance::ValueMapType, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("03837533-098b-11d8-9414-505054503030")]
+  record IValueMapItem, lpVtbl : IValueMapItemVtbl* do
+    GUID = LibC::GUID.new(0x3837533_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IValueMapItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IValueMapItem*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IValueMapItem*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IValueMapItem*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IValueMapItem*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IValueMapItem*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IValueMapItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Description(this : IValueMapItem*, description : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Description.call(this, description)
+    end
+    def put_Description(this : IValueMapItem*, description : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Description.call(this, description)
+    end
+    def get_Enabled(this : IValueMapItem*, enabled : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Enabled.call(this, enabled)
+    end
+    def put_Enabled(this : IValueMapItem*, enabled : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Enabled.call(this, enabled)
+    end
+    def get_Key(this : IValueMapItem*, key : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Key.call(this, key)
+    end
+    def put_Key(this : IValueMapItem*, key : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Key.call(this, key)
+    end
+    def get_Value(this : IValueMapItem*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Value.call(this, value)
+    end
+    def put_Value(this : IValueMapItem*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Value.call(this, value)
+    end
+    def get_ValueMapType(this : IValueMapItem*, type__ : Win32cr::System::Performance::ValueMapType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ValueMapType.call(this, type__)
+    end
+    def put_ValueMapType(this : IValueMapItem*, type__ : Win32cr::System::Performance::ValueMapType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ValueMapType.call(this, type__)
+    end
+
+  end
+
+  @[Extern]
+  record IValueMapVtbl,
+    query_interface : Proc(IValueMap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IValueMap*, UInt32),
+    release : Proc(IValueMap*, UInt32),
+    get_type_info_count : Proc(IValueMap*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IValueMap*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IValueMap*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IValueMap*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(IValueMap*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IValueMap*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(IValueMap*, Void**, Win32cr::Foundation::HRESULT),
+    get_Description : Proc(IValueMap*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Description : Proc(IValueMap*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Value : Proc(IValueMap*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Value : Proc(IValueMap*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_ValueMapType : Proc(IValueMap*, Win32cr::System::Performance::ValueMapType*, Win32cr::Foundation::HRESULT),
+    put_ValueMapType : Proc(IValueMap*, Win32cr::System::Performance::ValueMapType, Win32cr::Foundation::HRESULT),
+    add : Proc(IValueMap*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    remove : Proc(IValueMap*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    clear : Proc(IValueMap*, Win32cr::Foundation::HRESULT),
+    add_range : Proc(IValueMap*, Void*, Win32cr::Foundation::HRESULT),
+    create_value_map_item : Proc(IValueMap*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("03837534-098b-11d8-9414-505054503030")]
+  record IValueMap, lpVtbl : IValueMapVtbl* do
+    GUID = LibC::GUID.new(0x3837534_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
+    def query_interface(this : IValueMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IValueMap*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IValueMap*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IValueMap*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IValueMap*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IValueMap*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IValueMap*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : IValueMap*, retVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, retVal)
+    end
+    def get_Item(this : IValueMap*, index : Win32cr::System::Com::VARIANT, value : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, index, value)
+    end
+    def get__NewEnum(this : IValueMap*, retVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, retVal)
+    end
+    def get_Description(this : IValueMap*, description : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Description.call(this, description)
+    end
+    def put_Description(this : IValueMap*, description : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Description.call(this, description)
+    end
+    def get_Value(this : IValueMap*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Value.call(this, value)
+    end
+    def put_Value(this : IValueMap*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Value.call(this, value)
+    end
+    def get_ValueMapType(this : IValueMap*, type__ : Win32cr::System::Performance::ValueMapType*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ValueMapType.call(this, type__)
+    end
+    def put_ValueMapType(this : IValueMap*, type__ : Win32cr::System::Performance::ValueMapType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ValueMapType.call(this, type__)
+    end
+    def add(this : IValueMap*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, value)
+    end
+    def remove(this : IValueMap*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, value)
+    end
+    def clear(this : IValueMap*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear.call(this)
+    end
+    def add_range(this : IValueMap*, map : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_range.call(this, map)
+    end
+    def create_value_map_item(this : IValueMap*, item : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_value_map_item.call(this, item)
+    end
+
+  end
+
+  @[Extern]
+  record ICounterItemVtbl,
+    query_interface : Proc(ICounterItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ICounterItem*, UInt32),
+    release : Proc(ICounterItem*, UInt32),
+    get_Value : Proc(ICounterItem*, Float64*, Win32cr::Foundation::HRESULT),
+    put_Color : Proc(ICounterItem*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Color : Proc(ICounterItem*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_Width : Proc(ICounterItem*, Int32, Win32cr::Foundation::HRESULT),
+    get_Width : Proc(ICounterItem*, Int32*, Win32cr::Foundation::HRESULT),
+    put_LineStyle : Proc(ICounterItem*, Int32, Win32cr::Foundation::HRESULT),
+    get_LineStyle : Proc(ICounterItem*, Int32*, Win32cr::Foundation::HRESULT),
+    put_ScaleFactor : Proc(ICounterItem*, Int32, Win32cr::Foundation::HRESULT),
+    get_ScaleFactor : Proc(ICounterItem*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Path : Proc(ICounterItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(ICounterItem*, Float64*, Int32*, Win32cr::Foundation::HRESULT),
+    get_statistics : Proc(ICounterItem*, Float64*, Float64*, Float64*, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("771a9520-ee28-11ce-941e-008029004347")]
+  record ICounterItem, lpVtbl : ICounterItemVtbl* do
+    GUID = LibC::GUID.new(0x771a9520_u32, 0xee28_u16, 0x11ce_u16, StaticArray[0x94_u8, 0x1e_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+    def query_interface(this : ICounterItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ICounterItem*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ICounterItem*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_Value(this : ICounterItem*, pdblValue : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Value.call(this, pdblValue)
+    end
+    def put_Color(this : ICounterItem*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Color.call(this, color)
+    end
+    def get_Color(this : ICounterItem*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Color.call(this, pColor)
+    end
+    def put_Width(this : ICounterItem*, iWidth : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Width.call(this, iWidth)
+    end
+    def get_Width(this : ICounterItem*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Width.call(this, piValue)
+    end
+    def put_LineStyle(this : ICounterItem*, iLineStyle : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LineStyle.call(this, iLineStyle)
+    end
+    def get_LineStyle(this : ICounterItem*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LineStyle.call(this, piValue)
+    end
+    def put_ScaleFactor(this : ICounterItem*, iScale : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ScaleFactor.call(this, iScale)
+    end
+    def get_ScaleFactor(this : ICounterItem*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ScaleFactor.call(this, piValue)
+    end
+    def get_Path(this : ICounterItem*, pstrValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Path.call(this, pstrValue)
+    end
+    def get_value(this : ICounterItem*, value : Float64*, status : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_value.call(this, value, status)
+    end
+    def get_statistics(this : ICounterItem*, max : Float64*, min : Float64*, avg : Float64*, status : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_statistics.call(this, max, min, avg, status)
+    end
+
+  end
+
+  @[Extern]
+  record ICounterItem2Vtbl,
+    query_interface : Proc(ICounterItem2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ICounterItem2*, UInt32),
+    release : Proc(ICounterItem2*, UInt32),
+    get_Value : Proc(ICounterItem2*, Float64*, Win32cr::Foundation::HRESULT),
+    put_Color : Proc(ICounterItem2*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Color : Proc(ICounterItem2*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_Width : Proc(ICounterItem2*, Int32, Win32cr::Foundation::HRESULT),
+    get_Width : Proc(ICounterItem2*, Int32*, Win32cr::Foundation::HRESULT),
+    put_LineStyle : Proc(ICounterItem2*, Int32, Win32cr::Foundation::HRESULT),
+    get_LineStyle : Proc(ICounterItem2*, Int32*, Win32cr::Foundation::HRESULT),
+    put_ScaleFactor : Proc(ICounterItem2*, Int32, Win32cr::Foundation::HRESULT),
+    get_ScaleFactor : Proc(ICounterItem2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Path : Proc(ICounterItem2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(ICounterItem2*, Float64*, Int32*, Win32cr::Foundation::HRESULT),
+    get_statistics : Proc(ICounterItem2*, Float64*, Float64*, Float64*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Selected : Proc(ICounterItem2*, Int16, Win32cr::Foundation::HRESULT),
+    get_Selected : Proc(ICounterItem2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_Visible : Proc(ICounterItem2*, Int16, Win32cr::Foundation::HRESULT),
+    get_Visible : Proc(ICounterItem2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_data_at : Proc(ICounterItem2*, Int32, Win32cr::System::Performance::SysmonDataType, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("eefcd4e1-ea1c-4435-b7f4-e341ba03b4f9")]
+  record ICounterItem2, lpVtbl : ICounterItem2Vtbl* do
+    GUID = LibC::GUID.new(0xeefcd4e1_u32, 0xea1c_u16, 0x4435_u16, StaticArray[0xb7_u8, 0xf4_u8, 0xe3_u8, 0x41_u8, 0xba_u8, 0x3_u8, 0xb4_u8, 0xf9_u8])
+    def query_interface(this : ICounterItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ICounterItem2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ICounterItem2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_Value(this : ICounterItem2*, pdblValue : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Value.call(this, pdblValue)
+    end
+    def put_Color(this : ICounterItem2*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Color.call(this, color)
+    end
+    def get_Color(this : ICounterItem2*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Color.call(this, pColor)
+    end
+    def put_Width(this : ICounterItem2*, iWidth : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Width.call(this, iWidth)
+    end
+    def get_Width(this : ICounterItem2*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Width.call(this, piValue)
+    end
+    def put_LineStyle(this : ICounterItem2*, iLineStyle : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LineStyle.call(this, iLineStyle)
+    end
+    def get_LineStyle(this : ICounterItem2*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LineStyle.call(this, piValue)
+    end
+    def put_ScaleFactor(this : ICounterItem2*, iScale : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ScaleFactor.call(this, iScale)
+    end
+    def get_ScaleFactor(this : ICounterItem2*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ScaleFactor.call(this, piValue)
+    end
+    def get_Path(this : ICounterItem2*, pstrValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Path.call(this, pstrValue)
+    end
+    def get_value(this : ICounterItem2*, value : Float64*, status : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_value.call(this, value, status)
+    end
+    def get_statistics(this : ICounterItem2*, max : Float64*, min : Float64*, avg : Float64*, status : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_statistics.call(this, max, min, avg, status)
+    end
+    def put_Selected(this : ICounterItem2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Selected.call(this, bState)
+    end
+    def get_Selected(this : ICounterItem2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Selected.call(this, pbState)
+    end
+    def put_Visible(this : ICounterItem2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Visible.call(this, bState)
+    end
+    def get_Visible(this : ICounterItem2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Visible.call(this, pbState)
+    end
+    def get_data_at(this : ICounterItem2*, iIndex : Int32, iWhich : Win32cr::System::Performance::SysmonDataType, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data_at.call(this, iIndex, iWhich, pVariant)
+    end
+
+  end
+
+  @[Extern]
+  record ICounterItemUnionVtbl,
+    query_interface : Proc(ICounterItemUnion*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ICounterItemUnion*, UInt32),
+    release : Proc(ICounterItemUnion*, UInt32),
+    get_Value : Proc(ICounterItemUnion*, Float64*, Win32cr::Foundation::HRESULT),
+    put_Color : Proc(ICounterItemUnion*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Color : Proc(ICounterItemUnion*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_Width : Proc(ICounterItemUnion*, Int32, Win32cr::Foundation::HRESULT),
+    get_Width : Proc(ICounterItemUnion*, Int32*, Win32cr::Foundation::HRESULT),
+    put_LineStyle : Proc(ICounterItemUnion*, Int32, Win32cr::Foundation::HRESULT),
+    get_LineStyle : Proc(ICounterItemUnion*, Int32*, Win32cr::Foundation::HRESULT),
+    put_ScaleFactor : Proc(ICounterItemUnion*, Int32, Win32cr::Foundation::HRESULT),
+    get_ScaleFactor : Proc(ICounterItemUnion*, Int32*, Win32cr::Foundation::HRESULT),
+    get_Path : Proc(ICounterItemUnion*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(ICounterItemUnion*, Float64*, Int32*, Win32cr::Foundation::HRESULT),
+    get_statistics : Proc(ICounterItemUnion*, Float64*, Float64*, Float64*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Selected : Proc(ICounterItemUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_Selected : Proc(ICounterItemUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_Visible : Proc(ICounterItemUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_Visible : Proc(ICounterItemUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    get_data_at : Proc(ICounterItemUnion*, Int32, Win32cr::System::Performance::SysmonDataType, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("de1a6b74-9182-4c41-8e2c-24c2cd30ee83")]
+  record ICounterItemUnion, lpVtbl : ICounterItemUnionVtbl* do
+    GUID = LibC::GUID.new(0xde1a6b74_u32, 0x9182_u16, 0x4c41_u16, StaticArray[0x8e_u8, 0x2c_u8, 0x24_u8, 0xc2_u8, 0xcd_u8, 0x30_u8, 0xee_u8, 0x83_u8])
+    def query_interface(this : ICounterItemUnion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ICounterItemUnion*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ICounterItemUnion*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_Value(this : ICounterItemUnion*, pdblValue : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Value.call(this, pdblValue)
+    end
+    def put_Color(this : ICounterItemUnion*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Color.call(this, color)
+    end
+    def get_Color(this : ICounterItemUnion*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Color.call(this, pColor)
+    end
+    def put_Width(this : ICounterItemUnion*, iWidth : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Width.call(this, iWidth)
+    end
+    def get_Width(this : ICounterItemUnion*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Width.call(this, piValue)
+    end
+    def put_LineStyle(this : ICounterItemUnion*, iLineStyle : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LineStyle.call(this, iLineStyle)
+    end
+    def get_LineStyle(this : ICounterItemUnion*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LineStyle.call(this, piValue)
+    end
+    def put_ScaleFactor(this : ICounterItemUnion*, iScale : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ScaleFactor.call(this, iScale)
+    end
+    def get_ScaleFactor(this : ICounterItemUnion*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ScaleFactor.call(this, piValue)
+    end
+    def get_Path(this : ICounterItemUnion*, pstrValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Path.call(this, pstrValue)
+    end
+    def get_value(this : ICounterItemUnion*, value : Float64*, status : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_value.call(this, value, status)
+    end
+    def get_statistics(this : ICounterItemUnion*, max : Float64*, min : Float64*, avg : Float64*, status : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_statistics.call(this, max, min, avg, status)
+    end
+    def put_Selected(this : ICounterItemUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Selected.call(this, bState)
+    end
+    def get_Selected(this : ICounterItemUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Selected.call(this, pbState)
+    end
+    def put_Visible(this : ICounterItemUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Visible.call(this, bState)
+    end
+    def get_Visible(this : ICounterItemUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Visible.call(this, pbState)
+    end
+    def get_data_at(this : ICounterItemUnion*, iIndex : Int32, iWhich : Win32cr::System::Performance::SysmonDataType, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_data_at.call(this, iIndex, iWhich, pVariant)
+    end
+
+  end
+
+  @[Extern]
+  record DICounterItemVtbl,
+    query_interface : Proc(DICounterItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(DICounterItem*, UInt32),
+    release : Proc(DICounterItem*, UInt32),
+    get_type_info_count : Proc(DICounterItem*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(DICounterItem*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(DICounterItem*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(DICounterItem*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c08c4ff2-0e2e-11cf-942c-008029004347")]
+  record DICounterItem, lpVtbl : DICounterItemVtbl* do
+    GUID = LibC::GUID.new(0xc08c4ff2_u32, 0xe2e_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2c_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+    def query_interface(this : DICounterItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : DICounterItem*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : DICounterItem*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : DICounterItem*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : DICounterItem*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : DICounterItem*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : DICounterItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+
+  end
+
+  @[Extern]
+  record ICountersVtbl,
+    query_interface : Proc(ICounters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ICounters*, UInt32),
+    release : Proc(ICounters*, UInt32),
+    get_type_info_count : Proc(ICounters*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ICounters*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ICounters*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ICounters*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ICounters*, Int32*, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ICounters*, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ICounters*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    add : Proc(ICounters*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    remove : Proc(ICounters*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("79167962-28fc-11cf-942f-008029004347")]
+  record ICounters, lpVtbl : ICountersVtbl* do
+    GUID = LibC::GUID.new(0x79167962_u32, 0x28fc_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2f_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+    def query_interface(this : ICounters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ICounters*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ICounters*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ICounters*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ICounters*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ICounters*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ICounters*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : ICounters*, pLong : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, pLong)
+    end
+    def get__NewEnum(this : ICounters*, ppIunk : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, ppIunk)
+    end
+    def get_Item(this : ICounters*, index : Win32cr::System::Com::VARIANT, ppI : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, index, ppI)
+    end
+    def add(this : ICounters*, pathname : Win32cr::Foundation::BSTR, ppI : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, pathname, ppI)
+    end
+    def remove(this : ICounters*, index : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, index)
+    end
+
+  end
+
+  @[Extern]
+  record ILogFileItemVtbl,
+    query_interface : Proc(ILogFileItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ILogFileItem*, UInt32),
+    release : Proc(ILogFileItem*, UInt32),
+    get_Path : Proc(ILogFileItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("d6b518dd-05c7-418a-89e6-4f9ce8c6841e")]
+  record ILogFileItem, lpVtbl : ILogFileItemVtbl* do
+    GUID = LibC::GUID.new(0xd6b518dd_u32, 0x5c7_u16, 0x418a_u16, StaticArray[0x89_u8, 0xe6_u8, 0x4f_u8, 0x9c_u8, 0xe8_u8, 0xc6_u8, 0x84_u8, 0x1e_u8])
+    def query_interface(this : ILogFileItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ILogFileItem*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ILogFileItem*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_Path(this : ILogFileItem*, pstrValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Path.call(this, pstrValue)
+    end
+
+  end
+
+  @[Extern]
+  record DILogFileItemVtbl,
+    query_interface : Proc(DILogFileItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(DILogFileItem*, UInt32),
+    release : Proc(DILogFileItem*, UInt32),
+    get_type_info_count : Proc(DILogFileItem*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(DILogFileItem*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(DILogFileItem*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(DILogFileItem*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("8d093ffc-f777-4917-82d1-833fbc54c58f")]
+  record DILogFileItem, lpVtbl : DILogFileItemVtbl* do
+    GUID = LibC::GUID.new(0x8d093ffc_u32, 0xf777_u16, 0x4917_u16, StaticArray[0x82_u8, 0xd1_u8, 0x83_u8, 0x3f_u8, 0xbc_u8, 0x54_u8, 0xc5_u8, 0x8f_u8])
+    def query_interface(this : DILogFileItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : DILogFileItem*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : DILogFileItem*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : DILogFileItem*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : DILogFileItem*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : DILogFileItem*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : DILogFileItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+
+  end
+
+  @[Extern]
+  record ILogFilesVtbl,
+    query_interface : Proc(ILogFiles*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ILogFiles*, UInt32),
+    release : Proc(ILogFiles*, UInt32),
+    get_type_info_count : Proc(ILogFiles*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ILogFiles*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ILogFiles*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ILogFiles*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ILogFiles*, Int32*, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ILogFiles*, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ILogFiles*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    add : Proc(ILogFiles*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    remove : Proc(ILogFiles*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("6a2a97e6-6851-41ea-87ad-2a8225335865")]
+  record ILogFiles, lpVtbl : ILogFilesVtbl* do
+    GUID = LibC::GUID.new(0x6a2a97e6_u32, 0x6851_u16, 0x41ea_u16, StaticArray[0x87_u8, 0xad_u8, 0x2a_u8, 0x82_u8, 0x25_u8, 0x33_u8, 0x58_u8, 0x65_u8])
+    def query_interface(this : ILogFiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ILogFiles*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ILogFiles*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ILogFiles*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ILogFiles*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ILogFiles*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ILogFiles*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Count(this : ILogFiles*, pLong : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, pLong)
+    end
+    def get__NewEnum(this : ILogFiles*, ppIunk : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, ppIunk)
+    end
+    def get_Item(this : ILogFiles*, index : Win32cr::System::Com::VARIANT, ppI : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, index, ppI)
+    end
+    def add(this : ILogFiles*, pathname : Win32cr::Foundation::BSTR, ppI : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, pathname, ppI)
+    end
+    def remove(this : ILogFiles*, index : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, index)
+    end
+
+  end
+
+  @[Extern]
+  record ISystemMonitorVtbl,
+    query_interface : Proc(ISystemMonitor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISystemMonitor*, UInt32),
+    release : Proc(ISystemMonitor*, UInt32),
+    get_Appearance : Proc(ISystemMonitor*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Appearance : Proc(ISystemMonitor*, Int32, Win32cr::Foundation::HRESULT),
+    get_BackColor : Proc(ISystemMonitor*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_BackColor : Proc(ISystemMonitor*, UInt32, Win32cr::Foundation::HRESULT),
+    get_BorderStyle : Proc(ISystemMonitor*, Int32*, Win32cr::Foundation::HRESULT),
+    put_BorderStyle : Proc(ISystemMonitor*, Int32, Win32cr::Foundation::HRESULT),
+    get_ForeColor : Proc(ISystemMonitor*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_ForeColor : Proc(ISystemMonitor*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Font : Proc(ISystemMonitor*, Void**, Win32cr::Foundation::HRESULT),
+    putref_Font : Proc(ISystemMonitor*, Void*, Win32cr::Foundation::HRESULT),
+    get_Counters : Proc(ISystemMonitor*, Void**, Win32cr::Foundation::HRESULT),
+    put_ShowVerticalGrid : Proc(ISystemMonitor*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowVerticalGrid : Proc(ISystemMonitor*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowHorizontalGrid : Proc(ISystemMonitor*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowHorizontalGrid : Proc(ISystemMonitor*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowLegend : Proc(ISystemMonitor*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowLegend : Proc(ISystemMonitor*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowScaleLabels : Proc(ISystemMonitor*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowScaleLabels : Proc(ISystemMonitor*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowValueBar : Proc(ISystemMonitor*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowValueBar : Proc(ISystemMonitor*, Int16*, Win32cr::Foundation::HRESULT),
+    put_MaximumScale : Proc(ISystemMonitor*, Int32, Win32cr::Foundation::HRESULT),
+    get_MaximumScale : Proc(ISystemMonitor*, Int32*, Win32cr::Foundation::HRESULT),
+    put_MinimumScale : Proc(ISystemMonitor*, Int32, Win32cr::Foundation::HRESULT),
+    get_MinimumScale : Proc(ISystemMonitor*, Int32*, Win32cr::Foundation::HRESULT),
+    put_UpdateInterval : Proc(ISystemMonitor*, Float32, Win32cr::Foundation::HRESULT),
+    get_UpdateInterval : Proc(ISystemMonitor*, Float32*, Win32cr::Foundation::HRESULT),
+    put_DisplayType : Proc(ISystemMonitor*, Win32cr::System::Performance::DisplayTypeConstants, Win32cr::Foundation::HRESULT),
+    get_DisplayType : Proc(ISystemMonitor*, Win32cr::System::Performance::DisplayTypeConstants*, Win32cr::Foundation::HRESULT),
+    put_ManualUpdate : Proc(ISystemMonitor*, Int16, Win32cr::Foundation::HRESULT),
+    get_ManualUpdate : Proc(ISystemMonitor*, Int16*, Win32cr::Foundation::HRESULT),
+    put_GraphTitle : Proc(ISystemMonitor*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_GraphTitle : Proc(ISystemMonitor*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_YAxisLabel : Proc(ISystemMonitor*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_YAxisLabel : Proc(ISystemMonitor*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    collect_sample : Proc(ISystemMonitor*, Win32cr::Foundation::HRESULT),
+    update_graph : Proc(ISystemMonitor*, Win32cr::Foundation::HRESULT),
+    browse_counters : Proc(ISystemMonitor*, Win32cr::Foundation::HRESULT),
+    display_properties : Proc(ISystemMonitor*, Win32cr::Foundation::HRESULT),
+    counter : Proc(ISystemMonitor*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    add_counter : Proc(ISystemMonitor*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    delete_counter : Proc(ISystemMonitor*, Void*, Win32cr::Foundation::HRESULT),
+    get_BackColorCtl : Proc(ISystemMonitor*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_BackColorCtl : Proc(ISystemMonitor*, UInt32, Win32cr::Foundation::HRESULT),
+    put_LogFileName : Proc(ISystemMonitor*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LogFileName : Proc(ISystemMonitor*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_LogViewStart : Proc(ISystemMonitor*, Float64, Win32cr::Foundation::HRESULT),
+    get_LogViewStart : Proc(ISystemMonitor*, Float64*, Win32cr::Foundation::HRESULT),
+    put_LogViewStop : Proc(ISystemMonitor*, Float64, Win32cr::Foundation::HRESULT),
+    get_LogViewStop : Proc(ISystemMonitor*, Float64*, Win32cr::Foundation::HRESULT),
+    get_GridColor : Proc(ISystemMonitor*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_GridColor : Proc(ISystemMonitor*, UInt32, Win32cr::Foundation::HRESULT),
+    get_TimeBarColor : Proc(ISystemMonitor*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_TimeBarColor : Proc(ISystemMonitor*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Highlight : Proc(ISystemMonitor*, Int16*, Win32cr::Foundation::HRESULT),
+    put_Highlight : Proc(ISystemMonitor*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowToolbar : Proc(ISystemMonitor*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowToolbar : Proc(ISystemMonitor*, Int16, Win32cr::Foundation::HRESULT),
+    paste : Proc(ISystemMonitor*, Win32cr::Foundation::HRESULT),
+    copy : Proc(ISystemMonitor*, Win32cr::Foundation::HRESULT),
+    reset : Proc(ISystemMonitor*, Win32cr::Foundation::HRESULT),
+    put_ReadOnly : Proc(ISystemMonitor*, Int16, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(ISystemMonitor*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ReportValueType : Proc(ISystemMonitor*, Win32cr::System::Performance::ReportValueTypeConstants, Win32cr::Foundation::HRESULT),
+    get_ReportValueType : Proc(ISystemMonitor*, Win32cr::System::Performance::ReportValueTypeConstants*, Win32cr::Foundation::HRESULT),
+    put_MonitorDuplicateInstances : Proc(ISystemMonitor*, Int16, Win32cr::Foundation::HRESULT),
+    get_MonitorDuplicateInstances : Proc(ISystemMonitor*, Int16*, Win32cr::Foundation::HRESULT),
+    put_DisplayFilter : Proc(ISystemMonitor*, Int32, Win32cr::Foundation::HRESULT),
+    get_DisplayFilter : Proc(ISystemMonitor*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LogFiles : Proc(ISystemMonitor*, Void**, Win32cr::Foundation::HRESULT),
+    put_DataSourceType : Proc(ISystemMonitor*, Win32cr::System::Performance::DataSourceTypeConstants, Win32cr::Foundation::HRESULT),
+    get_DataSourceType : Proc(ISystemMonitor*, Win32cr::System::Performance::DataSourceTypeConstants*, Win32cr::Foundation::HRESULT),
+    put_SqlDsnName : Proc(ISystemMonitor*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_SqlDsnName : Proc(ISystemMonitor*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_SqlLogSetName : Proc(ISystemMonitor*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_SqlLogSetName : Proc(ISystemMonitor*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("194eb241-c32c-11cf-9398-00aa00a3ddea")]
+  record ISystemMonitor, lpVtbl : ISystemMonitorVtbl* do
+    GUID = LibC::GUID.new(0x194eb241_u32, 0xc32c_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
+    def query_interface(this : ISystemMonitor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISystemMonitor*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISystemMonitor*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_Appearance(this : ISystemMonitor*, iAppearance : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Appearance.call(this, iAppearance)
+    end
+    def put_Appearance(this : ISystemMonitor*, iAppearance : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Appearance.call(this, iAppearance)
+    end
+    def get_BackColor(this : ISystemMonitor*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BackColor.call(this, pColor)
+    end
+    def put_BackColor(this : ISystemMonitor*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BackColor.call(this, color)
+    end
+    def get_BorderStyle(this : ISystemMonitor*, iBorderStyle : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BorderStyle.call(this, iBorderStyle)
+    end
+    def put_BorderStyle(this : ISystemMonitor*, iBorderStyle : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BorderStyle.call(this, iBorderStyle)
+    end
+    def get_ForeColor(this : ISystemMonitor*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ForeColor.call(this, pColor)
+    end
+    def put_ForeColor(this : ISystemMonitor*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ForeColor.call(this, color)
+    end
+    def get_Font(this : ISystemMonitor*, ppFont : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Font.call(this, ppFont)
+    end
+    def putref_Font(this : ISystemMonitor*, pFont : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_Font.call(this, pFont)
+    end
+    def get_Counters(this : ISystemMonitor*, ppICounters : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Counters.call(this, ppICounters)
+    end
+    def put_ShowVerticalGrid(this : ISystemMonitor*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowVerticalGrid.call(this, bState)
+    end
+    def get_ShowVerticalGrid(this : ISystemMonitor*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowVerticalGrid.call(this, pbState)
+    end
+    def put_ShowHorizontalGrid(this : ISystemMonitor*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowHorizontalGrid.call(this, bState)
+    end
+    def get_ShowHorizontalGrid(this : ISystemMonitor*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowHorizontalGrid.call(this, pbState)
+    end
+    def put_ShowLegend(this : ISystemMonitor*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowLegend.call(this, bState)
+    end
+    def get_ShowLegend(this : ISystemMonitor*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowLegend.call(this, pbState)
+    end
+    def put_ShowScaleLabels(this : ISystemMonitor*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowScaleLabels.call(this, bState)
+    end
+    def get_ShowScaleLabels(this : ISystemMonitor*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowScaleLabels.call(this, pbState)
+    end
+    def put_ShowValueBar(this : ISystemMonitor*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowValueBar.call(this, bState)
+    end
+    def get_ShowValueBar(this : ISystemMonitor*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowValueBar.call(this, pbState)
+    end
+    def put_MaximumScale(this : ISystemMonitor*, iValue : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MaximumScale.call(this, iValue)
+    end
+    def get_MaximumScale(this : ISystemMonitor*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MaximumScale.call(this, piValue)
+    end
+    def put_MinimumScale(this : ISystemMonitor*, iValue : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MinimumScale.call(this, iValue)
+    end
+    def get_MinimumScale(this : ISystemMonitor*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MinimumScale.call(this, piValue)
+    end
+    def put_UpdateInterval(this : ISystemMonitor*, fValue : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_UpdateInterval.call(this, fValue)
+    end
+    def get_UpdateInterval(this : ISystemMonitor*, pfValue : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UpdateInterval.call(this, pfValue)
+    end
+    def put_DisplayType(this : ISystemMonitor*, eDisplayType : Win32cr::System::Performance::DisplayTypeConstants) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DisplayType.call(this, eDisplayType)
+    end
+    def get_DisplayType(this : ISystemMonitor*, peDisplayType : Win32cr::System::Performance::DisplayTypeConstants*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisplayType.call(this, peDisplayType)
+    end
+    def put_ManualUpdate(this : ISystemMonitor*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ManualUpdate.call(this, bState)
+    end
+    def get_ManualUpdate(this : ISystemMonitor*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ManualUpdate.call(this, pbState)
+    end
+    def put_GraphTitle(this : ISystemMonitor*, bsTitle : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_GraphTitle.call(this, bsTitle)
+    end
+    def get_GraphTitle(this : ISystemMonitor*, pbsTitle : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_GraphTitle.call(this, pbsTitle)
+    end
+    def put_YAxisLabel(this : ISystemMonitor*, bsTitle : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_YAxisLabel.call(this, bsTitle)
+    end
+    def get_YAxisLabel(this : ISystemMonitor*, pbsTitle : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_YAxisLabel.call(this, pbsTitle)
+    end
+    def collect_sample(this : ISystemMonitor*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.collect_sample.call(this)
+    end
+    def update_graph(this : ISystemMonitor*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.update_graph.call(this)
+    end
+    def browse_counters(this : ISystemMonitor*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.browse_counters.call(this)
+    end
+    def display_properties(this : ISystemMonitor*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.display_properties.call(this)
+    end
+    def counter(this : ISystemMonitor*, iIndex : Int32, ppICounter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.counter.call(this, iIndex, ppICounter)
+    end
+    def add_counter(this : ISystemMonitor*, bsPath : Win32cr::Foundation::BSTR, ppICounter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_counter.call(this, bsPath, ppICounter)
+    end
+    def delete_counter(this : ISystemMonitor*, pCtr : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_counter.call(this, pCtr)
+    end
+    def get_BackColorCtl(this : ISystemMonitor*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BackColorCtl.call(this, pColor)
+    end
+    def put_BackColorCtl(this : ISystemMonitor*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BackColorCtl.call(this, color)
+    end
+    def put_LogFileName(this : ISystemMonitor*, bsFileName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogFileName.call(this, bsFileName)
+    end
+    def get_LogFileName(this : ISystemMonitor*, bsFileName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogFileName.call(this, bsFileName)
+    end
+    def put_LogViewStart(this : ISystemMonitor*, start_time : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogViewStart.call(this, start_time)
+    end
+    def get_LogViewStart(this : ISystemMonitor*, start_time : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogViewStart.call(this, start_time)
+    end
+    def put_LogViewStop(this : ISystemMonitor*, stop_time : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogViewStop.call(this, stop_time)
+    end
+    def get_LogViewStop(this : ISystemMonitor*, stop_time : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogViewStop.call(this, stop_time)
+    end
+    def get_GridColor(this : ISystemMonitor*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_GridColor.call(this, pColor)
+    end
+    def put_GridColor(this : ISystemMonitor*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_GridColor.call(this, color)
+    end
+    def get_TimeBarColor(this : ISystemMonitor*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TimeBarColor.call(this, pColor)
+    end
+    def put_TimeBarColor(this : ISystemMonitor*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_TimeBarColor.call(this, color)
+    end
+    def get_Highlight(this : ISystemMonitor*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Highlight.call(this, pbState)
+    end
+    def put_Highlight(this : ISystemMonitor*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Highlight.call(this, bState)
+    end
+    def get_ShowToolbar(this : ISystemMonitor*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowToolbar.call(this, pbState)
+    end
+    def put_ShowToolbar(this : ISystemMonitor*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowToolbar.call(this, bState)
+    end
+    def paste(this : ISystemMonitor*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.paste.call(this)
+    end
+    def copy(this : ISystemMonitor*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy.call(this)
+    end
+    def reset(this : ISystemMonitor*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def put_ReadOnly(this : ISystemMonitor*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ReadOnly.call(this, bState)
+    end
+    def get_ReadOnly(this : ISystemMonitor*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ReadOnly.call(this, pbState)
+    end
+    def put_ReportValueType(this : ISystemMonitor*, eReportValueType : Win32cr::System::Performance::ReportValueTypeConstants) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ReportValueType.call(this, eReportValueType)
+    end
+    def get_ReportValueType(this : ISystemMonitor*, peReportValueType : Win32cr::System::Performance::ReportValueTypeConstants*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ReportValueType.call(this, peReportValueType)
+    end
+    def put_MonitorDuplicateInstances(this : ISystemMonitor*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MonitorDuplicateInstances.call(this, bState)
+    end
+    def get_MonitorDuplicateInstances(this : ISystemMonitor*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MonitorDuplicateInstances.call(this, pbState)
+    end
+    def put_DisplayFilter(this : ISystemMonitor*, iValue : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DisplayFilter.call(this, iValue)
+    end
+    def get_DisplayFilter(this : ISystemMonitor*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisplayFilter.call(this, piValue)
+    end
+    def get_LogFiles(this : ISystemMonitor*, ppILogFiles : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogFiles.call(this, ppILogFiles)
+    end
+    def put_DataSourceType(this : ISystemMonitor*, eDataSourceType : Win32cr::System::Performance::DataSourceTypeConstants) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DataSourceType.call(this, eDataSourceType)
+    end
+    def get_DataSourceType(this : ISystemMonitor*, peDataSourceType : Win32cr::System::Performance::DataSourceTypeConstants*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataSourceType.call(this, peDataSourceType)
+    end
+    def put_SqlDsnName(this : ISystemMonitor*, bsSqlDsnName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SqlDsnName.call(this, bsSqlDsnName)
+    end
+    def get_SqlDsnName(this : ISystemMonitor*, bsSqlDsnName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SqlDsnName.call(this, bsSqlDsnName)
+    end
+    def put_SqlLogSetName(this : ISystemMonitor*, bsSqlLogSetName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SqlLogSetName.call(this, bsSqlLogSetName)
+    end
+    def get_SqlLogSetName(this : ISystemMonitor*, bsSqlLogSetName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SqlLogSetName.call(this, bsSqlLogSetName)
+    end
+
+  end
+
+  @[Extern]
+  record ISystemMonitor2Vtbl,
+    query_interface : Proc(ISystemMonitor2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISystemMonitor2*, UInt32),
+    release : Proc(ISystemMonitor2*, UInt32),
+    get_Appearance : Proc(ISystemMonitor2*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Appearance : Proc(ISystemMonitor2*, Int32, Win32cr::Foundation::HRESULT),
+    get_BackColor : Proc(ISystemMonitor2*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_BackColor : Proc(ISystemMonitor2*, UInt32, Win32cr::Foundation::HRESULT),
+    get_BorderStyle : Proc(ISystemMonitor2*, Int32*, Win32cr::Foundation::HRESULT),
+    put_BorderStyle : Proc(ISystemMonitor2*, Int32, Win32cr::Foundation::HRESULT),
+    get_ForeColor : Proc(ISystemMonitor2*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_ForeColor : Proc(ISystemMonitor2*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Font : Proc(ISystemMonitor2*, Void**, Win32cr::Foundation::HRESULT),
+    putref_Font : Proc(ISystemMonitor2*, Void*, Win32cr::Foundation::HRESULT),
+    get_Counters : Proc(ISystemMonitor2*, Void**, Win32cr::Foundation::HRESULT),
+    put_ShowVerticalGrid : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowVerticalGrid : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowHorizontalGrid : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowHorizontalGrid : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowLegend : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowLegend : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowScaleLabels : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowScaleLabels : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowValueBar : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowValueBar : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_MaximumScale : Proc(ISystemMonitor2*, Int32, Win32cr::Foundation::HRESULT),
+    get_MaximumScale : Proc(ISystemMonitor2*, Int32*, Win32cr::Foundation::HRESULT),
+    put_MinimumScale : Proc(ISystemMonitor2*, Int32, Win32cr::Foundation::HRESULT),
+    get_MinimumScale : Proc(ISystemMonitor2*, Int32*, Win32cr::Foundation::HRESULT),
+    put_UpdateInterval : Proc(ISystemMonitor2*, Float32, Win32cr::Foundation::HRESULT),
+    get_UpdateInterval : Proc(ISystemMonitor2*, Float32*, Win32cr::Foundation::HRESULT),
+    put_DisplayType : Proc(ISystemMonitor2*, Win32cr::System::Performance::DisplayTypeConstants, Win32cr::Foundation::HRESULT),
+    get_DisplayType : Proc(ISystemMonitor2*, Win32cr::System::Performance::DisplayTypeConstants*, Win32cr::Foundation::HRESULT),
+    put_ManualUpdate : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    get_ManualUpdate : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_GraphTitle : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_GraphTitle : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_YAxisLabel : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_YAxisLabel : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    collect_sample : Proc(ISystemMonitor2*, Win32cr::Foundation::HRESULT),
+    update_graph : Proc(ISystemMonitor2*, Win32cr::Foundation::HRESULT),
+    browse_counters : Proc(ISystemMonitor2*, Win32cr::Foundation::HRESULT),
+    display_properties : Proc(ISystemMonitor2*, Win32cr::Foundation::HRESULT),
+    counter : Proc(ISystemMonitor2*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    add_counter : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    delete_counter : Proc(ISystemMonitor2*, Void*, Win32cr::Foundation::HRESULT),
+    get_BackColorCtl : Proc(ISystemMonitor2*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_BackColorCtl : Proc(ISystemMonitor2*, UInt32, Win32cr::Foundation::HRESULT),
+    put_LogFileName : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LogFileName : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_LogViewStart : Proc(ISystemMonitor2*, Float64, Win32cr::Foundation::HRESULT),
+    get_LogViewStart : Proc(ISystemMonitor2*, Float64*, Win32cr::Foundation::HRESULT),
+    put_LogViewStop : Proc(ISystemMonitor2*, Float64, Win32cr::Foundation::HRESULT),
+    get_LogViewStop : Proc(ISystemMonitor2*, Float64*, Win32cr::Foundation::HRESULT),
+    get_GridColor : Proc(ISystemMonitor2*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_GridColor : Proc(ISystemMonitor2*, UInt32, Win32cr::Foundation::HRESULT),
+    get_TimeBarColor : Proc(ISystemMonitor2*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_TimeBarColor : Proc(ISystemMonitor2*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Highlight : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_Highlight : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowToolbar : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowToolbar : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    paste : Proc(ISystemMonitor2*, Win32cr::Foundation::HRESULT),
+    copy : Proc(ISystemMonitor2*, Win32cr::Foundation::HRESULT),
+    reset : Proc(ISystemMonitor2*, Win32cr::Foundation::HRESULT),
+    put_ReadOnly : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ReportValueType : Proc(ISystemMonitor2*, Win32cr::System::Performance::ReportValueTypeConstants, Win32cr::Foundation::HRESULT),
+    get_ReportValueType : Proc(ISystemMonitor2*, Win32cr::System::Performance::ReportValueTypeConstants*, Win32cr::Foundation::HRESULT),
+    put_MonitorDuplicateInstances : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    get_MonitorDuplicateInstances : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_DisplayFilter : Proc(ISystemMonitor2*, Int32, Win32cr::Foundation::HRESULT),
+    get_DisplayFilter : Proc(ISystemMonitor2*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LogFiles : Proc(ISystemMonitor2*, Void**, Win32cr::Foundation::HRESULT),
+    put_DataSourceType : Proc(ISystemMonitor2*, Win32cr::System::Performance::DataSourceTypeConstants, Win32cr::Foundation::HRESULT),
+    get_DataSourceType : Proc(ISystemMonitor2*, Win32cr::System::Performance::DataSourceTypeConstants*, Win32cr::Foundation::HRESULT),
+    put_SqlDsnName : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_SqlDsnName : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_SqlLogSetName : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_SqlLogSetName : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_EnableDigitGrouping : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    get_EnableDigitGrouping : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_EnableToolTips : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    get_EnableToolTips : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowTimeAxisLabels : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowTimeAxisLabels : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ChartScroll : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    get_ChartScroll : Proc(ISystemMonitor2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_DataPointCount : Proc(ISystemMonitor2*, Int32, Win32cr::Foundation::HRESULT),
+    get_DataPointCount : Proc(ISystemMonitor2*, Int32*, Win32cr::Foundation::HRESULT),
+    scale_to_fit : Proc(ISystemMonitor2*, Int16, Win32cr::Foundation::HRESULT),
+    save_as : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR, Win32cr::System::Performance::SysmonFileType, Win32cr::Foundation::HRESULT),
+    relog : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR, Win32cr::System::Performance::SysmonFileType, Int32, Win32cr::Foundation::HRESULT),
+    clear_data : Proc(ISystemMonitor2*, Win32cr::Foundation::HRESULT),
+    get_LogSourceStartTime : Proc(ISystemMonitor2*, Float64*, Win32cr::Foundation::HRESULT),
+    get_LogSourceStopTime : Proc(ISystemMonitor2*, Float64*, Win32cr::Foundation::HRESULT),
+    set_log_view_range : Proc(ISystemMonitor2*, Float64, Float64, Win32cr::Foundation::HRESULT),
+    get_log_view_range : Proc(ISystemMonitor2*, Float64*, Float64*, Win32cr::Foundation::HRESULT),
+    batching_lock : Proc(ISystemMonitor2*, Int16, Win32cr::System::Performance::SysmonBatchReason, Win32cr::Foundation::HRESULT),
+    load_settings : Proc(ISystemMonitor2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("08e3206a-5fd2-4fde-a8a5-8cb3b63d2677")]
+  record ISystemMonitor2, lpVtbl : ISystemMonitor2Vtbl* do
+    GUID = LibC::GUID.new(0x8e3206a_u32, 0x5fd2_u16, 0x4fde_u16, StaticArray[0xa8_u8, 0xa5_u8, 0x8c_u8, 0xb3_u8, 0xb6_u8, 0x3d_u8, 0x26_u8, 0x77_u8])
+    def query_interface(this : ISystemMonitor2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISystemMonitor2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISystemMonitor2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_Appearance(this : ISystemMonitor2*, iAppearance : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Appearance.call(this, iAppearance)
+    end
+    def put_Appearance(this : ISystemMonitor2*, iAppearance : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Appearance.call(this, iAppearance)
+    end
+    def get_BackColor(this : ISystemMonitor2*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BackColor.call(this, pColor)
+    end
+    def put_BackColor(this : ISystemMonitor2*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BackColor.call(this, color)
+    end
+    def get_BorderStyle(this : ISystemMonitor2*, iBorderStyle : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BorderStyle.call(this, iBorderStyle)
+    end
+    def put_BorderStyle(this : ISystemMonitor2*, iBorderStyle : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BorderStyle.call(this, iBorderStyle)
+    end
+    def get_ForeColor(this : ISystemMonitor2*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ForeColor.call(this, pColor)
+    end
+    def put_ForeColor(this : ISystemMonitor2*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ForeColor.call(this, color)
+    end
+    def get_Font(this : ISystemMonitor2*, ppFont : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Font.call(this, ppFont)
+    end
+    def putref_Font(this : ISystemMonitor2*, pFont : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_Font.call(this, pFont)
+    end
+    def get_Counters(this : ISystemMonitor2*, ppICounters : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Counters.call(this, ppICounters)
+    end
+    def put_ShowVerticalGrid(this : ISystemMonitor2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowVerticalGrid.call(this, bState)
+    end
+    def get_ShowVerticalGrid(this : ISystemMonitor2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowVerticalGrid.call(this, pbState)
+    end
+    def put_ShowHorizontalGrid(this : ISystemMonitor2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowHorizontalGrid.call(this, bState)
+    end
+    def get_ShowHorizontalGrid(this : ISystemMonitor2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowHorizontalGrid.call(this, pbState)
+    end
+    def put_ShowLegend(this : ISystemMonitor2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowLegend.call(this, bState)
+    end
+    def get_ShowLegend(this : ISystemMonitor2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowLegend.call(this, pbState)
+    end
+    def put_ShowScaleLabels(this : ISystemMonitor2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowScaleLabels.call(this, bState)
+    end
+    def get_ShowScaleLabels(this : ISystemMonitor2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowScaleLabels.call(this, pbState)
+    end
+    def put_ShowValueBar(this : ISystemMonitor2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowValueBar.call(this, bState)
+    end
+    def get_ShowValueBar(this : ISystemMonitor2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowValueBar.call(this, pbState)
+    end
+    def put_MaximumScale(this : ISystemMonitor2*, iValue : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MaximumScale.call(this, iValue)
+    end
+    def get_MaximumScale(this : ISystemMonitor2*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MaximumScale.call(this, piValue)
+    end
+    def put_MinimumScale(this : ISystemMonitor2*, iValue : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MinimumScale.call(this, iValue)
+    end
+    def get_MinimumScale(this : ISystemMonitor2*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MinimumScale.call(this, piValue)
+    end
+    def put_UpdateInterval(this : ISystemMonitor2*, fValue : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_UpdateInterval.call(this, fValue)
+    end
+    def get_UpdateInterval(this : ISystemMonitor2*, pfValue : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UpdateInterval.call(this, pfValue)
+    end
+    def put_DisplayType(this : ISystemMonitor2*, eDisplayType : Win32cr::System::Performance::DisplayTypeConstants) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DisplayType.call(this, eDisplayType)
+    end
+    def get_DisplayType(this : ISystemMonitor2*, peDisplayType : Win32cr::System::Performance::DisplayTypeConstants*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisplayType.call(this, peDisplayType)
+    end
+    def put_ManualUpdate(this : ISystemMonitor2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ManualUpdate.call(this, bState)
+    end
+    def get_ManualUpdate(this : ISystemMonitor2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ManualUpdate.call(this, pbState)
+    end
+    def put_GraphTitle(this : ISystemMonitor2*, bsTitle : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_GraphTitle.call(this, bsTitle)
+    end
+    def get_GraphTitle(this : ISystemMonitor2*, pbsTitle : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_GraphTitle.call(this, pbsTitle)
+    end
+    def put_YAxisLabel(this : ISystemMonitor2*, bsTitle : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_YAxisLabel.call(this, bsTitle)
+    end
+    def get_YAxisLabel(this : ISystemMonitor2*, pbsTitle : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_YAxisLabel.call(this, pbsTitle)
+    end
+    def collect_sample(this : ISystemMonitor2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.collect_sample.call(this)
+    end
+    def update_graph(this : ISystemMonitor2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.update_graph.call(this)
+    end
+    def browse_counters(this : ISystemMonitor2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.browse_counters.call(this)
+    end
+    def display_properties(this : ISystemMonitor2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.display_properties.call(this)
+    end
+    def counter(this : ISystemMonitor2*, iIndex : Int32, ppICounter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.counter.call(this, iIndex, ppICounter)
+    end
+    def add_counter(this : ISystemMonitor2*, bsPath : Win32cr::Foundation::BSTR, ppICounter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_counter.call(this, bsPath, ppICounter)
+    end
+    def delete_counter(this : ISystemMonitor2*, pCtr : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_counter.call(this, pCtr)
+    end
+    def get_BackColorCtl(this : ISystemMonitor2*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BackColorCtl.call(this, pColor)
+    end
+    def put_BackColorCtl(this : ISystemMonitor2*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BackColorCtl.call(this, color)
+    end
+    def put_LogFileName(this : ISystemMonitor2*, bsFileName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogFileName.call(this, bsFileName)
+    end
+    def get_LogFileName(this : ISystemMonitor2*, bsFileName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogFileName.call(this, bsFileName)
+    end
+    def put_LogViewStart(this : ISystemMonitor2*, start_time : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogViewStart.call(this, start_time)
+    end
+    def get_LogViewStart(this : ISystemMonitor2*, start_time : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogViewStart.call(this, start_time)
+    end
+    def put_LogViewStop(this : ISystemMonitor2*, stop_time : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogViewStop.call(this, stop_time)
+    end
+    def get_LogViewStop(this : ISystemMonitor2*, stop_time : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogViewStop.call(this, stop_time)
+    end
+    def get_GridColor(this : ISystemMonitor2*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_GridColor.call(this, pColor)
+    end
+    def put_GridColor(this : ISystemMonitor2*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_GridColor.call(this, color)
+    end
+    def get_TimeBarColor(this : ISystemMonitor2*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TimeBarColor.call(this, pColor)
+    end
+    def put_TimeBarColor(this : ISystemMonitor2*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_TimeBarColor.call(this, color)
+    end
+    def get_Highlight(this : ISystemMonitor2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Highlight.call(this, pbState)
+    end
+    def put_Highlight(this : ISystemMonitor2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Highlight.call(this, bState)
+    end
+    def get_ShowToolbar(this : ISystemMonitor2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowToolbar.call(this, pbState)
+    end
+    def put_ShowToolbar(this : ISystemMonitor2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowToolbar.call(this, bState)
+    end
+    def paste(this : ISystemMonitor2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.paste.call(this)
+    end
+    def copy(this : ISystemMonitor2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy.call(this)
+    end
+    def reset(this : ISystemMonitor2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def put_ReadOnly(this : ISystemMonitor2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ReadOnly.call(this, bState)
+    end
+    def get_ReadOnly(this : ISystemMonitor2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ReadOnly.call(this, pbState)
+    end
+    def put_ReportValueType(this : ISystemMonitor2*, eReportValueType : Win32cr::System::Performance::ReportValueTypeConstants) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ReportValueType.call(this, eReportValueType)
+    end
+    def get_ReportValueType(this : ISystemMonitor2*, peReportValueType : Win32cr::System::Performance::ReportValueTypeConstants*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ReportValueType.call(this, peReportValueType)
+    end
+    def put_MonitorDuplicateInstances(this : ISystemMonitor2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MonitorDuplicateInstances.call(this, bState)
+    end
+    def get_MonitorDuplicateInstances(this : ISystemMonitor2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MonitorDuplicateInstances.call(this, pbState)
+    end
+    def put_DisplayFilter(this : ISystemMonitor2*, iValue : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DisplayFilter.call(this, iValue)
+    end
+    def get_DisplayFilter(this : ISystemMonitor2*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisplayFilter.call(this, piValue)
+    end
+    def get_LogFiles(this : ISystemMonitor2*, ppILogFiles : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogFiles.call(this, ppILogFiles)
+    end
+    def put_DataSourceType(this : ISystemMonitor2*, eDataSourceType : Win32cr::System::Performance::DataSourceTypeConstants) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DataSourceType.call(this, eDataSourceType)
+    end
+    def get_DataSourceType(this : ISystemMonitor2*, peDataSourceType : Win32cr::System::Performance::DataSourceTypeConstants*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataSourceType.call(this, peDataSourceType)
+    end
+    def put_SqlDsnName(this : ISystemMonitor2*, bsSqlDsnName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SqlDsnName.call(this, bsSqlDsnName)
+    end
+    def get_SqlDsnName(this : ISystemMonitor2*, bsSqlDsnName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SqlDsnName.call(this, bsSqlDsnName)
+    end
+    def put_SqlLogSetName(this : ISystemMonitor2*, bsSqlLogSetName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SqlLogSetName.call(this, bsSqlLogSetName)
+    end
+    def get_SqlLogSetName(this : ISystemMonitor2*, bsSqlLogSetName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SqlLogSetName.call(this, bsSqlLogSetName)
+    end
+    def put_EnableDigitGrouping(this : ISystemMonitor2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EnableDigitGrouping.call(this, bState)
+    end
+    def get_EnableDigitGrouping(this : ISystemMonitor2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EnableDigitGrouping.call(this, pbState)
+    end
+    def put_EnableToolTips(this : ISystemMonitor2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EnableToolTips.call(this, bState)
+    end
+    def get_EnableToolTips(this : ISystemMonitor2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EnableToolTips.call(this, pbState)
+    end
+    def put_ShowTimeAxisLabels(this : ISystemMonitor2*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowTimeAxisLabels.call(this, bState)
+    end
+    def get_ShowTimeAxisLabels(this : ISystemMonitor2*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowTimeAxisLabels.call(this, pbState)
+    end
+    def put_ChartScroll(this : ISystemMonitor2*, bScroll : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ChartScroll.call(this, bScroll)
+    end
+    def get_ChartScroll(this : ISystemMonitor2*, pbScroll : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ChartScroll.call(this, pbScroll)
+    end
+    def put_DataPointCount(this : ISystemMonitor2*, iNewCount : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DataPointCount.call(this, iNewCount)
+    end
+    def get_DataPointCount(this : ISystemMonitor2*, piDataPointCount : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataPointCount.call(this, piDataPointCount)
+    end
+    def scale_to_fit(this : ISystemMonitor2*, bSelectedCountersOnly : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.scale_to_fit.call(this, bSelectedCountersOnly)
+    end
+    def save_as(this : ISystemMonitor2*, bstrFileName : Win32cr::Foundation::BSTR, eSysmonFileType : Win32cr::System::Performance::SysmonFileType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_as.call(this, bstrFileName, eSysmonFileType)
+    end
+    def relog(this : ISystemMonitor2*, bstrFileName : Win32cr::Foundation::BSTR, eSysmonFileType : Win32cr::System::Performance::SysmonFileType, iFilter : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.relog.call(this, bstrFileName, eSysmonFileType, iFilter)
+    end
+    def clear_data(this : ISystemMonitor2*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear_data.call(this)
+    end
+    def get_LogSourceStartTime(this : ISystemMonitor2*, pDate : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogSourceStartTime.call(this, pDate)
+    end
+    def get_LogSourceStopTime(this : ISystemMonitor2*, pDate : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogSourceStopTime.call(this, pDate)
+    end
+    def set_log_view_range(this : ISystemMonitor2*, start_time : Float64, stop_time : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_log_view_range.call(this, start_time, stop_time)
+    end
+    def get_log_view_range(this : ISystemMonitor2*, start_time : Float64*, stop_time : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_log_view_range.call(this, start_time, stop_time)
+    end
+    def batching_lock(this : ISystemMonitor2*, fLock : Int16, eBatchReason : Win32cr::System::Performance::SysmonBatchReason) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.batching_lock.call(this, fLock, eBatchReason)
+    end
+    def load_settings(this : ISystemMonitor2*, bstrSettingFileName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_settings.call(this, bstrSettingFileName)
+    end
+
+  end
+
+  @[Extern]
+  record ISystemMonitorUnionVtbl,
+    query_interface : Proc(ISystemMonitorUnion*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISystemMonitorUnion*, UInt32),
+    release : Proc(ISystemMonitorUnion*, UInt32),
+    get_Appearance : Proc(ISystemMonitorUnion*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Appearance : Proc(ISystemMonitorUnion*, Int32, Win32cr::Foundation::HRESULT),
+    get_BackColor : Proc(ISystemMonitorUnion*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_BackColor : Proc(ISystemMonitorUnion*, UInt32, Win32cr::Foundation::HRESULT),
+    get_BorderStyle : Proc(ISystemMonitorUnion*, Int32*, Win32cr::Foundation::HRESULT),
+    put_BorderStyle : Proc(ISystemMonitorUnion*, Int32, Win32cr::Foundation::HRESULT),
+    get_ForeColor : Proc(ISystemMonitorUnion*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_ForeColor : Proc(ISystemMonitorUnion*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Font : Proc(ISystemMonitorUnion*, Void**, Win32cr::Foundation::HRESULT),
+    putref_Font : Proc(ISystemMonitorUnion*, Void*, Win32cr::Foundation::HRESULT),
+    get_Counters : Proc(ISystemMonitorUnion*, Void**, Win32cr::Foundation::HRESULT),
+    put_ShowVerticalGrid : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowVerticalGrid : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowHorizontalGrid : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowHorizontalGrid : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowLegend : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowLegend : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowScaleLabels : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowScaleLabels : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowValueBar : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowValueBar : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_MaximumScale : Proc(ISystemMonitorUnion*, Int32, Win32cr::Foundation::HRESULT),
+    get_MaximumScale : Proc(ISystemMonitorUnion*, Int32*, Win32cr::Foundation::HRESULT),
+    put_MinimumScale : Proc(ISystemMonitorUnion*, Int32, Win32cr::Foundation::HRESULT),
+    get_MinimumScale : Proc(ISystemMonitorUnion*, Int32*, Win32cr::Foundation::HRESULT),
+    put_UpdateInterval : Proc(ISystemMonitorUnion*, Float32, Win32cr::Foundation::HRESULT),
+    get_UpdateInterval : Proc(ISystemMonitorUnion*, Float32*, Win32cr::Foundation::HRESULT),
+    put_DisplayType : Proc(ISystemMonitorUnion*, Win32cr::System::Performance::DisplayTypeConstants, Win32cr::Foundation::HRESULT),
+    get_DisplayType : Proc(ISystemMonitorUnion*, Win32cr::System::Performance::DisplayTypeConstants*, Win32cr::Foundation::HRESULT),
+    put_ManualUpdate : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_ManualUpdate : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_GraphTitle : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_GraphTitle : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_YAxisLabel : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_YAxisLabel : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    collect_sample : Proc(ISystemMonitorUnion*, Win32cr::Foundation::HRESULT),
+    update_graph : Proc(ISystemMonitorUnion*, Win32cr::Foundation::HRESULT),
+    browse_counters : Proc(ISystemMonitorUnion*, Win32cr::Foundation::HRESULT),
+    display_properties : Proc(ISystemMonitorUnion*, Win32cr::Foundation::HRESULT),
+    counter : Proc(ISystemMonitorUnion*, Int32, Void**, Win32cr::Foundation::HRESULT),
+    add_counter : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    delete_counter : Proc(ISystemMonitorUnion*, Void*, Win32cr::Foundation::HRESULT),
+    get_BackColorCtl : Proc(ISystemMonitorUnion*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_BackColorCtl : Proc(ISystemMonitorUnion*, UInt32, Win32cr::Foundation::HRESULT),
+    put_LogFileName : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_LogFileName : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_LogViewStart : Proc(ISystemMonitorUnion*, Float64, Win32cr::Foundation::HRESULT),
+    get_LogViewStart : Proc(ISystemMonitorUnion*, Float64*, Win32cr::Foundation::HRESULT),
+    put_LogViewStop : Proc(ISystemMonitorUnion*, Float64, Win32cr::Foundation::HRESULT),
+    get_LogViewStop : Proc(ISystemMonitorUnion*, Float64*, Win32cr::Foundation::HRESULT),
+    get_GridColor : Proc(ISystemMonitorUnion*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_GridColor : Proc(ISystemMonitorUnion*, UInt32, Win32cr::Foundation::HRESULT),
+    get_TimeBarColor : Proc(ISystemMonitorUnion*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_TimeBarColor : Proc(ISystemMonitorUnion*, UInt32, Win32cr::Foundation::HRESULT),
+    get_Highlight : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_Highlight : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowToolbar : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowToolbar : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    paste : Proc(ISystemMonitorUnion*, Win32cr::Foundation::HRESULT),
+    copy : Proc(ISystemMonitorUnion*, Win32cr::Foundation::HRESULT),
+    reset : Proc(ISystemMonitorUnion*, Win32cr::Foundation::HRESULT),
+    put_ReadOnly : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_ReadOnly : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ReportValueType : Proc(ISystemMonitorUnion*, Win32cr::System::Performance::ReportValueTypeConstants, Win32cr::Foundation::HRESULT),
+    get_ReportValueType : Proc(ISystemMonitorUnion*, Win32cr::System::Performance::ReportValueTypeConstants*, Win32cr::Foundation::HRESULT),
+    put_MonitorDuplicateInstances : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_MonitorDuplicateInstances : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_DisplayFilter : Proc(ISystemMonitorUnion*, Int32, Win32cr::Foundation::HRESULT),
+    get_DisplayFilter : Proc(ISystemMonitorUnion*, Int32*, Win32cr::Foundation::HRESULT),
+    get_LogFiles : Proc(ISystemMonitorUnion*, Void**, Win32cr::Foundation::HRESULT),
+    put_DataSourceType : Proc(ISystemMonitorUnion*, Win32cr::System::Performance::DataSourceTypeConstants, Win32cr::Foundation::HRESULT),
+    get_DataSourceType : Proc(ISystemMonitorUnion*, Win32cr::System::Performance::DataSourceTypeConstants*, Win32cr::Foundation::HRESULT),
+    put_SqlDsnName : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_SqlDsnName : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_SqlLogSetName : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_SqlLogSetName : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_EnableDigitGrouping : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_EnableDigitGrouping : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_EnableToolTips : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_EnableToolTips : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ShowTimeAxisLabels : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_ShowTimeAxisLabels : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_ChartScroll : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    get_ChartScroll : Proc(ISystemMonitorUnion*, Int16*, Win32cr::Foundation::HRESULT),
+    put_DataPointCount : Proc(ISystemMonitorUnion*, Int32, Win32cr::Foundation::HRESULT),
+    get_DataPointCount : Proc(ISystemMonitorUnion*, Int32*, Win32cr::Foundation::HRESULT),
+    scale_to_fit : Proc(ISystemMonitorUnion*, Int16, Win32cr::Foundation::HRESULT),
+    save_as : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR, Win32cr::System::Performance::SysmonFileType, Win32cr::Foundation::HRESULT),
+    relog : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR, Win32cr::System::Performance::SysmonFileType, Int32, Win32cr::Foundation::HRESULT),
+    clear_data : Proc(ISystemMonitorUnion*, Win32cr::Foundation::HRESULT),
+    get_LogSourceStartTime : Proc(ISystemMonitorUnion*, Float64*, Win32cr::Foundation::HRESULT),
+    get_LogSourceStopTime : Proc(ISystemMonitorUnion*, Float64*, Win32cr::Foundation::HRESULT),
+    set_log_view_range : Proc(ISystemMonitorUnion*, Float64, Float64, Win32cr::Foundation::HRESULT),
+    get_log_view_range : Proc(ISystemMonitorUnion*, Float64*, Float64*, Win32cr::Foundation::HRESULT),
+    batching_lock : Proc(ISystemMonitorUnion*, Int16, Win32cr::System::Performance::SysmonBatchReason, Win32cr::Foundation::HRESULT),
+    load_settings : Proc(ISystemMonitorUnion*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c8a77338-265f-4de5-aa25-c7da1ce5a8f4")]
+  record ISystemMonitorUnion, lpVtbl : ISystemMonitorUnionVtbl* do
+    GUID = LibC::GUID.new(0xc8a77338_u32, 0x265f_u16, 0x4de5_u16, StaticArray[0xaa_u8, 0x25_u8, 0xc7_u8, 0xda_u8, 0x1c_u8, 0xe5_u8, 0xa8_u8, 0xf4_u8])
+    def query_interface(this : ISystemMonitorUnion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISystemMonitorUnion*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISystemMonitorUnion*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_Appearance(this : ISystemMonitorUnion*, iAppearance : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Appearance.call(this, iAppearance)
+    end
+    def put_Appearance(this : ISystemMonitorUnion*, iAppearance : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Appearance.call(this, iAppearance)
+    end
+    def get_BackColor(this : ISystemMonitorUnion*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BackColor.call(this, pColor)
+    end
+    def put_BackColor(this : ISystemMonitorUnion*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BackColor.call(this, color)
+    end
+    def get_BorderStyle(this : ISystemMonitorUnion*, iBorderStyle : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BorderStyle.call(this, iBorderStyle)
+    end
+    def put_BorderStyle(this : ISystemMonitorUnion*, iBorderStyle : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BorderStyle.call(this, iBorderStyle)
+    end
+    def get_ForeColor(this : ISystemMonitorUnion*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ForeColor.call(this, pColor)
+    end
+    def put_ForeColor(this : ISystemMonitorUnion*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ForeColor.call(this, color)
+    end
+    def get_Font(this : ISystemMonitorUnion*, ppFont : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Font.call(this, ppFont)
+    end
+    def putref_Font(this : ISystemMonitorUnion*, pFont : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.putref_Font.call(this, pFont)
+    end
+    def get_Counters(this : ISystemMonitorUnion*, ppICounters : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Counters.call(this, ppICounters)
+    end
+    def put_ShowVerticalGrid(this : ISystemMonitorUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowVerticalGrid.call(this, bState)
+    end
+    def get_ShowVerticalGrid(this : ISystemMonitorUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowVerticalGrid.call(this, pbState)
+    end
+    def put_ShowHorizontalGrid(this : ISystemMonitorUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowHorizontalGrid.call(this, bState)
+    end
+    def get_ShowHorizontalGrid(this : ISystemMonitorUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowHorizontalGrid.call(this, pbState)
+    end
+    def put_ShowLegend(this : ISystemMonitorUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowLegend.call(this, bState)
+    end
+    def get_ShowLegend(this : ISystemMonitorUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowLegend.call(this, pbState)
+    end
+    def put_ShowScaleLabels(this : ISystemMonitorUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowScaleLabels.call(this, bState)
+    end
+    def get_ShowScaleLabels(this : ISystemMonitorUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowScaleLabels.call(this, pbState)
+    end
+    def put_ShowValueBar(this : ISystemMonitorUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowValueBar.call(this, bState)
+    end
+    def get_ShowValueBar(this : ISystemMonitorUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowValueBar.call(this, pbState)
+    end
+    def put_MaximumScale(this : ISystemMonitorUnion*, iValue : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MaximumScale.call(this, iValue)
+    end
+    def get_MaximumScale(this : ISystemMonitorUnion*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MaximumScale.call(this, piValue)
+    end
+    def put_MinimumScale(this : ISystemMonitorUnion*, iValue : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MinimumScale.call(this, iValue)
+    end
+    def get_MinimumScale(this : ISystemMonitorUnion*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MinimumScale.call(this, piValue)
+    end
+    def put_UpdateInterval(this : ISystemMonitorUnion*, fValue : Float32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_UpdateInterval.call(this, fValue)
+    end
+    def get_UpdateInterval(this : ISystemMonitorUnion*, pfValue : Float32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_UpdateInterval.call(this, pfValue)
+    end
+    def put_DisplayType(this : ISystemMonitorUnion*, eDisplayType : Win32cr::System::Performance::DisplayTypeConstants) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DisplayType.call(this, eDisplayType)
+    end
+    def get_DisplayType(this : ISystemMonitorUnion*, peDisplayType : Win32cr::System::Performance::DisplayTypeConstants*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisplayType.call(this, peDisplayType)
+    end
+    def put_ManualUpdate(this : ISystemMonitorUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ManualUpdate.call(this, bState)
+    end
+    def get_ManualUpdate(this : ISystemMonitorUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ManualUpdate.call(this, pbState)
+    end
+    def put_GraphTitle(this : ISystemMonitorUnion*, bsTitle : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_GraphTitle.call(this, bsTitle)
+    end
+    def get_GraphTitle(this : ISystemMonitorUnion*, pbsTitle : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_GraphTitle.call(this, pbsTitle)
+    end
+    def put_YAxisLabel(this : ISystemMonitorUnion*, bsTitle : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_YAxisLabel.call(this, bsTitle)
+    end
+    def get_YAxisLabel(this : ISystemMonitorUnion*, pbsTitle : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_YAxisLabel.call(this, pbsTitle)
+    end
+    def collect_sample(this : ISystemMonitorUnion*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.collect_sample.call(this)
+    end
+    def update_graph(this : ISystemMonitorUnion*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.update_graph.call(this)
+    end
+    def browse_counters(this : ISystemMonitorUnion*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.browse_counters.call(this)
+    end
+    def display_properties(this : ISystemMonitorUnion*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.display_properties.call(this)
+    end
+    def counter(this : ISystemMonitorUnion*, iIndex : Int32, ppICounter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.counter.call(this, iIndex, ppICounter)
+    end
+    def add_counter(this : ISystemMonitorUnion*, bsPath : Win32cr::Foundation::BSTR, ppICounter : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_counter.call(this, bsPath, ppICounter)
+    end
+    def delete_counter(this : ISystemMonitorUnion*, pCtr : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.delete_counter.call(this, pCtr)
+    end
+    def get_BackColorCtl(this : ISystemMonitorUnion*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_BackColorCtl.call(this, pColor)
+    end
+    def put_BackColorCtl(this : ISystemMonitorUnion*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_BackColorCtl.call(this, color)
+    end
+    def put_LogFileName(this : ISystemMonitorUnion*, bsFileName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogFileName.call(this, bsFileName)
+    end
+    def get_LogFileName(this : ISystemMonitorUnion*, bsFileName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogFileName.call(this, bsFileName)
+    end
+    def put_LogViewStart(this : ISystemMonitorUnion*, start_time : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogViewStart.call(this, start_time)
+    end
+    def get_LogViewStart(this : ISystemMonitorUnion*, start_time : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogViewStart.call(this, start_time)
+    end
+    def put_LogViewStop(this : ISystemMonitorUnion*, stop_time : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_LogViewStop.call(this, stop_time)
+    end
+    def get_LogViewStop(this : ISystemMonitorUnion*, stop_time : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogViewStop.call(this, stop_time)
+    end
+    def get_GridColor(this : ISystemMonitorUnion*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_GridColor.call(this, pColor)
+    end
+    def put_GridColor(this : ISystemMonitorUnion*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_GridColor.call(this, color)
+    end
+    def get_TimeBarColor(this : ISystemMonitorUnion*, pColor : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TimeBarColor.call(this, pColor)
+    end
+    def put_TimeBarColor(this : ISystemMonitorUnion*, color : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_TimeBarColor.call(this, color)
+    end
+    def get_Highlight(this : ISystemMonitorUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Highlight.call(this, pbState)
+    end
+    def put_Highlight(this : ISystemMonitorUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Highlight.call(this, bState)
+    end
+    def get_ShowToolbar(this : ISystemMonitorUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowToolbar.call(this, pbState)
+    end
+    def put_ShowToolbar(this : ISystemMonitorUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowToolbar.call(this, bState)
+    end
+    def paste(this : ISystemMonitorUnion*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.paste.call(this)
+    end
+    def copy(this : ISystemMonitorUnion*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.copy.call(this)
+    end
+    def reset(this : ISystemMonitorUnion*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def put_ReadOnly(this : ISystemMonitorUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ReadOnly.call(this, bState)
+    end
+    def get_ReadOnly(this : ISystemMonitorUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ReadOnly.call(this, pbState)
+    end
+    def put_ReportValueType(this : ISystemMonitorUnion*, eReportValueType : Win32cr::System::Performance::ReportValueTypeConstants) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ReportValueType.call(this, eReportValueType)
+    end
+    def get_ReportValueType(this : ISystemMonitorUnion*, peReportValueType : Win32cr::System::Performance::ReportValueTypeConstants*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ReportValueType.call(this, peReportValueType)
+    end
+    def put_MonitorDuplicateInstances(this : ISystemMonitorUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MonitorDuplicateInstances.call(this, bState)
+    end
+    def get_MonitorDuplicateInstances(this : ISystemMonitorUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MonitorDuplicateInstances.call(this, pbState)
+    end
+    def put_DisplayFilter(this : ISystemMonitorUnion*, iValue : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DisplayFilter.call(this, iValue)
+    end
+    def get_DisplayFilter(this : ISystemMonitorUnion*, piValue : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DisplayFilter.call(this, piValue)
+    end
+    def get_LogFiles(this : ISystemMonitorUnion*, ppILogFiles : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogFiles.call(this, ppILogFiles)
+    end
+    def put_DataSourceType(this : ISystemMonitorUnion*, eDataSourceType : Win32cr::System::Performance::DataSourceTypeConstants) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DataSourceType.call(this, eDataSourceType)
+    end
+    def get_DataSourceType(this : ISystemMonitorUnion*, peDataSourceType : Win32cr::System::Performance::DataSourceTypeConstants*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataSourceType.call(this, peDataSourceType)
+    end
+    def put_SqlDsnName(this : ISystemMonitorUnion*, bsSqlDsnName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SqlDsnName.call(this, bsSqlDsnName)
+    end
+    def get_SqlDsnName(this : ISystemMonitorUnion*, bsSqlDsnName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SqlDsnName.call(this, bsSqlDsnName)
+    end
+    def put_SqlLogSetName(this : ISystemMonitorUnion*, bsSqlLogSetName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SqlLogSetName.call(this, bsSqlLogSetName)
+    end
+    def get_SqlLogSetName(this : ISystemMonitorUnion*, bsSqlLogSetName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SqlLogSetName.call(this, bsSqlLogSetName)
+    end
+    def put_EnableDigitGrouping(this : ISystemMonitorUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EnableDigitGrouping.call(this, bState)
+    end
+    def get_EnableDigitGrouping(this : ISystemMonitorUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EnableDigitGrouping.call(this, pbState)
+    end
+    def put_EnableToolTips(this : ISystemMonitorUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EnableToolTips.call(this, bState)
+    end
+    def get_EnableToolTips(this : ISystemMonitorUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EnableToolTips.call(this, pbState)
+    end
+    def put_ShowTimeAxisLabels(this : ISystemMonitorUnion*, bState : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ShowTimeAxisLabels.call(this, bState)
+    end
+    def get_ShowTimeAxisLabels(this : ISystemMonitorUnion*, pbState : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ShowTimeAxisLabels.call(this, pbState)
+    end
+    def put_ChartScroll(this : ISystemMonitorUnion*, bScroll : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ChartScroll.call(this, bScroll)
+    end
+    def get_ChartScroll(this : ISystemMonitorUnion*, pbScroll : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ChartScroll.call(this, pbScroll)
+    end
+    def put_DataPointCount(this : ISystemMonitorUnion*, iNewCount : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DataPointCount.call(this, iNewCount)
+    end
+    def get_DataPointCount(this : ISystemMonitorUnion*, piDataPointCount : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DataPointCount.call(this, piDataPointCount)
+    end
+    def scale_to_fit(this : ISystemMonitorUnion*, bSelectedCountersOnly : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.scale_to_fit.call(this, bSelectedCountersOnly)
+    end
+    def save_as(this : ISystemMonitorUnion*, bstrFileName : Win32cr::Foundation::BSTR, eSysmonFileType : Win32cr::System::Performance::SysmonFileType) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.save_as.call(this, bstrFileName, eSysmonFileType)
+    end
+    def relog(this : ISystemMonitorUnion*, bstrFileName : Win32cr::Foundation::BSTR, eSysmonFileType : Win32cr::System::Performance::SysmonFileType, iFilter : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.relog.call(this, bstrFileName, eSysmonFileType, iFilter)
+    end
+    def clear_data(this : ISystemMonitorUnion*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear_data.call(this)
+    end
+    def get_LogSourceStartTime(this : ISystemMonitorUnion*, pDate : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogSourceStartTime.call(this, pDate)
+    end
+    def get_LogSourceStopTime(this : ISystemMonitorUnion*, pDate : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LogSourceStopTime.call(this, pDate)
+    end
+    def set_log_view_range(this : ISystemMonitorUnion*, start_time : Float64, stop_time : Float64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_log_view_range.call(this, start_time, stop_time)
+    end
+    def get_log_view_range(this : ISystemMonitorUnion*, start_time : Float64*, stop_time : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_log_view_range.call(this, start_time, stop_time)
+    end
+    def batching_lock(this : ISystemMonitorUnion*, fLock : Int16, eBatchReason : Win32cr::System::Performance::SysmonBatchReason) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.batching_lock.call(this, fLock, eBatchReason)
+    end
+    def load_settings(this : ISystemMonitorUnion*, bstrSettingFileName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.load_settings.call(this, bstrSettingFileName)
+    end
+
+  end
+
+  @[Extern]
+  record DISystemMonitorVtbl,
+    query_interface : Proc(DISystemMonitor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(DISystemMonitor*, UInt32),
+    release : Proc(DISystemMonitor*, UInt32),
+    get_type_info_count : Proc(DISystemMonitor*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(DISystemMonitor*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(DISystemMonitor*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(DISystemMonitor*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("13d73d81-c32e-11cf-9398-00aa00a3ddea")]
+  record DISystemMonitor, lpVtbl : DISystemMonitorVtbl* do
+    GUID = LibC::GUID.new(0x13d73d81_u32, 0xc32e_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
+    def query_interface(this : DISystemMonitor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : DISystemMonitor*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : DISystemMonitor*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : DISystemMonitor*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : DISystemMonitor*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : DISystemMonitor*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : DISystemMonitor*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+
+  end
+
+  @[Extern]
+  record DISystemMonitorInternalVtbl,
+    query_interface : Proc(DISystemMonitorInternal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(DISystemMonitorInternal*, UInt32),
+    release : Proc(DISystemMonitorInternal*, UInt32),
+    get_type_info_count : Proc(DISystemMonitorInternal*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(DISystemMonitorInternal*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(DISystemMonitorInternal*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(DISystemMonitorInternal*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("194eb242-c32c-11cf-9398-00aa00a3ddea")]
+  record DISystemMonitorInternal, lpVtbl : DISystemMonitorInternalVtbl* do
+    GUID = LibC::GUID.new(0x194eb242_u32, 0xc32c_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
+    def query_interface(this : DISystemMonitorInternal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : DISystemMonitorInternal*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : DISystemMonitorInternal*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : DISystemMonitorInternal*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : DISystemMonitorInternal*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : DISystemMonitorInternal*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : DISystemMonitorInternal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+
+  end
+
+  @[Extern]
+  record ISystemMonitorEventsVtbl,
+    query_interface : Proc(ISystemMonitorEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ISystemMonitorEvents*, UInt32),
+    release : Proc(ISystemMonitorEvents*, UInt32),
+    on_counter_selected : Proc(ISystemMonitorEvents*, Int32, Void),
+    on_counter_added : Proc(ISystemMonitorEvents*, Int32, Void),
+    on_counter_deleted : Proc(ISystemMonitorEvents*, Int32, Void),
+    on_sample_collected : Proc(ISystemMonitorEvents*, Void),
     on_dbl_click : Proc(ISystemMonitorEvents*, Int32, Void)
-  end
 
-  ISystemMonitorEvents_GUID = "ee660ea0-4abd-11cf-943a-008029004347"
-  IID_ISystemMonitorEvents = LibC::GUID.new(0xee660ea0_u32, 0x4abd_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x3a_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
-  struct ISystemMonitorEvents
-    lpVtbl : ISystemMonitorEventsVTbl*
-  end
 
-  struct DISystemMonitorEventsVTbl
-    query_interface : Proc(DISystemMonitorEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(DISystemMonitorEvents*, UInt32)
-    release : Proc(DISystemMonitorEvents*, UInt32)
-    get_type_info_count : Proc(DISystemMonitorEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(DISystemMonitorEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(DISystemMonitorEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(DISystemMonitorEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  @[Extern]
+  #@[Com("ee660ea0-4abd-11cf-943a-008029004347")]
+  record ISystemMonitorEvents, lpVtbl : ISystemMonitorEventsVtbl* do
+    GUID = LibC::GUID.new(0xee660ea0_u32, 0x4abd_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x3a_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+    def query_interface(this : ISystemMonitorEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ISystemMonitorEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ISystemMonitorEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_counter_selected(this : ISystemMonitorEvents*, index : Int32) : Void
+      @lpVtbl.try &.value.on_counter_selected.call(this, index)
+    end
+    def on_counter_added(this : ISystemMonitorEvents*, index : Int32) : Void
+      @lpVtbl.try &.value.on_counter_added.call(this, index)
+    end
+    def on_counter_deleted(this : ISystemMonitorEvents*, index : Int32) : Void
+      @lpVtbl.try &.value.on_counter_deleted.call(this, index)
+    end
+    def on_sample_collected(this : ISystemMonitorEvents*) : Void
+      @lpVtbl.try &.value.on_sample_collected.call(this)
+    end
+    def on_dbl_click(this : ISystemMonitorEvents*, index : Int32) : Void
+      @lpVtbl.try &.value.on_dbl_click.call(this, index)
+    end
+
   end
+
+  @[Extern]
+  record DISystemMonitorEventsVtbl,
+    query_interface : Proc(DISystemMonitorEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(DISystemMonitorEvents*, UInt32),
+    release : Proc(DISystemMonitorEvents*, UInt32),
+    get_type_info_count : Proc(DISystemMonitorEvents*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(DISystemMonitorEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(DISystemMonitorEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(DISystemMonitorEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
-  DISystemMonitorEvents_GUID = "84979930-4ab3-11cf-943a-008029004347"
-  IID_DISystemMonitorEvents = LibC::GUID.new(0x84979930_u32, 0x4ab3_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x3a_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
-  struct DISystemMonitorEvents
-    lpVtbl : DISystemMonitorEventsVTbl*
+
+  @[Extern]
+  #@[Com("84979930-4ab3-11cf-943a-008029004347")]
+  record DISystemMonitorEvents, lpVtbl : DISystemMonitorEventsVtbl* do
+    GUID = LibC::GUID.new(0x84979930_u32, 0x4ab3_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x3a_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
+    def query_interface(this : DISystemMonitorEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : DISystemMonitorEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : DISystemMonitorEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : DISystemMonitorEvents*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : DISystemMonitorEvents*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : DISystemMonitorEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : DISystemMonitorEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+
   end
 
+  @[Link("kernel32")]
+  @[Link("loadperf")]
+  @[Link("advapi32")]
+  @[Link("pdh")]
+  lib C
+    # Commented out due to being part of LibC
+    #fun QueryPerformanceCounter(lpPerformanceCount : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
-  # Params # lpperformancecount : LARGE_INTEGER* [In]
-  # Commented out because function is part of Lib C
-  #fun QueryPerformanceCounter(lpperformancecount : LARGE_INTEGER*) : LibC::BOOL
+    # Commented out due to being part of LibC
+    #fun QueryPerformanceFrequency(lpFrequency : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
 
-  # Params # lpfrequency : LARGE_INTEGER* [In]
-  # Commented out because function is part of Lib C
-  #fun QueryPerformanceFrequency(lpfrequency : LARGE_INTEGER*) : LibC::BOOL
+    fun InstallPerfDllW(szComputerName : Win32cr::Foundation::PWSTR, lpIniFile : Win32cr::Foundation::PWSTR, dwFlags : LibC::UIntPtrT) : UInt32
 
-  # Params # szcomputername : LibC::LPWSTR [In],lpinifile : LibC::LPWSTR [In],dwflags : LibC::UINT_PTR [In]
-  fun InstallPerfDllW(szcomputername : LibC::LPWSTR, lpinifile : LibC::LPWSTR, dwflags : LibC::UINT_PTR) : UInt32
+    fun InstallPerfDllA(szComputerName : Win32cr::Foundation::PSTR, lpIniFile : Win32cr::Foundation::PSTR, dwFlags : LibC::UIntPtrT) : UInt32
 
-  # Params # szcomputername : PSTR [In],lpinifile : PSTR [In],dwflags : LibC::UINT_PTR [In]
-  fun InstallPerfDllA(szcomputername : PSTR, lpinifile : PSTR, dwflags : LibC::UINT_PTR) : UInt32
+    fun LoadPerfCounterTextStringsA(lpCommandLine : Win32cr::Foundation::PSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
 
-  # Params # lpcommandline : PSTR [In],bquietmodearg : LibC::BOOL [In]
-  fun LoadPerfCounterTextStringsA(lpcommandline : PSTR, bquietmodearg : LibC::BOOL) : UInt32
+    fun LoadPerfCounterTextStringsW(lpCommandLine : Win32cr::Foundation::PWSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
 
-  # Params # lpcommandline : LibC::LPWSTR [In],bquietmodearg : LibC::BOOL [In]
-  fun LoadPerfCounterTextStringsW(lpcommandline : LibC::LPWSTR, bquietmodearg : LibC::BOOL) : UInt32
+    fun UnloadPerfCounterTextStringsW(lpCommandLine : Win32cr::Foundation::PWSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
 
-  # Params # lpcommandline : LibC::LPWSTR [In],bquietmodearg : LibC::BOOL [In]
-  fun UnloadPerfCounterTextStringsW(lpcommandline : LibC::LPWSTR, bquietmodearg : LibC::BOOL) : UInt32
+    fun UnloadPerfCounterTextStringsA(lpCommandLine : Win32cr::Foundation::PSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
 
-  # Params # lpcommandline : PSTR [In],bquietmodearg : LibC::BOOL [In]
-  fun UnloadPerfCounterTextStringsA(lpcommandline : PSTR, bquietmodearg : LibC::BOOL) : UInt32
+    fun UpdatePerfNameFilesA(szNewCtrFilePath : Win32cr::Foundation::PSTR, szNewHlpFilePath : Win32cr::Foundation::PSTR, szLanguageID : Win32cr::Foundation::PSTR, dwFlags : LibC::UIntPtrT) : UInt32
 
-  # Params # sznewctrfilepath : PSTR [In],sznewhlpfilepath : PSTR [In],szlanguageid : PSTR [In],dwflags : LibC::UINT_PTR [In]
-  fun UpdatePerfNameFilesA(sznewctrfilepath : PSTR, sznewhlpfilepath : PSTR, szlanguageid : PSTR, dwflags : LibC::UINT_PTR) : UInt32
+    fun UpdatePerfNameFilesW(szNewCtrFilePath : Win32cr::Foundation::PWSTR, szNewHlpFilePath : Win32cr::Foundation::PWSTR, szLanguageID : Win32cr::Foundation::PWSTR, dwFlags : LibC::UIntPtrT) : UInt32
 
-  # Params # sznewctrfilepath : LibC::LPWSTR [In],sznewhlpfilepath : LibC::LPWSTR [In],szlanguageid : LibC::LPWSTR [In],dwflags : LibC::UINT_PTR [In]
-  fun UpdatePerfNameFilesW(sznewctrfilepath : LibC::LPWSTR, sznewhlpfilepath : LibC::LPWSTR, szlanguageid : LibC::LPWSTR, dwflags : LibC::UINT_PTR) : UInt32
+    fun SetServiceAsTrustedA(szReserved : Win32cr::Foundation::PSTR, szServiceName : Win32cr::Foundation::PSTR) : UInt32
 
-  # Params # szreserved : PSTR [In],szservicename : PSTR [In]
-  fun SetServiceAsTrustedA(szreserved : PSTR, szservicename : PSTR) : UInt32
+    fun SetServiceAsTrustedW(szReserved : Win32cr::Foundation::PWSTR, szServiceName : Win32cr::Foundation::PWSTR) : UInt32
 
-  # Params # szreserved : LibC::LPWSTR [In],szservicename : LibC::LPWSTR [In]
-  fun SetServiceAsTrustedW(szreserved : LibC::LPWSTR, szservicename : LibC::LPWSTR) : UInt32
+    fun BackupPerfRegistryToFileW(szFileName : Win32cr::Foundation::PWSTR, szCommentString : Win32cr::Foundation::PWSTR) : UInt32
 
-  # Params # szfilename : LibC::LPWSTR [In],szcommentstring : LibC::LPWSTR [In]
-  fun BackupPerfRegistryToFileW(szfilename : LibC::LPWSTR, szcommentstring : LibC::LPWSTR) : UInt32
+    fun RestorePerfRegistryFromFileW(szFileName : Win32cr::Foundation::PWSTR, szLangId : Win32cr::Foundation::PWSTR) : UInt32
 
-  # Params # szfilename : LibC::LPWSTR [In],szlangid : LibC::LPWSTR [In]
-  fun RestorePerfRegistryFromFileW(szfilename : LibC::LPWSTR, szlangid : LibC::LPWSTR) : UInt32
+    fun PerfStartProvider(provider_guid : LibC::GUID*, control_callback : Win32cr::System::Performance::PERFLIBREQUEST, phProvider : Win32cr::System::Performance::PerfProviderHandle*) : UInt32
 
-  # Params # providerguid : Guid* [In],controlcallback : PERFLIBREQUEST [In],phprovider : PerfProviderHandle* [In]
-  fun PerfStartProvider(providerguid : Guid*, controlcallback : PERFLIBREQUEST, phprovider : PerfProviderHandle*) : UInt32
+    fun PerfStartProviderEx(provider_guid : LibC::GUID*, provider_context : Win32cr::System::Performance::PERF_PROVIDER_CONTEXT*, provider : Win32cr::System::Performance::PerfProviderHandle*) : UInt32
 
-  # Params # providerguid : Guid* [In],providercontext : PERF_PROVIDER_CONTEXT* [In],provider : PerfProviderHandle* [In]
-  fun PerfStartProviderEx(providerguid : Guid*, providercontext : PERF_PROVIDER_CONTEXT*, provider : PerfProviderHandle*) : UInt32
+    fun PerfStopProvider(provider_handle : Win32cr::System::Performance::PerfProviderHandle) : UInt32
 
-  # Params # providerhandle : PerfProviderHandle [In]
-  fun PerfStopProvider(providerhandle : PerfProviderHandle) : UInt32
+    fun PerfSetCounterSetInfo(provider_handle : Win32cr::Foundation::HANDLE, template : Win32cr::System::Performance::PERF_COUNTERSET_INFO*, template_size : UInt32) : UInt32
 
-  # Params # providerhandle : LibC::HANDLE [In],template : PERF_COUNTERSET_INFO* [In],templatesize : UInt32 [In]
-  fun PerfSetCounterSetInfo(providerhandle : LibC::HANDLE, template : PERF_COUNTERSET_INFO*, templatesize : UInt32) : UInt32
+    fun PerfCreateInstance(provider_handle : Win32cr::System::Performance::PerfProviderHandle, counter_set_guid : LibC::GUID*, name : Win32cr::Foundation::PWSTR, id : UInt32) : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*
 
-  # Params # providerhandle : PerfProviderHandle [In],countersetguid : Guid* [In],name : LibC::LPWSTR [In],id : UInt32 [In]
-  fun PerfCreateInstance(providerhandle : PerfProviderHandle, countersetguid : Guid*, name : LibC::LPWSTR, id : UInt32) : PERF_COUNTERSET_INSTANCE*
+    fun PerfDeleteInstance(provider : Win32cr::System::Performance::PerfProviderHandle, instance_block : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*) : UInt32
 
-  # Params # provider : PerfProviderHandle [In],instanceblock : PERF_COUNTERSET_INSTANCE* [In]
-  fun PerfDeleteInstance(provider : PerfProviderHandle, instanceblock : PERF_COUNTERSET_INSTANCE*) : UInt32
+    fun PerfQueryInstance(provider_handle : Win32cr::Foundation::HANDLE, counter_set_guid : LibC::GUID*, name : Win32cr::Foundation::PWSTR, id : UInt32) : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*
 
-  # Params # providerhandle : LibC::HANDLE [In],countersetguid : Guid* [In],name : LibC::LPWSTR [In],id : UInt32 [In]
-  fun PerfQueryInstance(providerhandle : LibC::HANDLE, countersetguid : Guid*, name : LibC::LPWSTR, id : UInt32) : PERF_COUNTERSET_INSTANCE*
+    fun PerfSetCounterRefValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, address : Void*) : UInt32
 
-  # Params # provider : LibC::HANDLE [In],instance : PERF_COUNTERSET_INSTANCE* [In],counterid : UInt32 [In],address : Void* [In]
-  fun PerfSetCounterRefValue(provider : LibC::HANDLE, instance : PERF_COUNTERSET_INSTANCE*, counterid : UInt32, address : Void*) : UInt32
+    fun PerfSetULongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt32) : UInt32
 
-  # Params # provider : LibC::HANDLE [In],instance : PERF_COUNTERSET_INSTANCE* [In],counterid : UInt32 [In],value : UInt32 [In]
-  fun PerfSetULongCounterValue(provider : LibC::HANDLE, instance : PERF_COUNTERSET_INSTANCE*, counterid : UInt32, value : UInt32) : UInt32
+    fun PerfSetULongLongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt64) : UInt32
 
-  # Params # provider : LibC::HANDLE [In],instance : PERF_COUNTERSET_INSTANCE* [In],counterid : UInt32 [In],value : UInt64 [In]
-  fun PerfSetULongLongCounterValue(provider : LibC::HANDLE, instance : PERF_COUNTERSET_INSTANCE*, counterid : UInt32, value : UInt64) : UInt32
+    fun PerfIncrementULongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt32) : UInt32
 
-  # Params # provider : LibC::HANDLE [In],instance : PERF_COUNTERSET_INSTANCE* [In],counterid : UInt32 [In],value : UInt32 [In]
-  fun PerfIncrementULongCounterValue(provider : LibC::HANDLE, instance : PERF_COUNTERSET_INSTANCE*, counterid : UInt32, value : UInt32) : UInt32
+    fun PerfIncrementULongLongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt64) : UInt32
 
-  # Params # provider : LibC::HANDLE [In],instance : PERF_COUNTERSET_INSTANCE* [In],counterid : UInt32 [In],value : UInt64 [In]
-  fun PerfIncrementULongLongCounterValue(provider : LibC::HANDLE, instance : PERF_COUNTERSET_INSTANCE*, counterid : UInt32, value : UInt64) : UInt32
+    fun PerfDecrementULongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt32) : UInt32
 
-  # Params # provider : LibC::HANDLE [In],instance : PERF_COUNTERSET_INSTANCE* [In],counterid : UInt32 [In],value : UInt32 [In]
-  fun PerfDecrementULongCounterValue(provider : LibC::HANDLE, instance : PERF_COUNTERSET_INSTANCE*, counterid : UInt32, value : UInt32) : UInt32
+    fun PerfDecrementULongLongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt64) : UInt32
 
-  # Params # provider : LibC::HANDLE [In],instance : PERF_COUNTERSET_INSTANCE* [In],counterid : UInt32 [In],value : UInt64 [In]
-  fun PerfDecrementULongLongCounterValue(provider : LibC::HANDLE, instance : PERF_COUNTERSET_INSTANCE*, counterid : UInt32, value : UInt64) : UInt32
+    fun PerfEnumerateCounterSet(szMachine : Win32cr::Foundation::PWSTR, pCounterSetIds : LibC::GUID*, cCounterSetIds : UInt32, pcCounterSetIdsActual : UInt32*) : UInt32
 
-  # Params # szmachine : LibC::LPWSTR [In],pcountersetids : Guid* [In],ccountersetids : UInt32 [In],pccountersetidsactual : UInt32* [In]
-  fun PerfEnumerateCounterSet(szmachine : LibC::LPWSTR, pcountersetids : Guid*, ccountersetids : UInt32, pccountersetidsactual : UInt32*) : UInt32
+    fun PerfEnumerateCounterSetInstances(szMachine : Win32cr::Foundation::PWSTR, pCounterSetId : LibC::GUID*, pInstances : Win32cr::System::Performance::PERF_INSTANCE_HEADER*, cbInstances : UInt32, pcbInstancesActual : UInt32*) : UInt32
 
-  # Params # szmachine : LibC::LPWSTR [In],pcountersetid : Guid* [In],pinstances : PERF_INSTANCE_HEADER* [In],cbinstances : UInt32 [In],pcbinstancesactual : UInt32* [In]
-  fun PerfEnumerateCounterSetInstances(szmachine : LibC::LPWSTR, pcountersetid : Guid*, pinstances : PERF_INSTANCE_HEADER*, cbinstances : UInt32, pcbinstancesactual : UInt32*) : UInt32
+    fun PerfQueryCounterSetRegistrationInfo(szMachine : Win32cr::Foundation::PWSTR, pCounterSetId : LibC::GUID*, requestCode : Win32cr::System::Performance::PerfRegInfoType, requestLangId : UInt32, pbRegInfo : UInt8*, cbRegInfo : UInt32, pcbRegInfoActual : UInt32*) : UInt32
 
-  # Params # szmachine : LibC::LPWSTR [In],pcountersetid : Guid* [In],requestcode : PerfRegInfoType [In],requestlangid : UInt32 [In],pbreginfo : UInt8* [In],cbreginfo : UInt32 [In],pcbreginfoactual : UInt32* [In]
-  fun PerfQueryCounterSetRegistrationInfo(szmachine : LibC::LPWSTR, pcountersetid : Guid*, requestcode : PerfRegInfoType, requestlangid : UInt32, pbreginfo : UInt8*, cbreginfo : UInt32, pcbreginfoactual : UInt32*) : UInt32
+    fun PerfOpenQueryHandle(szMachine : Win32cr::Foundation::PWSTR, phQuery : Win32cr::System::Performance::PerfQueryHandle*) : UInt32
 
-  # Params # szmachine : LibC::LPWSTR [In],phquery : PerfQueryHandle* [In]
-  fun PerfOpenQueryHandle(szmachine : LibC::LPWSTR, phquery : PerfQueryHandle*) : UInt32
+    fun PerfCloseQueryHandle(hQuery : Win32cr::Foundation::HANDLE) : UInt32
 
-  # Params # hquery : LibC::HANDLE [In]
-  fun PerfCloseQueryHandle(hquery : LibC::HANDLE) : UInt32
+    fun PerfQueryCounterInfo(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounters : Win32cr::System::Performance::PERF_COUNTER_IDENTIFIER*, cbCounters : UInt32, pcbCountersActual : UInt32*) : UInt32
 
-  # Params # hquery : PerfQueryHandle [In],pcounters : PERF_COUNTER_IDENTIFIER* [In],cbcounters : UInt32 [In],pcbcountersactual : UInt32* [In]
-  fun PerfQueryCounterInfo(hquery : PerfQueryHandle, pcounters : PERF_COUNTER_IDENTIFIER*, cbcounters : UInt32, pcbcountersactual : UInt32*) : UInt32
+    fun PerfQueryCounterData(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounterBlock : Win32cr::System::Performance::PERF_DATA_HEADER*, cbCounterBlock : UInt32, pcbCounterBlockActual : UInt32*) : UInt32
 
-  # Params # hquery : PerfQueryHandle [In],pcounterblock : PERF_DATA_HEADER* [In],cbcounterblock : UInt32 [In],pcbcounterblockactual : UInt32* [In]
-  fun PerfQueryCounterData(hquery : PerfQueryHandle, pcounterblock : PERF_DATA_HEADER*, cbcounterblock : UInt32, pcbcounterblockactual : UInt32*) : UInt32
+    fun PerfAddCounters(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounters : Win32cr::System::Performance::PERF_COUNTER_IDENTIFIER*, cbCounters : UInt32) : UInt32
 
-  # Params # hquery : PerfQueryHandle [In],pcounters : PERF_COUNTER_IDENTIFIER* [In],cbcounters : UInt32 [In]
-  fun PerfAddCounters(hquery : PerfQueryHandle, pcounters : PERF_COUNTER_IDENTIFIER*, cbcounters : UInt32) : UInt32
+    fun PerfDeleteCounters(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounters : Win32cr::System::Performance::PERF_COUNTER_IDENTIFIER*, cbCounters : UInt32) : UInt32
 
-  # Params # hquery : PerfQueryHandle [In],pcounters : PERF_COUNTER_IDENTIFIER* [In],cbcounters : UInt32 [In]
-  fun PerfDeleteCounters(hquery : PerfQueryHandle, pcounters : PERF_COUNTER_IDENTIFIER*, cbcounters : UInt32) : UInt32
+    fun PdhGetDllVersion(lpdwVersion : Win32cr::System::Performance::PDH_DLL_VERSION*) : Int32
 
-  # Params # lpdwversion : PDH_DLL_VERSION* [In]
-  fun PdhGetDllVersion(lpdwversion : PDH_DLL_VERSION*) : Int32
+    fun PdhOpenQueryW(szDataSource : Win32cr::Foundation::PWSTR, dwUserData : LibC::UIntPtrT, phQuery : LibC::IntPtrT*) : Int32
 
-  # Params # szdatasource : LibC::LPWSTR [In],dwuserdata : LibC::UINT_PTR [In],phquery : LibC::IntPtrT* [In]
-  fun PdhOpenQueryW(szdatasource : LibC::LPWSTR, dwuserdata : LibC::UINT_PTR, phquery : LibC::IntPtrT*) : Int32
+    fun PdhOpenQueryA(szDataSource : Win32cr::Foundation::PSTR, dwUserData : LibC::UIntPtrT, phQuery : LibC::IntPtrT*) : Int32
 
-  # Params # szdatasource : PSTR [In],dwuserdata : LibC::UINT_PTR [In],phquery : LibC::IntPtrT* [In]
-  fun PdhOpenQueryA(szdatasource : PSTR, dwuserdata : LibC::UINT_PTR, phquery : LibC::IntPtrT*) : Int32
+    fun PdhAddCounterW(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PWSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
 
-  # Params # hquery : LibC::IntPtrT [In],szfullcounterpath : LibC::LPWSTR [In],dwuserdata : LibC::UINT_PTR [In],phcounter : LibC::IntPtrT* [In]
-  fun PdhAddCounterW(hquery : LibC::IntPtrT, szfullcounterpath : LibC::LPWSTR, dwuserdata : LibC::UINT_PTR, phcounter : LibC::IntPtrT*) : Int32
+    fun PdhAddCounterA(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
 
-  # Params # hquery : LibC::IntPtrT [In],szfullcounterpath : PSTR [In],dwuserdata : LibC::UINT_PTR [In],phcounter : LibC::IntPtrT* [In]
-  fun PdhAddCounterA(hquery : LibC::IntPtrT, szfullcounterpath : PSTR, dwuserdata : LibC::UINT_PTR, phcounter : LibC::IntPtrT*) : Int32
+    fun PdhAddEnglishCounterW(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PWSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
 
-  # Params # hquery : LibC::IntPtrT [In],szfullcounterpath : LibC::LPWSTR [In],dwuserdata : LibC::UINT_PTR [In],phcounter : LibC::IntPtrT* [In]
-  fun PdhAddEnglishCounterW(hquery : LibC::IntPtrT, szfullcounterpath : LibC::LPWSTR, dwuserdata : LibC::UINT_PTR, phcounter : LibC::IntPtrT*) : Int32
+    fun PdhAddEnglishCounterA(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
 
-  # Params # hquery : LibC::IntPtrT [In],szfullcounterpath : PSTR [In],dwuserdata : LibC::UINT_PTR [In],phcounter : LibC::IntPtrT* [In]
-  fun PdhAddEnglishCounterA(hquery : LibC::IntPtrT, szfullcounterpath : PSTR, dwuserdata : LibC::UINT_PTR, phcounter : LibC::IntPtrT*) : Int32
+    fun PdhCollectQueryDataWithTime(hQuery : LibC::IntPtrT, pllTimeStamp : Int64*) : Int32
 
-  # Params # hquery : LibC::IntPtrT [In],plltimestamp : Int64* [In]
-  fun PdhCollectQueryDataWithTime(hquery : LibC::IntPtrT, plltimestamp : Int64*) : Int32
+    fun PdhValidatePathExW(hDataSource : LibC::IntPtrT, szFullPathBuffer : Win32cr::Foundation::PWSTR) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],szfullpathbuffer : LibC::LPWSTR [In]
-  fun PdhValidatePathExW(hdatasource : LibC::IntPtrT, szfullpathbuffer : LibC::LPWSTR) : Int32
+    fun PdhValidatePathExA(hDataSource : LibC::IntPtrT, szFullPathBuffer : Win32cr::Foundation::PSTR) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],szfullpathbuffer : PSTR [In]
-  fun PdhValidatePathExA(hdatasource : LibC::IntPtrT, szfullpathbuffer : PSTR) : Int32
+    fun PdhRemoveCounter(hCounter : LibC::IntPtrT) : Int32
 
-  # Params # hcounter : LibC::IntPtrT [In]
-  fun PdhRemoveCounter(hcounter : LibC::IntPtrT) : Int32
+    fun PdhCollectQueryData(hQuery : LibC::IntPtrT) : Int32
 
-  # Params # hquery : LibC::IntPtrT [In]
-  fun PdhCollectQueryData(hquery : LibC::IntPtrT) : Int32
+    fun PdhCloseQuery(hQuery : LibC::IntPtrT) : Int32
 
-  # Params # hquery : LibC::IntPtrT [In]
-  fun PdhCloseQuery(hquery : LibC::IntPtrT) : Int32
+    fun PdhGetFormattedCounterValue(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, lpdwType : UInt32*, pValue : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE*) : Int32
 
-  # Params # hcounter : LibC::IntPtrT [In],dwformat : PDH_FMT [In],lpdwtype : UInt32* [In],pvalue : PDH_FMT_COUNTERVALUE* [In]
-  fun PdhGetFormattedCounterValue(hcounter : LibC::IntPtrT, dwformat : PDH_FMT, lpdwtype : UInt32*, pvalue : PDH_FMT_COUNTERVALUE*) : Int32
+    fun PdhGetFormattedCounterArrayA(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE_ITEM_A*) : Int32
 
-  # Params # hcounter : LibC::IntPtrT [In],dwformat : PDH_FMT [In],lpdwbuffersize : UInt32* [In],lpdwitemcount : UInt32* [In],itembuffer : PDH_FMT_COUNTERVALUE_ITEM_A* [In]
-  fun PdhGetFormattedCounterArrayA(hcounter : LibC::IntPtrT, dwformat : PDH_FMT, lpdwbuffersize : UInt32*, lpdwitemcount : UInt32*, itembuffer : PDH_FMT_COUNTERVALUE_ITEM_A*) : Int32
+    fun PdhGetFormattedCounterArrayW(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE_ITEM_W*) : Int32
 
-  # Params # hcounter : LibC::IntPtrT [In],dwformat : PDH_FMT [In],lpdwbuffersize : UInt32* [In],lpdwitemcount : UInt32* [In],itembuffer : PDH_FMT_COUNTERVALUE_ITEM_W* [In]
-  fun PdhGetFormattedCounterArrayW(hcounter : LibC::IntPtrT, dwformat : PDH_FMT, lpdwbuffersize : UInt32*, lpdwitemcount : UInt32*, itembuffer : PDH_FMT_COUNTERVALUE_ITEM_W*) : Int32
+    fun PdhGetRawCounterValue(hCounter : LibC::IntPtrT, lpdwType : UInt32*, pValue : Win32cr::System::Performance::PDH_RAW_COUNTER*) : Int32
 
-  # Params # hcounter : LibC::IntPtrT [In],lpdwtype : UInt32* [In],pvalue : PDH_RAW_COUNTER* [In]
-  fun PdhGetRawCounterValue(hcounter : LibC::IntPtrT, lpdwtype : UInt32*, pvalue : PDH_RAW_COUNTER*) : Int32
+    fun PdhGetRawCounterArrayA(hCounter : LibC::IntPtrT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_RAW_COUNTER_ITEM_A*) : Int32
 
-  # Params # hcounter : LibC::IntPtrT [In],lpdwbuffersize : UInt32* [In],lpdwitemcount : UInt32* [In],itembuffer : PDH_RAW_COUNTER_ITEM_A* [In]
-  fun PdhGetRawCounterArrayA(hcounter : LibC::IntPtrT, lpdwbuffersize : UInt32*, lpdwitemcount : UInt32*, itembuffer : PDH_RAW_COUNTER_ITEM_A*) : Int32
+    fun PdhGetRawCounterArrayW(hCounter : LibC::IntPtrT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_RAW_COUNTER_ITEM_W*) : Int32
 
-  # Params # hcounter : LibC::IntPtrT [In],lpdwbuffersize : UInt32* [In],lpdwitemcount : UInt32* [In],itembuffer : PDH_RAW_COUNTER_ITEM_W* [In]
-  fun PdhGetRawCounterArrayW(hcounter : LibC::IntPtrT, lpdwbuffersize : UInt32*, lpdwitemcount : UInt32*, itembuffer : PDH_RAW_COUNTER_ITEM_W*) : Int32
+    fun PdhCalculateCounterFromRawValue(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, rawValue1 : Win32cr::System::Performance::PDH_RAW_COUNTER*, rawValue2 : Win32cr::System::Performance::PDH_RAW_COUNTER*, fmtValue : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE*) : Int32
 
-  # Params # hcounter : LibC::IntPtrT [In],dwformat : PDH_FMT [In],rawvalue1 : PDH_RAW_COUNTER* [In],rawvalue2 : PDH_RAW_COUNTER* [In],fmtvalue : PDH_FMT_COUNTERVALUE* [In]
-  fun PdhCalculateCounterFromRawValue(hcounter : LibC::IntPtrT, dwformat : PDH_FMT, rawvalue1 : PDH_RAW_COUNTER*, rawvalue2 : PDH_RAW_COUNTER*, fmtvalue : PDH_FMT_COUNTERVALUE*) : Int32
+    fun PdhComputeCounterStatistics(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, dwFirstEntry : UInt32, dwNumEntries : UInt32, lpRawValueArray : Win32cr::System::Performance::PDH_RAW_COUNTER*, data : Win32cr::System::Performance::PDH_STATISTICS*) : Int32
 
-  # Params # hcounter : LibC::IntPtrT [In],dwformat : PDH_FMT [In],dwfirstentry : UInt32 [In],dwnumentries : UInt32 [In],lprawvaluearray : PDH_RAW_COUNTER* [In],data : PDH_STATISTICS* [In]
-  fun PdhComputeCounterStatistics(hcounter : LibC::IntPtrT, dwformat : PDH_FMT, dwfirstentry : UInt32, dwnumentries : UInt32, lprawvaluearray : PDH_RAW_COUNTER*, data : PDH_STATISTICS*) : Int32
+    fun PdhGetCounterInfoW(hCounter : LibC::IntPtrT, bRetrieveExplainText : Win32cr::Foundation::BOOLEAN, pdwBufferSize : UInt32*, lpBuffer : Win32cr::System::Performance::PDH_COUNTER_INFO_W*) : Int32
 
-  # Params # hcounter : LibC::IntPtrT [In],bretrieveexplaintext : BOOLEAN [In],pdwbuffersize : UInt32* [In],lpbuffer : PDH_COUNTER_INFO_W* [In]
-  fun PdhGetCounterInfoW(hcounter : LibC::IntPtrT, bretrieveexplaintext : BOOLEAN, pdwbuffersize : UInt32*, lpbuffer : PDH_COUNTER_INFO_W*) : Int32
+    fun PdhGetCounterInfoA(hCounter : LibC::IntPtrT, bRetrieveExplainText : Win32cr::Foundation::BOOLEAN, pdwBufferSize : UInt32*, lpBuffer : Win32cr::System::Performance::PDH_COUNTER_INFO_A*) : Int32
 
-  # Params # hcounter : LibC::IntPtrT [In],bretrieveexplaintext : BOOLEAN [In],pdwbuffersize : UInt32* [In],lpbuffer : PDH_COUNTER_INFO_A* [In]
-  fun PdhGetCounterInfoA(hcounter : LibC::IntPtrT, bretrieveexplaintext : BOOLEAN, pdwbuffersize : UInt32*, lpbuffer : PDH_COUNTER_INFO_A*) : Int32
+    fun PdhSetCounterScaleFactor(hCounter : LibC::IntPtrT, lFactor : Int32) : Int32
 
-  # Params # hcounter : LibC::IntPtrT [In],lfactor : Int32 [In]
-  fun PdhSetCounterScaleFactor(hcounter : LibC::IntPtrT, lfactor : Int32) : Int32
+    fun PdhConnectMachineW(szMachineName : Win32cr::Foundation::PWSTR) : Int32
 
-  # Params # szmachinename : LibC::LPWSTR [In]
-  fun PdhConnectMachineW(szmachinename : LibC::LPWSTR) : Int32
+    fun PdhConnectMachineA(szMachineName : Win32cr::Foundation::PSTR) : Int32
 
-  # Params # szmachinename : PSTR [In]
-  fun PdhConnectMachineA(szmachinename : PSTR) : Int32
+    fun PdhEnumMachinesW(szDataSource : Win32cr::Foundation::PWSTR, mszMachineList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
 
-  # Params # szdatasource : LibC::LPWSTR [In],mszmachinelist : LibC::LPWSTR [In],pcchbuffersize : UInt32* [In]
-  fun PdhEnumMachinesW(szdatasource : LibC::LPWSTR, mszmachinelist : LibC::LPWSTR, pcchbuffersize : UInt32*) : Int32
+    fun PdhEnumMachinesA(szDataSource : Win32cr::Foundation::PSTR, mszMachineList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
 
-  # Params # szdatasource : PSTR [In],mszmachinelist : PSTR [In],pcchbuffersize : UInt32* [In]
-  fun PdhEnumMachinesA(szdatasource : PSTR, mszmachinelist : PSTR, pcchbuffersize : UInt32*) : Int32
+    fun PdhEnumObjectsW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, mszObjectList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
 
-  # Params # szdatasource : LibC::LPWSTR [In],szmachinename : LibC::LPWSTR [In],mszobjectlist : LibC::LPWSTR [In],pcchbuffersize : UInt32* [In],dwdetaillevel : PERF_DETAIL [In],brefresh : LibC::BOOL [In]
-  fun PdhEnumObjectsW(szdatasource : LibC::LPWSTR, szmachinename : LibC::LPWSTR, mszobjectlist : LibC::LPWSTR, pcchbuffersize : UInt32*, dwdetaillevel : PERF_DETAIL, brefresh : LibC::BOOL) : Int32
+    fun PdhEnumObjectsA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, mszObjectList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
 
-  # Params # szdatasource : PSTR [In],szmachinename : PSTR [In],mszobjectlist : PSTR [In],pcchbuffersize : UInt32* [In],dwdetaillevel : PERF_DETAIL [In],brefresh : LibC::BOOL [In]
-  fun PdhEnumObjectsA(szdatasource : PSTR, szmachinename : PSTR, mszobjectlist : PSTR, pcchbuffersize : UInt32*, dwdetaillevel : PERF_DETAIL, brefresh : LibC::BOOL) : Int32
+    fun PdhEnumObjectItemsW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, mszCounterList : Win32cr::Foundation::PWSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PWSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
 
-  # Params # szdatasource : LibC::LPWSTR [In],szmachinename : LibC::LPWSTR [In],szobjectname : LibC::LPWSTR [In],mszcounterlist : LibC::LPWSTR [In],pcchcounterlistlength : UInt32* [In],mszinstancelist : LibC::LPWSTR [In],pcchinstancelistlength : UInt32* [In],dwdetaillevel : PERF_DETAIL [In],dwflags : UInt32 [In]
-  fun PdhEnumObjectItemsW(szdatasource : LibC::LPWSTR, szmachinename : LibC::LPWSTR, szobjectname : LibC::LPWSTR, mszcounterlist : LibC::LPWSTR, pcchcounterlistlength : UInt32*, mszinstancelist : LibC::LPWSTR, pcchinstancelistlength : UInt32*, dwdetaillevel : PERF_DETAIL, dwflags : UInt32) : Int32
+    fun PdhEnumObjectItemsA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, mszCounterList : Win32cr::Foundation::PSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
 
-  # Params # szdatasource : PSTR [In],szmachinename : PSTR [In],szobjectname : PSTR [In],mszcounterlist : PSTR [In],pcchcounterlistlength : UInt32* [In],mszinstancelist : PSTR [In],pcchinstancelistlength : UInt32* [In],dwdetaillevel : PERF_DETAIL [In],dwflags : UInt32 [In]
-  fun PdhEnumObjectItemsA(szdatasource : PSTR, szmachinename : PSTR, szobjectname : PSTR, mszcounterlist : PSTR, pcchcounterlistlength : UInt32*, mszinstancelist : PSTR, pcchinstancelistlength : UInt32*, dwdetaillevel : PERF_DETAIL, dwflags : UInt32) : Int32
+    fun PdhMakeCounterPathW(pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_W*, szFullPathBuffer : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*, dwFlags : Win32cr::System::Performance::PDH_PATH_FLAGS) : Int32
 
-  # Params # pcounterpathelements : PDH_COUNTER_PATH_ELEMENTS_W* [In],szfullpathbuffer : LibC::LPWSTR [In],pcchbuffersize : UInt32* [In],dwflags : PDH_PATH_FLAGS [In]
-  fun PdhMakeCounterPathW(pcounterpathelements : PDH_COUNTER_PATH_ELEMENTS_W*, szfullpathbuffer : LibC::LPWSTR, pcchbuffersize : UInt32*, dwflags : PDH_PATH_FLAGS) : Int32
+    fun PdhMakeCounterPathA(pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_A*, szFullPathBuffer : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*, dwFlags : Win32cr::System::Performance::PDH_PATH_FLAGS) : Int32
 
-  # Params # pcounterpathelements : PDH_COUNTER_PATH_ELEMENTS_A* [In],szfullpathbuffer : PSTR [In],pcchbuffersize : UInt32* [In],dwflags : PDH_PATH_FLAGS [In]
-  fun PdhMakeCounterPathA(pcounterpathelements : PDH_COUNTER_PATH_ELEMENTS_A*, szfullpathbuffer : PSTR, pcchbuffersize : UInt32*, dwflags : PDH_PATH_FLAGS) : Int32
+    fun PdhParseCounterPathW(szFullPathBuffer : Win32cr::Foundation::PWSTR, pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_W*, pdwBufferSize : UInt32*, dwFlags : UInt32) : Int32
 
-  # Params # szfullpathbuffer : LibC::LPWSTR [In],pcounterpathelements : PDH_COUNTER_PATH_ELEMENTS_W* [In],pdwbuffersize : UInt32* [In],dwflags : UInt32 [In]
-  fun PdhParseCounterPathW(szfullpathbuffer : LibC::LPWSTR, pcounterpathelements : PDH_COUNTER_PATH_ELEMENTS_W*, pdwbuffersize : UInt32*, dwflags : UInt32) : Int32
+    fun PdhParseCounterPathA(szFullPathBuffer : Win32cr::Foundation::PSTR, pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_A*, pdwBufferSize : UInt32*, dwFlags : UInt32) : Int32
 
-  # Params # szfullpathbuffer : PSTR [In],pcounterpathelements : PDH_COUNTER_PATH_ELEMENTS_A* [In],pdwbuffersize : UInt32* [In],dwflags : UInt32 [In]
-  fun PdhParseCounterPathA(szfullpathbuffer : PSTR, pcounterpathelements : PDH_COUNTER_PATH_ELEMENTS_A*, pdwbuffersize : UInt32*, dwflags : UInt32) : Int32
+    fun PdhParseInstanceNameW(szInstanceString : Win32cr::Foundation::PWSTR, szInstanceName : Win32cr::Foundation::PWSTR, pcchInstanceNameLength : UInt32*, szParentName : Win32cr::Foundation::PWSTR, pcchParentNameLength : UInt32*, lpIndex : UInt32*) : Int32
 
-  # Params # szinstancestring : LibC::LPWSTR [In],szinstancename : LibC::LPWSTR [In],pcchinstancenamelength : UInt32* [In],szparentname : LibC::LPWSTR [In],pcchparentnamelength : UInt32* [In],lpindex : UInt32* [In]
-  fun PdhParseInstanceNameW(szinstancestring : LibC::LPWSTR, szinstancename : LibC::LPWSTR, pcchinstancenamelength : UInt32*, szparentname : LibC::LPWSTR, pcchparentnamelength : UInt32*, lpindex : UInt32*) : Int32
+    fun PdhParseInstanceNameA(szInstanceString : Win32cr::Foundation::PSTR, szInstanceName : Win32cr::Foundation::PSTR, pcchInstanceNameLength : UInt32*, szParentName : Win32cr::Foundation::PSTR, pcchParentNameLength : UInt32*, lpIndex : UInt32*) : Int32
 
-  # Params # szinstancestring : PSTR [In],szinstancename : PSTR [In],pcchinstancenamelength : UInt32* [In],szparentname : PSTR [In],pcchparentnamelength : UInt32* [In],lpindex : UInt32* [In]
-  fun PdhParseInstanceNameA(szinstancestring : PSTR, szinstancename : PSTR, pcchinstancenamelength : UInt32*, szparentname : PSTR, pcchparentnamelength : UInt32*, lpindex : UInt32*) : Int32
+    fun PdhValidatePathW(szFullPathBuffer : Win32cr::Foundation::PWSTR) : Int32
 
-  # Params # szfullpathbuffer : LibC::LPWSTR [In]
-  fun PdhValidatePathW(szfullpathbuffer : LibC::LPWSTR) : Int32
+    fun PdhValidatePathA(szFullPathBuffer : Win32cr::Foundation::PSTR) : Int32
 
-  # Params # szfullpathbuffer : PSTR [In]
-  fun PdhValidatePathA(szfullpathbuffer : PSTR) : Int32
+    fun PdhGetDefaultPerfObjectW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, szDefaultObjectName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
 
-  # Params # szdatasource : LibC::LPWSTR [In],szmachinename : LibC::LPWSTR [In],szdefaultobjectname : LibC::LPWSTR [In],pcchbuffersize : UInt32* [In]
-  fun PdhGetDefaultPerfObjectW(szdatasource : LibC::LPWSTR, szmachinename : LibC::LPWSTR, szdefaultobjectname : LibC::LPWSTR, pcchbuffersize : UInt32*) : Int32
+    fun PdhGetDefaultPerfObjectA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, szDefaultObjectName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
 
-  # Params # szdatasource : PSTR [In],szmachinename : PSTR [In],szdefaultobjectname : PSTR [In],pcchbuffersize : UInt32* [In]
-  fun PdhGetDefaultPerfObjectA(szdatasource : PSTR, szmachinename : PSTR, szdefaultobjectname : PSTR, pcchbuffersize : UInt32*) : Int32
+    fun PdhGetDefaultPerfCounterW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szDefaultCounterName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
 
-  # Params # szdatasource : LibC::LPWSTR [In],szmachinename : LibC::LPWSTR [In],szobjectname : LibC::LPWSTR [In],szdefaultcountername : LibC::LPWSTR [In],pcchbuffersize : UInt32* [In]
-  fun PdhGetDefaultPerfCounterW(szdatasource : LibC::LPWSTR, szmachinename : LibC::LPWSTR, szobjectname : LibC::LPWSTR, szdefaultcountername : LibC::LPWSTR, pcchbuffersize : UInt32*) : Int32
+    fun PdhGetDefaultPerfCounterA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, szDefaultCounterName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
 
-  # Params # szdatasource : PSTR [In],szmachinename : PSTR [In],szobjectname : PSTR [In],szdefaultcountername : PSTR [In],pcchbuffersize : UInt32* [In]
-  fun PdhGetDefaultPerfCounterA(szdatasource : PSTR, szmachinename : PSTR, szobjectname : PSTR, szdefaultcountername : PSTR, pcchbuffersize : UInt32*) : Int32
+    fun PdhBrowseCountersW(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_W*) : Int32
 
-  # Params # pbrowsedlgdata : PDH_BROWSE_DLG_CONFIG_W* [In]
-  fun PdhBrowseCountersW(pbrowsedlgdata : PDH_BROWSE_DLG_CONFIG_W*) : Int32
+    fun PdhBrowseCountersA(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_A*) : Int32
 
-  # Params # pbrowsedlgdata : PDH_BROWSE_DLG_CONFIG_A* [In]
-  fun PdhBrowseCountersA(pbrowsedlgdata : PDH_BROWSE_DLG_CONFIG_A*) : Int32
+    fun PdhExpandCounterPathW(szWildCardPath : Win32cr::Foundation::PWSTR, mszExpandedPathList : Win32cr::Foundation::PWSTR, pcchPathListLength : UInt32*) : Int32
 
-  # Params # szwildcardpath : LibC::LPWSTR [In],mszexpandedpathlist : LibC::LPWSTR [In],pcchpathlistlength : UInt32* [In]
-  fun PdhExpandCounterPathW(szwildcardpath : LibC::LPWSTR, mszexpandedpathlist : LibC::LPWSTR, pcchpathlistlength : UInt32*) : Int32
+    fun PdhExpandCounterPathA(szWildCardPath : Win32cr::Foundation::PSTR, mszExpandedPathList : Win32cr::Foundation::PSTR, pcchPathListLength : UInt32*) : Int32
 
-  # Params # szwildcardpath : PSTR [In],mszexpandedpathlist : PSTR [In],pcchpathlistlength : UInt32* [In]
-  fun PdhExpandCounterPathA(szwildcardpath : PSTR, mszexpandedpathlist : PSTR, pcchpathlistlength : UInt32*) : Int32
+    fun PdhLookupPerfNameByIndexW(szMachineName : Win32cr::Foundation::PWSTR, dwNameIndex : UInt32, szNameBuffer : Win32cr::Foundation::PWSTR, pcchNameBufferSize : UInt32*) : Int32
 
-  # Params # szmachinename : LibC::LPWSTR [In],dwnameindex : UInt32 [In],sznamebuffer : LibC::LPWSTR [In],pcchnamebuffersize : UInt32* [In]
-  fun PdhLookupPerfNameByIndexW(szmachinename : LibC::LPWSTR, dwnameindex : UInt32, sznamebuffer : LibC::LPWSTR, pcchnamebuffersize : UInt32*) : Int32
+    fun PdhLookupPerfNameByIndexA(szMachineName : Win32cr::Foundation::PSTR, dwNameIndex : UInt32, szNameBuffer : Win32cr::Foundation::PSTR, pcchNameBufferSize : UInt32*) : Int32
 
-  # Params # szmachinename : PSTR [In],dwnameindex : UInt32 [In],sznamebuffer : PSTR [In],pcchnamebuffersize : UInt32* [In]
-  fun PdhLookupPerfNameByIndexA(szmachinename : PSTR, dwnameindex : UInt32, sznamebuffer : PSTR, pcchnamebuffersize : UInt32*) : Int32
+    fun PdhLookupPerfIndexByNameW(szMachineName : Win32cr::Foundation::PWSTR, szNameBuffer : Win32cr::Foundation::PWSTR, pdwIndex : UInt32*) : Int32
 
-  # Params # szmachinename : LibC::LPWSTR [In],sznamebuffer : LibC::LPWSTR [In],pdwindex : UInt32* [In]
-  fun PdhLookupPerfIndexByNameW(szmachinename : LibC::LPWSTR, sznamebuffer : LibC::LPWSTR, pdwindex : UInt32*) : Int32
+    fun PdhLookupPerfIndexByNameA(szMachineName : Win32cr::Foundation::PSTR, szNameBuffer : Win32cr::Foundation::PSTR, pdwIndex : UInt32*) : Int32
 
-  # Params # szmachinename : PSTR [In],sznamebuffer : PSTR [In],pdwindex : UInt32* [In]
-  fun PdhLookupPerfIndexByNameA(szmachinename : PSTR, sznamebuffer : PSTR, pdwindex : UInt32*) : Int32
+    fun PdhExpandWildCardPathA(szDataSource : Win32cr::Foundation::PSTR, szWildCardPath : Win32cr::Foundation::PSTR, mszExpandedPathList : Win32cr::Foundation::PSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
 
-  # Params # szdatasource : PSTR [In],szwildcardpath : PSTR [In],mszexpandedpathlist : PSTR [In],pcchpathlistlength : UInt32* [In],dwflags : UInt32 [In]
-  fun PdhExpandWildCardPathA(szdatasource : PSTR, szwildcardpath : PSTR, mszexpandedpathlist : PSTR, pcchpathlistlength : UInt32*, dwflags : UInt32) : Int32
+    fun PdhExpandWildCardPathW(szDataSource : Win32cr::Foundation::PWSTR, szWildCardPath : Win32cr::Foundation::PWSTR, mszExpandedPathList : Win32cr::Foundation::PWSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
 
-  # Params # szdatasource : LibC::LPWSTR [In],szwildcardpath : LibC::LPWSTR [In],mszexpandedpathlist : LibC::LPWSTR [In],pcchpathlistlength : UInt32* [In],dwflags : UInt32 [In]
-  fun PdhExpandWildCardPathW(szdatasource : LibC::LPWSTR, szwildcardpath : LibC::LPWSTR, mszexpandedpathlist : LibC::LPWSTR, pcchpathlistlength : UInt32*, dwflags : UInt32) : Int32
+    fun PdhOpenLogW(szLogFileName : Win32cr::Foundation::PWSTR, dwAccessFlags : Win32cr::System::Performance::PDH_LOG, lpdwLogType : Win32cr::System::Performance::PDH_LOG_TYPE*, hQuery : LibC::IntPtrT, dwMaxSize : UInt32, szUserCaption : Win32cr::Foundation::PWSTR, phLog : LibC::IntPtrT*) : Int32
 
-  # Params # szlogfilename : LibC::LPWSTR [In],dwaccessflags : PDH_LOG [In],lpdwlogtype : PDH_LOG_TYPE* [In],hquery : LibC::IntPtrT [In],dwmaxsize : UInt32 [In],szusercaption : LibC::LPWSTR [In],phlog : LibC::IntPtrT* [In]
-  fun PdhOpenLogW(szlogfilename : LibC::LPWSTR, dwaccessflags : PDH_LOG, lpdwlogtype : PDH_LOG_TYPE*, hquery : LibC::IntPtrT, dwmaxsize : UInt32, szusercaption : LibC::LPWSTR, phlog : LibC::IntPtrT*) : Int32
+    fun PdhOpenLogA(szLogFileName : Win32cr::Foundation::PSTR, dwAccessFlags : Win32cr::System::Performance::PDH_LOG, lpdwLogType : Win32cr::System::Performance::PDH_LOG_TYPE*, hQuery : LibC::IntPtrT, dwMaxSize : UInt32, szUserCaption : Win32cr::Foundation::PSTR, phLog : LibC::IntPtrT*) : Int32
 
-  # Params # szlogfilename : PSTR [In],dwaccessflags : PDH_LOG [In],lpdwlogtype : PDH_LOG_TYPE* [In],hquery : LibC::IntPtrT [In],dwmaxsize : UInt32 [In],szusercaption : PSTR [In],phlog : LibC::IntPtrT* [In]
-  fun PdhOpenLogA(szlogfilename : PSTR, dwaccessflags : PDH_LOG, lpdwlogtype : PDH_LOG_TYPE*, hquery : LibC::IntPtrT, dwmaxsize : UInt32, szusercaption : PSTR, phlog : LibC::IntPtrT*) : Int32
+    fun PdhUpdateLogW(hLog : LibC::IntPtrT, szUserString : Win32cr::Foundation::PWSTR) : Int32
 
-  # Params # hlog : LibC::IntPtrT [In],szuserstring : LibC::LPWSTR [In]
-  fun PdhUpdateLogW(hlog : LibC::IntPtrT, szuserstring : LibC::LPWSTR) : Int32
+    fun PdhUpdateLogA(hLog : LibC::IntPtrT, szUserString : Win32cr::Foundation::PSTR) : Int32
 
-  # Params # hlog : LibC::IntPtrT [In],szuserstring : PSTR [In]
-  fun PdhUpdateLogA(hlog : LibC::IntPtrT, szuserstring : PSTR) : Int32
+    fun PdhUpdateLogFileCatalog(hLog : LibC::IntPtrT) : Int32
 
-  # Params # hlog : LibC::IntPtrT [In]
-  fun PdhUpdateLogFileCatalog(hlog : LibC::IntPtrT) : Int32
+    fun PdhGetLogFileSize(hLog : LibC::IntPtrT, llSize : Int64*) : Int32
 
-  # Params # hlog : LibC::IntPtrT [In],llsize : Int64* [In]
-  fun PdhGetLogFileSize(hlog : LibC::IntPtrT, llsize : Int64*) : Int32
+    fun PdhCloseLog(hLog : LibC::IntPtrT, dwFlags : UInt32) : Int32
 
-  # Params # hlog : LibC::IntPtrT [In],dwflags : UInt32 [In]
-  fun PdhCloseLog(hlog : LibC::IntPtrT, dwflags : UInt32) : Int32
+    fun PdhSelectDataSourceW(hWndOwner : Win32cr::Foundation::HWND, dwFlags : Win32cr::System::Performance::PDH_SELECT_DATA_SOURCE_FLAGS, szDataSource : Win32cr::Foundation::PWSTR, pcchBufferLength : UInt32*) : Int32
 
-  # Params # hwndowner : LibC::HANDLE [In],dwflags : PDH_SELECT_DATA_SOURCE_FLAGS [In],szdatasource : LibC::LPWSTR [In],pcchbufferlength : UInt32* [In]
-  fun PdhSelectDataSourceW(hwndowner : LibC::HANDLE, dwflags : PDH_SELECT_DATA_SOURCE_FLAGS, szdatasource : LibC::LPWSTR, pcchbufferlength : UInt32*) : Int32
+    fun PdhSelectDataSourceA(hWndOwner : Win32cr::Foundation::HWND, dwFlags : Win32cr::System::Performance::PDH_SELECT_DATA_SOURCE_FLAGS, szDataSource : Win32cr::Foundation::PSTR, pcchBufferLength : UInt32*) : Int32
 
-  # Params # hwndowner : LibC::HANDLE [In],dwflags : PDH_SELECT_DATA_SOURCE_FLAGS [In],szdatasource : PSTR [In],pcchbufferlength : UInt32* [In]
-  fun PdhSelectDataSourceA(hwndowner : LibC::HANDLE, dwflags : PDH_SELECT_DATA_SOURCE_FLAGS, szdatasource : PSTR, pcchbufferlength : UInt32*) : Int32
+    fun PdhIsRealTimeQuery(hQuery : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
-  # Params # hquery : LibC::IntPtrT [In]
-  fun PdhIsRealTimeQuery(hquery : LibC::IntPtrT) : LibC::BOOL
+    fun PdhSetQueryTimeRange(hQuery : LibC::IntPtrT, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*) : Int32
 
-  # Params # hquery : LibC::IntPtrT [In],pinfo : PDH_TIME_INFO* [In]
-  fun PdhSetQueryTimeRange(hquery : LibC::IntPtrT, pinfo : PDH_TIME_INFO*) : Int32
+    fun PdhGetDataSourceTimeRangeW(szDataSource : Win32cr::Foundation::PWSTR, pdwNumEntries : UInt32*, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*, pdwBufferSize : UInt32*) : Int32
 
-  # Params # szdatasource : LibC::LPWSTR [In],pdwnumentries : UInt32* [In],pinfo : PDH_TIME_INFO* [In],pdwbuffersize : UInt32* [In]
-  fun PdhGetDataSourceTimeRangeW(szdatasource : LibC::LPWSTR, pdwnumentries : UInt32*, pinfo : PDH_TIME_INFO*, pdwbuffersize : UInt32*) : Int32
+    fun PdhGetDataSourceTimeRangeA(szDataSource : Win32cr::Foundation::PSTR, pdwNumEntries : UInt32*, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*, pdwBufferSize : UInt32*) : Int32
 
-  # Params # szdatasource : PSTR [In],pdwnumentries : UInt32* [In],pinfo : PDH_TIME_INFO* [In],pdwbuffersize : UInt32* [In]
-  fun PdhGetDataSourceTimeRangeA(szdatasource : PSTR, pdwnumentries : UInt32*, pinfo : PDH_TIME_INFO*, pdwbuffersize : UInt32*) : Int32
+    fun PdhCollectQueryDataEx(hQuery : LibC::IntPtrT, dwIntervalTime : UInt32, hNewDataEvent : Win32cr::Foundation::HANDLE) : Int32
 
-  # Params # hquery : LibC::IntPtrT [In],dwintervaltime : UInt32 [In],hnewdataevent : LibC::HANDLE [In]
-  fun PdhCollectQueryDataEx(hquery : LibC::IntPtrT, dwintervaltime : UInt32, hnewdataevent : LibC::HANDLE) : Int32
+    fun PdhFormatFromRawValue(dwCounterType : UInt32, dwFormat : Win32cr::System::Performance::PDH_FMT, pTimeBase : Int64*, pRawValue1 : Win32cr::System::Performance::PDH_RAW_COUNTER*, pRawValue2 : Win32cr::System::Performance::PDH_RAW_COUNTER*, pFmtValue : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE*) : Int32
 
-  # Params # dwcountertype : UInt32 [In],dwformat : PDH_FMT [In],ptimebase : Int64* [In],prawvalue1 : PDH_RAW_COUNTER* [In],prawvalue2 : PDH_RAW_COUNTER* [In],pfmtvalue : PDH_FMT_COUNTERVALUE* [In]
-  fun PdhFormatFromRawValue(dwcountertype : UInt32, dwformat : PDH_FMT, ptimebase : Int64*, prawvalue1 : PDH_RAW_COUNTER*, prawvalue2 : PDH_RAW_COUNTER*, pfmtvalue : PDH_FMT_COUNTERVALUE*) : Int32
+    fun PdhGetCounterTimeBase(hCounter : LibC::IntPtrT, pTimeBase : Int64*) : Int32
 
-  # Params # hcounter : LibC::IntPtrT [In],ptimebase : Int64* [In]
-  fun PdhGetCounterTimeBase(hcounter : LibC::IntPtrT, ptimebase : Int64*) : Int32
+    fun PdhReadRawLogRecord(hLog : LibC::IntPtrT, ftRecord : Win32cr::Foundation::FILETIME, pRawLogRecord : Win32cr::System::Performance::PDH_RAW_LOG_RECORD*, pdwBufferLength : UInt32*) : Int32
 
-  # Params # hlog : LibC::IntPtrT [In],ftrecord : FILETIME [In],prawlogrecord : PDH_RAW_LOG_RECORD* [In],pdwbufferlength : UInt32* [In]
-  fun PdhReadRawLogRecord(hlog : LibC::IntPtrT, ftrecord : FILETIME, prawlogrecord : PDH_RAW_LOG_RECORD*, pdwbufferlength : UInt32*) : Int32
+    fun PdhSetDefaultRealTimeDataSource(dwDataSourceId : Win32cr::System::Performance::REAL_TIME_DATA_SOURCE_ID_FLAGS) : Int32
 
-  # Params # dwdatasourceid : REAL_TIME_DATA_SOURCE_ID_FLAGS [In]
-  fun PdhSetDefaultRealTimeDataSource(dwdatasourceid : REAL_TIME_DATA_SOURCE_ID_FLAGS) : Int32
+    fun PdhBindInputDataSourceW(phDataSource : LibC::IntPtrT*, log_file_name_list : Win32cr::Foundation::PWSTR) : Int32
 
-  # Params # phdatasource : LibC::IntPtrT* [In],logfilenamelist : LibC::LPWSTR [In]
-  fun PdhBindInputDataSourceW(phdatasource : LibC::IntPtrT*, logfilenamelist : LibC::LPWSTR) : Int32
+    fun PdhBindInputDataSourceA(phDataSource : LibC::IntPtrT*, log_file_name_list : Win32cr::Foundation::PSTR) : Int32
 
-  # Params # phdatasource : LibC::IntPtrT* [In],logfilenamelist : PSTR [In]
-  fun PdhBindInputDataSourceA(phdatasource : LibC::IntPtrT*, logfilenamelist : PSTR) : Int32
+    fun PdhOpenQueryH(hDataSource : LibC::IntPtrT, dwUserData : LibC::UIntPtrT, phQuery : LibC::IntPtrT*) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],dwuserdata : LibC::UINT_PTR [In],phquery : LibC::IntPtrT* [In]
-  fun PdhOpenQueryH(hdatasource : LibC::IntPtrT, dwuserdata : LibC::UINT_PTR, phquery : LibC::IntPtrT*) : Int32
+    fun PdhEnumMachinesHW(hDataSource : LibC::IntPtrT, mszMachineList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],mszmachinelist : LibC::LPWSTR [In],pcchbuffersize : UInt32* [In]
-  fun PdhEnumMachinesHW(hdatasource : LibC::IntPtrT, mszmachinelist : LibC::LPWSTR, pcchbuffersize : UInt32*) : Int32
+    fun PdhEnumMachinesHA(hDataSource : LibC::IntPtrT, mszMachineList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],mszmachinelist : PSTR [In],pcchbuffersize : UInt32* [In]
-  fun PdhEnumMachinesHA(hdatasource : LibC::IntPtrT, mszmachinelist : PSTR, pcchbuffersize : UInt32*) : Int32
+    fun PdhEnumObjectsHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, mszObjectList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],szmachinename : LibC::LPWSTR [In],mszobjectlist : LibC::LPWSTR [In],pcchbuffersize : UInt32* [In],dwdetaillevel : PERF_DETAIL [In],brefresh : LibC::BOOL [In]
-  fun PdhEnumObjectsHW(hdatasource : LibC::IntPtrT, szmachinename : LibC::LPWSTR, mszobjectlist : LibC::LPWSTR, pcchbuffersize : UInt32*, dwdetaillevel : PERF_DETAIL, brefresh : LibC::BOOL) : Int32
+    fun PdhEnumObjectsHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, mszObjectList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],szmachinename : PSTR [In],mszobjectlist : PSTR [In],pcchbuffersize : UInt32* [In],dwdetaillevel : PERF_DETAIL [In],brefresh : LibC::BOOL [In]
-  fun PdhEnumObjectsHA(hdatasource : LibC::IntPtrT, szmachinename : PSTR, mszobjectlist : PSTR, pcchbuffersize : UInt32*, dwdetaillevel : PERF_DETAIL, brefresh : LibC::BOOL) : Int32
+    fun PdhEnumObjectItemsHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, mszCounterList : Win32cr::Foundation::PWSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PWSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],szmachinename : LibC::LPWSTR [In],szobjectname : LibC::LPWSTR [In],mszcounterlist : LibC::LPWSTR [In],pcchcounterlistlength : UInt32* [In],mszinstancelist : LibC::LPWSTR [In],pcchinstancelistlength : UInt32* [In],dwdetaillevel : PERF_DETAIL [In],dwflags : UInt32 [In]
-  fun PdhEnumObjectItemsHW(hdatasource : LibC::IntPtrT, szmachinename : LibC::LPWSTR, szobjectname : LibC::LPWSTR, mszcounterlist : LibC::LPWSTR, pcchcounterlistlength : UInt32*, mszinstancelist : LibC::LPWSTR, pcchinstancelistlength : UInt32*, dwdetaillevel : PERF_DETAIL, dwflags : UInt32) : Int32
+    fun PdhEnumObjectItemsHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, mszCounterList : Win32cr::Foundation::PSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],szmachinename : PSTR [In],szobjectname : PSTR [In],mszcounterlist : PSTR [In],pcchcounterlistlength : UInt32* [In],mszinstancelist : PSTR [In],pcchinstancelistlength : UInt32* [In],dwdetaillevel : PERF_DETAIL [In],dwflags : UInt32 [In]
-  fun PdhEnumObjectItemsHA(hdatasource : LibC::IntPtrT, szmachinename : PSTR, szobjectname : PSTR, mszcounterlist : PSTR, pcchcounterlistlength : UInt32*, mszinstancelist : PSTR, pcchinstancelistlength : UInt32*, dwdetaillevel : PERF_DETAIL, dwflags : UInt32) : Int32
+    fun PdhExpandWildCardPathHW(hDataSource : LibC::IntPtrT, szWildCardPath : Win32cr::Foundation::PWSTR, mszExpandedPathList : Win32cr::Foundation::PWSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],szwildcardpath : LibC::LPWSTR [In],mszexpandedpathlist : LibC::LPWSTR [In],pcchpathlistlength : UInt32* [In],dwflags : UInt32 [In]
-  fun PdhExpandWildCardPathHW(hdatasource : LibC::IntPtrT, szwildcardpath : LibC::LPWSTR, mszexpandedpathlist : LibC::LPWSTR, pcchpathlistlength : UInt32*, dwflags : UInt32) : Int32
+    fun PdhExpandWildCardPathHA(hDataSource : LibC::IntPtrT, szWildCardPath : Win32cr::Foundation::PSTR, mszExpandedPathList : Win32cr::Foundation::PSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],szwildcardpath : PSTR [In],mszexpandedpathlist : PSTR [In],pcchpathlistlength : UInt32* [In],dwflags : UInt32 [In]
-  fun PdhExpandWildCardPathHA(hdatasource : LibC::IntPtrT, szwildcardpath : PSTR, mszexpandedpathlist : PSTR, pcchpathlistlength : UInt32*, dwflags : UInt32) : Int32
+    fun PdhGetDataSourceTimeRangeH(hDataSource : LibC::IntPtrT, pdwNumEntries : UInt32*, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*, pdwBufferSize : UInt32*) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],pdwnumentries : UInt32* [In],pinfo : PDH_TIME_INFO* [In],pdwbuffersize : UInt32* [In]
-  fun PdhGetDataSourceTimeRangeH(hdatasource : LibC::IntPtrT, pdwnumentries : UInt32*, pinfo : PDH_TIME_INFO*, pdwbuffersize : UInt32*) : Int32
+    fun PdhGetDefaultPerfObjectHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, szDefaultObjectName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],szmachinename : LibC::LPWSTR [In],szdefaultobjectname : LibC::LPWSTR [In],pcchbuffersize : UInt32* [In]
-  fun PdhGetDefaultPerfObjectHW(hdatasource : LibC::IntPtrT, szmachinename : LibC::LPWSTR, szdefaultobjectname : LibC::LPWSTR, pcchbuffersize : UInt32*) : Int32
+    fun PdhGetDefaultPerfObjectHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, szDefaultObjectName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],szmachinename : PSTR [In],szdefaultobjectname : PSTR [In],pcchbuffersize : UInt32* [In]
-  fun PdhGetDefaultPerfObjectHA(hdatasource : LibC::IntPtrT, szmachinename : PSTR, szdefaultobjectname : PSTR, pcchbuffersize : UInt32*) : Int32
+    fun PdhGetDefaultPerfCounterHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szDefaultCounterName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],szmachinename : LibC::LPWSTR [In],szobjectname : LibC::LPWSTR [In],szdefaultcountername : LibC::LPWSTR [In],pcchbuffersize : UInt32* [In]
-  fun PdhGetDefaultPerfCounterHW(hdatasource : LibC::IntPtrT, szmachinename : LibC::LPWSTR, szobjectname : LibC::LPWSTR, szdefaultcountername : LibC::LPWSTR, pcchbuffersize : UInt32*) : Int32
+    fun PdhGetDefaultPerfCounterHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, szDefaultCounterName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
 
-  # Params # hdatasource : LibC::IntPtrT [In],szmachinename : PSTR [In],szobjectname : PSTR [In],szdefaultcountername : PSTR [In],pcchbuffersize : UInt32* [In]
-  fun PdhGetDefaultPerfCounterHA(hdatasource : LibC::IntPtrT, szmachinename : PSTR, szobjectname : PSTR, szdefaultcountername : PSTR, pcchbuffersize : UInt32*) : Int32
+    fun PdhBrowseCountersHW(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_HW*) : Int32
 
-  # Params # pbrowsedlgdata : PDH_BROWSE_DLG_CONFIG_HW* [In]
-  fun PdhBrowseCountersHW(pbrowsedlgdata : PDH_BROWSE_DLG_CONFIG_HW*) : Int32
+    fun PdhBrowseCountersHA(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_HA*) : Int32
 
-  # Params # pbrowsedlgdata : PDH_BROWSE_DLG_CONFIG_HA* [In]
-  fun PdhBrowseCountersHA(pbrowsedlgdata : PDH_BROWSE_DLG_CONFIG_HA*) : Int32
+    fun PdhVerifySQLDBW(szDataSource : Win32cr::Foundation::PWSTR) : Int32
 
-  # Params # szdatasource : LibC::LPWSTR [In]
-  fun PdhVerifySQLDBW(szdatasource : LibC::LPWSTR) : Int32
+    fun PdhVerifySQLDBA(szDataSource : Win32cr::Foundation::PSTR) : Int32
 
-  # Params # szdatasource : PSTR [In]
-  fun PdhVerifySQLDBA(szdatasource : PSTR) : Int32
+    fun PdhCreateSQLTablesW(szDataSource : Win32cr::Foundation::PWSTR) : Int32
 
-  # Params # szdatasource : LibC::LPWSTR [In]
-  fun PdhCreateSQLTablesW(szdatasource : LibC::LPWSTR) : Int32
+    fun PdhCreateSQLTablesA(szDataSource : Win32cr::Foundation::PSTR) : Int32
 
-  # Params # szdatasource : PSTR [In]
-  fun PdhCreateSQLTablesA(szdatasource : PSTR) : Int32
+    fun PdhEnumLogSetNamesW(szDataSource : Win32cr::Foundation::PWSTR, mszDataSetNameList : Win32cr::Foundation::PWSTR, pcchBufferLength : UInt32*) : Int32
 
-  # Params # szdatasource : LibC::LPWSTR [In],mszdatasetnamelist : LibC::LPWSTR [In],pcchbufferlength : UInt32* [In]
-  fun PdhEnumLogSetNamesW(szdatasource : LibC::LPWSTR, mszdatasetnamelist : LibC::LPWSTR, pcchbufferlength : UInt32*) : Int32
+    fun PdhEnumLogSetNamesA(szDataSource : Win32cr::Foundation::PSTR, mszDataSetNameList : Win32cr::Foundation::PSTR, pcchBufferLength : UInt32*) : Int32
 
-  # Params # szdatasource : PSTR [In],mszdatasetnamelist : PSTR [In],pcchbufferlength : UInt32* [In]
-  fun PdhEnumLogSetNamesA(szdatasource : PSTR, mszdatasetnamelist : PSTR, pcchbufferlength : UInt32*) : Int32
+    fun PdhGetLogSetGUID(hLog : LibC::IntPtrT, pGuid : LibC::GUID*, pRunId : Int32*) : Int32
 
-  # Params # hlog : LibC::IntPtrT [In],pguid : Guid* [In],prunid : Int32* [In]
-  fun PdhGetLogSetGUID(hlog : LibC::IntPtrT, pguid : Guid*, prunid : Int32*) : Int32
+    fun PdhSetLogSetRunID(hLog : LibC::IntPtrT, run_id : Int32) : Int32
 
-  # Params # hlog : LibC::IntPtrT [In],runid : Int32 [In]
-  fun PdhSetLogSetRunID(hlog : LibC::IntPtrT, runid : Int32) : Int32
-end
-struct LibWin32::IDataCollectorSet
-  def query_interface(this : IDataCollectorSet*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDataCollectorSet*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDataCollectorSet*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDataCollectorSet*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDataCollectorSet*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDataCollectorSet*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDataCollectorSet*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_data_collectors(this : IDataCollectorSet*, collectors : IDataCollectorCollection*) : HRESULT
-    @lpVtbl.value.get_data_collectors.call(this, collectors)
-  end
-  def get_duration(this : IDataCollectorSet*, seconds : UInt32*) : HRESULT
-    @lpVtbl.value.get_duration.call(this, seconds)
-  end
-  def put_duration(this : IDataCollectorSet*, seconds : UInt32) : HRESULT
-    @lpVtbl.value.put_duration.call(this, seconds)
-  end
-  def get_description(this : IDataCollectorSet*, description : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.call(this, description)
-  end
-  def put_description(this : IDataCollectorSet*, description : UInt8*) : HRESULT
-    @lpVtbl.value.put_description.call(this, description)
-  end
-  def get_description_unresolved(this : IDataCollectorSet*, descr : UInt8**) : HRESULT
-    @lpVtbl.value.get_description_unresolved.call(this, descr)
-  end
-  def get_display_name(this : IDataCollectorSet*, displayname : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_name.call(this, displayname)
-  end
-  def put_display_name(this : IDataCollectorSet*, displayname : UInt8*) : HRESULT
-    @lpVtbl.value.put_display_name.call(this, displayname)
-  end
-  def get_display_name_unresolved(this : IDataCollectorSet*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_name_unresolved.call(this, name)
-  end
-  def get_keywords(this : IDataCollectorSet*, keywords : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_keywords.call(this, keywords)
-  end
-  def put_keywords(this : IDataCollectorSet*, keywords : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_keywords.call(this, keywords)
-  end
-  def get_latest_output_location(this : IDataCollectorSet*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_latest_output_location.call(this, path)
-  end
-  def put_latest_output_location(this : IDataCollectorSet*, path : UInt8*) : HRESULT
-    @lpVtbl.value.put_latest_output_location.call(this, path)
-  end
-  def get_name(this : IDataCollectorSet*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, name)
-  end
-  def get_output_location(this : IDataCollectorSet*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_output_location.call(this, path)
-  end
-  def get_root_path(this : IDataCollectorSet*, folder : UInt8**) : HRESULT
-    @lpVtbl.value.get_root_path.call(this, folder)
-  end
-  def put_root_path(this : IDataCollectorSet*, folder : UInt8*) : HRESULT
-    @lpVtbl.value.put_root_path.call(this, folder)
-  end
-  def get_segment(this : IDataCollectorSet*, segment : Int16*) : HRESULT
-    @lpVtbl.value.get_segment.call(this, segment)
-  end
-  def put_segment(this : IDataCollectorSet*, segment : Int16) : HRESULT
-    @lpVtbl.value.put_segment.call(this, segment)
-  end
-  def get_segment_max_duration(this : IDataCollectorSet*, seconds : UInt32*) : HRESULT
-    @lpVtbl.value.get_segment_max_duration.call(this, seconds)
-  end
-  def put_segment_max_duration(this : IDataCollectorSet*, seconds : UInt32) : HRESULT
-    @lpVtbl.value.put_segment_max_duration.call(this, seconds)
-  end
-  def get_segment_max_size(this : IDataCollectorSet*, size : UInt32*) : HRESULT
-    @lpVtbl.value.get_segment_max_size.call(this, size)
-  end
-  def put_segment_max_size(this : IDataCollectorSet*, size : UInt32) : HRESULT
-    @lpVtbl.value.put_segment_max_size.call(this, size)
-  end
-  def get_serial_number(this : IDataCollectorSet*, index : UInt32*) : HRESULT
-    @lpVtbl.value.get_serial_number.call(this, index)
-  end
-  def put_serial_number(this : IDataCollectorSet*, index : UInt32) : HRESULT
-    @lpVtbl.value.put_serial_number.call(this, index)
-  end
-  def get_server(this : IDataCollectorSet*, server : UInt8**) : HRESULT
-    @lpVtbl.value.get_server.call(this, server)
-  end
-  def get_status(this : IDataCollectorSet*, status : DataCollectorSetStatus*) : HRESULT
-    @lpVtbl.value.get_status.call(this, status)
-  end
-  def get_subdirectory(this : IDataCollectorSet*, folder : UInt8**) : HRESULT
-    @lpVtbl.value.get_subdirectory.call(this, folder)
-  end
-  def put_subdirectory(this : IDataCollectorSet*, folder : UInt8*) : HRESULT
-    @lpVtbl.value.put_subdirectory.call(this, folder)
-  end
-  def get_subdirectory_format(this : IDataCollectorSet*, format : AutoPathFormat*) : HRESULT
-    @lpVtbl.value.get_subdirectory_format.call(this, format)
-  end
-  def put_subdirectory_format(this : IDataCollectorSet*, format : AutoPathFormat) : HRESULT
-    @lpVtbl.value.put_subdirectory_format.call(this, format)
-  end
-  def get_subdirectory_format_pattern(this : IDataCollectorSet*, pattern : UInt8**) : HRESULT
-    @lpVtbl.value.get_subdirectory_format_pattern.call(this, pattern)
-  end
-  def put_subdirectory_format_pattern(this : IDataCollectorSet*, pattern : UInt8*) : HRESULT
-    @lpVtbl.value.put_subdirectory_format_pattern.call(this, pattern)
-  end
-  def get_task(this : IDataCollectorSet*, task : UInt8**) : HRESULT
-    @lpVtbl.value.get_task.call(this, task)
-  end
-  def put_task(this : IDataCollectorSet*, task : UInt8*) : HRESULT
-    @lpVtbl.value.put_task.call(this, task)
-  end
-  def get_task_run_as_self(this : IDataCollectorSet*, runasself : Int16*) : HRESULT
-    @lpVtbl.value.get_task_run_as_self.call(this, runasself)
-  end
-  def put_task_run_as_self(this : IDataCollectorSet*, runasself : Int16) : HRESULT
-    @lpVtbl.value.put_task_run_as_self.call(this, runasself)
-  end
-  def get_task_arguments(this : IDataCollectorSet*, task : UInt8**) : HRESULT
-    @lpVtbl.value.get_task_arguments.call(this, task)
-  end
-  def put_task_arguments(this : IDataCollectorSet*, task : UInt8*) : HRESULT
-    @lpVtbl.value.put_task_arguments.call(this, task)
-  end
-  def get_task_user_text_arguments(this : IDataCollectorSet*, usertext : UInt8**) : HRESULT
-    @lpVtbl.value.get_task_user_text_arguments.call(this, usertext)
-  end
-  def put_task_user_text_arguments(this : IDataCollectorSet*, usertext : UInt8*) : HRESULT
-    @lpVtbl.value.put_task_user_text_arguments.call(this, usertext)
-  end
-  def get_schedules(this : IDataCollectorSet*, ppschedules : IScheduleCollection*) : HRESULT
-    @lpVtbl.value.get_schedules.call(this, ppschedules)
-  end
-  def get_schedules_enabled(this : IDataCollectorSet*, enabled : Int16*) : HRESULT
-    @lpVtbl.value.get_schedules_enabled.call(this, enabled)
-  end
-  def put_schedules_enabled(this : IDataCollectorSet*, enabled : Int16) : HRESULT
-    @lpVtbl.value.put_schedules_enabled.call(this, enabled)
-  end
-  def get_user_account(this : IDataCollectorSet*, user : UInt8**) : HRESULT
-    @lpVtbl.value.get_user_account.call(this, user)
-  end
-  def get_xml(this : IDataCollectorSet*, xml : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.call(this, xml)
-  end
-  def get_security(this : IDataCollectorSet*, pbstrsecurity : UInt8**) : HRESULT
-    @lpVtbl.value.get_security.call(this, pbstrsecurity)
-  end
-  def put_security(this : IDataCollectorSet*, bstrsecurity : UInt8*) : HRESULT
-    @lpVtbl.value.put_security.call(this, bstrsecurity)
-  end
-  def get_stop_on_completion(this : IDataCollectorSet*, stop : Int16*) : HRESULT
-    @lpVtbl.value.get_stop_on_completion.call(this, stop)
-  end
-  def put_stop_on_completion(this : IDataCollectorSet*, stop : Int16) : HRESULT
-    @lpVtbl.value.put_stop_on_completion.call(this, stop)
-  end
-  def get_data_manager(this : IDataCollectorSet*, datamanager : IDataManager*) : HRESULT
-    @lpVtbl.value.get_data_manager.call(this, datamanager)
-  end
-  def set_credentials(this : IDataCollectorSet*, user : UInt8*, password : UInt8*) : HRESULT
-    @lpVtbl.value.set_credentials.call(this, user, password)
-  end
-  def query(this : IDataCollectorSet*, name : UInt8*, server : UInt8*) : HRESULT
-    @lpVtbl.value.query.call(this, name, server)
-  end
-  def commit(this : IDataCollectorSet*, name : UInt8*, server : UInt8*, mode : CommitMode, validation : IValueMap*) : HRESULT
-    @lpVtbl.value.commit.call(this, name, server, mode, validation)
-  end
-  def delete(this : IDataCollectorSet*) : HRESULT
-    @lpVtbl.value.delete.call(this)
-  end
-  def start(this : IDataCollectorSet*, synchronous : Int16) : HRESULT
-    @lpVtbl.value.start.call(this, synchronous)
-  end
-  def stop(this : IDataCollectorSet*, synchronous : Int16) : HRESULT
-    @lpVtbl.value.stop.call(this, synchronous)
-  end
-  def set_xml(this : IDataCollectorSet*, xml : UInt8*, validation : IValueMap*) : HRESULT
-    @lpVtbl.value.set_xml.call(this, xml, validation)
-  end
-  def set_value(this : IDataCollectorSet*, key : UInt8*, value : UInt8*) : HRESULT
-    @lpVtbl.value.set_value.call(this, key, value)
-  end
-  def get_value(this : IDataCollectorSet*, key : UInt8*, value : UInt8**) : HRESULT
-    @lpVtbl.value.get_value.call(this, key, value)
-  end
-end
-struct LibWin32::IDataManager
-  def query_interface(this : IDataManager*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDataManager*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDataManager*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDataManager*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDataManager*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDataManager*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDataManager*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_enabled(this : IDataManager*, pfenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_enabled.call(this, pfenabled)
-  end
-  def put_enabled(this : IDataManager*, fenabled : Int16) : HRESULT
-    @lpVtbl.value.put_enabled.call(this, fenabled)
-  end
-  def get_check_before_running(this : IDataManager*, pfcheck : Int16*) : HRESULT
-    @lpVtbl.value.get_check_before_running.call(this, pfcheck)
-  end
-  def put_check_before_running(this : IDataManager*, fcheck : Int16) : HRESULT
-    @lpVtbl.value.put_check_before_running.call(this, fcheck)
-  end
-  def get_min_free_disk(this : IDataManager*, minfreedisk : UInt32*) : HRESULT
-    @lpVtbl.value.get_min_free_disk.call(this, minfreedisk)
-  end
-  def put_min_free_disk(this : IDataManager*, minfreedisk : UInt32) : HRESULT
-    @lpVtbl.value.put_min_free_disk.call(this, minfreedisk)
-  end
-  def get_max_size(this : IDataManager*, pulmaxsize : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_size.call(this, pulmaxsize)
-  end
-  def put_max_size(this : IDataManager*, ulmaxsize : UInt32) : HRESULT
-    @lpVtbl.value.put_max_size.call(this, ulmaxsize)
-  end
-  def get_max_folder_count(this : IDataManager*, pulmaxfoldercount : UInt32*) : HRESULT
-    @lpVtbl.value.get_max_folder_count.call(this, pulmaxfoldercount)
-  end
-  def put_max_folder_count(this : IDataManager*, ulmaxfoldercount : UInt32) : HRESULT
-    @lpVtbl.value.put_max_folder_count.call(this, ulmaxfoldercount)
-  end
-  def get_resource_policy(this : IDataManager*, ppolicy : ResourcePolicy*) : HRESULT
-    @lpVtbl.value.get_resource_policy.call(this, ppolicy)
-  end
-  def put_resource_policy(this : IDataManager*, policy : ResourcePolicy) : HRESULT
-    @lpVtbl.value.put_resource_policy.call(this, policy)
-  end
-  def get_folder_actions(this : IDataManager*, actions : IFolderActionCollection*) : HRESULT
-    @lpVtbl.value.get_folder_actions.call(this, actions)
-  end
-  def get_report_schema(this : IDataManager*, reportschema : UInt8**) : HRESULT
-    @lpVtbl.value.get_report_schema.call(this, reportschema)
-  end
-  def put_report_schema(this : IDataManager*, reportschema : UInt8*) : HRESULT
-    @lpVtbl.value.put_report_schema.call(this, reportschema)
-  end
-  def get_report_file_name(this : IDataManager*, pbstrfilename : UInt8**) : HRESULT
-    @lpVtbl.value.get_report_file_name.call(this, pbstrfilename)
-  end
-  def put_report_file_name(this : IDataManager*, pbstrfilename : UInt8*) : HRESULT
-    @lpVtbl.value.put_report_file_name.call(this, pbstrfilename)
-  end
-  def get_rule_target_file_name(this : IDataManager*, filename : UInt8**) : HRESULT
-    @lpVtbl.value.get_rule_target_file_name.call(this, filename)
-  end
-  def put_rule_target_file_name(this : IDataManager*, filename : UInt8*) : HRESULT
-    @lpVtbl.value.put_rule_target_file_name.call(this, filename)
-  end
-  def get_events_file_name(this : IDataManager*, pbstrfilename : UInt8**) : HRESULT
-    @lpVtbl.value.get_events_file_name.call(this, pbstrfilename)
-  end
-  def put_events_file_name(this : IDataManager*, pbstrfilename : UInt8*) : HRESULT
-    @lpVtbl.value.put_events_file_name.call(this, pbstrfilename)
-  end
-  def get_rules(this : IDataManager*, pbstrxml : UInt8**) : HRESULT
-    @lpVtbl.value.get_rules.call(this, pbstrxml)
-  end
-  def put_rules(this : IDataManager*, bstrxml : UInt8*) : HRESULT
-    @lpVtbl.value.put_rules.call(this, bstrxml)
-  end
-  def run(this : IDataManager*, steps : DataManagerSteps, bstrfolder : UInt8*, errors : IValueMap*) : HRESULT
-    @lpVtbl.value.run.call(this, steps, bstrfolder, errors)
-  end
-  def extract(this : IDataManager*, cabfilename : UInt8*, destinationpath : UInt8*) : HRESULT
-    @lpVtbl.value.extract.call(this, cabfilename, destinationpath)
-  end
-end
-struct LibWin32::IFolderAction
-  def query_interface(this : IFolderAction*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFolderAction*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFolderAction*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFolderAction*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFolderAction*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFolderAction*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFolderAction*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_age(this : IFolderAction*, pulage : UInt32*) : HRESULT
-    @lpVtbl.value.get_age.call(this, pulage)
-  end
-  def put_age(this : IFolderAction*, ulage : UInt32) : HRESULT
-    @lpVtbl.value.put_age.call(this, ulage)
-  end
-  def get_size(this : IFolderAction*, pulage : UInt32*) : HRESULT
-    @lpVtbl.value.get_size.call(this, pulage)
-  end
-  def put_size(this : IFolderAction*, ulage : UInt32) : HRESULT
-    @lpVtbl.value.put_size.call(this, ulage)
-  end
-  def get_actions(this : IFolderAction*, steps : FolderActionSteps*) : HRESULT
-    @lpVtbl.value.get_actions.call(this, steps)
-  end
-  def put_actions(this : IFolderAction*, steps : FolderActionSteps) : HRESULT
-    @lpVtbl.value.put_actions.call(this, steps)
-  end
-  def get_send_cab_to(this : IFolderAction*, pbstrdestination : UInt8**) : HRESULT
-    @lpVtbl.value.get_send_cab_to.call(this, pbstrdestination)
-  end
-  def put_send_cab_to(this : IFolderAction*, bstrdestination : UInt8*) : HRESULT
-    @lpVtbl.value.put_send_cab_to.call(this, bstrdestination)
-  end
-end
-struct LibWin32::IFolderActionCollection
-  def query_interface(this : IFolderActionCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFolderActionCollection*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFolderActionCollection*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFolderActionCollection*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFolderActionCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFolderActionCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFolderActionCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : IFolderActionCollection*, count : UInt32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, count)
-  end
-  def get_item(this : IFolderActionCollection*, index : VARIANT, action : IFolderAction*) : HRESULT
-    @lpVtbl.value.get_item.call(this, index, action)
-  end
-  def get__new_enum(this : IFolderActionCollection*, _enum : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, _enum)
-  end
-  def add(this : IFolderActionCollection*, action : IFolderAction) : HRESULT
-    @lpVtbl.value.add.call(this, action)
-  end
-  def remove(this : IFolderActionCollection*, index : VARIANT) : HRESULT
-    @lpVtbl.value.remove.call(this, index)
-  end
-  def clear(this : IFolderActionCollection*) : HRESULT
-    @lpVtbl.value.clear.call(this)
-  end
-  def add_range(this : IFolderActionCollection*, actions : IFolderActionCollection) : HRESULT
-    @lpVtbl.value.add_range.call(this, actions)
-  end
-  def create_folder_action(this : IFolderActionCollection*, folderaction : IFolderAction*) : HRESULT
-    @lpVtbl.value.create_folder_action.call(this, folderaction)
-  end
-end
-struct LibWin32::IDataCollector
-  def query_interface(this : IDataCollector*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDataCollector*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDataCollector*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDataCollector*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDataCollector*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDataCollector*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDataCollector*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_data_collector_set(this : IDataCollector*, group : IDataCollectorSet*) : HRESULT
-    @lpVtbl.value.get_data_collector_set.call(this, group)
-  end
-  def put_data_collector_set(this : IDataCollector*, group : IDataCollectorSet) : HRESULT
-    @lpVtbl.value.put_data_collector_set.call(this, group)
-  end
-  def get_data_collector_type(this : IDataCollector*, type : DataCollectorType*) : HRESULT
-    @lpVtbl.value.get_data_collector_type.call(this, type)
-  end
-  def get_file_name(this : IDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_name.call(this, name)
-  end
-  def put_file_name(this : IDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_file_name.call(this, name)
-  end
-  def get_file_name_format(this : IDataCollector*, format : AutoPathFormat*) : HRESULT
-    @lpVtbl.value.get_file_name_format.call(this, format)
-  end
-  def put_file_name_format(this : IDataCollector*, format : AutoPathFormat) : HRESULT
-    @lpVtbl.value.put_file_name_format.call(this, format)
-  end
-  def get_file_name_format_pattern(this : IDataCollector*, pattern : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_name_format_pattern.call(this, pattern)
-  end
-  def put_file_name_format_pattern(this : IDataCollector*, pattern : UInt8*) : HRESULT
-    @lpVtbl.value.put_file_name_format_pattern.call(this, pattern)
-  end
-  def get_latest_output_location(this : IDataCollector*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_latest_output_location.call(this, path)
-  end
-  def put_latest_output_location(this : IDataCollector*, path : UInt8*) : HRESULT
-    @lpVtbl.value.put_latest_output_location.call(this, path)
-  end
-  def get_log_append(this : IDataCollector*, append : Int16*) : HRESULT
-    @lpVtbl.value.get_log_append.call(this, append)
-  end
-  def put_log_append(this : IDataCollector*, append : Int16) : HRESULT
-    @lpVtbl.value.put_log_append.call(this, append)
-  end
-  def get_log_circular(this : IDataCollector*, circular : Int16*) : HRESULT
-    @lpVtbl.value.get_log_circular.call(this, circular)
-  end
-  def put_log_circular(this : IDataCollector*, circular : Int16) : HRESULT
-    @lpVtbl.value.put_log_circular.call(this, circular)
-  end
-  def get_log_overwrite(this : IDataCollector*, overwrite : Int16*) : HRESULT
-    @lpVtbl.value.get_log_overwrite.call(this, overwrite)
-  end
-  def put_log_overwrite(this : IDataCollector*, overwrite : Int16) : HRESULT
-    @lpVtbl.value.put_log_overwrite.call(this, overwrite)
-  end
-  def get_name(this : IDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, name)
-  end
-  def put_name(this : IDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_name.call(this, name)
-  end
-  def get_output_location(this : IDataCollector*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_output_location.call(this, path)
-  end
-  def get_index(this : IDataCollector*, index : Int32*) : HRESULT
-    @lpVtbl.value.get_index.call(this, index)
-  end
-  def put_index(this : IDataCollector*, index : Int32) : HRESULT
-    @lpVtbl.value.put_index.call(this, index)
-  end
-  def get_xml(this : IDataCollector*, xml : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.call(this, xml)
-  end
-  def set_xml(this : IDataCollector*, xml : UInt8*, validation : IValueMap*) : HRESULT
-    @lpVtbl.value.set_xml.call(this, xml, validation)
-  end
-  def create_output_location(this : IDataCollector*, latest : Int16, location : UInt8**) : HRESULT
-    @lpVtbl.value.create_output_location.call(this, latest, location)
-  end
-end
-struct LibWin32::IPerformanceCounterDataCollector
-  def query_interface(this : IPerformanceCounterDataCollector*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IPerformanceCounterDataCollector*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IPerformanceCounterDataCollector*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IPerformanceCounterDataCollector*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IPerformanceCounterDataCollector*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IPerformanceCounterDataCollector*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IPerformanceCounterDataCollector*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_data_collector_set(this : IPerformanceCounterDataCollector*, group : IDataCollectorSet*) : HRESULT
-    @lpVtbl.value.get_data_collector_set.call(this, group)
-  end
-  def put_data_collector_set(this : IPerformanceCounterDataCollector*, group : IDataCollectorSet) : HRESULT
-    @lpVtbl.value.put_data_collector_set.call(this, group)
-  end
-  def get_data_collector_type(this : IPerformanceCounterDataCollector*, type : DataCollectorType*) : HRESULT
-    @lpVtbl.value.get_data_collector_type.call(this, type)
-  end
-  def get_file_name(this : IPerformanceCounterDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_name.call(this, name)
-  end
-  def put_file_name(this : IPerformanceCounterDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_file_name.call(this, name)
-  end
-  def get_file_name_format(this : IPerformanceCounterDataCollector*, format : AutoPathFormat*) : HRESULT
-    @lpVtbl.value.get_file_name_format.call(this, format)
-  end
-  def put_file_name_format(this : IPerformanceCounterDataCollector*, format : AutoPathFormat) : HRESULT
-    @lpVtbl.value.put_file_name_format.call(this, format)
-  end
-  def get_file_name_format_pattern(this : IPerformanceCounterDataCollector*, pattern : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_name_format_pattern.call(this, pattern)
-  end
-  def put_file_name_format_pattern(this : IPerformanceCounterDataCollector*, pattern : UInt8*) : HRESULT
-    @lpVtbl.value.put_file_name_format_pattern.call(this, pattern)
-  end
-  def get_latest_output_location(this : IPerformanceCounterDataCollector*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_latest_output_location.call(this, path)
-  end
-  def put_latest_output_location(this : IPerformanceCounterDataCollector*, path : UInt8*) : HRESULT
-    @lpVtbl.value.put_latest_output_location.call(this, path)
-  end
-  def get_log_append(this : IPerformanceCounterDataCollector*, append : Int16*) : HRESULT
-    @lpVtbl.value.get_log_append.call(this, append)
-  end
-  def put_log_append(this : IPerformanceCounterDataCollector*, append : Int16) : HRESULT
-    @lpVtbl.value.put_log_append.call(this, append)
-  end
-  def get_log_circular(this : IPerformanceCounterDataCollector*, circular : Int16*) : HRESULT
-    @lpVtbl.value.get_log_circular.call(this, circular)
-  end
-  def put_log_circular(this : IPerformanceCounterDataCollector*, circular : Int16) : HRESULT
-    @lpVtbl.value.put_log_circular.call(this, circular)
-  end
-  def get_log_overwrite(this : IPerformanceCounterDataCollector*, overwrite : Int16*) : HRESULT
-    @lpVtbl.value.get_log_overwrite.call(this, overwrite)
-  end
-  def put_log_overwrite(this : IPerformanceCounterDataCollector*, overwrite : Int16) : HRESULT
-    @lpVtbl.value.put_log_overwrite.call(this, overwrite)
-  end
-  def get_name(this : IPerformanceCounterDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, name)
-  end
-  def put_name(this : IPerformanceCounterDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_name.call(this, name)
-  end
-  def get_output_location(this : IPerformanceCounterDataCollector*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_output_location.call(this, path)
-  end
-  def get_index(this : IPerformanceCounterDataCollector*, index : Int32*) : HRESULT
-    @lpVtbl.value.get_index.call(this, index)
-  end
-  def put_index(this : IPerformanceCounterDataCollector*, index : Int32) : HRESULT
-    @lpVtbl.value.put_index.call(this, index)
-  end
-  def get_xml(this : IPerformanceCounterDataCollector*, xml : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.call(this, xml)
-  end
-  def set_xml(this : IPerformanceCounterDataCollector*, xml : UInt8*, validation : IValueMap*) : HRESULT
-    @lpVtbl.value.set_xml.call(this, xml, validation)
-  end
-  def create_output_location(this : IPerformanceCounterDataCollector*, latest : Int16, location : UInt8**) : HRESULT
-    @lpVtbl.value.create_output_location.call(this, latest, location)
-  end
-  def get_data_source_name(this : IPerformanceCounterDataCollector*, dsn : UInt8**) : HRESULT
-    @lpVtbl.value.get_data_source_name.call(this, dsn)
-  end
-  def put_data_source_name(this : IPerformanceCounterDataCollector*, dsn : UInt8*) : HRESULT
-    @lpVtbl.value.put_data_source_name.call(this, dsn)
-  end
-  def get_performance_counters(this : IPerformanceCounterDataCollector*, counters : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_performance_counters.call(this, counters)
-  end
-  def put_performance_counters(this : IPerformanceCounterDataCollector*, counters : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_performance_counters.call(this, counters)
-  end
-  def get_log_file_format(this : IPerformanceCounterDataCollector*, format : FileFormat*) : HRESULT
-    @lpVtbl.value.get_log_file_format.call(this, format)
-  end
-  def put_log_file_format(this : IPerformanceCounterDataCollector*, format : FileFormat) : HRESULT
-    @lpVtbl.value.put_log_file_format.call(this, format)
-  end
-  def get_sample_interval(this : IPerformanceCounterDataCollector*, interval : UInt32*) : HRESULT
-    @lpVtbl.value.get_sample_interval.call(this, interval)
-  end
-  def put_sample_interval(this : IPerformanceCounterDataCollector*, interval : UInt32) : HRESULT
-    @lpVtbl.value.put_sample_interval.call(this, interval)
-  end
-  def get_segment_max_records(this : IPerformanceCounterDataCollector*, records : UInt32*) : HRESULT
-    @lpVtbl.value.get_segment_max_records.call(this, records)
-  end
-  def put_segment_max_records(this : IPerformanceCounterDataCollector*, records : UInt32) : HRESULT
-    @lpVtbl.value.put_segment_max_records.call(this, records)
-  end
-end
-struct LibWin32::ITraceDataCollector
-  def query_interface(this : ITraceDataCollector*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ITraceDataCollector*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ITraceDataCollector*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ITraceDataCollector*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ITraceDataCollector*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ITraceDataCollector*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ITraceDataCollector*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_data_collector_set(this : ITraceDataCollector*, group : IDataCollectorSet*) : HRESULT
-    @lpVtbl.value.get_data_collector_set.call(this, group)
-  end
-  def put_data_collector_set(this : ITraceDataCollector*, group : IDataCollectorSet) : HRESULT
-    @lpVtbl.value.put_data_collector_set.call(this, group)
-  end
-  def get_data_collector_type(this : ITraceDataCollector*, type : DataCollectorType*) : HRESULT
-    @lpVtbl.value.get_data_collector_type.call(this, type)
-  end
-  def get_file_name(this : ITraceDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_name.call(this, name)
-  end
-  def put_file_name(this : ITraceDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_file_name.call(this, name)
-  end
-  def get_file_name_format(this : ITraceDataCollector*, format : AutoPathFormat*) : HRESULT
-    @lpVtbl.value.get_file_name_format.call(this, format)
-  end
-  def put_file_name_format(this : ITraceDataCollector*, format : AutoPathFormat) : HRESULT
-    @lpVtbl.value.put_file_name_format.call(this, format)
-  end
-  def get_file_name_format_pattern(this : ITraceDataCollector*, pattern : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_name_format_pattern.call(this, pattern)
-  end
-  def put_file_name_format_pattern(this : ITraceDataCollector*, pattern : UInt8*) : HRESULT
-    @lpVtbl.value.put_file_name_format_pattern.call(this, pattern)
-  end
-  def get_latest_output_location(this : ITraceDataCollector*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_latest_output_location.call(this, path)
-  end
-  def put_latest_output_location(this : ITraceDataCollector*, path : UInt8*) : HRESULT
-    @lpVtbl.value.put_latest_output_location.call(this, path)
-  end
-  def get_log_append(this : ITraceDataCollector*, append : Int16*) : HRESULT
-    @lpVtbl.value.get_log_append.call(this, append)
-  end
-  def put_log_append(this : ITraceDataCollector*, append : Int16) : HRESULT
-    @lpVtbl.value.put_log_append.call(this, append)
-  end
-  def get_log_circular(this : ITraceDataCollector*, circular : Int16*) : HRESULT
-    @lpVtbl.value.get_log_circular.call(this, circular)
-  end
-  def put_log_circular(this : ITraceDataCollector*, circular : Int16) : HRESULT
-    @lpVtbl.value.put_log_circular.call(this, circular)
-  end
-  def get_log_overwrite(this : ITraceDataCollector*, overwrite : Int16*) : HRESULT
-    @lpVtbl.value.get_log_overwrite.call(this, overwrite)
-  end
-  def put_log_overwrite(this : ITraceDataCollector*, overwrite : Int16) : HRESULT
-    @lpVtbl.value.put_log_overwrite.call(this, overwrite)
-  end
-  def get_name(this : ITraceDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, name)
-  end
-  def put_name(this : ITraceDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_name.call(this, name)
-  end
-  def get_output_location(this : ITraceDataCollector*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_output_location.call(this, path)
-  end
-  def get_index(this : ITraceDataCollector*, index : Int32*) : HRESULT
-    @lpVtbl.value.get_index.call(this, index)
-  end
-  def put_index(this : ITraceDataCollector*, index : Int32) : HRESULT
-    @lpVtbl.value.put_index.call(this, index)
-  end
-  def get_xml(this : ITraceDataCollector*, xml : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.call(this, xml)
-  end
-  def set_xml(this : ITraceDataCollector*, xml : UInt8*, validation : IValueMap*) : HRESULT
-    @lpVtbl.value.set_xml.call(this, xml, validation)
-  end
-  def create_output_location(this : ITraceDataCollector*, latest : Int16, location : UInt8**) : HRESULT
-    @lpVtbl.value.create_output_location.call(this, latest, location)
-  end
-  def get_buffer_size(this : ITraceDataCollector*, size : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffer_size.call(this, size)
-  end
-  def put_buffer_size(this : ITraceDataCollector*, size : UInt32) : HRESULT
-    @lpVtbl.value.put_buffer_size.call(this, size)
-  end
-  def get_buffers_lost(this : ITraceDataCollector*, buffers : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffers_lost.call(this, buffers)
-  end
-  def put_buffers_lost(this : ITraceDataCollector*, buffers : UInt32) : HRESULT
-    @lpVtbl.value.put_buffers_lost.call(this, buffers)
-  end
-  def get_buffers_written(this : ITraceDataCollector*, buffers : UInt32*) : HRESULT
-    @lpVtbl.value.get_buffers_written.call(this, buffers)
-  end
-  def put_buffers_written(this : ITraceDataCollector*, buffers : UInt32) : HRESULT
-    @lpVtbl.value.put_buffers_written.call(this, buffers)
-  end
-  def get_clock_type(this : ITraceDataCollector*, clock : ClockType*) : HRESULT
-    @lpVtbl.value.get_clock_type.call(this, clock)
-  end
-  def put_clock_type(this : ITraceDataCollector*, clock : ClockType) : HRESULT
-    @lpVtbl.value.put_clock_type.call(this, clock)
-  end
-  def get_events_lost(this : ITraceDataCollector*, events : UInt32*) : HRESULT
-    @lpVtbl.value.get_events_lost.call(this, events)
-  end
-  def put_events_lost(this : ITraceDataCollector*, events : UInt32) : HRESULT
-    @lpVtbl.value.put_events_lost.call(this, events)
-  end
-  def get_extended_modes(this : ITraceDataCollector*, mode : UInt32*) : HRESULT
-    @lpVtbl.value.get_extended_modes.call(this, mode)
-  end
-  def put_extended_modes(this : ITraceDataCollector*, mode : UInt32) : HRESULT
-    @lpVtbl.value.put_extended_modes.call(this, mode)
-  end
-  def get_flush_timer(this : ITraceDataCollector*, seconds : UInt32*) : HRESULT
-    @lpVtbl.value.get_flush_timer.call(this, seconds)
-  end
-  def put_flush_timer(this : ITraceDataCollector*, seconds : UInt32) : HRESULT
-    @lpVtbl.value.put_flush_timer.call(this, seconds)
-  end
-  def get_free_buffers(this : ITraceDataCollector*, buffers : UInt32*) : HRESULT
-    @lpVtbl.value.get_free_buffers.call(this, buffers)
-  end
-  def put_free_buffers(this : ITraceDataCollector*, buffers : UInt32) : HRESULT
-    @lpVtbl.value.put_free_buffers.call(this, buffers)
-  end
-  def get_guid(this : ITraceDataCollector*, guid : Guid*) : HRESULT
-    @lpVtbl.value.get_guid.call(this, guid)
-  end
-  def put_guid(this : ITraceDataCollector*, guid : Guid) : HRESULT
-    @lpVtbl.value.put_guid.call(this, guid)
-  end
-  def get_is_kernel_trace(this : ITraceDataCollector*, kernel : Int16*) : HRESULT
-    @lpVtbl.value.get_is_kernel_trace.call(this, kernel)
-  end
-  def get_maximum_buffers(this : ITraceDataCollector*, buffers : UInt32*) : HRESULT
-    @lpVtbl.value.get_maximum_buffers.call(this, buffers)
-  end
-  def put_maximum_buffers(this : ITraceDataCollector*, buffers : UInt32) : HRESULT
-    @lpVtbl.value.put_maximum_buffers.call(this, buffers)
-  end
-  def get_minimum_buffers(this : ITraceDataCollector*, buffers : UInt32*) : HRESULT
-    @lpVtbl.value.get_minimum_buffers.call(this, buffers)
-  end
-  def put_minimum_buffers(this : ITraceDataCollector*, buffers : UInt32) : HRESULT
-    @lpVtbl.value.put_minimum_buffers.call(this, buffers)
-  end
-  def get_number_of_buffers(this : ITraceDataCollector*, buffers : UInt32*) : HRESULT
-    @lpVtbl.value.get_number_of_buffers.call(this, buffers)
-  end
-  def put_number_of_buffers(this : ITraceDataCollector*, buffers : UInt32) : HRESULT
-    @lpVtbl.value.put_number_of_buffers.call(this, buffers)
-  end
-  def get_preallocate_file(this : ITraceDataCollector*, allocate : Int16*) : HRESULT
-    @lpVtbl.value.get_preallocate_file.call(this, allocate)
-  end
-  def put_preallocate_file(this : ITraceDataCollector*, allocate : Int16) : HRESULT
-    @lpVtbl.value.put_preallocate_file.call(this, allocate)
-  end
-  def get_process_mode(this : ITraceDataCollector*, process : Int16*) : HRESULT
-    @lpVtbl.value.get_process_mode.call(this, process)
-  end
-  def put_process_mode(this : ITraceDataCollector*, process : Int16) : HRESULT
-    @lpVtbl.value.put_process_mode.call(this, process)
-  end
-  def get_real_time_buffers_lost(this : ITraceDataCollector*, buffers : UInt32*) : HRESULT
-    @lpVtbl.value.get_real_time_buffers_lost.call(this, buffers)
-  end
-  def put_real_time_buffers_lost(this : ITraceDataCollector*, buffers : UInt32) : HRESULT
-    @lpVtbl.value.put_real_time_buffers_lost.call(this, buffers)
-  end
-  def get_session_id(this : ITraceDataCollector*, id : UInt64*) : HRESULT
-    @lpVtbl.value.get_session_id.call(this, id)
-  end
-  def put_session_id(this : ITraceDataCollector*, id : UInt64) : HRESULT
-    @lpVtbl.value.put_session_id.call(this, id)
-  end
-  def get_session_name(this : ITraceDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_session_name.call(this, name)
-  end
-  def put_session_name(this : ITraceDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_session_name.call(this, name)
-  end
-  def get_session_thread_id(this : ITraceDataCollector*, tid : UInt32*) : HRESULT
-    @lpVtbl.value.get_session_thread_id.call(this, tid)
-  end
-  def put_session_thread_id(this : ITraceDataCollector*, tid : UInt32) : HRESULT
-    @lpVtbl.value.put_session_thread_id.call(this, tid)
-  end
-  def get_stream_mode(this : ITraceDataCollector*, mode : StreamMode*) : HRESULT
-    @lpVtbl.value.get_stream_mode.call(this, mode)
-  end
-  def put_stream_mode(this : ITraceDataCollector*, mode : StreamMode) : HRESULT
-    @lpVtbl.value.put_stream_mode.call(this, mode)
-  end
-  def get_trace_data_providers(this : ITraceDataCollector*, providers : ITraceDataProviderCollection*) : HRESULT
-    @lpVtbl.value.get_trace_data_providers.call(this, providers)
-  end
-end
-struct LibWin32::IConfigurationDataCollector
-  def query_interface(this : IConfigurationDataCollector*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IConfigurationDataCollector*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IConfigurationDataCollector*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IConfigurationDataCollector*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IConfigurationDataCollector*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IConfigurationDataCollector*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IConfigurationDataCollector*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_data_collector_set(this : IConfigurationDataCollector*, group : IDataCollectorSet*) : HRESULT
-    @lpVtbl.value.get_data_collector_set.call(this, group)
-  end
-  def put_data_collector_set(this : IConfigurationDataCollector*, group : IDataCollectorSet) : HRESULT
-    @lpVtbl.value.put_data_collector_set.call(this, group)
-  end
-  def get_data_collector_type(this : IConfigurationDataCollector*, type : DataCollectorType*) : HRESULT
-    @lpVtbl.value.get_data_collector_type.call(this, type)
-  end
-  def get_file_name(this : IConfigurationDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_name.call(this, name)
-  end
-  def put_file_name(this : IConfigurationDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_file_name.call(this, name)
-  end
-  def get_file_name_format(this : IConfigurationDataCollector*, format : AutoPathFormat*) : HRESULT
-    @lpVtbl.value.get_file_name_format.call(this, format)
-  end
-  def put_file_name_format(this : IConfigurationDataCollector*, format : AutoPathFormat) : HRESULT
-    @lpVtbl.value.put_file_name_format.call(this, format)
-  end
-  def get_file_name_format_pattern(this : IConfigurationDataCollector*, pattern : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_name_format_pattern.call(this, pattern)
-  end
-  def put_file_name_format_pattern(this : IConfigurationDataCollector*, pattern : UInt8*) : HRESULT
-    @lpVtbl.value.put_file_name_format_pattern.call(this, pattern)
-  end
-  def get_latest_output_location(this : IConfigurationDataCollector*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_latest_output_location.call(this, path)
-  end
-  def put_latest_output_location(this : IConfigurationDataCollector*, path : UInt8*) : HRESULT
-    @lpVtbl.value.put_latest_output_location.call(this, path)
-  end
-  def get_log_append(this : IConfigurationDataCollector*, append : Int16*) : HRESULT
-    @lpVtbl.value.get_log_append.call(this, append)
-  end
-  def put_log_append(this : IConfigurationDataCollector*, append : Int16) : HRESULT
-    @lpVtbl.value.put_log_append.call(this, append)
-  end
-  def get_log_circular(this : IConfigurationDataCollector*, circular : Int16*) : HRESULT
-    @lpVtbl.value.get_log_circular.call(this, circular)
-  end
-  def put_log_circular(this : IConfigurationDataCollector*, circular : Int16) : HRESULT
-    @lpVtbl.value.put_log_circular.call(this, circular)
-  end
-  def get_log_overwrite(this : IConfigurationDataCollector*, overwrite : Int16*) : HRESULT
-    @lpVtbl.value.get_log_overwrite.call(this, overwrite)
-  end
-  def put_log_overwrite(this : IConfigurationDataCollector*, overwrite : Int16) : HRESULT
-    @lpVtbl.value.put_log_overwrite.call(this, overwrite)
-  end
-  def get_name(this : IConfigurationDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, name)
-  end
-  def put_name(this : IConfigurationDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_name.call(this, name)
-  end
-  def get_output_location(this : IConfigurationDataCollector*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_output_location.call(this, path)
-  end
-  def get_index(this : IConfigurationDataCollector*, index : Int32*) : HRESULT
-    @lpVtbl.value.get_index.call(this, index)
-  end
-  def put_index(this : IConfigurationDataCollector*, index : Int32) : HRESULT
-    @lpVtbl.value.put_index.call(this, index)
-  end
-  def get_xml(this : IConfigurationDataCollector*, xml : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.call(this, xml)
-  end
-  def set_xml(this : IConfigurationDataCollector*, xml : UInt8*, validation : IValueMap*) : HRESULT
-    @lpVtbl.value.set_xml.call(this, xml, validation)
-  end
-  def create_output_location(this : IConfigurationDataCollector*, latest : Int16, location : UInt8**) : HRESULT
-    @lpVtbl.value.create_output_location.call(this, latest, location)
-  end
-  def get_file_max_count(this : IConfigurationDataCollector*, count : UInt32*) : HRESULT
-    @lpVtbl.value.get_file_max_count.call(this, count)
-  end
-  def put_file_max_count(this : IConfigurationDataCollector*, count : UInt32) : HRESULT
-    @lpVtbl.value.put_file_max_count.call(this, count)
-  end
-  def get_file_max_recursive_depth(this : IConfigurationDataCollector*, depth : UInt32*) : HRESULT
-    @lpVtbl.value.get_file_max_recursive_depth.call(this, depth)
-  end
-  def put_file_max_recursive_depth(this : IConfigurationDataCollector*, depth : UInt32) : HRESULT
-    @lpVtbl.value.put_file_max_recursive_depth.call(this, depth)
-  end
-  def get_file_max_total_size(this : IConfigurationDataCollector*, size : UInt32*) : HRESULT
-    @lpVtbl.value.get_file_max_total_size.call(this, size)
-  end
-  def put_file_max_total_size(this : IConfigurationDataCollector*, size : UInt32) : HRESULT
-    @lpVtbl.value.put_file_max_total_size.call(this, size)
-  end
-  def get_files(this : IConfigurationDataCollector*, files : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_files.call(this, files)
-  end
-  def put_files(this : IConfigurationDataCollector*, files : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_files.call(this, files)
-  end
-  def get_management_queries(this : IConfigurationDataCollector*, queries : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_management_queries.call(this, queries)
-  end
-  def put_management_queries(this : IConfigurationDataCollector*, queries : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_management_queries.call(this, queries)
-  end
-  def get_query_network_adapters(this : IConfigurationDataCollector*, network : Int16*) : HRESULT
-    @lpVtbl.value.get_query_network_adapters.call(this, network)
-  end
-  def put_query_network_adapters(this : IConfigurationDataCollector*, network : Int16) : HRESULT
-    @lpVtbl.value.put_query_network_adapters.call(this, network)
-  end
-  def get_registry_keys(this : IConfigurationDataCollector*, query : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_registry_keys.call(this, query)
-  end
-  def put_registry_keys(this : IConfigurationDataCollector*, query : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_registry_keys.call(this, query)
-  end
-  def get_registry_max_recursive_depth(this : IConfigurationDataCollector*, depth : UInt32*) : HRESULT
-    @lpVtbl.value.get_registry_max_recursive_depth.call(this, depth)
-  end
-  def put_registry_max_recursive_depth(this : IConfigurationDataCollector*, depth : UInt32) : HRESULT
-    @lpVtbl.value.put_registry_max_recursive_depth.call(this, depth)
-  end
-  def get_system_state_file(this : IConfigurationDataCollector*, filename : UInt8**) : HRESULT
-    @lpVtbl.value.get_system_state_file.call(this, filename)
-  end
-  def put_system_state_file(this : IConfigurationDataCollector*, filename : UInt8*) : HRESULT
-    @lpVtbl.value.put_system_state_file.call(this, filename)
-  end
-end
-struct LibWin32::IAlertDataCollector
-  def query_interface(this : IAlertDataCollector*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IAlertDataCollector*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IAlertDataCollector*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IAlertDataCollector*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IAlertDataCollector*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IAlertDataCollector*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IAlertDataCollector*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_data_collector_set(this : IAlertDataCollector*, group : IDataCollectorSet*) : HRESULT
-    @lpVtbl.value.get_data_collector_set.call(this, group)
-  end
-  def put_data_collector_set(this : IAlertDataCollector*, group : IDataCollectorSet) : HRESULT
-    @lpVtbl.value.put_data_collector_set.call(this, group)
-  end
-  def get_data_collector_type(this : IAlertDataCollector*, type : DataCollectorType*) : HRESULT
-    @lpVtbl.value.get_data_collector_type.call(this, type)
-  end
-  def get_file_name(this : IAlertDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_name.call(this, name)
-  end
-  def put_file_name(this : IAlertDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_file_name.call(this, name)
-  end
-  def get_file_name_format(this : IAlertDataCollector*, format : AutoPathFormat*) : HRESULT
-    @lpVtbl.value.get_file_name_format.call(this, format)
-  end
-  def put_file_name_format(this : IAlertDataCollector*, format : AutoPathFormat) : HRESULT
-    @lpVtbl.value.put_file_name_format.call(this, format)
-  end
-  def get_file_name_format_pattern(this : IAlertDataCollector*, pattern : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_name_format_pattern.call(this, pattern)
-  end
-  def put_file_name_format_pattern(this : IAlertDataCollector*, pattern : UInt8*) : HRESULT
-    @lpVtbl.value.put_file_name_format_pattern.call(this, pattern)
-  end
-  def get_latest_output_location(this : IAlertDataCollector*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_latest_output_location.call(this, path)
-  end
-  def put_latest_output_location(this : IAlertDataCollector*, path : UInt8*) : HRESULT
-    @lpVtbl.value.put_latest_output_location.call(this, path)
-  end
-  def get_log_append(this : IAlertDataCollector*, append : Int16*) : HRESULT
-    @lpVtbl.value.get_log_append.call(this, append)
-  end
-  def put_log_append(this : IAlertDataCollector*, append : Int16) : HRESULT
-    @lpVtbl.value.put_log_append.call(this, append)
-  end
-  def get_log_circular(this : IAlertDataCollector*, circular : Int16*) : HRESULT
-    @lpVtbl.value.get_log_circular.call(this, circular)
-  end
-  def put_log_circular(this : IAlertDataCollector*, circular : Int16) : HRESULT
-    @lpVtbl.value.put_log_circular.call(this, circular)
-  end
-  def get_log_overwrite(this : IAlertDataCollector*, overwrite : Int16*) : HRESULT
-    @lpVtbl.value.get_log_overwrite.call(this, overwrite)
-  end
-  def put_log_overwrite(this : IAlertDataCollector*, overwrite : Int16) : HRESULT
-    @lpVtbl.value.put_log_overwrite.call(this, overwrite)
-  end
-  def get_name(this : IAlertDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, name)
-  end
-  def put_name(this : IAlertDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_name.call(this, name)
-  end
-  def get_output_location(this : IAlertDataCollector*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_output_location.call(this, path)
-  end
-  def get_index(this : IAlertDataCollector*, index : Int32*) : HRESULT
-    @lpVtbl.value.get_index.call(this, index)
-  end
-  def put_index(this : IAlertDataCollector*, index : Int32) : HRESULT
-    @lpVtbl.value.put_index.call(this, index)
-  end
-  def get_xml(this : IAlertDataCollector*, xml : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.call(this, xml)
-  end
-  def set_xml(this : IAlertDataCollector*, xml : UInt8*, validation : IValueMap*) : HRESULT
-    @lpVtbl.value.set_xml.call(this, xml, validation)
-  end
-  def create_output_location(this : IAlertDataCollector*, latest : Int16, location : UInt8**) : HRESULT
-    @lpVtbl.value.create_output_location.call(this, latest, location)
-  end
-  def get_alert_thresholds(this : IAlertDataCollector*, alerts : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_alert_thresholds.call(this, alerts)
-  end
-  def put_alert_thresholds(this : IAlertDataCollector*, alerts : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_alert_thresholds.call(this, alerts)
-  end
-  def get_event_log(this : IAlertDataCollector*, log : Int16*) : HRESULT
-    @lpVtbl.value.get_event_log.call(this, log)
-  end
-  def put_event_log(this : IAlertDataCollector*, log : Int16) : HRESULT
-    @lpVtbl.value.put_event_log.call(this, log)
-  end
-  def get_sample_interval(this : IAlertDataCollector*, interval : UInt32*) : HRESULT
-    @lpVtbl.value.get_sample_interval.call(this, interval)
-  end
-  def put_sample_interval(this : IAlertDataCollector*, interval : UInt32) : HRESULT
-    @lpVtbl.value.put_sample_interval.call(this, interval)
-  end
-  def get_task(this : IAlertDataCollector*, task : UInt8**) : HRESULT
-    @lpVtbl.value.get_task.call(this, task)
-  end
-  def put_task(this : IAlertDataCollector*, task : UInt8*) : HRESULT
-    @lpVtbl.value.put_task.call(this, task)
-  end
-  def get_task_run_as_self(this : IAlertDataCollector*, runasself : Int16*) : HRESULT
-    @lpVtbl.value.get_task_run_as_self.call(this, runasself)
-  end
-  def put_task_run_as_self(this : IAlertDataCollector*, runasself : Int16) : HRESULT
-    @lpVtbl.value.put_task_run_as_self.call(this, runasself)
-  end
-  def get_task_arguments(this : IAlertDataCollector*, task : UInt8**) : HRESULT
-    @lpVtbl.value.get_task_arguments.call(this, task)
-  end
-  def put_task_arguments(this : IAlertDataCollector*, task : UInt8*) : HRESULT
-    @lpVtbl.value.put_task_arguments.call(this, task)
-  end
-  def get_task_user_text_arguments(this : IAlertDataCollector*, task : UInt8**) : HRESULT
-    @lpVtbl.value.get_task_user_text_arguments.call(this, task)
-  end
-  def put_task_user_text_arguments(this : IAlertDataCollector*, task : UInt8*) : HRESULT
-    @lpVtbl.value.put_task_user_text_arguments.call(this, task)
-  end
-  def get_trigger_data_collector_set(this : IAlertDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_trigger_data_collector_set.call(this, name)
-  end
-  def put_trigger_data_collector_set(this : IAlertDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_trigger_data_collector_set.call(this, name)
-  end
-end
-struct LibWin32::IApiTracingDataCollector
-  def query_interface(this : IApiTracingDataCollector*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IApiTracingDataCollector*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IApiTracingDataCollector*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IApiTracingDataCollector*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IApiTracingDataCollector*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IApiTracingDataCollector*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IApiTracingDataCollector*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_data_collector_set(this : IApiTracingDataCollector*, group : IDataCollectorSet*) : HRESULT
-    @lpVtbl.value.get_data_collector_set.call(this, group)
-  end
-  def put_data_collector_set(this : IApiTracingDataCollector*, group : IDataCollectorSet) : HRESULT
-    @lpVtbl.value.put_data_collector_set.call(this, group)
-  end
-  def get_data_collector_type(this : IApiTracingDataCollector*, type : DataCollectorType*) : HRESULT
-    @lpVtbl.value.get_data_collector_type.call(this, type)
-  end
-  def get_file_name(this : IApiTracingDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_name.call(this, name)
-  end
-  def put_file_name(this : IApiTracingDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_file_name.call(this, name)
-  end
-  def get_file_name_format(this : IApiTracingDataCollector*, format : AutoPathFormat*) : HRESULT
-    @lpVtbl.value.get_file_name_format.call(this, format)
-  end
-  def put_file_name_format(this : IApiTracingDataCollector*, format : AutoPathFormat) : HRESULT
-    @lpVtbl.value.put_file_name_format.call(this, format)
-  end
-  def get_file_name_format_pattern(this : IApiTracingDataCollector*, pattern : UInt8**) : HRESULT
-    @lpVtbl.value.get_file_name_format_pattern.call(this, pattern)
-  end
-  def put_file_name_format_pattern(this : IApiTracingDataCollector*, pattern : UInt8*) : HRESULT
-    @lpVtbl.value.put_file_name_format_pattern.call(this, pattern)
-  end
-  def get_latest_output_location(this : IApiTracingDataCollector*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_latest_output_location.call(this, path)
-  end
-  def put_latest_output_location(this : IApiTracingDataCollector*, path : UInt8*) : HRESULT
-    @lpVtbl.value.put_latest_output_location.call(this, path)
-  end
-  def get_log_append(this : IApiTracingDataCollector*, append : Int16*) : HRESULT
-    @lpVtbl.value.get_log_append.call(this, append)
-  end
-  def put_log_append(this : IApiTracingDataCollector*, append : Int16) : HRESULT
-    @lpVtbl.value.put_log_append.call(this, append)
-  end
-  def get_log_circular(this : IApiTracingDataCollector*, circular : Int16*) : HRESULT
-    @lpVtbl.value.get_log_circular.call(this, circular)
-  end
-  def put_log_circular(this : IApiTracingDataCollector*, circular : Int16) : HRESULT
-    @lpVtbl.value.put_log_circular.call(this, circular)
-  end
-  def get_log_overwrite(this : IApiTracingDataCollector*, overwrite : Int16*) : HRESULT
-    @lpVtbl.value.get_log_overwrite.call(this, overwrite)
-  end
-  def put_log_overwrite(this : IApiTracingDataCollector*, overwrite : Int16) : HRESULT
-    @lpVtbl.value.put_log_overwrite.call(this, overwrite)
-  end
-  def get_name(this : IApiTracingDataCollector*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, name)
-  end
-  def put_name(this : IApiTracingDataCollector*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_name.call(this, name)
-  end
-  def get_output_location(this : IApiTracingDataCollector*, path : UInt8**) : HRESULT
-    @lpVtbl.value.get_output_location.call(this, path)
-  end
-  def get_index(this : IApiTracingDataCollector*, index : Int32*) : HRESULT
-    @lpVtbl.value.get_index.call(this, index)
-  end
-  def put_index(this : IApiTracingDataCollector*, index : Int32) : HRESULT
-    @lpVtbl.value.put_index.call(this, index)
-  end
-  def get_xml(this : IApiTracingDataCollector*, xml : UInt8**) : HRESULT
-    @lpVtbl.value.get_xml.call(this, xml)
-  end
-  def set_xml(this : IApiTracingDataCollector*, xml : UInt8*, validation : IValueMap*) : HRESULT
-    @lpVtbl.value.set_xml.call(this, xml, validation)
-  end
-  def create_output_location(this : IApiTracingDataCollector*, latest : Int16, location : UInt8**) : HRESULT
-    @lpVtbl.value.create_output_location.call(this, latest, location)
-  end
-  def get_log_api_names_only(this : IApiTracingDataCollector*, logapinames : Int16*) : HRESULT
-    @lpVtbl.value.get_log_api_names_only.call(this, logapinames)
-  end
-  def put_log_api_names_only(this : IApiTracingDataCollector*, logapinames : Int16) : HRESULT
-    @lpVtbl.value.put_log_api_names_only.call(this, logapinames)
-  end
-  def get_log_apis_recursively(this : IApiTracingDataCollector*, logrecursively : Int16*) : HRESULT
-    @lpVtbl.value.get_log_apis_recursively.call(this, logrecursively)
-  end
-  def put_log_apis_recursively(this : IApiTracingDataCollector*, logrecursively : Int16) : HRESULT
-    @lpVtbl.value.put_log_apis_recursively.call(this, logrecursively)
-  end
-  def get_exe_path(this : IApiTracingDataCollector*, exepath : UInt8**) : HRESULT
-    @lpVtbl.value.get_exe_path.call(this, exepath)
-  end
-  def put_exe_path(this : IApiTracingDataCollector*, exepath : UInt8*) : HRESULT
-    @lpVtbl.value.put_exe_path.call(this, exepath)
-  end
-  def get_log_file_path(this : IApiTracingDataCollector*, logfilepath : UInt8**) : HRESULT
-    @lpVtbl.value.get_log_file_path.call(this, logfilepath)
-  end
-  def put_log_file_path(this : IApiTracingDataCollector*, logfilepath : UInt8*) : HRESULT
-    @lpVtbl.value.put_log_file_path.call(this, logfilepath)
-  end
-  def get_include_modules(this : IApiTracingDataCollector*, includemodules : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_include_modules.call(this, includemodules)
-  end
-  def put_include_modules(this : IApiTracingDataCollector*, includemodules : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_include_modules.call(this, includemodules)
-  end
-  def get_include_apis(this : IApiTracingDataCollector*, includeapis : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_include_apis.call(this, includeapis)
-  end
-  def put_include_apis(this : IApiTracingDataCollector*, includeapis : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_include_apis.call(this, includeapis)
-  end
-  def get_exclude_apis(this : IApiTracingDataCollector*, excludeapis : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_exclude_apis.call(this, excludeapis)
-  end
-  def put_exclude_apis(this : IApiTracingDataCollector*, excludeapis : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_exclude_apis.call(this, excludeapis)
-  end
-end
-struct LibWin32::IDataCollectorCollection
-  def query_interface(this : IDataCollectorCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDataCollectorCollection*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDataCollectorCollection*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDataCollectorCollection*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDataCollectorCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDataCollectorCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDataCollectorCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : IDataCollectorCollection*, retval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, retval)
-  end
-  def get_item(this : IDataCollectorCollection*, index : VARIANT, collector : IDataCollector*) : HRESULT
-    @lpVtbl.value.get_item.call(this, index, collector)
-  end
-  def get__new_enum(this : IDataCollectorCollection*, retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, retval)
-  end
-  def add(this : IDataCollectorCollection*, collector : IDataCollector) : HRESULT
-    @lpVtbl.value.add.call(this, collector)
-  end
-  def remove(this : IDataCollectorCollection*, collector : VARIANT) : HRESULT
-    @lpVtbl.value.remove.call(this, collector)
-  end
-  def clear(this : IDataCollectorCollection*) : HRESULT
-    @lpVtbl.value.clear.call(this)
-  end
-  def add_range(this : IDataCollectorCollection*, collectors : IDataCollectorCollection) : HRESULT
-    @lpVtbl.value.add_range.call(this, collectors)
-  end
-  def create_data_collector_from_xml(this : IDataCollectorCollection*, bstrxml : UInt8*, pvalidation : IValueMap*, pcollector : IDataCollector*) : HRESULT
-    @lpVtbl.value.create_data_collector_from_xml.call(this, bstrxml, pvalidation, pcollector)
-  end
-  def create_data_collector(this : IDataCollectorCollection*, type : DataCollectorType, collector : IDataCollector*) : HRESULT
-    @lpVtbl.value.create_data_collector.call(this, type, collector)
-  end
-end
-struct LibWin32::IDataCollectorSetCollection
-  def query_interface(this : IDataCollectorSetCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDataCollectorSetCollection*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDataCollectorSetCollection*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDataCollectorSetCollection*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDataCollectorSetCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDataCollectorSetCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDataCollectorSetCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : IDataCollectorSetCollection*, retval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, retval)
-  end
-  def get_item(this : IDataCollectorSetCollection*, index : VARIANT, set : IDataCollectorSet*) : HRESULT
-    @lpVtbl.value.get_item.call(this, index, set)
-  end
-  def get__new_enum(this : IDataCollectorSetCollection*, retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, retval)
-  end
-  def add(this : IDataCollectorSetCollection*, set : IDataCollectorSet) : HRESULT
-    @lpVtbl.value.add.call(this, set)
-  end
-  def remove(this : IDataCollectorSetCollection*, set : VARIANT) : HRESULT
-    @lpVtbl.value.remove.call(this, set)
-  end
-  def clear(this : IDataCollectorSetCollection*) : HRESULT
-    @lpVtbl.value.clear.call(this)
-  end
-  def add_range(this : IDataCollectorSetCollection*, sets : IDataCollectorSetCollection) : HRESULT
-    @lpVtbl.value.add_range.call(this, sets)
-  end
-  def get_data_collector_sets(this : IDataCollectorSetCollection*, server : UInt8*, filter : UInt8*) : HRESULT
-    @lpVtbl.value.get_data_collector_sets.call(this, server, filter)
-  end
-end
-struct LibWin32::ITraceDataProvider
-  def query_interface(this : ITraceDataProvider*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ITraceDataProvider*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ITraceDataProvider*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ITraceDataProvider*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ITraceDataProvider*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ITraceDataProvider*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ITraceDataProvider*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_display_name(this : ITraceDataProvider*, name : UInt8**) : HRESULT
-    @lpVtbl.value.get_display_name.call(this, name)
-  end
-  def put_display_name(this : ITraceDataProvider*, name : UInt8*) : HRESULT
-    @lpVtbl.value.put_display_name.call(this, name)
-  end
-  def get_guid(this : ITraceDataProvider*, guid : Guid*) : HRESULT
-    @lpVtbl.value.get_guid.call(this, guid)
-  end
-  def put_guid(this : ITraceDataProvider*, guid : Guid) : HRESULT
-    @lpVtbl.value.put_guid.call(this, guid)
-  end
-  def get_level(this : ITraceDataProvider*, pplevel : IValueMap*) : HRESULT
-    @lpVtbl.value.get_level.call(this, pplevel)
-  end
-  def get_keywords_any(this : ITraceDataProvider*, ppkeywords : IValueMap*) : HRESULT
-    @lpVtbl.value.get_keywords_any.call(this, ppkeywords)
-  end
-  def get_keywords_all(this : ITraceDataProvider*, ppkeywords : IValueMap*) : HRESULT
-    @lpVtbl.value.get_keywords_all.call(this, ppkeywords)
-  end
-  def get_properties(this : ITraceDataProvider*, ppproperties : IValueMap*) : HRESULT
-    @lpVtbl.value.get_properties.call(this, ppproperties)
-  end
-  def get_filter_enabled(this : ITraceDataProvider*, filterenabled : Int16*) : HRESULT
-    @lpVtbl.value.get_filter_enabled.call(this, filterenabled)
-  end
-  def put_filter_enabled(this : ITraceDataProvider*, filterenabled : Int16) : HRESULT
-    @lpVtbl.value.put_filter_enabled.call(this, filterenabled)
-  end
-  def get_filter_type(this : ITraceDataProvider*, pultype : UInt32*) : HRESULT
-    @lpVtbl.value.get_filter_type.call(this, pultype)
-  end
-  def put_filter_type(this : ITraceDataProvider*, ultype : UInt32) : HRESULT
-    @lpVtbl.value.put_filter_type.call(this, ultype)
-  end
-  def get_filter_data(this : ITraceDataProvider*, ppdata : SAFEARRAY**) : HRESULT
-    @lpVtbl.value.get_filter_data.call(this, ppdata)
-  end
-  def put_filter_data(this : ITraceDataProvider*, pdata : SAFEARRAY*) : HRESULT
-    @lpVtbl.value.put_filter_data.call(this, pdata)
-  end
-  def query(this : ITraceDataProvider*, bstrname : UInt8*, bstrserver : UInt8*) : HRESULT
-    @lpVtbl.value.query.call(this, bstrname, bstrserver)
-  end
-  def resolve(this : ITraceDataProvider*, pfrom : IDispatch) : HRESULT
-    @lpVtbl.value.resolve.call(this, pfrom)
-  end
-  def set_security(this : ITraceDataProvider*, sddl : UInt8*) : HRESULT
-    @lpVtbl.value.set_security.call(this, sddl)
-  end
-  def get_security(this : ITraceDataProvider*, securityinfo : UInt32, sddl : UInt8**) : HRESULT
-    @lpVtbl.value.get_security.call(this, securityinfo, sddl)
-  end
-  def get_registered_processes(this : ITraceDataProvider*, processes : IValueMap*) : HRESULT
-    @lpVtbl.value.get_registered_processes.call(this, processes)
-  end
-end
-struct LibWin32::ITraceDataProviderCollection
-  def query_interface(this : ITraceDataProviderCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ITraceDataProviderCollection*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ITraceDataProviderCollection*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ITraceDataProviderCollection*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ITraceDataProviderCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ITraceDataProviderCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ITraceDataProviderCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : ITraceDataProviderCollection*, retval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, retval)
-  end
-  def get_item(this : ITraceDataProviderCollection*, index : VARIANT, ppprovider : ITraceDataProvider*) : HRESULT
-    @lpVtbl.value.get_item.call(this, index, ppprovider)
-  end
-  def get__new_enum(this : ITraceDataProviderCollection*, retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, retval)
-  end
-  def add(this : ITraceDataProviderCollection*, pprovider : ITraceDataProvider) : HRESULT
-    @lpVtbl.value.add.call(this, pprovider)
-  end
-  def remove(this : ITraceDataProviderCollection*, vprovider : VARIANT) : HRESULT
-    @lpVtbl.value.remove.call(this, vprovider)
-  end
-  def clear(this : ITraceDataProviderCollection*) : HRESULT
-    @lpVtbl.value.clear.call(this)
-  end
-  def add_range(this : ITraceDataProviderCollection*, providers : ITraceDataProviderCollection) : HRESULT
-    @lpVtbl.value.add_range.call(this, providers)
-  end
-  def create_trace_data_provider(this : ITraceDataProviderCollection*, provider : ITraceDataProvider*) : HRESULT
-    @lpVtbl.value.create_trace_data_provider.call(this, provider)
-  end
-  def get_trace_data_providers(this : ITraceDataProviderCollection*, server : UInt8*) : HRESULT
-    @lpVtbl.value.get_trace_data_providers.call(this, server)
-  end
-  def get_trace_data_providers_by_process(this : ITraceDataProviderCollection*, server : UInt8*, pid : UInt32) : HRESULT
-    @lpVtbl.value.get_trace_data_providers_by_process.call(this, server, pid)
-  end
-end
-struct LibWin32::ISchedule
-  def query_interface(this : ISchedule*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISchedule*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISchedule*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ISchedule*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ISchedule*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ISchedule*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ISchedule*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_start_date(this : ISchedule*, start : VARIANT*) : HRESULT
-    @lpVtbl.value.get_start_date.call(this, start)
-  end
-  def put_start_date(this : ISchedule*, start : VARIANT) : HRESULT
-    @lpVtbl.value.put_start_date.call(this, start)
-  end
-  def get_end_date(this : ISchedule*, end_ : VARIANT*) : HRESULT
-    @lpVtbl.value.get_end_date.call(this, end_)
-  end
-  def put_end_date(this : ISchedule*, end_ : VARIANT) : HRESULT
-    @lpVtbl.value.put_end_date.call(this, end_)
-  end
-  def get_start_time(this : ISchedule*, start : VARIANT*) : HRESULT
-    @lpVtbl.value.get_start_time.call(this, start)
-  end
-  def put_start_time(this : ISchedule*, start : VARIANT) : HRESULT
-    @lpVtbl.value.put_start_time.call(this, start)
-  end
-  def get_days(this : ISchedule*, days : WeekDays*) : HRESULT
-    @lpVtbl.value.get_days.call(this, days)
-  end
-  def put_days(this : ISchedule*, days : WeekDays) : HRESULT
-    @lpVtbl.value.put_days.call(this, days)
-  end
-end
-struct LibWin32::IScheduleCollection
-  def query_interface(this : IScheduleCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IScheduleCollection*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IScheduleCollection*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IScheduleCollection*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IScheduleCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IScheduleCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IScheduleCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : IScheduleCollection*, retval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, retval)
-  end
-  def get_item(this : IScheduleCollection*, index : VARIANT, ppschedule : ISchedule*) : HRESULT
-    @lpVtbl.value.get_item.call(this, index, ppschedule)
-  end
-  def get__new_enum(this : IScheduleCollection*, ienum : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, ienum)
-  end
-  def add(this : IScheduleCollection*, pschedule : ISchedule) : HRESULT
-    @lpVtbl.value.add.call(this, pschedule)
-  end
-  def remove(this : IScheduleCollection*, vschedule : VARIANT) : HRESULT
-    @lpVtbl.value.remove.call(this, vschedule)
-  end
-  def clear(this : IScheduleCollection*) : HRESULT
-    @lpVtbl.value.clear.call(this)
-  end
-  def add_range(this : IScheduleCollection*, pschedules : IScheduleCollection) : HRESULT
-    @lpVtbl.value.add_range.call(this, pschedules)
-  end
-  def create_schedule(this : IScheduleCollection*, schedule : ISchedule*) : HRESULT
-    @lpVtbl.value.create_schedule.call(this, schedule)
-  end
-end
-struct LibWin32::IValueMapItem
-  def query_interface(this : IValueMapItem*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IValueMapItem*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IValueMapItem*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IValueMapItem*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IValueMapItem*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IValueMapItem*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IValueMapItem*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_description(this : IValueMapItem*, description : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.call(this, description)
-  end
-  def put_description(this : IValueMapItem*, description : UInt8*) : HRESULT
-    @lpVtbl.value.put_description.call(this, description)
-  end
-  def get_enabled(this : IValueMapItem*, enabled : Int16*) : HRESULT
-    @lpVtbl.value.get_enabled.call(this, enabled)
-  end
-  def put_enabled(this : IValueMapItem*, enabled : Int16) : HRESULT
-    @lpVtbl.value.put_enabled.call(this, enabled)
-  end
-  def get_key(this : IValueMapItem*, key : UInt8**) : HRESULT
-    @lpVtbl.value.get_key.call(this, key)
-  end
-  def put_key(this : IValueMapItem*, key : UInt8*) : HRESULT
-    @lpVtbl.value.put_key.call(this, key)
-  end
-  def get_value(this : IValueMapItem*, value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_value.call(this, value)
-  end
-  def put_value(this : IValueMapItem*, value : VARIANT) : HRESULT
-    @lpVtbl.value.put_value.call(this, value)
-  end
-  def get_value_map_type(this : IValueMapItem*, type : ValueMapType*) : HRESULT
-    @lpVtbl.value.get_value_map_type.call(this, type)
-  end
-  def put_value_map_type(this : IValueMapItem*, type : ValueMapType) : HRESULT
-    @lpVtbl.value.put_value_map_type.call(this, type)
-  end
-end
-struct LibWin32::IValueMap
-  def query_interface(this : IValueMap*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IValueMap*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IValueMap*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IValueMap*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IValueMap*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IValueMap*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IValueMap*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : IValueMap*, retval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, retval)
-  end
-  def get_item(this : IValueMap*, index : VARIANT, value : IValueMapItem*) : HRESULT
-    @lpVtbl.value.get_item.call(this, index, value)
-  end
-  def get__new_enum(this : IValueMap*, retval : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, retval)
-  end
-  def get_description(this : IValueMap*, description : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.call(this, description)
-  end
-  def put_description(this : IValueMap*, description : UInt8*) : HRESULT
-    @lpVtbl.value.put_description.call(this, description)
-  end
-  def get_value(this : IValueMap*, value : VARIANT*) : HRESULT
-    @lpVtbl.value.get_value.call(this, value)
-  end
-  def put_value(this : IValueMap*, value : VARIANT) : HRESULT
-    @lpVtbl.value.put_value.call(this, value)
-  end
-  def get_value_map_type(this : IValueMap*, type : ValueMapType*) : HRESULT
-    @lpVtbl.value.get_value_map_type.call(this, type)
-  end
-  def put_value_map_type(this : IValueMap*, type : ValueMapType) : HRESULT
-    @lpVtbl.value.put_value_map_type.call(this, type)
-  end
-  def add(this : IValueMap*, value : VARIANT) : HRESULT
-    @lpVtbl.value.add.call(this, value)
-  end
-  def remove(this : IValueMap*, value : VARIANT) : HRESULT
-    @lpVtbl.value.remove.call(this, value)
-  end
-  def clear(this : IValueMap*) : HRESULT
-    @lpVtbl.value.clear.call(this)
-  end
-  def add_range(this : IValueMap*, map : IValueMap) : HRESULT
-    @lpVtbl.value.add_range.call(this, map)
-  end
-  def create_value_map_item(this : IValueMap*, item : IValueMapItem*) : HRESULT
-    @lpVtbl.value.create_value_map_item.call(this, item)
-  end
-end
-struct LibWin32::ICounterItem
-  def query_interface(this : ICounterItem*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ICounterItem*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ICounterItem*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_value(this : ICounterItem*, pdblvalue : Float64*) : HRESULT
-    @lpVtbl.value.get_value.call(this, pdblvalue)
-  end
-  def put_color(this : ICounterItem*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_color.call(this, color)
-  end
-  def get_color(this : ICounterItem*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_color.call(this, pcolor)
-  end
-  def put_width(this : ICounterItem*, iwidth : Int32) : HRESULT
-    @lpVtbl.value.put_width.call(this, iwidth)
-  end
-  def get_width(this : ICounterItem*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_width.call(this, pivalue)
-  end
-  def put_line_style(this : ICounterItem*, ilinestyle : Int32) : HRESULT
-    @lpVtbl.value.put_line_style.call(this, ilinestyle)
-  end
-  def get_line_style(this : ICounterItem*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_line_style.call(this, pivalue)
-  end
-  def put_scale_factor(this : ICounterItem*, iscale : Int32) : HRESULT
-    @lpVtbl.value.put_scale_factor.call(this, iscale)
-  end
-  def get_scale_factor(this : ICounterItem*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_scale_factor.call(this, pivalue)
-  end
-  def get_path(this : ICounterItem*, pstrvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_path.call(this, pstrvalue)
-  end
-  def get_value2(this : ICounterItem*, value : Float64*, status : Int32*) : HRESULT
-    @lpVtbl.value.get_value2.call(this, value, status)
-  end
-  def get_statistics(this : ICounterItem*, max : Float64*, min : Float64*, avg : Float64*, status : Int32*) : HRESULT
-    @lpVtbl.value.get_statistics.call(this, max, min, avg, status)
-  end
-end
-struct LibWin32::ICounterItem2
-  def query_interface(this : ICounterItem2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ICounterItem2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ICounterItem2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_value(this : ICounterItem2*, pdblvalue : Float64*) : HRESULT
-    @lpVtbl.value.get_value.call(this, pdblvalue)
-  end
-  def put_color(this : ICounterItem2*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_color.call(this, color)
-  end
-  def get_color(this : ICounterItem2*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_color.call(this, pcolor)
-  end
-  def put_width(this : ICounterItem2*, iwidth : Int32) : HRESULT
-    @lpVtbl.value.put_width.call(this, iwidth)
-  end
-  def get_width(this : ICounterItem2*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_width.call(this, pivalue)
-  end
-  def put_line_style(this : ICounterItem2*, ilinestyle : Int32) : HRESULT
-    @lpVtbl.value.put_line_style.call(this, ilinestyle)
-  end
-  def get_line_style(this : ICounterItem2*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_line_style.call(this, pivalue)
-  end
-  def put_scale_factor(this : ICounterItem2*, iscale : Int32) : HRESULT
-    @lpVtbl.value.put_scale_factor.call(this, iscale)
-  end
-  def get_scale_factor(this : ICounterItem2*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_scale_factor.call(this, pivalue)
-  end
-  def get_path(this : ICounterItem2*, pstrvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_path.call(this, pstrvalue)
-  end
-  def get_value2(this : ICounterItem2*, value : Float64*, status : Int32*) : HRESULT
-    @lpVtbl.value.get_value2.call(this, value, status)
-  end
-  def get_statistics(this : ICounterItem2*, max : Float64*, min : Float64*, avg : Float64*, status : Int32*) : HRESULT
-    @lpVtbl.value.get_statistics.call(this, max, min, avg, status)
-  end
-  def put_selected(this : ICounterItem2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_selected.call(this, bstate)
-  end
-  def get_selected(this : ICounterItem2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_selected.call(this, pbstate)
-  end
-  def put_visible(this : ICounterItem2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_visible.call(this, bstate)
-  end
-  def get_visible(this : ICounterItem2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_visible.call(this, pbstate)
-  end
-  def get_data_at(this : ICounterItem2*, iindex : Int32, iwhich : SysmonDataType, pvariant : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_at.call(this, iindex, iwhich, pvariant)
-  end
-end
-struct LibWin32::IICounterItemUnion
-  def query_interface(this : IICounterItemUnion*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IICounterItemUnion*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IICounterItemUnion*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_value(this : IICounterItemUnion*, pdblvalue : Float64*) : HRESULT
-    @lpVtbl.value.get_value.call(this, pdblvalue)
-  end
-  def put_color(this : IICounterItemUnion*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_color.call(this, color)
-  end
-  def get_color(this : IICounterItemUnion*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_color.call(this, pcolor)
-  end
-  def put_width(this : IICounterItemUnion*, iwidth : Int32) : HRESULT
-    @lpVtbl.value.put_width.call(this, iwidth)
-  end
-  def get_width(this : IICounterItemUnion*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_width.call(this, pivalue)
-  end
-  def put_line_style(this : IICounterItemUnion*, ilinestyle : Int32) : HRESULT
-    @lpVtbl.value.put_line_style.call(this, ilinestyle)
-  end
-  def get_line_style(this : IICounterItemUnion*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_line_style.call(this, pivalue)
-  end
-  def put_scale_factor(this : IICounterItemUnion*, iscale : Int32) : HRESULT
-    @lpVtbl.value.put_scale_factor.call(this, iscale)
-  end
-  def get_scale_factor(this : IICounterItemUnion*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_scale_factor.call(this, pivalue)
-  end
-  def get_path(this : IICounterItemUnion*, pstrvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_path.call(this, pstrvalue)
-  end
-  def get_value2(this : IICounterItemUnion*, value : Float64*, status : Int32*) : HRESULT
-    @lpVtbl.value.get_value2.call(this, value, status)
-  end
-  def get_statistics(this : IICounterItemUnion*, max : Float64*, min : Float64*, avg : Float64*, status : Int32*) : HRESULT
-    @lpVtbl.value.get_statistics.call(this, max, min, avg, status)
-  end
-  def put_selected(this : IICounterItemUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_selected.call(this, bstate)
-  end
-  def get_selected(this : IICounterItemUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_selected.call(this, pbstate)
-  end
-  def put_visible(this : IICounterItemUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_visible.call(this, bstate)
-  end
-  def get_visible(this : IICounterItemUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_visible.call(this, pbstate)
-  end
-  def get_data_at(this : IICounterItemUnion*, iindex : Int32, iwhich : SysmonDataType, pvariant : VARIANT*) : HRESULT
-    @lpVtbl.value.get_data_at.call(this, iindex, iwhich, pvariant)
-  end
-end
-struct LibWin32::DICounterItem
-  def query_interface(this : DICounterItem*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : DICounterItem*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : DICounterItem*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : DICounterItem*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : DICounterItem*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : DICounterItem*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : DICounterItem*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-end
-struct LibWin32::ICounters
-  def query_interface(this : ICounters*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ICounters*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ICounters*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ICounters*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ICounters*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ICounters*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ICounters*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : ICounters*, plong : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, plong)
-  end
-  def get__new_enum(this : ICounters*, ppiunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, ppiunk)
-  end
-  def get_item(this : ICounters*, index : VARIANT, ppi : DICounterItem*) : HRESULT
-    @lpVtbl.value.get_item.call(this, index, ppi)
-  end
-  def add(this : ICounters*, pathname : UInt8*, ppi : DICounterItem*) : HRESULT
-    @lpVtbl.value.add.call(this, pathname, ppi)
-  end
-  def remove(this : ICounters*, index : VARIANT) : HRESULT
-    @lpVtbl.value.remove.call(this, index)
-  end
-end
-struct LibWin32::ILogFileItem
-  def query_interface(this : ILogFileItem*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ILogFileItem*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ILogFileItem*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_path(this : ILogFileItem*, pstrvalue : UInt8**) : HRESULT
-    @lpVtbl.value.get_path.call(this, pstrvalue)
-  end
-end
-struct LibWin32::DILogFileItem
-  def query_interface(this : DILogFileItem*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : DILogFileItem*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : DILogFileItem*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : DILogFileItem*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : DILogFileItem*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : DILogFileItem*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : DILogFileItem*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-end
-struct LibWin32::ILogFiles
-  def query_interface(this : ILogFiles*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ILogFiles*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ILogFiles*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ILogFiles*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ILogFiles*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ILogFiles*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ILogFiles*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_count(this : ILogFiles*, plong : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, plong)
-  end
-  def get__new_enum(this : ILogFiles*, ppiunk : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, ppiunk)
-  end
-  def get_item(this : ILogFiles*, index : VARIANT, ppi : DILogFileItem*) : HRESULT
-    @lpVtbl.value.get_item.call(this, index, ppi)
-  end
-  def add(this : ILogFiles*, pathname : UInt8*, ppi : DILogFileItem*) : HRESULT
-    @lpVtbl.value.add.call(this, pathname, ppi)
-  end
-  def remove(this : ILogFiles*, index : VARIANT) : HRESULT
-    @lpVtbl.value.remove.call(this, index)
-  end
-end
-struct LibWin32::ISystemMonitor
-  def query_interface(this : ISystemMonitor*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISystemMonitor*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISystemMonitor*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_appearance(this : ISystemMonitor*, iappearance : Int32*) : HRESULT
-    @lpVtbl.value.get_appearance.call(this, iappearance)
-  end
-  def put_appearance(this : ISystemMonitor*, iappearance : Int32) : HRESULT
-    @lpVtbl.value.put_appearance.call(this, iappearance)
-  end
-  def get_back_color(this : ISystemMonitor*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_back_color.call(this, pcolor)
-  end
-  def put_back_color(this : ISystemMonitor*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_back_color.call(this, color)
-  end
-  def get_border_style(this : ISystemMonitor*, iborderstyle : Int32*) : HRESULT
-    @lpVtbl.value.get_border_style.call(this, iborderstyle)
-  end
-  def put_border_style(this : ISystemMonitor*, iborderstyle : Int32) : HRESULT
-    @lpVtbl.value.put_border_style.call(this, iborderstyle)
-  end
-  def get_fore_color(this : ISystemMonitor*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_fore_color.call(this, pcolor)
-  end
-  def put_fore_color(this : ISystemMonitor*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_fore_color.call(this, color)
-  end
-  def get_font(this : ISystemMonitor*, ppfont : IFontDisp*) : HRESULT
-    @lpVtbl.value.get_font.call(this, ppfont)
-  end
-  def putref_font(this : ISystemMonitor*, pfont : IFontDisp) : HRESULT
-    @lpVtbl.value.putref_font.call(this, pfont)
-  end
-  def get_counters(this : ISystemMonitor*, ppicounters : ICounters*) : HRESULT
-    @lpVtbl.value.get_counters.call(this, ppicounters)
-  end
-  def put_show_vertical_grid(this : ISystemMonitor*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_vertical_grid.call(this, bstate)
-  end
-  def get_show_vertical_grid(this : ISystemMonitor*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_vertical_grid.call(this, pbstate)
-  end
-  def put_show_horizontal_grid(this : ISystemMonitor*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_horizontal_grid.call(this, bstate)
-  end
-  def get_show_horizontal_grid(this : ISystemMonitor*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_horizontal_grid.call(this, pbstate)
-  end
-  def put_show_legend(this : ISystemMonitor*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_legend.call(this, bstate)
-  end
-  def get_show_legend(this : ISystemMonitor*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_legend.call(this, pbstate)
-  end
-  def put_show_scale_labels(this : ISystemMonitor*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_scale_labels.call(this, bstate)
-  end
-  def get_show_scale_labels(this : ISystemMonitor*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_scale_labels.call(this, pbstate)
-  end
-  def put_show_value_bar(this : ISystemMonitor*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_value_bar.call(this, bstate)
-  end
-  def get_show_value_bar(this : ISystemMonitor*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_value_bar.call(this, pbstate)
-  end
-  def put_maximum_scale(this : ISystemMonitor*, ivalue : Int32) : HRESULT
-    @lpVtbl.value.put_maximum_scale.call(this, ivalue)
-  end
-  def get_maximum_scale(this : ISystemMonitor*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_maximum_scale.call(this, pivalue)
-  end
-  def put_minimum_scale(this : ISystemMonitor*, ivalue : Int32) : HRESULT
-    @lpVtbl.value.put_minimum_scale.call(this, ivalue)
-  end
-  def get_minimum_scale(this : ISystemMonitor*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_minimum_scale.call(this, pivalue)
-  end
-  def put_update_interval(this : ISystemMonitor*, fvalue : Float32) : HRESULT
-    @lpVtbl.value.put_update_interval.call(this, fvalue)
-  end
-  def get_update_interval(this : ISystemMonitor*, pfvalue : Float32*) : HRESULT
-    @lpVtbl.value.get_update_interval.call(this, pfvalue)
-  end
-  def put_display_type(this : ISystemMonitor*, edisplaytype : DisplayTypeConstants) : HRESULT
-    @lpVtbl.value.put_display_type.call(this, edisplaytype)
-  end
-  def get_display_type(this : ISystemMonitor*, pedisplaytype : DisplayTypeConstants*) : HRESULT
-    @lpVtbl.value.get_display_type.call(this, pedisplaytype)
-  end
-  def put_manual_update(this : ISystemMonitor*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_manual_update.call(this, bstate)
-  end
-  def get_manual_update(this : ISystemMonitor*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_manual_update.call(this, pbstate)
-  end
-  def put_graph_title(this : ISystemMonitor*, bstitle : UInt8*) : HRESULT
-    @lpVtbl.value.put_graph_title.call(this, bstitle)
-  end
-  def get_graph_title(this : ISystemMonitor*, pbstitle : UInt8**) : HRESULT
-    @lpVtbl.value.get_graph_title.call(this, pbstitle)
-  end
-  def put_y_axis_label(this : ISystemMonitor*, bstitle : UInt8*) : HRESULT
-    @lpVtbl.value.put_y_axis_label.call(this, bstitle)
-  end
-  def get_y_axis_label(this : ISystemMonitor*, pbstitle : UInt8**) : HRESULT
-    @lpVtbl.value.get_y_axis_label.call(this, pbstitle)
-  end
-  def collect_sample(this : ISystemMonitor*) : HRESULT
-    @lpVtbl.value.collect_sample.call(this)
-  end
-  def update_graph(this : ISystemMonitor*) : HRESULT
-    @lpVtbl.value.update_graph.call(this)
-  end
-  def browse_counters(this : ISystemMonitor*) : HRESULT
-    @lpVtbl.value.browse_counters.call(this)
-  end
-  def display_properties(this : ISystemMonitor*) : HRESULT
-    @lpVtbl.value.display_properties.call(this)
-  end
-  def counter(this : ISystemMonitor*, iindex : Int32, ppicounter : ICounterItem*) : HRESULT
-    @lpVtbl.value.counter.call(this, iindex, ppicounter)
-  end
-  def add_counter(this : ISystemMonitor*, bspath : UInt8*, ppicounter : ICounterItem*) : HRESULT
-    @lpVtbl.value.add_counter.call(this, bspath, ppicounter)
-  end
-  def delete_counter(this : ISystemMonitor*, pctr : ICounterItem) : HRESULT
-    @lpVtbl.value.delete_counter.call(this, pctr)
-  end
-  def get_back_color_ctl(this : ISystemMonitor*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_back_color_ctl.call(this, pcolor)
-  end
-  def put_back_color_ctl(this : ISystemMonitor*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_back_color_ctl.call(this, color)
-  end
-  def put_log_file_name(this : ISystemMonitor*, bsfilename : UInt8*) : HRESULT
-    @lpVtbl.value.put_log_file_name.call(this, bsfilename)
-  end
-  def get_log_file_name(this : ISystemMonitor*, bsfilename : UInt8**) : HRESULT
-    @lpVtbl.value.get_log_file_name.call(this, bsfilename)
-  end
-  def put_log_view_start(this : ISystemMonitor*, starttime : Float64) : HRESULT
-    @lpVtbl.value.put_log_view_start.call(this, starttime)
-  end
-  def get_log_view_start(this : ISystemMonitor*, starttime : Float64*) : HRESULT
-    @lpVtbl.value.get_log_view_start.call(this, starttime)
-  end
-  def put_log_view_stop(this : ISystemMonitor*, stoptime : Float64) : HRESULT
-    @lpVtbl.value.put_log_view_stop.call(this, stoptime)
-  end
-  def get_log_view_stop(this : ISystemMonitor*, stoptime : Float64*) : HRESULT
-    @lpVtbl.value.get_log_view_stop.call(this, stoptime)
-  end
-  def get_grid_color(this : ISystemMonitor*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_grid_color.call(this, pcolor)
-  end
-  def put_grid_color(this : ISystemMonitor*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_grid_color.call(this, color)
-  end
-  def get_time_bar_color(this : ISystemMonitor*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_time_bar_color.call(this, pcolor)
-  end
-  def put_time_bar_color(this : ISystemMonitor*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_time_bar_color.call(this, color)
-  end
-  def get_highlight(this : ISystemMonitor*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_highlight.call(this, pbstate)
-  end
-  def put_highlight(this : ISystemMonitor*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_highlight.call(this, bstate)
-  end
-  def get_show_toolbar(this : ISystemMonitor*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_toolbar.call(this, pbstate)
-  end
-  def put_show_toolbar(this : ISystemMonitor*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_toolbar.call(this, bstate)
-  end
-  def paste(this : ISystemMonitor*) : HRESULT
-    @lpVtbl.value.paste.call(this)
-  end
-  def copy(this : ISystemMonitor*) : HRESULT
-    @lpVtbl.value.copy.call(this)
-  end
-  def reset(this : ISystemMonitor*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def put_read_only(this : ISystemMonitor*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_read_only.call(this, bstate)
-  end
-  def get_read_only(this : ISystemMonitor*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_read_only.call(this, pbstate)
-  end
-  def put_report_value_type(this : ISystemMonitor*, ereportvaluetype : ReportValueTypeConstants) : HRESULT
-    @lpVtbl.value.put_report_value_type.call(this, ereportvaluetype)
-  end
-  def get_report_value_type(this : ISystemMonitor*, pereportvaluetype : ReportValueTypeConstants*) : HRESULT
-    @lpVtbl.value.get_report_value_type.call(this, pereportvaluetype)
-  end
-  def put_monitor_duplicate_instances(this : ISystemMonitor*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_monitor_duplicate_instances.call(this, bstate)
-  end
-  def get_monitor_duplicate_instances(this : ISystemMonitor*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_monitor_duplicate_instances.call(this, pbstate)
-  end
-  def put_display_filter(this : ISystemMonitor*, ivalue : Int32) : HRESULT
-    @lpVtbl.value.put_display_filter.call(this, ivalue)
-  end
-  def get_display_filter(this : ISystemMonitor*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_display_filter.call(this, pivalue)
-  end
-  def get_log_files(this : ISystemMonitor*, ppilogfiles : ILogFiles*) : HRESULT
-    @lpVtbl.value.get_log_files.call(this, ppilogfiles)
-  end
-  def put_data_source_type(this : ISystemMonitor*, edatasourcetype : DataSourceTypeConstants) : HRESULT
-    @lpVtbl.value.put_data_source_type.call(this, edatasourcetype)
-  end
-  def get_data_source_type(this : ISystemMonitor*, pedatasourcetype : DataSourceTypeConstants*) : HRESULT
-    @lpVtbl.value.get_data_source_type.call(this, pedatasourcetype)
-  end
-  def put_sql_dsn_name(this : ISystemMonitor*, bssqldsnname : UInt8*) : HRESULT
-    @lpVtbl.value.put_sql_dsn_name.call(this, bssqldsnname)
-  end
-  def get_sql_dsn_name(this : ISystemMonitor*, bssqldsnname : UInt8**) : HRESULT
-    @lpVtbl.value.get_sql_dsn_name.call(this, bssqldsnname)
-  end
-  def put_sql_log_set_name(this : ISystemMonitor*, bssqllogsetname : UInt8*) : HRESULT
-    @lpVtbl.value.put_sql_log_set_name.call(this, bssqllogsetname)
-  end
-  def get_sql_log_set_name(this : ISystemMonitor*, bssqllogsetname : UInt8**) : HRESULT
-    @lpVtbl.value.get_sql_log_set_name.call(this, bssqllogsetname)
-  end
-end
-struct LibWin32::ISystemMonitor2
-  def query_interface(this : ISystemMonitor2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISystemMonitor2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISystemMonitor2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_appearance(this : ISystemMonitor2*, iappearance : Int32*) : HRESULT
-    @lpVtbl.value.get_appearance.call(this, iappearance)
-  end
-  def put_appearance(this : ISystemMonitor2*, iappearance : Int32) : HRESULT
-    @lpVtbl.value.put_appearance.call(this, iappearance)
-  end
-  def get_back_color(this : ISystemMonitor2*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_back_color.call(this, pcolor)
-  end
-  def put_back_color(this : ISystemMonitor2*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_back_color.call(this, color)
-  end
-  def get_border_style(this : ISystemMonitor2*, iborderstyle : Int32*) : HRESULT
-    @lpVtbl.value.get_border_style.call(this, iborderstyle)
-  end
-  def put_border_style(this : ISystemMonitor2*, iborderstyle : Int32) : HRESULT
-    @lpVtbl.value.put_border_style.call(this, iborderstyle)
-  end
-  def get_fore_color(this : ISystemMonitor2*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_fore_color.call(this, pcolor)
-  end
-  def put_fore_color(this : ISystemMonitor2*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_fore_color.call(this, color)
-  end
-  def get_font(this : ISystemMonitor2*, ppfont : IFontDisp*) : HRESULT
-    @lpVtbl.value.get_font.call(this, ppfont)
-  end
-  def putref_font(this : ISystemMonitor2*, pfont : IFontDisp) : HRESULT
-    @lpVtbl.value.putref_font.call(this, pfont)
-  end
-  def get_counters(this : ISystemMonitor2*, ppicounters : ICounters*) : HRESULT
-    @lpVtbl.value.get_counters.call(this, ppicounters)
-  end
-  def put_show_vertical_grid(this : ISystemMonitor2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_vertical_grid.call(this, bstate)
-  end
-  def get_show_vertical_grid(this : ISystemMonitor2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_vertical_grid.call(this, pbstate)
-  end
-  def put_show_horizontal_grid(this : ISystemMonitor2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_horizontal_grid.call(this, bstate)
-  end
-  def get_show_horizontal_grid(this : ISystemMonitor2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_horizontal_grid.call(this, pbstate)
-  end
-  def put_show_legend(this : ISystemMonitor2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_legend.call(this, bstate)
-  end
-  def get_show_legend(this : ISystemMonitor2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_legend.call(this, pbstate)
-  end
-  def put_show_scale_labels(this : ISystemMonitor2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_scale_labels.call(this, bstate)
-  end
-  def get_show_scale_labels(this : ISystemMonitor2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_scale_labels.call(this, pbstate)
-  end
-  def put_show_value_bar(this : ISystemMonitor2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_value_bar.call(this, bstate)
-  end
-  def get_show_value_bar(this : ISystemMonitor2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_value_bar.call(this, pbstate)
-  end
-  def put_maximum_scale(this : ISystemMonitor2*, ivalue : Int32) : HRESULT
-    @lpVtbl.value.put_maximum_scale.call(this, ivalue)
-  end
-  def get_maximum_scale(this : ISystemMonitor2*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_maximum_scale.call(this, pivalue)
-  end
-  def put_minimum_scale(this : ISystemMonitor2*, ivalue : Int32) : HRESULT
-    @lpVtbl.value.put_minimum_scale.call(this, ivalue)
-  end
-  def get_minimum_scale(this : ISystemMonitor2*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_minimum_scale.call(this, pivalue)
-  end
-  def put_update_interval(this : ISystemMonitor2*, fvalue : Float32) : HRESULT
-    @lpVtbl.value.put_update_interval.call(this, fvalue)
-  end
-  def get_update_interval(this : ISystemMonitor2*, pfvalue : Float32*) : HRESULT
-    @lpVtbl.value.get_update_interval.call(this, pfvalue)
-  end
-  def put_display_type(this : ISystemMonitor2*, edisplaytype : DisplayTypeConstants) : HRESULT
-    @lpVtbl.value.put_display_type.call(this, edisplaytype)
-  end
-  def get_display_type(this : ISystemMonitor2*, pedisplaytype : DisplayTypeConstants*) : HRESULT
-    @lpVtbl.value.get_display_type.call(this, pedisplaytype)
-  end
-  def put_manual_update(this : ISystemMonitor2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_manual_update.call(this, bstate)
-  end
-  def get_manual_update(this : ISystemMonitor2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_manual_update.call(this, pbstate)
-  end
-  def put_graph_title(this : ISystemMonitor2*, bstitle : UInt8*) : HRESULT
-    @lpVtbl.value.put_graph_title.call(this, bstitle)
-  end
-  def get_graph_title(this : ISystemMonitor2*, pbstitle : UInt8**) : HRESULT
-    @lpVtbl.value.get_graph_title.call(this, pbstitle)
-  end
-  def put_y_axis_label(this : ISystemMonitor2*, bstitle : UInt8*) : HRESULT
-    @lpVtbl.value.put_y_axis_label.call(this, bstitle)
-  end
-  def get_y_axis_label(this : ISystemMonitor2*, pbstitle : UInt8**) : HRESULT
-    @lpVtbl.value.get_y_axis_label.call(this, pbstitle)
-  end
-  def collect_sample(this : ISystemMonitor2*) : HRESULT
-    @lpVtbl.value.collect_sample.call(this)
-  end
-  def update_graph(this : ISystemMonitor2*) : HRESULT
-    @lpVtbl.value.update_graph.call(this)
-  end
-  def browse_counters(this : ISystemMonitor2*) : HRESULT
-    @lpVtbl.value.browse_counters.call(this)
-  end
-  def display_properties(this : ISystemMonitor2*) : HRESULT
-    @lpVtbl.value.display_properties.call(this)
-  end
-  def counter(this : ISystemMonitor2*, iindex : Int32, ppicounter : ICounterItem*) : HRESULT
-    @lpVtbl.value.counter.call(this, iindex, ppicounter)
-  end
-  def add_counter(this : ISystemMonitor2*, bspath : UInt8*, ppicounter : ICounterItem*) : HRESULT
-    @lpVtbl.value.add_counter.call(this, bspath, ppicounter)
-  end
-  def delete_counter(this : ISystemMonitor2*, pctr : ICounterItem) : HRESULT
-    @lpVtbl.value.delete_counter.call(this, pctr)
-  end
-  def get_back_color_ctl(this : ISystemMonitor2*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_back_color_ctl.call(this, pcolor)
-  end
-  def put_back_color_ctl(this : ISystemMonitor2*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_back_color_ctl.call(this, color)
-  end
-  def put_log_file_name(this : ISystemMonitor2*, bsfilename : UInt8*) : HRESULT
-    @lpVtbl.value.put_log_file_name.call(this, bsfilename)
-  end
-  def get_log_file_name(this : ISystemMonitor2*, bsfilename : UInt8**) : HRESULT
-    @lpVtbl.value.get_log_file_name.call(this, bsfilename)
-  end
-  def put_log_view_start(this : ISystemMonitor2*, starttime : Float64) : HRESULT
-    @lpVtbl.value.put_log_view_start.call(this, starttime)
-  end
-  def get_log_view_start(this : ISystemMonitor2*, starttime : Float64*) : HRESULT
-    @lpVtbl.value.get_log_view_start.call(this, starttime)
-  end
-  def put_log_view_stop(this : ISystemMonitor2*, stoptime : Float64) : HRESULT
-    @lpVtbl.value.put_log_view_stop.call(this, stoptime)
-  end
-  def get_log_view_stop(this : ISystemMonitor2*, stoptime : Float64*) : HRESULT
-    @lpVtbl.value.get_log_view_stop.call(this, stoptime)
-  end
-  def get_grid_color(this : ISystemMonitor2*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_grid_color.call(this, pcolor)
-  end
-  def put_grid_color(this : ISystemMonitor2*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_grid_color.call(this, color)
-  end
-  def get_time_bar_color(this : ISystemMonitor2*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_time_bar_color.call(this, pcolor)
-  end
-  def put_time_bar_color(this : ISystemMonitor2*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_time_bar_color.call(this, color)
-  end
-  def get_highlight(this : ISystemMonitor2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_highlight.call(this, pbstate)
-  end
-  def put_highlight(this : ISystemMonitor2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_highlight.call(this, bstate)
-  end
-  def get_show_toolbar(this : ISystemMonitor2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_toolbar.call(this, pbstate)
-  end
-  def put_show_toolbar(this : ISystemMonitor2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_toolbar.call(this, bstate)
-  end
-  def paste(this : ISystemMonitor2*) : HRESULT
-    @lpVtbl.value.paste.call(this)
-  end
-  def copy(this : ISystemMonitor2*) : HRESULT
-    @lpVtbl.value.copy.call(this)
-  end
-  def reset(this : ISystemMonitor2*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def put_read_only(this : ISystemMonitor2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_read_only.call(this, bstate)
-  end
-  def get_read_only(this : ISystemMonitor2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_read_only.call(this, pbstate)
-  end
-  def put_report_value_type(this : ISystemMonitor2*, ereportvaluetype : ReportValueTypeConstants) : HRESULT
-    @lpVtbl.value.put_report_value_type.call(this, ereportvaluetype)
-  end
-  def get_report_value_type(this : ISystemMonitor2*, pereportvaluetype : ReportValueTypeConstants*) : HRESULT
-    @lpVtbl.value.get_report_value_type.call(this, pereportvaluetype)
-  end
-  def put_monitor_duplicate_instances(this : ISystemMonitor2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_monitor_duplicate_instances.call(this, bstate)
-  end
-  def get_monitor_duplicate_instances(this : ISystemMonitor2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_monitor_duplicate_instances.call(this, pbstate)
-  end
-  def put_display_filter(this : ISystemMonitor2*, ivalue : Int32) : HRESULT
-    @lpVtbl.value.put_display_filter.call(this, ivalue)
-  end
-  def get_display_filter(this : ISystemMonitor2*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_display_filter.call(this, pivalue)
-  end
-  def get_log_files(this : ISystemMonitor2*, ppilogfiles : ILogFiles*) : HRESULT
-    @lpVtbl.value.get_log_files.call(this, ppilogfiles)
-  end
-  def put_data_source_type(this : ISystemMonitor2*, edatasourcetype : DataSourceTypeConstants) : HRESULT
-    @lpVtbl.value.put_data_source_type.call(this, edatasourcetype)
-  end
-  def get_data_source_type(this : ISystemMonitor2*, pedatasourcetype : DataSourceTypeConstants*) : HRESULT
-    @lpVtbl.value.get_data_source_type.call(this, pedatasourcetype)
-  end
-  def put_sql_dsn_name(this : ISystemMonitor2*, bssqldsnname : UInt8*) : HRESULT
-    @lpVtbl.value.put_sql_dsn_name.call(this, bssqldsnname)
-  end
-  def get_sql_dsn_name(this : ISystemMonitor2*, bssqldsnname : UInt8**) : HRESULT
-    @lpVtbl.value.get_sql_dsn_name.call(this, bssqldsnname)
-  end
-  def put_sql_log_set_name(this : ISystemMonitor2*, bssqllogsetname : UInt8*) : HRESULT
-    @lpVtbl.value.put_sql_log_set_name.call(this, bssqllogsetname)
-  end
-  def get_sql_log_set_name(this : ISystemMonitor2*, bssqllogsetname : UInt8**) : HRESULT
-    @lpVtbl.value.get_sql_log_set_name.call(this, bssqllogsetname)
-  end
-  def put_enable_digit_grouping(this : ISystemMonitor2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_enable_digit_grouping.call(this, bstate)
-  end
-  def get_enable_digit_grouping(this : ISystemMonitor2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_enable_digit_grouping.call(this, pbstate)
-  end
-  def put_enable_tool_tips(this : ISystemMonitor2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_enable_tool_tips.call(this, bstate)
-  end
-  def get_enable_tool_tips(this : ISystemMonitor2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_enable_tool_tips.call(this, pbstate)
-  end
-  def put_show_time_axis_labels(this : ISystemMonitor2*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_time_axis_labels.call(this, bstate)
-  end
-  def get_show_time_axis_labels(this : ISystemMonitor2*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_time_axis_labels.call(this, pbstate)
-  end
-  def put_chart_scroll(this : ISystemMonitor2*, bscroll : Int16) : HRESULT
-    @lpVtbl.value.put_chart_scroll.call(this, bscroll)
-  end
-  def get_chart_scroll(this : ISystemMonitor2*, pbscroll : Int16*) : HRESULT
-    @lpVtbl.value.get_chart_scroll.call(this, pbscroll)
-  end
-  def put_data_point_count(this : ISystemMonitor2*, inewcount : Int32) : HRESULT
-    @lpVtbl.value.put_data_point_count.call(this, inewcount)
-  end
-  def get_data_point_count(this : ISystemMonitor2*, pidatapointcount : Int32*) : HRESULT
-    @lpVtbl.value.get_data_point_count.call(this, pidatapointcount)
-  end
-  def scale_to_fit(this : ISystemMonitor2*, bselectedcountersonly : Int16) : HRESULT
-    @lpVtbl.value.scale_to_fit.call(this, bselectedcountersonly)
-  end
-  def save_as(this : ISystemMonitor2*, bstrfilename : UInt8*, esysmonfiletype : SysmonFileType) : HRESULT
-    @lpVtbl.value.save_as.call(this, bstrfilename, esysmonfiletype)
-  end
-  def relog(this : ISystemMonitor2*, bstrfilename : UInt8*, esysmonfiletype : SysmonFileType, ifilter : Int32) : HRESULT
-    @lpVtbl.value.relog.call(this, bstrfilename, esysmonfiletype, ifilter)
-  end
-  def clear_data(this : ISystemMonitor2*) : HRESULT
-    @lpVtbl.value.clear_data.call(this)
-  end
-  def get_log_source_start_time(this : ISystemMonitor2*, pdate : Float64*) : HRESULT
-    @lpVtbl.value.get_log_source_start_time.call(this, pdate)
-  end
-  def get_log_source_stop_time(this : ISystemMonitor2*, pdate : Float64*) : HRESULT
-    @lpVtbl.value.get_log_source_stop_time.call(this, pdate)
-  end
-  def set_log_view_range(this : ISystemMonitor2*, starttime : Float64, stoptime : Float64) : HRESULT
-    @lpVtbl.value.set_log_view_range.call(this, starttime, stoptime)
-  end
-  def get_log_view_range(this : ISystemMonitor2*, starttime : Float64*, stoptime : Float64*) : HRESULT
-    @lpVtbl.value.get_log_view_range.call(this, starttime, stoptime)
-  end
-  def batching_lock(this : ISystemMonitor2*, flock : Int16, ebatchreason : SysmonBatchReason) : HRESULT
-    @lpVtbl.value.batching_lock.call(this, flock, ebatchreason)
-  end
-  def load_settings(this : ISystemMonitor2*, bstrsettingfilename : UInt8*) : HRESULT
-    @lpVtbl.value.load_settings.call(this, bstrsettingfilename)
-  end
-end
-struct LibWin32::IISystemMonitorUnion
-  def query_interface(this : IISystemMonitorUnion*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IISystemMonitorUnion*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IISystemMonitorUnion*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_appearance(this : IISystemMonitorUnion*, iappearance : Int32*) : HRESULT
-    @lpVtbl.value.get_appearance.call(this, iappearance)
-  end
-  def put_appearance(this : IISystemMonitorUnion*, iappearance : Int32) : HRESULT
-    @lpVtbl.value.put_appearance.call(this, iappearance)
-  end
-  def get_back_color(this : IISystemMonitorUnion*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_back_color.call(this, pcolor)
-  end
-  def put_back_color(this : IISystemMonitorUnion*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_back_color.call(this, color)
-  end
-  def get_border_style(this : IISystemMonitorUnion*, iborderstyle : Int32*) : HRESULT
-    @lpVtbl.value.get_border_style.call(this, iborderstyle)
-  end
-  def put_border_style(this : IISystemMonitorUnion*, iborderstyle : Int32) : HRESULT
-    @lpVtbl.value.put_border_style.call(this, iborderstyle)
-  end
-  def get_fore_color(this : IISystemMonitorUnion*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_fore_color.call(this, pcolor)
-  end
-  def put_fore_color(this : IISystemMonitorUnion*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_fore_color.call(this, color)
-  end
-  def get_font(this : IISystemMonitorUnion*, ppfont : IFontDisp*) : HRESULT
-    @lpVtbl.value.get_font.call(this, ppfont)
-  end
-  def putref_font(this : IISystemMonitorUnion*, pfont : IFontDisp) : HRESULT
-    @lpVtbl.value.putref_font.call(this, pfont)
-  end
-  def get_counters(this : IISystemMonitorUnion*, ppicounters : ICounters*) : HRESULT
-    @lpVtbl.value.get_counters.call(this, ppicounters)
-  end
-  def put_show_vertical_grid(this : IISystemMonitorUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_vertical_grid.call(this, bstate)
-  end
-  def get_show_vertical_grid(this : IISystemMonitorUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_vertical_grid.call(this, pbstate)
-  end
-  def put_show_horizontal_grid(this : IISystemMonitorUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_horizontal_grid.call(this, bstate)
-  end
-  def get_show_horizontal_grid(this : IISystemMonitorUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_horizontal_grid.call(this, pbstate)
-  end
-  def put_show_legend(this : IISystemMonitorUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_legend.call(this, bstate)
-  end
-  def get_show_legend(this : IISystemMonitorUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_legend.call(this, pbstate)
-  end
-  def put_show_scale_labels(this : IISystemMonitorUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_scale_labels.call(this, bstate)
-  end
-  def get_show_scale_labels(this : IISystemMonitorUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_scale_labels.call(this, pbstate)
-  end
-  def put_show_value_bar(this : IISystemMonitorUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_value_bar.call(this, bstate)
-  end
-  def get_show_value_bar(this : IISystemMonitorUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_value_bar.call(this, pbstate)
-  end
-  def put_maximum_scale(this : IISystemMonitorUnion*, ivalue : Int32) : HRESULT
-    @lpVtbl.value.put_maximum_scale.call(this, ivalue)
-  end
-  def get_maximum_scale(this : IISystemMonitorUnion*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_maximum_scale.call(this, pivalue)
-  end
-  def put_minimum_scale(this : IISystemMonitorUnion*, ivalue : Int32) : HRESULT
-    @lpVtbl.value.put_minimum_scale.call(this, ivalue)
-  end
-  def get_minimum_scale(this : IISystemMonitorUnion*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_minimum_scale.call(this, pivalue)
-  end
-  def put_update_interval(this : IISystemMonitorUnion*, fvalue : Float32) : HRESULT
-    @lpVtbl.value.put_update_interval.call(this, fvalue)
-  end
-  def get_update_interval(this : IISystemMonitorUnion*, pfvalue : Float32*) : HRESULT
-    @lpVtbl.value.get_update_interval.call(this, pfvalue)
-  end
-  def put_display_type(this : IISystemMonitorUnion*, edisplaytype : DisplayTypeConstants) : HRESULT
-    @lpVtbl.value.put_display_type.call(this, edisplaytype)
-  end
-  def get_display_type(this : IISystemMonitorUnion*, pedisplaytype : DisplayTypeConstants*) : HRESULT
-    @lpVtbl.value.get_display_type.call(this, pedisplaytype)
-  end
-  def put_manual_update(this : IISystemMonitorUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_manual_update.call(this, bstate)
-  end
-  def get_manual_update(this : IISystemMonitorUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_manual_update.call(this, pbstate)
-  end
-  def put_graph_title(this : IISystemMonitorUnion*, bstitle : UInt8*) : HRESULT
-    @lpVtbl.value.put_graph_title.call(this, bstitle)
-  end
-  def get_graph_title(this : IISystemMonitorUnion*, pbstitle : UInt8**) : HRESULT
-    @lpVtbl.value.get_graph_title.call(this, pbstitle)
-  end
-  def put_y_axis_label(this : IISystemMonitorUnion*, bstitle : UInt8*) : HRESULT
-    @lpVtbl.value.put_y_axis_label.call(this, bstitle)
-  end
-  def get_y_axis_label(this : IISystemMonitorUnion*, pbstitle : UInt8**) : HRESULT
-    @lpVtbl.value.get_y_axis_label.call(this, pbstitle)
-  end
-  def collect_sample(this : IISystemMonitorUnion*) : HRESULT
-    @lpVtbl.value.collect_sample.call(this)
-  end
-  def update_graph(this : IISystemMonitorUnion*) : HRESULT
-    @lpVtbl.value.update_graph.call(this)
-  end
-  def browse_counters(this : IISystemMonitorUnion*) : HRESULT
-    @lpVtbl.value.browse_counters.call(this)
-  end
-  def display_properties(this : IISystemMonitorUnion*) : HRESULT
-    @lpVtbl.value.display_properties.call(this)
-  end
-  def counter(this : IISystemMonitorUnion*, iindex : Int32, ppicounter : ICounterItem*) : HRESULT
-    @lpVtbl.value.counter.call(this, iindex, ppicounter)
-  end
-  def add_counter(this : IISystemMonitorUnion*, bspath : UInt8*, ppicounter : ICounterItem*) : HRESULT
-    @lpVtbl.value.add_counter.call(this, bspath, ppicounter)
-  end
-  def delete_counter(this : IISystemMonitorUnion*, pctr : ICounterItem) : HRESULT
-    @lpVtbl.value.delete_counter.call(this, pctr)
-  end
-  def get_back_color_ctl(this : IISystemMonitorUnion*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_back_color_ctl.call(this, pcolor)
-  end
-  def put_back_color_ctl(this : IISystemMonitorUnion*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_back_color_ctl.call(this, color)
-  end
-  def put_log_file_name(this : IISystemMonitorUnion*, bsfilename : UInt8*) : HRESULT
-    @lpVtbl.value.put_log_file_name.call(this, bsfilename)
-  end
-  def get_log_file_name(this : IISystemMonitorUnion*, bsfilename : UInt8**) : HRESULT
-    @lpVtbl.value.get_log_file_name.call(this, bsfilename)
-  end
-  def put_log_view_start(this : IISystemMonitorUnion*, starttime : Float64) : HRESULT
-    @lpVtbl.value.put_log_view_start.call(this, starttime)
-  end
-  def get_log_view_start(this : IISystemMonitorUnion*, starttime : Float64*) : HRESULT
-    @lpVtbl.value.get_log_view_start.call(this, starttime)
-  end
-  def put_log_view_stop(this : IISystemMonitorUnion*, stoptime : Float64) : HRESULT
-    @lpVtbl.value.put_log_view_stop.call(this, stoptime)
-  end
-  def get_log_view_stop(this : IISystemMonitorUnion*, stoptime : Float64*) : HRESULT
-    @lpVtbl.value.get_log_view_stop.call(this, stoptime)
-  end
-  def get_grid_color(this : IISystemMonitorUnion*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_grid_color.call(this, pcolor)
-  end
-  def put_grid_color(this : IISystemMonitorUnion*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_grid_color.call(this, color)
-  end
-  def get_time_bar_color(this : IISystemMonitorUnion*, pcolor : UInt32*) : HRESULT
-    @lpVtbl.value.get_time_bar_color.call(this, pcolor)
-  end
-  def put_time_bar_color(this : IISystemMonitorUnion*, color : UInt32) : HRESULT
-    @lpVtbl.value.put_time_bar_color.call(this, color)
-  end
-  def get_highlight(this : IISystemMonitorUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_highlight.call(this, pbstate)
-  end
-  def put_highlight(this : IISystemMonitorUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_highlight.call(this, bstate)
-  end
-  def get_show_toolbar(this : IISystemMonitorUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_toolbar.call(this, pbstate)
-  end
-  def put_show_toolbar(this : IISystemMonitorUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_toolbar.call(this, bstate)
-  end
-  def paste(this : IISystemMonitorUnion*) : HRESULT
-    @lpVtbl.value.paste.call(this)
-  end
-  def copy(this : IISystemMonitorUnion*) : HRESULT
-    @lpVtbl.value.copy.call(this)
-  end
-  def reset(this : IISystemMonitorUnion*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def put_read_only(this : IISystemMonitorUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_read_only.call(this, bstate)
-  end
-  def get_read_only(this : IISystemMonitorUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_read_only.call(this, pbstate)
-  end
-  def put_report_value_type(this : IISystemMonitorUnion*, ereportvaluetype : ReportValueTypeConstants) : HRESULT
-    @lpVtbl.value.put_report_value_type.call(this, ereportvaluetype)
-  end
-  def get_report_value_type(this : IISystemMonitorUnion*, pereportvaluetype : ReportValueTypeConstants*) : HRESULT
-    @lpVtbl.value.get_report_value_type.call(this, pereportvaluetype)
-  end
-  def put_monitor_duplicate_instances(this : IISystemMonitorUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_monitor_duplicate_instances.call(this, bstate)
-  end
-  def get_monitor_duplicate_instances(this : IISystemMonitorUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_monitor_duplicate_instances.call(this, pbstate)
-  end
-  def put_display_filter(this : IISystemMonitorUnion*, ivalue : Int32) : HRESULT
-    @lpVtbl.value.put_display_filter.call(this, ivalue)
-  end
-  def get_display_filter(this : IISystemMonitorUnion*, pivalue : Int32*) : HRESULT
-    @lpVtbl.value.get_display_filter.call(this, pivalue)
-  end
-  def get_log_files(this : IISystemMonitorUnion*, ppilogfiles : ILogFiles*) : HRESULT
-    @lpVtbl.value.get_log_files.call(this, ppilogfiles)
-  end
-  def put_data_source_type(this : IISystemMonitorUnion*, edatasourcetype : DataSourceTypeConstants) : HRESULT
-    @lpVtbl.value.put_data_source_type.call(this, edatasourcetype)
-  end
-  def get_data_source_type(this : IISystemMonitorUnion*, pedatasourcetype : DataSourceTypeConstants*) : HRESULT
-    @lpVtbl.value.get_data_source_type.call(this, pedatasourcetype)
-  end
-  def put_sql_dsn_name(this : IISystemMonitorUnion*, bssqldsnname : UInt8*) : HRESULT
-    @lpVtbl.value.put_sql_dsn_name.call(this, bssqldsnname)
-  end
-  def get_sql_dsn_name(this : IISystemMonitorUnion*, bssqldsnname : UInt8**) : HRESULT
-    @lpVtbl.value.get_sql_dsn_name.call(this, bssqldsnname)
-  end
-  def put_sql_log_set_name(this : IISystemMonitorUnion*, bssqllogsetname : UInt8*) : HRESULT
-    @lpVtbl.value.put_sql_log_set_name.call(this, bssqllogsetname)
-  end
-  def get_sql_log_set_name(this : IISystemMonitorUnion*, bssqllogsetname : UInt8**) : HRESULT
-    @lpVtbl.value.get_sql_log_set_name.call(this, bssqllogsetname)
-  end
-  def put_enable_digit_grouping(this : IISystemMonitorUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_enable_digit_grouping.call(this, bstate)
-  end
-  def get_enable_digit_grouping(this : IISystemMonitorUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_enable_digit_grouping.call(this, pbstate)
-  end
-  def put_enable_tool_tips(this : IISystemMonitorUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_enable_tool_tips.call(this, bstate)
-  end
-  def get_enable_tool_tips(this : IISystemMonitorUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_enable_tool_tips.call(this, pbstate)
-  end
-  def put_show_time_axis_labels(this : IISystemMonitorUnion*, bstate : Int16) : HRESULT
-    @lpVtbl.value.put_show_time_axis_labels.call(this, bstate)
-  end
-  def get_show_time_axis_labels(this : IISystemMonitorUnion*, pbstate : Int16*) : HRESULT
-    @lpVtbl.value.get_show_time_axis_labels.call(this, pbstate)
-  end
-  def put_chart_scroll(this : IISystemMonitorUnion*, bscroll : Int16) : HRESULT
-    @lpVtbl.value.put_chart_scroll.call(this, bscroll)
-  end
-  def get_chart_scroll(this : IISystemMonitorUnion*, pbscroll : Int16*) : HRESULT
-    @lpVtbl.value.get_chart_scroll.call(this, pbscroll)
-  end
-  def put_data_point_count(this : IISystemMonitorUnion*, inewcount : Int32) : HRESULT
-    @lpVtbl.value.put_data_point_count.call(this, inewcount)
-  end
-  def get_data_point_count(this : IISystemMonitorUnion*, pidatapointcount : Int32*) : HRESULT
-    @lpVtbl.value.get_data_point_count.call(this, pidatapointcount)
-  end
-  def scale_to_fit(this : IISystemMonitorUnion*, bselectedcountersonly : Int16) : HRESULT
-    @lpVtbl.value.scale_to_fit.call(this, bselectedcountersonly)
-  end
-  def save_as(this : IISystemMonitorUnion*, bstrfilename : UInt8*, esysmonfiletype : SysmonFileType) : HRESULT
-    @lpVtbl.value.save_as.call(this, bstrfilename, esysmonfiletype)
-  end
-  def relog(this : IISystemMonitorUnion*, bstrfilename : UInt8*, esysmonfiletype : SysmonFileType, ifilter : Int32) : HRESULT
-    @lpVtbl.value.relog.call(this, bstrfilename, esysmonfiletype, ifilter)
-  end
-  def clear_data(this : IISystemMonitorUnion*) : HRESULT
-    @lpVtbl.value.clear_data.call(this)
-  end
-  def get_log_source_start_time(this : IISystemMonitorUnion*, pdate : Float64*) : HRESULT
-    @lpVtbl.value.get_log_source_start_time.call(this, pdate)
-  end
-  def get_log_source_stop_time(this : IISystemMonitorUnion*, pdate : Float64*) : HRESULT
-    @lpVtbl.value.get_log_source_stop_time.call(this, pdate)
-  end
-  def set_log_view_range(this : IISystemMonitorUnion*, starttime : Float64, stoptime : Float64) : HRESULT
-    @lpVtbl.value.set_log_view_range.call(this, starttime, stoptime)
-  end
-  def get_log_view_range(this : IISystemMonitorUnion*, starttime : Float64*, stoptime : Float64*) : HRESULT
-    @lpVtbl.value.get_log_view_range.call(this, starttime, stoptime)
-  end
-  def batching_lock(this : IISystemMonitorUnion*, flock : Int16, ebatchreason : SysmonBatchReason) : HRESULT
-    @lpVtbl.value.batching_lock.call(this, flock, ebatchreason)
-  end
-  def load_settings(this : IISystemMonitorUnion*, bstrsettingfilename : UInt8*) : HRESULT
-    @lpVtbl.value.load_settings.call(this, bstrsettingfilename)
-  end
-end
-struct LibWin32::DISystemMonitor
-  def query_interface(this : DISystemMonitor*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : DISystemMonitor*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : DISystemMonitor*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : DISystemMonitor*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : DISystemMonitor*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : DISystemMonitor*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : DISystemMonitor*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-end
-struct LibWin32::DISystemMonitorInternal
-  def query_interface(this : DISystemMonitorInternal*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : DISystemMonitorInternal*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : DISystemMonitorInternal*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : DISystemMonitorInternal*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : DISystemMonitorInternal*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : DISystemMonitorInternal*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : DISystemMonitorInternal*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-end
-struct LibWin32::ISystemMonitorEvents
-  def query_interface(this : ISystemMonitorEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ISystemMonitorEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ISystemMonitorEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def on_counter_selected(this : ISystemMonitorEvents*, index : Int32) : Void
-    @lpVtbl.value.on_counter_selected.call(this, index)
-  end
-  def on_counter_added(this : ISystemMonitorEvents*, index : Int32) : Void
-    @lpVtbl.value.on_counter_added.call(this, index)
-  end
-  def on_counter_deleted(this : ISystemMonitorEvents*, index : Int32) : Void
-    @lpVtbl.value.on_counter_deleted.call(this, index)
-  end
-  def on_sample_collected(this : ISystemMonitorEvents*) : Void
-    @lpVtbl.value.on_sample_collected.call(this)
-  end
-  def on_dbl_click(this : ISystemMonitorEvents*, index : Int32) : Void
-    @lpVtbl.value.on_dbl_click.call(this, index)
-  end
-end
-struct LibWin32::DISystemMonitorEvents
-  def query_interface(this : DISystemMonitorEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : DISystemMonitorEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : DISystemMonitorEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : DISystemMonitorEvents*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : DISystemMonitorEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : DISystemMonitorEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : DISystemMonitorEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
   end
 end

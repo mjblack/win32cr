@@ -1,44 +1,33 @@
-require "../foundation.cr"
-require "../system/windowsprogramming.cr"
+require "./../foundation.cr"
+require "./windows_programming.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-lib LibWin32
+module Win32cr::System::Recovery
 
+  @[Flags]
   enum REGISTER_APPLICATION_RESTART_FLAGS : UInt32
-    RESTART_NO_CRASH = 1
-    RESTART_NO_HANG = 2
-    RESTART_NO_PATCH = 4
-    RESTART_NO_REBOOT = 8
+    RESTART_NO_CRASH = 1_u32
+    RESTART_NO_HANG = 2_u32
+    RESTART_NO_PATCH = 4_u32
+    RESTART_NO_REBOOT = 8_u32
   end
 
+  @[Link("kernel32")]
+  lib C
+    fun RegisterApplicationRecoveryCallback(pRecoveyCallback : Win32cr::System::WindowsProgramming::APPLICATION_RECOVERY_CALLBACK, pvParameter : Void*, dwPingInterval : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
-  # Params # precoveycallback : APPLICATION_RECOVERY_CALLBACK [In],pvparameter : Void* [In],dwpinginterval : UInt32 [In],dwflags : UInt32 [In]
-  fun RegisterApplicationRecoveryCallback(precoveycallback : APPLICATION_RECOVERY_CALLBACK, pvparameter : Void*, dwpinginterval : UInt32, dwflags : UInt32) : HRESULT
+    fun UnregisterApplicationRecoveryCallback : Win32cr::Foundation::HRESULT
 
-  # Params # 
-  fun UnregisterApplicationRecoveryCallback : HRESULT
+    fun RegisterApplicationRestart(pwzCommandline : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::Recovery::REGISTER_APPLICATION_RESTART_FLAGS) : Win32cr::Foundation::HRESULT
 
-  # Params # pwzcommandline : LibC::LPWSTR [In],dwflags : REGISTER_APPLICATION_RESTART_FLAGS [In]
-  fun RegisterApplicationRestart(pwzcommandline : LibC::LPWSTR, dwflags : REGISTER_APPLICATION_RESTART_FLAGS) : HRESULT
+    fun UnregisterApplicationRestart : Win32cr::Foundation::HRESULT
 
-  # Params # 
-  fun UnregisterApplicationRestart : HRESULT
+    fun GetApplicationRecoveryCallback(hProcess : Win32cr::Foundation::HANDLE, pRecoveryCallback : Win32cr::System::WindowsProgramming::APPLICATION_RECOVERY_CALLBACK*, ppvParameter : Void**, pdwPingInterval : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::HRESULT
 
-  # Params # hprocess : LibC::HANDLE [In],precoverycallback : APPLICATION_RECOVERY_CALLBACK* [In],ppvparameter : Void** [In],pdwpinginterval : UInt32* [In],pdwflags : UInt32* [In]
-  fun GetApplicationRecoveryCallback(hprocess : LibC::HANDLE, precoverycallback : APPLICATION_RECOVERY_CALLBACK*, ppvparameter : Void**, pdwpinginterval : UInt32*, pdwflags : UInt32*) : HRESULT
+    fun GetApplicationRestartSettings(hProcess : Win32cr::Foundation::HANDLE, pwzCommandline : UInt16*, pcchSize : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::HRESULT
 
-  # Params # hprocess : LibC::HANDLE [In],pwzcommandline : Char* [In],pcchsize : UInt32* [In],pdwflags : UInt32* [In]
-  fun GetApplicationRestartSettings(hprocess : LibC::HANDLE, pwzcommandline : Char*, pcchsize : UInt32*, pdwflags : UInt32*) : HRESULT
+    fun ApplicationRecoveryInProgress(pbCancelled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
-  # Params # pbcancelled : LibC::BOOL* [In]
-  fun ApplicationRecoveryInProgress(pbcancelled : LibC::BOOL*) : HRESULT
+    fun ApplicationRecoveryFinished(bSuccess : Win32cr::Foundation::BOOL) : Void
 
-  # Params # bsuccess : LibC::BOOL [In]
-  fun ApplicationRecoveryFinished(bsuccess : LibC::BOOL) : Void
+  end
 end

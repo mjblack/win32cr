@@ -26,9 +26,9 @@ module Win32::System
     end
 
     describe "Expanding variable" do
-      size = LibWin32.ExpandEnvironmentStringsW("%CrystalSpec%".to_utf16, nil, 0)
+      size = Win32cr::System::Environment::C.ExpandEnvironmentStringsW("%CrystalSpec%".to_utf16, nil, 0)
       lpwch = Pointer(UInt16).malloc(size)
-      LibWin32.ExpandEnvironmentStringsW("%CrystalSpec%".to_utf16, lpwch, size)
+      Win32cr::System::Environment::C.ExpandEnvironmentStringsW("%CrystalSpec%".to_utf16, lpwch, size)
       str = String.from_utf16(lpwch).first
 
       it "string expanded should be the previously set variable" do

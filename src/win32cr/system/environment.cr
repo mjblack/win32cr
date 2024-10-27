@@ -1,24 +1,56 @@
-require "../foundation.cr"
+require "./../foundation.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:userenv.dll")]
-@[Link(ldflags: "/DELAYLOAD:onecore.dll")]
-@[Link(ldflags: "/DELAYLOAD:vertdll.dll")]
-{% else %}
-@[Link("userenv")]
-@[Link("onecore")]
-{% if flag?(:preview_dll)%}
-@[Link("vertdll")]
-{% end %}
-{% end %}
-lib LibWin32
+module Win32cr::System::Environment
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_ENCLAVE = Proc(LibC::UIntPtrT, Void)*
+
+  {% if flag?(:x86_64) %}
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION = Proc(Win32cr::System::Environment::VBS_BASIC_ENCLAVE_EXCEPTION_AMD64*, Int32)*
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_TERMINATE_THREAD = Proc(Win32cr::System::Environment::VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64*, Int32)*
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD = Proc(Win32cr::System::Environment::VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64*, Int32)*
+  {% end %}
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_COMMIT_PAGES = Proc(Void*, LibC::UIntPtrT, Void*, UInt32, Int32)*
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_DECOMMIT_PAGES = Proc(Void*, LibC::UIntPtrT, Int32)*
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_PROTECT_PAGES = Proc(Void*, LibC::UIntPtrT, UInt32, Int32)*
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD = Proc(Win32cr::System::Environment::VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64*, Int32)*
+  {% end %}
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GET_ENCLAVE_INFORMATION = Proc(Win32cr::System::Environment::ENCLAVE_INFORMATION*, Int32)*
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_KEY = Proc(Win32cr::System::Environment::ENCLAVE_VBS_BASIC_KEY_REQUEST*, UInt32, UInt8*, Int32)*
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT = Proc(UInt8*, Void*, UInt32, UInt32*, Int32)*
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_VERIFY_REPORT = Proc(Void*, UInt32, Int32)*
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_RANDOM_DATA = Proc(UInt8*, UInt32, UInt64*, Int32)*
+
+  {% if flag?(:i386) || flag?(:arm) %}
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION = Proc(Void*, Int32)*
+  {% end %}
+
+  {% if flag?(:i386) %}
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_TERMINATE_THREAD = Proc(Win32cr::System::Environment::VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR32*, Int32)*
+  {% end %}
+
+  {% if flag?(:i386) %}
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD = Proc(Win32cr::System::Environment::VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR32*, Int32)*
+  {% end %}
+
+  {% if flag?(:i386) %}
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD = Proc(Win32cr::System::Environment::VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR32*, Int32)*
+  {% end %}
+
   ENCLAVE_RUNTIME_POLICY_ALLOW_FULL_DEBUG = 1_u32
   ENCLAVE_RUNTIME_POLICY_ALLOW_DYNAMIC_DEBUG = 2_u32
   ENCLAVE_UNSEAL_FLAG_STALE_KEY = 1_u32
@@ -36,241 +68,204 @@ lib LibWin32
   ENCLAVE_VBS_BASIC_KEY_FLAG_IMAGE_ID = 4_u32
   ENCLAVE_VBS_BASIC_KEY_FLAG_DEBUG_KEY = 8_u32
 
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_ENCLAVE = Proc(LibC::UINT_PTR, Void)
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION = Proc(VBS_BASIC_ENCLAVE_EXCEPTION_AMD64*, Int32)
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_TERMINATE_THREAD = Proc(VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64*, Int32)
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD = Proc(VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64*, Int32)
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_COMMIT_PAGES = Proc(Void*, LibC::UINT_PTR, Void*, UInt32, Int32)
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_DECOMMIT_PAGES = Proc(Void*, LibC::UINT_PTR, Int32)
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_PROTECT_PAGES = Proc(Void*, LibC::UINT_PTR, UInt32, Int32)
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD = Proc(VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64*, Int32)
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GET_ENCLAVE_INFORMATION = Proc(ENCLAVE_INFORMATION*, Int32)
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_KEY = Proc(ENCLAVE_VBS_BASIC_KEY_REQUEST*, UInt32, UInt8*, Int32)
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT = Proc(UInt8*, Void*, UInt32, UInt32*, Int32)
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_VERIFY_REPORT = Proc(Void*, UInt32, Int32)
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_RANDOM_DATA = Proc(UInt8*, UInt32, UInt64*, Int32)
-
-
-  enum ENCLAVE_SEALING_IDENTITY_POLICY : Int32
-    ENCLAVE_IDENTITY_POLICY_SEAL_INVALID = 0
-    ENCLAVE_IDENTITY_POLICY_SEAL_EXACT_CODE = 1
-    ENCLAVE_IDENTITY_POLICY_SEAL_SAME_PRIMARY_CODE = 2
-    ENCLAVE_IDENTITY_POLICY_SEAL_SAME_IMAGE = 3
-    ENCLAVE_IDENTITY_POLICY_SEAL_SAME_FAMILY = 4
-    ENCLAVE_IDENTITY_POLICY_SEAL_SAME_AUTHOR = 5
+  enum ENCLAVE_SEALING_IDENTITY_POLICY
+    ENCLAVE_IDENTITY_POLICY_SEAL_INVALID = 0_i32
+    ENCLAVE_IDENTITY_POLICY_SEAL_EXACT_CODE = 1_i32
+    ENCLAVE_IDENTITY_POLICY_SEAL_SAME_PRIMARY_CODE = 2_i32
+    ENCLAVE_IDENTITY_POLICY_SEAL_SAME_IMAGE = 3_i32
+    ENCLAVE_IDENTITY_POLICY_SEAL_SAME_FAMILY = 4_i32
+    ENCLAVE_IDENTITY_POLICY_SEAL_SAME_AUTHOR = 5_i32
   end
 
-  struct ENCLAVE_IDENTITY
-    owner_id : UInt8[32]*
-    unique_id : UInt8[32]*
-    author_id : UInt8[32]*
-    family_id : UInt8[16]*
-    image_id : UInt8[16]*
-    enclave_svn : UInt32
-    secure_kernel_svn : UInt32
-    platform_svn : UInt32
-    flags : UInt32
-    signing_level : UInt32
+  @[Extern]
+  record ENCLAVE_IDENTITY,
+    owner_id : UInt8[32],
+    unique_id : UInt8[32],
+    author_id : UInt8[32],
+    family_id : UInt8[16],
+    image_id : UInt8[16],
+    enclave_svn : UInt32,
+    secure_kernel_svn : UInt32,
+    platform_svn : UInt32,
+    flags : UInt32,
+    signing_level : UInt32,
     enclave_type : UInt32
-  end
-  struct VBS_ENCLAVE_REPORT_PKG_HEADER
-    package_size : UInt32
-    version : UInt32
-    signature_scheme : UInt32
-    signed_statement_size : UInt32
-    signature_size : UInt32
+
+  @[Extern]
+  record VBS_ENCLAVE_REPORT_PKG_HEADER,
+    package_size : UInt32,
+    version : UInt32,
+    signature_scheme : UInt32,
+    signed_statement_size : UInt32,
+    signature_size : UInt32,
     reserved : UInt32
-  end
-  struct VBS_ENCLAVE_REPORT
-    report_size : UInt32
-    report_version : UInt32
-    enclave_data : UInt8[64]*
-    enclave_identity : ENCLAVE_IDENTITY
-  end
-  struct VBS_ENCLAVE_REPORT_VARDATA_HEADER
-    data_type : UInt32
+
+  @[Extern]
+  record VBS_ENCLAVE_REPORT,
+    report_size : UInt32,
+    report_version : UInt32,
+    enclave_data : UInt8[64],
+    enclave_identity : Win32cr::System::Environment::ENCLAVE_IDENTITY
+
+  @[Extern]
+  record VBS_ENCLAVE_REPORT_VARDATA_HEADER,
+    data_type : UInt32,
     size : UInt32
-  end
-  struct VBS_ENCLAVE_REPORT_MODULE
-    header : VBS_ENCLAVE_REPORT_VARDATA_HEADER
-    unique_id : UInt8[32]*
-    author_id : UInt8[32]*
-    family_id : UInt8[16]*
-    image_id : UInt8[16]*
-    svn : UInt32
-    module_name : Char[0]*
-  end
-  struct ENCLAVE_INFORMATION
-    enclave_type : UInt32
-    reserved : UInt32
-    base_address : Void*
-    size : LibC::UINT_PTR
-    identity : ENCLAVE_IDENTITY
-  end
-  struct VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR32
-    thread_context : UInt32[4]*
-    entry_point : UInt32
-    stack_pointer : UInt32
-    exception_entry_point : UInt32
-    exception_stack : UInt32
+
+  @[Extern]
+  record VBS_ENCLAVE_REPORT_MODULE,
+    header : Win32cr::System::Environment::VBS_ENCLAVE_REPORT_VARDATA_HEADER,
+    unique_id : UInt8[32],
+    author_id : UInt8[32],
+    family_id : UInt8[16],
+    image_id : UInt8[16],
+    svn : UInt32,
+    module_name : UInt16*
+
+  @[Extern]
+  record ENCLAVE_INFORMATION,
+    enclave_type : UInt32,
+    reserved : UInt32,
+    base_address : Void*,
+    size : LibC::UIntPtrT,
+    identity : Win32cr::System::Environment::ENCLAVE_IDENTITY
+
+  @[Extern]
+  record VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR32,
+    thread_context : UInt32[4],
+    entry_point : UInt32,
+    stack_pointer : UInt32,
+    exception_entry_point : UInt32,
+    exception_stack : UInt32,
     exception_active : UInt32
-  end
-  struct VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64
-    thread_context : UInt64[4]*
-    entry_point : UInt64
-    stack_pointer : UInt64
-    exception_entry_point : UInt64
-    exception_stack : UInt64
+
+  @[Extern]
+  record VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64,
+    thread_context : UInt64[4],
+    entry_point : UInt64,
+    stack_pointer : UInt64,
+    exception_entry_point : UInt64,
+    exception_stack : UInt64,
     exception_active : UInt32
-  end
-  struct VBS_BASIC_ENCLAVE_EXCEPTION_AMD64
-    exception_code : UInt32
-    number_parameters : UInt32
-    exception_information : LibC::UINT_PTR[3]*
-    exception_rax : LibC::UINT_PTR
-    exception_rcx : LibC::UINT_PTR
-    exception_rip : LibC::UINT_PTR
-    exception_rflags : LibC::UINT_PTR
-    exception_rsp : LibC::UINT_PTR
-  end
-  struct ENCLAVE_VBS_BASIC_KEY_REQUEST
-    request_size : UInt32
-    flags : UInt32
-    enclave_svn : UInt32
-    system_key_id : UInt32
+
+  @[Extern]
+  record VBS_BASIC_ENCLAVE_EXCEPTION_AMD64,
+    exception_code : UInt32,
+    number_parameters : UInt32,
+    exception_information : LibC::UIntPtrT[3],
+    exception_rax : LibC::UIntPtrT,
+    exception_rcx : LibC::UIntPtrT,
+    exception_rip : LibC::UIntPtrT,
+    exception_rflags : LibC::UIntPtrT,
+    exception_rsp : LibC::UIntPtrT
+
+  @[Extern]
+  record ENCLAVE_VBS_BASIC_KEY_REQUEST,
+    request_size : UInt32,
+    flags : UInt32,
+    enclave_svn : UInt32,
+    system_key_id : UInt32,
     current_system_key_id : UInt32
+
+  @[Extern]
+  record VBS_BASIC_ENCLAVE_SYSCALL_PAGE,
+    return_from_enclave : Win32cr::System::Environment::VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_ENCLAVE,
+    return_from_exception : Win32cr::System::Environment::VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION,
+    terminate_thread : Win32cr::System::Environment::VBS_BASIC_ENCLAVE_BASIC_CALL_TERMINATE_THREAD,
+    interrupt_thread : Win32cr::System::Environment::VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD,
+    commit_pages : Win32cr::System::Environment::VBS_BASIC_ENCLAVE_BASIC_CALL_COMMIT_PAGES,
+    decommit_pages : Win32cr::System::Environment::VBS_BASIC_ENCLAVE_BASIC_CALL_DECOMMIT_PAGES,
+    protect_pages : Win32cr::System::Environment::VBS_BASIC_ENCLAVE_BASIC_CALL_PROTECT_PAGES,
+    create_thread : Win32cr::System::Environment::VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD,
+    get_enclave_information : Win32cr::System::Environment::VBS_BASIC_ENCLAVE_BASIC_CALL_GET_ENCLAVE_INFORMATION,
+    generate_key : Win32cr::System::Environment::VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_KEY,
+    generate_report : Win32cr::System::Environment::VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT,
+    verify_report : Win32cr::System::Environment::VBS_BASIC_ENCLAVE_BASIC_CALL_VERIFY_REPORT,
+    generate_random_data : Win32cr::System::Environment::VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_RANDOM_DATA
+
+  @[Link("kernel32")]
+  @[Link("userenv")]
+  @[Link("vertdll")]
+  lib C
+    fun SetEnvironmentStringsW(new_environment : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+
+    fun GetCommandLineA : Win32cr::Foundation::PSTR
+
+    fun GetCommandLineW : Win32cr::Foundation::PWSTR
+
+    fun GetEnvironmentStrings : Win32cr::Foundation::PSTR
+
+    # Commented out due to being part of LibC
+    #fun GetEnvironmentStringsW : Win32cr::Foundation::PWSTR
+
+    fun FreeEnvironmentStringsA(penv : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+
+    # Commented out due to being part of LibC
+    #fun FreeEnvironmentStringsW(penv : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+
+    fun GetEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpBuffer : UInt8*, nSize : UInt32) : UInt32
+
+    # Commented out due to being part of LibC
+    #fun GetEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpBuffer : UInt16*, nSize : UInt32) : UInt32
+
+    fun SetEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpValue : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+
+    # Commented out due to being part of LibC
+    #fun SetEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+
+    fun ExpandEnvironmentStringsA(lpSrc : Win32cr::Foundation::PSTR, lpDst : UInt8*, nSize : UInt32) : UInt32
+
+    fun ExpandEnvironmentStringsW(lpSrc : Win32cr::Foundation::PWSTR, lpDst : UInt16*, nSize : UInt32) : UInt32
+
+    fun SetCurrentDirectoryA(lpPathName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+
+    # Commented out due to being part of LibC
+    #fun SetCurrentDirectoryW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+
+    fun GetCurrentDirectoryA(nBufferLength : UInt32, lpBuffer : UInt8*) : UInt32
+
+    # Commented out due to being part of LibC
+    #fun GetCurrentDirectoryW(nBufferLength : UInt32, lpBuffer : UInt16*) : UInt32
+
+    fun NeedCurrentDirectoryForExePathA(exe_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+
+    fun NeedCurrentDirectoryForExePathW(exe_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+
+    fun CreateEnvironmentBlock(lpEnvironment : Void**, hToken : Win32cr::Foundation::HANDLE, bInherit : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+
+    fun DestroyEnvironmentBlock(lpEnvironment : Void*) : Win32cr::Foundation::BOOL
+
+    fun ExpandEnvironmentStringsForUserA(hToken : Win32cr::Foundation::HANDLE, lpSrc : Win32cr::Foundation::PSTR, lpDest : UInt8*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+
+    fun ExpandEnvironmentStringsForUserW(hToken : Win32cr::Foundation::HANDLE, lpSrc : Win32cr::Foundation::PWSTR, lpDest : UInt16*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+
+    fun IsEnclaveTypeSupported(flEnclaveType : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CreateEnclave(hProcess : Win32cr::Foundation::HANDLE, lpAddress : Void*, dwSize : LibC::UIntPtrT, dwInitialCommitment : LibC::UIntPtrT, flEnclaveType : UInt32, lpEnclaveInformation : Void*, dwInfoLength : UInt32, lpEnclaveError : UInt32*) : Void*
+
+    fun LoadEnclaveData(hProcess : Win32cr::Foundation::HANDLE, lpAddress : Void*, lpBuffer : Void*, nSize : LibC::UIntPtrT, flProtect : UInt32, lpPageInformation : Void*, dwInfoLength : UInt32, lpNumberOfBytesWritten : LibC::UIntPtrT*, lpEnclaveError : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun InitializeEnclave(hProcess : Win32cr::Foundation::HANDLE, lpAddress : Void*, lpEnclaveInformation : Void*, dwInfoLength : UInt32, lpEnclaveError : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun LoadEnclaveImageA(lpEnclaveAddress : Void*, lpImageName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+
+    fun LoadEnclaveImageW(lpEnclaveAddress : Void*, lpImageName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+
+    fun CallEnclave(lpRoutine : LibC::IntPtrT, lpParameter : Void*, fWaitForThread : Win32cr::Foundation::BOOL, lpReturnValue : Void**) : Win32cr::Foundation::BOOL
+
+    fun TerminateEnclave(lpAddress : Void*, fWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+
+    fun DeleteEnclave(lpAddress : Void*) : Win32cr::Foundation::BOOL
+
+    fun EnclaveGetAttestationReport(enclave_data : UInt8*, report : Void*, buffer_size : UInt32, output_size : UInt32*) : Win32cr::Foundation::HRESULT
+
+    fun EnclaveVerifyAttestationReport(enclave_type : UInt32, report : Void*, report_size : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun EnclaveSealData(data_to_encrypt : Void*, data_to_encrypt_size : UInt32, identity_policy : Win32cr::System::Environment::ENCLAVE_SEALING_IDENTITY_POLICY, runtime_policy : UInt32, protected_blob : Void*, buffer_size : UInt32, protected_blob_size : UInt32*) : Win32cr::Foundation::HRESULT
+
+    fun EnclaveUnsealData(protected_blob : Void*, protected_blob_size : UInt32, decrypted_data : Void*, buffer_size : UInt32, decrypted_data_size : UInt32*, sealing_identity : Win32cr::System::Environment::ENCLAVE_IDENTITY*, unsealing_flags : UInt32*) : Win32cr::Foundation::HRESULT
+
+    fun EnclaveGetEnclaveInformation(information_size : UInt32, enclave_information : Win32cr::System::Environment::ENCLAVE_INFORMATION*) : Win32cr::Foundation::HRESULT
+
   end
-  struct VBS_BASIC_ENCLAVE_SYSCALL_PAGE
-    return_from_enclave : VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_ENCLAVE
-    return_from_exception : VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION
-    terminate_thread : VBS_BASIC_ENCLAVE_BASIC_CALL_TERMINATE_THREAD
-    interrupt_thread : VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD
-    commit_pages : VBS_BASIC_ENCLAVE_BASIC_CALL_COMMIT_PAGES
-    decommit_pages : VBS_BASIC_ENCLAVE_BASIC_CALL_DECOMMIT_PAGES
-    protect_pages : VBS_BASIC_ENCLAVE_BASIC_CALL_PROTECT_PAGES
-    create_thread : VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD
-    get_enclave_information : VBS_BASIC_ENCLAVE_BASIC_CALL_GET_ENCLAVE_INFORMATION
-    generate_key : VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_KEY
-    generate_report : VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT
-    verify_report : VBS_BASIC_ENCLAVE_BASIC_CALL_VERIFY_REPORT
-    generate_random_data : VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_RANDOM_DATA
-  end
-
-
-  # Params # newenvironment : LibC::LPWSTR [In]
-  fun SetEnvironmentStringsW(newenvironment : LibC::LPWSTR) : LibC::BOOL
-
-  # Params # 
-  fun GetCommandLineA : PSTR
-
-  # Params # 
-  fun GetCommandLineW : LibC::LPWSTR
-
-  # Params # 
-  fun GetEnvironmentStrings : PSTR
-
-  # Params # 
-  # Commented out because function is part of Lib C
-  #fun GetEnvironmentStringsW : LibC::LPWSTR
-
-  # Params # penv : PSTR [In]
-  fun FreeEnvironmentStringsA(penv : PSTR) : LibC::BOOL
-
-  # Params # penv : LibC::LPWSTR [In]
-  # Commented out because function is part of Lib C
-  #fun FreeEnvironmentStringsW(penv : LibC::LPWSTR) : LibC::BOOL
-
-  # Params # lpname : PSTR [In],lpbuffer : UInt8* [In],nsize : UInt32 [In]
-  fun GetEnvironmentVariableA(lpname : PSTR, lpbuffer : UInt8*, nsize : UInt32) : UInt32
-
-  # Params # lpname : LibC::LPWSTR [In],lpbuffer : Char* [In],nsize : UInt32 [In]
-  # Commented out because function is part of Lib C
-  #fun GetEnvironmentVariableW(lpname : LibC::LPWSTR, lpbuffer : Char*, nsize : UInt32) : UInt32
-
-  # Params # lpname : PSTR [In],lpvalue : PSTR [In]
-  fun SetEnvironmentVariableA(lpname : PSTR, lpvalue : PSTR) : LibC::BOOL
-
-  # Params # lpname : LibC::LPWSTR [In],lpvalue : LibC::LPWSTR [In]
-  # Commented out because function is part of Lib C
-  #fun SetEnvironmentVariableW(lpname : LibC::LPWSTR, lpvalue : LibC::LPWSTR) : LibC::BOOL
-
-  # Params # lpsrc : PSTR [In],lpdst : UInt8* [In],nsize : UInt32 [In]
-  fun ExpandEnvironmentStringsA(lpsrc : PSTR, lpdst : UInt8*, nsize : UInt32) : UInt32
-
-  # Params # lpsrc : LibC::LPWSTR [In],lpdst : Char* [In],nsize : UInt32 [In]
-  fun ExpandEnvironmentStringsW(lpsrc : LibC::LPWSTR, lpdst : UInt16*, nsize : UInt32) : UInt32
-
-  # Params # lppathname : PSTR [In]
-  fun SetCurrentDirectoryA(lppathname : PSTR) : LibC::BOOL
-
-  # Params # lppathname : LibC::LPWSTR [In]
-  # Commented out because function is part of Lib C
-  #fun SetCurrentDirectoryW(lppathname : LibC::LPWSTR) : LibC::BOOL
-
-  # Params # nbufferlength : UInt32 [In],lpbuffer : UInt8* [In]
-  fun GetCurrentDirectoryA(nbufferlength : UInt32, lpbuffer : UInt8*) : UInt32
-
-  # Params # nbufferlength : UInt32 [In],lpbuffer : Char* [In]
-  # Commented out because function is part of Lib C
-  #fun GetCurrentDirectoryW(nbufferlength : UInt32, lpbuffer : Char*) : UInt32
-
-  # Params # exename : PSTR [In]
-  fun NeedCurrentDirectoryForExePathA(exename : PSTR) : LibC::BOOL
-
-  # Params # exename : LibC::LPWSTR [In]
-  fun NeedCurrentDirectoryForExePathW(exename : LibC::LPWSTR) : LibC::BOOL
-
-  # Params # lpenvironment : Void** [In],htoken : LibC::HANDLE [In],binherit : LibC::BOOL [In]
-  fun CreateEnvironmentBlock(lpenvironment : Void**, htoken : LibC::HANDLE, binherit : LibC::BOOL) : LibC::BOOL
-
-  # Params # lpenvironment : Void* [In]
-  fun DestroyEnvironmentBlock(lpenvironment : Void*) : LibC::BOOL
-
-  # Params # htoken : LibC::HANDLE [In],lpsrc : PSTR [In],lpdest : UInt8* [In],dwsize : UInt32 [In]
-  fun ExpandEnvironmentStringsForUserA(htoken : LibC::HANDLE, lpsrc : PSTR, lpdest : UInt8*, dwsize : UInt32) : LibC::BOOL
-
-  # Params # htoken : LibC::HANDLE [In],lpsrc : LibC::LPWSTR [In],lpdest : Char* [In],dwsize : UInt32 [In]
-  fun ExpandEnvironmentStringsForUserW(htoken : LibC::HANDLE, lpsrc : LibC::LPWSTR, lpdest : UInt16*, dwsize : UInt32) : LibC::BOOL
-
-  # Params # flenclavetype : UInt32 [In]
-  fun IsEnclaveTypeSupported(flenclavetype : UInt32) : LibC::BOOL
-
-  # Params # hprocess : LibC::HANDLE [In],lpaddress : Void* [In],dwsize : LibC::UINT_PTR [In],dwinitialcommitment : LibC::UINT_PTR [In],flenclavetype : UInt32 [In],lpenclaveinformation : Void* [In],dwinfolength : UInt32 [In],lpenclaveerror : UInt32* [In]
-  fun CreateEnclave(hprocess : LibC::HANDLE, lpaddress : Void*, dwsize : LibC::UINT_PTR, dwinitialcommitment : LibC::UINT_PTR, flenclavetype : UInt32, lpenclaveinformation : Void*, dwinfolength : UInt32, lpenclaveerror : UInt32*) : Void*
-
-  # Params # hprocess : LibC::HANDLE [In],lpaddress : Void* [In],lpbuffer : Void* [In],nsize : LibC::UINT_PTR [In],flprotect : UInt32 [In],lppageinformation : Void* [In],dwinfolength : UInt32 [In],lpnumberofbyteswritten : LibC::UINT_PTR* [In],lpenclaveerror : UInt32* [In]
-  fun LoadEnclaveData(hprocess : LibC::HANDLE, lpaddress : Void*, lpbuffer : Void*, nsize : LibC::UINT_PTR, flprotect : UInt32, lppageinformation : Void*, dwinfolength : UInt32, lpnumberofbyteswritten : LibC::UINT_PTR*, lpenclaveerror : UInt32*) : LibC::BOOL
-
-  # Params # hprocess : LibC::HANDLE [In],lpaddress : Void* [In],lpenclaveinformation : Void* [In],dwinfolength : UInt32 [In],lpenclaveerror : UInt32* [In]
-  fun InitializeEnclave(hprocess : LibC::HANDLE, lpaddress : Void*, lpenclaveinformation : Void*, dwinfolength : UInt32, lpenclaveerror : UInt32*) : LibC::BOOL
-
-  # Params # lpenclaveaddress : Void* [In],lpimagename : PSTR [In]
-  fun LoadEnclaveImageA(lpenclaveaddress : Void*, lpimagename : PSTR) : LibC::BOOL
-
-  # Params # lpenclaveaddress : Void* [In],lpimagename : LibC::LPWSTR [In]
-  fun LoadEnclaveImageW(lpenclaveaddress : Void*, lpimagename : LibC::LPWSTR) : LibC::BOOL
-
-  # Params # lproutine : LibC::IntPtrT [In],lpparameter : Void* [In],fwaitforthread : LibC::BOOL [In],lpreturnvalue : Void** [In]
-  fun CallEnclave(lproutine : LibC::IntPtrT, lpparameter : Void*, fwaitforthread : LibC::BOOL, lpreturnvalue : Void**) : LibC::BOOL
-
-  # Params # lpaddress : Void* [In],fwait : LibC::BOOL [In]
-  fun TerminateEnclave(lpaddress : Void*, fwait : LibC::BOOL) : LibC::BOOL
-
-  # Params # lpaddress : Void* [In]
-  fun DeleteEnclave(lpaddress : Void*) : LibC::BOOL
-
-  # Params # enclavedata : UInt8* [In],report : Void* [In],buffersize : UInt32 [In],outputsize : UInt32* [In]
-  fun EnclaveGetAttestationReport(enclavedata : UInt8*, report : Void*, buffersize : UInt32, outputsize : UInt32*) : HRESULT
-
-  # Params # enclavetype : UInt32 [In],report : Void* [In],reportsize : UInt32 [In]
-  fun EnclaveVerifyAttestationReport(enclavetype : UInt32, report : Void*, reportsize : UInt32) : HRESULT
-
-  # Params # datatoencrypt : Void* [In],datatoencryptsize : UInt32 [In],identitypolicy : ENCLAVE_SEALING_IDENTITY_POLICY [In],runtimepolicy : UInt32 [In],protectedblob : Void* [In],buffersize : UInt32 [In],protectedblobsize : UInt32* [In]
-  fun EnclaveSealData(datatoencrypt : Void*, datatoencryptsize : UInt32, identitypolicy : ENCLAVE_SEALING_IDENTITY_POLICY, runtimepolicy : UInt32, protectedblob : Void*, buffersize : UInt32, protectedblobsize : UInt32*) : HRESULT
-
-  # Params # protectedblob : Void* [In],protectedblobsize : UInt32 [In],decrypteddata : Void* [In],buffersize : UInt32 [In],decrypteddatasize : UInt32* [In],sealingidentity : ENCLAVE_IDENTITY* [In],unsealingflags : UInt32* [In]
-  fun EnclaveUnsealData(protectedblob : Void*, protectedblobsize : UInt32, decrypteddata : Void*, buffersize : UInt32, decrypteddatasize : UInt32*, sealingidentity : ENCLAVE_IDENTITY*, unsealingflags : UInt32*) : HRESULT
-
-  # Params # informationsize : UInt32 [In],enclaveinformation : ENCLAVE_INFORMATION* [In]
-  fun EnclaveGetEnclaveInformation(informationsize : UInt32, enclaveinformation : ENCLAVE_INFORMATION*) : HRESULT
 end

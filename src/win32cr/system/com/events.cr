@@ -1,1052 +1,1049 @@
-require "../../system/com.cr"
-require "../../foundation.cr"
+require "./../com.cr"
+require "./../../foundation.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-lib LibWin32
+module Win32cr::System::Com::Events
+
   CLSID_CEventSystem = LibC::GUID.new(0x4e14fba2_u32, 0x2e22_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
+
   CLSID_CEventPublisher = LibC::GUID.new(0xab944620_u32, 0x79c6_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
+
   CLSID_CEventClass = LibC::GUID.new(0xcdbec9c0_u32, 0x7a68_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
+
   CLSID_CEventSubscription = LibC::GUID.new(0x7542e960_u32, 0x79c7_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
+
   CLSID_EventObjectChange = LibC::GUID.new(0xd0565000_u32, 0x9df4_u16, 0x11d1_u16, StaticArray[0xa2_u8, 0x81_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xca_u8, 0xa_u8, 0xa7_u8])
+
   CLSID_EventObjectChange2 = LibC::GUID.new(0xbb07bacd_u32, 0xcd56_u16, 0x4e63_u16, StaticArray[0xa8_u8, 0xff_u8, 0xcb_u8, 0xf0_u8, 0x35_u8, 0x5f_u8, 0xb9_u8, 0xf4_u8])
 
-
-  enum EOC_ChangeType : Int32
-    EOC_NewObject = 0
-    EOC_ModifiedObject = 1
-    EOC_DeletedObject = 2
+  enum EOC_ChangeType
+    EOC_NewObject = 0_i32
+    EOC_ModifiedObject = 1_i32
+    EOC_DeletedObject = 2_i32
   end
 
-  struct COMEVENTSYSCHANGEINFO
-    cb_size : UInt32
-    change_type : EOC_ChangeType
-    object_id : UInt8*
-    partition_id : UInt8*
-    application_id : UInt8*
-    reserved : Guid[10]*
+  @[Extern]
+  record COMEVENTSYSCHANGEINFO,
+    cbSize : UInt32,
+    changeType : Win32cr::System::Com::Events::EOC_ChangeType,
+    objectId : Win32cr::Foundation::BSTR,
+    partitionId : Win32cr::Foundation::BSTR,
+    applicationId : Win32cr::Foundation::BSTR,
+    reserved : LibC::GUID[10]
+
+  @[Extern]
+  record IEventSystemVtbl,
+    query_interface : Proc(IEventSystem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEventSystem*, UInt32),
+    release : Proc(IEventSystem*, UInt32),
+    get_type_info_count : Proc(IEventSystem*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IEventSystem*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IEventSystem*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IEventSystem*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    query : Proc(IEventSystem*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Void**, Win32cr::Foundation::HRESULT),
+    store : Proc(IEventSystem*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
+    remove : Proc(IEventSystem*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
+    get_EventObjectChangeEventClassID : Proc(IEventSystem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    query_s : Proc(IEventSystem*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    remove_s : Proc(IEventSystem*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("4e14fb9f-2e22-11d1-9964-00c04fbbb345")]
+  record IEventSystem, lpVtbl : IEventSystemVtbl* do
+    GUID = LibC::GUID.new(0x4e14fb9f_u32, 0x2e22_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
+    def query_interface(this : IEventSystem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEventSystem*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEventSystem*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IEventSystem*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IEventSystem*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IEventSystem*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IEventSystem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def query(this : IEventSystem*, progID : Win32cr::Foundation::BSTR, queryCriteria : Win32cr::Foundation::BSTR, errorIndex : Int32*, ppInterface : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query.call(this, progID, queryCriteria, errorIndex, ppInterface)
+    end
+    def store(this : IEventSystem*, prog_id : Win32cr::Foundation::BSTR, pInterface : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.store.call(this, prog_id, pInterface)
+    end
+    def remove(this : IEventSystem*, progID : Win32cr::Foundation::BSTR, queryCriteria : Win32cr::Foundation::BSTR, errorIndex : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, progID, queryCriteria, errorIndex)
+    end
+    def get_EventObjectChangeEventClassID(this : IEventSystem*, pbstrEventClassID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventObjectChangeEventClassID.call(this, pbstrEventClassID)
+    end
+    def query_s(this : IEventSystem*, progID : Win32cr::Foundation::BSTR, queryCriteria : Win32cr::Foundation::BSTR, ppInterface : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_s.call(this, progID, queryCriteria, ppInterface)
+    end
+    def remove_s(this : IEventSystem*, progID : Win32cr::Foundation::BSTR, queryCriteria : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_s.call(this, progID, queryCriteria)
+    end
+
   end
 
+  @[Extern]
+  record IEventPublisherVtbl,
+    query_interface : Proc(IEventPublisher*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEventPublisher*, UInt32),
+    release : Proc(IEventPublisher*, UInt32),
+    get_type_info_count : Proc(IEventPublisher*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IEventPublisher*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IEventPublisher*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IEventPublisher*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_PublisherID : Proc(IEventPublisher*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_PublisherID : Proc(IEventPublisher*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_PublisherName : Proc(IEventPublisher*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_PublisherName : Proc(IEventPublisher*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_PublisherType : Proc(IEventPublisher*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_PublisherType : Proc(IEventPublisher*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_OwnerSID : Proc(IEventPublisher*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_OwnerSID : Proc(IEventPublisher*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Description : Proc(IEventPublisher*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Description : Proc(IEventPublisher*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_default_property : Proc(IEventPublisher*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_default_property : Proc(IEventPublisher*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    remove_default_property : Proc(IEventPublisher*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_default_property_collection : Proc(IEventPublisher*, Void**, Win32cr::Foundation::HRESULT)
 
-  struct IEventSystemVTbl
-    query_interface : Proc(IEventSystem*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEventSystem*, UInt32)
-    release : Proc(IEventSystem*, UInt32)
-    get_type_info_count : Proc(IEventSystem*, UInt32*, HRESULT)
-    get_type_info : Proc(IEventSystem*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IEventSystem*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IEventSystem*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    query : Proc(IEventSystem*, UInt8*, UInt8*, Int32*, IUnknown*, HRESULT)
-    store : Proc(IEventSystem*, UInt8*, IUnknown, HRESULT)
-    remove : Proc(IEventSystem*, UInt8*, UInt8*, Int32*, HRESULT)
-    get_event_object_change_event_class_id : Proc(IEventSystem*, UInt8**, HRESULT)
-    query_s : Proc(IEventSystem*, UInt8*, UInt8*, IUnknown*, HRESULT)
-    remove_s : Proc(IEventSystem*, UInt8*, UInt8*, HRESULT)
+
+  @[Extern]
+  #@[Com("e341516b-2e32-11d1-9964-00c04fbbb345")]
+  record IEventPublisher, lpVtbl : IEventPublisherVtbl* do
+    GUID = LibC::GUID.new(0xe341516b_u32, 0x2e32_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
+    def query_interface(this : IEventPublisher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEventPublisher*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEventPublisher*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IEventPublisher*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IEventPublisher*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IEventPublisher*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IEventPublisher*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_PublisherID(this : IEventPublisher*, pbstrPublisherID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PublisherID.call(this, pbstrPublisherID)
+    end
+    def put_PublisherID(this : IEventPublisher*, bstrPublisherID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_PublisherID.call(this, bstrPublisherID)
+    end
+    def get_PublisherName(this : IEventPublisher*, pbstrPublisherName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PublisherName.call(this, pbstrPublisherName)
+    end
+    def put_PublisherName(this : IEventPublisher*, bstrPublisherName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_PublisherName.call(this, bstrPublisherName)
+    end
+    def get_PublisherType(this : IEventPublisher*, pbstrPublisherType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PublisherType.call(this, pbstrPublisherType)
+    end
+    def put_PublisherType(this : IEventPublisher*, bstrPublisherType : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_PublisherType.call(this, bstrPublisherType)
+    end
+    def get_OwnerSID(this : IEventPublisher*, pbstrOwnerSID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_OwnerSID.call(this, pbstrOwnerSID)
+    end
+    def put_OwnerSID(this : IEventPublisher*, bstrOwnerSID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_OwnerSID.call(this, bstrOwnerSID)
+    end
+    def get_Description(this : IEventPublisher*, pbstrDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Description.call(this, pbstrDescription)
+    end
+    def put_Description(this : IEventPublisher*, bstrDescription : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Description.call(this, bstrDescription)
+    end
+    def get_default_property(this : IEventPublisher*, bstrPropertyName : Win32cr::Foundation::BSTR, propertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_default_property.call(this, bstrPropertyName, propertyValue)
+    end
+    def put_default_property(this : IEventPublisher*, bstrPropertyName : Win32cr::Foundation::BSTR, propertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_default_property.call(this, bstrPropertyName, propertyValue)
+    end
+    def remove_default_property(this : IEventPublisher*, bstrPropertyName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_default_property.call(this, bstrPropertyName)
+    end
+    def get_default_property_collection(this : IEventPublisher*, collection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_default_property_collection.call(this, collection)
+    end
+
   end
 
-  IEventSystem_GUID = "4e14fb9f-2e22-11d1-9964-00c04fbbb345"
-  IID_IEventSystem = LibC::GUID.new(0x4e14fb9f_u32, 0x2e22_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
-  struct IEventSystem
-    lpVtbl : IEventSystemVTbl*
+  @[Extern]
+  record IEventClassVtbl,
+    query_interface : Proc(IEventClass*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEventClass*, UInt32),
+    release : Proc(IEventClass*, UInt32),
+    get_type_info_count : Proc(IEventClass*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IEventClass*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IEventClass*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IEventClass*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_EventClassID : Proc(IEventClass*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_EventClassID : Proc(IEventClass*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_EventClassName : Proc(IEventClass*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_EventClassName : Proc(IEventClass*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_OwnerSID : Proc(IEventClass*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_OwnerSID : Proc(IEventClass*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_FiringInterfaceID : Proc(IEventClass*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FiringInterfaceID : Proc(IEventClass*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Description : Proc(IEventClass*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Description : Proc(IEventClass*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_CustomConfigCLSID : Proc(IEventClass*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_CustomConfigCLSID : Proc(IEventClass*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_TypeLib : Proc(IEventClass*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_TypeLib : Proc(IEventClass*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("fb2b72a0-7a68-11d1-88f9-0080c7d771bf")]
+  record IEventClass, lpVtbl : IEventClassVtbl* do
+    GUID = LibC::GUID.new(0xfb2b72a0_u32, 0x7a68_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
+    def query_interface(this : IEventClass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEventClass*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEventClass*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IEventClass*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IEventClass*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IEventClass*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IEventClass*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_EventClassID(this : IEventClass*, pbstrEventClassID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventClassID.call(this, pbstrEventClassID)
+    end
+    def put_EventClassID(this : IEventClass*, bstrEventClassID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EventClassID.call(this, bstrEventClassID)
+    end
+    def get_EventClassName(this : IEventClass*, pbstrEventClassName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventClassName.call(this, pbstrEventClassName)
+    end
+    def put_EventClassName(this : IEventClass*, bstrEventClassName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EventClassName.call(this, bstrEventClassName)
+    end
+    def get_OwnerSID(this : IEventClass*, pbstrOwnerSID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_OwnerSID.call(this, pbstrOwnerSID)
+    end
+    def put_OwnerSID(this : IEventClass*, bstrOwnerSID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_OwnerSID.call(this, bstrOwnerSID)
+    end
+    def get_FiringInterfaceID(this : IEventClass*, pbstrFiringInterfaceID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FiringInterfaceID.call(this, pbstrFiringInterfaceID)
+    end
+    def put_FiringInterfaceID(this : IEventClass*, bstrFiringInterfaceID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FiringInterfaceID.call(this, bstrFiringInterfaceID)
+    end
+    def get_Description(this : IEventClass*, pbstrDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Description.call(this, pbstrDescription)
+    end
+    def put_Description(this : IEventClass*, bstrDescription : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Description.call(this, bstrDescription)
+    end
+    def get_CustomConfigCLSID(this : IEventClass*, pbstrCustomConfigCLSID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CustomConfigCLSID.call(this, pbstrCustomConfigCLSID)
+    end
+    def put_CustomConfigCLSID(this : IEventClass*, bstrCustomConfigCLSID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_CustomConfigCLSID.call(this, bstrCustomConfigCLSID)
+    end
+    def get_TypeLib(this : IEventClass*, pbstrTypeLib : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TypeLib.call(this, pbstrTypeLib)
+    end
+    def put_TypeLib(this : IEventClass*, bstrTypeLib : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_TypeLib.call(this, bstrTypeLib)
+    end
+
   end
 
-  struct IEventPublisherVTbl
-    query_interface : Proc(IEventPublisher*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEventPublisher*, UInt32)
-    release : Proc(IEventPublisher*, UInt32)
-    get_type_info_count : Proc(IEventPublisher*, UInt32*, HRESULT)
-    get_type_info : Proc(IEventPublisher*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IEventPublisher*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IEventPublisher*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_publisher_id : Proc(IEventPublisher*, UInt8**, HRESULT)
-    put_publisher_id : Proc(IEventPublisher*, UInt8*, HRESULT)
-    get_publisher_name : Proc(IEventPublisher*, UInt8**, HRESULT)
-    put_publisher_name : Proc(IEventPublisher*, UInt8*, HRESULT)
-    get_publisher_type : Proc(IEventPublisher*, UInt8**, HRESULT)
-    put_publisher_type : Proc(IEventPublisher*, UInt8*, HRESULT)
-    get_owner_sid : Proc(IEventPublisher*, UInt8**, HRESULT)
-    put_owner_sid : Proc(IEventPublisher*, UInt8*, HRESULT)
-    get_description : Proc(IEventPublisher*, UInt8**, HRESULT)
-    put_description : Proc(IEventPublisher*, UInt8*, HRESULT)
-    get_default_property : Proc(IEventPublisher*, UInt8*, VARIANT*, HRESULT)
-    put_default_property : Proc(IEventPublisher*, UInt8*, VARIANT*, HRESULT)
-    remove_default_property : Proc(IEventPublisher*, UInt8*, HRESULT)
-    get_default_property_collection : Proc(IEventPublisher*, IEventObjectCollection*, HRESULT)
+  @[Extern]
+  record IEventClass2Vtbl,
+    query_interface : Proc(IEventClass2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEventClass2*, UInt32),
+    release : Proc(IEventClass2*, UInt32),
+    get_type_info_count : Proc(IEventClass2*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IEventClass2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IEventClass2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IEventClass2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_EventClassID : Proc(IEventClass2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_EventClassID : Proc(IEventClass2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_EventClassName : Proc(IEventClass2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_EventClassName : Proc(IEventClass2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_OwnerSID : Proc(IEventClass2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_OwnerSID : Proc(IEventClass2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_FiringInterfaceID : Proc(IEventClass2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_FiringInterfaceID : Proc(IEventClass2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Description : Proc(IEventClass2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Description : Proc(IEventClass2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_CustomConfigCLSID : Proc(IEventClass2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_CustomConfigCLSID : Proc(IEventClass2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_TypeLib : Proc(IEventClass2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_TypeLib : Proc(IEventClass2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_PublisherID : Proc(IEventClass2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_PublisherID : Proc(IEventClass2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_MultiInterfacePublisherFilterCLSID : Proc(IEventClass2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_MultiInterfacePublisherFilterCLSID : Proc(IEventClass2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_AllowInprocActivation : Proc(IEventClass2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    put_AllowInprocActivation : Proc(IEventClass2*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_FireInParallel : Proc(IEventClass2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    put_FireInParallel : Proc(IEventClass2*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("fb2b72a1-7a68-11d1-88f9-0080c7d771bf")]
+  record IEventClass2, lpVtbl : IEventClass2Vtbl* do
+    GUID = LibC::GUID.new(0xfb2b72a1_u32, 0x7a68_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
+    def query_interface(this : IEventClass2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEventClass2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEventClass2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IEventClass2*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IEventClass2*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IEventClass2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IEventClass2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_EventClassID(this : IEventClass2*, pbstrEventClassID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventClassID.call(this, pbstrEventClassID)
+    end
+    def put_EventClassID(this : IEventClass2*, bstrEventClassID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EventClassID.call(this, bstrEventClassID)
+    end
+    def get_EventClassName(this : IEventClass2*, pbstrEventClassName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventClassName.call(this, pbstrEventClassName)
+    end
+    def put_EventClassName(this : IEventClass2*, bstrEventClassName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EventClassName.call(this, bstrEventClassName)
+    end
+    def get_OwnerSID(this : IEventClass2*, pbstrOwnerSID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_OwnerSID.call(this, pbstrOwnerSID)
+    end
+    def put_OwnerSID(this : IEventClass2*, bstrOwnerSID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_OwnerSID.call(this, bstrOwnerSID)
+    end
+    def get_FiringInterfaceID(this : IEventClass2*, pbstrFiringInterfaceID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FiringInterfaceID.call(this, pbstrFiringInterfaceID)
+    end
+    def put_FiringInterfaceID(this : IEventClass2*, bstrFiringInterfaceID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FiringInterfaceID.call(this, bstrFiringInterfaceID)
+    end
+    def get_Description(this : IEventClass2*, pbstrDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Description.call(this, pbstrDescription)
+    end
+    def put_Description(this : IEventClass2*, bstrDescription : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Description.call(this, bstrDescription)
+    end
+    def get_CustomConfigCLSID(this : IEventClass2*, pbstrCustomConfigCLSID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CustomConfigCLSID.call(this, pbstrCustomConfigCLSID)
+    end
+    def put_CustomConfigCLSID(this : IEventClass2*, bstrCustomConfigCLSID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_CustomConfigCLSID.call(this, bstrCustomConfigCLSID)
+    end
+    def get_TypeLib(this : IEventClass2*, pbstrTypeLib : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_TypeLib.call(this, pbstrTypeLib)
+    end
+    def put_TypeLib(this : IEventClass2*, bstrTypeLib : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_TypeLib.call(this, bstrTypeLib)
+    end
+    def get_PublisherID(this : IEventClass2*, pbstrPublisherID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PublisherID.call(this, pbstrPublisherID)
+    end
+    def put_PublisherID(this : IEventClass2*, bstrPublisherID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_PublisherID.call(this, bstrPublisherID)
+    end
+    def get_MultiInterfacePublisherFilterCLSID(this : IEventClass2*, pbstrPubFilCLSID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MultiInterfacePublisherFilterCLSID.call(this, pbstrPubFilCLSID)
+    end
+    def put_MultiInterfacePublisherFilterCLSID(this : IEventClass2*, bstrPubFilCLSID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MultiInterfacePublisherFilterCLSID.call(this, bstrPubFilCLSID)
+    end
+    def get_AllowInprocActivation(this : IEventClass2*, pfAllowInprocActivation : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AllowInprocActivation.call(this, pfAllowInprocActivation)
+    end
+    def put_AllowInprocActivation(this : IEventClass2*, fAllowInprocActivation : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_AllowInprocActivation.call(this, fAllowInprocActivation)
+    end
+    def get_FireInParallel(this : IEventClass2*, pfFireInParallel : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FireInParallel.call(this, pfFireInParallel)
+    end
+    def put_FireInParallel(this : IEventClass2*, fFireInParallel : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FireInParallel.call(this, fFireInParallel)
+    end
+
   end
 
-  IEventPublisher_GUID = "e341516b-2e32-11d1-9964-00c04fbbb345"
-  IID_IEventPublisher = LibC::GUID.new(0xe341516b_u32, 0x2e32_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
-  struct IEventPublisher
-    lpVtbl : IEventPublisherVTbl*
+  @[Extern]
+  record IEventSubscriptionVtbl,
+    query_interface : Proc(IEventSubscription*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEventSubscription*, UInt32),
+    release : Proc(IEventSubscription*, UInt32),
+    get_type_info_count : Proc(IEventSubscription*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IEventSubscription*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IEventSubscription*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IEventSubscription*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_SubscriptionID : Proc(IEventSubscription*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_SubscriptionID : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_SubscriptionName : Proc(IEventSubscription*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_SubscriptionName : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_PublisherID : Proc(IEventSubscription*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_PublisherID : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_EventClassID : Proc(IEventSubscription*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_EventClassID : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_MethodName : Proc(IEventSubscription*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_MethodName : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_SubscriberCLSID : Proc(IEventSubscription*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_SubscriberCLSID : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_SubscriberInterface : Proc(IEventSubscription*, Void**, Win32cr::Foundation::HRESULT),
+    put_SubscriberInterface : Proc(IEventSubscription*, Void*, Win32cr::Foundation::HRESULT),
+    get_PerUser : Proc(IEventSubscription*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    put_PerUser : Proc(IEventSubscription*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_OwnerSID : Proc(IEventSubscription*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_OwnerSID : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IEventSubscription*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IEventSubscription*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_Description : Proc(IEventSubscription*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Description : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_MachineName : Proc(IEventSubscription*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_MachineName : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_publisher_property : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_publisher_property : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    remove_publisher_property : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_publisher_property_collection : Proc(IEventSubscription*, Void**, Win32cr::Foundation::HRESULT),
+    get_subscriber_property : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_subscriber_property : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    remove_subscriber_property : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_subscriber_property_collection : Proc(IEventSubscription*, Void**, Win32cr::Foundation::HRESULT),
+    get_InterfaceID : Proc(IEventSubscription*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_InterfaceID : Proc(IEventSubscription*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("4a6b0e15-2e38-11d1-9965-00c04fbbb345")]
+  record IEventSubscription, lpVtbl : IEventSubscriptionVtbl* do
+    GUID = LibC::GUID.new(0x4a6b0e15_u32, 0x2e38_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x65_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
+    def query_interface(this : IEventSubscription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEventSubscription*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEventSubscription*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IEventSubscription*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IEventSubscription*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IEventSubscription*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IEventSubscription*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_SubscriptionID(this : IEventSubscription*, pbstrSubscriptionID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SubscriptionID.call(this, pbstrSubscriptionID)
+    end
+    def put_SubscriptionID(this : IEventSubscription*, bstrSubscriptionID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SubscriptionID.call(this, bstrSubscriptionID)
+    end
+    def get_SubscriptionName(this : IEventSubscription*, pbstrSubscriptionName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SubscriptionName.call(this, pbstrSubscriptionName)
+    end
+    def put_SubscriptionName(this : IEventSubscription*, bstrSubscriptionName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SubscriptionName.call(this, bstrSubscriptionName)
+    end
+    def get_PublisherID(this : IEventSubscription*, pbstrPublisherID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PublisherID.call(this, pbstrPublisherID)
+    end
+    def put_PublisherID(this : IEventSubscription*, bstrPublisherID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_PublisherID.call(this, bstrPublisherID)
+    end
+    def get_EventClassID(this : IEventSubscription*, pbstrEventClassID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_EventClassID.call(this, pbstrEventClassID)
+    end
+    def put_EventClassID(this : IEventSubscription*, bstrEventClassID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_EventClassID.call(this, bstrEventClassID)
+    end
+    def get_MethodName(this : IEventSubscription*, pbstrMethodName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MethodName.call(this, pbstrMethodName)
+    end
+    def put_MethodName(this : IEventSubscription*, bstrMethodName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MethodName.call(this, bstrMethodName)
+    end
+    def get_SubscriberCLSID(this : IEventSubscription*, pbstrSubscriberCLSID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SubscriberCLSID.call(this, pbstrSubscriberCLSID)
+    end
+    def put_SubscriberCLSID(this : IEventSubscription*, bstrSubscriberCLSID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SubscriberCLSID.call(this, bstrSubscriberCLSID)
+    end
+    def get_SubscriberInterface(this : IEventSubscription*, ppSubscriberInterface : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_SubscriberInterface.call(this, ppSubscriberInterface)
+    end
+    def put_SubscriberInterface(this : IEventSubscription*, pSubscriberInterface : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_SubscriberInterface.call(this, pSubscriberInterface)
+    end
+    def get_PerUser(this : IEventSubscription*, pfPerUser : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PerUser.call(this, pfPerUser)
+    end
+    def put_PerUser(this : IEventSubscription*, fPerUser : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_PerUser.call(this, fPerUser)
+    end
+    def get_OwnerSID(this : IEventSubscription*, pbstrOwnerSID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_OwnerSID.call(this, pbstrOwnerSID)
+    end
+    def put_OwnerSID(this : IEventSubscription*, bstrOwnerSID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_OwnerSID.call(this, bstrOwnerSID)
+    end
+    def get_Enabled(this : IEventSubscription*, pfEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Enabled.call(this, pfEnabled)
+    end
+    def put_Enabled(this : IEventSubscription*, fEnabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Enabled.call(this, fEnabled)
+    end
+    def get_Description(this : IEventSubscription*, pbstrDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Description.call(this, pbstrDescription)
+    end
+    def put_Description(this : IEventSubscription*, bstrDescription : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Description.call(this, bstrDescription)
+    end
+    def get_MachineName(this : IEventSubscription*, pbstrMachineName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MachineName.call(this, pbstrMachineName)
+    end
+    def put_MachineName(this : IEventSubscription*, bstrMachineName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_MachineName.call(this, bstrMachineName)
+    end
+    def get_publisher_property(this : IEventSubscription*, bstrPropertyName : Win32cr::Foundation::BSTR, propertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_publisher_property.call(this, bstrPropertyName, propertyValue)
+    end
+    def put_publisher_property(this : IEventSubscription*, bstrPropertyName : Win32cr::Foundation::BSTR, propertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_publisher_property.call(this, bstrPropertyName, propertyValue)
+    end
+    def remove_publisher_property(this : IEventSubscription*, bstrPropertyName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_publisher_property.call(this, bstrPropertyName)
+    end
+    def get_publisher_property_collection(this : IEventSubscription*, collection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_publisher_property_collection.call(this, collection)
+    end
+    def get_subscriber_property(this : IEventSubscription*, bstrPropertyName : Win32cr::Foundation::BSTR, propertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_subscriber_property.call(this, bstrPropertyName, propertyValue)
+    end
+    def put_subscriber_property(this : IEventSubscription*, bstrPropertyName : Win32cr::Foundation::BSTR, propertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_subscriber_property.call(this, bstrPropertyName, propertyValue)
+    end
+    def remove_subscriber_property(this : IEventSubscription*, bstrPropertyName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_subscriber_property.call(this, bstrPropertyName)
+    end
+    def get_subscriber_property_collection(this : IEventSubscription*, collection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_subscriber_property_collection.call(this, collection)
+    end
+    def get_InterfaceID(this : IEventSubscription*, pbstrInterfaceID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_InterfaceID.call(this, pbstrInterfaceID)
+    end
+    def put_InterfaceID(this : IEventSubscription*, bstrInterfaceID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_InterfaceID.call(this, bstrInterfaceID)
+    end
+
   end
 
-  struct IEventClassVTbl
-    query_interface : Proc(IEventClass*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEventClass*, UInt32)
-    release : Proc(IEventClass*, UInt32)
-    get_type_info_count : Proc(IEventClass*, UInt32*, HRESULT)
-    get_type_info : Proc(IEventClass*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IEventClass*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IEventClass*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_event_class_id : Proc(IEventClass*, UInt8**, HRESULT)
-    put_event_class_id : Proc(IEventClass*, UInt8*, HRESULT)
-    get_event_class_name : Proc(IEventClass*, UInt8**, HRESULT)
-    put_event_class_name : Proc(IEventClass*, UInt8*, HRESULT)
-    get_owner_sid : Proc(IEventClass*, UInt8**, HRESULT)
-    put_owner_sid : Proc(IEventClass*, UInt8*, HRESULT)
-    get_firing_interface_id : Proc(IEventClass*, UInt8**, HRESULT)
-    put_firing_interface_id : Proc(IEventClass*, UInt8*, HRESULT)
-    get_description : Proc(IEventClass*, UInt8**, HRESULT)
-    put_description : Proc(IEventClass*, UInt8*, HRESULT)
-    get_custom_config_clsid : Proc(IEventClass*, UInt8**, HRESULT)
-    put_custom_config_clsid : Proc(IEventClass*, UInt8*, HRESULT)
-    get_type_lib : Proc(IEventClass*, UInt8**, HRESULT)
-    put_type_lib : Proc(IEventClass*, UInt8*, HRESULT)
+  @[Extern]
+  record IFiringControlVtbl,
+    query_interface : Proc(IFiringControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IFiringControl*, UInt32),
+    release : Proc(IFiringControl*, UInt32),
+    get_type_info_count : Proc(IFiringControl*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IFiringControl*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IFiringControl*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IFiringControl*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    fire_subscription : Proc(IFiringControl*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("e0498c93-4efe-11d1-9971-00c04fbbb345")]
+  record IFiringControl, lpVtbl : IFiringControlVtbl* do
+    GUID = LibC::GUID.new(0xe0498c93_u32, 0x4efe_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x71_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
+    def query_interface(this : IFiringControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IFiringControl*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IFiringControl*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IFiringControl*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IFiringControl*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IFiringControl*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IFiringControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def fire_subscription(this : IFiringControl*, subscription : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.fire_subscription.call(this, subscription)
+    end
+
   end
 
-  IEventClass_GUID = "fb2b72a0-7a68-11d1-88f9-0080c7d771bf"
-  IID_IEventClass = LibC::GUID.new(0xfb2b72a0_u32, 0x7a68_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
-  struct IEventClass
-    lpVtbl : IEventClassVTbl*
+  @[Extern]
+  record IPublisherFilterVtbl,
+    query_interface : Proc(IPublisherFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IPublisherFilter*, UInt32),
+    release : Proc(IPublisherFilter*, UInt32),
+    initialize__ : Proc(IPublisherFilter*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
+    prepare_to_fire : Proc(IPublisherFilter*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("465e5cc0-7b26-11d1-88fb-0080c7d771bf")]
+  record IPublisherFilter, lpVtbl : IPublisherFilterVtbl* do
+    GUID = LibC::GUID.new(0x465e5cc0_u32, 0x7b26_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xfb_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
+    def query_interface(this : IPublisherFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IPublisherFilter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IPublisherFilter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def initialize__(this : IPublisherFilter*, methodName : Win32cr::Foundation::BSTR, dispUserDefined : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, methodName, dispUserDefined)
+    end
+    def prepare_to_fire(this : IPublisherFilter*, methodName : Win32cr::Foundation::BSTR, firingControl : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.prepare_to_fire.call(this, methodName, firingControl)
+    end
+
   end
 
-  struct IEventClass2VTbl
-    query_interface : Proc(IEventClass2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEventClass2*, UInt32)
-    release : Proc(IEventClass2*, UInt32)
-    get_type_info_count : Proc(IEventClass2*, UInt32*, HRESULT)
-    get_type_info : Proc(IEventClass2*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IEventClass2*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IEventClass2*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_event_class_id : Proc(IEventClass2*, UInt8**, HRESULT)
-    put_event_class_id : Proc(IEventClass2*, UInt8*, HRESULT)
-    get_event_class_name : Proc(IEventClass2*, UInt8**, HRESULT)
-    put_event_class_name : Proc(IEventClass2*, UInt8*, HRESULT)
-    get_owner_sid : Proc(IEventClass2*, UInt8**, HRESULT)
-    put_owner_sid : Proc(IEventClass2*, UInt8*, HRESULT)
-    get_firing_interface_id : Proc(IEventClass2*, UInt8**, HRESULT)
-    put_firing_interface_id : Proc(IEventClass2*, UInt8*, HRESULT)
-    get_description : Proc(IEventClass2*, UInt8**, HRESULT)
-    put_description : Proc(IEventClass2*, UInt8*, HRESULT)
-    get_custom_config_clsid : Proc(IEventClass2*, UInt8**, HRESULT)
-    put_custom_config_clsid : Proc(IEventClass2*, UInt8*, HRESULT)
-    get_type_lib : Proc(IEventClass2*, UInt8**, HRESULT)
-    put_type_lib : Proc(IEventClass2*, UInt8*, HRESULT)
-    get_publisher_id : Proc(IEventClass2*, UInt8**, HRESULT)
-    put_publisher_id : Proc(IEventClass2*, UInt8*, HRESULT)
-    get_multi_interface_publisher_filter_clsid : Proc(IEventClass2*, UInt8**, HRESULT)
-    put_multi_interface_publisher_filter_clsid : Proc(IEventClass2*, UInt8*, HRESULT)
-    get_allow_inproc_activation : Proc(IEventClass2*, LibC::BOOL*, HRESULT)
-    put_allow_inproc_activation : Proc(IEventClass2*, LibC::BOOL, HRESULT)
-    get_fire_in_parallel : Proc(IEventClass2*, LibC::BOOL*, HRESULT)
-    put_fire_in_parallel : Proc(IEventClass2*, LibC::BOOL, HRESULT)
+  @[Extern]
+  record IMultiInterfacePublisherFilterVtbl,
+    query_interface : Proc(IMultiInterfacePublisherFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMultiInterfacePublisherFilter*, UInt32),
+    release : Proc(IMultiInterfacePublisherFilter*, UInt32),
+    initialize__ : Proc(IMultiInterfacePublisherFilter*, Void*, Win32cr::Foundation::HRESULT),
+    prepare_to_fire : Proc(IMultiInterfacePublisherFilter*, LibC::GUID*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("465e5cc1-7b26-11d1-88fb-0080c7d771bf")]
+  record IMultiInterfacePublisherFilter, lpVtbl : IMultiInterfacePublisherFilterVtbl* do
+    GUID = LibC::GUID.new(0x465e5cc1_u32, 0x7b26_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xfb_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
+    def query_interface(this : IMultiInterfacePublisherFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMultiInterfacePublisherFilter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMultiInterfacePublisherFilter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def initialize__(this : IMultiInterfacePublisherFilter*, pEIC : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize__.call(this, pEIC)
+    end
+    def prepare_to_fire(this : IMultiInterfacePublisherFilter*, iid : LibC::GUID*, methodName : Win32cr::Foundation::BSTR, firingControl : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.prepare_to_fire.call(this, iid, methodName, firingControl)
+    end
+
   end
 
-  IEventClass2_GUID = "fb2b72a1-7a68-11d1-88f9-0080c7d771bf"
-  IID_IEventClass2 = LibC::GUID.new(0xfb2b72a1_u32, 0x7a68_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
-  struct IEventClass2
-    lpVtbl : IEventClass2VTbl*
+  @[Extern]
+  record IEventObjectChangeVtbl,
+    query_interface : Proc(IEventObjectChange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEventObjectChange*, UInt32),
+    release : Proc(IEventObjectChange*, UInt32),
+    changed_subscription : Proc(IEventObjectChange*, Win32cr::System::Com::Events::EOC_ChangeType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    changed_event_class : Proc(IEventObjectChange*, Win32cr::System::Com::Events::EOC_ChangeType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    changed_publisher : Proc(IEventObjectChange*, Win32cr::System::Com::Events::EOC_ChangeType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f4a07d70-2e25-11d1-9964-00c04fbbb345")]
+  record IEventObjectChange, lpVtbl : IEventObjectChangeVtbl* do
+    GUID = LibC::GUID.new(0xf4a07d70_u32, 0x2e25_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
+    def query_interface(this : IEventObjectChange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEventObjectChange*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEventObjectChange*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def changed_subscription(this : IEventObjectChange*, changeType : Win32cr::System::Com::Events::EOC_ChangeType, bstrSubscriptionID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.changed_subscription.call(this, changeType, bstrSubscriptionID)
+    end
+    def changed_event_class(this : IEventObjectChange*, changeType : Win32cr::System::Com::Events::EOC_ChangeType, bstrEventClassID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.changed_event_class.call(this, changeType, bstrEventClassID)
+    end
+    def changed_publisher(this : IEventObjectChange*, changeType : Win32cr::System::Com::Events::EOC_ChangeType, bstrPublisherID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.changed_publisher.call(this, changeType, bstrPublisherID)
+    end
+
   end
 
-  struct IEventSubscriptionVTbl
-    query_interface : Proc(IEventSubscription*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEventSubscription*, UInt32)
-    release : Proc(IEventSubscription*, UInt32)
-    get_type_info_count : Proc(IEventSubscription*, UInt32*, HRESULT)
-    get_type_info : Proc(IEventSubscription*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IEventSubscription*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IEventSubscription*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_subscription_id : Proc(IEventSubscription*, UInt8**, HRESULT)
-    put_subscription_id : Proc(IEventSubscription*, UInt8*, HRESULT)
-    get_subscription_name : Proc(IEventSubscription*, UInt8**, HRESULT)
-    put_subscription_name : Proc(IEventSubscription*, UInt8*, HRESULT)
-    get_publisher_id : Proc(IEventSubscription*, UInt8**, HRESULT)
-    put_publisher_id : Proc(IEventSubscription*, UInt8*, HRESULT)
-    get_event_class_id : Proc(IEventSubscription*, UInt8**, HRESULT)
-    put_event_class_id : Proc(IEventSubscription*, UInt8*, HRESULT)
-    get_method_name : Proc(IEventSubscription*, UInt8**, HRESULT)
-    put_method_name : Proc(IEventSubscription*, UInt8*, HRESULT)
-    get_subscriber_clsid : Proc(IEventSubscription*, UInt8**, HRESULT)
-    put_subscriber_clsid : Proc(IEventSubscription*, UInt8*, HRESULT)
-    get_subscriber_interface : Proc(IEventSubscription*, IUnknown*, HRESULT)
-    put_subscriber_interface : Proc(IEventSubscription*, IUnknown, HRESULT)
-    get_per_user : Proc(IEventSubscription*, LibC::BOOL*, HRESULT)
-    put_per_user : Proc(IEventSubscription*, LibC::BOOL, HRESULT)
-    get_owner_sid : Proc(IEventSubscription*, UInt8**, HRESULT)
-    put_owner_sid : Proc(IEventSubscription*, UInt8*, HRESULT)
-    get_enabled : Proc(IEventSubscription*, LibC::BOOL*, HRESULT)
-    put_enabled : Proc(IEventSubscription*, LibC::BOOL, HRESULT)
-    get_description : Proc(IEventSubscription*, UInt8**, HRESULT)
-    put_description : Proc(IEventSubscription*, UInt8*, HRESULT)
-    get_machine_name : Proc(IEventSubscription*, UInt8**, HRESULT)
-    put_machine_name : Proc(IEventSubscription*, UInt8*, HRESULT)
-    get_publisher_property : Proc(IEventSubscription*, UInt8*, VARIANT*, HRESULT)
-    put_publisher_property : Proc(IEventSubscription*, UInt8*, VARIANT*, HRESULT)
-    remove_publisher_property : Proc(IEventSubscription*, UInt8*, HRESULT)
-    get_publisher_property_collection : Proc(IEventSubscription*, IEventObjectCollection*, HRESULT)
-    get_subscriber_property : Proc(IEventSubscription*, UInt8*, VARIANT*, HRESULT)
-    put_subscriber_property : Proc(IEventSubscription*, UInt8*, VARIANT*, HRESULT)
-    remove_subscriber_property : Proc(IEventSubscription*, UInt8*, HRESULT)
-    get_subscriber_property_collection : Proc(IEventSubscription*, IEventObjectCollection*, HRESULT)
-    get_interface_id : Proc(IEventSubscription*, UInt8**, HRESULT)
-    put_interface_id : Proc(IEventSubscription*, UInt8*, HRESULT)
+  @[Extern]
+  record IEventObjectChange2Vtbl,
+    query_interface : Proc(IEventObjectChange2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEventObjectChange2*, UInt32),
+    release : Proc(IEventObjectChange2*, UInt32),
+    changed_subscription : Proc(IEventObjectChange2*, Win32cr::System::Com::Events::COMEVENTSYSCHANGEINFO*, Win32cr::Foundation::HRESULT),
+    changed_event_class : Proc(IEventObjectChange2*, Win32cr::System::Com::Events::COMEVENTSYSCHANGEINFO*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("7701a9c3-bd68-438f-83e0-67bf4f53a422")]
+  record IEventObjectChange2, lpVtbl : IEventObjectChange2Vtbl* do
+    GUID = LibC::GUID.new(0x7701a9c3_u32, 0xbd68_u16, 0x438f_u16, StaticArray[0x83_u8, 0xe0_u8, 0x67_u8, 0xbf_u8, 0x4f_u8, 0x53_u8, 0xa4_u8, 0x22_u8])
+    def query_interface(this : IEventObjectChange2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEventObjectChange2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEventObjectChange2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def changed_subscription(this : IEventObjectChange2*, pInfo : Win32cr::System::Com::Events::COMEVENTSYSCHANGEINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.changed_subscription.call(this, pInfo)
+    end
+    def changed_event_class(this : IEventObjectChange2*, pInfo : Win32cr::System::Com::Events::COMEVENTSYSCHANGEINFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.changed_event_class.call(this, pInfo)
+    end
+
   end
 
-  IEventSubscription_GUID = "4a6b0e15-2e38-11d1-9965-00c04fbbb345"
-  IID_IEventSubscription = LibC::GUID.new(0x4a6b0e15_u32, 0x2e38_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x65_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
-  struct IEventSubscription
-    lpVtbl : IEventSubscriptionVTbl*
+  @[Extern]
+  record IEnumEventObjectVtbl,
+    query_interface : Proc(IEnumEventObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEnumEventObject*, UInt32),
+    release : Proc(IEnumEventObject*, UInt32),
+    clone : Proc(IEnumEventObject*, Void**, Win32cr::Foundation::HRESULT),
+    next__ : Proc(IEnumEventObject*, UInt32, Void**, UInt32*, Win32cr::Foundation::HRESULT),
+    reset : Proc(IEnumEventObject*, Win32cr::Foundation::HRESULT),
+    skip : Proc(IEnumEventObject*, UInt32, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f4a07d63-2e25-11d1-9964-00c04fbbb345")]
+  record IEnumEventObject, lpVtbl : IEnumEventObjectVtbl* do
+    GUID = LibC::GUID.new(0xf4a07d63_u32, 0x2e25_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
+    def query_interface(this : IEnumEventObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEnumEventObject*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEnumEventObject*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def clone(this : IEnumEventObject*, ppInterface : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clone.call(this, ppInterface)
+    end
+    def next__(this : IEnumEventObject*, cReqElem : UInt32, ppInterface : Void**, cRetElem : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.next__.call(this, cReqElem, ppInterface, cRetElem)
+    end
+    def reset(this : IEnumEventObject*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.reset.call(this)
+    end
+    def skip(this : IEnumEventObject*, cSkipElem : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.skip.call(this, cSkipElem)
+    end
+
   end
 
-  struct IFiringControlVTbl
-    query_interface : Proc(IFiringControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IFiringControl*, UInt32)
-    release : Proc(IFiringControl*, UInt32)
-    get_type_info_count : Proc(IFiringControl*, UInt32*, HRESULT)
-    get_type_info : Proc(IFiringControl*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IFiringControl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IFiringControl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    fire_subscription : Proc(IFiringControl*, IEventSubscription, HRESULT)
+  @[Extern]
+  record IEventObjectCollectionVtbl,
+    query_interface : Proc(IEventObjectCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEventObjectCollection*, UInt32),
+    release : Proc(IEventObjectCollection*, UInt32),
+    get_type_info_count : Proc(IEventObjectCollection*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IEventObjectCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IEventObjectCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IEventObjectCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(IEventObjectCollection*, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IEventObjectCollection*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_NewEnum : Proc(IEventObjectCollection*, Void**, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(IEventObjectCollection*, Int32*, Win32cr::Foundation::HRESULT),
+    add : Proc(IEventObjectCollection*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove : Proc(IEventObjectCollection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f89ac270-d4eb-11d1-b682-00805fc79216")]
+  record IEventObjectCollection, lpVtbl : IEventObjectCollectionVtbl* do
+    GUID = LibC::GUID.new(0xf89ac270_u32, 0xd4eb_u16, 0x11d1_u16, StaticArray[0xb6_u8, 0x82_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc7_u8, 0x92_u8, 0x16_u8])
+    def query_interface(this : IEventObjectCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEventObjectCollection*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEventObjectCollection*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IEventObjectCollection*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IEventObjectCollection*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IEventObjectCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IEventObjectCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get__NewEnum(this : IEventObjectCollection*, ppUnkEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, ppUnkEnum)
+    end
+    def get_Item(this : IEventObjectCollection*, objectID : Win32cr::Foundation::BSTR, pItem : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, objectID, pItem)
+    end
+    def get_NewEnum(this : IEventObjectCollection*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NewEnum.call(this, ppEnum)
+    end
+    def get_Count(this : IEventObjectCollection*, pCount : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, pCount)
+    end
+    def add(this : IEventObjectCollection*, item : Win32cr::System::Com::VARIANT*, objectID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, item, objectID)
+    end
+    def remove(this : IEventObjectCollection*, objectID : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove.call(this, objectID)
+    end
+
   end
 
-  IFiringControl_GUID = "e0498c93-4efe-11d1-9971-00c04fbbb345"
-  IID_IFiringControl = LibC::GUID.new(0xe0498c93_u32, 0x4efe_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x71_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
-  struct IFiringControl
-    lpVtbl : IFiringControlVTbl*
+  @[Extern]
+  record IEventPropertyVtbl,
+    query_interface : Proc(IEventProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEventProperty*, UInt32),
+    release : Proc(IEventProperty*, UInt32),
+    get_type_info_count : Proc(IEventProperty*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IEventProperty*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IEventProperty*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IEventProperty*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Name : Proc(IEventProperty*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_Name : Proc(IEventProperty*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Value : Proc(IEventProperty*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Value : Proc(IEventProperty*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("da538ee2-f4de-11d1-b6bb-00805fc79216")]
+  record IEventProperty, lpVtbl : IEventPropertyVtbl* do
+    GUID = LibC::GUID.new(0xda538ee2_u32, 0xf4de_u16, 0x11d1_u16, StaticArray[0xb6_u8, 0xbb_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc7_u8, 0x92_u8, 0x16_u8])
+    def query_interface(this : IEventProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEventProperty*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEventProperty*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IEventProperty*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IEventProperty*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IEventProperty*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IEventProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Name(this : IEventProperty*, propertyName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Name.call(this, propertyName)
+    end
+    def put_Name(this : IEventProperty*, propertyName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Name.call(this, propertyName)
+    end
+    def get_Value(this : IEventProperty*, propertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Value.call(this, propertyValue)
+    end
+    def put_Value(this : IEventProperty*, propertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Value.call(this, propertyValue)
+    end
+
   end
 
-  struct IPublisherFilterVTbl
-    query_interface : Proc(IPublisherFilter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IPublisherFilter*, UInt32)
-    release : Proc(IPublisherFilter*, UInt32)
-    initialize : Proc(IPublisherFilter*, UInt8*, IDispatch, HRESULT)
-    prepare_to_fire : Proc(IPublisherFilter*, UInt8*, IFiringControl, HRESULT)
+  @[Extern]
+  record IEventControlVtbl,
+    query_interface : Proc(IEventControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IEventControl*, UInt32),
+    release : Proc(IEventControl*, UInt32),
+    get_type_info_count : Proc(IEventControl*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IEventControl*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IEventControl*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IEventControl*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_publisher_filter : Proc(IEventControl*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
+    get_AllowInprocActivation : Proc(IEventControl*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    put_AllowInprocActivation : Proc(IEventControl*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_subscriptions : Proc(IEventControl*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Void**, Win32cr::Foundation::HRESULT),
+    set_default_query : Proc(IEventControl*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("0343e2f4-86f6-11d1-b760-00c04fb926af")]
+  record IEventControl, lpVtbl : IEventControlVtbl* do
+    GUID = LibC::GUID.new(0x343e2f4_u32, 0x86f6_u16, 0x11d1_u16, StaticArray[0xb7_u8, 0x60_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x26_u8, 0xaf_u8])
+    def query_interface(this : IEventControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IEventControl*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IEventControl*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IEventControl*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IEventControl*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IEventControl*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IEventControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def set_publisher_filter(this : IEventControl*, methodName : Win32cr::Foundation::BSTR, pPublisherFilter : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_publisher_filter.call(this, methodName, pPublisherFilter)
+    end
+    def get_AllowInprocActivation(this : IEventControl*, pfAllowInprocActivation : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AllowInprocActivation.call(this, pfAllowInprocActivation)
+    end
+    def put_AllowInprocActivation(this : IEventControl*, fAllowInprocActivation : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_AllowInprocActivation.call(this, fAllowInprocActivation)
+    end
+    def get_subscriptions(this : IEventControl*, methodName : Win32cr::Foundation::BSTR, optionalCriteria : Win32cr::Foundation::BSTR, optionalErrorIndex : Int32*, ppCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_subscriptions.call(this, methodName, optionalCriteria, optionalErrorIndex, ppCollection)
+    end
+    def set_default_query(this : IEventControl*, methodName : Win32cr::Foundation::BSTR, criteria : Win32cr::Foundation::BSTR, errorIndex : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_default_query.call(this, methodName, criteria, errorIndex)
+    end
+
   end
 
-  IPublisherFilter_GUID = "465e5cc0-7b26-11d1-88fb-0080c7d771bf"
-  IID_IPublisherFilter = LibC::GUID.new(0x465e5cc0_u32, 0x7b26_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xfb_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
-  struct IPublisherFilter
-    lpVtbl : IPublisherFilterVTbl*
+  @[Extern]
+  record IMultiInterfaceEventControlVtbl,
+    query_interface : Proc(IMultiInterfaceEventControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMultiInterfaceEventControl*, UInt32),
+    release : Proc(IMultiInterfaceEventControl*, UInt32),
+    set_multi_interface_publisher_filter : Proc(IMultiInterfaceEventControl*, Void*, Win32cr::Foundation::HRESULT),
+    get_subscriptions : Proc(IMultiInterfaceEventControl*, LibC::GUID*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Void**, Win32cr::Foundation::HRESULT),
+    set_default_query : Proc(IMultiInterfaceEventControl*, LibC::GUID*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
+    get_AllowInprocActivation : Proc(IMultiInterfaceEventControl*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    put_AllowInprocActivation : Proc(IMultiInterfaceEventControl*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    get_FireInParallel : Proc(IMultiInterfaceEventControl*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
+    put_FireInParallel : Proc(IMultiInterfaceEventControl*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("0343e2f5-86f6-11d1-b760-00c04fb926af")]
+  record IMultiInterfaceEventControl, lpVtbl : IMultiInterfaceEventControlVtbl* do
+    GUID = LibC::GUID.new(0x343e2f5_u32, 0x86f6_u16, 0x11d1_u16, StaticArray[0xb7_u8, 0x60_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x26_u8, 0xaf_u8])
+    def query_interface(this : IMultiInterfaceEventControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMultiInterfaceEventControl*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMultiInterfaceEventControl*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_multi_interface_publisher_filter(this : IMultiInterfaceEventControl*, classFilter : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_multi_interface_publisher_filter.call(this, classFilter)
+    end
+    def get_subscriptions(this : IMultiInterfaceEventControl*, eventIID : LibC::GUID*, bstrMethodName : Win32cr::Foundation::BSTR, optionalCriteria : Win32cr::Foundation::BSTR, optionalErrorIndex : Int32*, ppCollection : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_subscriptions.call(this, eventIID, bstrMethodName, optionalCriteria, optionalErrorIndex, ppCollection)
+    end
+    def set_default_query(this : IMultiInterfaceEventControl*, eventIID : LibC::GUID*, bstrMethodName : Win32cr::Foundation::BSTR, bstrCriteria : Win32cr::Foundation::BSTR, errorIndex : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_default_query.call(this, eventIID, bstrMethodName, bstrCriteria, errorIndex)
+    end
+    def get_AllowInprocActivation(this : IMultiInterfaceEventControl*, pfAllowInprocActivation : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AllowInprocActivation.call(this, pfAllowInprocActivation)
+    end
+    def put_AllowInprocActivation(this : IMultiInterfaceEventControl*, fAllowInprocActivation : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_AllowInprocActivation.call(this, fAllowInprocActivation)
+    end
+    def get_FireInParallel(this : IMultiInterfaceEventControl*, pfFireInParallel : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_FireInParallel.call(this, pfFireInParallel)
+    end
+    def put_FireInParallel(this : IMultiInterfaceEventControl*, fFireInParallel : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_FireInParallel.call(this, fFireInParallel)
+    end
+
   end
 
-  struct IMultiInterfacePublisherFilterVTbl
-    query_interface : Proc(IMultiInterfacePublisherFilter*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMultiInterfacePublisherFilter*, UInt32)
-    release : Proc(IMultiInterfacePublisherFilter*, UInt32)
-    initialize : Proc(IMultiInterfacePublisherFilter*, IMultiInterfaceEventControl, HRESULT)
-    prepare_to_fire : Proc(IMultiInterfacePublisherFilter*, Guid*, UInt8*, IFiringControl, HRESULT)
-  end
-
-  IMultiInterfacePublisherFilter_GUID = "465e5cc1-7b26-11d1-88fb-0080c7d771bf"
-  IID_IMultiInterfacePublisherFilter = LibC::GUID.new(0x465e5cc1_u32, 0x7b26_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xfb_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
-  struct IMultiInterfacePublisherFilter
-    lpVtbl : IMultiInterfacePublisherFilterVTbl*
-  end
-
-  struct IEventObjectChangeVTbl
-    query_interface : Proc(IEventObjectChange*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEventObjectChange*, UInt32)
-    release : Proc(IEventObjectChange*, UInt32)
-    changed_subscription : Proc(IEventObjectChange*, EOC_ChangeType, UInt8*, HRESULT)
-    changed_event_class : Proc(IEventObjectChange*, EOC_ChangeType, UInt8*, HRESULT)
-    changed_publisher : Proc(IEventObjectChange*, EOC_ChangeType, UInt8*, HRESULT)
-  end
-
-  IEventObjectChange_GUID = "f4a07d70-2e25-11d1-9964-00c04fbbb345"
-  IID_IEventObjectChange = LibC::GUID.new(0xf4a07d70_u32, 0x2e25_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
-  struct IEventObjectChange
-    lpVtbl : IEventObjectChangeVTbl*
-  end
-
-  struct IEventObjectChange2VTbl
-    query_interface : Proc(IEventObjectChange2*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEventObjectChange2*, UInt32)
-    release : Proc(IEventObjectChange2*, UInt32)
-    changed_subscription : Proc(IEventObjectChange2*, COMEVENTSYSCHANGEINFO*, HRESULT)
-    changed_event_class : Proc(IEventObjectChange2*, COMEVENTSYSCHANGEINFO*, HRESULT)
-  end
-
-  IEventObjectChange2_GUID = "7701a9c3-bd68-438f-83e0-67bf4f53a422"
-  IID_IEventObjectChange2 = LibC::GUID.new(0x7701a9c3_u32, 0xbd68_u16, 0x438f_u16, StaticArray[0x83_u8, 0xe0_u8, 0x67_u8, 0xbf_u8, 0x4f_u8, 0x53_u8, 0xa4_u8, 0x22_u8])
-  struct IEventObjectChange2
-    lpVtbl : IEventObjectChange2VTbl*
-  end
-
-  struct IEnumEventObjectVTbl
-    query_interface : Proc(IEnumEventObject*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEnumEventObject*, UInt32)
-    release : Proc(IEnumEventObject*, UInt32)
-    clone : Proc(IEnumEventObject*, IEnumEventObject*, HRESULT)
-    next : Proc(IEnumEventObject*, UInt32, IUnknown*, UInt32*, HRESULT)
-    reset : Proc(IEnumEventObject*, HRESULT)
-    skip : Proc(IEnumEventObject*, UInt32, HRESULT)
-  end
-
-  IEnumEventObject_GUID = "f4a07d63-2e25-11d1-9964-00c04fbbb345"
-  IID_IEnumEventObject = LibC::GUID.new(0xf4a07d63_u32, 0x2e25_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
-  struct IEnumEventObject
-    lpVtbl : IEnumEventObjectVTbl*
-  end
-
-  struct IEventObjectCollectionVTbl
-    query_interface : Proc(IEventObjectCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEventObjectCollection*, UInt32)
-    release : Proc(IEventObjectCollection*, UInt32)
-    get_type_info_count : Proc(IEventObjectCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(IEventObjectCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IEventObjectCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IEventObjectCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(IEventObjectCollection*, IUnknown*, HRESULT)
-    get_item : Proc(IEventObjectCollection*, UInt8*, VARIANT*, HRESULT)
-    get_new_enum : Proc(IEventObjectCollection*, IEnumEventObject*, HRESULT)
-    get_count : Proc(IEventObjectCollection*, Int32*, HRESULT)
-    add : Proc(IEventObjectCollection*, VARIANT*, UInt8*, HRESULT)
-    remove : Proc(IEventObjectCollection*, UInt8*, HRESULT)
-  end
-
-  IEventObjectCollection_GUID = "f89ac270-d4eb-11d1-b682-00805fc79216"
-  IID_IEventObjectCollection = LibC::GUID.new(0xf89ac270_u32, 0xd4eb_u16, 0x11d1_u16, StaticArray[0xb6_u8, 0x82_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc7_u8, 0x92_u8, 0x16_u8])
-  struct IEventObjectCollection
-    lpVtbl : IEventObjectCollectionVTbl*
-  end
-
-  struct IEventPropertyVTbl
-    query_interface : Proc(IEventProperty*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEventProperty*, UInt32)
-    release : Proc(IEventProperty*, UInt32)
-    get_type_info_count : Proc(IEventProperty*, UInt32*, HRESULT)
-    get_type_info : Proc(IEventProperty*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IEventProperty*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IEventProperty*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_name : Proc(IEventProperty*, UInt8**, HRESULT)
-    put_name : Proc(IEventProperty*, UInt8*, HRESULT)
-    get_value : Proc(IEventProperty*, VARIANT*, HRESULT)
-    put_value : Proc(IEventProperty*, VARIANT*, HRESULT)
-  end
-
-  IEventProperty_GUID = "da538ee2-f4de-11d1-b6bb-00805fc79216"
-  IID_IEventProperty = LibC::GUID.new(0xda538ee2_u32, 0xf4de_u16, 0x11d1_u16, StaticArray[0xb6_u8, 0xbb_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc7_u8, 0x92_u8, 0x16_u8])
-  struct IEventProperty
-    lpVtbl : IEventPropertyVTbl*
-  end
-
-  struct IEventControlVTbl
-    query_interface : Proc(IEventControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IEventControl*, UInt32)
-    release : Proc(IEventControl*, UInt32)
-    get_type_info_count : Proc(IEventControl*, UInt32*, HRESULT)
-    get_type_info : Proc(IEventControl*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IEventControl*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IEventControl*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    set_publisher_filter : Proc(IEventControl*, UInt8*, IPublisherFilter, HRESULT)
-    get_allow_inproc_activation : Proc(IEventControl*, LibC::BOOL*, HRESULT)
-    put_allow_inproc_activation : Proc(IEventControl*, LibC::BOOL, HRESULT)
-    get_subscriptions : Proc(IEventControl*, UInt8*, UInt8*, Int32*, IEventObjectCollection*, HRESULT)
-    set_default_query : Proc(IEventControl*, UInt8*, UInt8*, Int32*, HRESULT)
-  end
-
-  IEventControl_GUID = "0343e2f4-86f6-11d1-b760-00c04fb926af"
-  IID_IEventControl = LibC::GUID.new(0x343e2f4_u32, 0x86f6_u16, 0x11d1_u16, StaticArray[0xb7_u8, 0x60_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x26_u8, 0xaf_u8])
-  struct IEventControl
-    lpVtbl : IEventControlVTbl*
-  end
-
-  struct IMultiInterfaceEventControlVTbl
-    query_interface : Proc(IMultiInterfaceEventControl*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMultiInterfaceEventControl*, UInt32)
-    release : Proc(IMultiInterfaceEventControl*, UInt32)
-    set_multi_interface_publisher_filter : Proc(IMultiInterfaceEventControl*, IMultiInterfacePublisherFilter, HRESULT)
-    get_subscriptions : Proc(IMultiInterfaceEventControl*, Guid*, UInt8*, UInt8*, Int32*, IEventObjectCollection*, HRESULT)
-    set_default_query : Proc(IMultiInterfaceEventControl*, Guid*, UInt8*, UInt8*, Int32*, HRESULT)
-    get_allow_inproc_activation : Proc(IMultiInterfaceEventControl*, LibC::BOOL*, HRESULT)
-    put_allow_inproc_activation : Proc(IMultiInterfaceEventControl*, LibC::BOOL, HRESULT)
-    get_fire_in_parallel : Proc(IMultiInterfaceEventControl*, LibC::BOOL*, HRESULT)
-    put_fire_in_parallel : Proc(IMultiInterfaceEventControl*, LibC::BOOL, HRESULT)
-  end
-
-  IMultiInterfaceEventControl_GUID = "0343e2f5-86f6-11d1-b760-00c04fb926af"
-  IID_IMultiInterfaceEventControl = LibC::GUID.new(0x343e2f5_u32, 0x86f6_u16, 0x11d1_u16, StaticArray[0xb7_u8, 0x60_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x26_u8, 0xaf_u8])
-  struct IMultiInterfaceEventControl
-    lpVtbl : IMultiInterfaceEventControlVTbl*
-  end
-
-  struct IDontSupportEventSubscriptionVTbl
-    query_interface : Proc(IDontSupportEventSubscription*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDontSupportEventSubscription*, UInt32)
+  @[Extern]
+  record IDontSupportEventSubscriptionVtbl,
+    query_interface : Proc(IDontSupportEventSubscription*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDontSupportEventSubscription*, UInt32),
     release : Proc(IDontSupportEventSubscription*, UInt32)
+
+
+  @[Extern]
+  #@[Com("784121f1-62a6-4b89-855f-d65f296de83a")]
+  record IDontSupportEventSubscription, lpVtbl : IDontSupportEventSubscriptionVtbl* do
+    GUID = LibC::GUID.new(0x784121f1_u32, 0x62a6_u16, 0x4b89_u16, StaticArray[0x85_u8, 0x5f_u8, 0xd6_u8, 0x5f_u8, 0x29_u8, 0x6d_u8, 0xe8_u8, 0x3a_u8])
+    def query_interface(this : IDontSupportEventSubscription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDontSupportEventSubscription*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDontSupportEventSubscription*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+
   end
 
-  IDontSupportEventSubscription_GUID = "784121f1-62a6-4b89-855f-d65f296de83a"
-  IID_IDontSupportEventSubscription = LibC::GUID.new(0x784121f1_u32, 0x62a6_u16, 0x4b89_u16, StaticArray[0x85_u8, 0x5f_u8, 0xd6_u8, 0x5f_u8, 0x29_u8, 0x6d_u8, 0xe8_u8, 0x3a_u8])
-  struct IDontSupportEventSubscription
-    lpVtbl : IDontSupportEventSubscriptionVTbl*
-  end
-
-end
-struct LibWin32::IEventSystem
-  def query_interface(this : IEventSystem*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEventSystem*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEventSystem*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IEventSystem*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IEventSystem*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IEventSystem*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IEventSystem*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def query(this : IEventSystem*, progid : UInt8*, querycriteria : UInt8*, errorindex : Int32*, ppinterface : IUnknown*) : HRESULT
-    @lpVtbl.value.query.call(this, progid, querycriteria, errorindex, ppinterface)
-  end
-  def store(this : IEventSystem*, progid : UInt8*, pinterface : IUnknown) : HRESULT
-    @lpVtbl.value.store.call(this, progid, pinterface)
-  end
-  def remove(this : IEventSystem*, progid : UInt8*, querycriteria : UInt8*, errorindex : Int32*) : HRESULT
-    @lpVtbl.value.remove.call(this, progid, querycriteria, errorindex)
-  end
-  def get_event_object_change_event_class_id(this : IEventSystem*, pbstreventclassid : UInt8**) : HRESULT
-    @lpVtbl.value.get_event_object_change_event_class_id.call(this, pbstreventclassid)
-  end
-  def query_s(this : IEventSystem*, progid : UInt8*, querycriteria : UInt8*, ppinterface : IUnknown*) : HRESULT
-    @lpVtbl.value.query_s.call(this, progid, querycriteria, ppinterface)
-  end
-  def remove_s(this : IEventSystem*, progid : UInt8*, querycriteria : UInt8*) : HRESULT
-    @lpVtbl.value.remove_s.call(this, progid, querycriteria)
-  end
-end
-struct LibWin32::IEventPublisher
-  def query_interface(this : IEventPublisher*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEventPublisher*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEventPublisher*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IEventPublisher*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IEventPublisher*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IEventPublisher*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IEventPublisher*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_publisher_id(this : IEventPublisher*, pbstrpublisherid : UInt8**) : HRESULT
-    @lpVtbl.value.get_publisher_id.call(this, pbstrpublisherid)
-  end
-  def put_publisher_id(this : IEventPublisher*, bstrpublisherid : UInt8*) : HRESULT
-    @lpVtbl.value.put_publisher_id.call(this, bstrpublisherid)
-  end
-  def get_publisher_name(this : IEventPublisher*, pbstrpublishername : UInt8**) : HRESULT
-    @lpVtbl.value.get_publisher_name.call(this, pbstrpublishername)
-  end
-  def put_publisher_name(this : IEventPublisher*, bstrpublishername : UInt8*) : HRESULT
-    @lpVtbl.value.put_publisher_name.call(this, bstrpublishername)
-  end
-  def get_publisher_type(this : IEventPublisher*, pbstrpublishertype : UInt8**) : HRESULT
-    @lpVtbl.value.get_publisher_type.call(this, pbstrpublishertype)
-  end
-  def put_publisher_type(this : IEventPublisher*, bstrpublishertype : UInt8*) : HRESULT
-    @lpVtbl.value.put_publisher_type.call(this, bstrpublishertype)
-  end
-  def get_owner_sid(this : IEventPublisher*, pbstrownersid : UInt8**) : HRESULT
-    @lpVtbl.value.get_owner_sid.call(this, pbstrownersid)
-  end
-  def put_owner_sid(this : IEventPublisher*, bstrownersid : UInt8*) : HRESULT
-    @lpVtbl.value.put_owner_sid.call(this, bstrownersid)
-  end
-  def get_description(this : IEventPublisher*, pbstrdescription : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.call(this, pbstrdescription)
-  end
-  def put_description(this : IEventPublisher*, bstrdescription : UInt8*) : HRESULT
-    @lpVtbl.value.put_description.call(this, bstrdescription)
-  end
-  def get_default_property(this : IEventPublisher*, bstrpropertyname : UInt8*, propertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_default_property.call(this, bstrpropertyname, propertyvalue)
-  end
-  def put_default_property(this : IEventPublisher*, bstrpropertyname : UInt8*, propertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.put_default_property.call(this, bstrpropertyname, propertyvalue)
-  end
-  def remove_default_property(this : IEventPublisher*, bstrpropertyname : UInt8*) : HRESULT
-    @lpVtbl.value.remove_default_property.call(this, bstrpropertyname)
-  end
-  def get_default_property_collection(this : IEventPublisher*, collection : IEventObjectCollection*) : HRESULT
-    @lpVtbl.value.get_default_property_collection.call(this, collection)
-  end
-end
-struct LibWin32::IEventClass
-  def query_interface(this : IEventClass*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEventClass*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEventClass*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IEventClass*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IEventClass*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IEventClass*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IEventClass*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_event_class_id(this : IEventClass*, pbstreventclassid : UInt8**) : HRESULT
-    @lpVtbl.value.get_event_class_id.call(this, pbstreventclassid)
-  end
-  def put_event_class_id(this : IEventClass*, bstreventclassid : UInt8*) : HRESULT
-    @lpVtbl.value.put_event_class_id.call(this, bstreventclassid)
-  end
-  def get_event_class_name(this : IEventClass*, pbstreventclassname : UInt8**) : HRESULT
-    @lpVtbl.value.get_event_class_name.call(this, pbstreventclassname)
-  end
-  def put_event_class_name(this : IEventClass*, bstreventclassname : UInt8*) : HRESULT
-    @lpVtbl.value.put_event_class_name.call(this, bstreventclassname)
-  end
-  def get_owner_sid(this : IEventClass*, pbstrownersid : UInt8**) : HRESULT
-    @lpVtbl.value.get_owner_sid.call(this, pbstrownersid)
-  end
-  def put_owner_sid(this : IEventClass*, bstrownersid : UInt8*) : HRESULT
-    @lpVtbl.value.put_owner_sid.call(this, bstrownersid)
-  end
-  def get_firing_interface_id(this : IEventClass*, pbstrfiringinterfaceid : UInt8**) : HRESULT
-    @lpVtbl.value.get_firing_interface_id.call(this, pbstrfiringinterfaceid)
-  end
-  def put_firing_interface_id(this : IEventClass*, bstrfiringinterfaceid : UInt8*) : HRESULT
-    @lpVtbl.value.put_firing_interface_id.call(this, bstrfiringinterfaceid)
-  end
-  def get_description(this : IEventClass*, pbstrdescription : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.call(this, pbstrdescription)
-  end
-  def put_description(this : IEventClass*, bstrdescription : UInt8*) : HRESULT
-    @lpVtbl.value.put_description.call(this, bstrdescription)
-  end
-  def get_custom_config_clsid(this : IEventClass*, pbstrcustomconfigclsid : UInt8**) : HRESULT
-    @lpVtbl.value.get_custom_config_clsid.call(this, pbstrcustomconfigclsid)
-  end
-  def put_custom_config_clsid(this : IEventClass*, bstrcustomconfigclsid : UInt8*) : HRESULT
-    @lpVtbl.value.put_custom_config_clsid.call(this, bstrcustomconfigclsid)
-  end
-  def get_type_lib(this : IEventClass*, pbstrtypelib : UInt8**) : HRESULT
-    @lpVtbl.value.get_type_lib.call(this, pbstrtypelib)
-  end
-  def put_type_lib(this : IEventClass*, bstrtypelib : UInt8*) : HRESULT
-    @lpVtbl.value.put_type_lib.call(this, bstrtypelib)
-  end
-end
-struct LibWin32::IEventClass2
-  def query_interface(this : IEventClass2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEventClass2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEventClass2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IEventClass2*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IEventClass2*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IEventClass2*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IEventClass2*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_event_class_id(this : IEventClass2*, pbstreventclassid : UInt8**) : HRESULT
-    @lpVtbl.value.get_event_class_id.call(this, pbstreventclassid)
-  end
-  def put_event_class_id(this : IEventClass2*, bstreventclassid : UInt8*) : HRESULT
-    @lpVtbl.value.put_event_class_id.call(this, bstreventclassid)
-  end
-  def get_event_class_name(this : IEventClass2*, pbstreventclassname : UInt8**) : HRESULT
-    @lpVtbl.value.get_event_class_name.call(this, pbstreventclassname)
-  end
-  def put_event_class_name(this : IEventClass2*, bstreventclassname : UInt8*) : HRESULT
-    @lpVtbl.value.put_event_class_name.call(this, bstreventclassname)
-  end
-  def get_owner_sid(this : IEventClass2*, pbstrownersid : UInt8**) : HRESULT
-    @lpVtbl.value.get_owner_sid.call(this, pbstrownersid)
-  end
-  def put_owner_sid(this : IEventClass2*, bstrownersid : UInt8*) : HRESULT
-    @lpVtbl.value.put_owner_sid.call(this, bstrownersid)
-  end
-  def get_firing_interface_id(this : IEventClass2*, pbstrfiringinterfaceid : UInt8**) : HRESULT
-    @lpVtbl.value.get_firing_interface_id.call(this, pbstrfiringinterfaceid)
-  end
-  def put_firing_interface_id(this : IEventClass2*, bstrfiringinterfaceid : UInt8*) : HRESULT
-    @lpVtbl.value.put_firing_interface_id.call(this, bstrfiringinterfaceid)
-  end
-  def get_description(this : IEventClass2*, pbstrdescription : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.call(this, pbstrdescription)
-  end
-  def put_description(this : IEventClass2*, bstrdescription : UInt8*) : HRESULT
-    @lpVtbl.value.put_description.call(this, bstrdescription)
-  end
-  def get_custom_config_clsid(this : IEventClass2*, pbstrcustomconfigclsid : UInt8**) : HRESULT
-    @lpVtbl.value.get_custom_config_clsid.call(this, pbstrcustomconfigclsid)
-  end
-  def put_custom_config_clsid(this : IEventClass2*, bstrcustomconfigclsid : UInt8*) : HRESULT
-    @lpVtbl.value.put_custom_config_clsid.call(this, bstrcustomconfigclsid)
-  end
-  def get_type_lib(this : IEventClass2*, pbstrtypelib : UInt8**) : HRESULT
-    @lpVtbl.value.get_type_lib.call(this, pbstrtypelib)
-  end
-  def put_type_lib(this : IEventClass2*, bstrtypelib : UInt8*) : HRESULT
-    @lpVtbl.value.put_type_lib.call(this, bstrtypelib)
-  end
-  def get_publisher_id(this : IEventClass2*, pbstrpublisherid : UInt8**) : HRESULT
-    @lpVtbl.value.get_publisher_id.call(this, pbstrpublisherid)
-  end
-  def put_publisher_id(this : IEventClass2*, bstrpublisherid : UInt8*) : HRESULT
-    @lpVtbl.value.put_publisher_id.call(this, bstrpublisherid)
-  end
-  def get_multi_interface_publisher_filter_clsid(this : IEventClass2*, pbstrpubfilclsid : UInt8**) : HRESULT
-    @lpVtbl.value.get_multi_interface_publisher_filter_clsid.call(this, pbstrpubfilclsid)
-  end
-  def put_multi_interface_publisher_filter_clsid(this : IEventClass2*, bstrpubfilclsid : UInt8*) : HRESULT
-    @lpVtbl.value.put_multi_interface_publisher_filter_clsid.call(this, bstrpubfilclsid)
-  end
-  def get_allow_inproc_activation(this : IEventClass2*, pfallowinprocactivation : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_allow_inproc_activation.call(this, pfallowinprocactivation)
-  end
-  def put_allow_inproc_activation(this : IEventClass2*, fallowinprocactivation : LibC::BOOL) : HRESULT
-    @lpVtbl.value.put_allow_inproc_activation.call(this, fallowinprocactivation)
-  end
-  def get_fire_in_parallel(this : IEventClass2*, pffireinparallel : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_fire_in_parallel.call(this, pffireinparallel)
-  end
-  def put_fire_in_parallel(this : IEventClass2*, ffireinparallel : LibC::BOOL) : HRESULT
-    @lpVtbl.value.put_fire_in_parallel.call(this, ffireinparallel)
-  end
-end
-struct LibWin32::IEventSubscription
-  def query_interface(this : IEventSubscription*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEventSubscription*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEventSubscription*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IEventSubscription*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IEventSubscription*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IEventSubscription*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IEventSubscription*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_subscription_id(this : IEventSubscription*, pbstrsubscriptionid : UInt8**) : HRESULT
-    @lpVtbl.value.get_subscription_id.call(this, pbstrsubscriptionid)
-  end
-  def put_subscription_id(this : IEventSubscription*, bstrsubscriptionid : UInt8*) : HRESULT
-    @lpVtbl.value.put_subscription_id.call(this, bstrsubscriptionid)
-  end
-  def get_subscription_name(this : IEventSubscription*, pbstrsubscriptionname : UInt8**) : HRESULT
-    @lpVtbl.value.get_subscription_name.call(this, pbstrsubscriptionname)
-  end
-  def put_subscription_name(this : IEventSubscription*, bstrsubscriptionname : UInt8*) : HRESULT
-    @lpVtbl.value.put_subscription_name.call(this, bstrsubscriptionname)
-  end
-  def get_publisher_id(this : IEventSubscription*, pbstrpublisherid : UInt8**) : HRESULT
-    @lpVtbl.value.get_publisher_id.call(this, pbstrpublisherid)
-  end
-  def put_publisher_id(this : IEventSubscription*, bstrpublisherid : UInt8*) : HRESULT
-    @lpVtbl.value.put_publisher_id.call(this, bstrpublisherid)
-  end
-  def get_event_class_id(this : IEventSubscription*, pbstreventclassid : UInt8**) : HRESULT
-    @lpVtbl.value.get_event_class_id.call(this, pbstreventclassid)
-  end
-  def put_event_class_id(this : IEventSubscription*, bstreventclassid : UInt8*) : HRESULT
-    @lpVtbl.value.put_event_class_id.call(this, bstreventclassid)
-  end
-  def get_method_name(this : IEventSubscription*, pbstrmethodname : UInt8**) : HRESULT
-    @lpVtbl.value.get_method_name.call(this, pbstrmethodname)
-  end
-  def put_method_name(this : IEventSubscription*, bstrmethodname : UInt8*) : HRESULT
-    @lpVtbl.value.put_method_name.call(this, bstrmethodname)
-  end
-  def get_subscriber_clsid(this : IEventSubscription*, pbstrsubscriberclsid : UInt8**) : HRESULT
-    @lpVtbl.value.get_subscriber_clsid.call(this, pbstrsubscriberclsid)
-  end
-  def put_subscriber_clsid(this : IEventSubscription*, bstrsubscriberclsid : UInt8*) : HRESULT
-    @lpVtbl.value.put_subscriber_clsid.call(this, bstrsubscriberclsid)
-  end
-  def get_subscriber_interface(this : IEventSubscription*, ppsubscriberinterface : IUnknown*) : HRESULT
-    @lpVtbl.value.get_subscriber_interface.call(this, ppsubscriberinterface)
-  end
-  def put_subscriber_interface(this : IEventSubscription*, psubscriberinterface : IUnknown) : HRESULT
-    @lpVtbl.value.put_subscriber_interface.call(this, psubscriberinterface)
-  end
-  def get_per_user(this : IEventSubscription*, pfperuser : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_per_user.call(this, pfperuser)
-  end
-  def put_per_user(this : IEventSubscription*, fperuser : LibC::BOOL) : HRESULT
-    @lpVtbl.value.put_per_user.call(this, fperuser)
-  end
-  def get_owner_sid(this : IEventSubscription*, pbstrownersid : UInt8**) : HRESULT
-    @lpVtbl.value.get_owner_sid.call(this, pbstrownersid)
-  end
-  def put_owner_sid(this : IEventSubscription*, bstrownersid : UInt8*) : HRESULT
-    @lpVtbl.value.put_owner_sid.call(this, bstrownersid)
-  end
-  def get_enabled(this : IEventSubscription*, pfenabled : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_enabled.call(this, pfenabled)
-  end
-  def put_enabled(this : IEventSubscription*, fenabled : LibC::BOOL) : HRESULT
-    @lpVtbl.value.put_enabled.call(this, fenabled)
-  end
-  def get_description(this : IEventSubscription*, pbstrdescription : UInt8**) : HRESULT
-    @lpVtbl.value.get_description.call(this, pbstrdescription)
-  end
-  def put_description(this : IEventSubscription*, bstrdescription : UInt8*) : HRESULT
-    @lpVtbl.value.put_description.call(this, bstrdescription)
-  end
-  def get_machine_name(this : IEventSubscription*, pbstrmachinename : UInt8**) : HRESULT
-    @lpVtbl.value.get_machine_name.call(this, pbstrmachinename)
-  end
-  def put_machine_name(this : IEventSubscription*, bstrmachinename : UInt8*) : HRESULT
-    @lpVtbl.value.put_machine_name.call(this, bstrmachinename)
-  end
-  def get_publisher_property(this : IEventSubscription*, bstrpropertyname : UInt8*, propertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_publisher_property.call(this, bstrpropertyname, propertyvalue)
-  end
-  def put_publisher_property(this : IEventSubscription*, bstrpropertyname : UInt8*, propertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.put_publisher_property.call(this, bstrpropertyname, propertyvalue)
-  end
-  def remove_publisher_property(this : IEventSubscription*, bstrpropertyname : UInt8*) : HRESULT
-    @lpVtbl.value.remove_publisher_property.call(this, bstrpropertyname)
-  end
-  def get_publisher_property_collection(this : IEventSubscription*, collection : IEventObjectCollection*) : HRESULT
-    @lpVtbl.value.get_publisher_property_collection.call(this, collection)
-  end
-  def get_subscriber_property(this : IEventSubscription*, bstrpropertyname : UInt8*, propertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_subscriber_property.call(this, bstrpropertyname, propertyvalue)
-  end
-  def put_subscriber_property(this : IEventSubscription*, bstrpropertyname : UInt8*, propertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.put_subscriber_property.call(this, bstrpropertyname, propertyvalue)
-  end
-  def remove_subscriber_property(this : IEventSubscription*, bstrpropertyname : UInt8*) : HRESULT
-    @lpVtbl.value.remove_subscriber_property.call(this, bstrpropertyname)
-  end
-  def get_subscriber_property_collection(this : IEventSubscription*, collection : IEventObjectCollection*) : HRESULT
-    @lpVtbl.value.get_subscriber_property_collection.call(this, collection)
-  end
-  def get_interface_id(this : IEventSubscription*, pbstrinterfaceid : UInt8**) : HRESULT
-    @lpVtbl.value.get_interface_id.call(this, pbstrinterfaceid)
-  end
-  def put_interface_id(this : IEventSubscription*, bstrinterfaceid : UInt8*) : HRESULT
-    @lpVtbl.value.put_interface_id.call(this, bstrinterfaceid)
-  end
-end
-struct LibWin32::IFiringControl
-  def query_interface(this : IFiringControl*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IFiringControl*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IFiringControl*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IFiringControl*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IFiringControl*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IFiringControl*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IFiringControl*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def fire_subscription(this : IFiringControl*, subscription : IEventSubscription) : HRESULT
-    @lpVtbl.value.fire_subscription.call(this, subscription)
-  end
-end
-struct LibWin32::IPublisherFilter
-  def query_interface(this : IPublisherFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IPublisherFilter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IPublisherFilter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def initialize(this : IPublisherFilter*, methodname : UInt8*, dispuserdefined : IDispatch) : HRESULT
-    @lpVtbl.value.initialize.call(this, methodname, dispuserdefined)
-  end
-  def prepare_to_fire(this : IPublisherFilter*, methodname : UInt8*, firingcontrol : IFiringControl) : HRESULT
-    @lpVtbl.value.prepare_to_fire.call(this, methodname, firingcontrol)
-  end
-end
-struct LibWin32::IMultiInterfacePublisherFilter
-  def query_interface(this : IMultiInterfacePublisherFilter*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMultiInterfacePublisherFilter*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMultiInterfacePublisherFilter*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def initialize(this : IMultiInterfacePublisherFilter*, peic : IMultiInterfaceEventControl) : HRESULT
-    @lpVtbl.value.initialize.call(this, peic)
-  end
-  def prepare_to_fire(this : IMultiInterfacePublisherFilter*, iid : Guid*, methodname : UInt8*, firingcontrol : IFiringControl) : HRESULT
-    @lpVtbl.value.prepare_to_fire.call(this, iid, methodname, firingcontrol)
-  end
-end
-struct LibWin32::IEventObjectChange
-  def query_interface(this : IEventObjectChange*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEventObjectChange*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEventObjectChange*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def changed_subscription(this : IEventObjectChange*, changetype : EOC_ChangeType, bstrsubscriptionid : UInt8*) : HRESULT
-    @lpVtbl.value.changed_subscription.call(this, changetype, bstrsubscriptionid)
-  end
-  def changed_event_class(this : IEventObjectChange*, changetype : EOC_ChangeType, bstreventclassid : UInt8*) : HRESULT
-    @lpVtbl.value.changed_event_class.call(this, changetype, bstreventclassid)
-  end
-  def changed_publisher(this : IEventObjectChange*, changetype : EOC_ChangeType, bstrpublisherid : UInt8*) : HRESULT
-    @lpVtbl.value.changed_publisher.call(this, changetype, bstrpublisherid)
-  end
-end
-struct LibWin32::IEventObjectChange2
-  def query_interface(this : IEventObjectChange2*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEventObjectChange2*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEventObjectChange2*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def changed_subscription(this : IEventObjectChange2*, pinfo : COMEVENTSYSCHANGEINFO*) : HRESULT
-    @lpVtbl.value.changed_subscription.call(this, pinfo)
-  end
-  def changed_event_class(this : IEventObjectChange2*, pinfo : COMEVENTSYSCHANGEINFO*) : HRESULT
-    @lpVtbl.value.changed_event_class.call(this, pinfo)
-  end
-end
-struct LibWin32::IEnumEventObject
-  def query_interface(this : IEnumEventObject*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEnumEventObject*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEnumEventObject*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def clone(this : IEnumEventObject*, ppinterface : IEnumEventObject*) : HRESULT
-    @lpVtbl.value.clone.call(this, ppinterface)
-  end
-  def next(this : IEnumEventObject*, creqelem : UInt32, ppinterface : IUnknown*, cretelem : UInt32*) : HRESULT
-    @lpVtbl.value.next.call(this, creqelem, ppinterface, cretelem)
-  end
-  def reset(this : IEnumEventObject*) : HRESULT
-    @lpVtbl.value.reset.call(this)
-  end
-  def skip(this : IEnumEventObject*, cskipelem : UInt32) : HRESULT
-    @lpVtbl.value.skip.call(this, cskipelem)
-  end
-end
-struct LibWin32::IEventObjectCollection
-  def query_interface(this : IEventObjectCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEventObjectCollection*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEventObjectCollection*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IEventObjectCollection*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IEventObjectCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IEventObjectCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IEventObjectCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get__new_enum(this : IEventObjectCollection*, ppunkenum : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, ppunkenum)
-  end
-  def get_item(this : IEventObjectCollection*, objectid : UInt8*, pitem : VARIANT*) : HRESULT
-    @lpVtbl.value.get_item.call(this, objectid, pitem)
-  end
-  def get_new_enum(this : IEventObjectCollection*, ppenum : IEnumEventObject*) : HRESULT
-    @lpVtbl.value.get_new_enum.call(this, ppenum)
-  end
-  def get_count(this : IEventObjectCollection*, pcount : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, pcount)
-  end
-  def add(this : IEventObjectCollection*, item : VARIANT*, objectid : UInt8*) : HRESULT
-    @lpVtbl.value.add.call(this, item, objectid)
-  end
-  def remove(this : IEventObjectCollection*, objectid : UInt8*) : HRESULT
-    @lpVtbl.value.remove.call(this, objectid)
-  end
-end
-struct LibWin32::IEventProperty
-  def query_interface(this : IEventProperty*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEventProperty*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEventProperty*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IEventProperty*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IEventProperty*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IEventProperty*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IEventProperty*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_name(this : IEventProperty*, propertyname : UInt8**) : HRESULT
-    @lpVtbl.value.get_name.call(this, propertyname)
-  end
-  def put_name(this : IEventProperty*, propertyname : UInt8*) : HRESULT
-    @lpVtbl.value.put_name.call(this, propertyname)
-  end
-  def get_value(this : IEventProperty*, propertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_value.call(this, propertyvalue)
-  end
-  def put_value(this : IEventProperty*, propertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.put_value.call(this, propertyvalue)
-  end
-end
-struct LibWin32::IEventControl
-  def query_interface(this : IEventControl*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IEventControl*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IEventControl*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IEventControl*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IEventControl*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IEventControl*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IEventControl*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def set_publisher_filter(this : IEventControl*, methodname : UInt8*, ppublisherfilter : IPublisherFilter) : HRESULT
-    @lpVtbl.value.set_publisher_filter.call(this, methodname, ppublisherfilter)
-  end
-  def get_allow_inproc_activation(this : IEventControl*, pfallowinprocactivation : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_allow_inproc_activation.call(this, pfallowinprocactivation)
-  end
-  def put_allow_inproc_activation(this : IEventControl*, fallowinprocactivation : LibC::BOOL) : HRESULT
-    @lpVtbl.value.put_allow_inproc_activation.call(this, fallowinprocactivation)
-  end
-  def get_subscriptions(this : IEventControl*, methodname : UInt8*, optionalcriteria : UInt8*, optionalerrorindex : Int32*, ppcollection : IEventObjectCollection*) : HRESULT
-    @lpVtbl.value.get_subscriptions.call(this, methodname, optionalcriteria, optionalerrorindex, ppcollection)
-  end
-  def set_default_query(this : IEventControl*, methodname : UInt8*, criteria : UInt8*, errorindex : Int32*) : HRESULT
-    @lpVtbl.value.set_default_query.call(this, methodname, criteria, errorindex)
-  end
-end
-struct LibWin32::IMultiInterfaceEventControl
-  def query_interface(this : IMultiInterfaceEventControl*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMultiInterfaceEventControl*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMultiInterfaceEventControl*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_multi_interface_publisher_filter(this : IMultiInterfaceEventControl*, classfilter : IMultiInterfacePublisherFilter) : HRESULT
-    @lpVtbl.value.set_multi_interface_publisher_filter.call(this, classfilter)
-  end
-  def get_subscriptions(this : IMultiInterfaceEventControl*, eventiid : Guid*, bstrmethodname : UInt8*, optionalcriteria : UInt8*, optionalerrorindex : Int32*, ppcollection : IEventObjectCollection*) : HRESULT
-    @lpVtbl.value.get_subscriptions.call(this, eventiid, bstrmethodname, optionalcriteria, optionalerrorindex, ppcollection)
-  end
-  def set_default_query(this : IMultiInterfaceEventControl*, eventiid : Guid*, bstrmethodname : UInt8*, bstrcriteria : UInt8*, errorindex : Int32*) : HRESULT
-    @lpVtbl.value.set_default_query.call(this, eventiid, bstrmethodname, bstrcriteria, errorindex)
-  end
-  def get_allow_inproc_activation(this : IMultiInterfaceEventControl*, pfallowinprocactivation : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_allow_inproc_activation.call(this, pfallowinprocactivation)
-  end
-  def put_allow_inproc_activation(this : IMultiInterfaceEventControl*, fallowinprocactivation : LibC::BOOL) : HRESULT
-    @lpVtbl.value.put_allow_inproc_activation.call(this, fallowinprocactivation)
-  end
-  def get_fire_in_parallel(this : IMultiInterfaceEventControl*, pffireinparallel : LibC::BOOL*) : HRESULT
-    @lpVtbl.value.get_fire_in_parallel.call(this, pffireinparallel)
-  end
-  def put_fire_in_parallel(this : IMultiInterfaceEventControl*, ffireinparallel : LibC::BOOL) : HRESULT
-    @lpVtbl.value.put_fire_in_parallel.call(this, ffireinparallel)
-  end
-end
-struct LibWin32::IDontSupportEventSubscription
-  def query_interface(this : IDontSupportEventSubscription*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDontSupportEventSubscription*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDontSupportEventSubscription*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
 end

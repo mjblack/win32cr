@@ -1,42 +1,222 @@
-require "../foundation.cr"
-require "../system/registry.cr"
-require "../security.cr"
-require "../system/com.cr"
+require "./../foundation.cr"
+require "./../system/registry.cr"
+require "./../security.cr"
+require "./../system/com.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:advapi32.dll")]
-@[Link(ldflags: "/DELAYLOAD:bcrypt.dll")]
-@[Link(ldflags: "/DELAYLOAD:ncrypt.dll")]
-@[Link(ldflags: "/DELAYLOAD:crypt32.dll")]
-@[Link(ldflags: "/DELAYLOAD:wintrust.dll")]
-@[Link(ldflags: "/DELAYLOAD:cryptnet.dll")]
-@[Link(ldflags: "/DELAYLOAD:cryptxml.dll")]
-@[Link(ldflags: "/DELAYLOAD:infocardapi.dll")]
-{% else %}
-@[Link("advapi32")]
-@[Link("bcrypt")]
-@[Link("ncrypt")]
-@[Link("crypt32")]
-@[Link("wintrust")]
-@[Link("cryptnet")]
-@[Link("cryptxml")]
-@[Link("infocardapi")]
-{% end %}
-lib LibWin32
+module Win32cr::Security::Cryptography
   alias HCRYPTASYNC = LibC::IntPtrT
   alias HCERTCHAINENGINE = LibC::IntPtrT
   alias BCRYPT_ALG_HANDLE = LibC::IntPtrT
   alias BCRYPT_KEY_HANDLE = LibC::IntPtrT
+  alias NCRYPT_HANDLE = LibC::UIntPtrT
+  alias NCRYPT_PROV_HANDLE = LibC::UIntPtrT
+  alias NCRYPT_KEY_HANDLE = LibC::UIntPtrT
+  alias NCRYPT_HASH_HANDLE = LibC::UIntPtrT
+  alias NCRYPT_SECRET_HANDLE = LibC::UIntPtrT
+  alias HCRYPTPROV_LEGACY = LibC::UIntPtrT
+  alias HCRYPTPROV_OR_NCRYPT_KEY_HANDLE = LibC::UIntPtrT
+  alias HCERTSTORE = Void*
+  alias HCERTSTOREPROV = Void*
+  alias PFN_NCRYPT_ALLOC = Proc(LibC::UIntPtrT, Void*)*
+
+  alias PFN_NCRYPT_FREE = Proc(Void*, Void)*
+
+  alias PCRYPT_DECRYPT_PRIVATE_KEY_FUNC = Proc(Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, UInt8*, UInt32*, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC = Proc(Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, UInt8*, UInt32*, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PCRYPT_RESOLVE_HCRYPTPROV_FUNC = Proc(Win32cr::Security::Cryptography::CRYPT_PRIVATE_KEY_INFO*, LibC::UIntPtrT*, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CRYPT_ALLOC = Proc(LibC::UIntPtrT, Void*)*
+
+  alias PFN_CRYPT_FREE = Proc(Void*, Void)*
+
+  alias PFN_CRYPT_ENUM_OID_FUNC = Proc(UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, UInt32*, Win32cr::Foundation::PWSTR*, UInt8**, UInt32*, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CRYPT_ENUM_OID_INFO = Proc(Win32cr::Security::Cryptography::CRYPT_OID_INFO*, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_STREAM_OUTPUT = Proc(Void*, UInt8*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_ALLOC = Proc(LibC::UIntPtrT, Void*)*
+
+  alias PFN_CMSG_FREE = Proc(Void*, Void)*
+
+  alias PFN_CMSG_GEN_ENCRYPT_KEY = Proc(LibC::UIntPtrT*, Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Void*, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, Win32cr::Security::Cryptography::PFN_CMSG_ALLOC, LibC::UIntPtrT*, UInt8**, UInt32*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_EXPORT_ENCRYPT_KEY = Proc(LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, UInt8*, UInt32*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_IMPORT_ENCRYPT_KEY = Proc(LibC::UIntPtrT, UInt32, Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, UInt8*, UInt32, LibC::UIntPtrT*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_GEN_CONTENT_ENCRYPT_KEY = Proc(Win32cr::Security::Cryptography::CMSG_CONTENT_ENCRYPT_INFO*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_EXPORT_KEY_TRANS = Proc(Win32cr::Security::Cryptography::CMSG_CONTENT_ENCRYPT_INFO*, Win32cr::Security::Cryptography::CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO*, Win32cr::Security::Cryptography::CMSG_KEY_TRANS_ENCRYPT_INFO*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_EXPORT_KEY_AGREE = Proc(Win32cr::Security::Cryptography::CMSG_CONTENT_ENCRYPT_INFO*, Win32cr::Security::Cryptography::CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO*, Win32cr::Security::Cryptography::CMSG_KEY_AGREE_ENCRYPT_INFO*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_EXPORT_MAIL_LIST = Proc(Win32cr::Security::Cryptography::CMSG_CONTENT_ENCRYPT_INFO*, Win32cr::Security::Cryptography::CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO*, Win32cr::Security::Cryptography::CMSG_MAIL_LIST_ENCRYPT_INFO*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_IMPORT_KEY_TRANS = Proc(Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Win32cr::Security::Cryptography::CMSG_CTRL_KEY_TRANS_DECRYPT_PARA*, UInt32, Void*, LibC::UIntPtrT*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_IMPORT_KEY_AGREE = Proc(Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Win32cr::Security::Cryptography::CMSG_CTRL_KEY_AGREE_DECRYPT_PARA*, UInt32, Void*, LibC::UIntPtrT*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_IMPORT_MAIL_LIST = Proc(Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Win32cr::Security::Cryptography::CMSG_CTRL_MAIL_LIST_DECRYPT_PARA*, UInt32, Void*, LibC::UIntPtrT*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_CNG_IMPORT_KEY_TRANS = Proc(Win32cr::Security::Cryptography::CMSG_CNG_CONTENT_DECRYPT_INFO*, Win32cr::Security::Cryptography::CMSG_CTRL_KEY_TRANS_DECRYPT_PARA*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_CNG_IMPORT_KEY_AGREE = Proc(Win32cr::Security::Cryptography::CMSG_CNG_CONTENT_DECRYPT_INFO*, Win32cr::Security::Cryptography::CMSG_CTRL_KEY_AGREE_DECRYPT_PARA*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CMSG_CNG_IMPORT_CONTENT_ENCRYPT_KEY = Proc(Win32cr::Security::Cryptography::CMSG_CNG_CONTENT_DECRYPT_INFO*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_DLL_OPEN_STORE_PROV_FUNC = Proc(Win32cr::Foundation::PSTR, Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, Win32cr::Security::Cryptography::CERT_OPEN_STORE_FLAGS, Void*, Win32cr::Security::Cryptography::HCERTSTORE, Win32cr::Security::Cryptography::CERT_STORE_PROV_INFO*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_CLOSE = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, UInt32, Void)*
+
+  alias PFN_CERT_STORE_PROV_READ_CERT = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CERT_CONTEXT*, UInt32, Win32cr::Security::Cryptography::CERT_CONTEXT**, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_WRITE_CERT = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CERT_CONTEXT*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_DELETE_CERT = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CERT_CONTEXT*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_SET_CERT_PROPERTY = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CERT_CONTEXT*, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_READ_CRL = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CRL_CONTEXT*, UInt32, Win32cr::Security::Cryptography::CRL_CONTEXT**, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_WRITE_CRL = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CRL_CONTEXT*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_DELETE_CRL = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CRL_CONTEXT*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_SET_CRL_PROPERTY = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CRL_CONTEXT*, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_READ_CTL = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CTL_CONTEXT*, UInt32, Win32cr::Security::Cryptography::CTL_CONTEXT**, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_WRITE_CTL = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CTL_CONTEXT*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_DELETE_CTL = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CTL_CONTEXT*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_SET_CTL_PROPERTY = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CTL_CONTEXT*, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_CONTROL = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_FIND_CERT = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CERT_STORE_PROV_FIND_INFO*, Win32cr::Security::Cryptography::CERT_CONTEXT*, UInt32, Void**, Win32cr::Security::Cryptography::CERT_CONTEXT**, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_FREE_FIND_CERT = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CERT_CONTEXT*, Void*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_GET_CERT_PROPERTY = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CERT_CONTEXT*, UInt32, UInt32, Void*, UInt32*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_FIND_CRL = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CERT_STORE_PROV_FIND_INFO*, Win32cr::Security::Cryptography::CRL_CONTEXT*, UInt32, Void**, Win32cr::Security::Cryptography::CRL_CONTEXT**, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_FREE_FIND_CRL = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CRL_CONTEXT*, Void*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_GET_CRL_PROPERTY = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CRL_CONTEXT*, UInt32, UInt32, Void*, UInt32*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_FIND_CTL = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CERT_STORE_PROV_FIND_INFO*, Win32cr::Security::Cryptography::CTL_CONTEXT*, UInt32, Void**, Win32cr::Security::Cryptography::CTL_CONTEXT**, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_FREE_FIND_CTL = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CTL_CONTEXT*, Void*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_STORE_PROV_GET_CTL_PROPERTY = Proc(Win32cr::Security::Cryptography::HCERTSTOREPROV, Win32cr::Security::Cryptography::CTL_CONTEXT*, UInt32, UInt32, Void*, UInt32*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_CREATE_CONTEXT_SORT_FUNC = Proc(UInt32, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_ENUM_SYSTEM_STORE_LOCATION = Proc(Win32cr::Foundation::PWSTR, UInt32, Void*, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_ENUM_SYSTEM_STORE = Proc(Void*, Win32cr::Security::Cryptography::CERT_SYSTEM_STORE_FLAGS, Win32cr::Security::Cryptography::CERT_SYSTEM_STORE_INFO*, Void*, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_ENUM_PHYSICAL_STORE = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CERT_PHYSICAL_STORE_INFO*, Void*, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC = Proc(UInt32, Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Void**, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC = Proc(Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt32, Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Void*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt8*, UInt32*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC = Proc(UInt32, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Void*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt8*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC = Proc(Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt32, Win32cr::Foundation::PSTR, UInt32, Void*, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, UInt32*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC = Proc(Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, UInt32, Win32cr::Foundation::PSTR, UInt32, Void*, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, UInt32*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC = Proc(UInt32, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, UInt32, Void*, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_IMPORT_PRIV_KEY_FUNC = Proc(LibC::UIntPtrT, Win32cr::Security::Cryptography::CRYPT_PRIVATE_KEY_INFO*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_EXPORT_PRIV_KEY_FUNC = Proc(LibC::UIntPtrT, UInt32, Win32cr::Foundation::PSTR, UInt32, Void*, Win32cr::Security::Cryptography::CRYPT_PRIVATE_KEY_INFO*, UInt32*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CRYPT_GET_SIGNER_CERTIFICATE = Proc(Void*, UInt32, Win32cr::Security::Cryptography::CERT_INFO*, Win32cr::Security::Cryptography::HCERTSTORE, Win32cr::Security::Cryptography::CERT_CONTEXT*)*
+
+  alias PFN_CRYPT_ASYNC_PARAM_FREE_FUNC = Proc(Win32cr::Foundation::PSTR, Void*, Void)*
+
+  alias PFN_FREE_ENCODED_OBJECT_FUNC = Proc(Win32cr::Foundation::PSTR, Win32cr::Security::Cryptography::CRYPT_BLOB_ARRAY*, Void*, Void)*
+
+  alias PFN_CRYPT_CANCEL_RETRIEVAL = Proc(UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CRYPT_ASYNC_RETRIEVAL_COMPLETION_FUNC = Proc(Void*, UInt32, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Void*, Void)*
+
+  alias PFN_CANCEL_ASYNC_RETRIEVAL_FUNC = Proc(Win32cr::Security::Cryptography::HCRYPTASYNC, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CRYPT_ENUM_KEYID_PROP = Proc(Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, UInt32, Void*, Void*, UInt32, UInt32*, Void**, UInt32*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK = Proc(Win32cr::Security::Cryptography::CERT_CONTEXT*, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_SERVER_OCSP_RESPONSE_UPDATE_CALLBACK = Proc(Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, Win32cr::Security::Cryptography::CERT_SERVER_OCSP_RESPONSE_CONTEXT*, Win32cr::Security::Cryptography::CRL_CONTEXT*, Win32cr::Security::Cryptography::CRL_CONTEXT*, Void*, UInt32, Void)*
+
+  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FLUSH = Proc(Void*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB**, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_GET = Proc(Void*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, UInt32, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, UInt8**, UInt32*, Win32cr::Foundation::PWSTR*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB**, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE = Proc(Win32cr::Security::Cryptography::CRYPT_OBJECT_LOCATOR_RELEASE_REASON, Void*, Void)*
+
+  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_PASSWORD = Proc(Void*, Win32cr::Foundation::PWSTR, Void)*
+
+  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE = Proc(Void*, UInt8*, Void)*
+
+  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_IDENTIFIER = Proc(Void*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Void)*
+
+  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_INITIALIZE = Proc(Win32cr::Security::Cryptography::PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FLUSH, Void*, UInt32*, Win32cr::Security::Cryptography::CRYPT_OBJECT_LOCATOR_PROVIDER_TABLE**, Void**, Win32cr::Foundation::BOOL)*
+
+  alias PFN_CERT_IS_WEAK_HASH = Proc(UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, Win32cr::Foundation::FILETIME*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+
+  alias PFNCryptStreamOutputCallback = Proc(Void*, UInt8*, LibC::UIntPtrT, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)*
+
+  alias PFNCryptStreamOutputCallbackEx = Proc(Void*, UInt8*, LibC::UIntPtrT, Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)*
+
+  alias PFN_CRYPT_XML_WRITE_CALLBACK = Proc(Void*, UInt8*, UInt32, Win32cr::Foundation::HRESULT)*
+
+  alias PFN_CRYPT_XML_DATA_PROVIDER_READ = Proc(Void*, UInt8*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)*
+
+  alias PFN_CRYPT_XML_DATA_PROVIDER_CLOSE = Proc(Void*, Win32cr::Foundation::HRESULT)*
+
+  alias PFN_CRYPT_XML_CREATE_TRANSFORM = Proc(Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*, Win32cr::Security::Cryptography::CRYPT_XML_DATA_PROVIDER*, Win32cr::Security::Cryptography::CRYPT_XML_DATA_PROVIDER*, Win32cr::Foundation::HRESULT)*
+
+  alias PFN_CRYPT_XML_ENUM_ALG_INFO = Proc(Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM_INFO*, Void*, Win32cr::Foundation::BOOL)*
+
+  alias CryptXmlDllGetInterface = Proc(UInt32, Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM_INFO*, Win32cr::Security::Cryptography::CRYPT_XML_CRYPTOGRAPHIC_INTERFACE*, Win32cr::Foundation::HRESULT)*
+
+  alias CryptXmlDllEncodeAlgorithm = Proc(Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM_INFO*, Win32cr::Security::Cryptography::CRYPT_XML_CHARSET, Void*, Win32cr::Security::Cryptography::PFN_CRYPT_XML_WRITE_CALLBACK, Win32cr::Foundation::HRESULT)*
+
+  alias CryptXmlDllCreateDigest = Proc(Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*, UInt32*, Void**, Win32cr::Foundation::HRESULT)*
+
+  alias CryptXmlDllDigestData = Proc(Void*, UInt8*, UInt32, Win32cr::Foundation::HRESULT)*
+
+  alias CryptXmlDllFinalizeDigest = Proc(Void*, UInt8*, UInt32, Win32cr::Foundation::HRESULT)*
+
+  alias CryptXmlDllCloseDigest = Proc(Void*, Win32cr::Foundation::HRESULT)*
+
+  alias CryptXmlDllSignData = Proc(Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*, Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)*
+
+  alias CryptXmlDllVerifySignature = Proc(Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, UInt8*, UInt32, UInt8*, UInt32, Win32cr::Foundation::HRESULT)*
+
+  alias CryptXmlDllGetAlgorithmInfo = Proc(Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*, Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM_INFO**, Win32cr::Foundation::HRESULT)*
+
+  alias CryptXmlDllEncodeKeyValue = Proc(Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::CRYPT_XML_CHARSET, Void*, Win32cr::Security::Cryptography::PFN_CRYPT_XML_WRITE_CALLBACK, Win32cr::Foundation::HRESULT)*
+
+  alias CryptXmlDllCreateKey = Proc(Win32cr::Security::Cryptography::CRYPT_XML_BLOB*, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, Win32cr::Foundation::HRESULT)*
 
   CERT_COMPARE_SHIFT = 16_i32
   BCRYPT_OBJECT_ALIGNMENT = 16_u32
+  BCRYPT_KDF_HASH = "HASH"
+  BCRYPT_KDF_HMAC = "HMAC"
+  BCRYPT_KDF_TLS_PRF = "TLS_PRF"
+  BCRYPT_KDF_SP80056A_CONCAT = "SP800_56A_CONCAT"
+  BCRYPT_KDF_RAW_SECRET = "TRUNCATE"
+  BCRYPT_KDF_HKDF = "HKDF"
   KDF_HASH_ALGORITHM = 0_u32
   KDF_SECRET_PREPEND = 1_u32
   KDF_SECRET_APPEND = 2_u32
@@ -62,6 +242,45 @@ lib LibWin32
   BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO_VERSION = 1_u32
   BCRYPT_AUTH_MODE_CHAIN_CALLS_FLAG = 1_u32
   BCRYPT_AUTH_MODE_IN_PROGRESS_FLAG = 2_u32
+  BCRYPT_OPAQUE_KEY_BLOB = "OpaqueKeyBlob"
+  BCRYPT_KEY_DATA_BLOB = "KeyDataBlob"
+  BCRYPT_AES_WRAP_KEY_BLOB = "Rfc3565KeyWrapBlob"
+  BCRYPT_OBJECT_LENGTH = "ObjectLength"
+  BCRYPT_ALGORITHM_NAME = "AlgorithmName"
+  BCRYPT_PROVIDER_HANDLE = "ProviderHandle"
+  BCRYPT_CHAINING_MODE = "ChainingMode"
+  BCRYPT_BLOCK_LENGTH = "BlockLength"
+  BCRYPT_KEY_LENGTH = "KeyLength"
+  BCRYPT_KEY_OBJECT_LENGTH = "KeyObjectLength"
+  BCRYPT_KEY_STRENGTH = "KeyStrength"
+  BCRYPT_KEY_LENGTHS = "KeyLengths"
+  BCRYPT_BLOCK_SIZE_LIST = "BlockSizeList"
+  BCRYPT_EFFECTIVE_KEY_LENGTH = "EffectiveKeyLength"
+  BCRYPT_HASH_LENGTH = "HashDigestLength"
+  BCRYPT_HASH_OID_LIST = "HashOIDList"
+  BCRYPT_PADDING_SCHEMES = "PaddingSchemes"
+  BCRYPT_SIGNATURE_LENGTH = "SignatureLength"
+  BCRYPT_HASH_BLOCK_LENGTH = "HashBlockLength"
+  BCRYPT_AUTH_TAG_LENGTH = "AuthTagLength"
+  BCRYPT_PRIMITIVE_TYPE = "PrimitiveType"
+  BCRYPT_IS_KEYED_HASH = "IsKeyedHash"
+  BCRYPT_IS_REUSABLE_HASH = "IsReusableHash"
+  BCRYPT_MESSAGE_BLOCK_LENGTH = "MessageBlockLength"
+  BCRYPT_PUBLIC_KEY_LENGTH = "PublicKeyLength"
+  BCRYPT_PCP_PLATFORM_TYPE_PROPERTY = "PCP_PLATFORM_TYPE"
+  BCRYPT_PCP_PROVIDER_VERSION_PROPERTY = "PCP_PROVIDER_VERSION"
+  BCRYPT_MULTI_OBJECT_LENGTH = "MultiObjectLength"
+  BCRYPT_IS_IFX_TPM_WEAK_KEY = "IsIfxTpmWeakKey"
+  BCRYPT_HKDF_HASH_ALGORITHM = "HkdfHashAlgorithm"
+  BCRYPT_HKDF_SALT_AND_FINALIZE = "HkdfSaltAndFinalize"
+  BCRYPT_HKDF_PRK_AND_FINALIZE = "HkdfPrkAndFinalize"
+  BCRYPT_INITIALIZATION_VECTOR = "IV"
+  BCRYPT_CHAIN_MODE_NA = "ChainingModeN/A"
+  BCRYPT_CHAIN_MODE_CBC = "ChainingModeCBC"
+  BCRYPT_CHAIN_MODE_ECB = "ChainingModeECB"
+  BCRYPT_CHAIN_MODE_CFB = "ChainingModeCFB"
+  BCRYPT_CHAIN_MODE_CCM = "ChainingModeCCM"
+  BCRYPT_CHAIN_MODE_GCM = "ChainingModeGCM"
   BCRYPT_SUPPORTED_PAD_ROUTER = 1_u32
   BCRYPT_SUPPORTED_PAD_PKCS1_ENC = 2_u32
   BCRYPT_SUPPORTED_PAD_PKCS1_SIG = 4_u32
@@ -71,6 +290,20 @@ lib LibWin32
   BCRYPT_GENERATE_IV = 32_u32
   BCRYPT_PAD_PKCS1_OPTIONAL_HASH_OID = 16_u32
   BCRYPTBUFFER_VERSION = 0_u32
+  BCRYPT_PUBLIC_KEY_BLOB = "PUBLICBLOB"
+  BCRYPT_PRIVATE_KEY_BLOB = "PRIVATEBLOB"
+  BCRYPT_RSAPUBLIC_BLOB = "RSAPUBLICBLOB"
+  BCRYPT_RSAPRIVATE_BLOB = "RSAPRIVATEBLOB"
+  LEGACY_RSAPUBLIC_BLOB = "CAPIPUBLICBLOB"
+  LEGACY_RSAPRIVATE_BLOB = "CAPIPRIVATEBLOB"
+  BCRYPT_RSAFULLPRIVATE_BLOB = "RSAFULLPRIVATEBLOB"
+  BCRYPT_GLOBAL_PARAMETERS = "SecretAgreementParam"
+  BCRYPT_PRIVATE_KEY = "PrivKeyVal"
+  BCRYPT_ECCPUBLIC_BLOB = "ECCPUBLICBLOB"
+  BCRYPT_ECCPRIVATE_BLOB = "ECCPRIVATEBLOB"
+  BCRYPT_ECCFULLPUBLIC_BLOB = "ECCFULLPUBLICBLOB"
+  BCRYPT_ECCFULLPRIVATE_BLOB = "ECCFULLPRIVATEBLOB"
+  SSL_ECCPUBLIC_BLOB = "SSLECCPUBLICBLOB"
   BCRYPT_ECDH_PUBLIC_P256_MAGIC = 827016005_u32
   BCRYPT_ECDH_PRIVATE_P256_MAGIC = 843793221_u32
   BCRYPT_ECDH_PUBLIC_P384_MAGIC = 860570437_u32
@@ -88,14 +321,116 @@ lib LibWin32
   BCRYPT_ECDSA_PUBLIC_GENERIC_MAGIC = 1346650949_u32
   BCRYPT_ECDSA_PRIVATE_GENERIC_MAGIC = 1447314245_u32
   BCRYPT_ECC_FULLKEY_BLOB_V1 = 1_u32
+  BCRYPT_DH_PUBLIC_BLOB = "DHPUBLICBLOB"
+  BCRYPT_DH_PRIVATE_BLOB = "DHPRIVATEBLOB"
+  LEGACY_DH_PUBLIC_BLOB = "CAPIDHPUBLICBLOB"
+  LEGACY_DH_PRIVATE_BLOB = "CAPIDHPRIVATEBLOB"
+  BCRYPT_DH_PARAMETERS = "DHParameters"
   BCRYPT_DH_PARAMETERS_MAGIC = 1297107012_u32
+  BCRYPT_DSA_PUBLIC_BLOB = "DSAPUBLICBLOB"
+  BCRYPT_DSA_PRIVATE_BLOB = "DSAPRIVATEBLOB"
+  LEGACY_DSA_PUBLIC_BLOB = "CAPIDSAPUBLICBLOB"
+  LEGACY_DSA_PRIVATE_BLOB = "CAPIDSAPRIVATEBLOB"
+  LEGACY_DSA_V2_PUBLIC_BLOB = "V2CAPIDSAPUBLICBLOB"
+  LEGACY_DSA_V2_PRIVATE_BLOB = "V2CAPIDSAPRIVATEBLOB"
   BCRYPT_DSA_PUBLIC_MAGIC_V2 = 843206724_u32
   BCRYPT_DSA_PRIVATE_MAGIC_V2 = 844517444_u32
   BCRYPT_KEY_DATA_BLOB_MAGIC = 1296188491_u32
   BCRYPT_KEY_DATA_BLOB_VERSION1 = 1_u32
+  BCRYPT_DSA_PARAMETERS = "DSAParameters"
   BCRYPT_DSA_PARAMETERS_MAGIC = 1297109828_u32
   BCRYPT_DSA_PARAMETERS_MAGIC_V2 = 843927620_u32
+  BCRYPT_ECC_PARAMETERS = "ECCParameters"
+  BCRYPT_ECC_CURVE_NAME = "ECCCurveName"
+  BCRYPT_ECC_CURVE_NAME_LIST = "ECCCurveNameList"
   BCRYPT_ECC_PARAMETERS_MAGIC = 1346585413_u32
+  BCRYPT_ECC_CURVE_BRAINPOOLP160R1 = "brainpoolP160r1"
+  BCRYPT_ECC_CURVE_BRAINPOOLP160T1 = "brainpoolP160t1"
+  BCRYPT_ECC_CURVE_BRAINPOOLP192R1 = "brainpoolP192r1"
+  BCRYPT_ECC_CURVE_BRAINPOOLP192T1 = "brainpoolP192t1"
+  BCRYPT_ECC_CURVE_BRAINPOOLP224R1 = "brainpoolP224r1"
+  BCRYPT_ECC_CURVE_BRAINPOOLP224T1 = "brainpoolP224t1"
+  BCRYPT_ECC_CURVE_BRAINPOOLP256R1 = "brainpoolP256r1"
+  BCRYPT_ECC_CURVE_BRAINPOOLP256T1 = "brainpoolP256t1"
+  BCRYPT_ECC_CURVE_BRAINPOOLP320R1 = "brainpoolP320r1"
+  BCRYPT_ECC_CURVE_BRAINPOOLP320T1 = "brainpoolP320t1"
+  BCRYPT_ECC_CURVE_BRAINPOOLP384R1 = "brainpoolP384r1"
+  BCRYPT_ECC_CURVE_BRAINPOOLP384T1 = "brainpoolP384t1"
+  BCRYPT_ECC_CURVE_BRAINPOOLP512R1 = "brainpoolP512r1"
+  BCRYPT_ECC_CURVE_BRAINPOOLP512T1 = "brainpoolP512t1"
+  BCRYPT_ECC_CURVE_25519 = "curve25519"
+  BCRYPT_ECC_CURVE_EC192WAPI = "ec192wapi"
+  BCRYPT_ECC_CURVE_NISTP192 = "nistP192"
+  BCRYPT_ECC_CURVE_NISTP224 = "nistP224"
+  BCRYPT_ECC_CURVE_NISTP256 = "nistP256"
+  BCRYPT_ECC_CURVE_NISTP384 = "nistP384"
+  BCRYPT_ECC_CURVE_NISTP521 = "nistP521"
+  BCRYPT_ECC_CURVE_NUMSP256T1 = "numsP256t1"
+  BCRYPT_ECC_CURVE_NUMSP384T1 = "numsP384t1"
+  BCRYPT_ECC_CURVE_NUMSP512T1 = "numsP512t1"
+  BCRYPT_ECC_CURVE_SECP160K1 = "secP160k1"
+  BCRYPT_ECC_CURVE_SECP160R1 = "secP160r1"
+  BCRYPT_ECC_CURVE_SECP160R2 = "secP160r2"
+  BCRYPT_ECC_CURVE_SECP192K1 = "secP192k1"
+  BCRYPT_ECC_CURVE_SECP192R1 = "secP192r1"
+  BCRYPT_ECC_CURVE_SECP224K1 = "secP224k1"
+  BCRYPT_ECC_CURVE_SECP224R1 = "secP224r1"
+  BCRYPT_ECC_CURVE_SECP256K1 = "secP256k1"
+  BCRYPT_ECC_CURVE_SECP256R1 = "secP256r1"
+  BCRYPT_ECC_CURVE_SECP384R1 = "secP384r1"
+  BCRYPT_ECC_CURVE_SECP521R1 = "secP521r1"
+  BCRYPT_ECC_CURVE_WTLS7 = "wtls7"
+  BCRYPT_ECC_CURVE_WTLS9 = "wtls9"
+  BCRYPT_ECC_CURVE_WTLS12 = "wtls12"
+  BCRYPT_ECC_CURVE_X962P192V1 = "x962P192v1"
+  BCRYPT_ECC_CURVE_X962P192V2 = "x962P192v2"
+  BCRYPT_ECC_CURVE_X962P192V3 = "x962P192v3"
+  BCRYPT_ECC_CURVE_X962P239V1 = "x962P239v1"
+  BCRYPT_ECC_CURVE_X962P239V2 = "x962P239v2"
+  BCRYPT_ECC_CURVE_X962P239V3 = "x962P239v3"
+  BCRYPT_ECC_CURVE_X962P256V1 = "x962P256v1"
+  MS_PRIMITIVE_PROVIDER = "Microsoft Primitive Provider"
+  MS_PLATFORM_CRYPTO_PROVIDER = "Microsoft Platform Crypto Provider"
+  BCRYPT_RSA_ALGORITHM = "RSA"
+  BCRYPT_RSA_SIGN_ALGORITHM = "RSA_SIGN"
+  BCRYPT_DH_ALGORITHM = "DH"
+  BCRYPT_DSA_ALGORITHM = "DSA"
+  BCRYPT_RC2_ALGORITHM = "RC2"
+  BCRYPT_RC4_ALGORITHM = "RC4"
+  BCRYPT_AES_ALGORITHM = "AES"
+  BCRYPT_DES_ALGORITHM = "DES"
+  BCRYPT_DESX_ALGORITHM = "DESX"
+  BCRYPT_3DES_ALGORITHM = "3DES"
+  BCRYPT_3DES_112_ALGORITHM = "3DES_112"
+  BCRYPT_MD2_ALGORITHM = "MD2"
+  BCRYPT_MD4_ALGORITHM = "MD4"
+  BCRYPT_MD5_ALGORITHM = "MD5"
+  BCRYPT_SHA1_ALGORITHM = "SHA1"
+  BCRYPT_SHA256_ALGORITHM = "SHA256"
+  BCRYPT_SHA384_ALGORITHM = "SHA384"
+  BCRYPT_SHA512_ALGORITHM = "SHA512"
+  BCRYPT_AES_GMAC_ALGORITHM = "AES-GMAC"
+  BCRYPT_AES_CMAC_ALGORITHM = "AES-CMAC"
+  BCRYPT_ECDSA_P256_ALGORITHM = "ECDSA_P256"
+  BCRYPT_ECDSA_P384_ALGORITHM = "ECDSA_P384"
+  BCRYPT_ECDSA_P521_ALGORITHM = "ECDSA_P521"
+  BCRYPT_ECDH_P256_ALGORITHM = "ECDH_P256"
+  BCRYPT_ECDH_P384_ALGORITHM = "ECDH_P384"
+  BCRYPT_ECDH_P521_ALGORITHM = "ECDH_P521"
+  BCRYPT_RNG_ALGORITHM = "RNG"
+  BCRYPT_RNG_FIPS186_DSA_ALGORITHM = "FIPS186DSARNG"
+  BCRYPT_RNG_DUAL_EC_ALGORITHM = "DUALECRNG"
+  BCRYPT_SP800108_CTR_HMAC_ALGORITHM = "SP800_108_CTR_HMAC"
+  BCRYPT_SP80056A_CONCAT_ALGORITHM = "SP800_56A_CONCAT"
+  BCRYPT_PBKDF2_ALGORITHM = "PBKDF2"
+  BCRYPT_CAPI_KDF_ALGORITHM = "CAPI_KDF"
+  BCRYPT_TLS1_1_KDF_ALGORITHM = "TLS1_1_KDF"
+  BCRYPT_TLS1_2_KDF_ALGORITHM = "TLS1_2_KDF"
+  BCRYPT_ECDSA_ALGORITHM = "ECDSA"
+  BCRYPT_ECDH_ALGORITHM = "ECDH"
+  BCRYPT_XTS_AES_ALGORITHM = "XTS-AES"
+  BCRYPT_HKDF_ALGORITHM = "HKDF"
+  BCRYPT_CHACHA20_POLY1305_ALGORITHM = "CHACHA20_POLY1305"
   BCRYPT_KEY_DERIVATION_INTERFACE = 7_u32
   BCRYPT_MD2_ALG_HANDLE = 1_u32
   BCRYPT_MD4_ALG_HANDLE = 17_u32
@@ -175,6 +510,35 @@ lib LibWin32
   CRYPT_OVERWRITE = 1_u32
   CRYPT_PRIORITY_TOP = 0_u32
   CRYPT_PRIORITY_BOTTOM = 4294967295_u32
+  CRYPT_DEFAULT_CONTEXT = "Default"
+  Wszxmlns_digsig = "http://www.w3.org/2000/09/xmldsig#"
+  Wszxmlns_digsig_signatureproperties = "http://www.w3.org/2000/09/xmldsig#SignatureProperties"
+  Wszxmlns_digsig_id = "Id"
+  Wszuri_xmlns_digsig_base64 = "http://www.w3.org/2000/09/xmldsig#base64"
+  Wszuri_xmlns_digsig_sha1 = "http://www.w3.org/2000/09/xmldsig#sha1"
+  Wszuri_xmlns_digsig_sha256 = "http://www.w3.org/2001/04/xmlenc#sha256"
+  Wszuri_xmlns_digsig_sha384 = "http://www.w3.org/2001/04/xmldsig-more#sha384"
+  Wszuri_xmlns_digsig_sha512 = "http://www.w3.org/2001/04/xmlenc#sha512"
+  Wszuri_xmlns_digsig_rsa_sha1 = "http://www.w3.org/2000/09/xmldsig#rsa-sha1"
+  Wszuri_xmlns_digsig_dsa_sha1 = "http://www.w3.org/2000/09/xmldsig#dsa-sha1"
+  Wszuri_xmlns_digsig_rsa_sha256 = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"
+  Wszuri_xmlns_digsig_rsa_sha384 = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha384"
+  Wszuri_xmlns_digsig_rsa_sha512 = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"
+  Wszuri_xmlns_digsig_ecdsa_sha1 = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha1"
+  Wszuri_xmlns_digsig_ecdsa_sha256 = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256"
+  Wszuri_xmlns_digsig_ecdsa_sha384 = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha384"
+  Wszuri_xmlns_digsig_ecdsa_sha512 = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha512"
+  Wszuri_xmlns_digsig_hmac_sha1 = "http://www.w3.org/2000/09/xmldsig#hmac-sha1"
+  Wszuri_xmlns_digsig_hmac_sha256 = "http://www.w3.org/2001/04/xmldsig-more#hmac-sha256"
+  Wszuri_xmlns_digsig_hmac_sha384 = "http://www.w3.org/2001/04/xmldsig-more#hmac-sha384"
+  Wszuri_xmlns_digsig_hmac_sha512 = "http://www.w3.org/2001/04/xmldsig-more#hmac-sha512"
+  Wszuri_canonicalization_c14n = "http://www.w3.org/TR/2001/REC-xml-c14n-20010315"
+  Wszuri_canonicalization_c14nc = "http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"
+  Wszuri_canonicalization_exslusive_c14n = "http://www.w3.org/2001/10/xml-exc-c14n#"
+  Wszuri_canonicalization_exslusive_c14nc = "http://www.w3.org/2001/10/xml-exc-c14n#WithComments"
+  Wszuri_transform_xpath = "http://www.w3.org/TR/1999/REC-xpath-19991116"
+  Wszuri_xmlns_transform_base64 = "http://www.w3.org/2000/09/xmldsig#base64"
+  Wszuri_xmlns_transform_enveloped = "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
   CRYPT_XML_BLOB_MAX = 2147483640_u32
   CRYPT_XML_ID_MAX = 256_u32
   CRYPT_XML_SIGNATURES_MAX = 16_u32
@@ -211,12 +575,14 @@ lib LibWin32
   CRYPT_XML_FLAG_ADD_OBJECT_CREATE_COPY = 1_u32
   CRYPT_XML_FLAG_CREATE_REFERENCE_AS_OBJECT = 1_u32
   CRYPT_XML_DIGEST_REFERENCE_DATA_TRANSFORMED = 1_u32
-  CRYPT_XML_GROUP_ID_HASH = 1_u32
-  CRYPT_XML_GROUP_ID_SIGN = 2_u32
   CRYPT_XML_ALGORITHM_INFO_FIND_BY_URI = 1_u32
   CRYPT_XML_ALGORITHM_INFO_FIND_BY_NAME = 2_u32
   CRYPT_XML_ALGORITHM_INFO_FIND_BY_CNG_ALGID = 3_u32
   CRYPT_XML_ALGORITHM_INFO_FIND_BY_CNG_SIGN_ALGID = 4_u32
+  Szforce_key_protection = "ForceKeyProtection"
+  Dwforce_key_protection_disabled = 0_u32
+  Dwforce_key_protection_user_select = 1_u32
+  Dwforce_key_protection_high = 2_u32
   CRYPTPROTECT_PROMPT_ON_UNPROTECT = 1_u32
   CRYPTPROTECT_PROMPT_ON_PROTECT = 2_u32
   CRYPTPROTECT_PROMPT_RESERVED = 4_u32
@@ -237,8 +603,53 @@ lib LibWin32
   CRYPTPROTECTMEMORY_SAME_LOGON = 2_u32
   NCRYPT_MAX_KEY_NAME_LENGTH = 512_u32
   NCRYPT_MAX_ALG_ID_LENGTH = 512_u32
+  MS_KEY_STORAGE_PROVIDER = "Microsoft Software Key Storage Provider"
+  MS_SMART_CARD_KEY_STORAGE_PROVIDER = "Microsoft Smart Card Key Storage Provider"
+  MS_PLATFORM_KEY_STORAGE_PROVIDER = "Microsoft Platform Crypto Provider"
+  MS_NGC_KEY_STORAGE_PROVIDER = "Microsoft Passport Key Storage Provider"
+  TPM_RSA_SRK_SEAL_KEY = "MICROSOFT_PCP_KSP_RSA_SEAL_KEY_3BD1C4BF-004E-4E2F-8A4D-0BF633DCB074"
+  NCRYPT_RSA_ALGORITHM = "RSA"
+  NCRYPT_RSA_SIGN_ALGORITHM = "RSA_SIGN"
+  NCRYPT_DH_ALGORITHM = "DH"
+  NCRYPT_DSA_ALGORITHM = "DSA"
+  NCRYPT_MD2_ALGORITHM = "MD2"
+  NCRYPT_MD4_ALGORITHM = "MD4"
+  NCRYPT_MD5_ALGORITHM = "MD5"
+  NCRYPT_SHA1_ALGORITHM = "SHA1"
+  NCRYPT_SHA256_ALGORITHM = "SHA256"
+  NCRYPT_SHA384_ALGORITHM = "SHA384"
+  NCRYPT_SHA512_ALGORITHM = "SHA512"
+  NCRYPT_ECDSA_P256_ALGORITHM = "ECDSA_P256"
+  NCRYPT_ECDSA_P384_ALGORITHM = "ECDSA_P384"
+  NCRYPT_ECDSA_P521_ALGORITHM = "ECDSA_P521"
+  NCRYPT_ECDH_P256_ALGORITHM = "ECDH_P256"
+  NCRYPT_ECDH_P384_ALGORITHM = "ECDH_P384"
+  NCRYPT_ECDH_P521_ALGORITHM = "ECDH_P521"
+  NCRYPT_AES_ALGORITHM = "AES"
+  NCRYPT_RC2_ALGORITHM = "RC2"
+  NCRYPT_3DES_ALGORITHM = "3DES"
+  NCRYPT_DES_ALGORITHM = "DES"
+  NCRYPT_DESX_ALGORITHM = "DESX"
+  NCRYPT_3DES_112_ALGORITHM = "3DES_112"
+  NCRYPT_SP800108_CTR_HMAC_ALGORITHM = "SP800_108_CTR_HMAC"
+  NCRYPT_SP80056A_CONCAT_ALGORITHM = "SP800_56A_CONCAT"
+  NCRYPT_PBKDF2_ALGORITHM = "PBKDF2"
+  NCRYPT_CAPI_KDF_ALGORITHM = "CAPI_KDF"
+  NCRYPT_ECDSA_ALGORITHM = "ECDSA"
+  NCRYPT_ECDH_ALGORITHM = "ECDH"
+  NCRYPT_KEY_STORAGE_ALGORITHM = "KEY_STORAGE"
+  NCRYPT_HMAC_SHA256_ALGORITHM = "HMAC-SHA256"
   NCRYPT_KEY_DERIVATION_INTERFACE = 7_u32
   NCRYPT_KEY_PROTECTION_INTERFACE = 65540_u32
+  NCRYPT_RSA_ALGORITHM_GROUP = "RSA"
+  NCRYPT_DH_ALGORITHM_GROUP = "DH"
+  NCRYPT_DSA_ALGORITHM_GROUP = "DSA"
+  NCRYPT_ECDSA_ALGORITHM_GROUP = "ECDSA"
+  NCRYPT_ECDH_ALGORITHM_GROUP = "ECDH"
+  NCRYPT_AES_ALGORITHM_GROUP = "AES"
+  NCRYPT_RC2_ALGORITHM_GROUP = "RC2"
+  NCRYPT_DES_ALGORITHM_GROUP = "DES"
+  NCRYPT_KEY_DERIVATION_GROUP = "KEY_DERIVATION"
   NCRYPTBUFFER_VERSION = 0_u32
   NCRYPTBUFFER_EMPTY = 0_u32
   NCRYPTBUFFER_DATA = 1_u32
@@ -312,12 +723,111 @@ lib LibWin32
   NCRYPT_USE_PER_BOOT_KEY_FLAG = 262144_u32
   NCRYPT_KEY_DERIVATION_OPERATION = 64_u32
   NCRYPT_AUTHORITY_KEY_FLAG = 256_u32
+  NCRYPT_NAME_PROPERTY = "Name"
+  NCRYPT_UNIQUE_NAME_PROPERTY = "Unique Name"
+  NCRYPT_ALGORITHM_PROPERTY = "Algorithm Name"
+  NCRYPT_LENGTH_PROPERTY = "Length"
+  NCRYPT_LENGTHS_PROPERTY = "Lengths"
+  NCRYPT_BLOCK_LENGTH_PROPERTY = "Block Length"
+  NCRYPT_PUBLIC_LENGTH_PROPERTY = "PublicKeyLength"
+  NCRYPT_SIGNATURE_LENGTH_PROPERTY = "SignatureLength"
+  NCRYPT_CHAINING_MODE_PROPERTY = "Chaining Mode"
+  NCRYPT_AUTH_TAG_LENGTH = "AuthTagLength"
+  NCRYPT_UI_POLICY_PROPERTY = "UI Policy"
+  NCRYPT_EXPORT_POLICY_PROPERTY = "Export Policy"
+  NCRYPT_WINDOW_HANDLE_PROPERTY = "HWND Handle"
+  NCRYPT_USE_CONTEXT_PROPERTY = "Use Context"
+  NCRYPT_IMPL_TYPE_PROPERTY = "Impl Type"
+  NCRYPT_KEY_USAGE_PROPERTY = "Key Usage"
+  NCRYPT_KEY_TYPE_PROPERTY = "Key Type"
+  NCRYPT_VERSION_PROPERTY = "Version"
+  NCRYPT_SECURITY_DESCR_SUPPORT_PROPERTY = "Security Descr Support"
+  NCRYPT_SECURITY_DESCR_PROPERTY = "Security Descr"
+  NCRYPT_USE_COUNT_ENABLED_PROPERTY = "Enabled Use Count"
+  NCRYPT_USE_COUNT_PROPERTY = "Use Count"
+  NCRYPT_LAST_MODIFIED_PROPERTY = "Modified"
+  NCRYPT_MAX_NAME_LENGTH_PROPERTY = "Max Name Length"
+  NCRYPT_ALGORITHM_GROUP_PROPERTY = "Algorithm Group"
+  NCRYPT_DH_PARAMETERS_PROPERTY = "DHParameters"
+  NCRYPT_ECC_PARAMETERS_PROPERTY = "ECCParameters"
+  NCRYPT_ECC_CURVE_NAME_PROPERTY = "ECCCurveName"
+  NCRYPT_ECC_CURVE_NAME_LIST_PROPERTY = "ECCCurveNameList"
+  NCRYPT_USE_VIRTUAL_ISOLATION_PROPERTY = "Virtual Iso"
+  NCRYPT_USE_PER_BOOT_KEY_PROPERTY = "Per Boot Key"
+  NCRYPT_PROVIDER_HANDLE_PROPERTY = "Provider Handle"
+  NCRYPT_PIN_PROPERTY = "SmartCardPin"
+  NCRYPT_READER_PROPERTY = "SmartCardReader"
+  NCRYPT_SMARTCARD_GUID_PROPERTY = "SmartCardGuid"
+  NCRYPT_CERTIFICATE_PROPERTY = "SmartCardKeyCertificate"
+  NCRYPT_PIN_PROMPT_PROPERTY = "SmartCardPinPrompt"
+  NCRYPT_USER_CERTSTORE_PROPERTY = "SmartCardUserCertStore"
+  NCRYPT_ROOT_CERTSTORE_PROPERTY = "SmartcardRootCertStore"
+  NCRYPT_SECURE_PIN_PROPERTY = "SmartCardSecurePin"
+  NCRYPT_ASSOCIATED_ECDH_KEY = "SmartCardAssociatedECDHKey"
+  NCRYPT_SCARD_PIN_ID = "SmartCardPinId"
+  NCRYPT_SCARD_PIN_INFO = "SmartCardPinInfo"
+  NCRYPT_READER_ICON_PROPERTY = "SmartCardReaderIcon"
+  NCRYPT_KDF_SECRET_VALUE = "KDFKeySecret"
+  NCRYPT_DISMISS_UI_TIMEOUT_SEC_PROPERTY = "SmartCardDismissUITimeoutSeconds"
+  NCRYPT_PCP_PLATFORM_TYPE_PROPERTY = "PCP_PLATFORM_TYPE"
+  NCRYPT_PCP_PROVIDER_VERSION_PROPERTY = "PCP_PROVIDER_VERSION"
+  NCRYPT_PCP_EKPUB_PROPERTY = "PCP_EKPUB"
+  NCRYPT_PCP_EKCERT_PROPERTY = "PCP_EKCERT"
+  NCRYPT_PCP_EKNVCERT_PROPERTY = "PCP_EKNVCERT"
+  NCRYPT_PCP_RSA_EKPUB_PROPERTY = "PCP_RSA_EKPUB"
+  NCRYPT_PCP_RSA_EKCERT_PROPERTY = "PCP_RSA_EKCERT"
+  NCRYPT_PCP_RSA_EKNVCERT_PROPERTY = "PCP_RSA_EKNVCERT"
+  NCRYPT_PCP_ECC_EKPUB_PROPERTY = "PCP_ECC_EKPUB"
+  NCRYPT_PCP_ECC_EKCERT_PROPERTY = "PCP_ECC_EKCERT"
+  NCRYPT_PCP_ECC_EKNVCERT_PROPERTY = "PCP_ECC_EKNVCERT"
+  NCRYPT_PCP_SRKPUB_PROPERTY = "PCP_SRKPUB"
+  NCRYPT_PCP_PCRTABLE_PROPERTY = "PCP_PCRTABLE"
+  NCRYPT_PCP_CHANGEPASSWORD_PROPERTY = "PCP_CHANGEPASSWORD"
+  NCRYPT_PCP_PASSWORD_REQUIRED_PROPERTY = "PCP_PASSWORD_REQUIRED"
+  NCRYPT_PCP_USAGEAUTH_PROPERTY = "PCP_USAGEAUTH"
+  NCRYPT_PCP_MIGRATIONPASSWORD_PROPERTY = "PCP_MIGRATIONPASSWORD"
+  NCRYPT_PCP_EXPORT_ALLOWED_PROPERTY = "PCP_EXPORT_ALLOWED"
+  NCRYPT_PCP_STORAGEPARENT_PROPERTY = "PCP_STORAGEPARENT"
+  NCRYPT_PCP_PROVIDERHANDLE_PROPERTY = "PCP_PROVIDERMHANDLE"
+  NCRYPT_PCP_PLATFORMHANDLE_PROPERTY = "PCP_PLATFORMHANDLE"
+  NCRYPT_PCP_PLATFORM_BINDING_PCRMASK_PROPERTY = "PCP_PLATFORM_BINDING_PCRMASK"
+  NCRYPT_PCP_PLATFORM_BINDING_PCRDIGESTLIST_PROPERTY = "PCP_PLATFORM_BINDING_PCRDIGESTLIST"
+  NCRYPT_PCP_PLATFORM_BINDING_PCRDIGEST_PROPERTY = "PCP_PLATFORM_BINDING_PCRDIGEST"
+  NCRYPT_PCP_KEY_USAGE_POLICY_PROPERTY = "PCP_KEY_USAGE_POLICY"
+  NCRYPT_PCP_RSA_SCHEME_PROPERTY = "PCP_RSA_SCHEME"
+  NCRYPT_PCP_TPM12_IDBINDING_PROPERTY = "PCP_TPM12_IDBINDING"
+  NCRYPT_PCP_TPM12_IDBINDING_DYNAMIC_PROPERTY = "PCP_TPM12_IDBINDING_DYNAMIC"
+  NCRYPT_PCP_TPM12_IDACTIVATION_PROPERTY = "PCP_TPM12_IDACTIVATION"
+  NCRYPT_PCP_KEYATTESTATION_PROPERTY = "PCP_TPM12_KEYATTESTATION"
+  NCRYPT_PCP_ALTERNATE_KEY_STORAGE_LOCATION_PROPERTY = "PCP_ALTERNATE_KEY_STORAGE_LOCATION"
+  NCRYPT_PCP_PLATFORM_BINDING_PCRALGID_PROPERTY = "PCP_PLATFORM_BINDING_PCRALGID"
+  NCRYPT_PCP_HMAC_AUTH_POLICYREF = "PCP_HMAC_AUTH_POLICYREF"
+  NCRYPT_PCP_HMAC_AUTH_POLICYINFO = "PCP_HMAC_AUTH_POLICYINFO"
+  NCRYPT_PCP_HMAC_AUTH_NONCE = "PCP_HMAC_AUTH_NONCE"
+  NCRYPT_PCP_HMAC_AUTH_SIGNATURE = "PCP_HMAC_AUTH_SIGNATURE"
+  NCRYPT_PCP_HMAC_AUTH_TICKET = "PCP_HMAC_AUTH_TICKET"
+  NCRYPT_PCP_NO_DA_PROTECTION_PROPERTY = "PCP_NO_DA_PROTECTION"
+  NCRYPT_PCP_TPM_MANUFACTURER_ID_PROPERTY = "PCP_TPM_MANUFACTURER_ID"
+  NCRYPT_PCP_TPM_FW_VERSION_PROPERTY = "PCP_TPM_FW_VERSION"
+  NCRYPT_PCP_TPM2BNAME_PROPERTY = "PCP_TPM2BNAME"
+  NCRYPT_PCP_TPM_VERSION_PROPERTY = "PCP_TPM_VERSION"
+  NCRYPT_PCP_RAW_POLICYDIGEST_PROPERTY = "PCP_RAW_POLICYDIGEST"
+  NCRYPT_PCP_KEY_CREATIONHASH_PROPERTY = "PCP_KEY_CREATIONHASH"
+  NCRYPT_PCP_KEY_CREATIONTICKET_PROPERTY = "PCP_KEY_CREATIONTICKET"
+  NCRYPT_PCP_RSA_SCHEME_HASH_ALG_PROPERTY = "PCP_RSA_SCHEME_HASH_ALG"
+  NCRYPT_PCP_TPM_IFX_RSA_KEYGEN_PROHIBITED_PROPERTY = "PCP_TPM_IFX_RSA_KEYGEN_PROHIBITED"
+  NCRYPT_PCP_TPM_IFX_RSA_KEYGEN_VULNERABILITY_PROPERTY = "PCP_TPM_IFX_RSA_KEYGEN_VULNERABILITY"
   IFX_RSA_KEYGEN_VUL_NOT_AFFECTED = 0_u32
   IFX_RSA_KEYGEN_VUL_AFFECTED_LEVEL_1 = 1_u32
   IFX_RSA_KEYGEN_VUL_AFFECTED_LEVEL_2 = 2_u32
+  NCRYPT_PCP_SESSIONID_PROPERTY = "PCP_SESSIONID"
+  NCRYPT_PCP_PSS_SALT_SIZE_PROPERTY = "PSS Salt Size"
   NCRYPT_TPM_PSS_SALT_SIZE_UNKNOWN = 0_u32
   NCRYPT_TPM_PSS_SALT_SIZE_MAXIMUM = 1_u32
   NCRYPT_TPM_PSS_SALT_SIZE_HASHSIZE = 2_u32
+  NCRYPT_PCP_INTERMEDIATE_CA_EKCERT_PROPERTY = "PCP_INTERMEDIATE_CA_EKCERT"
+  NCRYPT_PCP_PCRTABLE_ALGORITHM_PROPERTY = "PCP_PCRTABLE_ALGORITHM"
+  NCRYPT_PCP_SYMMETRIC_KEYBITS_PROPERTY = "PCP_SYMMETRIC_KEYBITS"
   NCRYPT_TPM_PAD_PSS_IGNORE_SALT = 32_u32
   NCRYPT_TPM12_PROVIDER = 65536_u32
   NCRYPT_PCP_SIGNATURE_KEY = 1_u32
@@ -325,6 +835,11 @@ lib LibWin32
   NCRYPT_PCP_STORAGE_KEY = 4_u32
   NCRYPT_PCP_IDENTITY_KEY = 8_u32
   NCRYPT_PCP_HMACVERIFICATION_KEY = 16_u32
+  NCRYPT_SCARD_NGC_KEY_NAME = "SmartCardNgcKeyName"
+  NCRYPT_INITIALIZATION_VECTOR = "IV"
+  NCRYPT_CHANGEPASSWORD_PROPERTY = "PCP_CHANGEPASSWORD"
+  NCRYPT_ALTERNATE_KEY_STORAGE_LOCATION_PROPERTY = "PCP_ALTERNATE_KEY_STORAGE_LOCATION"
+  NCRYPT_KEY_ACCESS_POLICY_PROPERTY = "Key Access Policy"
   NCRYPT_MAX_PROPERTY_NAME = 64_u32
   NCRYPT_MAX_PROPERTY_DATA = 1048576_u32
   NCRYPT_ALLOW_EXPORT_FLAG = 1_u32
@@ -345,16 +860,47 @@ lib LibWin32
   NCRYPT_UI_FORCE_HIGH_PROTECTION_FLAG = 2_u32
   NCRYPT_UI_FINGERPRINT_PROTECTION_FLAG = 4_u32
   NCRYPT_UI_APPCONTAINER_ACCESS_MEDIUM_FLAG = 8_u32
+  NCRYPT_PIN_CACHE_FREE_APPLICATION_TICKET_PROPERTY = "PinCacheFreeApplicationTicket"
+  NCRYPT_PIN_CACHE_FLAGS_PROPERTY = "PinCacheFlags"
   NCRYPT_PIN_CACHE_DISABLE_DPL_FLAG = 1_u32
+  NCRYPT_PIN_CACHE_APPLICATION_TICKET_PROPERTY = "PinCacheApplicationTicket"
+  NCRYPT_PIN_CACHE_APPLICATION_IMAGE_PROPERTY = "PinCacheApplicationImage"
+  NCRYPT_PIN_CACHE_APPLICATION_STATUS_PROPERTY = "PinCacheApplicationStatus"
+  NCRYPT_PIN_CACHE_PIN_PROPERTY = "PinCachePin"
+  NCRYPT_PIN_CACHE_IS_GESTURE_REQUIRED_PROPERTY = "PinCacheIsGestureRequired"
   NCRYPT_PIN_CACHE_REQUIRE_GESTURE_FLAG = 1_u32
   NCRYPT_PIN_CACHE_APPLICATION_TICKET_BYTE_LENGTH = 90_u32
+  NCRYPT_PIN_CACHE_CLEAR_PROPERTY = "PinCacheClear"
   NCRYPT_PIN_CACHE_CLEAR_FOR_CALLING_PROCESS_OPTION = 1_u32
   NCRYPT_KEY_ACCESS_POLICY_VERSION = 1_u32
   NCRYPT_ALLOW_SILENT_KEY_ACCESS = 1_u32
   NCRYPT_CIPHER_KEY_BLOB_MAGIC = 1380470851_u32
   NCRYPT_KDF_KEY_BLOB_MAGIC = 826688587_u32
   NCRYPT_PROTECTED_KEY_BLOB_MAGIC = 1263817296_u32
+  NCRYPT_CIPHER_KEY_BLOB = "CipherKeyBlob"
+  NCRYPT_KDF_KEY_BLOB = "KDFKeyBlob"
+  NCRYPT_PROTECTED_KEY_BLOB = "ProtectedKeyBlob"
+  NCRYPT_TPM_LOADABLE_KEY_BLOB = "PcpTpmProtectedKeyBlob"
   NCRYPT_TPM_LOADABLE_KEY_BLOB_MAGIC = 1297371211_u32
+  NCRYPT_PKCS7_ENVELOPE_BLOB = "PKCS7_ENVELOPE"
+  NCRYPT_PKCS8_PRIVATE_KEY_BLOB = "PKCS8_PRIVATEKEY"
+  NCRYPT_OPAQUETRANSPORT_BLOB = "OpaqueTransport"
+  NCRYPT_ISOLATED_KEY_ENVELOPE_BLOB = "ISOLATED_KEY_ENVELOPE"
+  NCRYPT_DESCR_DELIMITER_OR = "OR"
+  NCRYPT_DESCR_DELIMITER_AND = "AND"
+  NCRYPT_DESCR_EQUAL = "="
+  MS_KEY_PROTECTION_PROVIDER = "Microsoft Key Protection Provider"
+  NCRYPT_KEY_PROTECTION_ALGORITHM_SID = "SID"
+  NCRYPT_KEY_PROTECTION_ALGORITHM_LOCAL = "LOCAL"
+  NCRYPT_KEY_PROTECTION_LOCAL_LOGON = "logon"
+  NCRYPT_KEY_PROTECTION_LOCAL_USER = "user"
+  NCRYPT_KEY_PROTECTION_LOCAL_MACHINE = "machine"
+  NCRYPT_KEY_PROTECTION_ALGORITHM_SDDL = "SDDL"
+  NCRYPT_KEY_PROTECTION_ALGORITHM_WEBCREDENTIALS = "WEBCREDENTIALS"
+  NCRYPT_KEY_PROTECTION_ALGORITHM_LOCKEDCREDENTIALS = "LOCKEDCREDENTIALS"
+  NCRYPT_KEY_PROTECTION_ALGORITHM_CERTIFICATE = "CERTIFICATE"
+  NCRYPT_KEY_PROTECTION_CERT_HASHID = "HashId"
+  NCRYPT_KEY_PROTECTION_CERT_CERTBLOB = "CertBlob"
   NCRYPT_NAMED_DESCRIPTOR_FLAG = 1_u32
   NCRYPT_PROTECTION_INFO_TYPE_DESCRIPTOR_STRING = 1_u32
   ALG_CLASS_ANY = 0_u32
@@ -599,11 +1145,300 @@ lib LibWin32
   PROV_STT_BRND = 9_u32
   PROV_STT_ROOT = 10_u32
   PROV_STT_ISS = 11_u32
+  MS_DEF_PROV_A = "Microsoft Base Cryptographic Provider v1.0"
+  MS_DEF_PROV_W = "Microsoft Base Cryptographic Provider v1.0"
+  MS_DEF_PROV = "Microsoft Base Cryptographic Provider v1.0"
+  MS_ENHANCED_PROV_A = "Microsoft Enhanced Cryptographic Provider v1.0"
+  MS_ENHANCED_PROV_W = "Microsoft Enhanced Cryptographic Provider v1.0"
+  MS_ENHANCED_PROV = "Microsoft Enhanced Cryptographic Provider v1.0"
+  MS_STRONG_PROV_A = "Microsoft Strong Cryptographic Provider"
+  MS_STRONG_PROV_W = "Microsoft Strong Cryptographic Provider"
+  MS_STRONG_PROV = "Microsoft Strong Cryptographic Provider"
+  MS_DEF_RSA_SIG_PROV_A = "Microsoft RSA Signature Cryptographic Provider"
+  MS_DEF_RSA_SIG_PROV_W = "Microsoft RSA Signature Cryptographic Provider"
+  MS_DEF_RSA_SIG_PROV = "Microsoft RSA Signature Cryptographic Provider"
+  MS_DEF_RSA_SCHANNEL_PROV_A = "Microsoft RSA SChannel Cryptographic Provider"
+  MS_DEF_RSA_SCHANNEL_PROV_W = "Microsoft RSA SChannel Cryptographic Provider"
+  MS_DEF_RSA_SCHANNEL_PROV = "Microsoft RSA SChannel Cryptographic Provider"
+  MS_DEF_DSS_PROV_A = "Microsoft Base DSS Cryptographic Provider"
+  MS_DEF_DSS_PROV_W = "Microsoft Base DSS Cryptographic Provider"
+  MS_DEF_DSS_PROV = "Microsoft Base DSS Cryptographic Provider"
+  MS_DEF_DSS_DH_PROV_A = "Microsoft Base DSS and Diffie-Hellman Cryptographic Provider"
+  MS_DEF_DSS_DH_PROV_W = "Microsoft Base DSS and Diffie-Hellman Cryptographic Provider"
+  MS_DEF_DSS_DH_PROV = "Microsoft Base DSS and Diffie-Hellman Cryptographic Provider"
+  MS_ENH_DSS_DH_PROV_A = "Microsoft Enhanced DSS and Diffie-Hellman Cryptographic Provider"
+  MS_ENH_DSS_DH_PROV_W = "Microsoft Enhanced DSS and Diffie-Hellman Cryptographic Provider"
+  MS_ENH_DSS_DH_PROV = "Microsoft Enhanced DSS and Diffie-Hellman Cryptographic Provider"
+  MS_DEF_DH_SCHANNEL_PROV_A = "Microsoft DH SChannel Cryptographic Provider"
+  MS_DEF_DH_SCHANNEL_PROV_W = "Microsoft DH SChannel Cryptographic Provider"
+  MS_DEF_DH_SCHANNEL_PROV = "Microsoft DH SChannel Cryptographic Provider"
+  MS_SCARD_PROV_A = "Microsoft Base Smart Card Crypto Provider"
+  MS_SCARD_PROV_W = "Microsoft Base Smart Card Crypto Provider"
+  MS_SCARD_PROV = "Microsoft Base Smart Card Crypto Provider"
+  MS_ENH_RSA_AES_PROV_A = "Microsoft Enhanced RSA and AES Cryptographic Provider"
+  MS_ENH_RSA_AES_PROV_W = "Microsoft Enhanced RSA and AES Cryptographic Provider"
+  MS_ENH_RSA_AES_PROV_XP_A = "Microsoft Enhanced RSA and AES Cryptographic Provider (Prototype)"
+  MS_ENH_RSA_AES_PROV_XP_W = "Microsoft Enhanced RSA and AES Cryptographic Provider (Prototype)"
+  MS_ENH_RSA_AES_PROV_XP = "Microsoft Enhanced RSA and AES Cryptographic Provider (Prototype)"
+  MS_ENH_RSA_AES_PROV = "Microsoft Enhanced RSA and AES Cryptographic Provider"
   MAXUIDLEN = 64_u32
+  EXPO_OFFLOAD_REG_VALUE = "ExpoOffload"
+  EXPO_OFFLOAD_FUNC_NAME = "OffloadModExpo"
+  Szkey_cryptoapi_private_key_options = "Software\\Policies\\Microsoft\\Cryptography"
+  Szkey_cache_enabled = "CachePrivateKeys"
+  Szkey_cache_seconds = "PrivateKeyLifetimeSeconds"
+  Szpriv_key_cache_max_items = "PrivKeyCacheMaxItems"
+  Cpriv_key_cache_max_items_default = 20_u32
+  Szpriv_key_cache_purge_interval_seconds = "PrivKeyCachePurgeIntervalSeconds"
+  Cpriv_key_cache_purge_interval_seconds_default = 86400_u32
   CUR_BLOB_VERSION = 2_u32
   SCHANNEL_MAC_KEY = 0_u32
   SCHANNEL_ENC_KEY = 1_u32
   INTERNATIONAL_USAGE = 1_u32
+  Szoid_rsa = "1.2.840.113549"
+  Szoid_pkcs = "1.2.840.113549.1"
+  Szoid_rsa_hash = "1.2.840.113549.2"
+  Szoid_rsa_encrypt = "1.2.840.113549.3"
+  Szoid_pkcs_1 = "1.2.840.113549.1.1"
+  Szoid_pkcs_2 = "1.2.840.113549.1.2"
+  Szoid_pkcs_3 = "1.2.840.113549.1.3"
+  Szoid_pkcs_4 = "1.2.840.113549.1.4"
+  Szoid_pkcs_5 = "1.2.840.113549.1.5"
+  Szoid_pkcs_6 = "1.2.840.113549.1.6"
+  Szoid_pkcs_7 = "1.2.840.113549.1.7"
+  Szoid_pkcs_8 = "1.2.840.113549.1.8"
+  Szoid_pkcs_9 = "1.2.840.113549.1.9"
+  Szoid_pkcs_10 = "1.2.840.113549.1.10"
+  Szoid_pkcs_12 = "1.2.840.113549.1.12"
+  Szoid_rsa_rsa = "1.2.840.113549.1.1.1"
+  Szoid_rsa_md2rsa = "1.2.840.113549.1.1.2"
+  Szoid_rsa_md4rsa = "1.2.840.113549.1.1.3"
+  Szoid_rsa_md5rsa = "1.2.840.113549.1.1.4"
+  Szoid_rsa_sha1rsa = "1.2.840.113549.1.1.5"
+  Szoid_rsa_setoaep_rsa = "1.2.840.113549.1.1.6"
+  Szoid_rsaes_oaep = "1.2.840.113549.1.1.7"
+  Szoid_rsa_mgf1 = "1.2.840.113549.1.1.8"
+  Szoid_rsa_pspecified = "1.2.840.113549.1.1.9"
+  Szoid_rsa_ssa_pss = "1.2.840.113549.1.1.10"
+  Szoid_rsa_sha256rsa = "1.2.840.113549.1.1.11"
+  Szoid_rsa_sha384rsa = "1.2.840.113549.1.1.12"
+  Szoid_rsa_sha512rsa = "1.2.840.113549.1.1.13"
+  Szoid_rsa_dh = "1.2.840.113549.1.3.1"
+  Szoid_rsa_data = "1.2.840.113549.1.7.1"
+  Szoid_rsa_signeddata = "1.2.840.113549.1.7.2"
+  Szoid_rsa_envelopeddata = "1.2.840.113549.1.7.3"
+  Szoid_rsa_signenvdata = "1.2.840.113549.1.7.4"
+  Szoid_rsa_digesteddata = "1.2.840.113549.1.7.5"
+  Szoid_rsa_hasheddata = "1.2.840.113549.1.7.5"
+  Szoid_rsa_encrypteddata = "1.2.840.113549.1.7.6"
+  Szoid_rsa_emailaddr = "1.2.840.113549.1.9.1"
+  Szoid_rsa_unstructname = "1.2.840.113549.1.9.2"
+  Szoid_rsa_contenttype = "1.2.840.113549.1.9.3"
+  Szoid_rsa_messagedigest = "1.2.840.113549.1.9.4"
+  Szoid_rsa_signingtime = "1.2.840.113549.1.9.5"
+  Szoid_rsa_countersign = "1.2.840.113549.1.9.6"
+  Szoid_rsa_challengepwd = "1.2.840.113549.1.9.7"
+  Szoid_rsa_unstructaddr = "1.2.840.113549.1.9.8"
+  Szoid_rsa_extcertattrs = "1.2.840.113549.1.9.9"
+  Szoid_rsa_certextensions = "1.2.840.113549.1.9.14"
+  Szoid_rsa_smimecapabilities = "1.2.840.113549.1.9.15"
+  Szoid_rsa_prefersigneddata = "1.2.840.113549.1.9.15.1"
+  Szoid_timestamp_token = "1.2.840.113549.1.9.16.1.4"
+  Szoid_rfc3161_countersign = "1.3.6.1.4.1.311.3.3.1"
+  Szoid_rsa_smimealg = "1.2.840.113549.1.9.16.3"
+  Szoid_rsa_smimealgesdh = "1.2.840.113549.1.9.16.3.5"
+  Szoid_rsa_smimealgcms3deswrap = "1.2.840.113549.1.9.16.3.6"
+  Szoid_rsa_smimealgcmsrc2wrap = "1.2.840.113549.1.9.16.3.7"
+  Szoid_rsa_md2 = "1.2.840.113549.2.2"
+  Szoid_rsa_md4 = "1.2.840.113549.2.4"
+  Szoid_rsa_md5 = "1.2.840.113549.2.5"
+  Szoid_rsa_rc2cbc = "1.2.840.113549.3.2"
+  Szoid_rsa_rc4 = "1.2.840.113549.3.4"
+  Szoid_rsa_des_ede3_cbc = "1.2.840.113549.3.7"
+  Szoid_rsa_rc5_cbcpad = "1.2.840.113549.3.9"
+  Szoid_ansi_x942 = "1.2.840.10046"
+  Szoid_ansi_x942_dh = "1.2.840.10046.2.1"
+  Szoid_x957 = "1.2.840.10040"
+  Szoid_x957_dsa = "1.2.840.10040.4.1"
+  Szoid_x957_sha1dsa = "1.2.840.10040.4.3"
+  Szoid_ecc_public_key = "1.2.840.10045.2.1"
+  Szoid_ecc_curve_p256 = "1.2.840.10045.3.1.7"
+  Szoid_ecc_curve_p384 = "1.3.132.0.34"
+  Szoid_ecc_curve_p521 = "1.3.132.0.35"
+  Szoid_ecc_curve_brainpoolp160r1 = "1.3.36.3.3.2.8.1.1.1"
+  Szoid_ecc_curve_brainpoolp160t1 = "1.3.36.3.3.2.8.1.1.2"
+  Szoid_ecc_curve_brainpoolp192r1 = "1.3.36.3.3.2.8.1.1.3"
+  Szoid_ecc_curve_brainpoolp192t1 = "1.3.36.3.3.2.8.1.1.4"
+  Szoid_ecc_curve_brainpoolp224r1 = "1.3.36.3.3.2.8.1.1.5"
+  Szoid_ecc_curve_brainpoolp224t1 = "1.3.36.3.3.2.8.1.1.6"
+  Szoid_ecc_curve_brainpoolp256r1 = "1.3.36.3.3.2.8.1.1.7"
+  Szoid_ecc_curve_brainpoolp256t1 = "1.3.36.3.3.2.8.1.1.8"
+  Szoid_ecc_curve_brainpoolp320r1 = "1.3.36.3.3.2.8.1.1.9"
+  Szoid_ecc_curve_brainpoolp320t1 = "1.3.36.3.3.2.8.1.1.10"
+  Szoid_ecc_curve_brainpoolp384r1 = "1.3.36.3.3.2.8.1.1.11"
+  Szoid_ecc_curve_brainpoolp384t1 = "1.3.36.3.3.2.8.1.1.12"
+  Szoid_ecc_curve_brainpoolp512r1 = "1.3.36.3.3.2.8.1.1.13"
+  Szoid_ecc_curve_brainpoolp512t1 = "1.3.36.3.3.2.8.1.1.14"
+  Szoid_ecc_curve_ec192wapi = "1.2.156.11235.1.1.2.1"
+  Szoid_cn_ecdsa_sha256 = "1.2.156.11235.1.1.1"
+  Szoid_ecc_curve_nistp192 = "1.2.840.10045.3.1.1"
+  Szoid_ecc_curve_nistp224 = "1.3.132.0.33"
+  Szoid_ecc_curve_nistp256 = "1.2.840.10045.3.1.7"
+  Szoid_ecc_curve_nistp384 = "1.3.132.0.34"
+  Szoid_ecc_curve_nistp521 = "1.3.132.0.35"
+  Szoid_ecc_curve_secp160k1 = "1.3.132.0.9"
+  Szoid_ecc_curve_secp160r1 = "1.3.132.0.8"
+  Szoid_ecc_curve_secp160r2 = "1.3.132.0.30"
+  Szoid_ecc_curve_secp192k1 = "1.3.132.0.31"
+  Szoid_ecc_curve_secp192r1 = "1.2.840.10045.3.1.1"
+  Szoid_ecc_curve_secp224k1 = "1.3.132.0.32"
+  Szoid_ecc_curve_secp224r1 = "1.3.132.0.33"
+  Szoid_ecc_curve_secp256k1 = "1.3.132.0.10"
+  Szoid_ecc_curve_secp256r1 = "1.2.840.10045.3.1.7"
+  Szoid_ecc_curve_secp384r1 = "1.3.132.0.34"
+  Szoid_ecc_curve_secp521r1 = "1.3.132.0.35"
+  Szoid_ecc_curve_wtls7 = "1.3.132.0.30"
+  Szoid_ecc_curve_wtls9 = "2.23.43.1.4.9"
+  Szoid_ecc_curve_wtls12 = "1.3.132.0.33"
+  Szoid_ecc_curve_x962p192v1 = "1.2.840.10045.3.1.1"
+  Szoid_ecc_curve_x962p192v2 = "1.2.840.10045.3.1.2"
+  Szoid_ecc_curve_x962p192v3 = "1.2.840.10045.3.1.3"
+  Szoid_ecc_curve_x962p239v1 = "1.2.840.10045.3.1.4"
+  Szoid_ecc_curve_x962p239v2 = "1.2.840.10045.3.1.5"
+  Szoid_ecc_curve_x962p239v3 = "1.2.840.10045.3.1.6"
+  Szoid_ecc_curve_x962p256v1 = "1.2.840.10045.3.1.7"
+  Szoid_ecdsa_sha1 = "1.2.840.10045.4.1"
+  Szoid_ecdsa_specified = "1.2.840.10045.4.3"
+  Szoid_ecdsa_sha256 = "1.2.840.10045.4.3.2"
+  Szoid_ecdsa_sha384 = "1.2.840.10045.4.3.3"
+  Szoid_ecdsa_sha512 = "1.2.840.10045.4.3.4"
+  Szoid_nist_aes128_cbc = "2.16.840.1.101.3.4.1.2"
+  Szoid_nist_aes192_cbc = "2.16.840.1.101.3.4.1.22"
+  Szoid_nist_aes256_cbc = "2.16.840.1.101.3.4.1.42"
+  Szoid_nist_aes128_wrap = "2.16.840.1.101.3.4.1.5"
+  Szoid_nist_aes192_wrap = "2.16.840.1.101.3.4.1.25"
+  Szoid_nist_aes256_wrap = "2.16.840.1.101.3.4.1.45"
+  Szoid_dh_single_pass_stddh_sha1_kdf = "1.3.133.16.840.63.0.2"
+  Szoid_dh_single_pass_stddh_sha256_kdf = "1.3.132.1.11.1"
+  Szoid_dh_single_pass_stddh_sha384_kdf = "1.3.132.1.11.2"
+  Szoid_ds = "2.5"
+  Szoid_dsalg = "2.5.8"
+  Szoid_dsalg_crpt = "2.5.8.1"
+  Szoid_dsalg_hash = "2.5.8.2"
+  Szoid_dsalg_sign = "2.5.8.3"
+  Szoid_dsalg_rsa = "2.5.8.1.1"
+  Szoid_oiw = "1.3.14"
+  Szoid_oiwsec = "1.3.14.3.2"
+  Szoid_oiwsec_md4rsa = "1.3.14.3.2.2"
+  Szoid_oiwsec_md5rsa = "1.3.14.3.2.3"
+  Szoid_oiwsec_md4rsa2 = "1.3.14.3.2.4"
+  Szoid_oiwsec_desecb = "1.3.14.3.2.6"
+  Szoid_oiwsec_descbc = "1.3.14.3.2.7"
+  Szoid_oiwsec_desofb = "1.3.14.3.2.8"
+  Szoid_oiwsec_descfb = "1.3.14.3.2.9"
+  Szoid_oiwsec_desmac = "1.3.14.3.2.10"
+  Szoid_oiwsec_rsasign = "1.3.14.3.2.11"
+  Szoid_oiwsec_dsa = "1.3.14.3.2.12"
+  Szoid_oiwsec_shadsa = "1.3.14.3.2.13"
+  Szoid_oiwsec_mdc2rsa = "1.3.14.3.2.14"
+  Szoid_oiwsec_sharsa = "1.3.14.3.2.15"
+  Szoid_oiwsec_dhcommmod = "1.3.14.3.2.16"
+  Szoid_oiwsec_desede = "1.3.14.3.2.17"
+  Szoid_oiwsec_sha = "1.3.14.3.2.18"
+  Szoid_oiwsec_mdc2 = "1.3.14.3.2.19"
+  Szoid_oiwsec_dsacomm = "1.3.14.3.2.20"
+  Szoid_oiwsec_dsacommsha = "1.3.14.3.2.21"
+  Szoid_oiwsec_rsaxchg = "1.3.14.3.2.22"
+  Szoid_oiwsec_keyhashseal = "1.3.14.3.2.23"
+  Szoid_oiwsec_md2rsasign = "1.3.14.3.2.24"
+  Szoid_oiwsec_md5rsasign = "1.3.14.3.2.25"
+  Szoid_oiwsec_sha1 = "1.3.14.3.2.26"
+  Szoid_oiwsec_dsasha1 = "1.3.14.3.2.27"
+  Szoid_oiwsec_dsacommsha1 = "1.3.14.3.2.28"
+  Szoid_oiwsec_sha1rsasign = "1.3.14.3.2.29"
+  Szoid_oiwdir = "1.3.14.7.2"
+  Szoid_oiwdir_crpt = "1.3.14.7.2.1"
+  Szoid_oiwdir_hash = "1.3.14.7.2.2"
+  Szoid_oiwdir_sign = "1.3.14.7.2.3"
+  Szoid_oiwdir_md2 = "1.3.14.7.2.2.1"
+  Szoid_oiwdir_md2rsa = "1.3.14.7.2.3.1"
+  Szoid_infosec = "2.16.840.1.101.2.1"
+  Szoid_infosec_sdnssignature = "2.16.840.1.101.2.1.1.1"
+  Szoid_infosec_mosaicsignature = "2.16.840.1.101.2.1.1.2"
+  Szoid_infosec_sdnsconfidentiality = "2.16.840.1.101.2.1.1.3"
+  Szoid_infosec_mosaicconfidentiality = "2.16.840.1.101.2.1.1.4"
+  Szoid_infosec_sdnsintegrity = "2.16.840.1.101.2.1.1.5"
+  Szoid_infosec_mosaicintegrity = "2.16.840.1.101.2.1.1.6"
+  Szoid_infosec_sdnstokenprotection = "2.16.840.1.101.2.1.1.7"
+  Szoid_infosec_mosaictokenprotection = "2.16.840.1.101.2.1.1.8"
+  Szoid_infosec_sdnskeymanagement = "2.16.840.1.101.2.1.1.9"
+  Szoid_infosec_mosaickeymanagement = "2.16.840.1.101.2.1.1.10"
+  Szoid_infosec_sdnskmandsig = "2.16.840.1.101.2.1.1.11"
+  Szoid_infosec_mosaickmandsig = "2.16.840.1.101.2.1.1.12"
+  Szoid_infosec_suiteasignature = "2.16.840.1.101.2.1.1.13"
+  Szoid_infosec_suiteaconfidentiality = "2.16.840.1.101.2.1.1.14"
+  Szoid_infosec_suiteaintegrity = "2.16.840.1.101.2.1.1.15"
+  Szoid_infosec_suiteatokenprotection = "2.16.840.1.101.2.1.1.16"
+  Szoid_infosec_suiteakeymanagement = "2.16.840.1.101.2.1.1.17"
+  Szoid_infosec_suiteakmandsig = "2.16.840.1.101.2.1.1.18"
+  Szoid_infosec_mosaicupdatedsig = "2.16.840.1.101.2.1.1.19"
+  Szoid_infosec_mosaickmandupdsig = "2.16.840.1.101.2.1.1.20"
+  Szoid_infosec_mosaicupdatedinteg = "2.16.840.1.101.2.1.1.21"
+  Szoid_nist_sha256 = "2.16.840.1.101.3.4.2.1"
+  Szoid_nist_sha384 = "2.16.840.1.101.3.4.2.2"
+  Szoid_nist_sha512 = "2.16.840.1.101.3.4.2.3"
+  Szoid_common_name = "2.5.4.3"
+  Szoid_sur_name = "2.5.4.4"
+  Szoid_device_serial_number = "2.5.4.5"
+  Szoid_country_name = "2.5.4.6"
+  Szoid_locality_name = "2.5.4.7"
+  Szoid_state_or_province_name = "2.5.4.8"
+  Szoid_street_address = "2.5.4.9"
+  Szoid_organization_name = "2.5.4.10"
+  Szoid_organizational_unit_name = "2.5.4.11"
+  Szoid_title = "2.5.4.12"
+  Szoid_description = "2.5.4.13"
+  Szoid_search_guide = "2.5.4.14"
+  Szoid_business_category = "2.5.4.15"
+  Szoid_postal_address = "2.5.4.16"
+  Szoid_postal_code = "2.5.4.17"
+  Szoid_post_office_box = "2.5.4.18"
+  Szoid_physical_delivery_office_name = "2.5.4.19"
+  Szoid_telephone_number = "2.5.4.20"
+  Szoid_telex_number = "2.5.4.21"
+  Szoid_teletext_terminal_identifier = "2.5.4.22"
+  Szoid_facsimile_telephone_number = "2.5.4.23"
+  Szoid_x21_address = "2.5.4.24"
+  Szoid_international_isdn_number = "2.5.4.25"
+  Szoid_registered_address = "2.5.4.26"
+  Szoid_destination_indicator = "2.5.4.27"
+  Szoid_preferred_delivery_method = "2.5.4.28"
+  Szoid_presentation_address = "2.5.4.29"
+  Szoid_supported_application_context = "2.5.4.30"
+  Szoid_member = "2.5.4.31"
+  Szoid_owner = "2.5.4.32"
+  Szoid_role_occupant = "2.5.4.33"
+  Szoid_see_also = "2.5.4.34"
+  Szoid_user_password = "2.5.4.35"
+  Szoid_user_certificate = "2.5.4.36"
+  Szoid_ca_certificate = "2.5.4.37"
+  Szoid_authority_revocation_list = "2.5.4.38"
+  Szoid_certificate_revocation_list = "2.5.4.39"
+  Szoid_cross_certificate_pair = "2.5.4.40"
+  Szoid_given_name = "2.5.4.42"
+  Szoid_initials = "2.5.4.43"
+  Szoid_dn_qualifier = "2.5.4.46"
+  Szoid_domain_component = "0.9.2342.19200300.100.1.25"
+  Szoid_pkcs_12_friendly_name_attr = "1.2.840.113549.1.9.20"
+  Szoid_pkcs_12_local_key_id = "1.2.840.113549.1.9.21"
+  Szoid_pkcs_12_key_provider_name_attr = "1.3.6.1.4.1.311.17.1"
+  Szoid_local_machine_keyset = "1.3.6.1.4.1.311.17.2"
+  Szoid_pkcs_12_extended_attributes = "1.3.6.1.4.1.311.17.3"
+  Szoid_pkcs_12_protected_password_secret_bag_type_id = "1.3.6.1.4.1.311.17.4"
+  Szoid_keyid_rdn = "1.3.6.1.4.1.311.10.7.1"
+  Szoid_ev_rdn_locale = "1.3.6.1.4.1.311.60.2.1.1"
+  Szoid_ev_rdn_state_or_province = "1.3.6.1.4.1.311.60.2.1.2"
+  Szoid_ev_rdn_country = "1.3.6.1.4.1.311.60.2.1.3"
   CERT_RDN_TYPE_MASK = 255_u32
   CERT_RDN_FLAGS_MASK = 4278190080_u32
   CERT_RDN_ENABLE_T61_UNICODE_FLAG = 2147483648_u32
@@ -612,6 +1447,9 @@ lib LibWin32
   CERT_RDN_DISABLE_CHECK_TYPE_FLAG = 1073741824_u32
   CERT_RDN_DISABLE_IE4_UTF8_FLAG = 16777216_u32
   CERT_RDN_ENABLE_PUNYCODE_FLAG = 33554432_u32
+  CERT_RSA_PUBLIC_KEY_OBJID = "1.2.840.113549.1.1.1"
+  CERT_DEFAULT_OID_PUBLIC_KEY_SIGN = "1.2.840.113549.1.1.1"
+  CERT_DEFAULT_OID_PUBLIC_KEY_XCHG = "1.2.840.113549.1.1.1"
   CRYPT_ECC_PRIVATE_KEY_INFO_v1 = 1_u32
   CERT_V1 = 0_u32
   CERT_V2 = 1_u32
@@ -665,9 +1503,293 @@ lib LibWin32
   CRYPT_DECODE_ENABLE_PUNYCODE_FLAG = 33554432_u32
   CRYPT_DECODE_ENABLE_UTF8PERCENT_FLAG = 67108864_u32
   CRYPT_ENCODE_DECODE_NONE = 0_u32
+  X509_CERT = 1_i32
+  X509_CERT_TO_BE_SIGNED = 2_i32
+  X509_CERT_CRL_TO_BE_SIGNED = 3_i32
+  X509_CERT_REQUEST_TO_BE_SIGNED = 4_i32
+  X509_EXTENSIONS = 5_i32
+  X509_NAME_VALUE = 6_i32
+  X509_NAME = 7_i32
+  X509_PUBLIC_KEY_INFO = 8_i32
+  X509_AUTHORITY_KEY_ID = 9_i32
+  X509_KEY_ATTRIBUTES = 10_i32
+  X509_KEY_USAGE_RESTRICTION = 11_i32
+  X509_ALTERNATE_NAME = 12_i32
+  X509_BASIC_CONSTRAINTS = 13_i32
+  X509_KEY_USAGE = 14_i32
+  X509_BASIC_CONSTRAINTS2 = 15_i32
+  X509_CERT_POLICIES = 16_i32
+  PKCS_UTC_TIME = 17_i32
+  PKCS_TIME_REQUEST = 18_i32
+  RSA_CSP_PUBLICKEYBLOB = 19_i32
+  X509_UNICODE_NAME = 20_i32
+  X509_KEYGEN_REQUEST_TO_BE_SIGNED = 21_i32
+  PKCS_ATTRIBUTE = 22_i32
+  PKCS_CONTENT_INFO_SEQUENCE_OF_ANY = 23_i32
+  X509_UNICODE_NAME_VALUE = 24_i32
+  X509_ANY_STRING = 6_i32
+  X509_UNICODE_ANY_STRING = 24_i32
+  X509_OCTET_STRING = 25_i32
+  X509_BITS = 26_i32
+  X509_INTEGER = 27_i32
+  X509_MULTI_BYTE_INTEGER = 28_i32
+  X509_ENUMERATED = 29_i32
+  X509_CHOICE_OF_TIME = 30_i32
+  X509_AUTHORITY_KEY_ID2 = 31_i32
+  X509_AUTHORITY_INFO_ACCESS = 32_i32
+  X509_SUBJECT_INFO_ACCESS = 32_i32
+  X509_CRL_REASON_CODE = 29_i32
+  PKCS_CONTENT_INFO = 33_i32
+  X509_SEQUENCE_OF_ANY = 34_i32
+  X509_CRL_DIST_POINTS = 35_i32
+  X509_ENHANCED_KEY_USAGE = 36_i32
+  PKCS_CTL = 37_i32
+  X509_MULTI_BYTE_UINT = 38_i32
+  X509_DSS_PUBLICKEY = 38_i32
+  X509_DSS_PARAMETERS = 39_i32
+  X509_DSS_SIGNATURE = 40_i32
+  PKCS_RC2_CBC_PARAMETERS = 41_i32
+  PKCS_SMIME_CAPABILITIES = 42_i32
+  X509_QC_STATEMENTS_EXT = 42_i32
+  PKCS_RSA_PRIVATE_KEY = 43_i32
+  PKCS_PRIVATE_KEY_INFO = 44_i32
+  PKCS_ENCRYPTED_PRIVATE_KEY_INFO = 45_i32
+  X509_PKIX_POLICY_QUALIFIER_USERNOTICE = 46_i32
+  X509_DH_PUBLICKEY = 38_i32
+  X509_DH_PARAMETERS = 47_i32
+  PKCS_ATTRIBUTES = 48_i32
+  PKCS_SORTED_CTL = 49_i32
+  X509_ECC_SIGNATURE = 47_i32
+  X942_DH_PARAMETERS = 50_i32
+  X509_BITS_WITHOUT_TRAILING_ZEROES = 51_i32
+  X942_OTHER_INFO = 52_i32
+  X509_CERT_PAIR = 53_i32
+  X509_ISSUING_DIST_POINT = 54_i32
+  X509_NAME_CONSTRAINTS = 55_i32
+  X509_POLICY_MAPPINGS = 56_i32
+  X509_POLICY_CONSTRAINTS = 57_i32
+  X509_CROSS_CERT_DIST_POINTS = 58_i32
+  CMC_DATA = 59_i32
+  CMC_RESPONSE = 60_i32
+  CMC_STATUS = 61_i32
+  CMC_ADD_EXTENSIONS = 62_i32
+  CMC_ADD_ATTRIBUTES = 63_i32
+  X509_CERTIFICATE_TEMPLATE = 64_i32
+  OCSP_SIGNED_REQUEST = 65_i32
+  OCSP_REQUEST = 66_i32
+  OCSP_RESPONSE = 67_i32
+  OCSP_BASIC_SIGNED_RESPONSE = 68_i32
+  OCSP_BASIC_RESPONSE = 69_i32
+  X509_LOGOTYPE_EXT = 70_i32
+  X509_BIOMETRIC_EXT = 71_i32
+  CNG_RSA_PUBLIC_KEY_BLOB = 72_i32
+  X509_OBJECT_IDENTIFIER = 73_i32
+  X509_ALGORITHM_IDENTIFIER = 74_i32
+  PKCS_RSA_SSA_PSS_PARAMETERS = 75_i32
+  PKCS_RSAES_OAEP_PARAMETERS = 76_i32
+  ECC_CMS_SHARED_INFO = 77_i32
+  TIMESTAMP_REQUEST = 78_i32
+  TIMESTAMP_RESPONSE = 79_i32
+  TIMESTAMP_INFO = 80_i32
+  X509_CERT_BUNDLE = 81_i32
+  X509_ECC_PRIVATE_KEY = 82_i32
+  CNG_RSA_PRIVATE_KEY_BLOB = 83_i32
+  X509_SUBJECT_DIR_ATTRS = 84_i32
+  X509_ECC_PARAMETERS = 85_i32
+  PKCS7_SIGNER_INFO = 500_i32
+  CMS_SIGNER_INFO = 501_i32
+  Szoid_authority_key_identifier = "2.5.29.1"
+  Szoid_key_attributes = "2.5.29.2"
+  Szoid_cert_policies_95 = "2.5.29.3"
+  Szoid_key_usage_restriction = "2.5.29.4"
+  Szoid_subject_alt_name = "2.5.29.7"
+  Szoid_issuer_alt_name = "2.5.29.8"
+  Szoid_basic_constraints = "2.5.29.10"
+  Szoid_key_usage = "2.5.29.15"
+  Szoid_privatekey_usage_period = "2.5.29.16"
+  Szoid_basic_constraints2 = "2.5.29.19"
+  Szoid_cert_policies = "2.5.29.32"
+  Szoid_any_cert_policy = "2.5.29.32.0"
+  Szoid_inhibit_any_policy = "2.5.29.54"
+  Szoid_authority_key_identifier2 = "2.5.29.35"
+  Szoid_subject_key_identifier = "2.5.29.14"
+  Szoid_subject_alt_name2 = "2.5.29.17"
+  Szoid_issuer_alt_name2 = "2.5.29.18"
+  Szoid_crl_reason_code = "2.5.29.21"
+  Szoid_reason_code_hold = "2.5.29.23"
+  Szoid_crl_dist_points = "2.5.29.31"
+  Szoid_enhanced_key_usage = "2.5.29.37"
+  Szoid_any_enhanced_key_usage = "2.5.29.37.0"
+  Szoid_crl_number = "2.5.29.20"
+  Szoid_delta_crl_indicator = "2.5.29.27"
+  Szoid_issuing_dist_point = "2.5.29.28"
+  Szoid_freshest_crl = "2.5.29.46"
+  Szoid_name_constraints = "2.5.29.30"
+  Szoid_policy_mappings = "2.5.29.33"
+  Szoid_legacy_policy_mappings = "2.5.29.5"
+  Szoid_policy_constraints = "2.5.29.36"
+  Szoid_renewal_certificate = "1.3.6.1.4.1.311.13.1"
+  Szoid_enrollment_name_value_pair = "1.3.6.1.4.1.311.13.2.1"
+  Szoid_enrollment_csp_provider = "1.3.6.1.4.1.311.13.2.2"
+  Szoid_os_version = "1.3.6.1.4.1.311.13.2.3"
+  Szoid_enrollment_agent = "1.3.6.1.4.1.311.20.2.1"
+  Szoid_pkix = "1.3.6.1.5.5.7"
+  Szoid_pkix_pe = "1.3.6.1.5.5.7.1"
+  Szoid_authority_info_access = "1.3.6.1.5.5.7.1.1"
+  Szoid_subject_info_access = "1.3.6.1.5.5.7.1.11"
+  Szoid_biometric_ext = "1.3.6.1.5.5.7.1.2"
+  Szoid_qc_statements_ext = "1.3.6.1.5.5.7.1.3"
+  Szoid_logotype_ext = "1.3.6.1.5.5.7.1.12"
+  Szoid_tls_features_ext = "1.3.6.1.5.5.7.1.24"
+  Szoid_cert_extensions = "1.3.6.1.4.1.311.2.1.14"
+  Szoid_next_update_location = "1.3.6.1.4.1.311.10.2"
+  Szoid_remove_certificate = "1.3.6.1.4.1.311.10.8.1"
+  Szoid_cross_cert_dist_points = "1.3.6.1.4.1.311.10.9.1"
+  Szoid_ctl = "1.3.6.1.4.1.311.10.1"
+  Szoid_sorted_ctl = "1.3.6.1.4.1.311.10.1.1"
+  Szoid_serialized = "1.3.6.1.4.1.311.10.3.3.1"
+  Szoid_nt_principal_name = "1.3.6.1.4.1.311.20.2.3"
+  Szoid_internationalized_email_address = "1.3.6.1.4.1.311.20.2.4"
+  Szoid_product_update = "1.3.6.1.4.1.311.31.1"
+  Szoid_any_application_policy = "1.3.6.1.4.1.311.10.12.1"
+  Szoid_auto_enroll_ctl_usage = "1.3.6.1.4.1.311.20.1"
+  Szoid_enroll_certtype_extension = "1.3.6.1.4.1.311.20.2"
+  Szoid_cert_manifold = "1.3.6.1.4.1.311.20.3"
+  Szoid_certsrv_ca_version = "1.3.6.1.4.1.311.21.1"
+  Szoid_certsrv_previous_cert_hash = "1.3.6.1.4.1.311.21.2"
+  Szoid_crl_virtual_base = "1.3.6.1.4.1.311.21.3"
+  Szoid_crl_next_publish = "1.3.6.1.4.1.311.21.4"
+  Szoid_kp_ca_exchange = "1.3.6.1.4.1.311.21.5"
+  Szoid_kp_privacy_ca = "1.3.6.1.4.1.311.21.36"
+  Szoid_kp_key_recovery_agent = "1.3.6.1.4.1.311.21.6"
+  Szoid_certificate_template = "1.3.6.1.4.1.311.21.7"
+  Szoid_enterprise_oid_root = "1.3.6.1.4.1.311.21.8"
+  Szoid_rdn_dummy_signer = "1.3.6.1.4.1.311.21.9"
+  Szoid_application_cert_policies = "1.3.6.1.4.1.311.21.10"
+  Szoid_application_policy_mappings = "1.3.6.1.4.1.311.21.11"
+  Szoid_application_policy_constraints = "1.3.6.1.4.1.311.21.12"
+  Szoid_archived_key_attr = "1.3.6.1.4.1.311.21.13"
+  Szoid_crl_self_cdp = "1.3.6.1.4.1.311.21.14"
+  Szoid_require_cert_chain_policy = "1.3.6.1.4.1.311.21.15"
+  Szoid_archived_key_cert_hash = "1.3.6.1.4.1.311.21.16"
+  Szoid_issued_cert_hash = "1.3.6.1.4.1.311.21.17"
+  Szoid_ds_email_replication = "1.3.6.1.4.1.311.21.19"
+  Szoid_request_client_info = "1.3.6.1.4.1.311.21.20"
+  Szoid_encrypted_key_hash = "1.3.6.1.4.1.311.21.21"
+  Szoid_certsrv_crossca_version = "1.3.6.1.4.1.311.21.22"
+  Szoid_ntds_replication = "1.3.6.1.4.1.311.25.1"
+  Szoid_subject_dir_attrs = "2.5.29.9"
+  Szoid_pkix_kp = "1.3.6.1.5.5.7.3"
+  Szoid_pkix_kp_server_auth = "1.3.6.1.5.5.7.3.1"
+  Szoid_pkix_kp_client_auth = "1.3.6.1.5.5.7.3.2"
+  Szoid_pkix_kp_code_signing = "1.3.6.1.5.5.7.3.3"
+  Szoid_pkix_kp_email_protection = "1.3.6.1.5.5.7.3.4"
+  Szoid_pkix_kp_ipsec_end_system = "1.3.6.1.5.5.7.3.5"
+  Szoid_pkix_kp_ipsec_tunnel = "1.3.6.1.5.5.7.3.6"
+  Szoid_pkix_kp_ipsec_user = "1.3.6.1.5.5.7.3.7"
+  Szoid_pkix_kp_timestamp_signing = "1.3.6.1.5.5.7.3.8"
+  Szoid_pkix_kp_ocsp_signing = "1.3.6.1.5.5.7.3.9"
+  Szoid_pkix_ocsp_nocheck = "1.3.6.1.5.5.7.48.1.5"
+  Szoid_pkix_ocsp_nonce = "1.3.6.1.5.5.7.48.1.2"
+  Szoid_ipsec_kp_ike_intermediate = "1.3.6.1.5.5.8.2.2"
+  Szoid_pkinit_kp_kdc = "1.3.6.1.5.2.3.5"
+  Szoid_kp_ctl_usage_signing = "1.3.6.1.4.1.311.10.3.1"
+  Szoid_kp_time_stamp_signing = "1.3.6.1.4.1.311.10.3.2"
+  Szoid_server_gated_crypto = "1.3.6.1.4.1.311.10.3.3"
+  Szoid_sgc_netscape = "2.16.840.1.113730.4.1"
+  Szoid_kp_efs = "1.3.6.1.4.1.311.10.3.4"
+  Szoid_efs_recovery = "1.3.6.1.4.1.311.10.3.4.1"
+  Szoid_whql_crypto = "1.3.6.1.4.1.311.10.3.5"
+  Szoid_attest_whql_crypto = "1.3.6.1.4.1.311.10.3.5.1"
+  Szoid_nt5_crypto = "1.3.6.1.4.1.311.10.3.6"
+  Szoid_oem_whql_crypto = "1.3.6.1.4.1.311.10.3.7"
+  Szoid_embedded_nt_crypto = "1.3.6.1.4.1.311.10.3.8"
+  Szoid_root_list_signer = "1.3.6.1.4.1.311.10.3.9"
+  Szoid_kp_qualified_subordination = "1.3.6.1.4.1.311.10.3.10"
+  Szoid_kp_key_recovery = "1.3.6.1.4.1.311.10.3.11"
+  Szoid_kp_document_signing = "1.3.6.1.4.1.311.10.3.12"
+  Szoid_kp_lifetime_signing = "1.3.6.1.4.1.311.10.3.13"
+  Szoid_kp_mobile_device_software = "1.3.6.1.4.1.311.10.3.14"
+  Szoid_kp_smart_display = "1.3.6.1.4.1.311.10.3.15"
+  Szoid_kp_csp_signature = "1.3.6.1.4.1.311.10.3.16"
+  Szoid_kp_flight_signing = "1.3.6.1.4.1.311.10.3.27"
+  Szoid_platform_manifest_binary_id = "1.3.6.1.4.1.311.10.3.28"
+  Szoid_drm = "1.3.6.1.4.1.311.10.5.1"
+  Szoid_drm_individualization = "1.3.6.1.4.1.311.10.5.2"
+  Szoid_licenses = "1.3.6.1.4.1.311.10.6.1"
+  Szoid_license_server = "1.3.6.1.4.1.311.10.6.2"
+  Szoid_kp_smartcard_logon = "1.3.6.1.4.1.311.20.2.2"
+  Szoid_kp_kernel_mode_code_signing = "1.3.6.1.4.1.311.61.1.1"
+  Szoid_kp_kernel_mode_trusted_boot_signing = "1.3.6.1.4.1.311.61.4.1"
+  Szoid_revoked_list_signer = "1.3.6.1.4.1.311.10.3.19"
+  Szoid_windows_kits_signer = "1.3.6.1.4.1.311.10.3.20"
+  Szoid_windows_rt_signer = "1.3.6.1.4.1.311.10.3.21"
+  Szoid_protected_process_light_signer = "1.3.6.1.4.1.311.10.3.22"
+  Szoid_windows_tcb_signer = "1.3.6.1.4.1.311.10.3.23"
+  Szoid_protected_process_signer = "1.3.6.1.4.1.311.10.3.24"
+  Szoid_windows_third_party_component_signer = "1.3.6.1.4.1.311.10.3.25"
+  Szoid_windows_software_extension_signer = "1.3.6.1.4.1.311.10.3.26"
+  Szoid_disallowed_list = "1.3.6.1.4.1.311.10.3.30"
+  Szoid_pin_rules_signer = "1.3.6.1.4.1.311.10.3.31"
+  Szoid_pin_rules_ctl = "1.3.6.1.4.1.311.10.3.32"
+  Szoid_pin_rules_ext = "1.3.6.1.4.1.311.10.3.33"
+  Szoid_pin_rules_domain_name = "1.3.6.1.4.1.311.10.3.34"
+  Szoid_pin_rules_log_end_date_ext = "1.3.6.1.4.1.311.10.3.35"
+  Szoid_ium_signing = "1.3.6.1.4.1.311.10.3.37"
+  Szoid_ev_whql_crypto = "1.3.6.1.4.1.311.10.3.39"
+  Szoid_biometric_signing = "1.3.6.1.4.1.311.10.3.41"
+  Szoid_enclave_signing = "1.3.6.1.4.1.311.10.3.42"
+  Szoid_sync_root_ctl_ext = "1.3.6.1.4.1.311.10.3.50"
+  Szoid_hpkp_domain_name_ctl = "1.3.6.1.4.1.311.10.3.60"
+  Szoid_hpkp_header_value_ctl = "1.3.6.1.4.1.311.10.3.61"
+  Szoid_kp_kernel_mode_hal_extension_signing = "1.3.6.1.4.1.311.61.5.1"
+  Szoid_windows_store_signer = "1.3.6.1.4.1.311.76.3.1"
+  Szoid_dynamic_code_gen_signer = "1.3.6.1.4.1.311.76.5.1"
+  Szoid_microsoft_publisher_signer = "1.3.6.1.4.1.311.76.8.1"
+  Szoid_yesno_trust_attr = "1.3.6.1.4.1.311.10.4.1"
+  Szoid_site_pin_rules_index_attr = "1.3.6.1.4.1.311.10.4.2"
+  Szoid_site_pin_rules_flags_attr = "1.3.6.1.4.1.311.10.4.3"
   SITE_PIN_RULES_ALL_SUBDOMAINS_FLAG = 1_u32
+  Szoid_pkix_policy_qualifier_cps = "1.3.6.1.5.5.7.2.1"
+  Szoid_pkix_policy_qualifier_usernotice = "1.3.6.1.5.5.7.2.2"
+  Szoid_root_program_flags = "1.3.6.1.4.1.311.60.1.1"
   CERT_ROOT_PROGRAM_FLAG_OU = 16_u32
   CERT_ROOT_PROGRAM_FLAG_ADDRESS = 8_u32
+  Szoid_cert_policies_95_qualifier1 = "2.16.840.1.113733.1.7.1.1"
+  Szoid_rdn_tpm_manufacturer = "2.23.133.2.1"
+  Szoid_rdn_tpm_model = "2.23.133.2.2"
+  Szoid_rdn_tpm_version = "2.23.133.2.3"
+  Szoid_rdn_tcg_platform_manufacturer = "2.23.133.2.4"
+  Szoid_rdn_tcg_platform_model = "2.23.133.2.5"
+  Szoid_rdn_tcg_platform_version = "2.23.133.2.6"
+  Szoid_ct_cert_sctlist = "1.3.6.1.4.1.11129.2.4.2"
+  Szoid_enroll_ek_info = "1.3.6.1.4.1.311.21.23"
+  Szoid_enroll_aik_info = "1.3.6.1.4.1.311.21.39"
+  Szoid_enroll_attestation_statement = "1.3.6.1.4.1.311.21.24"
+  Szoid_enroll_ksp_name = "1.3.6.1.4.1.311.21.25"
+  Szoid_enroll_ekpub_challenge = "1.3.6.1.4.1.311.21.26"
+  Szoid_enroll_caxchgcert_hash = "1.3.6.1.4.1.311.21.27"
+  Szoid_enroll_attestation_challenge = "1.3.6.1.4.1.311.21.28"
+  Szoid_enroll_encryption_algorithm = "1.3.6.1.4.1.311.21.29"
+  Szoid_kp_tpm_ek_certificate = "2.23.133.8.1"
+  Szoid_kp_tpm_platform_certificate = "2.23.133.8.2"
+  Szoid_kp_tpm_aik_certificate = "2.23.133.8.3"
+  Szoid_enroll_ekverifykey = "1.3.6.1.4.1.311.21.30"
+  Szoid_enroll_ekverifycert = "1.3.6.1.4.1.311.21.31"
+  Szoid_enroll_ekverifycreds = "1.3.6.1.4.1.311.21.32"
+  Szoid_enroll_scep_error = "1.3.6.1.4.1.311.21.33"
+  Szoid_enroll_scep_server_state = "1.3.6.1.4.1.311.21.34"
+  Szoid_enroll_scep_challenge_answer = "1.3.6.1.4.1.311.21.35"
+  Szoid_enroll_scep_client_request = "1.3.6.1.4.1.311.21.37"
+  Szoid_enroll_scep_server_message = "1.3.6.1.4.1.311.21.38"
+  Szoid_enroll_scep_server_secret = "1.3.6.1.4.1.311.21.40"
+  Szoid_enroll_key_affinity = "1.3.6.1.4.1.311.21.41"
+  Szoid_enroll_scep_signer_hash = "1.3.6.1.4.1.311.21.42"
+  Szoid_enroll_ek_ca_keyid = "1.3.6.1.4.1.311.21.43"
+  Szoid_attr_supported_algorithms = "2.5.4.52"
+  Szoid_attr_tpm_specification = "2.23.133.2.16"
+  Szoid_attr_platform_specification = "2.23.133.2.17"
+  Szoid_attr_tpm_security_assertions = "2.23.133.2.18"
   CERT_UNICODE_RDN_ERR_INDEX_MASK = 1023_u32
   CERT_UNICODE_RDN_ERR_INDEX_SHIFT = 22_u32
   CERT_UNICODE_ATTR_ERR_INDEX_MASK = 63_u32
@@ -692,6 +1814,11 @@ lib LibWin32
   CERT_ALT_NAME_VALUE_ERR_INDEX_SHIFT = 0_u32
   CERT_CA_SUBJECT_FLAG = 128_u32
   CERT_END_ENTITY_SUBJECT_FLAG = 64_u32
+  Szoid_pkix_acc_descr = "1.3.6.1.5.5.7.48"
+  Szoid_pkix_ocsp = "1.3.6.1.5.5.7.48.1"
+  Szoid_pkix_ca_issuers = "1.3.6.1.5.5.7.48.2"
+  Szoid_pkix_time_stamping = "1.3.6.1.5.5.7.48.3"
+  Szoid_pkix_ca_repository = "1.3.6.1.5.5.7.48.5"
   CRL_REASON_PRIVILEGE_WITHDRAWN = 9_u32
   CRL_REASON_AA_COMPROMISE = 10_u32
   CRL_DIST_POINT_NO_NAME = 0_u32
@@ -722,7 +1849,31 @@ lib LibWin32
   CRYPT_RC2_56BIT_VERSION = 52_u32
   CRYPT_RC2_64BIT_VERSION = 120_u32
   CRYPT_RC2_128BIT_VERSION = 58_u32
+  Szoid_qc_eu_compliance = "0.4.0.1862.1.1"
+  Szoid_qc_sscd = "0.4.0.1862.1.4"
   PKCS_RSA_SSA_PSS_TRAILER_FIELD_BC = 1_u32
+  Szoid_verisign_private_6_9 = "2.16.840.1.113733.1.6.9"
+  Szoid_verisign_onsite_jurisdiction_hash = "2.16.840.1.113733.1.6.11"
+  Szoid_verisign_bitstring_6_13 = "2.16.840.1.113733.1.6.13"
+  Szoid_verisign_iss_strong_crypto = "2.16.840.1.113733.1.8.1"
+  Szoidverisign_messagetype = "2.16.840.1.113733.1.9.2"
+  Szoidverisign_pkistatus = "2.16.840.1.113733.1.9.3"
+  Szoidverisign_failinfo = "2.16.840.1.113733.1.9.4"
+  Szoidverisign_sendernonce = "2.16.840.1.113733.1.9.5"
+  Szoidverisign_recipientnonce = "2.16.840.1.113733.1.9.6"
+  Szoidverisign_transactionid = "2.16.840.1.113733.1.9.7"
+  Szoid_netscape = "2.16.840.1.113730"
+  Szoid_netscape_cert_extension = "2.16.840.1.113730.1"
+  Szoid_netscape_cert_type = "2.16.840.1.113730.1.1"
+  Szoid_netscape_base_url = "2.16.840.1.113730.1.2"
+  Szoid_netscape_revocation_url = "2.16.840.1.113730.1.3"
+  Szoid_netscape_ca_revocation_url = "2.16.840.1.113730.1.4"
+  Szoid_netscape_cert_renewal_url = "2.16.840.1.113730.1.7"
+  Szoid_netscape_ca_policy_url = "2.16.840.1.113730.1.8"
+  Szoid_netscape_ssl_server_name = "2.16.840.1.113730.1.12"
+  Szoid_netscape_comment = "2.16.840.1.113730.1.13"
+  Szoid_netscape_data_type = "2.16.840.1.113730.2"
+  Szoid_netscape_cert_sequence = "2.16.840.1.113730.2.5"
   NETSCAPE_SSL_CLIENT_AUTH_CERT_TYPE = 128_u32
   NETSCAPE_SSL_SERVER_AUTH_CERT_TYPE = 64_u32
   NETSCAPE_SMIME_CERT_TYPE = 32_u32
@@ -730,6 +1881,31 @@ lib LibWin32
   NETSCAPE_SSL_CA_CERT_TYPE = 4_u32
   NETSCAPE_SMIME_CA_CERT_TYPE = 2_u32
   NETSCAPE_SIGN_CA_CERT_TYPE = 1_u32
+  Szoid_ct_pki_data = "1.3.6.1.5.5.7.12.2"
+  Szoid_ct_pki_response = "1.3.6.1.5.5.7.12.3"
+  Szoid_pkix_no_signature = "1.3.6.1.5.5.7.6.2"
+  Szoid_cmc = "1.3.6.1.5.5.7.7"
+  Szoid_cmc_status_info = "1.3.6.1.5.5.7.7.1"
+  Szoid_cmc_identification = "1.3.6.1.5.5.7.7.2"
+  Szoid_cmc_identity_proof = "1.3.6.1.5.5.7.7.3"
+  Szoid_cmc_data_return = "1.3.6.1.5.5.7.7.4"
+  Szoid_cmc_transaction_id = "1.3.6.1.5.5.7.7.5"
+  Szoid_cmc_sender_nonce = "1.3.6.1.5.5.7.7.6"
+  Szoid_cmc_recipient_nonce = "1.3.6.1.5.5.7.7.7"
+  Szoid_cmc_add_extensions = "1.3.6.1.5.5.7.7.8"
+  Szoid_cmc_encrypted_pop = "1.3.6.1.5.5.7.7.9"
+  Szoid_cmc_decrypted_pop = "1.3.6.1.5.5.7.7.10"
+  Szoid_cmc_lra_pop_witness = "1.3.6.1.5.5.7.7.11"
+  Szoid_cmc_get_cert = "1.3.6.1.5.5.7.7.15"
+  Szoid_cmc_get_crl = "1.3.6.1.5.5.7.7.16"
+  Szoid_cmc_revoke_request = "1.3.6.1.5.5.7.7.17"
+  Szoid_cmc_reg_info = "1.3.6.1.5.5.7.7.18"
+  Szoid_cmc_response_info = "1.3.6.1.5.5.7.7.19"
+  Szoid_cmc_query_pending = "1.3.6.1.5.5.7.7.21"
+  Szoid_cmc_id_pop_link_random = "1.3.6.1.5.5.7.7.22"
+  Szoid_cmc_id_pop_link_witness = "1.3.6.1.5.5.7.7.23"
+  Szoid_cmc_id_confirm_cert_acceptance = "1.3.6.1.5.5.7.7.24"
+  Szoid_cmc_add_attributes = "1.3.6.1.4.1.311.10.10.1"
   CMC_TAGGED_CERT_REQUEST_CHOICE = 1_u32
   CMC_OTHER_INFO_NO_CHOICE = 0_u32
   CMC_OTHER_INFO_FAIL_CHOICE = 1_u32
@@ -752,6 +1928,8 @@ lib LibWin32
   CMC_FAIL_NO_KEY_REUSE = 10_u32
   CMC_FAIL_INTERNAL_CA_ERROR = 11_u32
   CMC_FAIL_TRY_LATER = 12_u32
+  Szoid_loyalty_other_logotype = "1.3.6.1.5.5.7.20.1"
+  Szoid_background_other_logotype = "1.3.6.1.5.5.7.20.2"
   CERT_BIOMETRIC_PICTURE_TYPE = 0_u32
   CERT_BIOMETRIC_SIGNATURE_TYPE = 1_u32
   OCSP_REQUEST_V1 = 0_u32
@@ -761,12 +1939,30 @@ lib LibWin32
   OCSP_TRY_LATER_RESPONSE = 3_u32
   OCSP_SIG_REQUIRED_RESPONSE = 5_u32
   OCSP_UNAUTHORIZED_RESPONSE = 6_u32
+  Szoid_pkix_ocsp_basic_signed_response = "1.3.6.1.5.5.7.48.1.1"
   OCSP_BASIC_GOOD_CERT_STATUS = 0_u32
   OCSP_BASIC_REVOKED_CERT_STATUS = 1_u32
   OCSP_BASIC_UNKNOWN_CERT_STATUS = 2_u32
   OCSP_BASIC_RESPONSE_V1 = 0_u32
   OCSP_BASIC_BY_NAME_RESPONDER_ID = 1_u32
   OCSP_BASIC_BY_KEY_RESPONDER_ID = 2_u32
+  CRYPT_OID_ENCODE_OBJECT_FUNC = "CryptDllEncodeObject"
+  CRYPT_OID_DECODE_OBJECT_FUNC = "CryptDllDecodeObject"
+  CRYPT_OID_ENCODE_OBJECT_EX_FUNC = "CryptDllEncodeObjectEx"
+  CRYPT_OID_DECODE_OBJECT_EX_FUNC = "CryptDllDecodeObjectEx"
+  CRYPT_OID_CREATE_COM_OBJECT_FUNC = "CryptDllCreateCOMObject"
+  CRYPT_OID_VERIFY_REVOCATION_FUNC = "CertDllVerifyRevocation"
+  CRYPT_OID_VERIFY_CTL_USAGE_FUNC = "CertDllVerifyCTLUsage"
+  CRYPT_OID_FORMAT_OBJECT_FUNC = "CryptDllFormatObject"
+  CRYPT_OID_FIND_OID_INFO_FUNC = "CryptDllFindOIDInfo"
+  CRYPT_OID_FIND_LOCALIZED_NAME_FUNC = "CryptDllFindLocalizedName"
+  CRYPT_OID_REGPATH = "Software\\Microsoft\\Cryptography\\OID"
+  CRYPT_OID_REG_ENCODING_TYPE_PREFIX = "EncodingType "
+  CRYPT_OID_REG_DLL_VALUE_NAME = "Dll"
+  CRYPT_OID_REG_FUNC_NAME_VALUE_NAME = "FuncName"
+  CRYPT_OID_REG_FUNC_NAME_VALUE_NAME_A = "FuncName"
+  CRYPT_OID_REG_FLAGS_VALUE_NAME = "CryptFlags"
+  CRYPT_DEFAULT_OID = "DEFAULT"
   CRYPT_INSTALL_OID_FUNC_BEFORE_FLAG = 1_u32
   CRYPT_GET_INSTALLED_OID_FUNC_FLAG = 1_u32
   CRYPT_REGISTER_FIRST_INDEX = 0_u32
@@ -774,6 +1970,13 @@ lib LibWin32
   CRYPT_MATCH_ANY_ENCODING_TYPE = 4294967295_u32
   CALG_OID_INFO_CNG_ONLY = 4294967295_u32
   CALG_OID_INFO_PARAMETERS = 4294967294_u32
+  CRYPT_OID_INFO_HASH_PARAMETERS_ALGORITHM = "CryptOIDInfoHashParameters"
+  CRYPT_OID_INFO_ECC_PARAMETERS_ALGORITHM = "CryptOIDInfoECCParameters"
+  CRYPT_OID_INFO_MGF1_PARAMETERS_ALGORITHM = "CryptOIDInfoMgf1Parameters"
+  CRYPT_OID_INFO_NO_SIGN_ALGORITHM = "CryptOIDInfoNoSign"
+  CRYPT_OID_INFO_OAEP_PARAMETERS_ALGORITHM = "CryptOIDInfoOAEPParameters"
+  CRYPT_OID_INFO_ECC_WRAP_PARAMETERS_ALGORITHM = "CryptOIDInfoECCWrapParameters"
+  CRYPT_OID_INFO_NO_PARAMETERS_ALGORITHM = "CryptOIDInfoNoParameters"
   CRYPT_HASH_ALG_OID_GROUP_ID = 1_u32
   CRYPT_ENCRYPT_ALG_OID_GROUP_ID = 2_u32
   CRYPT_PUBKEY_ALG_OID_GROUP_ID = 3_u32
@@ -807,8 +2010,24 @@ lib LibWin32
   CRYPT_OID_INFO_OID_GROUP_BIT_LEN_SHIFT = 16_u32
   CRYPT_INSTALL_OID_INFO_BEFORE_FLAG = 1_u32
   CRYPT_LOCALIZED_NAME_ENCODING_TYPE = 0_u32
+  CRYPT_LOCALIZED_NAME_OID = "LocalizedNames"
+  CERT_STRONG_SIGN_ECDSA_ALGORITHM = "ECDSA"
   CERT_STRONG_SIGN_SERIALIZED_INFO_CHOICE = 1_u32
   CERT_STRONG_SIGN_OID_INFO_CHOICE = 2_u32
+  Szoid_cert_strong_sign_os_prefix = "1.3.6.1.4.1.311.72.1."
+  Szoid_cert_strong_sign_os_1 = "1.3.6.1.4.1.311.72.1.1"
+  Szoid_cert_strong_sign_os_current = "1.3.6.1.4.1.311.72.1.1"
+  Szoid_cert_strong_key_os_prefix = "1.3.6.1.4.1.311.72.2."
+  Szoid_cert_strong_key_os_1 = "1.3.6.1.4.1.311.72.2.1"
+  Szoid_cert_strong_key_os_current = "1.3.6.1.4.1.311.72.2.1"
+  Szoid_pkcs_7_data = "1.2.840.113549.1.7.1"
+  Szoid_pkcs_7_signed = "1.2.840.113549.1.7.2"
+  Szoid_pkcs_7_enveloped = "1.2.840.113549.1.7.3"
+  Szoid_pkcs_7_signedandenveloped = "1.2.840.113549.1.7.4"
+  Szoid_pkcs_7_digested = "1.2.840.113549.1.7.5"
+  Szoid_pkcs_7_encrypted = "1.2.840.113549.1.7.6"
+  Szoid_pkcs_9_content_type = "1.2.840.113549.1.9.3"
+  Szoid_pkcs_9_message_digest = "1.2.840.113549.1.9.4"
   CMSG_ENCRYPTED = 6_u32
   CMSG_MAIL_LIST_HANDLE_KEY_CHOICE = 1_u32
   CMSG_KEY_TRANS_RECIPIENT = 1_u32
@@ -909,20 +2128,44 @@ lib LibWin32
   CMSG_VERIFY_SIGNER_CHAIN = 3_u32
   CMSG_VERIFY_SIGNER_NULL = 4_u32
   CMSG_VERIFY_COUNTER_SIGN_ENABLE_STRONG_FLAG = 1_u32
+  CMSG_OID_GEN_ENCRYPT_KEY_FUNC = "CryptMsgDllGenEncryptKey"
+  CMSG_OID_EXPORT_ENCRYPT_KEY_FUNC = "CryptMsgDllExportEncryptKey"
+  CMSG_OID_IMPORT_ENCRYPT_KEY_FUNC = "CryptMsgDllImportEncryptKey"
+  CMSG_DEFAULT_INSTALLABLE_FUNC_OID = 1_i32
   CMSG_CONTENT_ENCRYPT_PAD_ENCODED_LEN_FLAG = 1_u32
   CMSG_CONTENT_ENCRYPT_FREE_PARA_FLAG = 1_u32
   CMSG_CONTENT_ENCRYPT_FREE_OBJID_FLAG = 2_u32
   CMSG_CONTENT_ENCRYPT_RELEASE_CONTEXT_FLAG = 32768_u32
+  CMSG_OID_GEN_CONTENT_ENCRYPT_KEY_FUNC = "CryptMsgDllGenContentEncryptKey"
+  CMSG_OID_CAPI1_GEN_CONTENT_ENCRYPT_KEY_FUNC = "CryptMsgDllGenContentEncryptKey"
+  CMSG_OID_CNG_GEN_CONTENT_ENCRYPT_KEY_FUNC = "CryptMsgDllCNGGenContentEncryptKey"
   CMSG_KEY_TRANS_ENCRYPT_FREE_PARA_FLAG = 1_u32
   CMSG_KEY_TRANS_ENCRYPT_FREE_OBJID_FLAG = 2_u32
+  CMSG_OID_EXPORT_KEY_TRANS_FUNC = "CryptMsgDllExportKeyTrans"
+  CMSG_OID_CAPI1_EXPORT_KEY_TRANS_FUNC = "CryptMsgDllExportKeyTrans"
+  CMSG_OID_CNG_EXPORT_KEY_TRANS_FUNC = "CryptMsgDllCNGExportKeyTrans"
   CMSG_KEY_AGREE_ENCRYPT_FREE_PARA_FLAG = 1_u32
   CMSG_KEY_AGREE_ENCRYPT_FREE_MATERIAL_FLAG = 2_u32
   CMSG_KEY_AGREE_ENCRYPT_FREE_PUBKEY_ALG_FLAG = 4_u32
   CMSG_KEY_AGREE_ENCRYPT_FREE_PUBKEY_PARA_FLAG = 8_u32
   CMSG_KEY_AGREE_ENCRYPT_FREE_PUBKEY_BITS_FLAG = 16_u32
   CMSG_KEY_AGREE_ENCRYPT_FREE_OBJID_FLAG = 32_u32
+  CMSG_OID_EXPORT_KEY_AGREE_FUNC = "CryptMsgDllExportKeyAgree"
+  CMSG_OID_CAPI1_EXPORT_KEY_AGREE_FUNC = "CryptMsgDllExportKeyAgree"
+  CMSG_OID_CNG_EXPORT_KEY_AGREE_FUNC = "CryptMsgDllCNGExportKeyAgree"
   CMSG_MAIL_LIST_ENCRYPT_FREE_PARA_FLAG = 1_u32
   CMSG_MAIL_LIST_ENCRYPT_FREE_OBJID_FLAG = 2_u32
+  CMSG_OID_EXPORT_MAIL_LIST_FUNC = "CryptMsgDllExportMailList"
+  CMSG_OID_CAPI1_EXPORT_MAIL_LIST_FUNC = "CryptMsgDllExportMailList"
+  CMSG_OID_IMPORT_KEY_TRANS_FUNC = "CryptMsgDllImportKeyTrans"
+  CMSG_OID_CAPI1_IMPORT_KEY_TRANS_FUNC = "CryptMsgDllImportKeyTrans"
+  CMSG_OID_IMPORT_KEY_AGREE_FUNC = "CryptMsgDllImportKeyAgree"
+  CMSG_OID_CAPI1_IMPORT_KEY_AGREE_FUNC = "CryptMsgDllImportKeyAgree"
+  CMSG_OID_IMPORT_MAIL_LIST_FUNC = "CryptMsgDllImportMailList"
+  CMSG_OID_CAPI1_IMPORT_MAIL_LIST_FUNC = "CryptMsgDllImportMailList"
+  CMSG_OID_CNG_IMPORT_KEY_TRANS_FUNC = "CryptMsgDllCNGImportKeyTrans"
+  CMSG_OID_CNG_IMPORT_KEY_AGREE_FUNC = "CryptMsgDllCNGImportKeyAgree"
+  CMSG_OID_CNG_IMPORT_CONTENT_ENCRYPT_KEY_FUNC = "CryptMsgDllCNGImportContentEncryptKey"
   CERT_KEY_PROV_HANDLE_PROP_ID = 1_u32
   CERT_KEY_PROV_INFO_PROP_ID = 2_u32
   CERT_SHA1_HASH_PROP_ID = 3_u32
@@ -1022,11 +2265,62 @@ lib LibWin32
   CERT_LAST_RESERVED_PROP_ID = 32767_u32
   CERT_FIRST_USER_PROP_ID = 32768_u32
   CERT_LAST_USER_PROP_ID = 65535_u32
+  Szoid_cert_prop_id_prefix = "1.3.6.1.4.1.311.10.11."
+  Szoid_cert_key_identifier_prop_id = "1.3.6.1.4.1.311.10.11.20"
+  Szoid_cert_issuer_serial_number_md5_hash_prop_id = "1.3.6.1.4.1.311.10.11.28"
+  Szoid_cert_subject_name_md5_hash_prop_id = "1.3.6.1.4.1.311.10.11.29"
+  Szoid_cert_md5_hash_prop_id = "1.3.6.1.4.1.311.10.11.4"
+  Szoid_cert_signature_hash_prop_id = "1.3.6.1.4.1.311.10.11.15"
+  Szoid_disallowed_hash = "1.3.6.1.4.1.311.10.11.15"
+  Szoid_cert_disallowed_filetime_prop_id = "1.3.6.1.4.1.311.10.11.104"
   CERT_ACCESS_STATE_WRITE_PERSIST_FLAG = 1_u32
   CERT_ACCESS_STATE_SYSTEM_STORE_FLAG = 2_u32
   CERT_ACCESS_STATE_LM_SYSTEM_STORE_FLAG = 4_u32
   CERT_ACCESS_STATE_GP_SYSTEM_STORE_FLAG = 8_u32
   CERT_ACCESS_STATE_SHARED_USER_FLAG = 16_u32
+  Szoid_root_program_auto_update_ca_revocation = "1.3.6.1.4.1.311.60.3.1"
+  Szoid_root_program_auto_update_end_revocation = "1.3.6.1.4.1.311.60.3.2"
+  Szoid_root_program_no_ocsp_failover_to_crl = "1.3.6.1.4.1.311.60.3.3"
+  CERT_STORE_PROV_MSG = 1_i32
+  CERT_STORE_PROV_MEMORY = 2_i32
+  CERT_STORE_PROV_FILE = 3_i32
+  CERT_STORE_PROV_REG = 4_i32
+  CERT_STORE_PROV_PKCS7 = 5_i32
+  CERT_STORE_PROV_SERIALIZED = 6_i32
+  CERT_STORE_PROV_FILENAME_A = 7_i32
+  CERT_STORE_PROV_FILENAME_W = 8_i32
+  CERT_STORE_PROV_FILENAME = 8_i32
+  CERT_STORE_PROV_SYSTEM_A = 9_i32
+  CERT_STORE_PROV_SYSTEM_W = 10_i32
+  CERT_STORE_PROV_SYSTEM = 10_i32
+  CERT_STORE_PROV_COLLECTION = 11_i32
+  CERT_STORE_PROV_SYSTEM_REGISTRY_A = 12_i32
+  CERT_STORE_PROV_SYSTEM_REGISTRY_W = 13_i32
+  CERT_STORE_PROV_SYSTEM_REGISTRY = 13_i32
+  CERT_STORE_PROV_PHYSICAL_W = 14_i32
+  CERT_STORE_PROV_PHYSICAL = 14_i32
+  CERT_STORE_PROV_SMART_CARD_W = 15_i32
+  CERT_STORE_PROV_SMART_CARD = 15_i32
+  CERT_STORE_PROV_LDAP_W = 16_i32
+  CERT_STORE_PROV_LDAP = 16_i32
+  CERT_STORE_PROV_PKCS12 = 17_i32
+  Sz_cert_store_prov_memory = "Memory"
+  Sz_cert_store_prov_filename_w = "File"
+  Sz_cert_store_prov_filename = "File"
+  Sz_cert_store_prov_system_w = "System"
+  Sz_cert_store_prov_system = "System"
+  Sz_cert_store_prov_pkcs7 = "PKCS7"
+  Sz_cert_store_prov_pkcs12 = "PKCS12"
+  Sz_cert_store_prov_serialized = "Serialized"
+  Sz_cert_store_prov_collection = "Collection"
+  Sz_cert_store_prov_system_registry_w = "SystemRegistry"
+  Sz_cert_store_prov_system_registry = "SystemRegistry"
+  Sz_cert_store_prov_physical_w = "Physical"
+  Sz_cert_store_prov_physical = "Physical"
+  Sz_cert_store_prov_smart_card_w = "SmartCard"
+  Sz_cert_store_prov_smart_card = "SmartCard"
+  Sz_cert_store_prov_ldap_w = "Ldap"
+  Sz_cert_store_prov_ldap = "Ldap"
   CERT_STORE_SIGNATURE_FLAG = 1_u32
   CERT_STORE_TIME_VALIDITY_FLAG = 2_u32
   CERT_STORE_REVOCATION_FLAG = 4_u32
@@ -1050,6 +2344,9 @@ lib LibWin32
   CERT_SYSTEM_STORE_LOCAL_MACHINE_GROUP_POLICY_ID = 8_u32
   CERT_SYSTEM_STORE_LOCAL_MACHINE_ENTERPRISE_ID = 9_u32
   CERT_SYSTEM_STORE_LOCAL_MACHINE_WCOS_ID = 10_u32
+  CERT_GROUP_POLICY_SYSTEM_STORE_REGPATH = "Software\\Policies\\Microsoft\\SystemCertificates"
+  CERT_EFSBLOB_VALUE_NAME = "EFSBlob"
+  CERT_PROT_ROOT_FLAGS_VALUE_NAME = "Flags"
   CERT_PROT_ROOT_DISABLE_CURRENT_USER_FLAG = 1_u32
   CERT_PROT_ROOT_INHIBIT_ADD_AT_INIT_FLAG = 2_u32
   CERT_PROT_ROOT_INHIBIT_PURGE_LM_FLAG = 4_u32
@@ -1058,15 +2355,50 @@ lib LibWin32
   CERT_PROT_ROOT_DISABLE_NT_AUTH_REQUIRED_FLAG = 16_u32
   CERT_PROT_ROOT_DISABLE_NOT_DEFINED_NAME_CONSTRAINT_FLAG = 32_u32
   CERT_PROT_ROOT_DISABLE_PEER_TRUST = 65536_u32
+  CERT_PROT_ROOT_PEER_USAGES_VALUE_NAME = "PeerUsages"
+  CERT_PROT_ROOT_PEER_USAGES_VALUE_NAME_A = "PeerUsages"
+  CERT_LOCAL_MACHINE_SYSTEM_STORE_REGPATH = "Software\\Microsoft\\SystemCertificates"
+  CERT_TRUST_PUB_AUTHENTICODE_FLAGS_VALUE_NAME = "AuthenticodeFlags"
   CERT_TRUST_PUB_ALLOW_TRUST_MASK = 3_u32
   CERT_TRUST_PUB_ALLOW_END_USER_TRUST = 0_u32
   CERT_TRUST_PUB_ALLOW_MACHINE_ADMIN_TRUST = 1_u32
   CERT_TRUST_PUB_ALLOW_ENTERPRISE_ADMIN_TRUST = 2_u32
   CERT_TRUST_PUB_CHECK_PUBLISHER_REV_FLAG = 256_u32
   CERT_TRUST_PUB_CHECK_TIMESTAMP_REV_FLAG = 512_u32
+  CERT_OCM_SUBCOMPONENTS_LOCAL_MACHINE_REGPATH = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Setup\\OC Manager\\Subcomponents"
+  CERT_OCM_SUBCOMPONENTS_ROOT_AUTO_UPDATE_VALUE_NAME = "RootAutoUpdate"
+  CERT_DISABLE_ROOT_AUTO_UPDATE_VALUE_NAME = "DisableRootAutoUpdate"
+  CERT_ENABLE_DISALLOWED_CERT_AUTO_UPDATE_VALUE_NAME = "EnableDisallowedCertAutoUpdate"
+  CERT_DISABLE_PIN_RULES_AUTO_UPDATE_VALUE_NAME = "DisablePinRulesAutoUpdate"
+  CERT_AUTO_UPDATE_ROOT_DIR_URL_VALUE_NAME = "RootDirUrl"
+  CERT_AUTO_UPDATE_SYNC_FROM_DIR_URL_VALUE_NAME = "SyncFromDirUrl"
+  CERT_AUTH_ROOT_AUTO_UPDATE_ROOT_DIR_URL_VALUE_NAME = "RootDirUrl"
+  CERT_AUTH_ROOT_AUTO_UPDATE_SYNC_DELTA_TIME_VALUE_NAME = "SyncDeltaTime"
+  CERT_AUTH_ROOT_AUTO_UPDATE_FLAGS_VALUE_NAME = "Flags"
   CERT_AUTH_ROOT_AUTO_UPDATE_DISABLE_UNTRUSTED_ROOT_LOGGING_FLAG = 1_u32
   CERT_AUTH_ROOT_AUTO_UPDATE_DISABLE_PARTIAL_CHAIN_LOGGING_FLAG = 2_u32
   CERT_AUTO_UPDATE_DISABLE_RANDOM_QUERY_STRING_FLAG = 4_u32
+  CERT_AUTH_ROOT_AUTO_UPDATE_LAST_SYNC_TIME_VALUE_NAME = "LastSyncTime"
+  CERT_AUTH_ROOT_AUTO_UPDATE_ENCODED_CTL_VALUE_NAME = "EncodedCtl"
+  CERT_AUTH_ROOT_CTL_FILENAME = "authroot.stl"
+  CERT_AUTH_ROOT_CTL_FILENAME_A = "authroot.stl"
+  CERT_AUTH_ROOT_CAB_FILENAME = "authrootstl.cab"
+  CERT_AUTH_ROOT_SEQ_FILENAME = "authrootseq.txt"
+  CERT_AUTH_ROOT_CERT_EXT = ".crt"
+  CERT_DISALLOWED_CERT_AUTO_UPDATE_SYNC_DELTA_TIME_VALUE_NAME = "DisallowedCertSyncDeltaTime"
+  CERT_DISALLOWED_CERT_AUTO_UPDATE_LAST_SYNC_TIME_VALUE_NAME = "DisallowedCertLastSyncTime"
+  CERT_DISALLOWED_CERT_AUTO_UPDATE_ENCODED_CTL_VALUE_NAME = "DisallowedCertEncodedCtl"
+  CERT_DISALLOWED_CERT_CTL_FILENAME = "disallowedcert.stl"
+  CERT_DISALLOWED_CERT_CTL_FILENAME_A = "disallowedcert.stl"
+  CERT_DISALLOWED_CERT_CAB_FILENAME = "disallowedcertstl.cab"
+  CERT_DISALLOWED_CERT_AUTO_UPDATE_LIST_IDENTIFIER = "DisallowedCert_AutoUpdate_1"
+  CERT_PIN_RULES_AUTO_UPDATE_SYNC_DELTA_TIME_VALUE_NAME = "PinRulesSyncDeltaTime"
+  CERT_PIN_RULES_AUTO_UPDATE_LAST_SYNC_TIME_VALUE_NAME = "PinRulesLastSyncTime"
+  CERT_PIN_RULES_AUTO_UPDATE_ENCODED_CTL_VALUE_NAME = "PinRulesEncodedCtl"
+  CERT_PIN_RULES_CTL_FILENAME = "pinrules.stl"
+  CERT_PIN_RULES_CTL_FILENAME_A = "pinrules.stl"
+  CERT_PIN_RULES_CAB_FILENAME = "pinrulesstl.cab"
+  CERT_PIN_RULES_AUTO_UPDATE_LIST_IDENTIFIER = "PinRules_AutoUpdate_1"
   CERT_REGISTRY_STORE_REMOTE_FLAG = 65536_u32
   CERT_REGISTRY_STORE_SERIALIZED_FLAG = 131072_u32
   CERT_REGISTRY_STORE_CLIENT_GPT_FLAG = 2147483648_u32
@@ -1074,11 +2406,13 @@ lib LibWin32
   CERT_REGISTRY_STORE_ROAMING_FLAG = 262144_u32
   CERT_REGISTRY_STORE_MY_IE_DIRTY_FLAG = 524288_u32
   CERT_REGISTRY_STORE_EXTERNAL_FLAG = 1048576_u32
+  CERT_IE_DIRTY_FLAGS_REGPATH = "Software\\Microsoft\\Cryptography\\IEDirtyFlags"
   CERT_FILE_STORE_COMMIT_ENABLE_FLAG = 65536_u32
   CERT_LDAP_STORE_SIGN_FLAG = 65536_u32
   CERT_LDAP_STORE_AREC_EXCLUSIVE_FLAG = 131072_u32
   CERT_LDAP_STORE_OPENED_FLAG = 262144_u32
   CERT_LDAP_STORE_UNBIND_FLAG = 524288_u32
+  CRYPT_OID_OPEN_STORE_PROV_FUNC = "CertDllOpenStoreProv"
   CERT_STORE_PROV_GP_SYSTEM_STORE_FLAG = 32_u32
   CERT_STORE_PROV_SHARED_USER_FLAG = 64_u32
   CERT_STORE_PROV_CLOSE_FUNC = 0_u32
@@ -1173,6 +2507,22 @@ lib LibWin32
   CERT_PHYSICAL_STORE_REMOTE_OPEN_DISABLE_FLAG = 4_u32
   CERT_PHYSICAL_STORE_INSERT_COMPUTER_NAME_ENABLE_FLAG = 8_u32
   CERT_PHYSICAL_STORE_PREDEFINED_ENUM_FLAG = 1_u32
+  CERT_PHYSICAL_STORE_DEFAULT_NAME = ".Default"
+  CERT_PHYSICAL_STORE_GROUP_POLICY_NAME = ".GroupPolicy"
+  CERT_PHYSICAL_STORE_LOCAL_MACHINE_NAME = ".LocalMachine"
+  CERT_PHYSICAL_STORE_DS_USER_CERTIFICATE_NAME = ".UserCertificate"
+  CERT_PHYSICAL_STORE_LOCAL_MACHINE_GROUP_POLICY_NAME = ".LocalMachineGroupPolicy"
+  CERT_PHYSICAL_STORE_ENTERPRISE_NAME = ".Enterprise"
+  CERT_PHYSICAL_STORE_AUTH_ROOT_NAME = ".AuthRoot"
+  CERT_PHYSICAL_STORE_SMART_CARD_NAME = ".SmartCard"
+  CRYPT_OID_OPEN_SYSTEM_STORE_PROV_FUNC = "CertDllOpenSystemStoreProv"
+  CRYPT_OID_REGISTER_SYSTEM_STORE_FUNC = "CertDllRegisterSystemStore"
+  CRYPT_OID_UNREGISTER_SYSTEM_STORE_FUNC = "CertDllUnregisterSystemStore"
+  CRYPT_OID_ENUM_SYSTEM_STORE_FUNC = "CertDllEnumSystemStore"
+  CRYPT_OID_REGISTER_PHYSICAL_STORE_FUNC = "CertDllRegisterPhysicalStore"
+  CRYPT_OID_UNREGISTER_PHYSICAL_STORE_FUNC = "CertDllUnregisterPhysicalStore"
+  CRYPT_OID_ENUM_PHYSICAL_STORE_FUNC = "CertDllEnumPhysicalStore"
+  CRYPT_OID_SYSTEM_STORE_LOCATION_VALUE_NAME = "SystemStoreLocation"
   CMSG_TRUSTED_SIGNER_FLAG = 1_u32
   CMSG_SIGNER_ONLY_FLAG = 2_u32
   CMSG_USE_SIGNER_INDEX_FLAG = 4_u32
@@ -1202,11 +2552,21 @@ lib LibWin32
   CRYPT_VERIFY_CERT_SIGN_ISSUER_CHAIN = 3_u32
   CRYPT_VERIFY_CERT_SIGN_ISSUER_NULL = 4_u32
   CRYPT_VERIFY_CERT_SIGN_CHECK_WEAK_HASH_FLAG = 8_u32
+  CRYPT_OID_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC = "CryptDllExtractEncodedSignatureParameters"
+  CRYPT_OID_SIGN_AND_ENCODE_HASH_FUNC = "CryptDllSignAndEncodeHash"
+  CRYPT_OID_VERIFY_ENCODED_SIGNATURE_FUNC = "CryptDllVerifyEncodedSignature"
+  CRYPT_OID_EXPORT_PUBLIC_KEY_INFO_FUNC = "CryptDllExportPublicKeyInfoEx"
+  CRYPT_OID_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC = "CryptDllExportPublicKeyInfoEx2"
+  CRYPT_OID_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC = "CryptDllExportPublicKeyInfoFromBCryptKeyHandle"
+  CRYPT_OID_IMPORT_PUBLIC_KEY_INFO_FUNC = "CryptDllImportPublicKeyInfoEx"
+  CRYPT_OID_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC = "CryptDllImportPublicKeyInfoEx2"
   CRYPT_ACQUIRE_WINDOW_HANDLE_FLAG = 128_u32
   CRYPT_ACQUIRE_NCRYPT_KEY_FLAGS_MASK = 458752_u32
   CRYPT_ACQUIRE_ALLOW_NCRYPT_KEY_FLAG = 65536_u32
   CRYPT_ACQUIRE_PREFER_NCRYPT_KEY_FLAG = 131072_u32
   CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG = 262144_u32
+  CRYPT_OID_IMPORT_PRIVATE_KEY_INFO_FUNC = "CryptDllImportPrivateKeyInfoEx"
+  CRYPT_OID_EXPORT_PRIVATE_KEY_INFO_FUNC = "CryptDllExportPrivateKeyInfoEx"
   CRYPT_DELETE_KEYSET = 16_u32
   CERT_XML_NAME_STR = 4_u32
   CERT_NAME_STR_SEMICOLON_FLAG = 1073741824_u32
@@ -1238,6 +2598,18 @@ lib LibWin32
   CRYPT_MESSAGE_KEYID_SIGNER_FLAG = 4_u32
   CRYPT_MESSAGE_SILENT_KEYSET_FLAG = 64_u32
   CRYPT_MESSAGE_KEYID_RECIPIENT_FLAG = 4_u32
+  CREDENTIAL_OID_PASSWORD_CREDENTIALS_A = 1_i32
+  CREDENTIAL_OID_PASSWORD_CREDENTIALS_W = 2_i32
+  CREDENTIAL_OID_PASSWORD_CREDENTIALS = 2_i32
+  SCHEME_OID_RETRIEVE_ENCODED_OBJECT_FUNC = "SchemeDllRetrieveEncodedObject"
+  SCHEME_OID_RETRIEVE_ENCODED_OBJECTW_FUNC = "SchemeDllRetrieveEncodedObjectW"
+  CONTEXT_OID_CREATE_OBJECT_CONTEXT_FUNC = "ContextDllCreateObjectContext"
+  CONTEXT_OID_CERTIFICATE = 1_i32
+  CONTEXT_OID_CRL = 2_i32
+  CONTEXT_OID_CTL = 3_i32
+  CONTEXT_OID_PKCS7 = 4_i32
+  CONTEXT_OID_CAPI2_ANY = 5_i32
+  CONTEXT_OID_OCSP_RESP = 6_i32
   CRYPT_RETRIEVE_MULTIPLE_OBJECTS = 1_u32
   CRYPT_CACHE_ONLY_RETRIEVAL = 2_u32
   CRYPT_WIRE_ONLY_RETRIEVAL = 4_u32
@@ -1280,22 +2652,81 @@ lib LibWin32
   CRYPTNET_URL_CACHE_RESPONSE_HTTP = 1_u32
   CRYPTNET_URL_CACHE_RESPONSE_VALIDATED = 32768_u32
   CRYPT_RETRIEVE_MAX_ERROR_CONTENT_LENGTH = 4096_u32
+  CRYPT_PARAM_ASYNC_RETRIEVAL_COMPLETION = 1_i32
+  CRYPT_PARAM_CANCEL_ASYNC_RETRIEVAL = 2_i32
+  URL_OID_GET_OBJECT_URL_FUNC = "UrlDllGetObjectUrl"
+  URL_OID_CERTIFICATE_ISSUER = 1_i32
+  URL_OID_CERTIFICATE_CRL_DIST_POINT = 2_i32
+  URL_OID_CTL_ISSUER = 3_i32
+  URL_OID_CTL_NEXT_UPDATE = 4_i32
+  URL_OID_CRL_ISSUER = 5_i32
+  URL_OID_CERTIFICATE_FRESHEST_CRL = 6_i32
+  URL_OID_CRL_FRESHEST_CRL = 7_i32
+  URL_OID_CROSS_CERT_DIST_POINT = 8_i32
+  URL_OID_CERTIFICATE_OCSP = 9_i32
+  URL_OID_CERTIFICATE_OCSP_AND_CRL_DIST_POINT = 10_i32
+  URL_OID_CERTIFICATE_CRL_DIST_POINT_AND_OCSP = 11_i32
+  URL_OID_CROSS_CERT_SUBJECT_INFO_ACCESS = 12_i32
+  URL_OID_CERTIFICATE_ONLY_OCSP = 13_i32
+  TIME_VALID_OID_GET_OBJECT_FUNC = "TimeValidDllGetObject"
+  TIME_VALID_OID_GET_CTL = 1_i32
+  TIME_VALID_OID_GET_CRL = 2_i32
+  TIME_VALID_OID_GET_CRL_FROM_CERT = 3_i32
+  TIME_VALID_OID_GET_FRESHEST_CRL_FROM_CERT = 4_i32
+  TIME_VALID_OID_GET_FRESHEST_CRL_FROM_CRL = 5_i32
+  TIME_VALID_OID_FLUSH_OBJECT_FUNC = "TimeValidDllFlushObject"
+  TIME_VALID_OID_FLUSH_CTL = 1_i32
+  TIME_VALID_OID_FLUSH_CRL = 2_i32
+  TIME_VALID_OID_FLUSH_CRL_FROM_CERT = 3_i32
+  TIME_VALID_OID_FLUSH_FRESHEST_CRL_FROM_CERT = 4_i32
+  TIME_VALID_OID_FLUSH_FRESHEST_CRL_FROM_CRL = 5_i32
   CRYPT_KEYID_MACHINE_FLAG = 32_u32
   CRYPT_KEYID_ALLOC_FLAG = 32768_u32
   CRYPT_KEYID_DELETE_FLAG = 16_u32
   CRYPT_KEYID_SET_NEW_FLAG = 8192_u32
+  CERT_CHAIN_CONFIG_REGPATH = "Software\\Microsoft\\Cryptography\\OID\\EncodingType 0\\CertDllCreateCertificateChainEngine\\Config"
+  CERT_CHAIN_MAX_URL_RETRIEVAL_BYTE_COUNT_VALUE_NAME = "MaxUrlRetrievalByteCount"
+  CERT_CHAIN_CACHE_RESYNC_FILETIME_VALUE_NAME = "ChainCacheResyncFiletime"
+  CERT_CHAIN_DISABLE_MANDATORY_BASIC_CONSTRAINTS_VALUE_NAME = "DisableMandatoryBasicConstraints"
+  CERT_CHAIN_DISABLE_CA_NAME_CONSTRAINTS_VALUE_NAME = "DisableCANameConstraints"
+  CERT_CHAIN_DISABLE_UNSUPPORTED_CRITICAL_EXTENSIONS_VALUE_NAME = "DisableUnsupportedCriticalExtensions"
+  CERT_CHAIN_MAX_AIA_URL_COUNT_IN_CERT_VALUE_NAME = "MaxAIAUrlCountInCert"
   CERT_CHAIN_MAX_AIA_URL_COUNT_IN_CERT_DEFAULT = 5_u32
+  CERT_CHAIN_MAX_AIA_URL_RETRIEVAL_COUNT_PER_CHAIN_VALUE_NAME = "MaxAIAUrlRetrievalCountPerChain"
   CERT_CHAIN_MAX_AIA_URL_RETRIEVAL_COUNT_PER_CHAIN_DEFAULT = 3_u32
+  CERT_CHAIN_MAX_AIA_URL_RETRIEVAL_BYTE_COUNT_VALUE_NAME = "MaxAIAUrlRetrievalByteCount"
   CERT_CHAIN_MAX_AIA_URL_RETRIEVAL_BYTE_COUNT_DEFAULT = 100000_u32
+  CERT_CHAIN_MAX_AIA_URL_RETRIEVAL_CERT_COUNT_VALUE_NAME = "MaxAIAUrlRetrievalCertCount"
   CERT_CHAIN_MAX_AIA_URL_RETRIEVAL_CERT_COUNT_DEFAULT = 10_u32
+  CERT_CHAIN_OCSP_VALIDITY_SECONDS_VALUE_NAME = "OcspValiditySeconds"
+  CERT_CHAIN_DISABLE_SERIAL_CHAIN_VALUE_NAME = "DisableSerialChain"
+  CERT_CHAIN_SERIAL_CHAIN_LOG_FILE_NAME_VALUE_NAME = "SerialChainLogFileName"
+  CERT_CHAIN_DISABLE_SYNC_WITH_SSL_TIME_VALUE_NAME = "DisableSyncWithSslTime"
+  CERT_CHAIN_MAX_SSL_TIME_UPDATED_EVENT_COUNT_VALUE_NAME = "MaxSslTimeUpdatedEventCount"
   CERT_CHAIN_MAX_SSL_TIME_UPDATED_EVENT_COUNT_DEFAULT = 5_u32
   CERT_CHAIN_MAX_SSL_TIME_UPDATED_EVENT_COUNT_DISABLE = 4294967295_u32
+  CERT_CHAIN_SSL_HANDSHAKE_LOG_FILE_NAME_VALUE_NAME = "SslHandshakeLogFileName"
+  CERT_CHAIN_ENABLE_WEAK_SIGNATURE_FLAGS_VALUE_NAME = "EnableWeakSignatureFlags"
   CERT_CHAIN_ENABLE_MD2_MD4_FLAG = 1_u32
   CERT_CHAIN_ENABLE_WEAK_RSA_ROOT_FLAG = 2_u32
   CERT_CHAIN_ENABLE_WEAK_LOGGING_FLAG = 4_u32
   CERT_CHAIN_ENABLE_ONLY_WEAK_LOGGING_FLAG = 8_u32
+  CERT_CHAIN_MIN_RSA_PUB_KEY_BIT_LENGTH_VALUE_NAME = "MinRsaPubKeyBitLength"
   CERT_CHAIN_MIN_RSA_PUB_KEY_BIT_LENGTH_DEFAULT = 1023_u32
   CERT_CHAIN_MIN_RSA_PUB_KEY_BIT_LENGTH_DISABLE = 4294967295_u32
+  CERT_CHAIN_WEAK_RSA_PUB_KEY_TIME_VALUE_NAME = "WeakRsaPubKeyTime"
+  CERT_CHAIN_WEAK_SIGNATURE_LOG_DIR_VALUE_NAME = "WeakSignatureLogDir"
+  CERT_CHAIN_DEFAULT_CONFIG_SUBDIR = "Default"
+  CERT_CHAIN_WEAK_PREFIX_NAME = "Weak"
+  CERT_CHAIN_WEAK_THIRD_PARTY_CONFIG_NAME = "ThirdParty"
+  CERT_CHAIN_WEAK_ALL_CONFIG_NAME = "All"
+  CERT_CHAIN_WEAK_FLAGS_NAME = "Flags"
+  CERT_CHAIN_WEAK_HYGIENE_NAME = "Hygiene"
+  CERT_CHAIN_WEAK_AFTER_TIME_NAME = "AfterTime"
+  CERT_CHAIN_WEAK_FILE_HASH_AFTER_TIME_NAME = "FileHashAfterTime"
+  CERT_CHAIN_WEAK_TIMESTAMP_HASH_AFTER_TIME_NAME = "TimestampHashAfterTime"
+  CERT_CHAIN_WEAK_MIN_BIT_LENGTH_NAME = "MinBitLength"
+  CERT_CHAIN_WEAK_SHA256_ALLOW_NAME = "Sha256Allow"
   CERT_CHAIN_MIN_PUB_KEY_BIT_LENGTH_DISABLE = 4294967295_u32
   CERT_CHAIN_ENABLE_WEAK_SETTINGS_FLAG = 2147483648_u32
   CERT_CHAIN_DISABLE_ECC_PARA_FLAG = 16_u32
@@ -1326,22 +2757,70 @@ lib LibWin32
   CERT_CHAIN_AUTO_NETWORK_INFO = 6_u32
   CERT_CHAIN_AUTO_SERIAL_LOCAL_MACHINE = 7_u32
   CERT_CHAIN_AUTO_HPKP_RULE_INFO = 8_u32
+  CERT_CHAIN_AUTO_FLAGS_VALUE_NAME = "AutoFlags"
   CERT_CHAIN_AUTO_FLUSH_DISABLE_FLAG = 1_u32
   CERT_CHAIN_AUTO_LOG_CREATE_FLAG = 2_u32
   CERT_CHAIN_AUTO_LOG_FREE_FLAG = 4_u32
   CERT_CHAIN_AUTO_LOG_FLUSH_FLAG = 8_u32
+  CERT_CHAIN_AUTO_FLUSH_FIRST_DELTA_SECONDS_VALUE_NAME = "AutoFlushFirstDeltaSeconds"
+  CERT_CHAIN_AUTO_FLUSH_NEXT_DELTA_SECONDS_VALUE_NAME = "AutoFlushNextDeltaSeconds"
+  CERT_CHAIN_AUTO_LOG_FILE_NAME_VALUE_NAME = "AutoLogFileName"
+  CERT_CHAIN_DISABLE_AUTO_FLUSH_PROCESS_NAME_LIST_VALUE_NAME = "DisableAutoFlushProcessNameList"
+  CERT_SRV_OCSP_RESP_MIN_VALIDITY_SECONDS_VALUE_NAME = "SrvOcspRespMinValiditySeconds"
+  CERT_SRV_OCSP_RESP_URL_RETRIEVAL_TIMEOUT_MILLISECONDS_VALUE_NAME = "SrvOcspRespUrlRetrievalTimeoutMilliseconds"
+  CERT_SRV_OCSP_RESP_MAX_BEFORE_NEXT_UPDATE_SECONDS_VALUE_NAME = "SrvOcspRespMaxBeforeNextUpdateSeconds"
+  CERT_SRV_OCSP_RESP_MIN_BEFORE_NEXT_UPDATE_SECONDS_VALUE_NAME = "SrvOcspRespMinBeforeNextUpdateSeconds"
+  CERT_SRV_OCSP_RESP_MIN_AFTER_NEXT_UPDATE_SECONDS_VALUE_NAME = "SrvOcspRespMinAfterNextUpdateSeconds"
+  CERT_SRV_OCSP_RESP_MIN_SYNC_CERT_FILE_SECONDS_VALUE_NAME = "SrvOcspRespMinSyncCertFileSeconds"
   CERT_SRV_OCSP_RESP_MIN_SYNC_CERT_FILE_SECONDS_DEFAULT = 5_u32
+  CERT_SRV_OCSP_RESP_MAX_SYNC_CERT_FILE_SECONDS_VALUE_NAME = "SrvOcspRespMaxSyncCertFileSeconds"
+  CRYPTNET_MAX_CACHED_OCSP_PER_CRL_COUNT_VALUE_NAME = "CryptnetMaxCachedOcspPerCrlCount"
   CRYPTNET_MAX_CACHED_OCSP_PER_CRL_COUNT_DEFAULT = 500_u32
   CRYPTNET_OCSP_AFTER_CRL_DISABLE = 4294967295_u32
+  CRYPTNET_URL_CACHE_DEFAULT_FLUSH_EXEMPT_SECONDS_VALUE_NAME = "CryptnetDefaultFlushExemptSeconds"
+  CRYPTNET_PRE_FETCH_MIN_MAX_AGE_SECONDS_VALUE_NAME = "CryptnetPreFetchMinMaxAgeSeconds"
+  CRYPTNET_PRE_FETCH_MAX_MAX_AGE_SECONDS_VALUE_NAME = "CryptnetPreFetchMaxMaxAgeSeconds"
+  CRYPTNET_PRE_FETCH_MIN_OCSP_VALIDITY_PERIOD_SECONDS_VALUE_NAME = "CryptnetPreFetchMinOcspValidityPeriodSeconds"
+  CRYPTNET_PRE_FETCH_AFTER_PUBLISH_PRE_FETCH_DIVISOR_VALUE_NAME = "CryptnetPreFetchAfterPublishPreFetchDivisor"
   CRYPTNET_PRE_FETCH_AFTER_PUBLISH_PRE_FETCH_DIVISOR_DEFAULT = 10_u32
+  CRYPTNET_PRE_FETCH_BEFORE_NEXT_UPDATE_PRE_FETCH_DIVISOR_VALUE_NAME = "CryptnetPreFetchBeforeNextUpdatePreFetchDivisor"
   CRYPTNET_PRE_FETCH_BEFORE_NEXT_UPDATE_PRE_FETCH_DIVISOR_DEFAULT = 20_u32
+  CRYPTNET_PRE_FETCH_MIN_BEFORE_NEXT_UPDATE_PRE_FETCH_PERIOD_SECONDS_VALUE_NAME = "CryptnetPreFetchMinBeforeNextUpdatePreFetchSeconds"
+  CRYPTNET_PRE_FETCH_VALIDITY_PERIOD_AFTER_NEXT_UPDATE_PRE_FETCH_DIVISOR_VALUE_NAME = "CryptnetPreFetchValidityPeriodAfterNextUpdatePreFetchDivisor"
   CRYPTNET_PRE_FETCH_VALIDITY_PERIOD_AFTER_NEXT_UPDATE_PRE_FETCH_DIVISOR_DEFAULT = 10_u32
+  CRYPTNET_PRE_FETCH_MAX_AFTER_NEXT_UPDATE_PRE_FETCH_PERIOD_SECONDS_VALUE_NAME = "CryptnetPreFetchMaxAfterNextUpdatePreFetchPeriodSeconds"
+  CRYPTNET_PRE_FETCH_MIN_AFTER_NEXT_UPDATE_PRE_FETCH_PERIOD_SECONDS_VALUE_NAME = "CryptnetPreFetchMinAfterNextUpdatePreFetchPeriodSeconds"
+  CRYPTNET_PRE_FETCH_AFTER_CURRENT_TIME_PRE_FETCH_PERIOD_SECONDS_VALUE_NAME = "CryptnetPreFetchAfterCurrentTimePreFetchPeriodSeconds"
+  CRYPTNET_PRE_FETCH_TRIGGER_PERIOD_SECONDS_VALUE_NAME = "CryptnetPreFetchTriggerPeriodSeconds"
   CRYPTNET_PRE_FETCH_TRIGGER_DISABLE = 4294967295_u32
+  CRYPTNET_PRE_FETCH_SCAN_AFTER_TRIGGER_DELAY_SECONDS_VALUE_NAME = "CryptnetPreFetchScanAfterTriggerDelaySeconds"
   CRYPTNET_PRE_FETCH_SCAN_AFTER_TRIGGER_DELAY_SECONDS_DEFAULT = 60_u32
+  CRYPTNET_PRE_FETCH_RETRIEVAL_TIMEOUT_SECONDS_VALUE_NAME = "CryptnetPreFetchRetrievalTimeoutSeconds"
+  CRYPTNET_CRL_PRE_FETCH_PROCESS_NAME_LIST_VALUE_NAME = "ProcessNameList"
+  CRYPTNET_CRL_PRE_FETCH_URL_LIST_VALUE_NAME = "PreFetchUrlList"
+  CRYPTNET_CRL_PRE_FETCH_DISABLE_INFORMATION_EVENTS_VALUE_NAME = "DisableInformationEvents"
+  CRYPTNET_CRL_PRE_FETCH_LOG_FILE_NAME_VALUE_NAME = "LogFileName"
+  CRYPTNET_CRL_PRE_FETCH_TIMEOUT_SECONDS_VALUE_NAME = "TimeoutSeconds"
+  CRYPTNET_CRL_PRE_FETCH_MAX_AGE_SECONDS_VALUE_NAME = "MaxAgeSeconds"
+  CRYPTNET_CRL_PRE_FETCH_PUBLISH_BEFORE_NEXT_UPDATE_SECONDS_VALUE_NAME = "PublishBeforeNextUpdateSeconds"
+  CRYPTNET_CRL_PRE_FETCH_PUBLISH_RANDOM_INTERVAL_SECONDS_VALUE_NAME = "PublishRandomIntervalSeconds"
+  CRYPTNET_CRL_PRE_FETCH_MIN_BEFORE_NEXT_UPDATE_SECONDS_VALUE_NAME = "MinBeforeNextUpdateSeconds"
+  CRYPTNET_CRL_PRE_FETCH_MIN_AFTER_NEXT_UPDATE_SECONDS_VALUE_NAME = "MinAfterNextUpdateSeconds"
+  CERT_CHAIN_URL_RETRIEVAL_TIMEOUT_MILLISECONDS_VALUE_NAME = "ChainUrlRetrievalTimeoutMilliseconds"
+  CERT_CHAIN_REV_ACCUMULATIVE_URL_RETRIEVAL_TIMEOUT_MILLISECONDS_VALUE_NAME = "ChainRevAccumulativeUrlRetrievalTimeoutMilliseconds"
+  CERT_RETR_BEHAVIOR_INET_AUTH_VALUE_NAME = "EnableInetUnknownAuth"
+  CERT_RETR_BEHAVIOR_INET_STATUS_VALUE_NAME = "EnableInetLocal"
+  CERT_RETR_BEHAVIOR_FILE_VALUE_NAME = "AllowFileUrlScheme"
+  CERT_RETR_BEHAVIOR_LDAP_VALUE_NAME = "DisableLDAPSignAndEncrypt"
+  CRYPTNET_CACHED_OCSP_SWITCH_TO_CRL_COUNT_VALUE_NAME = "CryptnetCachedOcspSwitchToCrlCount"
   CRYPTNET_CACHED_OCSP_SWITCH_TO_CRL_COUNT_DEFAULT = 50_u32
   CRYPTNET_CRL_BEFORE_OCSP_ENABLE = 4294967295_u32
+  CERT_CHAIN_DISABLE_AIA_URL_RETRIEVAL_VALUE_NAME = "DisableAIAUrlRetrieval"
+  CERT_CHAIN_OPTIONS_VALUE_NAME = "Options"
   CERT_CHAIN_OPTION_DISABLE_AIA_URL_RETRIEVAL = 2_u32
   CERT_CHAIN_OPTION_ENABLE_SIA_URL_RETRIEVAL = 4_u32
+  CERT_CHAIN_CROSS_CERT_DOWNLOAD_INTERVAL_HOURS_VALUE_NAME = "CrossCertDownloadIntervalHours"
+  CERT_CHAIN_CRL_VALIDITY_EXT_PERIOD_HOURS_VALUE_NAME = "CRLValidityExtensionPeriod"
   CERT_CHAIN_CRL_VALIDITY_EXT_PERIOD_HOURS_DEFAULT = 12_u32
   CERT_CHAIN_CACHE_END_CERT = 1_u32
   CERT_CHAIN_THREAD_STORE_SYNC = 2_u32
@@ -1420,8 +2899,22 @@ lib LibWin32
   CERT_CHAIN_HAS_MOTW = 16384_u32
   CERT_CHAIN_ONLY_ADDITIONAL_AND_AUTH_ROOT = 32768_u32
   CERT_CHAIN_OPT_IN_WEAK_SIGNATURE = 65536_u32
+  REVOCATION_OID_CRL_REVOCATION = 1_i32
   CERT_CHAIN_FIND_BY_ISSUER = 1_u32
   CERT_CHAIN_POLICY_IGNORE_WEAK_SIGNATURE_FLAG = 134217728_u32
+  CRYPT_OID_VERIFY_CERTIFICATE_CHAIN_POLICY_FUNC = "CertDllVerifyCertificateChainPolicy"
+  CERT_CHAIN_POLICY_BASE = 1_i32
+  CERT_CHAIN_POLICY_AUTHENTICODE = 2_i32
+  CERT_CHAIN_POLICY_AUTHENTICODE_TS = 3_i32
+  CERT_CHAIN_POLICY_SSL = 4_i32
+  CERT_CHAIN_POLICY_BASIC_CONSTRAINTS = 5_i32
+  CERT_CHAIN_POLICY_NT_AUTH = 6_i32
+  CERT_CHAIN_POLICY_MICROSOFT_ROOT = 7_i32
+  CERT_CHAIN_POLICY_EV = 8_i32
+  CERT_CHAIN_POLICY_SSL_F12 = 9_i32
+  CERT_CHAIN_POLICY_SSL_HPKP_HEADER = 10_i32
+  CERT_CHAIN_POLICY_THIRD_PARTY_ROOT = 11_i32
+  CERT_CHAIN_POLICY_SSL_KEY_PIN = 12_i32
   BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_CA_FLAG = 2147483648_u32
   BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG = 1073741824_u32
   MICROSOFT_ROOT_CERT_CHAIN_POLICY_ENABLE_TEST_ROOT_FLAG = 65536_u32
@@ -1451,12 +2944,23 @@ lib LibWin32
   CRYPT_STRING_HASHDATA = 268435456_u32
   CRYPT_STRING_NOCRLF = 1073741824_u32
   CRYPT_STRING_NOCR = 2147483648_u32
+  Szoid_pkcs_12_pbeids = "1.2.840.113549.1.12.1"
+  Szoid_pkcs_12_pbewithsha1and128bitrc4 = "1.2.840.113549.1.12.1.1"
+  Szoid_pkcs_12_pbewithsha1and40bitrc4 = "1.2.840.113549.1.12.1.2"
+  Szoid_pkcs_12_pbewithsha1and3keytripledes = "1.2.840.113549.1.12.1.3"
+  Szoid_pkcs_12_pbewithsha1and2keytripledes = "1.2.840.113549.1.12.1.4"
+  Szoid_pkcs_12_pbewithsha1and128bitrc2 = "1.2.840.113549.1.12.1.5"
+  Szoid_pkcs_12_pbewithsha1and40bitrc2 = "1.2.840.113549.1.12.1.6"
+  Szoid_pkcs_5_pbkdf2 = "1.2.840.113549.1.5.12"
+  Szoid_pkcs_5_pbes2 = "1.2.840.113549.1.5.13"
   PKCS12_IMPORT_SILENT = 64_u32
   PKCS12_ONLY_CERTIFICATES = 1024_u32
   PKCS12_ONLY_NOT_ENCRYPTED_CERTIFICATES = 2048_u32
   PKCS12_VIRTUAL_ISOLATION_KEY = 65536_u32
   PKCS12_IMPORT_RESERVED_MASK = 4294901760_u32
   PKCS12_ONLY_CERTIFICATES_PROVIDER_TYPE = 0_u32
+  PKCS12_ONLY_CERTIFICATES_PROVIDER_NAME = "PfxProvider"
+  PKCS12_ONLY_CERTIFICATES_CONTAINER_NAME = "PfxContainer"
   REPORT_NO_PRIVATE_KEY = 1_u32
   REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY = 2_u32
   EXPORT_PRIVATE_KEYS = 4_u32
@@ -1468,9 +2972,20 @@ lib LibWin32
   PKCS12_EXPORT_ECC_CURVE_PARAMETERS = 4096_u32
   PKCS12_EXPORT_ECC_CURVE_OID = 8192_u32
   PKCS12_EXPORT_RESERVED_MASK = 4294901760_u32
+  PKCS12_PBKDF2_ID_HMAC_SHA1 = "1.2.840.113549.2.7"
+  PKCS12_PBKDF2_ID_HMAC_SHA256 = "1.2.840.113549.2.9"
+  PKCS12_PBKDF2_ID_HMAC_SHA384 = "1.2.840.113549.2.10"
+  PKCS12_PBKDF2_ID_HMAC_SHA512 = "1.2.840.113549.2.11"
+  PKCS12_PBES2_ALG_AES256_SHA256 = "AES256-SHA256"
+  PKCS12_CONFIG_REGPATH = "Software\\Microsoft\\Windows\\CurrentVersion\\PFX"
+  PKCS12_ENCRYPT_CERTIFICATES_VALUE_NAME = "EncryptCertificates"
   CERT_SERVER_OCSP_RESPONSE_OPEN_PARA_READ_FLAG = 1_u32
   CERT_SERVER_OCSP_RESPONSE_OPEN_PARA_WRITE_FLAG = 2_u32
   CERT_SERVER_OCSP_RESPONSE_ASYNC_FLAG = 1_u32
+  CERT_RETRIEVE_ISSUER_LOGO = 1_i32
+  CERT_RETRIEVE_SUBJECT_LOGO = 2_i32
+  CERT_RETRIEVE_COMMUNITY_LOGO = 3_i32
+  CERT_RETRIEVE_BIOMETRIC_PREDEFINED_BASE_TYPE = 1000_i32
   CERT_SELECT_MAX_PARA = 500_u32
   CERT_SELECT_BY_ISSUER_DISPLAYNAME = 12_u32
   CERT_SELECT_BY_FRIENDLYNAME = 13_u32
@@ -1499,6 +3014,9 @@ lib LibWin32
   CRYPT_OBJECT_LOCATOR_LAST_RESERVED_NAME_TYPE = 32_u32
   CRYPT_OBJECT_LOCATOR_FIRST_RESERVED_USER_NAME_TYPE = 33_u32
   CRYPT_OBJECT_LOCATOR_LAST_RESERVED_USER_NAME_TYPE = 65535_u32
+  SSL_OBJECT_LOCATOR_PFX_FUNC = "SslObjectLocatorInitializePfx"
+  SSL_OBJECT_LOCATOR_ISSUER_LIST_FUNC = "SslObjectLocatorInitializeIssuerList"
+  SSL_OBJECT_LOCATOR_CERT_VALIDATION_CONFIG_FUNC = "SslObjectLocatorInitializeCertValidationConfig"
   CERT_FILE_HASH_USE_TYPE = 1_u32
   CERT_TIMESTAMP_HASH_USE_TYPE = 2_u32
   RECIPIENTPOLICYV1 = 1_u32
@@ -1538,4953 +3056,4905 @@ lib LibWin32
   AUDIT_STORE_EXPORT = 1074070020_i32
   AUDIT_STORE_DELETE = 1074070021_i32
   AUDIT_SERVICE_IDLE_STOP = 1074070022_i32
+
   CLSID_CCertSrvSetupKeyInformation = LibC::GUID.new(0x38373906_u32, 0x5433_u16, 0x4633_u16, StaticArray[0xb0_u8, 0xfb_u8, 0x29_u8, 0xb7_u8, 0xe7_u8, 0x82_u8, 0x62_u8, 0xe1_u8])
+
   CLSID_CCertSrvSetup = LibC::GUID.new(0x961f180f_u32, 0xf55c_u16, 0x413d_u16, StaticArray[0xa9_u8, 0xb3_u8, 0x7d_u8, 0x2a_u8, 0xf4_u8, 0xd8_u8, 0xe4_u8, 0x2f_u8])
+
   CLSID_CMSCEPSetup = LibC::GUID.new(0xaa4f5c02_u32, 0x8e7c_u16, 0x49c4_u16, StaticArray[0x94_u8, 0xfa_u8, 0x67_u8, 0xa5_u8, 0xcc_u8, 0x5e_u8, 0xad_u8, 0xb4_u8])
+
   CLSID_CCertificateEnrollmentServerSetup = LibC::GUID.new(0x9902f3bc_u32, 0x88af_u16, 0x4cf8_u16, StaticArray[0xae_u8, 0x62_u8, 0x71_u8, 0x40_u8, 0x53_u8, 0x15_u8, 0x52_u8, 0xb6_u8])
+
   CLSID_CCertificateEnrollmentPolicyServerSetup = LibC::GUID.new(0xafe2fa32_u32, 0x41b1_u16, 0x459d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x49_u8, 0xad_u8, 0xd8_u8, 0xa7_u8, 0x21_u8, 0x82_u8])
 
-  alias PFN_NCRYPT_ALLOC = Proc(LibC::UINT_PTR, Void*)
-  alias PFN_NCRYPT_FREE = Proc(Void*, Void)
-  alias PCRYPT_DECRYPT_PRIVATE_KEY_FUNC = Proc(CRYPT_ALGORITHM_IDENTIFIER, CRYPTOAPI_BLOB, UInt8*, UInt32*, Void*, LibC::BOOL)
-  alias PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC = Proc(CRYPT_ALGORITHM_IDENTIFIER*, CRYPTOAPI_BLOB*, UInt8*, UInt32*, Void*, LibC::BOOL)
-  alias PCRYPT_RESOLVE_HCRYPTPROV_FUNC = Proc(CRYPT_PRIVATE_KEY_INFO*, LibC::UINT_PTR*, Void*, LibC::BOOL)
-  alias PFN_CRYPT_ALLOC = Proc(LibC::UINT_PTR, Void*)
-  alias PFN_CRYPT_FREE = Proc(Void*, Void)
-  alias PFN_CRYPT_ENUM_OID_FUNC = Proc(UInt32, PSTR, PSTR, UInt32, UInt32*, LibC::LPWSTR*, UInt8**, UInt32*, Void*, LibC::BOOL)
-  alias PFN_CRYPT_ENUM_OID_INFO = Proc(CRYPT_OID_INFO*, Void*, LibC::BOOL)
-  alias PFN_CMSG_STREAM_OUTPUT = Proc(Void*, UInt8*, UInt32, LibC::BOOL, LibC::BOOL)
-  alias PFN_CMSG_ALLOC = Proc(LibC::UINT_PTR, Void*)
-  alias PFN_CMSG_FREE = Proc(Void*, Void)
-  alias PFN_CMSG_GEN_ENCRYPT_KEY = Proc(LibC::UINT_PTR*, CRYPT_ALGORITHM_IDENTIFIER*, Void*, CERT_PUBLIC_KEY_INFO*, PFN_CMSG_ALLOC, LibC::UINT_PTR*, UInt8**, UInt32*, LibC::BOOL)
-  alias PFN_CMSG_EXPORT_ENCRYPT_KEY = Proc(LibC::UINT_PTR, LibC::UINT_PTR, CERT_PUBLIC_KEY_INFO*, UInt8*, UInt32*, LibC::BOOL)
-  alias PFN_CMSG_IMPORT_ENCRYPT_KEY = Proc(LibC::UINT_PTR, UInt32, CRYPT_ALGORITHM_IDENTIFIER*, CRYPT_ALGORITHM_IDENTIFIER*, UInt8*, UInt32, LibC::UINT_PTR*, LibC::BOOL)
-  alias PFN_CMSG_GEN_CONTENT_ENCRYPT_KEY = Proc(CMSG_CONTENT_ENCRYPT_INFO*, UInt32, Void*, LibC::BOOL)
-  alias PFN_CMSG_EXPORT_KEY_TRANS = Proc(CMSG_CONTENT_ENCRYPT_INFO*, CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO*, CMSG_KEY_TRANS_ENCRYPT_INFO*, UInt32, Void*, LibC::BOOL)
-  alias PFN_CMSG_EXPORT_KEY_AGREE = Proc(CMSG_CONTENT_ENCRYPT_INFO*, CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO*, CMSG_KEY_AGREE_ENCRYPT_INFO*, UInt32, Void*, LibC::BOOL)
-  alias PFN_CMSG_EXPORT_MAIL_LIST = Proc(CMSG_CONTENT_ENCRYPT_INFO*, CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO*, CMSG_MAIL_LIST_ENCRYPT_INFO*, UInt32, Void*, LibC::BOOL)
-  alias PFN_CMSG_IMPORT_KEY_TRANS = Proc(CRYPT_ALGORITHM_IDENTIFIER*, CMSG_CTRL_KEY_TRANS_DECRYPT_PARA*, UInt32, Void*, LibC::UINT_PTR*, LibC::BOOL)
-  alias PFN_CMSG_IMPORT_KEY_AGREE = Proc(CRYPT_ALGORITHM_IDENTIFIER*, CMSG_CTRL_KEY_AGREE_DECRYPT_PARA*, UInt32, Void*, LibC::UINT_PTR*, LibC::BOOL)
-  alias PFN_CMSG_IMPORT_MAIL_LIST = Proc(CRYPT_ALGORITHM_IDENTIFIER*, CMSG_CTRL_MAIL_LIST_DECRYPT_PARA*, UInt32, Void*, LibC::UINT_PTR*, LibC::BOOL)
-  alias PFN_CMSG_CNG_IMPORT_KEY_TRANS = Proc(CMSG_CNG_CONTENT_DECRYPT_INFO*, CMSG_CTRL_KEY_TRANS_DECRYPT_PARA*, UInt32, Void*, LibC::BOOL)
-  alias PFN_CMSG_CNG_IMPORT_KEY_AGREE = Proc(CMSG_CNG_CONTENT_DECRYPT_INFO*, CMSG_CTRL_KEY_AGREE_DECRYPT_PARA*, UInt32, Void*, LibC::BOOL)
-  alias PFN_CMSG_CNG_IMPORT_CONTENT_ENCRYPT_KEY = Proc(CMSG_CNG_CONTENT_DECRYPT_INFO*, UInt32, Void*, LibC::BOOL)
-  alias PFN_CERT_DLL_OPEN_STORE_PROV_FUNC = Proc(PSTR, CERT_QUERY_ENCODING_TYPE, LibC::UINT_PTR, CERT_OPEN_STORE_FLAGS, Void*, Void*, CERT_STORE_PROV_INFO*, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_CLOSE = Proc(Void*, UInt32, Void)
-  alias PFN_CERT_STORE_PROV_READ_CERT = Proc(Void*, CERT_CONTEXT*, UInt32, CERT_CONTEXT**, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_WRITE_CERT = Proc(Void*, CERT_CONTEXT*, UInt32, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_DELETE_CERT = Proc(Void*, CERT_CONTEXT*, UInt32, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_SET_CERT_PROPERTY = Proc(Void*, CERT_CONTEXT*, UInt32, UInt32, Void*, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_READ_CRL = Proc(Void*, CRL_CONTEXT*, UInt32, CRL_CONTEXT**, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_WRITE_CRL = Proc(Void*, CRL_CONTEXT*, UInt32, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_DELETE_CRL = Proc(Void*, CRL_CONTEXT*, UInt32, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_SET_CRL_PROPERTY = Proc(Void*, CRL_CONTEXT*, UInt32, UInt32, Void*, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_READ_CTL = Proc(Void*, CTL_CONTEXT*, UInt32, CTL_CONTEXT**, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_WRITE_CTL = Proc(Void*, CTL_CONTEXT*, UInt32, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_DELETE_CTL = Proc(Void*, CTL_CONTEXT*, UInt32, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_SET_CTL_PROPERTY = Proc(Void*, CTL_CONTEXT*, UInt32, UInt32, Void*, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_CONTROL = Proc(Void*, UInt32, UInt32, Void*, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_FIND_CERT = Proc(Void*, CERT_STORE_PROV_FIND_INFO*, CERT_CONTEXT*, UInt32, Void**, CERT_CONTEXT**, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_FREE_FIND_CERT = Proc(Void*, CERT_CONTEXT*, Void*, UInt32, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_GET_CERT_PROPERTY = Proc(Void*, CERT_CONTEXT*, UInt32, UInt32, Void*, UInt32*, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_FIND_CRL = Proc(Void*, CERT_STORE_PROV_FIND_INFO*, CRL_CONTEXT*, UInt32, Void**, CRL_CONTEXT**, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_FREE_FIND_CRL = Proc(Void*, CRL_CONTEXT*, Void*, UInt32, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_GET_CRL_PROPERTY = Proc(Void*, CRL_CONTEXT*, UInt32, UInt32, Void*, UInt32*, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_FIND_CTL = Proc(Void*, CERT_STORE_PROV_FIND_INFO*, CTL_CONTEXT*, UInt32, Void**, CTL_CONTEXT**, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_FREE_FIND_CTL = Proc(Void*, CTL_CONTEXT*, Void*, UInt32, LibC::BOOL)
-  alias PFN_CERT_STORE_PROV_GET_CTL_PROPERTY = Proc(Void*, CTL_CONTEXT*, UInt32, UInt32, Void*, UInt32*, LibC::BOOL)
-  alias PFN_CERT_CREATE_CONTEXT_SORT_FUNC = Proc(UInt32, UInt32, UInt32, Void*, LibC::BOOL)
-  alias PFN_CERT_ENUM_SYSTEM_STORE_LOCATION = Proc(LibC::LPWSTR, UInt32, Void*, Void*, LibC::BOOL)
-  alias PFN_CERT_ENUM_SYSTEM_STORE = Proc(Void*, CERT_SYSTEM_STORE_FLAGS, CERT_SYSTEM_STORE_INFO*, Void*, Void*, LibC::BOOL)
-  alias PFN_CERT_ENUM_PHYSICAL_STORE = Proc(Void*, UInt32, LibC::LPWSTR, CERT_PHYSICAL_STORE_INFO*, Void*, Void*, LibC::BOOL)
-  alias PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC = Proc(UInt32, CRYPT_ALGORITHM_IDENTIFIER*, Void**, LibC::LPWSTR*, LibC::BOOL)
-  alias PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC = Proc(LibC::UINT_PTR, UInt32, CRYPT_ALGORITHM_IDENTIFIER*, Void*, LibC::LPWSTR, LibC::LPWSTR, UInt8*, UInt32, UInt8*, UInt32*, LibC::BOOL)
-  alias PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC = Proc(UInt32, CERT_PUBLIC_KEY_INFO*, CRYPT_ALGORITHM_IDENTIFIER*, Void*, LibC::LPWSTR, LibC::LPWSTR, UInt8*, UInt32, UInt8*, UInt32, LibC::BOOL)
-  alias PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC = Proc(LibC::UINT_PTR, UInt32, PSTR, UInt32, Void*, CERT_PUBLIC_KEY_INFO*, UInt32*, LibC::BOOL)
-  alias PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC = Proc(BCRYPT_KEY_HANDLE, UInt32, PSTR, UInt32, Void*, CERT_PUBLIC_KEY_INFO*, UInt32*, LibC::BOOL)
-  alias PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC = Proc(UInt32, CERT_PUBLIC_KEY_INFO*, UInt32, Void*, BCRYPT_KEY_HANDLE*, LibC::BOOL)
-  alias PFN_IMPORT_PRIV_KEY_FUNC = Proc(LibC::UINT_PTR, CRYPT_PRIVATE_KEY_INFO*, UInt32, Void*, LibC::BOOL)
-  alias PFN_EXPORT_PRIV_KEY_FUNC = Proc(LibC::UINT_PTR, UInt32, PSTR, UInt32, Void*, CRYPT_PRIVATE_KEY_INFO*, UInt32*, LibC::BOOL)
-  alias PFN_CRYPT_GET_SIGNER_CERTIFICATE = Proc(Void*, UInt32, CERT_INFO*, Void*, CERT_CONTEXT*)
-  alias PFN_CRYPT_ASYNC_PARAM_FREE_FUNC = Proc(PSTR, Void*, Void)
-  alias PFN_FREE_ENCODED_OBJECT_FUNC = Proc(PSTR, CRYPT_BLOB_ARRAY*, Void*, Void)
-  alias PFN_CRYPT_CANCEL_RETRIEVAL = Proc(UInt32, Void*, LibC::BOOL)
-  alias PFN_CRYPT_ASYNC_RETRIEVAL_COMPLETION_FUNC = Proc(Void*, UInt32, PSTR, PSTR, Void*, Void)
-  alias PFN_CANCEL_ASYNC_RETRIEVAL_FUNC = Proc(HCRYPTASYNC, LibC::BOOL)
-  alias PFN_CRYPT_ENUM_KEYID_PROP = Proc(CRYPTOAPI_BLOB*, UInt32, Void*, Void*, UInt32, UInt32*, Void**, UInt32*, LibC::BOOL)
-  alias PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK = Proc(CERT_CONTEXT*, Void*, LibC::BOOL)
-  alias PFN_CERT_SERVER_OCSP_RESPONSE_UPDATE_CALLBACK = Proc(CERT_CHAIN_CONTEXT*, CERT_SERVER_OCSP_RESPONSE_CONTEXT*, CRL_CONTEXT*, CRL_CONTEXT*, Void*, UInt32, Void)
-  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FLUSH = Proc(Void*, CRYPTOAPI_BLOB**, UInt32, LibC::BOOL)
-  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_GET = Proc(Void*, CRYPTOAPI_BLOB*, UInt32, CRYPTOAPI_BLOB*, UInt8**, UInt32*, LibC::LPWSTR*, CRYPTOAPI_BLOB**, LibC::BOOL)
-  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE = Proc(CRYPT_OBJECT_LOCATOR_RELEASE_REASON, Void*, Void)
-  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_PASSWORD = Proc(Void*, LibC::LPWSTR, Void)
-  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE = Proc(Void*, UInt8*, Void)
-  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_IDENTIFIER = Proc(Void*, CRYPTOAPI_BLOB*, Void)
-  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_INITIALIZE = Proc(PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FLUSH, Void*, UInt32*, CRYPT_OBJECT_LOCATOR_PROVIDER_TABLE**, Void**, LibC::BOOL)
-  alias PFN_CERT_IS_WEAK_HASH = Proc(UInt32, LibC::LPWSTR, UInt32, CERT_CHAIN_CONTEXT*, FILETIME*, LibC::LPWSTR, LibC::BOOL)
-  alias PFNCryptStreamOutputCallback = Proc(Void*, UInt8*, LibC::UINT_PTR, LibC::BOOL, Int32)
-  alias PFNCryptStreamOutputCallbackEx = Proc(Void*, UInt8*, LibC::UINT_PTR, NCRYPT_DESCRIPTOR_HANDLE, LibC::BOOL, Int32)
-  alias PFN_CRYPT_XML_WRITE_CALLBACK = Proc(Void*, UInt8*, UInt32, HRESULT)
-  alias PFN_CRYPT_XML_DATA_PROVIDER_READ = Proc(Void*, UInt8*, UInt32, UInt32*, HRESULT)
-  alias PFN_CRYPT_XML_DATA_PROVIDER_CLOSE = Proc(Void*, HRESULT)
-  alias PFN_CRYPT_XML_CREATE_TRANSFORM = Proc(CRYPT_XML_ALGORITHM*, CRYPT_XML_DATA_PROVIDER*, CRYPT_XML_DATA_PROVIDER*, HRESULT)
-  alias PFN_CRYPT_XML_ENUM_ALG_INFO = Proc(CRYPT_XML_ALGORITHM_INFO*, Void*, LibC::BOOL)
-  alias CryptXmlDllGetInterface = Proc(UInt32, CRYPT_XML_ALGORITHM_INFO*, CRYPT_XML_CRYPTOGRAPHIC_INTERFACE*, HRESULT)
-  alias CryptXmlDllEncodeAlgorithm = Proc(CRYPT_XML_ALGORITHM_INFO*, CRYPT_XML_CHARSET, Void*, PFN_CRYPT_XML_WRITE_CALLBACK, HRESULT)
-  alias CryptXmlDllCreateDigest = Proc(CRYPT_XML_ALGORITHM*, UInt32*, Void**, HRESULT)
-  alias CryptXmlDllDigestData = Proc(Void*, UInt8*, UInt32, HRESULT)
-  alias CryptXmlDllFinalizeDigest = Proc(Void*, UInt8*, UInt32, HRESULT)
-  alias CryptXmlDllCloseDigest = Proc(Void*, HRESULT)
-  alias CryptXmlDllSignData = Proc(CRYPT_XML_ALGORITHM*, LibC::UINT_PTR, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32*, HRESULT)
-  alias CryptXmlDllVerifySignature = Proc(CRYPT_XML_ALGORITHM*, BCRYPT_KEY_HANDLE, UInt8*, UInt32, UInt8*, UInt32, HRESULT)
-  alias CryptXmlDllGetAlgorithmInfo = Proc(CRYPT_XML_ALGORITHM*, CRYPT_XML_ALGORITHM_INFO**, HRESULT)
-  alias CryptXmlDllEncodeKeyValue = Proc(LibC::UINT_PTR, CRYPT_XML_CHARSET, Void*, PFN_CRYPT_XML_WRITE_CALLBACK, HRESULT)
-  alias CryptXmlDllCreateKey = Proc(CRYPT_XML_BLOB*, BCRYPT_KEY_HANDLE*, HRESULT)
-
-
+  @[Flags]
   enum BCRYPT_OPERATION : UInt32
-    BCRYPT_CIPHER_OPERATION = 1
-    BCRYPT_HASH_OPERATION = 2
-    BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION = 4
-    BCRYPT_SECRET_AGREEMENT_OPERATION = 8
-    BCRYPT_SIGNATURE_OPERATION = 16
-    BCRYPT_RNG_OPERATION = 32
+    BCRYPT_CIPHER_OPERATION = 1_u32
+    BCRYPT_HASH_OPERATION = 2_u32
+    BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION = 4_u32
+    BCRYPT_SECRET_AGREEMENT_OPERATION = 8_u32
+    BCRYPT_SIGNATURE_OPERATION = 16_u32
+    BCRYPT_RNG_OPERATION = 32_u32
   end
-
+  @[Flags]
   enum NCRYPT_OPERATION : UInt32
-    NCRYPT_CIPHER_OPERATION = 1
-    NCRYPT_HASH_OPERATION = 2
-    NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION = 4
-    NCRYPT_SECRET_AGREEMENT_OPERATION = 8
-    NCRYPT_SIGNATURE_OPERATION = 16
+    NCRYPT_CIPHER_OPERATION = 1_u32
+    NCRYPT_HASH_OPERATION = 2_u32
+    NCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION = 4_u32
+    NCRYPT_SECRET_AGREEMENT_OPERATION = 8_u32
+    NCRYPT_SIGNATURE_OPERATION = 16_u32
   end
-
+  @[Flags]
   enum CERT_FIND_FLAGS : UInt32
-    CERT_FIND_ANY = 0
-    CERT_FIND_CERT_ID = 1048576
-    CERT_FIND_CTL_USAGE = 655360
-    CERT_FIND_ENHKEY_USAGE = 655360
-    CERT_FIND_EXISTING = 851968
-    CERT_FIND_HASH = 65536
-    CERT_FIND_HAS_PRIVATE_KEY = 1376256
-    CERT_FIND_ISSUER_ATTR = 196612
-    CERT_FIND_ISSUER_NAME = 131076
-    CERT_FIND_ISSUER_OF = 786432
-    CERT_FIND_ISSUER_STR = 524292
-    CERT_FIND_KEY_IDENTIFIER = 983040
-    CERT_FIND_KEY_SPEC = 589824
-    CERT_FIND_MD5_HASH = 262144
-    CERT_FIND_PROPERTY = 327680
-    CERT_FIND_PUBLIC_KEY = 393216
-    CERT_FIND_SHA1_HASH = 65536
-    CERT_FIND_SIGNATURE_HASH = 917504
-    CERT_FIND_SUBJECT_ATTR = 196615
-    CERT_FIND_SUBJECT_CERT = 720896
-    CERT_FIND_SUBJECT_NAME = 131079
-    CERT_FIND_SUBJECT_STR = 524295
-    CERT_FIND_CROSS_CERT_DIST_POINTS = 1114112
-    CERT_FIND_PUBKEY_MD5_HASH = 1179648
-    CERT_FIND_SUBJECT_STR_A = 458759
-    CERT_FIND_SUBJECT_STR_W = 524295
-    CERT_FIND_ISSUER_STR_A = 458756
-    CERT_FIND_ISSUER_STR_W = 524292
-    CERT_FIND_SUBJECT_INFO_ACCESS = 1245184
-    CERT_FIND_HASH_STR = 1310720
-    CERT_FIND_OPTIONAL_ENHKEY_USAGE_FLAG = 1
-    CERT_FIND_EXT_ONLY_ENHKEY_USAGE_FLAG = 2
-    CERT_FIND_PROP_ONLY_ENHKEY_USAGE_FLAG = 4
-    CERT_FIND_NO_ENHKEY_USAGE_FLAG = 8
-    CERT_FIND_OR_ENHKEY_USAGE_FLAG = 16
-    CERT_FIND_VALID_ENHKEY_USAGE_FLAG = 32
-    CERT_FIND_OPTIONAL_CTL_USAGE_FLAG = 1
-    CERT_FIND_EXT_ONLY_CTL_USAGE_FLAG = 2
-    CERT_FIND_PROP_ONLY_CTL_USAGE_FLAG = 4
-    CERT_FIND_NO_CTL_USAGE_FLAG = 8
-    CERT_FIND_OR_CTL_USAGE_FLAG = 16
-    CERT_FIND_VALID_CTL_USAGE_FLAG = 32
+    CERT_FIND_ANY = 0_u32
+    CERT_FIND_CERT_ID = 1048576_u32
+    CERT_FIND_CTL_USAGE = 655360_u32
+    CERT_FIND_ENHKEY_USAGE = 655360_u32
+    CERT_FIND_EXISTING = 851968_u32
+    CERT_FIND_HASH = 65536_u32
+    CERT_FIND_HAS_PRIVATE_KEY = 1376256_u32
+    CERT_FIND_ISSUER_ATTR = 196612_u32
+    CERT_FIND_ISSUER_NAME = 131076_u32
+    CERT_FIND_ISSUER_OF = 786432_u32
+    CERT_FIND_ISSUER_STR = 524292_u32
+    CERT_FIND_KEY_IDENTIFIER = 983040_u32
+    CERT_FIND_KEY_SPEC = 589824_u32
+    CERT_FIND_MD5_HASH = 262144_u32
+    CERT_FIND_PROPERTY = 327680_u32
+    CERT_FIND_PUBLIC_KEY = 393216_u32
+    CERT_FIND_SHA1_HASH = 65536_u32
+    CERT_FIND_SIGNATURE_HASH = 917504_u32
+    CERT_FIND_SUBJECT_ATTR = 196615_u32
+    CERT_FIND_SUBJECT_CERT = 720896_u32
+    CERT_FIND_SUBJECT_NAME = 131079_u32
+    CERT_FIND_SUBJECT_STR = 524295_u32
+    CERT_FIND_CROSS_CERT_DIST_POINTS = 1114112_u32
+    CERT_FIND_PUBKEY_MD5_HASH = 1179648_u32
+    CERT_FIND_SUBJECT_STR_A = 458759_u32
+    CERT_FIND_SUBJECT_STR_W = 524295_u32
+    CERT_FIND_ISSUER_STR_A = 458756_u32
+    CERT_FIND_ISSUER_STR_W = 524292_u32
+    CERT_FIND_SUBJECT_INFO_ACCESS = 1245184_u32
+    CERT_FIND_HASH_STR = 1310720_u32
+    CERT_FIND_OPTIONAL_ENHKEY_USAGE_FLAG = 1_u32
+    CERT_FIND_EXT_ONLY_ENHKEY_USAGE_FLAG = 2_u32
+    CERT_FIND_PROP_ONLY_ENHKEY_USAGE_FLAG = 4_u32
+    CERT_FIND_NO_ENHKEY_USAGE_FLAG = 8_u32
+    CERT_FIND_OR_ENHKEY_USAGE_FLAG = 16_u32
+    CERT_FIND_VALID_ENHKEY_USAGE_FLAG = 32_u32
+    CERT_FIND_OPTIONAL_CTL_USAGE_FLAG = 1_u32
+    CERT_FIND_EXT_ONLY_CTL_USAGE_FLAG = 2_u32
+    CERT_FIND_PROP_ONLY_CTL_USAGE_FLAG = 4_u32
+    CERT_FIND_NO_CTL_USAGE_FLAG = 8_u32
+    CERT_FIND_OR_CTL_USAGE_FLAG = 16_u32
+    CERT_FIND_VALID_CTL_USAGE_FLAG = 32_u32
   end
-
   enum CERT_QUERY_OBJECT_TYPE : UInt32
-    CERT_QUERY_OBJECT_FILE = 1
-    CERT_QUERY_OBJECT_BLOB = 2
+    CERT_QUERY_OBJECT_FILE = 1_u32
+    CERT_QUERY_OBJECT_BLOB = 2_u32
   end
-
   enum CERT_QUERY_CONTENT_TYPE : UInt32
-    CERT_QUERY_CONTENT_CERT = 1
-    CERT_QUERY_CONTENT_CTL = 2
-    CERT_QUERY_CONTENT_CRL = 3
-    CERT_QUERY_CONTENT_SERIALIZED_STORE = 4
-    CERT_QUERY_CONTENT_SERIALIZED_CERT = 5
-    CERT_QUERY_CONTENT_SERIALIZED_CTL = 6
-    CERT_QUERY_CONTENT_SERIALIZED_CRL = 7
-    CERT_QUERY_CONTENT_PKCS7_SIGNED = 8
-    CERT_QUERY_CONTENT_PKCS7_UNSIGNED = 9
-    CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED = 10
-    CERT_QUERY_CONTENT_PKCS10 = 11
-    CERT_QUERY_CONTENT_PFX = 12
-    CERT_QUERY_CONTENT_CERT_PAIR = 13
-    CERT_QUERY_CONTENT_PFX_AND_LOAD = 14
+    CERT_QUERY_CONTENT_CERT = 1_u32
+    CERT_QUERY_CONTENT_CTL = 2_u32
+    CERT_QUERY_CONTENT_CRL = 3_u32
+    CERT_QUERY_CONTENT_SERIALIZED_STORE = 4_u32
+    CERT_QUERY_CONTENT_SERIALIZED_CERT = 5_u32
+    CERT_QUERY_CONTENT_SERIALIZED_CTL = 6_u32
+    CERT_QUERY_CONTENT_SERIALIZED_CRL = 7_u32
+    CERT_QUERY_CONTENT_PKCS7_SIGNED = 8_u32
+    CERT_QUERY_CONTENT_PKCS7_UNSIGNED = 9_u32
+    CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED = 10_u32
+    CERT_QUERY_CONTENT_PKCS10 = 11_u32
+    CERT_QUERY_CONTENT_PFX = 12_u32
+    CERT_QUERY_CONTENT_CERT_PAIR = 13_u32
+    CERT_QUERY_CONTENT_PFX_AND_LOAD = 14_u32
   end
-
   enum CERT_QUERY_CONTENT_TYPE_FLAGS : UInt32
-    CERT_QUERY_CONTENT_FLAG_CERT = 2
-    CERT_QUERY_CONTENT_FLAG_CTL = 4
-    CERT_QUERY_CONTENT_FLAG_CRL = 8
-    CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE = 16
-    CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT = 32
-    CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL = 64
-    CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL = 128
-    CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED = 256
-    CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED = 512
-    CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED = 1024
-    CERT_QUERY_CONTENT_FLAG_PKCS10 = 2048
-    CERT_QUERY_CONTENT_FLAG_PFX = 4096
-    CERT_QUERY_CONTENT_FLAG_CERT_PAIR = 8192
-    CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD = 16384
-    CERT_QUERY_CONTENT_FLAG_ALL = 16382
-    CERT_QUERY_CONTENT_FLAG_ALL_ISSUER_CERT = 818
+    CERT_QUERY_CONTENT_FLAG_CERT = 2_u32
+    CERT_QUERY_CONTENT_FLAG_CTL = 4_u32
+    CERT_QUERY_CONTENT_FLAG_CRL = 8_u32
+    CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE = 16_u32
+    CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT = 32_u32
+    CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL = 64_u32
+    CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL = 128_u32
+    CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED = 256_u32
+    CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED = 512_u32
+    CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED = 1024_u32
+    CERT_QUERY_CONTENT_FLAG_PKCS10 = 2048_u32
+    CERT_QUERY_CONTENT_FLAG_PFX = 4096_u32
+    CERT_QUERY_CONTENT_FLAG_CERT_PAIR = 8192_u32
+    CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD = 16384_u32
+    CERT_QUERY_CONTENT_FLAG_ALL = 16382_u32
+    CERT_QUERY_CONTENT_FLAG_ALL_ISSUER_CERT = 818_u32
   end
-
   enum CERT_QUERY_FORMAT_TYPE : UInt32
-    CERT_QUERY_FORMAT_BINARY = 1
-    CERT_QUERY_FORMAT_BASE64_ENCODED = 2
-    CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED = 3
+    CERT_QUERY_FORMAT_BINARY = 1_u32
+    CERT_QUERY_FORMAT_BASE64_ENCODED = 2_u32
+    CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED = 3_u32
   end
-
   enum CERT_QUERY_FORMAT_TYPE_FLAGS : UInt32
-    CERT_QUERY_FORMAT_FLAG_BINARY = 2
-    CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED = 4
-    CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED = 8
-    CERT_QUERY_FORMAT_FLAG_ALL = 14
+    CERT_QUERY_FORMAT_FLAG_BINARY = 2_u32
+    CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED = 4_u32
+    CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED = 8_u32
+    CERT_QUERY_FORMAT_FLAG_ALL = 14_u32
   end
-
   enum CERT_QUERY_ENCODING_TYPE : UInt32
-    X509_ASN_ENCODING = 1
-    PKCS_7_ASN_ENCODING = 65536
+    X509_ASN_ENCODING = 1_u32
+    PKCS_7_ASN_ENCODING = 65536_u32
   end
-
   enum CERT_RDN_ATTR_VALUE_TYPE : UInt32
-    CERT_RDN_ANY_TYPE = 0
-    CERT_RDN_NUMERIC_STRING = 3
-    CERT_RDN_PRINTABLE_STRING = 4
-    CERT_RDN_T61_STRING = 5
-    CERT_RDN_VIDEOTEX_STRING = 6
-    CERT_RDN_IA5_STRING = 7
-    CERT_RDN_GRAPHIC_STRING = 8
-    CERT_RDN_ISO646_STRING = 9
-    CERT_RDN_GENERAL_STRING = 10
-    CERT_RDN_INT4_STRING = 11
-    CERT_RDN_UNICODE_STRING = 12
-    CERT_RDN_BMP_STRING = 12
-    CERT_RDN_ENCODED_BLOB = 1
-    CERT_RDN_OCTET_STRING = 2
-    CERT_RDN_TELETEX_STRING = 5
-    CERT_RDN_UNIVERSAL_STRING = 11
-    CERT_RDN_UTF8_STRING = 13
-    CERT_RDN_VISIBLE_STRING = 9
+    CERT_RDN_ANY_TYPE = 0_u32
+    CERT_RDN_NUMERIC_STRING = 3_u32
+    CERT_RDN_PRINTABLE_STRING = 4_u32
+    CERT_RDN_T61_STRING = 5_u32
+    CERT_RDN_VIDEOTEX_STRING = 6_u32
+    CERT_RDN_IA5_STRING = 7_u32
+    CERT_RDN_GRAPHIC_STRING = 8_u32
+    CERT_RDN_ISO646_STRING = 9_u32
+    CERT_RDN_GENERAL_STRING = 10_u32
+    CERT_RDN_INT4_STRING = 11_u32
+    CERT_RDN_UNICODE_STRING = 12_u32
+    CERT_RDN_BMP_STRING = 12_u32
+    CERT_RDN_ENCODED_BLOB = 1_u32
+    CERT_RDN_OCTET_STRING = 2_u32
+    CERT_RDN_TELETEX_STRING = 5_u32
+    CERT_RDN_UNIVERSAL_STRING = 11_u32
+    CERT_RDN_UTF8_STRING = 13_u32
+    CERT_RDN_VISIBLE_STRING = 9_u32
   end
-
   enum CERT_STRING_TYPE : UInt32
-    CERT_SIMPLE_NAME_STR = 1
-    CERT_OID_NAME_STR = 2
-    CERT_X500_NAME_STR = 3
+    CERT_SIMPLE_NAME_STR = 1_u32
+    CERT_OID_NAME_STR = 2_u32
+    CERT_X500_NAME_STR = 3_u32
   end
-
   enum BCRYPT_TABLE : UInt32
-    CRYPT_LOCAL = 1
-    CRYPT_DOMAIN = 2
+    CRYPT_LOCAL = 1_u32
+    CRYPT_DOMAIN = 2_u32
   end
-
   enum CERT_KEY_SPEC : UInt32
-    AT_KEYEXCHANGE = 1
-    AT_SIGNATURE = 2
-    CERT_NCRYPT_KEY_SPEC = 4294967295
+    AT_KEYEXCHANGE = 1_u32
+    AT_SIGNATURE = 2_u32
+    CERT_NCRYPT_KEY_SPEC = 4294967295_u32
   end
-
   enum BCRYPT_INTERFACE : UInt32
-    BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE = 3
-    BCRYPT_CIPHER_INTERFACE = 1
-    BCRYPT_HASH_INTERFACE = 2
-    BCRYPT_RNG_INTERFACE = 6
-    BCRYPT_SECRET_AGREEMENT_INTERFACE = 4
-    BCRYPT_SIGNATURE_INTERFACE = 5
-    NCRYPT_KEY_STORAGE_INTERFACE = 65537
-    NCRYPT_SCHANNEL_INTERFACE = 65538
-    NCRYPT_SCHANNEL_SIGNATURE_INTERFACE = 65539
+    BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE = 3_u32
+    BCRYPT_CIPHER_INTERFACE = 1_u32
+    BCRYPT_HASH_INTERFACE = 2_u32
+    BCRYPT_RNG_INTERFACE = 6_u32
+    BCRYPT_SECRET_AGREEMENT_INTERFACE = 4_u32
+    BCRYPT_SIGNATURE_INTERFACE = 5_u32
+    NCRYPT_KEY_STORAGE_INTERFACE = 65537_u32
+    NCRYPT_SCHANNEL_INTERFACE = 65538_u32
+    NCRYPT_SCHANNEL_SIGNATURE_INTERFACE = 65539_u32
   end
-
+  @[Flags]
   enum NCRYPT_FLAGS : UInt32
-    BCRYPT_PAD_NONE = 1
-    BCRYPT_PAD_OAEP = 4
-    BCRYPT_PAD_PKCS1 = 2
-    BCRYPT_PAD_PSS = 8
-    NCRYPT_SILENT_FLAG = 64
-    NCRYPT_NO_PADDING_FLAG = 1
-    NCRYPT_PAD_OAEP_FLAG = 4
-    NCRYPT_PAD_PKCS1_FLAG = 2
-    NCRYPT_REGISTER_NOTIFY_FLAG = 1
-    NCRYPT_UNREGISTER_NOTIFY_FLAG = 2
-    NCRYPT_MACHINE_KEY_FLAG = 32
-    NCRYPT_UNPROTECT_NO_DECRYPT = 1
-    NCRYPT_OVERWRITE_KEY_FLAG = 128
-    NCRYPT_NO_KEY_VALIDATION = 8
-    NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG = 512
-    NCRYPT_PAD_PSS_FLAG = 8
-    NCRYPT_PERSIST_FLAG = 2147483648
-    NCRYPT_PERSIST_ONLY_FLAG = 1073741824
+    BCRYPT_PAD_NONE = 1_u32
+    BCRYPT_PAD_OAEP = 4_u32
+    BCRYPT_PAD_PKCS1 = 2_u32
+    BCRYPT_PAD_PSS = 8_u32
+    NCRYPT_SILENT_FLAG = 64_u32
+    NCRYPT_NO_PADDING_FLAG = 1_u32
+    NCRYPT_PAD_OAEP_FLAG = 4_u32
+    NCRYPT_PAD_PKCS1_FLAG = 2_u32
+    NCRYPT_REGISTER_NOTIFY_FLAG = 1_u32
+    NCRYPT_UNREGISTER_NOTIFY_FLAG = 2_u32
+    NCRYPT_MACHINE_KEY_FLAG = 32_u32
+    NCRYPT_UNPROTECT_NO_DECRYPT = 1_u32
+    NCRYPT_OVERWRITE_KEY_FLAG = 128_u32
+    NCRYPT_NO_KEY_VALIDATION = 8_u32
+    NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG = 512_u32
+    NCRYPT_PAD_PSS_FLAG = 8_u32
+    NCRYPT_PERSIST_FLAG = 2147483648_u32
+    NCRYPT_PERSIST_ONLY_FLAG = 1073741824_u32
   end
-
   enum CRYPT_STRING : UInt32
-    CRYPT_STRING_BASE64HEADER = 0
-    CRYPT_STRING_BASE64 = 1
-    CRYPT_STRING_BINARY = 2
-    CRYPT_STRING_BASE64REQUESTHEADER = 3
-    CRYPT_STRING_HEX = 4
-    CRYPT_STRING_HEXASCII = 5
-    CRYPT_STRING_BASE64X509CRLHEADER = 9
-    CRYPT_STRING_HEXADDR = 10
-    CRYPT_STRING_HEXASCIIADDR = 11
-    CRYPT_STRING_HEXRAW = 12
-    CRYPT_STRING_STRICT = 536870912
-    CRYPT_STRING_BASE64_ANY = 6
-    CRYPT_STRING_ANY = 7
-    CRYPT_STRING_HEX_ANY = 8
+    CRYPT_STRING_BASE64HEADER = 0_u32
+    CRYPT_STRING_BASE64 = 1_u32
+    CRYPT_STRING_BINARY = 2_u32
+    CRYPT_STRING_BASE64REQUESTHEADER = 3_u32
+    CRYPT_STRING_HEX = 4_u32
+    CRYPT_STRING_HEXASCII = 5_u32
+    CRYPT_STRING_BASE64X509CRLHEADER = 9_u32
+    CRYPT_STRING_HEXADDR = 10_u32
+    CRYPT_STRING_HEXASCIIADDR = 11_u32
+    CRYPT_STRING_HEXRAW = 12_u32
+    CRYPT_STRING_STRICT = 536870912_u32
+    CRYPT_STRING_BASE64_ANY = 6_u32
+    CRYPT_STRING_ANY = 7_u32
+    CRYPT_STRING_HEX_ANY = 8_u32
   end
-
+  @[Flags]
   enum CRYPT_IMPORT_PUBLIC_KEY_FLAGS : UInt32
-    CRYPT_OID_INFO_PUBKEY_SIGN_KEY_FLAG = 2147483648
-    CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG = 1073741824
+    CRYPT_OID_INFO_PUBKEY_SIGN_KEY_FLAG = 2147483648_u32
+    CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG = 1073741824_u32
   end
-
   enum CRYPT_XML_FLAGS : UInt32
-    CRYPT_XML_FLAG_DISABLE_EXTENSIONS = 268435456
-    CRYPT_XML_FLAG_NO_SERIALIZE = 2147483648
-    CRYPT_XML_SIGN_ADD_KEYVALUE = 1
+    CRYPT_XML_FLAG_DISABLE_EXTENSIONS = 268435456_u32
+    CRYPT_XML_FLAG_NO_SERIALIZE = 2147483648_u32
+    CRYPT_XML_SIGN_ADD_KEYVALUE = 1_u32
   end
-
+  @[Flags]
   enum CRYPT_ENCODE_OBJECT_FLAGS : UInt32
-    CRYPT_ENCODE_ALLOC_FLAG = 32768
-    CRYPT_ENCODE_ENABLE_PUNYCODE_FLAG = 131072
-    CRYPT_UNICODE_NAME_ENCODE_DISABLE_CHECK_TYPE_FLAG = 1073741824
-    CRYPT_UNICODE_NAME_ENCODE_ENABLE_T61_UNICODE_FLAG = 2147483648
-    CRYPT_UNICODE_NAME_ENCODE_ENABLE_UTF8_UNICODE_FLAG = 536870912
+    CRYPT_ENCODE_ALLOC_FLAG = 32768_u32
+    CRYPT_ENCODE_ENABLE_PUNYCODE_FLAG = 131072_u32
+    CRYPT_UNICODE_NAME_ENCODE_DISABLE_CHECK_TYPE_FLAG = 1073741824_u32
+    CRYPT_UNICODE_NAME_ENCODE_ENABLE_T61_UNICODE_FLAG = 2147483648_u32
+    CRYPT_UNICODE_NAME_ENCODE_ENABLE_UTF8_UNICODE_FLAG = 536870912_u32
   end
-
   enum CRYPT_OBJECT_LOCATOR_RELEASE_REASON : UInt32
-    CRYPT_OBJECT_LOCATOR_RELEASE_SYSTEM_SHUTDOWN = 1
-    CRYPT_OBJECT_LOCATOR_RELEASE_SERVICE_STOP = 2
-    CRYPT_OBJECT_LOCATOR_RELEASE_PROCESS_EXIT = 3
-    CRYPT_OBJECT_LOCATOR_RELEASE_DLL_UNLOAD = 4
+    CRYPT_OBJECT_LOCATOR_RELEASE_SYSTEM_SHUTDOWN = 1_u32
+    CRYPT_OBJECT_LOCATOR_RELEASE_SERVICE_STOP = 2_u32
+    CRYPT_OBJECT_LOCATOR_RELEASE_PROCESS_EXIT = 3_u32
+    CRYPT_OBJECT_LOCATOR_RELEASE_DLL_UNLOAD = 4_u32
   end
-
+  @[Flags]
   enum CRYPT_ACQUIRE_FLAGS : UInt32
-    CRYPT_ACQUIRE_CACHE_FLAG = 1
-    CRYPT_ACQUIRE_COMPARE_KEY_FLAG = 4
-    CRYPT_ACQUIRE_NO_HEALING = 8
-    CRYPT_ACQUIRE_SILENT_FLAG = 64
-    CRYPT_ACQUIRE_USE_PROV_INFO_FLAG = 2
+    CRYPT_ACQUIRE_CACHE_FLAG = 1_u32
+    CRYPT_ACQUIRE_COMPARE_KEY_FLAG = 4_u32
+    CRYPT_ACQUIRE_NO_HEALING = 8_u32
+    CRYPT_ACQUIRE_SILENT_FLAG = 64_u32
+    CRYPT_ACQUIRE_USE_PROV_INFO_FLAG = 2_u32
   end
-
+  @[Flags]
   enum CRYPT_GET_URL_FLAGS : UInt32
-    CRYPT_GET_URL_FROM_PROPERTY = 1
-    CRYPT_GET_URL_FROM_EXTENSION = 2
-    CRYPT_GET_URL_FROM_UNAUTH_ATTRIBUTE = 4
-    CRYPT_GET_URL_FROM_AUTH_ATTRIBUTE = 8
+    CRYPT_GET_URL_FROM_PROPERTY = 1_u32
+    CRYPT_GET_URL_FROM_EXTENSION = 2_u32
+    CRYPT_GET_URL_FROM_UNAUTH_ATTRIBUTE = 4_u32
+    CRYPT_GET_URL_FROM_AUTH_ATTRIBUTE = 8_u32
   end
-
   enum CERT_STORE_SAVE_AS : UInt32
-    CERT_STORE_SAVE_AS_PKCS7 = 2
-    CERT_STORE_SAVE_AS_STORE = 1
+    CERT_STORE_SAVE_AS_PKCS7 = 2_u32
+    CERT_STORE_SAVE_AS_STORE = 1_u32
   end
-
   enum BCRYPT_QUERY_PROVIDER_MODE : UInt32
-    CRYPT_ANY = 4
-    CRYPT_UM = 1
-    CRYPT_KM = 2
-    CRYPT_MM = 3
+    CRYPT_ANY = 4_u32
+    CRYPT_UM = 1_u32
+    CRYPT_KM = 2_u32
+    CRYPT_MM = 3_u32
   end
-
+  @[Flags]
   enum CERT_FIND_CHAIN_IN_STORE_FLAGS : UInt32
-    CERT_CHAIN_FIND_BY_ISSUER_COMPARE_KEY_FLAG = 1
-    CERT_CHAIN_FIND_BY_ISSUER_COMPLEX_CHAIN_FLAG = 2
-    CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_FLAG = 32768
-    CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_URL_FLAG = 4
-    CERT_CHAIN_FIND_BY_ISSUER_LOCAL_MACHINE_FLAG = 8
-    CERT_CHAIN_FIND_BY_ISSUER_NO_KEY_FLAG = 16384
+    CERT_CHAIN_FIND_BY_ISSUER_COMPARE_KEY_FLAG = 1_u32
+    CERT_CHAIN_FIND_BY_ISSUER_COMPLEX_CHAIN_FLAG = 2_u32
+    CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_FLAG = 32768_u32
+    CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_URL_FLAG = 4_u32
+    CERT_CHAIN_FIND_BY_ISSUER_LOCAL_MACHINE_FLAG = 8_u32
+    CERT_CHAIN_FIND_BY_ISSUER_NO_KEY_FLAG = 16384_u32
   end
-
   enum CERT_CONTROL_STORE_FLAGS : UInt32
-    CERT_STORE_CTRL_COMMIT_FORCE_FLAG = 1
-    CERT_STORE_CTRL_COMMIT_CLEAR_FLAG = 2
-    CERT_STORE_CTRL_INHIBIT_DUPLICATE_HANDLE_FLAG = 1
+    CERT_STORE_CTRL_COMMIT_FORCE_FLAG = 1_u32
+    CERT_STORE_CTRL_COMMIT_CLEAR_FLAG = 2_u32
+    CERT_STORE_CTRL_INHIBIT_DUPLICATE_HANDLE_FLAG = 1_u32
   end
-
+  @[Flags]
   enum BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS : UInt32
-    BCRYPT_ALG_HANDLE_HMAC_FLAG = 8
-    BCRYPT_PROV_DISPATCH = 1
-    BCRYPT_HASH_REUSABLE_FLAG = 32
+    BCRYPT_ALG_HANDLE_HMAC_FLAG = 8_u32
+    BCRYPT_PROV_DISPATCH = 1_u32
+    BCRYPT_HASH_REUSABLE_FLAG = 32_u32
   end
-
   enum CERT_STORE_SAVE_TO : UInt32
-    CERT_STORE_SAVE_TO_FILE = 1
-    CERT_STORE_SAVE_TO_FILENAME = 4
-    CERT_STORE_SAVE_TO_FILENAME_A = 3
-    CERT_STORE_SAVE_TO_FILENAME_W = 4
-    CERT_STORE_SAVE_TO_MEMORY = 2
+    CERT_STORE_SAVE_TO_FILE = 1_u32
+    CERT_STORE_SAVE_TO_FILENAME = 4_u32
+    CERT_STORE_SAVE_TO_FILENAME_A = 3_u32
+    CERT_STORE_SAVE_TO_FILENAME_W = 4_u32
+    CERT_STORE_SAVE_TO_MEMORY = 2_u32
   end
-
   enum CRYPT_SET_PROV_PARAM_ID : UInt32
-    PP_CLIENT_HWND = 1
-    PP_DELETEKEY = 24
-    PP_KEYEXCHANGE_ALG = 14
-    PP_KEYEXCHANGE_PIN = 32
-    PP_KEYEXCHANGE_KEYSIZE = 12
-    PP_KEYSET_SEC_DESCR = 8
-    PP_PIN_PROMPT_STRING = 44
-    PP_ROOT_CERTSTORE = 46
-    PP_SIGNATURE_ALG = 15
-    PP_SIGNATURE_PIN = 33
-    PP_SIGNATURE_KEYSIZE = 13
-    PP_UI_PROMPT = 21
-    PP_USE_HARDWARE_RNG = 38
-    PP_USER_CERTSTORE = 42
-    PP_SECURE_KEYEXCHANGE_PIN = 47
-    PP_SECURE_SIGNATURE_PIN = 48
-    PP_SMARTCARD_READER = 43
+    PP_CLIENT_HWND = 1_u32
+    PP_DELETEKEY = 24_u32
+    PP_KEYEXCHANGE_ALG = 14_u32
+    PP_KEYEXCHANGE_PIN = 32_u32
+    PP_KEYEXCHANGE_KEYSIZE = 12_u32
+    PP_KEYSET_SEC_DESCR = 8_u32
+    PP_PIN_PROMPT_STRING = 44_u32
+    PP_ROOT_CERTSTORE = 46_u32
+    PP_SIGNATURE_ALG = 15_u32
+    PP_SIGNATURE_PIN = 33_u32
+    PP_SIGNATURE_KEYSIZE = 13_u32
+    PP_UI_PROMPT = 21_u32
+    PP_USE_HARDWARE_RNG = 38_u32
+    PP_USER_CERTSTORE = 42_u32
+    PP_SECURE_KEYEXCHANGE_PIN = 47_u32
+    PP_SECURE_SIGNATURE_PIN = 48_u32
+    PP_SMARTCARD_READER = 43_u32
   end
-
   enum CRYPT_KEY_PARAM_ID : UInt32
-    KP_ALGID = 7
-    KP_CERTIFICATE = 26
-    KP_PERMISSIONS = 6
-    KP_SALT = 2
-    KP_SALT_EX = 10
-    KP_BLOCKLEN = 8
-    KP_GET_USE_COUNT = 42
-    KP_KEYLEN = 9
+    KP_ALGID = 7_u32
+    KP_CERTIFICATE = 26_u32
+    KP_PERMISSIONS = 6_u32
+    KP_SALT = 2_u32
+    KP_SALT_EX = 10_u32
+    KP_BLOCKLEN = 8_u32
+    KP_GET_USE_COUNT = 42_u32
+    KP_KEYLEN = 9_u32
   end
-
+  @[Flags]
   enum CRYPT_KEY_FLAGS : UInt32
-    CRYPT_EXPORTABLE = 1
-    CRYPT_USER_PROTECTED = 2
-    CRYPT_ARCHIVABLE = 16384
-    CRYPT_CREATE_IV = 512
-    CRYPT_CREATE_SALT = 4
-    CRYPT_DATA_KEY = 2048
-    CRYPT_FORCE_KEY_PROTECTION_HIGH = 32768
-    CRYPT_KEK = 1024
-    CRYPT_INITIATOR = 64
-    CRYPT_NO_SALT = 16
-    CRYPT_ONLINE = 128
-    CRYPT_PREGEN = 64
-    CRYPT_RECIPIENT = 16
-    CRYPT_SF = 256
-    CRYPT_SGCKEY = 8192
-    CRYPT_VOLATILE = 4096
-    CRYPT_MACHINE_KEYSET = 32
-    CRYPT_USER_KEYSET = 4096
-    PKCS12_PREFER_CNG_KSP = 256
-    PKCS12_ALWAYS_CNG_KSP = 512
-    PKCS12_ALLOW_OVERWRITE_KEY = 16384
-    PKCS12_NO_PERSIST_KEY = 32768
-    PKCS12_INCLUDE_EXTENDED_PROPERTIES = 16
-    CRYPT_OAEP = 64
-    CRYPT_BLOB_VER3 = 128
-    CRYPT_DESTROYKEY = 4
-    CRYPT_SSL2_FALLBACK = 2
-    CRYPT_Y_ONLY = 1
-    CRYPT_IPSEC_HMAC_KEY = 256
-    CERT_SET_KEY_PROV_HANDLE_PROP_ID = 1
-    CERT_SET_KEY_CONTEXT_PROP_ID = 1
+    CRYPT_EXPORTABLE = 1_u32
+    CRYPT_USER_PROTECTED = 2_u32
+    CRYPT_ARCHIVABLE = 16384_u32
+    CRYPT_CREATE_IV = 512_u32
+    CRYPT_CREATE_SALT = 4_u32
+    CRYPT_DATA_KEY = 2048_u32
+    CRYPT_FORCE_KEY_PROTECTION_HIGH = 32768_u32
+    CRYPT_KEK = 1024_u32
+    CRYPT_INITIATOR = 64_u32
+    CRYPT_NO_SALT = 16_u32
+    CRYPT_ONLINE = 128_u32
+    CRYPT_PREGEN = 64_u32
+    CRYPT_RECIPIENT = 16_u32
+    CRYPT_SF = 256_u32
+    CRYPT_SGCKEY = 8192_u32
+    CRYPT_VOLATILE = 4096_u32
+    CRYPT_MACHINE_KEYSET = 32_u32
+    CRYPT_USER_KEYSET = 4096_u32
+    PKCS12_PREFER_CNG_KSP = 256_u32
+    PKCS12_ALWAYS_CNG_KSP = 512_u32
+    PKCS12_ALLOW_OVERWRITE_KEY = 16384_u32
+    PKCS12_NO_PERSIST_KEY = 32768_u32
+    PKCS12_INCLUDE_EXTENDED_PROPERTIES = 16_u32
+    CRYPT_OAEP = 64_u32
+    CRYPT_BLOB_VER3 = 128_u32
+    CRYPT_DESTROYKEY = 4_u32
+    CRYPT_SSL2_FALLBACK = 2_u32
+    CRYPT_Y_ONLY = 1_u32
+    CRYPT_IPSEC_HMAC_KEY = 256_u32
+    CERT_SET_KEY_PROV_HANDLE_PROP_ID = 1_u32
+    CERT_SET_KEY_CONTEXT_PROP_ID = 1_u32
   end
-
   enum CRYPT_MSG_TYPE : UInt32
-    CMSG_DATA = 1
-    CMSG_SIGNED = 2
-    CMSG_ENVELOPED = 3
-    CMSG_SIGNED_AND_ENVELOPED = 4
-    CMSG_HASHED = 5
+    CMSG_DATA = 1_u32
+    CMSG_SIGNED = 2_u32
+    CMSG_ENVELOPED = 3_u32
+    CMSG_SIGNED_AND_ENVELOPED = 4_u32
+    CMSG_HASHED = 5_u32
   end
-
   enum CERT_OPEN_STORE_FLAGS : UInt32
-    CERT_STORE_BACKUP_RESTORE_FLAG = 2048
-    CERT_STORE_CREATE_NEW_FLAG = 8192
-    CERT_STORE_DEFER_CLOSE_UNTIL_LAST_FREE_FLAG = 4
-    CERT_STORE_DELETE_FLAG = 16
-    CERT_STORE_ENUM_ARCHIVED_FLAG = 512
-    CERT_STORE_MAXIMUM_ALLOWED_FLAG = 4096
-    CERT_STORE_NO_CRYPT_RELEASE_FLAG = 1
-    CERT_STORE_OPEN_EXISTING_FLAG = 16384
-    CERT_STORE_READONLY_FLAG = 32768
-    CERT_STORE_SET_LOCALIZED_NAME_FLAG = 2
-    CERT_STORE_SHARE_CONTEXT_FLAG = 128
-    CERT_STORE_UPDATE_KEYID_FLAG = 1024
+    CERT_STORE_BACKUP_RESTORE_FLAG = 2048_u32
+    CERT_STORE_CREATE_NEW_FLAG = 8192_u32
+    CERT_STORE_DEFER_CLOSE_UNTIL_LAST_FREE_FLAG = 4_u32
+    CERT_STORE_DELETE_FLAG = 16_u32
+    CERT_STORE_ENUM_ARCHIVED_FLAG = 512_u32
+    CERT_STORE_MAXIMUM_ALLOWED_FLAG = 4096_u32
+    CERT_STORE_NO_CRYPT_RELEASE_FLAG = 1_u32
+    CERT_STORE_OPEN_EXISTING_FLAG = 16384_u32
+    CERT_STORE_READONLY_FLAG = 32768_u32
+    CERT_STORE_SET_LOCALIZED_NAME_FLAG = 2_u32
+    CERT_STORE_SHARE_CONTEXT_FLAG = 128_u32
+    CERT_STORE_UPDATE_KEYID_FLAG = 1024_u32
   end
-
+  @[Flags]
   enum CRYPT_DEFAULT_CONTEXT_FLAGS : UInt32
-    CRYPT_DEFAULT_CONTEXT_AUTO_RELEASE_FLAG = 1
-    CRYPT_DEFAULT_CONTEXT_PROCESS_FLAG = 2
+    CRYPT_DEFAULT_CONTEXT_AUTO_RELEASE_FLAG = 1_u32
+    CRYPT_DEFAULT_CONTEXT_PROCESS_FLAG = 2_u32
   end
-
   enum CRYPT_VERIFY_CERT_FLAGS : UInt32
-    CRYPT_VERIFY_CERT_SIGN_DISABLE_MD2_MD4_FLAG = 1
-    CRYPT_VERIFY_CERT_SIGN_SET_STRONG_PROPERTIES_FLAG = 2
-    CRYPT_VERIFY_CERT_SIGN_RETURN_STRONG_PROPERTIES_FLAG = 4
+    CRYPT_VERIFY_CERT_SIGN_DISABLE_MD2_MD4_FLAG = 1_u32
+    CRYPT_VERIFY_CERT_SIGN_SET_STRONG_PROPERTIES_FLAG = 2_u32
+    CRYPT_VERIFY_CERT_SIGN_RETURN_STRONG_PROPERTIES_FLAG = 4_u32
   end
-
   enum CRYPT_SET_HASH_PARAM : UInt32
-    HP_HMAC_INFO = 5
-    HP_HASHVAL = 2
+    HP_HMAC_INFO = 5_u32
+    HP_HASHVAL = 2_u32
   end
-
   enum CERT_SYSTEM_STORE_FLAGS : UInt32
-    CERT_SYSTEM_STORE_LOCATION_MASK = 16711680
-    CERT_SYSTEM_STORE_RELOCATE_FLAG = 2147483648
+    CERT_SYSTEM_STORE_LOCATION_MASK = 16711680_u32
+    CERT_SYSTEM_STORE_RELOCATE_FLAG = 2147483648_u32
   end
-
+  @[Flags]
   enum CERT_CREATE_SELFSIGN_FLAGS : UInt32
-    CERT_CREATE_SELFSIGN_NO_KEY_INFO = 2
-    CERT_CREATE_SELFSIGN_NO_SIGN = 1
+    CERT_CREATE_SELFSIGN_NO_KEY_INFO = 2_u32
+    CERT_CREATE_SELFSIGN_NO_SIGN = 1_u32
   end
-
   enum CRYPT_DEFAULT_CONTEXT_TYPE : UInt32
-    CRYPT_DEFAULT_CONTEXT_CERT_SIGN_OID = 1
-    CRYPT_DEFAULT_CONTEXT_MULTI_CERT_SIGN_OID = 2
+    CRYPT_DEFAULT_CONTEXT_CERT_SIGN_OID = 1_u32
+    CRYPT_DEFAULT_CONTEXT_MULTI_CERT_SIGN_OID = 2_u32
   end
-
+  @[Flags]
   enum BCRYPT_RESOLVE_PROVIDERS_FLAGS : UInt32
-    CRYPT_ALL_FUNCTIONS = 1
-    CRYPT_ALL_PROVIDERS = 2
+    CRYPT_ALL_FUNCTIONS = 1_u32
+    CRYPT_ALL_PROVIDERS = 2_u32
   end
-
   enum CERT_FIND_TYPE : UInt32
-    CTL_FIND_ANY = 0
-    CTL_FIND_SHA1_HASH = 1
-    CTL_FIND_MD5_HASH = 2
-    CTL_FIND_USAGE = 3
-    CTL_FIND_SAME_USAGE_FLAG = 1
-    CTL_FIND_EXISTING = 5
-    CTL_FIND_SUBJECT = 4
+    CTL_FIND_ANY = 0_u32
+    CTL_FIND_SHA1_HASH = 1_u32
+    CTL_FIND_MD5_HASH = 2_u32
+    CTL_FIND_USAGE = 3_u32
+    CTL_FIND_SAME_USAGE_FLAG = 1_u32
+    CTL_FIND_EXISTING = 5_u32
+    CTL_FIND_SUBJECT = 4_u32
   end
-
   enum CRYPT_FIND_FLAGS : UInt32
-    CRYPT_FIND_USER_KEYSET_FLAG = 1
-    CRYPT_FIND_MACHINE_KEYSET_FLAG = 2
-    CRYPT_FIND_SILENT_KEYSET_FLAG = 64
+    CRYPT_FIND_USER_KEYSET_FLAG = 1_u32
+    CRYPT_FIND_MACHINE_KEYSET_FLAG = 2_u32
+    CRYPT_FIND_SILENT_KEYSET_FLAG = 64_u32
   end
-
+  @[Flags]
   enum CRYPT_IMAGE_REF_FLAGS : UInt32
-    CRYPT_MIN_DEPENDENCIES = 1
-    CRYPT_PROCESS_ISOLATE = 65536
+    CRYPT_MIN_DEPENDENCIES = 1_u32
+    CRYPT_PROCESS_ISOLATE = 65536_u32
   end
-
   enum CERT_REVOCATION_STATUS_REASON : UInt32
-    CRL_REASON_UNSPECIFIED = 0
-    CRL_REASON_KEY_COMPROMISE = 1
-    CRL_REASON_CA_COMPROMISE = 2
-    CRL_REASON_AFFILIATION_CHANGED = 3
-    CRL_REASON_SUPERSEDED = 4
-    CRL_REASON_CESSATION_OF_OPERATION = 5
-    CRL_REASON_CERTIFICATE_HOLD = 6
-    CRL_REASON_REMOVE_FROM_CRL = 8
+    CRL_REASON_UNSPECIFIED = 0_u32
+    CRL_REASON_KEY_COMPROMISE = 1_u32
+    CRL_REASON_CA_COMPROMISE = 2_u32
+    CRL_REASON_AFFILIATION_CHANGED = 3_u32
+    CRL_REASON_SUPERSEDED = 4_u32
+    CRL_REASON_CESSATION_OF_OPERATION = 5_u32
+    CRL_REASON_CERTIFICATE_HOLD = 6_u32
+    CRL_REASON_REMOVE_FROM_CRL = 8_u32
   end
-
+  @[Flags]
   enum CERT_ROOT_PROGRAM_FLAGS : UInt32
-    CERT_ROOT_PROGRAM_FLAG_LSC = 64
-    CERT_ROOT_PROGRAM_FLAG_ORG = 128
-    CERT_ROOT_PROGRAM_FLAG_SUBJECT_LOGO = 32
+    CERT_ROOT_PROGRAM_FLAG_LSC = 64_u32
+    CERT_ROOT_PROGRAM_FLAG_ORG = 128_u32
+    CERT_ROOT_PROGRAM_FLAG_SUBJECT_LOGO = 32_u32
   end
-
   enum CRYPT_XML_KEY_VALUE_TYPE : UInt32
-    CRYPT_XML_KEY_VALUE_TYPE_DSA = 1
-    CRYPT_XML_KEY_VALUE_TYPE_RSA = 2
-    CRYPT_XML_KEY_VALUE_TYPE_ECDSA = 3
-    CRYPT_XML_KEY_VALUE_TYPE_CUSTOM = 4
+    CRYPT_XML_KEY_VALUE_TYPE_DSA = 1_u32
+    CRYPT_XML_KEY_VALUE_TYPE_RSA = 2_u32
+    CRYPT_XML_KEY_VALUE_TYPE_ECDSA = 3_u32
+    CRYPT_XML_KEY_VALUE_TYPE_CUSTOM = 4_u32
   end
-
   enum CERT_LOGOTYPE_CHOICE : UInt32
-    CERT_LOGOTYPE_NO_IMAGE_RESOLUTION_CHOICE = 0
-    CERT_LOGOTYPE_BITS_IMAGE_RESOLUTION_CHOICE = 1
-    CERT_LOGOTYPE_TABLE_SIZE_IMAGE_RESOLUTION_CHOICE = 2
+    CERT_LOGOTYPE_NO_IMAGE_RESOLUTION_CHOICE = 0_u32
+    CERT_LOGOTYPE_BITS_IMAGE_RESOLUTION_CHOICE = 1_u32
+    CERT_LOGOTYPE_TABLE_SIZE_IMAGE_RESOLUTION_CHOICE = 2_u32
   end
-
   enum CMSG_KEY_AGREE_OPTION : UInt32
-    CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE = 1
-    CMSG_KEY_AGREE_STATIC_KEY_CHOICE = 2
+    CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE = 1_u32
+    CMSG_KEY_AGREE_STATIC_KEY_CHOICE = 2_u32
   end
-
   enum CERT_LOGOTYPE_OPTION : UInt32
-    CERT_LOGOTYPE_DIRECT_INFO_CHOICE = 1
-    CERT_LOGOTYPE_INDIRECT_INFO_CHOICE = 2
+    CERT_LOGOTYPE_DIRECT_INFO_CHOICE = 1_u32
+    CERT_LOGOTYPE_INDIRECT_INFO_CHOICE = 2_u32
   end
-
+  @[Flags]
   enum CERT_STORE_PROV_FLAGS : UInt32
-    CERT_STORE_PROV_EXTERNAL_FLAG = 1
-    CERT_STORE_PROV_DELETED_FLAG = 2
-    CERT_STORE_PROV_NO_PERSIST_FLAG = 4
-    CERT_STORE_PROV_SYSTEM_STORE_FLAG = 8
-    CERT_STORE_PROV_LM_SYSTEM_STORE_FLAG = 16
+    CERT_STORE_PROV_EXTERNAL_FLAG = 1_u32
+    CERT_STORE_PROV_DELETED_FLAG = 2_u32
+    CERT_STORE_PROV_NO_PERSIST_FLAG = 4_u32
+    CERT_STORE_PROV_SYSTEM_STORE_FLAG = 8_u32
+    CERT_STORE_PROV_LM_SYSTEM_STORE_FLAG = 16_u32
   end
-
   enum CMSG_KEY_AGREE_ORIGINATOR : UInt32
-    CMSG_KEY_AGREE_ORIGINATOR_CERT = 1
-    CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY = 2
+    CMSG_KEY_AGREE_ORIGINATOR_CERT = 1_u32
+    CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY = 2_u32
   end
-
+  @[Flags]
   enum CRYPT_CONTEXT_CONFIG_FLAGS : UInt32
-    CRYPT_EXCLUSIVE = 1
-    CRYPT_OVERRIDE = 65536
+    CRYPT_EXCLUSIVE = 1_u32
+    CRYPT_OVERRIDE = 65536_u32
   end
-
   enum BCRYPT_DSA_MAGIC : UInt32
-    BCRYPT_DSA_PUBLIC_MAGIC = 1112560452
-    BCRYPT_DSA_PRIVATE_MAGIC = 1448104772
+    BCRYPT_DSA_PUBLIC_MAGIC = 1112560452_u32
+    BCRYPT_DSA_PRIVATE_MAGIC = 1448104772_u32
   end
-
   enum CRYPT_XML_X509DATA_TYPE : UInt32
-    CRYPT_XML_X509DATA_TYPE_ISSUER_SERIAL = 1
-    CRYPT_XML_X509DATA_TYPE_SKI = 2
-    CRYPT_XML_X509DATA_TYPE_SUBJECT_NAME = 3
-    CRYPT_XML_X509DATA_TYPE_CERTIFICATE = 4
-    CRYPT_XML_X509DATA_TYPE_CRL = 5
-    CRYPT_XML_X509DATA_TYPE_CUSTOM = 6
+    CRYPT_XML_X509DATA_TYPE_ISSUER_SERIAL = 1_u32
+    CRYPT_XML_X509DATA_TYPE_SKI = 2_u32
+    CRYPT_XML_X509DATA_TYPE_SUBJECT_NAME = 3_u32
+    CRYPT_XML_X509DATA_TYPE_CERTIFICATE = 4_u32
+    CRYPT_XML_X509DATA_TYPE_CRL = 5_u32
+    CRYPT_XML_X509DATA_TYPE_CUSTOM = 6_u32
   end
-
   enum CERT_BIOMETRIC_DATA_TYPE : UInt32
-    CERT_BIOMETRIC_PREDEFINED_DATA_CHOICE = 1
-    CERT_BIOMETRIC_OID_DATA_CHOICE = 2
+    CERT_BIOMETRIC_PREDEFINED_DATA_CHOICE = 1_u32
+    CERT_BIOMETRIC_OID_DATA_CHOICE = 2_u32
   end
-
   enum CERT_CHAIN_POLICY_FLAGS : UInt32
-    CERT_CHAIN_POLICY_IGNORE_NOT_TIME_VALID_FLAG = 1
-    CERT_CHAIN_POLICY_IGNORE_CTL_NOT_TIME_VALID_FLAG = 2
-    CERT_CHAIN_POLICY_IGNORE_NOT_TIME_NESTED_FLAG = 4
-    CERT_CHAIN_POLICY_IGNORE_ALL_NOT_TIME_VALID_FLAGS = 7
-    CERT_CHAIN_POLICY_IGNORE_INVALID_BASIC_CONSTRAINTS_FLAG = 8
-    CERT_CHAIN_POLICY_ALLOW_UNKNOWN_CA_FLAG = 16
-    CERT_CHAIN_POLICY_IGNORE_WRONG_USAGE_FLAG = 32
-    CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG = 64
-    CERT_CHAIN_POLICY_IGNORE_INVALID_POLICY_FLAG = 128
-    CERT_CHAIN_POLICY_IGNORE_END_REV_UNKNOWN_FLAG = 256
-    CERT_CHAIN_POLICY_IGNORE_CTL_SIGNER_REV_UNKNOWN_FLAG = 512
-    CERT_CHAIN_POLICY_IGNORE_CA_REV_UNKNOWN_FLAG = 1024
-    CERT_CHAIN_POLICY_IGNORE_ROOT_REV_UNKNOWN_FLAG = 2048
-    CERT_CHAIN_POLICY_IGNORE_ALL_REV_UNKNOWN_FLAGS = 3840
-    CERT_CHAIN_POLICY_ALLOW_TESTROOT_FLAG = 32768
-    CERT_CHAIN_POLICY_TRUST_TESTROOT_FLAG = 16384
-    CERT_CHAIN_POLICY_IGNORE_NOT_SUPPORTED_CRITICAL_EXT_FLAG = 8192
-    CERT_CHAIN_POLICY_IGNORE_PEER_TRUST_FLAG = 4096
+    CERT_CHAIN_POLICY_IGNORE_NOT_TIME_VALID_FLAG = 1_u32
+    CERT_CHAIN_POLICY_IGNORE_CTL_NOT_TIME_VALID_FLAG = 2_u32
+    CERT_CHAIN_POLICY_IGNORE_NOT_TIME_NESTED_FLAG = 4_u32
+    CERT_CHAIN_POLICY_IGNORE_ALL_NOT_TIME_VALID_FLAGS = 7_u32
+    CERT_CHAIN_POLICY_IGNORE_INVALID_BASIC_CONSTRAINTS_FLAG = 8_u32
+    CERT_CHAIN_POLICY_ALLOW_UNKNOWN_CA_FLAG = 16_u32
+    CERT_CHAIN_POLICY_IGNORE_WRONG_USAGE_FLAG = 32_u32
+    CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG = 64_u32
+    CERT_CHAIN_POLICY_IGNORE_INVALID_POLICY_FLAG = 128_u32
+    CERT_CHAIN_POLICY_IGNORE_END_REV_UNKNOWN_FLAG = 256_u32
+    CERT_CHAIN_POLICY_IGNORE_CTL_SIGNER_REV_UNKNOWN_FLAG = 512_u32
+    CERT_CHAIN_POLICY_IGNORE_CA_REV_UNKNOWN_FLAG = 1024_u32
+    CERT_CHAIN_POLICY_IGNORE_ROOT_REV_UNKNOWN_FLAG = 2048_u32
+    CERT_CHAIN_POLICY_IGNORE_ALL_REV_UNKNOWN_FLAGS = 3840_u32
+    CERT_CHAIN_POLICY_ALLOW_TESTROOT_FLAG = 32768_u32
+    CERT_CHAIN_POLICY_TRUST_TESTROOT_FLAG = 16384_u32
+    CERT_CHAIN_POLICY_IGNORE_NOT_SUPPORTED_CRITICAL_EXT_FLAG = 8192_u32
+    CERT_CHAIN_POLICY_IGNORE_PEER_TRUST_FLAG = 4096_u32
   end
-
+  @[Flags]
   enum CERT_STRONG_SIGN_FLAGS : UInt32
-    CERT_STRONG_SIGN_ENABLE_CRL_CHECK = 1
-    CERT_STRONG_SIGN_ENABLE_OCSP_CHECK = 2
+    CERT_STRONG_SIGN_ENABLE_CRL_CHECK = 1_u32
+    CERT_STRONG_SIGN_ENABLE_OCSP_CHECK = 2_u32
   end
-
   enum CERT_LOGOTYPE_IMAGE_INFO_TYPE : UInt32
-    CERT_LOGOTYPE_GRAY_SCALE_IMAGE_INFO_CHOICE = 1
-    CERT_LOGOTYPE_COLOR_IMAGE_INFO_CHOICE = 2
+    CERT_LOGOTYPE_GRAY_SCALE_IMAGE_INFO_CHOICE = 1_u32
+    CERT_LOGOTYPE_COLOR_IMAGE_INFO_CHOICE = 2_u32
   end
-
   enum CRYPT_XML_STATUS_INFO_STATUS : UInt32
-    CRYPT_XML_STATUS_INTERNAL_REFERENCE = 1
-    CRYPT_XML_STATUS_KEY_AVAILABLE = 2
-    CRYPT_XML_STATUS_DIGESTING = 4
-    CRYPT_XML_STATUS_DIGEST_VALID = 8
-    CRYPT_XML_STATUS_SIGNATURE_VALID = 65536
-    CRYPT_XML_STATUS_OPENED_TO_ENCODE = 2147483648
+    CRYPT_XML_STATUS_INTERNAL_REFERENCE = 1_u32
+    CRYPT_XML_STATUS_KEY_AVAILABLE = 2_u32
+    CRYPT_XML_STATUS_DIGESTING = 4_u32
+    CRYPT_XML_STATUS_DIGEST_VALID = 8_u32
+    CRYPT_XML_STATUS_SIGNATURE_VALID = 65536_u32
+    CRYPT_XML_STATUS_OPENED_TO_ENCODE = 2147483648_u32
   end
-
+  @[Flags]
   enum CRYPT_XML_TRANSFORM_FLAGS : UInt32
-    CRYPT_XML_TRANSFORM_ON_STREAM = 1
-    CRYPT_XML_TRANSFORM_ON_NODESET = 2
-    CRYPT_XML_TRANSFORM_URI_QUERY_STRING = 3
+    CRYPT_XML_TRANSFORM_ON_STREAM = 1_u32
+    CRYPT_XML_TRANSFORM_ON_NODESET = 2_u32
+    CRYPT_XML_TRANSFORM_URI_QUERY_STRING = 3_u32
   end
-
   enum CRYPT_XML_GROUP_ID : UInt32
-    CRYPT_XML_GROUP_ID_HASH_________ = 1
-    CRYPT_XML_GROUP_ID_SIGN_________ = 2
+    CRYPT_XML_GROUP_ID_HASH = 1_u32
+    CRYPT_XML_GROUP_ID_SIGN = 2_u32
   end
-
   enum CERT_SELECT_CRITERIA_TYPE : UInt32
-    CERT_SELECT_BY_ENHKEY_USAGE = 1
-    CERT_SELECT_BY_KEY_USAGE = 2
-    CERT_SELECT_BY_POLICY_OID = 3
-    CERT_SELECT_BY_PROV_NAME = 4
-    CERT_SELECT_BY_EXTENSION = 5
-    CERT_SELECT_BY_SUBJECT_HOST_NAME = 6
-    CERT_SELECT_BY_ISSUER_ATTR = 7
-    CERT_SELECT_BY_SUBJECT_ATTR = 8
-    CERT_SELECT_BY_ISSUER_NAME = 9
-    CERT_SELECT_BY_PUBLIC_KEY = 10
-    CERT_SELECT_BY_TLS_SIGNATURES = 11
+    CERT_SELECT_BY_ENHKEY_USAGE = 1_u32
+    CERT_SELECT_BY_KEY_USAGE = 2_u32
+    CERT_SELECT_BY_POLICY_OID = 3_u32
+    CERT_SELECT_BY_PROV_NAME = 4_u32
+    CERT_SELECT_BY_EXTENSION = 5_u32
+    CERT_SELECT_BY_SUBJECT_HOST_NAME = 6_u32
+    CERT_SELECT_BY_ISSUER_ATTR = 7_u32
+    CERT_SELECT_BY_SUBJECT_ATTR = 8_u32
+    CERT_SELECT_BY_ISSUER_NAME = 9_u32
+    CERT_SELECT_BY_PUBLIC_KEY = 10_u32
+    CERT_SELECT_BY_TLS_SIGNATURES = 11_u32
   end
-
   enum BCRYPT_RSAKEY_BLOB_MAGIC : UInt32
-    BCRYPT_RSAPUBLIC_MAGIC = 826364754
-    BCRYPT_RSAPRIVATE_MAGIC = 843141970
-    BCRYPT_RSAFULLPRIVATE_MAGIC = 859919186
+    BCRYPT_RSAPUBLIC_MAGIC = 826364754_u32
+    BCRYPT_RSAPRIVATE_MAGIC = 843141970_u32
+    BCRYPT_RSAFULLPRIVATE_MAGIC = 859919186_u32
   end
-
   enum CRYPT_XML_KEYINFO_TYPE : UInt32
-    CRYPT_XML_KEYINFO_TYPE_KEYNAME = 1
-    CRYPT_XML_KEYINFO_TYPE_KEYVALUE = 2
-    CRYPT_XML_KEYINFO_TYPE_RETRIEVAL = 3
-    CRYPT_XML_KEYINFO_TYPE_X509DATA = 4
-    CRYPT_XML_KEYINFO_TYPE_CUSTOM = 5
+    CRYPT_XML_KEYINFO_TYPE_KEYNAME = 1_u32
+    CRYPT_XML_KEYINFO_TYPE_KEYVALUE = 2_u32
+    CRYPT_XML_KEYINFO_TYPE_RETRIEVAL = 3_u32
+    CRYPT_XML_KEYINFO_TYPE_X509DATA = 4_u32
+    CRYPT_XML_KEYINFO_TYPE_CUSTOM = 5_u32
   end
-
   enum CRYPT_TIMESTAMP_VERSION : UInt32
-    TIMESTAMP_VERSION = 1
+    TIMESTAMP_VERSION = 1_u32
   end
-
   enum CERT_ID_OPTION : UInt32
-    CERT_ID_ISSUER_SERIAL_NUMBER = 1
-    CERT_ID_KEY_IDENTIFIER = 2
-    CERT_ID_SHA1_HASH = 3
+    CERT_ID_ISSUER_SERIAL_NUMBER = 1_u32
+    CERT_ID_KEY_IDENTIFIER = 2_u32
+    CERT_ID_SHA1_HASH = 3_u32
   end
-
   enum HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE : UInt32
-    AUTHTYPE_CLIENT = 1
-    AUTHTYPE_SERVER = 2
+    AUTHTYPE_CLIENT = 1_u32
+    AUTHTYPE_SERVER = 2_u32
   end
-
   enum BCRYPT_DH_KEY_BLOB_MAGIC : UInt32
-    BCRYPT_DH_PUBLIC_MAGIC = 1112557636
-    BCRYPT_DH_PRIVATE_MAGIC = 1448101956
+    BCRYPT_DH_PUBLIC_MAGIC = 1112557636_u32
+    BCRYPT_DH_PRIVATE_MAGIC = 1448101956_u32
   end
-
   enum CRYPT_XML_STATUS_ERROR_STATUS : UInt32
-    CRYPT_XML_STATUS_ERROR_NOT_RESOLVED = 1
-    CRYPT_XML_STATUS_ERROR_DIGEST_INVALID = 2
-    CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_ALGORITHM = 5
-    CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_TRANSFORM = 8
-    CRYPT_XML_STATUS_ERROR_SIGNATURE_INVALID = 65536
-    CRYPT_XML_STATUS_ERROR_KEYINFO_NOT_PARSED = 131072
+    CRYPT_XML_STATUS_ERROR_NOT_RESOLVED = 1_u32
+    CRYPT_XML_STATUS_ERROR_DIGEST_INVALID = 2_u32
+    CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_ALGORITHM = 5_u32
+    CRYPT_XML_STATUS_ERROR_NOT_SUPPORTED_TRANSFORM = 8_u32
+    CRYPT_XML_STATUS_ERROR_SIGNATURE_INVALID = 65536_u32
+    CRYPT_XML_STATUS_ERROR_KEYINFO_NOT_PARSED = 131072_u32
   end
-
   enum CRYPT_TIMESTAMP_RESPONSE_STATUS : UInt32
-    TIMESTAMP_STATUS_GRANTED = 0
-    TIMESTAMP_STATUS_GRANTED_WITH_MODS = 1
-    TIMESTAMP_STATUS_REJECTED = 2
-    TIMESTAMP_STATUS_WAITING = 3
-    TIMESTAMP_STATUS_REVOCATION_WARNING = 4
-    TIMESTAMP_STATUS_REVOKED = 5
+    TIMESTAMP_STATUS_GRANTED = 0_u32
+    TIMESTAMP_STATUS_GRANTED_WITH_MODS = 1_u32
+    TIMESTAMP_STATUS_REJECTED = 2_u32
+    TIMESTAMP_STATUS_WAITING = 3_u32
+    TIMESTAMP_STATUS_REVOCATION_WARNING = 4_u32
+    TIMESTAMP_STATUS_REVOKED = 5_u32
   end
-
   enum NCRYPT_ALGORITHM_NAME_CLASS : UInt32
-    NCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE = 3
-    NCRYPT_SECRET_AGREEMENT_INTERFACE = 4
-    NCRYPT_SIGNATURE_INTERFACE = 5
+    NCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE = 3_u32
+    NCRYPT_SECRET_AGREEMENT_INTERFACE = 4_u32
+    NCRYPT_SIGNATURE_INTERFACE = 5_u32
   end
-
-  enum ECC_CURVE_TYPE_ENUM : Int32
-    BCRYPT_ECC_PRIME_SHORT_WEIERSTRASS_CURVE = 1
-    BCRYPT_ECC_PRIME_TWISTED_EDWARDS_CURVE = 2
-    BCRYPT_ECC_PRIME_MONTGOMERY_CURVE = 3
+  enum ECC_CURVE_TYPE_ENUM
+    BCRYPT_ECC_PRIME_SHORT_WEIERSTRASS_CURVE = 1_i32
+    BCRYPT_ECC_PRIME_TWISTED_EDWARDS_CURVE = 2_i32
+    BCRYPT_ECC_PRIME_MONTGOMERY_CURVE = 3_i32
   end
-
-  enum ECC_CURVE_ALG_ID_ENUM : Int32
-    BCRYPT_NO_CURVE_GENERATION_ALG_ID = 0
+  enum ECC_CURVE_ALG_ID_ENUM
+    BCRYPT_NO_CURVE_GENERATION_ALG_ID = 0_i32
   end
-
-  enum HASHALGORITHM_ENUM : Int32
-    DSA_HASH_ALGORITHM_SHA1 = 0
-    DSA_HASH_ALGORITHM_SHA256 = 1
-    DSA_HASH_ALGORITHM_SHA512 = 2
+  enum HASHALGORITHM_ENUM
+    DSA_HASH_ALGORITHM_SHA1 = 0_i32
+    DSA_HASH_ALGORITHM_SHA256 = 1_i32
+    DSA_HASH_ALGORITHM_SHA512 = 2_i32
   end
-
-  enum DSAFIPSVERSION_ENUM : Int32
-    DSA_FIPS186_2 = 0
-    DSA_FIPS186_3 = 1
+  enum DSAFIPSVERSION_ENUM
+    DSA_FIPS186_2 = 0_i32
+    DSA_FIPS186_3 = 1_i32
   end
-
-  enum BCRYPT_HASH_OPERATION_TYPE : Int32
-    BCRYPT_HASH_OPERATION_HASH_DATA = 1
-    BCRYPT_HASH_OPERATION_FINISH_HASH = 2
+  enum BCRYPT_HASH_OPERATION_TYPE
+    BCRYPT_HASH_OPERATION_HASH_DATA = 1_i32
+    BCRYPT_HASH_OPERATION_FINISH_HASH = 2_i32
   end
-
-  enum BCRYPT_MULTI_OPERATION_TYPE : Int32
-    BCRYPT_OPERATION_TYPE_HASH = 1
+  enum BCRYPT_MULTI_OPERATION_TYPE
+    BCRYPT_OPERATION_TYPE_HASH = 1_i32
   end
-
   enum CertKeyType : UInt32
-    KeyTypeOther = 0
-    KeyTypeVirtualSmartCard = 1
-    KeyTypePhysicalSmartCard = 2
-    KeyTypePassport = 3
-    KeyTypePassportRemote = 4
-    KeyTypePassportSmartCard = 5
-    KeyTypeHardware = 6
-    KeyTypeSoftware = 7
-    KeyTypeSelfSigned = 8
+    KeyTypeOther = 0_u32
+    KeyTypeVirtualSmartCard = 1_u32
+    KeyTypePhysicalSmartCard = 2_u32
+    KeyTypePassport = 3_u32
+    KeyTypePassportRemote = 4_u32
+    KeyTypePassportSmartCard = 5_u32
+    KeyTypeHardware = 6_u32
+    KeyTypeSoftware = 7_u32
+    KeyTypeSelfSigned = 8_u32
+  end
+  enum CRYPT_XML_CHARSET
+    CRYPT_XML_CHARSET_AUTO = 0_i32
+    CRYPT_XML_CHARSET_UTF8 = 1_i32
+    CRYPT_XML_CHARSET_UTF16LE = 2_i32
+    CRYPT_XML_CHARSET_UTF16BE = 3_i32
+  end
+  enum CRYPT_XML_PROPERTY_ID
+    CRYPT_XML_PROPERTY_MAX_HEAP_SIZE = 1_i32
+    CRYPT_XML_PROPERTY_SIGNATURE_LOCATION = 2_i32
+    CRYPT_XML_PROPERTY_MAX_SIGNATURES = 3_i32
+    CRYPT_XML_PROPERTY_DOC_DECLARATION = 4_i32
+    CRYPT_XML_PROPERTY_XML_OUTPUT_CHARSET = 5_i32
+  end
+  enum CRYPT_XML_KEYINFO_SPEC
+    CRYPT_XML_KEYINFO_SPEC_NONE = 0_i32
+    CRYPT_XML_KEYINFO_SPEC_ENCODED = 1_i32
+    CRYPT_XML_KEYINFO_SPEC_PARAM = 2_i32
+  end
+  enum HandleType
+    Asymmetric = 1_i32
+    Symmetric = 2_i32
+    Transform = 3_i32
+    Hash = 4_i32
+  end
+  enum PaddingMode
+    None = 1_i32
+    PKCS7 = 2_i32
+    Zeros = 3_i32
+    ANSIX923 = 4_i32
+    ISO10126 = 5_i32
+  end
+  enum Direction
+    DirectionEncrypt = 1_i32
+    DirectionDecrypt = 2_i32
+  end
+  enum CASetupProperty
+    ENUM_SETUPPROP_INVALID = -1_i32
+    ENUM_SETUPPROP_CATYPE = 0_i32
+    ENUM_SETUPPROP_CAKEYINFORMATION = 1_i32
+    ENUM_SETUPPROP_INTERACTIVE = 2_i32
+    ENUM_SETUPPROP_CANAME = 3_i32
+    ENUM_SETUPPROP_CADSSUFFIX = 4_i32
+    ENUM_SETUPPROP_VALIDITYPERIOD = 5_i32
+    ENUM_SETUPPROP_VALIDITYPERIODUNIT = 6_i32
+    ENUM_SETUPPROP_EXPIRATIONDATE = 7_i32
+    ENUM_SETUPPROP_PRESERVEDATABASE = 8_i32
+    ENUM_SETUPPROP_DATABASEDIRECTORY = 9_i32
+    ENUM_SETUPPROP_LOGDIRECTORY = 10_i32
+    ENUM_SETUPPROP_SHAREDFOLDER = 11_i32
+    ENUM_SETUPPROP_PARENTCAMACHINE = 12_i32
+    ENUM_SETUPPROP_PARENTCANAME = 13_i32
+    ENUM_SETUPPROP_REQUESTFILE = 14_i32
+    ENUM_SETUPPROP_WEBCAMACHINE = 15_i32
+    ENUM_SETUPPROP_WEBCANAME = 16_i32
+  end
+  enum MSCEPSetupProperty
+    ENUM_CEPSETUPPROP_USELOCALSYSTEM = 0_i32
+    ENUM_CEPSETUPPROP_USECHALLENGE = 1_i32
+    ENUM_CEPSETUPPROP_RANAME_CN = 2_i32
+    ENUM_CEPSETUPPROP_RANAME_EMAIL = 3_i32
+    ENUM_CEPSETUPPROP_RANAME_COMPANY = 4_i32
+    ENUM_CEPSETUPPROP_RANAME_DEPT = 5_i32
+    ENUM_CEPSETUPPROP_RANAME_CITY = 6_i32
+    ENUM_CEPSETUPPROP_RANAME_STATE = 7_i32
+    ENUM_CEPSETUPPROP_RANAME_COUNTRY = 8_i32
+    ENUM_CEPSETUPPROP_SIGNINGKEYINFORMATION = 9_i32
+    ENUM_CEPSETUPPROP_EXCHANGEKEYINFORMATION = 10_i32
+    ENUM_CEPSETUPPROP_CAINFORMATION = 11_i32
+    ENUM_CEPSETUPPROP_MSCEPURL = 12_i32
+    ENUM_CEPSETUPPROP_CHALLENGEURL = 13_i32
+  end
+  enum CESSetupProperty
+    ENUM_CESSETUPPROP_USE_IISAPPPOOLIDENTITY = 0_i32
+    ENUM_CESSETUPPROP_CACONFIG = 1_i32
+    ENUM_CESSETUPPROP_AUTHENTICATION = 2_i32
+    ENUM_CESSETUPPROP_SSLCERTHASH = 3_i32
+    ENUM_CESSETUPPROP_URL = 4_i32
+    ENUM_CESSETUPPROP_RENEWALONLY = 5_i32
+    ENUM_CESSETUPPROP_ALLOW_KEYBASED_RENEWAL = 6_i32
+  end
+  enum CEPSetupProperty
+    ENUM_CEPSETUPPROP_AUTHENTICATION = 0_i32
+    ENUM_CEPSETUPPROP_SSLCERTHASH = 1_i32
+    ENUM_CEPSETUPPROP_URL = 2_i32
+    ENUM_CEPSETUPPROP_KEYBASED_RENEWAL = 3_i32
   end
 
-  enum CRYPT_XML_CHARSET : Int32
-    CRYPT_XML_CHARSET_AUTO = 0
-    CRYPT_XML_CHARSET_UTF8 = 1
-    CRYPT_XML_CHARSET_UTF16LE = 2
-    CRYPT_XML_CHARSET_UTF16BE = 3
-  end
+  @[Extern]
+  record CMS_KEY_INFO,
+    dwVersion : UInt32,
+    algid : UInt32,
+    pbOID : UInt8*,
+    cbOID : UInt32
 
-  enum CRYPT_XML_PROPERTY_ID : Int32
-    CRYPT_XML_PROPERTY_MAX_HEAP_SIZE = 1
-    CRYPT_XML_PROPERTY_SIGNATURE_LOCATION = 2
-    CRYPT_XML_PROPERTY_MAX_SIGNATURES = 3
-    CRYPT_XML_PROPERTY_DOC_DECLARATION = 4
-    CRYPT_XML_PROPERTY_XML_OUTPUT_CHARSET = 5
-  end
+  @[Extern]
+  record HMAC_Info,
+    hash_algid : UInt32,
+    pbInnerString : UInt8*,
+    cbInnerString : UInt32,
+    pbOuterString : UInt8*,
+    cbOuterString : UInt32
 
-  enum CRYPT_XML_KEYINFO_SPEC : Int32
-    CRYPT_XML_KEYINFO_SPEC_NONE = 0
-    CRYPT_XML_KEYINFO_SPEC_ENCODED = 1
-    CRYPT_XML_KEYINFO_SPEC_PARAM = 2
-  end
+  @[Extern]
+  record SCHANNEL_ALG,
+    dwUse : UInt32,
+    algid : UInt32,
+    cBits : UInt32,
+    dwFlags : UInt32,
+    dwReserved : UInt32
 
-  enum HandleType : Int32
-    Asymmetric = 1
-    Symmetric = 2
-    Transform = 3
-    Hash = 4
-  end
+  @[Extern]
+  record PROV_ENUMALGS,
+    aiAlgid : UInt32,
+    dwBitLen : UInt32,
+    dwNameLen : UInt32,
+    szName : Win32cr::Foundation::CHAR[20]
 
-  enum PaddingMode : Int32
-    None = 1
-    PKCS7 = 2
-    Zeros = 3
-    ANSIX923 = 4
-    ISO10126 = 5
-  end
+  @[Extern]
+  record PROV_ENUMALGS_EX,
+    aiAlgid : UInt32,
+    dwDefaultLen : UInt32,
+    dwMinLen : UInt32,
+    dwMaxLen : UInt32,
+    dwProtocols : UInt32,
+    dwNameLen : UInt32,
+    szName : Win32cr::Foundation::CHAR[20],
+    dwLongNameLen : UInt32,
+    szLongName : Win32cr::Foundation::CHAR[40]
 
-  enum Direction : Int32
-    DirectionEncrypt = 1
-    DirectionDecrypt = 2
-  end
+  @[Extern]
+  record PUBLICKEYSTRUC,
+    bType : UInt8,
+    bVersion : UInt8,
+    reserved : UInt16,
+    aiKeyAlg : UInt32
 
-  enum CASetupProperty : Int32
-    ENUM_SETUPPROP_INVALID = -1
-    ENUM_SETUPPROP_CATYPE = 0
-    ENUM_SETUPPROP_CAKEYINFORMATION = 1
-    ENUM_SETUPPROP_INTERACTIVE = 2
-    ENUM_SETUPPROP_CANAME = 3
-    ENUM_SETUPPROP_CADSSUFFIX = 4
-    ENUM_SETUPPROP_VALIDITYPERIOD = 5
-    ENUM_SETUPPROP_VALIDITYPERIODUNIT = 6
-    ENUM_SETUPPROP_EXPIRATIONDATE = 7
-    ENUM_SETUPPROP_PRESERVEDATABASE = 8
-    ENUM_SETUPPROP_DATABASEDIRECTORY = 9
-    ENUM_SETUPPROP_LOGDIRECTORY = 10
-    ENUM_SETUPPROP_SHAREDFOLDER = 11
-    ENUM_SETUPPROP_PARENTCAMACHINE = 12
-    ENUM_SETUPPROP_PARENTCANAME = 13
-    ENUM_SETUPPROP_REQUESTFILE = 14
-    ENUM_SETUPPROP_WEBCAMACHINE = 15
-    ENUM_SETUPPROP_WEBCANAME = 16
-  end
-
-  enum MSCEPSetupProperty : Int32
-    ENUM_CEPSETUPPROP_USELOCALSYSTEM = 0
-    ENUM_CEPSETUPPROP_USECHALLENGE = 1
-    ENUM_CEPSETUPPROP_RANAME_CN = 2
-    ENUM_CEPSETUPPROP_RANAME_EMAIL = 3
-    ENUM_CEPSETUPPROP_RANAME_COMPANY = 4
-    ENUM_CEPSETUPPROP_RANAME_DEPT = 5
-    ENUM_CEPSETUPPROP_RANAME_CITY = 6
-    ENUM_CEPSETUPPROP_RANAME_STATE = 7
-    ENUM_CEPSETUPPROP_RANAME_COUNTRY = 8
-    ENUM_CEPSETUPPROP_SIGNINGKEYINFORMATION = 9
-    ENUM_CEPSETUPPROP_EXCHANGEKEYINFORMATION = 10
-    ENUM_CEPSETUPPROP_CAINFORMATION = 11
-    ENUM_CEPSETUPPROP_MSCEPURL = 12
-    ENUM_CEPSETUPPROP_CHALLENGEURL = 13
-  end
-
-  enum CESSetupProperty : Int32
-    ENUM_CESSETUPPROP_USE_IISAPPPOOLIDENTITY = 0
-    ENUM_CESSETUPPROP_CACONFIG = 1
-    ENUM_CESSETUPPROP_AUTHENTICATION = 2
-    ENUM_CESSETUPPROP_SSLCERTHASH = 3
-    ENUM_CESSETUPPROP_URL = 4
-    ENUM_CESSETUPPROP_RENEWALONLY = 5
-    ENUM_CESSETUPPROP_ALLOW_KEYBASED_RENEWAL = 6
-  end
-
-  enum CEPSetupProperty : Int32
-    ENUM_CEPSETUPPROP_AUTHENTICATION = 0
-    ENUM_CEPSETUPPROP_SSLCERTHASH = 1
-    ENUM_CEPSETUPPROP_URL = 2
-    ENUM_CEPSETUPPROP_KEYBASED_RENEWAL = 3
-  end
-
-  union CERT_ALT_NAME_ENTRY_Anonymous_e__Union
-    p_other_name : CERT_OTHER_NAME*
-    pwsz_rfc822_name : LibC::LPWSTR
-    pwsz_dns_name : LibC::LPWSTR
-    directory_name : CRYPTOAPI_BLOB
-    pwsz_url : LibC::LPWSTR
-    ip_address : CRYPTOAPI_BLOB
-    psz_registered_id : PSTR
-  end
-  union CRL_DIST_POINT_NAME_Anonymous_e__Union
-    full_name : CERT_ALT_NAME_INFO
-  end
-  union CMC_TAGGED_REQUEST_Anonymous_e__Union
-    p_tagged_cert_request : CMC_TAGGED_CERT_REQUEST*
-  end
-  union CMC_STATUS_INFO_Anonymous_e__Union
-    dw_fail_info : UInt32
-    p_pend_info : CMC_PEND_INFO*
-  end
-  union CERT_LOGOTYPE_IMAGE_INFO_Anonymous_e__Union
-    dw_num_bits : UInt32
-    dw_table_size : UInt32
-  end
-  union CERT_LOGOTYPE_INFO_Anonymous_e__Union
-    p_logotype_direct_info : CERT_LOGOTYPE_DATA*
-    p_logotype_indirect_info : CERT_LOGOTYPE_REFERENCE*
-  end
-  union CERT_BIOMETRIC_DATA_Anonymous_e__Union
-    dw_predefined : UInt32
-    psz_obj_id : PSTR
-  end
-  union OCSP_BASIC_RESPONSE_ENTRY_Anonymous_e__Union
-    p_revoked_info : OCSP_BASIC_REVOKED_INFO*
-  end
-  union OCSP_BASIC_RESPONSE_INFO_Anonymous_e__Union
-    by_name_responder_id : CRYPTOAPI_BLOB
-    by_key_responder_id : CRYPTOAPI_BLOB
-  end
-  union CRYPT_OID_INFO_Anonymous_e__Union
-    dw_value : UInt32
-    algid : UInt32
-    dw_length : UInt32
-  end
-  union CERT_STRONG_SIGN_PARA_Anonymous_e__Union
-    pv_info : Void*
-    p_serialized_info : CERT_STRONG_SIGN_SERIALIZED_INFO*
-    psz_oid : PSTR
-  end
-  union CERT_ID_Anonymous_e__Union
-    issuer_serial_number : CERT_ISSUER_SERIAL_NUMBER
-    key_id : CRYPTOAPI_BLOB
-    hash_id : CRYPTOAPI_BLOB
-  end
-  union CMSG_SIGNER_ENCODE_INFO_Anonymous_e__Union
-    h_crypt_prov : LibC::UINT_PTR
-    h_n_crypt_key : LibC::UINT_PTR
-  end
-  union CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
-    p_ephemeral_algorithm : CRYPT_ALGORITHM_IDENTIFIER*
-    p_sender_id : CERT_ID*
-  end
-  union CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
-    h_key_encryption_key : LibC::UINT_PTR
-    pv_key_encryption_key : Void*
-  end
-  union CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
-    p_key_trans : CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO*
-    p_key_agree : CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO*
-    p_mail_list : CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO*
-  end
-  union CMSG_KEY_AGREE_RECIPIENT_INFO_Anonymous_e__Union
-    originator_cert_id : CERT_ID
-    originator_public_key_info : CERT_PUBLIC_KEY_INFO
-  end
-  union CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union
-    p_key_trans : CMSG_KEY_TRANS_RECIPIENT_INFO*
-    p_key_agree : CMSG_KEY_AGREE_RECIPIENT_INFO*
-    p_mail_list : CMSG_MAIL_LIST_RECIPIENT_INFO*
-  end
-  union CMSG_CTRL_DECRYPT_PARA_Anonymous_e__Union
-    h_crypt_prov : LibC::UINT_PTR
-    h_n_crypt_key : LibC::UINT_PTR
-  end
-  union CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_Anonymous_e__Union
-    h_crypt_prov : LibC::UINT_PTR
-    h_n_crypt_key : LibC::UINT_PTR
-  end
-  union CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_Anonymous_e__Union
-    h_crypt_prov : LibC::UINT_PTR
-    h_n_crypt_key : LibC::UINT_PTR
-  end
-  union CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_Anonymous_e__Union
-    h_key_encryption_key : LibC::UINT_PTR
-    pv_key_encryption_key : Void*
-  end
-  union CMSG_CONTENT_ENCRYPT_INFO_Anonymous_e__Union
-    h_content_encrypt_key : LibC::UINT_PTR
-    h_cng_content_encrypt_key : BCRYPT_KEY_HANDLE
-  end
-  union CMSG_KEY_AGREE_ENCRYPT_INFO_Anonymous_e__Union
-    originator_cert_id : CERT_ID
-    originator_public_key_info : CERT_PUBLIC_KEY_INFO
-  end
-  union CERT_KEY_CONTEXT_Anonymous_e__Union
-    h_crypt_prov : LibC::UINT_PTR
-    h_n_crypt_key : LibC::UINT_PTR
-  end
-  union CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union
-    pv_system_store : Void*
-    psz_system_store : PSTR
-    pwsz_system_store : LibC::LPWSTR
-  end
-  union CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous1_e__Union
-    h_key_base : HKEY
-    pv_base : Void*
-  end
-  union CRYPT_KEY_SIGN_MESSAGE_PARA_Anonymous_e__Union
-    h_crypt_prov : LibC::UINT_PTR
-    h_n_crypt_key : LibC::UINT_PTR
-  end
-  union HTTPSPolicyCallbackData_Anonymous_e__Union
-    cb_struct : UInt32
-    cb_size : UInt32
-  end
-  union CRYPT_XML_KEY_VALUE_Anonymous_e__Union
-    dsa_key_value : CRYPT_XML_KEY_DSA_KEY_VALUE
-    rsa_key_value : CRYPT_XML_KEY_RSA_KEY_VALUE
-    ecdsa_key_value : CRYPT_XML_KEY_ECDSA_KEY_VALUE
-    custom : CRYPT_XML_BLOB
-  end
-  union CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union
-    issuer_serial : CRYPT_XML_ISSUER_SERIAL
-    ski : CRYPT_XML_DATA_BLOB
-    wsz_subject_name : LibC::LPWSTR
-    certificate : CRYPT_XML_DATA_BLOB
-    crl : CRYPT_XML_DATA_BLOB
-    custom : CRYPT_XML_BLOB
-  end
-  union CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union
-    wsz_key_name : LibC::LPWSTR
-    key_value : CRYPT_XML_KEY_VALUE
-    retrieval_method : CRYPT_XML_BLOB
-    x509_data : CRYPT_XML_X509DATA
-    custom : CRYPT_XML_BLOB
-  end
-
-  struct CMS_KEY_INFO
-    dw_version : UInt32
-    algid : UInt32
-    pb_oid : UInt8*
-    cb_oid : UInt32
-  end
-  struct HMAC_Info
-    hash_algid : UInt32
-    pb_inner_string : UInt8*
-    cb_inner_string : UInt32
-    pb_outer_string : UInt8*
-    cb_outer_string : UInt32
-  end
-  struct SCHANNEL_ALG
-    dw_use : UInt32
-    algid : UInt32
-    c_bits : UInt32
-    dw_flags : UInt32
-    dw_reserved : UInt32
-  end
-  struct PROV_ENUMALGS
-    ai_algid : UInt32
-    dw_bit_len : UInt32
-    dw_name_len : UInt32
-    sz_name : CHAR[20]*
-  end
-  struct PROV_ENUMALGS_EX
-    ai_algid : UInt32
-    dw_default_len : UInt32
-    dw_min_len : UInt32
-    dw_max_len : UInt32
-    dw_protocols : UInt32
-    dw_name_len : UInt32
-    sz_name : CHAR[20]*
-    dw_long_name_len : UInt32
-    sz_long_name : CHAR[40]*
-  end
-  struct PUBLICKEYSTRUC
-    b_type : UInt8
-    b_version : UInt8
-    reserved : UInt16
-    ai_key_alg : UInt32
-  end
-  struct RSAPUBKEY
-    magic : UInt32
-    bitlen : UInt32
+  @[Extern]
+  record RSAPUBKEY,
+    magic : UInt32,
+    bitlen : UInt32,
     pubexp : UInt32
-  end
-  struct PUBKEY
-    magic : UInt32
+
+  @[Extern]
+  record PUBKEY,
+    magic : UInt32,
     bitlen : UInt32
-  end
-  struct DSSSEED
-    counter : UInt32
-    seed : UInt8[20]*
-  end
-  struct PUBKEYVER3
-    magic : UInt32
-    bitlen_p : UInt32
-    bitlen_q : UInt32
-    bitlen_j : UInt32
-    dss_seed : DSSSEED
-  end
-  struct PRIVKEYVER3
-    magic : UInt32
-    bitlen_p : UInt32
-    bitlen_q : UInt32
-    bitlen_j : UInt32
-    bitlen_x : UInt32
-    dss_seed : DSSSEED
-  end
-  struct KEY_TYPE_SUBTYPE
-    dw_key_spec : UInt32
-    type : Guid
-    subtype : Guid
-  end
-  struct CERT_FORTEZZA_DATA_PROP
-    serial_number : UInt8[8]*
-    cert_index : Int32
-    cert_label : UInt8[36]*
-  end
-  struct CRYPT_RC4_KEY_STATE
-    key : UInt8[16]*
-    s_box : UInt8[256]*
-    i : UInt8
+
+  @[Extern]
+  record DSSSEED,
+    counter : UInt32,
+    seed : UInt8[20]
+
+  @[Extern]
+  record PUBKEYVER3,
+    magic : UInt32,
+    bitlenP : UInt32,
+    bitlenQ : UInt32,
+    bitlenJ : UInt32,
+    dss_seed : Win32cr::Security::Cryptography::DSSSEED
+
+  @[Extern]
+  record PRIVKEYVER3,
+    magic : UInt32,
+    bitlenP : UInt32,
+    bitlenQ : UInt32,
+    bitlenJ : UInt32,
+    bitlenX : UInt32,
+    dss_seed : Win32cr::Security::Cryptography::DSSSEED
+
+  @[Extern]
+  record KEY_TYPE_SUBTYPE,
+    dwKeySpec : UInt32,
+    type__ : LibC::GUID,
+    subtype : LibC::GUID
+
+  @[Extern]
+  record CERT_FORTEZZA_DATA_PROP,
+    serial_number : UInt8[8],
+    cert_index : Int32,
+    cert_label : UInt8[36]
+
+  @[Extern]
+  record CRYPT_RC4_KEY_STATE,
+    key : UInt8[16],
+    s_box : UInt8[256],
+    i : UInt8,
     j : UInt8
-  end
-  struct CRYPT_DES_KEY_STATE
-    key : UInt8[8]*
-    iv : UInt8[8]*
-    feedback : UInt8[8]*
-  end
-  struct CRYPT_3DES_KEY_STATE
-    key : UInt8[24]*
-    iv : UInt8[8]*
-    feedback : UInt8[8]*
-  end
-  struct CRYPT_AES_128_KEY_STATE
-    key : UInt8[16]*
-    iv : UInt8[16]*
-    encryption_state : UInt8[176]*
-    decryption_state : UInt8[176]*
-    feedback : UInt8[16]*
-  end
-  struct CRYPT_AES_256_KEY_STATE
-    key : UInt8[32]*
-    iv : UInt8[16]*
-    encryption_state : UInt8[240]*
-    decryption_state : UInt8[240]*
-    feedback : UInt8[16]*
-  end
-  struct CRYPTOAPI_BLOB
-    cb_data : UInt32
-    pb_data : UInt8*
-  end
-  struct CMS_DH_KEY_INFO
-    dw_version : UInt32
-    algid : UInt32
-    psz_content_enc_obj_id : PSTR
-    pub_info : CRYPTOAPI_BLOB
-    p_reserved : Void*
-  end
-  struct BCRYPT_KEY_LENGTHS_STRUCT
-    dw_min_length : UInt32
-    dw_max_length : UInt32
-    dw_increment : UInt32
-  end
-  struct BCRYPT_OID
-    cb_oid : UInt32
-    pb_oid : UInt8*
-  end
-  struct BCRYPT_OID_LIST
-    dw_oid_count : UInt32
-    p_oi_ds : BCRYPT_OID*
-  end
-  struct BCRYPT_PKCS1_PADDING_INFO
-    psz_alg_id : LibC::LPWSTR
-  end
-  struct BCRYPT_PSS_PADDING_INFO
-    psz_alg_id : LibC::LPWSTR
-    cb_salt : UInt32
-  end
-  struct BCRYPT_OAEP_PADDING_INFO
-    psz_alg_id : LibC::LPWSTR
-    pb_label : UInt8*
-    cb_label : UInt32
-  end
-  struct BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO
-    cb_size : UInt32
-    dw_info_version : UInt32
-    pb_nonce : UInt8*
-    cb_nonce : UInt32
-    pb_auth_data : UInt8*
-    cb_auth_data : UInt32
-    pb_tag : UInt8*
-    cb_tag : UInt32
-    pb_mac_context : UInt8*
-    cb_mac_context : UInt32
-    cb_aad : UInt32
-    cb_data : UInt64
-    dw_flags : UInt32
-  end
-  struct BCryptBuffer
-    cb_buffer : UInt32
-    buffer_type : UInt32
-    pv_buffer : Void*
-  end
-  struct BCryptBufferDesc
-    ul_version : UInt32
-    c_buffers : UInt32
-    p_buffers : BCryptBuffer*
-  end
-  struct BCRYPT_KEY_BLOB
+
+  @[Extern]
+  record CRYPT_DES_KEY_STATE,
+    key : UInt8[8],
+    iv : UInt8[8],
+    feedback : UInt8[8]
+
+  @[Extern]
+  record CRYPT_3DES_KEY_STATE,
+    key : UInt8[24],
+    iv : UInt8[8],
+    feedback : UInt8[8]
+
+  @[Extern]
+  record CRYPT_AES_128_KEY_STATE,
+    key : UInt8[16],
+    iv : UInt8[16],
+    encryption_state : UInt8[176],
+    decryption_state : UInt8[176],
+    feedback : UInt8[16]
+
+  @[Extern]
+  record CRYPT_AES_256_KEY_STATE,
+    key : UInt8[32],
+    iv : UInt8[16],
+    encryption_state : UInt8[240],
+    decryption_state : UInt8[240],
+    feedback : UInt8[16]
+
+  @[Extern]
+  record CRYPTOAPI_BLOB,
+    cbData : UInt32,
+    pbData : UInt8*
+
+  @[Extern]
+  record CMS_DH_KEY_INFO,
+    dwVersion : UInt32,
+    algid : UInt32,
+    pszContentEncObjId : Win32cr::Foundation::PSTR,
+    pub_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    pReserved : Void*
+
+  @[Extern]
+  record BCRYPT_KEY_LENGTHS_STRUCT,
+    dwMinLength : UInt32,
+    dwMaxLength : UInt32,
+    dwIncrement : UInt32
+
+  @[Extern]
+  record BCRYPT_OID,
+    cbOID : UInt32,
+    pbOID : UInt8*
+
+  @[Extern]
+  record BCRYPT_OID_LIST,
+    dwOIDCount : UInt32,
+    pOIDs : Win32cr::Security::Cryptography::BCRYPT_OID*
+
+  @[Extern]
+  record BCRYPT_PKCS1_PADDING_INFO,
+    pszAlgId : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record BCRYPT_PSS_PADDING_INFO,
+    pszAlgId : Win32cr::Foundation::PWSTR,
+    cbSalt : UInt32
+
+  @[Extern]
+  record BCRYPT_OAEP_PADDING_INFO,
+    pszAlgId : Win32cr::Foundation::PWSTR,
+    pbLabel : UInt8*,
+    cbLabel : UInt32
+
+  @[Extern]
+  record BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO,
+    cbSize : UInt32,
+    dwInfoVersion : UInt32,
+    pbNonce : UInt8*,
+    cbNonce : UInt32,
+    pbAuthData : UInt8*,
+    cbAuthData : UInt32,
+    pbTag : UInt8*,
+    cbTag : UInt32,
+    pbMacContext : UInt8*,
+    cbMacContext : UInt32,
+    cbAAD : UInt32,
+    cbData : UInt64,
+    dwFlags : UInt32
+
+  @[Extern]
+  record BCryptBuffer,
+    cbBuffer : UInt32,
+    buffer_type : UInt32,
+    pvBuffer : Void*
+
+  @[Extern]
+  record BCryptBufferDesc,
+    ulVersion : UInt32,
+    cBuffers : UInt32,
+    pBuffers : Win32cr::Security::Cryptography::BCryptBuffer*
+
+  @[Extern]
+  record BCRYPT_KEY_BLOB,
     magic : UInt32
-  end
-  struct BCRYPT_RSAKEY_BLOB
-    magic : BCRYPT_RSAKEY_BLOB_MAGIC
-    bit_length : UInt32
-    cb_public_exp : UInt32
-    cb_modulus : UInt32
-    cb_prime1 : UInt32
-    cb_prime2 : UInt32
-  end
-  struct BCRYPT_ECCKEY_BLOB
-    dw_magic : UInt32
-    cb_key : UInt32
-  end
-  struct SSL_ECCKEY_BLOB
-    dw_curve_type : UInt32
-    cb_key : UInt32
-  end
-  struct BCRYPT_ECCFULLKEY_BLOB
-    dw_magic : UInt32
-    dw_version : UInt32
-    dw_curve_type : ECC_CURVE_TYPE_ENUM
-    dw_curve_generation_alg_id : ECC_CURVE_ALG_ID_ENUM
-    cb_field_length : UInt32
-    cb_subgroup_order : UInt32
-    cb_cofactor : UInt32
-    cb_seed : UInt32
-  end
-  struct BCRYPT_DH_KEY_BLOB
-    dw_magic : BCRYPT_DH_KEY_BLOB_MAGIC
-    cb_key : UInt32
-  end
-  struct BCRYPT_DH_PARAMETER_HEADER
-    cb_length : UInt32
-    dw_magic : UInt32
-    cb_key_length : UInt32
-  end
-  struct BCRYPT_DSA_KEY_BLOB
-    dw_magic : BCRYPT_DSA_MAGIC
-    cb_key : UInt32
-    count : UInt8[4]*
-    seed : UInt8[20]*
-    q : UInt8[20]*
-  end
-  struct BCRYPT_DSA_KEY_BLOB_V2
-    dw_magic : BCRYPT_DSA_MAGIC
-    cb_key : UInt32
-    hash_algorithm : HASHALGORITHM_ENUM
-    standard_version : DSAFIPSVERSION_ENUM
-    cb_seed_length : UInt32
-    cb_group_size : UInt32
-    count : UInt8[4]*
-  end
-  struct BCRYPT_KEY_DATA_BLOB_HEADER
-    dw_magic : UInt32
-    dw_version : UInt32
-    cb_key_data : UInt32
-  end
-  struct BCRYPT_DSA_PARAMETER_HEADER
-    cb_length : UInt32
-    dw_magic : UInt32
-    cb_key_length : UInt32
-    count : UInt8[4]*
-    seed : UInt8[20]*
-    q : UInt8[20]*
-  end
-  struct BCRYPT_DSA_PARAMETER_HEADER_V2
-    cb_length : UInt32
-    dw_magic : UInt32
-    cb_key_length : UInt32
-    hash_algorithm : HASHALGORITHM_ENUM
-    standard_version : DSAFIPSVERSION_ENUM
-    cb_seed_length : UInt32
-    cb_group_size : UInt32
-    count : UInt8[4]*
-  end
-  struct BCRYPT_ECC_CURVE_NAMES
-    dw_ecc_curve_names : UInt32
-    p_ecc_curve_names : LibC::LPWSTR*
-  end
-  struct BCRYPT_MULTI_HASH_OPERATION
-    i_hash : UInt32
-    hash_operation : BCRYPT_HASH_OPERATION_TYPE
-    pb_buffer : UInt8*
-    cb_buffer : UInt32
-  end
-  struct BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
-    cb_per_object : UInt32
-    cb_per_element : UInt32
-  end
-  struct BCRYPT_ALGORITHM_IDENTIFIER
-    psz_name : LibC::LPWSTR
-    dw_class : UInt32
-    dw_flags : UInt32
-  end
-  struct BCRYPT_PROVIDER_NAME
-    psz_provider_name : LibC::LPWSTR
-  end
-  struct BCRYPT_INTERFACE_VERSION
-    major_version : UInt16
+
+  @[Extern]
+  record BCRYPT_RSAKEY_BLOB,
+    magic : Win32cr::Security::Cryptography::BCRYPT_RSAKEY_BLOB_MAGIC,
+    bit_length : UInt32,
+    cbPublicExp : UInt32,
+    cbModulus : UInt32,
+    cbPrime1 : UInt32,
+    cbPrime2 : UInt32
+
+  @[Extern]
+  record BCRYPT_ECCKEY_BLOB,
+    dwMagic : UInt32,
+    cbKey : UInt32
+
+  @[Extern]
+  record SSL_ECCKEY_BLOB,
+    dwCurveType : UInt32,
+    cbKey : UInt32
+
+  @[Extern]
+  record BCRYPT_ECCFULLKEY_BLOB,
+    dwMagic : UInt32,
+    dwVersion : UInt32,
+    dwCurveType : Win32cr::Security::Cryptography::ECC_CURVE_TYPE_ENUM,
+    dwCurveGenerationAlgId : Win32cr::Security::Cryptography::ECC_CURVE_ALG_ID_ENUM,
+    cbFieldLength : UInt32,
+    cbSubgroupOrder : UInt32,
+    cbCofactor : UInt32,
+    cbSeed : UInt32
+
+  @[Extern]
+  record BCRYPT_DH_KEY_BLOB,
+    dwMagic : Win32cr::Security::Cryptography::BCRYPT_DH_KEY_BLOB_MAGIC,
+    cbKey : UInt32
+
+  @[Extern]
+  record BCRYPT_DH_PARAMETER_HEADER,
+    cbLength : UInt32,
+    dwMagic : UInt32,
+    cbKeyLength : UInt32
+
+  @[Extern]
+  record BCRYPT_DSA_KEY_BLOB,
+    dwMagic : Win32cr::Security::Cryptography::BCRYPT_DSA_MAGIC,
+    cbKey : UInt32,
+    count : UInt8[4],
+    seed : UInt8[20],
+    q : UInt8[20]
+
+  @[Extern]
+  record BCRYPT_DSA_KEY_BLOB_V2,
+    dwMagic : Win32cr::Security::Cryptography::BCRYPT_DSA_MAGIC,
+    cbKey : UInt32,
+    hashAlgorithm : Win32cr::Security::Cryptography::HASHALGORITHM_ENUM,
+    standardVersion : Win32cr::Security::Cryptography::DSAFIPSVERSION_ENUM,
+    cbSeedLength : UInt32,
+    cbGroupSize : UInt32,
+    count : UInt8[4]
+
+  @[Extern]
+  record BCRYPT_KEY_DATA_BLOB_HEADER,
+    dwMagic : UInt32,
+    dwVersion : UInt32,
+    cbKeyData : UInt32
+
+  @[Extern]
+  record BCRYPT_DSA_PARAMETER_HEADER,
+    cbLength : UInt32,
+    dwMagic : UInt32,
+    cbKeyLength : UInt32,
+    count : UInt8[4],
+    seed : UInt8[20],
+    q : UInt8[20]
+
+  @[Extern]
+  record BCRYPT_DSA_PARAMETER_HEADER_V2,
+    cbLength : UInt32,
+    dwMagic : UInt32,
+    cbKeyLength : UInt32,
+    hashAlgorithm : Win32cr::Security::Cryptography::HASHALGORITHM_ENUM,
+    standardVersion : Win32cr::Security::Cryptography::DSAFIPSVERSION_ENUM,
+    cbSeedLength : UInt32,
+    cbGroupSize : UInt32,
+    count : UInt8[4]
+
+  @[Extern]
+  record BCRYPT_ECC_CURVE_NAMES,
+    dwEccCurveNames : UInt32,
+    pEccCurveNames : Win32cr::Foundation::PWSTR*
+
+  @[Extern]
+  record BCRYPT_MULTI_HASH_OPERATION,
+    iHash : UInt32,
+    hashOperation : Win32cr::Security::Cryptography::BCRYPT_HASH_OPERATION_TYPE,
+    pbBuffer : UInt8*,
+    cbBuffer : UInt32
+
+  @[Extern]
+  record BCRYPT_MULTI_OBJECT_LENGTH_STRUCT,
+    cbPerObject : UInt32,
+    cbPerElement : UInt32
+
+  @[Extern]
+  record BCRYPT_ALGORITHM_IDENTIFIER,
+    pszName : Win32cr::Foundation::PWSTR,
+    dwClass : UInt32,
+    dwFlags : UInt32
+
+  @[Extern]
+  record BCRYPT_PROVIDER_NAME,
+    pszProviderName : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record BCRYPT_INTERFACE_VERSION,
+    major_version : UInt16,
     minor_version : UInt16
-  end
-  struct CRYPT_INTERFACE_REG
-    dw_interface : BCRYPT_INTERFACE
-    dw_flags : BCRYPT_TABLE
-    c_functions : UInt32
-    rgpsz_functions : LibC::LPWSTR*
-  end
-  struct CRYPT_IMAGE_REG
-    psz_image : LibC::LPWSTR
-    c_interfaces : UInt32
-    rgp_interfaces : CRYPT_INTERFACE_REG**
-  end
-  struct CRYPT_PROVIDER_REG
-    c_aliases : UInt32
-    rgpsz_aliases : LibC::LPWSTR*
-    p_um : CRYPT_IMAGE_REG*
-    p_km : CRYPT_IMAGE_REG*
-  end
-  struct CRYPT_PROVIDERS
-    c_providers : UInt32
-    rgpsz_providers : LibC::LPWSTR*
-  end
-  struct CRYPT_CONTEXT_CONFIG
-    dw_flags : CRYPT_CONTEXT_CONFIG_FLAGS
-    dw_reserved : UInt32
-  end
-  struct CRYPT_CONTEXT_FUNCTION_CONFIG
-    dw_flags : UInt32
-    dw_reserved : UInt32
-  end
-  struct CRYPT_CONTEXTS
-    c_contexts : UInt32
-    rgpsz_contexts : LibC::LPWSTR*
-  end
-  struct CRYPT_CONTEXT_FUNCTIONS
-    c_functions : UInt32
-    rgpsz_functions : LibC::LPWSTR*
-  end
-  struct CRYPT_CONTEXT_FUNCTION_PROVIDERS
-    c_providers : UInt32
-    rgpsz_providers : LibC::LPWSTR*
-  end
-  struct CRYPT_PROPERTY_REF
-    psz_property : LibC::LPWSTR
-    cb_value : UInt32
-    pb_value : UInt8*
-  end
-  struct CRYPT_IMAGE_REF
-    psz_image : LibC::LPWSTR
-    dw_flags : CRYPT_IMAGE_REF_FLAGS
-  end
-  struct CRYPT_PROVIDER_REF
-    dw_interface : UInt32
-    psz_function : LibC::LPWSTR
-    psz_provider : LibC::LPWSTR
-    c_properties : UInt32
-    rgp_properties : CRYPT_PROPERTY_REF**
-    p_um : CRYPT_IMAGE_REF*
-    p_km : CRYPT_IMAGE_REF*
-  end
-  struct CRYPT_PROVIDER_REFS
-    c_providers : UInt32
-    rgp_providers : CRYPT_PROVIDER_REF**
-  end
-  struct NCRYPT_ALLOC_PARA
-    cb_size : UInt32
-    pfn_alloc : PFN_NCRYPT_ALLOC
-    pfn_free : PFN_NCRYPT_FREE
-  end
-  struct NCRYPT_CIPHER_PADDING_INFO
-    cb_size : UInt32
-    dw_flags : UInt32
-    pb_iv : UInt8*
-    cb_iv : UInt32
-    pb_other_info : UInt8*
-    cb_other_info : UInt32
-  end
-  struct NCRYPT_PLATFORM_ATTEST_PADDING_INFO
-    magic : UInt32
-    pcr_mask : UInt32
-  end
-  struct NCRYPT_KEY_ATTEST_PADDING_INFO
-    magic : UInt32
-    pb_key_blob : UInt8*
-    cb_key_blob : UInt32
-    pb_key_auth : UInt8*
-    cb_key_auth : UInt32
-  end
-  struct NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES
-    version : UInt32
-    flags : UInt32
-    cb_public_key_blob : UInt32
-  end
-  struct NCRYPT_VSM_KEY_ATTESTATION_STATEMENT
-    magic : UInt32
-    version : UInt32
-    cb_signature : UInt32
-    cb_report : UInt32
-    cb_attributes : UInt32
-  end
-  struct NCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS
-    version : UInt32
-    trustlet_id : UInt64
-    min_svn : UInt32
-    flags_mask : UInt32
-    flags_expected : UInt32
+
+  @[Extern]
+  record CRYPT_INTERFACE_REG,
+    dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE,
+    dwFlags : Win32cr::Security::Cryptography::BCRYPT_TABLE,
+    cFunctions : UInt32,
+    rgpszFunctions : Win32cr::Foundation::PWSTR*
+
+  @[Extern]
+  record CRYPT_IMAGE_REG,
+    pszImage : Win32cr::Foundation::PWSTR,
+    cInterfaces : UInt32,
+    rgpInterfaces : Win32cr::Security::Cryptography::CRYPT_INTERFACE_REG**
+
+  @[Extern]
+  record CRYPT_PROVIDER_REG,
+    cAliases : UInt32,
+    rgpszAliases : Win32cr::Foundation::PWSTR*,
+    pUM : Win32cr::Security::Cryptography::CRYPT_IMAGE_REG*,
+    pKM : Win32cr::Security::Cryptography::CRYPT_IMAGE_REG*
+
+  @[Extern]
+  record CRYPT_PROVIDERS,
+    cProviders : UInt32,
+    rgpszProviders : Win32cr::Foundation::PWSTR*
+
+  @[Extern]
+  record CRYPT_CONTEXT_CONFIG,
+    dwFlags : Win32cr::Security::Cryptography::CRYPT_CONTEXT_CONFIG_FLAGS,
+    dwReserved : UInt32
+
+  @[Extern]
+  record CRYPT_CONTEXT_FUNCTION_CONFIG,
+    dwFlags : UInt32,
+    dwReserved : UInt32
+
+  @[Extern]
+  record CRYPT_CONTEXTS,
+    cContexts : UInt32,
+    rgpszContexts : Win32cr::Foundation::PWSTR*
+
+  @[Extern]
+  record CRYPT_CONTEXT_FUNCTIONS,
+    cFunctions : UInt32,
+    rgpszFunctions : Win32cr::Foundation::PWSTR*
+
+  @[Extern]
+  record CRYPT_CONTEXT_FUNCTION_PROVIDERS,
+    cProviders : UInt32,
+    rgpszProviders : Win32cr::Foundation::PWSTR*
+
+  @[Extern]
+  record CRYPT_PROPERTY_REF,
+    pszProperty : Win32cr::Foundation::PWSTR,
+    cbValue : UInt32,
+    pbValue : UInt8*
+
+  @[Extern]
+  record CRYPT_IMAGE_REF,
+    pszImage : Win32cr::Foundation::PWSTR,
+    dwFlags : Win32cr::Security::Cryptography::CRYPT_IMAGE_REF_FLAGS
+
+  @[Extern]
+  record CRYPT_PROVIDER_REF,
+    dwInterface : UInt32,
+    pszFunction : Win32cr::Foundation::PWSTR,
+    pszProvider : Win32cr::Foundation::PWSTR,
+    cProperties : UInt32,
+    rgpProperties : Win32cr::Security::Cryptography::CRYPT_PROPERTY_REF**,
+    pUM : Win32cr::Security::Cryptography::CRYPT_IMAGE_REF*,
+    pKM : Win32cr::Security::Cryptography::CRYPT_IMAGE_REF*
+
+  @[Extern]
+  record CRYPT_PROVIDER_REFS,
+    cProviders : UInt32,
+    rgpProviders : Win32cr::Security::Cryptography::CRYPT_PROVIDER_REF**
+
+  @[Extern]
+  record NCRYPT_ALLOC_PARA,
+    cbSize : UInt32,
+    pfnAlloc : Win32cr::Security::Cryptography::PFN_NCRYPT_ALLOC,
+    pfnFree : Win32cr::Security::Cryptography::PFN_NCRYPT_FREE
+
+  @[Extern]
+  record NCRYPT_CIPHER_PADDING_INFO,
+    cbSize : UInt32,
+    dwFlags : UInt32,
+    pbIV : UInt8*,
+    cbIV : UInt32,
+    pbOtherInfo : UInt8*,
+    cbOtherInfo : UInt32
+
+  @[Extern]
+  record NCRYPT_PLATFORM_ATTEST_PADDING_INFO,
+    magic : UInt32,
+    pcrMask : UInt32
+
+  @[Extern]
+  record NCRYPT_KEY_ATTEST_PADDING_INFO,
+    magic : UInt32,
+    pbKeyBlob : UInt8*,
+    cbKeyBlob : UInt32,
+    pbKeyAuth : UInt8*,
+    cbKeyAuth : UInt32
+
+  @[Extern]
+  record NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES,
+    version : UInt32,
+    flags : UInt32,
+    cbPublicKeyBlob : UInt32
+
+  @[Extern]
+  record NCRYPT_VSM_KEY_ATTESTATION_STATEMENT,
+    magic : UInt32,
+    version : UInt32,
+    cbSignature : UInt32,
+    cbReport : UInt32,
+    cbAttributes : UInt32
+
+  @[Extern]
+  record NCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS,
+    version : UInt32,
+    trustlet_id : UInt64,
+    min_svn : UInt32,
+    flags_mask : UInt32,
+    flags_expected : UInt32,
     _bitfield : UInt32
-  end
-  struct NCRYPT_EXPORTED_ISOLATED_KEY_HEADER
-    version : UInt32
-    key_usage : UInt32
-    _bitfield : UInt32
-    cb_alg_name : UInt32
-    cb_nonce : UInt32
-    cb_auth_tag : UInt32
-    cb_wrapping_key : UInt32
-    cb_isolated_key : UInt32
-  end
-  struct NCRYPT_EXPORTED_ISOLATED_KEY_ENVELOPE
-    header : NCRYPT_EXPORTED_ISOLATED_KEY_HEADER
-  end
-  struct NCRYPT_PCP_TPM_WEB_AUTHN_ATTESTATION_STATEMENT
-    magic : UInt32
-    version : UInt32
-    header_size : UInt32
-    cb_certify_info : UInt32
-    cb_signature : UInt32
-    cb_tpm_public : UInt32
-  end
-  struct NCRYPT_TPM_PLATFORM_ATTESTATION_STATEMENT
-    magic : UInt32
-    version : UInt32
-    pcr_alg : UInt32
-    cb_signature : UInt32
-    cb_quote : UInt32
-    cb_pcrs : UInt32
-  end
-  struct NCryptAlgorithmName
-    psz_name : LibC::LPWSTR
-    dw_class : NCRYPT_ALGORITHM_NAME_CLASS
-    dw_alg_operations : NCRYPT_OPERATION
-    dw_flags : UInt32
-  end
-  struct NCryptKeyName
-    psz_name : LibC::LPWSTR
-    psz_algid : LibC::LPWSTR
-    dw_legacy_key_spec : CERT_KEY_SPEC
-    dw_flags : UInt32
-  end
-  struct NCryptProviderName
-    psz_name : LibC::LPWSTR
-    psz_comment : LibC::LPWSTR
-  end
-  struct NCRYPT_UI_POLICY
-    dw_version : UInt32
-    dw_flags : UInt32
-    psz_creation_title : LibC::LPWSTR
-    psz_friendly_name : LibC::LPWSTR
-    psz_description : LibC::LPWSTR
-  end
-  struct NCRYPT_KEY_ACCESS_POLICY_BLOB
-    dw_version : UInt32
-    dw_policy_flags : UInt32
-    cb_user_sid : UInt32
-    cb_application_sid : UInt32
-  end
-  struct NCRYPT_SUPPORTED_LENGTHS
-    dw_min_length : UInt32
-    dw_max_length : UInt32
-    dw_increment : UInt32
-    dw_default_length : UInt32
-  end
-  struct NCRYPT_PCP_HMAC_AUTH_SIGNATURE_INFO
-    dw_version : UInt32
-    i_expiration : Int32
-    pab_nonce : UInt8[32]*
-    pab_policy_ref : UInt8[32]*
-    pab_hmac : UInt8[32]*
-  end
-  struct NCRYPT_PCP_TPM_FW_VERSION_INFO
-    major1 : UInt16
-    major2 : UInt16
-    minor1 : UInt16
+
+  @[Extern]
+  record NCRYPT_EXPORTED_ISOLATED_KEY_HEADER,
+    version : UInt32,
+    key_usage : UInt32,
+    _bitfield : UInt32,
+    cbAlgName : UInt32,
+    cbNonce : UInt32,
+    cbAuthTag : UInt32,
+    cbWrappingKey : UInt32,
+    cbIsolatedKey : UInt32
+
+  @[Extern]
+  record NCRYPT_EXPORTED_ISOLATED_KEY_ENVELOPE,
+    header : Win32cr::Security::Cryptography::NCRYPT_EXPORTED_ISOLATED_KEY_HEADER
+
+  @[Extern]
+  record NCRYPT_PCP_TPM_WEB_AUTHN_ATTESTATION_STATEMENT,
+    magic : UInt32,
+    version : UInt32,
+    header_size : UInt32,
+    cbCertifyInfo : UInt32,
+    cbSignature : UInt32,
+    cbTpmPublic : UInt32
+
+  @[Extern]
+  record NCRYPT_TPM_PLATFORM_ATTESTATION_STATEMENT,
+    magic : UInt32,
+    version : UInt32,
+    pcrAlg : UInt32,
+    cbSignature : UInt32,
+    cbQuote : UInt32,
+    cbPcrs : UInt32
+
+  @[Extern]
+  record NCryptAlgorithmName,
+    pszName : Win32cr::Foundation::PWSTR,
+    dwClass : Win32cr::Security::Cryptography::NCRYPT_ALGORITHM_NAME_CLASS,
+    dwAlgOperations : Win32cr::Security::Cryptography::NCRYPT_OPERATION,
+    dwFlags : UInt32
+
+  @[Extern]
+  record NCryptKeyName,
+    pszName : Win32cr::Foundation::PWSTR,
+    pszAlgid : Win32cr::Foundation::PWSTR,
+    dwLegacyKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC,
+    dwFlags : UInt32
+
+  @[Extern]
+  record NCryptProviderName,
+    pszName : Win32cr::Foundation::PWSTR,
+    pszComment : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record NCRYPT_UI_POLICY,
+    dwVersion : UInt32,
+    dwFlags : UInt32,
+    pszCreationTitle : Win32cr::Foundation::PWSTR,
+    pszFriendlyName : Win32cr::Foundation::PWSTR,
+    pszDescription : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record NCRYPT_KEY_ACCESS_POLICY_BLOB,
+    dwVersion : UInt32,
+    dwPolicyFlags : UInt32,
+    cbUserSid : UInt32,
+    cbApplicationSid : UInt32
+
+  @[Extern]
+  record NCRYPT_SUPPORTED_LENGTHS,
+    dwMinLength : UInt32,
+    dwMaxLength : UInt32,
+    dwIncrement : UInt32,
+    dwDefaultLength : UInt32
+
+  @[Extern]
+  record NCRYPT_PCP_HMAC_AUTH_SIGNATURE_INFO,
+    dwVersion : UInt32,
+    iExpiration : Int32,
+    pabNonce : UInt8[32],
+    pabPolicyRef : UInt8[32],
+    pabHMAC : UInt8[32]
+
+  @[Extern]
+  record NCRYPT_PCP_TPM_FW_VERSION_INFO,
+    major1 : UInt16,
+    major2 : UInt16,
+    minor1 : UInt16,
     minor2 : UInt16
-  end
-  struct NCRYPT_PCP_RAW_POLICYDIGEST
-    dw_version : UInt32
-    cb_digest : UInt32
-  end
-  struct NCRYPT_KEY_BLOB_HEADER
-    cb_size : UInt32
-    dw_magic : UInt32
-    cb_alg_name : UInt32
-    cb_key_data : UInt32
-  end
-  struct NCRYPT_TPM_LOADABLE_KEY_BLOB_HEADER
-    magic : UInt32
-    cb_header : UInt32
-    cb_public : UInt32
-    cb_private : UInt32
-    cb_name : UInt32
-  end
-  struct CRYPT_BIT_BLOB
-    cb_data : UInt32
-    pb_data : UInt8*
-    c_unused_bits : UInt32
-  end
-  struct CRYPT_ALGORITHM_IDENTIFIER
-    psz_obj_id : PSTR
-    parameters : CRYPTOAPI_BLOB
-  end
-  struct CRYPT_OBJID_TABLE
-    dw_alg_id : UInt32
-    psz_obj_id : PSTR
-  end
-  struct CRYPT_HASH_INFO
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    hash : CRYPTOAPI_BLOB
-  end
-  struct CERT_EXTENSION
-    psz_obj_id : PSTR
-    f_critical : LibC::BOOL
-    value : CRYPTOAPI_BLOB
-  end
-  struct CRYPT_ATTRIBUTE_TYPE_VALUE
-    psz_obj_id : PSTR
-    value : CRYPTOAPI_BLOB
-  end
-  struct CRYPT_ATTRIBUTE
-    psz_obj_id : PSTR
-    c_value : UInt32
-    rg_value : CRYPTOAPI_BLOB*
-  end
-  struct CRYPT_ATTRIBUTES
-    c_attr : UInt32
-    rg_attr : CRYPT_ATTRIBUTE*
-  end
-  struct CERT_RDN_ATTR
-    psz_obj_id : PSTR
-    dw_value_type : CERT_RDN_ATTR_VALUE_TYPE
-    value : CRYPTOAPI_BLOB
-  end
-  struct CERT_RDN
-    c_rdn_attr : UInt32
-    rg_rdn_attr : CERT_RDN_ATTR*
-  end
-  struct CERT_NAME_INFO
-    c_rdn : UInt32
-    rg_rdn : CERT_RDN*
-  end
-  struct CERT_NAME_VALUE
-    dw_value_type : UInt32
-    value : CRYPTOAPI_BLOB
-  end
-  struct CERT_PUBLIC_KEY_INFO
-    algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    public_key : CRYPT_BIT_BLOB
-  end
-  struct CRYPT_ECC_PRIVATE_KEY_INFO
-    dw_version : UInt32
-    private_key : CRYPTOAPI_BLOB
-    sz_curve_oid : PSTR
-    public_key : CRYPT_BIT_BLOB
-  end
-  struct CRYPT_PRIVATE_KEY_INFO
-    version : UInt32
-    algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    private_key : CRYPTOAPI_BLOB
-    p_attributes : CRYPT_ATTRIBUTES*
-  end
-  struct CRYPT_ENCRYPTED_PRIVATE_KEY_INFO
-    encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    encrypted_private_key : CRYPTOAPI_BLOB
-  end
-  struct CRYPT_PKCS8_IMPORT_PARAMS
-    private_key : CRYPTOAPI_BLOB
-    p_resolveh_crypt_prov_func : PCRYPT_RESOLVE_HCRYPTPROV_FUNC
-    p_void_resolve_func : Void*
-    p_decrypt_private_key_func : PCRYPT_DECRYPT_PRIVATE_KEY_FUNC
-    p_void_decrypt_func : Void*
-  end
-  struct CRYPT_PKCS8_EXPORT_PARAMS
-    h_crypt_prov : LibC::UINT_PTR
-    dw_key_spec : UInt32
-    psz_private_key_obj_id : PSTR
-    p_encrypt_private_key_func : PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC
-    p_void_encrypt_func : Void*
-  end
-  struct CERT_INFO
-    dw_version : UInt32
-    serial_number : CRYPTOAPI_BLOB
-    signature_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    issuer : CRYPTOAPI_BLOB
-    not_before : FILETIME
-    not_after : FILETIME
-    subject : CRYPTOAPI_BLOB
-    subject_public_key_info : CERT_PUBLIC_KEY_INFO
-    issuer_unique_id : CRYPT_BIT_BLOB
-    subject_unique_id : CRYPT_BIT_BLOB
-    c_extension : UInt32
-    rg_extension : CERT_EXTENSION*
-  end
-  struct CRL_ENTRY
-    serial_number : CRYPTOAPI_BLOB
-    revocation_date : FILETIME
-    c_extension : UInt32
-    rg_extension : CERT_EXTENSION*
-  end
-  struct CRL_INFO
-    dw_version : UInt32
-    signature_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    issuer : CRYPTOAPI_BLOB
-    this_update : FILETIME
-    next_update : FILETIME
-    c_crl_entry : UInt32
-    rg_crl_entry : CRL_ENTRY*
-    c_extension : UInt32
-    rg_extension : CERT_EXTENSION*
-  end
-  struct CERT_OR_CRL_BLOB
-    dw_choice : UInt32
-    cb_encoded : UInt32
-    pb_encoded : UInt8*
-  end
-  struct CERT_OR_CRL_BUNDLE
-    c_item : UInt32
-    rg_item : CERT_OR_CRL_BLOB*
-  end
-  struct CERT_REQUEST_INFO
-    dw_version : UInt32
-    subject : CRYPTOAPI_BLOB
-    subject_public_key_info : CERT_PUBLIC_KEY_INFO
-    c_attribute : UInt32
-    rg_attribute : CRYPT_ATTRIBUTE*
-  end
-  struct CERT_KEYGEN_REQUEST_INFO
-    dw_version : UInt32
-    subject_public_key_info : CERT_PUBLIC_KEY_INFO
-    pwsz_challenge_string : LibC::LPWSTR
-  end
-  struct CERT_SIGNED_CONTENT_INFO
-    to_be_signed : CRYPTOAPI_BLOB
-    signature_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    signature : CRYPT_BIT_BLOB
-  end
-  struct CTL_USAGE
-    c_usage_identifier : UInt32
-    rgpsz_usage_identifier : PSTR*
-  end
-  struct CTL_ENTRY
-    subject_identifier : CRYPTOAPI_BLOB
-    c_attribute : UInt32
-    rg_attribute : CRYPT_ATTRIBUTE*
-  end
-  struct CTL_INFO
-    dw_version : UInt32
-    subject_usage : CTL_USAGE
-    list_identifier : CRYPTOAPI_BLOB
-    sequence_number : CRYPTOAPI_BLOB
-    this_update : FILETIME
-    next_update : FILETIME
-    subject_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    c_ctl_entry : UInt32
-    rg_ctl_entry : CTL_ENTRY*
-    c_extension : UInt32
-    rg_extension : CERT_EXTENSION*
-  end
-  struct CRYPT_TIME_STAMP_REQUEST_INFO
-    psz_time_stamp_algorithm : PSTR
-    psz_content_type : PSTR
-    content : CRYPTOAPI_BLOB
-    c_attribute : UInt32
-    rg_attribute : CRYPT_ATTRIBUTE*
-  end
-  struct CRYPT_ENROLLMENT_NAME_VALUE_PAIR
-    pwsz_name : LibC::LPWSTR
-    pwsz_value : LibC::LPWSTR
-  end
-  struct CRYPT_CSP_PROVIDER
-    dw_key_spec : UInt32
-    pwsz_provider_name : LibC::LPWSTR
-    signature : CRYPT_BIT_BLOB
-  end
-  struct CRYPT_ENCODE_PARA
-    cb_size : UInt32
-    pfn_alloc : PFN_CRYPT_ALLOC
-    pfn_free : PFN_CRYPT_FREE
-  end
-  struct CRYPT_DECODE_PARA
-    cb_size : UInt32
-    pfn_alloc : PFN_CRYPT_ALLOC
-    pfn_free : PFN_CRYPT_FREE
-  end
-  struct CERT_EXTENSIONS
-    c_extension : UInt32
-    rg_extension : CERT_EXTENSION*
-  end
-  struct CERT_AUTHORITY_KEY_ID_INFO
-    key_id : CRYPTOAPI_BLOB
-    cert_issuer : CRYPTOAPI_BLOB
-    cert_serial_number : CRYPTOAPI_BLOB
-  end
-  struct CERT_PRIVATE_KEY_VALIDITY
-    not_before : FILETIME
-    not_after : FILETIME
-  end
-  struct CERT_KEY_ATTRIBUTES_INFO
-    key_id : CRYPTOAPI_BLOB
-    intended_key_usage : CRYPT_BIT_BLOB
-    p_private_key_usage_period : CERT_PRIVATE_KEY_VALIDITY*
-  end
-  struct CERT_POLICY_ID
-    c_cert_policy_element_id : UInt32
-    rgpsz_cert_policy_element_id : PSTR*
-  end
-  struct CERT_KEY_USAGE_RESTRICTION_INFO
-    c_cert_policy_id : UInt32
-    rg_cert_policy_id : CERT_POLICY_ID*
-    restricted_key_usage : CRYPT_BIT_BLOB
-  end
-  struct CERT_OTHER_NAME
-    psz_obj_id : PSTR
-    value : CRYPTOAPI_BLOB
-  end
-  struct CERT_ALT_NAME_ENTRY
-    dw_alt_name_choice : UInt32
-    anonymous : CERT_ALT_NAME_ENTRY_Anonymous_e__Union
-  end
-  struct CERT_ALT_NAME_INFO
-    c_alt_entry : UInt32
-    rg_alt_entry : CERT_ALT_NAME_ENTRY*
-  end
-  struct CERT_BASIC_CONSTRAINTS_INFO
-    subject_type : CRYPT_BIT_BLOB
-    f_path_len_constraint : LibC::BOOL
-    dw_path_len_constraint : UInt32
-    c_subtrees_constraint : UInt32
-    rg_subtrees_constraint : CRYPTOAPI_BLOB*
-  end
-  struct CERT_BASIC_CONSTRAINTS2_INFO
-    f_ca : LibC::BOOL
-    f_path_len_constraint : LibC::BOOL
-    dw_path_len_constraint : UInt32
-  end
-  struct CERT_POLICY_QUALIFIER_INFO
-    psz_policy_qualifier_id : PSTR
-    qualifier : CRYPTOAPI_BLOB
-  end
-  struct CERT_POLICY_INFO
-    psz_policy_identifier : PSTR
-    c_policy_qualifier : UInt32
-    rg_policy_qualifier : CERT_POLICY_QUALIFIER_INFO*
-  end
-  struct CERT_POLICIES_INFO
-    c_policy_info : UInt32
-    rg_policy_info : CERT_POLICY_INFO*
-  end
-  struct CERT_POLICY_QUALIFIER_NOTICE_REFERENCE
-    psz_organization : PSTR
-    c_notice_numbers : UInt32
-    rg_notice_numbers : Int32*
-  end
-  struct CERT_POLICY_QUALIFIER_USER_NOTICE
-    p_notice_reference : CERT_POLICY_QUALIFIER_NOTICE_REFERENCE*
-    psz_display_text : LibC::LPWSTR
-  end
-  struct CPS_URLS
-    psz_url : LibC::LPWSTR
-    p_algorithm : CRYPT_ALGORITHM_IDENTIFIER*
-    p_digest : CRYPTOAPI_BLOB*
-  end
-  struct CERT_POLICY95_QUALIFIER1
-    psz_practices_reference : LibC::LPWSTR
-    psz_notice_identifier : PSTR
-    psz_nsi_notice_identifier : PSTR
-    c_cpsur_ls : UInt32
-    rg_cpsur_ls : CPS_URLS*
-  end
-  struct CERT_POLICY_MAPPING
-    psz_issuer_domain_policy : PSTR
-    psz_subject_domain_policy : PSTR
-  end
-  struct CERT_POLICY_MAPPINGS_INFO
-    c_policy_mapping : UInt32
-    rg_policy_mapping : CERT_POLICY_MAPPING*
-  end
-  struct CERT_POLICY_CONSTRAINTS_INFO
-    f_require_explicit_policy : LibC::BOOL
-    dw_require_explicit_policy_skip_certs : UInt32
-    f_inhibit_policy_mapping : LibC::BOOL
-    dw_inhibit_policy_mapping_skip_certs : UInt32
-  end
-  struct CRYPT_CONTENT_INFO_SEQUENCE_OF_ANY
-    psz_obj_id : PSTR
-    c_value : UInt32
-    rg_value : CRYPTOAPI_BLOB*
-  end
-  struct CRYPT_CONTENT_INFO
-    psz_obj_id : PSTR
-    content : CRYPTOAPI_BLOB
-  end
-  struct CRYPT_SEQUENCE_OF_ANY
-    c_value : UInt32
-    rg_value : CRYPTOAPI_BLOB*
-  end
-  struct CERT_AUTHORITY_KEY_ID2_INFO
-    key_id : CRYPTOAPI_BLOB
-    authority_cert_issuer : CERT_ALT_NAME_INFO
-    authority_cert_serial_number : CRYPTOAPI_BLOB
-  end
-  struct CERT_ACCESS_DESCRIPTION
-    psz_access_method : PSTR
-    access_location : CERT_ALT_NAME_ENTRY
-  end
-  struct CERT_AUTHORITY_INFO_ACCESS
-    c_acc_descr : UInt32
-    rg_acc_descr : CERT_ACCESS_DESCRIPTION*
-  end
-  struct CRL_DIST_POINT_NAME
-    dw_dist_point_name_choice : UInt32
-    anonymous : CRL_DIST_POINT_NAME_Anonymous_e__Union
-  end
-  struct CRL_DIST_POINT
-    dist_point_name : CRL_DIST_POINT_NAME
-    reason_flags : CRYPT_BIT_BLOB
-    crl_issuer : CERT_ALT_NAME_INFO
-  end
-  struct CRL_DIST_POINTS_INFO
-    c_dist_point : UInt32
-    rg_dist_point : CRL_DIST_POINT*
-  end
-  struct CROSS_CERT_DIST_POINTS_INFO
-    dw_sync_delta_time : UInt32
-    c_dist_point : UInt32
-    rg_dist_point : CERT_ALT_NAME_INFO*
-  end
-  struct CERT_PAIR
-    forward : CRYPTOAPI_BLOB
-    reverse : CRYPTOAPI_BLOB
-  end
-  struct CRL_ISSUING_DIST_POINT
-    dist_point_name : CRL_DIST_POINT_NAME
-    f_only_contains_user_certs : LibC::BOOL
-    f_only_contains_ca_certs : LibC::BOOL
-    only_some_reason_flags : CRYPT_BIT_BLOB
-    f_indirect_crl : LibC::BOOL
-  end
-  struct CERT_GENERAL_SUBTREE
-    base : CERT_ALT_NAME_ENTRY
-    dw_minimum : UInt32
-    f_maximum : LibC::BOOL
-    dw_maximum : UInt32
-  end
-  struct CERT_NAME_CONSTRAINTS_INFO
-    c_permitted_subtree : UInt32
-    rg_permitted_subtree : CERT_GENERAL_SUBTREE*
-    c_excluded_subtree : UInt32
-    rg_excluded_subtree : CERT_GENERAL_SUBTREE*
-  end
-  struct CERT_DSS_PARAMETERS
-    p : CRYPTOAPI_BLOB
-    q : CRYPTOAPI_BLOB
-    g : CRYPTOAPI_BLOB
-  end
-  struct CERT_DH_PARAMETERS
-    p : CRYPTOAPI_BLOB
-    g : CRYPTOAPI_BLOB
-  end
-  struct CERT_ECC_SIGNATURE
-    r : CRYPTOAPI_BLOB
-    s : CRYPTOAPI_BLOB
-  end
-  struct CERT_X942_DH_VALIDATION_PARAMS
-    seed : CRYPT_BIT_BLOB
-    pgen_counter : UInt32
-  end
-  struct CERT_X942_DH_PARAMETERS
-    p : CRYPTOAPI_BLOB
-    g : CRYPTOAPI_BLOB
-    q : CRYPTOAPI_BLOB
-    j : CRYPTOAPI_BLOB
-    p_validation_params : CERT_X942_DH_VALIDATION_PARAMS*
-  end
-  struct CRYPT_X942_OTHER_INFO
-    psz_content_encryption_obj_id : PSTR
-    rgb_counter : UInt8[4]*
-    rgb_key_length : UInt8[4]*
-    pub_info : CRYPTOAPI_BLOB
-  end
-  struct CRYPT_ECC_CMS_SHARED_INFO
-    algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    entity_u_info : CRYPTOAPI_BLOB
-    rgb_supp_pub_info : UInt8[4]*
-  end
-  struct CRYPT_RC2_CBC_PARAMETERS
-    dw_version : UInt32
-    f_iv : LibC::BOOL
-    rgb_iv : UInt8[8]*
-  end
-  struct CRYPT_SMIME_CAPABILITY
-    psz_obj_id : PSTR
-    parameters : CRYPTOAPI_BLOB
-  end
-  struct CRYPT_SMIME_CAPABILITIES
-    c_capability : UInt32
-    rg_capability : CRYPT_SMIME_CAPABILITY*
-  end
-  struct CERT_QC_STATEMENT
-    psz_statement_id : PSTR
-    statement_info : CRYPTOAPI_BLOB
-  end
-  struct CERT_QC_STATEMENTS_EXT_INFO
-    c_statement : UInt32
-    rg_statement : CERT_QC_STATEMENT*
-  end
-  struct CRYPT_MASK_GEN_ALGORITHM
-    psz_obj_id : PSTR
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-  end
-  struct CRYPT_RSA_SSA_PSS_PARAMETERS
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    mask_gen_algorithm : CRYPT_MASK_GEN_ALGORITHM
-    dw_salt_length : UInt32
-    dw_trailer_field : UInt32
-  end
-  struct CRYPT_PSOURCE_ALGORITHM
-    psz_obj_id : PSTR
-    encoding_parameters : CRYPTOAPI_BLOB
-  end
-  struct CRYPT_RSAES_OAEP_PARAMETERS
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    mask_gen_algorithm : CRYPT_MASK_GEN_ALGORITHM
-    p_source_algorithm : CRYPT_PSOURCE_ALGORITHM
-  end
-  struct CMC_TAGGED_ATTRIBUTE
-    dw_body_part_id : UInt32
-    attribute : CRYPT_ATTRIBUTE
-  end
-  struct CMC_TAGGED_CERT_REQUEST
-    dw_body_part_id : UInt32
-    signed_cert_request : CRYPTOAPI_BLOB
-  end
-  struct CMC_TAGGED_REQUEST
-    dw_tagged_request_choice : UInt32
-    anonymous : CMC_TAGGED_REQUEST_Anonymous_e__Union
-  end
-  struct CMC_TAGGED_CONTENT_INFO
-    dw_body_part_id : UInt32
-    encoded_content_info : CRYPTOAPI_BLOB
-  end
-  struct CMC_TAGGED_OTHER_MSG
-    dw_body_part_id : UInt32
-    psz_obj_id : PSTR
-    value : CRYPTOAPI_BLOB
-  end
-  struct CMC_DATA_INFO
-    c_tagged_attribute : UInt32
-    rg_tagged_attribute : CMC_TAGGED_ATTRIBUTE*
-    c_tagged_request : UInt32
-    rg_tagged_request : CMC_TAGGED_REQUEST*
-    c_tagged_content_info : UInt32
-    rg_tagged_content_info : CMC_TAGGED_CONTENT_INFO*
-    c_tagged_other_msg : UInt32
-    rg_tagged_other_msg : CMC_TAGGED_OTHER_MSG*
-  end
-  struct CMC_RESPONSE_INFO
-    c_tagged_attribute : UInt32
-    rg_tagged_attribute : CMC_TAGGED_ATTRIBUTE*
-    c_tagged_content_info : UInt32
-    rg_tagged_content_info : CMC_TAGGED_CONTENT_INFO*
-    c_tagged_other_msg : UInt32
-    rg_tagged_other_msg : CMC_TAGGED_OTHER_MSG*
-  end
-  struct CMC_PEND_INFO
-    pend_token : CRYPTOAPI_BLOB
-    pend_time : FILETIME
-  end
-  struct CMC_STATUS_INFO
-    dw_status : UInt32
-    c_body_list : UInt32
-    rgdw_body_list : UInt32*
-    pwsz_status_string : LibC::LPWSTR
-    dw_other_info_choice : UInt32
-    anonymous : CMC_STATUS_INFO_Anonymous_e__Union
-  end
-  struct CMC_ADD_EXTENSIONS_INFO
-    dw_cmc_data_reference : UInt32
-    c_cert_reference : UInt32
-    rgdw_cert_reference : UInt32*
-    c_extension : UInt32
-    rg_extension : CERT_EXTENSION*
-  end
-  struct CMC_ADD_ATTRIBUTES_INFO
-    dw_cmc_data_reference : UInt32
-    c_cert_reference : UInt32
-    rgdw_cert_reference : UInt32*
-    c_attribute : UInt32
-    rg_attribute : CRYPT_ATTRIBUTE*
-  end
-  struct CERT_TEMPLATE_EXT
-    psz_obj_id : PSTR
-    dw_major_version : UInt32
-    f_minor_version : LibC::BOOL
-    dw_minor_version : UInt32
-  end
-  struct CERT_HASHED_URL
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    hash : CRYPTOAPI_BLOB
-    pwsz_url : LibC::LPWSTR
-  end
-  struct CERT_LOGOTYPE_DETAILS
-    pwsz_mime_type : LibC::LPWSTR
-    c_hashed_url : UInt32
-    rg_hashed_url : CERT_HASHED_URL*
-  end
-  struct CERT_LOGOTYPE_REFERENCE
-    c_hashed_url : UInt32
-    rg_hashed_url : CERT_HASHED_URL*
-  end
-  struct CERT_LOGOTYPE_IMAGE_INFO
-    dw_logotype_image_info_choice : CERT_LOGOTYPE_IMAGE_INFO_TYPE
-    dw_file_size : UInt32
-    dw_x_size : UInt32
-    dw_y_size : UInt32
-    dw_logotype_image_resolution_choice : CERT_LOGOTYPE_CHOICE
-    anonymous : CERT_LOGOTYPE_IMAGE_INFO_Anonymous_e__Union
-    pwsz_language : LibC::LPWSTR
-  end
-  struct CERT_LOGOTYPE_IMAGE
-    logotype_details : CERT_LOGOTYPE_DETAILS
-    p_logotype_image_info : CERT_LOGOTYPE_IMAGE_INFO*
-  end
-  struct CERT_LOGOTYPE_AUDIO_INFO
-    dw_file_size : UInt32
-    dw_play_time : UInt32
-    dw_channels : UInt32
-    dw_sample_rate : UInt32
-    pwsz_language : LibC::LPWSTR
-  end
-  struct CERT_LOGOTYPE_AUDIO
-    logotype_details : CERT_LOGOTYPE_DETAILS
-    p_logotype_audio_info : CERT_LOGOTYPE_AUDIO_INFO*
-  end
-  struct CERT_LOGOTYPE_DATA
-    c_logotype_image : UInt32
-    rg_logotype_image : CERT_LOGOTYPE_IMAGE*
-    c_logotype_audio : UInt32
-    rg_logotype_audio : CERT_LOGOTYPE_AUDIO*
-  end
-  struct CERT_LOGOTYPE_INFO
-    dw_logotype_info_choice : CERT_LOGOTYPE_OPTION
-    anonymous : CERT_LOGOTYPE_INFO_Anonymous_e__Union
-  end
-  struct CERT_OTHER_LOGOTYPE_INFO
-    psz_obj_id : PSTR
-    logotype_info : CERT_LOGOTYPE_INFO
-  end
-  struct CERT_LOGOTYPE_EXT_INFO
-    c_community_logo : UInt32
-    rg_community_logo : CERT_LOGOTYPE_INFO*
-    p_issuer_logo : CERT_LOGOTYPE_INFO*
-    p_subject_logo : CERT_LOGOTYPE_INFO*
-    c_other_logo : UInt32
-    rg_other_logo : CERT_OTHER_LOGOTYPE_INFO*
-  end
-  struct CERT_BIOMETRIC_DATA
-    dw_type_of_biometric_data_choice : CERT_BIOMETRIC_DATA_TYPE
-    anonymous : CERT_BIOMETRIC_DATA_Anonymous_e__Union
-    hashed_url : CERT_HASHED_URL
-  end
-  struct CERT_BIOMETRIC_EXT_INFO
-    c_biometric_data : UInt32
-    rg_biometric_data : CERT_BIOMETRIC_DATA*
-  end
-  struct OCSP_SIGNATURE_INFO
-    signature_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    signature : CRYPT_BIT_BLOB
-    c_cert_encoded : UInt32
-    rg_cert_encoded : CRYPTOAPI_BLOB*
-  end
-  struct OCSP_SIGNED_REQUEST_INFO
-    to_be_signed : CRYPTOAPI_BLOB
-    p_optional_signature_info : OCSP_SIGNATURE_INFO*
-  end
-  struct OCSP_CERT_ID
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    issuer_name_hash : CRYPTOAPI_BLOB
-    issuer_key_hash : CRYPTOAPI_BLOB
-    serial_number : CRYPTOAPI_BLOB
-  end
-  struct OCSP_REQUEST_ENTRY
-    cert_id : OCSP_CERT_ID
-    c_extension : UInt32
-    rg_extension : CERT_EXTENSION*
-  end
-  struct OCSP_REQUEST_INFO
-    dw_version : UInt32
-    p_requestor_name : CERT_ALT_NAME_ENTRY*
-    c_request_entry : UInt32
-    rg_request_entry : OCSP_REQUEST_ENTRY*
-    c_extension : UInt32
-    rg_extension : CERT_EXTENSION*
-  end
-  struct OCSP_RESPONSE_INFO
-    dw_status : UInt32
-    psz_obj_id : PSTR
-    value : CRYPTOAPI_BLOB
-  end
-  struct OCSP_BASIC_SIGNED_RESPONSE_INFO
-    to_be_signed : CRYPTOAPI_BLOB
-    signature_info : OCSP_SIGNATURE_INFO
-  end
-  struct OCSP_BASIC_REVOKED_INFO
-    revocation_date : FILETIME
-    dw_crl_reason_code : CERT_REVOCATION_STATUS_REASON
-  end
-  struct OCSP_BASIC_RESPONSE_ENTRY
-    cert_id : OCSP_CERT_ID
-    dw_cert_status : UInt32
-    anonymous : OCSP_BASIC_RESPONSE_ENTRY_Anonymous_e__Union
-    this_update : FILETIME
-    next_update : FILETIME
-    c_extension : UInt32
-    rg_extension : CERT_EXTENSION*
-  end
-  struct OCSP_BASIC_RESPONSE_INFO
-    dw_version : UInt32
-    dw_responder_id_choice : UInt32
-    anonymous : OCSP_BASIC_RESPONSE_INFO_Anonymous_e__Union
-    produced_at : FILETIME
-    c_response_entry : UInt32
-    rg_response_entry : OCSP_BASIC_RESPONSE_ENTRY*
-    c_extension : UInt32
-    rg_extension : CERT_EXTENSION*
-  end
-  struct CERT_SUPPORTED_ALGORITHM_INFO
-    algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    intended_key_usage : CRYPT_BIT_BLOB
-    intended_cert_policies : CERT_POLICIES_INFO
-  end
-  struct CERT_TPM_SPECIFICATION_INFO
-    pwsz_family : LibC::LPWSTR
-    dw_level : UInt32
-    dw_revision : UInt32
-  end
-  struct CRYPT_OID_FUNC_ENTRY
-    psz_oid : PSTR
-    pv_func_addr : Void*
-  end
-  struct CRYPT_OID_INFO
-    cb_size : UInt32
-    psz_oid : PSTR
-    pwsz_name : LibC::LPWSTR
-    dw_group_id : UInt32
-    anonymous : CRYPT_OID_INFO_Anonymous_e__Union
-    extra_info : CRYPTOAPI_BLOB
-  end
-  struct CERT_STRONG_SIGN_SERIALIZED_INFO
-    dw_flags : CERT_STRONG_SIGN_FLAGS
-    pwsz_cng_sign_hash_algids : LibC::LPWSTR
-    pwsz_cng_pub_key_min_bit_lengths : LibC::LPWSTR
-  end
-  struct CERT_STRONG_SIGN_PARA
-    cb_size : UInt32
-    dw_info_choice : UInt32
-    anonymous : CERT_STRONG_SIGN_PARA_Anonymous_e__Union
-  end
-  struct CERT_ISSUER_SERIAL_NUMBER
-    issuer : CRYPTOAPI_BLOB
-    serial_number : CRYPTOAPI_BLOB
-  end
-  struct CERT_ID
-    dw_id_choice : CERT_ID_OPTION
-    anonymous : CERT_ID_Anonymous_e__Union
-  end
-  struct CMSG_SIGNER_ENCODE_INFO
-    cb_size : UInt32
-    p_cert_info : CERT_INFO*
-    anonymous : CMSG_SIGNER_ENCODE_INFO_Anonymous_e__Union
-    dw_key_spec : UInt32
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pv_hash_aux_info : Void*
-    c_auth_attr : UInt32
-    rg_auth_attr : CRYPT_ATTRIBUTE*
-    c_unauth_attr : UInt32
-    rg_unauth_attr : CRYPT_ATTRIBUTE*
-  end
-  struct CMSG_SIGNED_ENCODE_INFO
-    cb_size : UInt32
-    c_signers : UInt32
-    rg_signers : CMSG_SIGNER_ENCODE_INFO*
-    c_cert_encoded : UInt32
-    rg_cert_encoded : CRYPTOAPI_BLOB*
-    c_crl_encoded : UInt32
-    rg_crl_encoded : CRYPTOAPI_BLOB*
-  end
-  struct CMSG_ENVELOPED_ENCODE_INFO
-    cb_size : UInt32
-    h_crypt_prov : LibC::UINT_PTR
-    content_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pv_encryption_aux_info : Void*
-    c_recipients : UInt32
-    rgp_recipients : CERT_INFO**
-  end
-  struct CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO
-    cb_size : UInt32
-    key_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pv_key_encryption_aux_info : Void*
-    h_crypt_prov : LibC::UINT_PTR
-    recipient_public_key : CRYPT_BIT_BLOB
-    recipient_id : CERT_ID
-  end
-  struct CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO
-    cb_size : UInt32
-    recipient_public_key : CRYPT_BIT_BLOB
-    recipient_id : CERT_ID
-    date : FILETIME
-    p_other_attr : CRYPT_ATTRIBUTE_TYPE_VALUE*
-  end
-  struct CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO
-    cb_size : UInt32
-    key_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pv_key_encryption_aux_info : Void*
-    key_wrap_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pv_key_wrap_aux_info : Void*
-    h_crypt_prov : LibC::UINT_PTR
-    dw_key_spec : UInt32
-    dw_key_choice : CMSG_KEY_AGREE_OPTION
-    anonymous : CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
-    user_keying_material : CRYPTOAPI_BLOB
-    c_recipient_encrypted_keys : UInt32
-    rgp_recipient_encrypted_keys : CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO**
-  end
-  struct CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO
-    cb_size : UInt32
-    key_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pv_key_encryption_aux_info : Void*
-    h_crypt_prov : LibC::UINT_PTR
-    dw_key_choice : UInt32
-    anonymous : CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
-    key_id : CRYPTOAPI_BLOB
-    date : FILETIME
-    p_other_attr : CRYPT_ATTRIBUTE_TYPE_VALUE*
-  end
-  struct CMSG_RECIPIENT_ENCODE_INFO
-    dw_recipient_choice : UInt32
-    anonymous : CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union
-  end
-  struct CMSG_RC2_AUX_INFO
-    cb_size : UInt32
-    dw_bit_len : UInt32
-  end
-  struct CMSG_SP3_COMPATIBLE_AUX_INFO
-    cb_size : UInt32
-    dw_flags : UInt32
-  end
-  struct CMSG_RC4_AUX_INFO
-    cb_size : UInt32
-    dw_bit_len : UInt32
-  end
-  struct CMSG_SIGNED_AND_ENVELOPED_ENCODE_INFO
-    cb_size : UInt32
-    signed_info : CMSG_SIGNED_ENCODE_INFO
-    enveloped_info : CMSG_ENVELOPED_ENCODE_INFO
-  end
-  struct CMSG_HASHED_ENCODE_INFO
-    cb_size : UInt32
-    h_crypt_prov : LibC::UINT_PTR
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pv_hash_aux_info : Void*
-  end
-  struct CMSG_ENCRYPTED_ENCODE_INFO
-    cb_size : UInt32
-    content_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pv_encryption_aux_info : Void*
-  end
-  struct CMSG_STREAM_INFO
-    cb_content : UInt32
-    pfn_stream_output : PFN_CMSG_STREAM_OUTPUT
-    pv_arg : Void*
-  end
-  struct CMSG_SIGNER_INFO
-    dw_version : UInt32
-    issuer : CRYPTOAPI_BLOB
-    serial_number : CRYPTOAPI_BLOB
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    hash_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    encrypted_hash : CRYPTOAPI_BLOB
-    auth_attrs : CRYPT_ATTRIBUTES
-    unauth_attrs : CRYPT_ATTRIBUTES
-  end
-  struct CMSG_CMS_SIGNER_INFO
-    dw_version : UInt32
-    signer_id : CERT_ID
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    hash_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    encrypted_hash : CRYPTOAPI_BLOB
-    auth_attrs : CRYPT_ATTRIBUTES
-    unauth_attrs : CRYPT_ATTRIBUTES
-  end
-  struct CMSG_KEY_TRANS_RECIPIENT_INFO
-    dw_version : UInt32
-    recipient_id : CERT_ID
-    key_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    encrypted_key : CRYPTOAPI_BLOB
-  end
-  struct CMSG_RECIPIENT_ENCRYPTED_KEY_INFO
-    recipient_id : CERT_ID
-    encrypted_key : CRYPTOAPI_BLOB
-    date : FILETIME
-    p_other_attr : CRYPT_ATTRIBUTE_TYPE_VALUE*
-  end
-  struct CMSG_KEY_AGREE_RECIPIENT_INFO
-    dw_version : UInt32
-    dw_originator_choice : CMSG_KEY_AGREE_ORIGINATOR
-    anonymous : CMSG_KEY_AGREE_RECIPIENT_INFO_Anonymous_e__Union
-    user_keying_material : CRYPTOAPI_BLOB
-    key_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    c_recipient_encrypted_keys : UInt32
-    rgp_recipient_encrypted_keys : CMSG_RECIPIENT_ENCRYPTED_KEY_INFO**
-  end
-  struct CMSG_MAIL_LIST_RECIPIENT_INFO
-    dw_version : UInt32
-    key_id : CRYPTOAPI_BLOB
-    key_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    encrypted_key : CRYPTOAPI_BLOB
-    date : FILETIME
-    p_other_attr : CRYPT_ATTRIBUTE_TYPE_VALUE*
-  end
-  struct CMSG_CMS_RECIPIENT_INFO
-    dw_recipient_choice : UInt32
-    anonymous : CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union
-  end
-  struct CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA
-    cb_size : UInt32
-    h_crypt_prov : LibC::UINT_PTR
-    dw_signer_index : UInt32
-    dw_signer_type : UInt32
-    pv_signer : Void*
-  end
-  struct CMSG_CTRL_DECRYPT_PARA
-    cb_size : UInt32
-    anonymous : CMSG_CTRL_DECRYPT_PARA_Anonymous_e__Union
-    dw_key_spec : UInt32
-    dw_recipient_index : UInt32
-  end
-  struct CMSG_CTRL_KEY_TRANS_DECRYPT_PARA
-    cb_size : UInt32
-    anonymous : CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_Anonymous_e__Union
-    dw_key_spec : UInt32
-    p_key_trans : CMSG_KEY_TRANS_RECIPIENT_INFO*
-    dw_recipient_index : UInt32
-  end
-  struct CMSG_CTRL_KEY_AGREE_DECRYPT_PARA
-    cb_size : UInt32
-    anonymous : CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_Anonymous_e__Union
-    dw_key_spec : UInt32
-    p_key_agree : CMSG_KEY_AGREE_RECIPIENT_INFO*
-    dw_recipient_index : UInt32
-    dw_recipient_encrypted_key_index : UInt32
-    originator_public_key : CRYPT_BIT_BLOB
-  end
-  struct CMSG_CTRL_MAIL_LIST_DECRYPT_PARA
-    cb_size : UInt32
-    h_crypt_prov : LibC::UINT_PTR
-    p_mail_list : CMSG_MAIL_LIST_RECIPIENT_INFO*
-    dw_recipient_index : UInt32
-    dw_key_choice : UInt32
-    anonymous : CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_Anonymous_e__Union
-  end
-  struct CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA
-    cb_size : UInt32
-    dw_signer_index : UInt32
-    blob : CRYPTOAPI_BLOB
-  end
-  struct CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA
-    cb_size : UInt32
-    dw_signer_index : UInt32
-    dw_unauth_attr_index : UInt32
-  end
-  struct CMSG_CONTENT_ENCRYPT_INFO
-    cb_size : UInt32
-    h_crypt_prov : LibC::UINT_PTR
-    content_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pv_encryption_aux_info : Void*
-    c_recipients : UInt32
-    rg_cms_recipients : CMSG_RECIPIENT_ENCODE_INFO*
-    pfn_alloc : PFN_CMSG_ALLOC
-    pfn_free : PFN_CMSG_FREE
-    dw_encrypt_flags : UInt32
-    anonymous : CMSG_CONTENT_ENCRYPT_INFO_Anonymous_e__Union
-    dw_flags : UInt32
-    f_cng : LibC::BOOL
-    pb_cng_content_encrypt_key_object : UInt8*
-    pb_content_encrypt_key : UInt8*
-    cb_content_encrypt_key : UInt32
-  end
-  struct CMSG_KEY_TRANS_ENCRYPT_INFO
-    cb_size : UInt32
-    dw_recipient_index : UInt32
-    key_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    encrypted_key : CRYPTOAPI_BLOB
-    dw_flags : UInt32
-  end
-  struct CMSG_KEY_AGREE_KEY_ENCRYPT_INFO
-    cb_size : UInt32
-    encrypted_key : CRYPTOAPI_BLOB
-  end
-  struct CMSG_KEY_AGREE_ENCRYPT_INFO
-    cb_size : UInt32
-    dw_recipient_index : UInt32
-    key_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    user_keying_material : CRYPTOAPI_BLOB
-    dw_originator_choice : CMSG_KEY_AGREE_ORIGINATOR
-    anonymous : CMSG_KEY_AGREE_ENCRYPT_INFO_Anonymous_e__Union
-    c_key_agree_key_encrypt_info : UInt32
-    rgp_key_agree_key_encrypt_info : CMSG_KEY_AGREE_KEY_ENCRYPT_INFO**
-    dw_flags : UInt32
-  end
-  struct CMSG_MAIL_LIST_ENCRYPT_INFO
-    cb_size : UInt32
-    dw_recipient_index : UInt32
-    key_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    encrypted_key : CRYPTOAPI_BLOB
-    dw_flags : UInt32
-  end
-  struct CMSG_CNG_CONTENT_DECRYPT_INFO
-    cb_size : UInt32
-    content_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pfn_alloc : PFN_CMSG_ALLOC
-    pfn_free : PFN_CMSG_FREE
-    h_n_crypt_key : LibC::UINT_PTR
-    pb_content_encrypt_key : UInt8*
-    cb_content_encrypt_key : UInt32
-    h_cng_content_encrypt_key : BCRYPT_KEY_HANDLE
-    pb_cng_content_encrypt_key_object : UInt8*
-  end
-  struct CERT_CONTEXT
-    dw_cert_encoding_type : UInt32
-    pb_cert_encoded : UInt8*
-    cb_cert_encoded : UInt32
-    p_cert_info : CERT_INFO*
-    h_cert_store : Void*
-  end
-  struct CRL_CONTEXT
-    dw_cert_encoding_type : UInt32
-    pb_crl_encoded : UInt8*
-    cb_crl_encoded : UInt32
-    p_crl_info : CRL_INFO*
-    h_cert_store : Void*
-  end
-  struct CTL_CONTEXT
-    dw_msg_and_cert_encoding_type : UInt32
-    pb_ctl_encoded : UInt8*
-    cb_ctl_encoded : UInt32
-    p_ctl_info : CTL_INFO*
-    h_cert_store : Void*
-    h_crypt_msg : Void*
-    pb_ctl_content : UInt8*
-    cb_ctl_content : UInt32
-  end
-  struct CRYPT_KEY_PROV_PARAM
-    dw_param : UInt32
-    pb_data : UInt8*
-    cb_data : UInt32
-    dw_flags : UInt32
-  end
-  struct CRYPT_KEY_PROV_INFO
-    pwsz_container_name : LibC::LPWSTR
-    pwsz_prov_name : LibC::LPWSTR
-    dw_prov_type : UInt32
-    dw_flags : CRYPT_KEY_FLAGS
-    c_prov_param : UInt32
-    rg_prov_param : CRYPT_KEY_PROV_PARAM*
-    dw_key_spec : UInt32
-  end
-  struct CERT_KEY_CONTEXT
-    cb_size : UInt32
-    anonymous : CERT_KEY_CONTEXT_Anonymous_e__Union
-    dw_key_spec : UInt32
-  end
-  struct ROOT_INFO_LUID
-    low_part : UInt32
+
+  @[Extern]
+  record NCRYPT_PCP_RAW_POLICYDIGEST,
+    dwVersion : UInt32,
+    cbDigest : UInt32
+
+  @[Extern]
+  record NCRYPT_KEY_BLOB_HEADER,
+    cbSize : UInt32,
+    dwMagic : UInt32,
+    cbAlgName : UInt32,
+    cbKeyData : UInt32
+
+  @[Extern]
+  record NCRYPT_TPM_LOADABLE_KEY_BLOB_HEADER,
+    magic : UInt32,
+    cbHeader : UInt32,
+    cbPublic : UInt32,
+    cbPrivate : UInt32,
+    cbName : UInt32
+
+  @[Extern]
+  record CRYPT_BIT_BLOB,
+    cbData : UInt32,
+    pbData : UInt8*,
+    cUnusedBits : UInt32
+
+  @[Extern]
+  record CRYPT_ALGORITHM_IDENTIFIER,
+    pszObjId : Win32cr::Foundation::PSTR,
+    parameters : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CRYPT_OBJID_TABLE,
+    dwAlgId : UInt32,
+    pszObjId : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record CRYPT_HASH_INFO,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CERT_EXTENSION,
+    pszObjId : Win32cr::Foundation::PSTR,
+    fCritical : Win32cr::Foundation::BOOL,
+    value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CRYPT_ATTRIBUTE_TYPE_VALUE,
+    pszObjId : Win32cr::Foundation::PSTR,
+    value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CRYPT_ATTRIBUTE,
+    pszObjId : Win32cr::Foundation::PSTR,
+    cValue : UInt32,
+    rgValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+
+  @[Extern]
+  record CRYPT_ATTRIBUTES,
+    cAttr : UInt32,
+    rgAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*
+
+  @[Extern]
+  record CERT_RDN_ATTR,
+    pszObjId : Win32cr::Foundation::PSTR,
+    dwValueType : Win32cr::Security::Cryptography::CERT_RDN_ATTR_VALUE_TYPE,
+    value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CERT_RDN,
+    cRDNAttr : UInt32,
+    rgRDNAttr : Win32cr::Security::Cryptography::CERT_RDN_ATTR*
+
+  @[Extern]
+  record CERT_NAME_INFO,
+    cRDN : UInt32,
+    rgRDN : Win32cr::Security::Cryptography::CERT_RDN*
+
+  @[Extern]
+  record CERT_NAME_VALUE,
+    dwValueType : UInt32,
+    value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CERT_PUBLIC_KEY_INFO,
+    algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    public_key : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB
+
+  @[Extern]
+  record CRYPT_ECC_PRIVATE_KEY_INFO,
+    dwVersion : UInt32,
+    private_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    szCurveOid : Win32cr::Foundation::PSTR,
+    public_key : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB
+
+  @[Extern]
+  record CRYPT_PRIVATE_KEY_INFO,
+    version : UInt32,
+    algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    private_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    pAttributes : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*
+
+  @[Extern]
+  record CRYPT_ENCRYPTED_PRIVATE_KEY_INFO,
+    encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    encrypted_private_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CRYPT_PKCS8_IMPORT_PARAMS,
+    private_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    pResolvehCryptProvFunc : Win32cr::Security::Cryptography::PCRYPT_RESOLVE_HCRYPTPROV_FUNC,
+    pVoidResolveFunc : Void*,
+    pDecryptPrivateKeyFunc : Win32cr::Security::Cryptography::PCRYPT_DECRYPT_PRIVATE_KEY_FUNC,
+    pVoidDecryptFunc : Void*
+
+  @[Extern]
+  record CRYPT_PKCS8_EXPORT_PARAMS,
+    hCryptProv : LibC::UIntPtrT,
+    dwKeySpec : UInt32,
+    pszPrivateKeyObjId : Win32cr::Foundation::PSTR,
+    pEncryptPrivateKeyFunc : Win32cr::Security::Cryptography::PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC,
+    pVoidEncryptFunc : Void*
+
+  @[Extern]
+  record CERT_INFO,
+    dwVersion : UInt32,
+    serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    not_before : Win32cr::Foundation::FILETIME,
+    not_after : Win32cr::Foundation::FILETIME,
+    subject : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    subject_public_key_info : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO,
+    issuer_unique_id : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB,
+    subject_unique_id : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB,
+    cExtension : UInt32,
+    rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
+
+  @[Extern]
+  record CRL_ENTRY,
+    serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    revocation_date : Win32cr::Foundation::FILETIME,
+    cExtension : UInt32,
+    rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
+
+  @[Extern]
+  record CRL_INFO,
+    dwVersion : UInt32,
+    signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    this_update : Win32cr::Foundation::FILETIME,
+    next_update : Win32cr::Foundation::FILETIME,
+    cCRLEntry : UInt32,
+    rgCRLEntry : Win32cr::Security::Cryptography::CRL_ENTRY*,
+    cExtension : UInt32,
+    rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
+
+  @[Extern]
+  record CERT_OR_CRL_BLOB,
+    dwChoice : UInt32,
+    cbEncoded : UInt32,
+    pbEncoded : UInt8*
+
+  @[Extern]
+  record CERT_OR_CRL_BUNDLE,
+    cItem : UInt32,
+    rgItem : Win32cr::Security::Cryptography::CERT_OR_CRL_BLOB*
+
+  @[Extern]
+  record CERT_REQUEST_INFO,
+    dwVersion : UInt32,
+    subject : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    subject_public_key_info : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO,
+    cAttribute : UInt32,
+    rgAttribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*
+
+  @[Extern]
+  record CERT_KEYGEN_REQUEST_INFO,
+    dwVersion : UInt32,
+    subject_public_key_info : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO,
+    pwszChallengeString : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record CERT_SIGNED_CONTENT_INFO,
+    to_be_signed : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    signature : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB
+
+  @[Extern]
+  record CTL_USAGE,
+    cUsageIdentifier : UInt32,
+    rgpszUsageIdentifier : Win32cr::Foundation::PSTR*
+
+  @[Extern]
+  record CTL_ENTRY,
+    subject_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    cAttribute : UInt32,
+    rgAttribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*
+
+  @[Extern]
+  record CTL_INFO,
+    dwVersion : UInt32,
+    subject_usage : Win32cr::Security::Cryptography::CTL_USAGE,
+    list_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    sequence_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    this_update : Win32cr::Foundation::FILETIME,
+    next_update : Win32cr::Foundation::FILETIME,
+    subject_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    cCTLEntry : UInt32,
+    rgCTLEntry : Win32cr::Security::Cryptography::CTL_ENTRY*,
+    cExtension : UInt32,
+    rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
+
+  @[Extern]
+  record CRYPT_TIME_STAMP_REQUEST_INFO,
+    pszTimeStampAlgorithm : Win32cr::Foundation::PSTR,
+    pszContentType : Win32cr::Foundation::PSTR,
+    content : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    cAttribute : UInt32,
+    rgAttribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*
+
+  @[Extern]
+  record CRYPT_ENROLLMENT_NAME_VALUE_PAIR,
+    pwszName : Win32cr::Foundation::PWSTR,
+    pwszValue : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record CRYPT_CSP_PROVIDER,
+    dwKeySpec : UInt32,
+    pwszProviderName : Win32cr::Foundation::PWSTR,
+    signature : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB
+
+  @[Extern]
+  record CRYPT_ENCODE_PARA,
+    cbSize : UInt32,
+    pfnAlloc : Win32cr::Security::Cryptography::PFN_CRYPT_ALLOC,
+    pfnFree : Win32cr::Security::Cryptography::PFN_CRYPT_FREE
+
+  @[Extern]
+  record CRYPT_DECODE_PARA,
+    cbSize : UInt32,
+    pfnAlloc : Win32cr::Security::Cryptography::PFN_CRYPT_ALLOC,
+    pfnFree : Win32cr::Security::Cryptography::PFN_CRYPT_FREE
+
+  @[Extern]
+  record CERT_EXTENSIONS,
+    cExtension : UInt32,
+    rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
+
+  @[Extern]
+  record CERT_AUTHORITY_KEY_ID_INFO,
+    key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    cert_issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    cert_serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CERT_PRIVATE_KEY_VALIDITY,
+    not_before : Win32cr::Foundation::FILETIME,
+    not_after : Win32cr::Foundation::FILETIME
+
+  @[Extern]
+  record CERT_KEY_ATTRIBUTES_INFO,
+    key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    intended_key_usage : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB,
+    pPrivateKeyUsagePeriod : Win32cr::Security::Cryptography::CERT_PRIVATE_KEY_VALIDITY*
+
+  @[Extern]
+  record CERT_POLICY_ID,
+    cCertPolicyElementId : UInt32,
+    rgpszCertPolicyElementId : Win32cr::Foundation::PSTR*
+
+  @[Extern]
+  record CERT_KEY_USAGE_RESTRICTION_INFO,
+    cCertPolicyId : UInt32,
+    rgCertPolicyId : Win32cr::Security::Cryptography::CERT_POLICY_ID*,
+    restricted_key_usage : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB
+
+  @[Extern]
+  record CERT_OTHER_NAME,
+    pszObjId : Win32cr::Foundation::PSTR,
+    value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CERT_ALT_NAME_ENTRY,
+    dwAltNameChoice : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      pOtherName : Win32cr::Security::Cryptography::CERT_OTHER_NAME*,
+      pwszRfc822Name : Win32cr::Foundation::PWSTR,
+      pwszDNSName : Win32cr::Foundation::PWSTR,
+      directory_name : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+      pwszURL : Win32cr::Foundation::PWSTR,
+      ip_address : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+      pszRegisteredID : Win32cr::Foundation::PSTR
+
+  end
+
+  @[Extern]
+  record CERT_ALT_NAME_INFO,
+    cAltEntry : UInt32,
+    rgAltEntry : Win32cr::Security::Cryptography::CERT_ALT_NAME_ENTRY*
+
+  @[Extern]
+  record CERT_BASIC_CONSTRAINTS_INFO,
+    subject_type : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB,
+    fPathLenConstraint : Win32cr::Foundation::BOOL,
+    dwPathLenConstraint : UInt32,
+    cSubtreesConstraint : UInt32,
+    rgSubtreesConstraint : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+
+  @[Extern]
+  record CERT_BASIC_CONSTRAINTS2_INFO,
+    fCA : Win32cr::Foundation::BOOL,
+    fPathLenConstraint : Win32cr::Foundation::BOOL,
+    dwPathLenConstraint : UInt32
+
+  @[Extern]
+  record CERT_POLICY_QUALIFIER_INFO,
+    pszPolicyQualifierId : Win32cr::Foundation::PSTR,
+    qualifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CERT_POLICY_INFO,
+    pszPolicyIdentifier : Win32cr::Foundation::PSTR,
+    cPolicyQualifier : UInt32,
+    rgPolicyQualifier : Win32cr::Security::Cryptography::CERT_POLICY_QUALIFIER_INFO*
+
+  @[Extern]
+  record CERT_POLICIES_INFO,
+    cPolicyInfo : UInt32,
+    rgPolicyInfo : Win32cr::Security::Cryptography::CERT_POLICY_INFO*
+
+  @[Extern]
+  record CERT_POLICY_QUALIFIER_NOTICE_REFERENCE,
+    pszOrganization : Win32cr::Foundation::PSTR,
+    cNoticeNumbers : UInt32,
+    rgNoticeNumbers : Int32*
+
+  @[Extern]
+  record CERT_POLICY_QUALIFIER_USER_NOTICE,
+    pNoticeReference : Win32cr::Security::Cryptography::CERT_POLICY_QUALIFIER_NOTICE_REFERENCE*,
+    pszDisplayText : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record CPS_URLS,
+    pszURL : Win32cr::Foundation::PWSTR,
+    pAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*,
+    pDigest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+
+  @[Extern]
+  record CERT_POLICY95_QUALIFIER1,
+    pszPracticesReference : Win32cr::Foundation::PWSTR,
+    pszNoticeIdentifier : Win32cr::Foundation::PSTR,
+    pszNSINoticeIdentifier : Win32cr::Foundation::PSTR,
+    cCPSURLs : UInt32,
+    rgCPSURLs : Win32cr::Security::Cryptography::CPS_URLS*
+
+  @[Extern]
+  record CERT_POLICY_MAPPING,
+    pszIssuerDomainPolicy : Win32cr::Foundation::PSTR,
+    pszSubjectDomainPolicy : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record CERT_POLICY_MAPPINGS_INFO,
+    cPolicyMapping : UInt32,
+    rgPolicyMapping : Win32cr::Security::Cryptography::CERT_POLICY_MAPPING*
+
+  @[Extern]
+  record CERT_POLICY_CONSTRAINTS_INFO,
+    fRequireExplicitPolicy : Win32cr::Foundation::BOOL,
+    dwRequireExplicitPolicySkipCerts : UInt32,
+    fInhibitPolicyMapping : Win32cr::Foundation::BOOL,
+    dwInhibitPolicyMappingSkipCerts : UInt32
+
+  @[Extern]
+  record CRYPT_CONTENT_INFO_SEQUENCE_OF_ANY,
+    pszObjId : Win32cr::Foundation::PSTR,
+    cValue : UInt32,
+    rgValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+
+  @[Extern]
+  record CRYPT_CONTENT_INFO,
+    pszObjId : Win32cr::Foundation::PSTR,
+    content : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CRYPT_SEQUENCE_OF_ANY,
+    cValue : UInt32,
+    rgValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+
+  @[Extern]
+  record CERT_AUTHORITY_KEY_ID2_INFO,
+    key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    authority_cert_issuer : Win32cr::Security::Cryptography::CERT_ALT_NAME_INFO,
+    authority_cert_serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CERT_ACCESS_DESCRIPTION,
+    pszAccessMethod : Win32cr::Foundation::PSTR,
+    access_location : Win32cr::Security::Cryptography::CERT_ALT_NAME_ENTRY
+
+  @[Extern]
+  record CERT_AUTHORITY_INFO_ACCESS,
+    cAccDescr : UInt32,
+    rgAccDescr : Win32cr::Security::Cryptography::CERT_ACCESS_DESCRIPTION*
+
+  @[Extern]
+  record CRL_DIST_POINT_NAME,
+    dwDistPointNameChoice : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      full_name : Win32cr::Security::Cryptography::CERT_ALT_NAME_INFO
+
+  end
+
+  @[Extern]
+  record CRL_DIST_POINT,
+    dist_point_name : Win32cr::Security::Cryptography::CRL_DIST_POINT_NAME,
+    reason_flags : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB,
+    crl_issuer : Win32cr::Security::Cryptography::CERT_ALT_NAME_INFO
+
+  @[Extern]
+  record CRL_DIST_POINTS_INFO,
+    cDistPoint : UInt32,
+    rgDistPoint : Win32cr::Security::Cryptography::CRL_DIST_POINT*
+
+  @[Extern]
+  record CROSS_CERT_DIST_POINTS_INFO,
+    dwSyncDeltaTime : UInt32,
+    cDistPoint : UInt32,
+    rgDistPoint : Win32cr::Security::Cryptography::CERT_ALT_NAME_INFO*
+
+  @[Extern]
+  record CERT_PAIR,
+    forward : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    reverse : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CRL_ISSUING_DIST_POINT,
+    dist_point_name : Win32cr::Security::Cryptography::CRL_DIST_POINT_NAME,
+    fOnlyContainsUserCerts : Win32cr::Foundation::BOOL,
+    fOnlyContainsCACerts : Win32cr::Foundation::BOOL,
+    only_some_reason_flags : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB,
+    fIndirectCRL : Win32cr::Foundation::BOOL
+
+  @[Extern]
+  record CERT_GENERAL_SUBTREE,
+    base : Win32cr::Security::Cryptography::CERT_ALT_NAME_ENTRY,
+    dwMinimum : UInt32,
+    fMaximum : Win32cr::Foundation::BOOL,
+    dwMaximum : UInt32
+
+  @[Extern]
+  record CERT_NAME_CONSTRAINTS_INFO,
+    cPermittedSubtree : UInt32,
+    rgPermittedSubtree : Win32cr::Security::Cryptography::CERT_GENERAL_SUBTREE*,
+    cExcludedSubtree : UInt32,
+    rgExcludedSubtree : Win32cr::Security::Cryptography::CERT_GENERAL_SUBTREE*
+
+  @[Extern]
+  record CERT_DSS_PARAMETERS,
+    p : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    q : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    g : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CERT_DH_PARAMETERS,
+    p : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    g : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CERT_ECC_SIGNATURE,
+    r : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    s : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CERT_X942_DH_VALIDATION_PARAMS,
+    seed : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB,
+    pgenCounter : UInt32
+
+  @[Extern]
+  record CERT_X942_DH_PARAMETERS,
+    p : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    g : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    q : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    j : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    pValidationParams : Win32cr::Security::Cryptography::CERT_X942_DH_VALIDATION_PARAMS*
+
+  @[Extern]
+  record CRYPT_X942_OTHER_INFO,
+    pszContentEncryptionObjId : Win32cr::Foundation::PSTR,
+    rgbCounter : UInt8[4],
+    rgbKeyLength : UInt8[4],
+    pub_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CRYPT_ECC_CMS_SHARED_INFO,
+    algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    entity_u_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    rgbSuppPubInfo : UInt8[4]
+
+  @[Extern]
+  record CRYPT_RC2_CBC_PARAMETERS,
+    dwVersion : UInt32,
+    fIV : Win32cr::Foundation::BOOL,
+    rgbIV : UInt8[8]
+
+  @[Extern]
+  record CRYPT_SMIME_CAPABILITY,
+    pszObjId : Win32cr::Foundation::PSTR,
+    parameters : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CRYPT_SMIME_CAPABILITIES,
+    cCapability : UInt32,
+    rgCapability : Win32cr::Security::Cryptography::CRYPT_SMIME_CAPABILITY*
+
+  @[Extern]
+  record CERT_QC_STATEMENT,
+    pszStatementId : Win32cr::Foundation::PSTR,
+    statement_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CERT_QC_STATEMENTS_EXT_INFO,
+    cStatement : UInt32,
+    rgStatement : Win32cr::Security::Cryptography::CERT_QC_STATEMENT*
+
+  @[Extern]
+  record CRYPT_MASK_GEN_ALGORITHM,
+    pszObjId : Win32cr::Foundation::PSTR,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
+
+  @[Extern]
+  record CRYPT_RSA_SSA_PSS_PARAMETERS,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    mask_gen_algorithm : Win32cr::Security::Cryptography::CRYPT_MASK_GEN_ALGORITHM,
+    dwSaltLength : UInt32,
+    dwTrailerField : UInt32
+
+  @[Extern]
+  record CRYPT_PSOURCE_ALGORITHM,
+    pszObjId : Win32cr::Foundation::PSTR,
+    encoding_parameters : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CRYPT_RSAES_OAEP_PARAMETERS,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    mask_gen_algorithm : Win32cr::Security::Cryptography::CRYPT_MASK_GEN_ALGORITHM,
+    p_source_algorithm : Win32cr::Security::Cryptography::CRYPT_PSOURCE_ALGORITHM
+
+  @[Extern]
+  record CMC_TAGGED_ATTRIBUTE,
+    dwBodyPartID : UInt32,
+    attribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE
+
+  @[Extern]
+  record CMC_TAGGED_CERT_REQUEST,
+    dwBodyPartID : UInt32,
+    signed_cert_request : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CMC_TAGGED_REQUEST,
+    dwTaggedRequestChoice : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      pTaggedCertRequest : Win32cr::Security::Cryptography::CMC_TAGGED_CERT_REQUEST*
+
+  end
+
+  @[Extern]
+  record CMC_TAGGED_CONTENT_INFO,
+    dwBodyPartID : UInt32,
+    encoded_content_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CMC_TAGGED_OTHER_MSG,
+    dwBodyPartID : UInt32,
+    pszObjId : Win32cr::Foundation::PSTR,
+    value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CMC_DATA_INFO,
+    cTaggedAttribute : UInt32,
+    rgTaggedAttribute : Win32cr::Security::Cryptography::CMC_TAGGED_ATTRIBUTE*,
+    cTaggedRequest : UInt32,
+    rgTaggedRequest : Win32cr::Security::Cryptography::CMC_TAGGED_REQUEST*,
+    cTaggedContentInfo : UInt32,
+    rgTaggedContentInfo : Win32cr::Security::Cryptography::CMC_TAGGED_CONTENT_INFO*,
+    cTaggedOtherMsg : UInt32,
+    rgTaggedOtherMsg : Win32cr::Security::Cryptography::CMC_TAGGED_OTHER_MSG*
+
+  @[Extern]
+  record CMC_RESPONSE_INFO,
+    cTaggedAttribute : UInt32,
+    rgTaggedAttribute : Win32cr::Security::Cryptography::CMC_TAGGED_ATTRIBUTE*,
+    cTaggedContentInfo : UInt32,
+    rgTaggedContentInfo : Win32cr::Security::Cryptography::CMC_TAGGED_CONTENT_INFO*,
+    cTaggedOtherMsg : UInt32,
+    rgTaggedOtherMsg : Win32cr::Security::Cryptography::CMC_TAGGED_OTHER_MSG*
+
+  @[Extern]
+  record CMC_PEND_INFO,
+    pend_token : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    pend_time : Win32cr::Foundation::FILETIME
+
+  @[Extern]
+  record CMC_STATUS_INFO,
+    dwStatus : UInt32,
+    cBodyList : UInt32,
+    rgdwBodyList : UInt32*,
+    pwszStatusString : Win32cr::Foundation::PWSTR,
+    dwOtherInfoChoice : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      dwFailInfo : UInt32,
+      pPendInfo : Win32cr::Security::Cryptography::CMC_PEND_INFO*
+
+  end
+
+  @[Extern]
+  record CMC_ADD_EXTENSIONS_INFO,
+    dwCmcDataReference : UInt32,
+    cCertReference : UInt32,
+    rgdwCertReference : UInt32*,
+    cExtension : UInt32,
+    rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
+
+  @[Extern]
+  record CMC_ADD_ATTRIBUTES_INFO,
+    dwCmcDataReference : UInt32,
+    cCertReference : UInt32,
+    rgdwCertReference : UInt32*,
+    cAttribute : UInt32,
+    rgAttribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*
+
+  @[Extern]
+  record CERT_TEMPLATE_EXT,
+    pszObjId : Win32cr::Foundation::PSTR,
+    dwMajorVersion : UInt32,
+    fMinorVersion : Win32cr::Foundation::BOOL,
+    dwMinorVersion : UInt32
+
+  @[Extern]
+  record CERT_HASHED_URL,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    pwszUrl : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record CERT_LOGOTYPE_DETAILS,
+    pwszMimeType : Win32cr::Foundation::PWSTR,
+    cHashedUrl : UInt32,
+    rgHashedUrl : Win32cr::Security::Cryptography::CERT_HASHED_URL*
+
+  @[Extern]
+  record CERT_LOGOTYPE_REFERENCE,
+    cHashedUrl : UInt32,
+    rgHashedUrl : Win32cr::Security::Cryptography::CERT_HASHED_URL*
+
+  @[Extern]
+  record CERT_LOGOTYPE_IMAGE_INFO,
+    dwLogotypeImageInfoChoice : Win32cr::Security::Cryptography::CERT_LOGOTYPE_IMAGE_INFO_TYPE,
+    dwFileSize : UInt32,
+    dwXSize : UInt32,
+    dwYSize : UInt32,
+    dwLogotypeImageResolutionChoice : Win32cr::Security::Cryptography::CERT_LOGOTYPE_CHOICE,
+    anonymous : Anonymous_e__Union,
+    pwszLanguage : Win32cr::Foundation::PWSTR do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      dwNumBits : UInt32,
+      dwTableSize : UInt32
+
+  end
+
+  @[Extern]
+  record CERT_LOGOTYPE_IMAGE,
+    logotype_details : Win32cr::Security::Cryptography::CERT_LOGOTYPE_DETAILS,
+    pLogotypeImageInfo : Win32cr::Security::Cryptography::CERT_LOGOTYPE_IMAGE_INFO*
+
+  @[Extern]
+  record CERT_LOGOTYPE_AUDIO_INFO,
+    dwFileSize : UInt32,
+    dwPlayTime : UInt32,
+    dwChannels : UInt32,
+    dwSampleRate : UInt32,
+    pwszLanguage : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record CERT_LOGOTYPE_AUDIO,
+    logotype_details : Win32cr::Security::Cryptography::CERT_LOGOTYPE_DETAILS,
+    pLogotypeAudioInfo : Win32cr::Security::Cryptography::CERT_LOGOTYPE_AUDIO_INFO*
+
+  @[Extern]
+  record CERT_LOGOTYPE_DATA,
+    cLogotypeImage : UInt32,
+    rgLogotypeImage : Win32cr::Security::Cryptography::CERT_LOGOTYPE_IMAGE*,
+    cLogotypeAudio : UInt32,
+    rgLogotypeAudio : Win32cr::Security::Cryptography::CERT_LOGOTYPE_AUDIO*
+
+  @[Extern]
+  record CERT_LOGOTYPE_INFO,
+    dwLogotypeInfoChoice : Win32cr::Security::Cryptography::CERT_LOGOTYPE_OPTION,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      pLogotypeDirectInfo : Win32cr::Security::Cryptography::CERT_LOGOTYPE_DATA*,
+      pLogotypeIndirectInfo : Win32cr::Security::Cryptography::CERT_LOGOTYPE_REFERENCE*
+
+  end
+
+  @[Extern]
+  record CERT_OTHER_LOGOTYPE_INFO,
+    pszObjId : Win32cr::Foundation::PSTR,
+    logotype_info : Win32cr::Security::Cryptography::CERT_LOGOTYPE_INFO
+
+  @[Extern]
+  record CERT_LOGOTYPE_EXT_INFO,
+    cCommunityLogo : UInt32,
+    rgCommunityLogo : Win32cr::Security::Cryptography::CERT_LOGOTYPE_INFO*,
+    pIssuerLogo : Win32cr::Security::Cryptography::CERT_LOGOTYPE_INFO*,
+    pSubjectLogo : Win32cr::Security::Cryptography::CERT_LOGOTYPE_INFO*,
+    cOtherLogo : UInt32,
+    rgOtherLogo : Win32cr::Security::Cryptography::CERT_OTHER_LOGOTYPE_INFO*
+
+  @[Extern]
+  record CERT_BIOMETRIC_DATA,
+    dwTypeOfBiometricDataChoice : Win32cr::Security::Cryptography::CERT_BIOMETRIC_DATA_TYPE,
+    anonymous : Anonymous_e__Union,
+    hashed_url : Win32cr::Security::Cryptography::CERT_HASHED_URL do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      dwPredefined : UInt32,
+      pszObjId : Win32cr::Foundation::PSTR
+
+  end
+
+  @[Extern]
+  record CERT_BIOMETRIC_EXT_INFO,
+    cBiometricData : UInt32,
+    rgBiometricData : Win32cr::Security::Cryptography::CERT_BIOMETRIC_DATA*
+
+  @[Extern]
+  record OCSP_SIGNATURE_INFO,
+    signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    signature : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB,
+    cCertEncoded : UInt32,
+    rgCertEncoded : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+
+  @[Extern]
+  record OCSP_SIGNED_REQUEST_INFO,
+    to_be_signed : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    pOptionalSignatureInfo : Win32cr::Security::Cryptography::OCSP_SIGNATURE_INFO*
+
+  @[Extern]
+  record OCSP_CERT_ID,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    issuer_name_hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    issuer_key_hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record OCSP_REQUEST_ENTRY,
+    cert_id : Win32cr::Security::Cryptography::OCSP_CERT_ID,
+    cExtension : UInt32,
+    rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
+
+  @[Extern]
+  record OCSP_REQUEST_INFO,
+    dwVersion : UInt32,
+    pRequestorName : Win32cr::Security::Cryptography::CERT_ALT_NAME_ENTRY*,
+    cRequestEntry : UInt32,
+    rgRequestEntry : Win32cr::Security::Cryptography::OCSP_REQUEST_ENTRY*,
+    cExtension : UInt32,
+    rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
+
+  @[Extern]
+  record OCSP_RESPONSE_INFO,
+    dwStatus : UInt32,
+    pszObjId : Win32cr::Foundation::PSTR,
+    value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record OCSP_BASIC_SIGNED_RESPONSE_INFO,
+    to_be_signed : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    signature_info : Win32cr::Security::Cryptography::OCSP_SIGNATURE_INFO
+
+  @[Extern]
+  record OCSP_BASIC_REVOKED_INFO,
+    revocation_date : Win32cr::Foundation::FILETIME,
+    dwCrlReasonCode : Win32cr::Security::Cryptography::CERT_REVOCATION_STATUS_REASON
+
+  @[Extern]
+  record OCSP_BASIC_RESPONSE_ENTRY,
+    cert_id : Win32cr::Security::Cryptography::OCSP_CERT_ID,
+    dwCertStatus : UInt32,
+    anonymous : Anonymous_e__Union,
+    this_update : Win32cr::Foundation::FILETIME,
+    next_update : Win32cr::Foundation::FILETIME,
+    cExtension : UInt32,
+    rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION* do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      pRevokedInfo : Win32cr::Security::Cryptography::OCSP_BASIC_REVOKED_INFO*
+
+  end
+
+  @[Extern]
+  record OCSP_BASIC_RESPONSE_INFO,
+    dwVersion : UInt32,
+    dwResponderIdChoice : UInt32,
+    anonymous : Anonymous_e__Union,
+    produced_at : Win32cr::Foundation::FILETIME,
+    cResponseEntry : UInt32,
+    rgResponseEntry : Win32cr::Security::Cryptography::OCSP_BASIC_RESPONSE_ENTRY*,
+    cExtension : UInt32,
+    rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION* do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      by_name_responder_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+      by_key_responder_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  end
+
+  @[Extern]
+  record CERT_SUPPORTED_ALGORITHM_INFO,
+    algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    intended_key_usage : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB,
+    intended_cert_policies : Win32cr::Security::Cryptography::CERT_POLICIES_INFO
+
+  @[Extern]
+  record CERT_TPM_SPECIFICATION_INFO,
+    pwszFamily : Win32cr::Foundation::PWSTR,
+    dwLevel : UInt32,
+    dwRevision : UInt32
+
+  @[Extern]
+  record CRYPT_OID_FUNC_ENTRY,
+    pszOID : Win32cr::Foundation::PSTR,
+    pvFuncAddr : Void*
+
+  @[Extern]
+  record CRYPT_OID_INFO,
+    cbSize : UInt32,
+    pszOID : Win32cr::Foundation::PSTR,
+    pwszName : Win32cr::Foundation::PWSTR,
+    dwGroupId : UInt32,
+    anonymous : Anonymous_e__Union,
+    extra_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      dwValue : UInt32,
+      algid : UInt32,
+      dwLength : UInt32
+
+  end
+
+  @[Extern]
+  record CERT_STRONG_SIGN_SERIALIZED_INFO,
+    dwFlags : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_FLAGS,
+    pwszCNGSignHashAlgids : Win32cr::Foundation::PWSTR,
+    pwszCNGPubKeyMinBitLengths : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record CERT_STRONG_SIGN_PARA,
+    cbSize : UInt32,
+    dwInfoChoice : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      pvInfo : Void*,
+      pSerializedInfo : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_SERIALIZED_INFO*,
+      pszOID : Win32cr::Foundation::PSTR
+
+  end
+
+  @[Extern]
+  record CERT_ISSUER_SERIAL_NUMBER,
+    issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CERT_ID,
+    dwIdChoice : Win32cr::Security::Cryptography::CERT_ID_OPTION,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      issuer_serial_number : Win32cr::Security::Cryptography::CERT_ISSUER_SERIAL_NUMBER,
+      key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+      hash_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  end
+
+  @[Extern]
+  record CMSG_SIGNER_ENCODE_INFO,
+    cbSize : UInt32,
+    pCertInfo : Win32cr::Security::Cryptography::CERT_INFO*,
+    anonymous : Anonymous_e__Union,
+    dwKeySpec : UInt32,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pvHashAuxInfo : Void*,
+    cAuthAttr : UInt32,
+    rgAuthAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*,
+    cUnauthAttr : UInt32,
+    rgUnauthAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE* do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      hCryptProv : LibC::UIntPtrT,
+      hNCryptKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE
+
+  end
+
+  @[Extern]
+  record CMSG_SIGNED_ENCODE_INFO,
+    cbSize : UInt32,
+    cSigners : UInt32,
+    rgSigners : Win32cr::Security::Cryptography::CMSG_SIGNER_ENCODE_INFO*,
+    cCertEncoded : UInt32,
+    rgCertEncoded : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*,
+    cCrlEncoded : UInt32,
+    rgCrlEncoded : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+
+  @[Extern]
+  record CMSG_ENVELOPED_ENCODE_INFO,
+    cbSize : UInt32,
+    hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY,
+    content_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pvEncryptionAuxInfo : Void*,
+    cRecipients : UInt32,
+    rgpRecipients : Win32cr::Security::Cryptography::CERT_INFO**
+
+  @[Extern]
+  record CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO,
+    cbSize : UInt32,
+    key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pvKeyEncryptionAuxInfo : Void*,
+    hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY,
+    recipient_public_key : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB,
+    recipient_id : Win32cr::Security::Cryptography::CERT_ID
+
+  @[Extern]
+  record CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO,
+    cbSize : UInt32,
+    recipient_public_key : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB,
+    recipient_id : Win32cr::Security::Cryptography::CERT_ID,
+    date : Win32cr::Foundation::FILETIME,
+    pOtherAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE*
+
+  @[Extern]
+  record CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO,
+    cbSize : UInt32,
+    key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pvKeyEncryptionAuxInfo : Void*,
+    key_wrap_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pvKeyWrapAuxInfo : Void*,
+    hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY,
+    dwKeySpec : UInt32,
+    dwKeyChoice : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_OPTION,
+    anonymous : Anonymous_e__Union,
+    user_keying_material : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    cRecipientEncryptedKeys : UInt32,
+    rgpRecipientEncryptedKeys : Win32cr::Security::Cryptography::CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO** do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      pEphemeralAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*,
+      pSenderId : Win32cr::Security::Cryptography::CERT_ID*
+
+  end
+
+  @[Extern]
+  record CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO,
+    cbSize : UInt32,
+    key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pvKeyEncryptionAuxInfo : Void*,
+    hCryptProv : LibC::UIntPtrT,
+    dwKeyChoice : UInt32,
+    anonymous : Anonymous_e__Union,
+    key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    date : Win32cr::Foundation::FILETIME,
+    pOtherAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE* do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      hKeyEncryptionKey : LibC::UIntPtrT,
+      pvKeyEncryptionKey : Void*
+
+  end
+
+  @[Extern]
+  record CMSG_RECIPIENT_ENCODE_INFO,
+    dwRecipientChoice : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      pKeyTrans : Win32cr::Security::Cryptography::CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO*,
+      pKeyAgree : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO*,
+      pMailList : Win32cr::Security::Cryptography::CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO*
+
+  end
+
+  @[Extern]
+  record CMSG_RC2_AUX_INFO,
+    cbSize : UInt32,
+    dwBitLen : UInt32
+
+  @[Extern]
+  record CMSG_SP3_COMPATIBLE_AUX_INFO,
+    cbSize : UInt32,
+    dwFlags : UInt32
+
+  @[Extern]
+  record CMSG_RC4_AUX_INFO,
+    cbSize : UInt32,
+    dwBitLen : UInt32
+
+  @[Extern]
+  record CMSG_SIGNED_AND_ENVELOPED_ENCODE_INFO,
+    cbSize : UInt32,
+    signed_info : Win32cr::Security::Cryptography::CMSG_SIGNED_ENCODE_INFO,
+    enveloped_info : Win32cr::Security::Cryptography::CMSG_ENVELOPED_ENCODE_INFO
+
+  @[Extern]
+  record CMSG_HASHED_ENCODE_INFO,
+    cbSize : UInt32,
+    hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pvHashAuxInfo : Void*
+
+  @[Extern]
+  record CMSG_ENCRYPTED_ENCODE_INFO,
+    cbSize : UInt32,
+    content_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pvEncryptionAuxInfo : Void*
+
+  @[Extern]
+  record CMSG_STREAM_INFO,
+    cbContent : UInt32,
+    pfnStreamOutput : Win32cr::Security::Cryptography::PFN_CMSG_STREAM_OUTPUT,
+    pvArg : Void*
+
+  @[Extern]
+  record CMSG_SIGNER_INFO,
+    dwVersion : UInt32,
+    issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    hash_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    encrypted_hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    auth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES,
+    unauth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES
+
+  @[Extern]
+  record CMSG_CMS_SIGNER_INFO,
+    dwVersion : UInt32,
+    signer_id : Win32cr::Security::Cryptography::CERT_ID,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    hash_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    encrypted_hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    auth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES,
+    unauth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES
+
+  @[Extern]
+  record CMSG_KEY_TRANS_RECIPIENT_INFO,
+    dwVersion : UInt32,
+    recipient_id : Win32cr::Security::Cryptography::CERT_ID,
+    key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CMSG_RECIPIENT_ENCRYPTED_KEY_INFO,
+    recipient_id : Win32cr::Security::Cryptography::CERT_ID,
+    encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    date : Win32cr::Foundation::FILETIME,
+    pOtherAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE*
+
+  @[Extern]
+  record CMSG_KEY_AGREE_RECIPIENT_INFO,
+    dwVersion : UInt32,
+    dwOriginatorChoice : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_ORIGINATOR,
+    anonymous : Anonymous_e__Union,
+    user_keying_material : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    cRecipientEncryptedKeys : UInt32,
+    rgpRecipientEncryptedKeys : Win32cr::Security::Cryptography::CMSG_RECIPIENT_ENCRYPTED_KEY_INFO** do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      originator_cert_id : Win32cr::Security::Cryptography::CERT_ID,
+      originator_public_key_info : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO
+
+  end
+
+  @[Extern]
+  record CMSG_MAIL_LIST_RECIPIENT_INFO,
+    dwVersion : UInt32,
+    key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    date : Win32cr::Foundation::FILETIME,
+    pOtherAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE*
+
+  @[Extern]
+  record CMSG_CMS_RECIPIENT_INFO,
+    dwRecipientChoice : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      pKeyTrans : Win32cr::Security::Cryptography::CMSG_KEY_TRANS_RECIPIENT_INFO*,
+      pKeyAgree : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_RECIPIENT_INFO*,
+      pMailList : Win32cr::Security::Cryptography::CMSG_MAIL_LIST_RECIPIENT_INFO*
+
+  end
+
+  @[Extern]
+  record CMSG_CTRL_VERIFY_SIGNATURE_EX_PARA,
+    cbSize : UInt32,
+    hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY,
+    dwSignerIndex : UInt32,
+    dwSignerType : UInt32,
+    pvSigner : Void*
+
+  @[Extern]
+  record CMSG_CTRL_DECRYPT_PARA,
+    cbSize : UInt32,
+    anonymous : Anonymous_e__Union,
+    dwKeySpec : UInt32,
+    dwRecipientIndex : UInt32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      hCryptProv : LibC::UIntPtrT,
+      hNCryptKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE
+
+  end
+
+  @[Extern]
+  record CMSG_CTRL_KEY_TRANS_DECRYPT_PARA,
+    cbSize : UInt32,
+    anonymous : Anonymous_e__Union,
+    dwKeySpec : UInt32,
+    pKeyTrans : Win32cr::Security::Cryptography::CMSG_KEY_TRANS_RECIPIENT_INFO*,
+    dwRecipientIndex : UInt32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      hCryptProv : LibC::UIntPtrT,
+      hNCryptKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE
+
+  end
+
+  @[Extern]
+  record CMSG_CTRL_KEY_AGREE_DECRYPT_PARA,
+    cbSize : UInt32,
+    anonymous : Anonymous_e__Union,
+    dwKeySpec : UInt32,
+    pKeyAgree : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_RECIPIENT_INFO*,
+    dwRecipientIndex : UInt32,
+    dwRecipientEncryptedKeyIndex : UInt32,
+    originator_public_key : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      hCryptProv : LibC::UIntPtrT,
+      hNCryptKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE
+
+  end
+
+  @[Extern]
+  record CMSG_CTRL_MAIL_LIST_DECRYPT_PARA,
+    cbSize : UInt32,
+    hCryptProv : LibC::UIntPtrT,
+    pMailList : Win32cr::Security::Cryptography::CMSG_MAIL_LIST_RECIPIENT_INFO*,
+    dwRecipientIndex : UInt32,
+    dwKeyChoice : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      hKeyEncryptionKey : LibC::UIntPtrT,
+      pvKeyEncryptionKey : Void*
+
+  end
+
+  @[Extern]
+  record CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA,
+    cbSize : UInt32,
+    dwSignerIndex : UInt32,
+    blob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA,
+    cbSize : UInt32,
+    dwSignerIndex : UInt32,
+    dwUnauthAttrIndex : UInt32
+
+  @[Extern]
+  record CMSG_CONTENT_ENCRYPT_INFO,
+    cbSize : UInt32,
+    hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY,
+    content_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pvEncryptionAuxInfo : Void*,
+    cRecipients : UInt32,
+    rgCmsRecipients : Win32cr::Security::Cryptography::CMSG_RECIPIENT_ENCODE_INFO*,
+    pfnAlloc : Win32cr::Security::Cryptography::PFN_CMSG_ALLOC,
+    pfnFree : Win32cr::Security::Cryptography::PFN_CMSG_FREE,
+    dwEncryptFlags : UInt32,
+    anonymous : Anonymous_e__Union,
+    dwFlags : UInt32,
+    fCNG : Win32cr::Foundation::BOOL,
+    pbCNGContentEncryptKeyObject : UInt8*,
+    pbContentEncryptKey : UInt8*,
+    cbContentEncryptKey : UInt32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      hContentEncryptKey : LibC::UIntPtrT,
+      hCNGContentEncryptKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE
+
+  end
+
+  @[Extern]
+  record CMSG_KEY_TRANS_ENCRYPT_INFO,
+    cbSize : UInt32,
+    dwRecipientIndex : UInt32,
+    key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    dwFlags : UInt32
+
+  @[Extern]
+  record CMSG_KEY_AGREE_KEY_ENCRYPT_INFO,
+    cbSize : UInt32,
+    encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CMSG_KEY_AGREE_ENCRYPT_INFO,
+    cbSize : UInt32,
+    dwRecipientIndex : UInt32,
+    key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    user_keying_material : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    dwOriginatorChoice : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_ORIGINATOR,
+    anonymous : Anonymous_e__Union,
+    cKeyAgreeKeyEncryptInfo : UInt32,
+    rgpKeyAgreeKeyEncryptInfo : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_KEY_ENCRYPT_INFO**,
+    dwFlags : UInt32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      originator_cert_id : Win32cr::Security::Cryptography::CERT_ID,
+      originator_public_key_info : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO
+
+  end
+
+  @[Extern]
+  record CMSG_MAIL_LIST_ENCRYPT_INFO,
+    cbSize : UInt32,
+    dwRecipientIndex : UInt32,
+    key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    dwFlags : UInt32
+
+  @[Extern]
+  record CMSG_CNG_CONTENT_DECRYPT_INFO,
+    cbSize : UInt32,
+    content_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pfnAlloc : Win32cr::Security::Cryptography::PFN_CMSG_ALLOC,
+    pfnFree : Win32cr::Security::Cryptography::PFN_CMSG_FREE,
+    hNCryptKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE,
+    pbContentEncryptKey : UInt8*,
+    cbContentEncryptKey : UInt32,
+    hCNGContentEncryptKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE,
+    pbCNGContentEncryptKeyObject : UInt8*
+
+  @[Extern]
+  record CERT_CONTEXT,
+    dwCertEncodingType : UInt32,
+    pbCertEncoded : UInt8*,
+    cbCertEncoded : UInt32,
+    pCertInfo : Win32cr::Security::Cryptography::CERT_INFO*,
+    hCertStore : Win32cr::Security::Cryptography::HCERTSTORE
+
+  @[Extern]
+  record CRL_CONTEXT,
+    dwCertEncodingType : UInt32,
+    pbCrlEncoded : UInt8*,
+    cbCrlEncoded : UInt32,
+    pCrlInfo : Win32cr::Security::Cryptography::CRL_INFO*,
+    hCertStore : Win32cr::Security::Cryptography::HCERTSTORE
+
+  @[Extern]
+  record CTL_CONTEXT,
+    dwMsgAndCertEncodingType : UInt32,
+    pbCtlEncoded : UInt8*,
+    cbCtlEncoded : UInt32,
+    pCtlInfo : Win32cr::Security::Cryptography::CTL_INFO*,
+    hCertStore : Win32cr::Security::Cryptography::HCERTSTORE,
+    hCryptMsg : Void*,
+    pbCtlContent : UInt8*,
+    cbCtlContent : UInt32
+
+  @[Extern]
+  record CRYPT_KEY_PROV_PARAM,
+    dwParam : UInt32,
+    pbData : UInt8*,
+    cbData : UInt32,
+    dwFlags : UInt32
+
+  @[Extern]
+  record CRYPT_KEY_PROV_INFO,
+    pwszContainerName : Win32cr::Foundation::PWSTR,
+    pwszProvName : Win32cr::Foundation::PWSTR,
+    dwProvType : UInt32,
+    dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS,
+    cProvParam : UInt32,
+    rgProvParam : Win32cr::Security::Cryptography::CRYPT_KEY_PROV_PARAM*,
+    dwKeySpec : UInt32
+
+  @[Extern]
+  record CERT_KEY_CONTEXT,
+    cbSize : UInt32,
+    anonymous : Anonymous_e__Union,
+    dwKeySpec : UInt32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      hCryptProv : LibC::UIntPtrT,
+      hNCryptKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE
+
+  end
+
+  @[Extern]
+  record ROOT_INFO_LUID,
+    low_part : UInt32,
     high_part : Int32
-  end
-  struct CRYPT_SMART_CARD_ROOT_INFO
-    rgb_card_id : UInt8[16]*
-    luid : ROOT_INFO_LUID
-  end
-  struct CERT_SYSTEM_STORE_RELOCATE_PARA
-    anonymous1 : CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous1_e__Union
-    anonymous2 : CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union
-  end
-  struct CERT_REGISTRY_STORE_CLIENT_GPT_PARA
-    h_key_base : HKEY
-    pwsz_reg_path : LibC::LPWSTR
-  end
-  struct CERT_REGISTRY_STORE_ROAMING_PARA
-    h_key : HKEY
-    pwsz_store_directory : LibC::LPWSTR
-  end
-  struct CERT_LDAP_STORE_OPENED_PARA
-    pv_ldap_session_handle : Void*
-    pwsz_ldap_url : LibC::LPWSTR
-  end
-  struct CERT_STORE_PROV_INFO
-    cb_size : UInt32
-    c_store_prov_func : UInt32
-    rgpv_store_prov_func : Void**
-    h_store_prov : Void*
-    dw_store_prov_flags : CERT_STORE_PROV_FLAGS
-    h_store_prov_func_addr2 : Void*
-  end
-  struct CERT_STORE_PROV_FIND_INFO
-    cb_size : UInt32
-    dw_msg_and_cert_encoding_type : UInt32
-    dw_find_flags : UInt32
-    dw_find_type : UInt32
-    pv_find_para : Void*
-  end
-  struct CRL_FIND_ISSUED_FOR_PARA
-    p_subject_cert : CERT_CONTEXT*
-    p_issuer_cert : CERT_CONTEXT*
-  end
-  struct CTL_ANY_SUBJECT_INFO
-    subject_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    subject_identifier : CRYPTOAPI_BLOB
-  end
-  struct CTL_FIND_USAGE_PARA
-    cb_size : UInt32
-    subject_usage : CTL_USAGE
-    list_identifier : CRYPTOAPI_BLOB
-    p_signer : CERT_INFO*
-  end
-  struct CTL_FIND_SUBJECT_PARA
-    cb_size : UInt32
-    p_usage_para : CTL_FIND_USAGE_PARA*
-    dw_subject_type : UInt32
-    pv_subject : Void*
-  end
-  struct CERT_CREATE_CONTEXT_PARA
-    cb_size : UInt32
-    pfn_free : PFN_CRYPT_FREE
-    pv_free : Void*
-    pfn_sort : PFN_CERT_CREATE_CONTEXT_SORT_FUNC
-    pv_sort : Void*
-  end
-  struct CERT_SYSTEM_STORE_INFO
-    cb_size : UInt32
-  end
-  struct CERT_PHYSICAL_STORE_INFO
-    cb_size : UInt32
-    psz_open_store_provider : PSTR
-    dw_open_encoding_type : UInt32
-    dw_open_flags : UInt32
-    open_parameters : CRYPTOAPI_BLOB
-    dw_flags : UInt32
-    dw_priority : UInt32
-  end
-  struct CTL_VERIFY_USAGE_PARA
-    cb_size : UInt32
-    list_identifier : CRYPTOAPI_BLOB
-    c_ctl_store : UInt32
-    rgh_ctl_store : Void**
-    c_signer_store : UInt32
-    rgh_signer_store : Void**
-  end
-  struct CTL_VERIFY_USAGE_STATUS
-    cb_size : UInt32
-    dw_error : UInt32
-    dw_flags : UInt32
-    pp_ctl : CTL_CONTEXT**
-    dw_ctl_entry_index : UInt32
-    pp_signer : CERT_CONTEXT**
-    dw_signer_index : UInt32
-  end
-  struct CERT_REVOCATION_CRL_INFO
-    cb_size : UInt32
-    p_base_crl_context : CRL_CONTEXT*
-    p_delta_crl_context : CRL_CONTEXT*
-    p_crl_entry : CRL_ENTRY*
-    f_delta_crl_entry : LibC::BOOL
-  end
-  struct CERT_REVOCATION_PARA
-    cb_size : UInt32
-    p_issuer_cert : CERT_CONTEXT*
-    c_cert_store : UInt32
-    rg_cert_store : Void**
-    h_crl_store : Void*
-    pft_time_to_use : FILETIME*
-  end
-  struct CERT_REVOCATION_STATUS
-    cb_size : UInt32
-    dw_index : UInt32
-    dw_error : UInt32
-    dw_reason : CERT_REVOCATION_STATUS_REASON
-    f_has_freshness_time : LibC::BOOL
-    dw_freshness_time : UInt32
-  end
-  struct CRYPT_VERIFY_CERT_SIGN_STRONG_PROPERTIES_INFO
-    cert_sign_hash_cng_alg_prop_data : CRYPTOAPI_BLOB
-    cert_issuer_pub_key_bit_length_prop_data : CRYPTOAPI_BLOB
-  end
-  struct CRYPT_VERIFY_CERT_SIGN_WEAK_HASH_INFO
-    c_cng_hash_algid : UInt32
-    rgpwsz_cng_hash_algid : LibC::LPWSTR*
-    dw_weak_index : UInt32
-  end
-  struct CRYPT_DEFAULT_CONTEXT_MULTI_OID_PARA
-    c_oid : UInt32
-    rgpsz_oid : PSTR*
-  end
-  struct CRYPT_SIGN_MESSAGE_PARA
-    cb_size : UInt32
-    dw_msg_encoding_type : UInt32
-    p_signing_cert : CERT_CONTEXT*
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pv_hash_aux_info : Void*
-    c_msg_cert : UInt32
-    rgp_msg_cert : CERT_CONTEXT**
-    c_msg_crl : UInt32
-    rgp_msg_crl : CRL_CONTEXT**
-    c_auth_attr : UInt32
-    rg_auth_attr : CRYPT_ATTRIBUTE*
-    c_unauth_attr : UInt32
-    rg_unauth_attr : CRYPT_ATTRIBUTE*
-    dw_flags : UInt32
-    dw_inner_content_type : UInt32
-  end
-  struct CRYPT_VERIFY_MESSAGE_PARA
-    cb_size : UInt32
-    dw_msg_and_cert_encoding_type : UInt32
-    h_crypt_prov : LibC::UINT_PTR
-    pfn_get_signer_certificate : PFN_CRYPT_GET_SIGNER_CERTIFICATE
-    pv_get_arg : Void*
-  end
-  struct CRYPT_ENCRYPT_MESSAGE_PARA
-    cb_size : UInt32
-    dw_msg_encoding_type : UInt32
-    h_crypt_prov : LibC::UINT_PTR
-    content_encryption_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pv_encryption_aux_info : Void*
-    dw_flags : UInt32
-    dw_inner_content_type : UInt32
-  end
-  struct CRYPT_DECRYPT_MESSAGE_PARA
-    cb_size : UInt32
-    dw_msg_and_cert_encoding_type : UInt32
-    c_cert_store : UInt32
-    rgh_cert_store : Void**
-  end
-  struct CRYPT_HASH_MESSAGE_PARA
-    cb_size : UInt32
-    dw_msg_encoding_type : UInt32
-    h_crypt_prov : LibC::UINT_PTR
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pv_hash_aux_info : Void*
-  end
-  struct CRYPT_KEY_SIGN_MESSAGE_PARA
-    cb_size : UInt32
-    dw_msg_and_cert_encoding_type : CERT_QUERY_ENCODING_TYPE
-    anonymous : CRYPT_KEY_SIGN_MESSAGE_PARA_Anonymous_e__Union
-    dw_key_spec : CERT_KEY_SPEC
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    pv_hash_aux_info : Void*
-    pub_key_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-  end
-  struct CRYPT_KEY_VERIFY_MESSAGE_PARA
-    cb_size : UInt32
-    dw_msg_encoding_type : UInt32
-    h_crypt_prov : LibC::UINT_PTR
-  end
-  struct CERT_CHAIN
-    c_certs : UInt32
-    certs : CRYPTOAPI_BLOB*
-    key_locator_info : CRYPT_KEY_PROV_INFO
-  end
-  struct CRYPT_BLOB_ARRAY
-    c_blob : UInt32
-    rg_blob : CRYPTOAPI_BLOB*
-  end
-  struct CRYPT_CREDENTIALS
-    cb_size : UInt32
-    psz_credentials_oid : PSTR
-    pv_credentials : Void*
-  end
-  struct CRYPT_PASSWORD_CREDENTIALSA
-    cb_size : UInt32
-    psz_username : PSTR
-    psz_password : PSTR
-  end
-  struct CRYPT_PASSWORD_CREDENTIALSW
-    cb_size : UInt32
-    psz_username : LibC::LPWSTR
-    psz_password : LibC::LPWSTR
-  end
-  struct CRYPTNET_URL_CACHE_PRE_FETCH_INFO
-    cb_size : UInt32
-    dw_object_type : UInt32
-    dw_error : UInt32
-    dw_reserved : UInt32
-    this_update_time : FILETIME
-    next_update_time : FILETIME
-    publish_time : FILETIME
-  end
-  struct CRYPTNET_URL_CACHE_FLUSH_INFO
-    cb_size : UInt32
-    dw_exempt_seconds : UInt32
-    expire_time : FILETIME
-  end
-  struct CRYPTNET_URL_CACHE_RESPONSE_INFO
-    cb_size : UInt32
-    w_response_type : UInt16
-    w_response_flags : UInt16
-    last_modified_time : FILETIME
-    dw_max_age : UInt32
-    pwsz_e_tag : LibC::LPWSTR
-    dw_proxy_id : UInt32
-  end
-  struct CRYPT_RETRIEVE_AUX_INFO
-    cb_size : UInt32
-    p_last_sync_time : FILETIME*
-    dw_max_url_retrieval_byte_count : UInt32
-    p_pre_fetch_info : CRYPTNET_URL_CACHE_PRE_FETCH_INFO*
-    p_flush_info : CRYPTNET_URL_CACHE_FLUSH_INFO*
-    pp_response_info : CRYPTNET_URL_CACHE_RESPONSE_INFO**
-    pwsz_cache_file_name_prefix : LibC::LPWSTR
-    pft_cache_resync : FILETIME*
-    f_proxy_cache_retrieval : LibC::BOOL
-    dw_http_status_code : UInt32
-    ppwsz_error_response_headers : LibC::LPWSTR*
-    pp_error_content_blob : CRYPTOAPI_BLOB**
-  end
-  struct CRYPT_ASYNC_RETRIEVAL_COMPLETION
-    pfn_completion : PFN_CRYPT_ASYNC_RETRIEVAL_COMPLETION_FUNC
-    pv_completion : Void*
-  end
-  struct CRYPT_URL_ARRAY
-    c_url : UInt32
-    rgwsz_url : LibC::LPWSTR*
-  end
-  struct CRYPT_URL_INFO
-    cb_size : UInt32
-    dw_sync_delta_time : UInt32
-    c_group : UInt32
-    rgc_group_entry : UInt32*
-  end
-  struct CERT_CRL_CONTEXT_PAIR
-    p_cert_context : CERT_CONTEXT*
-    p_crl_context : CRL_CONTEXT*
-  end
-  struct CRYPT_GET_TIME_VALID_OBJECT_EXTRA_INFO
-    cb_size : UInt32
-    i_delta_crl_indicator : Int32
-    pft_cache_resync : FILETIME*
-    p_last_sync_time : FILETIME*
-    p_max_age_time : FILETIME*
-    p_chain_para : CERT_REVOCATION_CHAIN_PARA*
-    p_delta_crl_indicator : CRYPTOAPI_BLOB*
-  end
-  struct CERT_CHAIN_ENGINE_CONFIG
-    cb_size : UInt32
-    h_restricted_root : Void*
-    h_restricted_trust : Void*
-    h_restricted_other : Void*
-    c_additional_store : UInt32
-    rgh_additional_store : Void**
-    dw_flags : UInt32
-    dw_url_retrieval_timeout : UInt32
-    maximum_cached_certificates : UInt32
-    cycle_detection_modulus : UInt32
-    h_exclusive_root : Void*
-    h_exclusive_trusted_people : Void*
-    dw_exclusive_flags : UInt32
-  end
-  struct CERT_TRUST_STATUS
-    dw_error_status : UInt32
-    dw_info_status : UInt32
-  end
-  struct CERT_REVOCATION_INFO
-    cb_size : UInt32
-    dw_revocation_result : UInt32
-    psz_revocation_oid : PSTR
-    pv_oid_specific_info : Void*
-    f_has_freshness_time : LibC::BOOL
-    dw_freshness_time : UInt32
-    p_crl_info : CERT_REVOCATION_CRL_INFO*
-  end
-  struct CERT_TRUST_LIST_INFO
-    cb_size : UInt32
-    p_ctl_entry : CTL_ENTRY*
-    p_ctl_context : CTL_CONTEXT*
-  end
-  struct CERT_CHAIN_ELEMENT
-    cb_size : UInt32
-    p_cert_context : CERT_CONTEXT*
-    trust_status : CERT_TRUST_STATUS
-    p_revocation_info : CERT_REVOCATION_INFO*
-    p_issuance_usage : CTL_USAGE*
-    p_application_usage : CTL_USAGE*
-    pwsz_extended_error_info : LibC::LPWSTR
-  end
-  struct CERT_SIMPLE_CHAIN
-    cb_size : UInt32
-    trust_status : CERT_TRUST_STATUS
-    c_element : UInt32
-    rgp_element : CERT_CHAIN_ELEMENT**
-    p_trust_list_info : CERT_TRUST_LIST_INFO*
-    f_has_revocation_freshness_time : LibC::BOOL
-    dw_revocation_freshness_time : UInt32
-  end
-  struct CERT_CHAIN_CONTEXT
-    cb_size : UInt32
-    trust_status : CERT_TRUST_STATUS
-    c_chain : UInt32
-    rgp_chain : CERT_SIMPLE_CHAIN**
-    c_lower_quality_chain_context : UInt32
-    rgp_lower_quality_chain_context : CERT_CHAIN_CONTEXT**
-    f_has_revocation_freshness_time : LibC::BOOL
-    dw_revocation_freshness_time : UInt32
-    dw_create_flags : UInt32
-    chain_id : Guid
-  end
-  struct CERT_USAGE_MATCH
-    dw_type : UInt32
-    usage : CTL_USAGE
-  end
-  struct CTL_USAGE_MATCH
-    dw_type : UInt32
-    usage : CTL_USAGE
-  end
-  struct CERT_CHAIN_PARA
-    cb_size : UInt32
-    requested_usage : CERT_USAGE_MATCH
-  end
-  struct CERT_REVOCATION_CHAIN_PARA
-    cb_size : UInt32
-    h_chain_engine : HCERTCHAINENGINE
-    h_additional_store : Void*
-    dw_chain_flags : UInt32
-    dw_url_retrieval_timeout : UInt32
-    pft_current_time : FILETIME*
-    pft_cache_resync : FILETIME*
-    cb_max_url_retrieval_byte_count : UInt32
-  end
-  struct CRL_REVOCATION_INFO
-    p_crl_entry : CRL_ENTRY*
-    p_crl_context : CRL_CONTEXT*
-    p_crl_issuer_chain : CERT_CHAIN_CONTEXT*
-  end
-  struct CERT_CHAIN_FIND_BY_ISSUER_PARA
-    cb_size : UInt32
-    psz_usage_identifier : PSTR
-    dw_key_spec : UInt32
-    dw_acquire_private_key_flags : UInt32
-    c_issuer : UInt32
-    rg_issuer : CRYPTOAPI_BLOB*
-    pfn_find_callback : PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK
-    pv_find_arg : Void*
-  end
-  struct CERT_CHAIN_POLICY_PARA
-    cb_size : UInt32
-    dw_flags : CERT_CHAIN_POLICY_FLAGS
-    pv_extra_policy_para : Void*
-  end
-  struct CERT_CHAIN_POLICY_STATUS
-    cb_size : UInt32
-    dw_error : UInt32
-    l_chain_index : Int32
-    l_element_index : Int32
-    pv_extra_policy_status : Void*
-  end
-  struct AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_PARA
-    cb_size : UInt32
-    dw_reg_policy_settings : UInt32
-    p_signer_info : CMSG_SIGNER_INFO*
-  end
-  struct AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_STATUS
-    cb_size : UInt32
-    f_commercial : LibC::BOOL
-  end
-  struct AUTHENTICODE_TS_EXTRA_CERT_CHAIN_POLICY_PARA
-    cb_size : UInt32
-    dw_reg_policy_settings : UInt32
-    f_commercial : LibC::BOOL
-  end
-  struct HTTPSPolicyCallbackData
-    anonymous : HTTPSPolicyCallbackData_Anonymous_e__Union
-    dw_auth_type : HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE
-    fdw_checks : UInt32
-    pwsz_server_name : LibC::LPWSTR
-  end
-  struct EV_EXTRA_CERT_CHAIN_POLICY_PARA
-    cb_size : UInt32
-    dw_root_program_qualifier_flags : CERT_ROOT_PROGRAM_FLAGS
-  end
-  struct EV_EXTRA_CERT_CHAIN_POLICY_STATUS
-    cb_size : UInt32
-    dw_qualifiers : UInt32
-    dw_issuance_usage_index : UInt32
-  end
-  struct SSL_F12_EXTRA_CERT_CHAIN_POLICY_STATUS
-    cb_size : UInt32
-    dw_error_level : UInt32
-    dw_error_category : UInt32
-    dw_reserved : UInt32
-    wsz_error_text : Char[256]*
-  end
-  struct SSL_HPKP_HEADER_EXTRA_CERT_CHAIN_POLICY_PARA
-    cb_size : UInt32
-    dw_reserved : UInt32
-    pwsz_server_name : LibC::LPWSTR
-    rgpsz_hpkp_value : PSTR[2]*
-  end
-  struct SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_PARA
-    cb_size : UInt32
-    dw_reserved : UInt32
-    pwsz_server_name : LibC::LPWSTR
-  end
-  struct SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_STATUS
-    cb_size : UInt32
-    l_error : Int32
-    wsz_error_text : Char[512]*
-  end
-  struct CRYPT_PKCS12_PBE_PARAMS
-    i_iterations : Int32
-    cb_salt : UInt32
-  end
-  struct PKCS12_PBES2_EXPORT_PARAMS
-    dw_size : UInt32
-    h_ncrypt_descriptor : Void*
-    pwsz_pbes2_alg : LibC::LPWSTR
-  end
-  struct CERT_SERVER_OCSP_RESPONSE_CONTEXT
-    cb_size : UInt32
-    pb_encoded_ocsp_response : UInt8*
-    cb_encoded_ocsp_response : UInt32
-  end
-  struct CERT_SERVER_OCSP_RESPONSE_OPEN_PARA
-    cb_size : UInt32
-    dw_flags : UInt32
-    pcb_used_size : UInt32*
-    pwsz_ocsp_directory : LibC::LPWSTR
-    pfn_update_callback : PFN_CERT_SERVER_OCSP_RESPONSE_UPDATE_CALLBACK
-    pv_update_callback_arg : Void*
-  end
-  struct CERT_SELECT_CHAIN_PARA
-    h_chain_engine : HCERTCHAINENGINE
-    p_time : FILETIME*
-    h_additional_store : Void*
-    p_chain_para : CERT_CHAIN_PARA*
-    dw_flags : UInt32
-  end
-  struct CERT_SELECT_CRITERIA
-    dw_type : CERT_SELECT_CRITERIA_TYPE
-    c_para : UInt32
-    pp_para : Void**
-  end
-  struct CRYPT_TIMESTAMP_REQUEST
-    dw_version : CRYPT_TIMESTAMP_VERSION
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    hashed_message : CRYPTOAPI_BLOB
-    psz_tsa_policy_id : PSTR
-    nonce : CRYPTOAPI_BLOB
-    f_cert_req : LibC::BOOL
-    c_extension : UInt32
-    rg_extension : CERT_EXTENSION*
-  end
-  struct CRYPT_TIMESTAMP_RESPONSE
-    dw_status : CRYPT_TIMESTAMP_RESPONSE_STATUS
-    c_free_text : UInt32
-    rg_free_text : LibC::LPWSTR*
-    failure_info : CRYPT_BIT_BLOB
-    content_info : CRYPTOAPI_BLOB
-  end
-  struct CRYPT_TIMESTAMP_ACCURACY
-    dw_seconds : UInt32
-    dw_millis : UInt32
-    dw_micros : UInt32
-  end
-  struct CRYPT_TIMESTAMP_INFO
-    dw_version : UInt32
-    psz_tsa_policy_id : PSTR
-    hash_algorithm : CRYPT_ALGORITHM_IDENTIFIER
-    hashed_message : CRYPTOAPI_BLOB
-    serial_number : CRYPTOAPI_BLOB
-    ft_time : FILETIME
-    pv_accuracy : CRYPT_TIMESTAMP_ACCURACY*
-    f_ordering : LibC::BOOL
-    nonce : CRYPTOAPI_BLOB
-    tsa : CRYPTOAPI_BLOB
-    c_extension : UInt32
-    rg_extension : CERT_EXTENSION*
-  end
-  struct CRYPT_TIMESTAMP_CONTEXT
-    cb_encoded : UInt32
-    pb_encoded : UInt8*
-    p_time_stamp : CRYPT_TIMESTAMP_INFO*
-  end
-  struct CRYPT_TIMESTAMP_PARA
-    psz_tsa_policy_id : PSTR
-    f_request_certs : LibC::BOOL
-    nonce : CRYPTOAPI_BLOB
-    c_extension : UInt32
-    rg_extension : CERT_EXTENSION*
-  end
-  struct CRYPT_OBJECT_LOCATOR_PROVIDER_TABLE
-    cb_size : UInt32
-    pfn_get : PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_GET
-    pfn_release : PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE
-    pfn_free_password : PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_PASSWORD
-    pfn_free : PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE
-    pfn_free_identifier : PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_IDENTIFIER
-  end
-  struct CRYPTPROTECT_PROMPTSTRUCT
-    cb_size : UInt32
-    dw_prompt_flags : UInt32
-    hwnd_app : HANDLE
-    sz_prompt : LibC::LPWSTR
-  end
-  struct NCRYPT_PROTECT_STREAM_INFO
-    pfn_stream_output : PFNCryptStreamOutputCallback
-    pv_callback_ctxt : Void*
-  end
-  struct NCRYPT_PROTECT_STREAM_INFO_EX
-    pfn_stream_output : PFNCryptStreamOutputCallbackEx
-    pv_callback_ctxt : Void*
-  end
-  struct CRYPT_XML_BLOB
-    dw_charset : CRYPT_XML_CHARSET
-    cb_data : UInt32
-    pb_data : UInt8*
-  end
-  struct CRYPT_XML_DATA_BLOB
-    cb_data : UInt32
-    pb_data : UInt8*
-  end
-  struct CRYPT_XML_PROPERTY
-    dw_prop_id : CRYPT_XML_PROPERTY_ID
-    pv_value : Void*
-    cb_value : UInt32
-  end
-  struct CRYPT_XML_DATA_PROVIDER
-    pv_callback_state : Void*
-    cb_buffer_size : UInt32
-    pfn_read : PFN_CRYPT_XML_DATA_PROVIDER_READ
-    pfn_close : PFN_CRYPT_XML_DATA_PROVIDER_CLOSE
-  end
-  struct CRYPT_XML_STATUS
-    cb_size : UInt32
-    dw_error_status : CRYPT_XML_STATUS_ERROR_STATUS
-    dw_info_status : CRYPT_XML_STATUS_INFO_STATUS
-  end
-  struct CRYPT_XML_ALGORITHM
-    cb_size : UInt32
-    wsz_algorithm : LibC::LPWSTR
-    encoded : CRYPT_XML_BLOB
-  end
-  struct CRYPT_XML_TRANSFORM_INFO
-    cb_size : UInt32
-    wsz_algorithm : LibC::LPWSTR
-    cb_buffer_size : UInt32
-    dw_flags : CRYPT_XML_TRANSFORM_FLAGS
-    pfn_create_transform : PFN_CRYPT_XML_CREATE_TRANSFORM
-  end
-  struct CRYPT_XML_TRANSFORM_CHAIN_CONFIG
-    cb_size : UInt32
-    c_transform_info : UInt32
-    rgp_transform_info : CRYPT_XML_TRANSFORM_INFO**
-  end
-  struct CRYPT_XML_KEY_DSA_KEY_VALUE
-    p : CRYPT_XML_DATA_BLOB
-    q : CRYPT_XML_DATA_BLOB
-    g : CRYPT_XML_DATA_BLOB
-    y : CRYPT_XML_DATA_BLOB
-    j : CRYPT_XML_DATA_BLOB
-    seed : CRYPT_XML_DATA_BLOB
-    counter : CRYPT_XML_DATA_BLOB
-  end
-  struct CRYPT_XML_KEY_ECDSA_KEY_VALUE
-    wsz_named_curve : LibC::LPWSTR
-    x : CRYPT_XML_DATA_BLOB
-    y : CRYPT_XML_DATA_BLOB
-    explicit_para : CRYPT_XML_BLOB
-  end
-  struct CRYPT_XML_KEY_RSA_KEY_VALUE
-    modulus : CRYPT_XML_DATA_BLOB
-    exponent : CRYPT_XML_DATA_BLOB
-  end
-  struct CRYPT_XML_KEY_VALUE
-    dw_type : CRYPT_XML_KEY_VALUE_TYPE
-    anonymous : CRYPT_XML_KEY_VALUE_Anonymous_e__Union
-  end
-  struct CRYPT_XML_ISSUER_SERIAL
-    wsz_issuer : LibC::LPWSTR
-    wsz_serial : LibC::LPWSTR
-  end
-  struct CRYPT_XML_X509DATA_ITEM
-    dw_type : CRYPT_XML_X509DATA_TYPE
-    anonymous : CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union
-  end
-  struct CRYPT_XML_X509DATA
-    c_x509_data : UInt32
-    rg_x509_data : CRYPT_XML_X509DATA_ITEM*
-  end
-  struct CRYPT_XML_KEY_INFO_ITEM
-    dw_type : CRYPT_XML_KEYINFO_TYPE
-    anonymous : CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union
-  end
-  struct CRYPT_XML_KEY_INFO
-    cb_size : UInt32
-    wsz_id : LibC::LPWSTR
-    c_key_info : UInt32
-    rg_key_info : CRYPT_XML_KEY_INFO_ITEM*
-    h_verify_key : BCRYPT_KEY_HANDLE
-  end
-  struct CRYPT_XML_REFERENCE
-    cb_size : UInt32
-    h_reference : Void*
-    wsz_id : LibC::LPWSTR
-    wsz_uri : LibC::LPWSTR
-    wsz_type : LibC::LPWSTR
-    digest_method : CRYPT_XML_ALGORITHM
-    digest_value : CRYPTOAPI_BLOB
-    c_transform : UInt32
-    rg_transform : CRYPT_XML_ALGORITHM*
-  end
-  struct CRYPT_XML_REFERENCES
-    c_reference : UInt32
-    rgp_reference : CRYPT_XML_REFERENCE**
-  end
-  struct CRYPT_XML_SIGNED_INFO
-    cb_size : UInt32
-    wsz_id : LibC::LPWSTR
-    canonicalization : CRYPT_XML_ALGORITHM
-    signature_method : CRYPT_XML_ALGORITHM
-    c_reference : UInt32
-    rgp_reference : CRYPT_XML_REFERENCE**
-    encoded : CRYPT_XML_BLOB
-  end
-  struct CRYPT_XML_OBJECT
-    cb_size : UInt32
-    h_object : Void*
-    wsz_id : LibC::LPWSTR
-    wsz_mime_type : LibC::LPWSTR
-    wsz_encoding : LibC::LPWSTR
-    manifest : CRYPT_XML_REFERENCES
-    encoded : CRYPT_XML_BLOB
-  end
-  struct CRYPT_XML_SIGNATURE
-    cb_size : UInt32
-    h_signature : Void*
-    wsz_id : LibC::LPWSTR
-    signed_info : CRYPT_XML_SIGNED_INFO
-    signature_value : CRYPTOAPI_BLOB
-    p_key_info : CRYPT_XML_KEY_INFO*
-    c_object : UInt32
-    rgp_object : CRYPT_XML_OBJECT**
-  end
-  struct CRYPT_XML_DOC_CTXT
-    cb_size : UInt32
-    h_doc_ctxt : Void*
-    p_transforms_config : CRYPT_XML_TRANSFORM_CHAIN_CONFIG*
-    c_signature : UInt32
-    rgp_signature : CRYPT_XML_SIGNATURE**
-  end
-  struct CRYPT_XML_KEYINFO_PARAM
-    wsz_id : LibC::LPWSTR
-    wsz_key_name : LibC::LPWSTR
-    ski : CRYPTOAPI_BLOB
-    wsz_subject_name : LibC::LPWSTR
-    c_certificate : UInt32
-    rg_certificate : CRYPTOAPI_BLOB*
-    c_crl : UInt32
-    rg_crl : CRYPTOAPI_BLOB*
-  end
-  struct CRYPT_XML_ALGORITHM_INFO
-    cb_size : UInt32
-    wsz_algorithm_uri : LibC::LPWSTR
-    wsz_name : LibC::LPWSTR
-    dw_group_id : CRYPT_XML_GROUP_ID
-    wsz_cng_algid : LibC::LPWSTR
-    wsz_cng_extra_algid : LibC::LPWSTR
-    dw_sign_flags : UInt32
-    dw_verify_flags : UInt32
-    pv_padding_info : Void*
-    pv_extra_info : Void*
-  end
-  struct CRYPT_XML_CRYPTOGRAPHIC_INTERFACE
-    cb_size : UInt32
-    fp_crypt_xml_encode_algorithm : CryptXmlDllEncodeAlgorithm
-    fp_crypt_xml_create_digest : CryptXmlDllCreateDigest
-    fp_crypt_xml_digest_data : CryptXmlDllDigestData
-    fp_crypt_xml_finalize_digest : CryptXmlDllFinalizeDigest
-    fp_crypt_xml_close_digest : CryptXmlDllCloseDigest
-    fp_crypt_xml_sign_data : CryptXmlDllSignData
-    fp_crypt_xml_verify_signature : CryptXmlDllVerifySignature
-    fp_crypt_xml_get_algorithm_info : CryptXmlDllGetAlgorithmInfo
-  end
-  struct INFORMATIONCARD_ASYMMETRIC_CRYPTO_PARAMETERS
-    key_size : Int32
-    key_exchange_algorithm : LibC::LPWSTR
-    signature_algorithm : LibC::LPWSTR
-  end
-  struct INFORMATIONCARD_SYMMETRIC_CRYPTO_PARAMETERS
-    key_size : Int32
-    block_size : Int32
-    feedback_size : Int32
-  end
-  struct INFORMATIONCARD_TRANSFORM_CRYPTO_PARAMETERS
-    input_block_size : Int32
-    output_block_size : Int32
-    can_transform_multiple_blocks : LibC::BOOL
-    can_reuse_transform : LibC::BOOL
-  end
-  struct INFORMATIONCARD_HASH_CRYPTO_PARAMETERS
-    hash_size : Int32
-    transform : INFORMATIONCARD_TRANSFORM_CRYPTO_PARAMETERS
-  end
-  struct INFORMATIONCARD_CRYPTO_HANDLE
-    type : HandleType
-    expiration : Int64
-    crypto_parameters : Void*
-  end
-  struct GENERIC_XML_TOKEN
-    create_date : FILETIME
-    expiry_date : FILETIME
-    xml_token : LibC::LPWSTR
-    internal_token_reference : LibC::LPWSTR
-    external_token_reference : LibC::LPWSTR
-  end
-  struct CRYPTO_POLICY_ELEMENT
-    target_endpoint_address : LibC::LPWSTR
-    issuer_endpoint_address : LibC::LPWSTR
-    issued_token_parameters : LibC::LPWSTR
-    privacy_notice_link : LibC::LPWSTR
-    privacy_notice_version : UInt32
-    use_managed_presentation : LibC::BOOL
-  end
-  struct ENDPOINTADDRESS
-    service_url : LibC::LPWSTR
-    policy_url : LibC::LPWSTR
-    raw_certificate : CRYPTOAPI_BLOB
-  end
-  struct ENDPOINTADDRESS2
-    service_url : LibC::LPWSTR
-    policy_url : LibC::LPWSTR
-    identity_type : UInt32
-    identity_bytes : Void*
-  end
-  struct CERTIFICATE_CHAIN_BLOB
-    cert_count : UInt32
-    raw_certificates : CRYPTOAPI_BLOB*
-  end
-  struct CLAIMLIST
-    count : UInt32
-    claims : LibC::LPWSTR*
-  end
-  struct RECIPIENTPOLICY
-    recipient : ENDPOINTADDRESS
-    issuer : ENDPOINTADDRESS
-    token_type : LibC::LPWSTR
-    required_claims : CLAIMLIST
-    optional_claims : CLAIMLIST
-    privacy_url : LibC::LPWSTR
-    privacy_version : UInt32
-  end
-  struct RECIPIENTPOLICY2
-    recipient : ENDPOINTADDRESS2
-    issuer : ENDPOINTADDRESS2
-    token_type : LibC::LPWSTR
-    required_claims : CLAIMLIST
-    optional_claims : CLAIMLIST
-    privacy_url : LibC::LPWSTR
-    privacy_version : UInt32
-  end
-
-
-  struct ICertSrvSetupKeyInformationVTbl
-    query_interface : Proc(ICertSrvSetupKeyInformation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICertSrvSetupKeyInformation*, UInt32)
-    release : Proc(ICertSrvSetupKeyInformation*, UInt32)
-    get_type_info_count : Proc(ICertSrvSetupKeyInformation*, UInt32*, HRESULT)
-    get_type_info : Proc(ICertSrvSetupKeyInformation*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ICertSrvSetupKeyInformation*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ICertSrvSetupKeyInformation*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_provider_name : Proc(ICertSrvSetupKeyInformation*, UInt8**, HRESULT)
-    put_provider_name : Proc(ICertSrvSetupKeyInformation*, UInt8*, HRESULT)
-    get_length : Proc(ICertSrvSetupKeyInformation*, Int32*, HRESULT)
-    put_length : Proc(ICertSrvSetupKeyInformation*, Int32, HRESULT)
-    get_existing : Proc(ICertSrvSetupKeyInformation*, Int16*, HRESULT)
-    put_existing : Proc(ICertSrvSetupKeyInformation*, Int16, HRESULT)
-    get_container_name : Proc(ICertSrvSetupKeyInformation*, UInt8**, HRESULT)
-    put_container_name : Proc(ICertSrvSetupKeyInformation*, UInt8*, HRESULT)
-    get_hash_algorithm : Proc(ICertSrvSetupKeyInformation*, UInt8**, HRESULT)
-    put_hash_algorithm : Proc(ICertSrvSetupKeyInformation*, UInt8*, HRESULT)
-    get_existing_ca_certificate : Proc(ICertSrvSetupKeyInformation*, VARIANT*, HRESULT)
-    put_existing_ca_certificate : Proc(ICertSrvSetupKeyInformation*, VARIANT, HRESULT)
-  end
-
-  ICertSrvSetupKeyInformation_GUID = "6ba73778-36da-4c39-8a85-bcfa7d000793"
-  IID_ICertSrvSetupKeyInformation = LibC::GUID.new(0x6ba73778_u32, 0x36da_u16, 0x4c39_u16, StaticArray[0x8a_u8, 0x85_u8, 0xbc_u8, 0xfa_u8, 0x7d_u8, 0x0_u8, 0x7_u8, 0x93_u8])
-  struct ICertSrvSetupKeyInformation
-    lpVtbl : ICertSrvSetupKeyInformationVTbl*
-  end
-
-  struct ICertSrvSetupKeyInformationCollectionVTbl
-    query_interface : Proc(ICertSrvSetupKeyInformationCollection*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICertSrvSetupKeyInformationCollection*, UInt32)
-    release : Proc(ICertSrvSetupKeyInformationCollection*, UInt32)
-    get_type_info_count : Proc(ICertSrvSetupKeyInformationCollection*, UInt32*, HRESULT)
-    get_type_info : Proc(ICertSrvSetupKeyInformationCollection*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ICertSrvSetupKeyInformationCollection*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ICertSrvSetupKeyInformationCollection*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get__new_enum : Proc(ICertSrvSetupKeyInformationCollection*, IUnknown*, HRESULT)
-    get_item : Proc(ICertSrvSetupKeyInformationCollection*, Int32, VARIANT*, HRESULT)
-    get_count : Proc(ICertSrvSetupKeyInformationCollection*, Int32*, HRESULT)
-    add : Proc(ICertSrvSetupKeyInformationCollection*, ICertSrvSetupKeyInformation, HRESULT)
-  end
-
-  ICertSrvSetupKeyInformationCollection_GUID = "e65c8b00-e58f-41f9-a9ec-a28d7427c844"
-  IID_ICertSrvSetupKeyInformationCollection = LibC::GUID.new(0xe65c8b00_u32, 0xe58f_u16, 0x41f9_u16, StaticArray[0xa9_u8, 0xec_u8, 0xa2_u8, 0x8d_u8, 0x74_u8, 0x27_u8, 0xc8_u8, 0x44_u8])
-  struct ICertSrvSetupKeyInformationCollection
-    lpVtbl : ICertSrvSetupKeyInformationCollectionVTbl*
-  end
-
-  struct ICertSrvSetupVTbl
-    query_interface : Proc(ICertSrvSetup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICertSrvSetup*, UInt32)
-    release : Proc(ICertSrvSetup*, UInt32)
-    get_type_info_count : Proc(ICertSrvSetup*, UInt32*, HRESULT)
-    get_type_info : Proc(ICertSrvSetup*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ICertSrvSetup*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ICertSrvSetup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_ca_error_id : Proc(ICertSrvSetup*, Int32*, HRESULT)
-    get_ca_error_string : Proc(ICertSrvSetup*, UInt8**, HRESULT)
-    initialize_defaults : Proc(ICertSrvSetup*, Int16, Int16, HRESULT)
-    get_ca_setup_property : Proc(ICertSrvSetup*, CASetupProperty, VARIANT*, HRESULT)
-    set_ca_setup_property : Proc(ICertSrvSetup*, CASetupProperty, VARIANT*, HRESULT)
-    is_property_editable : Proc(ICertSrvSetup*, CASetupProperty, Int16*, HRESULT)
-    get_supported_ca_types : Proc(ICertSrvSetup*, VARIANT*, HRESULT)
-    get_provider_name_list : Proc(ICertSrvSetup*, VARIANT*, HRESULT)
-    get_key_length_list : Proc(ICertSrvSetup*, UInt8*, VARIANT*, HRESULT)
-    get_hash_algorithm_list : Proc(ICertSrvSetup*, UInt8*, VARIANT*, HRESULT)
-    get_private_key_container_list : Proc(ICertSrvSetup*, UInt8*, VARIANT*, HRESULT)
-    get_existing_ca_certificates : Proc(ICertSrvSetup*, ICertSrvSetupKeyInformationCollection*, HRESULT)
-    ca_import_pfx : Proc(ICertSrvSetup*, UInt8*, UInt8*, Int16, ICertSrvSetupKeyInformation*, HRESULT)
-    set_ca_distinguished_name : Proc(ICertSrvSetup*, UInt8*, Int16, Int16, Int16, HRESULT)
-    set_database_information : Proc(ICertSrvSetup*, UInt8*, UInt8*, UInt8*, Int16, HRESULT)
-    set_parent_ca_information : Proc(ICertSrvSetup*, UInt8*, HRESULT)
-    set_web_ca_information : Proc(ICertSrvSetup*, UInt8*, HRESULT)
-    install : Proc(ICertSrvSetup*, HRESULT)
-    pre_un_install : Proc(ICertSrvSetup*, Int16, HRESULT)
-    post_un_install : Proc(ICertSrvSetup*, HRESULT)
-  end
-
-  ICertSrvSetup_GUID = "b760a1bb-4784-44c0-8f12-555f0780ff25"
-  IID_ICertSrvSetup = LibC::GUID.new(0xb760a1bb_u32, 0x4784_u16, 0x44c0_u16, StaticArray[0x8f_u8, 0x12_u8, 0x55_u8, 0x5f_u8, 0x7_u8, 0x80_u8, 0xff_u8, 0x25_u8])
-  struct ICertSrvSetup
-    lpVtbl : ICertSrvSetupVTbl*
-  end
-
-  struct IMSCEPSetupVTbl
-    query_interface : Proc(IMSCEPSetup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IMSCEPSetup*, UInt32)
-    release : Proc(IMSCEPSetup*, UInt32)
-    get_type_info_count : Proc(IMSCEPSetup*, UInt32*, HRESULT)
-    get_type_info : Proc(IMSCEPSetup*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IMSCEPSetup*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IMSCEPSetup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_mscep_error_id : Proc(IMSCEPSetup*, Int32*, HRESULT)
-    get_mscep_error_string : Proc(IMSCEPSetup*, UInt8**, HRESULT)
-    initialize_defaults : Proc(IMSCEPSetup*, HRESULT)
-    get_mscep_setup_property : Proc(IMSCEPSetup*, MSCEPSetupProperty, VARIANT*, HRESULT)
-    set_mscep_setup_property : Proc(IMSCEPSetup*, MSCEPSetupProperty, VARIANT*, HRESULT)
-    set_account_information : Proc(IMSCEPSetup*, UInt8*, UInt8*, HRESULT)
-    is_mscep_store_empty : Proc(IMSCEPSetup*, Int16*, HRESULT)
-    get_provider_name_list : Proc(IMSCEPSetup*, Int16, VARIANT*, HRESULT)
-    get_key_length_list : Proc(IMSCEPSetup*, Int16, UInt8*, VARIANT*, HRESULT)
-    install : Proc(IMSCEPSetup*, HRESULT)
-    pre_un_install : Proc(IMSCEPSetup*, HRESULT)
-    post_un_install : Proc(IMSCEPSetup*, HRESULT)
-  end
-
-  IMSCEPSetup_GUID = "4f7761bb-9f3b-4592-9ee0-9a73259c313e"
-  IID_IMSCEPSetup = LibC::GUID.new(0x4f7761bb_u32, 0x9f3b_u16, 0x4592_u16, StaticArray[0x9e_u8, 0xe0_u8, 0x9a_u8, 0x73_u8, 0x25_u8, 0x9c_u8, 0x31_u8, 0x3e_u8])
-  struct IMSCEPSetup
-    lpVtbl : IMSCEPSetupVTbl*
-  end
-
-  struct ICertificateEnrollmentServerSetupVTbl
-    query_interface : Proc(ICertificateEnrollmentServerSetup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICertificateEnrollmentServerSetup*, UInt32)
-    release : Proc(ICertificateEnrollmentServerSetup*, UInt32)
-    get_type_info_count : Proc(ICertificateEnrollmentServerSetup*, UInt32*, HRESULT)
-    get_type_info : Proc(ICertificateEnrollmentServerSetup*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ICertificateEnrollmentServerSetup*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ICertificateEnrollmentServerSetup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_error_string : Proc(ICertificateEnrollmentServerSetup*, UInt8**, HRESULT)
-    initialize_install_defaults : Proc(ICertificateEnrollmentServerSetup*, HRESULT)
-    get_property : Proc(ICertificateEnrollmentServerSetup*, CESSetupProperty, VARIANT*, HRESULT)
-    set_property : Proc(ICertificateEnrollmentServerSetup*, CESSetupProperty, VARIANT*, HRESULT)
-    set_application_pool_credentials : Proc(ICertificateEnrollmentServerSetup*, UInt8*, UInt8*, HRESULT)
-    install : Proc(ICertificateEnrollmentServerSetup*, HRESULT)
-    un_install : Proc(ICertificateEnrollmentServerSetup*, VARIANT*, VARIANT*, HRESULT)
-  end
-
-  ICertificateEnrollmentServerSetup_GUID = "70027fdb-9dd9-4921-8944-b35cb31bd2ec"
-  IID_ICertificateEnrollmentServerSetup = LibC::GUID.new(0x70027fdb_u32, 0x9dd9_u16, 0x4921_u16, StaticArray[0x89_u8, 0x44_u8, 0xb3_u8, 0x5c_u8, 0xb3_u8, 0x1b_u8, 0xd2_u8, 0xec_u8])
-  struct ICertificateEnrollmentServerSetup
-    lpVtbl : ICertificateEnrollmentServerSetupVTbl*
-  end
-
-  struct ICertificateEnrollmentPolicyServerSetupVTbl
-    query_interface : Proc(ICertificateEnrollmentPolicyServerSetup*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICertificateEnrollmentPolicyServerSetup*, UInt32)
-    release : Proc(ICertificateEnrollmentPolicyServerSetup*, UInt32)
-    get_type_info_count : Proc(ICertificateEnrollmentPolicyServerSetup*, UInt32*, HRESULT)
-    get_type_info : Proc(ICertificateEnrollmentPolicyServerSetup*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ICertificateEnrollmentPolicyServerSetup*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ICertificateEnrollmentPolicyServerSetup*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_error_string : Proc(ICertificateEnrollmentPolicyServerSetup*, UInt8**, HRESULT)
-    initialize_install_defaults : Proc(ICertificateEnrollmentPolicyServerSetup*, HRESULT)
-    get_property : Proc(ICertificateEnrollmentPolicyServerSetup*, CEPSetupProperty, VARIANT*, HRESULT)
-    set_property : Proc(ICertificateEnrollmentPolicyServerSetup*, CEPSetupProperty, VARIANT*, HRESULT)
-    install : Proc(ICertificateEnrollmentPolicyServerSetup*, HRESULT)
-    un_install : Proc(ICertificateEnrollmentPolicyServerSetup*, VARIANT*, HRESULT)
-  end
-
-  ICertificateEnrollmentPolicyServerSetup_GUID = "859252cc-238c-4a88-b8fd-a37e7d04e68b"
-  IID_ICertificateEnrollmentPolicyServerSetup = LibC::GUID.new(0x859252cc_u32, 0x238c_u16, 0x4a88_u16, StaticArray[0xb8_u8, 0xfd_u8, 0xa3_u8, 0x7e_u8, 0x7d_u8, 0x4_u8, 0xe6_u8, 0x8b_u8])
-  struct ICertificateEnrollmentPolicyServerSetup
-    lpVtbl : ICertificateEnrollmentPolicyServerSetupVTbl*
-  end
-
-
-  # Params # phprov : LibC::UINT_PTR* [In],szcontainer : PSTR [In],szprovider : PSTR [In],dwprovtype : UInt32 [In],dwflags : UInt32 [In]
-  fun CryptAcquireContextA(phprov : LibC::UINT_PTR*, szcontainer : PSTR, szprovider : PSTR, dwprovtype : UInt32, dwflags : UInt32) : LibC::BOOL
-
-  # Params # phprov : LibC::UINT_PTR* [In],szcontainer : LibC::LPWSTR [In],szprovider : LibC::LPWSTR [In],dwprovtype : UInt32 [In],dwflags : UInt32 [In]
-  fun CryptAcquireContextW(phprov : LibC::UINT_PTR*, szcontainer : LibC::LPWSTR, szprovider : LibC::LPWSTR, dwprovtype : UInt32, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hprov : LibC::UINT_PTR [In],dwflags : UInt32 [In]
-  fun CryptReleaseContext(hprov : LibC::UINT_PTR, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hprov : LibC::UINT_PTR [In],algid : UInt32 [In],dwflags : CRYPT_KEY_FLAGS [In],phkey : LibC::UINT_PTR* [In]
-  fun CryptGenKey(hprov : LibC::UINT_PTR, algid : UInt32, dwflags : CRYPT_KEY_FLAGS, phkey : LibC::UINT_PTR*) : LibC::BOOL
-
-  # Params # hprov : LibC::UINT_PTR [In],algid : UInt32 [In],hbasedata : LibC::UINT_PTR [In],dwflags : UInt32 [In],phkey : LibC::UINT_PTR* [In]
-  fun CryptDeriveKey(hprov : LibC::UINT_PTR, algid : UInt32, hbasedata : LibC::UINT_PTR, dwflags : UInt32, phkey : LibC::UINT_PTR*) : LibC::BOOL
-
-  # Params # hkey : LibC::UINT_PTR [In]
-  fun CryptDestroyKey(hkey : LibC::UINT_PTR) : LibC::BOOL
-
-  # Params # hkey : LibC::UINT_PTR [In],dwparam : CRYPT_KEY_PARAM_ID [In],pbdata : UInt8* [In],dwflags : UInt32 [In]
-  fun CryptSetKeyParam(hkey : LibC::UINT_PTR, dwparam : CRYPT_KEY_PARAM_ID, pbdata : UInt8*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hkey : LibC::UINT_PTR [In],dwparam : CRYPT_KEY_PARAM_ID [In],pbdata : UInt8* [In],pdwdatalen : UInt32* [In],dwflags : UInt32 [In]
-  fun CryptGetKeyParam(hkey : LibC::UINT_PTR, dwparam : CRYPT_KEY_PARAM_ID, pbdata : UInt8*, pdwdatalen : UInt32*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hhash : LibC::UINT_PTR [In],dwparam : CRYPT_SET_HASH_PARAM [In],pbdata : UInt8* [In],dwflags : UInt32 [In]
-  fun CryptSetHashParam(hhash : LibC::UINT_PTR, dwparam : CRYPT_SET_HASH_PARAM, pbdata : UInt8*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hhash : LibC::UINT_PTR [In],dwparam : UInt32 [In],pbdata : UInt8* [In],pdwdatalen : UInt32* [In],dwflags : UInt32 [In]
-  fun CryptGetHashParam(hhash : LibC::UINT_PTR, dwparam : UInt32, pbdata : UInt8*, pdwdatalen : UInt32*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hprov : LibC::UINT_PTR [In],dwparam : CRYPT_SET_PROV_PARAM_ID [In],pbdata : UInt8* [In],dwflags : UInt32 [In]
-  fun CryptSetProvParam(hprov : LibC::UINT_PTR, dwparam : CRYPT_SET_PROV_PARAM_ID, pbdata : UInt8*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hprov : LibC::UINT_PTR [In],dwparam : UInt32 [In],pbdata : UInt8* [In],pdwdatalen : UInt32* [In],dwflags : UInt32 [In]
-  fun CryptGetProvParam(hprov : LibC::UINT_PTR, dwparam : UInt32, pbdata : UInt8*, pdwdatalen : UInt32*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hprov : LibC::UINT_PTR [In],dwlen : UInt32 [In],pbbuffer : UInt8* [In]
-  fun CryptGenRandom(hprov : LibC::UINT_PTR, dwlen : UInt32, pbbuffer : UInt8*) : LibC::BOOL
-
-  # Params # hprov : LibC::UINT_PTR [In],dwkeyspec : UInt32 [In],phuserkey : LibC::UINT_PTR* [In]
-  fun CryptGetUserKey(hprov : LibC::UINT_PTR, dwkeyspec : UInt32, phuserkey : LibC::UINT_PTR*) : LibC::BOOL
-
-  # Params # hkey : LibC::UINT_PTR [In],hexpkey : LibC::UINT_PTR [In],dwblobtype : UInt32 [In],dwflags : CRYPT_KEY_FLAGS [In],pbdata : UInt8* [In],pdwdatalen : UInt32* [In]
-  fun CryptExportKey(hkey : LibC::UINT_PTR, hexpkey : LibC::UINT_PTR, dwblobtype : UInt32, dwflags : CRYPT_KEY_FLAGS, pbdata : UInt8*, pdwdatalen : UInt32*) : LibC::BOOL
-
-  # Params # hprov : LibC::UINT_PTR [In],pbdata : UInt8* [In],dwdatalen : UInt32 [In],hpubkey : LibC::UINT_PTR [In],dwflags : CRYPT_KEY_FLAGS [In],phkey : LibC::UINT_PTR* [In]
-  fun CryptImportKey(hprov : LibC::UINT_PTR, pbdata : UInt8*, dwdatalen : UInt32, hpubkey : LibC::UINT_PTR, dwflags : CRYPT_KEY_FLAGS, phkey : LibC::UINT_PTR*) : LibC::BOOL
-
-  # Params # hkey : LibC::UINT_PTR [In],hhash : LibC::UINT_PTR [In],final : LibC::BOOL [In],dwflags : UInt32 [In],pbdata : UInt8* [In],pdwdatalen : UInt32* [In],dwbuflen : UInt32 [In]
-  fun CryptEncrypt(hkey : LibC::UINT_PTR, hhash : LibC::UINT_PTR, final : LibC::BOOL, dwflags : UInt32, pbdata : UInt8*, pdwdatalen : UInt32*, dwbuflen : UInt32) : LibC::BOOL
-
-  # Params # hkey : LibC::UINT_PTR [In],hhash : LibC::UINT_PTR [In],final : LibC::BOOL [In],dwflags : UInt32 [In],pbdata : UInt8* [In],pdwdatalen : UInt32* [In]
-  fun CryptDecrypt(hkey : LibC::UINT_PTR, hhash : LibC::UINT_PTR, final : LibC::BOOL, dwflags : UInt32, pbdata : UInt8*, pdwdatalen : UInt32*) : LibC::BOOL
-
-  # Params # hprov : LibC::UINT_PTR [In],algid : UInt32 [In],hkey : LibC::UINT_PTR [In],dwflags : UInt32 [In],phhash : LibC::UINT_PTR* [In]
-  fun CryptCreateHash(hprov : LibC::UINT_PTR, algid : UInt32, hkey : LibC::UINT_PTR, dwflags : UInt32, phhash : LibC::UINT_PTR*) : LibC::BOOL
-
-  # Params # hhash : LibC::UINT_PTR [In],pbdata : UInt8* [In],dwdatalen : UInt32 [In],dwflags : UInt32 [In]
-  fun CryptHashData(hhash : LibC::UINT_PTR, pbdata : UInt8*, dwdatalen : UInt32, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hhash : LibC::UINT_PTR [In],hkey : LibC::UINT_PTR [In],dwflags : UInt32 [In]
-  fun CryptHashSessionKey(hhash : LibC::UINT_PTR, hkey : LibC::UINT_PTR, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hhash : LibC::UINT_PTR [In]
-  fun CryptDestroyHash(hhash : LibC::UINT_PTR) : LibC::BOOL
-
-  # Params # hhash : LibC::UINT_PTR [In],dwkeyspec : UInt32 [In],szdescription : PSTR [In],dwflags : UInt32 [In],pbsignature : UInt8* [In],pdwsiglen : UInt32* [In]
-  fun CryptSignHashA(hhash : LibC::UINT_PTR, dwkeyspec : UInt32, szdescription : PSTR, dwflags : UInt32, pbsignature : UInt8*, pdwsiglen : UInt32*) : LibC::BOOL
-
-  # Params # hhash : LibC::UINT_PTR [In],dwkeyspec : UInt32 [In],szdescription : LibC::LPWSTR [In],dwflags : UInt32 [In],pbsignature : UInt8* [In],pdwsiglen : UInt32* [In]
-  fun CryptSignHashW(hhash : LibC::UINT_PTR, dwkeyspec : UInt32, szdescription : LibC::LPWSTR, dwflags : UInt32, pbsignature : UInt8*, pdwsiglen : UInt32*) : LibC::BOOL
-
-  # Params # hhash : LibC::UINT_PTR [In],pbsignature : UInt8* [In],dwsiglen : UInt32 [In],hpubkey : LibC::UINT_PTR [In],szdescription : PSTR [In],dwflags : UInt32 [In]
-  fun CryptVerifySignatureA(hhash : LibC::UINT_PTR, pbsignature : UInt8*, dwsiglen : UInt32, hpubkey : LibC::UINT_PTR, szdescription : PSTR, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hhash : LibC::UINT_PTR [In],pbsignature : UInt8* [In],dwsiglen : UInt32 [In],hpubkey : LibC::UINT_PTR [In],szdescription : LibC::LPWSTR [In],dwflags : UInt32 [In]
-  fun CryptVerifySignatureW(hhash : LibC::UINT_PTR, pbsignature : UInt8*, dwsiglen : UInt32, hpubkey : LibC::UINT_PTR, szdescription : LibC::LPWSTR, dwflags : UInt32) : LibC::BOOL
-
-  # Params # pszprovname : PSTR [In],dwprovtype : UInt32 [In]
-  fun CryptSetProviderA(pszprovname : PSTR, dwprovtype : UInt32) : LibC::BOOL
-
-  # Params # pszprovname : LibC::LPWSTR [In],dwprovtype : UInt32 [In]
-  fun CryptSetProviderW(pszprovname : LibC::LPWSTR, dwprovtype : UInt32) : LibC::BOOL
-
-  # Params # pszprovname : PSTR [In],dwprovtype : UInt32 [In],pdwreserved : UInt32* [In],dwflags : UInt32 [In]
-  fun CryptSetProviderExA(pszprovname : PSTR, dwprovtype : UInt32, pdwreserved : UInt32*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # pszprovname : LibC::LPWSTR [In],dwprovtype : UInt32 [In],pdwreserved : UInt32* [In],dwflags : UInt32 [In]
-  fun CryptSetProviderExW(pszprovname : LibC::LPWSTR, dwprovtype : UInt32, pdwreserved : UInt32*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # dwprovtype : UInt32 [In],pdwreserved : UInt32* [In],dwflags : UInt32 [In],pszprovname : PSTR [In],pcbprovname : UInt32* [In]
-  fun CryptGetDefaultProviderA(dwprovtype : UInt32, pdwreserved : UInt32*, dwflags : UInt32, pszprovname : PSTR, pcbprovname : UInt32*) : LibC::BOOL
-
-  # Params # dwprovtype : UInt32 [In],pdwreserved : UInt32* [In],dwflags : UInt32 [In],pszprovname : LibC::LPWSTR [In],pcbprovname : UInt32* [In]
-  fun CryptGetDefaultProviderW(dwprovtype : UInt32, pdwreserved : UInt32*, dwflags : UInt32, pszprovname : LibC::LPWSTR, pcbprovname : UInt32*) : LibC::BOOL
-
-  # Params # dwindex : UInt32 [In],pdwreserved : UInt32* [In],dwflags : UInt32 [In],pdwprovtype : UInt32* [In],sztypename : PSTR [In],pcbtypename : UInt32* [In]
-  fun CryptEnumProviderTypesA(dwindex : UInt32, pdwreserved : UInt32*, dwflags : UInt32, pdwprovtype : UInt32*, sztypename : PSTR, pcbtypename : UInt32*) : LibC::BOOL
-
-  # Params # dwindex : UInt32 [In],pdwreserved : UInt32* [In],dwflags : UInt32 [In],pdwprovtype : UInt32* [In],sztypename : LibC::LPWSTR [In],pcbtypename : UInt32* [In]
-  fun CryptEnumProviderTypesW(dwindex : UInt32, pdwreserved : UInt32*, dwflags : UInt32, pdwprovtype : UInt32*, sztypename : LibC::LPWSTR, pcbtypename : UInt32*) : LibC::BOOL
-
-  # Params # dwindex : UInt32 [In],pdwreserved : UInt32* [In],dwflags : UInt32 [In],pdwprovtype : UInt32* [In],szprovname : PSTR [In],pcbprovname : UInt32* [In]
-  fun CryptEnumProvidersA(dwindex : UInt32, pdwreserved : UInt32*, dwflags : UInt32, pdwprovtype : UInt32*, szprovname : PSTR, pcbprovname : UInt32*) : LibC::BOOL
-
-  # Params # dwindex : UInt32 [In],pdwreserved : UInt32* [In],dwflags : UInt32 [In],pdwprovtype : UInt32* [In],szprovname : LibC::LPWSTR [In],pcbprovname : UInt32* [In]
-  fun CryptEnumProvidersW(dwindex : UInt32, pdwreserved : UInt32*, dwflags : UInt32, pdwprovtype : UInt32*, szprovname : LibC::LPWSTR, pcbprovname : UInt32*) : LibC::BOOL
-
-  # Params # hprov : LibC::UINT_PTR [In],pdwreserved : UInt32* [In],dwflags : UInt32 [In]
-  fun CryptContextAddRef(hprov : LibC::UINT_PTR, pdwreserved : UInt32*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hkey : LibC::UINT_PTR [In],pdwreserved : UInt32* [In],dwflags : UInt32 [In],phkey : LibC::UINT_PTR* [In]
-  fun CryptDuplicateKey(hkey : LibC::UINT_PTR, pdwreserved : UInt32*, dwflags : UInt32, phkey : LibC::UINT_PTR*) : LibC::BOOL
-
-  # Params # hhash : LibC::UINT_PTR [In],pdwreserved : UInt32* [In],dwflags : UInt32 [In],phhash : LibC::UINT_PTR* [In]
-  fun CryptDuplicateHash(hhash : LibC::UINT_PTR, pdwreserved : UInt32*, dwflags : UInt32, phhash : LibC::UINT_PTR*) : LibC::BOOL
-
-  # Params # phalgorithm : BCRYPT_ALG_HANDLE* [In],pszalgid : LibC::LPWSTR [In],pszimplementation : LibC::LPWSTR [In],dwflags : BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS [In]
-  fun BCryptOpenAlgorithmProvider(phalgorithm : BCRYPT_ALG_HANDLE*, pszalgid : LibC::LPWSTR, pszimplementation : LibC::LPWSTR, dwflags : BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS) : NTSTATUS
-
-  # Params # dwalgoperations : BCRYPT_OPERATION [In],palgcount : UInt32* [In],ppalglist : BCRYPT_ALGORITHM_IDENTIFIER** [In],dwflags : UInt32 [In]
-  fun BCryptEnumAlgorithms(dwalgoperations : BCRYPT_OPERATION, palgcount : UInt32*, ppalglist : BCRYPT_ALGORITHM_IDENTIFIER**, dwflags : UInt32) : NTSTATUS
-
-  # Params # pszalgid : LibC::LPWSTR [In],pimplcount : UInt32* [In],ppimpllist : BCRYPT_PROVIDER_NAME** [In],dwflags : UInt32 [In]
-  fun BCryptEnumProviders(pszalgid : LibC::LPWSTR, pimplcount : UInt32*, ppimpllist : BCRYPT_PROVIDER_NAME**, dwflags : UInt32) : NTSTATUS
-
-  # Params # hobject : Void* [In],pszproperty : LibC::LPWSTR [In],pboutput : UInt8* [In],cboutput : UInt32 [In],pcbresult : UInt32* [In],dwflags : UInt32 [In]
-  fun BCryptGetProperty(hobject : Void*, pszproperty : LibC::LPWSTR, pboutput : UInt8*, cboutput : UInt32, pcbresult : UInt32*, dwflags : UInt32) : NTSTATUS
-
-  # Params # hobject : Void* [In],pszproperty : LibC::LPWSTR [In],pbinput : UInt8* [In],cbinput : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptSetProperty(hobject : Void*, pszproperty : LibC::LPWSTR, pbinput : UInt8*, cbinput : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # halgorithm : BCRYPT_ALG_HANDLE [In],dwflags : UInt32 [In]
-  fun BCryptCloseAlgorithmProvider(halgorithm : BCRYPT_ALG_HANDLE, dwflags : UInt32) : NTSTATUS
-
-  # Params # pvbuffer : Void* [In]
-  fun BCryptFreeBuffer(pvbuffer : Void*) : Void
-
-  # Params # halgorithm : BCRYPT_ALG_HANDLE [In],phkey : BCRYPT_KEY_HANDLE* [In],pbkeyobject : UInt8* [In],cbkeyobject : UInt32 [In],pbsecret : UInt8* [In],cbsecret : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptGenerateSymmetricKey(halgorithm : BCRYPT_ALG_HANDLE, phkey : BCRYPT_KEY_HANDLE*, pbkeyobject : UInt8*, cbkeyobject : UInt32, pbsecret : UInt8*, cbsecret : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # halgorithm : BCRYPT_ALG_HANDLE [In],phkey : BCRYPT_KEY_HANDLE* [In],dwlength : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptGenerateKeyPair(halgorithm : BCRYPT_ALG_HANDLE, phkey : BCRYPT_KEY_HANDLE*, dwlength : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # hkey : BCRYPT_KEY_HANDLE [In],pbinput : UInt8* [In],cbinput : UInt32 [In],ppaddinginfo : Void* [In],pbiv : UInt8* [In],cbiv : UInt32 [In],pboutput : UInt8* [In],cboutput : UInt32 [In],pcbresult : UInt32* [In],dwflags : NCRYPT_FLAGS [In]
-  fun BCryptEncrypt(hkey : BCRYPT_KEY_HANDLE, pbinput : UInt8*, cbinput : UInt32, ppaddinginfo : Void*, pbiv : UInt8*, cbiv : UInt32, pboutput : UInt8*, cboutput : UInt32, pcbresult : UInt32*, dwflags : NCRYPT_FLAGS) : NTSTATUS
-
-  # Params # hkey : BCRYPT_KEY_HANDLE [In],pbinput : UInt8* [In],cbinput : UInt32 [In],ppaddinginfo : Void* [In],pbiv : UInt8* [In],cbiv : UInt32 [In],pboutput : UInt8* [In],cboutput : UInt32 [In],pcbresult : UInt32* [In],dwflags : NCRYPT_FLAGS [In]
-  fun BCryptDecrypt(hkey : BCRYPT_KEY_HANDLE, pbinput : UInt8*, cbinput : UInt32, ppaddinginfo : Void*, pbiv : UInt8*, cbiv : UInt32, pboutput : UInt8*, cboutput : UInt32, pcbresult : UInt32*, dwflags : NCRYPT_FLAGS) : NTSTATUS
-
-  # Params # hkey : BCRYPT_KEY_HANDLE [In],hexportkey : BCRYPT_KEY_HANDLE [In],pszblobtype : LibC::LPWSTR [In],pboutput : UInt8* [In],cboutput : UInt32 [In],pcbresult : UInt32* [In],dwflags : UInt32 [In]
-  fun BCryptExportKey(hkey : BCRYPT_KEY_HANDLE, hexportkey : BCRYPT_KEY_HANDLE, pszblobtype : LibC::LPWSTR, pboutput : UInt8*, cboutput : UInt32, pcbresult : UInt32*, dwflags : UInt32) : NTSTATUS
-
-  # Params # halgorithm : BCRYPT_ALG_HANDLE [In],himportkey : BCRYPT_KEY_HANDLE [In],pszblobtype : LibC::LPWSTR [In],phkey : BCRYPT_KEY_HANDLE* [In],pbkeyobject : UInt8* [In],cbkeyobject : UInt32 [In],pbinput : UInt8* [In],cbinput : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptImportKey(halgorithm : BCRYPT_ALG_HANDLE, himportkey : BCRYPT_KEY_HANDLE, pszblobtype : LibC::LPWSTR, phkey : BCRYPT_KEY_HANDLE*, pbkeyobject : UInt8*, cbkeyobject : UInt32, pbinput : UInt8*, cbinput : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # halgorithm : BCRYPT_ALG_HANDLE [In],himportkey : BCRYPT_KEY_HANDLE [In],pszblobtype : LibC::LPWSTR [In],phkey : BCRYPT_KEY_HANDLE* [In],pbinput : UInt8* [In],cbinput : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptImportKeyPair(halgorithm : BCRYPT_ALG_HANDLE, himportkey : BCRYPT_KEY_HANDLE, pszblobtype : LibC::LPWSTR, phkey : BCRYPT_KEY_HANDLE*, pbinput : UInt8*, cbinput : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # hkey : BCRYPT_KEY_HANDLE [In],phnewkey : BCRYPT_KEY_HANDLE* [In],pbkeyobject : UInt8* [In],cbkeyobject : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptDuplicateKey(hkey : BCRYPT_KEY_HANDLE, phnewkey : BCRYPT_KEY_HANDLE*, pbkeyobject : UInt8*, cbkeyobject : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # hkey : BCRYPT_KEY_HANDLE [In],dwflags : UInt32 [In]
-  fun BCryptFinalizeKeyPair(hkey : BCRYPT_KEY_HANDLE, dwflags : UInt32) : NTSTATUS
-
-  # Params # hkey : BCRYPT_KEY_HANDLE [In]
-  fun BCryptDestroyKey(hkey : BCRYPT_KEY_HANDLE) : NTSTATUS
-
-  # Params # hsecret : Void* [In]
-  fun BCryptDestroySecret(hsecret : Void*) : NTSTATUS
-
-  # Params # hkey : BCRYPT_KEY_HANDLE [In],ppaddinginfo : Void* [In],pbinput : UInt8* [In],cbinput : UInt32 [In],pboutput : UInt8* [In],cboutput : UInt32 [In],pcbresult : UInt32* [In],dwflags : NCRYPT_FLAGS [In]
-  fun BCryptSignHash(hkey : BCRYPT_KEY_HANDLE, ppaddinginfo : Void*, pbinput : UInt8*, cbinput : UInt32, pboutput : UInt8*, cboutput : UInt32, pcbresult : UInt32*, dwflags : NCRYPT_FLAGS) : NTSTATUS
-
-  # Params # hkey : BCRYPT_KEY_HANDLE [In],ppaddinginfo : Void* [In],pbhash : UInt8* [In],cbhash : UInt32 [In],pbsignature : UInt8* [In],cbsignature : UInt32 [In],dwflags : NCRYPT_FLAGS [In]
-  fun BCryptVerifySignature(hkey : BCRYPT_KEY_HANDLE, ppaddinginfo : Void*, pbhash : UInt8*, cbhash : UInt32, pbsignature : UInt8*, cbsignature : UInt32, dwflags : NCRYPT_FLAGS) : NTSTATUS
-
-  # Params # hprivkey : BCRYPT_KEY_HANDLE [In],hpubkey : BCRYPT_KEY_HANDLE [In],phagreedsecret : Void** [In],dwflags : UInt32 [In]
-  fun BCryptSecretAgreement(hprivkey : BCRYPT_KEY_HANDLE, hpubkey : BCRYPT_KEY_HANDLE, phagreedsecret : Void**, dwflags : UInt32) : NTSTATUS
-
-  # Params # hsharedsecret : Void* [In],pwszkdf : LibC::LPWSTR [In],pparameterlist : BCryptBufferDesc* [In],pbderivedkey : UInt8* [In],cbderivedkey : UInt32 [In],pcbresult : UInt32* [In],dwflags : UInt32 [In]
-  fun BCryptDeriveKey(hsharedsecret : Void*, pwszkdf : LibC::LPWSTR, pparameterlist : BCryptBufferDesc*, pbderivedkey : UInt8*, cbderivedkey : UInt32, pcbresult : UInt32*, dwflags : UInt32) : NTSTATUS
-
-  # Params # hkey : BCRYPT_KEY_HANDLE [In],pparameterlist : BCryptBufferDesc* [In],pbderivedkey : UInt8* [In],cbderivedkey : UInt32 [In],pcbresult : UInt32* [In],dwflags : UInt32 [In]
-  fun BCryptKeyDerivation(hkey : BCRYPT_KEY_HANDLE, pparameterlist : BCryptBufferDesc*, pbderivedkey : UInt8*, cbderivedkey : UInt32, pcbresult : UInt32*, dwflags : UInt32) : NTSTATUS
-
-  # Params # halgorithm : BCRYPT_ALG_HANDLE [In],phhash : Void** [In],pbhashobject : UInt8* [In],cbhashobject : UInt32 [In],pbsecret : UInt8* [In],cbsecret : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptCreateHash(halgorithm : BCRYPT_ALG_HANDLE, phhash : Void**, pbhashobject : UInt8*, cbhashobject : UInt32, pbsecret : UInt8*, cbsecret : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # hhash : Void* [In],pbinput : UInt8* [In],cbinput : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptHashData(hhash : Void*, pbinput : UInt8*, cbinput : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # hhash : Void* [In],pboutput : UInt8* [In],cboutput : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptFinishHash(hhash : Void*, pboutput : UInt8*, cboutput : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # halgorithm : BCRYPT_ALG_HANDLE [In],phhash : Void** [In],nhashes : UInt32 [In],pbhashobject : UInt8* [In],cbhashobject : UInt32 [In],pbsecret : UInt8* [In],cbsecret : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptCreateMultiHash(halgorithm : BCRYPT_ALG_HANDLE, phhash : Void**, nhashes : UInt32, pbhashobject : UInt8*, cbhashobject : UInt32, pbsecret : UInt8*, cbsecret : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # hobject : Void* [In],operationtype : BCRYPT_MULTI_OPERATION_TYPE [In],poperations : Void* [In],cboperations : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptProcessMultiOperations(hobject : Void*, operationtype : BCRYPT_MULTI_OPERATION_TYPE, poperations : Void*, cboperations : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # hhash : Void* [In],phnewhash : Void** [In],pbhashobject : UInt8* [In],cbhashobject : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptDuplicateHash(hhash : Void*, phnewhash : Void**, pbhashobject : UInt8*, cbhashobject : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # hhash : Void* [In]
-  fun BCryptDestroyHash(hhash : Void*) : NTSTATUS
-
-  # Params # halgorithm : BCRYPT_ALG_HANDLE [In],pbsecret : UInt8* [In],cbsecret : UInt32 [In],pbinput : UInt8* [In],cbinput : UInt32 [In],pboutput : UInt8* [In],cboutput : UInt32 [In]
-  fun BCryptHash(halgorithm : BCRYPT_ALG_HANDLE, pbsecret : UInt8*, cbsecret : UInt32, pbinput : UInt8*, cbinput : UInt32, pboutput : UInt8*, cboutput : UInt32) : NTSTATUS
-
-  # Params # halgorithm : BCRYPT_ALG_HANDLE [In],pbbuffer : UInt8* [In],cbbuffer : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptGenRandom(halgorithm : BCRYPT_ALG_HANDLE, pbbuffer : UInt8*, cbbuffer : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # hhash : Void* [In],htargetalg : BCRYPT_ALG_HANDLE [In],pbderivedkey : UInt8* [In],cbderivedkey : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptDeriveKeyCapi(hhash : Void*, htargetalg : BCRYPT_ALG_HANDLE, pbderivedkey : UInt8*, cbderivedkey : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # hprf : BCRYPT_ALG_HANDLE [In],pbpassword : UInt8* [In],cbpassword : UInt32 [In],pbsalt : UInt8* [In],cbsalt : UInt32 [In],citerations : UInt64 [In],pbderivedkey : UInt8* [In],cbderivedkey : UInt32 [In],dwflags : UInt32 [In]
-  fun BCryptDeriveKeyPBKDF2(hprf : BCRYPT_ALG_HANDLE, pbpassword : UInt8*, cbpassword : UInt32, pbsalt : UInt8*, cbsalt : UInt32, citerations : UInt64, pbderivedkey : UInt8*, cbderivedkey : UInt32, dwflags : UInt32) : NTSTATUS
-
-  # Params # pszprovider : LibC::LPWSTR [In],dwmode : BCRYPT_QUERY_PROVIDER_MODE [In],dwinterface : BCRYPT_INTERFACE [In],pcbbuffer : UInt32* [In],ppbuffer : CRYPT_PROVIDER_REG** [In]
-  fun BCryptQueryProviderRegistration(pszprovider : LibC::LPWSTR, dwmode : BCRYPT_QUERY_PROVIDER_MODE, dwinterface : BCRYPT_INTERFACE, pcbbuffer : UInt32*, ppbuffer : CRYPT_PROVIDER_REG**) : NTSTATUS
-
-  # Params # pcbbuffer : UInt32* [In],ppbuffer : CRYPT_PROVIDERS** [In]
-  fun BCryptEnumRegisteredProviders(pcbbuffer : UInt32*, ppbuffer : CRYPT_PROVIDERS**) : NTSTATUS
-
-  # Params # dwtable : BCRYPT_TABLE [In],pszcontext : LibC::LPWSTR [In],pconfig : CRYPT_CONTEXT_CONFIG* [In]
-  fun BCryptCreateContext(dwtable : BCRYPT_TABLE, pszcontext : LibC::LPWSTR, pconfig : CRYPT_CONTEXT_CONFIG*) : NTSTATUS
-
-  # Params # dwtable : BCRYPT_TABLE [In],pszcontext : LibC::LPWSTR [In]
-  fun BCryptDeleteContext(dwtable : BCRYPT_TABLE, pszcontext : LibC::LPWSTR) : NTSTATUS
-
-  # Params # dwtable : BCRYPT_TABLE [In],pcbbuffer : UInt32* [In],ppbuffer : CRYPT_CONTEXTS** [In]
-  fun BCryptEnumContexts(dwtable : BCRYPT_TABLE, pcbbuffer : UInt32*, ppbuffer : CRYPT_CONTEXTS**) : NTSTATUS
-
-  # Params # dwtable : BCRYPT_TABLE [In],pszcontext : LibC::LPWSTR [In],pconfig : CRYPT_CONTEXT_CONFIG* [In]
-  fun BCryptConfigureContext(dwtable : BCRYPT_TABLE, pszcontext : LibC::LPWSTR, pconfig : CRYPT_CONTEXT_CONFIG*) : NTSTATUS
-
-  # Params # dwtable : BCRYPT_TABLE [In],pszcontext : LibC::LPWSTR [In],pcbbuffer : UInt32* [In],ppbuffer : CRYPT_CONTEXT_CONFIG** [In]
-  fun BCryptQueryContextConfiguration(dwtable : BCRYPT_TABLE, pszcontext : LibC::LPWSTR, pcbbuffer : UInt32*, ppbuffer : CRYPT_CONTEXT_CONFIG**) : NTSTATUS
-
-  # Params # dwtable : BCRYPT_TABLE [In],pszcontext : LibC::LPWSTR [In],dwinterface : BCRYPT_INTERFACE [In],pszfunction : LibC::LPWSTR [In],dwposition : UInt32 [In]
-  fun BCryptAddContextFunction(dwtable : BCRYPT_TABLE, pszcontext : LibC::LPWSTR, dwinterface : BCRYPT_INTERFACE, pszfunction : LibC::LPWSTR, dwposition : UInt32) : NTSTATUS
-
-  # Params # dwtable : BCRYPT_TABLE [In],pszcontext : LibC::LPWSTR [In],dwinterface : BCRYPT_INTERFACE [In],pszfunction : LibC::LPWSTR [In]
-  fun BCryptRemoveContextFunction(dwtable : BCRYPT_TABLE, pszcontext : LibC::LPWSTR, dwinterface : BCRYPT_INTERFACE, pszfunction : LibC::LPWSTR) : NTSTATUS
-
-  # Params # dwtable : BCRYPT_TABLE [In],pszcontext : LibC::LPWSTR [In],dwinterface : BCRYPT_INTERFACE [In],pcbbuffer : UInt32* [In],ppbuffer : CRYPT_CONTEXT_FUNCTIONS** [In]
-  fun BCryptEnumContextFunctions(dwtable : BCRYPT_TABLE, pszcontext : LibC::LPWSTR, dwinterface : BCRYPT_INTERFACE, pcbbuffer : UInt32*, ppbuffer : CRYPT_CONTEXT_FUNCTIONS**) : NTSTATUS
-
-  # Params # dwtable : BCRYPT_TABLE [In],pszcontext : LibC::LPWSTR [In],dwinterface : BCRYPT_INTERFACE [In],pszfunction : LibC::LPWSTR [In],pconfig : CRYPT_CONTEXT_FUNCTION_CONFIG* [In]
-  fun BCryptConfigureContextFunction(dwtable : BCRYPT_TABLE, pszcontext : LibC::LPWSTR, dwinterface : BCRYPT_INTERFACE, pszfunction : LibC::LPWSTR, pconfig : CRYPT_CONTEXT_FUNCTION_CONFIG*) : NTSTATUS
-
-  # Params # dwtable : BCRYPT_TABLE [In],pszcontext : LibC::LPWSTR [In],dwinterface : BCRYPT_INTERFACE [In],pszfunction : LibC::LPWSTR [In],pcbbuffer : UInt32* [In],ppbuffer : CRYPT_CONTEXT_FUNCTION_CONFIG** [In]
-  fun BCryptQueryContextFunctionConfiguration(dwtable : BCRYPT_TABLE, pszcontext : LibC::LPWSTR, dwinterface : BCRYPT_INTERFACE, pszfunction : LibC::LPWSTR, pcbbuffer : UInt32*, ppbuffer : CRYPT_CONTEXT_FUNCTION_CONFIG**) : NTSTATUS
-
-  # Params # dwtable : BCRYPT_TABLE [In],pszcontext : LibC::LPWSTR [In],dwinterface : BCRYPT_INTERFACE [In],pszfunction : LibC::LPWSTR [In],pcbbuffer : UInt32* [In],ppbuffer : CRYPT_CONTEXT_FUNCTION_PROVIDERS** [In]
-  fun BCryptEnumContextFunctionProviders(dwtable : BCRYPT_TABLE, pszcontext : LibC::LPWSTR, dwinterface : BCRYPT_INTERFACE, pszfunction : LibC::LPWSTR, pcbbuffer : UInt32*, ppbuffer : CRYPT_CONTEXT_FUNCTION_PROVIDERS**) : NTSTATUS
-
-  # Params # dwtable : BCRYPT_TABLE [In],pszcontext : LibC::LPWSTR [In],dwinterface : BCRYPT_INTERFACE [In],pszfunction : LibC::LPWSTR [In],pszproperty : LibC::LPWSTR [In],cbvalue : UInt32 [In],pbvalue : UInt8* [In]
-  fun BCryptSetContextFunctionProperty(dwtable : BCRYPT_TABLE, pszcontext : LibC::LPWSTR, dwinterface : BCRYPT_INTERFACE, pszfunction : LibC::LPWSTR, pszproperty : LibC::LPWSTR, cbvalue : UInt32, pbvalue : UInt8*) : NTSTATUS
-
-  # Params # dwtable : BCRYPT_TABLE [In],pszcontext : LibC::LPWSTR [In],dwinterface : BCRYPT_INTERFACE [In],pszfunction : LibC::LPWSTR [In],pszproperty : LibC::LPWSTR [In],pcbvalue : UInt32* [In],ppbvalue : UInt8** [In]
-  fun BCryptQueryContextFunctionProperty(dwtable : BCRYPT_TABLE, pszcontext : LibC::LPWSTR, dwinterface : BCRYPT_INTERFACE, pszfunction : LibC::LPWSTR, pszproperty : LibC::LPWSTR, pcbvalue : UInt32*, ppbvalue : UInt8**) : NTSTATUS
-
-  # Params # phevent : LibC::HANDLE* [In]
-  fun BCryptRegisterConfigChangeNotify(phevent : LibC::HANDLE*) : NTSTATUS
-
-  # Params # hevent : LibC::HANDLE [In]
-  fun BCryptUnregisterConfigChangeNotify(hevent : LibC::HANDLE) : NTSTATUS
-
-  # Params # pszcontext : LibC::LPWSTR [In],dwinterface : UInt32 [In],pszfunction : LibC::LPWSTR [In],pszprovider : LibC::LPWSTR [In],dwmode : BCRYPT_QUERY_PROVIDER_MODE [In],dwflags : BCRYPT_RESOLVE_PROVIDERS_FLAGS [In],pcbbuffer : UInt32* [In],ppbuffer : CRYPT_PROVIDER_REFS** [In]
-  fun BCryptResolveProviders(pszcontext : LibC::LPWSTR, dwinterface : UInt32, pszfunction : LibC::LPWSTR, pszprovider : LibC::LPWSTR, dwmode : BCRYPT_QUERY_PROVIDER_MODE, dwflags : BCRYPT_RESOLVE_PROVIDERS_FLAGS, pcbbuffer : UInt32*, ppbuffer : CRYPT_PROVIDER_REFS**) : NTSTATUS
-
-  # Params # pfenabled : UInt8* [In]
-  fun BCryptGetFipsAlgorithmMode(pfenabled : UInt8*) : NTSTATUS
-
-  # Params # phprovider : LibC::UINT_PTR* [In],pszprovidername : LibC::LPWSTR [In],dwflags : UInt32 [In]
-  fun NCryptOpenStorageProvider(phprovider : LibC::UINT_PTR*, pszprovidername : LibC::LPWSTR, dwflags : UInt32) : Int32
-
-  # Params # hprovider : LibC::UINT_PTR [In],dwalgoperations : NCRYPT_OPERATION [In],pdwalgcount : UInt32* [In],ppalglist : NCryptAlgorithmName** [In],dwflags : UInt32 [In]
-  fun NCryptEnumAlgorithms(hprovider : LibC::UINT_PTR, dwalgoperations : NCRYPT_OPERATION, pdwalgcount : UInt32*, ppalglist : NCryptAlgorithmName**, dwflags : UInt32) : Int32
-
-  # Params # hprovider : LibC::UINT_PTR [In],pszalgid : LibC::LPWSTR [In],dwflags : UInt32 [In]
-  fun NCryptIsAlgSupported(hprovider : LibC::UINT_PTR, pszalgid : LibC::LPWSTR, dwflags : UInt32) : Int32
-
-  # Params # hprovider : LibC::UINT_PTR [In],pszscope : LibC::LPWSTR [In],ppkeyname : NCryptKeyName** [In],ppenumstate : Void** [In],dwflags : NCRYPT_FLAGS [In]
-  fun NCryptEnumKeys(hprovider : LibC::UINT_PTR, pszscope : LibC::LPWSTR, ppkeyname : NCryptKeyName**, ppenumstate : Void**, dwflags : NCRYPT_FLAGS) : Int32
-
-  # Params # pdwprovidercount : UInt32* [In],ppproviderlist : NCryptProviderName** [In],dwflags : UInt32 [In]
-  fun NCryptEnumStorageProviders(pdwprovidercount : UInt32*, ppproviderlist : NCryptProviderName**, dwflags : UInt32) : Int32
-
-  # Params # pvinput : Void* [In]
-  fun NCryptFreeBuffer(pvinput : Void*) : Int32
-
-  # Params # hprovider : LibC::UINT_PTR [In],phkey : LibC::UINT_PTR* [In],pszkeyname : LibC::LPWSTR [In],dwlegacykeyspec : CERT_KEY_SPEC [In],dwflags : NCRYPT_FLAGS [In]
-  fun NCryptOpenKey(hprovider : LibC::UINT_PTR, phkey : LibC::UINT_PTR*, pszkeyname : LibC::LPWSTR, dwlegacykeyspec : CERT_KEY_SPEC, dwflags : NCRYPT_FLAGS) : Int32
-
-  # Params # hprovider : LibC::UINT_PTR [In],phkey : LibC::UINT_PTR* [In],pszalgid : LibC::LPWSTR [In],pszkeyname : LibC::LPWSTR [In],dwlegacykeyspec : CERT_KEY_SPEC [In],dwflags : NCRYPT_FLAGS [In]
-  fun NCryptCreatePersistedKey(hprovider : LibC::UINT_PTR, phkey : LibC::UINT_PTR*, pszalgid : LibC::LPWSTR, pszkeyname : LibC::LPWSTR, dwlegacykeyspec : CERT_KEY_SPEC, dwflags : NCRYPT_FLAGS) : Int32
-
-  # Params # hobject : LibC::UINT_PTR [In],pszproperty : LibC::LPWSTR [In],pboutput : UInt8* [In],cboutput : UInt32 [In],pcbresult : UInt32* [In],dwflags : OBJECT_SECURITY_INFORMATION [In]
-  fun NCryptGetProperty(hobject : LibC::UINT_PTR, pszproperty : LibC::LPWSTR, pboutput : UInt8*, cboutput : UInt32, pcbresult : UInt32*, dwflags : OBJECT_SECURITY_INFORMATION) : Int32
-
-  # Params # hobject : LibC::UINT_PTR [In],pszproperty : LibC::LPWSTR [In],pbinput : UInt8* [In],cbinput : UInt32 [In],dwflags : NCRYPT_FLAGS [In]
-  fun NCryptSetProperty(hobject : LibC::UINT_PTR, pszproperty : LibC::LPWSTR, pbinput : UInt8*, cbinput : UInt32, dwflags : NCRYPT_FLAGS) : Int32
-
-  # Params # hkey : LibC::UINT_PTR [In],dwflags : NCRYPT_FLAGS [In]
-  fun NCryptFinalizeKey(hkey : LibC::UINT_PTR, dwflags : NCRYPT_FLAGS) : Int32
-
-  # Params # hkey : LibC::UINT_PTR [In],pbinput : UInt8* [In],cbinput : UInt32 [In],ppaddinginfo : Void* [In],pboutput : UInt8* [In],cboutput : UInt32 [In],pcbresult : UInt32* [In],dwflags : NCRYPT_FLAGS [In]
-  fun NCryptEncrypt(hkey : LibC::UINT_PTR, pbinput : UInt8*, cbinput : UInt32, ppaddinginfo : Void*, pboutput : UInt8*, cboutput : UInt32, pcbresult : UInt32*, dwflags : NCRYPT_FLAGS) : Int32
-
-  # Params # hkey : LibC::UINT_PTR [In],pbinput : UInt8* [In],cbinput : UInt32 [In],ppaddinginfo : Void* [In],pboutput : UInt8* [In],cboutput : UInt32 [In],pcbresult : UInt32* [In],dwflags : NCRYPT_FLAGS [In]
-  fun NCryptDecrypt(hkey : LibC::UINT_PTR, pbinput : UInt8*, cbinput : UInt32, ppaddinginfo : Void*, pboutput : UInt8*, cboutput : UInt32, pcbresult : UInt32*, dwflags : NCRYPT_FLAGS) : Int32
-
-  # Params # hprovider : LibC::UINT_PTR [In],himportkey : LibC::UINT_PTR [In],pszblobtype : LibC::LPWSTR [In],pparameterlist : BCryptBufferDesc* [In],phkey : LibC::UINT_PTR* [In],pbdata : UInt8* [In],cbdata : UInt32 [In],dwflags : NCRYPT_FLAGS [In]
-  fun NCryptImportKey(hprovider : LibC::UINT_PTR, himportkey : LibC::UINT_PTR, pszblobtype : LibC::LPWSTR, pparameterlist : BCryptBufferDesc*, phkey : LibC::UINT_PTR*, pbdata : UInt8*, cbdata : UInt32, dwflags : NCRYPT_FLAGS) : Int32
-
-  # Params # hkey : LibC::UINT_PTR [In],hexportkey : LibC::UINT_PTR [In],pszblobtype : LibC::LPWSTR [In],pparameterlist : BCryptBufferDesc* [In],pboutput : UInt8* [In],cboutput : UInt32 [In],pcbresult : UInt32* [In],dwflags : NCRYPT_FLAGS [In]
-  fun NCryptExportKey(hkey : LibC::UINT_PTR, hexportkey : LibC::UINT_PTR, pszblobtype : LibC::LPWSTR, pparameterlist : BCryptBufferDesc*, pboutput : UInt8*, cboutput : UInt32, pcbresult : UInt32*, dwflags : NCRYPT_FLAGS) : Int32
-
-  # Params # hkey : LibC::UINT_PTR [In],ppaddinginfo : Void* [In],pbhashvalue : UInt8* [In],cbhashvalue : UInt32 [In],pbsignature : UInt8* [In],cbsignature : UInt32 [In],pcbresult : UInt32* [In],dwflags : NCRYPT_FLAGS [In]
-  fun NCryptSignHash(hkey : LibC::UINT_PTR, ppaddinginfo : Void*, pbhashvalue : UInt8*, cbhashvalue : UInt32, pbsignature : UInt8*, cbsignature : UInt32, pcbresult : UInt32*, dwflags : NCRYPT_FLAGS) : Int32
-
-  # Params # hkey : LibC::UINT_PTR [In],ppaddinginfo : Void* [In],pbhashvalue : UInt8* [In],cbhashvalue : UInt32 [In],pbsignature : UInt8* [In],cbsignature : UInt32 [In],dwflags : NCRYPT_FLAGS [In]
-  fun NCryptVerifySignature(hkey : LibC::UINT_PTR, ppaddinginfo : Void*, pbhashvalue : UInt8*, cbhashvalue : UInt32, pbsignature : UInt8*, cbsignature : UInt32, dwflags : NCRYPT_FLAGS) : Int32
-
-  # Params # hkey : LibC::UINT_PTR [In],dwflags : UInt32 [In]
-  fun NCryptDeleteKey(hkey : LibC::UINT_PTR, dwflags : UInt32) : Int32
-
-  # Params # hobject : LibC::UINT_PTR [In]
-  fun NCryptFreeObject(hobject : LibC::UINT_PTR) : Int32
-
-  # Params # hkey : LibC::UINT_PTR [In]
-  fun NCryptIsKeyHandle(hkey : LibC::UINT_PTR) : LibC::BOOL
-
-  # Params # phprovider : LibC::UINT_PTR* [In],phkey : LibC::UINT_PTR* [In],hlegacyprov : LibC::UINT_PTR [In],hlegacykey : LibC::UINT_PTR [In],dwlegacykeyspec : CERT_KEY_SPEC [In],dwflags : UInt32 [In]
-  fun NCryptTranslateHandle(phprovider : LibC::UINT_PTR*, phkey : LibC::UINT_PTR*, hlegacyprov : LibC::UINT_PTR, hlegacykey : LibC::UINT_PTR, dwlegacykeyspec : CERT_KEY_SPEC, dwflags : UInt32) : Int32
-
-  # Params # hprovider : LibC::UINT_PTR [In],phevent : LibC::HANDLE* [In],dwflags : NCRYPT_FLAGS [In]
-  fun NCryptNotifyChangeKey(hprovider : LibC::UINT_PTR, phevent : LibC::HANDLE*, dwflags : NCRYPT_FLAGS) : Int32
-
-  # Params # hprivkey : LibC::UINT_PTR [In],hpubkey : LibC::UINT_PTR [In],phagreedsecret : LibC::UINT_PTR* [In],dwflags : NCRYPT_FLAGS [In]
-  fun NCryptSecretAgreement(hprivkey : LibC::UINT_PTR, hpubkey : LibC::UINT_PTR, phagreedsecret : LibC::UINT_PTR*, dwflags : NCRYPT_FLAGS) : Int32
-
-  # Params # hsharedsecret : LibC::UINT_PTR [In],pwszkdf : LibC::LPWSTR [In],pparameterlist : BCryptBufferDesc* [In],pbderivedkey : UInt8* [In],cbderivedkey : UInt32 [In],pcbresult : UInt32* [In],dwflags : UInt32 [In]
-  fun NCryptDeriveKey(hsharedsecret : LibC::UINT_PTR, pwszkdf : LibC::LPWSTR, pparameterlist : BCryptBufferDesc*, pbderivedkey : UInt8*, cbderivedkey : UInt32, pcbresult : UInt32*, dwflags : UInt32) : Int32
-
-  # Params # hkey : LibC::UINT_PTR [In],pparameterlist : BCryptBufferDesc* [In],pbderivedkey : UInt8* [In],cbderivedkey : UInt32 [In],pcbresult : UInt32* [In],dwflags : UInt32 [In]
-  fun NCryptKeyDerivation(hkey : LibC::UINT_PTR, pparameterlist : BCryptBufferDesc*, pbderivedkey : UInt8*, cbderivedkey : UInt32, pcbresult : UInt32*, dwflags : UInt32) : Int32
-
-  # Params # hsubjectkey : LibC::UINT_PTR [In],hauthoritykey : LibC::UINT_PTR [In],dwclaimtype : UInt32 [In],pparameterlist : BCryptBufferDesc* [In],pbclaimblob : UInt8* [In],cbclaimblob : UInt32 [In],pcbresult : UInt32* [In],dwflags : UInt32 [In]
-  fun NCryptCreateClaim(hsubjectkey : LibC::UINT_PTR, hauthoritykey : LibC::UINT_PTR, dwclaimtype : UInt32, pparameterlist : BCryptBufferDesc*, pbclaimblob : UInt8*, cbclaimblob : UInt32, pcbresult : UInt32*, dwflags : UInt32) : Int32
-
-  # Params # hsubjectkey : LibC::UINT_PTR [In],hauthoritykey : LibC::UINT_PTR [In],dwclaimtype : UInt32 [In],pparameterlist : BCryptBufferDesc* [In],pbclaimblob : UInt8* [In],cbclaimblob : UInt32 [In],poutput : BCryptBufferDesc* [In],dwflags : UInt32 [In]
-  fun NCryptVerifyClaim(hsubjectkey : LibC::UINT_PTR, hauthoritykey : LibC::UINT_PTR, dwclaimtype : UInt32, pparameterlist : BCryptBufferDesc*, pbclaimblob : UInt8*, cbclaimblob : UInt32, poutput : BCryptBufferDesc*, dwflags : UInt32) : Int32
-
-  # Params # dwcertencodingtype : UInt32 [In],dwformattype : UInt32 [In],dwformatstrtype : UInt32 [In],pformatstruct : Void* [In],lpszstructtype : PSTR [In],pbencoded : UInt8* [In],cbencoded : UInt32 [In],pbformat : Void* [In],pcbformat : UInt32* [In]
-  fun CryptFormatObject(dwcertencodingtype : UInt32, dwformattype : UInt32, dwformatstrtype : UInt32, pformatstruct : Void*, lpszstructtype : PSTR, pbencoded : UInt8*, cbencoded : UInt32, pbformat : Void*, pcbformat : UInt32*) : LibC::BOOL
-
-  # Params # dwcertencodingtype : CERT_QUERY_ENCODING_TYPE [In],lpszstructtype : PSTR [In],pvstructinfo : Void* [In],dwflags : CRYPT_ENCODE_OBJECT_FLAGS [In],pencodepara : CRYPT_ENCODE_PARA* [In],pvencoded : Void* [In],pcbencoded : UInt32* [In]
-  fun CryptEncodeObjectEx(dwcertencodingtype : CERT_QUERY_ENCODING_TYPE, lpszstructtype : PSTR, pvstructinfo : Void*, dwflags : CRYPT_ENCODE_OBJECT_FLAGS, pencodepara : CRYPT_ENCODE_PARA*, pvencoded : Void*, pcbencoded : UInt32*) : LibC::BOOL
-
-  # Params # dwcertencodingtype : UInt32 [In],lpszstructtype : PSTR [In],pvstructinfo : Void* [In],pbencoded : UInt8* [In],pcbencoded : UInt32* [In]
-  fun CryptEncodeObject(dwcertencodingtype : UInt32, lpszstructtype : PSTR, pvstructinfo : Void*, pbencoded : UInt8*, pcbencoded : UInt32*) : LibC::BOOL
-
-  # Params # dwcertencodingtype : UInt32 [In],lpszstructtype : PSTR [In],pbencoded : UInt8* [In],cbencoded : UInt32 [In],dwflags : UInt32 [In],pdecodepara : CRYPT_DECODE_PARA* [In],pvstructinfo : Void* [In],pcbstructinfo : UInt32* [In]
-  fun CryptDecodeObjectEx(dwcertencodingtype : UInt32, lpszstructtype : PSTR, pbencoded : UInt8*, cbencoded : UInt32, dwflags : UInt32, pdecodepara : CRYPT_DECODE_PARA*, pvstructinfo : Void*, pcbstructinfo : UInt32*) : LibC::BOOL
-
-  # Params # dwcertencodingtype : UInt32 [In],lpszstructtype : PSTR [In],pbencoded : UInt8* [In],cbencoded : UInt32 [In],dwflags : UInt32 [In],pvstructinfo : Void* [In],pcbstructinfo : UInt32* [In]
-  fun CryptDecodeObject(dwcertencodingtype : UInt32, lpszstructtype : PSTR, pbencoded : UInt8*, cbencoded : UInt32, dwflags : UInt32, pvstructinfo : Void*, pcbstructinfo : UInt32*) : LibC::BOOL
-
-  # Params # hmodule : HINSTANCE [In],dwencodingtype : UInt32 [In],pszfuncname : PSTR [In],cfuncentry : UInt32 [In],rgfuncentry : CRYPT_OID_FUNC_ENTRY* [In],dwflags : UInt32 [In]
-  fun CryptInstallOIDFunctionAddress(hmodule : HINSTANCE, dwencodingtype : UInt32, pszfuncname : PSTR, cfuncentry : UInt32, rgfuncentry : CRYPT_OID_FUNC_ENTRY*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # pszfuncname : PSTR [In],dwflags : UInt32 [In]
-  fun CryptInitOIDFunctionSet(pszfuncname : PSTR, dwflags : UInt32) : Void*
-
-  # Params # hfuncset : Void* [In],dwencodingtype : UInt32 [In],pszoid : PSTR [In],dwflags : UInt32 [In],ppvfuncaddr : Void** [In],phfuncaddr : Void** [In]
-  fun CryptGetOIDFunctionAddress(hfuncset : Void*, dwencodingtype : UInt32, pszoid : PSTR, dwflags : UInt32, ppvfuncaddr : Void**, phfuncaddr : Void**) : LibC::BOOL
-
-  # Params # hfuncset : Void* [In],dwencodingtype : UInt32 [In],pwszdlllist : Char* [In],pcchdlllist : UInt32* [In]
-  fun CryptGetDefaultOIDDllList(hfuncset : Void*, dwencodingtype : UInt32, pwszdlllist : Char*, pcchdlllist : UInt32*) : LibC::BOOL
-
-  # Params # hfuncset : Void* [In],dwencodingtype : UInt32 [In],pwszdll : LibC::LPWSTR [In],dwflags : UInt32 [In],ppvfuncaddr : Void** [In],phfuncaddr : Void** [In]
-  fun CryptGetDefaultOIDFunctionAddress(hfuncset : Void*, dwencodingtype : UInt32, pwszdll : LibC::LPWSTR, dwflags : UInt32, ppvfuncaddr : Void**, phfuncaddr : Void**) : LibC::BOOL
-
-  # Params # hfuncaddr : Void* [In],dwflags : UInt32 [In]
-  fun CryptFreeOIDFunctionAddress(hfuncaddr : Void*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # dwencodingtype : UInt32 [In],pszfuncname : PSTR [In],pszoid : PSTR [In],pwszdll : LibC::LPWSTR [In],pszoverridefuncname : PSTR [In]
-  fun CryptRegisterOIDFunction(dwencodingtype : UInt32, pszfuncname : PSTR, pszoid : PSTR, pwszdll : LibC::LPWSTR, pszoverridefuncname : PSTR) : LibC::BOOL
-
-  # Params # dwencodingtype : UInt32 [In],pszfuncname : PSTR [In],pszoid : PSTR [In]
-  fun CryptUnregisterOIDFunction(dwencodingtype : UInt32, pszfuncname : PSTR, pszoid : PSTR) : LibC::BOOL
-
-  # Params # dwencodingtype : UInt32 [In],pszfuncname : PSTR [In],dwindex : UInt32 [In],pwszdll : LibC::LPWSTR [In]
-  fun CryptRegisterDefaultOIDFunction(dwencodingtype : UInt32, pszfuncname : PSTR, dwindex : UInt32, pwszdll : LibC::LPWSTR) : LibC::BOOL
-
-  # Params # dwencodingtype : UInt32 [In],pszfuncname : PSTR [In],pwszdll : LibC::LPWSTR [In]
-  fun CryptUnregisterDefaultOIDFunction(dwencodingtype : UInt32, pszfuncname : PSTR, pwszdll : LibC::LPWSTR) : LibC::BOOL
-
-  # Params # dwencodingtype : UInt32 [In],pszfuncname : PSTR [In],pszoid : PSTR [In],pwszvaluename : LibC::LPWSTR [In],dwvaluetype : REG_VALUE_TYPE [In],pbvaluedata : UInt8* [In],cbvaluedata : UInt32 [In]
-  fun CryptSetOIDFunctionValue(dwencodingtype : UInt32, pszfuncname : PSTR, pszoid : PSTR, pwszvaluename : LibC::LPWSTR, dwvaluetype : REG_VALUE_TYPE, pbvaluedata : UInt8*, cbvaluedata : UInt32) : LibC::BOOL
-
-  # Params # dwencodingtype : UInt32 [In],pszfuncname : PSTR [In],pszoid : PSTR [In],pwszvaluename : LibC::LPWSTR [In],pdwvaluetype : UInt32* [In],pbvaluedata : UInt8* [In],pcbvaluedata : UInt32* [In]
-  fun CryptGetOIDFunctionValue(dwencodingtype : UInt32, pszfuncname : PSTR, pszoid : PSTR, pwszvaluename : LibC::LPWSTR, pdwvaluetype : UInt32*, pbvaluedata : UInt8*, pcbvaluedata : UInt32*) : LibC::BOOL
-
-  # Params # dwencodingtype : UInt32 [In],pszfuncname : PSTR [In],pszoid : PSTR [In],dwflags : UInt32 [In],pvarg : Void* [In],pfnenumoidfunc : PFN_CRYPT_ENUM_OID_FUNC [In]
-  fun CryptEnumOIDFunction(dwencodingtype : UInt32, pszfuncname : PSTR, pszoid : PSTR, dwflags : UInt32, pvarg : Void*, pfnenumoidfunc : PFN_CRYPT_ENUM_OID_FUNC) : LibC::BOOL
-
-  # Params # dwkeytype : UInt32 [In],pvkey : Void* [In],dwgroupid : UInt32 [In]
-  fun CryptFindOIDInfo(dwkeytype : UInt32, pvkey : Void*, dwgroupid : UInt32) : CRYPT_OID_INFO*
-
-  # Params # pinfo : CRYPT_OID_INFO* [In],dwflags : UInt32 [In]
-  fun CryptRegisterOIDInfo(pinfo : CRYPT_OID_INFO*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # pinfo : CRYPT_OID_INFO* [In]
-  fun CryptUnregisterOIDInfo(pinfo : CRYPT_OID_INFO*) : LibC::BOOL
-
-  # Params # dwgroupid : UInt32 [In],dwflags : UInt32 [In],pvarg : Void* [In],pfnenumoidinfo : PFN_CRYPT_ENUM_OID_INFO [In]
-  fun CryptEnumOIDInfo(dwgroupid : UInt32, dwflags : UInt32, pvarg : Void*, pfnenumoidinfo : PFN_CRYPT_ENUM_OID_INFO) : LibC::BOOL
-
-  # Params # pwszcryptname : LibC::LPWSTR [In]
-  fun CryptFindLocalizedName(pwszcryptname : LibC::LPWSTR) : LibC::LPWSTR
-
-  # Params # dwmsgencodingtype : UInt32 [In],dwflags : UInt32 [In],dwmsgtype : CRYPT_MSG_TYPE [In],pvmsgencodeinfo : Void* [In],pszinnercontentobjid : PSTR [In],pstreaminfo : CMSG_STREAM_INFO* [In]
-  fun CryptMsgOpenToEncode(dwmsgencodingtype : UInt32, dwflags : UInt32, dwmsgtype : CRYPT_MSG_TYPE, pvmsgencodeinfo : Void*, pszinnercontentobjid : PSTR, pstreaminfo : CMSG_STREAM_INFO*) : Void*
-
-  # Params # dwmsgencodingtype : UInt32 [In],dwflags : UInt32 [In],dwmsgtype : UInt32 [In],pvmsgencodeinfo : Void* [In],pszinnercontentobjid : PSTR [In],cbdata : UInt32 [In]
-  fun CryptMsgCalculateEncodedLength(dwmsgencodingtype : UInt32, dwflags : UInt32, dwmsgtype : UInt32, pvmsgencodeinfo : Void*, pszinnercontentobjid : PSTR, cbdata : UInt32) : UInt32
-
-  # Params # dwmsgencodingtype : UInt32 [In],dwflags : UInt32 [In],dwmsgtype : UInt32 [In],hcryptprov : LibC::UINT_PTR [In],precipientinfo : CERT_INFO* [In],pstreaminfo : CMSG_STREAM_INFO* [In]
-  fun CryptMsgOpenToDecode(dwmsgencodingtype : UInt32, dwflags : UInt32, dwmsgtype : UInt32, hcryptprov : LibC::UINT_PTR, precipientinfo : CERT_INFO*, pstreaminfo : CMSG_STREAM_INFO*) : Void*
-
-  # Params # hcryptmsg : Void* [In]
-  fun CryptMsgDuplicate(hcryptmsg : Void*) : Void*
-
-  # Params # hcryptmsg : Void* [In]
-  fun CryptMsgClose(hcryptmsg : Void*) : LibC::BOOL
-
-  # Params # hcryptmsg : Void* [In],pbdata : UInt8* [In],cbdata : UInt32 [In],ffinal : LibC::BOOL [In]
-  fun CryptMsgUpdate(hcryptmsg : Void*, pbdata : UInt8*, cbdata : UInt32, ffinal : LibC::BOOL) : LibC::BOOL
-
-  # Params # hcryptmsg : Void* [In],dwparamtype : UInt32 [In],dwindex : UInt32 [In],pvdata : Void* [In],pcbdata : UInt32* [In]
-  fun CryptMsgGetParam(hcryptmsg : Void*, dwparamtype : UInt32, dwindex : UInt32, pvdata : Void*, pcbdata : UInt32*) : LibC::BOOL
-
-  # Params # hcryptmsg : Void* [In],dwflags : UInt32 [In],dwctrltype : UInt32 [In],pvctrlpara : Void* [In]
-  fun CryptMsgControl(hcryptmsg : Void*, dwflags : UInt32, dwctrltype : UInt32, pvctrlpara : Void*) : LibC::BOOL
-
-  # Params # hcryptprov : LibC::UINT_PTR [In],dwencodingtype : UInt32 [In],pbsignerinfo : UInt8* [In],cbsignerinfo : UInt32 [In],pbsignerinfocountersignature : UInt8* [In],cbsignerinfocountersignature : UInt32 [In],pcicountersigner : CERT_INFO* [In]
-  fun CryptMsgVerifyCountersignatureEncoded(hcryptprov : LibC::UINT_PTR, dwencodingtype : UInt32, pbsignerinfo : UInt8*, cbsignerinfo : UInt32, pbsignerinfocountersignature : UInt8*, cbsignerinfocountersignature : UInt32, pcicountersigner : CERT_INFO*) : LibC::BOOL
-
-  # Params # hcryptprov : LibC::UINT_PTR [In],dwencodingtype : UInt32 [In],pbsignerinfo : UInt8* [In],cbsignerinfo : UInt32 [In],pbsignerinfocountersignature : UInt8* [In],cbsignerinfocountersignature : UInt32 [In],dwsignertype : UInt32 [In],pvsigner : Void* [In],dwflags : UInt32 [In],pvextra : Void* [In]
-  fun CryptMsgVerifyCountersignatureEncodedEx(hcryptprov : LibC::UINT_PTR, dwencodingtype : UInt32, pbsignerinfo : UInt8*, cbsignerinfo : UInt32, pbsignerinfocountersignature : UInt8*, cbsignerinfocountersignature : UInt32, dwsignertype : UInt32, pvsigner : Void*, dwflags : UInt32, pvextra : Void*) : LibC::BOOL
-
-  # Params # hcryptmsg : Void* [In],dwindex : UInt32 [In],ccountersigners : UInt32 [In],rgcountersigners : CMSG_SIGNER_ENCODE_INFO* [In]
-  fun CryptMsgCountersign(hcryptmsg : Void*, dwindex : UInt32, ccountersigners : UInt32, rgcountersigners : CMSG_SIGNER_ENCODE_INFO*) : LibC::BOOL
-
-  # Params # dwencodingtype : UInt32 [In],pbsignerinfo : UInt8* [In],cbsignerinfo : UInt32 [In],ccountersigners : UInt32 [In],rgcountersigners : CMSG_SIGNER_ENCODE_INFO* [In],pbcountersignature : UInt8* [In],pcbcountersignature : UInt32* [In]
-  fun CryptMsgCountersignEncoded(dwencodingtype : UInt32, pbsignerinfo : UInt8*, cbsignerinfo : UInt32, ccountersigners : UInt32, rgcountersigners : CMSG_SIGNER_ENCODE_INFO*, pbcountersignature : UInt8*, pcbcountersignature : UInt32*) : LibC::BOOL
-
-  # Params # lpszstoreprovider : PSTR [In],dwencodingtype : CERT_QUERY_ENCODING_TYPE [In],hcryptprov : LibC::UINT_PTR [In],dwflags : CERT_OPEN_STORE_FLAGS [In],pvpara : Void* [In]
-  fun CertOpenStore(lpszstoreprovider : PSTR, dwencodingtype : CERT_QUERY_ENCODING_TYPE, hcryptprov : LibC::UINT_PTR, dwflags : CERT_OPEN_STORE_FLAGS, pvpara : Void*) : Void*
-
-  # Params # hcertstore : Void* [In]
-  fun CertDuplicateStore(hcertstore : Void*) : Void*
-
-  # Params # hcertstore : Void* [In],dwencodingtype : CERT_QUERY_ENCODING_TYPE [In],dwsaveas : CERT_STORE_SAVE_AS [In],dwsaveto : CERT_STORE_SAVE_TO [In],pvsavetopara : Void* [In],dwflags : UInt32 [In]
-  fun CertSaveStore(hcertstore : Void*, dwencodingtype : CERT_QUERY_ENCODING_TYPE, dwsaveas : CERT_STORE_SAVE_AS, dwsaveto : CERT_STORE_SAVE_TO, pvsavetopara : Void*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hcertstore : Void* [In],dwflags : UInt32 [In]
-  # Commented out because function is part of Lib C
-  #fun CertCloseStore(hcertstore : Void*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hcertstore : Void* [In],dwcertencodingtype : UInt32 [In],pcertid : CERT_INFO* [In]
-  fun CertGetSubjectCertificateFromStore(hcertstore : Void*, dwcertencodingtype : UInt32, pcertid : CERT_INFO*) : CERT_CONTEXT*
-
-  # Params # hcertstore : Void* [In],pprevcertcontext : CERT_CONTEXT* [In]
-  # Commented out because function is part of Lib C
-  #fun CertEnumCertificatesInStore(hcertstore : Void*, pprevcertcontext : CERT_CONTEXT*) : CERT_CONTEXT*
-
-  # Params # hcertstore : Void* [In],dwcertencodingtype : UInt32 [In],dwfindflags : UInt32 [In],dwfindtype : CERT_FIND_FLAGS [In],pvfindpara : Void* [In],pprevcertcontext : CERT_CONTEXT* [In]
-  fun CertFindCertificateInStore(hcertstore : Void*, dwcertencodingtype : UInt32, dwfindflags : UInt32, dwfindtype : CERT_FIND_FLAGS, pvfindpara : Void*, pprevcertcontext : CERT_CONTEXT*) : CERT_CONTEXT*
-
-  # Params # hcertstore : Void* [In],psubjectcontext : CERT_CONTEXT* [In],pprevissuercontext : CERT_CONTEXT* [In],pdwflags : UInt32* [In]
-  fun CertGetIssuerCertificateFromStore(hcertstore : Void*, psubjectcontext : CERT_CONTEXT*, pprevissuercontext : CERT_CONTEXT*, pdwflags : UInt32*) : CERT_CONTEXT*
-
-  # Params # psubject : CERT_CONTEXT* [In],pissuer : CERT_CONTEXT* [In],pdwflags : UInt32* [In]
-  fun CertVerifySubjectCertificateContext(psubject : CERT_CONTEXT*, pissuer : CERT_CONTEXT*, pdwflags : UInt32*) : LibC::BOOL
-
-  # Params # pcertcontext : CERT_CONTEXT* [In]
-  fun CertDuplicateCertificateContext(pcertcontext : CERT_CONTEXT*) : CERT_CONTEXT*
-
-  # Params # dwcertencodingtype : UInt32 [In],pbcertencoded : UInt8* [In],cbcertencoded : UInt32 [In]
-  fun CertCreateCertificateContext(dwcertencodingtype : UInt32, pbcertencoded : UInt8*, cbcertencoded : UInt32) : CERT_CONTEXT*
-
-  # Params # pcertcontext : CERT_CONTEXT* [In]
-  fun CertFreeCertificateContext(pcertcontext : CERT_CONTEXT*) : LibC::BOOL
-
-  # Params # pcertcontext : CERT_CONTEXT* [In],dwpropid : UInt32 [In],dwflags : UInt32 [In],pvdata : Void* [In]
-  fun CertSetCertificateContextProperty(pcertcontext : CERT_CONTEXT*, dwpropid : UInt32, dwflags : UInt32, pvdata : Void*) : LibC::BOOL
-
-  # Params # pcertcontext : CERT_CONTEXT* [In],dwpropid : UInt32 [In],pvdata : Void* [In],pcbdata : UInt32* [In]
-  fun CertGetCertificateContextProperty(pcertcontext : CERT_CONTEXT*, dwpropid : UInt32, pvdata : Void*, pcbdata : UInt32*) : LibC::BOOL
-
-  # Params # pcertcontext : CERT_CONTEXT* [In],dwpropid : UInt32 [In]
-  fun CertEnumCertificateContextProperties(pcertcontext : CERT_CONTEXT*, dwpropid : UInt32) : UInt32
-
-  # Params # pcertcontext : CERT_CONTEXT* [In],coptattr : UInt32 [In],rgoptattr : CRYPT_ATTRIBUTE* [In],dwflags : UInt32 [In],pvreserved : Void* [In],pctlentry : CTL_ENTRY* [In],pcbctlentry : UInt32* [In]
-  fun CertCreateCTLEntryFromCertificateContextProperties(pcertcontext : CERT_CONTEXT*, coptattr : UInt32, rgoptattr : CRYPT_ATTRIBUTE*, dwflags : UInt32, pvreserved : Void*, pctlentry : CTL_ENTRY*, pcbctlentry : UInt32*) : LibC::BOOL
 
-  # Params # pcertcontext : CERT_CONTEXT* [In],pctlentry : CTL_ENTRY* [In],dwflags : UInt32 [In]
-  fun CertSetCertificateContextPropertiesFromCTLEntry(pcertcontext : CERT_CONTEXT*, pctlentry : CTL_ENTRY*, dwflags : UInt32) : LibC::BOOL
+  @[Extern]
+  record CRYPT_SMART_CARD_ROOT_INFO,
+    rgbCardID : UInt8[16],
+    luid : Win32cr::Security::Cryptography::ROOT_INFO_LUID
+
+  @[Extern]
+  record CERT_SYSTEM_STORE_RELOCATE_PARA,
+    anonymous1 : Anonymous1_e__Union,
+    anonymous2 : Anonymous2_e__Union do
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      pvSystemStore : Void*,
+      pszSystemStore : Win32cr::Foundation::PSTR,
+      pwszSystemStore : Win32cr::Foundation::PWSTR
+
+
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      hKeyBase : Win32cr::System::Registry::HKEY,
+      pvBase : Void*
+
+  end
+
+  @[Extern]
+  record CERT_REGISTRY_STORE_CLIENT_GPT_PARA,
+    hKeyBase : Win32cr::System::Registry::HKEY,
+    pwszRegPath : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record CERT_REGISTRY_STORE_ROAMING_PARA,
+    hKey : Win32cr::System::Registry::HKEY,
+    pwszStoreDirectory : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record CERT_LDAP_STORE_OPENED_PARA,
+    pvLdapSessionHandle : Void*,
+    pwszLdapUrl : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record CERT_STORE_PROV_INFO,
+    cbSize : UInt32,
+    cStoreProvFunc : UInt32,
+    rgpvStoreProvFunc : Void**,
+    hStoreProv : Win32cr::Security::Cryptography::HCERTSTOREPROV,
+    dwStoreProvFlags : Win32cr::Security::Cryptography::CERT_STORE_PROV_FLAGS,
+    hStoreProvFuncAddr2 : Void*
+
+  @[Extern]
+  record CERT_STORE_PROV_FIND_INFO,
+    cbSize : UInt32,
+    dwMsgAndCertEncodingType : UInt32,
+    dwFindFlags : UInt32,
+    dwFindType : UInt32,
+    pvFindPara : Void*
+
+  @[Extern]
+  record CRL_FIND_ISSUED_FOR_PARA,
+    pSubjectCert : Win32cr::Security::Cryptography::CERT_CONTEXT*,
+    pIssuerCert : Win32cr::Security::Cryptography::CERT_CONTEXT*
+
+  @[Extern]
+  record CTL_ANY_SUBJECT_INFO,
+    subject_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    subject_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CTL_FIND_USAGE_PARA,
+    cbSize : UInt32,
+    subject_usage : Win32cr::Security::Cryptography::CTL_USAGE,
+    list_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    pSigner : Win32cr::Security::Cryptography::CERT_INFO*
+
+  @[Extern]
+  record CTL_FIND_SUBJECT_PARA,
+    cbSize : UInt32,
+    pUsagePara : Win32cr::Security::Cryptography::CTL_FIND_USAGE_PARA*,
+    dwSubjectType : UInt32,
+    pvSubject : Void*
+
+  @[Extern]
+  record CERT_CREATE_CONTEXT_PARA,
+    cbSize : UInt32,
+    pfnFree : Win32cr::Security::Cryptography::PFN_CRYPT_FREE,
+    pvFree : Void*,
+    pfnSort : Win32cr::Security::Cryptography::PFN_CERT_CREATE_CONTEXT_SORT_FUNC,
+    pvSort : Void*
+
+  @[Extern]
+  record CERT_SYSTEM_STORE_INFO,
+    cbSize : UInt32
+
+  @[Extern]
+  record CERT_PHYSICAL_STORE_INFO,
+    cbSize : UInt32,
+    pszOpenStoreProvider : Win32cr::Foundation::PSTR,
+    dwOpenEncodingType : UInt32,
+    dwOpenFlags : UInt32,
+    open_parameters : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    dwFlags : UInt32,
+    dwPriority : UInt32
+
+  @[Extern]
+  record CTL_VERIFY_USAGE_PARA,
+    cbSize : UInt32,
+    list_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    cCtlStore : UInt32,
+    rghCtlStore : Win32cr::Security::Cryptography::HCERTSTORE*,
+    cSignerStore : UInt32,
+    rghSignerStore : Win32cr::Security::Cryptography::HCERTSTORE*
+
+  @[Extern]
+  record CTL_VERIFY_USAGE_STATUS,
+    cbSize : UInt32,
+    dwError : UInt32,
+    dwFlags : UInt32,
+    ppCtl : Win32cr::Security::Cryptography::CTL_CONTEXT**,
+    dwCtlEntryIndex : UInt32,
+    ppSigner : Win32cr::Security::Cryptography::CERT_CONTEXT**,
+    dwSignerIndex : UInt32
+
+  @[Extern]
+  record CERT_REVOCATION_CRL_INFO,
+    cbSize : UInt32,
+    pBaseCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*,
+    pDeltaCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*,
+    pCrlEntry : Win32cr::Security::Cryptography::CRL_ENTRY*,
+    fDeltaCrlEntry : Win32cr::Foundation::BOOL
+
+  @[Extern]
+  record CERT_REVOCATION_PARA,
+    cbSize : UInt32,
+    pIssuerCert : Win32cr::Security::Cryptography::CERT_CONTEXT*,
+    cCertStore : UInt32,
+    rgCertStore : Win32cr::Security::Cryptography::HCERTSTORE*,
+    hCrlStore : Win32cr::Security::Cryptography::HCERTSTORE,
+    pftTimeToUse : Win32cr::Foundation::FILETIME*
+
+  @[Extern]
+  record CERT_REVOCATION_STATUS,
+    cbSize : UInt32,
+    dwIndex : UInt32,
+    dwError : UInt32,
+    dwReason : Win32cr::Security::Cryptography::CERT_REVOCATION_STATUS_REASON,
+    fHasFreshnessTime : Win32cr::Foundation::BOOL,
+    dwFreshnessTime : UInt32
+
+  @[Extern]
+  record CRYPT_VERIFY_CERT_SIGN_STRONG_PROPERTIES_INFO,
+    cert_sign_hash_cng_alg_prop_data : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    cert_issuer_pub_key_bit_length_prop_data : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CRYPT_VERIFY_CERT_SIGN_WEAK_HASH_INFO,
+    cCNGHashAlgid : UInt32,
+    rgpwszCNGHashAlgid : Win32cr::Foundation::PWSTR*,
+    dwWeakIndex : UInt32
+
+  @[Extern]
+  record CRYPT_DEFAULT_CONTEXT_MULTI_OID_PARA,
+    cOID : UInt32,
+    rgpszOID : Win32cr::Foundation::PSTR*
+
+  @[Extern]
+  record CRYPT_SIGN_MESSAGE_PARA,
+    cbSize : UInt32,
+    dwMsgEncodingType : UInt32,
+    pSigningCert : Win32cr::Security::Cryptography::CERT_CONTEXT*,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pvHashAuxInfo : Void*,
+    cMsgCert : UInt32,
+    rgpMsgCert : Win32cr::Security::Cryptography::CERT_CONTEXT**,
+    cMsgCrl : UInt32,
+    rgpMsgCrl : Win32cr::Security::Cryptography::CRL_CONTEXT**,
+    cAuthAttr : UInt32,
+    rgAuthAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*,
+    cUnauthAttr : UInt32,
+    rgUnauthAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*,
+    dwFlags : UInt32,
+    dwInnerContentType : UInt32
+
+  @[Extern]
+  record CRYPT_VERIFY_MESSAGE_PARA,
+    cbSize : UInt32,
+    dwMsgAndCertEncodingType : UInt32,
+    hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY,
+    pfnGetSignerCertificate : Win32cr::Security::Cryptography::PFN_CRYPT_GET_SIGNER_CERTIFICATE,
+    pvGetArg : Void*
+
+  @[Extern]
+  record CRYPT_ENCRYPT_MESSAGE_PARA,
+    cbSize : UInt32,
+    dwMsgEncodingType : UInt32,
+    hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY,
+    content_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pvEncryptionAuxInfo : Void*,
+    dwFlags : UInt32,
+    dwInnerContentType : UInt32
+
+  @[Extern]
+  record CRYPT_DECRYPT_MESSAGE_PARA,
+    cbSize : UInt32,
+    dwMsgAndCertEncodingType : UInt32,
+    cCertStore : UInt32,
+    rghCertStore : Win32cr::Security::Cryptography::HCERTSTORE*
+
+  @[Extern]
+  record CRYPT_HASH_MESSAGE_PARA,
+    cbSize : UInt32,
+    dwMsgEncodingType : UInt32,
+    hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pvHashAuxInfo : Void*
+
+  @[Extern]
+  record CRYPT_KEY_SIGN_MESSAGE_PARA,
+    cbSize : UInt32,
+    dwMsgAndCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE,
+    anonymous : Anonymous_e__Union,
+    dwKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    pvHashAuxInfo : Void*,
+    pub_key_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      hCryptProv : LibC::UIntPtrT,
+      hNCryptKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE
+
+  end
+
+  @[Extern]
+  record CRYPT_KEY_VERIFY_MESSAGE_PARA,
+    cbSize : UInt32,
+    dwMsgEncodingType : UInt32,
+    hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY
+
+  @[Extern]
+  record CERT_CHAIN,
+    cCerts : UInt32,
+    certs : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*,
+    keyLocatorInfo : Win32cr::Security::Cryptography::CRYPT_KEY_PROV_INFO
+
+  @[Extern]
+  record CRYPT_BLOB_ARRAY,
+    cBlob : UInt32,
+    rgBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+
+  @[Extern]
+  record CRYPT_CREDENTIALS,
+    cbSize : UInt32,
+    pszCredentialsOid : Win32cr::Foundation::PSTR,
+    pvCredentials : Void*
+
+  @[Extern]
+  record CRYPT_PASSWORD_CREDENTIALSA,
+    cbSize : UInt32,
+    pszUsername : Win32cr::Foundation::PSTR,
+    pszPassword : Win32cr::Foundation::PSTR
+
+  @[Extern]
+  record CRYPT_PASSWORD_CREDENTIALSW,
+    cbSize : UInt32,
+    pszUsername : Win32cr::Foundation::PWSTR,
+    pszPassword : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record CRYPTNET_URL_CACHE_PRE_FETCH_INFO,
+    cbSize : UInt32,
+    dwObjectType : UInt32,
+    dwError : UInt32,
+    dwReserved : UInt32,
+    this_update_time : Win32cr::Foundation::FILETIME,
+    next_update_time : Win32cr::Foundation::FILETIME,
+    publish_time : Win32cr::Foundation::FILETIME
+
+  @[Extern]
+  record CRYPTNET_URL_CACHE_FLUSH_INFO,
+    cbSize : UInt32,
+    dwExemptSeconds : UInt32,
+    expire_time : Win32cr::Foundation::FILETIME
+
+  @[Extern]
+  record CRYPTNET_URL_CACHE_RESPONSE_INFO,
+    cbSize : UInt32,
+    wResponseType : UInt16,
+    wResponseFlags : UInt16,
+    last_modified_time : Win32cr::Foundation::FILETIME,
+    dwMaxAge : UInt32,
+    pwszETag : Win32cr::Foundation::PWSTR,
+    dwProxyId : UInt32
+
+  @[Extern]
+  record CRYPT_RETRIEVE_AUX_INFO,
+    cbSize : UInt32,
+    pLastSyncTime : Win32cr::Foundation::FILETIME*,
+    dwMaxUrlRetrievalByteCount : UInt32,
+    pPreFetchInfo : Win32cr::Security::Cryptography::CRYPTNET_URL_CACHE_PRE_FETCH_INFO*,
+    pFlushInfo : Win32cr::Security::Cryptography::CRYPTNET_URL_CACHE_FLUSH_INFO*,
+    ppResponseInfo : Win32cr::Security::Cryptography::CRYPTNET_URL_CACHE_RESPONSE_INFO**,
+    pwszCacheFileNamePrefix : Win32cr::Foundation::PWSTR,
+    pftCacheResync : Win32cr::Foundation::FILETIME*,
+    fProxyCacheRetrieval : Win32cr::Foundation::BOOL,
+    dwHttpStatusCode : UInt32,
+    ppwszErrorResponseHeaders : Win32cr::Foundation::PWSTR*,
+    ppErrorContentBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB**
+
+  @[Extern]
+  record CRYPT_ASYNC_RETRIEVAL_COMPLETION,
+    pfnCompletion : Win32cr::Security::Cryptography::PFN_CRYPT_ASYNC_RETRIEVAL_COMPLETION_FUNC,
+    pvCompletion : Void*
+
+  @[Extern]
+  record CRYPT_URL_ARRAY,
+    cUrl : UInt32,
+    rgwszUrl : Win32cr::Foundation::PWSTR*
+
+  @[Extern]
+  record CRYPT_URL_INFO,
+    cbSize : UInt32,
+    dwSyncDeltaTime : UInt32,
+    cGroup : UInt32,
+    rgcGroupEntry : UInt32*
+
+  @[Extern]
+  record CERT_CRL_CONTEXT_PAIR,
+    pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*,
+    pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*
+
+  @[Extern]
+  record CRYPT_GET_TIME_VALID_OBJECT_EXTRA_INFO,
+    cbSize : UInt32,
+    iDeltaCrlIndicator : Int32,
+    pftCacheResync : Win32cr::Foundation::FILETIME*,
+    pLastSyncTime : Win32cr::Foundation::FILETIME*,
+    pMaxAgeTime : Win32cr::Foundation::FILETIME*,
+    pChainPara : Win32cr::Security::Cryptography::CERT_REVOCATION_CHAIN_PARA*,
+    pDeltaCrlIndicator : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+
+  @[Extern]
+  record CERT_CHAIN_ENGINE_CONFIG,
+    cbSize : UInt32,
+    hRestrictedRoot : Win32cr::Security::Cryptography::HCERTSTORE,
+    hRestrictedTrust : Win32cr::Security::Cryptography::HCERTSTORE,
+    hRestrictedOther : Win32cr::Security::Cryptography::HCERTSTORE,
+    cAdditionalStore : UInt32,
+    rghAdditionalStore : Win32cr::Security::Cryptography::HCERTSTORE*,
+    dwFlags : UInt32,
+    dwUrlRetrievalTimeout : UInt32,
+    maximum_cached_certificates : UInt32,
+    cycle_detection_modulus : UInt32,
+    hExclusiveRoot : Win32cr::Security::Cryptography::HCERTSTORE,
+    hExclusiveTrustedPeople : Win32cr::Security::Cryptography::HCERTSTORE,
+    dwExclusiveFlags : UInt32
+
+  @[Extern]
+  record CERT_TRUST_STATUS,
+    dwErrorStatus : UInt32,
+    dwInfoStatus : UInt32
+
+  @[Extern]
+  record CERT_REVOCATION_INFO,
+    cbSize : UInt32,
+    dwRevocationResult : UInt32,
+    pszRevocationOid : Win32cr::Foundation::PSTR,
+    pvOidSpecificInfo : Void*,
+    fHasFreshnessTime : Win32cr::Foundation::BOOL,
+    dwFreshnessTime : UInt32,
+    pCrlInfo : Win32cr::Security::Cryptography::CERT_REVOCATION_CRL_INFO*
+
+  @[Extern]
+  record CERT_TRUST_LIST_INFO,
+    cbSize : UInt32,
+    pCtlEntry : Win32cr::Security::Cryptography::CTL_ENTRY*,
+    pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*
+
+  @[Extern]
+  record CERT_CHAIN_ELEMENT,
+    cbSize : UInt32,
+    pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*,
+    trust_status : Win32cr::Security::Cryptography::CERT_TRUST_STATUS,
+    pRevocationInfo : Win32cr::Security::Cryptography::CERT_REVOCATION_INFO*,
+    pIssuanceUsage : Win32cr::Security::Cryptography::CTL_USAGE*,
+    pApplicationUsage : Win32cr::Security::Cryptography::CTL_USAGE*,
+    pwszExtendedErrorInfo : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record CERT_SIMPLE_CHAIN,
+    cbSize : UInt32,
+    trust_status : Win32cr::Security::Cryptography::CERT_TRUST_STATUS,
+    cElement : UInt32,
+    rgpElement : Win32cr::Security::Cryptography::CERT_CHAIN_ELEMENT**,
+    pTrustListInfo : Win32cr::Security::Cryptography::CERT_TRUST_LIST_INFO*,
+    fHasRevocationFreshnessTime : Win32cr::Foundation::BOOL,
+    dwRevocationFreshnessTime : UInt32
+
+  @[Extern]
+  record CERT_CHAIN_CONTEXT,
+    cbSize : UInt32,
+    trust_status : Win32cr::Security::Cryptography::CERT_TRUST_STATUS,
+    cChain : UInt32,
+    rgpChain : Win32cr::Security::Cryptography::CERT_SIMPLE_CHAIN**,
+    cLowerQualityChainContext : UInt32,
+    rgpLowerQualityChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT**,
+    fHasRevocationFreshnessTime : Win32cr::Foundation::BOOL,
+    dwRevocationFreshnessTime : UInt32,
+    dwCreateFlags : UInt32,
+    chain_id : LibC::GUID
+
+  @[Extern]
+  record CERT_USAGE_MATCH,
+    dwType : UInt32,
+    usage : Win32cr::Security::Cryptography::CTL_USAGE
+
+  @[Extern]
+  record CTL_USAGE_MATCH,
+    dwType : UInt32,
+    usage : Win32cr::Security::Cryptography::CTL_USAGE
+
+  @[Extern]
+  record CERT_CHAIN_PARA,
+    cbSize : UInt32,
+    requested_usage : Win32cr::Security::Cryptography::CERT_USAGE_MATCH
+
+  @[Extern]
+  record CERT_REVOCATION_CHAIN_PARA,
+    cbSize : UInt32,
+    hChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE,
+    hAdditionalStore : Win32cr::Security::Cryptography::HCERTSTORE,
+    dwChainFlags : UInt32,
+    dwUrlRetrievalTimeout : UInt32,
+    pftCurrentTime : Win32cr::Foundation::FILETIME*,
+    pftCacheResync : Win32cr::Foundation::FILETIME*,
+    cbMaxUrlRetrievalByteCount : UInt32
+
+  @[Extern]
+  record CRL_REVOCATION_INFO,
+    pCrlEntry : Win32cr::Security::Cryptography::CRL_ENTRY*,
+    pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*,
+    pCrlIssuerChain : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
+
+  @[Extern]
+  record CERT_CHAIN_FIND_BY_ISSUER_PARA,
+    cbSize : UInt32,
+    pszUsageIdentifier : Win32cr::Foundation::PSTR,
+    dwKeySpec : UInt32,
+    dwAcquirePrivateKeyFlags : UInt32,
+    cIssuer : UInt32,
+    rgIssuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*,
+    pfnFindCallback : Win32cr::Security::Cryptography::PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK,
+    pvFindArg : Void*
+
+  @[Extern]
+  record CERT_CHAIN_POLICY_PARA,
+    cbSize : UInt32,
+    dwFlags : Win32cr::Security::Cryptography::CERT_CHAIN_POLICY_FLAGS,
+    pvExtraPolicyPara : Void*
+
+  @[Extern]
+  record CERT_CHAIN_POLICY_STATUS,
+    cbSize : UInt32,
+    dwError : UInt32,
+    lChainIndex : Int32,
+    lElementIndex : Int32,
+    pvExtraPolicyStatus : Void*
+
+  @[Extern]
+  record AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_PARA,
+    cbSize : UInt32,
+    dwRegPolicySettings : UInt32,
+    pSignerInfo : Win32cr::Security::Cryptography::CMSG_SIGNER_INFO*
+
+  @[Extern]
+  record AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_STATUS,
+    cbSize : UInt32,
+    fCommercial : Win32cr::Foundation::BOOL
+
+  @[Extern]
+  record AUTHENTICODE_TS_EXTRA_CERT_CHAIN_POLICY_PARA,
+    cbSize : UInt32,
+    dwRegPolicySettings : UInt32,
+    fCommercial : Win32cr::Foundation::BOOL
+
+  @[Extern]
+  record HTTPSPolicyCallbackData,
+    anonymous : Anonymous_e__Union,
+    dwAuthType : Win32cr::Security::Cryptography::HTTPSPOLICY_CALLBACK_DATA_AUTH_TYPE,
+    fdwChecks : UInt32,
+    pwszServerName : Win32cr::Foundation::PWSTR do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      cbStruct : UInt32,
+      cbSize : UInt32
+
+  end
+
+  @[Extern]
+  record EV_EXTRA_CERT_CHAIN_POLICY_PARA,
+    cbSize : UInt32,
+    dwRootProgramQualifierFlags : Win32cr::Security::Cryptography::CERT_ROOT_PROGRAM_FLAGS
+
+  @[Extern]
+  record EV_EXTRA_CERT_CHAIN_POLICY_STATUS,
+    cbSize : UInt32,
+    dwQualifiers : UInt32,
+    dwIssuanceUsageIndex : UInt32
+
+  @[Extern]
+  record SSL_F12_EXTRA_CERT_CHAIN_POLICY_STATUS,
+    cbSize : UInt32,
+    dwErrorLevel : UInt32,
+    dwErrorCategory : UInt32,
+    dwReserved : UInt32,
+    wszErrorText : UInt16[256]
+
+  @[Extern]
+  record SSL_HPKP_HEADER_EXTRA_CERT_CHAIN_POLICY_PARA,
+    cbSize : UInt32,
+    dwReserved : UInt32,
+    pwszServerName : Win32cr::Foundation::PWSTR,
+    rgpszHpkpValue : Win32cr::Foundation::PSTR[2]
+
+  @[Extern]
+  record SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_PARA,
+    cbSize : UInt32,
+    dwReserved : UInt32,
+    pwszServerName : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record SSL_KEY_PIN_EXTRA_CERT_CHAIN_POLICY_STATUS,
+    cbSize : UInt32,
+    lError : Int32,
+    wszErrorText : UInt16[512]
+
+  @[Extern]
+  record CRYPT_PKCS12_PBE_PARAMS,
+    iIterations : Int32,
+    cbSalt : UInt32
+
+  @[Extern]
+  record PKCS12_PBES2_EXPORT_PARAMS,
+    dwSize : UInt32,
+    hNcryptDescriptor : Void*,
+    pwszPbes2Alg : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record CERT_SERVER_OCSP_RESPONSE_CONTEXT,
+    cbSize : UInt32,
+    pbEncodedOcspResponse : UInt8*,
+    cbEncodedOcspResponse : UInt32
+
+  @[Extern]
+  record CERT_SERVER_OCSP_RESPONSE_OPEN_PARA,
+    cbSize : UInt32,
+    dwFlags : UInt32,
+    pcbUsedSize : UInt32*,
+    pwszOcspDirectory : Win32cr::Foundation::PWSTR,
+    pfnUpdateCallback : Win32cr::Security::Cryptography::PFN_CERT_SERVER_OCSP_RESPONSE_UPDATE_CALLBACK,
+    pvUpdateCallbackArg : Void*
+
+  @[Extern]
+  record CERT_SELECT_CHAIN_PARA,
+    hChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE,
+    pTime : Win32cr::Foundation::FILETIME*,
+    hAdditionalStore : Win32cr::Security::Cryptography::HCERTSTORE,
+    pChainPara : Win32cr::Security::Cryptography::CERT_CHAIN_PARA*,
+    dwFlags : UInt32
+
+  @[Extern]
+  record CERT_SELECT_CRITERIA,
+    dwType : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA_TYPE,
+    cPara : UInt32,
+    ppPara : Void**
+
+  @[Extern]
+  record CRYPT_TIMESTAMP_REQUEST,
+    dwVersion : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_VERSION,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    hashed_message : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    pszTSAPolicyId : Win32cr::Foundation::PSTR,
+    nonce : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    fCertReq : Win32cr::Foundation::BOOL,
+    cExtension : UInt32,
+    rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
+
+  @[Extern]
+  record CRYPT_TIMESTAMP_RESPONSE,
+    dwStatus : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_RESPONSE_STATUS,
+    cFreeText : UInt32,
+    rgFreeText : Win32cr::Foundation::PWSTR*,
+    failure_info : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB,
+    content_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record CRYPT_TIMESTAMP_ACCURACY,
+    dwSeconds : UInt32,
+    dwMillis : UInt32,
+    dwMicros : UInt32
+
+  @[Extern]
+  record CRYPT_TIMESTAMP_INFO,
+    dwVersion : UInt32,
+    pszTSAPolicyId : Win32cr::Foundation::PSTR,
+    hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER,
+    hashed_message : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    ftTime : Win32cr::Foundation::FILETIME,
+    pvAccuracy : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_ACCURACY*,
+    fOrdering : Win32cr::Foundation::BOOL,
+    nonce : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    tsa : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    cExtension : UInt32,
+    rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
+
+  @[Extern]
+  record CRYPT_TIMESTAMP_CONTEXT,
+    cbEncoded : UInt32,
+    pbEncoded : UInt8*,
+    pTimeStamp : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_INFO*
+
+  @[Extern]
+  record CRYPT_TIMESTAMP_PARA,
+    pszTSAPolicyId : Win32cr::Foundation::PSTR,
+    fRequestCerts : Win32cr::Foundation::BOOL,
+    nonce : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    cExtension : UInt32,
+    rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
+
+  @[Extern]
+  record CRYPT_OBJECT_LOCATOR_PROVIDER_TABLE,
+    cbSize : UInt32,
+    pfnGet : Win32cr::Security::Cryptography::PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_GET,
+    pfnRelease : Win32cr::Security::Cryptography::PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE,
+    pfnFreePassword : Win32cr::Security::Cryptography::PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_PASSWORD,
+    pfnFree : Win32cr::Security::Cryptography::PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE,
+    pfnFreeIdentifier : Win32cr::Security::Cryptography::PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_IDENTIFIER
+
+  @[Extern]
+  record CRYPTPROTECT_PROMPTSTRUCT,
+    cbSize : UInt32,
+    dwPromptFlags : UInt32,
+    hwndApp : Win32cr::Foundation::HWND,
+    szPrompt : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record NCRYPT_PROTECT_STREAM_INFO,
+    pfnStreamOutput : Win32cr::Security::Cryptography::PFNCryptStreamOutputCallback,
+    pvCallbackCtxt : Void*
+
+  @[Extern]
+  record NCRYPT_PROTECT_STREAM_INFO_EX,
+    pfnStreamOutput : Win32cr::Security::Cryptography::PFNCryptStreamOutputCallbackEx,
+    pvCallbackCtxt : Void*
+
+  @[Extern]
+  record CRYPT_XML_BLOB,
+    dwCharset : Win32cr::Security::Cryptography::CRYPT_XML_CHARSET,
+    cbData : UInt32,
+    pbData : UInt8*
+
+  @[Extern]
+  record CRYPT_XML_DATA_BLOB,
+    cbData : UInt32,
+    pbData : UInt8*
+
+  @[Extern]
+  record CRYPT_XML_PROPERTY,
+    dwPropId : Win32cr::Security::Cryptography::CRYPT_XML_PROPERTY_ID,
+    pvValue : Void*,
+    cbValue : UInt32
+
+  @[Extern]
+  record CRYPT_XML_DATA_PROVIDER,
+    pvCallbackState : Void*,
+    cbBufferSize : UInt32,
+    pfnRead : Win32cr::Security::Cryptography::PFN_CRYPT_XML_DATA_PROVIDER_READ,
+    pfnClose : Win32cr::Security::Cryptography::PFN_CRYPT_XML_DATA_PROVIDER_CLOSE
+
+  @[Extern]
+  record CRYPT_XML_STATUS,
+    cbSize : UInt32,
+    dwErrorStatus : Win32cr::Security::Cryptography::CRYPT_XML_STATUS_ERROR_STATUS,
+    dwInfoStatus : Win32cr::Security::Cryptography::CRYPT_XML_STATUS_INFO_STATUS
+
+  @[Extern]
+  record CRYPT_XML_ALGORITHM,
+    cbSize : UInt32,
+    wszAlgorithm : Win32cr::Foundation::PWSTR,
+    encoded : Win32cr::Security::Cryptography::CRYPT_XML_BLOB
+
+  @[Extern]
+  record CRYPT_XML_TRANSFORM_INFO,
+    cbSize : UInt32,
+    wszAlgorithm : Win32cr::Foundation::PWSTR,
+    cbBufferSize : UInt32,
+    dwFlags : Win32cr::Security::Cryptography::CRYPT_XML_TRANSFORM_FLAGS,
+    pfnCreateTransform : Win32cr::Security::Cryptography::PFN_CRYPT_XML_CREATE_TRANSFORM
+
+  @[Extern]
+  record CRYPT_XML_TRANSFORM_CHAIN_CONFIG,
+    cbSize : UInt32,
+    cTransformInfo : UInt32,
+    rgpTransformInfo : Win32cr::Security::Cryptography::CRYPT_XML_TRANSFORM_INFO**
+
+  @[Extern]
+  record CRYPT_XML_KEY_DSA_KEY_VALUE,
+    p : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB,
+    q : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB,
+    g : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB,
+    y : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB,
+    j : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB,
+    seed : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB,
+    counter : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB
+
+  @[Extern]
+  record CRYPT_XML_KEY_ECDSA_KEY_VALUE,
+    wszNamedCurve : Win32cr::Foundation::PWSTR,
+    x : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB,
+    y : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB,
+    explicit_para : Win32cr::Security::Cryptography::CRYPT_XML_BLOB
+
+  @[Extern]
+  record CRYPT_XML_KEY_RSA_KEY_VALUE,
+    modulus : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB,
+    exponent : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB
+
+  @[Extern]
+  record CRYPT_XML_KEY_VALUE,
+    dwType : Win32cr::Security::Cryptography::CRYPT_XML_KEY_VALUE_TYPE,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      dsa_key_value : Win32cr::Security::Cryptography::CRYPT_XML_KEY_DSA_KEY_VALUE,
+      rsa_key_value : Win32cr::Security::Cryptography::CRYPT_XML_KEY_RSA_KEY_VALUE,
+      ecdsa_key_value : Win32cr::Security::Cryptography::CRYPT_XML_KEY_ECDSA_KEY_VALUE,
+      custom : Win32cr::Security::Cryptography::CRYPT_XML_BLOB
+
+  end
+
+  @[Extern]
+  record CRYPT_XML_ISSUER_SERIAL,
+    wszIssuer : Win32cr::Foundation::PWSTR,
+    wszSerial : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record CRYPT_XML_X509DATA_ITEM,
+    dwType : Win32cr::Security::Cryptography::CRYPT_XML_X509DATA_TYPE,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      issuer_serial : Win32cr::Security::Cryptography::CRYPT_XML_ISSUER_SERIAL,
+      ski : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB,
+      wszSubjectName : Win32cr::Foundation::PWSTR,
+      certificate : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB,
+      crl : Win32cr::Security::Cryptography::CRYPT_XML_DATA_BLOB,
+      custom : Win32cr::Security::Cryptography::CRYPT_XML_BLOB
+
+  end
+
+  @[Extern]
+  record CRYPT_XML_X509DATA,
+    cX509Data : UInt32,
+    rgX509Data : Win32cr::Security::Cryptography::CRYPT_XML_X509DATA_ITEM*
+
+  @[Extern]
+  record CRYPT_XML_KEY_INFO_ITEM,
+    dwType : Win32cr::Security::Cryptography::CRYPT_XML_KEYINFO_TYPE,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      wszKeyName : Win32cr::Foundation::PWSTR,
+      key_value : Win32cr::Security::Cryptography::CRYPT_XML_KEY_VALUE,
+      retrieval_method : Win32cr::Security::Cryptography::CRYPT_XML_BLOB,
+      x509_data : Win32cr::Security::Cryptography::CRYPT_XML_X509DATA,
+      custom : Win32cr::Security::Cryptography::CRYPT_XML_BLOB
+
+  end
+
+  @[Extern]
+  record CRYPT_XML_KEY_INFO,
+    cbSize : UInt32,
+    wszId : Win32cr::Foundation::PWSTR,
+    cKeyInfo : UInt32,
+    rgKeyInfo : Win32cr::Security::Cryptography::CRYPT_XML_KEY_INFO_ITEM*,
+    hVerifyKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE
+
+  @[Extern]
+  record CRYPT_XML_REFERENCE,
+    cbSize : UInt32,
+    hReference : Void*,
+    wszId : Win32cr::Foundation::PWSTR,
+    wszUri : Win32cr::Foundation::PWSTR,
+    wszType : Win32cr::Foundation::PWSTR,
+    digest_method : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM,
+    digest_value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    cTransform : UInt32,
+    rgTransform : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*
+
+  @[Extern]
+  record CRYPT_XML_REFERENCES,
+    cReference : UInt32,
+    rgpReference : Win32cr::Security::Cryptography::CRYPT_XML_REFERENCE**
+
+  @[Extern]
+  record CRYPT_XML_SIGNED_INFO,
+    cbSize : UInt32,
+    wszId : Win32cr::Foundation::PWSTR,
+    canonicalization : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM,
+    signature_method : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM,
+    cReference : UInt32,
+    rgpReference : Win32cr::Security::Cryptography::CRYPT_XML_REFERENCE**,
+    encoded : Win32cr::Security::Cryptography::CRYPT_XML_BLOB
+
+  @[Extern]
+  record CRYPT_XML_OBJECT,
+    cbSize : UInt32,
+    hObject : Void*,
+    wszId : Win32cr::Foundation::PWSTR,
+    wszMimeType : Win32cr::Foundation::PWSTR,
+    wszEncoding : Win32cr::Foundation::PWSTR,
+    manifest : Win32cr::Security::Cryptography::CRYPT_XML_REFERENCES,
+    encoded : Win32cr::Security::Cryptography::CRYPT_XML_BLOB
+
+  @[Extern]
+  record CRYPT_XML_SIGNATURE,
+    cbSize : UInt32,
+    hSignature : Void*,
+    wszId : Win32cr::Foundation::PWSTR,
+    signed_info : Win32cr::Security::Cryptography::CRYPT_XML_SIGNED_INFO,
+    signature_value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    pKeyInfo : Win32cr::Security::Cryptography::CRYPT_XML_KEY_INFO*,
+    cObject : UInt32,
+    rgpObject : Win32cr::Security::Cryptography::CRYPT_XML_OBJECT**
+
+  @[Extern]
+  record CRYPT_XML_DOC_CTXT,
+    cbSize : UInt32,
+    hDocCtxt : Void*,
+    pTransformsConfig : Win32cr::Security::Cryptography::CRYPT_XML_TRANSFORM_CHAIN_CONFIG*,
+    cSignature : UInt32,
+    rgpSignature : Win32cr::Security::Cryptography::CRYPT_XML_SIGNATURE**
+
+  @[Extern]
+  record CRYPT_XML_KEYINFO_PARAM,
+    wszId : Win32cr::Foundation::PWSTR,
+    wszKeyName : Win32cr::Foundation::PWSTR,
+    ski : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB,
+    wszSubjectName : Win32cr::Foundation::PWSTR,
+    cCertificate : UInt32,
+    rgCertificate : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*,
+    cCRL : UInt32,
+    rgCRL : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+
+  @[Extern]
+  record CRYPT_XML_ALGORITHM_INFO,
+    cbSize : UInt32,
+    wszAlgorithmURI : Win32cr::Foundation::PWSTR,
+    wszName : Win32cr::Foundation::PWSTR,
+    dwGroupId : Win32cr::Security::Cryptography::CRYPT_XML_GROUP_ID,
+    wszCNGAlgid : Win32cr::Foundation::PWSTR,
+    wszCNGExtraAlgid : Win32cr::Foundation::PWSTR,
+    dwSignFlags : UInt32,
+    dwVerifyFlags : UInt32,
+    pvPaddingInfo : Void*,
+    pvExtraInfo : Void*
+
+  @[Extern]
+  record CRYPT_XML_CRYPTOGRAPHIC_INTERFACE,
+    cbSize : UInt32,
+    fpCryptXmlEncodeAlgorithm : Win32cr::Security::Cryptography::CryptXmlDllEncodeAlgorithm,
+    fpCryptXmlCreateDigest : Win32cr::Security::Cryptography::CryptXmlDllCreateDigest,
+    fpCryptXmlDigestData : Win32cr::Security::Cryptography::CryptXmlDllDigestData,
+    fpCryptXmlFinalizeDigest : Win32cr::Security::Cryptography::CryptXmlDllFinalizeDigest,
+    fpCryptXmlCloseDigest : Win32cr::Security::Cryptography::CryptXmlDllCloseDigest,
+    fpCryptXmlSignData : Win32cr::Security::Cryptography::CryptXmlDllSignData,
+    fpCryptXmlVerifySignature : Win32cr::Security::Cryptography::CryptXmlDllVerifySignature,
+    fpCryptXmlGetAlgorithmInfo : Win32cr::Security::Cryptography::CryptXmlDllGetAlgorithmInfo
+
+  @[Extern]
+  record INFORMATIONCARD_ASYMMETRIC_CRYPTO_PARAMETERS,
+    keySize : Int32,
+    keyExchangeAlgorithm : Win32cr::Foundation::PWSTR,
+    signatureAlgorithm : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record INFORMATIONCARD_SYMMETRIC_CRYPTO_PARAMETERS,
+    keySize : Int32,
+    blockSize : Int32,
+    feedbackSize : Int32
+
+  @[Extern]
+  record INFORMATIONCARD_TRANSFORM_CRYPTO_PARAMETERS,
+    inputBlockSize : Int32,
+    outputBlockSize : Int32,
+    canTransformMultipleBlocks : Win32cr::Foundation::BOOL,
+    canReuseTransform : Win32cr::Foundation::BOOL
+
+  @[Extern]
+  record INFORMATIONCARD_HASH_CRYPTO_PARAMETERS,
+    hashSize : Int32,
+    transform : Win32cr::Security::Cryptography::INFORMATIONCARD_TRANSFORM_CRYPTO_PARAMETERS
+
+  @[Extern]
+  record INFORMATIONCARD_CRYPTO_HANDLE,
+    type__ : Win32cr::Security::Cryptography::HandleType,
+    expiration : Int64,
+    cryptoParameters : Void*
+
+  @[Extern]
+  record GENERIC_XML_TOKEN,
+    createDate : Win32cr::Foundation::FILETIME,
+    expiryDate : Win32cr::Foundation::FILETIME,
+    xmlToken : Win32cr::Foundation::PWSTR,
+    internalTokenReference : Win32cr::Foundation::PWSTR,
+    externalTokenReference : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record POLICY_ELEMENT,
+    targetEndpointAddress : Win32cr::Foundation::PWSTR,
+    issuerEndpointAddress : Win32cr::Foundation::PWSTR,
+    issuedTokenParameters : Win32cr::Foundation::PWSTR,
+    privacyNoticeLink : Win32cr::Foundation::PWSTR,
+    privacyNoticeVersion : UInt32,
+    useManagedPresentation : Win32cr::Foundation::BOOL
+
+  @[Extern]
+  record ENDPOINTADDRESS,
+    serviceUrl : Win32cr::Foundation::PWSTR,
+    policyUrl : Win32cr::Foundation::PWSTR,
+    rawCertificate : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+
+  @[Extern]
+  record ENDPOINTADDRESS2,
+    serviceUrl : Win32cr::Foundation::PWSTR,
+    policyUrl : Win32cr::Foundation::PWSTR,
+    identityType : UInt32,
+    identityBytes : Void*
+
+  @[Extern]
+  record CERTIFICATE_CHAIN_BLOB,
+    certCount : UInt32,
+    rawCertificates : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+
+  @[Extern]
+  record CLAIMLIST,
+    count : UInt32,
+    claims : Win32cr::Foundation::PWSTR*
+
+  @[Extern]
+  record RECIPIENTPOLICY,
+    recipient : Win32cr::Security::Cryptography::ENDPOINTADDRESS,
+    issuer : Win32cr::Security::Cryptography::ENDPOINTADDRESS,
+    tokenType : Win32cr::Foundation::PWSTR,
+    requiredClaims : Win32cr::Security::Cryptography::CLAIMLIST,
+    optionalClaims : Win32cr::Security::Cryptography::CLAIMLIST,
+    privacyUrl : Win32cr::Foundation::PWSTR,
+    privacyVersion : UInt32
+
+  @[Extern]
+  record RECIPIENTPOLICY2,
+    recipient : Win32cr::Security::Cryptography::ENDPOINTADDRESS2,
+    issuer : Win32cr::Security::Cryptography::ENDPOINTADDRESS2,
+    tokenType : Win32cr::Foundation::PWSTR,
+    requiredClaims : Win32cr::Security::Cryptography::CLAIMLIST,
+    optionalClaims : Win32cr::Security::Cryptography::CLAIMLIST,
+    privacyUrl : Win32cr::Foundation::PWSTR,
+    privacyVersion : UInt32
+
+  @[Extern]
+  record ICertSrvSetupKeyInformationVtbl,
+    query_interface : Proc(ICertSrvSetupKeyInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ICertSrvSetupKeyInformation*, UInt32),
+    release : Proc(ICertSrvSetupKeyInformation*, UInt32),
+    get_type_info_count : Proc(ICertSrvSetupKeyInformation*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ICertSrvSetupKeyInformation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ICertSrvSetupKeyInformation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ICertSrvSetupKeyInformation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ProviderName : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_ProviderName : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_Length : Proc(ICertSrvSetupKeyInformation*, Int32*, Win32cr::Foundation::HRESULT),
+    put_Length : Proc(ICertSrvSetupKeyInformation*, Int32, Win32cr::Foundation::HRESULT),
+    get_Existing : Proc(ICertSrvSetupKeyInformation*, Int16*, Win32cr::Foundation::HRESULT),
+    put_Existing : Proc(ICertSrvSetupKeyInformation*, Int16, Win32cr::Foundation::HRESULT),
+    get_ContainerName : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_ContainerName : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_HashAlgorithm : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    put_HashAlgorithm : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    get_ExistingCACertificate : Proc(ICertSrvSetupKeyInformation*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_ExistingCACertificate : Proc(ICertSrvSetupKeyInformation*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("6ba73778-36da-4c39-8a85-bcfa7d000793")]
+  record ICertSrvSetupKeyInformation, lpVtbl : ICertSrvSetupKeyInformationVtbl* do
+    GUID = LibC::GUID.new(0x6ba73778_u32, 0x36da_u16, 0x4c39_u16, StaticArray[0x8a_u8, 0x85_u8, 0xbc_u8, 0xfa_u8, 0x7d_u8, 0x0_u8, 0x7_u8, 0x93_u8])
+    def query_interface(this : ICertSrvSetupKeyInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ICertSrvSetupKeyInformation*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ICertSrvSetupKeyInformation*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ICertSrvSetupKeyInformation*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ICertSrvSetupKeyInformation*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ICertSrvSetupKeyInformation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ICertSrvSetupKeyInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_ProviderName(this : ICertSrvSetupKeyInformation*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ProviderName.call(this, pVal)
+    end
+    def put_ProviderName(this : ICertSrvSetupKeyInformation*, bstrVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ProviderName.call(this, bstrVal)
+    end
+    def get_Length(this : ICertSrvSetupKeyInformation*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Length.call(this, pVal)
+    end
+    def put_Length(this : ICertSrvSetupKeyInformation*, lVal : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Length.call(this, lVal)
+    end
+    def get_Existing(this : ICertSrvSetupKeyInformation*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Existing.call(this, pVal)
+    end
+    def put_Existing(this : ICertSrvSetupKeyInformation*, bVal : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_Existing.call(this, bVal)
+    end
+    def get_ContainerName(this : ICertSrvSetupKeyInformation*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ContainerName.call(this, pVal)
+    end
+    def put_ContainerName(this : ICertSrvSetupKeyInformation*, bstrVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ContainerName.call(this, bstrVal)
+    end
+    def get_HashAlgorithm(this : ICertSrvSetupKeyInformation*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_HashAlgorithm.call(this, pVal)
+    end
+    def put_HashAlgorithm(this : ICertSrvSetupKeyInformation*, bstrVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_HashAlgorithm.call(this, bstrVal)
+    end
+    def get_ExistingCACertificate(this : ICertSrvSetupKeyInformation*, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ExistingCACertificate.call(this, pVal)
+    end
+    def put_ExistingCACertificate(this : ICertSrvSetupKeyInformation*, varVal : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ExistingCACertificate.call(this, varVal)
+    end
+
+  end
+
+  @[Extern]
+  record ICertSrvSetupKeyInformationCollectionVtbl,
+    query_interface : Proc(ICertSrvSetupKeyInformationCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ICertSrvSetupKeyInformationCollection*, UInt32),
+    release : Proc(ICertSrvSetupKeyInformationCollection*, UInt32),
+    get_type_info_count : Proc(ICertSrvSetupKeyInformationCollection*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ICertSrvSetupKeyInformationCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ICertSrvSetupKeyInformationCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ICertSrvSetupKeyInformationCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get__NewEnum : Proc(ICertSrvSetupKeyInformationCollection*, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ICertSrvSetupKeyInformationCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Count : Proc(ICertSrvSetupKeyInformationCollection*, Int32*, Win32cr::Foundation::HRESULT),
+    add : Proc(ICertSrvSetupKeyInformationCollection*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("e65c8b00-e58f-41f9-a9ec-a28d7427c844")]
+  record ICertSrvSetupKeyInformationCollection, lpVtbl : ICertSrvSetupKeyInformationCollectionVtbl* do
+    GUID = LibC::GUID.new(0xe65c8b00_u32, 0xe58f_u16, 0x41f9_u16, StaticArray[0xa9_u8, 0xec_u8, 0xa2_u8, 0x8d_u8, 0x74_u8, 0x27_u8, 0xc8_u8, 0x44_u8])
+    def query_interface(this : ICertSrvSetupKeyInformationCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ICertSrvSetupKeyInformationCollection*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ICertSrvSetupKeyInformationCollection*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ICertSrvSetupKeyInformationCollection*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ICertSrvSetupKeyInformationCollection*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ICertSrvSetupKeyInformationCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ICertSrvSetupKeyInformationCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get__NewEnum(this : ICertSrvSetupKeyInformationCollection*, ppVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get__NewEnum.call(this, ppVal)
+    end
+    def get_Item(this : ICertSrvSetupKeyInformationCollection*, index : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Item.call(this, index, pVal)
+    end
+    def get_Count(this : ICertSrvSetupKeyInformationCollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Count.call(this, pVal)
+    end
+    def add(this : ICertSrvSetupKeyInformationCollection*, pIKeyInformation : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add.call(this, pIKeyInformation)
+    end
+
+  end
+
+  @[Extern]
+  record ICertSrvSetupVtbl,
+    query_interface : Proc(ICertSrvSetup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ICertSrvSetup*, UInt32),
+    release : Proc(ICertSrvSetup*, UInt32),
+    get_type_info_count : Proc(ICertSrvSetup*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ICertSrvSetup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ICertSrvSetup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ICertSrvSetup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_CAErrorId : Proc(ICertSrvSetup*, Int32*, Win32cr::Foundation::HRESULT),
+    get_CAErrorString : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    initialize_defaults : Proc(ICertSrvSetup*, Int16, Int16, Win32cr::Foundation::HRESULT),
+    get_ca_setup_property : Proc(ICertSrvSetup*, Win32cr::Security::Cryptography::CASetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_ca_setup_property : Proc(ICertSrvSetup*, Win32cr::Security::Cryptography::CASetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    is_property_editable : Proc(ICertSrvSetup*, Win32cr::Security::Cryptography::CASetupProperty, Int16*, Win32cr::Foundation::HRESULT),
+    get_supported_ca_types : Proc(ICertSrvSetup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_provider_name_list : Proc(ICertSrvSetup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_key_length_list : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_hash_algorithm_list : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_private_key_container_list : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_existing_ca_certificates : Proc(ICertSrvSetup*, Void**, Win32cr::Foundation::HRESULT),
+    ca_import_pfx : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Void**, Win32cr::Foundation::HRESULT),
+    set_ca_distinguished_name : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Int16, Int16, Int16, Win32cr::Foundation::HRESULT),
+    set_database_information : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    set_parent_ca_information : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_web_ca_information : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    install : Proc(ICertSrvSetup*, Win32cr::Foundation::HRESULT),
+    pre_un_install : Proc(ICertSrvSetup*, Int16, Win32cr::Foundation::HRESULT),
+    post_un_install : Proc(ICertSrvSetup*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("b760a1bb-4784-44c0-8f12-555f0780ff25")]
+  record ICertSrvSetup, lpVtbl : ICertSrvSetupVtbl* do
+    GUID = LibC::GUID.new(0xb760a1bb_u32, 0x4784_u16, 0x44c0_u16, StaticArray[0x8f_u8, 0x12_u8, 0x55_u8, 0x5f_u8, 0x7_u8, 0x80_u8, 0xff_u8, 0x25_u8])
+    def query_interface(this : ICertSrvSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ICertSrvSetup*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ICertSrvSetup*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ICertSrvSetup*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ICertSrvSetup*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ICertSrvSetup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ICertSrvSetup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_CAErrorId(this : ICertSrvSetup*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CAErrorId.call(this, pVal)
+    end
+    def get_CAErrorString(this : ICertSrvSetup*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CAErrorString.call(this, pVal)
+    end
+    def initialize_defaults(this : ICertSrvSetup*, bServer : Int16, bClient : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_defaults.call(this, bServer, bClient)
+    end
+    def get_ca_setup_property(this : ICertSrvSetup*, propertyId : Win32cr::Security::Cryptography::CASetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ca_setup_property.call(this, propertyId, pPropertyValue)
+    end
+    def set_ca_setup_property(this : ICertSrvSetup*, propertyId : Win32cr::Security::Cryptography::CASetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_ca_setup_property.call(this, propertyId, pPropertyValue)
+    end
+    def is_property_editable(this : ICertSrvSetup*, propertyId : Win32cr::Security::Cryptography::CASetupProperty, pbEditable : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_property_editable.call(this, propertyId, pbEditable)
+    end
+    def get_supported_ca_types(this : ICertSrvSetup*, pCATypes : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_supported_ca_types.call(this, pCATypes)
+    end
+    def get_provider_name_list(this : ICertSrvSetup*, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_provider_name_list.call(this, pVal)
+    end
+    def get_key_length_list(this : ICertSrvSetup*, bstrProviderName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_key_length_list.call(this, bstrProviderName, pVal)
+    end
+    def get_hash_algorithm_list(this : ICertSrvSetup*, bstrProviderName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_hash_algorithm_list.call(this, bstrProviderName, pVal)
+    end
+    def get_private_key_container_list(this : ICertSrvSetup*, bstrProviderName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_private_key_container_list.call(this, bstrProviderName, pVal)
+    end
+    def get_existing_ca_certificates(this : ICertSrvSetup*, ppVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_existing_ca_certificates.call(this, ppVal)
+    end
+    def ca_import_pfx(this : ICertSrvSetup*, bstrFileName : Win32cr::Foundation::BSTR, bstrPasswd : Win32cr::Foundation::BSTR, bOverwriteExistingKey : Int16, ppVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ca_import_pfx.call(this, bstrFileName, bstrPasswd, bOverwriteExistingKey, ppVal)
+    end
+    def set_ca_distinguished_name(this : ICertSrvSetup*, bstrCADN : Win32cr::Foundation::BSTR, bIgnoreUnicode : Int16, bOverwriteExistingKey : Int16, bOverwriteExistingCAInDS : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_ca_distinguished_name.call(this, bstrCADN, bIgnoreUnicode, bOverwriteExistingKey, bOverwriteExistingCAInDS)
+    end
+    def set_database_information(this : ICertSrvSetup*, bstrDBDirectory : Win32cr::Foundation::BSTR, bstrLogDirectory : Win32cr::Foundation::BSTR, bstrSharedFolder : Win32cr::Foundation::BSTR, bForceOverwrite : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_database_information.call(this, bstrDBDirectory, bstrLogDirectory, bstrSharedFolder, bForceOverwrite)
+    end
+    def set_parent_ca_information(this : ICertSrvSetup*, bstrCAConfiguration : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_parent_ca_information.call(this, bstrCAConfiguration)
+    end
+    def set_web_ca_information(this : ICertSrvSetup*, bstrCAConfiguration : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_web_ca_information.call(this, bstrCAConfiguration)
+    end
+    def install(this : ICertSrvSetup*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.install.call(this)
+    end
+    def pre_un_install(this : ICertSrvSetup*, bClientOnly : Int16) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pre_un_install.call(this, bClientOnly)
+    end
+    def post_un_install(this : ICertSrvSetup*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.post_un_install.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record IMSCEPSetupVtbl,
+    query_interface : Proc(IMSCEPSetup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IMSCEPSetup*, UInt32),
+    release : Proc(IMSCEPSetup*, UInt32),
+    get_type_info_count : Proc(IMSCEPSetup*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IMSCEPSetup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IMSCEPSetup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IMSCEPSetup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_MSCEPErrorId : Proc(IMSCEPSetup*, Int32*, Win32cr::Foundation::HRESULT),
+    get_MSCEPErrorString : Proc(IMSCEPSetup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    initialize_defaults : Proc(IMSCEPSetup*, Win32cr::Foundation::HRESULT),
+    get_mscep_setup_property : Proc(IMSCEPSetup*, Win32cr::Security::Cryptography::MSCEPSetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_mscep_setup_property : Proc(IMSCEPSetup*, Win32cr::Security::Cryptography::MSCEPSetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_account_information : Proc(IMSCEPSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    is_mscep_store_empty : Proc(IMSCEPSetup*, Int16*, Win32cr::Foundation::HRESULT),
+    get_provider_name_list : Proc(IMSCEPSetup*, Int16, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_key_length_list : Proc(IMSCEPSetup*, Int16, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    install : Proc(IMSCEPSetup*, Win32cr::Foundation::HRESULT),
+    pre_un_install : Proc(IMSCEPSetup*, Win32cr::Foundation::HRESULT),
+    post_un_install : Proc(IMSCEPSetup*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("4f7761bb-9f3b-4592-9ee0-9a73259c313e")]
+  record IMSCEPSetup, lpVtbl : IMSCEPSetupVtbl* do
+    GUID = LibC::GUID.new(0x4f7761bb_u32, 0x9f3b_u16, 0x4592_u16, StaticArray[0x9e_u8, 0xe0_u8, 0x9a_u8, 0x73_u8, 0x25_u8, 0x9c_u8, 0x31_u8, 0x3e_u8])
+    def query_interface(this : IMSCEPSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IMSCEPSetup*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IMSCEPSetup*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IMSCEPSetup*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IMSCEPSetup*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IMSCEPSetup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IMSCEPSetup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_MSCEPErrorId(this : IMSCEPSetup*, pVal : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MSCEPErrorId.call(this, pVal)
+    end
+    def get_MSCEPErrorString(this : IMSCEPSetup*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_MSCEPErrorString.call(this, pVal)
+    end
+    def initialize_defaults(this : IMSCEPSetup*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_defaults.call(this)
+    end
+    def get_mscep_setup_property(this : IMSCEPSetup*, propertyId : Win32cr::Security::Cryptography::MSCEPSetupProperty, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_mscep_setup_property.call(this, propertyId, pVal)
+    end
+    def set_mscep_setup_property(this : IMSCEPSetup*, propertyId : Win32cr::Security::Cryptography::MSCEPSetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_mscep_setup_property.call(this, propertyId, pPropertyValue)
+    end
+    def set_account_information(this : IMSCEPSetup*, bstrUserName : Win32cr::Foundation::BSTR, bstrPassword : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_account_information.call(this, bstrUserName, bstrPassword)
+    end
+    def is_mscep_store_empty(this : IMSCEPSetup*, pbEmpty : Int16*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.is_mscep_store_empty.call(this, pbEmpty)
+    end
+    def get_provider_name_list(this : IMSCEPSetup*, bExchange : Int16, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_provider_name_list.call(this, bExchange, pVal)
+    end
+    def get_key_length_list(this : IMSCEPSetup*, bExchange : Int16, bstrProviderName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_key_length_list.call(this, bExchange, bstrProviderName, pVal)
+    end
+    def install(this : IMSCEPSetup*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.install.call(this)
+    end
+    def pre_un_install(this : IMSCEPSetup*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.pre_un_install.call(this)
+    end
+    def post_un_install(this : IMSCEPSetup*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.post_un_install.call(this)
+    end
+
+  end
+
+  @[Extern]
+  record ICertificateEnrollmentServerSetupVtbl,
+    query_interface : Proc(ICertificateEnrollmentServerSetup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ICertificateEnrollmentServerSetup*, UInt32),
+    release : Proc(ICertificateEnrollmentServerSetup*, UInt32),
+    get_type_info_count : Proc(ICertificateEnrollmentServerSetup*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ICertificateEnrollmentServerSetup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ICertificateEnrollmentServerSetup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ICertificateEnrollmentServerSetup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ErrorString : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    initialize_install_defaults : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Security::Cryptography::CESSetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Security::Cryptography::CESSetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_application_pool_credentials : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    install : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Foundation::HRESULT),
+    un_install : Proc(ICertificateEnrollmentServerSetup*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("70027fdb-9dd9-4921-8944-b35cb31bd2ec")]
+  record ICertificateEnrollmentServerSetup, lpVtbl : ICertificateEnrollmentServerSetupVtbl* do
+    GUID = LibC::GUID.new(0x70027fdb_u32, 0x9dd9_u16, 0x4921_u16, StaticArray[0x89_u8, 0x44_u8, 0xb3_u8, 0x5c_u8, 0xb3_u8, 0x1b_u8, 0xd2_u8, 0xec_u8])
+    def query_interface(this : ICertificateEnrollmentServerSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ICertificateEnrollmentServerSetup*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ICertificateEnrollmentServerSetup*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ICertificateEnrollmentServerSetup*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ICertificateEnrollmentServerSetup*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ICertificateEnrollmentServerSetup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ICertificateEnrollmentServerSetup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_ErrorString(this : ICertificateEnrollmentServerSetup*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ErrorString.call(this, pVal)
+    end
+    def initialize_install_defaults(this : ICertificateEnrollmentServerSetup*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_install_defaults.call(this)
+    end
+    def get_property(this : ICertificateEnrollmentServerSetup*, propertyId : Win32cr::Security::Cryptography::CESSetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_property.call(this, propertyId, pPropertyValue)
+    end
+    def set_property(this : ICertificateEnrollmentServerSetup*, propertyId : Win32cr::Security::Cryptography::CESSetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_property.call(this, propertyId, pPropertyValue)
+    end
+    def set_application_pool_credentials(this : ICertificateEnrollmentServerSetup*, bstrUsername : Win32cr::Foundation::BSTR, bstrPassword : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_application_pool_credentials.call(this, bstrUsername, bstrPassword)
+    end
+    def install(this : ICertificateEnrollmentServerSetup*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.install.call(this)
+    end
+    def un_install(this : ICertificateEnrollmentServerSetup*, pCAConfig : Win32cr::System::Com::VARIANT*, pAuthentication : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.un_install.call(this, pCAConfig, pAuthentication)
+    end
+
+  end
+
+  @[Extern]
+  record ICertificateEnrollmentPolicyServerSetupVtbl,
+    query_interface : Proc(ICertificateEnrollmentPolicyServerSetup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ICertificateEnrollmentPolicyServerSetup*, UInt32),
+    release : Proc(ICertificateEnrollmentPolicyServerSetup*, UInt32),
+    get_type_info_count : Proc(ICertificateEnrollmentPolicyServerSetup*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ICertificateEnrollmentPolicyServerSetup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ICertificateEnrollmentPolicyServerSetup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ICertificateEnrollmentPolicyServerSetup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ErrorString : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    initialize_install_defaults : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::Security::Cryptography::CEPSetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::Security::Cryptography::CEPSetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    install : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::Foundation::HRESULT),
+    un_install : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("859252cc-238c-4a88-b8fd-a37e7d04e68b")]
+  record ICertificateEnrollmentPolicyServerSetup, lpVtbl : ICertificateEnrollmentPolicyServerSetupVtbl* do
+    GUID = LibC::GUID.new(0x859252cc_u32, 0x238c_u16, 0x4a88_u16, StaticArray[0xb8_u8, 0xfd_u8, 0xa3_u8, 0x7e_u8, 0x7d_u8, 0x4_u8, 0xe6_u8, 0x8b_u8])
+    def query_interface(this : ICertificateEnrollmentPolicyServerSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ICertificateEnrollmentPolicyServerSetup*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ICertificateEnrollmentPolicyServerSetup*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ICertificateEnrollmentPolicyServerSetup*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ICertificateEnrollmentPolicyServerSetup*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ICertificateEnrollmentPolicyServerSetup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ICertificateEnrollmentPolicyServerSetup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_ErrorString(this : ICertificateEnrollmentPolicyServerSetup*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ErrorString.call(this, pVal)
+    end
+    def initialize_install_defaults(this : ICertificateEnrollmentPolicyServerSetup*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.initialize_install_defaults.call(this)
+    end
+    def get_property(this : ICertificateEnrollmentPolicyServerSetup*, propertyId : Win32cr::Security::Cryptography::CEPSetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_property.call(this, propertyId, pPropertyValue)
+    end
+    def set_property(this : ICertificateEnrollmentPolicyServerSetup*, propertyId : Win32cr::Security::Cryptography::CEPSetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_property.call(this, propertyId, pPropertyValue)
+    end
+    def install(this : ICertificateEnrollmentPolicyServerSetup*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.install.call(this)
+    end
+    def un_install(this : ICertificateEnrollmentPolicyServerSetup*, pAuthKeyBasedRenewal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.un_install.call(this, pAuthKeyBasedRenewal)
+    end
+
+  end
+
+  @[Link("advapi32")]
+  @[Link("bcrypt")]
+  @[Link("ncrypt")]
+  @[Link("crypt32")]
+  @[Link("wintrust")]
+  @[Link("cryptnet")]
+  @[Link("cryptxml")]
+  @[Link("infocardapi")]
+  lib C
+    fun CryptAcquireContextA(phProv : LibC::UIntPtrT*, szContainer : Win32cr::Foundation::PSTR, szProvider : Win32cr::Foundation::PSTR, dwProvType : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptAcquireContextW(phProv : LibC::UIntPtrT*, szContainer : Win32cr::Foundation::PWSTR, szProvider : Win32cr::Foundation::PWSTR, dwProvType : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptReleaseContext(hProv : LibC::UIntPtrT, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptGenKey(hProv : LibC::UIntPtrT, algid : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+
+    fun CryptDeriveKey(hProv : LibC::UIntPtrT, algid : UInt32, hBaseData : LibC::UIntPtrT, dwFlags : UInt32, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+
+    fun CryptDestroyKey(hKey : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+
+    fun CryptSetKeyParam(hKey : LibC::UIntPtrT, dwParam : Win32cr::Security::Cryptography::CRYPT_KEY_PARAM_ID, pbData : UInt8*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptGetKeyParam(hKey : LibC::UIntPtrT, dwParam : Win32cr::Security::Cryptography::CRYPT_KEY_PARAM_ID, pbData : UInt8*, pdwDataLen : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptSetHashParam(hHash : LibC::UIntPtrT, dwParam : Win32cr::Security::Cryptography::CRYPT_SET_HASH_PARAM, pbData : UInt8*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptGetHashParam(hHash : LibC::UIntPtrT, dwParam : UInt32, pbData : UInt8*, pdwDataLen : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptSetProvParam(hProv : LibC::UIntPtrT, dwParam : Win32cr::Security::Cryptography::CRYPT_SET_PROV_PARAM_ID, pbData : UInt8*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptGetProvParam(hProv : LibC::UIntPtrT, dwParam : UInt32, pbData : UInt8*, pdwDataLen : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptGenRandom(hProv : LibC::UIntPtrT, dwLen : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::BOOL
+
+    fun CryptGetUserKey(hProv : LibC::UIntPtrT, dwKeySpec : UInt32, phUserKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+
+    fun CryptExportKey(hKey : LibC::UIntPtrT, hExpKey : LibC::UIntPtrT, dwBlobType : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS, pbData : UInt8*, pdwDataLen : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptImportKey(hProv : LibC::UIntPtrT, pbData : UInt8*, dwDataLen : UInt32, hPubKey : LibC::UIntPtrT, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+
+    fun CryptEncrypt(hKey : LibC::UIntPtrT, hHash : LibC::UIntPtrT, final : Win32cr::Foundation::BOOL, dwFlags : UInt32, pbData : UInt8*, pdwDataLen : UInt32*, dwBufLen : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptDecrypt(hKey : LibC::UIntPtrT, hHash : LibC::UIntPtrT, final : Win32cr::Foundation::BOOL, dwFlags : UInt32, pbData : UInt8*, pdwDataLen : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptCreateHash(hProv : LibC::UIntPtrT, algid : UInt32, hKey : LibC::UIntPtrT, dwFlags : UInt32, phHash : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+
+    fun CryptHashData(hHash : LibC::UIntPtrT, pbData : UInt8*, dwDataLen : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptHashSessionKey(hHash : LibC::UIntPtrT, hKey : LibC::UIntPtrT, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptDestroyHash(hHash : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+
+    fun CryptSignHashA(hHash : LibC::UIntPtrT, dwKeySpec : UInt32, szDescription : Win32cr::Foundation::PSTR, dwFlags : UInt32, pbSignature : UInt8*, pdwSigLen : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptSignHashW(hHash : LibC::UIntPtrT, dwKeySpec : UInt32, szDescription : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pbSignature : UInt8*, pdwSigLen : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptVerifySignatureA(hHash : LibC::UIntPtrT, pbSignature : UInt8*, dwSigLen : UInt32, hPubKey : LibC::UIntPtrT, szDescription : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptVerifySignatureW(hHash : LibC::UIntPtrT, pbSignature : UInt8*, dwSigLen : UInt32, hPubKey : LibC::UIntPtrT, szDescription : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptSetProviderA(pszProvName : Win32cr::Foundation::PSTR, dwProvType : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptSetProviderW(pszProvName : Win32cr::Foundation::PWSTR, dwProvType : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptSetProviderExA(pszProvName : Win32cr::Foundation::PSTR, dwProvType : UInt32, pdwReserved : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptSetProviderExW(pszProvName : Win32cr::Foundation::PWSTR, dwProvType : UInt32, pdwReserved : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptGetDefaultProviderA(dwProvType : UInt32, pdwReserved : UInt32*, dwFlags : UInt32, pszProvName : Win32cr::Foundation::PSTR, pcbProvName : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptGetDefaultProviderW(dwProvType : UInt32, pdwReserved : UInt32*, dwFlags : UInt32, pszProvName : Win32cr::Foundation::PWSTR, pcbProvName : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptEnumProviderTypesA(dwIndex : UInt32, pdwReserved : UInt32*, dwFlags : UInt32, pdwProvType : UInt32*, szTypeName : Win32cr::Foundation::PSTR, pcbTypeName : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptEnumProviderTypesW(dwIndex : UInt32, pdwReserved : UInt32*, dwFlags : UInt32, pdwProvType : UInt32*, szTypeName : Win32cr::Foundation::PWSTR, pcbTypeName : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptEnumProvidersA(dwIndex : UInt32, pdwReserved : UInt32*, dwFlags : UInt32, pdwProvType : UInt32*, szProvName : Win32cr::Foundation::PSTR, pcbProvName : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptEnumProvidersW(dwIndex : UInt32, pdwReserved : UInt32*, dwFlags : UInt32, pdwProvType : UInt32*, szProvName : Win32cr::Foundation::PWSTR, pcbProvName : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptContextAddRef(hProv : LibC::UIntPtrT, pdwReserved : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptDuplicateKey(hKey : LibC::UIntPtrT, pdwReserved : UInt32*, dwFlags : UInt32, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+
+    fun CryptDuplicateHash(hHash : LibC::UIntPtrT, pdwReserved : UInt32*, dwFlags : UInt32, phHash : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+
+    fun BCryptOpenAlgorithmProvider(phAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE*, pszAlgId : Win32cr::Foundation::PWSTR, pszImplementation : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Security::Cryptography::BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptEnumAlgorithms(dwAlgOperations : Win32cr::Security::Cryptography::BCRYPT_OPERATION, pAlgCount : UInt32*, ppAlgList : Win32cr::Security::Cryptography::BCRYPT_ALGORITHM_IDENTIFIER**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptEnumProviders(pszAlgId : Win32cr::Foundation::PWSTR, pImplCount : UInt32*, ppImplList : Win32cr::Security::Cryptography::BCRYPT_PROVIDER_NAME**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptGetProperty(hObject : Void*, pszProperty : Win32cr::Foundation::PWSTR, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptSetProperty(hObject : Void*, pszProperty : Win32cr::Foundation::PWSTR, pbInput : UInt8*, cbInput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptCloseAlgorithmProvider(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptFreeBuffer(pvBuffer : Void*) : Void
+
+    fun BCryptGenerateSymmetricKey(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, pbKeyObject : UInt8*, cbKeyObject : UInt32, pbSecret : UInt8*, cbSecret : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptGenerateKeyPair(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, dwLength : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptEncrypt(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbIV : UInt8*, cbIV : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptDecrypt(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbIV : UInt8*, cbIV : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptExportKey(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, hExportKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptImportKey(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, hImportKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, pbKeyObject : UInt8*, cbKeyObject : UInt32, pbInput : UInt8*, cbInput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptImportKeyPair(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, hImportKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, pbInput : UInt8*, cbInput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptDuplicateKey(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, phNewKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, pbKeyObject : UInt8*, cbKeyObject : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptFinalizeKeyPair(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptDestroyKey(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptDestroySecret(hSecret : Void*) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptSignHash(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbInput : UInt8*, cbInput : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptVerifySignature(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbHash : UInt8*, cbHash : UInt32, pbSignature : UInt8*, cbSignature : UInt32, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptSecretAgreement(hPrivKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, hPubKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, phAgreedSecret : Void**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptDeriveKey(hSharedSecret : Void*, pwszKDF : Win32cr::Foundation::PWSTR, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptKeyDerivation(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptCreateHash(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, phHash : Void**, pbHashObject : UInt8*, cbHashObject : UInt32, pbSecret : UInt8*, cbSecret : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptHashData(hHash : Void*, pbInput : UInt8*, cbInput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptFinishHash(hHash : Void*, pbOutput : UInt8*, cbOutput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptCreateMultiHash(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, phHash : Void**, nHashes : UInt32, pbHashObject : UInt8*, cbHashObject : UInt32, pbSecret : UInt8*, cbSecret : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptProcessMultiOperations(hObject : Void*, operationType : Win32cr::Security::Cryptography::BCRYPT_MULTI_OPERATION_TYPE, pOperations : Void*, cbOperations : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptDuplicateHash(hHash : Void*, phNewHash : Void**, pbHashObject : UInt8*, cbHashObject : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptDestroyHash(hHash : Void*) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptHash(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbSecret : UInt8*, cbSecret : UInt32, pbInput : UInt8*, cbInput : UInt32, pbOutput : UInt8*, cbOutput : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptGenRandom(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbBuffer : UInt8*, cbBuffer : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptDeriveKeyCapi(hHash : Void*, hTargetAlg : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptDeriveKeyPBKDF2(hPrf : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbPassword : UInt8*, cbPassword : UInt32, pbSalt : UInt8*, cbSalt : UInt32, cIterations : UInt64, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptQueryProviderRegistration(pszProvider : Win32cr::Foundation::PWSTR, dwMode : Win32cr::Security::Cryptography::BCRYPT_QUERY_PROVIDER_MODE, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_PROVIDER_REG**) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptEnumRegisteredProviders(pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_PROVIDERS**) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptCreateContext(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, pConfig : Win32cr::Security::Cryptography::CRYPT_CONTEXT_CONFIG*) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptDeleteContext(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptEnumContexts(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_CONTEXTS**) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptConfigureContext(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, pConfig : Win32cr::Security::Cryptography::CRYPT_CONTEXT_CONFIG*) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptQueryContextConfiguration(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_CONTEXT_CONFIG**) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptAddContextFunction(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR, dwPosition : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptRemoveContextFunction(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptEnumContextFunctions(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_CONTEXT_FUNCTIONS**) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptConfigureContextFunction(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR, pConfig : Win32cr::Security::Cryptography::CRYPT_CONTEXT_FUNCTION_CONFIG*) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptQueryContextFunctionConfiguration(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_CONTEXT_FUNCTION_CONFIG**) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptEnumContextFunctionProviders(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_CONTEXT_FUNCTION_PROVIDERS**) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptSetContextFunctionProperty(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR, pszProperty : Win32cr::Foundation::PWSTR, cbValue : UInt32, pbValue : UInt8*) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptQueryContextFunctionProperty(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR, pszProperty : Win32cr::Foundation::PWSTR, pcbValue : UInt32*, ppbValue : UInt8**) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptRegisterConfigChangeNotify(phEvent : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptUnregisterConfigChangeNotify(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptResolveProviders(pszContext : Win32cr::Foundation::PWSTR, dwInterface : UInt32, pszFunction : Win32cr::Foundation::PWSTR, pszProvider : Win32cr::Foundation::PWSTR, dwMode : Win32cr::Security::Cryptography::BCRYPT_QUERY_PROVIDER_MODE, dwFlags : Win32cr::Security::Cryptography::BCRYPT_RESOLVE_PROVIDERS_FLAGS, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_PROVIDER_REFS**) : Win32cr::Foundation::NTSTATUS
+
+    fun BCryptGetFipsAlgorithmMode(pfEnabled : UInt8*) : Win32cr::Foundation::NTSTATUS
+
+    fun NCryptOpenStorageProvider(phProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE*, pszProviderName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun NCryptEnumAlgorithms(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, dwAlgOperations : Win32cr::Security::Cryptography::NCRYPT_OPERATION, pdwAlgCount : UInt32*, ppAlgList : Win32cr::Security::Cryptography::NCryptAlgorithmName**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun NCryptIsAlgSupported(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, pszAlgId : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun NCryptEnumKeys(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, pszScope : Win32cr::Foundation::PWSTR, ppKeyName : Win32cr::Security::Cryptography::NCryptKeyName**, ppEnumState : Void**, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+
+    fun NCryptEnumStorageProviders(pdwProviderCount : UInt32*, ppProviderList : Win32cr::Security::Cryptography::NCryptProviderName**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun NCryptFreeBuffer(pvInput : Void*) : Win32cr::Foundation::HRESULT
+
+    fun NCryptOpenKey(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pszKeyName : Win32cr::Foundation::PWSTR, dwLegacyKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+
+    fun NCryptCreatePersistedKey(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pszAlgId : Win32cr::Foundation::PWSTR, pszKeyName : Win32cr::Foundation::PWSTR, dwLegacyKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+
+    fun NCryptGetProperty(hObject : Win32cr::Security::Cryptography::NCRYPT_HANDLE, pszProperty : Win32cr::Foundation::PWSTR, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::OBJECT_SECURITY_INFORMATION) : Win32cr::Foundation::HRESULT
+
+    fun NCryptSetProperty(hObject : Win32cr::Security::Cryptography::NCRYPT_HANDLE, pszProperty : Win32cr::Foundation::PWSTR, pbInput : UInt8*, cbInput : UInt32, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+
+    fun NCryptFinalizeKey(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+
+    fun NCryptEncrypt(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+
+    fun NCryptDecrypt(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+
+    fun NCryptImportKey(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hImportKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, phKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pbData : UInt8*, cbData : UInt32, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+
+    fun NCryptExportKey(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hExportKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+
+    fun NCryptSignHash(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbHashValue : UInt8*, cbHashValue : UInt32, pbSignature : UInt8*, cbSignature : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+
+    fun NCryptVerifySignature(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbHashValue : UInt8*, cbHashValue : UInt32, pbSignature : UInt8*, cbSignature : UInt32, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+
+    fun NCryptDeleteKey(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun NCryptFreeObject(hObject : Win32cr::Security::Cryptography::NCRYPT_HANDLE) : Win32cr::Foundation::HRESULT
+
+    fun NCryptIsKeyHandle(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE) : Win32cr::Foundation::BOOL
+
+    fun NCryptTranslateHandle(phProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE*, phKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, hLegacyProv : LibC::UIntPtrT, hLegacyKey : LibC::UIntPtrT, dwLegacyKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun NCryptNotifyChangeKey(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phEvent : Win32cr::Foundation::HANDLE*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+
+    fun NCryptSecretAgreement(hPrivKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hPubKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phAgreedSecret : Win32cr::Security::Cryptography::NCRYPT_SECRET_HANDLE*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+
+    fun NCryptDeriveKey(hSharedSecret : Win32cr::Security::Cryptography::NCRYPT_SECRET_HANDLE, pwszKDF : Win32cr::Foundation::PWSTR, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun NCryptKeyDerivation(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun NCryptCreateClaim(hSubjectKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hAuthorityKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, dwClaimType : UInt32, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbClaimBlob : UInt8*, cbClaimBlob : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun NCryptVerifyClaim(hSubjectKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hAuthorityKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, dwClaimType : UInt32, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbClaimBlob : UInt8*, cbClaimBlob : UInt32, pOutput : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun CryptFormatObject(dwCertEncodingType : UInt32, dwFormatType : UInt32, dwFormatStrType : UInt32, pFormatStruct : Void*, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, pbFormat : Void*, pcbFormat : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptEncodeObjectEx(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, lpszStructType : Win32cr::Foundation::PSTR, pvStructInfo : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_ENCODE_OBJECT_FLAGS, pEncodePara : Win32cr::Security::Cryptography::CRYPT_ENCODE_PARA*, pvEncoded : Void*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptEncodeObject(dwCertEncodingType : UInt32, lpszStructType : Win32cr::Foundation::PSTR, pvStructInfo : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptDecodeObjectEx(dwCertEncodingType : UInt32, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, dwFlags : UInt32, pDecodePara : Win32cr::Security::Cryptography::CRYPT_DECODE_PARA*, pvStructInfo : Void*, pcbStructInfo : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptDecodeObject(dwCertEncodingType : UInt32, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, dwFlags : UInt32, pvStructInfo : Void*, pcbStructInfo : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptInstallOIDFunctionAddress(hModule : Win32cr::Foundation::HINSTANCE, dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, cFuncEntry : UInt32, rgFuncEntry : Win32cr::Security::Cryptography::CRYPT_OID_FUNC_ENTRY*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptInitOIDFunctionSet(pszFuncName : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Void*
+
+    fun CryptGetOIDFunctionAddress(hFuncSet : Void*, dwEncodingType : UInt32, pszOID : Win32cr::Foundation::PSTR, dwFlags : UInt32, ppvFuncAddr : Void**, phFuncAddr : Void**) : Win32cr::Foundation::BOOL
+
+    fun CryptGetDefaultOIDDllList(hFuncSet : Void*, dwEncodingType : UInt32, pwszDllList : UInt16*, pcchDllList : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptGetDefaultOIDFunctionAddress(hFuncSet : Void*, dwEncodingType : UInt32, pwszDll : Win32cr::Foundation::PWSTR, dwFlags : UInt32, ppvFuncAddr : Void**, phFuncAddr : Void**) : Win32cr::Foundation::BOOL
+
+    fun CryptFreeOIDFunctionAddress(hFuncAddr : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptRegisterOIDFunction(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, pszOID : Win32cr::Foundation::PSTR, pwszDll : Win32cr::Foundation::PWSTR, pszOverrideFuncName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+
+    fun CryptUnregisterOIDFunction(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, pszOID : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+
+    fun CryptRegisterDefaultOIDFunction(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, dwIndex : UInt32, pwszDll : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+
+    fun CryptUnregisterDefaultOIDFunction(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, pwszDll : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+
+    fun CryptSetOIDFunctionValue(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, pszOID : Win32cr::Foundation::PSTR, pwszValueName : Win32cr::Foundation::PWSTR, dwValueType : Win32cr::System::Registry::REG_VALUE_TYPE, pbValueData : UInt8*, cbValueData : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptGetOIDFunctionValue(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, pszOID : Win32cr::Foundation::PSTR, pwszValueName : Win32cr::Foundation::PWSTR, pdwValueType : UInt32*, pbValueData : UInt8*, pcbValueData : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptEnumOIDFunction(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, pszOID : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvArg : Void*, pfnEnumOIDFunc : Win32cr::Security::Cryptography::PFN_CRYPT_ENUM_OID_FUNC) : Win32cr::Foundation::BOOL
+
+    fun CryptFindOIDInfo(dwKeyType : UInt32, pvKey : Void*, dwGroupId : UInt32) : Win32cr::Security::Cryptography::CRYPT_OID_INFO*
+
+    fun CryptRegisterOIDInfo(pInfo : Win32cr::Security::Cryptography::CRYPT_OID_INFO*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptUnregisterOIDInfo(pInfo : Win32cr::Security::Cryptography::CRYPT_OID_INFO*) : Win32cr::Foundation::BOOL
+
+    fun CryptEnumOIDInfo(dwGroupId : UInt32, dwFlags : UInt32, pvArg : Void*, pfnEnumOIDInfo : Win32cr::Security::Cryptography::PFN_CRYPT_ENUM_OID_INFO) : Win32cr::Foundation::BOOL
+
+    fun CryptFindLocalizedName(pwszCryptName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+
+    fun CryptMsgOpenToEncode(dwMsgEncodingType : UInt32, dwFlags : UInt32, dwMsgType : Win32cr::Security::Cryptography::CRYPT_MSG_TYPE, pvMsgEncodeInfo : Void*, pszInnerContentObjID : Win32cr::Foundation::PSTR, pStreamInfo : Win32cr::Security::Cryptography::CMSG_STREAM_INFO*) : Void*
+
+    fun CryptMsgCalculateEncodedLength(dwMsgEncodingType : UInt32, dwFlags : UInt32, dwMsgType : UInt32, pvMsgEncodeInfo : Void*, pszInnerContentObjID : Win32cr::Foundation::PSTR, cbData : UInt32) : UInt32
+
+    fun CryptMsgOpenToDecode(dwMsgEncodingType : UInt32, dwFlags : UInt32, dwMsgType : UInt32, hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, pRecipientInfo : Win32cr::Security::Cryptography::CERT_INFO*, pStreamInfo : Win32cr::Security::Cryptography::CMSG_STREAM_INFO*) : Void*
+
+    fun CryptMsgDuplicate(hCryptMsg : Void*) : Void*
+
+    fun CryptMsgClose(hCryptMsg : Void*) : Win32cr::Foundation::BOOL
+
+    fun CryptMsgUpdate(hCryptMsg : Void*, pbData : UInt8*, cbData : UInt32, fFinal : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+
+    fun CryptMsgGetParam(hCryptMsg : Void*, dwParamType : UInt32, dwIndex : UInt32, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptMsgControl(hCryptMsg : Void*, dwFlags : UInt32, dwCtrlType : UInt32, pvCtrlPara : Void*) : Win32cr::Foundation::BOOL
+
+    fun CryptMsgVerifyCountersignatureEncoded(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwEncodingType : UInt32, pbSignerInfo : UInt8*, cbSignerInfo : UInt32, pbSignerInfoCountersignature : UInt8*, cbSignerInfoCountersignature : UInt32, pciCountersigner : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
+
+    fun CryptMsgVerifyCountersignatureEncodedEx(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwEncodingType : UInt32, pbSignerInfo : UInt8*, cbSignerInfo : UInt32, pbSignerInfoCountersignature : UInt8*, cbSignerInfoCountersignature : UInt32, dwSignerType : UInt32, pvSigner : Void*, dwFlags : UInt32, pvExtra : Void*) : Win32cr::Foundation::BOOL
+
+    fun CryptMsgCountersign(hCryptMsg : Void*, dwIndex : UInt32, cCountersigners : UInt32, rgCountersigners : Win32cr::Security::Cryptography::CMSG_SIGNER_ENCODE_INFO*) : Win32cr::Foundation::BOOL
+
+    fun CryptMsgCountersignEncoded(dwEncodingType : UInt32, pbSignerInfo : UInt8*, cbSignerInfo : UInt32, cCountersigners : UInt32, rgCountersigners : Win32cr::Security::Cryptography::CMSG_SIGNER_ENCODE_INFO*, pbCountersignature : UInt8*, pcbCountersignature : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertOpenStore(lpszStoreProvider : Win32cr::Foundation::PSTR, dwEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwFlags : Win32cr::Security::Cryptography::CERT_OPEN_STORE_FLAGS, pvPara : Void*) : Win32cr::Security::Cryptography::HCERTSTORE
+
+    fun CertDuplicateStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE) : Win32cr::Security::Cryptography::HCERTSTORE
+
+    fun CertSaveStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwSaveAs : Win32cr::Security::Cryptography::CERT_STORE_SAVE_AS, dwSaveTo : Win32cr::Security::Cryptography::CERT_STORE_SAVE_TO, pvSaveToPara : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    # Commented out due to being part of LibC
+    #fun CertCloseStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CertGetSubjectCertificateFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, pCertId : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+
+    # Commented out due to being part of LibC
+    #fun CertEnumCertificatesInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pPrevCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+
+    fun CertFindCertificateInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, dwFindFlags : UInt32, dwFindType : Win32cr::Security::Cryptography::CERT_FIND_FLAGS, pvFindPara : Void*, pPrevCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+
+    fun CertGetIssuerCertificateFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pSubjectContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pPrevIssuerContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pdwFlags : UInt32*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+
+    fun CertVerifySubjectCertificateContext(pSubject : Win32cr::Security::Cryptography::CERT_CONTEXT*, pIssuer : Win32cr::Security::Cryptography::CERT_CONTEXT*, pdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertDuplicateCertificateContext(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+
+    fun CertCreateCertificateContext(dwCertEncodingType : UInt32, pbCertEncoded : UInt8*, cbCertEncoded : UInt32) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+
+    fun CertFreeCertificateContext(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::BOOL
+
+    fun CertSetCertificateContextProperty(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwPropId : UInt32, dwFlags : UInt32, pvData : Void*) : Win32cr::Foundation::BOOL
+
+    fun CertGetCertificateContextProperty(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwPropId : UInt32, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertEnumCertificateContextProperties(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwPropId : UInt32) : UInt32
+
+    fun CertCreateCTLEntryFromCertificateContextProperties(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, cOptAttr : UInt32, rgOptAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*, dwFlags : UInt32, pvReserved : Void*, pCtlEntry : Win32cr::Security::Cryptography::CTL_ENTRY*, pcbCtlEntry : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertSetCertificateContextPropertiesFromCTLEntry(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pCtlEntry : Win32cr::Security::Cryptography::CTL_ENTRY*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CertGetCRLFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pIssuerContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pPrevCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, pdwFlags : UInt32*) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+
+    fun CertEnumCRLsInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pPrevCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+
+    fun CertFindCRLInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, dwFindFlags : UInt32, dwFindType : UInt32, pvFindPara : Void*, pPrevCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+
+    fun CertDuplicateCRLContext(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+
+    fun CertCreateCRLContext(dwCertEncodingType : UInt32, pbCrlEncoded : UInt8*, cbCrlEncoded : UInt32) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+
+    fun CertFreeCRLContext(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Foundation::BOOL
+
+    fun CertSetCRLContextProperty(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwPropId : UInt32, dwFlags : UInt32, pvData : Void*) : Win32cr::Foundation::BOOL
+
+    fun CertGetCRLContextProperty(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwPropId : UInt32, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertEnumCRLContextProperties(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwPropId : UInt32) : UInt32
+
+    fun CertFindCertificateInCRL(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwFlags : UInt32, pvReserved : Void*, ppCrlEntry : Win32cr::Security::Cryptography::CRL_ENTRY**) : Win32cr::Foundation::BOOL
+
+    fun CertIsValidCRLForCertificate(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pCrl : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
+
+    fun CertAddEncodedCertificateToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, pbCertEncoded : UInt8*, cbCertEncoded : UInt32, dwAddDisposition : UInt32, ppCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CertAddCertificateContextToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CertAddSerializedElementToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pbElement : UInt8*, cbElement : UInt32, dwAddDisposition : UInt32, dwFlags : UInt32, dwContextTypeFlags : UInt32, pdwContextType : UInt32*, ppvContext : Void**) : Win32cr::Foundation::BOOL
+
+    fun CertDeleteCertificateFromStore(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::BOOL
+
+    fun CertAddEncodedCRLToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, pbCrlEncoded : UInt8*, cbCrlEncoded : UInt32, dwAddDisposition : UInt32, ppCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CertAddCRLContextToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CRL_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CertDeleteCRLFromStore(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Foundation::BOOL
+
+    fun CertSerializeCertificateStoreElement(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : UInt32, pbElement : UInt8*, pcbElement : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertSerializeCRLStoreElement(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwFlags : UInt32, pbElement : UInt8*, pcbElement : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertDuplicateCTLContext(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*) : Win32cr::Security::Cryptography::CTL_CONTEXT*
+
+    fun CertCreateCTLContext(dwMsgAndCertEncodingType : UInt32, pbCtlEncoded : UInt8*, cbCtlEncoded : UInt32) : Win32cr::Security::Cryptography::CTL_CONTEXT*
+
+    fun CertFreeCTLContext(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*) : Win32cr::Foundation::BOOL
+
+    fun CertSetCTLContextProperty(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwPropId : UInt32, dwFlags : UInt32, pvData : Void*) : Win32cr::Foundation::BOOL
+
+    fun CertGetCTLContextProperty(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwPropId : UInt32, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertEnumCTLContextProperties(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwPropId : UInt32) : UInt32
+
+    fun CertEnumCTLsInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pPrevCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*) : Win32cr::Security::Cryptography::CTL_CONTEXT*
+
+    fun CertFindSubjectInCTL(dwEncodingType : UInt32, dwSubjectType : UInt32, pvSubject : Void*, pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwFlags : UInt32) : Win32cr::Security::Cryptography::CTL_ENTRY*
+
+    fun CertFindCTLInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwMsgAndCertEncodingType : UInt32, dwFindFlags : UInt32, dwFindType : Win32cr::Security::Cryptography::CERT_FIND_TYPE, pvFindPara : Void*, pPrevCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*) : Win32cr::Security::Cryptography::CTL_CONTEXT*
+
+    fun CertAddEncodedCTLToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwMsgAndCertEncodingType : UInt32, pbCtlEncoded : UInt8*, cbCtlEncoded : UInt32, dwAddDisposition : UInt32, ppCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CertAddCTLContextToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CTL_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CertSerializeCTLStoreElement(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwFlags : UInt32, pbElement : UInt8*, pcbElement : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertDeleteCTLFromStore(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*) : Win32cr::Foundation::BOOL
+
+    fun CertAddCertificateLinkToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CertAddCRLLinkToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CRL_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CertAddCTLLinkToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CTL_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CertAddStoreToCollection(hCollectionStore : Win32cr::Security::Cryptography::HCERTSTORE, hSiblingStore : Win32cr::Security::Cryptography::HCERTSTORE, dwUpdateFlags : UInt32, dwPriority : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CertRemoveStoreFromCollection(hCollectionStore : Win32cr::Security::Cryptography::HCERTSTORE, hSiblingStore : Win32cr::Security::Cryptography::HCERTSTORE) : Void
+
+    fun CertControlStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwFlags : Win32cr::Security::Cryptography::CERT_CONTROL_STORE_FLAGS, dwCtrlType : UInt32, pvCtrlPara : Void*) : Win32cr::Foundation::BOOL
+
+    fun CertSetStoreProperty(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwPropId : UInt32, dwFlags : UInt32, pvData : Void*) : Win32cr::Foundation::BOOL
+
+    fun CertGetStoreProperty(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwPropId : UInt32, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertCreateContext(dwContextType : UInt32, dwEncodingType : UInt32, pbEncoded : UInt8*, cbEncoded : UInt32, dwFlags : UInt32, pCreatePara : Win32cr::Security::Cryptography::CERT_CREATE_CONTEXT_PARA*) : Void*
+
+    fun CertRegisterSystemStore(pvSystemStore : Void*, dwFlags : UInt32, pStoreInfo : Win32cr::Security::Cryptography::CERT_SYSTEM_STORE_INFO*, pvReserved : Void*) : Win32cr::Foundation::BOOL
+
+    fun CertRegisterPhysicalStore(pvSystemStore : Void*, dwFlags : UInt32, pwszStoreName : Win32cr::Foundation::PWSTR, pStoreInfo : Win32cr::Security::Cryptography::CERT_PHYSICAL_STORE_INFO*, pvReserved : Void*) : Win32cr::Foundation::BOOL
+
+    fun CertUnregisterSystemStore(pvSystemStore : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CertUnregisterPhysicalStore(pvSystemStore : Void*, dwFlags : UInt32, pwszStoreName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+
+    fun CertEnumSystemStoreLocation(dwFlags : UInt32, pvArg : Void*, pfnEnum : Win32cr::Security::Cryptography::PFN_CERT_ENUM_SYSTEM_STORE_LOCATION) : Win32cr::Foundation::BOOL
+
+    fun CertEnumSystemStore(dwFlags : UInt32, pvSystemStoreLocationPara : Void*, pvArg : Void*, pfnEnum : Win32cr::Security::Cryptography::PFN_CERT_ENUM_SYSTEM_STORE) : Win32cr::Foundation::BOOL
+
+    fun CertEnumPhysicalStore(pvSystemStore : Void*, dwFlags : UInt32, pvArg : Void*, pfnEnum : Win32cr::Security::Cryptography::PFN_CERT_ENUM_PHYSICAL_STORE) : Win32cr::Foundation::BOOL
+
+    # Commented out due to being part of LibC
+    #fun CertGetEnhancedKeyUsage(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : UInt32, pUsage : Win32cr::Security::Cryptography::CTL_USAGE*, pcbUsage : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertSetEnhancedKeyUsage(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pUsage : Win32cr::Security::Cryptography::CTL_USAGE*) : Win32cr::Foundation::BOOL
+
+    fun CertAddEnhancedKeyUsageIdentifier(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pszUsageIdentifier : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+
+    fun CertRemoveEnhancedKeyUsageIdentifier(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pszUsageIdentifier : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+
+    fun CertGetValidUsages(cCerts : UInt32, rghCerts : Win32cr::Security::Cryptography::CERT_CONTEXT**, cNumOIDs : Int32*, rghOIDs : Win32cr::Foundation::PSTR*, pcbOIDs : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptMsgGetAndVerifySigner(hCryptMsg : Void*, cSignerStore : UInt32, rghSignerStore : Win32cr::Security::Cryptography::HCERTSTORE*, dwFlags : UInt32, ppSigner : Win32cr::Security::Cryptography::CERT_CONTEXT**, pdwSignerIndex : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptMsgSignCTL(dwMsgEncodingType : UInt32, pbCtlContent : UInt8*, cbCtlContent : UInt32, pSignInfo : Win32cr::Security::Cryptography::CMSG_SIGNED_ENCODE_INFO*, dwFlags : UInt32, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptMsgEncodeAndSignCTL(dwMsgEncodingType : UInt32, pCtlInfo : Win32cr::Security::Cryptography::CTL_INFO*, pSignInfo : Win32cr::Security::Cryptography::CMSG_SIGNED_ENCODE_INFO*, dwFlags : UInt32, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertFindSubjectInSortedCTL(pSubjectIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwFlags : UInt32, pvReserved : Void*, pEncodedAttributes : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+
+    fun CertEnumSubjectInSortedCTL(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, ppvNextSubject : Void**, pSubjectIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pEncodedAttributes : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+
+    fun CertVerifyCTLUsage(dwEncodingType : UInt32, dwSubjectType : UInt32, pvSubject : Void*, pSubjectUsage : Win32cr::Security::Cryptography::CTL_USAGE*, dwFlags : UInt32, pVerifyUsagePara : Win32cr::Security::Cryptography::CTL_VERIFY_USAGE_PARA*, pVerifyUsageStatus : Win32cr::Security::Cryptography::CTL_VERIFY_USAGE_STATUS*) : Win32cr::Foundation::BOOL
+
+    fun CertVerifyRevocation(dwEncodingType : UInt32, dwRevType : UInt32, cContext : UInt32, rgpvContext : Void**, dwFlags : UInt32, pRevPara : Win32cr::Security::Cryptography::CERT_REVOCATION_PARA*, pRevStatus : Win32cr::Security::Cryptography::CERT_REVOCATION_STATUS*) : Win32cr::Foundation::BOOL
+
+    fun CertCompareIntegerBlob(pInt1 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pInt2 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+
+    fun CertCompareCertificate(dwCertEncodingType : UInt32, pCertId1 : Win32cr::Security::Cryptography::CERT_INFO*, pCertId2 : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
+
+    fun CertCompareCertificateName(dwCertEncodingType : UInt32, pCertName1 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pCertName2 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+
+    fun CertIsRDNAttrsInCertificateName(dwCertEncodingType : UInt32, dwFlags : UInt32, pCertName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pRDN : Win32cr::Security::Cryptography::CERT_RDN*) : Win32cr::Foundation::BOOL
+
+    fun CertComparePublicKeyInfo(dwCertEncodingType : UInt32, pPublicKey1 : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pPublicKey2 : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : Win32cr::Foundation::BOOL
+
+    fun CertGetPublicKeyLength(dwCertEncodingType : UInt32, pPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : UInt32
+
+    fun CryptVerifyCertificateSignature(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : UInt32, pbEncoded : UInt8*, cbEncoded : UInt32, pPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : Win32cr::Foundation::BOOL
+
+    fun CryptVerifyCertificateSignatureEx(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : UInt32, dwSubjectType : UInt32, pvSubject : Void*, dwIssuerType : UInt32, pvIssuer : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_VERIFY_CERT_FLAGS, pvExtra : Void*) : Win32cr::Foundation::BOOL
+
+    fun CertIsStrongHashToSign(pStrongSignPara : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*, pwszCNGHashAlgid : Win32cr::Foundation::PWSTR, pSigningCert : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::BOOL
+
+    fun CryptHashToBeSigned(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : UInt32, pbEncoded : UInt8*, cbEncoded : UInt32, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptHashCertificate(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, algid : UInt32, dwFlags : UInt32, pbEncoded : UInt8*, cbEncoded : UInt32, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptHashCertificate2(pwszCNGHashAlgid : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pvReserved : Void*, pbEncoded : UInt8*, cbEncoded : UInt32, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptSignCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : UInt32, pbEncodedToBeSigned : UInt8*, cbEncodedToBeSigned : UInt32, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pvHashAuxInfo : Void*, pbSignature : UInt8*, pcbSignature : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptSignAndEncodeCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC, dwCertEncodingType : UInt32, lpszStructType : Win32cr::Foundation::PSTR, pvStructInfo : Void*, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pvHashAuxInfo : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertVerifyTimeValidity(pTimeToVerify : Win32cr::Foundation::FILETIME*, pCertInfo : Win32cr::Security::Cryptography::CERT_INFO*) : Int32
+
+    fun CertVerifyCRLTimeValidity(pTimeToVerify : Win32cr::Foundation::FILETIME*, pCrlInfo : Win32cr::Security::Cryptography::CRL_INFO*) : Int32
+
+    fun CertVerifyValidityNesting(pSubjectInfo : Win32cr::Security::Cryptography::CERT_INFO*, pIssuerInfo : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
+
+    fun CertVerifyCRLRevocation(dwCertEncodingType : UInt32, pCertId : Win32cr::Security::Cryptography::CERT_INFO*, cCrlInfo : UInt32, rgpCrlInfo : Win32cr::Security::Cryptography::CRL_INFO**) : Win32cr::Foundation::BOOL
+
+    fun CertAlgIdToOID(dwAlgId : UInt32) : Win32cr::Foundation::PSTR
+
+    fun CertOIDToAlgId(pszObjId : Win32cr::Foundation::PSTR) : UInt32
+
+    fun CertFindExtension(pszObjId : Win32cr::Foundation::PSTR, cExtensions : UInt32, rgExtensions : Win32cr::Security::Cryptography::CERT_EXTENSION*) : Win32cr::Security::Cryptography::CERT_EXTENSION*
+
+    fun CertFindAttribute(pszObjId : Win32cr::Foundation::PSTR, cAttr : UInt32, rgAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*) : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*
+
+    fun CertFindRDNAttr(pszObjId : Win32cr::Foundation::PSTR, pName : Win32cr::Security::Cryptography::CERT_NAME_INFO*) : Win32cr::Security::Cryptography::CERT_RDN_ATTR*
+
+    fun CertGetIntendedKeyUsage(dwCertEncodingType : UInt32, pCertInfo : Win32cr::Security::Cryptography::CERT_INFO*, pbKeyUsage : UInt8*, cbKeyUsage : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CryptInstallDefaultContext(hCryptProv : LibC::UIntPtrT, dwDefaultType : Win32cr::Security::Cryptography::CRYPT_DEFAULT_CONTEXT_TYPE, pvDefaultPara : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_DEFAULT_CONTEXT_FLAGS, pvReserved : Void*, phDefaultContext : Void**) : Win32cr::Foundation::BOOL
+
+    fun CryptUninstallDefaultContext(hDefaultContext : Void*, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
+
+    fun CryptExportPublicKeyInfo(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptExportPublicKeyInfoEx(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : UInt32, pszPublicKeyObjId : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvAuxInfo : Void*, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptExportPublicKeyInfoFromBCryptKeyHandle(hBCryptKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, dwCertEncodingType : UInt32, pszPublicKeyObjId : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvAuxInfo : Void*, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptImportPublicKeyInfo(hCryptProv : LibC::UIntPtrT, dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+
+    fun CryptImportPublicKeyInfoEx(hCryptProv : LibC::UIntPtrT, dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, aiKeyAlg : UInt32, dwFlags : UInt32, pvAuxInfo : Void*, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+
+    fun CryptImportPublicKeyInfoEx2(dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, dwFlags : Win32cr::Security::Cryptography::CRYPT_IMPORT_PUBLIC_KEY_FLAGS, pvAuxInfo : Void*, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*) : Win32cr::Foundation::BOOL
+
+    fun CryptAcquireCertificatePrivateKey(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : Win32cr::Security::Cryptography::CRYPT_ACQUIRE_FLAGS, pvParameters : Void*, phCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE*, pdwKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC*, pfCallerFreeProvOrNCryptKey : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+
+    fun CryptFindCertificateKeyProvInfo(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : Win32cr::Security::Cryptography::CRYPT_FIND_FLAGS, pvReserved : Void*) : Win32cr::Foundation::BOOL
+
+    fun CryptImportPKCS8(sPrivateKeyAndParams : Win32cr::Security::Cryptography::CRYPT_PKCS8_IMPORT_PARAMS, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS, phCryptProv : LibC::UIntPtrT*, pvAuxInfo : Void*) : Win32cr::Foundation::BOOL
+
+    fun CryptExportPKCS8(hCryptProv : LibC::UIntPtrT, dwKeySpec : UInt32, pszPrivateKeyObjId : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvAuxInfo : Void*, pbPrivateKeyBlob : UInt8*, pcbPrivateKeyBlob : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptHashPublicKeyInfo(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, algid : UInt32, dwFlags : UInt32, dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertRDNValueToStrA(dwValueType : UInt32, pValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, psz : UInt8*, csz : UInt32) : UInt32
+
+    fun CertRDNValueToStrW(dwValueType : UInt32, pValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, psz : UInt16*, csz : UInt32) : UInt32
+
+    fun CertNameToStrA(dwCertEncodingType : UInt32, pName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, psz : UInt8*, csz : UInt32) : UInt32
+
+    fun CertNameToStrW(dwCertEncodingType : UInt32, pName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, psz : UInt16*, csz : UInt32) : UInt32
+
+    fun CertStrToNameA(dwCertEncodingType : UInt32, pszX500 : Win32cr::Foundation::PSTR, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, pvReserved : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*, ppszError : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+
+    fun CertStrToNameW(dwCertEncodingType : UInt32, pszX500 : Win32cr::Foundation::PWSTR, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, pvReserved : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*, ppszError : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+
+    fun CertGetNameStringA(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwType : UInt32, dwFlags : UInt32, pvTypePara : Void*, pszNameString : UInt8*, cchNameString : UInt32) : UInt32
+
+    fun CertGetNameStringW(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwType : UInt32, dwFlags : UInt32, pvTypePara : Void*, pszNameString : UInt16*, cchNameString : UInt32) : UInt32
+
+    fun CryptSignMessage(pSignPara : Win32cr::Security::Cryptography::CRYPT_SIGN_MESSAGE_PARA*, fDetachedSignature : Win32cr::Foundation::BOOL, cToBeSigned : UInt32, rgpbToBeSigned : UInt8**, rgcbToBeSigned : UInt32*, pbSignedBlob : UInt8*, pcbSignedBlob : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptVerifyMessageSignature(pVerifyPara : Win32cr::Security::Cryptography::CRYPT_VERIFY_MESSAGE_PARA*, dwSignerIndex : UInt32, pbSignedBlob : UInt8*, cbSignedBlob : UInt32, pbDecoded : UInt8*, pcbDecoded : UInt32*, ppSignerCert : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CryptGetMessageSignerCount(dwMsgEncodingType : UInt32, pbSignedBlob : UInt8*, cbSignedBlob : UInt32) : Int32
+
+    fun CryptGetMessageCertificates(dwMsgAndCertEncodingType : UInt32, hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwFlags : UInt32, pbSignedBlob : UInt8*, cbSignedBlob : UInt32) : Win32cr::Security::Cryptography::HCERTSTORE
+
+    fun CryptVerifyDetachedMessageSignature(pVerifyPara : Win32cr::Security::Cryptography::CRYPT_VERIFY_MESSAGE_PARA*, dwSignerIndex : UInt32, pbDetachedSignBlob : UInt8*, cbDetachedSignBlob : UInt32, cToBeSigned : UInt32, rgpbToBeSigned : UInt8**, rgcbToBeSigned : UInt32*, ppSignerCert : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CryptEncryptMessage(pEncryptPara : Win32cr::Security::Cryptography::CRYPT_ENCRYPT_MESSAGE_PARA*, cRecipientCert : UInt32, rgpRecipientCert : Win32cr::Security::Cryptography::CERT_CONTEXT**, pbToBeEncrypted : UInt8*, cbToBeEncrypted : UInt32, pbEncryptedBlob : UInt8*, pcbEncryptedBlob : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptDecryptMessage(pDecryptPara : Win32cr::Security::Cryptography::CRYPT_DECRYPT_MESSAGE_PARA*, pbEncryptedBlob : UInt8*, cbEncryptedBlob : UInt32, pbDecrypted : UInt8*, pcbDecrypted : UInt32*, ppXchgCert : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CryptSignAndEncryptMessage(pSignPara : Win32cr::Security::Cryptography::CRYPT_SIGN_MESSAGE_PARA*, pEncryptPara : Win32cr::Security::Cryptography::CRYPT_ENCRYPT_MESSAGE_PARA*, cRecipientCert : UInt32, rgpRecipientCert : Win32cr::Security::Cryptography::CERT_CONTEXT**, pbToBeSignedAndEncrypted : UInt8*, cbToBeSignedAndEncrypted : UInt32, pbSignedAndEncryptedBlob : UInt8*, pcbSignedAndEncryptedBlob : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptDecryptAndVerifyMessageSignature(pDecryptPara : Win32cr::Security::Cryptography::CRYPT_DECRYPT_MESSAGE_PARA*, pVerifyPara : Win32cr::Security::Cryptography::CRYPT_VERIFY_MESSAGE_PARA*, dwSignerIndex : UInt32, pbEncryptedBlob : UInt8*, cbEncryptedBlob : UInt32, pbDecrypted : UInt8*, pcbDecrypted : UInt32*, ppXchgCert : Win32cr::Security::Cryptography::CERT_CONTEXT**, ppSignerCert : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CryptDecodeMessage(dwMsgTypeFlags : UInt32, pDecryptPara : Win32cr::Security::Cryptography::CRYPT_DECRYPT_MESSAGE_PARA*, pVerifyPara : Win32cr::Security::Cryptography::CRYPT_VERIFY_MESSAGE_PARA*, dwSignerIndex : UInt32, pbEncodedBlob : UInt8*, cbEncodedBlob : UInt32, dwPrevInnerContentType : UInt32, pdwMsgType : UInt32*, pdwInnerContentType : UInt32*, pbDecoded : UInt8*, pcbDecoded : UInt32*, ppXchgCert : Win32cr::Security::Cryptography::CERT_CONTEXT**, ppSignerCert : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CryptHashMessage(pHashPara : Win32cr::Security::Cryptography::CRYPT_HASH_MESSAGE_PARA*, fDetachedHash : Win32cr::Foundation::BOOL, cToBeHashed : UInt32, rgpbToBeHashed : UInt8**, rgcbToBeHashed : UInt32*, pbHashedBlob : UInt8*, pcbHashedBlob : UInt32*, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptVerifyMessageHash(pHashPara : Win32cr::Security::Cryptography::CRYPT_HASH_MESSAGE_PARA*, pbHashedBlob : UInt8*, cbHashedBlob : UInt32, pbToBeHashed : UInt8*, pcbToBeHashed : UInt32*, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptVerifyDetachedMessageHash(pHashPara : Win32cr::Security::Cryptography::CRYPT_HASH_MESSAGE_PARA*, pbDetachedHashBlob : UInt8*, cbDetachedHashBlob : UInt32, cToBeHashed : UInt32, rgpbToBeHashed : UInt8**, rgcbToBeHashed : UInt32*, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptSignMessageWithKey(pSignPara : Win32cr::Security::Cryptography::CRYPT_KEY_SIGN_MESSAGE_PARA*, pbToBeSigned : UInt8*, cbToBeSigned : UInt32, pbSignedBlob : UInt8*, pcbSignedBlob : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptVerifyMessageSignatureWithKey(pVerifyPara : Win32cr::Security::Cryptography::CRYPT_KEY_VERIFY_MESSAGE_PARA*, pPublicKeyInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pbSignedBlob : UInt8*, cbSignedBlob : UInt32, pbDecoded : UInt8*, pcbDecoded : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertOpenSystemStoreA(hProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, szSubsystemProtocol : Win32cr::Foundation::PSTR) : Win32cr::Security::Cryptography::HCERTSTORE
+
+    # Commented out due to being part of LibC
+    #fun CertOpenSystemStoreW(hProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, szSubsystemProtocol : Win32cr::Foundation::PWSTR) : Win32cr::Security::Cryptography::HCERTSTORE
+
+    fun CertAddEncodedCertificateToSystemStoreA(szCertStoreName : Win32cr::Foundation::PSTR, pbCertEncoded : UInt8*, cbCertEncoded : UInt32) : Win32cr::Foundation::BOOL
+
+    fun CertAddEncodedCertificateToSystemStoreW(szCertStoreName : Win32cr::Foundation::PWSTR, pbCertEncoded : UInt8*, cbCertEncoded : UInt32) : Win32cr::Foundation::BOOL
+
+    fun FindCertsByIssuer(pCertChains : Win32cr::Security::Cryptography::CERT_CHAIN*, pcbCertChains : UInt32*, pcCertChains : UInt32*, pbEncodedIssuerName : UInt8*, cbEncodedIssuerName : UInt32, pwszPurpose : Win32cr::Foundation::PWSTR, dwKeySpec : UInt32) : Win32cr::Foundation::HRESULT
+
+    fun CryptQueryObject(dwObjectType : Win32cr::Security::Cryptography::CERT_QUERY_OBJECT_TYPE, pvObject : Void*, dwExpectedContentTypeFlags : Win32cr::Security::Cryptography::CERT_QUERY_CONTENT_TYPE_FLAGS, dwExpectedFormatTypeFlags : Win32cr::Security::Cryptography::CERT_QUERY_FORMAT_TYPE_FLAGS, dwFlags : UInt32, pdwMsgAndCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE*, pdwContentType : Win32cr::Security::Cryptography::CERT_QUERY_CONTENT_TYPE*, pdwFormatType : Win32cr::Security::Cryptography::CERT_QUERY_FORMAT_TYPE*, phCertStore : Win32cr::Security::Cryptography::HCERTSTORE*, phMsg : Void**, ppvContext : Void**) : Win32cr::Foundation::BOOL
+
+    fun CryptMemAlloc(cbSize : UInt32) : Void*
+
+    fun CryptMemRealloc(pv : Void*, cbSize : UInt32) : Void*
+
+    fun CryptMemFree(pv : Void*) : Void
+
+    fun CryptCreateAsyncHandle(dwFlags : UInt32, phAsync : Win32cr::Security::Cryptography::HCRYPTASYNC*) : Win32cr::Foundation::BOOL
+
+    fun CryptSetAsyncParam(hAsync : Win32cr::Security::Cryptography::HCRYPTASYNC, pszParamOid : Win32cr::Foundation::PSTR, pvParam : Void*, pfnFree : Win32cr::Security::Cryptography::PFN_CRYPT_ASYNC_PARAM_FREE_FUNC) : Win32cr::Foundation::BOOL
+
+    fun CryptGetAsyncParam(hAsync : Win32cr::Security::Cryptography::HCRYPTASYNC, pszParamOid : Win32cr::Foundation::PSTR, ppvParam : Void**, ppfnFree : Win32cr::Security::Cryptography::PFN_CRYPT_ASYNC_PARAM_FREE_FUNC*) : Win32cr::Foundation::BOOL
+
+    fun CryptCloseAsyncHandle(hAsync : Win32cr::Security::Cryptography::HCRYPTASYNC) : Win32cr::Foundation::BOOL
+
+    fun CryptRetrieveObjectByUrlA(pszUrl : Win32cr::Foundation::PSTR, pszObjectOid : Win32cr::Foundation::PSTR, dwRetrievalFlags : UInt32, dwTimeout : UInt32, ppvObject : Void**, hAsyncRetrieve : Win32cr::Security::Cryptography::HCRYPTASYNC, pCredentials : Win32cr::Security::Cryptography::CRYPT_CREDENTIALS*, pvVerify : Void*, pAuxInfo : Win32cr::Security::Cryptography::CRYPT_RETRIEVE_AUX_INFO*) : Win32cr::Foundation::BOOL
+
+    fun CryptRetrieveObjectByUrlW(pszUrl : Win32cr::Foundation::PWSTR, pszObjectOid : Win32cr::Foundation::PSTR, dwRetrievalFlags : UInt32, dwTimeout : UInt32, ppvObject : Void**, hAsyncRetrieve : Win32cr::Security::Cryptography::HCRYPTASYNC, pCredentials : Win32cr::Security::Cryptography::CRYPT_CREDENTIALS*, pvVerify : Void*, pAuxInfo : Win32cr::Security::Cryptography::CRYPT_RETRIEVE_AUX_INFO*) : Win32cr::Foundation::BOOL
+
+    fun CryptInstallCancelRetrieval(pfnCancel : Win32cr::Security::Cryptography::PFN_CRYPT_CANCEL_RETRIEVAL, pvArg : Void*, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
+
+    fun CryptUninstallCancelRetrieval(dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
+
+    fun CryptGetObjectUrl(pszUrlOid : Win32cr::Foundation::PSTR, pvPara : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_GET_URL_FLAGS, pUrlArray : Win32cr::Security::Cryptography::CRYPT_URL_ARRAY*, pcbUrlArray : UInt32*, pUrlInfo : Win32cr::Security::Cryptography::CRYPT_URL_INFO*, pcbUrlInfo : UInt32*, pvReserved : Void*) : Win32cr::Foundation::BOOL
+
+    fun CertCreateSelfSignCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, pSubjectIssuerBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwFlags : Win32cr::Security::Cryptography::CERT_CREATE_SELFSIGN_FLAGS, pKeyProvInfo : Win32cr::Security::Cryptography::CRYPT_KEY_PROV_INFO*, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pStartTime : Win32cr::Foundation::SYSTEMTIME*, pEndTime : Win32cr::Foundation::SYSTEMTIME*, pExtensions : Win32cr::Security::Cryptography::CERT_EXTENSIONS*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+
+    fun CryptGetKeyIdentifierProperty(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptSetKeyIdentifierProperty(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvData : Void*) : Win32cr::Foundation::BOOL
+
+    fun CryptEnumKeyIdentifierProperties(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvArg : Void*, pfnEnum : Win32cr::Security::Cryptography::PFN_CRYPT_ENUM_KEYID_PROP) : Win32cr::Foundation::BOOL
+
+    fun CryptCreateKeyIdentifierFromCSP(dwCertEncodingType : UInt32, pszPubKeyOID : Win32cr::Foundation::PSTR, pPubKeyStruc : Win32cr::Security::Cryptography::PUBLICKEYSTRUC*, cbPubKeyStruc : UInt32, dwFlags : UInt32, pvReserved : Void*, pbHash : UInt8*, pcbHash : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CertCreateCertificateChainEngine(pConfig : Win32cr::Security::Cryptography::CERT_CHAIN_ENGINE_CONFIG*, phChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE*) : Win32cr::Foundation::BOOL
+
+    fun CertFreeCertificateChainEngine(hChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE) : Void
+
+    fun CertResyncCertificateChainEngine(hChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE) : Win32cr::Foundation::BOOL
+
+    fun CertGetCertificateChain(hChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE, pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pTime : Win32cr::Foundation::FILETIME*, hAdditionalStore : Win32cr::Security::Cryptography::HCERTSTORE, pChainPara : Win32cr::Security::Cryptography::CERT_CHAIN_PARA*, dwFlags : UInt32, pvReserved : Void*, ppChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT**) : Win32cr::Foundation::BOOL
+
+    fun CertFreeCertificateChain(pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*) : Void
+
+    fun CertDuplicateCertificateChain(pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
+
+    fun CertFindChainInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, dwFindFlags : Win32cr::Security::Cryptography::CERT_FIND_CHAIN_IN_STORE_FLAGS, dwFindType : UInt32, pvFindPara : Void*, pPrevChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
+
+    fun CertVerifyCertificateChainPolicy(pszPolicyOID : Win32cr::Foundation::PSTR, pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, pPolicyPara : Win32cr::Security::Cryptography::CERT_CHAIN_POLICY_PARA*, pPolicyStatus : Win32cr::Security::Cryptography::CERT_CHAIN_POLICY_STATUS*) : Win32cr::Foundation::BOOL
+
+    fun CryptStringToBinaryA(pszString : UInt8*, cchString : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pbBinary : UInt8*, pcbBinary : UInt32*, pdwSkip : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptStringToBinaryW(pszString : UInt16*, cchString : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pbBinary : UInt8*, pcbBinary : UInt32*, pdwSkip : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptBinaryToStringA(pbBinary : UInt8*, cbBinary : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pszString : UInt8*, pcchString : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CryptBinaryToStringW(pbBinary : UInt8*, cbBinary : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pszString : UInt16*, pcchString : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # hcertstore : Void* [In],pissuercontext : CERT_CONTEXT* [In],pprevcrlcontext : CRL_CONTEXT* [In],pdwflags : UInt32* [In]
-  fun CertGetCRLFromStore(hcertstore : Void*, pissuercontext : CERT_CONTEXT*, pprevcrlcontext : CRL_CONTEXT*, pdwflags : UInt32*) : CRL_CONTEXT*
+    fun PFXImportCertStore(pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS) : Win32cr::Security::Cryptography::HCERTSTORE
 
-  # Params # hcertstore : Void* [In],pprevcrlcontext : CRL_CONTEXT* [In]
-  fun CertEnumCRLsInStore(hcertstore : Void*, pprevcrlcontext : CRL_CONTEXT*) : CRL_CONTEXT*
+    fun PFXIsPFXBlob(pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
 
-  # Params # hcertstore : Void* [In],dwcertencodingtype : UInt32 [In],dwfindflags : UInt32 [In],dwfindtype : UInt32 [In],pvfindpara : Void* [In],pprevcrlcontext : CRL_CONTEXT* [In]
-  fun CertFindCRLInStore(hcertstore : Void*, dwcertencodingtype : UInt32, dwfindflags : UInt32, dwfindtype : UInt32, pvfindpara : Void*, pprevcrlcontext : CRL_CONTEXT*) : CRL_CONTEXT*
+    fun PFXVerifyPassword(pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # pcrlcontext : CRL_CONTEXT* [In]
-  fun CertDuplicateCRLContext(pcrlcontext : CRL_CONTEXT*) : CRL_CONTEXT*
+    fun PFXExportCertStoreEx(hStore : Win32cr::Security::Cryptography::HCERTSTORE, pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szPassword : Win32cr::Foundation::PWSTR, pvPara : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # dwcertencodingtype : UInt32 [In],pbcrlencoded : UInt8* [In],cbcrlencoded : UInt32 [In]
-  fun CertCreateCRLContext(dwcertencodingtype : UInt32, pbcrlencoded : UInt8*, cbcrlencoded : UInt32) : CRL_CONTEXT*
+    fun PFXExportCertStore(hStore : Win32cr::Security::Cryptography::HCERTSTORE, pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # pcrlcontext : CRL_CONTEXT* [In]
-  fun CertFreeCRLContext(pcrlcontext : CRL_CONTEXT*) : LibC::BOOL
+    fun CertOpenServerOcspResponse(pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, dwFlags : UInt32, pOpenPara : Win32cr::Security::Cryptography::CERT_SERVER_OCSP_RESPONSE_OPEN_PARA*) : Void*
 
-  # Params # pcrlcontext : CRL_CONTEXT* [In],dwpropid : UInt32 [In],dwflags : UInt32 [In],pvdata : Void* [In]
-  fun CertSetCRLContextProperty(pcrlcontext : CRL_CONTEXT*, dwpropid : UInt32, dwflags : UInt32, pvdata : Void*) : LibC::BOOL
+    fun CertAddRefServerOcspResponse(hServerOcspResponse : Void*) : Void
 
-  # Params # pcrlcontext : CRL_CONTEXT* [In],dwpropid : UInt32 [In],pvdata : Void* [In],pcbdata : UInt32* [In]
-  fun CertGetCRLContextProperty(pcrlcontext : CRL_CONTEXT*, dwpropid : UInt32, pvdata : Void*, pcbdata : UInt32*) : LibC::BOOL
+    fun CertCloseServerOcspResponse(hServerOcspResponse : Void*, dwFlags : UInt32) : Void
 
-  # Params # pcrlcontext : CRL_CONTEXT* [In],dwpropid : UInt32 [In]
-  fun CertEnumCRLContextProperties(pcrlcontext : CRL_CONTEXT*, dwpropid : UInt32) : UInt32
+    fun CertGetServerOcspResponseContext(hServerOcspResponse : Void*, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Security::Cryptography::CERT_SERVER_OCSP_RESPONSE_CONTEXT*
 
-  # Params # pcert : CERT_CONTEXT* [In],pcrlcontext : CRL_CONTEXT* [In],dwflags : UInt32 [In],pvreserved : Void* [In],ppcrlentry : CRL_ENTRY** [In]
-  fun CertFindCertificateInCRL(pcert : CERT_CONTEXT*, pcrlcontext : CRL_CONTEXT*, dwflags : UInt32, pvreserved : Void*, ppcrlentry : CRL_ENTRY**) : LibC::BOOL
+    fun CertAddRefServerOcspResponseContext(pServerOcspResponseContext : Win32cr::Security::Cryptography::CERT_SERVER_OCSP_RESPONSE_CONTEXT*) : Void
 
-  # Params # pcert : CERT_CONTEXT* [In],pcrl : CRL_CONTEXT* [In],dwflags : UInt32 [In],pvreserved : Void* [In]
-  fun CertIsValidCRLForCertificate(pcert : CERT_CONTEXT*, pcrl : CRL_CONTEXT*, dwflags : UInt32, pvreserved : Void*) : LibC::BOOL
+    fun CertFreeServerOcspResponseContext(pServerOcspResponseContext : Win32cr::Security::Cryptography::CERT_SERVER_OCSP_RESPONSE_CONTEXT*) : Void
 
-  # Params # hcertstore : Void* [In],dwcertencodingtype : UInt32 [In],pbcertencoded : UInt8* [In],cbcertencoded : UInt32 [In],dwadddisposition : UInt32 [In],ppcertcontext : CERT_CONTEXT** [In]
-  fun CertAddEncodedCertificateToStore(hcertstore : Void*, dwcertencodingtype : UInt32, pbcertencoded : UInt8*, cbcertencoded : UInt32, dwadddisposition : UInt32, ppcertcontext : CERT_CONTEXT**) : LibC::BOOL
+    fun CertRetrieveLogoOrBiometricInfo(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, lpszLogoOrBiometricType : Win32cr::Foundation::PSTR, dwRetrievalFlags : UInt32, dwTimeout : UInt32, dwFlags : UInt32, pvReserved : Void*, ppbData : UInt8**, pcbData : UInt32*, ppwszMimeType : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
 
-  # Params # hcertstore : Void* [In],pcertcontext : CERT_CONTEXT* [In],dwadddisposition : UInt32 [In],ppstorecontext : CERT_CONTEXT** [In]
-  fun CertAddCertificateContextToStore(hcertstore : Void*, pcertcontext : CERT_CONTEXT*, dwadddisposition : UInt32, ppstorecontext : CERT_CONTEXT**) : LibC::BOOL
+    fun CertSelectCertificateChains(pSelectionContext : LibC::GUID*, dwFlags : UInt32, pChainParameters : Win32cr::Security::Cryptography::CERT_SELECT_CHAIN_PARA*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, hStore : Win32cr::Security::Cryptography::HCERTSTORE, pcSelection : UInt32*, pprgpSelection : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT***) : Win32cr::Foundation::BOOL
 
-  # Params # hcertstore : Void* [In],pbelement : UInt8* [In],cbelement : UInt32 [In],dwadddisposition : UInt32 [In],dwflags : UInt32 [In],dwcontexttypeflags : UInt32 [In],pdwcontexttype : UInt32* [In],ppvcontext : Void** [In]
-  fun CertAddSerializedElementToStore(hcertstore : Void*, pbelement : UInt8*, cbelement : UInt32, dwadddisposition : UInt32, dwflags : UInt32, dwcontexttypeflags : UInt32, pdwcontexttype : UInt32*, ppvcontext : Void**) : LibC::BOOL
+    fun CertFreeCertificateChainList(prgpSelection : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT**) : Void
 
-  # Params # pcertcontext : CERT_CONTEXT* [In]
-  fun CertDeleteCertificateFromStore(pcertcontext : CERT_CONTEXT*) : LibC::BOOL
+    fun CryptRetrieveTimeStamp(wszUrl : Win32cr::Foundation::PWSTR, dwRetrievalFlags : UInt32, dwTimeout : UInt32, pszHashId : Win32cr::Foundation::PSTR, pPara : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_PARA*, pbData : UInt8*, cbData : UInt32, ppTsContext : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_CONTEXT**, ppTsSigner : Win32cr::Security::Cryptography::CERT_CONTEXT**, phStore : Win32cr::Security::Cryptography::HCERTSTORE*) : Win32cr::Foundation::BOOL
 
-  # Params # hcertstore : Void* [In],dwcertencodingtype : UInt32 [In],pbcrlencoded : UInt8* [In],cbcrlencoded : UInt32 [In],dwadddisposition : UInt32 [In],ppcrlcontext : CRL_CONTEXT** [In]
-  fun CertAddEncodedCRLToStore(hcertstore : Void*, dwcertencodingtype : UInt32, pbcrlencoded : UInt8*, cbcrlencoded : UInt32, dwadddisposition : UInt32, ppcrlcontext : CRL_CONTEXT**) : LibC::BOOL
+    fun CryptVerifyTimeStampSignature(pbTSContentInfo : UInt8*, cbTSContentInfo : UInt32, pbData : UInt8*, cbData : UInt32, hAdditionalStore : Win32cr::Security::Cryptography::HCERTSTORE, ppTsContext : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_CONTEXT**, ppTsSigner : Win32cr::Security::Cryptography::CERT_CONTEXT**, phStore : Win32cr::Security::Cryptography::HCERTSTORE*) : Win32cr::Foundation::BOOL
 
-  # Params # hcertstore : Void* [In],pcrlcontext : CRL_CONTEXT* [In],dwadddisposition : UInt32 [In],ppstorecontext : CRL_CONTEXT** [In]
-  fun CertAddCRLContextToStore(hcertstore : Void*, pcrlcontext : CRL_CONTEXT*, dwadddisposition : UInt32, ppstorecontext : CRL_CONTEXT**) : LibC::BOOL
+    fun CertIsWeakHash(dwHashUseType : UInt32, pwszCNGHashAlgid : Win32cr::Foundation::PWSTR, dwChainFlags : UInt32, pSignerChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, pTimeStamp : Win32cr::Foundation::FILETIME*, pwszFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
-  # Params # pcrlcontext : CRL_CONTEXT* [In]
-  fun CertDeleteCRLFromStore(pcrlcontext : CRL_CONTEXT*) : LibC::BOOL
+    fun CryptProtectData(pDataIn : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szDataDescr : Win32cr::Foundation::PWSTR, pOptionalEntropy : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pvReserved : Void*, pPromptStruct : Win32cr::Security::Cryptography::CRYPTPROTECT_PROMPTSTRUCT*, dwFlags : UInt32, pDataOut : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
 
-  # Params # pcertcontext : CERT_CONTEXT* [In],dwflags : UInt32 [In],pbelement : UInt8* [In],pcbelement : UInt32* [In]
-  fun CertSerializeCertificateStoreElement(pcertcontext : CERT_CONTEXT*, dwflags : UInt32, pbelement : UInt8*, pcbelement : UInt32*) : LibC::BOOL
+    fun CryptUnprotectData(pDataIn : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, ppszDataDescr : Win32cr::Foundation::PWSTR*, pOptionalEntropy : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pvReserved : Void*, pPromptStruct : Win32cr::Security::Cryptography::CRYPTPROTECT_PROMPTSTRUCT*, dwFlags : UInt32, pDataOut : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
 
-  # Params # pcrlcontext : CRL_CONTEXT* [In],dwflags : UInt32 [In],pbelement : UInt8* [In],pcbelement : UInt32* [In]
-  fun CertSerializeCRLStoreElement(pcrlcontext : CRL_CONTEXT*, dwflags : UInt32, pbelement : UInt8*, pcbelement : UInt32*) : LibC::BOOL
+    fun CryptUpdateProtectedState(pOldSid : Win32cr::Foundation::PSID, pwszOldPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pdwSuccessCount : UInt32*, pdwFailureCount : UInt32*) : Win32cr::Foundation::BOOL
 
-  # Params # pctlcontext : CTL_CONTEXT* [In]
-  fun CertDuplicateCTLContext(pctlcontext : CTL_CONTEXT*) : CTL_CONTEXT*
+    fun CryptProtectMemory(pDataIn : Void*, cbDataIn : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # dwmsgandcertencodingtype : UInt32 [In],pbctlencoded : UInt8* [In],cbctlencoded : UInt32 [In]
-  fun CertCreateCTLContext(dwmsgandcertencodingtype : UInt32, pbctlencoded : UInt8*, cbctlencoded : UInt32) : CTL_CONTEXT*
+    fun CryptUnprotectMemory(pDataIn : Void*, cbDataIn : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
-  # Params # pctlcontext : CTL_CONTEXT* [In]
-  fun CertFreeCTLContext(pctlcontext : CTL_CONTEXT*) : LibC::BOOL
+    fun NCryptRegisterProtectionDescriptorName(pwszName : Win32cr::Foundation::PWSTR, pwszDescriptorString : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
-  # Params # pctlcontext : CTL_CONTEXT* [In],dwpropid : UInt32 [In],dwflags : UInt32 [In],pvdata : Void* [In]
-  fun CertSetCTLContextProperty(pctlcontext : CTL_CONTEXT*, dwpropid : UInt32, dwflags : UInt32, pvdata : Void*) : LibC::BOOL
+    fun NCryptQueryProtectionDescriptorName(pwszName : Win32cr::Foundation::PWSTR, pwszDescriptorString : UInt16*, pcDescriptorString : LibC::UIntPtrT*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
-  # Params # pctlcontext : CTL_CONTEXT* [In],dwpropid : UInt32 [In],pvdata : Void* [In],pcbdata : UInt32* [In]
-  fun CertGetCTLContextProperty(pctlcontext : CTL_CONTEXT*, dwpropid : UInt32, pvdata : Void*, pcbdata : UInt32*) : LibC::BOOL
+    fun NCryptCreateProtectionDescriptor(pwszDescriptorString : Win32cr::Foundation::PWSTR, dwFlags : UInt32, phDescriptor : Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE*) : Win32cr::Foundation::HRESULT
 
-  # Params # pctlcontext : CTL_CONTEXT* [In],dwpropid : UInt32 [In]
-  fun CertEnumCTLContextProperties(pctlcontext : CTL_CONTEXT*, dwpropid : UInt32) : UInt32
+    fun NCryptCloseProtectionDescriptor(hDescriptor : Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE) : Win32cr::Foundation::HRESULT
 
-  # Params # hcertstore : Void* [In],pprevctlcontext : CTL_CONTEXT* [In]
-  fun CertEnumCTLsInStore(hcertstore : Void*, pprevctlcontext : CTL_CONTEXT*) : CTL_CONTEXT*
+    fun NCryptGetProtectionDescriptorInfo(hDescriptor : Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE, pMemPara : Win32cr::Security::Cryptography::NCRYPT_ALLOC_PARA*, dwInfoType : UInt32, ppvInfo : Void**) : Win32cr::Foundation::HRESULT
 
-  # Params # dwencodingtype : UInt32 [In],dwsubjecttype : UInt32 [In],pvsubject : Void* [In],pctlcontext : CTL_CONTEXT* [In],dwflags : UInt32 [In]
-  fun CertFindSubjectInCTL(dwencodingtype : UInt32, dwsubjecttype : UInt32, pvsubject : Void*, pctlcontext : CTL_CONTEXT*, dwflags : UInt32) : CTL_ENTRY*
+    fun NCryptProtectSecret(hDescriptor : Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE, dwFlags : UInt32, pbData : UInt8*, cbData : UInt32, pMemPara : Win32cr::Security::Cryptography::NCRYPT_ALLOC_PARA*, hWnd : Win32cr::Foundation::HWND, ppbProtectedBlob : UInt8**, pcbProtectedBlob : UInt32*) : Win32cr::Foundation::HRESULT
 
-  # Params # hcertstore : Void* [In],dwmsgandcertencodingtype : UInt32 [In],dwfindflags : UInt32 [In],dwfindtype : CERT_FIND_TYPE [In],pvfindpara : Void* [In],pprevctlcontext : CTL_CONTEXT* [In]
-  fun CertFindCTLInStore(hcertstore : Void*, dwmsgandcertencodingtype : UInt32, dwfindflags : UInt32, dwfindtype : CERT_FIND_TYPE, pvfindpara : Void*, pprevctlcontext : CTL_CONTEXT*) : CTL_CONTEXT*
+    fun NCryptUnprotectSecret(phDescriptor : Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS, pbProtectedBlob : UInt8*, cbProtectedBlob : UInt32, pMemPara : Win32cr::Security::Cryptography::NCRYPT_ALLOC_PARA*, hWnd : Win32cr::Foundation::HWND, ppbData : UInt8**, pcbData : UInt32*) : Win32cr::Foundation::HRESULT
 
-  # Params # hcertstore : Void* [In],dwmsgandcertencodingtype : UInt32 [In],pbctlencoded : UInt8* [In],cbctlencoded : UInt32 [In],dwadddisposition : UInt32 [In],ppctlcontext : CTL_CONTEXT** [In]
-  fun CertAddEncodedCTLToStore(hcertstore : Void*, dwmsgandcertencodingtype : UInt32, pbctlencoded : UInt8*, cbctlencoded : UInt32, dwadddisposition : UInt32, ppctlcontext : CTL_CONTEXT**) : LibC::BOOL
+    fun NCryptStreamOpenToProtect(hDescriptor : Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE, dwFlags : UInt32, hWnd : Win32cr::Foundation::HWND, pStreamInfo : Win32cr::Security::Cryptography::NCRYPT_PROTECT_STREAM_INFO*, phStream : Win32cr::Security::NCRYPT_STREAM_HANDLE*) : Win32cr::Foundation::HRESULT
 
-  # Params # hcertstore : Void* [In],pctlcontext : CTL_CONTEXT* [In],dwadddisposition : UInt32 [In],ppstorecontext : CTL_CONTEXT** [In]
-  fun CertAddCTLContextToStore(hcertstore : Void*, pctlcontext : CTL_CONTEXT*, dwadddisposition : UInt32, ppstorecontext : CTL_CONTEXT**) : LibC::BOOL
+    fun NCryptStreamOpenToUnprotect(pStreamInfo : Win32cr::Security::Cryptography::NCRYPT_PROTECT_STREAM_INFO*, dwFlags : UInt32, hWnd : Win32cr::Foundation::HWND, phStream : Win32cr::Security::NCRYPT_STREAM_HANDLE*) : Win32cr::Foundation::HRESULT
 
-  # Params # pctlcontext : CTL_CONTEXT* [In],dwflags : UInt32 [In],pbelement : UInt8* [In],pcbelement : UInt32* [In]
-  fun CertSerializeCTLStoreElement(pctlcontext : CTL_CONTEXT*, dwflags : UInt32, pbelement : UInt8*, pcbelement : UInt32*) : LibC::BOOL
+    fun NCryptStreamOpenToUnprotectEx(pStreamInfo : Win32cr::Security::Cryptography::NCRYPT_PROTECT_STREAM_INFO_EX*, dwFlags : UInt32, hWnd : Win32cr::Foundation::HWND, phStream : Win32cr::Security::NCRYPT_STREAM_HANDLE*) : Win32cr::Foundation::HRESULT
 
-  # Params # pctlcontext : CTL_CONTEXT* [In]
-  fun CertDeleteCTLFromStore(pctlcontext : CTL_CONTEXT*) : LibC::BOOL
+    fun NCryptStreamUpdate(hStream : Win32cr::Security::NCRYPT_STREAM_HANDLE, pbData : UInt8*, cbData : LibC::UIntPtrT, fFinal : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
-  # Params # hcertstore : Void* [In],pcertcontext : CERT_CONTEXT* [In],dwadddisposition : UInt32 [In],ppstorecontext : CERT_CONTEXT** [In]
-  fun CertAddCertificateLinkToStore(hcertstore : Void*, pcertcontext : CERT_CONTEXT*, dwadddisposition : UInt32, ppstorecontext : CERT_CONTEXT**) : LibC::BOOL
+    fun NCryptStreamClose(hStream : Win32cr::Security::NCRYPT_STREAM_HANDLE) : Win32cr::Foundation::HRESULT
 
-  # Params # hcertstore : Void* [In],pcrlcontext : CRL_CONTEXT* [In],dwadddisposition : UInt32 [In],ppstorecontext : CRL_CONTEXT** [In]
-  fun CertAddCRLLinkToStore(hcertstore : Void*, pcrlcontext : CRL_CONTEXT*, dwadddisposition : UInt32, ppstorecontext : CRL_CONTEXT**) : LibC::BOOL
+    fun CryptXmlClose(hCryptXml : Void*) : Win32cr::Foundation::HRESULT
 
-  # Params # hcertstore : Void* [In],pctlcontext : CTL_CONTEXT* [In],dwadddisposition : UInt32 [In],ppstorecontext : CTL_CONTEXT** [In]
-  fun CertAddCTLLinkToStore(hcertstore : Void*, pctlcontext : CTL_CONTEXT*, dwadddisposition : UInt32, ppstorecontext : CTL_CONTEXT**) : LibC::BOOL
+    fun CryptXmlGetTransforms(ppConfig : Win32cr::Security::Cryptography::CRYPT_XML_TRANSFORM_CHAIN_CONFIG**) : Win32cr::Foundation::HRESULT
 
-  # Params # hcollectionstore : Void* [In],hsiblingstore : Void* [In],dwupdateflags : UInt32 [In],dwpriority : UInt32 [In]
-  fun CertAddStoreToCollection(hcollectionstore : Void*, hsiblingstore : Void*, dwupdateflags : UInt32, dwpriority : UInt32) : LibC::BOOL
+    fun CryptXmlOpenToEncode(pConfig : Win32cr::Security::Cryptography::CRYPT_XML_TRANSFORM_CHAIN_CONFIG*, dwFlags : Win32cr::Security::Cryptography::CRYPT_XML_FLAGS, wszId : Win32cr::Foundation::PWSTR, rgProperty : Win32cr::Security::Cryptography::CRYPT_XML_PROPERTY*, cProperty : UInt32, pEncoded : Win32cr::Security::Cryptography::CRYPT_XML_BLOB*, phSignature : Void**) : Win32cr::Foundation::HRESULT
 
-  # Params # hcollectionstore : Void* [In],hsiblingstore : Void* [In]
-  fun CertRemoveStoreFromCollection(hcollectionstore : Void*, hsiblingstore : Void*) : Void
+    fun CryptXmlOpenToDecode(pConfig : Win32cr::Security::Cryptography::CRYPT_XML_TRANSFORM_CHAIN_CONFIG*, dwFlags : Win32cr::Security::Cryptography::CRYPT_XML_FLAGS, rgProperty : Win32cr::Security::Cryptography::CRYPT_XML_PROPERTY*, cProperty : UInt32, pEncoded : Win32cr::Security::Cryptography::CRYPT_XML_BLOB*, phCryptXml : Void**) : Win32cr::Foundation::HRESULT
 
-  # Params # hcertstore : Void* [In],dwflags : CERT_CONTROL_STORE_FLAGS [In],dwctrltype : UInt32 [In],pvctrlpara : Void* [In]
-  fun CertControlStore(hcertstore : Void*, dwflags : CERT_CONTROL_STORE_FLAGS, dwctrltype : UInt32, pvctrlpara : Void*) : LibC::BOOL
+    fun CryptXmlAddObject(hSignatureOrObject : Void*, dwFlags : UInt32, rgProperty : Win32cr::Security::Cryptography::CRYPT_XML_PROPERTY*, cProperty : UInt32, pEncoded : Win32cr::Security::Cryptography::CRYPT_XML_BLOB*, ppObject : Win32cr::Security::Cryptography::CRYPT_XML_OBJECT**) : Win32cr::Foundation::HRESULT
 
-  # Params # hcertstore : Void* [In],dwpropid : UInt32 [In],dwflags : UInt32 [In],pvdata : Void* [In]
-  fun CertSetStoreProperty(hcertstore : Void*, dwpropid : UInt32, dwflags : UInt32, pvdata : Void*) : LibC::BOOL
+    fun CryptXmlCreateReference(hCryptXml : Void*, dwFlags : UInt32, wszId : Win32cr::Foundation::PWSTR, wszURI : Win32cr::Foundation::PWSTR, wszType : Win32cr::Foundation::PWSTR, pDigestMethod : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*, cTransform : UInt32, rgTransform : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*, phReference : Void**) : Win32cr::Foundation::HRESULT
 
-  # Params # hcertstore : Void* [In],dwpropid : UInt32 [In],pvdata : Void* [In],pcbdata : UInt32* [In]
-  fun CertGetStoreProperty(hcertstore : Void*, dwpropid : UInt32, pvdata : Void*, pcbdata : UInt32*) : LibC::BOOL
+    fun CryptXmlDigestReference(hReference : Void*, dwFlags : UInt32, pDataProviderIn : Win32cr::Security::Cryptography::CRYPT_XML_DATA_PROVIDER*) : Win32cr::Foundation::HRESULT
 
-  # Params # dwcontexttype : UInt32 [In],dwencodingtype : UInt32 [In],pbencoded : UInt8* [In],cbencoded : UInt32 [In],dwflags : UInt32 [In],pcreatepara : CERT_CREATE_CONTEXT_PARA* [In]
-  fun CertCreateContext(dwcontexttype : UInt32, dwencodingtype : UInt32, pbencoded : UInt8*, cbencoded : UInt32, dwflags : UInt32, pcreatepara : CERT_CREATE_CONTEXT_PARA*) : Void*
+    fun CryptXmlSetHMACSecret(hSignature : Void*, pbSecret : UInt8*, cbSecret : UInt32) : Win32cr::Foundation::HRESULT
 
-  # Params # pvsystemstore : Void* [In],dwflags : UInt32 [In],pstoreinfo : CERT_SYSTEM_STORE_INFO* [In],pvreserved : Void* [In]
-  fun CertRegisterSystemStore(pvsystemstore : Void*, dwflags : UInt32, pstoreinfo : CERT_SYSTEM_STORE_INFO*, pvreserved : Void*) : LibC::BOOL
+    fun CryptXmlSign(hSignature : Void*, hKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC, dwFlags : Win32cr::Security::Cryptography::CRYPT_XML_FLAGS, dwKeyInfoSpec : Win32cr::Security::Cryptography::CRYPT_XML_KEYINFO_SPEC, pvKeyInfoSpec : Void*, pSignatureMethod : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*, pCanonicalization : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*) : Win32cr::Foundation::HRESULT
 
-  # Params # pvsystemstore : Void* [In],dwflags : UInt32 [In],pwszstorename : LibC::LPWSTR [In],pstoreinfo : CERT_PHYSICAL_STORE_INFO* [In],pvreserved : Void* [In]
-  fun CertRegisterPhysicalStore(pvsystemstore : Void*, dwflags : UInt32, pwszstorename : LibC::LPWSTR, pstoreinfo : CERT_PHYSICAL_STORE_INFO*, pvreserved : Void*) : LibC::BOOL
+    fun CryptXmlImportPublicKey(dwFlags : Win32cr::Security::Cryptography::CRYPT_XML_FLAGS, pKeyValue : Win32cr::Security::Cryptography::CRYPT_XML_KEY_VALUE*, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*) : Win32cr::Foundation::HRESULT
 
-  # Params # pvsystemstore : Void* [In],dwflags : UInt32 [In]
-  fun CertUnregisterSystemStore(pvsystemstore : Void*, dwflags : UInt32) : LibC::BOOL
+    fun CryptXmlVerifySignature(hSignature : Void*, hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, dwFlags : Win32cr::Security::Cryptography::CRYPT_XML_FLAGS) : Win32cr::Foundation::HRESULT
 
-  # Params # pvsystemstore : Void* [In],dwflags : UInt32 [In],pwszstorename : LibC::LPWSTR [In]
-  fun CertUnregisterPhysicalStore(pvsystemstore : Void*, dwflags : UInt32, pwszstorename : LibC::LPWSTR) : LibC::BOOL
+    fun CryptXmlGetDocContext(hCryptXml : Void*, ppStruct : Win32cr::Security::Cryptography::CRYPT_XML_DOC_CTXT**) : Win32cr::Foundation::HRESULT
 
-  # Params # dwflags : UInt32 [In],pvarg : Void* [In],pfnenum : PFN_CERT_ENUM_SYSTEM_STORE_LOCATION [In]
-  fun CertEnumSystemStoreLocation(dwflags : UInt32, pvarg : Void*, pfnenum : PFN_CERT_ENUM_SYSTEM_STORE_LOCATION) : LibC::BOOL
+    fun CryptXmlGetSignature(hCryptXml : Void*, ppStruct : Win32cr::Security::Cryptography::CRYPT_XML_SIGNATURE**) : Win32cr::Foundation::HRESULT
 
-  # Params # dwflags : UInt32 [In],pvsystemstorelocationpara : Void* [In],pvarg : Void* [In],pfnenum : PFN_CERT_ENUM_SYSTEM_STORE [In]
-  fun CertEnumSystemStore(dwflags : UInt32, pvsystemstorelocationpara : Void*, pvarg : Void*, pfnenum : PFN_CERT_ENUM_SYSTEM_STORE) : LibC::BOOL
+    fun CryptXmlGetReference(hCryptXml : Void*, ppStruct : Win32cr::Security::Cryptography::CRYPT_XML_REFERENCE**) : Win32cr::Foundation::HRESULT
 
-  # Params # pvsystemstore : Void* [In],dwflags : UInt32 [In],pvarg : Void* [In],pfnenum : PFN_CERT_ENUM_PHYSICAL_STORE [In]
-  fun CertEnumPhysicalStore(pvsystemstore : Void*, dwflags : UInt32, pvarg : Void*, pfnenum : PFN_CERT_ENUM_PHYSICAL_STORE) : LibC::BOOL
+    fun CryptXmlGetStatus(hCryptXml : Void*, pStatus : Win32cr::Security::Cryptography::CRYPT_XML_STATUS*) : Win32cr::Foundation::HRESULT
 
-  # Params # pcertcontext : CERT_CONTEXT* [In],dwflags : UInt32 [In],pusage : CTL_USAGE* [In],pcbusage : UInt32* [In]
-  # Commented out because function is part of Lib C
-  #fun CertGetEnhancedKeyUsage(pcertcontext : CERT_CONTEXT*, dwflags : UInt32, pusage : CTL_USAGE*, pcbusage : UInt32*) : LibC::BOOL
+    fun CryptXmlEncode(hCryptXml : Void*, dwCharset : Win32cr::Security::Cryptography::CRYPT_XML_CHARSET, rgProperty : Win32cr::Security::Cryptography::CRYPT_XML_PROPERTY*, cProperty : UInt32, pvCallbackState : Void*, pfnWrite : Win32cr::Security::Cryptography::PFN_CRYPT_XML_WRITE_CALLBACK) : Win32cr::Foundation::HRESULT
 
-  # Params # pcertcontext : CERT_CONTEXT* [In],pusage : CTL_USAGE* [In]
-  fun CertSetEnhancedKeyUsage(pcertcontext : CERT_CONTEXT*, pusage : CTL_USAGE*) : LibC::BOOL
+    fun CryptXmlGetAlgorithmInfo(pXmlAlgorithm : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*, dwFlags : Win32cr::Security::Cryptography::CRYPT_XML_FLAGS, ppAlgInfo : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM_INFO**) : Win32cr::Foundation::HRESULT
 
-  # Params # pcertcontext : CERT_CONTEXT* [In],pszusageidentifier : PSTR [In]
-  fun CertAddEnhancedKeyUsageIdentifier(pcertcontext : CERT_CONTEXT*, pszusageidentifier : PSTR) : LibC::BOOL
+    fun CryptXmlFindAlgorithmInfo(dwFindByType : UInt32, pvFindBy : Void*, dwGroupId : UInt32, dwFlags : UInt32) : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM_INFO*
 
-  # Params # pcertcontext : CERT_CONTEXT* [In],pszusageidentifier : PSTR [In]
-  fun CertRemoveEnhancedKeyUsageIdentifier(pcertcontext : CERT_CONTEXT*, pszusageidentifier : PSTR) : LibC::BOOL
+    fun CryptXmlEnumAlgorithmInfo(dwGroupId : UInt32, dwFlags : UInt32, pvArg : Void*, pfnEnumAlgInfo : Win32cr::Security::Cryptography::PFN_CRYPT_XML_ENUM_ALG_INFO) : Win32cr::Foundation::HRESULT
 
-  # Params # ccerts : UInt32 [In],rghcerts : CERT_CONTEXT** [In],cnumoids : Int32* [In],rghoids : PSTR* [In],pcboids : UInt32* [In]
-  fun CertGetValidUsages(ccerts : UInt32, rghcerts : CERT_CONTEXT**, cnumoids : Int32*, rghoids : PSTR*, pcboids : UInt32*) : LibC::BOOL
+    fun GetToken(cPolicyChain : UInt32, pPolicyChain : Win32cr::Security::Cryptography::POLICY_ELEMENT*, securityToken : Win32cr::Security::Cryptography::GENERIC_XML_TOKEN**, phProofTokenCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE**) : Win32cr::Foundation::HRESULT
 
-  # Params # hcryptmsg : Void* [In],csignerstore : UInt32 [In],rghsignerstore : Void** [In],dwflags : UInt32 [In],ppsigner : CERT_CONTEXT** [In],pdwsignerindex : UInt32* [In]
-  fun CryptMsgGetAndVerifySigner(hcryptmsg : Void*, csignerstore : UInt32, rghsignerstore : Void**, dwflags : UInt32, ppsigner : CERT_CONTEXT**, pdwsignerindex : UInt32*) : LibC::BOOL
+    fun ManageCardSpace : Win32cr::Foundation::HRESULT
 
-  # Params # dwmsgencodingtype : UInt32 [In],pbctlcontent : UInt8* [In],cbctlcontent : UInt32 [In],psigninfo : CMSG_SIGNED_ENCODE_INFO* [In],dwflags : UInt32 [In],pbencoded : UInt8* [In],pcbencoded : UInt32* [In]
-  fun CryptMsgSignCTL(dwmsgencodingtype : UInt32, pbctlcontent : UInt8*, cbctlcontent : UInt32, psigninfo : CMSG_SIGNED_ENCODE_INFO*, dwflags : UInt32, pbencoded : UInt8*, pcbencoded : UInt32*) : LibC::BOOL
+    fun ImportInformationCard(fileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
-  # Params # dwmsgencodingtype : UInt32 [In],pctlinfo : CTL_INFO* [In],psigninfo : CMSG_SIGNED_ENCODE_INFO* [In],dwflags : UInt32 [In],pbencoded : UInt8* [In],pcbencoded : UInt32* [In]
-  fun CryptMsgEncodeAndSignCTL(dwmsgencodingtype : UInt32, pctlinfo : CTL_INFO*, psigninfo : CMSG_SIGNED_ENCODE_INFO*, dwflags : UInt32, pbencoded : UInt8*, pcbencoded : UInt32*) : LibC::BOOL
+    fun Encrypt(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, fOAEP : Win32cr::Foundation::BOOL, cbInData : UInt32, pInData : UInt8*, pcbOutData : UInt32*, ppOutData : UInt8**) : Win32cr::Foundation::HRESULT
 
-  # Params # psubjectidentifier : CRYPTOAPI_BLOB* [In],pctlcontext : CTL_CONTEXT* [In],dwflags : UInt32 [In],pvreserved : Void* [In],pencodedattributes : CRYPTOAPI_BLOB* [In]
-  fun CertFindSubjectInSortedCTL(psubjectidentifier : CRYPTOAPI_BLOB*, pctlcontext : CTL_CONTEXT*, dwflags : UInt32, pvreserved : Void*, pencodedattributes : CRYPTOAPI_BLOB*) : LibC::BOOL
+    fun Decrypt(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, fOAEP : Win32cr::Foundation::BOOL, cbInData : UInt32, pInData : UInt8*, pcbOutData : UInt32*, ppOutData : UInt8**) : Win32cr::Foundation::HRESULT
 
-  # Params # pctlcontext : CTL_CONTEXT* [In],ppvnextsubject : Void** [In],psubjectidentifier : CRYPTOAPI_BLOB* [In],pencodedattributes : CRYPTOAPI_BLOB* [In]
-  fun CertEnumSubjectInSortedCTL(pctlcontext : CTL_CONTEXT*, ppvnextsubject : Void**, psubjectidentifier : CRYPTOAPI_BLOB*, pencodedattributes : CRYPTOAPI_BLOB*) : LibC::BOOL
+    fun SignHash(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbHash : UInt32, pHash : UInt8*, hashAlgOid : Win32cr::Foundation::PWSTR, pcbSig : UInt32*, ppSig : UInt8**) : Win32cr::Foundation::HRESULT
 
-  # Params # dwencodingtype : UInt32 [In],dwsubjecttype : UInt32 [In],pvsubject : Void* [In],psubjectusage : CTL_USAGE* [In],dwflags : UInt32 [In],pverifyusagepara : CTL_VERIFY_USAGE_PARA* [In],pverifyusagestatus : CTL_VERIFY_USAGE_STATUS* [In]
-  fun CertVerifyCTLUsage(dwencodingtype : UInt32, dwsubjecttype : UInt32, pvsubject : Void*, psubjectusage : CTL_USAGE*, dwflags : UInt32, pverifyusagepara : CTL_VERIFY_USAGE_PARA*, pverifyusagestatus : CTL_VERIFY_USAGE_STATUS*) : LibC::BOOL
+    fun VerifyHash(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbHash : UInt32, pHash : UInt8*, hashAlgOid : Win32cr::Foundation::PWSTR, cbSig : UInt32, pSig : UInt8*, pfVerified : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
 
-  # Params # dwencodingtype : UInt32 [In],dwrevtype : UInt32 [In],ccontext : UInt32 [In],rgpvcontext : Void** [In],dwflags : UInt32 [In],prevpara : CERT_REVOCATION_PARA* [In],prevstatus : CERT_REVOCATION_STATUS* [In]
-  fun CertVerifyRevocation(dwencodingtype : UInt32, dwrevtype : UInt32, ccontext : UInt32, rgpvcontext : Void**, dwflags : UInt32, prevpara : CERT_REVOCATION_PARA*, prevstatus : CERT_REVOCATION_STATUS*) : LibC::BOOL
+    fun GetCryptoTransform(hSymmetricCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, mode : UInt32, padding : Win32cr::Security::Cryptography::PaddingMode, feedbackSize : UInt32, direction : Win32cr::Security::Cryptography::Direction, cbIV : UInt32, pIV : UInt8*, pphTransform : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE**) : Win32cr::Foundation::HRESULT
 
-  # Params # pint1 : CRYPTOAPI_BLOB* [In],pint2 : CRYPTOAPI_BLOB* [In]
-  fun CertCompareIntegerBlob(pint1 : CRYPTOAPI_BLOB*, pint2 : CRYPTOAPI_BLOB*) : LibC::BOOL
+    fun GetKeyedHash(hSymmetricCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, pphHash : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE**) : Win32cr::Foundation::HRESULT
 
-  # Params # dwcertencodingtype : UInt32 [In],pcertid1 : CERT_INFO* [In],pcertid2 : CERT_INFO* [In]
-  fun CertCompareCertificate(dwcertencodingtype : UInt32, pcertid1 : CERT_INFO*, pcertid2 : CERT_INFO*) : LibC::BOOL
+    fun TransformBlock(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbInData : UInt32, pInData : UInt8*, pcbOutData : UInt32*, ppOutData : UInt8**) : Win32cr::Foundation::HRESULT
 
-  # Params # dwcertencodingtype : UInt32 [In],pcertname1 : CRYPTOAPI_BLOB* [In],pcertname2 : CRYPTOAPI_BLOB* [In]
-  fun CertCompareCertificateName(dwcertencodingtype : UInt32, pcertname1 : CRYPTOAPI_BLOB*, pcertname2 : CRYPTOAPI_BLOB*) : LibC::BOOL
+    fun TransformFinalBlock(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbInData : UInt32, pInData : UInt8*, pcbOutData : UInt32*, ppOutData : UInt8**) : Win32cr::Foundation::HRESULT
 
-  # Params # dwcertencodingtype : UInt32 [In],dwflags : UInt32 [In],pcertname : CRYPTOAPI_BLOB* [In],prdn : CERT_RDN* [In]
-  fun CertIsRDNAttrsInCertificateName(dwcertencodingtype : UInt32, dwflags : UInt32, pcertname : CRYPTOAPI_BLOB*, prdn : CERT_RDN*) : LibC::BOOL
+    fun HashCore(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbInData : UInt32, pInData : UInt8*) : Win32cr::Foundation::HRESULT
 
-  # Params # dwcertencodingtype : UInt32 [In],ppublickey1 : CERT_PUBLIC_KEY_INFO* [In],ppublickey2 : CERT_PUBLIC_KEY_INFO* [In]
-  fun CertComparePublicKeyInfo(dwcertencodingtype : UInt32, ppublickey1 : CERT_PUBLIC_KEY_INFO*, ppublickey2 : CERT_PUBLIC_KEY_INFO*) : LibC::BOOL
+    fun HashFinal(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbInData : UInt32, pInData : UInt8*, pcbOutData : UInt32*, ppOutData : UInt8**) : Win32cr::Foundation::HRESULT
 
-  # Params # dwcertencodingtype : UInt32 [In],ppublickey : CERT_PUBLIC_KEY_INFO* [In]
-  fun CertGetPublicKeyLength(dwcertencodingtype : UInt32, ppublickey : CERT_PUBLIC_KEY_INFO*) : UInt32
+    fun FreeToken(pAllocMemory : Win32cr::Security::Cryptography::GENERIC_XML_TOKEN*) : Win32cr::Foundation::BOOL
 
-  # Params # hcryptprov : LibC::UINT_PTR [In],dwcertencodingtype : UInt32 [In],pbencoded : UInt8* [In],cbencoded : UInt32 [In],ppublickey : CERT_PUBLIC_KEY_INFO* [In]
-  fun CryptVerifyCertificateSignature(hcryptprov : LibC::UINT_PTR, dwcertencodingtype : UInt32, pbencoded : UInt8*, cbencoded : UInt32, ppublickey : CERT_PUBLIC_KEY_INFO*) : LibC::BOOL
+    fun CloseCryptoHandle(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*) : Win32cr::Foundation::HRESULT
 
-  # Params # hcryptprov : LibC::UINT_PTR [In],dwcertencodingtype : UInt32 [In],dwsubjecttype : UInt32 [In],pvsubject : Void* [In],dwissuertype : UInt32 [In],pvissuer : Void* [In],dwflags : CRYPT_VERIFY_CERT_FLAGS [In],pvextra : Void* [In]
-  fun CryptVerifyCertificateSignatureEx(hcryptprov : LibC::UINT_PTR, dwcertencodingtype : UInt32, dwsubjecttype : UInt32, pvsubject : Void*, dwissuertype : UInt32, pvissuer : Void*, dwflags : CRYPT_VERIFY_CERT_FLAGS, pvextra : Void*) : LibC::BOOL
+    fun GenerateDerivedKey(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbLabel : UInt32, pLabel : UInt8*, cbNonce : UInt32, pNonce : UInt8*, derivedKeyLength : UInt32, offset : UInt32, algId : Win32cr::Foundation::PWSTR, pcbKey : UInt32*, ppKey : UInt8**) : Win32cr::Foundation::HRESULT
 
-  # Params # pstrongsignpara : CERT_STRONG_SIGN_PARA* [In],pwszcnghashalgid : LibC::LPWSTR [In],psigningcert : CERT_CONTEXT* [In]
-  fun CertIsStrongHashToSign(pstrongsignpara : CERT_STRONG_SIGN_PARA*, pwszcnghashalgid : LibC::LPWSTR, psigningcert : CERT_CONTEXT*) : LibC::BOOL
+    fun GetBrowserToken(dwParamType : UInt32, pParam : Void*, pcbToken : UInt32*, ppToken : UInt8**) : Win32cr::Foundation::HRESULT
 
-  # Params # hcryptprov : LibC::UINT_PTR [In],dwcertencodingtype : UInt32 [In],pbencoded : UInt8* [In],cbencoded : UInt32 [In],pbcomputedhash : UInt8* [In],pcbcomputedhash : UInt32* [In]
-  fun CryptHashToBeSigned(hcryptprov : LibC::UINT_PTR, dwcertencodingtype : UInt32, pbencoded : UInt8*, cbencoded : UInt32, pbcomputedhash : UInt8*, pcbcomputedhash : UInt32*) : LibC::BOOL
-
-  # Params # hcryptprov : LibC::UINT_PTR [In],algid : UInt32 [In],dwflags : UInt32 [In],pbencoded : UInt8* [In],cbencoded : UInt32 [In],pbcomputedhash : UInt8* [In],pcbcomputedhash : UInt32* [In]
-  fun CryptHashCertificate(hcryptprov : LibC::UINT_PTR, algid : UInt32, dwflags : UInt32, pbencoded : UInt8*, cbencoded : UInt32, pbcomputedhash : UInt8*, pcbcomputedhash : UInt32*) : LibC::BOOL
-
-  # Params # pwszcnghashalgid : LibC::LPWSTR [In],dwflags : UInt32 [In],pvreserved : Void* [In],pbencoded : UInt8* [In],cbencoded : UInt32 [In],pbcomputedhash : UInt8* [In],pcbcomputedhash : UInt32* [In]
-  fun CryptHashCertificate2(pwszcnghashalgid : LibC::LPWSTR, dwflags : UInt32, pvreserved : Void*, pbencoded : UInt8*, cbencoded : UInt32, pbcomputedhash : UInt8*, pcbcomputedhash : UInt32*) : LibC::BOOL
-
-  # Params # hcryptprovorncryptkey : LibC::UINT_PTR [In],dwkeyspec : UInt32 [In],dwcertencodingtype : UInt32 [In],pbencodedtobesigned : UInt8* [In],cbencodedtobesigned : UInt32 [In],psignaturealgorithm : CRYPT_ALGORITHM_IDENTIFIER* [In],pvhashauxinfo : Void* [In],pbsignature : UInt8* [In],pcbsignature : UInt32* [In]
-  fun CryptSignCertificate(hcryptprovorncryptkey : LibC::UINT_PTR, dwkeyspec : UInt32, dwcertencodingtype : UInt32, pbencodedtobesigned : UInt8*, cbencodedtobesigned : UInt32, psignaturealgorithm : CRYPT_ALGORITHM_IDENTIFIER*, pvhashauxinfo : Void*, pbsignature : UInt8*, pcbsignature : UInt32*) : LibC::BOOL
-
-  # Params # hcryptprovorncryptkey : LibC::UINT_PTR [In],dwkeyspec : CERT_KEY_SPEC [In],dwcertencodingtype : UInt32 [In],lpszstructtype : PSTR [In],pvstructinfo : Void* [In],psignaturealgorithm : CRYPT_ALGORITHM_IDENTIFIER* [In],pvhashauxinfo : Void* [In],pbencoded : UInt8* [In],pcbencoded : UInt32* [In]
-  fun CryptSignAndEncodeCertificate(hcryptprovorncryptkey : LibC::UINT_PTR, dwkeyspec : CERT_KEY_SPEC, dwcertencodingtype : UInt32, lpszstructtype : PSTR, pvstructinfo : Void*, psignaturealgorithm : CRYPT_ALGORITHM_IDENTIFIER*, pvhashauxinfo : Void*, pbencoded : UInt8*, pcbencoded : UInt32*) : LibC::BOOL
-
-  # Params # ptimetoverify : FILETIME* [In],pcertinfo : CERT_INFO* [In]
-  fun CertVerifyTimeValidity(ptimetoverify : FILETIME*, pcertinfo : CERT_INFO*) : Int32
-
-  # Params # ptimetoverify : FILETIME* [In],pcrlinfo : CRL_INFO* [In]
-  fun CertVerifyCRLTimeValidity(ptimetoverify : FILETIME*, pcrlinfo : CRL_INFO*) : Int32
-
-  # Params # psubjectinfo : CERT_INFO* [In],pissuerinfo : CERT_INFO* [In]
-  fun CertVerifyValidityNesting(psubjectinfo : CERT_INFO*, pissuerinfo : CERT_INFO*) : LibC::BOOL
-
-  # Params # dwcertencodingtype : UInt32 [In],pcertid : CERT_INFO* [In],ccrlinfo : UInt32 [In],rgpcrlinfo : CRL_INFO** [In]
-  fun CertVerifyCRLRevocation(dwcertencodingtype : UInt32, pcertid : CERT_INFO*, ccrlinfo : UInt32, rgpcrlinfo : CRL_INFO**) : LibC::BOOL
-
-  # Params # dwalgid : UInt32 [In]
-  fun CertAlgIdToOID(dwalgid : UInt32) : PSTR
-
-  # Params # pszobjid : PSTR [In]
-  fun CertOIDToAlgId(pszobjid : PSTR) : UInt32
-
-  # Params # pszobjid : PSTR [In],cextensions : UInt32 [In],rgextensions : CERT_EXTENSION* [In]
-  fun CertFindExtension(pszobjid : PSTR, cextensions : UInt32, rgextensions : CERT_EXTENSION*) : CERT_EXTENSION*
-
-  # Params # pszobjid : PSTR [In],cattr : UInt32 [In],rgattr : CRYPT_ATTRIBUTE* [In]
-  fun CertFindAttribute(pszobjid : PSTR, cattr : UInt32, rgattr : CRYPT_ATTRIBUTE*) : CRYPT_ATTRIBUTE*
-
-  # Params # pszobjid : PSTR [In],pname : CERT_NAME_INFO* [In]
-  fun CertFindRDNAttr(pszobjid : PSTR, pname : CERT_NAME_INFO*) : CERT_RDN_ATTR*
-
-  # Params # dwcertencodingtype : UInt32 [In],pcertinfo : CERT_INFO* [In],pbkeyusage : UInt8* [In],cbkeyusage : UInt32 [In]
-  fun CertGetIntendedKeyUsage(dwcertencodingtype : UInt32, pcertinfo : CERT_INFO*, pbkeyusage : UInt8*, cbkeyusage : UInt32) : LibC::BOOL
-
-  # Params # hcryptprov : LibC::UINT_PTR [In],dwdefaulttype : CRYPT_DEFAULT_CONTEXT_TYPE [In],pvdefaultpara : Void* [In],dwflags : CRYPT_DEFAULT_CONTEXT_FLAGS [In],pvreserved : Void* [In],phdefaultcontext : Void** [In]
-  fun CryptInstallDefaultContext(hcryptprov : LibC::UINT_PTR, dwdefaulttype : CRYPT_DEFAULT_CONTEXT_TYPE, pvdefaultpara : Void*, dwflags : CRYPT_DEFAULT_CONTEXT_FLAGS, pvreserved : Void*, phdefaultcontext : Void**) : LibC::BOOL
-
-  # Params # hdefaultcontext : Void* [In],dwflags : UInt32 [In],pvreserved : Void* [In]
-  fun CryptUninstallDefaultContext(hdefaultcontext : Void*, dwflags : UInt32, pvreserved : Void*) : LibC::BOOL
-
-  # Params # hcryptprovorncryptkey : LibC::UINT_PTR [In],dwkeyspec : UInt32 [In],dwcertencodingtype : UInt32 [In],pinfo : CERT_PUBLIC_KEY_INFO* [In],pcbinfo : UInt32* [In]
-  fun CryptExportPublicKeyInfo(hcryptprovorncryptkey : LibC::UINT_PTR, dwkeyspec : UInt32, dwcertencodingtype : UInt32, pinfo : CERT_PUBLIC_KEY_INFO*, pcbinfo : UInt32*) : LibC::BOOL
-
-  # Params # hcryptprovorncryptkey : LibC::UINT_PTR [In],dwkeyspec : UInt32 [In],dwcertencodingtype : UInt32 [In],pszpublickeyobjid : PSTR [In],dwflags : UInt32 [In],pvauxinfo : Void* [In],pinfo : CERT_PUBLIC_KEY_INFO* [In],pcbinfo : UInt32* [In]
-  fun CryptExportPublicKeyInfoEx(hcryptprovorncryptkey : LibC::UINT_PTR, dwkeyspec : UInt32, dwcertencodingtype : UInt32, pszpublickeyobjid : PSTR, dwflags : UInt32, pvauxinfo : Void*, pinfo : CERT_PUBLIC_KEY_INFO*, pcbinfo : UInt32*) : LibC::BOOL
-
-  # Params # hbcryptkey : BCRYPT_KEY_HANDLE [In],dwcertencodingtype : UInt32 [In],pszpublickeyobjid : PSTR [In],dwflags : UInt32 [In],pvauxinfo : Void* [In],pinfo : CERT_PUBLIC_KEY_INFO* [In],pcbinfo : UInt32* [In]
-  fun CryptExportPublicKeyInfoFromBCryptKeyHandle(hbcryptkey : BCRYPT_KEY_HANDLE, dwcertencodingtype : UInt32, pszpublickeyobjid : PSTR, dwflags : UInt32, pvauxinfo : Void*, pinfo : CERT_PUBLIC_KEY_INFO*, pcbinfo : UInt32*) : LibC::BOOL
-
-  # Params # hcryptprov : LibC::UINT_PTR [In],dwcertencodingtype : UInt32 [In],pinfo : CERT_PUBLIC_KEY_INFO* [In],phkey : LibC::UINT_PTR* [In]
-  fun CryptImportPublicKeyInfo(hcryptprov : LibC::UINT_PTR, dwcertencodingtype : UInt32, pinfo : CERT_PUBLIC_KEY_INFO*, phkey : LibC::UINT_PTR*) : LibC::BOOL
-
-  # Params # hcryptprov : LibC::UINT_PTR [In],dwcertencodingtype : UInt32 [In],pinfo : CERT_PUBLIC_KEY_INFO* [In],aikeyalg : UInt32 [In],dwflags : UInt32 [In],pvauxinfo : Void* [In],phkey : LibC::UINT_PTR* [In]
-  fun CryptImportPublicKeyInfoEx(hcryptprov : LibC::UINT_PTR, dwcertencodingtype : UInt32, pinfo : CERT_PUBLIC_KEY_INFO*, aikeyalg : UInt32, dwflags : UInt32, pvauxinfo : Void*, phkey : LibC::UINT_PTR*) : LibC::BOOL
-
-  # Params # dwcertencodingtype : UInt32 [In],pinfo : CERT_PUBLIC_KEY_INFO* [In],dwflags : CRYPT_IMPORT_PUBLIC_KEY_FLAGS [In],pvauxinfo : Void* [In],phkey : BCRYPT_KEY_HANDLE* [In]
-  fun CryptImportPublicKeyInfoEx2(dwcertencodingtype : UInt32, pinfo : CERT_PUBLIC_KEY_INFO*, dwflags : CRYPT_IMPORT_PUBLIC_KEY_FLAGS, pvauxinfo : Void*, phkey : BCRYPT_KEY_HANDLE*) : LibC::BOOL
-
-  # Params # pcert : CERT_CONTEXT* [In],dwflags : CRYPT_ACQUIRE_FLAGS [In],pvparameters : Void* [In],phcryptprovorncryptkey : LibC::UINT_PTR* [In],pdwkeyspec : CERT_KEY_SPEC* [In],pfcallerfreeprovorncryptkey : LibC::BOOL* [In]
-  fun CryptAcquireCertificatePrivateKey(pcert : CERT_CONTEXT*, dwflags : CRYPT_ACQUIRE_FLAGS, pvparameters : Void*, phcryptprovorncryptkey : LibC::UINT_PTR*, pdwkeyspec : CERT_KEY_SPEC*, pfcallerfreeprovorncryptkey : LibC::BOOL*) : LibC::BOOL
-
-  # Params # pcert : CERT_CONTEXT* [In],dwflags : CRYPT_FIND_FLAGS [In],pvreserved : Void* [In]
-  fun CryptFindCertificateKeyProvInfo(pcert : CERT_CONTEXT*, dwflags : CRYPT_FIND_FLAGS, pvreserved : Void*) : LibC::BOOL
-
-  # Params # sprivatekeyandparams : CRYPT_PKCS8_IMPORT_PARAMS [In],dwflags : CRYPT_KEY_FLAGS [In],phcryptprov : LibC::UINT_PTR* [In],pvauxinfo : Void* [In]
-  fun CryptImportPKCS8(sprivatekeyandparams : CRYPT_PKCS8_IMPORT_PARAMS, dwflags : CRYPT_KEY_FLAGS, phcryptprov : LibC::UINT_PTR*, pvauxinfo : Void*) : LibC::BOOL
-
-  # Params # hcryptprov : LibC::UINT_PTR [In],dwkeyspec : UInt32 [In],pszprivatekeyobjid : PSTR [In],dwflags : UInt32 [In],pvauxinfo : Void* [In],pbprivatekeyblob : UInt8* [In],pcbprivatekeyblob : UInt32* [In]
-  fun CryptExportPKCS8(hcryptprov : LibC::UINT_PTR, dwkeyspec : UInt32, pszprivatekeyobjid : PSTR, dwflags : UInt32, pvauxinfo : Void*, pbprivatekeyblob : UInt8*, pcbprivatekeyblob : UInt32*) : LibC::BOOL
-
-  # Params # hcryptprov : LibC::UINT_PTR [In],algid : UInt32 [In],dwflags : UInt32 [In],dwcertencodingtype : UInt32 [In],pinfo : CERT_PUBLIC_KEY_INFO* [In],pbcomputedhash : UInt8* [In],pcbcomputedhash : UInt32* [In]
-  fun CryptHashPublicKeyInfo(hcryptprov : LibC::UINT_PTR, algid : UInt32, dwflags : UInt32, dwcertencodingtype : UInt32, pinfo : CERT_PUBLIC_KEY_INFO*, pbcomputedhash : UInt8*, pcbcomputedhash : UInt32*) : LibC::BOOL
-
-  # Params # dwvaluetype : UInt32 [In],pvalue : CRYPTOAPI_BLOB* [In],psz : UInt8* [In],csz : UInt32 [In]
-  fun CertRDNValueToStrA(dwvaluetype : UInt32, pvalue : CRYPTOAPI_BLOB*, psz : UInt8*, csz : UInt32) : UInt32
-
-  # Params # dwvaluetype : UInt32 [In],pvalue : CRYPTOAPI_BLOB* [In],psz : Char* [In],csz : UInt32 [In]
-  fun CertRDNValueToStrW(dwvaluetype : UInt32, pvalue : CRYPTOAPI_BLOB*, psz : Char*, csz : UInt32) : UInt32
-
-  # Params # dwcertencodingtype : UInt32 [In],pname : CRYPTOAPI_BLOB* [In],dwstrtype : CERT_STRING_TYPE [In],psz : UInt8* [In],csz : UInt32 [In]
-  fun CertNameToStrA(dwcertencodingtype : UInt32, pname : CRYPTOAPI_BLOB*, dwstrtype : CERT_STRING_TYPE, psz : UInt8*, csz : UInt32) : UInt32
-
-  # Params # dwcertencodingtype : UInt32 [In],pname : CRYPTOAPI_BLOB* [In],dwstrtype : CERT_STRING_TYPE [In],psz : Char* [In],csz : UInt32 [In]
-  fun CertNameToStrW(dwcertencodingtype : UInt32, pname : CRYPTOAPI_BLOB*, dwstrtype : CERT_STRING_TYPE, psz : Char*, csz : UInt32) : UInt32
-
-  # Params # dwcertencodingtype : UInt32 [In],pszx500 : PSTR [In],dwstrtype : CERT_STRING_TYPE [In],pvreserved : Void* [In],pbencoded : UInt8* [In],pcbencoded : UInt32* [In],ppszerror : PSTR* [In]
-  fun CertStrToNameA(dwcertencodingtype : UInt32, pszx500 : PSTR, dwstrtype : CERT_STRING_TYPE, pvreserved : Void*, pbencoded : UInt8*, pcbencoded : UInt32*, ppszerror : PSTR*) : LibC::BOOL
-
-  # Params # dwcertencodingtype : UInt32 [In],pszx500 : LibC::LPWSTR [In],dwstrtype : CERT_STRING_TYPE [In],pvreserved : Void* [In],pbencoded : UInt8* [In],pcbencoded : UInt32* [In],ppszerror : LibC::LPWSTR* [In]
-  fun CertStrToNameW(dwcertencodingtype : UInt32, pszx500 : LibC::LPWSTR, dwstrtype : CERT_STRING_TYPE, pvreserved : Void*, pbencoded : UInt8*, pcbencoded : UInt32*, ppszerror : LibC::LPWSTR*) : LibC::BOOL
-
-  # Params # pcertcontext : CERT_CONTEXT* [In],dwtype : UInt32 [In],dwflags : UInt32 [In],pvtypepara : Void* [In],psznamestring : UInt8* [In],cchnamestring : UInt32 [In]
-  fun CertGetNameStringA(pcertcontext : CERT_CONTEXT*, dwtype : UInt32, dwflags : UInt32, pvtypepara : Void*, psznamestring : UInt8*, cchnamestring : UInt32) : UInt32
-
-  # Params # pcertcontext : CERT_CONTEXT* [In],dwtype : UInt32 [In],dwflags : UInt32 [In],pvtypepara : Void* [In],psznamestring : Char* [In],cchnamestring : UInt32 [In]
-  fun CertGetNameStringW(pcertcontext : CERT_CONTEXT*, dwtype : UInt32, dwflags : UInt32, pvtypepara : Void*, psznamestring : Char*, cchnamestring : UInt32) : UInt32
-
-  # Params # psignpara : CRYPT_SIGN_MESSAGE_PARA* [In],fdetachedsignature : LibC::BOOL [In],ctobesigned : UInt32 [In],rgpbtobesigned : UInt8** [In],rgcbtobesigned : UInt32* [In],pbsignedblob : UInt8* [In],pcbsignedblob : UInt32* [In]
-  fun CryptSignMessage(psignpara : CRYPT_SIGN_MESSAGE_PARA*, fdetachedsignature : LibC::BOOL, ctobesigned : UInt32, rgpbtobesigned : UInt8**, rgcbtobesigned : UInt32*, pbsignedblob : UInt8*, pcbsignedblob : UInt32*) : LibC::BOOL
-
-  # Params # pverifypara : CRYPT_VERIFY_MESSAGE_PARA* [In],dwsignerindex : UInt32 [In],pbsignedblob : UInt8* [In],cbsignedblob : UInt32 [In],pbdecoded : UInt8* [In],pcbdecoded : UInt32* [In],ppsignercert : CERT_CONTEXT** [In]
-  fun CryptVerifyMessageSignature(pverifypara : CRYPT_VERIFY_MESSAGE_PARA*, dwsignerindex : UInt32, pbsignedblob : UInt8*, cbsignedblob : UInt32, pbdecoded : UInt8*, pcbdecoded : UInt32*, ppsignercert : CERT_CONTEXT**) : LibC::BOOL
-
-  # Params # dwmsgencodingtype : UInt32 [In],pbsignedblob : UInt8* [In],cbsignedblob : UInt32 [In]
-  fun CryptGetMessageSignerCount(dwmsgencodingtype : UInt32, pbsignedblob : UInt8*, cbsignedblob : UInt32) : Int32
-
-  # Params # dwmsgandcertencodingtype : UInt32 [In],hcryptprov : LibC::UINT_PTR [In],dwflags : UInt32 [In],pbsignedblob : UInt8* [In],cbsignedblob : UInt32 [In]
-  fun CryptGetMessageCertificates(dwmsgandcertencodingtype : UInt32, hcryptprov : LibC::UINT_PTR, dwflags : UInt32, pbsignedblob : UInt8*, cbsignedblob : UInt32) : Void*
-
-  # Params # pverifypara : CRYPT_VERIFY_MESSAGE_PARA* [In],dwsignerindex : UInt32 [In],pbdetachedsignblob : UInt8* [In],cbdetachedsignblob : UInt32 [In],ctobesigned : UInt32 [In],rgpbtobesigned : UInt8** [In],rgcbtobesigned : UInt32* [In],ppsignercert : CERT_CONTEXT** [In]
-  fun CryptVerifyDetachedMessageSignature(pverifypara : CRYPT_VERIFY_MESSAGE_PARA*, dwsignerindex : UInt32, pbdetachedsignblob : UInt8*, cbdetachedsignblob : UInt32, ctobesigned : UInt32, rgpbtobesigned : UInt8**, rgcbtobesigned : UInt32*, ppsignercert : CERT_CONTEXT**) : LibC::BOOL
-
-  # Params # pencryptpara : CRYPT_ENCRYPT_MESSAGE_PARA* [In],crecipientcert : UInt32 [In],rgprecipientcert : CERT_CONTEXT** [In],pbtobeencrypted : UInt8* [In],cbtobeencrypted : UInt32 [In],pbencryptedblob : UInt8* [In],pcbencryptedblob : UInt32* [In]
-  fun CryptEncryptMessage(pencryptpara : CRYPT_ENCRYPT_MESSAGE_PARA*, crecipientcert : UInt32, rgprecipientcert : CERT_CONTEXT**, pbtobeencrypted : UInt8*, cbtobeencrypted : UInt32, pbencryptedblob : UInt8*, pcbencryptedblob : UInt32*) : LibC::BOOL
-
-  # Params # pdecryptpara : CRYPT_DECRYPT_MESSAGE_PARA* [In],pbencryptedblob : UInt8* [In],cbencryptedblob : UInt32 [In],pbdecrypted : UInt8* [In],pcbdecrypted : UInt32* [In],ppxchgcert : CERT_CONTEXT** [In]
-  fun CryptDecryptMessage(pdecryptpara : CRYPT_DECRYPT_MESSAGE_PARA*, pbencryptedblob : UInt8*, cbencryptedblob : UInt32, pbdecrypted : UInt8*, pcbdecrypted : UInt32*, ppxchgcert : CERT_CONTEXT**) : LibC::BOOL
-
-  # Params # psignpara : CRYPT_SIGN_MESSAGE_PARA* [In],pencryptpara : CRYPT_ENCRYPT_MESSAGE_PARA* [In],crecipientcert : UInt32 [In],rgprecipientcert : CERT_CONTEXT** [In],pbtobesignedandencrypted : UInt8* [In],cbtobesignedandencrypted : UInt32 [In],pbsignedandencryptedblob : UInt8* [In],pcbsignedandencryptedblob : UInt32* [In]
-  fun CryptSignAndEncryptMessage(psignpara : CRYPT_SIGN_MESSAGE_PARA*, pencryptpara : CRYPT_ENCRYPT_MESSAGE_PARA*, crecipientcert : UInt32, rgprecipientcert : CERT_CONTEXT**, pbtobesignedandencrypted : UInt8*, cbtobesignedandencrypted : UInt32, pbsignedandencryptedblob : UInt8*, pcbsignedandencryptedblob : UInt32*) : LibC::BOOL
-
-  # Params # pdecryptpara : CRYPT_DECRYPT_MESSAGE_PARA* [In],pverifypara : CRYPT_VERIFY_MESSAGE_PARA* [In],dwsignerindex : UInt32 [In],pbencryptedblob : UInt8* [In],cbencryptedblob : UInt32 [In],pbdecrypted : UInt8* [In],pcbdecrypted : UInt32* [In],ppxchgcert : CERT_CONTEXT** [In],ppsignercert : CERT_CONTEXT** [In]
-  fun CryptDecryptAndVerifyMessageSignature(pdecryptpara : CRYPT_DECRYPT_MESSAGE_PARA*, pverifypara : CRYPT_VERIFY_MESSAGE_PARA*, dwsignerindex : UInt32, pbencryptedblob : UInt8*, cbencryptedblob : UInt32, pbdecrypted : UInt8*, pcbdecrypted : UInt32*, ppxchgcert : CERT_CONTEXT**, ppsignercert : CERT_CONTEXT**) : LibC::BOOL
-
-  # Params # dwmsgtypeflags : UInt32 [In],pdecryptpara : CRYPT_DECRYPT_MESSAGE_PARA* [In],pverifypara : CRYPT_VERIFY_MESSAGE_PARA* [In],dwsignerindex : UInt32 [In],pbencodedblob : UInt8* [In],cbencodedblob : UInt32 [In],dwprevinnercontenttype : UInt32 [In],pdwmsgtype : UInt32* [In],pdwinnercontenttype : UInt32* [In],pbdecoded : UInt8* [In],pcbdecoded : UInt32* [In],ppxchgcert : CERT_CONTEXT** [In],ppsignercert : CERT_CONTEXT** [In]
-  fun CryptDecodeMessage(dwmsgtypeflags : UInt32, pdecryptpara : CRYPT_DECRYPT_MESSAGE_PARA*, pverifypara : CRYPT_VERIFY_MESSAGE_PARA*, dwsignerindex : UInt32, pbencodedblob : UInt8*, cbencodedblob : UInt32, dwprevinnercontenttype : UInt32, pdwmsgtype : UInt32*, pdwinnercontenttype : UInt32*, pbdecoded : UInt8*, pcbdecoded : UInt32*, ppxchgcert : CERT_CONTEXT**, ppsignercert : CERT_CONTEXT**) : LibC::BOOL
-
-  # Params # phashpara : CRYPT_HASH_MESSAGE_PARA* [In],fdetachedhash : LibC::BOOL [In],ctobehashed : UInt32 [In],rgpbtobehashed : UInt8** [In],rgcbtobehashed : UInt32* [In],pbhashedblob : UInt8* [In],pcbhashedblob : UInt32* [In],pbcomputedhash : UInt8* [In],pcbcomputedhash : UInt32* [In]
-  fun CryptHashMessage(phashpara : CRYPT_HASH_MESSAGE_PARA*, fdetachedhash : LibC::BOOL, ctobehashed : UInt32, rgpbtobehashed : UInt8**, rgcbtobehashed : UInt32*, pbhashedblob : UInt8*, pcbhashedblob : UInt32*, pbcomputedhash : UInt8*, pcbcomputedhash : UInt32*) : LibC::BOOL
-
-  # Params # phashpara : CRYPT_HASH_MESSAGE_PARA* [In],pbhashedblob : UInt8* [In],cbhashedblob : UInt32 [In],pbtobehashed : UInt8* [In],pcbtobehashed : UInt32* [In],pbcomputedhash : UInt8* [In],pcbcomputedhash : UInt32* [In]
-  fun CryptVerifyMessageHash(phashpara : CRYPT_HASH_MESSAGE_PARA*, pbhashedblob : UInt8*, cbhashedblob : UInt32, pbtobehashed : UInt8*, pcbtobehashed : UInt32*, pbcomputedhash : UInt8*, pcbcomputedhash : UInt32*) : LibC::BOOL
-
-  # Params # phashpara : CRYPT_HASH_MESSAGE_PARA* [In],pbdetachedhashblob : UInt8* [In],cbdetachedhashblob : UInt32 [In],ctobehashed : UInt32 [In],rgpbtobehashed : UInt8** [In],rgcbtobehashed : UInt32* [In],pbcomputedhash : UInt8* [In],pcbcomputedhash : UInt32* [In]
-  fun CryptVerifyDetachedMessageHash(phashpara : CRYPT_HASH_MESSAGE_PARA*, pbdetachedhashblob : UInt8*, cbdetachedhashblob : UInt32, ctobehashed : UInt32, rgpbtobehashed : UInt8**, rgcbtobehashed : UInt32*, pbcomputedhash : UInt8*, pcbcomputedhash : UInt32*) : LibC::BOOL
-
-  # Params # psignpara : CRYPT_KEY_SIGN_MESSAGE_PARA* [In],pbtobesigned : UInt8* [In],cbtobesigned : UInt32 [In],pbsignedblob : UInt8* [In],pcbsignedblob : UInt32* [In]
-  fun CryptSignMessageWithKey(psignpara : CRYPT_KEY_SIGN_MESSAGE_PARA*, pbtobesigned : UInt8*, cbtobesigned : UInt32, pbsignedblob : UInt8*, pcbsignedblob : UInt32*) : LibC::BOOL
-
-  # Params # pverifypara : CRYPT_KEY_VERIFY_MESSAGE_PARA* [In],ppublickeyinfo : CERT_PUBLIC_KEY_INFO* [In],pbsignedblob : UInt8* [In],cbsignedblob : UInt32 [In],pbdecoded : UInt8* [In],pcbdecoded : UInt32* [In]
-  fun CryptVerifyMessageSignatureWithKey(pverifypara : CRYPT_KEY_VERIFY_MESSAGE_PARA*, ppublickeyinfo : CERT_PUBLIC_KEY_INFO*, pbsignedblob : UInt8*, cbsignedblob : UInt32, pbdecoded : UInt8*, pcbdecoded : UInt32*) : LibC::BOOL
-
-  # Params # hprov : LibC::UINT_PTR [In],szsubsystemprotocol : PSTR [In]
-  fun CertOpenSystemStoreA(hprov : LibC::UINT_PTR, szsubsystemprotocol : PSTR) : Void*
-
-  # Params # hprov : LibC::UINT_PTR [In],szsubsystemprotocol : LibC::LPWSTR [In]
-  # Commented out because function is part of Lib C
-  #fun CertOpenSystemStoreW(hprov : LibC::UINT_PTR, szsubsystemprotocol : LibC::LPWSTR) : Void*
-
-  # Params # szcertstorename : PSTR [In],pbcertencoded : UInt8* [In],cbcertencoded : UInt32 [In]
-  fun CertAddEncodedCertificateToSystemStoreA(szcertstorename : PSTR, pbcertencoded : UInt8*, cbcertencoded : UInt32) : LibC::BOOL
-
-  # Params # szcertstorename : LibC::LPWSTR [In],pbcertencoded : UInt8* [In],cbcertencoded : UInt32 [In]
-  fun CertAddEncodedCertificateToSystemStoreW(szcertstorename : LibC::LPWSTR, pbcertencoded : UInt8*, cbcertencoded : UInt32) : LibC::BOOL
-
-  # Params # pcertchains : CERT_CHAIN* [In],pcbcertchains : UInt32* [In],pccertchains : UInt32* [In],pbencodedissuername : UInt8* [In],cbencodedissuername : UInt32 [In],pwszpurpose : LibC::LPWSTR [In],dwkeyspec : UInt32 [In]
-  fun FindCertsByIssuer(pcertchains : CERT_CHAIN*, pcbcertchains : UInt32*, pccertchains : UInt32*, pbencodedissuername : UInt8*, cbencodedissuername : UInt32, pwszpurpose : LibC::LPWSTR, dwkeyspec : UInt32) : HRESULT
-
-  # Params # dwobjecttype : CERT_QUERY_OBJECT_TYPE [In],pvobject : Void* [In],dwexpectedcontenttypeflags : CERT_QUERY_CONTENT_TYPE_FLAGS [In],dwexpectedformattypeflags : CERT_QUERY_FORMAT_TYPE_FLAGS [In],dwflags : UInt32 [In],pdwmsgandcertencodingtype : CERT_QUERY_ENCODING_TYPE* [In],pdwcontenttype : CERT_QUERY_CONTENT_TYPE* [In],pdwformattype : CERT_QUERY_FORMAT_TYPE* [In],phcertstore : Void** [In],phmsg : Void** [In],ppvcontext : Void** [In]
-  fun CryptQueryObject(dwobjecttype : CERT_QUERY_OBJECT_TYPE, pvobject : Void*, dwexpectedcontenttypeflags : CERT_QUERY_CONTENT_TYPE_FLAGS, dwexpectedformattypeflags : CERT_QUERY_FORMAT_TYPE_FLAGS, dwflags : UInt32, pdwmsgandcertencodingtype : CERT_QUERY_ENCODING_TYPE*, pdwcontenttype : CERT_QUERY_CONTENT_TYPE*, pdwformattype : CERT_QUERY_FORMAT_TYPE*, phcertstore : Void**, phmsg : Void**, ppvcontext : Void**) : LibC::BOOL
-
-  # Params # cbsize : UInt32 [In]
-  fun CryptMemAlloc(cbsize : UInt32) : Void*
-
-  # Params # pv : Void* [In],cbsize : UInt32 [In]
-  fun CryptMemRealloc(pv : Void*, cbsize : UInt32) : Void*
-
-  # Params # pv : Void* [In]
-  fun CryptMemFree(pv : Void*) : Void
-
-  # Params # dwflags : UInt32 [In],phasync : HCRYPTASYNC* [In]
-  fun CryptCreateAsyncHandle(dwflags : UInt32, phasync : HCRYPTASYNC*) : LibC::BOOL
-
-  # Params # hasync : HCRYPTASYNC [In],pszparamoid : PSTR [In],pvparam : Void* [In],pfnfree : PFN_CRYPT_ASYNC_PARAM_FREE_FUNC [In]
-  fun CryptSetAsyncParam(hasync : HCRYPTASYNC, pszparamoid : PSTR, pvparam : Void*, pfnfree : PFN_CRYPT_ASYNC_PARAM_FREE_FUNC) : LibC::BOOL
-
-  # Params # hasync : HCRYPTASYNC [In],pszparamoid : PSTR [In],ppvparam : Void** [In],ppfnfree : PFN_CRYPT_ASYNC_PARAM_FREE_FUNC* [In]
-  fun CryptGetAsyncParam(hasync : HCRYPTASYNC, pszparamoid : PSTR, ppvparam : Void**, ppfnfree : PFN_CRYPT_ASYNC_PARAM_FREE_FUNC*) : LibC::BOOL
-
-  # Params # hasync : HCRYPTASYNC [In]
-  fun CryptCloseAsyncHandle(hasync : HCRYPTASYNC) : LibC::BOOL
-
-  # Params # pszurl : PSTR [In],pszobjectoid : PSTR [In],dwretrievalflags : UInt32 [In],dwtimeout : UInt32 [In],ppvobject : Void** [In],hasyncretrieve : HCRYPTASYNC [In],pcredentials : CRYPT_CREDENTIALS* [In],pvverify : Void* [In],pauxinfo : CRYPT_RETRIEVE_AUX_INFO* [In]
-  fun CryptRetrieveObjectByUrlA(pszurl : PSTR, pszobjectoid : PSTR, dwretrievalflags : UInt32, dwtimeout : UInt32, ppvobject : Void**, hasyncretrieve : HCRYPTASYNC, pcredentials : CRYPT_CREDENTIALS*, pvverify : Void*, pauxinfo : CRYPT_RETRIEVE_AUX_INFO*) : LibC::BOOL
-
-  # Params # pszurl : LibC::LPWSTR [In],pszobjectoid : PSTR [In],dwretrievalflags : UInt32 [In],dwtimeout : UInt32 [In],ppvobject : Void** [In],hasyncretrieve : HCRYPTASYNC [In],pcredentials : CRYPT_CREDENTIALS* [In],pvverify : Void* [In],pauxinfo : CRYPT_RETRIEVE_AUX_INFO* [In]
-  fun CryptRetrieveObjectByUrlW(pszurl : LibC::LPWSTR, pszobjectoid : PSTR, dwretrievalflags : UInt32, dwtimeout : UInt32, ppvobject : Void**, hasyncretrieve : HCRYPTASYNC, pcredentials : CRYPT_CREDENTIALS*, pvverify : Void*, pauxinfo : CRYPT_RETRIEVE_AUX_INFO*) : LibC::BOOL
-
-  # Params # pfncancel : PFN_CRYPT_CANCEL_RETRIEVAL [In],pvarg : Void* [In],dwflags : UInt32 [In],pvreserved : Void* [In]
-  fun CryptInstallCancelRetrieval(pfncancel : PFN_CRYPT_CANCEL_RETRIEVAL, pvarg : Void*, dwflags : UInt32, pvreserved : Void*) : LibC::BOOL
-
-  # Params # dwflags : UInt32 [In],pvreserved : Void* [In]
-  fun CryptUninstallCancelRetrieval(dwflags : UInt32, pvreserved : Void*) : LibC::BOOL
-
-  # Params # pszurloid : PSTR [In],pvpara : Void* [In],dwflags : CRYPT_GET_URL_FLAGS [In],purlarray : CRYPT_URL_ARRAY* [In],pcburlarray : UInt32* [In],purlinfo : CRYPT_URL_INFO* [In],pcburlinfo : UInt32* [In],pvreserved : Void* [In]
-  fun CryptGetObjectUrl(pszurloid : PSTR, pvpara : Void*, dwflags : CRYPT_GET_URL_FLAGS, purlarray : CRYPT_URL_ARRAY*, pcburlarray : UInt32*, purlinfo : CRYPT_URL_INFO*, pcburlinfo : UInt32*, pvreserved : Void*) : LibC::BOOL
-
-  # Params # hcryptprovorncryptkey : LibC::UINT_PTR [In],psubjectissuerblob : CRYPTOAPI_BLOB* [In],dwflags : CERT_CREATE_SELFSIGN_FLAGS [In],pkeyprovinfo : CRYPT_KEY_PROV_INFO* [In],psignaturealgorithm : CRYPT_ALGORITHM_IDENTIFIER* [In],pstarttime : SYSTEMTIME* [In],pendtime : SYSTEMTIME* [In],pextensions : CERT_EXTENSIONS* [In]
-  fun CertCreateSelfSignCertificate(hcryptprovorncryptkey : LibC::UINT_PTR, psubjectissuerblob : CRYPTOAPI_BLOB*, dwflags : CERT_CREATE_SELFSIGN_FLAGS, pkeyprovinfo : CRYPT_KEY_PROV_INFO*, psignaturealgorithm : CRYPT_ALGORITHM_IDENTIFIER*, pstarttime : SYSTEMTIME*, pendtime : SYSTEMTIME*, pextensions : CERT_EXTENSIONS*) : CERT_CONTEXT*
-
-  # Params # pkeyidentifier : CRYPTOAPI_BLOB* [In],dwpropid : UInt32 [In],dwflags : UInt32 [In],pwszcomputername : LibC::LPWSTR [In],pvreserved : Void* [In],pvdata : Void* [In],pcbdata : UInt32* [In]
-  fun CryptGetKeyIdentifierProperty(pkeyidentifier : CRYPTOAPI_BLOB*, dwpropid : UInt32, dwflags : UInt32, pwszcomputername : LibC::LPWSTR, pvreserved : Void*, pvdata : Void*, pcbdata : UInt32*) : LibC::BOOL
-
-  # Params # pkeyidentifier : CRYPTOAPI_BLOB* [In],dwpropid : UInt32 [In],dwflags : UInt32 [In],pwszcomputername : LibC::LPWSTR [In],pvreserved : Void* [In],pvdata : Void* [In]
-  fun CryptSetKeyIdentifierProperty(pkeyidentifier : CRYPTOAPI_BLOB*, dwpropid : UInt32, dwflags : UInt32, pwszcomputername : LibC::LPWSTR, pvreserved : Void*, pvdata : Void*) : LibC::BOOL
-
-  # Params # pkeyidentifier : CRYPTOAPI_BLOB* [In],dwpropid : UInt32 [In],dwflags : UInt32 [In],pwszcomputername : LibC::LPWSTR [In],pvreserved : Void* [In],pvarg : Void* [In],pfnenum : PFN_CRYPT_ENUM_KEYID_PROP [In]
-  fun CryptEnumKeyIdentifierProperties(pkeyidentifier : CRYPTOAPI_BLOB*, dwpropid : UInt32, dwflags : UInt32, pwszcomputername : LibC::LPWSTR, pvreserved : Void*, pvarg : Void*, pfnenum : PFN_CRYPT_ENUM_KEYID_PROP) : LibC::BOOL
-
-  # Params # dwcertencodingtype : UInt32 [In],pszpubkeyoid : PSTR [In],ppubkeystruc : PUBLICKEYSTRUC* [In],cbpubkeystruc : UInt32 [In],dwflags : UInt32 [In],pvreserved : Void* [In],pbhash : UInt8* [In],pcbhash : UInt32* [In]
-  fun CryptCreateKeyIdentifierFromCSP(dwcertencodingtype : UInt32, pszpubkeyoid : PSTR, ppubkeystruc : PUBLICKEYSTRUC*, cbpubkeystruc : UInt32, dwflags : UInt32, pvreserved : Void*, pbhash : UInt8*, pcbhash : UInt32*) : LibC::BOOL
-
-  # Params # pconfig : CERT_CHAIN_ENGINE_CONFIG* [In],phchainengine : HCERTCHAINENGINE* [In]
-  fun CertCreateCertificateChainEngine(pconfig : CERT_CHAIN_ENGINE_CONFIG*, phchainengine : HCERTCHAINENGINE*) : LibC::BOOL
-
-  # Params # hchainengine : HCERTCHAINENGINE [In]
-  fun CertFreeCertificateChainEngine(hchainengine : HCERTCHAINENGINE) : Void
-
-  # Params # hchainengine : HCERTCHAINENGINE [In]
-  fun CertResyncCertificateChainEngine(hchainengine : HCERTCHAINENGINE) : LibC::BOOL
-
-  # Params # hchainengine : HCERTCHAINENGINE [In],pcertcontext : CERT_CONTEXT* [In],ptime : FILETIME* [In],hadditionalstore : Void* [In],pchainpara : CERT_CHAIN_PARA* [In],dwflags : UInt32 [In],pvreserved : Void* [In],ppchaincontext : CERT_CHAIN_CONTEXT** [In]
-  fun CertGetCertificateChain(hchainengine : HCERTCHAINENGINE, pcertcontext : CERT_CONTEXT*, ptime : FILETIME*, hadditionalstore : Void*, pchainpara : CERT_CHAIN_PARA*, dwflags : UInt32, pvreserved : Void*, ppchaincontext : CERT_CHAIN_CONTEXT**) : LibC::BOOL
-
-  # Params # pchaincontext : CERT_CHAIN_CONTEXT* [In]
-  fun CertFreeCertificateChain(pchaincontext : CERT_CHAIN_CONTEXT*) : Void
-
-  # Params # pchaincontext : CERT_CHAIN_CONTEXT* [In]
-  fun CertDuplicateCertificateChain(pchaincontext : CERT_CHAIN_CONTEXT*) : CERT_CHAIN_CONTEXT*
-
-  # Params # hcertstore : Void* [In],dwcertencodingtype : UInt32 [In],dwfindflags : CERT_FIND_CHAIN_IN_STORE_FLAGS [In],dwfindtype : UInt32 [In],pvfindpara : Void* [In],pprevchaincontext : CERT_CHAIN_CONTEXT* [In]
-  fun CertFindChainInStore(hcertstore : Void*, dwcertencodingtype : UInt32, dwfindflags : CERT_FIND_CHAIN_IN_STORE_FLAGS, dwfindtype : UInt32, pvfindpara : Void*, pprevchaincontext : CERT_CHAIN_CONTEXT*) : CERT_CHAIN_CONTEXT*
-
-  # Params # pszpolicyoid : PSTR [In],pchaincontext : CERT_CHAIN_CONTEXT* [In],ppolicypara : CERT_CHAIN_POLICY_PARA* [In],ppolicystatus : CERT_CHAIN_POLICY_STATUS* [In]
-  fun CertVerifyCertificateChainPolicy(pszpolicyoid : PSTR, pchaincontext : CERT_CHAIN_CONTEXT*, ppolicypara : CERT_CHAIN_POLICY_PARA*, ppolicystatus : CERT_CHAIN_POLICY_STATUS*) : LibC::BOOL
-
-  # Params # pszstring : UInt8* [In],cchstring : UInt32 [In],dwflags : CRYPT_STRING [In],pbbinary : UInt8* [In],pcbbinary : UInt32* [In],pdwskip : UInt32* [In],pdwflags : UInt32* [In]
-  fun CryptStringToBinaryA(pszstring : UInt8*, cchstring : UInt32, dwflags : CRYPT_STRING, pbbinary : UInt8*, pcbbinary : UInt32*, pdwskip : UInt32*, pdwflags : UInt32*) : LibC::BOOL
-
-  # Params # pszstring : Char* [In],cchstring : UInt32 [In],dwflags : CRYPT_STRING [In],pbbinary : UInt8* [In],pcbbinary : UInt32* [In],pdwskip : UInt32* [In],pdwflags : UInt32* [In]
-  fun CryptStringToBinaryW(pszstring : Char*, cchstring : UInt32, dwflags : CRYPT_STRING, pbbinary : UInt8*, pcbbinary : UInt32*, pdwskip : UInt32*, pdwflags : UInt32*) : LibC::BOOL
-
-  # Params # pbbinary : UInt8* [In],cbbinary : UInt32 [In],dwflags : CRYPT_STRING [In],pszstring : UInt8* [In],pcchstring : UInt32* [In]
-  fun CryptBinaryToStringA(pbbinary : UInt8*, cbbinary : UInt32, dwflags : CRYPT_STRING, pszstring : UInt8*, pcchstring : UInt32*) : LibC::BOOL
-
-  # Params # pbbinary : UInt8* [In],cbbinary : UInt32 [In],dwflags : CRYPT_STRING [In],pszstring : Char* [In],pcchstring : UInt32* [In]
-  fun CryptBinaryToStringW(pbbinary : UInt8*, cbbinary : UInt32, dwflags : CRYPT_STRING, pszstring : Char*, pcchstring : UInt32*) : LibC::BOOL
-
-  # Params # ppfx : CRYPTOAPI_BLOB* [In],szpassword : LibC::LPWSTR [In],dwflags : CRYPT_KEY_FLAGS [In]
-  fun PFXImportCertStore(ppfx : CRYPTOAPI_BLOB*, szpassword : LibC::LPWSTR, dwflags : CRYPT_KEY_FLAGS) : Void*
-
-  # Params # ppfx : CRYPTOAPI_BLOB* [In]
-  fun PFXIsPFXBlob(ppfx : CRYPTOAPI_BLOB*) : LibC::BOOL
-
-  # Params # ppfx : CRYPTOAPI_BLOB* [In],szpassword : LibC::LPWSTR [In],dwflags : UInt32 [In]
-  fun PFXVerifyPassword(ppfx : CRYPTOAPI_BLOB*, szpassword : LibC::LPWSTR, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hstore : Void* [In],ppfx : CRYPTOAPI_BLOB* [In],szpassword : LibC::LPWSTR [In],pvpara : Void* [In],dwflags : UInt32 [In]
-  fun PFXExportCertStoreEx(hstore : Void*, ppfx : CRYPTOAPI_BLOB*, szpassword : LibC::LPWSTR, pvpara : Void*, dwflags : UInt32) : LibC::BOOL
-
-  # Params # hstore : Void* [In],ppfx : CRYPTOAPI_BLOB* [In],szpassword : LibC::LPWSTR [In],dwflags : UInt32 [In]
-  fun PFXExportCertStore(hstore : Void*, ppfx : CRYPTOAPI_BLOB*, szpassword : LibC::LPWSTR, dwflags : UInt32) : LibC::BOOL
-
-  # Params # pchaincontext : CERT_CHAIN_CONTEXT* [In],dwflags : UInt32 [In],popenpara : CERT_SERVER_OCSP_RESPONSE_OPEN_PARA* [In]
-  fun CertOpenServerOcspResponse(pchaincontext : CERT_CHAIN_CONTEXT*, dwflags : UInt32, popenpara : CERT_SERVER_OCSP_RESPONSE_OPEN_PARA*) : Void*
-
-  # Params # hserverocspresponse : Void* [In]
-  fun CertAddRefServerOcspResponse(hserverocspresponse : Void*) : Void
-
-  # Params # hserverocspresponse : Void* [In],dwflags : UInt32 [In]
-  fun CertCloseServerOcspResponse(hserverocspresponse : Void*, dwflags : UInt32) : Void
-
-  # Params # hserverocspresponse : Void* [In],dwflags : UInt32 [In],pvreserved : Void* [In]
-  fun CertGetServerOcspResponseContext(hserverocspresponse : Void*, dwflags : UInt32, pvreserved : Void*) : CERT_SERVER_OCSP_RESPONSE_CONTEXT*
-
-  # Params # pserverocspresponsecontext : CERT_SERVER_OCSP_RESPONSE_CONTEXT* [In]
-  fun CertAddRefServerOcspResponseContext(pserverocspresponsecontext : CERT_SERVER_OCSP_RESPONSE_CONTEXT*) : Void
-
-  # Params # pserverocspresponsecontext : CERT_SERVER_OCSP_RESPONSE_CONTEXT* [In]
-  fun CertFreeServerOcspResponseContext(pserverocspresponsecontext : CERT_SERVER_OCSP_RESPONSE_CONTEXT*) : Void
-
-  # Params # pcertcontext : CERT_CONTEXT* [In],lpszlogoorbiometrictype : PSTR [In],dwretrievalflags : UInt32 [In],dwtimeout : UInt32 [In],dwflags : UInt32 [In],pvreserved : Void* [In],ppbdata : UInt8** [In],pcbdata : UInt32* [In],ppwszmimetype : LibC::LPWSTR* [In]
-  fun CertRetrieveLogoOrBiometricInfo(pcertcontext : CERT_CONTEXT*, lpszlogoorbiometrictype : PSTR, dwretrievalflags : UInt32, dwtimeout : UInt32, dwflags : UInt32, pvreserved : Void*, ppbdata : UInt8**, pcbdata : UInt32*, ppwszmimetype : LibC::LPWSTR*) : LibC::BOOL
-
-  # Params # pselectioncontext : Guid* [In],dwflags : UInt32 [In],pchainparameters : CERT_SELECT_CHAIN_PARA* [In],ccriteria : UInt32 [In],rgpcriteria : CERT_SELECT_CRITERIA* [In],hstore : Void* [In],pcselection : UInt32* [In],pprgpselection : CERT_CHAIN_CONTEXT*** [In]
-  fun CertSelectCertificateChains(pselectioncontext : Guid*, dwflags : UInt32, pchainparameters : CERT_SELECT_CHAIN_PARA*, ccriteria : UInt32, rgpcriteria : CERT_SELECT_CRITERIA*, hstore : Void*, pcselection : UInt32*, pprgpselection : CERT_CHAIN_CONTEXT***) : LibC::BOOL
-
-  # Params # prgpselection : CERT_CHAIN_CONTEXT** [In]
-  fun CertFreeCertificateChainList(prgpselection : CERT_CHAIN_CONTEXT**) : Void
-
-  # Params # wszurl : LibC::LPWSTR [In],dwretrievalflags : UInt32 [In],dwtimeout : UInt32 [In],pszhashid : PSTR [In],ppara : CRYPT_TIMESTAMP_PARA* [In],pbdata : UInt8* [In],cbdata : UInt32 [In],pptscontext : CRYPT_TIMESTAMP_CONTEXT** [In],pptssigner : CERT_CONTEXT** [In],phstore : Void** [In]
-  fun CryptRetrieveTimeStamp(wszurl : LibC::LPWSTR, dwretrievalflags : UInt32, dwtimeout : UInt32, pszhashid : PSTR, ppara : CRYPT_TIMESTAMP_PARA*, pbdata : UInt8*, cbdata : UInt32, pptscontext : CRYPT_TIMESTAMP_CONTEXT**, pptssigner : CERT_CONTEXT**, phstore : Void**) : LibC::BOOL
-
-  # Params # pbtscontentinfo : UInt8* [In],cbtscontentinfo : UInt32 [In],pbdata : UInt8* [In],cbdata : UInt32 [In],hadditionalstore : Void* [In],pptscontext : CRYPT_TIMESTAMP_CONTEXT** [In],pptssigner : CERT_CONTEXT** [In],phstore : Void** [In]
-  fun CryptVerifyTimeStampSignature(pbtscontentinfo : UInt8*, cbtscontentinfo : UInt32, pbdata : UInt8*, cbdata : UInt32, hadditionalstore : Void*, pptscontext : CRYPT_TIMESTAMP_CONTEXT**, pptssigner : CERT_CONTEXT**, phstore : Void**) : LibC::BOOL
-
-  # Params # dwhashusetype : UInt32 [In],pwszcnghashalgid : LibC::LPWSTR [In],dwchainflags : UInt32 [In],psignerchaincontext : CERT_CHAIN_CONTEXT* [In],ptimestamp : FILETIME* [In],pwszfilename : LibC::LPWSTR [In]
-  fun CertIsWeakHash(dwhashusetype : UInt32, pwszcnghashalgid : LibC::LPWSTR, dwchainflags : UInt32, psignerchaincontext : CERT_CHAIN_CONTEXT*, ptimestamp : FILETIME*, pwszfilename : LibC::LPWSTR) : LibC::BOOL
-
-  # Params # pdatain : CRYPTOAPI_BLOB* [In],szdatadescr : LibC::LPWSTR [In],poptionalentropy : CRYPTOAPI_BLOB* [In],pvreserved : Void* [In],ppromptstruct : CRYPTPROTECT_PROMPTSTRUCT* [In],dwflags : UInt32 [In],pdataout : CRYPTOAPI_BLOB* [In]
-  fun CryptProtectData(pdatain : CRYPTOAPI_BLOB*, szdatadescr : LibC::LPWSTR, poptionalentropy : CRYPTOAPI_BLOB*, pvreserved : Void*, ppromptstruct : CRYPTPROTECT_PROMPTSTRUCT*, dwflags : UInt32, pdataout : CRYPTOAPI_BLOB*) : LibC::BOOL
-
-  # Params # pdatain : CRYPTOAPI_BLOB* [In],ppszdatadescr : LibC::LPWSTR* [In],poptionalentropy : CRYPTOAPI_BLOB* [In],pvreserved : Void* [In],ppromptstruct : CRYPTPROTECT_PROMPTSTRUCT* [In],dwflags : UInt32 [In],pdataout : CRYPTOAPI_BLOB* [In]
-  fun CryptUnprotectData(pdatain : CRYPTOAPI_BLOB*, ppszdatadescr : LibC::LPWSTR*, poptionalentropy : CRYPTOAPI_BLOB*, pvreserved : Void*, ppromptstruct : CRYPTPROTECT_PROMPTSTRUCT*, dwflags : UInt32, pdataout : CRYPTOAPI_BLOB*) : LibC::BOOL
-
-  # Params # poldsid : PSID [In],pwszoldpassword : LibC::LPWSTR [In],dwflags : UInt32 [In],pdwsuccesscount : UInt32* [In],pdwfailurecount : UInt32* [In]
-  fun CryptUpdateProtectedState(poldsid : PSID, pwszoldpassword : LibC::LPWSTR, dwflags : UInt32, pdwsuccesscount : UInt32*, pdwfailurecount : UInt32*) : LibC::BOOL
-
-  # Params # pdatain : Void* [In],cbdatain : UInt32 [In],dwflags : UInt32 [In]
-  fun CryptProtectMemory(pdatain : Void*, cbdatain : UInt32, dwflags : UInt32) : LibC::BOOL
-
-  # Params # pdatain : Void* [In],cbdatain : UInt32 [In],dwflags : UInt32 [In]
-  fun CryptUnprotectMemory(pdatain : Void*, cbdatain : UInt32, dwflags : UInt32) : LibC::BOOL
-
-  # Params # pwszname : LibC::LPWSTR [In],pwszdescriptorstring : LibC::LPWSTR [In],dwflags : UInt32 [In]
-  fun NCryptRegisterProtectionDescriptorName(pwszname : LibC::LPWSTR, pwszdescriptorstring : LibC::LPWSTR, dwflags : UInt32) : Int32
-
-  # Params # pwszname : LibC::LPWSTR [In],pwszdescriptorstring : Char* [In],pcdescriptorstring : LibC::UINT_PTR* [In],dwflags : UInt32 [In]
-  fun NCryptQueryProtectionDescriptorName(pwszname : LibC::LPWSTR, pwszdescriptorstring : Char*, pcdescriptorstring : LibC::UINT_PTR*, dwflags : UInt32) : Int32
-
-  # Params # pwszdescriptorstring : LibC::LPWSTR [In],dwflags : UInt32 [In],phdescriptor : NCRYPT_DESCRIPTOR_HANDLE* [In]
-  fun NCryptCreateProtectionDescriptor(pwszdescriptorstring : LibC::LPWSTR, dwflags : UInt32, phdescriptor : NCRYPT_DESCRIPTOR_HANDLE*) : Int32
-
-  # Params # hdescriptor : NCRYPT_DESCRIPTOR_HANDLE [In]
-  fun NCryptCloseProtectionDescriptor(hdescriptor : NCRYPT_DESCRIPTOR_HANDLE) : Int32
-
-  # Params # hdescriptor : NCRYPT_DESCRIPTOR_HANDLE [In],pmempara : NCRYPT_ALLOC_PARA* [In],dwinfotype : UInt32 [In],ppvinfo : Void** [In]
-  fun NCryptGetProtectionDescriptorInfo(hdescriptor : NCRYPT_DESCRIPTOR_HANDLE, pmempara : NCRYPT_ALLOC_PARA*, dwinfotype : UInt32, ppvinfo : Void**) : Int32
-
-  # Params # hdescriptor : NCRYPT_DESCRIPTOR_HANDLE [In],dwflags : UInt32 [In],pbdata : UInt8* [In],cbdata : UInt32 [In],pmempara : NCRYPT_ALLOC_PARA* [In],hwnd : LibC::HANDLE [In],ppbprotectedblob : UInt8** [In],pcbprotectedblob : UInt32* [In]
-  fun NCryptProtectSecret(hdescriptor : NCRYPT_DESCRIPTOR_HANDLE, dwflags : UInt32, pbdata : UInt8*, cbdata : UInt32, pmempara : NCRYPT_ALLOC_PARA*, hwnd : LibC::HANDLE, ppbprotectedblob : UInt8**, pcbprotectedblob : UInt32*) : Int32
-
-  # Params # phdescriptor : NCRYPT_DESCRIPTOR_HANDLE* [In],dwflags : NCRYPT_FLAGS [In],pbprotectedblob : UInt8* [In],cbprotectedblob : UInt32 [In],pmempara : NCRYPT_ALLOC_PARA* [In],hwnd : LibC::HANDLE [In],ppbdata : UInt8** [In],pcbdata : UInt32* [In]
-  fun NCryptUnprotectSecret(phdescriptor : NCRYPT_DESCRIPTOR_HANDLE*, dwflags : NCRYPT_FLAGS, pbprotectedblob : UInt8*, cbprotectedblob : UInt32, pmempara : NCRYPT_ALLOC_PARA*, hwnd : LibC::HANDLE, ppbdata : UInt8**, pcbdata : UInt32*) : Int32
-
-  # Params # hdescriptor : NCRYPT_DESCRIPTOR_HANDLE [In],dwflags : UInt32 [In],hwnd : LibC::HANDLE [In],pstreaminfo : NCRYPT_PROTECT_STREAM_INFO* [In],phstream : NCRYPT_STREAM_HANDLE* [In]
-  fun NCryptStreamOpenToProtect(hdescriptor : NCRYPT_DESCRIPTOR_HANDLE, dwflags : UInt32, hwnd : LibC::HANDLE, pstreaminfo : NCRYPT_PROTECT_STREAM_INFO*, phstream : NCRYPT_STREAM_HANDLE*) : Int32
-
-  # Params # pstreaminfo : NCRYPT_PROTECT_STREAM_INFO* [In],dwflags : UInt32 [In],hwnd : LibC::HANDLE [In],phstream : NCRYPT_STREAM_HANDLE* [In]
-  fun NCryptStreamOpenToUnprotect(pstreaminfo : NCRYPT_PROTECT_STREAM_INFO*, dwflags : UInt32, hwnd : LibC::HANDLE, phstream : NCRYPT_STREAM_HANDLE*) : Int32
-
-  # Params # pstreaminfo : NCRYPT_PROTECT_STREAM_INFO_EX* [In],dwflags : UInt32 [In],hwnd : LibC::HANDLE [In],phstream : NCRYPT_STREAM_HANDLE* [In]
-  fun NCryptStreamOpenToUnprotectEx(pstreaminfo : NCRYPT_PROTECT_STREAM_INFO_EX*, dwflags : UInt32, hwnd : LibC::HANDLE, phstream : NCRYPT_STREAM_HANDLE*) : Int32
-
-  # Params # hstream : NCRYPT_STREAM_HANDLE [In],pbdata : UInt8* [In],cbdata : LibC::UINT_PTR [In],ffinal : LibC::BOOL [In]
-  fun NCryptStreamUpdate(hstream : NCRYPT_STREAM_HANDLE, pbdata : UInt8*, cbdata : LibC::UINT_PTR, ffinal : LibC::BOOL) : Int32
-
-  # Params # hstream : NCRYPT_STREAM_HANDLE [In]
-  fun NCryptStreamClose(hstream : NCRYPT_STREAM_HANDLE) : Int32
-
-  # Params # hcryptxml : Void* [In]
-  fun CryptXmlClose(hcryptxml : Void*) : HRESULT
-
-  # Params # ppconfig : CRYPT_XML_TRANSFORM_CHAIN_CONFIG** [In]
-  fun CryptXmlGetTransforms(ppconfig : CRYPT_XML_TRANSFORM_CHAIN_CONFIG**) : HRESULT
-
-  # Params # pconfig : CRYPT_XML_TRANSFORM_CHAIN_CONFIG* [In],dwflags : CRYPT_XML_FLAGS [In],wszid : LibC::LPWSTR [In],rgproperty : CRYPT_XML_PROPERTY* [In],cproperty : UInt32 [In],pencoded : CRYPT_XML_BLOB* [In],phsignature : Void** [In]
-  fun CryptXmlOpenToEncode(pconfig : CRYPT_XML_TRANSFORM_CHAIN_CONFIG*, dwflags : CRYPT_XML_FLAGS, wszid : LibC::LPWSTR, rgproperty : CRYPT_XML_PROPERTY*, cproperty : UInt32, pencoded : CRYPT_XML_BLOB*, phsignature : Void**) : HRESULT
-
-  # Params # pconfig : CRYPT_XML_TRANSFORM_CHAIN_CONFIG* [In],dwflags : CRYPT_XML_FLAGS [In],rgproperty : CRYPT_XML_PROPERTY* [In],cproperty : UInt32 [In],pencoded : CRYPT_XML_BLOB* [In],phcryptxml : Void** [In]
-  fun CryptXmlOpenToDecode(pconfig : CRYPT_XML_TRANSFORM_CHAIN_CONFIG*, dwflags : CRYPT_XML_FLAGS, rgproperty : CRYPT_XML_PROPERTY*, cproperty : UInt32, pencoded : CRYPT_XML_BLOB*, phcryptxml : Void**) : HRESULT
-
-  # Params # hsignatureorobject : Void* [In],dwflags : UInt32 [In],rgproperty : CRYPT_XML_PROPERTY* [In],cproperty : UInt32 [In],pencoded : CRYPT_XML_BLOB* [In],ppobject : CRYPT_XML_OBJECT** [In]
-  fun CryptXmlAddObject(hsignatureorobject : Void*, dwflags : UInt32, rgproperty : CRYPT_XML_PROPERTY*, cproperty : UInt32, pencoded : CRYPT_XML_BLOB*, ppobject : CRYPT_XML_OBJECT**) : HRESULT
-
-  # Params # hcryptxml : Void* [In],dwflags : UInt32 [In],wszid : LibC::LPWSTR [In],wszuri : LibC::LPWSTR [In],wsztype : LibC::LPWSTR [In],pdigestmethod : CRYPT_XML_ALGORITHM* [In],ctransform : UInt32 [In],rgtransform : CRYPT_XML_ALGORITHM* [In],phreference : Void** [In]
-  fun CryptXmlCreateReference(hcryptxml : Void*, dwflags : UInt32, wszid : LibC::LPWSTR, wszuri : LibC::LPWSTR, wsztype : LibC::LPWSTR, pdigestmethod : CRYPT_XML_ALGORITHM*, ctransform : UInt32, rgtransform : CRYPT_XML_ALGORITHM*, phreference : Void**) : HRESULT
-
-  # Params # hreference : Void* [In],dwflags : UInt32 [In],pdataproviderin : CRYPT_XML_DATA_PROVIDER* [In]
-  fun CryptXmlDigestReference(hreference : Void*, dwflags : UInt32, pdataproviderin : CRYPT_XML_DATA_PROVIDER*) : HRESULT
-
-  # Params # hsignature : Void* [In],pbsecret : UInt8* [In],cbsecret : UInt32 [In]
-  fun CryptXmlSetHMACSecret(hsignature : Void*, pbsecret : UInt8*, cbsecret : UInt32) : HRESULT
-
-  # Params # hsignature : Void* [In],hkey : LibC::UINT_PTR [In],dwkeyspec : CERT_KEY_SPEC [In],dwflags : CRYPT_XML_FLAGS [In],dwkeyinfospec : CRYPT_XML_KEYINFO_SPEC [In],pvkeyinfospec : Void* [In],psignaturemethod : CRYPT_XML_ALGORITHM* [In],pcanonicalization : CRYPT_XML_ALGORITHM* [In]
-  fun CryptXmlSign(hsignature : Void*, hkey : LibC::UINT_PTR, dwkeyspec : CERT_KEY_SPEC, dwflags : CRYPT_XML_FLAGS, dwkeyinfospec : CRYPT_XML_KEYINFO_SPEC, pvkeyinfospec : Void*, psignaturemethod : CRYPT_XML_ALGORITHM*, pcanonicalization : CRYPT_XML_ALGORITHM*) : HRESULT
-
-  # Params # dwflags : CRYPT_XML_FLAGS [In],pkeyvalue : CRYPT_XML_KEY_VALUE* [In],phkey : BCRYPT_KEY_HANDLE* [In]
-  fun CryptXmlImportPublicKey(dwflags : CRYPT_XML_FLAGS, pkeyvalue : CRYPT_XML_KEY_VALUE*, phkey : BCRYPT_KEY_HANDLE*) : HRESULT
-
-  # Params # hsignature : Void* [In],hkey : BCRYPT_KEY_HANDLE [In],dwflags : CRYPT_XML_FLAGS [In]
-  fun CryptXmlVerifySignature(hsignature : Void*, hkey : BCRYPT_KEY_HANDLE, dwflags : CRYPT_XML_FLAGS) : HRESULT
-
-  # Params # hcryptxml : Void* [In],ppstruct : CRYPT_XML_DOC_CTXT** [In]
-  fun CryptXmlGetDocContext(hcryptxml : Void*, ppstruct : CRYPT_XML_DOC_CTXT**) : HRESULT
-
-  # Params # hcryptxml : Void* [In],ppstruct : CRYPT_XML_SIGNATURE** [In]
-  fun CryptXmlGetSignature(hcryptxml : Void*, ppstruct : CRYPT_XML_SIGNATURE**) : HRESULT
-
-  # Params # hcryptxml : Void* [In],ppstruct : CRYPT_XML_REFERENCE** [In]
-  fun CryptXmlGetReference(hcryptxml : Void*, ppstruct : CRYPT_XML_REFERENCE**) : HRESULT
-
-  # Params # hcryptxml : Void* [In],pstatus : CRYPT_XML_STATUS* [In]
-  fun CryptXmlGetStatus(hcryptxml : Void*, pstatus : CRYPT_XML_STATUS*) : HRESULT
-
-  # Params # hcryptxml : Void* [In],dwcharset : CRYPT_XML_CHARSET [In],rgproperty : CRYPT_XML_PROPERTY* [In],cproperty : UInt32 [In],pvcallbackstate : Void* [In],pfnwrite : PFN_CRYPT_XML_WRITE_CALLBACK [In]
-  fun CryptXmlEncode(hcryptxml : Void*, dwcharset : CRYPT_XML_CHARSET, rgproperty : CRYPT_XML_PROPERTY*, cproperty : UInt32, pvcallbackstate : Void*, pfnwrite : PFN_CRYPT_XML_WRITE_CALLBACK) : HRESULT
-
-  # Params # pxmlalgorithm : CRYPT_XML_ALGORITHM* [In],dwflags : CRYPT_XML_FLAGS [In],ppalginfo : CRYPT_XML_ALGORITHM_INFO** [In]
-  fun CryptXmlGetAlgorithmInfo(pxmlalgorithm : CRYPT_XML_ALGORITHM*, dwflags : CRYPT_XML_FLAGS, ppalginfo : CRYPT_XML_ALGORITHM_INFO**) : HRESULT
-
-  # Params # dwfindbytype : UInt32 [In],pvfindby : Void* [In],dwgroupid : UInt32 [In],dwflags : UInt32 [In]
-  fun CryptXmlFindAlgorithmInfo(dwfindbytype : UInt32, pvfindby : Void*, dwgroupid : UInt32, dwflags : UInt32) : CRYPT_XML_ALGORITHM_INFO*
-
-  # Params # dwgroupid : UInt32 [In],dwflags : UInt32 [In],pvarg : Void* [In],pfnenumalginfo : PFN_CRYPT_XML_ENUM_ALG_INFO [In]
-  fun CryptXmlEnumAlgorithmInfo(dwgroupid : UInt32, dwflags : UInt32, pvarg : Void*, pfnenumalginfo : PFN_CRYPT_XML_ENUM_ALG_INFO) : HRESULT
-
-  # Params # cpolicychain : UInt32 [In],ppolicychain : CRYPTO_POLICY_ELEMENT* [In],securitytoken : GENERIC_XML_TOKEN** [In],phprooftokencrypto : INFORMATIONCARD_CRYPTO_HANDLE** [In]
-  fun GetToken(cpolicychain : UInt32, ppolicychain : CRYPTO_POLICY_ELEMENT*, securitytoken : GENERIC_XML_TOKEN**, phprooftokencrypto : INFORMATIONCARD_CRYPTO_HANDLE**) : HRESULT
-
-  # Params # 
-  fun ManageCardSpace : HRESULT
-
-  # Params # filename : LibC::LPWSTR [In]
-  fun ImportInformationCard(filename : LibC::LPWSTR) : HRESULT
-
-  # Params # hcrypto : INFORMATIONCARD_CRYPTO_HANDLE* [In],foaep : LibC::BOOL [In],cbindata : UInt32 [In],pindata : UInt8* [In],pcboutdata : UInt32* [In],ppoutdata : UInt8** [In]
-  fun Encrypt(hcrypto : INFORMATIONCARD_CRYPTO_HANDLE*, foaep : LibC::BOOL, cbindata : UInt32, pindata : UInt8*, pcboutdata : UInt32*, ppoutdata : UInt8**) : HRESULT
-
-  # Params # hcrypto : INFORMATIONCARD_CRYPTO_HANDLE* [In],foaep : LibC::BOOL [In],cbindata : UInt32 [In],pindata : UInt8* [In],pcboutdata : UInt32* [In],ppoutdata : UInt8** [In]
-  fun Decrypt(hcrypto : INFORMATIONCARD_CRYPTO_HANDLE*, foaep : LibC::BOOL, cbindata : UInt32, pindata : UInt8*, pcboutdata : UInt32*, ppoutdata : UInt8**) : HRESULT
-
-  # Params # hcrypto : INFORMATIONCARD_CRYPTO_HANDLE* [In],cbhash : UInt32 [In],phash : UInt8* [In],hashalgoid : LibC::LPWSTR [In],pcbsig : UInt32* [In],ppsig : UInt8** [In]
-  fun SignHash(hcrypto : INFORMATIONCARD_CRYPTO_HANDLE*, cbhash : UInt32, phash : UInt8*, hashalgoid : LibC::LPWSTR, pcbsig : UInt32*, ppsig : UInt8**) : HRESULT
-
-  # Params # hcrypto : INFORMATIONCARD_CRYPTO_HANDLE* [In],cbhash : UInt32 [In],phash : UInt8* [In],hashalgoid : LibC::LPWSTR [In],cbsig : UInt32 [In],psig : UInt8* [In],pfverified : LibC::BOOL* [In]
-  fun VerifyHash(hcrypto : INFORMATIONCARD_CRYPTO_HANDLE*, cbhash : UInt32, phash : UInt8*, hashalgoid : LibC::LPWSTR, cbsig : UInt32, psig : UInt8*, pfverified : LibC::BOOL*) : HRESULT
-
-  # Params # hsymmetriccrypto : INFORMATIONCARD_CRYPTO_HANDLE* [In],mode : UInt32 [In],padding : PaddingMode [In],feedbacksize : UInt32 [In],direction : Direction [In],cbiv : UInt32 [In],piv : UInt8* [In],pphtransform : INFORMATIONCARD_CRYPTO_HANDLE** [In]
-  fun GetCryptoTransform(hsymmetriccrypto : INFORMATIONCARD_CRYPTO_HANDLE*, mode : UInt32, padding : PaddingMode, feedbacksize : UInt32, direction : Direction, cbiv : UInt32, piv : UInt8*, pphtransform : INFORMATIONCARD_CRYPTO_HANDLE**) : HRESULT
-
-  # Params # hsymmetriccrypto : INFORMATIONCARD_CRYPTO_HANDLE* [In],pphhash : INFORMATIONCARD_CRYPTO_HANDLE** [In]
-  fun GetKeyedHash(hsymmetriccrypto : INFORMATIONCARD_CRYPTO_HANDLE*, pphhash : INFORMATIONCARD_CRYPTO_HANDLE**) : HRESULT
-
-  # Params # hcrypto : INFORMATIONCARD_CRYPTO_HANDLE* [In],cbindata : UInt32 [In],pindata : UInt8* [In],pcboutdata : UInt32* [In],ppoutdata : UInt8** [In]
-  fun TransformBlock(hcrypto : INFORMATIONCARD_CRYPTO_HANDLE*, cbindata : UInt32, pindata : UInt8*, pcboutdata : UInt32*, ppoutdata : UInt8**) : HRESULT
-
-  # Params # hcrypto : INFORMATIONCARD_CRYPTO_HANDLE* [In],cbindata : UInt32 [In],pindata : UInt8* [In],pcboutdata : UInt32* [In],ppoutdata : UInt8** [In]
-  fun TransformFinalBlock(hcrypto : INFORMATIONCARD_CRYPTO_HANDLE*, cbindata : UInt32, pindata : UInt8*, pcboutdata : UInt32*, ppoutdata : UInt8**) : HRESULT
-
-  # Params # hcrypto : INFORMATIONCARD_CRYPTO_HANDLE* [In],cbindata : UInt32 [In],pindata : UInt8* [In]
-  fun HashCore(hcrypto : INFORMATIONCARD_CRYPTO_HANDLE*, cbindata : UInt32, pindata : UInt8*) : HRESULT
-
-  # Params # hcrypto : INFORMATIONCARD_CRYPTO_HANDLE* [In],cbindata : UInt32 [In],pindata : UInt8* [In],pcboutdata : UInt32* [In],ppoutdata : UInt8** [In]
-  fun HashFinal(hcrypto : INFORMATIONCARD_CRYPTO_HANDLE*, cbindata : UInt32, pindata : UInt8*, pcboutdata : UInt32*, ppoutdata : UInt8**) : HRESULT
-
-  # Params # pallocmemory : GENERIC_XML_TOKEN* [In]
-  fun FreeToken(pallocmemory : GENERIC_XML_TOKEN*) : LibC::BOOL
-
-  # Params # hcrypto : INFORMATIONCARD_CRYPTO_HANDLE* [In]
-  fun CloseCryptoHandle(hcrypto : INFORMATIONCARD_CRYPTO_HANDLE*) : HRESULT
-
-  # Params # hcrypto : INFORMATIONCARD_CRYPTO_HANDLE* [In],cblabel : UInt32 [In],plabel : UInt8* [In],cbnonce : UInt32 [In],pnonce : UInt8* [In],derivedkeylength : UInt32 [In],offset : UInt32 [In],algid : LibC::LPWSTR [In],pcbkey : UInt32* [In],ppkey : UInt8** [In]
-  fun GenerateDerivedKey(hcrypto : INFORMATIONCARD_CRYPTO_HANDLE*, cblabel : UInt32, plabel : UInt8*, cbnonce : UInt32, pnonce : UInt8*, derivedkeylength : UInt32, offset : UInt32, algid : LibC::LPWSTR, pcbkey : UInt32*, ppkey : UInt8**) : HRESULT
-
-  # Params # dwparamtype : UInt32 [In],pparam : Void* [In],pcbtoken : UInt32* [In],pptoken : UInt8** [In]
-  fun GetBrowserToken(dwparamtype : UInt32, pparam : Void*, pcbtoken : UInt32*, pptoken : UInt8**) : HRESULT
-end
-struct LibWin32::ICertSrvSetupKeyInformation
-  def query_interface(this : ICertSrvSetupKeyInformation*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ICertSrvSetupKeyInformation*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ICertSrvSetupKeyInformation*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ICertSrvSetupKeyInformation*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ICertSrvSetupKeyInformation*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ICertSrvSetupKeyInformation*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ICertSrvSetupKeyInformation*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_provider_name(this : ICertSrvSetupKeyInformation*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_provider_name.call(this, pval)
-  end
-  def put_provider_name(this : ICertSrvSetupKeyInformation*, bstrval : UInt8*) : HRESULT
-    @lpVtbl.value.put_provider_name.call(this, bstrval)
-  end
-  def get_length(this : ICertSrvSetupKeyInformation*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_length.call(this, pval)
-  end
-  def put_length(this : ICertSrvSetupKeyInformation*, lval : Int32) : HRESULT
-    @lpVtbl.value.put_length.call(this, lval)
-  end
-  def get_existing(this : ICertSrvSetupKeyInformation*, pval : Int16*) : HRESULT
-    @lpVtbl.value.get_existing.call(this, pval)
-  end
-  def put_existing(this : ICertSrvSetupKeyInformation*, bval : Int16) : HRESULT
-    @lpVtbl.value.put_existing.call(this, bval)
-  end
-  def get_container_name(this : ICertSrvSetupKeyInformation*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_container_name.call(this, pval)
-  end
-  def put_container_name(this : ICertSrvSetupKeyInformation*, bstrval : UInt8*) : HRESULT
-    @lpVtbl.value.put_container_name.call(this, bstrval)
-  end
-  def get_hash_algorithm(this : ICertSrvSetupKeyInformation*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_hash_algorithm.call(this, pval)
-  end
-  def put_hash_algorithm(this : ICertSrvSetupKeyInformation*, bstrval : UInt8*) : HRESULT
-    @lpVtbl.value.put_hash_algorithm.call(this, bstrval)
-  end
-  def get_existing_ca_certificate(this : ICertSrvSetupKeyInformation*, pval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_existing_ca_certificate.call(this, pval)
-  end
-  def put_existing_ca_certificate(this : ICertSrvSetupKeyInformation*, varval : VARIANT) : HRESULT
-    @lpVtbl.value.put_existing_ca_certificate.call(this, varval)
-  end
-end
-struct LibWin32::ICertSrvSetupKeyInformationCollection
-  def query_interface(this : ICertSrvSetupKeyInformationCollection*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ICertSrvSetupKeyInformationCollection*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ICertSrvSetupKeyInformationCollection*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ICertSrvSetupKeyInformationCollection*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ICertSrvSetupKeyInformationCollection*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ICertSrvSetupKeyInformationCollection*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ICertSrvSetupKeyInformationCollection*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get__new_enum(this : ICertSrvSetupKeyInformationCollection*, ppval : IUnknown*) : HRESULT
-    @lpVtbl.value.get__new_enum.call(this, ppval)
-  end
-  def get_item(this : ICertSrvSetupKeyInformationCollection*, index : Int32, pval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_item.call(this, index, pval)
-  end
-  def get_count(this : ICertSrvSetupKeyInformationCollection*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_count.call(this, pval)
-  end
-  def add(this : ICertSrvSetupKeyInformationCollection*, pikeyinformation : ICertSrvSetupKeyInformation) : HRESULT
-    @lpVtbl.value.add.call(this, pikeyinformation)
-  end
-end
-struct LibWin32::ICertSrvSetup
-  def query_interface(this : ICertSrvSetup*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ICertSrvSetup*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ICertSrvSetup*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ICertSrvSetup*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ICertSrvSetup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ICertSrvSetup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ICertSrvSetup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_ca_error_id(this : ICertSrvSetup*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_ca_error_id.call(this, pval)
-  end
-  def get_ca_error_string(this : ICertSrvSetup*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_ca_error_string.call(this, pval)
-  end
-  def initialize_defaults(this : ICertSrvSetup*, bserver : Int16, bclient : Int16) : HRESULT
-    @lpVtbl.value.initialize_defaults.call(this, bserver, bclient)
-  end
-  def get_ca_setup_property(this : ICertSrvSetup*, propertyid : CASetupProperty, ppropertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_ca_setup_property.call(this, propertyid, ppropertyvalue)
-  end
-  def set_ca_setup_property(this : ICertSrvSetup*, propertyid : CASetupProperty, ppropertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.set_ca_setup_property.call(this, propertyid, ppropertyvalue)
-  end
-  def is_property_editable(this : ICertSrvSetup*, propertyid : CASetupProperty, pbeditable : Int16*) : HRESULT
-    @lpVtbl.value.is_property_editable.call(this, propertyid, pbeditable)
-  end
-  def get_supported_ca_types(this : ICertSrvSetup*, pcatypes : VARIANT*) : HRESULT
-    @lpVtbl.value.get_supported_ca_types.call(this, pcatypes)
-  end
-  def get_provider_name_list(this : ICertSrvSetup*, pval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_provider_name_list.call(this, pval)
-  end
-  def get_key_length_list(this : ICertSrvSetup*, bstrprovidername : UInt8*, pval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_key_length_list.call(this, bstrprovidername, pval)
-  end
-  def get_hash_algorithm_list(this : ICertSrvSetup*, bstrprovidername : UInt8*, pval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_hash_algorithm_list.call(this, bstrprovidername, pval)
-  end
-  def get_private_key_container_list(this : ICertSrvSetup*, bstrprovidername : UInt8*, pval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_private_key_container_list.call(this, bstrprovidername, pval)
-  end
-  def get_existing_ca_certificates(this : ICertSrvSetup*, ppval : ICertSrvSetupKeyInformationCollection*) : HRESULT
-    @lpVtbl.value.get_existing_ca_certificates.call(this, ppval)
-  end
-  def ca_import_pfx(this : ICertSrvSetup*, bstrfilename : UInt8*, bstrpasswd : UInt8*, boverwriteexistingkey : Int16, ppval : ICertSrvSetupKeyInformation*) : HRESULT
-    @lpVtbl.value.ca_import_pfx.call(this, bstrfilename, bstrpasswd, boverwriteexistingkey, ppval)
-  end
-  def set_ca_distinguished_name(this : ICertSrvSetup*, bstrcadn : UInt8*, bignoreunicode : Int16, boverwriteexistingkey : Int16, boverwriteexistingcainds : Int16) : HRESULT
-    @lpVtbl.value.set_ca_distinguished_name.call(this, bstrcadn, bignoreunicode, boverwriteexistingkey, boverwriteexistingcainds)
-  end
-  def set_database_information(this : ICertSrvSetup*, bstrdbdirectory : UInt8*, bstrlogdirectory : UInt8*, bstrsharedfolder : UInt8*, bforceoverwrite : Int16) : HRESULT
-    @lpVtbl.value.set_database_information.call(this, bstrdbdirectory, bstrlogdirectory, bstrsharedfolder, bforceoverwrite)
-  end
-  def set_parent_ca_information(this : ICertSrvSetup*, bstrcaconfiguration : UInt8*) : HRESULT
-    @lpVtbl.value.set_parent_ca_information.call(this, bstrcaconfiguration)
-  end
-  def set_web_ca_information(this : ICertSrvSetup*, bstrcaconfiguration : UInt8*) : HRESULT
-    @lpVtbl.value.set_web_ca_information.call(this, bstrcaconfiguration)
-  end
-  def install(this : ICertSrvSetup*) : HRESULT
-    @lpVtbl.value.install.call(this)
-  end
-  def pre_un_install(this : ICertSrvSetup*, bclientonly : Int16) : HRESULT
-    @lpVtbl.value.pre_un_install.call(this, bclientonly)
-  end
-  def post_un_install(this : ICertSrvSetup*) : HRESULT
-    @lpVtbl.value.post_un_install.call(this)
-  end
-end
-struct LibWin32::IMSCEPSetup
-  def query_interface(this : IMSCEPSetup*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IMSCEPSetup*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IMSCEPSetup*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IMSCEPSetup*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IMSCEPSetup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IMSCEPSetup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IMSCEPSetup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_mscep_error_id(this : IMSCEPSetup*, pval : Int32*) : HRESULT
-    @lpVtbl.value.get_mscep_error_id.call(this, pval)
-  end
-  def get_mscep_error_string(this : IMSCEPSetup*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_mscep_error_string.call(this, pval)
-  end
-  def initialize_defaults(this : IMSCEPSetup*) : HRESULT
-    @lpVtbl.value.initialize_defaults.call(this)
-  end
-  def get_mscep_setup_property(this : IMSCEPSetup*, propertyid : MSCEPSetupProperty, pval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_mscep_setup_property.call(this, propertyid, pval)
-  end
-  def set_mscep_setup_property(this : IMSCEPSetup*, propertyid : MSCEPSetupProperty, ppropertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.set_mscep_setup_property.call(this, propertyid, ppropertyvalue)
-  end
-  def set_account_information(this : IMSCEPSetup*, bstrusername : UInt8*, bstrpassword : UInt8*) : HRESULT
-    @lpVtbl.value.set_account_information.call(this, bstrusername, bstrpassword)
-  end
-  def is_mscep_store_empty(this : IMSCEPSetup*, pbempty : Int16*) : HRESULT
-    @lpVtbl.value.is_mscep_store_empty.call(this, pbempty)
-  end
-  def get_provider_name_list(this : IMSCEPSetup*, bexchange : Int16, pval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_provider_name_list.call(this, bexchange, pval)
-  end
-  def get_key_length_list(this : IMSCEPSetup*, bexchange : Int16, bstrprovidername : UInt8*, pval : VARIANT*) : HRESULT
-    @lpVtbl.value.get_key_length_list.call(this, bexchange, bstrprovidername, pval)
-  end
-  def install(this : IMSCEPSetup*) : HRESULT
-    @lpVtbl.value.install.call(this)
-  end
-  def pre_un_install(this : IMSCEPSetup*) : HRESULT
-    @lpVtbl.value.pre_un_install.call(this)
-  end
-  def post_un_install(this : IMSCEPSetup*) : HRESULT
-    @lpVtbl.value.post_un_install.call(this)
-  end
-end
-struct LibWin32::ICertificateEnrollmentServerSetup
-  def query_interface(this : ICertificateEnrollmentServerSetup*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ICertificateEnrollmentServerSetup*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ICertificateEnrollmentServerSetup*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ICertificateEnrollmentServerSetup*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ICertificateEnrollmentServerSetup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ICertificateEnrollmentServerSetup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ICertificateEnrollmentServerSetup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_error_string(this : ICertificateEnrollmentServerSetup*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_error_string.call(this, pval)
-  end
-  def initialize_install_defaults(this : ICertificateEnrollmentServerSetup*) : HRESULT
-    @lpVtbl.value.initialize_install_defaults.call(this)
-  end
-  def get_property(this : ICertificateEnrollmentServerSetup*, propertyid : CESSetupProperty, ppropertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_property.call(this, propertyid, ppropertyvalue)
-  end
-  def set_property(this : ICertificateEnrollmentServerSetup*, propertyid : CESSetupProperty, ppropertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.set_property.call(this, propertyid, ppropertyvalue)
-  end
-  def set_application_pool_credentials(this : ICertificateEnrollmentServerSetup*, bstrusername : UInt8*, bstrpassword : UInt8*) : HRESULT
-    @lpVtbl.value.set_application_pool_credentials.call(this, bstrusername, bstrpassword)
-  end
-  def install(this : ICertificateEnrollmentServerSetup*) : HRESULT
-    @lpVtbl.value.install.call(this)
-  end
-  def un_install(this : ICertificateEnrollmentServerSetup*, pcaconfig : VARIANT*, pauthentication : VARIANT*) : HRESULT
-    @lpVtbl.value.un_install.call(this, pcaconfig, pauthentication)
-  end
-end
-struct LibWin32::ICertificateEnrollmentPolicyServerSetup
-  def query_interface(this : ICertificateEnrollmentPolicyServerSetup*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ICertificateEnrollmentPolicyServerSetup*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ICertificateEnrollmentPolicyServerSetup*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ICertificateEnrollmentPolicyServerSetup*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ICertificateEnrollmentPolicyServerSetup*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ICertificateEnrollmentPolicyServerSetup*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ICertificateEnrollmentPolicyServerSetup*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_error_string(this : ICertificateEnrollmentPolicyServerSetup*, pval : UInt8**) : HRESULT
-    @lpVtbl.value.get_error_string.call(this, pval)
-  end
-  def initialize_install_defaults(this : ICertificateEnrollmentPolicyServerSetup*) : HRESULT
-    @lpVtbl.value.initialize_install_defaults.call(this)
-  end
-  def get_property(this : ICertificateEnrollmentPolicyServerSetup*, propertyid : CEPSetupProperty, ppropertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.get_property.call(this, propertyid, ppropertyvalue)
-  end
-  def set_property(this : ICertificateEnrollmentPolicyServerSetup*, propertyid : CEPSetupProperty, ppropertyvalue : VARIANT*) : HRESULT
-    @lpVtbl.value.set_property.call(this, propertyid, ppropertyvalue)
-  end
-  def install(this : ICertificateEnrollmentPolicyServerSetup*) : HRESULT
-    @lpVtbl.value.install.call(this)
-  end
-  def un_install(this : ICertificateEnrollmentPolicyServerSetup*, pauthkeybasedrenewal : VARIANT*) : HRESULT
-    @lpVtbl.value.un_install.call(this, pauthkeybasedrenewal)
   end
 end

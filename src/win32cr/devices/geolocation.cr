@@ -1,17 +1,10 @@
-require "../system/com.cr"
-require "../foundation.cr"
-require "../ui/shell/propertiessystem.cr"
-require "../system/com/structuredstorage.cr"
-require "../devices/sensors.cr"
+require "./../system/com.cr"
+require "./../foundation.cr"
+require "./../ui/shell/properties_system.cr"
+require "./../system/com/structured_storage.cr"
+require "./sensors.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-lib LibWin32
+module Win32cr::Devices::Geolocation
   GNSS_DRIVER_VERSION_1 = 1_u32
   GNSS_DRIVER_VERSION_2 = 2_u32
   GNSS_DRIVER_VERSION_3 = 3_u32
@@ -80,1331 +73,1403 @@ lib LibWin32
   GNSS_GEOFENCESUPPORT_CIRCLE = 2_u32
   LOCATION_API_VERSION = 1_u32
   GUID_DEVINTERFACE_GNSS = "3336e5e4-018a-4669-84c5-bd05f3bd368b"
+
   CLSID_Location = LibC::GUID.new(0xe5b8e079_u32, 0xee6d_u16, 0x4e33_u16, StaticArray[0xa4_u8, 0x38_u8, 0xc8_u8, 0x7f_u8, 0x2e_u8, 0x95_u8, 0x92_u8, 0x54_u8])
+
   CLSID_DefaultLocation = LibC::GUID.new(0x8b7fbfe0_u32, 0x5cd7_u16, 0x494a_u16, StaticArray[0xaf_u8, 0x8c_u8, 0x28_u8, 0x3a_u8, 0x65_u8, 0x70_u8, 0x75_u8, 0x6_u8])
+
   CLSID_LatLongReport = LibC::GUID.new(0xed81c073_u32, 0x1f84_u16, 0x4ca8_u16, StaticArray[0xa1_u8, 0x61_u8, 0x18_u8, 0x3c_u8, 0x77_u8, 0x6b_u8, 0xc6_u8, 0x51_u8])
+
   CLSID_CivicAddressReport = LibC::GUID.new(0xd39e7bdd_u32, 0x7d05_u16, 0x46b8_u16, StaticArray[0x87_u8, 0x21_u8, 0x80_u8, 0xcf_u8, 0x3_u8, 0x5f_u8, 0x57_u8, 0xd7_u8])
+
   CLSID_LatLongReportFactory = LibC::GUID.new(0x9dcc3cc8_u32, 0x8609_u16, 0x4863_u16, StaticArray[0xba_u8, 0xd4_u8, 0x3_u8, 0x60_u8, 0x1f_u8, 0x4c_u8, 0x65_u8, 0xe8_u8])
+
   CLSID_CivicAddressReportFactory = LibC::GUID.new(0x2a11f42c_u32, 0x3e81_u16, 0x4ad4_u16, StaticArray[0x9c_u8, 0xbe_u8, 0x45_u8, 0x57_u8, 0x9d_u8, 0x89_u8, 0x67_u8, 0x1a_u8])
+
   CLSID_DispLatLongReport = LibC::GUID.new(0x7a7c3277_u32, 0x8f84_u16, 0x4636_u16, StaticArray[0x95_u8, 0xb2_u8, 0xeb_u8, 0xb5_u8, 0x50_u8, 0x7f_u8, 0xf7_u8, 0x7e_u8])
+
   CLSID_DispCivicAddressReport = LibC::GUID.new(0x4c596aec_u32, 0x8544_u16, 0x4082_u16, StaticArray[0xba_u8, 0x9f_u8, 0xeb_u8, 0xa_u8, 0x7d_u8, 0x8e_u8, 0x65_u8, 0xc6_u8])
 
-
-  enum LOCATION_REPORT_STATUS : Int32
-    REPORT_NOT_SUPPORTED = 0
-    REPORT_ERROR = 1
-    REPORT_ACCESS_DENIED = 2
-    REPORT_INITIALIZING = 3
-    REPORT_RUNNING = 4
+  enum LOCATION_REPORT_STATUS
+    REPORT_NOT_SUPPORTED = 0_i32
+    REPORT_ERROR = 1_i32
+    REPORT_ACCESS_DENIED = 2_i32
+    REPORT_INITIALIZING = 3_i32
+    REPORT_RUNNING = 4_i32
+  end
+  enum GNSS_DRIVERCOMMAND_TYPE
+    GNSS_SetLocationServiceEnabled = 1_i32
+    GNSS_SetLocationNIRequestAllowed = 2_i32
+    GNSS_ForceSatelliteSystem = 3_i32
+    GNSS_ForceOperationMode = 4_i32
+    GNSS_ResetEngine = 9_i32
+    GNSS_ClearAgnssData = 10_i32
+    GNSS_SetSuplVersion = 12_i32
+    GNSS_SetNMEALogging = 13_i32
+    GNSS_SetUplServerAccessInterval = 14_i32
+    GNSS_SetNiTimeoutInterval = 15_i32
+    GNSS_ResetGeofencesTracking = 16_i32
+    GNSS_SetSuplVersion2 = 17_i32
+    GNSS_CustomCommand = 256_i32
+  end
+  enum GNSS_FIXSESSIONTYPE
+    GNSS_FixSession_SingleShot = 1_i32
+    GNSS_FixSession_DistanceTracking = 2_i32
+    GNSS_FixSession_ContinuousTracking = 3_i32
+    GNSS_FixSession_LKG = 4_i32
+  end
+  enum GNSS_GEOREGIONTYPE
+    GNSS_GeoRegion_Circle = 1_i32
+  end
+  enum GNSS_GEOFENCE_STATE
+    GNSS_GeofenceState_Unknown = 0_i32
+    GNSS_GeofenceState_Entered = 1_i32
+    GNSS_GeofenceState_Exited = 2_i32
+  end
+  enum GNSS_EVENT_TYPE
+    GNSS_Event_FixAvailable = 1_i32
+    GNSS_Event_RequireAgnss = 2_i32
+    GNSS_Event_Error = 3_i32
+    GNSS_Event_NiRequest = 12_i32
+    GNSS_Event_NmeaData = 13_i32
+    GNSS_Event_GeofenceAlertData = 14_i32
+    GNSS_Event_GeofencesTrackingStatus = 15_i32
+    GNSS_Event_DriverRequest = 16_i32
+    GNSS_Event_BreadcrumbAlertEvent = 17_i32
+    GNSS_Event_FixAvailable_2 = 18_i32
+    GNSS_Event_Custom = 32768_i32
+  end
+  enum GNSS_AGNSS_REQUEST_TYPE
+    GNSS_AGNSS_TimeInjection = 1_i32
+    GNSS_AGNSS_PositionInjection = 2_i32
+    GNSS_AGNSS_BlobInjection = 3_i32
+  end
+  enum GNSS_NI_PLANE_TYPE
+    GNSS_NI_SUPL = 1_i32
+    GNSS_NI_CP = 2_i32
+    GNSS_NI_V2UPL = 3_i32
+  end
+  enum GNSS_NI_REQUEST_TYPE
+    GNSS_NI_Request_SingleShot = 1_i32
+    GNSS_NI_Request_AreaTrigger = 2_i32
+  end
+  enum GNSS_NI_NOTIFICATION_TYPE
+    GNSS_NI_NoNotifyNoVerify = 1_i32
+    GNSS_NI_NotifyOnly = 2_i32
+    GNSS_NI_NotifyVerifyDefaultAllow = 3_i32
+    GNSS_NI_NotifyVerifyDefaultNotAllow = 4_i32
+    GNSS_NI_PrivacyOverride = 5_i32
+  end
+  enum GNSS_DRIVER_REQUEST
+    SUPL_CONFIG_DATA = 1_i32
+  end
+  enum GNSS_SUPL_CERT_ACTION
+    GNSS_Supl_Cert_Inject = 1_i32
+    GNSS_Supl_Cert_Delete = 2_i32
+    GNSS_Supl_Cert_Purge = 3_i32
+  end
+  enum GNSS_NI_USER_RESPONSE
+    GNSS_Ni_UserResponseAccept = 1_i32
+    GNSS_Ni_UserResponseDeny = 2_i32
+    GNSS_Ni_UserResponseTimeout = 3_i32
   end
 
-  enum GNSS_DRIVERCOMMAND_TYPE : Int32
-    GNSS_SetLocationServiceEnabled = 1
-    GNSS_SetLocationNIRequestAllowed = 2
-    GNSS_ForceSatelliteSystem = 3
-    GNSS_ForceOperationMode = 4
-    GNSS_ResetEngine = 9
-    GNSS_ClearAgnssData = 10
-    GNSS_SetSuplVersion = 12
-    GNSS_SetNMEALogging = 13
-    GNSS_SetUplServerAccessInterval = 14
-    GNSS_SetNiTimeoutInterval = 15
-    GNSS_ResetGeofencesTracking = 16
-    GNSS_SetSuplVersion2 = 17
-    GNSS_CustomCommand = 256
-  end
-
-  enum GNSS_FIXSESSIONTYPE : Int32
-    GNSS_FixSession_SingleShot = 1
-    GNSS_FixSession_DistanceTracking = 2
-    GNSS_FixSession_ContinuousTracking = 3
-    GNSS_FixSession_LKG = 4
-  end
-
-  enum GNSS_GEOREGIONTYPE : Int32
-    GNSS_GeoRegion_Circle = 1
-  end
-
-  enum GNSS_GEOFENCE_STATE : Int32
-    GNSS_GeofenceState_Unknown = 0
-    GNSS_GeofenceState_Entered = 1
-    GNSS_GeofenceState_Exited = 2
-  end
-
-  enum GNSS_EVENT_TYPE : Int32
-    GNSS_Event_FixAvailable = 1
-    GNSS_Event_RequireAgnss = 2
-    GNSS_Event_Error = 3
-    GNSS_Event_NiRequest = 12
-    GNSS_Event_NmeaData = 13
-    GNSS_Event_GeofenceAlertData = 14
-    GNSS_Event_GeofencesTrackingStatus = 15
-    GNSS_Event_DriverRequest = 16
-    GNSS_Event_BreadcrumbAlertEvent = 17
-    GNSS_Event_FixAvailable_2 = 18
-    GNSS_Event_Custom = 32768
-  end
-
-  enum GNSS_AGNSS_REQUEST_TYPE : Int32
-    GNSS_AGNSS_TimeInjection = 1
-    GNSS_AGNSS_PositionInjection = 2
-    GNSS_AGNSS_BlobInjection = 3
-  end
-
-  enum GNSS_NI_PLANE_TYPE : Int32
-    GNSS_NI_SUPL = 1
-    GNSS_NI_CP = 2
-    GNSS_NI_V2UPL = 3
-  end
-
-  enum GNSS_NI_REQUEST_TYPE : Int32
-    GNSS_NI_Request_SingleShot = 1
-    GNSS_NI_Request_AreaTrigger = 2
-  end
-
-  enum GNSS_NI_NOTIFICATION_TYPE : Int32
-    GNSS_NI_NoNotifyNoVerify = 1
-    GNSS_NI_NotifyOnly = 2
-    GNSS_NI_NotifyVerifyDefaultAllow = 3
-    GNSS_NI_NotifyVerifyDefaultNotAllow = 4
-    GNSS_NI_PrivacyOverride = 5
-  end
-
-  enum GNSS_DRIVER_REQUEST : Int32
-    SUPL_CONFIG_DATA = 1
-  end
-
-  enum GNSS_SUPL_CERT_ACTION : Int32
-    GNSS_Supl_Cert_Inject = 1
-    GNSS_Supl_Cert_Delete = 2
-    GNSS_Supl_Cert_Purge = 3
-  end
-
-  enum GNSS_NI_USER_RESPONSE : Int32
-    GNSS_Ni_UserResponseAccept = 1
-    GNSS_Ni_UserResponseDeny = 2
-    GNSS_Ni_UserResponseTimeout = 3
-  end
-
-  union GNSS_FIXSESSION_PARAM_Anonymous_e__Union
-    single_shot_param : GNSS_SINGLESHOT_PARAM
-    distance_param : GNSS_DISTANCETRACKING_PARAM
-    continuous_param : GNSS_CONTINUOUSTRACKING_PARAM
-    lkg_fix_param : GNSS_LKGFIX_PARAM
-    unused_param : UInt8[268]*
-  end
-  union GNSS_BREADCRUMB_LIST_Anonymous_e__Union
-    v1 : GNSS_BREADCRUMB_V1[50]*
-  end
-  union GNSS_GEOREGION_Anonymous_e__Union
-    circle : GNSS_GEOREGION_CIRCLE
-    unused : UInt8[512]*
-  end
-  union GNSS_NI_REQUEST_PARAM_Anonymous_e__Union
-    supl_ni_info : GNSS_SUPL_NI_INFO
-    cp_ni_info : GNSS_CP_NI_INFO
-    v2_upl_ni_info : GNSS_V2UPL_NI_INFO
-  end
-  union GNSS_EVENT_Anonymous_e__Union
-    fix_data : GNSS_FIXDATA
-    agnss_request : GNSS_AGNSS_REQUEST_PARAM
-    ni_request : GNSS_NI_REQUEST_PARAM
-    error_information : GNSS_ERRORINFO
-    nmea_data : GNSS_NMEA_DATA
-    geofence_alert_data : GNSS_GEOFENCE_ALERT_DATA
-    breadcrumb_alert_data : GNSS_BREADCRUMBING_ALERT_DATA
-    geofences_tracking_status : GNSS_GEOFENCES_TRACKINGSTATUS_DATA
-    driver_request_data : GNSS_DRIVER_REQUEST_DATA
-    custom_data : UInt8[0]*
-  end
-  union GNSS_EVENT_2_Anonymous_e__Union
-    fix_data : GNSS_FIXDATA
-    fix_data2 : GNSS_FIXDATA_2
-    agnss_request : GNSS_AGNSS_REQUEST_PARAM
-    ni_request : GNSS_NI_REQUEST_PARAM
-    error_information : GNSS_ERRORINFO
-    nmea_data : GNSS_NMEA_DATA
-    geofence_alert_data : GNSS_GEOFENCE_ALERT_DATA
-    breadcrumb_alert_data : GNSS_BREADCRUMBING_ALERT_DATA
-    geofences_tracking_status : GNSS_GEOFENCES_TRACKINGSTATUS_DATA
-    driver_request_data : GNSS_DRIVER_REQUEST_DATA
-    custom_data : UInt8[0]*
-  end
-  union GNSS_AGNSS_INJECT_Anonymous_e__Union
-    time : GNSS_AGNSS_INJECTTIME
-    position : GNSS_AGNSS_INJECTPOSITION
-    blob_data : GNSS_AGNSS_INJECTBLOB
-  end
-
-  struct GNSS_SUPL_VERSION
-    major_version : UInt32
+  @[Extern]
+  record GNSS_SUPL_VERSION,
+    major_version : UInt32,
     minor_version : UInt32
-  end
-  struct GNSS_SUPL_VERSION_2
-    major_version : UInt32
-    minor_version : UInt32
+
+  @[Extern]
+  record GNSS_SUPL_VERSION_2,
+    major_version : UInt32,
+    minor_version : UInt32,
     service_indicator : UInt32
-  end
-  struct GNSS_DEVICE_CAPABILITY
-    size : UInt32
-    version : UInt32
-    support_multiple_fix_sessions : LibC::BOOL
-    support_multiple_app_sessions : LibC::BOOL
-    require_a_gnss_injection : LibC::BOOL
-    agnss_format_supported : UInt32
-    agnss_format_preferred : UInt32
-    support_distance_tracking : LibC::BOOL
-    support_continuous_tracking : LibC::BOOL
-    reserved1 : UInt32
-    reserved2 : LibC::BOOL
-    reserved3 : LibC::BOOL
-    reserved4 : LibC::BOOL
-    reserved5 : LibC::BOOL
-    geofencing_support : UInt32
-    reserved6 : LibC::BOOL
-    reserved7 : LibC::BOOL
-    support_cp_location : LibC::BOOL
-    support_upl_v2 : LibC::BOOL
-    support_supl_v1 : LibC::BOOL
-    support_supl_v2 : LibC::BOOL
-    supported_supl_version : GNSS_SUPL_VERSION
-    max_geofences_supported : UInt32
-    support_multiple_supl_root_cert : LibC::BOOL
-    gnss_bread_crumb_payload_version : UInt32
-    max_gnss_bread_crumb_fixes : UInt32
-    unused : UInt8[496]*
-  end
-  struct GNSS_PLATFORM_CAPABILITY
-    size : UInt32
-    version : UInt32
-    support_agnss_injection : LibC::BOOL
-    agnss_format_supported : UInt32
-    unused : UInt8[516]*
-  end
-  struct GNSS_DRIVERCOMMAND_PARAM
-    size : UInt32
-    version : UInt32
-    command_type : GNSS_DRIVERCOMMAND_TYPE
-    reserved : UInt32
-    command_data_size : UInt32
-    unused : UInt8[512]*
-    command_data : UInt8[0]*
-  end
-  struct GNSS_SINGLESHOT_PARAM
-    size : UInt32
-    version : UInt32
+
+  @[Extern]
+  record GNSS_DEVICE_CAPABILITY,
+    size : UInt32,
+    version : UInt32,
+    support_multiple_fix_sessions : Win32cr::Foundation::BOOL,
+    support_multiple_app_sessions : Win32cr::Foundation::BOOL,
+    require_a_gnss_injection : Win32cr::Foundation::BOOL,
+    agnss_format_supported : UInt32,
+    agnss_format_preferred : UInt32,
+    support_distance_tracking : Win32cr::Foundation::BOOL,
+    support_continuous_tracking : Win32cr::Foundation::BOOL,
+    reserved1 : UInt32,
+    reserved2 : Win32cr::Foundation::BOOL,
+    reserved3 : Win32cr::Foundation::BOOL,
+    reserved4 : Win32cr::Foundation::BOOL,
+    reserved5 : Win32cr::Foundation::BOOL,
+    geofencing_support : UInt32,
+    reserved6 : Win32cr::Foundation::BOOL,
+    reserved7 : Win32cr::Foundation::BOOL,
+    support_cp_location : Win32cr::Foundation::BOOL,
+    support_upl_v2 : Win32cr::Foundation::BOOL,
+    support_supl_v1 : Win32cr::Foundation::BOOL,
+    support_supl_v2 : Win32cr::Foundation::BOOL,
+    supported_supl_version : Win32cr::Devices::Geolocation::GNSS_SUPL_VERSION,
+    max_geofences_supported : UInt32,
+    support_multiple_supl_root_cert : Win32cr::Foundation::BOOL,
+    gnss_bread_crumb_payload_version : UInt32,
+    max_gnss_bread_crumb_fixes : UInt32,
+    unused : UInt8[496]
+
+  @[Extern]
+  record GNSS_PLATFORM_CAPABILITY,
+    size : UInt32,
+    version : UInt32,
+    support_agnss_injection : Win32cr::Foundation::BOOL,
+    agnss_format_supported : UInt32,
+    unused : UInt8[516]
+
+  @[Extern]
+  record GNSS_DRIVERCOMMAND_PARAM,
+    size : UInt32,
+    version : UInt32,
+    command_type : Win32cr::Devices::Geolocation::GNSS_DRIVERCOMMAND_TYPE,
+    reserved : UInt32,
+    command_data_size : UInt32,
+    unused : UInt8[512],
+    command_data : UInt8*
+
+  @[Extern]
+  record GNSS_SINGLESHOT_PARAM,
+    size : UInt32,
+    version : UInt32,
     response_time : UInt32
-  end
-  struct GNSS_DISTANCETRACKING_PARAM
-    size : UInt32
-    version : UInt32
+
+  @[Extern]
+  record GNSS_DISTANCETRACKING_PARAM,
+    size : UInt32,
+    version : UInt32,
     movement_threshold : UInt32
-  end
-  struct GNSS_CONTINUOUSTRACKING_PARAM
-    size : UInt32
-    version : UInt32
+
+  @[Extern]
+  record GNSS_CONTINUOUSTRACKING_PARAM,
+    size : UInt32,
+    version : UInt32,
     preferred_interval : UInt32
-  end
-  struct GNSS_LKGFIX_PARAM
-    size : UInt32
+
+  @[Extern]
+  record GNSS_LKGFIX_PARAM,
+    size : UInt32,
     version : UInt32
+
+  @[Extern]
+  record GNSS_FIXSESSION_PARAM,
+    size : UInt32,
+    version : UInt32,
+    fix_session_id : UInt32,
+    session_type : Win32cr::Devices::Geolocation::GNSS_FIXSESSIONTYPE,
+    horizontal_accuracy : UInt32,
+    horizontal_confidence : UInt32,
+    reserved : UInt32[9],
+    fix_level_of_details : UInt32,
+    anonymous : Anonymous_e__Union,
+    unused : UInt8[256] do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      single_shot_param : Win32cr::Devices::Geolocation::GNSS_SINGLESHOT_PARAM,
+      distance_param : Win32cr::Devices::Geolocation::GNSS_DISTANCETRACKING_PARAM,
+      continuous_param : Win32cr::Devices::Geolocation::GNSS_CONTINUOUSTRACKING_PARAM,
+      lkg_fix_param : Win32cr::Devices::Geolocation::GNSS_LKGFIX_PARAM,
+      unused_param : UInt8[268]
+
   end
-  struct GNSS_FIXSESSION_PARAM
-    size : UInt32
-    version : UInt32
-    fix_session_id : UInt32
-    session_type : GNSS_FIXSESSIONTYPE
-    horizontal_accuracy : UInt32
-    horizontal_confidence : UInt32
-    reserved : UInt32[9]*
-    fix_level_of_details : UInt32
-    anonymous : GNSS_FIXSESSION_PARAM_Anonymous_e__Union
-    unused : UInt8[256]*
-  end
-  struct GNSS_STOPFIXSESSION_PARAM
-    size : UInt32
-    version : UInt32
-    fix_session_id : UInt32
-    unused : UInt8[512]*
-  end
-  struct GNSS_FIXDATA_BASIC
-    size : UInt32
-    version : UInt32
-    latitude : Float64
-    longitude : Float64
-    altitude : Float64
-    speed : Float64
+
+  @[Extern]
+  record GNSS_STOPFIXSESSION_PARAM,
+    size : UInt32,
+    version : UInt32,
+    fix_session_id : UInt32,
+    unused : UInt8[512]
+
+  @[Extern]
+  record GNSS_FIXDATA_BASIC,
+    size : UInt32,
+    version : UInt32,
+    latitude : Float64,
+    longitude : Float64,
+    altitude : Float64,
+    speed : Float64,
     heading : Float64
-  end
-  struct GNSS_FIXDATA_BASIC_2
-    size : UInt32
-    version : UInt32
-    latitude : Float64
-    longitude : Float64
-    altitude : Float64
-    speed : Float64
-    heading : Float64
+
+  @[Extern]
+  record GNSS_FIXDATA_BASIC_2,
+    size : UInt32,
+    version : UInt32,
+    latitude : Float64,
+    longitude : Float64,
+    altitude : Float64,
+    speed : Float64,
+    heading : Float64,
     altitude_ellipsoid : Float64
-  end
-  struct GNSS_FIXDATA_ACCURACY
-    size : UInt32
-    version : UInt32
-    horizontal_accuracy : UInt32
-    horizontal_error_major_axis : UInt32
-    horizontal_error_minor_axis : UInt32
-    horizontal_error_angle : UInt32
-    heading_accuracy : UInt32
-    altitude_accuracy : UInt32
-    speed_accuracy : UInt32
-    horizontal_confidence : UInt32
-    heading_confidence : UInt32
-    altitude_confidence : UInt32
-    speed_confidence : UInt32
-    position_dilution_of_precision : Float32
-    horizontal_dilution_of_precision : Float32
+
+  @[Extern]
+  record GNSS_FIXDATA_ACCURACY,
+    size : UInt32,
+    version : UInt32,
+    horizontal_accuracy : UInt32,
+    horizontal_error_major_axis : UInt32,
+    horizontal_error_minor_axis : UInt32,
+    horizontal_error_angle : UInt32,
+    heading_accuracy : UInt32,
+    altitude_accuracy : UInt32,
+    speed_accuracy : UInt32,
+    horizontal_confidence : UInt32,
+    heading_confidence : UInt32,
+    altitude_confidence : UInt32,
+    speed_confidence : UInt32,
+    position_dilution_of_precision : Float32,
+    horizontal_dilution_of_precision : Float32,
     vertical_dilution_of_precision : Float32
-  end
-  struct GNSS_FIXDATA_ACCURACY_2
-    size : UInt32
-    version : UInt32
-    horizontal_accuracy : Float64
-    horizontal_error_major_axis : Float64
-    horizontal_error_minor_axis : Float64
-    horizontal_error_angle : Float64
-    heading_accuracy : Float64
-    altitude_accuracy : Float64
-    speed_accuracy : Float64
-    horizontal_confidence : UInt32
-    heading_confidence : UInt32
-    altitude_confidence : UInt32
-    speed_confidence : UInt32
-    position_dilution_of_precision : Float64
-    horizontal_dilution_of_precision : Float64
-    vertical_dilution_of_precision : Float64
-    geometric_dilution_of_precision : Float64
+
+  @[Extern]
+  record GNSS_FIXDATA_ACCURACY_2,
+    size : UInt32,
+    version : UInt32,
+    horizontal_accuracy : Float64,
+    horizontal_error_major_axis : Float64,
+    horizontal_error_minor_axis : Float64,
+    horizontal_error_angle : Float64,
+    heading_accuracy : Float64,
+    altitude_accuracy : Float64,
+    speed_accuracy : Float64,
+    horizontal_confidence : UInt32,
+    heading_confidence : UInt32,
+    altitude_confidence : UInt32,
+    speed_confidence : UInt32,
+    position_dilution_of_precision : Float64,
+    horizontal_dilution_of_precision : Float64,
+    vertical_dilution_of_precision : Float64,
+    geometric_dilution_of_precision : Float64,
     time_dilution_of_precision : Float64
-  end
-  struct GNSS_SATELLITEINFO
-    satellite_id : UInt32
-    used_in_positiong : LibC::BOOL
-    elevation : Float64
-    azimuth : Float64
+
+  @[Extern]
+  record GNSS_SATELLITEINFO,
+    satellite_id : UInt32,
+    used_in_positiong : Win32cr::Foundation::BOOL,
+    elevation : Float64,
+    azimuth : Float64,
     signal_to_noise_ratio : Float64
-  end
-  struct GNSS_FIXDATA_SATELLITE
-    size : UInt32
-    version : UInt32
-    satellite_count : UInt32
-    satellite_array : GNSS_SATELLITEINFO[64]*
-  end
-  struct GNSS_FIXDATA
-    size : UInt32
-    version : UInt32
-    fix_session_id : UInt32
-    fix_time_stamp : FILETIME
-    is_final_fix : LibC::BOOL
-    fix_status : NTSTATUS
-    fix_level_of_details : UInt32
-    basic_data : GNSS_FIXDATA_BASIC
-    accuracy_data : GNSS_FIXDATA_ACCURACY
-    satellite_data : GNSS_FIXDATA_SATELLITE
-  end
-  struct GNSS_FIXDATA_2
-    size : UInt32
-    version : UInt32
-    fix_session_id : UInt32
-    fix_time_stamp : FILETIME
-    is_final_fix : LibC::BOOL
-    fix_status : NTSTATUS
-    fix_level_of_details : UInt32
-    basic_data : GNSS_FIXDATA_BASIC_2
-    accuracy_data : GNSS_FIXDATA_ACCURACY_2
-    satellite_data : GNSS_FIXDATA_SATELLITE
-  end
-  struct GNSS_BREADCRUMBING_PARAM
-    size : UInt32
-    version : UInt32
-    maximum_horizontal_uncertainty : UInt32
-    min_distance_between_fixes : UInt32
-    maximum_error_timeout_ms : UInt32
-    unused : UInt8[512]*
-  end
-  struct GNSS_BREADCRUMBING_ALERT_DATA
-    size : UInt32
-    version : UInt32
-    unused : UInt8[512]*
-  end
-  struct GNSS_BREADCRUMB_V1
-    fix_time_stamp : FILETIME
-    latitude : Float64
-    longitude : Float64
-    horizontal_accuracy : UInt32
-    speed : UInt16
-    speed_accuracy : UInt16
-    altitude : Int16
-    altitude_accuracy : UInt16
-    heading : Int16
-    heading_accuracy : UInt8
+
+  @[Extern]
+  record GNSS_FIXDATA_SATELLITE,
+    size : UInt32,
+    version : UInt32,
+    satellite_count : UInt32,
+    satellite_array : Win32cr::Devices::Geolocation::GNSS_SATELLITEINFO[64]
+
+  @[Extern]
+  record GNSS_FIXDATA,
+    size : UInt32,
+    version : UInt32,
+    fix_session_id : UInt32,
+    fix_time_stamp : Win32cr::Foundation::FILETIME,
+    is_final_fix : Win32cr::Foundation::BOOL,
+    fix_status : Win32cr::Foundation::NTSTATUS,
+    fix_level_of_details : UInt32,
+    basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC,
+    accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY,
+    satellite_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_SATELLITE
+
+  @[Extern]
+  record GNSS_FIXDATA_2,
+    size : UInt32,
+    version : UInt32,
+    fix_session_id : UInt32,
+    fix_time_stamp : Win32cr::Foundation::FILETIME,
+    is_final_fix : Win32cr::Foundation::BOOL,
+    fix_status : Win32cr::Foundation::NTSTATUS,
+    fix_level_of_details : UInt32,
+    basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC_2,
+    accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY_2,
+    satellite_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_SATELLITE
+
+  @[Extern]
+  record GNSS_BREADCRUMBING_PARAM,
+    size : UInt32,
+    version : UInt32,
+    maximum_horizontal_uncertainty : UInt32,
+    min_distance_between_fixes : UInt32,
+    maximum_error_timeout_ms : UInt32,
+    unused : UInt8[512]
+
+  @[Extern]
+  record GNSS_BREADCRUMBING_ALERT_DATA,
+    size : UInt32,
+    version : UInt32,
+    unused : UInt8[512]
+
+  @[Extern]
+  record GNSS_BREADCRUMB_V1,
+    fix_time_stamp : Win32cr::Foundation::FILETIME,
+    latitude : Float64,
+    longitude : Float64,
+    horizontal_accuracy : UInt32,
+    speed : UInt16,
+    speed_accuracy : UInt16,
+    altitude : Int16,
+    altitude_accuracy : UInt16,
+    heading : Int16,
+    heading_accuracy : UInt8,
     fix_success : UInt8
+
+  @[Extern]
+  record GNSS_BREADCRUMB_LIST,
+    size : UInt32,
+    version : UInt32,
+    num_crumbs : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      v1 : Win32cr::Devices::Geolocation::GNSS_BREADCRUMB_V1[50]
+
   end
-  struct GNSS_BREADCRUMB_LIST
-    size : UInt32
-    version : UInt32
-    num_crumbs : UInt32
-    anonymous : GNSS_BREADCRUMB_LIST_Anonymous_e__Union
-  end
-  struct GNSS_GEOREGION_CIRCLE
-    latitude : Float64
-    longitude : Float64
+
+  @[Extern]
+  record GNSS_GEOREGION_CIRCLE,
+    latitude : Float64,
+    longitude : Float64,
     radius_in_meters : Float64
+
+  @[Extern]
+  record GNSS_GEOREGION,
+    size : UInt32,
+    version : UInt32,
+    geo_region_type : Win32cr::Devices::Geolocation::GNSS_GEOREGIONTYPE,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      circle : Win32cr::Devices::Geolocation::GNSS_GEOREGION_CIRCLE,
+      unused : UInt8[512]
+
   end
-  struct GNSS_GEOREGION
-    size : UInt32
-    version : UInt32
-    geo_region_type : GNSS_GEOREGIONTYPE
-    anonymous : GNSS_GEOREGION_Anonymous_e__Union
-  end
-  struct GNSS_GEOFENCE_CREATE_PARAM
-    size : UInt32
-    version : UInt32
-    alert_types : UInt32
-    initial_state : GNSS_GEOFENCE_STATE
-    boundary : GNSS_GEOREGION
-    unused : UInt8[512]*
-  end
-  struct GNSS_GEOFENCE_CREATE_RESPONSE
-    size : UInt32
-    version : UInt32
-    creation_status : NTSTATUS
-    geofence_id : UInt32
-    unused : UInt8[512]*
-  end
-  struct GNSS_GEOFENCE_DELETE_PARAM
-    size : UInt32
-    version : UInt32
-    geofence_id : UInt32
-    unused : UInt8[512]*
-  end
-  struct GNSS_GEOFENCE_ALERT_DATA
-    size : UInt32
-    version : UInt32
-    geofence_id : UInt32
-    geofence_state : GNSS_GEOFENCE_STATE
-    fix_basic_data : GNSS_FIXDATA_BASIC
-    fix_accuracy_data : GNSS_FIXDATA_ACCURACY
-    unused : UInt8[512]*
-  end
-  struct GNSS_GEOFENCES_TRACKINGSTATUS_DATA
-    size : UInt32
-    version : UInt32
-    status : NTSTATUS
-    status_time_stamp : FILETIME
-    unused : UInt8[512]*
-  end
-  struct GNSS_ERRORINFO
-    size : UInt32
-    version : UInt32
-    error_code : UInt32
-    is_recoverable : LibC::BOOL
-    error_description : Char[256]*
-    unused : UInt8[512]*
-  end
-  struct GNSS_NMEA_DATA
-    size : UInt32
-    version : UInt32
-    nmea_sentences : CHAR[256]*
-  end
-  struct GNSS_AGNSS_REQUEST_PARAM
-    size : UInt32
-    version : UInt32
-    request_type : GNSS_AGNSS_REQUEST_TYPE
+
+  @[Extern]
+  record GNSS_GEOFENCE_CREATE_PARAM,
+    size : UInt32,
+    version : UInt32,
+    alert_types : UInt32,
+    initial_state : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_STATE,
+    boundary : Win32cr::Devices::Geolocation::GNSS_GEOREGION,
+    unused : UInt8[512]
+
+  @[Extern]
+  record GNSS_GEOFENCE_CREATE_RESPONSE,
+    size : UInt32,
+    version : UInt32,
+    creation_status : Win32cr::Foundation::NTSTATUS,
+    geofence_id : UInt32,
+    unused : UInt8[512]
+
+  @[Extern]
+  record GNSS_GEOFENCE_DELETE_PARAM,
+    size : UInt32,
+    version : UInt32,
+    geofence_id : UInt32,
+    unused : UInt8[512]
+
+  @[Extern]
+  record GNSS_GEOFENCE_ALERT_DATA,
+    size : UInt32,
+    version : UInt32,
+    geofence_id : UInt32,
+    geofence_state : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_STATE,
+    fix_basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC,
+    fix_accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY,
+    unused : UInt8[512]
+
+  @[Extern]
+  record GNSS_GEOFENCES_TRACKINGSTATUS_DATA,
+    size : UInt32,
+    version : UInt32,
+    status : Win32cr::Foundation::NTSTATUS,
+    status_time_stamp : Win32cr::Foundation::FILETIME,
+    unused : UInt8[512]
+
+  @[Extern]
+  record GNSS_ERRORINFO,
+    size : UInt32,
+    version : UInt32,
+    error_code : UInt32,
+    is_recoverable : Win32cr::Foundation::BOOL,
+    error_description : UInt16[256],
+    unused : UInt8[512]
+
+  @[Extern]
+  record GNSS_NMEA_DATA,
+    size : UInt32,
+    version : UInt32,
+    nmea_sentences : Win32cr::Foundation::CHAR[256]
+
+  @[Extern]
+  record GNSS_AGNSS_REQUEST_PARAM,
+    size : UInt32,
+    version : UInt32,
+    request_type : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_TYPE,
     blob_format : UInt32
+
+  @[Extern]
+  record GNSS_SUPL_NI_INFO,
+    size : UInt32,
+    version : UInt32,
+    requestor_id : UInt16[260],
+    client_name : UInt16[260],
+    supl_ni_url : Win32cr::Foundation::CHAR[260]
+
+  @[Extern]
+  record GNSS_CP_NI_INFO,
+    size : UInt32,
+    version : UInt32,
+    requestor_id : UInt16[260],
+    notification_text : UInt16[260]
+
+  @[Extern]
+  record GNSS_V2UPL_NI_INFO,
+    size : UInt32,
+    version : UInt32,
+    requestor_id : UInt16[260]
+
+  @[Extern]
+  record GNSS_NI_REQUEST_PARAM,
+    size : UInt32,
+    version : UInt32,
+    request_id : UInt32,
+    request_type : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_TYPE,
+    notification_type : Win32cr::Devices::Geolocation::GNSS_NI_NOTIFICATION_TYPE,
+    request_plane_type : Win32cr::Devices::Geolocation::GNSS_NI_PLANE_TYPE,
+    anonymous : Anonymous_e__Union,
+    response_time_in_sec : UInt32,
+    emergency_location : Win32cr::Foundation::BOOL do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      supl_ni_info : Win32cr::Devices::Geolocation::GNSS_SUPL_NI_INFO,
+      cp_ni_info : Win32cr::Devices::Geolocation::GNSS_CP_NI_INFO,
+      v2_upl_ni_info : Win32cr::Devices::Geolocation::GNSS_V2UPL_NI_INFO
+
   end
-  struct GNSS_SUPL_NI_INFO
-    size : UInt32
-    version : UInt32
-    requestor_id : Char[260]*
-    client_name : Char[260]*
-    supl_ni_url : CHAR[260]*
-  end
-  struct GNSS_CP_NI_INFO
-    size : UInt32
-    version : UInt32
-    requestor_id : Char[260]*
-    notification_text : Char[260]*
-  end
-  struct GNSS_V2UPL_NI_INFO
-    size : UInt32
-    version : UInt32
-    requestor_id : Char[260]*
-  end
-  struct GNSS_NI_REQUEST_PARAM
-    size : UInt32
-    version : UInt32
-    request_id : UInt32
-    request_type : GNSS_NI_REQUEST_TYPE
-    notification_type : GNSS_NI_NOTIFICATION_TYPE
-    request_plane_type : GNSS_NI_PLANE_TYPE
-    anonymous : GNSS_NI_REQUEST_PARAM_Anonymous_e__Union
-    response_time_in_sec : UInt32
-    emergency_location : LibC::BOOL
-  end
-  struct GNSS_DRIVER_REQUEST_DATA
-    size : UInt32
-    version : UInt32
-    request : GNSS_DRIVER_REQUEST
+
+  @[Extern]
+  record GNSS_DRIVER_REQUEST_DATA,
+    size : UInt32,
+    version : UInt32,
+    request : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST,
     request_flag : UInt32
+
+  @[Extern]
+  record GNSS_EVENT,
+    size : UInt32,
+    version : UInt32,
+    event_type : Win32cr::Devices::Geolocation::GNSS_EVENT_TYPE,
+    event_data_size : UInt32,
+    unused : UInt8[512],
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      fix_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA,
+      agnss_request : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_PARAM,
+      ni_request : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_PARAM,
+      error_information : Win32cr::Devices::Geolocation::GNSS_ERRORINFO,
+      nmea_data : Win32cr::Devices::Geolocation::GNSS_NMEA_DATA,
+      geofence_alert_data : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_ALERT_DATA,
+      breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA,
+      geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA,
+      driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA,
+      custom_data : UInt8*
+
   end
-  struct GNSS_EVENT
-    size : UInt32
-    version : UInt32
-    event_type : GNSS_EVENT_TYPE
-    event_data_size : UInt32
-    unused : UInt8[512]*
-    anonymous : GNSS_EVENT_Anonymous_e__Union
+
+  @[Extern]
+  record GNSS_EVENT_2,
+    size : UInt32,
+    version : UInt32,
+    event_type : Win32cr::Devices::Geolocation::GNSS_EVENT_TYPE,
+    event_data_size : UInt32,
+    unused : UInt8[512],
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      fix_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA,
+      fix_data2 : Win32cr::Devices::Geolocation::GNSS_FIXDATA_2,
+      agnss_request : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_PARAM,
+      ni_request : Win32cr::Devices::Geolocation::GNSS_NI_REQUEST_PARAM,
+      error_information : Win32cr::Devices::Geolocation::GNSS_ERRORINFO,
+      nmea_data : Win32cr::Devices::Geolocation::GNSS_NMEA_DATA,
+      geofence_alert_data : Win32cr::Devices::Geolocation::GNSS_GEOFENCE_ALERT_DATA,
+      breadcrumb_alert_data : Win32cr::Devices::Geolocation::GNSS_BREADCRUMBING_ALERT_DATA,
+      geofences_tracking_status : Win32cr::Devices::Geolocation::GNSS_GEOFENCES_TRACKINGSTATUS_DATA,
+      driver_request_data : Win32cr::Devices::Geolocation::GNSS_DRIVER_REQUEST_DATA,
+      custom_data : UInt8*
+
   end
-  struct GNSS_EVENT_2
-    size : UInt32
-    version : UInt32
-    event_type : GNSS_EVENT_TYPE
-    event_data_size : UInt32
-    unused : UInt8[512]*
-    anonymous : GNSS_EVENT_2_Anonymous_e__Union
-  end
-  struct GNSS_AGNSS_INJECTTIME
-    size : UInt32
-    version : UInt32
-    utc_time : FILETIME
+
+  @[Extern]
+  record GNSS_AGNSS_INJECTTIME,
+    size : UInt32,
+    version : UInt32,
+    utc_time : Win32cr::Foundation::FILETIME,
     time_uncertainty : UInt32
-  end
-  struct GNSS_AGNSS_INJECTPOSITION
-    size : UInt32
-    version : UInt32
-    age : UInt32
-    basic_data : GNSS_FIXDATA_BASIC
-    accuracy_data : GNSS_FIXDATA_ACCURACY
-  end
-  struct GNSS_AGNSS_INJECTBLOB
-    size : UInt32
-    version : UInt32
-    blob_oui : UInt32
-    blob_version : UInt32
-    agnss_format : UInt32
-    blob_size : UInt32
-    blob_data : UInt8[0]*
-  end
-  struct GNSS_AGNSS_INJECT
-    size : UInt32
-    version : UInt32
-    injection_type : GNSS_AGNSS_REQUEST_TYPE
-    injection_status : NTSTATUS
-    injection_data_size : UInt32
-    unused : UInt8[512]*
-    anonymous : GNSS_AGNSS_INJECT_Anonymous_e__Union
-  end
-  struct GNSS_SUPL_HSLP_CONFIG
-    size : UInt32
-    version : UInt32
-    supl_hslp : CHAR[260]*
-    supl_hslp_from_imsi : CHAR[260]*
-    reserved : UInt32
-    unused : UInt8[512]*
-  end
-  struct GNSS_SUPL_CERT_CONFIG
-    size : UInt32
-    version : UInt32
-    cert_action : GNSS_SUPL_CERT_ACTION
-    supl_cert_name : CHAR[260]*
-    cert_size : UInt32
-    unused : UInt8[512]*
-    cert_data : UInt8[0]*
-  end
-  struct GNSS_V2UPL_CONFIG
-    size : UInt32
-    version : UInt32
-    mpc : CHAR[260]*
-    pde : CHAR[260]*
-    application_type_indicator_mr : UInt8
-    unused : UInt8[512]*
-  end
-  struct GNSS_NI_RESPONSE
-    size : UInt32
-    version : UInt32
-    request_id : UInt32
-    user_response : GNSS_NI_USER_RESPONSE
-  end
-  struct GNSS_CWTESTDATA
-    size : UInt32
-    version : UInt32
-    test_result_status : NTSTATUS
-    signal_to_noise_ratio : Float64
-    frequency : Float64
-    unused : UInt8[512]*
-  end
-  struct GNSS_SELFTESTCONFIG
-    size : UInt32
-    version : UInt32
-    test_type : UInt32
-    unused : UInt8[512]*
-    in_buf_len : UInt32
-    in_buffer : UInt8[0]*
-  end
-  struct GNSS_SELFTESTRESULT
-    size : UInt32
-    version : UInt32
-    test_result_status : NTSTATUS
-    result : UInt32
-    pin_failed_bit_mask : UInt32
-    unused : UInt8[512]*
-    out_buf_len : UInt32
-    out_buffer : UInt8[0]*
-  end
-  struct GNSS_CHIPSETINFO
-    size : UInt32
-    version : UInt32
-    manufacturer_id : Char[25]*
-    hardware_id : Char[25]*
-    firmware_version : Char[20]*
-    unused : UInt8[512]*
+
+  @[Extern]
+  record GNSS_AGNSS_INJECTPOSITION,
+    size : UInt32,
+    version : UInt32,
+    age : UInt32,
+    basic_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_BASIC,
+    accuracy_data : Win32cr::Devices::Geolocation::GNSS_FIXDATA_ACCURACY
+
+  @[Extern]
+  record GNSS_AGNSS_INJECTBLOB,
+    size : UInt32,
+    version : UInt32,
+    blob_oui : UInt32,
+    blob_version : UInt32,
+    agnss_format : UInt32,
+    blob_size : UInt32,
+    blob_data : UInt8*
+
+  @[Extern]
+  record GNSS_AGNSS_INJECT,
+    size : UInt32,
+    version : UInt32,
+    injection_type : Win32cr::Devices::Geolocation::GNSS_AGNSS_REQUEST_TYPE,
+    injection_status : Win32cr::Foundation::NTSTATUS,
+    injection_data_size : UInt32,
+    unused : UInt8[512],
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      time : Win32cr::Devices::Geolocation::GNSS_AGNSS_INJECTTIME,
+      position : Win32cr::Devices::Geolocation::GNSS_AGNSS_INJECTPOSITION,
+      blob_data : Win32cr::Devices::Geolocation::GNSS_AGNSS_INJECTBLOB
+
   end
 
+  @[Extern]
+  record GNSS_SUPL_HSLP_CONFIG,
+    size : UInt32,
+    version : UInt32,
+    supl_hslp : Win32cr::Foundation::CHAR[260],
+    supl_hslp_from_imsi : Win32cr::Foundation::CHAR[260],
+    reserved : UInt32,
+    unused : UInt8[512]
 
-  struct ILocationReportVTbl
-    query_interface : Proc(ILocationReport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILocationReport*, UInt32)
-    release : Proc(ILocationReport*, UInt32)
-    get_sensor_id : Proc(ILocationReport*, Guid*, HRESULT)
-    get_timestamp : Proc(ILocationReport*, SYSTEMTIME*, HRESULT)
-    get_value : Proc(ILocationReport*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
-  end
+  @[Extern]
+  record GNSS_SUPL_CERT_CONFIG,
+    size : UInt32,
+    version : UInt32,
+    cert_action : Win32cr::Devices::Geolocation::GNSS_SUPL_CERT_ACTION,
+    supl_cert_name : Win32cr::Foundation::CHAR[260],
+    cert_size : UInt32,
+    unused : UInt8[512],
+    cert_data : UInt8*
 
-  ILocationReport_GUID = "c8b7f7ee-75d0-4db9-b62d-7a0f369ca456"
-  IID_ILocationReport = LibC::GUID.new(0xc8b7f7ee_u32, 0x75d0_u16, 0x4db9_u16, StaticArray[0xb6_u8, 0x2d_u8, 0x7a_u8, 0xf_u8, 0x36_u8, 0x9c_u8, 0xa4_u8, 0x56_u8])
-  struct ILocationReport
-    lpVtbl : ILocationReportVTbl*
-  end
+  @[Extern]
+  record GNSS_V2UPL_CONFIG,
+    size : UInt32,
+    version : UInt32,
+    mpc : Win32cr::Foundation::CHAR[260],
+    pde : Win32cr::Foundation::CHAR[260],
+    application_type_indicator_mr : UInt8,
+    unused : UInt8[512]
 
-  struct ILatLongReportVTbl
-    query_interface : Proc(ILatLongReport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILatLongReport*, UInt32)
-    release : Proc(ILatLongReport*, UInt32)
-    get_sensor_id : Proc(ILatLongReport*, Guid*, HRESULT)
-    get_timestamp : Proc(ILatLongReport*, SYSTEMTIME*, HRESULT)
-    get_value : Proc(ILatLongReport*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
-    get_latitude : Proc(ILatLongReport*, Float64*, HRESULT)
-    get_longitude : Proc(ILatLongReport*, Float64*, HRESULT)
-    get_error_radius : Proc(ILatLongReport*, Float64*, HRESULT)
-    get_altitude : Proc(ILatLongReport*, Float64*, HRESULT)
-    get_altitude_error : Proc(ILatLongReport*, Float64*, HRESULT)
-  end
+  @[Extern]
+  record GNSS_NI_RESPONSE,
+    size : UInt32,
+    version : UInt32,
+    request_id : UInt32,
+    user_response : Win32cr::Devices::Geolocation::GNSS_NI_USER_RESPONSE
 
-  ILatLongReport_GUID = "7fed806d-0ef8-4f07-80ac-36a0beae3134"
-  IID_ILatLongReport = LibC::GUID.new(0x7fed806d_u32, 0xef8_u16, 0x4f07_u16, StaticArray[0x80_u8, 0xac_u8, 0x36_u8, 0xa0_u8, 0xbe_u8, 0xae_u8, 0x31_u8, 0x34_u8])
-  struct ILatLongReport
-    lpVtbl : ILatLongReportVTbl*
-  end
+  @[Extern]
+  record GNSS_CWTESTDATA,
+    size : UInt32,
+    version : UInt32,
+    test_result_status : Win32cr::Foundation::NTSTATUS,
+    signal_to_noise_ratio : Float64,
+    frequency : Float64,
+    unused : UInt8[512]
 
-  struct ICivicAddressReportVTbl
-    query_interface : Proc(ICivicAddressReport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICivicAddressReport*, UInt32)
-    release : Proc(ICivicAddressReport*, UInt32)
-    get_sensor_id : Proc(ICivicAddressReport*, Guid*, HRESULT)
-    get_timestamp : Proc(ICivicAddressReport*, SYSTEMTIME*, HRESULT)
-    get_value : Proc(ICivicAddressReport*, PROPERTYKEY*, PROPVARIANT*, HRESULT)
-    get_address_line1 : Proc(ICivicAddressReport*, UInt8**, HRESULT)
-    get_address_line2 : Proc(ICivicAddressReport*, UInt8**, HRESULT)
-    get_city : Proc(ICivicAddressReport*, UInt8**, HRESULT)
-    get_state_province : Proc(ICivicAddressReport*, UInt8**, HRESULT)
-    get_postal_code : Proc(ICivicAddressReport*, UInt8**, HRESULT)
-    get_country_region : Proc(ICivicAddressReport*, UInt8**, HRESULT)
-    get_detail_level : Proc(ICivicAddressReport*, UInt32*, HRESULT)
-  end
+  @[Extern]
+  record GNSS_SELFTESTCONFIG,
+    size : UInt32,
+    version : UInt32,
+    test_type : UInt32,
+    unused : UInt8[512],
+    in_buf_len : UInt32,
+    in_buffer : UInt8*
 
-  ICivicAddressReport_GUID = "c0b19f70-4adf-445d-87f2-cad8fd711792"
-  IID_ICivicAddressReport = LibC::GUID.new(0xc0b19f70_u32, 0x4adf_u16, 0x445d_u16, StaticArray[0x87_u8, 0xf2_u8, 0xca_u8, 0xd8_u8, 0xfd_u8, 0x71_u8, 0x17_u8, 0x92_u8])
-  struct ICivicAddressReport
-    lpVtbl : ICivicAddressReportVTbl*
-  end
+  @[Extern]
+  record GNSS_SELFTESTRESULT,
+    size : UInt32,
+    version : UInt32,
+    test_result_status : Win32cr::Foundation::NTSTATUS,
+    result : UInt32,
+    pin_failed_bit_mask : UInt32,
+    unused : UInt8[512],
+    out_buf_len : UInt32,
+    out_buffer : UInt8*
 
-  struct ILocationVTbl
-    query_interface : Proc(ILocation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILocation*, UInt32)
-    release : Proc(ILocation*, UInt32)
-    register_for_report : Proc(ILocation*, ILocationEvents, Guid*, UInt32, HRESULT)
-    unregister_for_report : Proc(ILocation*, Guid*, HRESULT)
-    get_report : Proc(ILocation*, Guid*, ILocationReport*, HRESULT)
-    get_report_status : Proc(ILocation*, Guid*, LOCATION_REPORT_STATUS*, HRESULT)
-    get_report_interval : Proc(ILocation*, Guid*, UInt32*, HRESULT)
-    set_report_interval : Proc(ILocation*, Guid*, UInt32, HRESULT)
-    get_desired_accuracy : Proc(ILocation*, Guid*, LOCATION_DESIRED_ACCURACY*, HRESULT)
-    set_desired_accuracy : Proc(ILocation*, Guid*, LOCATION_DESIRED_ACCURACY, HRESULT)
-    request_permissions : Proc(ILocation*, LibC::HANDLE, Guid*, UInt32, LibC::BOOL, HRESULT)
-  end
+  @[Extern]
+  record GNSS_CHIPSETINFO,
+    size : UInt32,
+    version : UInt32,
+    manufacturer_id : UInt16[25],
+    hardware_id : UInt16[25],
+    firmware_version : UInt16[20],
+    unused : UInt8[512]
 
-  ILocation_GUID = "ab2ece69-56d9-4f28-b525-de1b0ee44237"
-  IID_ILocation = LibC::GUID.new(0xab2ece69_u32, 0x56d9_u16, 0x4f28_u16, StaticArray[0xb5_u8, 0x25_u8, 0xde_u8, 0x1b_u8, 0xe_u8, 0xe4_u8, 0x42_u8, 0x37_u8])
-  struct ILocation
-    lpVtbl : ILocationVTbl*
-  end
+  @[Extern]
+  record ILocationReportVtbl,
+    query_interface : Proc(ILocationReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ILocationReport*, UInt32),
+    release : Proc(ILocationReport*, UInt32),
+    get_sensor_id : Proc(ILocationReport*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_timestamp : Proc(ILocationReport*, Win32cr::Foundation::SYSTEMTIME*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(ILocationReport*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT)
 
-  struct ILocationPowerVTbl
-    query_interface : Proc(ILocationPower*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILocationPower*, UInt32)
-    release : Proc(ILocationPower*, UInt32)
-    connect : Proc(ILocationPower*, HRESULT)
-    disconnect : Proc(ILocationPower*, HRESULT)
-  end
 
-  ILocationPower_GUID = "193e7729-ab6b-4b12-8617-7596e1bb191c"
-  IID_ILocationPower = LibC::GUID.new(0x193e7729_u32, 0xab6b_u16, 0x4b12_u16, StaticArray[0x86_u8, 0x17_u8, 0x75_u8, 0x96_u8, 0xe1_u8, 0xbb_u8, 0x19_u8, 0x1c_u8])
-  struct ILocationPower
-    lpVtbl : ILocationPowerVTbl*
-  end
+  @[Extern]
+  #@[Com("c8b7f7ee-75d0-4db9-b62d-7a0f369ca456")]
+  record ILocationReport, lpVtbl : ILocationReportVtbl* do
+    GUID = LibC::GUID.new(0xc8b7f7ee_u32, 0x75d0_u16, 0x4db9_u16, StaticArray[0xb6_u8, 0x2d_u8, 0x7a_u8, 0xf_u8, 0x36_u8, 0x9c_u8, 0xa4_u8, 0x56_u8])
+    def query_interface(this : ILocationReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ILocationReport*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ILocationReport*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_sensor_id(this : ILocationReport*, pSensorID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_sensor_id.call(this, pSensorID)
+    end
+    def get_timestamp(this : ILocationReport*, pCreationTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_timestamp.call(this, pCreationTime)
+    end
+    def get_value(this : ILocationReport*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_value.call(this, pKey, pValue)
+    end
 
-  struct IDefaultLocationVTbl
-    query_interface : Proc(IDefaultLocation*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDefaultLocation*, UInt32)
-    release : Proc(IDefaultLocation*, UInt32)
-    set_report : Proc(IDefaultLocation*, Guid*, ILocationReport, HRESULT)
-    get_report : Proc(IDefaultLocation*, Guid*, ILocationReport*, HRESULT)
-  end
-
-  IDefaultLocation_GUID = "a65af77e-969a-4a2e-8aca-33bb7cbb1235"
-  IID_IDefaultLocation = LibC::GUID.new(0xa65af77e_u32, 0x969a_u16, 0x4a2e_u16, StaticArray[0x8a_u8, 0xca_u8, 0x33_u8, 0xbb_u8, 0x7c_u8, 0xbb_u8, 0x12_u8, 0x35_u8])
-  struct IDefaultLocation
-    lpVtbl : IDefaultLocationVTbl*
-  end
-
-  struct ILocationEventsVTbl
-    query_interface : Proc(ILocationEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILocationEvents*, UInt32)
-    release : Proc(ILocationEvents*, UInt32)
-    on_location_changed : Proc(ILocationEvents*, Guid*, ILocationReport, HRESULT)
-    on_status_changed : Proc(ILocationEvents*, Guid*, LOCATION_REPORT_STATUS, HRESULT)
   end
 
-  ILocationEvents_GUID = "cae02bbf-798b-4508-a207-35a7906dc73d"
-  IID_ILocationEvents = LibC::GUID.new(0xcae02bbf_u32, 0x798b_u16, 0x4508_u16, StaticArray[0xa2_u8, 0x7_u8, 0x35_u8, 0xa7_u8, 0x90_u8, 0x6d_u8, 0xc7_u8, 0x3d_u8])
-  struct ILocationEvents
-    lpVtbl : ILocationEventsVTbl*
+  @[Extern]
+  record ILatLongReportVtbl,
+    query_interface : Proc(ILatLongReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ILatLongReport*, UInt32),
+    release : Proc(ILatLongReport*, UInt32),
+    get_sensor_id : Proc(ILatLongReport*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_timestamp : Proc(ILatLongReport*, Win32cr::Foundation::SYSTEMTIME*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(ILatLongReport*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    get_latitude : Proc(ILatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
+    get_longitude : Proc(ILatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
+    get_error_radius : Proc(ILatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
+    get_altitude : Proc(ILatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
+    get_altitude_error : Proc(ILatLongReport*, Float64*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("7fed806d-0ef8-4f07-80ac-36a0beae3134")]
+  record ILatLongReport, lpVtbl : ILatLongReportVtbl* do
+    GUID = LibC::GUID.new(0x7fed806d_u32, 0xef8_u16, 0x4f07_u16, StaticArray[0x80_u8, 0xac_u8, 0x36_u8, 0xa0_u8, 0xbe_u8, 0xae_u8, 0x31_u8, 0x34_u8])
+    def query_interface(this : ILatLongReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ILatLongReport*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ILatLongReport*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_sensor_id(this : ILatLongReport*, pSensorID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_sensor_id.call(this, pSensorID)
+    end
+    def get_timestamp(this : ILatLongReport*, pCreationTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_timestamp.call(this, pCreationTime)
+    end
+    def get_value(this : ILatLongReport*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_value.call(this, pKey, pValue)
+    end
+    def get_latitude(this : ILatLongReport*, pLatitude : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_latitude.call(this, pLatitude)
+    end
+    def get_longitude(this : ILatLongReport*, pLongitude : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_longitude.call(this, pLongitude)
+    end
+    def get_error_radius(this : ILatLongReport*, pErrorRadius : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_error_radius.call(this, pErrorRadius)
+    end
+    def get_altitude(this : ILatLongReport*, pAltitude : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_altitude.call(this, pAltitude)
+    end
+    def get_altitude_error(this : ILatLongReport*, pAltitudeError : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_altitude_error.call(this, pAltitudeError)
+    end
+
   end
 
-  struct IDispLatLongReportVTbl
-    query_interface : Proc(IDispLatLongReport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDispLatLongReport*, UInt32)
-    release : Proc(IDispLatLongReport*, UInt32)
-    get_type_info_count : Proc(IDispLatLongReport*, UInt32*, HRESULT)
-    get_type_info : Proc(IDispLatLongReport*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDispLatLongReport*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDispLatLongReport*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_latitude : Proc(IDispLatLongReport*, Float64*, HRESULT)
-    get_longitude : Proc(IDispLatLongReport*, Float64*, HRESULT)
-    get_error_radius : Proc(IDispLatLongReport*, Float64*, HRESULT)
-    get_altitude : Proc(IDispLatLongReport*, Float64*, HRESULT)
-    get_altitude_error : Proc(IDispLatLongReport*, Float64*, HRESULT)
-    get_timestamp : Proc(IDispLatLongReport*, Float64*, HRESULT)
+  @[Extern]
+  record ICivicAddressReportVtbl,
+    query_interface : Proc(ICivicAddressReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ICivicAddressReport*, UInt32),
+    release : Proc(ICivicAddressReport*, UInt32),
+    get_sensor_id : Proc(ICivicAddressReport*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_timestamp : Proc(ICivicAddressReport*, Win32cr::Foundation::SYSTEMTIME*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(ICivicAddressReport*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    get_address_line1 : Proc(ICivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_address_line2 : Proc(ICivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_city : Proc(ICivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_state_province : Proc(ICivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_postal_code : Proc(ICivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_country_region : Proc(ICivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_detail_level : Proc(ICivicAddressReport*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c0b19f70-4adf-445d-87f2-cad8fd711792")]
+  record ICivicAddressReport, lpVtbl : ICivicAddressReportVtbl* do
+    GUID = LibC::GUID.new(0xc0b19f70_u32, 0x4adf_u16, 0x445d_u16, StaticArray[0x87_u8, 0xf2_u8, 0xca_u8, 0xd8_u8, 0xfd_u8, 0x71_u8, 0x17_u8, 0x92_u8])
+    def query_interface(this : ICivicAddressReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ICivicAddressReport*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ICivicAddressReport*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_sensor_id(this : ICivicAddressReport*, pSensorID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_sensor_id.call(this, pSensorID)
+    end
+    def get_timestamp(this : ICivicAddressReport*, pCreationTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_timestamp.call(this, pCreationTime)
+    end
+    def get_value(this : ICivicAddressReport*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_value.call(this, pKey, pValue)
+    end
+    def get_address_line1(this : ICivicAddressReport*, pbstrAddress1 : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_address_line1.call(this, pbstrAddress1)
+    end
+    def get_address_line2(this : ICivicAddressReport*, pbstrAddress2 : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_address_line2.call(this, pbstrAddress2)
+    end
+    def get_city(this : ICivicAddressReport*, pbstrCity : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_city.call(this, pbstrCity)
+    end
+    def get_state_province(this : ICivicAddressReport*, pbstrStateProvince : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_state_province.call(this, pbstrStateProvince)
+    end
+    def get_postal_code(this : ICivicAddressReport*, pbstrPostalCode : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_postal_code.call(this, pbstrPostalCode)
+    end
+    def get_country_region(this : ICivicAddressReport*, pbstrCountryRegion : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_country_region.call(this, pbstrCountryRegion)
+    end
+    def get_detail_level(this : ICivicAddressReport*, pDetailLevel : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_detail_level.call(this, pDetailLevel)
+    end
+
   end
 
-  IDispLatLongReport_GUID = "8ae32723-389b-4a11-9957-5bdd48fc9617"
-  IID_IDispLatLongReport = LibC::GUID.new(0x8ae32723_u32, 0x389b_u16, 0x4a11_u16, StaticArray[0x99_u8, 0x57_u8, 0x5b_u8, 0xdd_u8, 0x48_u8, 0xfc_u8, 0x96_u8, 0x17_u8])
-  struct IDispLatLongReport
-    lpVtbl : IDispLatLongReportVTbl*
+  @[Extern]
+  record ILocationVtbl,
+    query_interface : Proc(ILocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ILocation*, UInt32),
+    release : Proc(ILocation*, UInt32),
+    register_for_report : Proc(ILocation*, Void*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    unregister_for_report : Proc(ILocation*, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_report : Proc(ILocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_report_status : Proc(ILocation*, LibC::GUID*, Win32cr::Devices::Geolocation::LOCATION_REPORT_STATUS*, Win32cr::Foundation::HRESULT),
+    get_report_interval : Proc(ILocation*, LibC::GUID*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_report_interval : Proc(ILocation*, LibC::GUID*, UInt32, Win32cr::Foundation::HRESULT),
+    get_desired_accuracy : Proc(ILocation*, LibC::GUID*, Win32cr::Devices::Sensors::LOCATION_DESIRED_ACCURACY*, Win32cr::Foundation::HRESULT),
+    set_desired_accuracy : Proc(ILocation*, LibC::GUID*, Win32cr::Devices::Sensors::LOCATION_DESIRED_ACCURACY, Win32cr::Foundation::HRESULT),
+    request_permissions : Proc(ILocation*, Win32cr::Foundation::HWND, LibC::GUID*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("ab2ece69-56d9-4f28-b525-de1b0ee44237")]
+  record ILocation, lpVtbl : ILocationVtbl* do
+    GUID = LibC::GUID.new(0xab2ece69_u32, 0x56d9_u16, 0x4f28_u16, StaticArray[0xb5_u8, 0x25_u8, 0xde_u8, 0x1b_u8, 0xe_u8, 0xe4_u8, 0x42_u8, 0x37_u8])
+    def query_interface(this : ILocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ILocation*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ILocation*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def register_for_report(this : ILocation*, pEvents : Void*, reportType : LibC::GUID*, dwRequestedReportInterval : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_for_report.call(this, pEvents, reportType, dwRequestedReportInterval)
+    end
+    def unregister_for_report(this : ILocation*, reportType : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_for_report.call(this, reportType)
+    end
+    def get_report(this : ILocation*, reportType : LibC::GUID*, ppLocationReport : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_report.call(this, reportType, ppLocationReport)
+    end
+    def get_report_status(this : ILocation*, reportType : LibC::GUID*, pStatus : Win32cr::Devices::Geolocation::LOCATION_REPORT_STATUS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_report_status.call(this, reportType, pStatus)
+    end
+    def get_report_interval(this : ILocation*, reportType : LibC::GUID*, pMilliseconds : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_report_interval.call(this, reportType, pMilliseconds)
+    end
+    def set_report_interval(this : ILocation*, reportType : LibC::GUID*, millisecondsRequested : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_report_interval.call(this, reportType, millisecondsRequested)
+    end
+    def get_desired_accuracy(this : ILocation*, reportType : LibC::GUID*, pDesiredAccuracy : Win32cr::Devices::Sensors::LOCATION_DESIRED_ACCURACY*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_desired_accuracy.call(this, reportType, pDesiredAccuracy)
+    end
+    def set_desired_accuracy(this : ILocation*, reportType : LibC::GUID*, desiredAccuracy : Win32cr::Devices::Sensors::LOCATION_DESIRED_ACCURACY) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_desired_accuracy.call(this, reportType, desiredAccuracy)
+    end
+    def request_permissions(this : ILocation*, hParent : Win32cr::Foundation::HWND, pReportTypes : LibC::GUID*, count : UInt32, fModal : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.request_permissions.call(this, hParent, pReportTypes, count, fModal)
+    end
+
   end
 
-  struct IDispCivicAddressReportVTbl
-    query_interface : Proc(IDispCivicAddressReport*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IDispCivicAddressReport*, UInt32)
-    release : Proc(IDispCivicAddressReport*, UInt32)
-    get_type_info_count : Proc(IDispCivicAddressReport*, UInt32*, HRESULT)
-    get_type_info : Proc(IDispCivicAddressReport*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IDispCivicAddressReport*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IDispCivicAddressReport*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    get_address_line1 : Proc(IDispCivicAddressReport*, UInt8**, HRESULT)
-    get_address_line2 : Proc(IDispCivicAddressReport*, UInt8**, HRESULT)
-    get_city : Proc(IDispCivicAddressReport*, UInt8**, HRESULT)
-    get_state_province : Proc(IDispCivicAddressReport*, UInt8**, HRESULT)
-    get_postal_code : Proc(IDispCivicAddressReport*, UInt8**, HRESULT)
-    get_country_region : Proc(IDispCivicAddressReport*, UInt8**, HRESULT)
-    get_detail_level : Proc(IDispCivicAddressReport*, UInt32*, HRESULT)
-    get_timestamp : Proc(IDispCivicAddressReport*, Float64*, HRESULT)
+  @[Extern]
+  record ILocationPowerVtbl,
+    query_interface : Proc(ILocationPower*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ILocationPower*, UInt32),
+    release : Proc(ILocationPower*, UInt32),
+    connect : Proc(ILocationPower*, Win32cr::Foundation::HRESULT),
+    disconnect : Proc(ILocationPower*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("193e7729-ab6b-4b12-8617-7596e1bb191c")]
+  record ILocationPower, lpVtbl : ILocationPowerVtbl* do
+    GUID = LibC::GUID.new(0x193e7729_u32, 0xab6b_u16, 0x4b12_u16, StaticArray[0x86_u8, 0x17_u8, 0x75_u8, 0x96_u8, 0xe1_u8, 0xbb_u8, 0x19_u8, 0x1c_u8])
+    def query_interface(this : ILocationPower*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ILocationPower*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ILocationPower*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def connect(this : ILocationPower*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.connect.call(this)
+    end
+    def disconnect(this : ILocationPower*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.disconnect.call(this)
+    end
+
   end
 
-  IDispCivicAddressReport_GUID = "16ff1a34-9e30-42c3-b44d-e22513b5767a"
-  IID_IDispCivicAddressReport = LibC::GUID.new(0x16ff1a34_u32, 0x9e30_u16, 0x42c3_u16, StaticArray[0xb4_u8, 0x4d_u8, 0xe2_u8, 0x25_u8, 0x13_u8, 0xb5_u8, 0x76_u8, 0x7a_u8])
-  struct IDispCivicAddressReport
-    lpVtbl : IDispCivicAddressReportVTbl*
+  @[Extern]
+  record IDefaultLocationVtbl,
+    query_interface : Proc(IDefaultLocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDefaultLocation*, UInt32),
+    release : Proc(IDefaultLocation*, UInt32),
+    set_report : Proc(IDefaultLocation*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
+    get_report : Proc(IDefaultLocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("a65af77e-969a-4a2e-8aca-33bb7cbb1235")]
+  record IDefaultLocation, lpVtbl : IDefaultLocationVtbl* do
+    GUID = LibC::GUID.new(0xa65af77e_u32, 0x969a_u16, 0x4a2e_u16, StaticArray[0x8a_u8, 0xca_u8, 0x33_u8, 0xbb_u8, 0x7c_u8, 0xbb_u8, 0x12_u8, 0x35_u8])
+    def query_interface(this : IDefaultLocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDefaultLocation*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDefaultLocation*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set_report(this : IDefaultLocation*, reportType : LibC::GUID*, pLocationReport : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_report.call(this, reportType, pLocationReport)
+    end
+    def get_report(this : IDefaultLocation*, reportType : LibC::GUID*, ppLocationReport : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_report.call(this, reportType, ppLocationReport)
+    end
+
   end
 
-  struct ILocationReportFactoryVTbl
-    query_interface : Proc(ILocationReportFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILocationReportFactory*, UInt32)
-    release : Proc(ILocationReportFactory*, UInt32)
-    get_type_info_count : Proc(ILocationReportFactory*, UInt32*, HRESULT)
-    get_type_info : Proc(ILocationReportFactory*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ILocationReportFactory*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ILocationReportFactory*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    listen_for_reports : Proc(ILocationReportFactory*, UInt32, HRESULT)
-    stop_listening_for_reports : Proc(ILocationReportFactory*, HRESULT)
-    get_status : Proc(ILocationReportFactory*, UInt32*, HRESULT)
-    get_report_interval : Proc(ILocationReportFactory*, UInt32*, HRESULT)
-    put_report_interval : Proc(ILocationReportFactory*, UInt32, HRESULT)
-    get_desired_accuracy : Proc(ILocationReportFactory*, UInt32*, HRESULT)
-    put_desired_accuracy : Proc(ILocationReportFactory*, UInt32, HRESULT)
-    request_permissions : Proc(ILocationReportFactory*, UInt32*, HRESULT)
+  @[Extern]
+  record ILocationEventsVtbl,
+    query_interface : Proc(ILocationEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ILocationEvents*, UInt32),
+    release : Proc(ILocationEvents*, UInt32),
+    on_location_changed : Proc(ILocationEvents*, LibC::GUID*, Void*, Win32cr::Foundation::HRESULT),
+    on_status_changed : Proc(ILocationEvents*, LibC::GUID*, Win32cr::Devices::Geolocation::LOCATION_REPORT_STATUS, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("cae02bbf-798b-4508-a207-35a7906dc73d")]
+  record ILocationEvents, lpVtbl : ILocationEventsVtbl* do
+    GUID = LibC::GUID.new(0xcae02bbf_u32, 0x798b_u16, 0x4508_u16, StaticArray[0xa2_u8, 0x7_u8, 0x35_u8, 0xa7_u8, 0x90_u8, 0x6d_u8, 0xc7_u8, 0x3d_u8])
+    def query_interface(this : ILocationEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ILocationEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ILocationEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def on_location_changed(this : ILocationEvents*, reportType : LibC::GUID*, pLocationReport : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_location_changed.call(this, reportType, pLocationReport)
+    end
+    def on_status_changed(this : ILocationEvents*, reportType : LibC::GUID*, newStatus : Win32cr::Devices::Geolocation::LOCATION_REPORT_STATUS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_status_changed.call(this, reportType, newStatus)
+    end
+
   end
 
-  ILocationReportFactory_GUID = "2daec322-90b2-47e4-bb08-0da841935a6b"
-  IID_ILocationReportFactory = LibC::GUID.new(0x2daec322_u32, 0x90b2_u16, 0x47e4_u16, StaticArray[0xbb_u8, 0x8_u8, 0xd_u8, 0xa8_u8, 0x41_u8, 0x93_u8, 0x5a_u8, 0x6b_u8])
-  struct ILocationReportFactory
-    lpVtbl : ILocationReportFactoryVTbl*
+  @[Extern]
+  record IDispLatLongReportVtbl,
+    query_interface : Proc(IDispLatLongReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDispLatLongReport*, UInt32),
+    release : Proc(IDispLatLongReport*, UInt32),
+    get_type_info_count : Proc(IDispLatLongReport*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDispLatLongReport*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDispLatLongReport*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDispLatLongReport*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Latitude : Proc(IDispLatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
+    get_Longitude : Proc(IDispLatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
+    get_ErrorRadius : Proc(IDispLatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
+    get_Altitude : Proc(IDispLatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
+    get_AltitudeError : Proc(IDispLatLongReport*, Float64*, Win32cr::Foundation::HRESULT),
+    get_Timestamp : Proc(IDispLatLongReport*, Float64*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("8ae32723-389b-4a11-9957-5bdd48fc9617")]
+  record IDispLatLongReport, lpVtbl : IDispLatLongReportVtbl* do
+    GUID = LibC::GUID.new(0x8ae32723_u32, 0x389b_u16, 0x4a11_u16, StaticArray[0x99_u8, 0x57_u8, 0x5b_u8, 0xdd_u8, 0x48_u8, 0xfc_u8, 0x96_u8, 0x17_u8])
+    def query_interface(this : IDispLatLongReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDispLatLongReport*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDispLatLongReport*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDispLatLongReport*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDispLatLongReport*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDispLatLongReport*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDispLatLongReport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_Latitude(this : IDispLatLongReport*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Latitude.call(this, pVal)
+    end
+    def get_Longitude(this : IDispLatLongReport*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Longitude.call(this, pVal)
+    end
+    def get_ErrorRadius(this : IDispLatLongReport*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ErrorRadius.call(this, pVal)
+    end
+    def get_Altitude(this : IDispLatLongReport*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Altitude.call(this, pVal)
+    end
+    def get_AltitudeError(this : IDispLatLongReport*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AltitudeError.call(this, pVal)
+    end
+    def get_Timestamp(this : IDispLatLongReport*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Timestamp.call(this, pVal)
+    end
+
   end
 
-  struct ILatLongReportFactoryVTbl
-    query_interface : Proc(ILatLongReportFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ILatLongReportFactory*, UInt32)
-    release : Proc(ILatLongReportFactory*, UInt32)
-    get_type_info_count : Proc(ILatLongReportFactory*, UInt32*, HRESULT)
-    get_type_info : Proc(ILatLongReportFactory*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ILatLongReportFactory*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ILatLongReportFactory*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    listen_for_reports : Proc(ILatLongReportFactory*, UInt32, HRESULT)
-    stop_listening_for_reports : Proc(ILatLongReportFactory*, HRESULT)
-    get_status : Proc(ILatLongReportFactory*, UInt32*, HRESULT)
-    get_report_interval : Proc(ILatLongReportFactory*, UInt32*, HRESULT)
-    put_report_interval : Proc(ILatLongReportFactory*, UInt32, HRESULT)
-    get_desired_accuracy : Proc(ILatLongReportFactory*, UInt32*, HRESULT)
-    put_desired_accuracy : Proc(ILatLongReportFactory*, UInt32, HRESULT)
-    request_permissions : Proc(ILatLongReportFactory*, UInt32*, HRESULT)
-    get_lat_long_report : Proc(ILatLongReportFactory*, IDispLatLongReport*, HRESULT)
+  @[Extern]
+  record IDispCivicAddressReportVtbl,
+    query_interface : Proc(IDispCivicAddressReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IDispCivicAddressReport*, UInt32),
+    release : Proc(IDispCivicAddressReport*, UInt32),
+    get_type_info_count : Proc(IDispCivicAddressReport*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(IDispCivicAddressReport*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(IDispCivicAddressReport*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(IDispCivicAddressReport*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_AddressLine1 : Proc(IDispCivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_AddressLine2 : Proc(IDispCivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_City : Proc(IDispCivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_StateProvince : Proc(IDispCivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_PostalCode : Proc(IDispCivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_CountryRegion : Proc(IDispCivicAddressReport*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_DetailLevel : Proc(IDispCivicAddressReport*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Timestamp : Proc(IDispCivicAddressReport*, Float64*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("16ff1a34-9e30-42c3-b44d-e22513b5767a")]
+  record IDispCivicAddressReport, lpVtbl : IDispCivicAddressReportVtbl* do
+    GUID = LibC::GUID.new(0x16ff1a34_u32, 0x9e30_u16, 0x42c3_u16, StaticArray[0xb4_u8, 0x4d_u8, 0xe2_u8, 0x25_u8, 0x13_u8, 0xb5_u8, 0x76_u8, 0x7a_u8])
+    def query_interface(this : IDispCivicAddressReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IDispCivicAddressReport*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IDispCivicAddressReport*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : IDispCivicAddressReport*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : IDispCivicAddressReport*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : IDispCivicAddressReport*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : IDispCivicAddressReport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def get_AddressLine1(this : IDispCivicAddressReport*, pAddress1 : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AddressLine1.call(this, pAddress1)
+    end
+    def get_AddressLine2(this : IDispCivicAddressReport*, pAddress2 : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_AddressLine2.call(this, pAddress2)
+    end
+    def get_City(this : IDispCivicAddressReport*, pCity : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_City.call(this, pCity)
+    end
+    def get_StateProvince(this : IDispCivicAddressReport*, pStateProvince : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_StateProvince.call(this, pStateProvince)
+    end
+    def get_PostalCode(this : IDispCivicAddressReport*, pPostalCode : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_PostalCode.call(this, pPostalCode)
+    end
+    def get_CountryRegion(this : IDispCivicAddressReport*, pCountryRegion : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CountryRegion.call(this, pCountryRegion)
+    end
+    def get_DetailLevel(this : IDispCivicAddressReport*, pDetailLevel : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DetailLevel.call(this, pDetailLevel)
+    end
+    def get_Timestamp(this : IDispCivicAddressReport*, pVal : Float64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Timestamp.call(this, pVal)
+    end
+
   end
 
-  ILatLongReportFactory_GUID = "3f0804cb-b114-447d-83dd-390174ebb082"
-  IID_ILatLongReportFactory = LibC::GUID.new(0x3f0804cb_u32, 0xb114_u16, 0x447d_u16, StaticArray[0x83_u8, 0xdd_u8, 0x39_u8, 0x1_u8, 0x74_u8, 0xeb_u8, 0xb0_u8, 0x82_u8])
-  struct ILatLongReportFactory
-    lpVtbl : ILatLongReportFactoryVTbl*
+  @[Extern]
+  record ILocationReportFactoryVtbl,
+    query_interface : Proc(ILocationReportFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ILocationReportFactory*, UInt32),
+    release : Proc(ILocationReportFactory*, UInt32),
+    get_type_info_count : Proc(ILocationReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ILocationReportFactory*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ILocationReportFactory*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ILocationReportFactory*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    listen_for_reports : Proc(ILocationReportFactory*, UInt32, Win32cr::Foundation::HRESULT),
+    stop_listening_for_reports : Proc(ILocationReportFactory*, Win32cr::Foundation::HRESULT),
+    get_Status : Proc(ILocationReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ReportInterval : Proc(ILocationReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_ReportInterval : Proc(ILocationReportFactory*, UInt32, Win32cr::Foundation::HRESULT),
+    get_DesiredAccuracy : Proc(ILocationReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_DesiredAccuracy : Proc(ILocationReportFactory*, UInt32, Win32cr::Foundation::HRESULT),
+    request_permissions : Proc(ILocationReportFactory*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("2daec322-90b2-47e4-bb08-0da841935a6b")]
+  record ILocationReportFactory, lpVtbl : ILocationReportFactoryVtbl* do
+    GUID = LibC::GUID.new(0x2daec322_u32, 0x90b2_u16, 0x47e4_u16, StaticArray[0xbb_u8, 0x8_u8, 0xd_u8, 0xa8_u8, 0x41_u8, 0x93_u8, 0x5a_u8, 0x6b_u8])
+    def query_interface(this : ILocationReportFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ILocationReportFactory*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ILocationReportFactory*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ILocationReportFactory*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ILocationReportFactory*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ILocationReportFactory*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ILocationReportFactory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def listen_for_reports(this : ILocationReportFactory*, requestedReportInterval : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.listen_for_reports.call(this, requestedReportInterval)
+    end
+    def stop_listening_for_reports(this : ILocationReportFactory*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stop_listening_for_reports.call(this)
+    end
+    def get_Status(this : ILocationReportFactory*, pVal : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Status.call(this, pVal)
+    end
+    def get_ReportInterval(this : ILocationReportFactory*, pMilliseconds : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ReportInterval.call(this, pMilliseconds)
+    end
+    def put_ReportInterval(this : ILocationReportFactory*, millisecondsRequested : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ReportInterval.call(this, millisecondsRequested)
+    end
+    def get_DesiredAccuracy(this : ILocationReportFactory*, pDesiredAccuracy : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DesiredAccuracy.call(this, pDesiredAccuracy)
+    end
+    def put_DesiredAccuracy(this : ILocationReportFactory*, desiredAccuracy : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DesiredAccuracy.call(this, desiredAccuracy)
+    end
+    def request_permissions(this : ILocationReportFactory*, hWnd : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.request_permissions.call(this, hWnd)
+    end
+
   end
 
-  struct ICivicAddressReportFactoryVTbl
-    query_interface : Proc(ICivicAddressReportFactory*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICivicAddressReportFactory*, UInt32)
-    release : Proc(ICivicAddressReportFactory*, UInt32)
-    get_type_info_count : Proc(ICivicAddressReportFactory*, UInt32*, HRESULT)
-    get_type_info : Proc(ICivicAddressReportFactory*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(ICivicAddressReportFactory*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(ICivicAddressReportFactory*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-    listen_for_reports : Proc(ICivicAddressReportFactory*, UInt32, HRESULT)
-    stop_listening_for_reports : Proc(ICivicAddressReportFactory*, HRESULT)
-    get_status : Proc(ICivicAddressReportFactory*, UInt32*, HRESULT)
-    get_report_interval : Proc(ICivicAddressReportFactory*, UInt32*, HRESULT)
-    put_report_interval : Proc(ICivicAddressReportFactory*, UInt32, HRESULT)
-    get_desired_accuracy : Proc(ICivicAddressReportFactory*, UInt32*, HRESULT)
-    put_desired_accuracy : Proc(ICivicAddressReportFactory*, UInt32, HRESULT)
-    request_permissions : Proc(ICivicAddressReportFactory*, UInt32*, HRESULT)
-    get_civic_address_report : Proc(ICivicAddressReportFactory*, IDispCivicAddressReport*, HRESULT)
+  @[Extern]
+  record ILatLongReportFactoryVtbl,
+    query_interface : Proc(ILatLongReportFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ILatLongReportFactory*, UInt32),
+    release : Proc(ILatLongReportFactory*, UInt32),
+    get_type_info_count : Proc(ILatLongReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ILatLongReportFactory*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ILatLongReportFactory*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ILatLongReportFactory*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    listen_for_reports : Proc(ILatLongReportFactory*, UInt32, Win32cr::Foundation::HRESULT),
+    stop_listening_for_reports : Proc(ILatLongReportFactory*, Win32cr::Foundation::HRESULT),
+    get_Status : Proc(ILatLongReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ReportInterval : Proc(ILatLongReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_ReportInterval : Proc(ILatLongReportFactory*, UInt32, Win32cr::Foundation::HRESULT),
+    get_DesiredAccuracy : Proc(ILatLongReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_DesiredAccuracy : Proc(ILatLongReportFactory*, UInt32, Win32cr::Foundation::HRESULT),
+    request_permissions : Proc(ILatLongReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_LatLongReport : Proc(ILatLongReportFactory*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("3f0804cb-b114-447d-83dd-390174ebb082")]
+  record ILatLongReportFactory, lpVtbl : ILatLongReportFactoryVtbl* do
+    GUID = LibC::GUID.new(0x3f0804cb_u32, 0xb114_u16, 0x447d_u16, StaticArray[0x83_u8, 0xdd_u8, 0x39_u8, 0x1_u8, 0x74_u8, 0xeb_u8, 0xb0_u8, 0x82_u8])
+    def query_interface(this : ILatLongReportFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ILatLongReportFactory*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ILatLongReportFactory*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ILatLongReportFactory*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ILatLongReportFactory*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ILatLongReportFactory*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ILatLongReportFactory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def listen_for_reports(this : ILatLongReportFactory*, requestedReportInterval : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.listen_for_reports.call(this, requestedReportInterval)
+    end
+    def stop_listening_for_reports(this : ILatLongReportFactory*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stop_listening_for_reports.call(this)
+    end
+    def get_Status(this : ILatLongReportFactory*, pVal : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Status.call(this, pVal)
+    end
+    def get_ReportInterval(this : ILatLongReportFactory*, pMilliseconds : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ReportInterval.call(this, pMilliseconds)
+    end
+    def put_ReportInterval(this : ILatLongReportFactory*, millisecondsRequested : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ReportInterval.call(this, millisecondsRequested)
+    end
+    def get_DesiredAccuracy(this : ILatLongReportFactory*, pDesiredAccuracy : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DesiredAccuracy.call(this, pDesiredAccuracy)
+    end
+    def put_DesiredAccuracy(this : ILatLongReportFactory*, desiredAccuracy : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DesiredAccuracy.call(this, desiredAccuracy)
+    end
+    def request_permissions(this : ILatLongReportFactory*, hWnd : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.request_permissions.call(this, hWnd)
+    end
+    def get_LatLongReport(this : ILatLongReportFactory*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_LatLongReport.call(this, pVal)
+    end
+
   end
 
-  ICivicAddressReportFactory_GUID = "bf773b93-c64f-4bee-beb2-67c0b8df66e0"
-  IID_ICivicAddressReportFactory = LibC::GUID.new(0xbf773b93_u32, 0xc64f_u16, 0x4bee_u16, StaticArray[0xbe_u8, 0xb2_u8, 0x67_u8, 0xc0_u8, 0xb8_u8, 0xdf_u8, 0x66_u8, 0xe0_u8])
-  struct ICivicAddressReportFactory
-    lpVtbl : ICivicAddressReportFactoryVTbl*
+  @[Extern]
+  record ICivicAddressReportFactoryVtbl,
+    query_interface : Proc(ICivicAddressReportFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ICivicAddressReportFactory*, UInt32),
+    release : Proc(ICivicAddressReportFactory*, UInt32),
+    get_type_info_count : Proc(ICivicAddressReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ICivicAddressReportFactory*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ICivicAddressReportFactory*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ICivicAddressReportFactory*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    listen_for_reports : Proc(ICivicAddressReportFactory*, UInt32, Win32cr::Foundation::HRESULT),
+    stop_listening_for_reports : Proc(ICivicAddressReportFactory*, Win32cr::Foundation::HRESULT),
+    get_Status : Proc(ICivicAddressReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ReportInterval : Proc(ICivicAddressReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_ReportInterval : Proc(ICivicAddressReportFactory*, UInt32, Win32cr::Foundation::HRESULT),
+    get_DesiredAccuracy : Proc(ICivicAddressReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_DesiredAccuracy : Proc(ICivicAddressReportFactory*, UInt32, Win32cr::Foundation::HRESULT),
+    request_permissions : Proc(ICivicAddressReportFactory*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_CivicAddressReport : Proc(ICivicAddressReportFactory*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("bf773b93-c64f-4bee-beb2-67c0b8df66e0")]
+  record ICivicAddressReportFactory, lpVtbl : ICivicAddressReportFactoryVtbl* do
+    GUID = LibC::GUID.new(0xbf773b93_u32, 0xc64f_u16, 0x4bee_u16, StaticArray[0xbe_u8, 0xb2_u8, 0x67_u8, 0xc0_u8, 0xb8_u8, 0xdf_u8, 0x66_u8, 0xe0_u8])
+    def query_interface(this : ICivicAddressReportFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ICivicAddressReportFactory*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ICivicAddressReportFactory*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ICivicAddressReportFactory*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ICivicAddressReportFactory*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ICivicAddressReportFactory*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ICivicAddressReportFactory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def listen_for_reports(this : ICivicAddressReportFactory*, requestedReportInterval : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.listen_for_reports.call(this, requestedReportInterval)
+    end
+    def stop_listening_for_reports(this : ICivicAddressReportFactory*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.stop_listening_for_reports.call(this)
+    end
+    def get_Status(this : ICivicAddressReportFactory*, pVal : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Status.call(this, pVal)
+    end
+    def get_ReportInterval(this : ICivicAddressReportFactory*, pMilliseconds : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ReportInterval.call(this, pMilliseconds)
+    end
+    def put_ReportInterval(this : ICivicAddressReportFactory*, millisecondsRequested : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_ReportInterval.call(this, millisecondsRequested)
+    end
+    def get_DesiredAccuracy(this : ICivicAddressReportFactory*, pDesiredAccuracy : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_DesiredAccuracy.call(this, pDesiredAccuracy)
+    end
+    def put_DesiredAccuracy(this : ICivicAddressReportFactory*, desiredAccuracy : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_DesiredAccuracy.call(this, desiredAccuracy)
+    end
+    def request_permissions(this : ICivicAddressReportFactory*, hWnd : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.request_permissions.call(this, hWnd)
+    end
+    def get_CivicAddressReport(this : ICivicAddressReportFactory*, pVal : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_CivicAddressReport.call(this, pVal)
+    end
+
   end
 
-  struct IILatLongReportFactoryEventsVTbl
-    query_interface : Proc(IILatLongReportFactoryEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IILatLongReportFactoryEvents*, UInt32)
-    release : Proc(IILatLongReportFactoryEvents*, UInt32)
-    get_type_info_count : Proc(IILatLongReportFactoryEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IILatLongReportFactoryEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IILatLongReportFactoryEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IILatLongReportFactoryEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
+  @[Extern]
+  record ILatLongReportFactoryEventsVtbl,
+    query_interface : Proc(ILatLongReportFactoryEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ILatLongReportFactoryEvents*, UInt32),
+    release : Proc(ILatLongReportFactoryEvents*, UInt32),
+    get_type_info_count : Proc(ILatLongReportFactoryEvents*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ILatLongReportFactoryEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ILatLongReportFactoryEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ILatLongReportFactoryEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("16ee6cb7-ab3c-424b-849f-269be551fcbc")]
+  record ILatLongReportFactoryEvents, lpVtbl : ILatLongReportFactoryEventsVtbl* do
+    GUID = LibC::GUID.new(0x16ee6cb7_u32, 0xab3c_u16, 0x424b_u16, StaticArray[0x84_u8, 0x9f_u8, 0x26_u8, 0x9b_u8, 0xe5_u8, 0x51_u8, 0xfc_u8, 0xbc_u8])
+    def query_interface(this : ILatLongReportFactoryEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ILatLongReportFactoryEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ILatLongReportFactoryEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ILatLongReportFactoryEvents*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ILatLongReportFactoryEvents*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ILatLongReportFactoryEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ILatLongReportFactoryEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+
   end
 
-  IILatLongReportFactoryEvents_GUID = "16ee6cb7-ab3c-424b-849f-269be551fcbc"
-  IID_IILatLongReportFactoryEvents = LibC::GUID.new(0x16ee6cb7_u32, 0xab3c_u16, 0x424b_u16, StaticArray[0x84_u8, 0x9f_u8, 0x26_u8, 0x9b_u8, 0xe5_u8, 0x51_u8, 0xfc_u8, 0xbc_u8])
-  struct IILatLongReportFactoryEvents
-    lpVtbl : IILatLongReportFactoryEventsVTbl*
+  @[Extern]
+  record ICivicAddressReportFactoryEventsVtbl,
+    query_interface : Proc(ICivicAddressReportFactoryEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ICivicAddressReportFactoryEvents*, UInt32),
+    release : Proc(ICivicAddressReportFactoryEvents*, UInt32),
+    get_type_info_count : Proc(ICivicAddressReportFactoryEvents*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_type_info : Proc(ICivicAddressReportFactoryEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    get_i_ds_of_names : Proc(ICivicAddressReportFactoryEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
+    invoke_1 : Proc(ICivicAddressReportFactoryEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("c96039ff-72ec-4617-89bd-84d88bedc722")]
+  record ICivicAddressReportFactoryEvents, lpVtbl : ICivicAddressReportFactoryEventsVtbl* do
+    GUID = LibC::GUID.new(0xc96039ff_u32, 0x72ec_u16, 0x4617_u16, StaticArray[0x89_u8, 0xbd_u8, 0x84_u8, 0xd8_u8, 0x8b_u8, 0xed_u8, 0xc7_u8, 0x22_u8])
+    def query_interface(this : ICivicAddressReportFactoryEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ICivicAddressReportFactoryEvents*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ICivicAddressReportFactoryEvents*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_type_info_count(this : ICivicAddressReportFactoryEvents*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    end
+    def get_type_info(this : ICivicAddressReportFactoryEvents*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    end
+    def get_i_ds_of_names(this : ICivicAddressReportFactoryEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    end
+    def invoke_1(this : ICivicAddressReportFactoryEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+
   end
 
-  struct IICivicAddressReportFactoryEventsVTbl
-    query_interface : Proc(IICivicAddressReportFactoryEvents*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IICivicAddressReportFactoryEvents*, UInt32)
-    release : Proc(IICivicAddressReportFactoryEvents*, UInt32)
-    get_type_info_count : Proc(IICivicAddressReportFactoryEvents*, UInt32*, HRESULT)
-    get_type_info : Proc(IICivicAddressReportFactoryEvents*, UInt32, UInt32, ITypeInfo*, HRESULT)
-    get_i_ds_of_names : Proc(IICivicAddressReportFactoryEvents*, Guid*, LibC::LPWSTR*, UInt32, UInt32, Int32*, HRESULT)
-    invoke : Proc(IICivicAddressReportFactoryEvents*, Int32, Guid*, UInt32, UInt16, DISPPARAMS*, VARIANT*, EXCEPINFO*, UInt32*, HRESULT)
-  end
-
-  IICivicAddressReportFactoryEvents_GUID = "c96039ff-72ec-4617-89bd-84d88bedc722"
-  IID_IICivicAddressReportFactoryEvents = LibC::GUID.new(0xc96039ff_u32, 0x72ec_u16, 0x4617_u16, StaticArray[0x89_u8, 0xbd_u8, 0x84_u8, 0xd8_u8, 0x8b_u8, 0xed_u8, 0xc7_u8, 0x22_u8])
-  struct IICivicAddressReportFactoryEvents
-    lpVtbl : IICivicAddressReportFactoryEventsVTbl*
-  end
-
-end
-struct LibWin32::ILocationReport
-  def query_interface(this : ILocationReport*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ILocationReport*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ILocationReport*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_sensor_id(this : ILocationReport*, psensorid : Guid*) : HRESULT
-    @lpVtbl.value.get_sensor_id.call(this, psensorid)
-  end
-  def get_timestamp(this : ILocationReport*, pcreationtime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.get_timestamp.call(this, pcreationtime)
-  end
-  def get_value(this : ILocationReport*, pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value.call(this, pkey, pvalue)
-  end
-end
-struct LibWin32::ILatLongReport
-  def query_interface(this : ILatLongReport*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ILatLongReport*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ILatLongReport*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_sensor_id(this : ILatLongReport*, psensorid : Guid*) : HRESULT
-    @lpVtbl.value.get_sensor_id.call(this, psensorid)
-  end
-  def get_timestamp(this : ILatLongReport*, pcreationtime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.get_timestamp.call(this, pcreationtime)
-  end
-  def get_value(this : ILatLongReport*, pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value.call(this, pkey, pvalue)
-  end
-  def get_latitude(this : ILatLongReport*, platitude : Float64*) : HRESULT
-    @lpVtbl.value.get_latitude.call(this, platitude)
-  end
-  def get_longitude(this : ILatLongReport*, plongitude : Float64*) : HRESULT
-    @lpVtbl.value.get_longitude.call(this, plongitude)
-  end
-  def get_error_radius(this : ILatLongReport*, perrorradius : Float64*) : HRESULT
-    @lpVtbl.value.get_error_radius.call(this, perrorradius)
-  end
-  def get_altitude(this : ILatLongReport*, paltitude : Float64*) : HRESULT
-    @lpVtbl.value.get_altitude.call(this, paltitude)
-  end
-  def get_altitude_error(this : ILatLongReport*, paltitudeerror : Float64*) : HRESULT
-    @lpVtbl.value.get_altitude_error.call(this, paltitudeerror)
-  end
-end
-struct LibWin32::ICivicAddressReport
-  def query_interface(this : ICivicAddressReport*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ICivicAddressReport*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ICivicAddressReport*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_sensor_id(this : ICivicAddressReport*, psensorid : Guid*) : HRESULT
-    @lpVtbl.value.get_sensor_id.call(this, psensorid)
-  end
-  def get_timestamp(this : ICivicAddressReport*, pcreationtime : SYSTEMTIME*) : HRESULT
-    @lpVtbl.value.get_timestamp.call(this, pcreationtime)
-  end
-  def get_value(this : ICivicAddressReport*, pkey : PROPERTYKEY*, pvalue : PROPVARIANT*) : HRESULT
-    @lpVtbl.value.get_value.call(this, pkey, pvalue)
-  end
-  def get_address_line1(this : ICivicAddressReport*, pbstraddress1 : UInt8**) : HRESULT
-    @lpVtbl.value.get_address_line1.call(this, pbstraddress1)
-  end
-  def get_address_line2(this : ICivicAddressReport*, pbstraddress2 : UInt8**) : HRESULT
-    @lpVtbl.value.get_address_line2.call(this, pbstraddress2)
-  end
-  def get_city(this : ICivicAddressReport*, pbstrcity : UInt8**) : HRESULT
-    @lpVtbl.value.get_city.call(this, pbstrcity)
-  end
-  def get_state_province(this : ICivicAddressReport*, pbstrstateprovince : UInt8**) : HRESULT
-    @lpVtbl.value.get_state_province.call(this, pbstrstateprovince)
-  end
-  def get_postal_code(this : ICivicAddressReport*, pbstrpostalcode : UInt8**) : HRESULT
-    @lpVtbl.value.get_postal_code.call(this, pbstrpostalcode)
-  end
-  def get_country_region(this : ICivicAddressReport*, pbstrcountryregion : UInt8**) : HRESULT
-    @lpVtbl.value.get_country_region.call(this, pbstrcountryregion)
-  end
-  def get_detail_level(this : ICivicAddressReport*, pdetaillevel : UInt32*) : HRESULT
-    @lpVtbl.value.get_detail_level.call(this, pdetaillevel)
-  end
-end
-struct LibWin32::ILocation
-  def query_interface(this : ILocation*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ILocation*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ILocation*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def register_for_report(this : ILocation*, pevents : ILocationEvents, reporttype : Guid*, dwrequestedreportinterval : UInt32) : HRESULT
-    @lpVtbl.value.register_for_report.call(this, pevents, reporttype, dwrequestedreportinterval)
-  end
-  def unregister_for_report(this : ILocation*, reporttype : Guid*) : HRESULT
-    @lpVtbl.value.unregister_for_report.call(this, reporttype)
-  end
-  def get_report(this : ILocation*, reporttype : Guid*, pplocationreport : ILocationReport*) : HRESULT
-    @lpVtbl.value.get_report.call(this, reporttype, pplocationreport)
-  end
-  def get_report_status(this : ILocation*, reporttype : Guid*, pstatus : LOCATION_REPORT_STATUS*) : HRESULT
-    @lpVtbl.value.get_report_status.call(this, reporttype, pstatus)
-  end
-  def get_report_interval(this : ILocation*, reporttype : Guid*, pmilliseconds : UInt32*) : HRESULT
-    @lpVtbl.value.get_report_interval.call(this, reporttype, pmilliseconds)
-  end
-  def set_report_interval(this : ILocation*, reporttype : Guid*, millisecondsrequested : UInt32) : HRESULT
-    @lpVtbl.value.set_report_interval.call(this, reporttype, millisecondsrequested)
-  end
-  def get_desired_accuracy(this : ILocation*, reporttype : Guid*, pdesiredaccuracy : LOCATION_DESIRED_ACCURACY*) : HRESULT
-    @lpVtbl.value.get_desired_accuracy.call(this, reporttype, pdesiredaccuracy)
-  end
-  def set_desired_accuracy(this : ILocation*, reporttype : Guid*, desiredaccuracy : LOCATION_DESIRED_ACCURACY) : HRESULT
-    @lpVtbl.value.set_desired_accuracy.call(this, reporttype, desiredaccuracy)
-  end
-  def request_permissions(this : ILocation*, hparent : LibC::HANDLE, preporttypes : Guid*, count : UInt32, fmodal : LibC::BOOL) : HRESULT
-    @lpVtbl.value.request_permissions.call(this, hparent, preporttypes, count, fmodal)
-  end
-end
-struct LibWin32::ILocationPower
-  def query_interface(this : ILocationPower*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ILocationPower*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ILocationPower*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def connect(this : ILocationPower*) : HRESULT
-    @lpVtbl.value.connect.call(this)
-  end
-  def disconnect(this : ILocationPower*) : HRESULT
-    @lpVtbl.value.disconnect.call(this)
-  end
-end
-struct LibWin32::IDefaultLocation
-  def query_interface(this : IDefaultLocation*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDefaultLocation*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDefaultLocation*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def set_report(this : IDefaultLocation*, reporttype : Guid*, plocationreport : ILocationReport) : HRESULT
-    @lpVtbl.value.set_report.call(this, reporttype, plocationreport)
-  end
-  def get_report(this : IDefaultLocation*, reporttype : Guid*, pplocationreport : ILocationReport*) : HRESULT
-    @lpVtbl.value.get_report.call(this, reporttype, pplocationreport)
-  end
-end
-struct LibWin32::ILocationEvents
-  def query_interface(this : ILocationEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ILocationEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ILocationEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def on_location_changed(this : ILocationEvents*, reporttype : Guid*, plocationreport : ILocationReport) : HRESULT
-    @lpVtbl.value.on_location_changed.call(this, reporttype, plocationreport)
-  end
-  def on_status_changed(this : ILocationEvents*, reporttype : Guid*, newstatus : LOCATION_REPORT_STATUS) : HRESULT
-    @lpVtbl.value.on_status_changed.call(this, reporttype, newstatus)
-  end
-end
-struct LibWin32::IDispLatLongReport
-  def query_interface(this : IDispLatLongReport*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDispLatLongReport*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDispLatLongReport*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDispLatLongReport*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDispLatLongReport*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDispLatLongReport*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDispLatLongReport*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_latitude(this : IDispLatLongReport*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_latitude.call(this, pval)
-  end
-  def get_longitude(this : IDispLatLongReport*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_longitude.call(this, pval)
-  end
-  def get_error_radius(this : IDispLatLongReport*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_error_radius.call(this, pval)
-  end
-  def get_altitude(this : IDispLatLongReport*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_altitude.call(this, pval)
-  end
-  def get_altitude_error(this : IDispLatLongReport*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_altitude_error.call(this, pval)
-  end
-  def get_timestamp(this : IDispLatLongReport*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_timestamp.call(this, pval)
-  end
-end
-struct LibWin32::IDispCivicAddressReport
-  def query_interface(this : IDispCivicAddressReport*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IDispCivicAddressReport*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IDispCivicAddressReport*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IDispCivicAddressReport*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IDispCivicAddressReport*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IDispCivicAddressReport*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IDispCivicAddressReport*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def get_address_line1(this : IDispCivicAddressReport*, paddress1 : UInt8**) : HRESULT
-    @lpVtbl.value.get_address_line1.call(this, paddress1)
-  end
-  def get_address_line2(this : IDispCivicAddressReport*, paddress2 : UInt8**) : HRESULT
-    @lpVtbl.value.get_address_line2.call(this, paddress2)
-  end
-  def get_city(this : IDispCivicAddressReport*, pcity : UInt8**) : HRESULT
-    @lpVtbl.value.get_city.call(this, pcity)
-  end
-  def get_state_province(this : IDispCivicAddressReport*, pstateprovince : UInt8**) : HRESULT
-    @lpVtbl.value.get_state_province.call(this, pstateprovince)
-  end
-  def get_postal_code(this : IDispCivicAddressReport*, ppostalcode : UInt8**) : HRESULT
-    @lpVtbl.value.get_postal_code.call(this, ppostalcode)
-  end
-  def get_country_region(this : IDispCivicAddressReport*, pcountryregion : UInt8**) : HRESULT
-    @lpVtbl.value.get_country_region.call(this, pcountryregion)
-  end
-  def get_detail_level(this : IDispCivicAddressReport*, pdetaillevel : UInt32*) : HRESULT
-    @lpVtbl.value.get_detail_level.call(this, pdetaillevel)
-  end
-  def get_timestamp(this : IDispCivicAddressReport*, pval : Float64*) : HRESULT
-    @lpVtbl.value.get_timestamp.call(this, pval)
-  end
-end
-struct LibWin32::ILocationReportFactory
-  def query_interface(this : ILocationReportFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ILocationReportFactory*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ILocationReportFactory*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ILocationReportFactory*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ILocationReportFactory*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ILocationReportFactory*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ILocationReportFactory*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def listen_for_reports(this : ILocationReportFactory*, requestedreportinterval : UInt32) : HRESULT
-    @lpVtbl.value.listen_for_reports.call(this, requestedreportinterval)
-  end
-  def stop_listening_for_reports(this : ILocationReportFactory*) : HRESULT
-    @lpVtbl.value.stop_listening_for_reports.call(this)
-  end
-  def get_status(this : ILocationReportFactory*, pval : UInt32*) : HRESULT
-    @lpVtbl.value.get_status.call(this, pval)
-  end
-  def get_report_interval(this : ILocationReportFactory*, pmilliseconds : UInt32*) : HRESULT
-    @lpVtbl.value.get_report_interval.call(this, pmilliseconds)
-  end
-  def put_report_interval(this : ILocationReportFactory*, millisecondsrequested : UInt32) : HRESULT
-    @lpVtbl.value.put_report_interval.call(this, millisecondsrequested)
-  end
-  def get_desired_accuracy(this : ILocationReportFactory*, pdesiredaccuracy : UInt32*) : HRESULT
-    @lpVtbl.value.get_desired_accuracy.call(this, pdesiredaccuracy)
-  end
-  def put_desired_accuracy(this : ILocationReportFactory*, desiredaccuracy : UInt32) : HRESULT
-    @lpVtbl.value.put_desired_accuracy.call(this, desiredaccuracy)
-  end
-  def request_permissions(this : ILocationReportFactory*, hwnd : UInt32*) : HRESULT
-    @lpVtbl.value.request_permissions.call(this, hwnd)
-  end
-end
-struct LibWin32::ILatLongReportFactory
-  def query_interface(this : ILatLongReportFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ILatLongReportFactory*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ILatLongReportFactory*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ILatLongReportFactory*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ILatLongReportFactory*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ILatLongReportFactory*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ILatLongReportFactory*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def listen_for_reports(this : ILatLongReportFactory*, requestedreportinterval : UInt32) : HRESULT
-    @lpVtbl.value.listen_for_reports.call(this, requestedreportinterval)
-  end
-  def stop_listening_for_reports(this : ILatLongReportFactory*) : HRESULT
-    @lpVtbl.value.stop_listening_for_reports.call(this)
-  end
-  def get_status(this : ILatLongReportFactory*, pval : UInt32*) : HRESULT
-    @lpVtbl.value.get_status.call(this, pval)
-  end
-  def get_report_interval(this : ILatLongReportFactory*, pmilliseconds : UInt32*) : HRESULT
-    @lpVtbl.value.get_report_interval.call(this, pmilliseconds)
-  end
-  def put_report_interval(this : ILatLongReportFactory*, millisecondsrequested : UInt32) : HRESULT
-    @lpVtbl.value.put_report_interval.call(this, millisecondsrequested)
-  end
-  def get_desired_accuracy(this : ILatLongReportFactory*, pdesiredaccuracy : UInt32*) : HRESULT
-    @lpVtbl.value.get_desired_accuracy.call(this, pdesiredaccuracy)
-  end
-  def put_desired_accuracy(this : ILatLongReportFactory*, desiredaccuracy : UInt32) : HRESULT
-    @lpVtbl.value.put_desired_accuracy.call(this, desiredaccuracy)
-  end
-  def request_permissions(this : ILatLongReportFactory*, hwnd : UInt32*) : HRESULT
-    @lpVtbl.value.request_permissions.call(this, hwnd)
-  end
-  def get_lat_long_report(this : ILatLongReportFactory*, pval : IDispLatLongReport*) : HRESULT
-    @lpVtbl.value.get_lat_long_report.call(this, pval)
-  end
-end
-struct LibWin32::ICivicAddressReportFactory
-  def query_interface(this : ICivicAddressReportFactory*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : ICivicAddressReportFactory*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ICivicAddressReportFactory*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : ICivicAddressReportFactory*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : ICivicAddressReportFactory*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : ICivicAddressReportFactory*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : ICivicAddressReportFactory*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-  def listen_for_reports(this : ICivicAddressReportFactory*, requestedreportinterval : UInt32) : HRESULT
-    @lpVtbl.value.listen_for_reports.call(this, requestedreportinterval)
-  end
-  def stop_listening_for_reports(this : ICivicAddressReportFactory*) : HRESULT
-    @lpVtbl.value.stop_listening_for_reports.call(this)
-  end
-  def get_status(this : ICivicAddressReportFactory*, pval : UInt32*) : HRESULT
-    @lpVtbl.value.get_status.call(this, pval)
-  end
-  def get_report_interval(this : ICivicAddressReportFactory*, pmilliseconds : UInt32*) : HRESULT
-    @lpVtbl.value.get_report_interval.call(this, pmilliseconds)
-  end
-  def put_report_interval(this : ICivicAddressReportFactory*, millisecondsrequested : UInt32) : HRESULT
-    @lpVtbl.value.put_report_interval.call(this, millisecondsrequested)
-  end
-  def get_desired_accuracy(this : ICivicAddressReportFactory*, pdesiredaccuracy : UInt32*) : HRESULT
-    @lpVtbl.value.get_desired_accuracy.call(this, pdesiredaccuracy)
-  end
-  def put_desired_accuracy(this : ICivicAddressReportFactory*, desiredaccuracy : UInt32) : HRESULT
-    @lpVtbl.value.put_desired_accuracy.call(this, desiredaccuracy)
-  end
-  def request_permissions(this : ICivicAddressReportFactory*, hwnd : UInt32*) : HRESULT
-    @lpVtbl.value.request_permissions.call(this, hwnd)
-  end
-  def get_civic_address_report(this : ICivicAddressReportFactory*, pval : IDispCivicAddressReport*) : HRESULT
-    @lpVtbl.value.get_civic_address_report.call(this, pval)
-  end
-end
-struct LibWin32::IILatLongReportFactoryEvents
-  def query_interface(this : IILatLongReportFactoryEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IILatLongReportFactoryEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IILatLongReportFactoryEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IILatLongReportFactoryEvents*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IILatLongReportFactoryEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IILatLongReportFactoryEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IILatLongReportFactoryEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
-end
-struct LibWin32::IICivicAddressReportFactoryEvents
-  def query_interface(this : IICivicAddressReportFactoryEvents*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IICivicAddressReportFactoryEvents*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IICivicAddressReportFactoryEvents*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_type_info_count(this : IICivicAddressReportFactoryEvents*, pctinfo : UInt32*) : HRESULT
-    @lpVtbl.value.get_type_info_count.call(this, pctinfo)
-  end
-  def get_type_info(this : IICivicAddressReportFactoryEvents*, itinfo : UInt32, lcid : UInt32, pptinfo : ITypeInfo*) : HRESULT
-    @lpVtbl.value.get_type_info.call(this, itinfo, lcid, pptinfo)
-  end
-  def get_i_ds_of_names(this : IICivicAddressReportFactoryEvents*, riid : Guid*, rgsznames : LibC::LPWSTR*, cnames : UInt32, lcid : UInt32, rgdispid : Int32*) : HRESULT
-    @lpVtbl.value.get_i_ds_of_names.call(this, riid, rgsznames, cnames, lcid, rgdispid)
-  end
-  def invoke(this : IICivicAddressReportFactoryEvents*, dispidmember : Int32, riid : Guid*, lcid : UInt32, wflags : UInt16, pdispparams : DISPPARAMS*, pvarresult : VARIANT*, pexcepinfo : EXCEPINFO*, puargerr : UInt32*) : HRESULT
-    @lpVtbl.value.invoke.call(this, dispidmember, riid, lcid, wflags, pdispparams, pvarresult, pexcepinfo, puargerr)
-  end
 end

@@ -1,97 +1,75 @@
-require "../foundation.cr"
-require "../graphics/gdi.cr"
+require "./../foundation.cr"
+require "./../graphics/gdi.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:magnification.dll")]
-{% else %}
-@[Link("magnification")]
-{% end %}
-lib LibWin32
+module Win32cr::UI::Magnification
+  alias MagImageScalingCallback = Proc(Win32cr::Foundation::HWND, Void*, Win32cr::UI::Magnification::MAGIMAGEHEADER, Void*, Win32cr::UI::Magnification::MAGIMAGEHEADER, Win32cr::Foundation::RECT, Win32cr::Foundation::RECT, Win32cr::Graphics::Gdi::HRGN, Win32cr::Foundation::BOOL)*
+
+  WC_MAGNIFIERA = "Magnifier"
+  WC_MAGNIFIERW = "Magnifier"
+  WC_MAGNIFIER = "Magnifier"
   MS_SHOWMAGNIFIEDCURSOR = 1_i32
   MS_CLIPAROUNDCURSOR = 2_i32
   MS_INVERTCOLORS = 4_i32
   MW_FILTERMODE_EXCLUDE = 0_u32
   MW_FILTERMODE_INCLUDE = 1_u32
 
-  alias MagImageScalingCallback = Proc(LibC::HANDLE, Void*, MAGIMAGEHEADER, Void*, MAGIMAGEHEADER, RECT, RECT, HRGN, LibC::BOOL)
 
-  struct MAGTRANSFORM
-    v : Float32[9]*
+  @[Extern]
+  record MAGTRANSFORM,
+    v : Float32[9]
+
+  @[Extern]
+  record MAGIMAGEHEADER,
+    width : UInt32,
+    height : UInt32,
+    format : LibC::GUID,
+    stride : UInt32,
+    offset : UInt32,
+    cbSize : LibC::UIntPtrT
+
+  @[Extern]
+  record MAGCOLOREFFECT,
+    transform : Float32[25]
+
+  @[Link("magnification")]
+  lib C
+    fun MagInitialize : Win32cr::Foundation::BOOL
+
+    fun MagUninitialize : Win32cr::Foundation::BOOL
+
+    fun MagSetWindowSource(hwnd : Win32cr::Foundation::HWND, rect : Win32cr::Foundation::RECT) : Win32cr::Foundation::BOOL
+
+    fun MagGetWindowSource(hwnd : Win32cr::Foundation::HWND, pRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+
+    fun MagSetWindowTransform(hwnd : Win32cr::Foundation::HWND, pTransform : Win32cr::UI::Magnification::MAGTRANSFORM*) : Win32cr::Foundation::BOOL
+
+    fun MagGetWindowTransform(hwnd : Win32cr::Foundation::HWND, pTransform : Win32cr::UI::Magnification::MAGTRANSFORM*) : Win32cr::Foundation::BOOL
+
+    fun MagSetWindowFilterList(hwnd : Win32cr::Foundation::HWND, dwFilterMode : UInt32, count : Int32, pHWND : Win32cr::Foundation::HWND*) : Win32cr::Foundation::BOOL
+
+    fun MagGetWindowFilterList(hwnd : Win32cr::Foundation::HWND, pdwFilterMode : UInt32*, count : Int32, pHWND : Win32cr::Foundation::HWND*) : Int32
+
+    fun MagSetImageScalingCallback(hwnd : Win32cr::Foundation::HWND, callback : Win32cr::UI::Magnification::MagImageScalingCallback) : Win32cr::Foundation::BOOL
+
+    fun MagGetImageScalingCallback(hwnd : Win32cr::Foundation::HWND) : Win32cr::UI::Magnification::MagImageScalingCallback
+
+    fun MagSetColorEffect(hwnd : Win32cr::Foundation::HWND, pEffect : Win32cr::UI::Magnification::MAGCOLOREFFECT*) : Win32cr::Foundation::BOOL
+
+    fun MagGetColorEffect(hwnd : Win32cr::Foundation::HWND, pEffect : Win32cr::UI::Magnification::MAGCOLOREFFECT*) : Win32cr::Foundation::BOOL
+
+    fun MagSetFullscreenTransform(magLevel : Float32, xOffset : Int32, yOffset : Int32) : Win32cr::Foundation::BOOL
+
+    fun MagGetFullscreenTransform(pMagLevel : Float32*, pxOffset : Int32*, pyOffset : Int32*) : Win32cr::Foundation::BOOL
+
+    fun MagSetFullscreenColorEffect(pEffect : Win32cr::UI::Magnification::MAGCOLOREFFECT*) : Win32cr::Foundation::BOOL
+
+    fun MagGetFullscreenColorEffect(pEffect : Win32cr::UI::Magnification::MAGCOLOREFFECT*) : Win32cr::Foundation::BOOL
+
+    fun MagSetInputTransform(fEnabled : Win32cr::Foundation::BOOL, pRectSource : Win32cr::Foundation::RECT*, pRectDest : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+
+    fun MagGetInputTransform(pfEnabled : Win32cr::Foundation::BOOL*, pRectSource : Win32cr::Foundation::RECT*, pRectDest : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+
+    fun MagShowSystemCursor(fShowCursor : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+
   end
-  struct MAGIMAGEHEADER
-    width : UInt32
-    height : UInt32
-    format : Guid
-    stride : UInt32
-    offset : UInt32
-    cb_size : LibC::UINT_PTR
-  end
-  struct MAGCOLOREFFECT
-    transform : Float32[25]*
-  end
-
-
-  # Params # 
-  fun MagInitialize : LibC::BOOL
-
-  # Params # 
-  fun MagUninitialize : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],rect : RECT [In]
-  fun MagSetWindowSource(hwnd : LibC::HANDLE, rect : RECT) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],prect : RECT* [In]
-  fun MagGetWindowSource(hwnd : LibC::HANDLE, prect : RECT*) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],ptransform : MAGTRANSFORM* [In]
-  fun MagSetWindowTransform(hwnd : LibC::HANDLE, ptransform : MAGTRANSFORM*) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],ptransform : MAGTRANSFORM* [In]
-  fun MagGetWindowTransform(hwnd : LibC::HANDLE, ptransform : MAGTRANSFORM*) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],dwfiltermode : UInt32 [In],count : Int32 [In],phwnd : HANDLE* [In]
-  fun MagSetWindowFilterList(hwnd : LibC::HANDLE, dwfiltermode : UInt32, count : Int32, phwnd : HANDLE*) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],pdwfiltermode : UInt32* [In],count : Int32 [In],phwnd : HANDLE* [In]
-  fun MagGetWindowFilterList(hwnd : LibC::HANDLE, pdwfiltermode : UInt32*, count : Int32, phwnd : HANDLE*) : Int32
-
-  # Params # hwnd : LibC::HANDLE [In],callback : MagImageScalingCallback [In]
-  fun MagSetImageScalingCallback(hwnd : LibC::HANDLE, callback : MagImageScalingCallback) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In]
-  fun MagGetImageScalingCallback(hwnd : LibC::HANDLE) : MagImageScalingCallback
-
-  # Params # hwnd : LibC::HANDLE [In],peffect : MAGCOLOREFFECT* [In]
-  fun MagSetColorEffect(hwnd : LibC::HANDLE, peffect : MAGCOLOREFFECT*) : LibC::BOOL
-
-  # Params # hwnd : LibC::HANDLE [In],peffect : MAGCOLOREFFECT* [In]
-  fun MagGetColorEffect(hwnd : LibC::HANDLE, peffect : MAGCOLOREFFECT*) : LibC::BOOL
-
-  # Params # maglevel : Float32 [In],xoffset : Int32 [In],yoffset : Int32 [In]
-  fun MagSetFullscreenTransform(maglevel : Float32, xoffset : Int32, yoffset : Int32) : LibC::BOOL
-
-  # Params # pmaglevel : Float32* [In],pxoffset : Int32* [In],pyoffset : Int32* [In]
-  fun MagGetFullscreenTransform(pmaglevel : Float32*, pxoffset : Int32*, pyoffset : Int32*) : LibC::BOOL
-
-  # Params # peffect : MAGCOLOREFFECT* [In]
-  fun MagSetFullscreenColorEffect(peffect : MAGCOLOREFFECT*) : LibC::BOOL
-
-  # Params # peffect : MAGCOLOREFFECT* [In]
-  fun MagGetFullscreenColorEffect(peffect : MAGCOLOREFFECT*) : LibC::BOOL
-
-  # Params # fenabled : LibC::BOOL [In],prectsource : RECT* [In],prectdest : RECT* [In]
-  fun MagSetInputTransform(fenabled : LibC::BOOL, prectsource : RECT*, prectdest : RECT*) : LibC::BOOL
-
-  # Params # pfenabled : LibC::BOOL* [In],prectsource : RECT* [In],prectdest : RECT* [In]
-  fun MagGetInputTransform(pfenabled : LibC::BOOL*, prectsource : RECT*, prectdest : RECT*) : LibC::BOOL
-
-  # Params # fshowcursor : LibC::BOOL [In]
-  fun MagShowSystemCursor(fshowcursor : LibC::BOOL) : LibC::BOOL
 end

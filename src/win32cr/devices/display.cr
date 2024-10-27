@@ -1,29 +1,13 @@
-require "../foundation.cr"
-require "../graphics/gdi.cr"
-require "../system/com.cr"
-require "../graphics/opengl.cr"
-require "../graphics/directdraw.cr"
-require "../ui/colorsystem.cr"
-require "../system/console.cr"
-require "../graphics/direct3d9.cr"
+require "./../foundation.cr"
+require "./../graphics/gdi.cr"
+require "./../system/com.cr"
+require "./../graphics/open_gl.cr"
+require "./../graphics/direct_draw.cr"
+require "./../ui/color_system.cr"
+require "./../system/console.cr"
+require "./../graphics/direct3_d9.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/DELAYLOAD:dxva2.dll")]
-@[Link(ldflags: "/DELAYLOAD:gdi32.dll")]
-@[Link(ldflags: "/DELAYLOAD:user32.dll")]
-{% else %}
-@[Link("dxva2")]
-@[Link("gdi32")]
-@[Link("user32")]
-{% end %}
-lib LibWin32
+module Win32cr::Devices::Display
   alias HSEMAPHORE = LibC::IntPtrT
   alias HSURF = LibC::IntPtrT
   alias HFASTMUTEX = LibC::IntPtrT
@@ -32,16 +16,215 @@ lib LibWin32
   alias HBM = LibC::IntPtrT
   alias DHSURF = LibC::IntPtrT
   alias DHPDEV = LibC::IntPtrT
+  alias PFN = Proc(LibC::IntPtrT)*
+
+  alias FREEOBJPROC = Proc(Win32cr::Devices::Display::DRIVEROBJ*, Win32cr::Foundation::BOOL)*
+
+  alias WNDOBJCHANGEPROC = Proc(Win32cr::Devices::Display::WNDOBJ*, UInt32, Void)*
+
+  alias SORTCOMP = Proc(Void*, Void*, Int32)*
+
+  alias PFN_DrvEnableDriver = Proc(UInt32, UInt32, Win32cr::Devices::Display::DRVENABLEDATA*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvEnablePDEV = Proc(Win32cr::Graphics::Gdi::DEVMODEW*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Devices::Display::HSURF*, UInt32, Win32cr::Devices::Display::GDIINFO*, UInt32, Win32cr::Devices::Display::DEVINFO*, Win32cr::Devices::Display::HDEV, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HANDLE, Win32cr::Devices::Display::DHPDEV)*
+
+  alias PFN_DrvCompletePDEV = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Devices::Display::HDEV, Void)*
+
+  alias PFN_DrvResetDevice = Proc(Win32cr::Devices::Display::DHPDEV, Void*, UInt32)*
+
+  alias PFN_DrvDisablePDEV = Proc(Win32cr::Devices::Display::DHPDEV, Void)*
+
+  alias PFN_DrvSynchronize = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Foundation::RECTL*, Void)*
+
+  alias PFN_DrvEnableSurface = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Devices::Display::HSURF)*
+
+  alias PFN_DrvDisableDriver = Proc(Void)*
+
+  alias PFN_DrvDisableSurface = Proc(Win32cr::Devices::Display::DHPDEV, Void)*
+
+  alias PFN_DrvAssertMode = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvTextOut = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::STROBJ*, Win32cr::Devices::Display::FONTOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Foundation::RECTL*, Win32cr::Foundation::RECTL*, Win32cr::Devices::Display::BRUSHOBJ*, Win32cr::Devices::Display::BRUSHOBJ*, Win32cr::Foundation::POINTL*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvStretchBlt = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Devices::Display::XLATEOBJ*, Win32cr::Graphics::Gdi::COLORADJUSTMENT*, Win32cr::Foundation::POINTL*, Win32cr::Foundation::RECTL*, Win32cr::Foundation::RECTL*, Win32cr::Foundation::POINTL*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvStretchBltROP = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Devices::Display::XLATEOBJ*, Win32cr::Graphics::Gdi::COLORADJUSTMENT*, Win32cr::Foundation::POINTL*, Win32cr::Foundation::RECTL*, Win32cr::Foundation::RECTL*, Win32cr::Foundation::POINTL*, UInt32, Win32cr::Devices::Display::BRUSHOBJ*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvTransparentBlt = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Devices::Display::XLATEOBJ*, Win32cr::Foundation::RECTL*, Win32cr::Foundation::RECTL*, UInt32, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvPlgBlt = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Devices::Display::XLATEOBJ*, Win32cr::Graphics::Gdi::COLORADJUSTMENT*, Win32cr::Foundation::POINTL*, Win32cr::Devices::Display::POINTFIX*, Win32cr::Foundation::RECTL*, Win32cr::Foundation::POINTL*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvBitBlt = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Devices::Display::XLATEOBJ*, Win32cr::Foundation::RECTL*, Win32cr::Foundation::POINTL*, Win32cr::Foundation::POINTL*, Win32cr::Devices::Display::BRUSHOBJ*, Win32cr::Foundation::POINTL*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvRealizeBrush = Proc(Win32cr::Devices::Display::BRUSHOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::XLATEOBJ*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvCopyBits = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Devices::Display::XLATEOBJ*, Win32cr::Foundation::RECTL*, Win32cr::Foundation::POINTL*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvDitherColor = Proc(Win32cr::Devices::Display::DHPDEV, UInt32, UInt32, UInt32*, UInt32)*
+
+  alias PFN_DrvCreateDeviceBitmap = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Foundation::SIZE, UInt32, Win32cr::Graphics::Gdi::HBITMAP)*
+
+  alias PFN_DrvDeleteDeviceBitmap = Proc(Win32cr::Devices::Display::DHSURF, Void)*
+
+  alias PFN_DrvSetPalette = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Devices::Display::PALOBJ*, UInt32, UInt32, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvEscape = Proc(Win32cr::Devices::Display::SURFOBJ*, UInt32, UInt32, Void*, UInt32, Void*, UInt32)*
+
+  alias PFN_DrvDrawEscape = Proc(Win32cr::Devices::Display::SURFOBJ*, UInt32, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Foundation::RECTL*, UInt32, Void*, UInt32)*
+
+  alias PFN_DrvQueryFont = Proc(Win32cr::Devices::Display::DHPDEV, LibC::UIntPtrT, UInt32, LibC::UIntPtrT*, Win32cr::Devices::Display::IFIMETRICS*)*
+
+  alias PFN_DrvQueryFontTree = Proc(Win32cr::Devices::Display::DHPDEV, LibC::UIntPtrT, UInt32, UInt32, LibC::UIntPtrT*, Void*)*
+
+  alias PFN_DrvQueryFontData = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Devices::Display::FONTOBJ*, UInt32, UInt32, Win32cr::Devices::Display::GLYPHDATA*, Void*, UInt32, Int32)*
+
+  alias PFN_DrvFree = Proc(Void*, LibC::UIntPtrT, Void)*
+
+  alias PFN_DrvDestroyFont = Proc(Win32cr::Devices::Display::FONTOBJ*, Void)*
+
+  alias PFN_DrvQueryFontCaps = Proc(UInt32, UInt32*, Int32)*
+
+  alias PFN_DrvLoadFontFile = Proc(UInt32, LibC::UIntPtrT*, Void**, UInt32*, Win32cr::Graphics::Gdi::DESIGNVECTOR*, UInt32, UInt32, LibC::UIntPtrT)*
+
+  alias PFN_DrvUnloadFontFile = Proc(LibC::UIntPtrT, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvSetPointerShape = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::XLATEOBJ*, Int32, Int32, Int32, Int32, Win32cr::Foundation::RECTL*, UInt32, UInt32)*
+
+  alias PFN_DrvMovePointer = Proc(Win32cr::Devices::Display::SURFOBJ*, Int32, Int32, Win32cr::Foundation::RECTL*, Void)*
+
+  alias PFN_DrvSendPage = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvStartPage = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvStartDoc = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvEndDoc = Proc(Win32cr::Devices::Display::SURFOBJ*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvQuerySpoolType = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvLineTo = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Devices::Display::BRUSHOBJ*, Int32, Int32, Int32, Int32, Win32cr::Foundation::RECTL*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvStrokePath = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::PATHOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Devices::Display::XFORMOBJ*, Win32cr::Devices::Display::BRUSHOBJ*, Win32cr::Foundation::POINTL*, Win32cr::Devices::Display::LINEATTRS*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvFillPath = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::PATHOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Devices::Display::BRUSHOBJ*, Win32cr::Foundation::POINTL*, UInt32, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvStrokeAndFillPath = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::PATHOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Devices::Display::XFORMOBJ*, Win32cr::Devices::Display::BRUSHOBJ*, Win32cr::Devices::Display::LINEATTRS*, Win32cr::Devices::Display::BRUSHOBJ*, Win32cr::Foundation::POINTL*, UInt32, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvPaint = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Devices::Display::BRUSHOBJ*, Win32cr::Foundation::POINTL*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvGetGlyphMode = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Devices::Display::FONTOBJ*, UInt32)*
+
+  alias PFN_DrvResetPDEV = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Devices::Display::DHPDEV, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvSaveScreenBits = Proc(Win32cr::Devices::Display::SURFOBJ*, UInt32, LibC::UIntPtrT, Win32cr::Foundation::RECTL*, LibC::UIntPtrT)*
+
+  alias PFN_DrvGetModes = Proc(Win32cr::Foundation::HANDLE, UInt32, Win32cr::Graphics::Gdi::DEVMODEW*, UInt32)*
+
+  alias PFN_DrvQueryTrueTypeTable = Proc(LibC::UIntPtrT, UInt32, UInt32, Int32, UInt32, UInt8*, UInt8**, UInt32*, Int32)*
+
+  alias PFN_DrvQueryTrueTypeSection = Proc(UInt32, UInt32, UInt32, Win32cr::Foundation::HANDLE*, Int32*, Int32)*
+
+  alias PFN_DrvQueryTrueTypeOutline = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Devices::Display::FONTOBJ*, UInt32, Win32cr::Foundation::BOOL, Win32cr::Devices::Display::GLYPHDATA*, UInt32, Win32cr::Graphics::Gdi::TTPOLYGONHEADER*, Int32)*
+
+  alias PFN_DrvGetTrueTypeFile = Proc(LibC::UIntPtrT, UInt32*, Void*)*
+
+  alias PFN_DrvQueryFontFile = Proc(LibC::UIntPtrT, UInt32, UInt32, UInt32*, Int32)*
+
+  alias PFN_DrvQueryGlyphAttrs = Proc(Win32cr::Devices::Display::FONTOBJ*, UInt32, Win32cr::Devices::Display::FD_GLYPHATTR*)*
+
+  alias PFN_DrvQueryAdvanceWidths = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Devices::Display::FONTOBJ*, UInt32, UInt32*, Void*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvFontManagement = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::FONTOBJ*, UInt32, UInt32, Void*, UInt32, Void*, UInt32)*
+
+  alias PFN_DrvSetPixelFormat = Proc(Win32cr::Devices::Display::SURFOBJ*, Int32, Win32cr::Foundation::HWND, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvDescribePixelFormat = Proc(Win32cr::Devices::Display::DHPDEV, Int32, UInt32, Win32cr::Graphics::OpenGL::PIXELFORMATDESCRIPTOR*, Int32)*
+
+  alias PFN_DrvSwapBuffers = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::WNDOBJ*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvStartBanding = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Foundation::POINTL*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvNextBand = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Foundation::POINTL*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvQueryPerBandInfo = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::PERBANDINFO*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvEnableDirectDraw = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Graphics::DirectDraw::DD_CALLBACKS*, Win32cr::Graphics::DirectDraw::DD_SURFACECALLBACKS*, Win32cr::Graphics::DirectDraw::DD_PALETTECALLBACKS*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvDisableDirectDraw = Proc(Win32cr::Devices::Display::DHPDEV, Void)*
+
+  alias PFN_DrvGetDirectDrawInfo = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Graphics::DirectDraw::DD_HALINFO*, UInt32*, Win32cr::Graphics::DirectDraw::VIDEOMEMORY*, UInt32*, UInt32*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvIcmCreateColorTransform = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::UI::ColorSystem::LOGCOLORSPACEW*, Void*, UInt32, Void*, UInt32, Void*, UInt32, UInt32, Win32cr::Foundation::HANDLE)*
+
+  alias PFN_DrvIcmDeleteColorTransform = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvIcmCheckBitmapBits = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Foundation::HANDLE, Win32cr::Devices::Display::SURFOBJ*, UInt8*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvIcmSetDeviceGammaRamp = Proc(Win32cr::Devices::Display::DHPDEV, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvAlphaBlend = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Devices::Display::XLATEOBJ*, Win32cr::Foundation::RECTL*, Win32cr::Foundation::RECTL*, Win32cr::Devices::Display::BLENDOBJ*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvGradientFill = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::CLIPOBJ*, Win32cr::Devices::Display::XLATEOBJ*, Win32cr::Graphics::Gdi::TRIVERTEX*, UInt32, Void*, UInt32, Win32cr::Foundation::RECTL*, Win32cr::Foundation::POINTL*, UInt32, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvQueryDeviceSupport = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::XLATEOBJ*, Win32cr::Devices::Display::XFORMOBJ*, UInt32, UInt32, Void*, UInt32, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvDeriveSurface = Proc(Win32cr::Graphics::DirectDraw::DD_DIRECTDRAW_GLOBAL*, Win32cr::Graphics::DirectDraw::DD_SURFACE_LOCAL*, Win32cr::Graphics::Gdi::HBITMAP)*
+
+  alias PFN_DrvSynchronizeSurface = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Foundation::RECTL*, UInt32, Void)*
+
+  alias PFN_DrvNotify = Proc(Win32cr::Devices::Display::SURFOBJ*, UInt32, Void*, Void)*
+
+  alias PFN_DrvRenderHint = Proc(Win32cr::Devices::Display::DHPDEV, UInt32, LibC::UIntPtrT, Void*, Int32)*
+
+  alias PFN_EngCreateRectRgn = Proc(Int32, Int32, Int32, Int32, Win32cr::Foundation::HANDLE)*
+
+  alias PFN_EngDeleteRgn = Proc(Win32cr::Foundation::HANDLE, Void)*
+
+  alias PFN_EngCombineRgn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Int32, Int32)*
+
+  alias PFN_EngCopyRgn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Int32)*
+
+  alias PFN_EngIntersectRgn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Int32)*
+
+  alias PFN_EngSubtractRgn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Int32)*
+
+  alias PFN_EngUnionRgn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Int32)*
+
+  alias PFN_EngXorRgn = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Int32)*
+
+  alias PFN_DrvCreateDeviceBitmapEx = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Foundation::SIZE, UInt32, UInt32, Win32cr::Devices::Display::DHSURF, UInt32, UInt32, Win32cr::Foundation::HANDLE*, Win32cr::Graphics::Gdi::HBITMAP)*
+
+  alias PFN_DrvDeleteDeviceBitmapEx = Proc(Win32cr::Devices::Display::DHSURF, Void)*
+
+  alias PFN_DrvAssociateSharedSurface = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, Win32cr::Foundation::SIZE, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvSynchronizeRedirectionBitmaps = Proc(Win32cr::Devices::Display::DHPDEV, UInt64*, Win32cr::Foundation::NTSTATUS)*
+
+  alias PFN_DrvAccumulateD3DDirtyRect = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Devices::Display::CDDDXGK_REDIRBITMAPPRESENTINFO*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvStartDxInterop = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Foundation::BOOL, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvEndDxInterop = Proc(Win32cr::Devices::Display::SURFOBJ*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL*, Void*, Win32cr::Foundation::BOOL)*
+
+  alias PFN_DrvLockDisplayArea = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Foundation::RECTL*, Void)*
+
+  alias PFN_DrvUnlockDisplayArea = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Foundation::RECTL*, Void)*
+
+  alias PFN_DrvSurfaceComplete = Proc(Win32cr::Devices::Display::DHPDEV, Win32cr::Foundation::HANDLE, Win32cr::Foundation::BOOL)*
+
+  alias PVIDEO_WIN32K_CALLOUT = Proc(Void*, Void)*
 
   GUID_DEVINTERFACE_DISPLAY_ADAPTER = "5b45201d-f2f2-4f3b-85bb-30ff1f953599"
   GUID_DEVINTERFACE_MONITOR = "e6f07b5f-ee97-4a90-b076-33f57bf4eaa7"
   GUID_DISPLAY_DEVICE_ARRIVAL = "1ca05180-a699-450a-9a0c-de4fbe3ddd89"
   GUID_DEVINTERFACE_VIDEO_OUTPUT_ARRIVAL = "1ad9e4f0-f88d-4360-bab9-4c2d55e564cd"
-  DEVPKEY_IndirectDisplay = PROPERTYKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 1_u32)
-  DEVPKEY_Device_TerminalLuid = PROPERTYKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 2_u32)
-  DEVPKEY_Device_AdapterLuid = PROPERTYKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 3_u32)
-  DEVPKEY_Device_ActivityId = PROPERTYKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 4_u32)
+  DEVPKEY_IndirectDisplay = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 1_u32)
+  DEVPKEY_Device_TerminalLuid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 2_u32)
+  DEVPKEY_Device_AdapterLuid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 3_u32)
+  DEVPKEY_Device_ActivityId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xc50a3f10_u32, 0xaa5c_u16, 0x4247_u16, StaticArray[0xb8_u8, 0x30_u8, 0xd6_u8, 0xa6_u8, 0xf8_u8, 0xea_u8, 0xa3_u8, 0x10_u8]), 4_u32)
   INDIRECT_DISPLAY_INFO_FLAGS_CREATED_IDDCX_ADAPTER = 1_u32
+  VIDEO_DEVICE_NAME = "DISPLAY%d"
+  WVIDEO_DEVICE_NAME = "DISPLAY%d"
   IOCTL_VIDEO_DISABLE_VDM = 2293764_u32
   IOCTL_VIDEO_REGISTER_VDM = 2293768_u32
   IOCTL_VIDEO_SET_OUTPUT_DEVICE_POWER_STATE = 2293772_u32
@@ -156,6 +339,7 @@ lib LibWin32
   BITMAP_ARRAY_BYTE = 3_u32
   BITMAP_PLANES = 1_u32
   BITMAP_BITS_PIXEL = 1_u32
+  DD_FULLSCREEN_VIDEO_DEVICE_NAME = "\\Device\\FSVideo"
   VIDEO_REASON_NONE = 0_u32
   VIDEO_REASON_POLICY1 = 1_u32
   VIDEO_REASON_POLICY2 = 2_u32
@@ -771,2162 +955,2409 @@ lib LibWin32
   SETCONFIGURATION_STATUS_ADDITIONAL = 1_u32
   SETCONFIGURATION_STATUS_OVERRIDDEN = 2_u32
 
-  alias PFN = Proc(LibC::IntPtrT)
-  alias FREEOBJPROC = Proc(DRIVEROBJ*, LibC::BOOL)
-  alias WNDOBJCHANGEPROC = Proc(WNDOBJ*, UInt32, Void)
-  alias SORTCOMP = Proc(Void*, Void*, Int32)
-  alias PFN_DrvEnableDriver = Proc(UInt32, UInt32, DRVENABLEDATA*, LibC::BOOL)
-  alias PFN_DrvEnablePDEV = Proc(DEVMODEW*, LibC::LPWSTR, UInt32, HSURF*, UInt32, GDIINFO*, UInt32, DEVINFO*, HDEV, LibC::LPWSTR, LibC::HANDLE, DHPDEV)
-  alias PFN_DrvCompletePDEV = Proc(DHPDEV, HDEV, Void)
-  alias PFN_DrvResetDevice = Proc(DHPDEV, Void*, UInt32)
-  alias PFN_DrvDisablePDEV = Proc(DHPDEV, Void)
-  alias PFN_DrvSynchronize = Proc(DHPDEV, RECTL*, Void)
-  alias PFN_DrvEnableSurface = Proc(DHPDEV, HSURF)
-  alias PFN_DrvDisableDriver = Proc(Void)
-  alias PFN_DrvDisableSurface = Proc(DHPDEV, Void)
-  alias PFN_DrvAssertMode = Proc(DHPDEV, LibC::BOOL, LibC::BOOL)
-  alias PFN_DrvTextOut = Proc(SURFOBJ*, STROBJ*, FONTOBJ*, CLIPOBJ*, RECTL*, RECTL*, BRUSHOBJ*, BRUSHOBJ*, POINTL*, UInt32, LibC::BOOL)
-  alias PFN_DrvStretchBlt = Proc(SURFOBJ*, SURFOBJ*, SURFOBJ*, CLIPOBJ*, XLATEOBJ*, COLORADJUSTMENT*, POINTL*, RECTL*, RECTL*, POINTL*, UInt32, LibC::BOOL)
-  alias PFN_DrvStretchBltROP = Proc(SURFOBJ*, SURFOBJ*, SURFOBJ*, CLIPOBJ*, XLATEOBJ*, COLORADJUSTMENT*, POINTL*, RECTL*, RECTL*, POINTL*, UInt32, BRUSHOBJ*, UInt32, LibC::BOOL)
-  alias PFN_DrvTransparentBlt = Proc(SURFOBJ*, SURFOBJ*, CLIPOBJ*, XLATEOBJ*, RECTL*, RECTL*, UInt32, UInt32, LibC::BOOL)
-  alias PFN_DrvPlgBlt = Proc(SURFOBJ*, SURFOBJ*, SURFOBJ*, CLIPOBJ*, XLATEOBJ*, COLORADJUSTMENT*, POINTL*, POINTFIX*, RECTL*, POINTL*, UInt32, LibC::BOOL)
-  alias PFN_DrvBitBlt = Proc(SURFOBJ*, SURFOBJ*, SURFOBJ*, CLIPOBJ*, XLATEOBJ*, RECTL*, POINTL*, POINTL*, BRUSHOBJ*, POINTL*, UInt32, LibC::BOOL)
-  alias PFN_DrvRealizeBrush = Proc(BRUSHOBJ*, SURFOBJ*, SURFOBJ*, SURFOBJ*, XLATEOBJ*, UInt32, LibC::BOOL)
-  alias PFN_DrvCopyBits = Proc(SURFOBJ*, SURFOBJ*, CLIPOBJ*, XLATEOBJ*, RECTL*, POINTL*, LibC::BOOL)
-  alias PFN_DrvDitherColor = Proc(DHPDEV, UInt32, UInt32, UInt32*, UInt32)
-  alias PFN_DrvCreateDeviceBitmap = Proc(DHPDEV, SIZE, UInt32, HBITMAP)
-  alias PFN_DrvDeleteDeviceBitmap = Proc(DHSURF, Void)
-  alias PFN_DrvSetPalette = Proc(DHPDEV, PALOBJ*, UInt32, UInt32, UInt32, LibC::BOOL)
-  alias PFN_DrvEscape = Proc(SURFOBJ*, UInt32, UInt32, Void*, UInt32, Void*, UInt32)
-  alias PFN_DrvDrawEscape = Proc(SURFOBJ*, UInt32, CLIPOBJ*, RECTL*, UInt32, Void*, UInt32)
-  alias PFN_DrvQueryFont = Proc(DHPDEV, LibC::UINT_PTR, UInt32, LibC::UINT_PTR*, IFIMETRICS*)
-  alias PFN_DrvQueryFontTree = Proc(DHPDEV, LibC::UINT_PTR, UInt32, UInt32, LibC::UINT_PTR*, Void*)
-  alias PFN_DrvQueryFontData = Proc(DHPDEV, FONTOBJ*, UInt32, UInt32, GLYPHDATA*, Void*, UInt32, Int32)
-  alias PFN_DrvFree = Proc(Void*, LibC::UINT_PTR, Void)
-  alias PFN_DrvDestroyFont = Proc(FONTOBJ*, Void)
-  alias PFN_DrvQueryFontCaps = Proc(UInt32, UInt32*, Int32)
-  alias PFN_DrvLoadFontFile = Proc(UInt32, LibC::UINT_PTR*, Void**, UInt32*, DESIGNVECTOR*, UInt32, UInt32, LibC::UINT_PTR)
-  alias PFN_DrvUnloadFontFile = Proc(LibC::UINT_PTR, LibC::BOOL)
-  alias PFN_DrvSetPointerShape = Proc(SURFOBJ*, SURFOBJ*, SURFOBJ*, XLATEOBJ*, Int32, Int32, Int32, Int32, RECTL*, UInt32, UInt32)
-  alias PFN_DrvMovePointer = Proc(SURFOBJ*, Int32, Int32, RECTL*, Void)
-  alias PFN_DrvSendPage = Proc(SURFOBJ*, LibC::BOOL)
-  alias PFN_DrvStartPage = Proc(SURFOBJ*, LibC::BOOL)
-  alias PFN_DrvStartDoc = Proc(SURFOBJ*, LibC::LPWSTR, UInt32, LibC::BOOL)
-  alias PFN_DrvEndDoc = Proc(SURFOBJ*, UInt32, LibC::BOOL)
-  alias PFN_DrvQuerySpoolType = Proc(DHPDEV, LibC::LPWSTR, LibC::BOOL)
-  alias PFN_DrvLineTo = Proc(SURFOBJ*, CLIPOBJ*, BRUSHOBJ*, Int32, Int32, Int32, Int32, RECTL*, UInt32, LibC::BOOL)
-  alias PFN_DrvStrokePath = Proc(SURFOBJ*, PATHOBJ*, CLIPOBJ*, XFORMOBJ*, BRUSHOBJ*, POINTL*, LINEATTRS*, UInt32, LibC::BOOL)
-  alias PFN_DrvFillPath = Proc(SURFOBJ*, PATHOBJ*, CLIPOBJ*, BRUSHOBJ*, POINTL*, UInt32, UInt32, LibC::BOOL)
-  alias PFN_DrvStrokeAndFillPath = Proc(SURFOBJ*, PATHOBJ*, CLIPOBJ*, XFORMOBJ*, BRUSHOBJ*, LINEATTRS*, BRUSHOBJ*, POINTL*, UInt32, UInt32, LibC::BOOL)
-  alias PFN_DrvPaint = Proc(SURFOBJ*, CLIPOBJ*, BRUSHOBJ*, POINTL*, UInt32, LibC::BOOL)
-  alias PFN_DrvGetGlyphMode = Proc(DHPDEV, FONTOBJ*, UInt32)
-  alias PFN_DrvResetPDEV = Proc(DHPDEV, DHPDEV, LibC::BOOL)
-  alias PFN_DrvSaveScreenBits = Proc(SURFOBJ*, UInt32, LibC::UINT_PTR, RECTL*, LibC::UINT_PTR)
-  alias PFN_DrvGetModes = Proc(LibC::HANDLE, UInt32, DEVMODEW*, UInt32)
-  alias PFN_DrvQueryTrueTypeTable = Proc(LibC::UINT_PTR, UInt32, UInt32, Int32, UInt32, UInt8*, UInt8**, UInt32*, Int32)
-  alias PFN_DrvQueryTrueTypeSection = Proc(UInt32, UInt32, UInt32, LibC::HANDLE*, Int32*, Int32)
-  alias PFN_DrvQueryTrueTypeOutline = Proc(DHPDEV, FONTOBJ*, UInt32, LibC::BOOL, GLYPHDATA*, UInt32, TTPOLYGONHEADER*, Int32)
-  alias PFN_DrvGetTrueTypeFile = Proc(LibC::UINT_PTR, UInt32*, Void*)
-  alias PFN_DrvQueryFontFile = Proc(LibC::UINT_PTR, UInt32, UInt32, UInt32*, Int32)
-  alias PFN_DrvQueryGlyphAttrs = Proc(FONTOBJ*, UInt32, FD_GLYPHATTR*)
-  alias PFN_DrvQueryAdvanceWidths = Proc(DHPDEV, FONTOBJ*, UInt32, UInt32*, Void*, UInt32, LibC::BOOL)
-  alias PFN_DrvFontManagement = Proc(SURFOBJ*, FONTOBJ*, UInt32, UInt32, Void*, UInt32, Void*, UInt32)
-  alias PFN_DrvSetPixelFormat = Proc(SURFOBJ*, Int32, LibC::HANDLE, LibC::BOOL)
-  alias PFN_DrvDescribePixelFormat = Proc(DHPDEV, Int32, UInt32, PIXELFORMATDESCRIPTOR*, Int32)
-  alias PFN_DrvSwapBuffers = Proc(SURFOBJ*, WNDOBJ*, LibC::BOOL)
-  alias PFN_DrvStartBanding = Proc(SURFOBJ*, POINTL*, LibC::BOOL)
-  alias PFN_DrvNextBand = Proc(SURFOBJ*, POINTL*, LibC::BOOL)
-  alias PFN_DrvQueryPerBandInfo = Proc(SURFOBJ*, PERBANDINFO*, LibC::BOOL)
-  alias PFN_DrvEnableDirectDraw = Proc(DHPDEV, DD_CALLBACKS*, DD_SURFACECALLBACKS*, DD_PALETTECALLBACKS*, LibC::BOOL)
-  alias PFN_DrvDisableDirectDraw = Proc(DHPDEV, Void)
-  alias PFN_DrvGetDirectDrawInfo = Proc(DHPDEV, DD_HALINFO*, UInt32*, VIDEOMEMORY*, UInt32*, UInt32*, LibC::BOOL)
-  alias PFN_DrvIcmCreateColorTransform = Proc(DHPDEV, LOGCOLORSPACEW*, Void*, UInt32, Void*, UInt32, Void*, UInt32, UInt32, LibC::HANDLE)
-  alias PFN_DrvIcmDeleteColorTransform = Proc(DHPDEV, LibC::HANDLE, LibC::BOOL)
-  alias PFN_DrvIcmCheckBitmapBits = Proc(DHPDEV, LibC::HANDLE, SURFOBJ*, UInt8*, LibC::BOOL)
-  alias PFN_DrvIcmSetDeviceGammaRamp = Proc(DHPDEV, UInt32, Void*, LibC::BOOL)
-  alias PFN_DrvAlphaBlend = Proc(SURFOBJ*, SURFOBJ*, CLIPOBJ*, XLATEOBJ*, RECTL*, RECTL*, BLENDOBJ*, LibC::BOOL)
-  alias PFN_DrvGradientFill = Proc(SURFOBJ*, CLIPOBJ*, XLATEOBJ*, TRIVERTEX*, UInt32, Void*, UInt32, RECTL*, POINTL*, UInt32, LibC::BOOL)
-  alias PFN_DrvQueryDeviceSupport = Proc(SURFOBJ*, XLATEOBJ*, XFORMOBJ*, UInt32, UInt32, Void*, UInt32, Void*, LibC::BOOL)
-  alias PFN_DrvDeriveSurface = Proc(DD_DIRECTDRAW_GLOBAL*, DD_SURFACE_LOCAL*, HBITMAP)
-  alias PFN_DrvSynchronizeSurface = Proc(SURFOBJ*, RECTL*, UInt32, Void)
-  alias PFN_DrvNotify = Proc(SURFOBJ*, UInt32, Void*, Void)
-  alias PFN_DrvRenderHint = Proc(DHPDEV, UInt32, LibC::UINT_PTR, Void*, Int32)
-  alias PFN_EngCreateRectRgn = Proc(Int32, Int32, Int32, Int32, LibC::HANDLE)
-  alias PFN_EngDeleteRgn = Proc(LibC::HANDLE, Void)
-  alias PFN_EngCombineRgn = Proc(LibC::HANDLE, LibC::HANDLE, LibC::HANDLE, Int32, Int32)
-  alias PFN_EngCopyRgn = Proc(LibC::HANDLE, LibC::HANDLE, Int32)
-  alias PFN_EngIntersectRgn = Proc(LibC::HANDLE, LibC::HANDLE, LibC::HANDLE, Int32)
-  alias PFN_EngSubtractRgn = Proc(LibC::HANDLE, LibC::HANDLE, LibC::HANDLE, Int32)
-  alias PFN_EngUnionRgn = Proc(LibC::HANDLE, LibC::HANDLE, LibC::HANDLE, Int32)
-  alias PFN_EngXorRgn = Proc(LibC::HANDLE, LibC::HANDLE, LibC::HANDLE, Int32)
-  alias PFN_DrvCreateDeviceBitmapEx = Proc(DHPDEV, SIZE, UInt32, UInt32, DHSURF, UInt32, UInt32, LibC::HANDLE*, HBITMAP)
-  alias PFN_DrvDeleteDeviceBitmapEx = Proc(DHSURF, Void)
-  alias PFN_DrvAssociateSharedSurface = Proc(SURFOBJ*, LibC::HANDLE, LibC::HANDLE, SIZE, LibC::BOOL)
-  alias PFN_DrvSynchronizeRedirectionBitmaps = Proc(DHPDEV, UInt64*, NTSTATUS)
-  alias PFN_DrvAccumulateD3DDirtyRect = Proc(SURFOBJ*, CDDDXGK_REDIRBITMAPPRESENTINFO*, LibC::BOOL)
-  alias PFN_DrvStartDxInterop = Proc(SURFOBJ*, LibC::BOOL, Void*, LibC::BOOL)
-  alias PFN_DrvEndDxInterop = Proc(SURFOBJ*, LibC::BOOL, LibC::BOOL*, Void*, LibC::BOOL)
-  alias PFN_DrvLockDisplayArea = Proc(DHPDEV, RECTL*, Void)
-  alias PFN_DrvUnlockDisplayArea = Proc(DHPDEV, RECTL*, Void)
-  alias PFN_DrvSurfaceComplete = Proc(DHPDEV, LibC::HANDLE, LibC::BOOL)
-  alias PVIDEO_WIN32K_CALLOUT = Proc(Void*, Void)
-
-
-  enum DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY : Int32
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_OTHER = -1
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_HD15 = 0
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_SVIDEO = 1
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_COMPOSITE_VIDEO = 2
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_COMPONENT_VIDEO = 3
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DVI = 4
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_HDMI = 5
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_LVDS = 6
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_D_JPN = 8
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_SDI = 9
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_EXTERNAL = 10
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_EMBEDDED = 11
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_UDI_EXTERNAL = 12
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_UDI_EMBEDDED = 13
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_SDTVDONGLE = 14
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_MIRACAST = 15
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INDIRECT_WIRED = 16
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INDIRECT_VIRTUAL = 17
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_USB_TUNNEL = 18
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INTERNAL = -2147483648
-    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_FORCE_UINT32 = -1
+  enum DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_OTHER = -1_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_HD15 = 0_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_SVIDEO = 1_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_COMPOSITE_VIDEO = 2_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_COMPONENT_VIDEO = 3_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DVI = 4_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_HDMI = 5_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_LVDS = 6_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_D_JPN = 8_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_SDI = 9_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_EXTERNAL = 10_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_EMBEDDED = 11_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_UDI_EXTERNAL = 12_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_UDI_EMBEDDED = 13_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_SDTVDONGLE = 14_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_MIRACAST = 15_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INDIRECT_WIRED = 16_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INDIRECT_VIRTUAL = 17_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_DISPLAYPORT_USB_TUNNEL = 18_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_INTERNAL = -2147483648_i32
+    DISPLAYCONFIG_OUTPUT_TECHNOLOGY_FORCE_UINT32 = -1_i32
+  end
+  enum DISPLAYCONFIG_SCANLINE_ORDERING
+    DISPLAYCONFIG_SCANLINE_ORDERING_UNSPECIFIED = 0_i32
+    DISPLAYCONFIG_SCANLINE_ORDERING_PROGRESSIVE = 1_i32
+    DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED = 2_i32
+    DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_UPPERFIELDFIRST = 2_i32
+    DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_LOWERFIELDFIRST = 3_i32
+    DISPLAYCONFIG_SCANLINE_ORDERING_FORCE_UINT32 = -1_i32
+  end
+  enum DISPLAYCONFIG_SCALING
+    DISPLAYCONFIG_SCALING_IDENTITY = 1_i32
+    DISPLAYCONFIG_SCALING_CENTERED = 2_i32
+    DISPLAYCONFIG_SCALING_STRETCHED = 3_i32
+    DISPLAYCONFIG_SCALING_ASPECTRATIOCENTEREDMAX = 4_i32
+    DISPLAYCONFIG_SCALING_CUSTOM = 5_i32
+    DISPLAYCONFIG_SCALING_PREFERRED = 128_i32
+    DISPLAYCONFIG_SCALING_FORCE_UINT32 = -1_i32
+  end
+  enum DISPLAYCONFIG_ROTATION
+    DISPLAYCONFIG_ROTATION_IDENTITY = 1_i32
+    DISPLAYCONFIG_ROTATION_ROTATE90 = 2_i32
+    DISPLAYCONFIG_ROTATION_ROTATE180 = 3_i32
+    DISPLAYCONFIG_ROTATION_ROTATE270 = 4_i32
+    DISPLAYCONFIG_ROTATION_FORCE_UINT32 = -1_i32
+  end
+  enum DISPLAYCONFIG_MODE_INFO_TYPE
+    DISPLAYCONFIG_MODE_INFO_TYPE_SOURCE = 1_i32
+    DISPLAYCONFIG_MODE_INFO_TYPE_TARGET = 2_i32
+    DISPLAYCONFIG_MODE_INFO_TYPE_DESKTOP_IMAGE = 3_i32
+    DISPLAYCONFIG_MODE_INFO_TYPE_FORCE_UINT32 = -1_i32
+  end
+  enum DISPLAYCONFIG_PIXELFORMAT
+    DISPLAYCONFIG_PIXELFORMAT_8BPP = 1_i32
+    DISPLAYCONFIG_PIXELFORMAT_16BPP = 2_i32
+    DISPLAYCONFIG_PIXELFORMAT_24BPP = 3_i32
+    DISPLAYCONFIG_PIXELFORMAT_32BPP = 4_i32
+    DISPLAYCONFIG_PIXELFORMAT_NONGDI = 5_i32
+    DISPLAYCONFIG_PIXELFORMAT_FORCE_UINT32 = -1_i32
+  end
+  enum DISPLAYCONFIG_TOPOLOGY_ID
+    DISPLAYCONFIG_TOPOLOGY_INTERNAL = 1_i32
+    DISPLAYCONFIG_TOPOLOGY_CLONE = 2_i32
+    DISPLAYCONFIG_TOPOLOGY_EXTEND = 4_i32
+    DISPLAYCONFIG_TOPOLOGY_EXTERNAL = 8_i32
+    DISPLAYCONFIG_TOPOLOGY_FORCE_UINT32 = -1_i32
+  end
+  enum DISPLAYCONFIG_DEVICE_INFO_TYPE
+    DISPLAYCONFIG_DEVICE_INFO_GET_SOURCE_NAME = 1_i32
+    DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME = 2_i32
+    DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_PREFERRED_MODE = 3_i32
+    DISPLAYCONFIG_DEVICE_INFO_GET_ADAPTER_NAME = 4_i32
+    DISPLAYCONFIG_DEVICE_INFO_SET_TARGET_PERSISTENCE = 5_i32
+    DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_BASE_TYPE = 6_i32
+    DISPLAYCONFIG_DEVICE_INFO_GET_SUPPORT_VIRTUAL_RESOLUTION = 7_i32
+    DISPLAYCONFIG_DEVICE_INFO_SET_SUPPORT_VIRTUAL_RESOLUTION = 8_i32
+    DISPLAYCONFIG_DEVICE_INFO_GET_ADVANCED_COLOR_INFO = 9_i32
+    DISPLAYCONFIG_DEVICE_INFO_SET_ADVANCED_COLOR_STATE = 10_i32
+    DISPLAYCONFIG_DEVICE_INFO_GET_SDR_WHITE_LEVEL = 11_i32
+    DISPLAYCONFIG_DEVICE_INFO_GET_MONITOR_SPECIALIZATION = 12_i32
+    DISPLAYCONFIG_DEVICE_INFO_SET_MONITOR_SPECIALIZATION = 13_i32
+    DISPLAYCONFIG_DEVICE_INFO_FORCE_UINT32 = -1_i32
+  end
+  enum MC_VCP_CODE_TYPE
+    MC_MOMENTARY = 0_i32
+    MC_SET_PARAMETER = 1_i32
+  end
+  enum MC_DISPLAY_TECHNOLOGY_TYPE
+    MC_SHADOW_MASK_CATHODE_RAY_TUBE = 0_i32
+    MC_APERTURE_GRILL_CATHODE_RAY_TUBE = 1_i32
+    MC_THIN_FILM_TRANSISTOR = 2_i32
+    MC_LIQUID_CRYSTAL_ON_SILICON = 3_i32
+    MC_PLASMA = 4_i32
+    MC_ORGANIC_LIGHT_EMITTING_DIODE = 5_i32
+    MC_ELECTROLUMINESCENT = 6_i32
+    MC_MICROELECTROMECHANICAL = 7_i32
+    MC_FIELD_EMISSION_DEVICE = 8_i32
+  end
+  enum MC_DRIVE_TYPE
+    MC_RED_DRIVE = 0_i32
+    MC_GREEN_DRIVE = 1_i32
+    MC_BLUE_DRIVE = 2_i32
+  end
+  enum MC_GAIN_TYPE
+    MC_RED_GAIN = 0_i32
+    MC_GREEN_GAIN = 1_i32
+    MC_BLUE_GAIN = 2_i32
+  end
+  enum MC_POSITION_TYPE
+    MC_HORIZONTAL_POSITION = 0_i32
+    MC_VERTICAL_POSITION = 1_i32
+  end
+  enum MC_SIZE_TYPE
+    MC_WIDTH = 0_i32
+    MC_HEIGHT = 1_i32
+  end
+  enum MC_COLOR_TEMPERATURE
+    MC_COLOR_TEMPERATURE_UNKNOWN = 0_i32
+    MC_COLOR_TEMPERATURE_4000K = 1_i32
+    MC_COLOR_TEMPERATURE_5000K = 2_i32
+    MC_COLOR_TEMPERATURE_6500K = 3_i32
+    MC_COLOR_TEMPERATURE_7500K = 4_i32
+    MC_COLOR_TEMPERATURE_8200K = 5_i32
+    MC_COLOR_TEMPERATURE_9300K = 6_i32
+    MC_COLOR_TEMPERATURE_10000K = 7_i32
+    MC_COLOR_TEMPERATURE_11500K = 8_i32
+  end
+  enum ENG_SYSTEM_ATTRIBUTE
+    EngProcessorFeature = 1_i32
+    EngNumberOfProcessors = 2_i32
+    EngOptimumAvailableUserMemory = 3_i32
+    EngOptimumAvailableSystemMemory = 4_i32
+  end
+  enum ENG_DEVICE_ATTRIBUTE
+    QDA_RESERVED = 0_i32
+    QDA_ACCELERATION_LEVEL = 1_i32
+  end
+  enum VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE
+    VideoPowerNotifyCallout = 1_i32
+    VideoEnumChildPdoNotifyCallout = 3_i32
+    VideoFindAdapterCallout = 4_i32
+    VideoPnpNotifyCallout = 7_i32
+    VideoDxgkDisplaySwitchCallout = 8_i32
+    VideoDxgkFindAdapterTdrCallout = 10_i32
+    VideoDxgkHardwareProtectionTeardown = 11_i32
+    VideoRepaintDesktop = 12_i32
+    VideoUpdateCursor = 13_i32
+    VideoDisableMultiPlaneOverlay = 14_i32
+    VideoDesktopDuplicationChange = 15_i32
+    VideoBlackScreenDiagnostics = 16_i32
+  end
+  enum BlackScreenDiagnosticsCalloutParam
+    BlackScreenDiagnosticsData = 1_i32
+    BlackScreenDisplayRecovery = 2_i32
+  end
+  enum VIDEO_BANK_TYPE
+    VideoNotBanked = 0_i32
+    VideoBanked1RW = 1_i32
+    VideoBanked1R1W = 2_i32
+    VideoBanked2RW = 3_i32
+    NumVideoBankTypes = 4_i32
+  end
+  enum VIDEO_POWER_STATE
+    VideoPowerUnspecified = 0_i32
+    VideoPowerOn = 1_i32
+    VideoPowerStandBy = 2_i32
+    VideoPowerSuspend = 3_i32
+    VideoPowerOff = 4_i32
+    VideoPowerHibernate = 5_i32
+    VideoPowerShutdown = 6_i32
+    VideoPowerMaximum = 7_i32
+  end
+  enum BRIGHTNESS_INTERFACE_VERSION
+    BRIGHTNESS_INTERFACE_VERSION_1 = 1_i32
+    BRIGHTNESS_INTERFACE_VERSION_2 = 2_i32
+    BRIGHTNESS_INTERFACE_VERSION_3 = 3_i32
+  end
+  enum BACKLIGHT_OPTIMIZATION_LEVEL
+    BacklightOptimizationDisable = 0_i32
+    BacklightOptimizationDesktop = 1_i32
+    BacklightOptimizationDynamic = 2_i32
+    BacklightOptimizationDimmed = 3_i32
+    BacklightOptimizationEDR = 4_i32
+  end
+  enum COLORSPACE_TRANSFORM_DATA_TYPE
+    COLORSPACE_TRANSFORM_DATA_TYPE_FIXED_POINT = 0_i32
+    COLORSPACE_TRANSFORM_DATA_TYPE_FLOAT = 1_i32
+  end
+  enum COLORSPACE_TRANSFORM_TARGET_CAPS_VERSION
+    COLORSPACE_TRANSFORM_VERSION_DEFAULT = 0_i32
+    COLORSPACE_TRANSFORM_VERSION_1 = 1_i32
+    COLORSPACE_TRANSFORM_VERSION_NOT_SUPPORTED = 0_i32
+  end
+  enum COLORSPACE_TRANSFORM_TYPE
+    COLORSPACE_TRANSFORM_TYPE_UNINITIALIZED = 0_i32
+    COLORSPACE_TRANSFORM_TYPE_DEFAULT = 1_i32
+    COLORSPACE_TRANSFORM_TYPE_RGB256x3x16 = 2_i32
+    COLORSPACE_TRANSFORM_TYPE_DXGI_1 = 3_i32
+    COLORSPACE_TRANSFORM_TYPE_MATRIX_3x4 = 4_i32
+    COLORSPACE_TRANSFORM_TYPE_MATRIX_V2 = 5_i32
+  end
+  enum OUTPUT_WIRE_COLOR_SPACE_TYPE
+    OUTPUT_WIRE_COLOR_SPACE_G22_P709 = 0_i32
+    OUTPUT_WIRE_COLOR_SPACE_RESERVED = 4_i32
+    OUTPUT_WIRE_COLOR_SPACE_G2084_P2020 = 12_i32
+    OUTPUT_WIRE_COLOR_SPACE_G22_P709_WCG = 30_i32
+    OUTPUT_WIRE_COLOR_SPACE_G22_P2020 = 31_i32
+    OUTPUT_WIRE_COLOR_SPACE_G2084_P2020_HDR10PLUS = 32_i32
+    OUTPUT_WIRE_COLOR_SPACE_G2084_P2020_DVLL = 33_i32
+  end
+  enum OUTPUT_COLOR_ENCODING
+    OUTPUT_COLOR_ENCODING_RGB = 0_i32
+    OUTPUT_COLOR_ENCODING_YCBCR444 = 1_i32
+    OUTPUT_COLOR_ENCODING_YCBCR422 = 2_i32
+    OUTPUT_COLOR_ENCODING_YCBCR420 = 3_i32
+    OUTPUT_COLOR_ENCODING_INTENSITY = 4_i32
+    OUTPUT_COLOR_ENCODING_FORCE_UINT32 = -1_i32
+  end
+  enum COLORSPACE_TRANSFORM_STAGE_CONTROL
+    ColorSpaceTransformStageControl_No_Change = 0_i32
+    ColorSpaceTransformStageControl_Enable = 1_i32
+    ColorSpaceTransformStageControl_Bypass = 2_i32
+  end
+  enum DSI_CONTROL_TRANSMISSION_MODE
+    DCT_DEFAULT = 0_i32
+    DCT_FORCE_LOW_POWER = 1_i32
+    DCT_FORCE_HIGH_PERFORMANCE = 2_i32
+  end
+  enum AR_STATE
+    AR_ENABLED = 0_i32
+    AR_DISABLED = 1_i32
+    AR_SUPPRESSED = 2_i32
+    AR_REMOTESESSION = 4_i32
+    AR_MULTIMON = 8_i32
+    AR_NOSENSOR = 16_i32
+    AR_NOT_SUPPORTED = 32_i32
+    AR_DOCKED = 64_i32
+    AR_LAPTOP = 128_i32
+  end
+  enum ORIENTATION_PREFERENCE
+    ORIENTATION_PREFERENCE_NONE = 0_i32
+    ORIENTATION_PREFERENCE_LANDSCAPE = 1_i32
+    ORIENTATION_PREFERENCE_PORTRAIT = 2_i32
+    ORIENTATION_PREFERENCE_LANDSCAPE_FLIPPED = 4_i32
+    ORIENTATION_PREFERENCE_PORTRAIT_FLIPPED = 8_i32
   end
 
-  enum DISPLAYCONFIG_SCANLINE_ORDERING : Int32
-    DISPLAYCONFIG_SCANLINE_ORDERING_UNSPECIFIED = 0
-    DISPLAYCONFIG_SCANLINE_ORDERING_PROGRESSIVE = 1
-    DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED = 2
-    DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_UPPERFIELDFIRST = 2
-    DISPLAYCONFIG_SCANLINE_ORDERING_INTERLACED_LOWERFIELDFIRST = 3
-    DISPLAYCONFIG_SCANLINE_ORDERING_FORCE_UINT32 = -1
-  end
-
-  enum DISPLAYCONFIG_SCALING : Int32
-    DISPLAYCONFIG_SCALING_IDENTITY = 1
-    DISPLAYCONFIG_SCALING_CENTERED = 2
-    DISPLAYCONFIG_SCALING_STRETCHED = 3
-    DISPLAYCONFIG_SCALING_ASPECTRATIOCENTEREDMAX = 4
-    DISPLAYCONFIG_SCALING_CUSTOM = 5
-    DISPLAYCONFIG_SCALING_PREFERRED = 128
-    DISPLAYCONFIG_SCALING_FORCE_UINT32 = -1
-  end
-
-  enum DISPLAYCONFIG_ROTATION : Int32
-    DISPLAYCONFIG_ROTATION_IDENTITY = 1
-    DISPLAYCONFIG_ROTATION_ROTATE90 = 2
-    DISPLAYCONFIG_ROTATION_ROTATE180 = 3
-    DISPLAYCONFIG_ROTATION_ROTATE270 = 4
-    DISPLAYCONFIG_ROTATION_FORCE_UINT32 = -1
-  end
-
-  enum DISPLAYCONFIG_MODE_INFO_TYPE : Int32
-    DISPLAYCONFIG_MODE_INFO_TYPE_SOURCE = 1
-    DISPLAYCONFIG_MODE_INFO_TYPE_TARGET = 2
-    DISPLAYCONFIG_MODE_INFO_TYPE_DESKTOP_IMAGE = 3
-    DISPLAYCONFIG_MODE_INFO_TYPE_FORCE_UINT32 = -1
-  end
-
-  enum DISPLAYCONFIG_PIXELFORMAT : Int32
-    DISPLAYCONFIG_PIXELFORMAT_8BPP = 1
-    DISPLAYCONFIG_PIXELFORMAT_16BPP = 2
-    DISPLAYCONFIG_PIXELFORMAT_24BPP = 3
-    DISPLAYCONFIG_PIXELFORMAT_32BPP = 4
-    DISPLAYCONFIG_PIXELFORMAT_NONGDI = 5
-    DISPLAYCONFIG_PIXELFORMAT_FORCE_UINT32 = -1
-  end
-
-  enum DISPLAYCONFIG_TOPOLOGY_ID : Int32
-    DISPLAYCONFIG_TOPOLOGY_INTERNAL = 1
-    DISPLAYCONFIG_TOPOLOGY_CLONE = 2
-    DISPLAYCONFIG_TOPOLOGY_EXTEND = 4
-    DISPLAYCONFIG_TOPOLOGY_EXTERNAL = 8
-    DISPLAYCONFIG_TOPOLOGY_FORCE_UINT32 = -1
-  end
-
-  enum DISPLAYCONFIG_DEVICE_INFO_TYPE : Int32
-    DISPLAYCONFIG_DEVICE_INFO_GET_SOURCE_NAME = 1
-    DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_NAME = 2
-    DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_PREFERRED_MODE = 3
-    DISPLAYCONFIG_DEVICE_INFO_GET_ADAPTER_NAME = 4
-    DISPLAYCONFIG_DEVICE_INFO_SET_TARGET_PERSISTENCE = 5
-    DISPLAYCONFIG_DEVICE_INFO_GET_TARGET_BASE_TYPE = 6
-    DISPLAYCONFIG_DEVICE_INFO_GET_SUPPORT_VIRTUAL_RESOLUTION = 7
-    DISPLAYCONFIG_DEVICE_INFO_SET_SUPPORT_VIRTUAL_RESOLUTION = 8
-    DISPLAYCONFIG_DEVICE_INFO_GET_ADVANCED_COLOR_INFO = 9
-    DISPLAYCONFIG_DEVICE_INFO_SET_ADVANCED_COLOR_STATE = 10
-    DISPLAYCONFIG_DEVICE_INFO_GET_SDR_WHITE_LEVEL = 11
-    DISPLAYCONFIG_DEVICE_INFO_GET_MONITOR_SPECIALIZATION = 12
-    DISPLAYCONFIG_DEVICE_INFO_SET_MONITOR_SPECIALIZATION = 13
-    DISPLAYCONFIG_DEVICE_INFO_FORCE_UINT32 = -1
-  end
-
-  enum MC_VCP_CODE_TYPE : Int32
-    MC_MOMENTARY = 0
-    MC_SET_PARAMETER = 1
-  end
-
-  enum MC_DISPLAY_TECHNOLOGY_TYPE : Int32
-    MC_SHADOW_MASK_CATHODE_RAY_TUBE = 0
-    MC_APERTURE_GRILL_CATHODE_RAY_TUBE = 1
-    MC_THIN_FILM_TRANSISTOR = 2
-    MC_LIQUID_CRYSTAL_ON_SILICON = 3
-    MC_PLASMA = 4
-    MC_ORGANIC_LIGHT_EMITTING_DIODE = 5
-    MC_ELECTROLUMINESCENT = 6
-    MC_MICROELECTROMECHANICAL = 7
-    MC_FIELD_EMISSION_DEVICE = 8
-  end
-
-  enum MC_DRIVE_TYPE : Int32
-    MC_RED_DRIVE = 0
-    MC_GREEN_DRIVE = 1
-    MC_BLUE_DRIVE = 2
-  end
-
-  enum MC_GAIN_TYPE : Int32
-    MC_RED_GAIN = 0
-    MC_GREEN_GAIN = 1
-    MC_BLUE_GAIN = 2
-  end
-
-  enum MC_POSITION_TYPE : Int32
-    MC_HORIZONTAL_POSITION = 0
-    MC_VERTICAL_POSITION = 1
-  end
-
-  enum MC_SIZE_TYPE : Int32
-    MC_WIDTH = 0
-    MC_HEIGHT = 1
-  end
-
-  enum MC_COLOR_TEMPERATURE : Int32
-    MC_COLOR_TEMPERATURE_UNKNOWN = 0
-    MC_COLOR_TEMPERATURE_4000K = 1
-    MC_COLOR_TEMPERATURE_5000K = 2
-    MC_COLOR_TEMPERATURE_6500K = 3
-    MC_COLOR_TEMPERATURE_7500K = 4
-    MC_COLOR_TEMPERATURE_8200K = 5
-    MC_COLOR_TEMPERATURE_9300K = 6
-    MC_COLOR_TEMPERATURE_10000K = 7
-    MC_COLOR_TEMPERATURE_11500K = 8
-  end
-
-  enum ENG_SYSTEM_ATTRIBUTE : Int32
-    EngProcessorFeature = 1
-    EngNumberOfProcessors = 2
-    EngOptimumAvailableUserMemory = 3
-    EngOptimumAvailableSystemMemory = 4
-  end
-
-  enum ENG_DEVICE_ATTRIBUTE : Int32
-    QDA_RESERVED = 0
-    QDA_ACCELERATION_LEVEL = 1
-  end
-
-  enum VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE : Int32
-    VideoPowerNotifyCallout = 1
-    VideoEnumChildPdoNotifyCallout = 3
-    VideoFindAdapterCallout = 4
-    VideoPnpNotifyCallout = 7
-    VideoDxgkDisplaySwitchCallout = 8
-    VideoDxgkFindAdapterTdrCallout = 10
-    VideoDxgkHardwareProtectionTeardown = 11
-    VideoRepaintDesktop = 12
-    VideoUpdateCursor = 13
-    VideoDisableMultiPlaneOverlay = 14
-    VideoDesktopDuplicationChange = 15
-    VideoBlackScreenDiagnostics = 16
-  end
-
-  enum BlackScreenDiagnosticsCalloutParam : Int32
-    BlackScreenDiagnosticsData = 1
-    BlackScreenDisplayRecovery = 2
-  end
-
-  enum VIDEO_BANK_TYPE : Int32
-    VideoNotBanked = 0
-    VideoBanked1RW = 1
-    VideoBanked1R1W = 2
-    VideoBanked2RW = 3
-    NumVideoBankTypes = 4
-  end
-
-  enum VIDEO_POWER_STATE : Int32
-    VideoPowerUnspecified = 0
-    VideoPowerOn = 1
-    VideoPowerStandBy = 2
-    VideoPowerSuspend = 3
-    VideoPowerOff = 4
-    VideoPowerHibernate = 5
-    VideoPowerShutdown = 6
-    VideoPowerMaximum = 7
-  end
-
-  enum BRIGHTNESS_INTERFACE_VERSION : Int32
-    BRIGHTNESS_INTERFACE_VERSION_1 = 1
-    BRIGHTNESS_INTERFACE_VERSION_2 = 2
-    BRIGHTNESS_INTERFACE_VERSION_3 = 3
-  end
-
-  enum BACKLIGHT_OPTIMIZATION_LEVEL : Int32
-    BacklightOptimizationDisable = 0
-    BacklightOptimizationDesktop = 1
-    BacklightOptimizationDynamic = 2
-    BacklightOptimizationDimmed = 3
-    BacklightOptimizationEDR = 4
-  end
-
-  enum COLORSPACE_TRANSFORM_DATA_TYPE : Int32
-    COLORSPACE_TRANSFORM_DATA_TYPE_FIXED_POINT = 0
-    COLORSPACE_TRANSFORM_DATA_TYPE_FLOAT = 1
-  end
-
-  enum COLORSPACE_TRANSFORM_TARGET_CAPS_VERSION : Int32
-    COLORSPACE_TRANSFORM_VERSION_DEFAULT = 0
-    COLORSPACE_TRANSFORM_VERSION_1 = 1
-    COLORSPACE_TRANSFORM_VERSION_NOT_SUPPORTED = 0
-  end
-
-  enum COLORSPACE_TRANSFORM_TYPE : Int32
-    COLORSPACE_TRANSFORM_TYPE_UNINITIALIZED = 0
-    COLORSPACE_TRANSFORM_TYPE_DEFAULT = 1
-    COLORSPACE_TRANSFORM_TYPE_RGB256x3x16 = 2
-    COLORSPACE_TRANSFORM_TYPE_DXGI_1 = 3
-    COLORSPACE_TRANSFORM_TYPE_MATRIX_3x4 = 4
-    COLORSPACE_TRANSFORM_TYPE_MATRIX_V2 = 5
-  end
-
-  enum OUTPUT_WIRE_COLOR_SPACE_TYPE : Int32
-    OUTPUT_WIRE_COLOR_SPACE_G22_P709 = 0
-    OUTPUT_WIRE_COLOR_SPACE_RESERVED = 4
-    OUTPUT_WIRE_COLOR_SPACE_G2084_P2020 = 12
-    OUTPUT_WIRE_COLOR_SPACE_G22_P709_WCG = 30
-    OUTPUT_WIRE_COLOR_SPACE_G22_P2020 = 31
-    OUTPUT_WIRE_COLOR_SPACE_G2084_P2020_HDR10PLUS = 32
-    OUTPUT_WIRE_COLOR_SPACE_G2084_P2020_DVLL = 33
-  end
-
-  enum OUTPUT_COLOR_ENCODING : Int32
-    OUTPUT_COLOR_ENCODING_RGB = 0
-    OUTPUT_COLOR_ENCODING_YCBCR444 = 1
-    OUTPUT_COLOR_ENCODING_YCBCR422 = 2
-    OUTPUT_COLOR_ENCODING_YCBCR420 = 3
-    OUTPUT_COLOR_ENCODING_INTENSITY = 4
-    OUTPUT_COLOR_ENCODING_FORCE_UINT32 = -1
-  end
-
-  enum COLORSPACE_TRANSFORM_STAGE_CONTROL : Int32
-    ColorSpaceTransformStageControl_No_Change = 0
-    ColorSpaceTransformStageControl_Enable = 1
-    ColorSpaceTransformStageControl_Bypass = 2
-  end
-
-  enum DSI_CONTROL_TRANSMISSION_MODE : Int32
-    DCT_DEFAULT = 0
-    DCT_FORCE_LOW_POWER = 1
-    DCT_FORCE_HIGH_PERFORMANCE = 2
-  end
-
-  enum AR_STATE : Int32
-    AR_ENABLED = 0
-    AR_DISABLED = 1
-    AR_SUPPRESSED = 2
-    AR_REMOTESESSION = 4
-    AR_MULTIMON = 8
-    AR_NOSENSOR = 16
-    AR_NOT_SUPPORTED = 32
-    AR_DOCKED = 64
-    AR_LAPTOP = 128
-  end
-
-  enum ORIENTATION_PREFERENCE : Int32
-    ORIENTATION_PREFERENCE_NONE = 0
-    ORIENTATION_PREFERENCE_LANDSCAPE = 1
-    ORIENTATION_PREFERENCE_PORTRAIT = 2
-    ORIENTATION_PREFERENCE_LANDSCAPE_FLIPPED = 4
-    ORIENTATION_PREFERENCE_PORTRAIT_FLIPPED = 8
-  end
-
-  union DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union
-    additional_signal_info : DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union_AdditionalSignalInfo_e__Struct
-    video_standard : UInt32
-  end
-  union DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union
-    target_mode : DISPLAYCONFIG_TARGET_MODE
-    source_mode : DISPLAYCONFIG_SOURCE_MODE
-    desktop_image_info : DISPLAYCONFIG_DESKTOP_IMAGE_INFO
-  end
-  union DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union
-    mode_info_idx : UInt32
-    anonymous : DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union_Anonymous_e__Struct
-  end
-  union DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union
-    mode_info_idx : UInt32
-    anonymous : DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union_Anonymous_e__Struct
-  end
-  union DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union
-    anonymous : DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union_Anonymous_e__Struct
-    value : UInt32
-  end
-  union DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union
-    anonymous : DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union_Anonymous_e__Struct
-    value : UInt32
-  end
-  union DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union
-    anonymous : DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union_Anonymous_e__Struct
-    value : UInt32
-  end
-  union DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union
-    anonymous : DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union_Anonymous_e__Struct
-    value : UInt32
-  end
-  union DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union
-    anonymous : DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union_Anonymous_e__Struct
-    value : UInt32
-  end
-  union DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union
-    anonymous : DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct
-    value : UInt32
-  end
-  union DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union
-    anonymous : DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct
-    value : UInt32
-  end
-  union FLOAT_LONG
-    e : Float32
-    l : Int32
-  end
-  union GLYPHDEF
-    pgb : GLYPHBITS*
-    ppo : PATHOBJ*
-  end
-  union VIDEO_CLUT_Anonymous_e__Union
-    rgb_array : VIDEO_CLUTDATA
-    rgb_long : UInt32
-  end
-  union PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union
-    anonymous : PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union_Anonymous_e__Struct
-    value : UInt32
-  end
-  union PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union
-    brightness_level : BRIGHTNESS_LEVEL
-    nit_ranges : BRIGHTNESS_NIT_RANGES
-  end
-  union PANEL_GET_BRIGHTNESS_Anonymous_e__Union
-    level : UInt8
-    anonymous : PANEL_GET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct
-  end
-  union PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union
-    anonymous : PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union_Anonymous_e__Struct
-    value : UInt32
-  end
-  union PANEL_SET_BRIGHTNESS_Anonymous_e__Union
-    level : UInt8
-    anonymous : PANEL_SET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct
-  end
-  union PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union
-    anonymous : PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union_Anonymous_e__Struct
-    value : UInt32
-  end
-  union COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union
-    anonymous1 : COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous1_e__Struct
-    anonymous2 : COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous2_e__Struct
-    value : UInt32
-  end
-  union COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union
-    anonymous : COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union_Anonymous_e__Struct
-    value : UInt32
-  end
-  union COLORSPACE_TRANSFORM_Data_e__Union
-    rgb256x3x16 : GAMMA_RAMP_RGB256x3x16
-    dxgi1 : GAMMA_RAMP_DXGI_1
-    t3x4 : COLORSPACE_TRANSFORM_3x4
-    matrix_v2 : COLORSPACE_TRANSFORM_MATRIX_V2
-  end
-  union MIPI_DSI_PACKET_Anonymous2_e__Union
-    anonymous : MIPI_DSI_PACKET_Anonymous2_e__Union_Anonymous_e__Struct
-    long_write_word_count : UInt16
-  end
-  union MIPI_DSI_PACKET_Anonymous1_e__Union
-    data_id : UInt8
-    anonymous : MIPI_DSI_PACKET_Anonymous1_e__Union_Anonymous_e__Struct
-  end
-  union MIPI_DSI_RESET_Anonymous_e__Union
-    anonymous : MIPI_DSI_RESET_Anonymous_e__Union_Anonymous_e__Struct
-    results : UInt32
-  end
-
-  struct DISPLAYCONFIG_RATIONAL
-    numerator : UInt32
+  @[Extern]
+  record DISPLAYCONFIG_RATIONAL,
+    numerator : UInt32,
     denominator : UInt32
-  end
-  struct DISPLAYCONFIG_2DREGION
-    cx : UInt32
+
+  @[Extern]
+  record DISPLAYCONFIG_2DREGION,
+    cx : UInt32,
     cy : UInt32
+
+  @[Extern]
+  record DISPLAYCONFIG_VIDEO_SIGNAL_INFO,
+    pixelRate : UInt64,
+    hSyncFreq : Win32cr::Devices::Display::DISPLAYCONFIG_RATIONAL,
+    vSyncFreq : Win32cr::Devices::Display::DISPLAYCONFIG_RATIONAL,
+    activeSize : Win32cr::Devices::Display::DISPLAYCONFIG_2DREGION,
+    totalSize : Win32cr::Devices::Display::DISPLAYCONFIG_2DREGION,
+    anonymous : Anonymous_e__Union,
+    scanLineOrdering : Win32cr::Devices::Display::DISPLAYCONFIG_SCANLINE_ORDERING do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      additional_signal_info : AdditionalSignalInfo_e__Struct,
+      videoStandard : UInt32 do
+
+      # Nested Type AdditionalSignalInfo_e__Struct
+      @[Extern]
+      record AdditionalSignalInfo_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct DISPLAYCONFIG_VIDEO_SIGNAL_INFO
-    pixel_rate : UInt64
-    h_sync_freq : DISPLAYCONFIG_RATIONAL
-    v_sync_freq : DISPLAYCONFIG_RATIONAL
-    active_size : DISPLAYCONFIG_2DREGION
-    total_size : DISPLAYCONFIG_2DREGION
-    anonymous : DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union
-    scan_line_ordering : DISPLAYCONFIG_SCANLINE_ORDERING
+
+  @[Extern]
+  record DISPLAYCONFIG_SOURCE_MODE,
+    width : UInt32,
+    height : UInt32,
+    pixelFormat : Win32cr::Devices::Display::DISPLAYCONFIG_PIXELFORMAT,
+    position : Win32cr::Foundation::POINTL
+
+  @[Extern]
+  record DISPLAYCONFIG_TARGET_MODE,
+    targetVideoSignalInfo : Win32cr::Devices::Display::DISPLAYCONFIG_VIDEO_SIGNAL_INFO
+
+  @[Extern]
+  record DISPLAYCONFIG_DESKTOP_IMAGE_INFO,
+    path_source_size : Win32cr::Foundation::POINTL,
+    desktop_image_region : Win32cr::Foundation::RECTL,
+    desktop_image_clip : Win32cr::Foundation::RECTL
+
+  @[Extern]
+  record DISPLAYCONFIG_MODE_INFO,
+    infoType : Win32cr::Devices::Display::DISPLAYCONFIG_MODE_INFO_TYPE,
+    id : UInt32,
+    adapterId : Win32cr::Foundation::LUID,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      targetMode : Win32cr::Devices::Display::DISPLAYCONFIG_TARGET_MODE,
+      sourceMode : Win32cr::Devices::Display::DISPLAYCONFIG_SOURCE_MODE,
+      desktopImageInfo : Win32cr::Devices::Display::DISPLAYCONFIG_DESKTOP_IMAGE_INFO
+
   end
-  struct DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union_AdditionalSignalInfo_e__Struct
-    _bitfield : UInt32
+
+  @[Extern]
+  record DISPLAYCONFIG_PATH_SOURCE_INFO,
+    adapterId : Win32cr::Foundation::LUID,
+    id : UInt32,
+    anonymous : Anonymous_e__Union,
+    statusFlags : UInt32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      modeInfoIdx : UInt32,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct DISPLAYCONFIG_SOURCE_MODE
-    width : UInt32
-    height : UInt32
-    pixel_format : DISPLAYCONFIG_PIXELFORMAT
-    position : POINTL
+
+  @[Extern]
+  record DISPLAYCONFIG_PATH_TARGET_INFO,
+    adapterId : Win32cr::Foundation::LUID,
+    id : UInt32,
+    anonymous : Anonymous_e__Union,
+    outputTechnology : Win32cr::Devices::Display::DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY,
+    rotation : Win32cr::Devices::Display::DISPLAYCONFIG_ROTATION,
+    scaling : Win32cr::Devices::Display::DISPLAYCONFIG_SCALING,
+    refreshRate : Win32cr::Devices::Display::DISPLAYCONFIG_RATIONAL,
+    scanLineOrdering : Win32cr::Devices::Display::DISPLAYCONFIG_SCANLINE_ORDERING,
+    targetAvailable : Win32cr::Foundation::BOOL,
+    statusFlags : UInt32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      modeInfoIdx : UInt32,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct DISPLAYCONFIG_TARGET_MODE
-    target_video_signal_info : DISPLAYCONFIG_VIDEO_SIGNAL_INFO
-  end
-  struct DISPLAYCONFIG_DESKTOP_IMAGE_INFO
-    path_source_size : POINTL
-    desktop_image_region : RECTL
-    desktop_image_clip : RECTL
-  end
-  struct DISPLAYCONFIG_MODE_INFO
-    info_type : DISPLAYCONFIG_MODE_INFO_TYPE
-    id : UInt32
-    adapter_id : LUID
-    anonymous : DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union
-  end
-  struct DISPLAYCONFIG_PATH_SOURCE_INFO
-    adapter_id : LUID
-    id : UInt32
-    anonymous : DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union
-    status_flags : UInt32
-  end
-  struct DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct DISPLAYCONFIG_PATH_TARGET_INFO
-    adapter_id : LUID
-    id : UInt32
-    anonymous : DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union
-    output_technology : DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY
-    rotation : DISPLAYCONFIG_ROTATION
-    scaling : DISPLAYCONFIG_SCALING
-    refresh_rate : DISPLAYCONFIG_RATIONAL
-    scan_line_ordering : DISPLAYCONFIG_SCANLINE_ORDERING
-    target_available : LibC::BOOL
-    status_flags : UInt32
-  end
-  struct DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct DISPLAYCONFIG_PATH_INFO
-    source_info : DISPLAYCONFIG_PATH_SOURCE_INFO
-    target_info : DISPLAYCONFIG_PATH_TARGET_INFO
+
+  @[Extern]
+  record DISPLAYCONFIG_PATH_INFO,
+    sourceInfo : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_SOURCE_INFO,
+    targetInfo : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_TARGET_INFO,
     flags : UInt32
-  end
-  struct DISPLAYCONFIG_DEVICE_INFO_HEADER
-    type : DISPLAYCONFIG_DEVICE_INFO_TYPE
-    size : UInt32
-    adapter_id : LUID
+
+  @[Extern]
+  record DISPLAYCONFIG_DEVICE_INFO_HEADER,
+    type__ : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_TYPE,
+    size : UInt32,
+    adapterId : Win32cr::Foundation::LUID,
     id : UInt32
+
+  @[Extern]
+  record DISPLAYCONFIG_SOURCE_DEVICE_NAME,
+    header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER,
+    viewGdiDeviceName : UInt16[32]
+
+  @[Extern]
+  record DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      value : UInt32 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct DISPLAYCONFIG_SOURCE_DEVICE_NAME
-    header : DISPLAYCONFIG_DEVICE_INFO_HEADER
-    view_gdi_device_name : Char[32]*
+
+  @[Extern]
+  record DISPLAYCONFIG_TARGET_DEVICE_NAME,
+    header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER,
+    flags : Win32cr::Devices::Display::DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS,
+    outputTechnology : Win32cr::Devices::Display::DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY,
+    edidManufactureId : UInt16,
+    edidProductCodeId : UInt16,
+    connectorInstance : UInt32,
+    monitorFriendlyDeviceName : UInt16[64],
+    monitorDevicePath : UInt16[128]
+
+  @[Extern]
+  record DISPLAYCONFIG_TARGET_PREFERRED_MODE,
+    header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER,
+    width : UInt32,
+    height : UInt32,
+    targetMode : Win32cr::Devices::Display::DISPLAYCONFIG_TARGET_MODE
+
+  @[Extern]
+  record DISPLAYCONFIG_ADAPTER_NAME,
+    header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER,
+    adapterDevicePath : UInt16[128]
+
+  @[Extern]
+  record DISPLAYCONFIG_TARGET_BASE_TYPE,
+    header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER,
+    baseOutputTechnology : Win32cr::Devices::Display::DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY
+
+  @[Extern]
+  record DISPLAYCONFIG_SET_TARGET_PERSISTENCE,
+    header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      value : UInt32 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS
-    anonymous : DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union
+
+  @[Extern]
+  record DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION,
+    header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      value : UInt32 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
+
+  @[Extern]
+  record DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO,
+    header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER,
+    anonymous : Anonymous_e__Union,
+    colorEncoding : Win32cr::Graphics::Gdi::DISPLAYCONFIG_COLOR_ENCODING,
+    bitsPerColorChannel : UInt32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      value : UInt32 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct DISPLAYCONFIG_TARGET_DEVICE_NAME
-    header : DISPLAYCONFIG_DEVICE_INFO_HEADER
-    flags : DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS
-    output_technology : DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY
-    edid_manufacture_id : UInt16
-    edid_product_code_id : UInt16
-    connector_instance : UInt32
-    monitor_friendly_device_name : Char[64]*
-    monitor_device_path : Char[128]*
+
+  @[Extern]
+  record DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE,
+    header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      value : UInt32 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct DISPLAYCONFIG_TARGET_PREFERRED_MODE
-    header : DISPLAYCONFIG_DEVICE_INFO_HEADER
-    width : UInt32
-    height : UInt32
-    target_mode : DISPLAYCONFIG_TARGET_MODE
-  end
-  struct DISPLAYCONFIG_ADAPTER_NAME
-    header : DISPLAYCONFIG_DEVICE_INFO_HEADER
-    adapter_device_path : Char[128]*
-  end
-  struct DISPLAYCONFIG_TARGET_BASE_TYPE
-    header : DISPLAYCONFIG_DEVICE_INFO_HEADER
-    base_output_technology : DISPLAYCONFIG_VIDEO_OUTPUT_TECHNOLOGY
-  end
-  struct DISPLAYCONFIG_SET_TARGET_PERSISTENCE
-    header : DISPLAYCONFIG_DEVICE_INFO_HEADER
-    anonymous : DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union
-  end
-  struct DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION
-    header : DISPLAYCONFIG_DEVICE_INFO_HEADER
-    anonymous : DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union
-  end
-  struct DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO
-    header : DISPLAYCONFIG_DEVICE_INFO_HEADER
-    anonymous : DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union
-    color_encoding : DISPLAYCONFIG_COLOR_ENCODING
-    bits_per_color_channel : UInt32
-  end
-  struct DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE
-    header : DISPLAYCONFIG_DEVICE_INFO_HEADER
-    anonymous : DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union
-  end
-  struct DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct DISPLAYCONFIG_SDR_WHITE_LEVEL
-    header : DISPLAYCONFIG_DEVICE_INFO_HEADER
+
+  @[Extern]
+  record DISPLAYCONFIG_SDR_WHITE_LEVEL,
+    header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER,
     sdr_white_level : UInt32
+
+  @[Extern]
+  record DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION,
+    header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      value : UInt32 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION
-    header : DISPLAYCONFIG_DEVICE_INFO_HEADER
-    anonymous : DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union
+
+  @[Extern]
+  record DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION,
+    header : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER,
+    anonymous : Anonymous_e__Union,
+    specializationType : LibC::GUID,
+    specializationSubType : LibC::GUID,
+    specializationApplicationName : UInt16[128] do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      value : UInt32 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION
-    header : DISPLAYCONFIG_DEVICE_INFO_HEADER
-    anonymous : DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union
-    specialization_type : Guid
-    specialization_sub_type : Guid
-    specialization_application_name : Char[128]*
-  end
-  struct DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct PHYSICAL_MONITOR
-    h_physical_monitor : LibC::HANDLE
-    sz_physical_monitor_description : Char[128]*
-  end
-  struct MC_TIMING_REPORT
-    dw_horizontal_frequency_in_hz : UInt32
-    dw_vertical_frequency_in_hz : UInt32
-    b_timing_status_byte : UInt8
-  end
-  struct Sources
-    source_id : UInt32
-    num_targets : Int32
-    a_targets : UInt32[0]*
-  end
-  struct Adapter
-    adapter_name : Char[128]*
-    num_sources : Int32
-    sources : Sources[0]*
-  end
-  struct Adapters
-    num_adapters : Int32
-    adapter : Adapter[0]*
-  end
-  struct DisplayMode
-    device_name : Char[32]*
-    dev_mode : DEVMODEW
-  end
-  struct DisplayModes
-    num_display_modes : Int32
-    display_mode : DisplayMode[0]*
-  end
-  struct VIDEOPARAMETERS
-    guid : Guid
-    dw_offset : UInt32
-    dw_command : UInt32
-    dw_flags : UInt32
-    dw_mode : UInt32
-    dw_tv_standard : UInt32
-    dw_available_modes : UInt32
-    dw_available_tv_standard : UInt32
-    dw_flicker_filter : UInt32
-    dw_over_scan_x : UInt32
-    dw_over_scan_y : UInt32
-    dw_max_unscaled_x : UInt32
-    dw_max_unscaled_y : UInt32
-    dw_position_x : UInt32
-    dw_position_y : UInt32
-    dw_brightness : UInt32
-    dw_contrast : UInt32
-    dw_cp_type : UInt32
-    dw_cp_command : UInt32
-    dw_cp_standard : UInt32
-    dw_cp_key : UInt32
-    b_cp_aps_trigger_bits : UInt32
-    b_oem_copy_protection : UInt8[256]*
-  end
-  struct POINTE
-    x : Float32
+
+  @[Extern]
+  record PHYSICAL_MONITOR,
+    hPhysicalMonitor : Win32cr::Foundation::HANDLE,
+    szPhysicalMonitorDescription : UInt16[128]
+
+  @[Extern]
+  record MC_TIMING_REPORT,
+    dwHorizontalFrequencyInHZ : UInt32,
+    dwVerticalFrequencyInHZ : UInt32,
+    bTimingStatusByte : UInt8
+
+  @[Extern]
+  record Sources,
+    sourceId : UInt32,
+    numTargets : Int32,
+    aTargets : UInt32*
+
+  @[Extern]
+  record Adapter,
+    adapter_name : UInt16[128],
+    numSources : Int32,
+    sources : Win32cr::Devices::Display::Sources*
+
+  @[Extern]
+  record Adapters,
+    numAdapters : Int32,
+    adapter : Win32cr::Devices::Display::Adapter*
+
+  @[Extern]
+  record DisplayMode,
+    device_name : UInt16[32],
+    devMode : Win32cr::Graphics::Gdi::DEVMODEW
+
+  @[Extern]
+  record DisplayModes,
+    numDisplayModes : Int32,
+    displayMode : Win32cr::Devices::Display::DisplayMode*
+
+  @[Extern]
+  record VIDEOPARAMETERS,
+    guid : LibC::GUID,
+    dwOffset : UInt32,
+    dwCommand : UInt32,
+    dwFlags : UInt32,
+    dwMode : UInt32,
+    dwTVStandard : UInt32,
+    dwAvailableModes : UInt32,
+    dwAvailableTVStandard : UInt32,
+    dwFlickerFilter : UInt32,
+    dwOverScanX : UInt32,
+    dwOverScanY : UInt32,
+    dwMaxUnscaledX : UInt32,
+    dwMaxUnscaledY : UInt32,
+    dwPositionX : UInt32,
+    dwPositionY : UInt32,
+    dwBrightness : UInt32,
+    dwContrast : UInt32,
+    dwCPType : UInt32,
+    dwCPCommand : UInt32,
+    dwCPStandard : UInt32,
+    dwCPKey : UInt32,
+    bCP_APSTriggerBits : UInt32,
+    bOEMCopyProtection : UInt8[256]
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  record POINTE,
+    x : Float32,
     y : Float32
-  end
-  struct POINTFIX
-    x : Int32
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern(union: true)]
+  record FLOAT_LONG,
+    e : Float32,
+    l : Int32
+  {% end %}
+
+  @[Extern]
+  record POINTFIX,
+    x : Int32,
     y : Int32
-  end
-  struct RECTFX
-    x_left : Int32
-    y_top : Int32
-    x_right : Int32
-    y_bottom : Int32
-  end
-  struct FD_XFORM
-    e_xx : Float32
-    e_xy : Float32
-    e_yx : Float32
-    e_yy : Float32
-  end
-  struct FD_DEVICEMETRICS
-    fl_realized_type : UInt32
-    pte_base : POINTE
-    pte_side : POINTE
-    l_d : Int32
-    fx_max_ascender : Int32
-    fx_max_descender : Int32
-    ptl_underline1 : POINTL
-    ptl_strike_out : POINTL
-    ptl_ul_thickness : POINTL
-    ptl_so_thickness : POINTL
-    cx_max : UInt32
-    cy_max : UInt32
-    cj_glyph_max : UInt32
-    fdx_quantized : FD_XFORM
-    l_non_linear_ext_leading : Int32
-    l_non_linear_int_leading : Int32
-    l_non_linear_max_char_width : Int32
-    l_non_linear_avg_char_width : Int32
-    l_min_a : Int32
-    l_min_c : Int32
-    l_min_d : Int32
-    al_reserved : Int32[0]*
-  end
-  struct LIGATURE
-    cul_size : UInt32
-    pwsz : LibC::LPWSTR
-    chglyph : UInt32
-    ahglyph : UInt32[0]*
-  end
-  struct FD_LIGATURE
-    cul_this : UInt32
-    ul_type : UInt32
-    c_ligatures : UInt32
-    alig : LIGATURE[0]*
-  end
-  struct POINTQF
-    x : LARGE_INTEGER
-    y : LARGE_INTEGER
-  end
-  struct WCRUN
-    wc_low : Char
-    c_glyphs : UInt16
+
+  @[Extern]
+  record RECTFX,
+    xLeft : Int32,
+    yTop : Int32,
+    xRight : Int32,
+    yBottom : Int32
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  record FD_XFORM,
+    eXX : Float32,
+    eXY : Float32,
+    eYX : Float32,
+    eYY : Float32
+  {% end %}
+
+  @[Extern]
+  record FD_DEVICEMETRICS,
+    flRealizedType : UInt32,
+    pteBase : Win32cr::Devices::Display::POINTE,
+    pteSide : Win32cr::Devices::Display::POINTE,
+    lD : Int32,
+    fxMaxAscender : Int32,
+    fxMaxDescender : Int32,
+    ptlUnderline1 : Win32cr::Foundation::POINTL,
+    ptlStrikeOut : Win32cr::Foundation::POINTL,
+    ptlULThickness : Win32cr::Foundation::POINTL,
+    ptlSOThickness : Win32cr::Foundation::POINTL,
+    cxMax : UInt32,
+    cyMax : UInt32,
+    cjGlyphMax : UInt32,
+    fdxQuantized : Win32cr::Devices::Display::FD_XFORM,
+    lNonLinearExtLeading : Int32,
+    lNonLinearIntLeading : Int32,
+    lNonLinearMaxCharWidth : Int32,
+    lNonLinearAvgCharWidth : Int32,
+    lMinA : Int32,
+    lMinC : Int32,
+    lMinD : Int32,
+    alReserved : Int32*
+
+  @[Extern]
+  record LIGATURE,
+    culSize : UInt32,
+    pwsz : Win32cr::Foundation::PWSTR,
+    chglyph : UInt32,
+    ahglyph : UInt32*
+
+  @[Extern]
+  record FD_LIGATURE,
+    culThis : UInt32,
+    ulType : UInt32,
+    cLigatures : UInt32,
+    alig : Win32cr::Devices::Display::LIGATURE*
+
+  @[Extern]
+  record POINTQF,
+    x : Win32cr::Foundation::LARGE_INTEGER,
+    y : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record WCRUN,
+    wcLow : UInt16,
+    cGlyphs : UInt16,
     phg : UInt32*
-  end
-  struct FD_GLYPHSET
-    cj_this : UInt32
-    fl_accel : UInt32
-    c_glyphs_supported : UInt32
-    c_runs : UInt32
-    awcrun : WCRUN[0]*
-  end
-  struct FD_GLYPHATTR
-    cj_this : UInt32
-    c_glyphs : UInt32
-    i_mode : UInt32
-    a_glyph_attr : UInt8[0]*
-  end
-  struct FD_KERNINGPAIR
-    wc_first : Char
-    wc_second : Char
-    fwd_kern : Int16
-  end
-  struct FONTDIFF
-    j_reserved1 : UInt8
-    j_reserved2 : UInt8
-    j_reserved3 : UInt8
-    b_weight : UInt8
-    us_win_weight : UInt16
-    fs_selection : UInt16
-    fwd_ave_char_width : Int16
-    fwd_max_char_inc : Int16
-    ptl_caret : POINTL
-  end
-  struct FONTSIM
-    dp_bold : Int32
-    dp_italic : Int32
-    dp_bold_italic : Int32
-  end
-  struct IFIMETRICS
-    cj_this : UInt32
-    cj_ifi_extra : UInt32
-    dpwsz_family_name : Int32
-    dpwsz_style_name : Int32
-    dpwsz_face_name : Int32
-    dpwsz_unique_name : Int32
-    dp_font_sim : Int32
-    l_embed_id : Int32
-    l_italic_angle : Int32
-    l_char_bias : Int32
-    dp_char_sets : Int32
-    j_win_char_set : UInt8
-    j_win_pitch_and_family : UInt8
-    us_win_weight : UInt16
-    fl_info : UInt32
-    fs_selection : UInt16
-    fs_type : UInt16
-    fwd_units_per_em : Int16
-    fwd_lowest_pp_em : Int16
-    fwd_win_ascender : Int16
-    fwd_win_descender : Int16
-    fwd_mac_ascender : Int16
-    fwd_mac_descender : Int16
-    fwd_mac_line_gap : Int16
-    fwd_typo_ascender : Int16
-    fwd_typo_descender : Int16
-    fwd_typo_line_gap : Int16
-    fwd_ave_char_width : Int16
-    fwd_max_char_inc : Int16
-    fwd_cap_height : Int16
-    fwd_x_height : Int16
-    fwd_subscript_x_size : Int16
-    fwd_subscript_y_size : Int16
-    fwd_subscript_x_offset : Int16
-    fwd_subscript_y_offset : Int16
-    fwd_superscript_x_size : Int16
-    fwd_superscript_y_size : Int16
-    fwd_superscript_x_offset : Int16
-    fwd_superscript_y_offset : Int16
-    fwd_underscore_size : Int16
-    fwd_underscore_position : Int16
-    fwd_strikeout_size : Int16
-    fwd_strikeout_position : Int16
-    ch_first_char : UInt8
-    ch_last_char : UInt8
-    ch_default_char : UInt8
-    ch_break_char : UInt8
-    wc_first_char : Char
-    wc_last_char : Char
-    wc_default_char : Char
-    wc_break_char : Char
-    ptl_baseline : POINTL
-    ptl_aspect : POINTL
-    ptl_caret : POINTL
-    rcl_font_box : RECTL
-    ach_vend_id : UInt8[4]*
-    c_kerning_pairs : UInt32
-    ul_panose_culture : UInt32
-    panose : PANOSE
+
+  @[Extern]
+  record FD_GLYPHSET,
+    cjThis : UInt32,
+    flAccel : UInt32,
+    cGlyphsSupported : UInt32,
+    cRuns : UInt32,
+    awcrun : Win32cr::Devices::Display::WCRUN*
+
+  @[Extern]
+  record FD_GLYPHATTR,
+    cjThis : UInt32,
+    cGlyphs : UInt32,
+    iMode : UInt32,
+    aGlyphAttr : UInt8*
+
+  @[Extern]
+  record FD_KERNINGPAIR,
+    wcFirst : UInt16,
+    wcSecond : UInt16,
+    fwdKern : Int16
+
+  @[Extern]
+  record FONTDIFF,
+    jReserved1 : UInt8,
+    jReserved2 : UInt8,
+    jReserved3 : UInt8,
+    bWeight : UInt8,
+    usWinWeight : UInt16,
+    fsSelection : UInt16,
+    fwdAveCharWidth : Int16,
+    fwdMaxCharInc : Int16,
+    ptlCaret : Win32cr::Foundation::POINTL
+
+  @[Extern]
+  record FONTSIM,
+    dpBold : Int32,
+    dpItalic : Int32,
+    dpBoldItalic : Int32
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  record IFIMETRICS,
+    cjThis : UInt32,
+    cjIfiExtra : UInt32,
+    dpwszFamilyName : Int32,
+    dpwszStyleName : Int32,
+    dpwszFaceName : Int32,
+    dpwszUniqueName : Int32,
+    dpFontSim : Int32,
+    lEmbedId : Int32,
+    lItalicAngle : Int32,
+    lCharBias : Int32,
+    dpCharSets : Int32,
+    jWinCharSet : UInt8,
+    jWinPitchAndFamily : UInt8,
+    usWinWeight : UInt16,
+    flInfo : UInt32,
+    fsSelection : UInt16,
+    fsType : UInt16,
+    fwdUnitsPerEm : Int16,
+    fwdLowestPPEm : Int16,
+    fwdWinAscender : Int16,
+    fwdWinDescender : Int16,
+    fwdMacAscender : Int16,
+    fwdMacDescender : Int16,
+    fwdMacLineGap : Int16,
+    fwdTypoAscender : Int16,
+    fwdTypoDescender : Int16,
+    fwdTypoLineGap : Int16,
+    fwdAveCharWidth : Int16,
+    fwdMaxCharInc : Int16,
+    fwdCapHeight : Int16,
+    fwdXHeight : Int16,
+    fwdSubscriptXSize : Int16,
+    fwdSubscriptYSize : Int16,
+    fwdSubscriptXOffset : Int16,
+    fwdSubscriptYOffset : Int16,
+    fwdSuperscriptXSize : Int16,
+    fwdSuperscriptYSize : Int16,
+    fwdSuperscriptXOffset : Int16,
+    fwdSuperscriptYOffset : Int16,
+    fwdUnderscoreSize : Int16,
+    fwdUnderscorePosition : Int16,
+    fwdStrikeoutSize : Int16,
+    fwdStrikeoutPosition : Int16,
+    chFirstChar : UInt8,
+    chLastChar : UInt8,
+    chDefaultChar : UInt8,
+    chBreakChar : UInt8,
+    wcFirstChar : UInt16,
+    wcLastChar : UInt16,
+    wcDefaultChar : UInt16,
+    wcBreakChar : UInt16,
+    ptlBaseline : Win32cr::Foundation::POINTL,
+    ptlAspect : Win32cr::Foundation::POINTL,
+    ptlCaret : Win32cr::Foundation::POINTL,
+    rclFontBox : Win32cr::Foundation::RECTL,
+    achVendId : UInt8[4],
+    cKerningPairs : UInt32,
+    ulPanoseCulture : UInt32,
+    panose : Win32cr::Graphics::Gdi::PANOSE,
     align : Void*
-  end
-  struct IFIEXTRA
-    ul_identifier : UInt32
-    dp_font_sig : Int32
-    cig : UInt32
-    dp_design_vector : Int32
-    dp_axes_info_w : Int32
-    aul_reserved : UInt32[0]*
-  end
-  struct DRVFN
-    i_func : UInt32
-    pfn : PFN
-  end
-  struct DRVENABLEDATA
-    i_driver_version : UInt32
-    c : UInt32
-    pdrvfn : DRVFN*
-  end
-  struct DEVINFO
-    fl_graphics_caps : UInt32
-    lf_default_font : LOGFONTW
-    lf_ansi_var_font : LOGFONTW
-    lf_ansi_fix_font : LOGFONTW
-    c_fonts : UInt32
-    i_dither_format : UInt32
-    cx_dither : UInt16
-    cy_dither : UInt16
-    hpal_default : HPALETTE
-    fl_graphics_caps2 : UInt32
-  end
-  struct LINEATTRS
-    fl : UInt32
-    i_join : UInt32
-    i_end_cap : UInt32
-    el_width : FLOAT_LONG
-    e_miter_limit : Float32
-    cstyle : UInt32
-    pstyle : FLOAT_LONG*
-    el_style_state : FLOAT_LONG
-  end
-  struct XFORML
-    e_m11 : Float32
-    e_m12 : Float32
-    e_m21 : Float32
-    e_m22 : Float32
-    e_dx : Float32
-    e_dy : Float32
-  end
-  struct CIECHROMA
-    x : Int32
-    y : Int32
-    _y : Int32
-  end
-  struct COLORINFO
-    red : CIECHROMA
-    green : CIECHROMA
-    blue : CIECHROMA
-    cyan : CIECHROMA
-    magenta : CIECHROMA
-    yellow : CIECHROMA
-    alignment_white : CIECHROMA
-    red_gamma : Int32
-    green_gamma : Int32
-    blue_gamma : Int32
-    magenta_in_cyan_dye : Int32
-    yellow_in_cyan_dye : Int32
-    cyan_in_magenta_dye : Int32
-    yellow_in_magenta_dye : Int32
-    cyan_in_yellow_dye : Int32
+  {% end %}
+
+  @[Extern]
+  record IFIEXTRA,
+    ulIdentifier : UInt32,
+    dpFontSig : Int32,
+    cig : UInt32,
+    dpDesignVector : Int32,
+    dpAxesInfoW : Int32,
+    aulReserved : UInt32*
+
+  @[Extern]
+  record DRVFN,
+    iFunc : UInt32,
+    pfn : Win32cr::Devices::Display::PFN
+
+  @[Extern]
+  record DRVENABLEDATA,
+    iDriverVersion : UInt32,
+    c : UInt32,
+    pdrvfn : Win32cr::Devices::Display::DRVFN*
+
+  @[Extern]
+  record DEVINFO,
+    flGraphicsCaps : UInt32,
+    lfDefaultFont : Win32cr::Graphics::Gdi::LOGFONTW,
+    lfAnsiVarFont : Win32cr::Graphics::Gdi::LOGFONTW,
+    lfAnsiFixFont : Win32cr::Graphics::Gdi::LOGFONTW,
+    cFonts : UInt32,
+    iDitherFormat : UInt32,
+    cxDither : UInt16,
+    cyDither : UInt16,
+    hpalDefault : Win32cr::Graphics::Gdi::HPALETTE,
+    flGraphicsCaps2 : UInt32
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  record LINEATTRS,
+    fl : UInt32,
+    iJoin : UInt32,
+    iEndCap : UInt32,
+    elWidth : Win32cr::Devices::Display::FLOAT_LONG,
+    eMiterLimit : Float32,
+    cstyle : UInt32,
+    pstyle : Win32cr::Devices::Display::FLOAT_LONG*,
+    elStyleState : Win32cr::Devices::Display::FLOAT_LONG
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  record XFORML,
+    eM11 : Float32,
+    eM12 : Float32,
+    eM21 : Float32,
+    eM22 : Float32,
+    eDx : Float32,
+    eDy : Float32
+  {% end %}
+
+  @[Extern]
+  record CIECHROMA,
+    x : Int32,
+    y : Int32,
+    y_ : Int32
+
+  @[Extern]
+  record COLORINFO,
+    red : Win32cr::Devices::Display::CIECHROMA,
+    green : Win32cr::Devices::Display::CIECHROMA,
+    blue : Win32cr::Devices::Display::CIECHROMA,
+    cyan : Win32cr::Devices::Display::CIECHROMA,
+    magenta : Win32cr::Devices::Display::CIECHROMA,
+    yellow : Win32cr::Devices::Display::CIECHROMA,
+    alignment_white : Win32cr::Devices::Display::CIECHROMA,
+    red_gamma : Int32,
+    green_gamma : Int32,
+    blue_gamma : Int32,
+    magenta_in_cyan_dye : Int32,
+    yellow_in_cyan_dye : Int32,
+    cyan_in_magenta_dye : Int32,
+    yellow_in_magenta_dye : Int32,
+    cyan_in_yellow_dye : Int32,
     magenta_in_yellow_dye : Int32
-  end
-  struct CDDDXGK_REDIRBITMAPPRESENTINFO
-    num_dirty_rects : UInt32
-    dirty_rect : RECT*
-    num_contexts : UInt32
-    h_context : LibC::HANDLE[65]*
-    b_do_not_synchronize_with_dx_content : BOOLEAN
-  end
-  struct GDIINFO
-    ul_version : UInt32
-    ul_technology : UInt32
-    ul_horz_size : UInt32
-    ul_vert_size : UInt32
-    ul_horz_res : UInt32
-    ul_vert_res : UInt32
-    c_bits_pixel : UInt32
-    c_planes : UInt32
-    ul_num_colors : UInt32
-    fl_raster : UInt32
-    ul_log_pixels_x : UInt32
-    ul_log_pixels_y : UInt32
-    fl_text_caps : UInt32
-    ul_dac_red : UInt32
-    ul_dac_green : UInt32
-    ul_dac_blue : UInt32
-    ul_aspect_x : UInt32
-    ul_aspect_y : UInt32
-    ul_aspect_xy : UInt32
-    x_style_step : Int32
-    y_style_step : Int32
-    den_style_step : Int32
-    ptl_phys_offset : POINTL
-    szl_phys_size : SIZE
-    ul_num_pal_reg : UInt32
-    ci_device : COLORINFO
-    ul_device_pels_dpi : UInt32
-    ul_primary_order : UInt32
-    ul_ht_pattern_size : UInt32
-    ul_ht_output_format : UInt32
-    fl_ht_flags : UInt32
-    ul_v_refresh : UInt32
-    ul_blt_alignment : UInt32
-    ul_panning_horz_res : UInt32
-    ul_panning_vert_res : UInt32
-    x_panning_alignment : UInt32
-    y_panning_alignment : UInt32
-    cx_ht_pat : UInt32
-    cy_ht_pat : UInt32
-    p_ht_pat_a : UInt8*
-    p_ht_pat_b : UInt8*
-    p_ht_pat_c : UInt8*
-    fl_shade_blend : UInt32
-    ul_physical_pixel_characteristics : UInt32
-    ul_physical_pixel_gamma : UInt32
-  end
-  struct BRUSHOBJ
-    i_solid_color : UInt32
-    pv_rbrush : Void*
-    fl_color_type : UInt32
-  end
-  struct CLIPOBJ
-    i_uniq : UInt32
-    rcl_bounds : RECTL
-    i_d_complexity : UInt8
-    i_f_complexity : UInt8
-    i_mode : UInt8
-    fj_options : UInt8
-  end
-  struct DRIVEROBJ
-    pv_obj : Void*
-    p_free_proc : FREEOBJPROC
-    hdev : HDEV
-    dhpdev : DHPDEV
-  end
-  struct FONTOBJ
-    i_uniq : UInt32
-    i_face : UInt32
-    cx_max : UInt32
-    fl_font_type : UInt32
-    i_tt_uniq : LibC::UINT_PTR
-    i_file : LibC::UINT_PTR
-    siz_log_res_ppi : SIZE
-    ul_style_size : UInt32
-    pv_consumer : Void*
-    pv_producer : Void*
-  end
-  struct BLENDOBJ
-    blend_function : BLENDFUNCTION
-  end
-  struct PALOBJ
-    ul_reserved : UInt32
-  end
-  struct PATHOBJ
-    fl : UInt32
-    c_curves : UInt32
-  end
-  struct SURFOBJ
-    dhsurf : DHSURF
-    hsurf : HSURF
-    dhpdev : DHPDEV
-    hdev : HDEV
-    sizl_bitmap : SIZE
-    cj_bits : UInt32
-    pv_bits : Void*
-    pv_scan0 : Void*
-    l_delta : Int32
-    i_uniq : UInt32
-    i_bitmap_format : UInt32
-    i_type : UInt16
-    fj_bitmap : UInt16
-  end
-  struct WNDOBJ
-    co_client : CLIPOBJ
-    pv_consumer : Void*
-    rcl_client : RECTL
-    pso_owner : SURFOBJ*
-  end
-  struct XFORMOBJ
-    ul_reserved : UInt32
-  end
-  struct XLATEOBJ
-    i_uniq : UInt32
-    fl_xlate : UInt32
-    i_src_type : UInt16
-    i_dst_type : UInt16
-    c_entries : UInt32
-    pul_xlate : UInt32*
-  end
-  struct ENUMRECTS
-    c : UInt32
-    arcl : RECTL[0]*
-  end
-  struct GLYPHBITS
-    ptl_origin : POINTL
-    sizl_bitmap : SIZE
-    aj : UInt8[0]*
-  end
-  struct GLYPHPOS
-    hg : UInt32
-    pgdf : GLYPHDEF*
-    ptl : POINTL
-  end
-  struct GLYPHDATA
-    gdf : GLYPHDEF
-    hg : UInt32
-    fx_d : Int32
-    fx_a : Int32
-    fx_ab : Int32
-    fx_ink_top : Int32
-    fx_ink_bottom : Int32
-    rcl_ink : RECTL
-    ptq_d : POINTQF
-  end
-  struct STROBJ
-    c_glyphs : UInt32
-    fl_accel : UInt32
-    ul_char_inc : UInt32
-    rcl_bk_ground : RECTL
-    pgp : GLYPHPOS*
-    pwsz_org : LibC::LPWSTR
-  end
-  struct FONTINFO
-    cj_this : UInt32
-    fl_caps : UInt32
-    c_glyphs_supported : UInt32
-    cj_max_glyph1 : UInt32
-    cj_max_glyph4 : UInt32
-    cj_max_glyph8 : UInt32
-    cj_max_glyph32 : UInt32
-  end
-  struct PATHDATA
-    flags : UInt32
-    count : UInt32
-    pptfx : POINTFIX*
-  end
-  struct RUN
-    i_start : Int32
-    i_stop : Int32
-  end
-  struct CLIPLINE
-    ptfx_a : POINTFIX
-    ptfx_b : POINTFIX
-    l_style_state : Int32
-    c : UInt32
-    arun : RUN[0]*
-  end
-  struct PERBANDINFO
-    b_repeat_this_band : LibC::BOOL
-    szl_band : SIZE
-    ul_horz_res : UInt32
-    ul_vert_res : UInt32
-  end
-  struct GAMMARAMP
-    red : UInt16[256]*
-    green : UInt16[256]*
-    blue : UInt16[256]*
-  end
-  struct DEVHTINFO
-    ht_flags : UInt32
-    ht_pattern_size : UInt32
-    dev_pels_dpi : UInt32
-    color_info : COLORINFO
-  end
-  struct DEVHTADJDATA
-    device_flags : UInt32
-    device_xdpi : UInt32
-    device_ydpi : UInt32
-    p_def_ht_info : DEVHTINFO*
-    p_adj_ht_info : DEVHTINFO*
-  end
-  struct TYPE1_FONT
-    h_pfm : LibC::HANDLE
-    h_pfb : LibC::HANDLE
-    ul_identifier : UInt32
-  end
-  struct ENGSAFESEMAPHORE
-    hsem : HSEMAPHORE
-    l_count : Int32
-  end
-  struct FLOATOBJ_XFORM
-    e_m11 : Float32
-    e_m12 : Float32
-    e_m21 : Float32
-    e_m22 : Float32
-    e_dx : Float32
-    e_dy : Float32
-  end
-  struct ENG_TIME_FIELDS
-    us_year : UInt16
-    us_month : UInt16
-    us_day : UInt16
-    us_hour : UInt16
-    us_minute : UInt16
-    us_second : UInt16
-    us_milliseconds : UInt16
-    us_weekday : UInt16
-  end
-  struct EMFINFO
-    n_size : UInt32
-    hdc : HDC
-    pv_emf : UInt8*
-    pv_current_record : UInt8*
-  end
-  struct DRH_APIBITMAPDATA
-    pso : SURFOBJ*
-    b : LibC::BOOL
-  end
-  struct INDIRECT_DISPLAY_INFO
-    display_adapter_luid : LUID
-    flags : UInt32
-    num_monitors : UInt32
+
+  @[Extern]
+  record CDDDXGK_REDIRBITMAPPRESENTINFO,
+    num_dirty_rects : UInt32,
+    dirty_rect : Win32cr::Foundation::RECT*,
+    num_contexts : UInt32,
+    hContext : Win32cr::Foundation::HANDLE[65],
+    bDoNotSynchronizeWithDxContent : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record GDIINFO,
+    ulVersion : UInt32,
+    ulTechnology : UInt32,
+    ulHorzSize : UInt32,
+    ulVertSize : UInt32,
+    ulHorzRes : UInt32,
+    ulVertRes : UInt32,
+    cBitsPixel : UInt32,
+    cPlanes : UInt32,
+    ulNumColors : UInt32,
+    flRaster : UInt32,
+    ulLogPixelsX : UInt32,
+    ulLogPixelsY : UInt32,
+    flTextCaps : UInt32,
+    ulDACRed : UInt32,
+    ulDACGreen : UInt32,
+    ulDACBlue : UInt32,
+    ulAspectX : UInt32,
+    ulAspectY : UInt32,
+    ulAspectXY : UInt32,
+    xStyleStep : Int32,
+    yStyleStep : Int32,
+    denStyleStep : Int32,
+    ptlPhysOffset : Win32cr::Foundation::POINTL,
+    szlPhysSize : Win32cr::Foundation::SIZE,
+    ulNumPalReg : UInt32,
+    ciDevice : Win32cr::Devices::Display::COLORINFO,
+    ulDevicePelsDPI : UInt32,
+    ulPrimaryOrder : UInt32,
+    ulHTPatternSize : UInt32,
+    ulHTOutputFormat : UInt32,
+    flHTFlags : UInt32,
+    ulVRefresh : UInt32,
+    ulBltAlignment : UInt32,
+    ulPanningHorzRes : UInt32,
+    ulPanningVertRes : UInt32,
+    xPanningAlignment : UInt32,
+    yPanningAlignment : UInt32,
+    cxHTPat : UInt32,
+    cyHTPat : UInt32,
+    pHTPatA : UInt8*,
+    pHTPatB : UInt8*,
+    pHTPatC : UInt8*,
+    flShadeBlend : UInt32,
+    ulPhysicalPixelCharacteristics : UInt32,
+    ulPhysicalPixelGamma : UInt32
+
+  @[Extern]
+  record BRUSHOBJ,
+    iSolidColor : UInt32,
+    pvRbrush : Void*,
+    flColorType : UInt32
+
+  @[Extern]
+  record CLIPOBJ,
+    iUniq : UInt32,
+    rclBounds : Win32cr::Foundation::RECTL,
+    iDComplexity : UInt8,
+    iFComplexity : UInt8,
+    iMode : UInt8,
+    fjOptions : UInt8
+
+  @[Extern]
+  record DRIVEROBJ,
+    pvObj : Void*,
+    pFreeProc : Win32cr::Devices::Display::FREEOBJPROC,
+    hdev : Win32cr::Devices::Display::HDEV,
+    dhpdev : Win32cr::Devices::Display::DHPDEV
+
+  @[Extern]
+  record FONTOBJ,
+    iUniq : UInt32,
+    iFace : UInt32,
+    cxMax : UInt32,
+    flFontType : UInt32,
+    iTTUniq : LibC::UIntPtrT,
+    iFile : LibC::UIntPtrT,
+    sizLogResPpi : Win32cr::Foundation::SIZE,
+    ulStyleSize : UInt32,
+    pvConsumer : Void*,
+    pvProducer : Void*
+
+  @[Extern]
+  record BLENDOBJ,
+    blend_function : Win32cr::Graphics::Gdi::BLENDFUNCTION
+
+  @[Extern]
+  record PALOBJ,
+    ulReserved : UInt32
+
+  @[Extern]
+  record PATHOBJ,
+    fl : UInt32,
+    cCurves : UInt32
+
+  @[Extern]
+  record SURFOBJ,
+    dhsurf : Win32cr::Devices::Display::DHSURF,
+    hsurf : Win32cr::Devices::Display::HSURF,
+    dhpdev : Win32cr::Devices::Display::DHPDEV,
+    hdev : Win32cr::Devices::Display::HDEV,
+    sizlBitmap : Win32cr::Foundation::SIZE,
+    cjBits : UInt32,
+    pvBits : Void*,
+    pvScan0 : Void*,
+    lDelta : Int32,
+    iUniq : UInt32,
+    iBitmapFormat : UInt32,
+    iType : UInt16,
+    fjBitmap : UInt16
+
+  @[Extern]
+  record WNDOBJ,
+    coClient : Win32cr::Devices::Display::CLIPOBJ,
+    pvConsumer : Void*,
+    rclClient : Win32cr::Foundation::RECTL,
+    psoOwner : Win32cr::Devices::Display::SURFOBJ*
+
+  @[Extern]
+  record XFORMOBJ,
+    ulReserved : UInt32
+
+  @[Extern]
+  record XLATEOBJ,
+    iUniq : UInt32,
+    flXlate : UInt32,
+    iSrcType : UInt16,
+    iDstType : UInt16,
+    cEntries : UInt32,
+    pulXlate : UInt32*
+
+  @[Extern]
+  record ENUMRECTS,
+    c : UInt32,
+    arcl : Win32cr::Foundation::RECTL*
+
+  @[Extern]
+  record GLYPHBITS,
+    ptlOrigin : Win32cr::Foundation::POINTL,
+    sizlBitmap : Win32cr::Foundation::SIZE,
+    aj : UInt8*
+
+  @[Extern(union: true)]
+  record GLYPHDEF,
+    pgb : Win32cr::Devices::Display::GLYPHBITS*,
+    ppo : Win32cr::Devices::Display::PATHOBJ*
+
+  @[Extern]
+  record GLYPHPOS,
+    hg : UInt32,
+    pgdf : Win32cr::Devices::Display::GLYPHDEF*,
+    ptl : Win32cr::Foundation::POINTL
+
+  @[Extern]
+  record GLYPHDATA,
+    gdf : Win32cr::Devices::Display::GLYPHDEF,
+    hg : UInt32,
+    fxD : Int32,
+    fxA : Int32,
+    fxAB : Int32,
+    fxInkTop : Int32,
+    fxInkBottom : Int32,
+    rclInk : Win32cr::Foundation::RECTL,
+    ptqD : Win32cr::Devices::Display::POINTQF
+
+  @[Extern]
+  record STROBJ,
+    cGlyphs : UInt32,
+    flAccel : UInt32,
+    ulCharInc : UInt32,
+    rclBkGround : Win32cr::Foundation::RECTL,
+    pgp : Win32cr::Devices::Display::GLYPHPOS*,
+    pwszOrg : Win32cr::Foundation::PWSTR
+
+  @[Extern]
+  record FONTINFO,
+    cjThis : UInt32,
+    flCaps : UInt32,
+    cGlyphsSupported : UInt32,
+    cjMaxGlyph1 : UInt32,
+    cjMaxGlyph4 : UInt32,
+    cjMaxGlyph8 : UInt32,
+    cjMaxGlyph32 : UInt32
+
+  @[Extern]
+  record PATHDATA,
+    flags : UInt32,
+    count : UInt32,
+    pptfx : Win32cr::Devices::Display::POINTFIX*
+
+  @[Extern]
+  record RUN,
+    iStart : Int32,
+    iStop : Int32
+
+  @[Extern]
+  record CLIPLINE,
+    ptfxA : Win32cr::Devices::Display::POINTFIX,
+    ptfxB : Win32cr::Devices::Display::POINTFIX,
+    lStyleState : Int32,
+    c : UInt32,
+    arun : Win32cr::Devices::Display::RUN*
+
+  @[Extern]
+  record PERBANDINFO,
+    bRepeatThisBand : Win32cr::Foundation::BOOL,
+    szlBand : Win32cr::Foundation::SIZE,
+    ulHorzRes : UInt32,
+    ulVertRes : UInt32
+
+  @[Extern]
+  record GAMMARAMP,
+    red : UInt16[256],
+    green : UInt16[256],
+    blue : UInt16[256]
+
+  @[Extern]
+  record DEVHTINFO,
+    ht_flags : UInt32,
+    ht_pattern_size : UInt32,
+    dev_pels_dpi : UInt32,
+    color_info : Win32cr::Devices::Display::COLORINFO
+
+  @[Extern]
+  record DEVHTADJDATA,
+    device_flags : UInt32,
+    device_xdpi : UInt32,
+    device_ydpi : UInt32,
+    pDefHTInfo : Win32cr::Devices::Display::DEVHTINFO*,
+    pAdjHTInfo : Win32cr::Devices::Display::DEVHTINFO*
+
+  @[Extern]
+  record TYPE1_FONT,
+    hPFM : Win32cr::Foundation::HANDLE,
+    hPFB : Win32cr::Foundation::HANDLE,
+    ulIdentifier : UInt32
+
+  @[Extern]
+  record ENGSAFESEMAPHORE,
+    hsem : Win32cr::Devices::Display::HSEMAPHORE,
+    lCount : Int32
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  record FLOATOBJ_XFORM,
+    eM11 : Float32,
+    eM12 : Float32,
+    eM21 : Float32,
+    eM22 : Float32,
+    eDx : Float32,
+    eDy : Float32
+  {% end %}
+
+  @[Extern]
+  record ENG_TIME_FIELDS,
+    usYear : UInt16,
+    usMonth : UInt16,
+    usDay : UInt16,
+    usHour : UInt16,
+    usMinute : UInt16,
+    usSecond : UInt16,
+    usMilliseconds : UInt16,
+    usWeekday : UInt16
+
+  @[Extern]
+  record EMFINFO,
+    nSize : UInt32,
+    hdc : Win32cr::Graphics::Gdi::HDC,
+    pvEMF : UInt8*,
+    pvCurrentRecord : UInt8*
+
+  @[Extern]
+  record DRH_APIBITMAPDATA,
+    pso : Win32cr::Devices::Display::SURFOBJ*,
+    b : Win32cr::Foundation::BOOL
+
+  @[Extern]
+  record INDIRECT_DISPLAY_INFO,
+    display_adapter_luid : Win32cr::Foundation::LUID,
+    flags : UInt32,
+    num_monitors : UInt32,
     display_adapter_target_base : UInt32
-  end
-  struct VIDEO_VDM
-    process_handle : LibC::HANDLE
-  end
-  struct VIDEO_REGISTER_VDM
+
+  @[Extern]
+  record VIDEO_VDM,
+    process_handle : Win32cr::Foundation::HANDLE
+
+  @[Extern]
+  record VIDEO_REGISTER_VDM,
     minimum_state_size : UInt32
-  end
-  struct VIDEO_MONITOR_DESCRIPTOR
-    descriptor_size : UInt32
-    descriptor : UInt8[0]*
-  end
-  struct DXGK_WIN32K_PARAM_DATA
-    paths_array : Void*
-    modes_array : Void*
-    num_path_array_elements : UInt32
-    num_mode_array_elements : UInt32
+
+  @[Extern]
+  record VIDEO_MONITOR_DESCRIPTOR,
+    descriptor_size : UInt32,
+    descriptor : UInt8*
+
+  @[Extern]
+  record DXGK_WIN32K_PARAM_DATA,
+    paths_array : Void*,
+    modes_array : Void*,
+    num_path_array_elements : UInt32,
+    num_mode_array_elements : UInt32,
     sdc_flags : UInt32
-  end
-  struct VIDEO_WIN32K_CALLBACKS_PARAMS
-    callout_type : VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE
-    phys_disp : Void*
-    param : LibC::UINT_PTR
-    status : Int32
-    lock_user_session : BOOLEAN
-    is_post_device : BOOLEAN
-    surprise_removal : BOOLEAN
-    wait_for_queue_ready : BOOLEAN
-  end
-  struct VIDEO_WIN32K_CALLBACKS
-    phys_disp : Void*
-    callout : PVIDEO_WIN32K_CALLOUT
-    b_acpi : UInt32
-    p_phys_device_object : LibC::HANDLE
+
+  @[Extern]
+  record VIDEO_WIN32K_CALLBACKS_PARAMS,
+    callout_type : Win32cr::Devices::Display::VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE,
+    phys_disp : Void*,
+    param : LibC::UIntPtrT,
+    status : Int32,
+    lock_user_session : Win32cr::Foundation::BOOLEAN,
+    is_post_device : Win32cr::Foundation::BOOLEAN,
+    surprise_removal : Win32cr::Foundation::BOOLEAN,
+    wait_for_queue_ready : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record VIDEO_WIN32K_CALLBACKS,
+    phys_disp : Void*,
+    callout : Win32cr::Devices::Display::PVIDEO_WIN32K_CALLOUT,
+    bACPI : UInt32,
+    pPhysDeviceObject : Win32cr::Foundation::HANDLE,
     dualview_flags : UInt32
-  end
-  struct VIDEO_DEVICE_SESSION_STATUS
-    b_enable : UInt32
-    b_success : UInt32
-  end
-  struct VIDEO_HARDWARE_STATE_HEADER
-    length : UInt32
-    port_value : UInt8[48]*
-    attrib_index_data_state : UInt32
-    basic_sequencer_offset : UInt32
-    basic_crt_cont_offset : UInt32
-    basic_graph_cont_offset : UInt32
-    basic_attrib_cont_offset : UInt32
-    basic_dac_offset : UInt32
-    basic_latches_offset : UInt32
-    extended_sequencer_offset : UInt32
-    extended_crt_cont_offset : UInt32
-    extended_graph_cont_offset : UInt32
-    extended_attrib_cont_offset : UInt32
-    extended_dac_offset : UInt32
-    extended_validator_state_offset : UInt32
-    extended_misc_data_offset : UInt32
-    plane_length : UInt32
-    plane1_offset : UInt32
-    plane2_offset : UInt32
-    plane3_offset : UInt32
-    plane4_offset : UInt32
-    vga_state_flags : UInt32
-    dib_offset : UInt32
-    dib_bits_per_pixel : UInt32
-    dibx_resolution : UInt32
-    diby_resolution : UInt32
-    dib_xlat_offset : UInt32
-    dib_xlat_length : UInt32
-    vesa_info_offset : UInt32
+
+  @[Extern]
+  record VIDEO_DEVICE_SESSION_STATUS,
+    bEnable : UInt32,
+    bSuccess : UInt32
+
+  @[Extern]
+  record VIDEO_HARDWARE_STATE_HEADER,
+    length : UInt32,
+    port_value : UInt8[48],
+    attrib_index_data_state : UInt32,
+    basic_sequencer_offset : UInt32,
+    basic_crt_cont_offset : UInt32,
+    basic_graph_cont_offset : UInt32,
+    basic_attrib_cont_offset : UInt32,
+    basic_dac_offset : UInt32,
+    basic_latches_offset : UInt32,
+    extended_sequencer_offset : UInt32,
+    extended_crt_cont_offset : UInt32,
+    extended_graph_cont_offset : UInt32,
+    extended_attrib_cont_offset : UInt32,
+    extended_dac_offset : UInt32,
+    extended_validator_state_offset : UInt32,
+    extended_misc_data_offset : UInt32,
+    plane_length : UInt32,
+    plane1_offset : UInt32,
+    plane2_offset : UInt32,
+    plane3_offset : UInt32,
+    plane4_offset : UInt32,
+    vga_state_flags : UInt32,
+    dib_offset : UInt32,
+    dib_bits_per_pixel : UInt32,
+    dibx_resolution : UInt32,
+    diby_resolution : UInt32,
+    dib_xlat_offset : UInt32,
+    dib_xlat_length : UInt32,
+    vesa_info_offset : UInt32,
     frame_buffer_data : Void*
-  end
-  struct VIDEO_HARDWARE_STATE
-    state_header : VIDEO_HARDWARE_STATE_HEADER*
+
+  @[Extern]
+  record VIDEO_HARDWARE_STATE,
+    state_header : Win32cr::Devices::Display::VIDEO_HARDWARE_STATE_HEADER*,
     state_length : UInt32
-  end
-  struct VIDEO_NUM_MODES
-    num_modes : UInt32
+
+  @[Extern]
+  record VIDEO_NUM_MODES,
+    num_modes : UInt32,
     mode_information_length : UInt32
-  end
-  struct VIDEO_MODE
+
+  @[Extern]
+  record VIDEO_MODE,
     requested_mode : UInt32
-  end
-  struct VIDEO_MODE_INFORMATION
-    length : UInt32
-    mode_index : UInt32
-    vis_screen_width : UInt32
-    vis_screen_height : UInt32
-    screen_stride : UInt32
-    number_of_planes : UInt32
-    bits_per_plane : UInt32
-    frequency : UInt32
-    x_millimeter : UInt32
-    y_millimeter : UInt32
-    number_red_bits : UInt32
-    number_green_bits : UInt32
-    number_blue_bits : UInt32
-    red_mask : UInt32
-    green_mask : UInt32
-    blue_mask : UInt32
-    attribute_flags : UInt32
-    video_memory_bitmap_width : UInt32
-    video_memory_bitmap_height : UInt32
+
+  @[Extern]
+  record VIDEO_MODE_INFORMATION,
+    length : UInt32,
+    mode_index : UInt32,
+    vis_screen_width : UInt32,
+    vis_screen_height : UInt32,
+    screen_stride : UInt32,
+    number_of_planes : UInt32,
+    bits_per_plane : UInt32,
+    frequency : UInt32,
+    x_millimeter : UInt32,
+    y_millimeter : UInt32,
+    number_red_bits : UInt32,
+    number_green_bits : UInt32,
+    number_blue_bits : UInt32,
+    red_mask : UInt32,
+    green_mask : UInt32,
+    blue_mask : UInt32,
+    attribute_flags : UInt32,
+    video_memory_bitmap_width : UInt32,
+    video_memory_bitmap_height : UInt32,
     driver_specific_attribute_flags : UInt32
-  end
-  struct VIDEO_LOAD_FONT_INFORMATION
-    width_in_pixels : UInt16
-    height_in_pixels : UInt16
-    font_size : UInt32
-    font : UInt8[0]*
-  end
-  struct VIDEO_PALETTE_DATA
-    num_entries : UInt16
-    first_entry : UInt16
-    colors : UInt16[0]*
-  end
-  struct VIDEO_CLUTDATA
-    red : UInt8
-    green : UInt8
-    blue : UInt8
+
+  @[Extern]
+  record VIDEO_LOAD_FONT_INFORMATION,
+    width_in_pixels : UInt16,
+    height_in_pixels : UInt16,
+    font_size : UInt32,
+    font : UInt8*
+
+  @[Extern]
+  record VIDEO_PALETTE_DATA,
+    num_entries : UInt16,
+    first_entry : UInt16,
+    colors : UInt16*
+
+  @[Extern]
+  record VIDEO_CLUTDATA,
+    red : UInt8,
+    green : UInt8,
+    blue : UInt8,
     unused : UInt8
+
+  @[Extern]
+  record VIDEO_CLUT,
+    num_entries : UInt16,
+    first_entry : UInt16,
+    lookup_table : Anonymous_e__Union* do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      rgb_array : Win32cr::Devices::Display::VIDEO_CLUTDATA,
+      rgb_long : UInt32
+
   end
-  struct VIDEO_CLUT
-    num_entries : UInt16
-    first_entry : UInt16
-    lookup_table : VIDEO_CLUT_Anonymous_e__Union[0]*
-  end
-  struct VIDEO_CURSOR_POSITION
-    column : Int16
+
+  @[Extern]
+  record VIDEO_CURSOR_POSITION,
+    column : Int16,
     row : Int16
-  end
-  struct VIDEO_CURSOR_ATTRIBUTES
-    width : UInt16
-    height : UInt16
-    column : Int16
-    row : Int16
-    rate : UInt8
+
+  @[Extern]
+  record VIDEO_CURSOR_ATTRIBUTES,
+    width : UInt16,
+    height : UInt16,
+    column : Int16,
+    row : Int16,
+    rate : UInt8,
     enable : UInt8
-  end
-  struct VIDEO_POINTER_POSITION
-    column : Int16
+
+  @[Extern]
+  record VIDEO_POINTER_POSITION,
+    column : Int16,
     row : Int16
-  end
-  struct VIDEO_POINTER_ATTRIBUTES
-    flags : UInt32
-    width : UInt32
-    height : UInt32
-    width_in_bytes : UInt32
-    enable : UInt32
-    column : Int16
-    row : Int16
-    pixels : UInt8[0]*
-  end
-  struct VIDEO_POINTER_CAPABILITIES
-    flags : UInt32
-    max_width : UInt32
-    max_height : UInt32
-    hw_ptr_bitmap_start : UInt32
+
+  @[Extern]
+  record VIDEO_POINTER_ATTRIBUTES,
+    flags : UInt32,
+    width : UInt32,
+    height : UInt32,
+    width_in_bytes : UInt32,
+    enable : UInt32,
+    column : Int16,
+    row : Int16,
+    pixels : UInt8*
+
+  @[Extern]
+  record VIDEO_POINTER_CAPABILITIES,
+    flags : UInt32,
+    max_width : UInt32,
+    max_height : UInt32,
+    hw_ptr_bitmap_start : UInt32,
     hw_ptr_bitmap_end : UInt32
-  end
-  struct VIDEO_BANK_SELECT
-    length : UInt32
-    size : UInt32
-    banking_flags : UInt32
-    banking_type : UInt32
-    planar_hc_banking_type : UInt32
-    bitmap_width_in_bytes : UInt32
-    bitmap_size : UInt32
-    granularity : UInt32
-    planar_hc_granularity : UInt32
-    code_offset : UInt32
-    planar_hc_bank_code_offset : UInt32
-    planar_hc_enable_code_offset : UInt32
+
+  @[Extern]
+  record VIDEO_BANK_SELECT,
+    length : UInt32,
+    size : UInt32,
+    banking_flags : UInt32,
+    banking_type : UInt32,
+    planar_hc_banking_type : UInt32,
+    bitmap_width_in_bytes : UInt32,
+    bitmap_size : UInt32,
+    granularity : UInt32,
+    planar_hc_granularity : UInt32,
+    code_offset : UInt32,
+    planar_hc_bank_code_offset : UInt32,
+    planar_hc_enable_code_offset : UInt32,
     planar_hc_disable_code_offset : UInt32
-  end
-  struct VIDEO_MEMORY
+
+  @[Extern]
+  record VIDEO_MEMORY,
     requested_virtual_address : Void*
-  end
-  struct VIDEO_SHARE_MEMORY
-    process_handle : LibC::HANDLE
-    view_offset : UInt32
-    view_size : UInt32
+
+  @[Extern]
+  record VIDEO_SHARE_MEMORY,
+    process_handle : Win32cr::Foundation::HANDLE,
+    view_offset : UInt32,
+    view_size : UInt32,
     requested_virtual_address : Void*
-  end
-  struct VIDEO_SHARE_MEMORY_INFORMATION
-    shared_view_offset : UInt32
-    shared_view_size : UInt32
+
+  @[Extern]
+  record VIDEO_SHARE_MEMORY_INFORMATION,
+    shared_view_offset : UInt32,
+    shared_view_size : UInt32,
     virtual_address : Void*
-  end
-  struct VIDEO_MEMORY_INFORMATION
-    video_ram_base : Void*
-    video_ram_length : UInt32
-    frame_buffer_base : Void*
+
+  @[Extern]
+  record VIDEO_MEMORY_INFORMATION,
+    video_ram_base : Void*,
+    video_ram_length : UInt32,
+    frame_buffer_base : Void*,
     frame_buffer_length : UInt32
-  end
-  struct VIDEO_PUBLIC_ACCESS_RANGES
-    in_io_space : UInt32
-    mapped_in_io_space : UInt32
+
+  @[Extern]
+  record VIDEO_PUBLIC_ACCESS_RANGES,
+    in_io_space : UInt32,
+    mapped_in_io_space : UInt32,
     virtual_address : Void*
-  end
-  struct VIDEO_COLOR_CAPABILITIES
-    length : UInt32
-    attribute_flags : UInt32
-    red_phosphore_decay : Int32
-    green_phosphore_decay : Int32
-    blue_phosphore_decay : Int32
-    white_chromaticity_x : Int32
-    white_chromaticity_y : Int32
-    white_chromaticity_Y : Int32
-    red_chromaticity_x : Int32
-    red_chromaticity_y : Int32
-    green_chromaticity_x : Int32
-    green_chromaticity_y : Int32
-    blue_chromaticity_x : Int32
-    blue_chromaticity_y : Int32
-    white_gamma : Int32
-    red_gamma : Int32
-    green_gamma : Int32
+
+  @[Extern]
+  record VIDEO_COLOR_CAPABILITIES,
+    length : UInt32,
+    attribute_flags : UInt32,
+    red_phosphore_decay : Int32,
+    green_phosphore_decay : Int32,
+    blue_phosphore_decay : Int32,
+    white_chromaticity_x : Int32,
+    white_chromaticity_y : Int32,
+    white_chromaticity_y_ : Int32,
+    red_chromaticity_x : Int32,
+    red_chromaticity_y : Int32,
+    green_chromaticity_x : Int32,
+    green_chromaticity_y : Int32,
+    blue_chromaticity_x : Int32,
+    blue_chromaticity_y : Int32,
+    white_gamma : Int32,
+    red_gamma : Int32,
+    green_gamma : Int32,
     blue_gamma : Int32
-  end
-  struct VIDEO_POWER_MANAGEMENT
-    length : UInt32
-    dpms_version : UInt32
+
+  @[Extern]
+  record VIDEO_POWER_MANAGEMENT,
+    length : UInt32,
+    dpms_version : UInt32,
     power_state : UInt32
-  end
-  struct VIDEO_COLOR_LUT_DATA
-    length : UInt32
-    lut_data_format : UInt32
-    lut_data : UInt8[0]*
-  end
-  struct VIDEO_LUT_RGB256WORDS
-    red : UInt16[256]*
-    green : UInt16[256]*
-    blue : UInt16[256]*
-  end
-  struct BANK_POSITION
-    read_bank_position : UInt32
+
+  @[Extern]
+  record VIDEO_COLOR_LUT_DATA,
+    length : UInt32,
+    lut_data_format : UInt32,
+    lut_data : UInt8*
+
+  @[Extern]
+  record VIDEO_LUT_RGB256WORDS,
+    red : UInt16[256],
+    green : UInt16[256],
+    blue : UInt16[256]
+
+  @[Extern]
+  record BANK_POSITION,
+    read_bank_position : UInt32,
     write_bank_position : UInt32
+
+  @[Extern]
+  record DISPLAY_BRIGHTNESS,
+    ucDisplayPolicy : UInt8,
+    ucACBrightness : UInt8,
+    ucDCBrightness : UInt8
+
+  @[Extern]
+  record VIDEO_BRIGHTNESS_POLICY,
+    default_to_bios_policy : Win32cr::Foundation::BOOLEAN,
+    level_count : UInt8,
+    level : Anonymous_e__Struct* do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      battery_level : UInt8,
+      brightness : UInt8
+
   end
-  struct DISPLAY_BRIGHTNESS
-    uc_display_policy : UInt8
-    uc_ac_brightness : UInt8
-    uc_dc_brightness : UInt8
-  end
-  struct VIDEO_BRIGHTNESS_POLICY
-    default_to_bios_policy : BOOLEAN
-    level_count : UInt8
-    level : VIDEO_BRIGHTNESS_POLICY_Anonymous_e__Struct[0]*
-  end
-  struct VIDEO_BRIGHTNESS_POLICY_Anonymous_e__Struct
-    battery_level : UInt8
-    brightness : UInt8
-  end
-  struct FSCNTL_SCREEN_INFO
-    position : COORD
-    screen_size : COORD
-    n_number_of_chars : UInt32
-  end
-  struct FONT_IMAGE_INFO
-    font_size : COORD
+
+  @[Extern]
+  record FSCNTL_SCREEN_INFO,
+    position : Win32cr::System::Console::COORD,
+    screen_size : Win32cr::System::Console::COORD,
+    nNumberOfChars : UInt32
+
+  @[Extern]
+  record FONT_IMAGE_INFO,
+    font_size : Win32cr::System::Console::COORD,
     image_bits : UInt8*
-  end
-  struct CHAR_IMAGE_INFO
-    char_info : CHAR_INFO
-    font_image_info : FONT_IMAGE_INFO
-  end
-  struct VGA_CHAR
-    char : CHAR
-    attributes : CHAR
-  end
-  struct FSVIDEO_COPY_FRAME_BUFFER
-    src_screen : FSCNTL_SCREEN_INFO
-    dest_screen : FSCNTL_SCREEN_INFO
-  end
-  struct FSVIDEO_WRITE_TO_FRAME_BUFFER
-    src_buffer : CHAR_IMAGE_INFO*
-    dest_screen : FSCNTL_SCREEN_INFO
-  end
-  struct FSVIDEO_REVERSE_MOUSE_POINTER
-    screen : FSCNTL_SCREEN_INFO
-    dw_type : UInt32
-  end
-  struct FSVIDEO_MODE_INFORMATION
-    video_mode : VIDEO_MODE_INFORMATION
-    video_memory : VIDEO_MEMORY_INFORMATION
-  end
-  struct FSVIDEO_SCREEN_INFORMATION
-    screen_size : COORD
-    font_size : COORD
-  end
-  struct FSVIDEO_CURSOR_POSITION
-    coord : VIDEO_CURSOR_POSITION
-    dw_type : UInt32
-  end
-  struct ENG_EVENT
-    p_k_event : Void*
-    f_flags : UInt32
-  end
-  struct VIDEO_PERFORMANCE_COUNTER
-    nb_of_allocation_evicted : UInt64[10]*
-    nb_of_allocation_marked : UInt64[10]*
-    nb_of_allocation_restored : UInt64[10]*
-    k_bytes_evicted : UInt64[10]*
-    k_bytes_marked : UInt64[10]*
-    k_bytes_restored : UInt64[10]*
-    nb_process_commited : UInt64
-    nb_allocation_commited : UInt64
-    nb_allocation_marked : UInt64
-    k_bytes_allocated : UInt64
-    k_bytes_available : UInt64
-    k_bytes_cur_marked : UInt64
-    reference : UInt64
-    unreference : UInt64
-    true_reference : UInt64
-    nb_of_page_in : UInt64
-    k_bytes_page_in : UInt64
-    nb_of_page_out : UInt64
-    k_bytes_page_out : UInt64
-    nb_of_rotate_out : UInt64
+
+  @[Extern]
+  record CHAR_IMAGE_INFO,
+    char_info : Win32cr::System::Console::CHAR_INFO,
+    font_image_info : Win32cr::Devices::Display::FONT_IMAGE_INFO
+
+  @[Extern]
+  record VGA_CHAR,
+    char : Win32cr::Foundation::CHAR,
+    attributes : Win32cr::Foundation::CHAR
+
+  @[Extern]
+  record FSVIDEO_COPY_FRAME_BUFFER,
+    src_screen : Win32cr::Devices::Display::FSCNTL_SCREEN_INFO,
+    dest_screen : Win32cr::Devices::Display::FSCNTL_SCREEN_INFO
+
+  @[Extern]
+  record FSVIDEO_WRITE_TO_FRAME_BUFFER,
+    src_buffer : Win32cr::Devices::Display::CHAR_IMAGE_INFO*,
+    dest_screen : Win32cr::Devices::Display::FSCNTL_SCREEN_INFO
+
+  @[Extern]
+  record FSVIDEO_REVERSE_MOUSE_POINTER,
+    screen : Win32cr::Devices::Display::FSCNTL_SCREEN_INFO,
+    dwType : UInt32
+
+  @[Extern]
+  record FSVIDEO_MODE_INFORMATION,
+    video_mode : Win32cr::Devices::Display::VIDEO_MODE_INFORMATION,
+    video_memory : Win32cr::Devices::Display::VIDEO_MEMORY_INFORMATION
+
+  @[Extern]
+  record FSVIDEO_SCREEN_INFORMATION,
+    screen_size : Win32cr::System::Console::COORD,
+    font_size : Win32cr::System::Console::COORD
+
+  @[Extern]
+  record FSVIDEO_CURSOR_POSITION,
+    coord : Win32cr::Devices::Display::VIDEO_CURSOR_POSITION,
+    dwType : UInt32
+
+  @[Extern]
+  record ENG_EVENT,
+    pKEvent : Void*,
+    fFlags : UInt32
+
+  @[Extern]
+  record VIDEO_PERFORMANCE_COUNTER,
+    nb_of_allocation_evicted : UInt64[10],
+    nb_of_allocation_marked : UInt64[10],
+    nb_of_allocation_restored : UInt64[10],
+    k_bytes_evicted : UInt64[10],
+    k_bytes_marked : UInt64[10],
+    k_bytes_restored : UInt64[10],
+    nb_process_commited : UInt64,
+    nb_allocation_commited : UInt64,
+    nb_allocation_marked : UInt64,
+    k_bytes_allocated : UInt64,
+    k_bytes_available : UInt64,
+    k_bytes_cur_marked : UInt64,
+    reference : UInt64,
+    unreference : UInt64,
+    true_reference : UInt64,
+    nb_of_page_in : UInt64,
+    k_bytes_page_in : UInt64,
+    nb_of_page_out : UInt64,
+    k_bytes_page_out : UInt64,
+    nb_of_rotate_out : UInt64,
     k_bytes_rotate_out : UInt64
+
+  @[Extern]
+  record VIDEO_QUERY_PERFORMANCE_COUNTER,
+    buffer_size : UInt32,
+    buffer : Win32cr::Devices::Display::VIDEO_PERFORMANCE_COUNTER*
+
+  @[Extern]
+  record PANEL_QUERY_BRIGHTNESS_CAPS,
+    version : Win32cr::Devices::Display::BRIGHTNESS_INTERFACE_VERSION,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      value : UInt32 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct VIDEO_QUERY_PERFORMANCE_COUNTER
-    buffer_size : UInt32
-    buffer : VIDEO_PERFORMANCE_COUNTER*
-  end
-  struct PANEL_QUERY_BRIGHTNESS_CAPS
-    version : BRIGHTNESS_INTERFACE_VERSION
-    anonymous : PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union
-  end
-  struct PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct BRIGHTNESS_LEVEL
-    count : UInt8
-    level : UInt8[103]*
-  end
-  struct BRIGHTNESS_NIT_RANGE
-    min_level_in_millinit : UInt32
-    max_level_in_millinit : UInt32
+
+  @[Extern]
+  record BRIGHTNESS_LEVEL,
+    count : UInt8,
+    level : UInt8[103]
+
+  @[Extern]
+  record BRIGHTNESS_NIT_RANGE,
+    min_level_in_millinit : UInt32,
+    max_level_in_millinit : UInt32,
     step_size_in_millinit : UInt32
+
+  @[Extern]
+  record BRIGHTNESS_NIT_RANGES,
+    normal_range_count : UInt32,
+    range_count : UInt32,
+    preferred_maximum_brightness : UInt32,
+    supported_ranges : Win32cr::Devices::Display::BRIGHTNESS_NIT_RANGE[16]
+
+  @[Extern]
+  record PANEL_QUERY_BRIGHTNESS_RANGES,
+    version : Win32cr::Devices::Display::BRIGHTNESS_INTERFACE_VERSION,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      brightness_level : Win32cr::Devices::Display::BRIGHTNESS_LEVEL,
+      nit_ranges : Win32cr::Devices::Display::BRIGHTNESS_NIT_RANGES
+
   end
-  struct BRIGHTNESS_NIT_RANGES
-    normal_range_count : UInt32
-    range_count : UInt32
-    preferred_maximum_brightness : UInt32
-    supported_ranges : BRIGHTNESS_NIT_RANGE[16]*
+
+  @[Extern]
+  record PANEL_GET_BRIGHTNESS,
+    version : Win32cr::Devices::Display::BRIGHTNESS_INTERFACE_VERSION,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      level : UInt8,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        current_in_millinits : UInt32,
+        target_in_millinits : UInt32
+
+    end
+
   end
-  struct PANEL_QUERY_BRIGHTNESS_RANGES
-    version : BRIGHTNESS_INTERFACE_VERSION
-    anonymous : PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union
-  end
-  struct PANEL_GET_BRIGHTNESS
-    version : BRIGHTNESS_INTERFACE_VERSION
-    anonymous : PANEL_GET_BRIGHTNESS_Anonymous_e__Union
-  end
-  struct PANEL_GET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct
-    current_in_millinits : UInt32
-    target_in_millinits : UInt32
-  end
-  struct CHROMATICITY_COORDINATE
-    x : Float32
+
+  @[Extern]
+  record CHROMATICITY_COORDINATE,
+    x : Float32,
     y : Float32
+
+  @[Extern]
+  record PANEL_BRIGHTNESS_SENSOR_DATA,
+    anonymous : Anonymous_e__Union,
+    als_reading : Float32,
+    chromaticity_coordinate : Win32cr::Devices::Display::CHROMATICITY_COORDINATE,
+    color_temperature : Float32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      value : UInt32 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct PANEL_BRIGHTNESS_SENSOR_DATA
-    anonymous : PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union
-    als_reading : Float32
-    chromaticity_coordinate : CHROMATICITY_COORDINATE
-    color_temperature : Float32
+
+  @[Extern]
+  record PANEL_SET_BRIGHTNESS,
+    version : Win32cr::Devices::Display::BRIGHTNESS_INTERFACE_VERSION,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      level : UInt8,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        millinits : UInt32,
+        transition_time_in_ms : UInt32,
+        sensor_data : Win32cr::Devices::Display::PANEL_BRIGHTNESS_SENSOR_DATA
+
+    end
+
   end
-  struct PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
+
+  @[Extern]
+  record PANEL_SET_BRIGHTNESS_STATE,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      value : UInt32 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct PANEL_SET_BRIGHTNESS
-    version : BRIGHTNESS_INTERFACE_VERSION
-    anonymous : PANEL_SET_BRIGHTNESS_Anonymous_e__Union
+
+  @[Extern]
+  record PANEL_SET_BACKLIGHT_OPTIMIZATION,
+    level : Win32cr::Devices::Display::BACKLIGHT_OPTIMIZATION_LEVEL
+
+  @[Extern]
+  record BACKLIGHT_REDUCTION_GAMMA_RAMP,
+    r : UInt16[256],
+    g : UInt16[256],
+    b : UInt16[256]
+
+  @[Extern]
+  record PANEL_GET_BACKLIGHT_REDUCTION,
+    backlight_usersetting : UInt16,
+    backlight_effective : UInt16,
+    gamma_ramp : Win32cr::Devices::Display::BACKLIGHT_REDUCTION_GAMMA_RAMP
+
+  @[Extern]
+  record COLORSPACE_TRANSFORM_DATA_CAP,
+    data_type : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_DATA_TYPE,
+    anonymous : Anonymous_e__Union,
+    numeric_range_min : Float32,
+    numeric_range_max : Float32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous1 : Anonymous1_e__Struct,
+      anonymous2 : Anonymous2_e__Struct,
+      value : UInt32 do
+
+      # Nested Type Anonymous2_e__Struct
+      @[Extern]
+      record Anonymous2_e__Struct,
+        _bitfield : UInt32
+
+
+      # Nested Type Anonymous1_e__Struct
+      @[Extern]
+      record Anonymous1_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct PANEL_SET_BRIGHTNESS_Anonymous_e__Union_Anonymous_e__Struct
-    millinits : UInt32
-    transition_time_in_ms : UInt32
-    sensor_data : PANEL_BRIGHTNESS_SENSOR_DATA
+
+  @[Extern]
+  record COLORSPACE_TRANSFORM_1DLUT_CAP,
+    number_of_lut_entries : UInt32,
+    data_cap : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_DATA_CAP
+
+  @[Extern]
+  record COLORSPACE_TRANSFORM_MATRIX_CAP,
+    anonymous : Anonymous_e__Union,
+    data_cap : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_DATA_CAP do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      value : UInt32 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct PANEL_SET_BRIGHTNESS_STATE
-    anonymous : PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union
-  end
-  struct PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct PANEL_SET_BACKLIGHT_OPTIMIZATION
-    level : BACKLIGHT_OPTIMIZATION_LEVEL
-  end
-  struct BACKLIGHT_REDUCTION_GAMMA_RAMP
-    r : UInt16[256]*
-    g : UInt16[256]*
-    b : UInt16[256]*
-  end
-  struct PANEL_GET_BACKLIGHT_REDUCTION
-    backlight_usersetting : UInt16
-    backlight_effective : UInt16
-    gamma_ramp : BACKLIGHT_REDUCTION_GAMMA_RAMP
-  end
-  struct COLORSPACE_TRANSFORM_DATA_CAP
-    data_type : COLORSPACE_TRANSFORM_DATA_TYPE
-    anonymous : COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union
-    numeric_range_min : Float32
-    numeric_range_max : Float32
-  end
-  struct COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous2_e__Struct
-    _bitfield : UInt32
-  end
-  struct COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union_Anonymous1_e__Struct
-    _bitfield : UInt32
-  end
-  struct COLORSPACE_TRANSFORM_1DLUT_CAP
-    number_of_lut_entries : UInt32
-    data_cap : COLORSPACE_TRANSFORM_DATA_CAP
-  end
-  struct COLORSPACE_TRANSFORM_MATRIX_CAP
-    anonymous : COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union
-    data_cap : COLORSPACE_TRANSFORM_DATA_CAP
-  end
-  struct COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct COLORSPACE_TRANSFORM_TARGET_CAPS
-    version : COLORSPACE_TRANSFORM_TARGET_CAPS_VERSION
-    lookup_table1_d_degamma_cap : COLORSPACE_TRANSFORM_1DLUT_CAP
-    color_matrix3x3_cap : COLORSPACE_TRANSFORM_MATRIX_CAP
-    lookup_table1_d_regamma_cap : COLORSPACE_TRANSFORM_1DLUT_CAP
-  end
-  struct GAMMA_RAMP_RGB256x3x16
-    red : UInt16[256]*
-    green : UInt16[256]*
-    blue : UInt16[256]*
-  end
-  struct GAMMA_RAMP_RGB
-    red : Float32
-    green : Float32
+
+  @[Extern]
+  record COLORSPACE_TRANSFORM_TARGET_CAPS,
+    version : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_TARGET_CAPS_VERSION,
+    lookup_table1_d_degamma_cap : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_1DLUT_CAP,
+    color_matrix3x3_cap : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_MATRIX_CAP,
+    lookup_table1_d_regamma_cap : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_1DLUT_CAP
+
+  @[Extern]
+  record GAMMA_RAMP_RGB256x3x16,
+    red : UInt16[256],
+    green : UInt16[256],
+    blue : UInt16[256]
+
+  @[Extern]
+  record GAMMA_RAMP_RGB,
+    red : Float32,
+    green : Float32,
     blue : Float32
-  end
-  struct GAMMA_RAMP_DXGI_1
-    scale : GAMMA_RAMP_RGB
-    offset : GAMMA_RAMP_RGB
-    gamma_curve : GAMMA_RAMP_RGB[1025]*
-  end
-  struct COLORSPACE_TRANSFORM_3x4
-    color_matrix3x4 : Float32[12]*
-    scalar_multiplier : Float32
-    lookup_table1_d : GAMMA_RAMP_RGB[4096]*
-  end
-  struct OUTPUT_WIRE_FORMAT
-    color_encoding : OUTPUT_COLOR_ENCODING
+
+  @[Extern]
+  record GAMMA_RAMP_DXGI_1,
+    scale : Win32cr::Devices::Display::GAMMA_RAMP_RGB,
+    offset : Win32cr::Devices::Display::GAMMA_RAMP_RGB,
+    gamma_curve : Win32cr::Devices::Display::GAMMA_RAMP_RGB[1025]
+
+  @[Extern]
+  record COLORSPACE_TRANSFORM_3x4,
+    color_matrix3x4 : Float32[12],
+    scalar_multiplier : Float32,
+    lookup_table1_d : Win32cr::Devices::Display::GAMMA_RAMP_RGB[4096]
+
+  @[Extern]
+  record OUTPUT_WIRE_FORMAT,
+    color_encoding : Win32cr::Devices::Display::OUTPUT_COLOR_ENCODING,
     bits_per_pixel : UInt32
+
+  @[Extern]
+  record COLORSPACE_TRANSFORM_MATRIX_V2,
+    stage_control_lookup_table1_d_degamma : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_STAGE_CONTROL,
+    lookup_table1_d_degamma : Win32cr::Devices::Display::GAMMA_RAMP_RGB[4096],
+    stage_control_color_matrix3x3 : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_STAGE_CONTROL,
+    color_matrix3x3 : Float32[9],
+    stage_control_lookup_table1_d_regamma : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_STAGE_CONTROL,
+    lookup_table1_d_regamma : Win32cr::Devices::Display::GAMMA_RAMP_RGB[4096]
+
+  @[Extern]
+  record COLORSPACE_TRANSFORM,
+    type__ : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_TYPE,
+    data : Data_e__Union do
+
+    # Nested Type Data_e__Union
+    @[Extern(union: true)]
+    record Data_e__Union,
+      rgb256x3x16 : Win32cr::Devices::Display::GAMMA_RAMP_RGB256x3x16,
+      dxgi1 : Win32cr::Devices::Display::GAMMA_RAMP_DXGI_1,
+      t3x4 : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_3x4,
+      matrix_v2 : Win32cr::Devices::Display::COLORSPACE_TRANSFORM_MATRIX_V2
+
   end
-  struct COLORSPACE_TRANSFORM_MATRIX_V2
-    stage_control_lookup_table1_d_degamma : COLORSPACE_TRANSFORM_STAGE_CONTROL
-    lookup_table1_d_degamma : GAMMA_RAMP_RGB[4096]*
-    stage_control_color_matrix3x3 : COLORSPACE_TRANSFORM_STAGE_CONTROL
-    color_matrix3x3 : Float32[9]*
-    stage_control_lookup_table1_d_regamma : COLORSPACE_TRANSFORM_STAGE_CONTROL
-    lookup_table1_d_regamma : GAMMA_RAMP_RGB[4096]*
-  end
-  struct COLORSPACE_TRANSFORM
-    type : COLORSPACE_TRANSFORM_TYPE
-    data : COLORSPACE_TRANSFORM_Data_e__Union
-  end
-  struct COLORSPACE_TRANSFORM_SET_INPUT
-    output_wire_color_space_expected : OUTPUT_WIRE_COLOR_SPACE_TYPE
-    output_wire_format_expected : OUTPUT_WIRE_FORMAT
-    color_space_transform : COLORSPACE_TRANSFORM
-  end
-  struct SET_ACTIVE_COLOR_PROFILE_NAME
-    color_profile_name : Char[0]*
-  end
-  struct MIPI_DSI_CAPS
-    dsi_type_major : UInt8
-    dsi_type_minor : UInt8
-    spec_version_major : UInt8
-    spec_version_minor : UInt8
-    spec_version_patch : UInt8
-    target_maximum_return_packet_size : UInt16
-    result_code_flags : UInt8
-    result_code_status : UInt8
-    revision : UInt8
-    level : UInt8
-    device_class_hi : UInt8
-    device_class_lo : UInt8
-    manufacturer_hi : UInt8
-    manufacturer_lo : UInt8
-    product_hi : UInt8
-    product_lo : UInt8
-    length_hi : UInt8
+
+  @[Extern]
+  record COLORSPACE_TRANSFORM_SET_INPUT,
+    output_wire_color_space_expected : Win32cr::Devices::Display::OUTPUT_WIRE_COLOR_SPACE_TYPE,
+    output_wire_format_expected : Win32cr::Devices::Display::OUTPUT_WIRE_FORMAT,
+    color_space_transform : Win32cr::Devices::Display::COLORSPACE_TRANSFORM
+
+  @[Extern]
+  record SET_ACTIVE_COLOR_PROFILE_NAME,
+    color_profile_name : UInt16*
+
+  @[Extern]
+  record MIPI_DSI_CAPS,
+    dsi_type_major : UInt8,
+    dsi_type_minor : UInt8,
+    spec_version_major : UInt8,
+    spec_version_minor : UInt8,
+    spec_version_patch : UInt8,
+    target_maximum_return_packet_size : UInt16,
+    result_code_flags : UInt8,
+    result_code_status : UInt8,
+    revision : UInt8,
+    level : UInt8,
+    device_class_hi : UInt8,
+    device_class_lo : UInt8,
+    manufacturer_hi : UInt8,
+    manufacturer_lo : UInt8,
+    product_hi : UInt8,
+    product_lo : UInt8,
+    length_hi : UInt8,
     length_lo : UInt8
-  end
-  struct MIPI_DSI_PACKET
-    anonymous1 : MIPI_DSI_PACKET_Anonymous1_e__Union
-    anonymous2 : MIPI_DSI_PACKET_Anonymous2_e__Union
-    ecc_filler : UInt8
-    payload : UInt8[8]*
-  end
-  struct MIPI_DSI_PACKET_Anonymous2_e__Union_Anonymous_e__Struct
-    data0 : UInt8
-    data1 : UInt8
-  end
-  struct MIPI_DSI_PACKET_Anonymous1_e__Union_Anonymous_e__Struct
-    _bitfield : UInt8
-  end
-  struct MIPI_DSI_TRANSMISSION
-    total_buffer_size : UInt32
-    packet_count : UInt8
-    failed_packet : UInt8
-    anonymous : MIPI_DSI_TRANSMISSION_Anonymous_e__Struct
-    read_word_count : UInt16
-    final_command_extra_payload : UInt16
-    mipi_errors : UInt16
-    host_errors : UInt16
-    packets : MIPI_DSI_PACKET[0]*
-  end
-  struct MIPI_DSI_TRANSMISSION_Anonymous_e__Struct
-    _bitfield : UInt16
-  end
-  struct MIPI_DSI_RESET
-    flags : UInt32
-    anonymous : MIPI_DSI_RESET_Anonymous_e__Union
-  end
-  struct MIPI_DSI_RESET_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
+
+  @[Extern]
+  record MIPI_DSI_PACKET,
+    anonymous1 : Anonymous1_e__Union,
+    anonymous2 : Anonymous2_e__Union,
+    ecc_filler : UInt8,
+    payload : UInt8[8] do
+
+    # Nested Type Anonymous2_e__Union
+    @[Extern(union: true)]
+    record Anonymous2_e__Union,
+      anonymous : Anonymous_e__Struct,
+      long_write_word_count : UInt16 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        data0 : UInt8,
+        data1 : UInt8
+
+    end
 
 
-  struct ICloneViewHelperVTbl
-    query_interface : Proc(ICloneViewHelper*, Guid*, Void**, HRESULT)
-    add_ref : Proc(ICloneViewHelper*, UInt32)
-    release : Proc(ICloneViewHelper*, UInt32)
-    get_connected_i_ds : Proc(ICloneViewHelper*, LibC::LPWSTR, UInt32*, UInt32*, UInt32, HRESULT)
-    get_active_topology : Proc(ICloneViewHelper*, LibC::LPWSTR, UInt32, UInt32*, UInt32*, HRESULT)
-    set_active_topology : Proc(ICloneViewHelper*, LibC::LPWSTR, UInt32, UInt32, UInt32*, HRESULT)
-    commit : Proc(ICloneViewHelper*, LibC::BOOL, HRESULT)
+    # Nested Type Anonymous1_e__Union
+    @[Extern(union: true)]
+    record Anonymous1_e__Union,
+      data_id : UInt8,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt8
+
+    end
+
   end
 
-  ICloneViewHelper_GUID = "f6a3d4c4-5632-4d83-b0a1-fb88712b1eb7"
-  IID_ICloneViewHelper = LibC::GUID.new(0xf6a3d4c4_u32, 0x5632_u16, 0x4d83_u16, StaticArray[0xb0_u8, 0xa1_u8, 0xfb_u8, 0x88_u8, 0x71_u8, 0x2b_u8, 0x1e_u8, 0xb7_u8])
-  struct ICloneViewHelper
-    lpVtbl : ICloneViewHelperVTbl*
+  @[Extern]
+  record MIPI_DSI_TRANSMISSION,
+    total_buffer_size : UInt32,
+    packet_count : UInt8,
+    failed_packet : UInt8,
+    anonymous : Anonymous_e__Struct,
+    read_word_count : UInt16,
+    final_command_extra_payload : UInt16,
+    mipi_errors : UInt16,
+    host_errors : UInt16,
+    packets : Win32cr::Devices::Display::MIPI_DSI_PACKET* do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt16
+
   end
 
-  struct IViewHelperVTbl
-    query_interface : Proc(IViewHelper*, Guid*, Void**, HRESULT)
-    add_ref : Proc(IViewHelper*, UInt32)
-    release : Proc(IViewHelper*, UInt32)
-    get_connected_i_ds : Proc(IViewHelper*, LibC::LPWSTR, UInt32*, UInt32*, UInt32, HRESULT)
-    get_active_topology : Proc(IViewHelper*, LibC::LPWSTR, UInt32, UInt32*, UInt32*, HRESULT)
-    set_active_topology : Proc(IViewHelper*, LibC::LPWSTR, UInt32, UInt32, UInt32*, HRESULT)
-    commit : Proc(IViewHelper*, HRESULT)
-    set_configuration : Proc(IViewHelper*, IStream, UInt32*, HRESULT)
-    get_proceed_on_new_configuration : Proc(IViewHelper*, HRESULT)
+  @[Extern]
+  record MIPI_DSI_RESET,
+    flags : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      results : UInt32 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
 
-  IViewHelper_GUID = "e85ccef5-aaaa-47f0-b5e3-61f7aecdc4c1"
-  IID_IViewHelper = LibC::GUID.new(0xe85ccef5_u32, 0xaaaa_u16, 0x47f0_u16, StaticArray[0xb5_u8, 0xe3_u8, 0x61_u8, 0xf7_u8, 0xae_u8, 0xcd_u8, 0xc4_u8, 0xc1_u8])
-  struct IViewHelper
-    lpVtbl : IViewHelperVTbl*
+  {% if flag?(:i386) %}
+  @[Extern]
+  record POINTE,
+    x : UInt32,
+    y : UInt32
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern(union: true)]
+  record FLOAT_LONG,
+    e : UInt32,
+    l : Int32
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  record FD_XFORM,
+    eXX : UInt32,
+    eXY : UInt32,
+    eYX : UInt32,
+    eYY : UInt32
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  record IFIMETRICS,
+    cjThis : UInt32,
+    cjIfiExtra : UInt32,
+    dpwszFamilyName : Int32,
+    dpwszStyleName : Int32,
+    dpwszFaceName : Int32,
+    dpwszUniqueName : Int32,
+    dpFontSim : Int32,
+    lEmbedId : Int32,
+    lItalicAngle : Int32,
+    lCharBias : Int32,
+    dpCharSets : Int32,
+    jWinCharSet : UInt8,
+    jWinPitchAndFamily : UInt8,
+    usWinWeight : UInt16,
+    flInfo : UInt32,
+    fsSelection : UInt16,
+    fsType : UInt16,
+    fwdUnitsPerEm : Int16,
+    fwdLowestPPEm : Int16,
+    fwdWinAscender : Int16,
+    fwdWinDescender : Int16,
+    fwdMacAscender : Int16,
+    fwdMacDescender : Int16,
+    fwdMacLineGap : Int16,
+    fwdTypoAscender : Int16,
+    fwdTypoDescender : Int16,
+    fwdTypoLineGap : Int16,
+    fwdAveCharWidth : Int16,
+    fwdMaxCharInc : Int16,
+    fwdCapHeight : Int16,
+    fwdXHeight : Int16,
+    fwdSubscriptXSize : Int16,
+    fwdSubscriptYSize : Int16,
+    fwdSubscriptXOffset : Int16,
+    fwdSubscriptYOffset : Int16,
+    fwdSuperscriptXSize : Int16,
+    fwdSuperscriptYSize : Int16,
+    fwdSuperscriptXOffset : Int16,
+    fwdSuperscriptYOffset : Int16,
+    fwdUnderscoreSize : Int16,
+    fwdUnderscorePosition : Int16,
+    fwdStrikeoutSize : Int16,
+    fwdStrikeoutPosition : Int16,
+    chFirstChar : UInt8,
+    chLastChar : UInt8,
+    chDefaultChar : UInt8,
+    chBreakChar : UInt8,
+    wcFirstChar : UInt16,
+    wcLastChar : UInt16,
+    wcDefaultChar : UInt16,
+    wcBreakChar : UInt16,
+    ptlBaseline : Win32cr::Foundation::POINTL,
+    ptlAspect : Win32cr::Foundation::POINTL,
+    ptlCaret : Win32cr::Foundation::POINTL,
+    rclFontBox : Win32cr::Foundation::RECTL,
+    achVendId : UInt8[4],
+    cKerningPairs : UInt32,
+    ulPanoseCulture : UInt32,
+    panose : Win32cr::Graphics::Gdi::PANOSE
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  record LINEATTRS,
+    fl : UInt32,
+    iJoin : UInt32,
+    iEndCap : UInt32,
+    elWidth : Win32cr::Devices::Display::FLOAT_LONG,
+    eMiterLimit : UInt32,
+    cstyle : UInt32,
+    pstyle : Win32cr::Devices::Display::FLOAT_LONG*,
+    elStyleState : Win32cr::Devices::Display::FLOAT_LONG
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  record XFORML,
+    eM11 : UInt32,
+    eM12 : UInt32,
+    eM21 : UInt32,
+    eM22 : UInt32,
+    eDx : UInt32,
+    eDy : UInt32
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  record FLOATOBJ,
+    ul1 : UInt32,
+    ul2 : UInt32
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  record FLOATOBJ_XFORM,
+    eM11 : Win32cr::Devices::Display::FLOATOBJ,
+    eM12 : Win32cr::Devices::Display::FLOATOBJ,
+    eM21 : Win32cr::Devices::Display::FLOATOBJ,
+    eM22 : Win32cr::Devices::Display::FLOATOBJ,
+    eDx : Win32cr::Devices::Display::FLOATOBJ,
+    eDy : Win32cr::Devices::Display::FLOATOBJ
+  {% end %}
+
+  @[Extern]
+  record ICloneViewHelperVtbl,
+    query_interface : Proc(ICloneViewHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ICloneViewHelper*, UInt32),
+    release : Proc(ICloneViewHelper*, UInt32),
+    get_connected_i_ds : Proc(ICloneViewHelper*, Win32cr::Foundation::PWSTR, UInt32*, UInt32*, UInt32, Win32cr::Foundation::HRESULT),
+    get_active_topology : Proc(ICloneViewHelper*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_active_topology : Proc(ICloneViewHelper*, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    commit : Proc(ICloneViewHelper*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("f6a3d4c4-5632-4d83-b0a1-fb88712b1eb7")]
+  record ICloneViewHelper, lpVtbl : ICloneViewHelperVtbl* do
+    GUID = LibC::GUID.new(0xf6a3d4c4_u32, 0x5632_u16, 0x4d83_u16, StaticArray[0xb0_u8, 0xa1_u8, 0xfb_u8, 0x88_u8, 0x71_u8, 0x2b_u8, 0x1e_u8, 0xb7_u8])
+    def query_interface(this : ICloneViewHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ICloneViewHelper*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ICloneViewHelper*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_connected_i_ds(this : ICloneViewHelper*, wszAdaptorName : Win32cr::Foundation::PWSTR, pulCount : UInt32*, pulID : UInt32*, ulFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_connected_i_ds.call(this, wszAdaptorName, pulCount, pulID, ulFlags)
+    end
+    def get_active_topology(this : ICloneViewHelper*, wszAdaptorName : Win32cr::Foundation::PWSTR, ulSourceID : UInt32, pulCount : UInt32*, pulTargetID : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_active_topology.call(this, wszAdaptorName, ulSourceID, pulCount, pulTargetID)
+    end
+    def set_active_topology(this : ICloneViewHelper*, wszAdaptorName : Win32cr::Foundation::PWSTR, ulSourceID : UInt32, ulCount : UInt32, pulTargetID : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_active_topology.call(this, wszAdaptorName, ulSourceID, ulCount, pulTargetID)
+    end
+    def commit(this : ICloneViewHelper*, fFinalCall : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this, fFinalCall)
+    end
+
   end
 
+  @[Extern]
+  record IViewHelperVtbl,
+    query_interface : Proc(IViewHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IViewHelper*, UInt32),
+    release : Proc(IViewHelper*, UInt32),
+    get_connected_i_ds : Proc(IViewHelper*, Win32cr::Foundation::PWSTR, UInt32*, UInt32*, UInt32, Win32cr::Foundation::HRESULT),
+    get_active_topology : Proc(IViewHelper*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
+    set_active_topology : Proc(IViewHelper*, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    commit : Proc(IViewHelper*, Win32cr::Foundation::HRESULT),
+    set_configuration : Proc(IViewHelper*, Void*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_proceed_on_new_configuration : Proc(IViewHelper*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  #@[Com("e85ccef5-aaaa-47f0-b5e3-61f7aecdc4c1")]
+  record IViewHelper, lpVtbl : IViewHelperVtbl* do
+    GUID = LibC::GUID.new(0xe85ccef5_u32, 0xaaaa_u16, 0x47f0_u16, StaticArray[0xb5_u8, 0xe3_u8, 0x61_u8, 0xf7_u8, 0xae_u8, 0xcd_u8, 0xc4_u8, 0xc1_u8])
+    def query_interface(this : IViewHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IViewHelper*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IViewHelper*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_connected_i_ds(this : IViewHelper*, wszAdaptorName : Win32cr::Foundation::PWSTR, pulCount : UInt32*, pulID : UInt32*, ulFlags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_connected_i_ds.call(this, wszAdaptorName, pulCount, pulID, ulFlags)
+    end
+    def get_active_topology(this : IViewHelper*, wszAdaptorName : Win32cr::Foundation::PWSTR, ulSourceID : UInt32, pulCount : UInt32*, pulTargetID : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_active_topology.call(this, wszAdaptorName, ulSourceID, pulCount, pulTargetID)
+    end
+    def set_active_topology(this : IViewHelper*, wszAdaptorName : Win32cr::Foundation::PWSTR, ulSourceID : UInt32, ulCount : UInt32, pulTargetID : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_active_topology.call(this, wszAdaptorName, ulSourceID, ulCount, pulTargetID)
+    end
+    def commit(this : IViewHelper*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.commit.call(this)
+    end
+    def set_configuration(this : IViewHelper*, pIStream : Void*, pulStatus : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set_configuration.call(this, pIStream, pulStatus)
+    end
+    def get_proceed_on_new_configuration(this : IViewHelper*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_proceed_on_new_configuration.call(this)
+    end
 
-  # Params # hmonitor : HMONITOR [In],pdwnumberofphysicalmonitors : UInt32* [In]
-  fun GetNumberOfPhysicalMonitorsFromHMONITOR(hmonitor : HMONITOR, pdwnumberofphysicalmonitors : UInt32*) : Int32
-
-  # Params # pdirect3ddevice9 : IDirect3DDevice9 [In],pdwnumberofphysicalmonitors : UInt32* [In]
-  fun GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pdirect3ddevice9 : IDirect3DDevice9, pdwnumberofphysicalmonitors : UInt32*) : HRESULT
-
-  # Params # hmonitor : HMONITOR [In],dwphysicalmonitorarraysize : UInt32 [In],pphysicalmonitorarray : PHYSICAL_MONITOR* [In]
-  fun GetPhysicalMonitorsFromHMONITOR(hmonitor : HMONITOR, dwphysicalmonitorarraysize : UInt32, pphysicalmonitorarray : PHYSICAL_MONITOR*) : Int32
-
-  # Params # pdirect3ddevice9 : IDirect3DDevice9 [In],dwphysicalmonitorarraysize : UInt32 [In],pphysicalmonitorarray : PHYSICAL_MONITOR* [In]
-  fun GetPhysicalMonitorsFromIDirect3DDevice9(pdirect3ddevice9 : IDirect3DDevice9, dwphysicalmonitorarraysize : UInt32, pphysicalmonitorarray : PHYSICAL_MONITOR*) : HRESULT
-
-  # Params # hmonitor : LibC::HANDLE [In]
-  fun DestroyPhysicalMonitor(hmonitor : LibC::HANDLE) : Int32
-
-  # Params # dwphysicalmonitorarraysize : UInt32 [In],pphysicalmonitorarray : PHYSICAL_MONITOR* [In]
-  fun DestroyPhysicalMonitors(dwphysicalmonitorarraysize : UInt32, pphysicalmonitorarray : PHYSICAL_MONITOR*) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],bvcpcode : UInt8 [In],pvct : MC_VCP_CODE_TYPE* [In],pdwcurrentvalue : UInt32* [In],pdwmaximumvalue : UInt32* [In]
-  fun GetVCPFeatureAndVCPFeatureReply(hmonitor : LibC::HANDLE, bvcpcode : UInt8, pvct : MC_VCP_CODE_TYPE*, pdwcurrentvalue : UInt32*, pdwmaximumvalue : UInt32*) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],bvcpcode : UInt8 [In],dwnewvalue : UInt32 [In]
-  fun SetVCPFeature(hmonitor : LibC::HANDLE, bvcpcode : UInt8, dwnewvalue : UInt32) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In]
-  fun SaveCurrentSettings(hmonitor : LibC::HANDLE) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],pdwcapabilitiesstringlengthincharacters : UInt32* [In]
-  fun GetCapabilitiesStringLength(hmonitor : LibC::HANDLE, pdwcapabilitiesstringlengthincharacters : UInt32*) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],pszasciicapabilitiesstring : UInt8* [In],dwcapabilitiesstringlengthincharacters : UInt32 [In]
-  fun CapabilitiesRequestAndCapabilitiesReply(hmonitor : LibC::HANDLE, pszasciicapabilitiesstring : UInt8*, dwcapabilitiesstringlengthincharacters : UInt32) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],pmtrmonitortimingreport : MC_TIMING_REPORT* [In]
-  fun GetTimingReport(hmonitor : LibC::HANDLE, pmtrmonitortimingreport : MC_TIMING_REPORT*) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],pdwmonitorcapabilities : UInt32* [In],pdwsupportedcolortemperatures : UInt32* [In]
-  fun GetMonitorCapabilities(hmonitor : LibC::HANDLE, pdwmonitorcapabilities : UInt32*, pdwsupportedcolortemperatures : UInt32*) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In]
-  fun SaveCurrentMonitorSettings(hmonitor : LibC::HANDLE) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],pdtydisplaytechnologytype : MC_DISPLAY_TECHNOLOGY_TYPE* [In]
-  fun GetMonitorTechnologyType(hmonitor : LibC::HANDLE, pdtydisplaytechnologytype : MC_DISPLAY_TECHNOLOGY_TYPE*) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],pdwminimumbrightness : UInt32* [In],pdwcurrentbrightness : UInt32* [In],pdwmaximumbrightness : UInt32* [In]
-  fun GetMonitorBrightness(hmonitor : LibC::HANDLE, pdwminimumbrightness : UInt32*, pdwcurrentbrightness : UInt32*, pdwmaximumbrightness : UInt32*) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],pdwminimumcontrast : UInt32* [In],pdwcurrentcontrast : UInt32* [In],pdwmaximumcontrast : UInt32* [In]
-  fun GetMonitorContrast(hmonitor : LibC::HANDLE, pdwminimumcontrast : UInt32*, pdwcurrentcontrast : UInt32*, pdwmaximumcontrast : UInt32*) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],pctcurrentcolortemperature : MC_COLOR_TEMPERATURE* [In]
-  fun GetMonitorColorTemperature(hmonitor : LibC::HANDLE, pctcurrentcolortemperature : MC_COLOR_TEMPERATURE*) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],dtdrivetype : MC_DRIVE_TYPE [In],pdwminimumdrive : UInt32* [In],pdwcurrentdrive : UInt32* [In],pdwmaximumdrive : UInt32* [In]
-  fun GetMonitorRedGreenOrBlueDrive(hmonitor : LibC::HANDLE, dtdrivetype : MC_DRIVE_TYPE, pdwminimumdrive : UInt32*, pdwcurrentdrive : UInt32*, pdwmaximumdrive : UInt32*) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],gtgaintype : MC_GAIN_TYPE [In],pdwminimumgain : UInt32* [In],pdwcurrentgain : UInt32* [In],pdwmaximumgain : UInt32* [In]
-  fun GetMonitorRedGreenOrBlueGain(hmonitor : LibC::HANDLE, gtgaintype : MC_GAIN_TYPE, pdwminimumgain : UInt32*, pdwcurrentgain : UInt32*, pdwmaximumgain : UInt32*) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],dwnewbrightness : UInt32 [In]
-  fun SetMonitorBrightness(hmonitor : LibC::HANDLE, dwnewbrightness : UInt32) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],dwnewcontrast : UInt32 [In]
-  fun SetMonitorContrast(hmonitor : LibC::HANDLE, dwnewcontrast : UInt32) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],ctcurrentcolortemperature : MC_COLOR_TEMPERATURE [In]
-  fun SetMonitorColorTemperature(hmonitor : LibC::HANDLE, ctcurrentcolortemperature : MC_COLOR_TEMPERATURE) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],dtdrivetype : MC_DRIVE_TYPE [In],dwnewdrive : UInt32 [In]
-  fun SetMonitorRedGreenOrBlueDrive(hmonitor : LibC::HANDLE, dtdrivetype : MC_DRIVE_TYPE, dwnewdrive : UInt32) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],gtgaintype : MC_GAIN_TYPE [In],dwnewgain : UInt32 [In]
-  fun SetMonitorRedGreenOrBlueGain(hmonitor : LibC::HANDLE, gtgaintype : MC_GAIN_TYPE, dwnewgain : UInt32) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In]
-  fun DegaussMonitor(hmonitor : LibC::HANDLE) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],stsizetype : MC_SIZE_TYPE [In],pdwminimumwidthorheight : UInt32* [In],pdwcurrentwidthorheight : UInt32* [In],pdwmaximumwidthorheight : UInt32* [In]
-  fun GetMonitorDisplayAreaSize(hmonitor : LibC::HANDLE, stsizetype : MC_SIZE_TYPE, pdwminimumwidthorheight : UInt32*, pdwcurrentwidthorheight : UInt32*, pdwmaximumwidthorheight : UInt32*) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],ptpositiontype : MC_POSITION_TYPE [In],pdwminimumposition : UInt32* [In],pdwcurrentposition : UInt32* [In],pdwmaximumposition : UInt32* [In]
-  fun GetMonitorDisplayAreaPosition(hmonitor : LibC::HANDLE, ptpositiontype : MC_POSITION_TYPE, pdwminimumposition : UInt32*, pdwcurrentposition : UInt32*, pdwmaximumposition : UInt32*) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],stsizetype : MC_SIZE_TYPE [In],dwnewdisplayareawidthorheight : UInt32 [In]
-  fun SetMonitorDisplayAreaSize(hmonitor : LibC::HANDLE, stsizetype : MC_SIZE_TYPE, dwnewdisplayareawidthorheight : UInt32) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In],ptpositiontype : MC_POSITION_TYPE [In],dwnewposition : UInt32 [In]
-  fun SetMonitorDisplayAreaPosition(hmonitor : LibC::HANDLE, ptpositiontype : MC_POSITION_TYPE, dwnewposition : UInt32) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In]
-  fun RestoreMonitorFactoryColorDefaults(hmonitor : LibC::HANDLE) : Int32
-
-  # Params # hmonitor : LibC::HANDLE [In]
-  fun RestoreMonitorFactoryDefaults(hmonitor : LibC::HANDLE) : Int32
-
-  # Params # pbo : BRUSHOBJ* [In],cj : UInt32 [In]
-  fun BRUSHOBJ_pvAllocRbrush(pbo : BRUSHOBJ*, cj : UInt32) : Void*
-
-  # Params # pbo : BRUSHOBJ* [In]
-  fun BRUSHOBJ_pvGetRbrush(pbo : BRUSHOBJ*) : Void*
-
-  # Params # pbo : BRUSHOBJ* [In]
-  fun BRUSHOBJ_ulGetBrushColor(pbo : BRUSHOBJ*) : UInt32
-
-  # Params # pbo : BRUSHOBJ* [In]
-  fun BRUSHOBJ_hGetColorTransform(pbo : BRUSHOBJ*) : LibC::HANDLE
-
-  # Params # pco : CLIPOBJ* [In],ball : LibC::BOOL [In],itype : UInt32 [In],idirection : UInt32 [In],climit : UInt32 [In]
-  fun CLIPOBJ_cEnumStart(pco : CLIPOBJ*, ball : LibC::BOOL, itype : UInt32, idirection : UInt32, climit : UInt32) : UInt32
-
-  # Params # pco : CLIPOBJ* [In],cj : UInt32 [In],pul : UInt32* [In]
-  fun CLIPOBJ_bEnum(pco : CLIPOBJ*, cj : UInt32, pul : UInt32*) : LibC::BOOL
-
-  # Params # pco : CLIPOBJ* [In]
-  fun CLIPOBJ_ppoGetPath(pco : CLIPOBJ*) : PATHOBJ*
-
-  # Params # pfo : FONTOBJ* [In],phg : UInt32* [In]
-  fun FONTOBJ_cGetAllGlyphHandles(pfo : FONTOBJ*, phg : UInt32*) : UInt32
-
-  # Params # pfo : FONTOBJ* [In],cjsize : UInt32 [In],pfi : FONTINFO* [In]
-  fun FONTOBJ_vGetInfo(pfo : FONTOBJ*, cjsize : UInt32, pfi : FONTINFO*) : Void
-
-  # Params # pfo : FONTOBJ* [In],imode : UInt32 [In],cglyph : UInt32 [In],phg : UInt32* [In],ppvglyph : Void** [In]
-  fun FONTOBJ_cGetGlyphs(pfo : FONTOBJ*, imode : UInt32, cglyph : UInt32, phg : UInt32*, ppvglyph : Void**) : UInt32
-
-  # Params # pfo : FONTOBJ* [In]
-  fun FONTOBJ_pxoGetXform(pfo : FONTOBJ*) : XFORMOBJ*
-
-  # Params # pfo : FONTOBJ* [In]
-  fun FONTOBJ_pifi(pfo : FONTOBJ*) : IFIMETRICS*
-
-  # Params # pfo : FONTOBJ* [In]
-  fun FONTOBJ_pfdg(pfo : FONTOBJ*) : FD_GLYPHSET*
-
-  # Params # pfo : FONTOBJ* [In],pcjfile : UInt32* [In]
-  fun FONTOBJ_pvTrueTypeFontFile(pfo : FONTOBJ*, pcjfile : UInt32*) : Void*
-
-  # Params # pfo : FONTOBJ* [In],imode : UInt32 [In]
-  fun FONTOBJ_pQueryGlyphAttrs(pfo : FONTOBJ*, imode : UInt32) : FD_GLYPHATTR*
-
-  # Params # ppo : PATHOBJ* [In]
-  fun PATHOBJ_vEnumStart(ppo : PATHOBJ*) : Void
-
-  # Params # ppo : PATHOBJ* [In],ppd : PATHDATA* [In]
-  fun PATHOBJ_bEnum(ppo : PATHOBJ*, ppd : PATHDATA*) : LibC::BOOL
-
-  # Params # ppo : PATHOBJ* [In],pco : CLIPOBJ* [In],pso : SURFOBJ* [In],pla : LINEATTRS* [In]
-  fun PATHOBJ_vEnumStartClipLines(ppo : PATHOBJ*, pco : CLIPOBJ*, pso : SURFOBJ*, pla : LINEATTRS*) : Void
-
-  # Params # ppo : PATHOBJ* [In],cb : UInt32 [In],pcl : CLIPLINE* [In]
-  fun PATHOBJ_bEnumClipLines(ppo : PATHOBJ*, cb : UInt32, pcl : CLIPLINE*) : LibC::BOOL
-
-  # Params # ppo : PATHOBJ* [In],prectfx : RECTFX* [In]
-  fun PATHOBJ_vGetBounds(ppo : PATHOBJ*, prectfx : RECTFX*) : Void
-
-  # Params # pstro : STROBJ* [In]
-  fun STROBJ_vEnumStart(pstro : STROBJ*) : Void
-
-  # Params # pstro : STROBJ* [In],pc : UInt32* [In],ppgpos : GLYPHPOS** [In]
-  fun STROBJ_bEnum(pstro : STROBJ*, pc : UInt32*, ppgpos : GLYPHPOS**) : LibC::BOOL
-
-  # Params # pstro : STROBJ* [In],pc : UInt32* [In],ppgpos : GLYPHPOS** [In]
-  fun STROBJ_bEnumPositionsOnly(pstro : STROBJ*, pc : UInt32*, ppgpos : GLYPHPOS**) : LibC::BOOL
-
-  # Params # pstro : STROBJ* [In]
-  fun STROBJ_dwGetCodePage(pstro : STROBJ*) : UInt32
-
-  # Params # pso : STROBJ* [In],ifirst : UInt32 [In],c : UInt32 [In],pptqd : POINTQF* [In]
-  fun STROBJ_bGetAdvanceWidths(pso : STROBJ*, ifirst : UInt32, c : UInt32, pptqd : POINTQF*) : LibC::BOOL
-
-  # Params # pxo : XFORMOBJ* [In],pxform : XFORML* [In]
-  fun XFORMOBJ_iGetXform(pxo : XFORMOBJ*, pxform : XFORML*) : UInt32
-
-  # Params # pxo : XFORMOBJ* [In],imode : UInt32 [In],cpoints : UInt32 [In],pvin : Void* [In],pvout : Void* [In]
-  fun XFORMOBJ_bApplyXform(pxo : XFORMOBJ*, imode : UInt32, cpoints : UInt32, pvin : Void*, pvout : Void*) : LibC::BOOL
-
-  # Params # pxlo : XLATEOBJ* [In],icolor : UInt32 [In]
-  fun XLATEOBJ_iXlate(pxlo : XLATEOBJ*, icolor : UInt32) : UInt32
-
-  # Params # pxlo : XLATEOBJ* [In]
-  fun XLATEOBJ_piVector(pxlo : XLATEOBJ*) : UInt32*
-
-  # Params # pxlo : XLATEOBJ* [In],ipal : UInt32 [In],cpal : UInt32 [In],ppal : UInt32* [In]
-  fun XLATEOBJ_cGetPalette(pxlo : XLATEOBJ*, ipal : UInt32, cpal : UInt32, ppal : UInt32*) : UInt32
-
-  # Params # pxlo : XLATEOBJ* [In]
-  fun XLATEOBJ_hGetColorTransform(pxlo : XLATEOBJ*) : LibC::HANDLE
-
-  # Params # sizl : SIZE [In],lwidth : Int32 [In],iformat : UInt32 [In],fl : UInt32 [In],pvbits : Void* [In]
-  fun EngCreateBitmap(sizl : SIZE, lwidth : Int32, iformat : UInt32, fl : UInt32, pvbits : Void*) : HBITMAP
-
-  # Params # dhsurf : DHSURF [In],sizl : SIZE [In],iformatcompat : UInt32 [In]
-  fun EngCreateDeviceSurface(dhsurf : DHSURF, sizl : SIZE, iformatcompat : UInt32) : HSURF
-
-  # Params # dhsurf : DHSURF [In],sizl : SIZE [In],iformatcompat : UInt32 [In]
-  fun EngCreateDeviceBitmap(dhsurf : DHSURF, sizl : SIZE, iformatcompat : UInt32) : HBITMAP
-
-  # Params # hsurf : HSURF [In]
-  fun EngDeleteSurface(hsurf : HSURF) : LibC::BOOL
-
-  # Params # hsurf : HSURF [In]
-  fun EngLockSurface(hsurf : HSURF) : SURFOBJ*
-
-  # Params # pso : SURFOBJ* [In]
-  fun EngUnlockSurface(pso : SURFOBJ*) : Void
-
-  # Params # pso : SURFOBJ* [In],prcl : RECTL* [In],icolor : UInt32 [In]
-  fun EngEraseSurface(pso : SURFOBJ*, prcl : RECTL*, icolor : UInt32) : LibC::BOOL
-
-  # Params # hsurf : HSURF [In],hdev : HDEV [In],flhooks : UInt32 [In]
-  fun EngAssociateSurface(hsurf : HSURF, hdev : HDEV, flhooks : UInt32) : LibC::BOOL
-
-  # Params # hsurf : HSURF [In]
-  fun EngMarkBandingSurface(hsurf : HSURF) : LibC::BOOL
-
-  # Params # pso : SURFOBJ* [In]
-  fun EngCheckAbort(pso : SURFOBJ*) : LibC::BOOL
-
-  # Params # ppo : PATHOBJ* [In]
-  fun EngDeletePath(ppo : PATHOBJ*) : Void
-
-  # Params # imode : UInt32 [In],ccolors : UInt32 [In],pulcolors : UInt32* [In],flred : UInt32 [In],flgreen : UInt32 [In],flblue : UInt32 [In]
-  fun EngCreatePalette(imode : UInt32, ccolors : UInt32, pulcolors : UInt32*, flred : UInt32, flgreen : UInt32, flblue : UInt32) : HPALETTE
-
-  # Params # hpal : HPALETTE [In]
-  fun EngDeletePalette(hpal : HPALETTE) : LibC::BOOL
-
-  # Params # 
-  fun EngCreateClip : CLIPOBJ*
-
-  # Params # pco : CLIPOBJ* [In]
-  fun EngDeleteClip(pco : CLIPOBJ*) : Void
-
-  # Params # psotrg : SURFOBJ* [In],psosrc : SURFOBJ* [In],psomask : SURFOBJ* [In],pco : CLIPOBJ* [In],pxlo : XLATEOBJ* [In],prcltrg : RECTL* [In],pptlsrc : POINTL* [In],pptlmask : POINTL* [In],pbo : BRUSHOBJ* [In],pptlbrush : POINTL* [In],rop4 : UInt32 [In]
-  fun EngBitBlt(psotrg : SURFOBJ*, psosrc : SURFOBJ*, psomask : SURFOBJ*, pco : CLIPOBJ*, pxlo : XLATEOBJ*, prcltrg : RECTL*, pptlsrc : POINTL*, pptlmask : POINTL*, pbo : BRUSHOBJ*, pptlbrush : POINTL*, rop4 : UInt32) : LibC::BOOL
-
-  # Params # pso : SURFOBJ* [In],pco : CLIPOBJ* [In],pbo : BRUSHOBJ* [In],x1 : Int32 [In],y1 : Int32 [In],x2 : Int32 [In],y2 : Int32 [In],prclbounds : RECTL* [In],mix : UInt32 [In]
-  fun EngLineTo(pso : SURFOBJ*, pco : CLIPOBJ*, pbo : BRUSHOBJ*, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, prclbounds : RECTL*, mix : UInt32) : LibC::BOOL
-
-  # Params # psodest : SURFOBJ* [In],psosrc : SURFOBJ* [In],psomask : SURFOBJ* [In],pco : CLIPOBJ* [In],pxlo : XLATEOBJ* [In],pca : COLORADJUSTMENT* [In],pptlhtorg : POINTL* [In],prcldest : RECTL* [In],prclsrc : RECTL* [In],pptlmask : POINTL* [In],imode : UInt32 [In]
-  fun EngStretchBlt(psodest : SURFOBJ*, psosrc : SURFOBJ*, psomask : SURFOBJ*, pco : CLIPOBJ*, pxlo : XLATEOBJ*, pca : COLORADJUSTMENT*, pptlhtorg : POINTL*, prcldest : RECTL*, prclsrc : RECTL*, pptlmask : POINTL*, imode : UInt32) : LibC::BOOL
-
-  # Params # psodest : SURFOBJ* [In],psosrc : SURFOBJ* [In],psomask : SURFOBJ* [In],pco : CLIPOBJ* [In],pxlo : XLATEOBJ* [In],pca : COLORADJUSTMENT* [In],pptlhtorg : POINTL* [In],prcldest : RECTL* [In],prclsrc : RECTL* [In],pptlmask : POINTL* [In],imode : UInt32 [In],pbo : BRUSHOBJ* [In],rop4 : UInt32 [In]
-  fun EngStretchBltROP(psodest : SURFOBJ*, psosrc : SURFOBJ*, psomask : SURFOBJ*, pco : CLIPOBJ*, pxlo : XLATEOBJ*, pca : COLORADJUSTMENT*, pptlhtorg : POINTL*, prcldest : RECTL*, prclsrc : RECTL*, pptlmask : POINTL*, imode : UInt32, pbo : BRUSHOBJ*, rop4 : UInt32) : LibC::BOOL
-
-  # Params # psodest : SURFOBJ* [In],psosrc : SURFOBJ* [In],pco : CLIPOBJ* [In],pxlo : XLATEOBJ* [In],prcldest : RECTL* [In],prclsrc : RECTL* [In],pblendobj : BLENDOBJ* [In]
-  fun EngAlphaBlend(psodest : SURFOBJ*, psosrc : SURFOBJ*, pco : CLIPOBJ*, pxlo : XLATEOBJ*, prcldest : RECTL*, prclsrc : RECTL*, pblendobj : BLENDOBJ*) : LibC::BOOL
-
-  # Params # psodest : SURFOBJ* [In],pco : CLIPOBJ* [In],pxlo : XLATEOBJ* [In],pvertex : TRIVERTEX* [In],nvertex : UInt32 [In],pmesh : Void* [In],nmesh : UInt32 [In],prclextents : RECTL* [In],pptlditherorg : POINTL* [In],ulmode : UInt32 [In]
-  fun EngGradientFill(psodest : SURFOBJ*, pco : CLIPOBJ*, pxlo : XLATEOBJ*, pvertex : TRIVERTEX*, nvertex : UInt32, pmesh : Void*, nmesh : UInt32, prclextents : RECTL*, pptlditherorg : POINTL*, ulmode : UInt32) : LibC::BOOL
-
-  # Params # psodst : SURFOBJ* [In],psosrc : SURFOBJ* [In],pco : CLIPOBJ* [In],pxlo : XLATEOBJ* [In],prcldst : RECTL* [In],prclsrc : RECTL* [In],transcolor : UInt32 [In],bcalledfrombitblt : UInt32 [In]
-  fun EngTransparentBlt(psodst : SURFOBJ*, psosrc : SURFOBJ*, pco : CLIPOBJ*, pxlo : XLATEOBJ*, prcldst : RECTL*, prclsrc : RECTL*, transcolor : UInt32, bcalledfrombitblt : UInt32) : LibC::BOOL
-
-  # Params # pso : SURFOBJ* [In],pstro : STROBJ* [In],pfo : FONTOBJ* [In],pco : CLIPOBJ* [In],prclextra : RECTL* [In],prclopaque : RECTL* [In],pbofore : BRUSHOBJ* [In],pboopaque : BRUSHOBJ* [In],pptlorg : POINTL* [In],mix : UInt32 [In]
-  fun EngTextOut(pso : SURFOBJ*, pstro : STROBJ*, pfo : FONTOBJ*, pco : CLIPOBJ*, prclextra : RECTL*, prclopaque : RECTL*, pbofore : BRUSHOBJ*, pboopaque : BRUSHOBJ*, pptlorg : POINTL*, mix : UInt32) : LibC::BOOL
-
-  # Params # pso : SURFOBJ* [In],ppo : PATHOBJ* [In],pco : CLIPOBJ* [In],pxo : XFORMOBJ* [In],pbo : BRUSHOBJ* [In],pptlbrushorg : POINTL* [In],plineattrs : LINEATTRS* [In],mix : UInt32 [In]
-  fun EngStrokePath(pso : SURFOBJ*, ppo : PATHOBJ*, pco : CLIPOBJ*, pxo : XFORMOBJ*, pbo : BRUSHOBJ*, pptlbrushorg : POINTL*, plineattrs : LINEATTRS*, mix : UInt32) : LibC::BOOL
-
-  # Params # pso : SURFOBJ* [In],ppo : PATHOBJ* [In],pco : CLIPOBJ* [In],pbo : BRUSHOBJ* [In],pptlbrushorg : POINTL* [In],mix : UInt32 [In],floptions : UInt32 [In]
-  fun EngFillPath(pso : SURFOBJ*, ppo : PATHOBJ*, pco : CLIPOBJ*, pbo : BRUSHOBJ*, pptlbrushorg : POINTL*, mix : UInt32, floptions : UInt32) : LibC::BOOL
-
-  # Params # pso : SURFOBJ* [In],ppo : PATHOBJ* [In],pco : CLIPOBJ* [In],pxo : XFORMOBJ* [In],pbostroke : BRUSHOBJ* [In],plineattrs : LINEATTRS* [In],pbofill : BRUSHOBJ* [In],pptlbrushorg : POINTL* [In],mixfill : UInt32 [In],floptions : UInt32 [In]
-  fun EngStrokeAndFillPath(pso : SURFOBJ*, ppo : PATHOBJ*, pco : CLIPOBJ*, pxo : XFORMOBJ*, pbostroke : BRUSHOBJ*, plineattrs : LINEATTRS*, pbofill : BRUSHOBJ*, pptlbrushorg : POINTL*, mixfill : UInt32, floptions : UInt32) : LibC::BOOL
-
-  # Params # pso : SURFOBJ* [In],pco : CLIPOBJ* [In],pbo : BRUSHOBJ* [In],pptlbrushorg : POINTL* [In],mix : UInt32 [In]
-  fun EngPaint(pso : SURFOBJ*, pco : CLIPOBJ*, pbo : BRUSHOBJ*, pptlbrushorg : POINTL*, mix : UInt32) : LibC::BOOL
-
-  # Params # psodest : SURFOBJ* [In],psosrc : SURFOBJ* [In],pco : CLIPOBJ* [In],pxlo : XLATEOBJ* [In],prcldest : RECTL* [In],pptlsrc : POINTL* [In]
-  fun EngCopyBits(psodest : SURFOBJ*, psosrc : SURFOBJ*, pco : CLIPOBJ*, pxlo : XLATEOBJ*, prcldest : RECTL*, pptlsrc : POINTL*) : LibC::BOOL
-
-  # Params # psotrg : SURFOBJ* [In],psosrc : SURFOBJ* [In],psomsk : SURFOBJ* [In],pco : CLIPOBJ* [In],pxlo : XLATEOBJ* [In],pca : COLORADJUSTMENT* [In],pptlbrushorg : POINTL* [In],pptfx : POINTFIX* [In],prcl : RECTL* [In],pptl : POINTL* [In],imode : UInt32 [In]
-  fun EngPlgBlt(psotrg : SURFOBJ*, psosrc : SURFOBJ*, psomsk : SURFOBJ*, pco : CLIPOBJ*, pxlo : XLATEOBJ*, pca : COLORADJUSTMENT*, pptlbrushorg : POINTL*, pptfx : POINTFIX*, prcl : RECTL*, pptl : POINTL*, imode : UInt32) : LibC::BOOL
-
-  # Params # ppaletteentry : PALETTEENTRY* [In],redgamma : UInt16 [In],greengamma : UInt16 [In],bluegamma : UInt16 [In]
-  fun HT_Get8BPPFormatPalette(ppaletteentry : PALETTEENTRY*, redgamma : UInt16, greengamma : UInt16, bluegamma : UInt16) : Int32
-
-  # Params # ppaletteentry : PALETTEENTRY* [In],use8bppmaskpal : LibC::BOOL [In],cmymask : UInt8 [In],redgamma : UInt16 [In],greengamma : UInt16 [In],bluegamma : UInt16 [In]
-  fun HT_Get8BPPMaskPalette(ppaletteentry : PALETTEENTRY*, use8bppmaskpal : LibC::BOOL, cmymask : UInt8, redgamma : UInt16, greengamma : UInt16, bluegamma : UInt16) : Int32
-
-  # Params # hdev : HDEV [In]
-  fun EngGetPrinterDataFileName(hdev : HDEV) : LibC::LPWSTR
-
-  # Params # hdev : HDEV [In]
-  fun EngGetDriverName(hdev : HDEV) : LibC::LPWSTR
-
-  # Params # pwsz : LibC::LPWSTR [In]
-  fun EngLoadModule(pwsz : LibC::LPWSTR) : LibC::HANDLE
-
-  # Params # h : LibC::HANDLE [In],iname : Int32 [In],itype : Int32 [In],pulsize : UInt32* [In]
-  fun EngFindResource(h : LibC::HANDLE, iname : Int32, itype : Int32, pulsize : UInt32*) : Void*
-
-  # Params # h : LibC::HANDLE [In]
-  fun EngFreeModule(h : LibC::HANDLE) : Void
-
-  # Params # 
-  fun EngCreateSemaphore : HSEMAPHORE
-
-  # Params # hsem : HSEMAPHORE [In]
-  fun EngAcquireSemaphore(hsem : HSEMAPHORE) : Void
-
-  # Params # hsem : HSEMAPHORE [In]
-  fun EngReleaseSemaphore(hsem : HSEMAPHORE) : Void
-
-  # Params # hsem : HSEMAPHORE [In]
-  fun EngDeleteSemaphore(hsem : HSEMAPHORE) : Void
-
-  # Params # unicodestring : LibC::LPWSTR [In],maxbytesinunicodestring : UInt32 [In],bytesinunicodestring : UInt32* [In],multibytestring : PSTR [In],bytesinmultibytestring : UInt32 [In]
-  fun EngMultiByteToUnicodeN(unicodestring : LibC::LPWSTR, maxbytesinunicodestring : UInt32, bytesinunicodestring : UInt32*, multibytestring : PSTR, bytesinmultibytestring : UInt32) : Void
-
-  # Params # multibytestring : PSTR [In],maxbytesinmultibytestring : UInt32 [In],bytesinmultibytestring : UInt32* [In],unicodestring : LibC::LPWSTR [In],bytesinunicodestring : UInt32 [In]
-  fun EngUnicodeToMultiByteN(multibytestring : PSTR, maxbytesinmultibytestring : UInt32, bytesinmultibytestring : UInt32*, unicodestring : LibC::LPWSTR, bytesinunicodestring : UInt32) : Void
-
-  # Params # param0 : ENG_TIME_FIELDS* [In]
-  fun EngQueryLocalTime(param0 : ENG_TIME_FIELDS*) : Void
-
-  # Params # ncodepage : Int32 [In],nfirstchar : Int32 [In],cchars : Int32 [In]
-  fun EngComputeGlyphSet(ncodepage : Int32, nfirstchar : Int32, cchars : Int32) : FD_GLYPHSET*
-
-  # Params # codepage : UInt32 [In],widecharstring : LibC::LPWSTR [In],bytesinwidecharstring : Int32 [In],multibytestring : PSTR [In],bytesinmultibytestring : Int32 [In]
-  fun EngMultiByteToWideChar(codepage : UInt32, widecharstring : LibC::LPWSTR, bytesinwidecharstring : Int32, multibytestring : PSTR, bytesinmultibytestring : Int32) : Int32
-
-  # Params # codepage : UInt32 [In],widecharstring : LibC::LPWSTR [In],bytesinwidecharstring : Int32 [In],multibytestring : PSTR [In],bytesinmultibytestring : Int32 [In]
-  fun EngWideCharToMultiByte(codepage : UInt32, widecharstring : LibC::LPWSTR, bytesinwidecharstring : Int32, multibytestring : PSTR, bytesinmultibytestring : Int32) : Int32
-
-  # Params # oemcodepage : UInt16* [In],ansicodepage : UInt16* [In]
-  fun EngGetCurrentCodePage(oemcodepage : UInt16*, ansicodepage : UInt16*) : Void
-
-  # Params # hdev : HDEV [In],pemfinfo : EMFINFO* [In]
-  fun EngQueryEMFInfo(hdev : HDEV, pemfinfo : EMFINFO*) : LibC::BOOL
-
-  # Params # flags : UInt32 [In],numpatharrayelements : UInt32* [In],nummodeinfoarrayelements : UInt32* [In]
-  fun GetDisplayConfigBufferSizes(flags : UInt32, numpatharrayelements : UInt32*, nummodeinfoarrayelements : UInt32*) : Int32
-
-  # Params # numpatharrayelements : UInt32 [In],patharray : DISPLAYCONFIG_PATH_INFO* [In],nummodeinfoarrayelements : UInt32 [In],modeinfoarray : DISPLAYCONFIG_MODE_INFO* [In],flags : UInt32 [In]
-  fun SetDisplayConfig(numpatharrayelements : UInt32, patharray : DISPLAYCONFIG_PATH_INFO*, nummodeinfoarrayelements : UInt32, modeinfoarray : DISPLAYCONFIG_MODE_INFO*, flags : UInt32) : Int32
-
-  # Params # flags : UInt32 [In],numpatharrayelements : UInt32* [In],patharray : DISPLAYCONFIG_PATH_INFO* [In],nummodeinfoarrayelements : UInt32* [In],modeinfoarray : DISPLAYCONFIG_MODE_INFO* [In],currenttopologyid : DISPLAYCONFIG_TOPOLOGY_ID* [In]
-  fun QueryDisplayConfig(flags : UInt32, numpatharrayelements : UInt32*, patharray : DISPLAYCONFIG_PATH_INFO*, nummodeinfoarrayelements : UInt32*, modeinfoarray : DISPLAYCONFIG_MODE_INFO*, currenttopologyid : DISPLAYCONFIG_TOPOLOGY_ID*) : Int32
-
-  # Params # requestpacket : DISPLAYCONFIG_DEVICE_INFO_HEADER* [In]
-  fun DisplayConfigGetDeviceInfo(requestpacket : DISPLAYCONFIG_DEVICE_INFO_HEADER*) : Int32
-
-  # Params # setpacket : DISPLAYCONFIG_DEVICE_INFO_HEADER* [In]
-  fun DisplayConfigSetDeviceInfo(setpacket : DISPLAYCONFIG_DEVICE_INFO_HEADER*) : Int32
-
-  # Params # pstate : AR_STATE* [In]
-  fun GetAutoRotationState(pstate : AR_STATE*) : LibC::BOOL
-
-  # Params # porientation : ORIENTATION_PREFERENCE* [In]
-  fun GetDisplayAutoRotationPreferences(porientation : ORIENTATION_PREFERENCE*) : LibC::BOOL
-
-  # Params # orientation : ORIENTATION_PREFERENCE [In]
-  fun SetDisplayAutoRotationPreferences(orientation : ORIENTATION_PREFERENCE) : LibC::BOOL
-end
-struct LibWin32::ICloneViewHelper
-  def query_interface(this : ICloneViewHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
   end
-  def add_ref(this : ICloneViewHelper*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : ICloneViewHelper*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_connected_i_ds(this : ICloneViewHelper*, wszadaptorname : LibC::LPWSTR, pulcount : UInt32*, pulid : UInt32*, ulflags : UInt32) : HRESULT
-    @lpVtbl.value.get_connected_i_ds.call(this, wszadaptorname, pulcount, pulid, ulflags)
-  end
-  def get_active_topology(this : ICloneViewHelper*, wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, pulcount : UInt32*, pultargetid : UInt32*) : HRESULT
-    @lpVtbl.value.get_active_topology.call(this, wszadaptorname, ulsourceid, pulcount, pultargetid)
-  end
-  def set_active_topology(this : ICloneViewHelper*, wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, ulcount : UInt32, pultargetid : UInt32*) : HRESULT
-    @lpVtbl.value.set_active_topology.call(this, wszadaptorname, ulsourceid, ulcount, pultargetid)
-  end
-  def commit(this : ICloneViewHelper*, ffinalcall : LibC::BOOL) : HRESULT
-    @lpVtbl.value.commit.call(this, ffinalcall)
-  end
-end
-struct LibWin32::IViewHelper
-  def query_interface(this : IViewHelper*, riid : Guid*, ppvobject : Void**) : HRESULT
-    @lpVtbl.value.query_interface.call(this, riid, ppvobject)
-  end
-  def add_ref(this : IViewHelper*) : UInt32
-    @lpVtbl.value.add_ref.call(this)
-  end
-  def release(this : IViewHelper*) : UInt32
-    @lpVtbl.value.release.call(this)
-  end
-  def get_connected_i_ds(this : IViewHelper*, wszadaptorname : LibC::LPWSTR, pulcount : UInt32*, pulid : UInt32*, ulflags : UInt32) : HRESULT
-    @lpVtbl.value.get_connected_i_ds.call(this, wszadaptorname, pulcount, pulid, ulflags)
-  end
-  def get_active_topology(this : IViewHelper*, wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, pulcount : UInt32*, pultargetid : UInt32*) : HRESULT
-    @lpVtbl.value.get_active_topology.call(this, wszadaptorname, ulsourceid, pulcount, pultargetid)
-  end
-  def set_active_topology(this : IViewHelper*, wszadaptorname : LibC::LPWSTR, ulsourceid : UInt32, ulcount : UInt32, pultargetid : UInt32*) : HRESULT
-    @lpVtbl.value.set_active_topology.call(this, wszadaptorname, ulsourceid, ulcount, pultargetid)
-  end
-  def commit(this : IViewHelper*) : HRESULT
-    @lpVtbl.value.commit.call(this)
-  end
-  def set_configuration(this : IViewHelper*, pistream : IStream, pulstatus : UInt32*) : HRESULT
-    @lpVtbl.value.set_configuration.call(this, pistream, pulstatus)
-  end
-  def get_proceed_on_new_configuration(this : IViewHelper*) : HRESULT
-    @lpVtbl.value.get_proceed_on_new_configuration.call(this)
+
+  @[Link("dxva2")]
+  @[Link("gdi32")]
+  @[Link("user32")]
+  lib C
+    fun GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, pdwNumberOfPhysicalMonitors : UInt32*) : Int32
+
+    fun GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 : Void*, pdwNumberOfPhysicalMonitors : UInt32*) : Win32cr::Foundation::HRESULT
+
+    fun GetPhysicalMonitorsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Int32
+
+    fun GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 : Void*, dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Win32cr::Foundation::HRESULT
+
+    fun DestroyPhysicalMonitor(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+
+    fun DestroyPhysicalMonitors(dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Int32
+
+    fun GetVCPFeatureAndVCPFeatureReply(hMonitor : Win32cr::Foundation::HANDLE, bVCPCode : UInt8, pvct : Win32cr::Devices::Display::MC_VCP_CODE_TYPE*, pdwCurrentValue : UInt32*, pdwMaximumValue : UInt32*) : Int32
+
+    fun SetVCPFeature(hMonitor : Win32cr::Foundation::HANDLE, bVCPCode : UInt8, dwNewValue : UInt32) : Int32
+
+    fun SaveCurrentSettings(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+
+    fun GetCapabilitiesStringLength(hMonitor : Win32cr::Foundation::HANDLE, pdwCapabilitiesStringLengthInCharacters : UInt32*) : Int32
+
+    fun CapabilitiesRequestAndCapabilitiesReply(hMonitor : Win32cr::Foundation::HANDLE, pszASCIICapabilitiesString : UInt8*, dwCapabilitiesStringLengthInCharacters : UInt32) : Int32
+
+    fun GetTimingReport(hMonitor : Win32cr::Foundation::HANDLE, pmtrMonitorTimingReport : Win32cr::Devices::Display::MC_TIMING_REPORT*) : Int32
+
+    fun GetMonitorCapabilities(hMonitor : Win32cr::Foundation::HANDLE, pdwMonitorCapabilities : UInt32*, pdwSupportedColorTemperatures : UInt32*) : Int32
+
+    fun SaveCurrentMonitorSettings(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+
+    fun GetMonitorTechnologyType(hMonitor : Win32cr::Foundation::HANDLE, pdtyDisplayTechnologyType : Win32cr::Devices::Display::MC_DISPLAY_TECHNOLOGY_TYPE*) : Int32
+
+    fun GetMonitorBrightness(hMonitor : Win32cr::Foundation::HANDLE, pdwMinimumBrightness : UInt32*, pdwCurrentBrightness : UInt32*, pdwMaximumBrightness : UInt32*) : Int32
+
+    fun GetMonitorContrast(hMonitor : Win32cr::Foundation::HANDLE, pdwMinimumContrast : UInt32*, pdwCurrentContrast : UInt32*, pdwMaximumContrast : UInt32*) : Int32
+
+    fun GetMonitorColorTemperature(hMonitor : Win32cr::Foundation::HANDLE, pctCurrentColorTemperature : Win32cr::Devices::Display::MC_COLOR_TEMPERATURE*) : Int32
+
+    fun GetMonitorRedGreenOrBlueDrive(hMonitor : Win32cr::Foundation::HANDLE, dtDriveType : Win32cr::Devices::Display::MC_DRIVE_TYPE, pdwMinimumDrive : UInt32*, pdwCurrentDrive : UInt32*, pdwMaximumDrive : UInt32*) : Int32
+
+    fun GetMonitorRedGreenOrBlueGain(hMonitor : Win32cr::Foundation::HANDLE, gtGainType : Win32cr::Devices::Display::MC_GAIN_TYPE, pdwMinimumGain : UInt32*, pdwCurrentGain : UInt32*, pdwMaximumGain : UInt32*) : Int32
+
+    fun SetMonitorBrightness(hMonitor : Win32cr::Foundation::HANDLE, dwNewBrightness : UInt32) : Int32
+
+    fun SetMonitorContrast(hMonitor : Win32cr::Foundation::HANDLE, dwNewContrast : UInt32) : Int32
+
+    fun SetMonitorColorTemperature(hMonitor : Win32cr::Foundation::HANDLE, ctCurrentColorTemperature : Win32cr::Devices::Display::MC_COLOR_TEMPERATURE) : Int32
+
+    fun SetMonitorRedGreenOrBlueDrive(hMonitor : Win32cr::Foundation::HANDLE, dtDriveType : Win32cr::Devices::Display::MC_DRIVE_TYPE, dwNewDrive : UInt32) : Int32
+
+    fun SetMonitorRedGreenOrBlueGain(hMonitor : Win32cr::Foundation::HANDLE, gtGainType : Win32cr::Devices::Display::MC_GAIN_TYPE, dwNewGain : UInt32) : Int32
+
+    fun DegaussMonitor(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+
+    fun GetMonitorDisplayAreaSize(hMonitor : Win32cr::Foundation::HANDLE, stSizeType : Win32cr::Devices::Display::MC_SIZE_TYPE, pdwMinimumWidthOrHeight : UInt32*, pdwCurrentWidthOrHeight : UInt32*, pdwMaximumWidthOrHeight : UInt32*) : Int32
+
+    fun GetMonitorDisplayAreaPosition(hMonitor : Win32cr::Foundation::HANDLE, ptPositionType : Win32cr::Devices::Display::MC_POSITION_TYPE, pdwMinimumPosition : UInt32*, pdwCurrentPosition : UInt32*, pdwMaximumPosition : UInt32*) : Int32
+
+    fun SetMonitorDisplayAreaSize(hMonitor : Win32cr::Foundation::HANDLE, stSizeType : Win32cr::Devices::Display::MC_SIZE_TYPE, dwNewDisplayAreaWidthOrHeight : UInt32) : Int32
+
+    fun SetMonitorDisplayAreaPosition(hMonitor : Win32cr::Foundation::HANDLE, ptPositionType : Win32cr::Devices::Display::MC_POSITION_TYPE, dwNewPosition : UInt32) : Int32
+
+    fun RestoreMonitorFactoryColorDefaults(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+
+    fun RestoreMonitorFactoryDefaults(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+
+    fun BRUSHOBJ_pvAllocRbrush(pbo : Win32cr::Devices::Display::BRUSHOBJ*, cj : UInt32) : Void*
+
+    fun BRUSHOBJ_pvGetRbrush(pbo : Win32cr::Devices::Display::BRUSHOBJ*) : Void*
+
+    fun BRUSHOBJ_ulGetBrushColor(pbo : Win32cr::Devices::Display::BRUSHOBJ*) : UInt32
+
+    fun BRUSHOBJ_hGetColorTransform(pbo : Win32cr::Devices::Display::BRUSHOBJ*) : Win32cr::Foundation::HANDLE
+
+    fun CLIPOBJ_cEnumStart(pco : Win32cr::Devices::Display::CLIPOBJ*, bAll : Win32cr::Foundation::BOOL, iType : UInt32, iDirection : UInt32, cLimit : UInt32) : UInt32
+
+    fun CLIPOBJ_bEnum(pco : Win32cr::Devices::Display::CLIPOBJ*, cj : UInt32, pul : UInt32*) : Win32cr::Foundation::BOOL
+
+    fun CLIPOBJ_ppoGetPath(pco : Win32cr::Devices::Display::CLIPOBJ*) : Win32cr::Devices::Display::PATHOBJ*
+
+    fun FONTOBJ_cGetAllGlyphHandles(pfo : Win32cr::Devices::Display::FONTOBJ*, phg : UInt32*) : UInt32
+
+    fun FONTOBJ_vGetInfo(pfo : Win32cr::Devices::Display::FONTOBJ*, cjSize : UInt32, pfi : Win32cr::Devices::Display::FONTINFO*) : Void
+
+    fun FONTOBJ_cGetGlyphs(pfo : Win32cr::Devices::Display::FONTOBJ*, iMode : UInt32, cGlyph : UInt32, phg : UInt32*, ppvGlyph : Void**) : UInt32
+
+    fun FONTOBJ_pxoGetXform(pfo : Win32cr::Devices::Display::FONTOBJ*) : Win32cr::Devices::Display::XFORMOBJ*
+
+    fun FONTOBJ_pifi(pfo : Win32cr::Devices::Display::FONTOBJ*) : Win32cr::Devices::Display::IFIMETRICS*
+
+    fun FONTOBJ_pfdg(pfo : Win32cr::Devices::Display::FONTOBJ*) : Win32cr::Devices::Display::FD_GLYPHSET*
+
+    fun FONTOBJ_pvTrueTypeFontFile(pfo : Win32cr::Devices::Display::FONTOBJ*, pcjFile : UInt32*) : Void*
+
+    fun FONTOBJ_pQueryGlyphAttrs(pfo : Win32cr::Devices::Display::FONTOBJ*, iMode : UInt32) : Win32cr::Devices::Display::FD_GLYPHATTR*
+
+    fun PATHOBJ_vEnumStart(ppo : Win32cr::Devices::Display::PATHOBJ*) : Void
+
+    fun PATHOBJ_bEnum(ppo : Win32cr::Devices::Display::PATHOBJ*, ppd : Win32cr::Devices::Display::PATHDATA*) : Win32cr::Foundation::BOOL
+
+    fun PATHOBJ_vEnumStartClipLines(ppo : Win32cr::Devices::Display::PATHOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pso : Win32cr::Devices::Display::SURFOBJ*, pla : Win32cr::Devices::Display::LINEATTRS*) : Void
+
+    fun PATHOBJ_bEnumClipLines(ppo : Win32cr::Devices::Display::PATHOBJ*, cb : UInt32, pcl : Win32cr::Devices::Display::CLIPLINE*) : Win32cr::Foundation::BOOL
+
+    fun PATHOBJ_vGetBounds(ppo : Win32cr::Devices::Display::PATHOBJ*, prectfx : Win32cr::Devices::Display::RECTFX*) : Void
+
+    fun STROBJ_vEnumStart(pstro : Win32cr::Devices::Display::STROBJ*) : Void
+
+    fun STROBJ_bEnum(pstro : Win32cr::Devices::Display::STROBJ*, pc : UInt32*, ppgpos : Win32cr::Devices::Display::GLYPHPOS**) : Win32cr::Foundation::BOOL
+
+    fun STROBJ_bEnumPositionsOnly(pstro : Win32cr::Devices::Display::STROBJ*, pc : UInt32*, ppgpos : Win32cr::Devices::Display::GLYPHPOS**) : Win32cr::Foundation::BOOL
+
+    fun STROBJ_dwGetCodePage(pstro : Win32cr::Devices::Display::STROBJ*) : UInt32
+
+    fun STROBJ_bGetAdvanceWidths(pso : Win32cr::Devices::Display::STROBJ*, iFirst : UInt32, c : UInt32, pptqD : Win32cr::Devices::Display::POINTQF*) : Win32cr::Foundation::BOOL
+
+    fun XFORMOBJ_iGetXform(pxo : Win32cr::Devices::Display::XFORMOBJ*, pxform : Win32cr::Devices::Display::XFORML*) : UInt32
+
+    fun XFORMOBJ_bApplyXform(pxo : Win32cr::Devices::Display::XFORMOBJ*, iMode : UInt32, cPoints : UInt32, pvIn : Void*, pvOut : Void*) : Win32cr::Foundation::BOOL
+
+    fun XLATEOBJ_iXlate(pxlo : Win32cr::Devices::Display::XLATEOBJ*, iColor : UInt32) : UInt32
+
+    fun XLATEOBJ_piVector(pxlo : Win32cr::Devices::Display::XLATEOBJ*) : UInt32*
+
+    fun XLATEOBJ_cGetPalette(pxlo : Win32cr::Devices::Display::XLATEOBJ*, iPal : UInt32, cPal : UInt32, pPal : UInt32*) : UInt32
+
+    fun XLATEOBJ_hGetColorTransform(pxlo : Win32cr::Devices::Display::XLATEOBJ*) : Win32cr::Foundation::HANDLE
+
+    fun EngCreateBitmap(sizl : Win32cr::Foundation::SIZE, lWidth : Int32, iFormat : UInt32, fl : UInt32, pvBits : Void*) : Win32cr::Graphics::Gdi::HBITMAP
+
+    fun EngCreateDeviceSurface(dhsurf : Win32cr::Devices::Display::DHSURF, sizl : Win32cr::Foundation::SIZE, iFormatCompat : UInt32) : Win32cr::Devices::Display::HSURF
+
+    fun EngCreateDeviceBitmap(dhsurf : Win32cr::Devices::Display::DHSURF, sizl : Win32cr::Foundation::SIZE, iFormatCompat : UInt32) : Win32cr::Graphics::Gdi::HBITMAP
+
+    fun EngDeleteSurface(hsurf : Win32cr::Devices::Display::HSURF) : Win32cr::Foundation::BOOL
+
+    fun EngLockSurface(hsurf : Win32cr::Devices::Display::HSURF) : Win32cr::Devices::Display::SURFOBJ*
+
+    fun EngUnlockSurface(pso : Win32cr::Devices::Display::SURFOBJ*) : Void
+
+    fun EngEraseSurface(pso : Win32cr::Devices::Display::SURFOBJ*, prcl : Win32cr::Foundation::RECTL*, iColor : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EngAssociateSurface(hsurf : Win32cr::Devices::Display::HSURF, hdev : Win32cr::Devices::Display::HDEV, flHooks : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EngMarkBandingSurface(hsurf : Win32cr::Devices::Display::HSURF) : Win32cr::Foundation::BOOL
+
+    fun EngCheckAbort(pso : Win32cr::Devices::Display::SURFOBJ*) : Win32cr::Foundation::BOOL
+
+    fun EngDeletePath(ppo : Win32cr::Devices::Display::PATHOBJ*) : Void
+
+    fun EngCreatePalette(iMode : UInt32, cColors : UInt32, pulColors : UInt32*, flRed : UInt32, flGreen : UInt32, flBlue : UInt32) : Win32cr::Graphics::Gdi::HPALETTE
+
+    fun EngDeletePalette(hpal : Win32cr::Graphics::Gdi::HPALETTE) : Win32cr::Foundation::BOOL
+
+    fun EngCreateClip : Win32cr::Devices::Display::CLIPOBJ*
+
+    fun EngDeleteClip(pco : Win32cr::Devices::Display::CLIPOBJ*) : Void
+
+    fun EngBitBlt(psoTrg : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, psoMask : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, prclTrg : Win32cr::Foundation::RECTL*, pptlSrc : Win32cr::Foundation::POINTL*, pptlMask : Win32cr::Foundation::POINTL*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrush : Win32cr::Foundation::POINTL*, rop4 : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EngLineTo(pso : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, prclBounds : Win32cr::Foundation::RECTL*, mix : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EngStretchBlt(psoDest : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, psoMask : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, pca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*, pptlHTOrg : Win32cr::Foundation::POINTL*, prclDest : Win32cr::Foundation::RECTL*, prclSrc : Win32cr::Foundation::RECTL*, pptlMask : Win32cr::Foundation::POINTL*, iMode : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EngStretchBltROP(psoDest : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, psoMask : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, pca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*, pptlHTOrg : Win32cr::Foundation::POINTL*, prclDest : Win32cr::Foundation::RECTL*, prclSrc : Win32cr::Foundation::RECTL*, pptlMask : Win32cr::Foundation::POINTL*, iMode : UInt32, pbo : Win32cr::Devices::Display::BRUSHOBJ*, rop4 : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EngAlphaBlend(psoDest : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, prclDest : Win32cr::Foundation::RECTL*, prclSrc : Win32cr::Foundation::RECTL*, pBlendObj : Win32cr::Devices::Display::BLENDOBJ*) : Win32cr::Foundation::BOOL
+
+    fun EngGradientFill(psoDest : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, pVertex : Win32cr::Graphics::Gdi::TRIVERTEX*, nVertex : UInt32, pMesh : Void*, nMesh : UInt32, prclExtents : Win32cr::Foundation::RECTL*, pptlDitherOrg : Win32cr::Foundation::POINTL*, ulMode : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EngTransparentBlt(psoDst : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, prclDst : Win32cr::Foundation::RECTL*, prclSrc : Win32cr::Foundation::RECTL*, trans_color : UInt32, bCalledFromBitBlt : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EngTextOut(pso : Win32cr::Devices::Display::SURFOBJ*, pstro : Win32cr::Devices::Display::STROBJ*, pfo : Win32cr::Devices::Display::FONTOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, prclExtra : Win32cr::Foundation::RECTL*, prclOpaque : Win32cr::Foundation::RECTL*, pboFore : Win32cr::Devices::Display::BRUSHOBJ*, pboOpaque : Win32cr::Devices::Display::BRUSHOBJ*, pptlOrg : Win32cr::Foundation::POINTL*, mix : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EngStrokePath(pso : Win32cr::Devices::Display::SURFOBJ*, ppo : Win32cr::Devices::Display::PATHOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxo : Win32cr::Devices::Display::XFORMOBJ*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrushOrg : Win32cr::Foundation::POINTL*, plineattrs : Win32cr::Devices::Display::LINEATTRS*, mix : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EngFillPath(pso : Win32cr::Devices::Display::SURFOBJ*, ppo : Win32cr::Devices::Display::PATHOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrushOrg : Win32cr::Foundation::POINTL*, mix : UInt32, flOptions : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EngStrokeAndFillPath(pso : Win32cr::Devices::Display::SURFOBJ*, ppo : Win32cr::Devices::Display::PATHOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxo : Win32cr::Devices::Display::XFORMOBJ*, pboStroke : Win32cr::Devices::Display::BRUSHOBJ*, plineattrs : Win32cr::Devices::Display::LINEATTRS*, pboFill : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrushOrg : Win32cr::Foundation::POINTL*, mixFill : UInt32, flOptions : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EngPaint(pso : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrushOrg : Win32cr::Foundation::POINTL*, mix : UInt32) : Win32cr::Foundation::BOOL
+
+    fun EngCopyBits(psoDest : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, prclDest : Win32cr::Foundation::RECTL*, pptlSrc : Win32cr::Foundation::POINTL*) : Win32cr::Foundation::BOOL
+
+    fun EngPlgBlt(psoTrg : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, psoMsk : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, pca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*, pptlBrushOrg : Win32cr::Foundation::POINTL*, pptfx : Win32cr::Devices::Display::POINTFIX*, prcl : Win32cr::Foundation::RECTL*, pptl : Win32cr::Foundation::POINTL*, iMode : UInt32) : Win32cr::Foundation::BOOL
+
+    fun HT_Get8BPPFormatPalette(pPaletteEntry : Win32cr::Graphics::Gdi::PALETTEENTRY*, red_gamma : UInt16, green_gamma : UInt16, blue_gamma : UInt16) : Int32
+
+    fun HT_Get8BPPMaskPalette(pPaletteEntry : Win32cr::Graphics::Gdi::PALETTEENTRY*, use8_bpp_mask_pal : Win32cr::Foundation::BOOL, cmy_mask : UInt8, red_gamma : UInt16, green_gamma : UInt16, blue_gamma : UInt16) : Int32
+
+    fun EngGetPrinterDataFileName(hdev : Win32cr::Devices::Display::HDEV) : Win32cr::Foundation::PWSTR
+
+    fun EngGetDriverName(hdev : Win32cr::Devices::Display::HDEV) : Win32cr::Foundation::PWSTR
+
+    fun EngLoadModule(pwsz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+
+    fun EngFindResource(h : Win32cr::Foundation::HANDLE, iName : Int32, iType : Int32, pulSize : UInt32*) : Void*
+
+    fun EngFreeModule(h : Win32cr::Foundation::HANDLE) : Void
+
+    fun EngCreateSemaphore : Win32cr::Devices::Display::HSEMAPHORE
+
+    fun EngAcquireSemaphore(hsem : Win32cr::Devices::Display::HSEMAPHORE) : Void
+
+    fun EngReleaseSemaphore(hsem : Win32cr::Devices::Display::HSEMAPHORE) : Void
+
+    fun EngDeleteSemaphore(hsem : Win32cr::Devices::Display::HSEMAPHORE) : Void
+
+    fun EngMultiByteToUnicodeN(unicode_string : Win32cr::Foundation::PWSTR, max_bytes_in_unicode_string : UInt32, bytes_in_unicode_string : UInt32*, multi_byte_string : Win32cr::Foundation::PSTR, bytes_in_multi_byte_string : UInt32) : Void
+
+    fun EngUnicodeToMultiByteN(multi_byte_string : Win32cr::Foundation::PSTR, max_bytes_in_multi_byte_string : UInt32, bytes_in_multi_byte_string : UInt32*, unicode_string : Win32cr::Foundation::PWSTR, bytes_in_unicode_string : UInt32) : Void
+
+    fun EngQueryLocalTime(param0 : Win32cr::Devices::Display::ENG_TIME_FIELDS*) : Void
+
+    fun EngComputeGlyphSet(nCodePage : Int32, nFirstChar : Int32, cChars : Int32) : Win32cr::Devices::Display::FD_GLYPHSET*
+
+    fun EngMultiByteToWideChar(code_page : UInt32, wide_char_string : Win32cr::Foundation::PWSTR, bytes_in_wide_char_string : Int32, multi_byte_string : Win32cr::Foundation::PSTR, bytes_in_multi_byte_string : Int32) : Int32
+
+    fun EngWideCharToMultiByte(code_page : UInt32, wide_char_string : Win32cr::Foundation::PWSTR, bytes_in_wide_char_string : Int32, multi_byte_string : Win32cr::Foundation::PSTR, bytes_in_multi_byte_string : Int32) : Int32
+
+    fun EngGetCurrentCodePage(oem_code_page : UInt16*, ansi_code_page : UInt16*) : Void
+
+    fun EngQueryEMFInfo(hdev : Win32cr::Devices::Display::HDEV, pEMFInfo : Win32cr::Devices::Display::EMFINFO*) : Win32cr::Foundation::BOOL
+
+    fun GetDisplayConfigBufferSizes(flags : UInt32, numPathArrayElements : UInt32*, numModeInfoArrayElements : UInt32*) : Int32
+
+    fun SetDisplayConfig(numPathArrayElements : UInt32, pathArray : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_INFO*, numModeInfoArrayElements : UInt32, modeInfoArray : Win32cr::Devices::Display::DISPLAYCONFIG_MODE_INFO*, flags : UInt32) : Int32
+
+    fun QueryDisplayConfig(flags : UInt32, numPathArrayElements : UInt32*, pathArray : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_INFO*, numModeInfoArrayElements : UInt32*, modeInfoArray : Win32cr::Devices::Display::DISPLAYCONFIG_MODE_INFO*, currentTopologyId : Win32cr::Devices::Display::DISPLAYCONFIG_TOPOLOGY_ID*) : Int32
+
+    fun DisplayConfigGetDeviceInfo(requestPacket : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER*) : Int32
+
+    fun DisplayConfigSetDeviceInfo(setPacket : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER*) : Int32
+
+    fun GetAutoRotationState(pState : Win32cr::Devices::Display::AR_STATE*) : Win32cr::Foundation::BOOL
+
+    fun GetDisplayAutoRotationPreferences(pOrientation : Win32cr::Devices::Display::ORIENTATION_PREFERENCE*) : Win32cr::Foundation::BOOL
+
+    fun SetDisplayAutoRotationPreferences(orientation : Win32cr::Devices::Display::ORIENTATION_PREFERENCE) : Win32cr::Foundation::BOOL
+
   end
 end

@@ -1,16 +1,11 @@
-require "../foundation.cr"
-require "../storage/filesystem.cr"
-require "../security.cr"
-require "../storage/vhd.cr"
+require "./../foundation.cr"
+require "./../storage/file_system.cr"
+require "./../security.cr"
+require "./../storage/vhd.cr"
 
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link("delayimp")]
-{% end %}
-@[Link("user32")]
-{% if compare_versions(Crystal::VERSION, "1.8.2") <= 0 %}
-@[Link(ldflags: "/IGNORE:4199")]
-{% end %}
-lib LibWin32
+module Win32cr::System::Ioctl
+  alias PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK = Proc(Win32cr::System::Ioctl::IO_IRP_EXT_TRACK_OFFSET_HEADER*, Win32cr::System::Ioctl::IO_IRP_EXT_TRACK_OFFSET_HEADER*, Int64, Void)*
+
   IOCTL_STORAGE_BASE = 45_u32
   IOCTL_SCMBUS_BASE = 89_u32
   IOCTL_DISK_BASE = 7_u32
@@ -35,14 +30,14 @@ lib LibWin32
   GUID_DEVINTERFACE_UNIFIED_ACCESS_RPMB = "27447c21-bcc3-4d07-a05b-a3395bb4eee7"
   GUID_DEVICEDUMP_STORAGE_DEVICE = "d8e2592f-1aab-4d56-a746-1f7585df40f4"
   GUID_DEVICEDUMP_DRIVER_STORAGE_PORT = "da82441d-7142-4bc1-b844-0807c5a4b67f"
-  DEVPKEY_Storage_Portable = PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 2_u32)
-  DEVPKEY_Storage_Removable_Media = PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 3_u32)
-  DEVPKEY_Storage_System_Critical = PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 4_u32)
-  DEVPKEY_Storage_Disk_Number = PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 5_u32)
-  DEVPKEY_Storage_Partition_Number = PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 6_u32)
-  DEVPKEY_Storage_Mbr_Type = PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 7_u32)
-  DEVPKEY_Storage_Gpt_Type = PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 8_u32)
-  DEVPKEY_Storage_Gpt_Name = PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 9_u32)
+  DEVPKEY_Storage_Portable = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 2_u32)
+  DEVPKEY_Storage_Removable_Media = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 3_u32)
+  DEVPKEY_Storage_System_Critical = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 4_u32)
+  DEVPKEY_Storage_Disk_Number = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 5_u32)
+  DEVPKEY_Storage_Partition_Number = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 6_u32)
+  DEVPKEY_Storage_Mbr_Type = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 7_u32)
+  DEVPKEY_Storage_Gpt_Type = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 8_u32)
+  DEVPKEY_Storage_Gpt_Name = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4d1ebee8_u32, 0x803_u16, 0x4774_u16, StaticArray[0x98_u8, 0x42_u8, 0xb7_u8, 0x7d_u8, 0xb5_u8, 0x2_u8, 0x65_u8, 0xe9_u8]), 9_u32)
   IOCTL_STORAGE_CHECK_VERIFY = 2967552_u32
   IOCTL_STORAGE_CHECK_VERIFY2 = 2951168_u32
   IOCTL_STORAGE_MEDIA_REMOVAL = 2967556_u32
@@ -183,6 +178,8 @@ lib LibWin32
   DEVICEDUMP_STRUCTURE_VERSION_V1 = 1_u32
   DEVICEDUMP_MAX_IDSTRING = 32_u32
   MAX_FW_BUCKET_ID_LENGTH = 132_u32
+  STORAGE_CRASH_TELEMETRY_REGKEY = "\\Registry\\Machine\\System\\CurrentControlSet\\Control\\CrashControl\\StorageTelemetry"
+  STORAGE_DEVICE_TELEMETRY_REGKEY = "\\Registry\\Machine\\System\\CurrentControlSet\\Control\\Storage\\StorageTelemetry"
   DDUMP_FLAG_DATA_READ_FROM_DEVICE = 1_u32
   FW_ISSUEID_NO_ISSUE = 0_u32
   FW_ISSUEID_UNKNOWN = 4294967295_u32
@@ -190,6 +187,8 @@ lib LibWin32
   TC_PUBLIC_DEVICEDUMP_CONTENT_GPLOG = 2_u32
   TC_PUBLIC_DEVICEDUMP_CONTENT_GPLOG_MAX = 16_u32
   TC_DEVICEDUMP_SUBSECTION_DESC_LENGTH = 16_u32
+  TC_PUBLIC_DATA_TYPE_ATAGP = "ATAGPLogPages"
+  TC_PUBLIC_DATA_TYPE_ATASMART = "ATASMARTPages"
   CDB_SIZE = 16_u32
   TELEMETRY_COMMAND_SIZE = 16_u32
   DEVICEDUMP_CAP_PRIVATE_SECTION = 1_u32
@@ -1021,4259 +1020,4926 @@ lib LibWin32
   EFS_TRACKED_OFFSET_HEADER_FLAG = 1_u32
   SPACES_TRACKED_OFFSET_HEADER_FLAG = 2_u32
 
-  alias PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK = Proc(IO_IRP_EXT_TRACK_OFFSET_HEADER*, IO_IRP_EXT_TRACK_OFFSET_HEADER*, Int64, Void)
-
-
+  @[Flags]
   enum GPT_ATTRIBUTES : UInt64
-    GPT_ATTRIBUTE_PLATFORM_REQUIRED = 1
-    GPT_BASIC_DATA_ATTRIBUTE_NO_DRIVE_LETTER = 9223372036854775808
-    GPT_BASIC_DATA_ATTRIBUTE_HIDDEN = 4611686018427387904
-    GPT_BASIC_DATA_ATTRIBUTE_SHADOW_COPY = 2305843009213693952
-    GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY = 1152921504606846976
+    GPT_ATTRIBUTE_PLATFORM_REQUIRED = 1_u64
+    GPT_BASIC_DATA_ATTRIBUTE_NO_DRIVE_LETTER = 9223372036854775808_u64
+    GPT_BASIC_DATA_ATTRIBUTE_HIDDEN = 4611686018427387904_u64
+    GPT_BASIC_DATA_ATTRIBUTE_SHADOW_COPY = 2305843009213693952_u64
+    GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY = 1152921504606846976_u64
   end
-
+  @[Flags]
   enum USN_DELETE_FLAGS : UInt32
-    USN_DELETE_FLAG_DELETE = 1
-    USN_DELETE_FLAG_NOTIFY = 2
+    USN_DELETE_FLAG_DELETE = 1_u32
+    USN_DELETE_FLAG_NOTIFY = 2_u32
   end
-
+  @[Flags]
   enum CHANGER_FEATURES : UInt32
-    CHANGER_BAR_CODE_SCANNER_INSTALLED = 1
-    CHANGER_CARTRIDGE_MAGAZINE = 256
-    CHANGER_CLEANER_ACCESS_NOT_VALID = 262144
-    CHANGER_CLEANER_SLOT = 64
-    CHANGER_CLOSE_IEPORT = 4
-    CHANGER_DEVICE_REINITIALIZE_CAPABLE = 134217728
-    CHANGER_DRIVE_CLEANING_REQUIRED = 65536
-    CHANGER_DRIVE_EMPTY_ON_DOOR_ACCESS = 536870912
-    CHANGER_EXCHANGE_MEDIA = 32
-    CHANGER_INIT_ELEM_STAT_WITH_RANGE = 2
-    CHANGER_KEYPAD_ENABLE_DISABLE = 268435456
-    CHANGER_LOCK_UNLOCK = 128
-    CHANGER_MEDIUM_FLIP = 512
-    CHANGER_OPEN_IEPORT = 8
-    CHANGER_POSITION_TO_ELEMENT = 1024
-    CHANGER_PREDISMOUNT_EJECT_REQUIRED = 131072
-    CHANGER_PREMOUNT_EJECT_REQUIRED = 524288
-    CHANGER_REPORT_IEPORT_STATE = 2048
-    CHANGER_SERIAL_NUMBER_VALID = 67108864
-    CHANGER_STATUS_NON_VOLATILE = 16
-    CHANGER_STORAGE_DRIVE = 4096
-    CHANGER_STORAGE_IEPORT = 8192
-    CHANGER_STORAGE_SLOT = 16384
-    CHANGER_STORAGE_TRANSPORT = 32768
-    CHANGER_VOLUME_ASSERT = 4194304
-    CHANGER_VOLUME_IDENTIFICATION = 1048576
-    CHANGER_VOLUME_REPLACE = 8388608
-    CHANGER_VOLUME_SEARCH = 2097152
-    CHANGER_VOLUME_UNDEFINE = 16777216
+    CHANGER_BAR_CODE_SCANNER_INSTALLED = 1_u32
+    CHANGER_CARTRIDGE_MAGAZINE = 256_u32
+    CHANGER_CLEANER_ACCESS_NOT_VALID = 262144_u32
+    CHANGER_CLEANER_SLOT = 64_u32
+    CHANGER_CLOSE_IEPORT = 4_u32
+    CHANGER_DEVICE_REINITIALIZE_CAPABLE = 134217728_u32
+    CHANGER_DRIVE_CLEANING_REQUIRED = 65536_u32
+    CHANGER_DRIVE_EMPTY_ON_DOOR_ACCESS = 536870912_u32
+    CHANGER_EXCHANGE_MEDIA = 32_u32
+    CHANGER_INIT_ELEM_STAT_WITH_RANGE = 2_u32
+    CHANGER_KEYPAD_ENABLE_DISABLE = 268435456_u32
+    CHANGER_LOCK_UNLOCK = 128_u32
+    CHANGER_MEDIUM_FLIP = 512_u32
+    CHANGER_OPEN_IEPORT = 8_u32
+    CHANGER_POSITION_TO_ELEMENT = 1024_u32
+    CHANGER_PREDISMOUNT_EJECT_REQUIRED = 131072_u32
+    CHANGER_PREMOUNT_EJECT_REQUIRED = 524288_u32
+    CHANGER_REPORT_IEPORT_STATE = 2048_u32
+    CHANGER_SERIAL_NUMBER_VALID = 67108864_u32
+    CHANGER_STATUS_NON_VOLATILE = 16_u32
+    CHANGER_STORAGE_DRIVE = 4096_u32
+    CHANGER_STORAGE_IEPORT = 8192_u32
+    CHANGER_STORAGE_SLOT = 16384_u32
+    CHANGER_STORAGE_TRANSPORT = 32768_u32
+    CHANGER_VOLUME_ASSERT = 4194304_u32
+    CHANGER_VOLUME_IDENTIFICATION = 1048576_u32
+    CHANGER_VOLUME_REPLACE = 8388608_u32
+    CHANGER_VOLUME_SEARCH = 2097152_u32
+    CHANGER_VOLUME_UNDEFINE = 16777216_u32
   end
-
+  @[Flags]
   enum TXFS_RMF_LAGS : UInt32
-    TXFS_RM_FLAG_LOGGING_MODE = 1
-    TXFS_RM_FLAG_RENAME_RM = 2
-    TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MAX = 4
-    TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MIN = 8
-    TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_NUM_CONTAINERS = 16
-    TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_PERCENT = 32
-    TXFS_RM_FLAG_LOG_AUTO_SHRINK_PERCENTAGE = 64
-    TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MAX = 128
-    TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MIN = 256
-    TXFS_RM_FLAG_GROW_LOG = 1024
-    TXFS_RM_FLAG_SHRINK_LOG = 2048
-    TXFS_RM_FLAG_ENFORCE_MINIMUM_SIZE = 4096
-    TXFS_RM_FLAG_PRESERVE_CHANGES = 8192
-    TXFS_RM_FLAG_RESET_RM_AT_NEXT_START = 16384
-    TXFS_RM_FLAG_DO_NOT_RESET_RM_AT_NEXT_START = 32768
-    TXFS_RM_FLAG_PREFER_CONSISTENCY = 65536
-    TXFS_RM_FLAG_PREFER_AVAILABILITY = 131072
+    TXFS_RM_FLAG_LOGGING_MODE = 1_u32
+    TXFS_RM_FLAG_RENAME_RM = 2_u32
+    TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MAX = 4_u32
+    TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MIN = 8_u32
+    TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_NUM_CONTAINERS = 16_u32
+    TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_PERCENT = 32_u32
+    TXFS_RM_FLAG_LOG_AUTO_SHRINK_PERCENTAGE = 64_u32
+    TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MAX = 128_u32
+    TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MIN = 256_u32
+    TXFS_RM_FLAG_GROW_LOG = 1024_u32
+    TXFS_RM_FLAG_SHRINK_LOG = 2048_u32
+    TXFS_RM_FLAG_ENFORCE_MINIMUM_SIZE = 4096_u32
+    TXFS_RM_FLAG_PRESERVE_CHANGES = 8192_u32
+    TXFS_RM_FLAG_RESET_RM_AT_NEXT_START = 16384_u32
+    TXFS_RM_FLAG_DO_NOT_RESET_RM_AT_NEXT_START = 32768_u32
+    TXFS_RM_FLAG_PREFER_CONSISTENCY = 65536_u32
+    TXFS_RM_FLAG_PREFER_AVAILABILITY = 131072_u32
   end
-
   enum FILESYSTEM_STATISTICS_TYPE : UInt16
-    FILESYSTEM_STATISTICS_TYPE_EXFAT = 3
-    FILESYSTEM_STATISTICS_TYPE_FAT = 2
-    FILESYSTEM_STATISTICS_TYPE_NTFS = 1
+    FILESYSTEM_STATISTICS_TYPE_EXFAT = 3_u16
+    FILESYSTEM_STATISTICS_TYPE_FAT = 2_u16
+    FILESYSTEM_STATISTICS_TYPE_NTFS = 1_u16
   end
-
   enum USN_SOURCE_INFO_ID : UInt32
-    USN_SOURCE_AUXILIARY_DATA = 2
-    USN_SOURCE_DATA_MANAGEMENT = 1
-    USN_SOURCE_REPLICATION_MANAGEMENT = 4
-    USN_SOURCE_CLIENT_REPLICATION_MANAGEMENT = 8
+    USN_SOURCE_AUXILIARY_DATA = 2_u32
+    USN_SOURCE_DATA_MANAGEMENT = 1_u32
+    USN_SOURCE_REPLICATION_MANAGEMENT = 4_u32
+    USN_SOURCE_CLIENT_REPLICATION_MANAGEMENT = 8_u32
   end
-
+  @[Flags]
   enum FILE_STORAGE_TIER_FLAGS : UInt32
-    FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY = 131072
+    FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY = 131072_u32
   end
-
+  @[Flags]
   enum CHANGER_ELEMENT_STATUS_FLAGS : UInt32
-    ELEMENT_STATUS_ACCESS = 8
-    ELEMENT_STATUS_AVOLTAG = 536870912
-    ELEMENT_STATUS_EXCEPT = 4
-    ELEMENT_STATUS_EXENAB = 16
-    ELEMENT_STATUS_FULL = 1
-    ELEMENT_STATUS_ID_VALID = 8192
-    ELEMENT_STATUS_IMPEXP = 2
-    ELEMENT_STATUS_INENAB = 32
-    ELEMENT_STATUS_INVERT = 4194304
-    ELEMENT_STATUS_LUN_VALID = 4096
-    ELEMENT_STATUS_NOT_BUS = 32768
-    ELEMENT_STATUS_PVOLTAG = 268435456
-    ELEMENT_STATUS_SVALID = 8388608
-    ELEMENT_STATUS_PRODUCT_DATA = 64
+    ELEMENT_STATUS_ACCESS = 8_u32
+    ELEMENT_STATUS_AVOLTAG = 536870912_u32
+    ELEMENT_STATUS_EXCEPT = 4_u32
+    ELEMENT_STATUS_EXENAB = 16_u32
+    ELEMENT_STATUS_FULL = 1_u32
+    ELEMENT_STATUS_ID_VALID = 8192_u32
+    ELEMENT_STATUS_IMPEXP = 2_u32
+    ELEMENT_STATUS_INENAB = 32_u32
+    ELEMENT_STATUS_INVERT = 4194304_u32
+    ELEMENT_STATUS_LUN_VALID = 4096_u32
+    ELEMENT_STATUS_NOT_BUS = 32768_u32
+    ELEMENT_STATUS_PVOLTAG = 268435456_u32
+    ELEMENT_STATUS_SVALID = 8388608_u32
+    ELEMENT_STATUS_PRODUCT_DATA = 64_u32
   end
-
+  @[Flags]
   enum GET_CHANGER_PARAMETERS_FEATURES1 : UInt32
-    CHANGER_CLEANER_AUTODISMOUNT = 2147483652
-    CHANGER_CLEANER_OPS_NOT_SUPPORTED = 2147483712
-    CHANGER_IEPORT_USER_CONTROL_CLOSE = 2147483904
-    CHANGER_IEPORT_USER_CONTROL_OPEN = 2147483776
-    CHANGER_MOVE_EXTENDS_IEPORT = 2147484160
-    CHANGER_MOVE_RETRACTS_IEPORT = 2147484672
-    CHANGER_PREDISMOUNT_ALIGN_TO_DRIVE = 2147483650
-    CHANGER_PREDISMOUNT_ALIGN_TO_SLOT = 2147483649
-    CHANGER_RTN_MEDIA_TO_ORIGINAL_ADDR = 2147483680
-    CHANGER_SLOTS_USE_TRAYS = 2147483664
-    CHANGER_TRUE_EXCHANGE_CAPABLE = 2147483656
-  end
-
-  enum STORAGE_MEDIA_TYPE : Int32
-    DDS_4mm = 32
-    MiniQic = 33
-    Travan = 34
-    QIC = 35
-    MP_8mm = 36
-    AME_8mm = 37
-    AIT1_8mm = 38
-    DLT = 39
-    NCTP = 40
-    IBM_3480 = 41
-    IBM_3490E = 42
-    IBM_Magstar_3590 = 43
-    IBM_Magstar_MP = 44
-    STK_DATA_D3 = 45
-    SONY_DTF = 46
-    DV_6mm = 47
-    DMI = 48
-    SONY_D2 = 49
-    CLEANER_CARTRIDGE = 50
-    CD_ROM = 51
-    CD_R = 52
-    CD_RW = 53
-    DVD_ROM = 54
-    DVD_R = 55
-    DVD_RW = 56
-    MO_3_RW = 57
-    MO_5_WO = 58
-    MO_5_RW = 59
-    MO_5_LIMDOW = 60
-    PC_5_WO = 61
-    PC_5_RW = 62
-    PD_5_RW = 63
-    ABL_5_WO = 64
-    PINNACLE_APEX_5_RW = 65
-    SONY_12_WO = 66
-    PHILIPS_12_WO = 67
-    HITACHI_12_WO = 68
-    CYGNET_12_WO = 69
-    KODAK_14_WO = 70
-    MO_NFR_525 = 71
-    NIKON_12_RW = 72
-    IOMEGA_ZIP = 73
-    IOMEGA_JAZ = 74
-    SYQUEST_EZ135 = 75
-    SYQUEST_EZFLYER = 76
-    SYQUEST_SYJET = 77
-    AVATAR_F2 = 78
-    MP2_8mm = 79
-    DST_S = 80
-    DST_M = 81
-    DST_L = 82
-    VXATape_1 = 83
-    VXATape_2 = 84
-    STK_9840 = 85
-    LTO_Ultrium = 86
-    LTO_Accelis = 87
-    DVD_RAM = 88
-    AIT_8mm = 89
-    ADR_1 = 90
-    ADR_2 = 91
-    STK_9940 = 92
-    SAIT = 93
-    VXATape = 94
-  end
-
-  enum STORAGE_QUERY_TYPE : Int32
-    PropertyStandardQuery = 0
-    PropertyExistsQuery = 1
-    PropertyMaskQuery = 2
-    PropertyQueryMaxDefined = 3
-  end
-
-  enum STORAGE_SET_TYPE : Int32
-    PropertyStandardSet = 0
-    PropertyExistsSet = 1
-    PropertySetMaxDefined = 2
-  end
-
-  enum STORAGE_PROPERTY_ID : Int32
-    StorageDeviceProperty = 0
-    StorageAdapterProperty = 1
-    StorageDeviceIdProperty = 2
-    StorageDeviceUniqueIdProperty = 3
-    StorageDeviceWriteCacheProperty = 4
-    StorageMiniportProperty = 5
-    StorageAccessAlignmentProperty = 6
-    StorageDeviceSeekPenaltyProperty = 7
-    StorageDeviceTrimProperty = 8
-    StorageDeviceWriteAggregationProperty = 9
-    StorageDeviceDeviceTelemetryProperty = 10
-    StorageDeviceLBProvisioningProperty = 11
-    StorageDevicePowerProperty = 12
-    StorageDeviceCopyOffloadProperty = 13
-    StorageDeviceResiliencyProperty = 14
-    StorageDeviceMediumProductType = 15
-    StorageAdapterRpmbProperty = 16
-    StorageAdapterCryptoProperty = 17
-    StorageDeviceIoCapabilityProperty = 48
-    StorageAdapterProtocolSpecificProperty = 49
-    StorageDeviceProtocolSpecificProperty = 50
-    StorageAdapterTemperatureProperty = 51
-    StorageDeviceTemperatureProperty = 52
-    StorageAdapterPhysicalTopologyProperty = 53
-    StorageDevicePhysicalTopologyProperty = 54
-    StorageDeviceAttributesProperty = 55
-    StorageDeviceManagementStatus = 56
-    StorageAdapterSerialNumberProperty = 57
-    StorageDeviceLocationProperty = 58
-    StorageDeviceNumaProperty = 59
-    StorageDeviceZonedDeviceProperty = 60
-    StorageDeviceUnsafeShutdownCount = 61
-    StorageDeviceEnduranceProperty = 62
-    StorageDeviceLedStateProperty = 63
-    StorageDeviceSelfEncryptionProperty = 64
-    StorageFruIdProperty = 65
-  end
-
-  enum STORAGE_PORT_CODE_SET : Int32
-    StoragePortCodeSetReserved = 0
-    StoragePortCodeSetStorport = 1
-    StoragePortCodeSetSCSIport = 2
-    StoragePortCodeSetSpaceport = 3
-    StoragePortCodeSetATAport = 4
-    StoragePortCodeSetUSBport = 5
-    StoragePortCodeSetSBP2port = 6
-    StoragePortCodeSetSDport = 7
-  end
-
-  enum STORAGE_IDENTIFIER_CODE_SET : Int32
-    StorageIdCodeSetReserved = 0
-    StorageIdCodeSetBinary = 1
-    StorageIdCodeSetAscii = 2
-    StorageIdCodeSetUtf8 = 3
-  end
-
-  enum STORAGE_IDENTIFIER_TYPE : Int32
-    StorageIdTypeVendorSpecific = 0
-    StorageIdTypeVendorId = 1
-    StorageIdTypeEUI64 = 2
-    StorageIdTypeFCPHName = 3
-    StorageIdTypePortRelative = 4
-    StorageIdTypeTargetPortGroup = 5
-    StorageIdTypeLogicalUnitGroup = 6
-    StorageIdTypeMD5LogicalUnitIdentifier = 7
-    StorageIdTypeScsiNameString = 8
-  end
-
-  enum STORAGE_ID_NAA_FORMAT : Int32
-    StorageIdNAAFormatIEEEExtended = 2
-    StorageIdNAAFormatIEEERegistered = 3
-    StorageIdNAAFormatIEEEERegisteredExtended = 5
-  end
-
-  enum STORAGE_ASSOCIATION_TYPE : Int32
-    StorageIdAssocDevice = 0
-    StorageIdAssocPort = 1
-    StorageIdAssocTarget = 2
-  end
-
-  enum STORAGE_RPMB_FRAME_TYPE : Int32
-    StorageRpmbFrameTypeUnknown = 0
-    StorageRpmbFrameTypeStandard = 1
-    StorageRpmbFrameTypeMax = 2
-  end
-
-  enum STORAGE_CRYPTO_ALGORITHM_ID : Int32
-    StorageCryptoAlgorithmUnknown = 0
-    StorageCryptoAlgorithmXTSAES = 1
-    StorageCryptoAlgorithmBitlockerAESCBC = 2
-    StorageCryptoAlgorithmAESECB = 3
-    StorageCryptoAlgorithmESSIVAESCBC = 4
-    StorageCryptoAlgorithmMax = 5
-  end
-
-  enum STORAGE_CRYPTO_KEY_SIZE : Int32
-    StorageCryptoKeySizeUnknown = 0
-    StorageCryptoKeySize128Bits = 1
-    StorageCryptoKeySize192Bits = 2
-    StorageCryptoKeySize256Bits = 3
-    StorageCryptoKeySize512Bits = 4
-  end
-
-  enum STORAGE_TIER_MEDIA_TYPE : Int32
-    StorageTierMediaTypeUnspecified = 0
-    StorageTierMediaTypeDisk = 1
-    StorageTierMediaTypeSsd = 2
-    StorageTierMediaTypeScm = 4
-    StorageTierMediaTypeMax = 5
-  end
-
-  enum STORAGE_TIER_CLASS : Int32
-    StorageTierClassUnspecified = 0
-    StorageTierClassCapacity = 1
-    StorageTierClassPerformance = 2
-    StorageTierClassMax = 3
-  end
-
-  enum STORAGE_PROTOCOL_TYPE : Int32
-    ProtocolTypeUnknown = 0
-    ProtocolTypeScsi = 1
-    ProtocolTypeAta = 2
-    ProtocolTypeNvme = 3
-    ProtocolTypeSd = 4
-    ProtocolTypeUfs = 5
-    ProtocolTypeProprietary = 126
-    ProtocolTypeMaxReserved = 127
-  end
-
-  enum STORAGE_PROTOCOL_NVME_DATA_TYPE : Int32
-    NVMeDataTypeUnknown = 0
-    NVMeDataTypeIdentify = 1
-    NVMeDataTypeLogPage = 2
-    NVMeDataTypeFeature = 3
-  end
-
-  enum STORAGE_PROTOCOL_ATA_DATA_TYPE : Int32
-    AtaDataTypeUnknown = 0
-    AtaDataTypeIdentify = 1
-    AtaDataTypeLogPage = 2
-  end
-
-  enum STORAGE_PROTOCOL_UFS_DATA_TYPE : Int32
-    UfsDataTypeUnknown = 0
-    UfsDataTypeQueryDescriptor = 1
-    UfsDataTypeQueryAttribute = 2
-    UfsDataTypeQueryFlag = 3
-    UfsDataTypeQueryDmeAttribute = 4
-    UfsDataTypeQueryDmePeerAttribute = 5
-    UfsDataTypeMax = 6
-  end
-
-  enum STORAGE_DEVICE_FORM_FACTOR : Int32
-    FormFactorUnknown = 0
-    FormFactor3_5 = 1
-    FormFactor2_5 = 2
-    FormFactor1_8 = 3
-    FormFactor1_8Less = 4
-    FormFactorEmbedded = 5
-    FormFactorMemoryCard = 6
-    FormFactormSata = 7
-    FormFactorM_2 = 8
-    FormFactorPCIeBoard = 9
-    FormFactorDimm = 10
-  end
-
-  enum STORAGE_COMPONENT_HEALTH_STATUS : Int32
-    HealthStatusUnknown = 0
-    HealthStatusNormal = 1
-    HealthStatusThrottled = 2
-    HealthStatusWarning = 3
-    HealthStatusDisabled = 4
-    HealthStatusFailed = 5
-  end
-
-  enum STORAGE_DISK_HEALTH_STATUS : Int32
-    DiskHealthUnknown = 0
-    DiskHealthUnhealthy = 1
-    DiskHealthWarning = 2
-    DiskHealthHealthy = 3
-    DiskHealthMax = 4
-  end
-
-  enum STORAGE_DISK_OPERATIONAL_STATUS : Int32
-    DiskOpStatusNone = 0
-    DiskOpStatusUnknown = 1
-    DiskOpStatusOk = 2
-    DiskOpStatusPredictingFailure = 3
-    DiskOpStatusInService = 4
-    DiskOpStatusHardwareError = 5
-    DiskOpStatusNotUsable = 6
-    DiskOpStatusTransientError = 7
-    DiskOpStatusMissing = 8
-  end
-
-  enum STORAGE_OPERATIONAL_STATUS_REASON : Int32
-    DiskOpReasonUnknown = 0
-    DiskOpReasonScsiSenseCode = 1
-    DiskOpReasonMedia = 2
-    DiskOpReasonIo = 3
-    DiskOpReasonThresholdExceeded = 4
-    DiskOpReasonLostData = 5
-    DiskOpReasonEnergySource = 6
-    DiskOpReasonConfiguration = 7
-    DiskOpReasonDeviceController = 8
-    DiskOpReasonMediaController = 9
-    DiskOpReasonComponent = 10
-    DiskOpReasonNVDIMM_N = 11
-    DiskOpReasonBackgroundOperation = 12
-    DiskOpReasonInvalidFirmware = 13
-    DiskOpReasonHealthCheck = 14
-    DiskOpReasonLostDataPersistence = 15
-    DiskOpReasonDisabledByPlatform = 16
-    DiskOpReasonLostWritePersistence = 17
-    DiskOpReasonDataPersistenceLossImminent = 18
-    DiskOpReasonWritePersistenceLossImminent = 19
-    DiskOpReasonMax = 20
-  end
-
-  enum STORAGE_ZONED_DEVICE_TYPES : Int32
-    ZonedDeviceTypeUnknown = 0
-    ZonedDeviceTypeHostManaged = 1
-    ZonedDeviceTypeHostAware = 2
-    ZonedDeviceTypeDeviceManaged = 3
-  end
-
-  enum STORAGE_ZONE_TYPES : Int32
-    ZoneTypeUnknown = 0
-    ZoneTypeConventional = 1
-    ZoneTypeSequentialWriteRequired = 2
-    ZoneTypeSequentialWritePreferred = 3
-    ZoneTypeMax = 4
-  end
-
-  enum STORAGE_ZONES_ATTRIBUTES : Int32
-    ZonesAttributeTypeAndLengthMayDifferent = 0
-    ZonesAttributeTypeSameLengthSame = 1
-    ZonesAttributeTypeSameLastZoneLengthDifferent = 2
-    ZonesAttributeTypeMayDifferentLengthSame = 3
-  end
-
-  enum STORAGE_ZONE_CONDITION : Int32
-    ZoneConditionConventional = 0
-    ZoneConditionEmpty = 1
-    ZoneConditionImplicitlyOpened = 2
-    ZoneConditionExplicitlyOpened = 3
-    ZoneConditionClosed = 4
-    ZoneConditionReadOnly = 13
-    ZoneConditionFull = 14
-    ZoneConditionOffline = 15
-  end
-
-  enum STORAGE_DIAGNOSTIC_LEVEL : Int32
-    StorageDiagnosticLevelDefault = 0
-    StorageDiagnosticLevelMax = 1
-  end
-
-  enum STORAGE_DIAGNOSTIC_TARGET_TYPE : Int32
-    StorageDiagnosticTargetTypeUndefined = 0
-    StorageDiagnosticTargetTypePort = 1
-    StorageDiagnosticTargetTypeMiniport = 2
-    StorageDiagnosticTargetTypeHbaFirmware = 3
-    StorageDiagnosticTargetTypeMax = 4
-  end
-
-  enum DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE : Int32
-    DeviceInternalStatusDataRequestTypeUndefined = 0
-    DeviceCurrentInternalStatusDataHeader = 1
-    DeviceCurrentInternalStatusData = 2
-    DeviceSavedInternalStatusDataHeader = 3
-    DeviceSavedInternalStatusData = 4
-  end
-
-  enum DEVICE_INTERNAL_STATUS_DATA_SET : Int32
-    DeviceStatusDataSetUndefined = 0
-    DeviceStatusDataSet1 = 1
-    DeviceStatusDataSet2 = 2
-    DeviceStatusDataSet3 = 3
-    DeviceStatusDataSet4 = 4
-    DeviceStatusDataSetMax = 5
-  end
-
-  enum STORAGE_SANITIZE_METHOD : Int32
-    StorageSanitizeMethodDefault = 0
-    StorageSanitizeMethodBlockErase = 1
-    StorageSanitizeMethodCryptoErase = 2
-  end
-
-  enum WRITE_CACHE_TYPE : Int32
-    WriteCacheTypeUnknown = 0
-    WriteCacheTypeNone = 1
-    WriteCacheTypeWriteBack = 2
-    WriteCacheTypeWriteThrough = 3
-  end
-
-  enum WRITE_CACHE_ENABLE : Int32
-    WriteCacheEnableUnknown = 0
-    WriteCacheDisabled = 1
-    WriteCacheEnabled = 2
-  end
-
-  enum WRITE_CACHE_CHANGE : Int32
-    WriteCacheChangeUnknown = 0
-    WriteCacheNotChangeable = 1
-    WriteCacheChangeable = 2
-  end
-
-  enum WRITE_THROUGH : Int32
-    WriteThroughUnknown = 0
-    WriteThroughNotSupported = 1
-    WriteThroughSupported = 2
-  end
-
-  enum DEVICEDUMP_COLLECTION_TYPE : Int32
-    TCCollectionBugCheck = 1
-    TCCollectionApplicationRequested = 2
-    TCCollectionDeviceRequested = 3
-  end
-
-  enum STORAGE_POWERUP_REASON_TYPE : Int32
-    StoragePowerupUnknown = 0
-    StoragePowerupIO = 1
-    StoragePowerupDeviceAttention = 2
-  end
-
-  enum STORAGE_DEVICE_POWER_CAP_UNITS : Int32
-    StorageDevicePowerCapUnitsPercent = 0
-    StorageDevicePowerCapUnitsMilliwatts = 1
-  end
-
-  enum STORAGE_RPMB_COMMAND_TYPE : Int32
-    StorRpmbProgramAuthKey = 1
-    StorRpmbQueryWriteCounter = 2
-    StorRpmbAuthenticatedWrite = 3
-    StorRpmbAuthenticatedRead = 4
-    StorRpmbReadResultRequest = 5
-    StorRpmbAuthenticatedDeviceConfigWrite = 6
-    StorRpmbAuthenticatedDeviceConfigRead = 7
-  end
-
-  enum STORAGE_COUNTER_TYPE : Int32
-    StorageCounterTypeUnknown = 0
-    StorageCounterTypeTemperatureCelsius = 1
-    StorageCounterTypeTemperatureCelsiusMax = 2
-    StorageCounterTypeReadErrorsTotal = 3
-    StorageCounterTypeReadErrorsCorrected = 4
-    StorageCounterTypeReadErrorsUncorrected = 5
-    StorageCounterTypeWriteErrorsTotal = 6
-    StorageCounterTypeWriteErrorsCorrected = 7
-    StorageCounterTypeWriteErrorsUncorrected = 8
-    StorageCounterTypeManufactureDate = 9
-    StorageCounterTypeStartStopCycleCount = 10
-    StorageCounterTypeStartStopCycleCountMax = 11
-    StorageCounterTypeLoadUnloadCycleCount = 12
-    StorageCounterTypeLoadUnloadCycleCountMax = 13
-    StorageCounterTypeWearPercentage = 14
-    StorageCounterTypeWearPercentageWarning = 15
-    StorageCounterTypeWearPercentageMax = 16
-    StorageCounterTypePowerOnHours = 17
-    StorageCounterTypeReadLatency100NSMax = 18
-    StorageCounterTypeWriteLatency100NSMax = 19
-    StorageCounterTypeFlushLatency100NSMax = 20
-    StorageCounterTypeMax = 21
-  end
-
-  enum STORAGE_ATTRIBUTE_MGMT_ACTION : Int32
-    StorAttributeMgmt_ClearAttribute = 0
-    StorAttributeMgmt_SetAttribute = 1
-    StorAttributeMgmt_ResetAttribute = 2
-  end
-
-  enum SCM_REGION_FLAG : Int32
-    ScmRegionFlagNone = 0
-    ScmRegionFlagLabel = 1
-  end
-
-  enum SCM_BUS_QUERY_TYPE : Int32
-    ScmBusQuery_Descriptor = 0
-    ScmBusQuery_IsSupported = 1
-    ScmBusQuery_Max = 2
-  end
-
-  enum SCM_BUS_SET_TYPE : Int32
-    ScmBusSet_Descriptor = 0
-    ScmBusSet_IsSupported = 1
-    ScmBusSet_Max = 2
-  end
-
-  enum SCM_BUS_PROPERTY_ID : Int32
-    ScmBusProperty_RuntimeFwActivationInfo = 0
-    ScmBusProperty_DedicatedMemoryInfo = 1
-    ScmBusProperty_DedicatedMemoryState = 2
-    ScmBusProperty_Max = 3
-  end
-
-  enum SCM_BUS_FIRMWARE_ACTIVATION_STATE : Int32
-    ScmBusFirmwareActivationState_Idle = 0
-    ScmBusFirmwareActivationState_Armed = 1
-    ScmBusFirmwareActivationState_Busy = 2
-  end
-
-  enum SCM_PD_QUERY_TYPE : Int32
-    ScmPhysicalDeviceQuery_Descriptor = 0
-    ScmPhysicalDeviceQuery_IsSupported = 1
-    ScmPhysicalDeviceQuery_Max = 2
-  end
-
-  enum SCM_PD_SET_TYPE : Int32
-    ScmPhysicalDeviceSet_Descriptor = 0
-    ScmPhysicalDeviceSet_IsSupported = 1
-    ScmPhysicalDeviceSet_Max = 2
-  end
-
-  enum SCM_PD_PROPERTY_ID : Int32
-    ScmPhysicalDeviceProperty_DeviceInfo = 0
-    ScmPhysicalDeviceProperty_ManagementStatus = 1
-    ScmPhysicalDeviceProperty_FirmwareInfo = 2
-    ScmPhysicalDeviceProperty_LocationString = 3
-    ScmPhysicalDeviceProperty_DeviceSpecificInfo = 4
-    ScmPhysicalDeviceProperty_DeviceHandle = 5
-    ScmPhysicalDeviceProperty_FruIdString = 6
-    ScmPhysicalDeviceProperty_RuntimeFwActivationInfo = 7
-    ScmPhysicalDeviceProperty_RuntimeFwActivationArmState = 8
-    ScmPhysicalDeviceProperty_Max = 9
-  end
-
-  enum SCM_PD_HEALTH_STATUS : Int32
-    ScmPhysicalDeviceHealth_Unknown = 0
-    ScmPhysicalDeviceHealth_Unhealthy = 1
-    ScmPhysicalDeviceHealth_Warning = 2
-    ScmPhysicalDeviceHealth_Healthy = 3
-    ScmPhysicalDeviceHealth_Max = 4
-  end
-
-  enum SCM_PD_OPERATIONAL_STATUS : Int32
-    ScmPhysicalDeviceOpStatus_Unknown = 0
-    ScmPhysicalDeviceOpStatus_Ok = 1
-    ScmPhysicalDeviceOpStatus_PredictingFailure = 2
-    ScmPhysicalDeviceOpStatus_InService = 3
-    ScmPhysicalDeviceOpStatus_HardwareError = 4
-    ScmPhysicalDeviceOpStatus_NotUsable = 5
-    ScmPhysicalDeviceOpStatus_TransientError = 6
-    ScmPhysicalDeviceOpStatus_Missing = 7
-    ScmPhysicalDeviceOpStatus_Max = 8
-  end
-
-  enum SCM_PD_OPERATIONAL_STATUS_REASON : Int32
-    ScmPhysicalDeviceOpReason_Unknown = 0
-    ScmPhysicalDeviceOpReason_Media = 1
-    ScmPhysicalDeviceOpReason_ThresholdExceeded = 2
-    ScmPhysicalDeviceOpReason_LostData = 3
-    ScmPhysicalDeviceOpReason_EnergySource = 4
-    ScmPhysicalDeviceOpReason_Configuration = 5
-    ScmPhysicalDeviceOpReason_DeviceController = 6
-    ScmPhysicalDeviceOpReason_MediaController = 7
-    ScmPhysicalDeviceOpReason_Component = 8
-    ScmPhysicalDeviceOpReason_BackgroundOperation = 9
-    ScmPhysicalDeviceOpReason_InvalidFirmware = 10
-    ScmPhysicalDeviceOpReason_HealthCheck = 11
-    ScmPhysicalDeviceOpReason_LostDataPersistence = 12
-    ScmPhysicalDeviceOpReason_DisabledByPlatform = 13
-    ScmPhysicalDeviceOpReason_PermanentError = 14
-    ScmPhysicalDeviceOpReason_LostWritePersistence = 15
-    ScmPhysicalDeviceOpReason_FatalError = 16
-    ScmPhysicalDeviceOpReason_DataPersistenceLossImminent = 17
-    ScmPhysicalDeviceOpReason_WritePersistenceLossImminent = 18
-    ScmPhysicalDeviceOpReason_MediaRemainingSpareBlock = 19
-    ScmPhysicalDeviceOpReason_PerformanceDegradation = 20
-    ScmPhysicalDeviceOpReason_ExcessiveTemperature = 21
-    ScmPhysicalDeviceOpReason_InternalFailure = 22
-    ScmPhysicalDeviceOpReason_Max = 23
-  end
-
-  enum SCM_PD_LAST_FW_ACTIVATION_STATUS : Int32
-    ScmPdLastFwActivationStatus_None = 0
-    ScmPdLastFwActivationStatus_Success = 1
-    ScmPdLastFwActivationStatus_FwNotFound = 2
-    ScmPdLastFwActivationStatus_ColdRebootRequired = 3
-    ScmPdLastFwActivaitonStatus_ActivationInProgress = 4
-    ScmPdLastFwActivaitonStatus_Retry = 5
-    ScmPdLastFwActivaitonStatus_FwUnsupported = 6
-    ScmPdLastFwActivaitonStatus_UnknownError = 7
-  end
-
-  enum SCM_PD_FIRMWARE_ACTIVATION_STATE : Int32
-    ScmPdFirmwareActivationState_Idle = 0
-    ScmPdFirmwareActivationState_Armed = 1
-    ScmPdFirmwareActivationState_Busy = 2
-  end
-
-  enum SCM_PD_MEDIA_REINITIALIZATION_STATUS : Int32
-    ScmPhysicalDeviceReinit_Success = 0
-    ScmPhysicalDeviceReinit_RebootNeeded = 1
-    ScmPhysicalDeviceReinit_ColdBootNeeded = 2
-    ScmPhysicalDeviceReinit_Max = 3
-  end
-
-  enum MEDIA_TYPE : Int32
-    Unknown = 0
-    F5_1Pt2_512 = 1
-    F3_1Pt44_512 = 2
-    F3_2Pt88_512 = 3
-    F3_20Pt8_512 = 4
-    F3_720_512 = 5
-    F5_360_512 = 6
-    F5_320_512 = 7
-    F5_320_1024 = 8
-    F5_180_512 = 9
-    F5_160_512 = 10
-    RemovableMedia = 11
-    FixedMedia = 12
-    F3_120M_512 = 13
-    F3_640_512 = 14
-    F5_640_512 = 15
-    F5_720_512 = 16
-    F3_1Pt2_512 = 17
-    F3_1Pt23_1024 = 18
-    F5_1Pt23_1024 = 19
-    F3_128Mb_512 = 20
-    F3_230Mb_512 = 21
-    F8_256_128 = 22
-    F3_200Mb_512 = 23
-    F3_240M_512 = 24
-    F3_32M_512 = 25
-  end
-
-  enum PARTITION_STYLE : Int32
-    PARTITION_STYLE_MBR = 0
-    PARTITION_STYLE_GPT = 1
-    PARTITION_STYLE_RAW = 2
-  end
-
-  enum DETECTION_TYPE : Int32
-    DetectNone = 0
-    DetectInt13 = 1
-    DetectExInt13 = 2
-  end
-
-  enum DISK_CACHE_RETENTION_PRIORITY : Int32
-    EqualPriority = 0
-    KeepPrefetchedData = 1
-    KeepReadData = 2
-  end
-
-  enum BIN_TYPES : Int32
-    RequestSize = 0
-    RequestLocation = 1
-  end
-
-  enum ELEMENT_TYPE : Int32
-    AllElements = 0
-    ChangerTransport = 1
-    ChangerSlot = 2
-    ChangerIEPort = 3
-    ChangerDrive = 4
-    ChangerDoor = 5
-    ChangerKeypad = 6
-    ChangerMaxElement = 7
-  end
-
-  enum CHANGER_DEVICE_PROBLEM_TYPE : Int32
-    DeviceProblemNone = 0
-    DeviceProblemHardware = 1
-    DeviceProblemCHMError = 2
-    DeviceProblemDoorOpen = 3
-    DeviceProblemCalibrationError = 4
-    DeviceProblemTargetFailure = 5
-    DeviceProblemCHMMoveError = 6
-    DeviceProblemCHMZeroError = 7
-    DeviceProblemCartridgeInsertError = 8
-    DeviceProblemPositionError = 9
-    DeviceProblemSensorError = 10
-    DeviceProblemCartridgeEjectError = 11
-    DeviceProblemGripperError = 12
-    DeviceProblemDriveError = 13
-  end
-
-  enum SHRINK_VOLUME_REQUEST_TYPES : Int32
-    ShrinkPrepare = 1
-    ShrinkCommit = 2
-    ShrinkAbort = 3
-  end
-
-  enum CSV_CONTROL_OP : Int32
-    CsvControlStartRedirectFile = 2
-    CsvControlStopRedirectFile = 3
-    CsvControlQueryRedirectState = 4
-    CsvControlQueryFileRevision = 6
-    CsvControlQueryMdsPath = 8
-    CsvControlQueryFileRevisionFileId128 = 9
-    CsvControlQueryVolumeRedirectState = 10
-    CsvControlEnableUSNRangeModificationTracking = 13
-    CsvControlMarkHandleLocalVolumeMount = 14
-    CsvControlUnmarkHandleLocalVolumeMount = 15
-    CsvControlGetCsvFsMdsPathV2 = 18
-    CsvControlDisableCaching = 19
-    CsvControlEnableCaching = 20
-    CsvControlStartForceDFO = 21
-    CsvControlStopForceDFO = 22
-    CsvControlQueryMdsPathNoPause = 23
-    CsvControlSetVolumeId = 24
-    CsvControlQueryVolumeId = 25
-  end
-
-  enum CSVFS_DISK_CONNECTIVITY : Int32
-    CsvFsDiskConnectivityNone = 0
-    CsvFsDiskConnectivityMdsNodeOnly = 1
-    CsvFsDiskConnectivitySubsetOfNodes = 2
-    CsvFsDiskConnectivityAllNodes = 3
-  end
-
-  enum STORAGE_RESERVE_ID : Int32
-    StorageReserveIdNone = 0
-    StorageReserveIdHard = 1
-    StorageReserveIdSoft = 2
-    StorageReserveIdUpdateScratch = 3
-    StorageReserveIdMax = 4
-  end
-
-  enum QUERY_FILE_LAYOUT_FILTER_TYPE : Int32
-    QUERY_FILE_LAYOUT_FILTER_TYPE_NONE = 0
-    QUERY_FILE_LAYOUT_FILTER_TYPE_CLUSTERS = 1
-    QUERY_FILE_LAYOUT_FILTER_TYPE_FILEID = 2
-    QUERY_FILE_LAYOUT_FILTER_TYPE_STORAGE_RESERVE_ID = 3
-    QUERY_FILE_LAYOUT_NUM_FILTER_TYPES = 4
-  end
-
-  enum FILE_STORAGE_TIER_MEDIA_TYPE : Int32
-    FileStorageTierMediaTypeUnspecified = 0
-    FileStorageTierMediaTypeDisk = 1
-    FileStorageTierMediaTypeSsd = 2
-    FileStorageTierMediaTypeScm = 4
-    FileStorageTierMediaTypeMax = 5
-  end
-
-  enum FILE_STORAGE_TIER_CLASS : Int32
-    FileStorageTierClassUnspecified = 0
-    FileStorageTierClassCapacity = 1
-    FileStorageTierClassPerformance = 2
-    FileStorageTierClassMax = 3
-  end
-
-  enum DUPLICATE_EXTENTS_STATE : Int32
-    FileSnapStateInactive = 0
-    FileSnapStateSource = 1
-    FileSnapStateTarget = 2
-  end
-
-  enum REFS_SMR_VOLUME_GC_STATE : Int32
-    SmrGcStateInactive = 0
-    SmrGcStatePaused = 1
-    SmrGcStateActive = 2
-    SmrGcStateActiveFullSpeed = 3
-  end
-
-  enum REFS_SMR_VOLUME_GC_ACTION : Int32
-    SmrGcActionStart = 1
-    SmrGcActionStartFullSpeed = 2
-    SmrGcActionPause = 3
-    SmrGcActionStop = 4
-  end
-
-  enum REFS_SMR_VOLUME_GC_METHOD : Int32
-    SmrGcMethodCompaction = 1
-    SmrGcMethodCompression = 2
-    SmrGcMethodRotation = 3
-  end
-
-  enum VIRTUAL_STORAGE_BEHAVIOR_CODE : Int32
-    VirtualStorageBehaviorUndefined = 0
-    VirtualStorageBehaviorCacheWriteThrough = 1
-    VirtualStorageBehaviorCacheWriteBack = 2
-    VirtualStorageBehaviorStopIoProcessing = 3
-    VirtualStorageBehaviorRestartIoProcessing = 4
-  end
-
-  enum FS_BPIO_OPERATIONS : Int32
-    FS_BPIO_OP_ENABLE = 1
-    FS_BPIO_OP_DISABLE = 2
-    FS_BPIO_OP_QUERY = 3
-    FS_BPIO_OP_VOLUME_STACK_PAUSE = 4
-    FS_BPIO_OP_VOLUME_STACK_RESUME = 5
-    FS_BPIO_OP_STREAM_PAUSE = 6
-    FS_BPIO_OP_STREAM_RESUME = 7
-    FS_BPIO_OP_GET_INFO = 8
-    FS_BPIO_OP_MAX_OPERATION = 9
-  end
-
-  enum FS_BPIO_INFLAGS : Int32
-    FSBPIO_INFL_None = 0
-    FSBPIO_INFL_SKIP_STORAGE_STACK_QUERY = 1
-  end
-
-  enum FS_BPIO_OUTFLAGS : Int32
-    FSBPIO_OUTFL_None = 0
-    FSBPIO_OUTFL_VOLUME_STACK_BYPASS_PAUSED = 1
-    FSBPIO_OUTFL_STREAM_BYPASS_PAUSED = 2
-    FSBPIO_OUTFL_FILTER_ATTACH_BLOCKED = 4
-    FSBPIO_OUTFL_COMPATIBLE_STORAGE_DRIVER = 8
-  end
-
-  union DEVICE_MEDIA_INFO_DeviceSpecific_e__Union
-    disk_info : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_DiskInfo_e__Struct
-    removable_disk_info : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_RemovableDiskInfo_e__Struct
-    tape_info : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct
-  end
-  union DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union
-    scsi_information : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union_ScsiInformation_e__Struct
-  end
-  union STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union
-    anonymous : STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union_Anonymous_e__Struct
-    as_byte : UInt8
-  end
-  union STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE
-    anonymous : STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE_Anonymous_e__Struct
-    as_ulong : UInt32
-  end
-  union STORAGE_SPEC_VERSION
-    anonymous : STORAGE_SPEC_VERSION_Anonymous_e__Struct
-    as_ulong : UInt32
-  end
-  union STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union
-    anonymous : STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union_Anonymous_e__Struct
-    as_ushort : UInt16
-  end
-  union STORAGE_OPERATIONAL_REASON_RawBytes_e__Union
-    scsi_sense_key : STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_ScsiSenseKey_e__Struct
-    nvdimm_n : STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_NVDIMM_N_e__Struct
-    as_ulong : UInt32
-  end
-  union STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union
-    sequential_required_zone : STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialRequiredZone_e__Struct
-    sequential_preferred_zone : STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialPreferredZone_e__Struct
-  end
-  union DEVICE_LOCATION_Anonymous_e__Union
-    anonymous1 : DEVICE_LOCATION_Anonymous_e__Union_Anonymous1_e__Struct
-    anonymous2 : DEVICE_LOCATION_Anonymous_e__Union_Anonymous2_e__Struct
-  end
-  union STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union
-    storage_offload_zero_data_token : STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union_StorageOffloadZeroDataToken_e__Struct
-    token : UInt8[504]*
-  end
-  union DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union
-    all_flags : UInt32
-    anonymous : DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct
-  end
-  union PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union
-    pr_in : PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_IN_e__Struct
-    pr_out : PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_OUT_e__Struct
-  end
-  union DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union
-    external_stack : DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union_ExternalStack_e__Struct
-    ata_port : DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union_AtaPort_e__Struct
-    stor_port : DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union_StorPort_e__Struct
-  end
-  union STORAGE_COUNTER_Value_e__Union
-    manufacture_date : STORAGE_COUNTER_Value_e__Union_ManufactureDate_e__Struct
-    as_ulonglong : UInt64
-  end
-  union SET_PARTITION_INFORMATION_EX_Anonymous_e__Union
-    mbr : SET_PARTITION_INFORMATION
-    gpt : PARTITION_INFORMATION_GPT
-  end
-  union CREATE_DISK_Anonymous_e__Union
-    mbr : CREATE_DISK_MBR
-    gpt : CREATE_DISK_GPT
-  end
-  union PARTITION_INFORMATION_EX_Anonymous_e__Union
-    mbr : PARTITION_INFORMATION_MBR
-    gpt : PARTITION_INFORMATION_GPT
-  end
-  union DRIVE_LAYOUT_INFORMATION_EX_Anonymous_e__Union
-    mbr : DRIVE_LAYOUT_INFORMATION_MBR
-    gpt : DRIVE_LAYOUT_INFORMATION_GPT
-  end
-  union DISK_DETECTION_INFO_Anonymous_e__Union
-    anonymous : DISK_DETECTION_INFO_Anonymous_e__Union_Anonymous_e__Struct
-  end
-  union DISK_PARTITION_INFO_Anonymous_e__Union
-    mbr : DISK_PARTITION_INFO_Anonymous_e__Union_Mbr_e__Struct
-    gpt : DISK_PARTITION_INFO_Anonymous_e__Union_Gpt_e__Struct
-  end
-  union DISK_CACHE_INFORMATION_Anonymous_e__Union
-    scalar_prefetch : DISK_CACHE_INFORMATION_Anonymous_e__Union_ScalarPrefetch_e__Struct
-    block_prefetch : DISK_CACHE_INFORMATION_Anonymous_e__Union_BlockPrefetch_e__Struct
-  end
-  union USN_RECORD_UNION
-    header : USN_RECORD_COMMON_HEADER
-    v2 : USN_RECORD_V2
-    v3 : USN_RECORD_V3
-    v4 : USN_RECORD_V4
-  end
-  union MARK_HANDLE_INFO_Anonymous_e__Union
-    usn_source_info : UInt32
-    copy_number : UInt32
-  end
-  union MARK_HANDLE_INFO32_Anonymous_e__Union
-    usn_source_info : UInt32
-    copy_number : UInt32
-  end
-  union FILE_OBJECTID_BUFFER_Anonymous_e__Union
-    anonymous : FILE_OBJECTID_BUFFER_Anonymous_e__Union_Anonymous_e__Struct
-    extended_info : UInt8[48]*
-  end
-  union TXFS_READ_BACKUP_INFORMATION_OUT_Anonymous_e__Union
-    buffer_length : UInt32
-    buffer : UInt8[0]*
-  end
-  union STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE_Anonymous_e__Union
-    lev1_depends : STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY[0]*
-    lev2_depends : STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY[0]*
-  end
-  union SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union
-    sd_change : SD_CHANGE_MACHINE_SID_INPUT
-    sd_query_stats : SD_QUERY_STATS_INPUT
-    sd_enum_sds : SD_ENUM_SDS_INPUT
-  end
-  union SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union
-    sd_change : SD_CHANGE_MACHINE_SID_OUTPUT
-    sd_query_stats : SD_QUERY_STATS_OUTPUT
-    sd_enum_sds : SD_ENUM_SDS_OUTPUT
-  end
-  union QUERY_FILE_LAYOUT_INPUT_Anonymous_e__Union
-    filter_entry_count : UInt32
-    number_of_pairs : UInt32
-  end
-  union QUERY_FILE_LAYOUT_INPUT_Filter_e__Union
-    cluster_ranges : CLUSTER_RANGE[0]*
-    file_reference_ranges : FILE_REFERENCE_RANGE[0]*
-    storage_reserve_ids : STORAGE_RESERVE_ID[0]*
-  end
-  union STREAM_EXTENT_ENTRY_ExtentInformation_e__Union
-    retrieval_pointers : RETRIEVAL_POINTERS_BUFFER
-  end
-  union STREAM_INFORMATION_ENTRY_StreamInformation
-    desired_storage_class : STREAM_INFORMATION_ENTRY_StreamInformation_DesiredStorageClass
-    data_stream : STREAM_INFORMATION_ENTRY_StreamInformation_DataStream
-    reparse : STREAM_INFORMATION_ENTRY_StreamInformation_Reparse
-    ea : STREAM_INFORMATION_ENTRY_StreamInformation_Ea
-  end
-  union FS_BPIO_OUTPUT_Anonymous_e__Union
-    enable : FS_BPIO_RESULTS
-    query : FS_BPIO_RESULTS
-    volume_stack_resume : FS_BPIO_RESULTS
-    stream_resume : FS_BPIO_RESULTS
-    get_info : FS_BPIO_INFO
-  end
-
-  struct STORAGE_HOTPLUG_INFO
-    size : UInt32
-    media_removable : BOOLEAN
-    media_hotplug : BOOLEAN
-    device_hotplug : BOOLEAN
-    write_cache_enable_override : BOOLEAN
-  end
-  struct STORAGE_DEVICE_NUMBER
-    device_type : UInt32
-    device_number : UInt32
+    CHANGER_CLEANER_AUTODISMOUNT = 2147483652_u32
+    CHANGER_CLEANER_OPS_NOT_SUPPORTED = 2147483712_u32
+    CHANGER_IEPORT_USER_CONTROL_CLOSE = 2147483904_u32
+    CHANGER_IEPORT_USER_CONTROL_OPEN = 2147483776_u32
+    CHANGER_MOVE_EXTENDS_IEPORT = 2147484160_u32
+    CHANGER_MOVE_RETRACTS_IEPORT = 2147484672_u32
+    CHANGER_PREDISMOUNT_ALIGN_TO_DRIVE = 2147483650_u32
+    CHANGER_PREDISMOUNT_ALIGN_TO_SLOT = 2147483649_u32
+    CHANGER_RTN_MEDIA_TO_ORIGINAL_ADDR = 2147483680_u32
+    CHANGER_SLOTS_USE_TRAYS = 2147483664_u32
+    CHANGER_TRUE_EXCHANGE_CAPABLE = 2147483656_u32
+  end
+  enum STORAGE_MEDIA_TYPE
+    DDS_4mm = 32_i32
+    MiniQic = 33_i32
+    Travan = 34_i32
+    QIC = 35_i32
+    MP_8mm = 36_i32
+    AME_8mm = 37_i32
+    AIT1_8mm = 38_i32
+    DLT = 39_i32
+    NCTP = 40_i32
+    IBM_3480 = 41_i32
+    IBM_3490E = 42_i32
+    IBM_Magstar_3590 = 43_i32
+    IBM_Magstar_MP = 44_i32
+    STK_DATA_D3 = 45_i32
+    SONY_DTF = 46_i32
+    DV_6mm = 47_i32
+    DMI = 48_i32
+    SONY_D2 = 49_i32
+    CLEANER_CARTRIDGE = 50_i32
+    CD_ROM = 51_i32
+    CD_R = 52_i32
+    CD_RW = 53_i32
+    DVD_ROM = 54_i32
+    DVD_R = 55_i32
+    DVD_RW = 56_i32
+    MO_3_RW = 57_i32
+    MO_5_WO = 58_i32
+    MO_5_RW = 59_i32
+    MO_5_LIMDOW = 60_i32
+    PC_5_WO = 61_i32
+    PC_5_RW = 62_i32
+    PD_5_RW = 63_i32
+    ABL_5_WO = 64_i32
+    PINNACLE_APEX_5_RW = 65_i32
+    SONY_12_WO = 66_i32
+    PHILIPS_12_WO = 67_i32
+    HITACHI_12_WO = 68_i32
+    CYGNET_12_WO = 69_i32
+    KODAK_14_WO = 70_i32
+    MO_NFR_525 = 71_i32
+    NIKON_12_RW = 72_i32
+    IOMEGA_ZIP = 73_i32
+    IOMEGA_JAZ = 74_i32
+    SYQUEST_EZ135 = 75_i32
+    SYQUEST_EZFLYER = 76_i32
+    SYQUEST_SYJET = 77_i32
+    AVATAR_F2 = 78_i32
+    MP2_8mm = 79_i32
+    DST_S = 80_i32
+    DST_M = 81_i32
+    DST_L = 82_i32
+    VXATape_1 = 83_i32
+    VXATape_2 = 84_i32
+    STK_9840 = 85_i32
+    LTO_Ultrium = 86_i32
+    LTO_Accelis = 87_i32
+    DVD_RAM = 88_i32
+    AIT_8mm = 89_i32
+    ADR_1 = 90_i32
+    ADR_2 = 91_i32
+    STK_9940 = 92_i32
+    SAIT = 93_i32
+    VXATape = 94_i32
+  end
+  enum STORAGE_QUERY_TYPE
+    PropertyStandardQuery = 0_i32
+    PropertyExistsQuery = 1_i32
+    PropertyMaskQuery = 2_i32
+    PropertyQueryMaxDefined = 3_i32
+  end
+  enum STORAGE_SET_TYPE
+    PropertyStandardSet = 0_i32
+    PropertyExistsSet = 1_i32
+    PropertySetMaxDefined = 2_i32
+  end
+  enum STORAGE_PROPERTY_ID
+    StorageDeviceProperty = 0_i32
+    StorageAdapterProperty = 1_i32
+    StorageDeviceIdProperty = 2_i32
+    StorageDeviceUniqueIdProperty = 3_i32
+    StorageDeviceWriteCacheProperty = 4_i32
+    StorageMiniportProperty = 5_i32
+    StorageAccessAlignmentProperty = 6_i32
+    StorageDeviceSeekPenaltyProperty = 7_i32
+    StorageDeviceTrimProperty = 8_i32
+    StorageDeviceWriteAggregationProperty = 9_i32
+    StorageDeviceDeviceTelemetryProperty = 10_i32
+    StorageDeviceLBProvisioningProperty = 11_i32
+    StorageDevicePowerProperty = 12_i32
+    StorageDeviceCopyOffloadProperty = 13_i32
+    StorageDeviceResiliencyProperty = 14_i32
+    StorageDeviceMediumProductType = 15_i32
+    StorageAdapterRpmbProperty = 16_i32
+    StorageAdapterCryptoProperty = 17_i32
+    StorageDeviceIoCapabilityProperty = 48_i32
+    StorageAdapterProtocolSpecificProperty = 49_i32
+    StorageDeviceProtocolSpecificProperty = 50_i32
+    StorageAdapterTemperatureProperty = 51_i32
+    StorageDeviceTemperatureProperty = 52_i32
+    StorageAdapterPhysicalTopologyProperty = 53_i32
+    StorageDevicePhysicalTopologyProperty = 54_i32
+    StorageDeviceAttributesProperty = 55_i32
+    StorageDeviceManagementStatus = 56_i32
+    StorageAdapterSerialNumberProperty = 57_i32
+    StorageDeviceLocationProperty = 58_i32
+    StorageDeviceNumaProperty = 59_i32
+    StorageDeviceZonedDeviceProperty = 60_i32
+    StorageDeviceUnsafeShutdownCount = 61_i32
+    StorageDeviceEnduranceProperty = 62_i32
+    StorageDeviceLedStateProperty = 63_i32
+    StorageDeviceSelfEncryptionProperty = 64_i32
+    StorageFruIdProperty = 65_i32
+  end
+  enum STORAGE_PORT_CODE_SET
+    StoragePortCodeSetReserved = 0_i32
+    StoragePortCodeSetStorport = 1_i32
+    StoragePortCodeSetSCSIport = 2_i32
+    StoragePortCodeSetSpaceport = 3_i32
+    StoragePortCodeSetATAport = 4_i32
+    StoragePortCodeSetUSBport = 5_i32
+    StoragePortCodeSetSBP2port = 6_i32
+    StoragePortCodeSetSDport = 7_i32
+  end
+  enum STORAGE_IDENTIFIER_CODE_SET
+    StorageIdCodeSetReserved = 0_i32
+    StorageIdCodeSetBinary = 1_i32
+    StorageIdCodeSetAscii = 2_i32
+    StorageIdCodeSetUtf8 = 3_i32
+  end
+  enum STORAGE_IDENTIFIER_TYPE
+    StorageIdTypeVendorSpecific = 0_i32
+    StorageIdTypeVendorId = 1_i32
+    StorageIdTypeEUI64 = 2_i32
+    StorageIdTypeFCPHName = 3_i32
+    StorageIdTypePortRelative = 4_i32
+    StorageIdTypeTargetPortGroup = 5_i32
+    StorageIdTypeLogicalUnitGroup = 6_i32
+    StorageIdTypeMD5LogicalUnitIdentifier = 7_i32
+    StorageIdTypeScsiNameString = 8_i32
+  end
+  enum STORAGE_ID_NAA_FORMAT
+    StorageIdNAAFormatIEEEExtended = 2_i32
+    StorageIdNAAFormatIEEERegistered = 3_i32
+    StorageIdNAAFormatIEEEERegisteredExtended = 5_i32
+  end
+  enum STORAGE_ASSOCIATION_TYPE
+    StorageIdAssocDevice = 0_i32
+    StorageIdAssocPort = 1_i32
+    StorageIdAssocTarget = 2_i32
+  end
+  enum STORAGE_RPMB_FRAME_TYPE
+    StorageRpmbFrameTypeUnknown = 0_i32
+    StorageRpmbFrameTypeStandard = 1_i32
+    StorageRpmbFrameTypeMax = 2_i32
+  end
+  enum STORAGE_CRYPTO_ALGORITHM_ID
+    StorageCryptoAlgorithmUnknown = 0_i32
+    StorageCryptoAlgorithmXTSAES = 1_i32
+    StorageCryptoAlgorithmBitlockerAESCBC = 2_i32
+    StorageCryptoAlgorithmAESECB = 3_i32
+    StorageCryptoAlgorithmESSIVAESCBC = 4_i32
+    StorageCryptoAlgorithmMax = 5_i32
+  end
+  enum STORAGE_CRYPTO_KEY_SIZE
+    StorageCryptoKeySizeUnknown = 0_i32
+    StorageCryptoKeySize128Bits = 1_i32
+    StorageCryptoKeySize192Bits = 2_i32
+    StorageCryptoKeySize256Bits = 3_i32
+    StorageCryptoKeySize512Bits = 4_i32
+  end
+  enum STORAGE_TIER_MEDIA_TYPE
+    StorageTierMediaTypeUnspecified = 0_i32
+    StorageTierMediaTypeDisk = 1_i32
+    StorageTierMediaTypeSsd = 2_i32
+    StorageTierMediaTypeScm = 4_i32
+    StorageTierMediaTypeMax = 5_i32
+  end
+  enum STORAGE_TIER_CLASS
+    StorageTierClassUnspecified = 0_i32
+    StorageTierClassCapacity = 1_i32
+    StorageTierClassPerformance = 2_i32
+    StorageTierClassMax = 3_i32
+  end
+  enum STORAGE_PROTOCOL_TYPE
+    ProtocolTypeUnknown = 0_i32
+    ProtocolTypeScsi = 1_i32
+    ProtocolTypeAta = 2_i32
+    ProtocolTypeNvme = 3_i32
+    ProtocolTypeSd = 4_i32
+    ProtocolTypeUfs = 5_i32
+    ProtocolTypeProprietary = 126_i32
+    ProtocolTypeMaxReserved = 127_i32
+  end
+  enum STORAGE_PROTOCOL_NVME_DATA_TYPE
+    NVMeDataTypeUnknown = 0_i32
+    NVMeDataTypeIdentify = 1_i32
+    NVMeDataTypeLogPage = 2_i32
+    NVMeDataTypeFeature = 3_i32
+  end
+  enum STORAGE_PROTOCOL_ATA_DATA_TYPE
+    AtaDataTypeUnknown = 0_i32
+    AtaDataTypeIdentify = 1_i32
+    AtaDataTypeLogPage = 2_i32
+  end
+  enum STORAGE_PROTOCOL_UFS_DATA_TYPE
+    UfsDataTypeUnknown = 0_i32
+    UfsDataTypeQueryDescriptor = 1_i32
+    UfsDataTypeQueryAttribute = 2_i32
+    UfsDataTypeQueryFlag = 3_i32
+    UfsDataTypeQueryDmeAttribute = 4_i32
+    UfsDataTypeQueryDmePeerAttribute = 5_i32
+    UfsDataTypeMax = 6_i32
+  end
+  enum STORAGE_DEVICE_FORM_FACTOR
+    FormFactorUnknown = 0_i32
+    FormFactor3_5 = 1_i32
+    FormFactor2_5 = 2_i32
+    FormFactor1_8 = 3_i32
+    FormFactor1_8Less = 4_i32
+    FormFactorEmbedded = 5_i32
+    FormFactorMemoryCard = 6_i32
+    FormFactormSata = 7_i32
+    FormFactorM_2 = 8_i32
+    FormFactorPCIeBoard = 9_i32
+    FormFactorDimm = 10_i32
+  end
+  enum STORAGE_COMPONENT_HEALTH_STATUS
+    HealthStatusUnknown = 0_i32
+    HealthStatusNormal = 1_i32
+    HealthStatusThrottled = 2_i32
+    HealthStatusWarning = 3_i32
+    HealthStatusDisabled = 4_i32
+    HealthStatusFailed = 5_i32
+  end
+  enum STORAGE_DISK_HEALTH_STATUS
+    DiskHealthUnknown = 0_i32
+    DiskHealthUnhealthy = 1_i32
+    DiskHealthWarning = 2_i32
+    DiskHealthHealthy = 3_i32
+    DiskHealthMax = 4_i32
+  end
+  enum STORAGE_DISK_OPERATIONAL_STATUS
+    DiskOpStatusNone = 0_i32
+    DiskOpStatusUnknown = 1_i32
+    DiskOpStatusOk = 2_i32
+    DiskOpStatusPredictingFailure = 3_i32
+    DiskOpStatusInService = 4_i32
+    DiskOpStatusHardwareError = 5_i32
+    DiskOpStatusNotUsable = 6_i32
+    DiskOpStatusTransientError = 7_i32
+    DiskOpStatusMissing = 8_i32
+  end
+  enum STORAGE_OPERATIONAL_STATUS_REASON
+    DiskOpReasonUnknown = 0_i32
+    DiskOpReasonScsiSenseCode = 1_i32
+    DiskOpReasonMedia = 2_i32
+    DiskOpReasonIo = 3_i32
+    DiskOpReasonThresholdExceeded = 4_i32
+    DiskOpReasonLostData = 5_i32
+    DiskOpReasonEnergySource = 6_i32
+    DiskOpReasonConfiguration = 7_i32
+    DiskOpReasonDeviceController = 8_i32
+    DiskOpReasonMediaController = 9_i32
+    DiskOpReasonComponent = 10_i32
+    DiskOpReasonNVDIMM_N = 11_i32
+    DiskOpReasonBackgroundOperation = 12_i32
+    DiskOpReasonInvalidFirmware = 13_i32
+    DiskOpReasonHealthCheck = 14_i32
+    DiskOpReasonLostDataPersistence = 15_i32
+    DiskOpReasonDisabledByPlatform = 16_i32
+    DiskOpReasonLostWritePersistence = 17_i32
+    DiskOpReasonDataPersistenceLossImminent = 18_i32
+    DiskOpReasonWritePersistenceLossImminent = 19_i32
+    DiskOpReasonMax = 20_i32
+  end
+  enum STORAGE_ZONED_DEVICE_TYPES
+    ZonedDeviceTypeUnknown = 0_i32
+    ZonedDeviceTypeHostManaged = 1_i32
+    ZonedDeviceTypeHostAware = 2_i32
+    ZonedDeviceTypeDeviceManaged = 3_i32
+  end
+  enum STORAGE_ZONE_TYPES
+    ZoneTypeUnknown = 0_i32
+    ZoneTypeConventional = 1_i32
+    ZoneTypeSequentialWriteRequired = 2_i32
+    ZoneTypeSequentialWritePreferred = 3_i32
+    ZoneTypeMax = 4_i32
+  end
+  enum STORAGE_ZONES_ATTRIBUTES
+    ZonesAttributeTypeAndLengthMayDifferent = 0_i32
+    ZonesAttributeTypeSameLengthSame = 1_i32
+    ZonesAttributeTypeSameLastZoneLengthDifferent = 2_i32
+    ZonesAttributeTypeMayDifferentLengthSame = 3_i32
+  end
+  enum STORAGE_ZONE_CONDITION
+    ZoneConditionConventional = 0_i32
+    ZoneConditionEmpty = 1_i32
+    ZoneConditionImplicitlyOpened = 2_i32
+    ZoneConditionExplicitlyOpened = 3_i32
+    ZoneConditionClosed = 4_i32
+    ZoneConditionReadOnly = 13_i32
+    ZoneConditionFull = 14_i32
+    ZoneConditionOffline = 15_i32
+  end
+  enum STORAGE_DIAGNOSTIC_LEVEL
+    StorageDiagnosticLevelDefault = 0_i32
+    StorageDiagnosticLevelMax = 1_i32
+  end
+  enum STORAGE_DIAGNOSTIC_TARGET_TYPE
+    StorageDiagnosticTargetTypeUndefined = 0_i32
+    StorageDiagnosticTargetTypePort = 1_i32
+    StorageDiagnosticTargetTypeMiniport = 2_i32
+    StorageDiagnosticTargetTypeHbaFirmware = 3_i32
+    StorageDiagnosticTargetTypeMax = 4_i32
+  end
+  enum DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE
+    DeviceInternalStatusDataRequestTypeUndefined = 0_i32
+    DeviceCurrentInternalStatusDataHeader = 1_i32
+    DeviceCurrentInternalStatusData = 2_i32
+    DeviceSavedInternalStatusDataHeader = 3_i32
+    DeviceSavedInternalStatusData = 4_i32
+  end
+  enum DEVICE_INTERNAL_STATUS_DATA_SET
+    DeviceStatusDataSetUndefined = 0_i32
+    DeviceStatusDataSet1 = 1_i32
+    DeviceStatusDataSet2 = 2_i32
+    DeviceStatusDataSet3 = 3_i32
+    DeviceStatusDataSet4 = 4_i32
+    DeviceStatusDataSetMax = 5_i32
+  end
+  enum STORAGE_SANITIZE_METHOD
+    StorageSanitizeMethodDefault = 0_i32
+    StorageSanitizeMethodBlockErase = 1_i32
+    StorageSanitizeMethodCryptoErase = 2_i32
+  end
+  enum WRITE_CACHE_TYPE
+    WriteCacheTypeUnknown = 0_i32
+    WriteCacheTypeNone = 1_i32
+    WriteCacheTypeWriteBack = 2_i32
+    WriteCacheTypeWriteThrough = 3_i32
+  end
+  enum WRITE_CACHE_ENABLE
+    WriteCacheEnableUnknown = 0_i32
+    WriteCacheDisabled = 1_i32
+    WriteCacheEnabled = 2_i32
+  end
+  enum WRITE_CACHE_CHANGE
+    WriteCacheChangeUnknown = 0_i32
+    WriteCacheNotChangeable = 1_i32
+    WriteCacheChangeable = 2_i32
+  end
+  enum WRITE_THROUGH
+    WriteThroughUnknown = 0_i32
+    WriteThroughNotSupported = 1_i32
+    WriteThroughSupported = 2_i32
+  end
+  enum DEVICEDUMP_COLLECTION_TYPE
+    TCCollectionBugCheck = 1_i32
+    TCCollectionApplicationRequested = 2_i32
+    TCCollectionDeviceRequested = 3_i32
+  end
+  enum STORAGE_POWERUP_REASON_TYPE
+    StoragePowerupUnknown = 0_i32
+    StoragePowerupIO = 1_i32
+    StoragePowerupDeviceAttention = 2_i32
+  end
+  enum STORAGE_DEVICE_POWER_CAP_UNITS
+    StorageDevicePowerCapUnitsPercent = 0_i32
+    StorageDevicePowerCapUnitsMilliwatts = 1_i32
+  end
+  enum STORAGE_RPMB_COMMAND_TYPE
+    StorRpmbProgramAuthKey = 1_i32
+    StorRpmbQueryWriteCounter = 2_i32
+    StorRpmbAuthenticatedWrite = 3_i32
+    StorRpmbAuthenticatedRead = 4_i32
+    StorRpmbReadResultRequest = 5_i32
+    StorRpmbAuthenticatedDeviceConfigWrite = 6_i32
+    StorRpmbAuthenticatedDeviceConfigRead = 7_i32
+  end
+  enum STORAGE_COUNTER_TYPE
+    StorageCounterTypeUnknown = 0_i32
+    StorageCounterTypeTemperatureCelsius = 1_i32
+    StorageCounterTypeTemperatureCelsiusMax = 2_i32
+    StorageCounterTypeReadErrorsTotal = 3_i32
+    StorageCounterTypeReadErrorsCorrected = 4_i32
+    StorageCounterTypeReadErrorsUncorrected = 5_i32
+    StorageCounterTypeWriteErrorsTotal = 6_i32
+    StorageCounterTypeWriteErrorsCorrected = 7_i32
+    StorageCounterTypeWriteErrorsUncorrected = 8_i32
+    StorageCounterTypeManufactureDate = 9_i32
+    StorageCounterTypeStartStopCycleCount = 10_i32
+    StorageCounterTypeStartStopCycleCountMax = 11_i32
+    StorageCounterTypeLoadUnloadCycleCount = 12_i32
+    StorageCounterTypeLoadUnloadCycleCountMax = 13_i32
+    StorageCounterTypeWearPercentage = 14_i32
+    StorageCounterTypeWearPercentageWarning = 15_i32
+    StorageCounterTypeWearPercentageMax = 16_i32
+    StorageCounterTypePowerOnHours = 17_i32
+    StorageCounterTypeReadLatency100NSMax = 18_i32
+    StorageCounterTypeWriteLatency100NSMax = 19_i32
+    StorageCounterTypeFlushLatency100NSMax = 20_i32
+    StorageCounterTypeMax = 21_i32
+  end
+  enum STORAGE_ATTRIBUTE_MGMT_ACTION
+    StorAttributeMgmt_ClearAttribute = 0_i32
+    StorAttributeMgmt_SetAttribute = 1_i32
+    StorAttributeMgmt_ResetAttribute = 2_i32
+  end
+  enum SCM_REGION_FLAG
+    ScmRegionFlagNone = 0_i32
+    ScmRegionFlagLabel = 1_i32
+  end
+  enum SCM_BUS_QUERY_TYPE
+    ScmBusQuery_Descriptor = 0_i32
+    ScmBusQuery_IsSupported = 1_i32
+    ScmBusQuery_Max = 2_i32
+  end
+  enum SCM_BUS_SET_TYPE
+    ScmBusSet_Descriptor = 0_i32
+    ScmBusSet_IsSupported = 1_i32
+    ScmBusSet_Max = 2_i32
+  end
+  enum SCM_BUS_PROPERTY_ID
+    ScmBusProperty_RuntimeFwActivationInfo = 0_i32
+    ScmBusProperty_DedicatedMemoryInfo = 1_i32
+    ScmBusProperty_DedicatedMemoryState = 2_i32
+    ScmBusProperty_Max = 3_i32
+  end
+  enum SCM_BUS_FIRMWARE_ACTIVATION_STATE
+    ScmBusFirmwareActivationState_Idle = 0_i32
+    ScmBusFirmwareActivationState_Armed = 1_i32
+    ScmBusFirmwareActivationState_Busy = 2_i32
+  end
+  enum SCM_PD_QUERY_TYPE
+    ScmPhysicalDeviceQuery_Descriptor = 0_i32
+    ScmPhysicalDeviceQuery_IsSupported = 1_i32
+    ScmPhysicalDeviceQuery_Max = 2_i32
+  end
+  enum SCM_PD_SET_TYPE
+    ScmPhysicalDeviceSet_Descriptor = 0_i32
+    ScmPhysicalDeviceSet_IsSupported = 1_i32
+    ScmPhysicalDeviceSet_Max = 2_i32
+  end
+  enum SCM_PD_PROPERTY_ID
+    ScmPhysicalDeviceProperty_DeviceInfo = 0_i32
+    ScmPhysicalDeviceProperty_ManagementStatus = 1_i32
+    ScmPhysicalDeviceProperty_FirmwareInfo = 2_i32
+    ScmPhysicalDeviceProperty_LocationString = 3_i32
+    ScmPhysicalDeviceProperty_DeviceSpecificInfo = 4_i32
+    ScmPhysicalDeviceProperty_DeviceHandle = 5_i32
+    ScmPhysicalDeviceProperty_FruIdString = 6_i32
+    ScmPhysicalDeviceProperty_RuntimeFwActivationInfo = 7_i32
+    ScmPhysicalDeviceProperty_RuntimeFwActivationArmState = 8_i32
+    ScmPhysicalDeviceProperty_Max = 9_i32
+  end
+  enum SCM_PD_HEALTH_STATUS
+    ScmPhysicalDeviceHealth_Unknown = 0_i32
+    ScmPhysicalDeviceHealth_Unhealthy = 1_i32
+    ScmPhysicalDeviceHealth_Warning = 2_i32
+    ScmPhysicalDeviceHealth_Healthy = 3_i32
+    ScmPhysicalDeviceHealth_Max = 4_i32
+  end
+  enum SCM_PD_OPERATIONAL_STATUS
+    ScmPhysicalDeviceOpStatus_Unknown = 0_i32
+    ScmPhysicalDeviceOpStatus_Ok = 1_i32
+    ScmPhysicalDeviceOpStatus_PredictingFailure = 2_i32
+    ScmPhysicalDeviceOpStatus_InService = 3_i32
+    ScmPhysicalDeviceOpStatus_HardwareError = 4_i32
+    ScmPhysicalDeviceOpStatus_NotUsable = 5_i32
+    ScmPhysicalDeviceOpStatus_TransientError = 6_i32
+    ScmPhysicalDeviceOpStatus_Missing = 7_i32
+    ScmPhysicalDeviceOpStatus_Max = 8_i32
+  end
+  enum SCM_PD_OPERATIONAL_STATUS_REASON
+    ScmPhysicalDeviceOpReason_Unknown = 0_i32
+    ScmPhysicalDeviceOpReason_Media = 1_i32
+    ScmPhysicalDeviceOpReason_ThresholdExceeded = 2_i32
+    ScmPhysicalDeviceOpReason_LostData = 3_i32
+    ScmPhysicalDeviceOpReason_EnergySource = 4_i32
+    ScmPhysicalDeviceOpReason_Configuration = 5_i32
+    ScmPhysicalDeviceOpReason_DeviceController = 6_i32
+    ScmPhysicalDeviceOpReason_MediaController = 7_i32
+    ScmPhysicalDeviceOpReason_Component = 8_i32
+    ScmPhysicalDeviceOpReason_BackgroundOperation = 9_i32
+    ScmPhysicalDeviceOpReason_InvalidFirmware = 10_i32
+    ScmPhysicalDeviceOpReason_HealthCheck = 11_i32
+    ScmPhysicalDeviceOpReason_LostDataPersistence = 12_i32
+    ScmPhysicalDeviceOpReason_DisabledByPlatform = 13_i32
+    ScmPhysicalDeviceOpReason_PermanentError = 14_i32
+    ScmPhysicalDeviceOpReason_LostWritePersistence = 15_i32
+    ScmPhysicalDeviceOpReason_FatalError = 16_i32
+    ScmPhysicalDeviceOpReason_DataPersistenceLossImminent = 17_i32
+    ScmPhysicalDeviceOpReason_WritePersistenceLossImminent = 18_i32
+    ScmPhysicalDeviceOpReason_MediaRemainingSpareBlock = 19_i32
+    ScmPhysicalDeviceOpReason_PerformanceDegradation = 20_i32
+    ScmPhysicalDeviceOpReason_ExcessiveTemperature = 21_i32
+    ScmPhysicalDeviceOpReason_InternalFailure = 22_i32
+    ScmPhysicalDeviceOpReason_Max = 23_i32
+  end
+  enum SCM_PD_LAST_FW_ACTIVATION_STATUS
+    ScmPdLastFwActivationStatus_None = 0_i32
+    ScmPdLastFwActivationStatus_Success = 1_i32
+    ScmPdLastFwActivationStatus_FwNotFound = 2_i32
+    ScmPdLastFwActivationStatus_ColdRebootRequired = 3_i32
+    ScmPdLastFwActivaitonStatus_ActivationInProgress = 4_i32
+    ScmPdLastFwActivaitonStatus_Retry = 5_i32
+    ScmPdLastFwActivaitonStatus_FwUnsupported = 6_i32
+    ScmPdLastFwActivaitonStatus_UnknownError = 7_i32
+  end
+  enum SCM_PD_FIRMWARE_ACTIVATION_STATE
+    ScmPdFirmwareActivationState_Idle = 0_i32
+    ScmPdFirmwareActivationState_Armed = 1_i32
+    ScmPdFirmwareActivationState_Busy = 2_i32
+  end
+  enum SCM_PD_MEDIA_REINITIALIZATION_STATUS
+    ScmPhysicalDeviceReinit_Success = 0_i32
+    ScmPhysicalDeviceReinit_RebootNeeded = 1_i32
+    ScmPhysicalDeviceReinit_ColdBootNeeded = 2_i32
+    ScmPhysicalDeviceReinit_Max = 3_i32
+  end
+  enum MEDIA_TYPE
+    Unknown = 0_i32
+    F5_1Pt2_512 = 1_i32
+    F3_1Pt44_512 = 2_i32
+    F3_2Pt88_512 = 3_i32
+    F3_20Pt8_512 = 4_i32
+    F3_720_512 = 5_i32
+    F5_360_512 = 6_i32
+    F5_320_512 = 7_i32
+    F5_320_1024 = 8_i32
+    F5_180_512 = 9_i32
+    F5_160_512 = 10_i32
+    RemovableMedia = 11_i32
+    FixedMedia = 12_i32
+    F3_120M_512 = 13_i32
+    F3_640_512 = 14_i32
+    F5_640_512 = 15_i32
+    F5_720_512 = 16_i32
+    F3_1Pt2_512 = 17_i32
+    F3_1Pt23_1024 = 18_i32
+    F5_1Pt23_1024 = 19_i32
+    F3_128Mb_512 = 20_i32
+    F3_230Mb_512 = 21_i32
+    F8_256_128 = 22_i32
+    F3_200Mb_512 = 23_i32
+    F3_240M_512 = 24_i32
+    F3_32M_512 = 25_i32
+  end
+  enum PARTITION_STYLE
+    PARTITION_STYLE_MBR = 0_i32
+    PARTITION_STYLE_GPT = 1_i32
+    PARTITION_STYLE_RAW = 2_i32
+  end
+  enum DETECTION_TYPE
+    DetectNone = 0_i32
+    DetectInt13 = 1_i32
+    DetectExInt13 = 2_i32
+  end
+  enum DISK_CACHE_RETENTION_PRIORITY
+    EqualPriority = 0_i32
+    KeepPrefetchedData = 1_i32
+    KeepReadData = 2_i32
+  end
+  enum BIN_TYPES
+    RequestSize = 0_i32
+    RequestLocation = 1_i32
+  end
+  enum ELEMENT_TYPE
+    AllElements = 0_i32
+    ChangerTransport = 1_i32
+    ChangerSlot = 2_i32
+    ChangerIEPort = 3_i32
+    ChangerDrive = 4_i32
+    ChangerDoor = 5_i32
+    ChangerKeypad = 6_i32
+    ChangerMaxElement = 7_i32
+  end
+  enum CHANGER_DEVICE_PROBLEM_TYPE
+    DeviceProblemNone = 0_i32
+    DeviceProblemHardware = 1_i32
+    DeviceProblemCHMError = 2_i32
+    DeviceProblemDoorOpen = 3_i32
+    DeviceProblemCalibrationError = 4_i32
+    DeviceProblemTargetFailure = 5_i32
+    DeviceProblemCHMMoveError = 6_i32
+    DeviceProblemCHMZeroError = 7_i32
+    DeviceProblemCartridgeInsertError = 8_i32
+    DeviceProblemPositionError = 9_i32
+    DeviceProblemSensorError = 10_i32
+    DeviceProblemCartridgeEjectError = 11_i32
+    DeviceProblemGripperError = 12_i32
+    DeviceProblemDriveError = 13_i32
+  end
+  enum SHRINK_VOLUME_REQUEST_TYPES
+    ShrinkPrepare = 1_i32
+    ShrinkCommit = 2_i32
+    ShrinkAbort = 3_i32
+  end
+  enum CSV_CONTROL_OP
+    CsvControlStartRedirectFile = 2_i32
+    CsvControlStopRedirectFile = 3_i32
+    CsvControlQueryRedirectState = 4_i32
+    CsvControlQueryFileRevision = 6_i32
+    CsvControlQueryMdsPath = 8_i32
+    CsvControlQueryFileRevisionFileId128 = 9_i32
+    CsvControlQueryVolumeRedirectState = 10_i32
+    CsvControlEnableUSNRangeModificationTracking = 13_i32
+    CsvControlMarkHandleLocalVolumeMount = 14_i32
+    CsvControlUnmarkHandleLocalVolumeMount = 15_i32
+    CsvControlGetCsvFsMdsPathV2 = 18_i32
+    CsvControlDisableCaching = 19_i32
+    CsvControlEnableCaching = 20_i32
+    CsvControlStartForceDFO = 21_i32
+    CsvControlStopForceDFO = 22_i32
+    CsvControlQueryMdsPathNoPause = 23_i32
+    CsvControlSetVolumeId = 24_i32
+    CsvControlQueryVolumeId = 25_i32
+  end
+  enum CSVFS_DISK_CONNECTIVITY
+    CsvFsDiskConnectivityNone = 0_i32
+    CsvFsDiskConnectivityMdsNodeOnly = 1_i32
+    CsvFsDiskConnectivitySubsetOfNodes = 2_i32
+    CsvFsDiskConnectivityAllNodes = 3_i32
+  end
+  enum STORAGE_RESERVE_ID
+    StorageReserveIdNone = 0_i32
+    StorageReserveIdHard = 1_i32
+    StorageReserveIdSoft = 2_i32
+    StorageReserveIdUpdateScratch = 3_i32
+    StorageReserveIdMax = 4_i32
+  end
+  enum QUERY_FILE_LAYOUT_FILTER_TYPE
+    QUERY_FILE_LAYOUT_FILTER_TYPE_NONE = 0_i32
+    QUERY_FILE_LAYOUT_FILTER_TYPE_CLUSTERS = 1_i32
+    QUERY_FILE_LAYOUT_FILTER_TYPE_FILEID = 2_i32
+    QUERY_FILE_LAYOUT_FILTER_TYPE_STORAGE_RESERVE_ID = 3_i32
+    QUERY_FILE_LAYOUT_NUM_FILTER_TYPES = 4_i32
+  end
+  enum FILE_STORAGE_TIER_MEDIA_TYPE
+    FileStorageTierMediaTypeUnspecified = 0_i32
+    FileStorageTierMediaTypeDisk = 1_i32
+    FileStorageTierMediaTypeSsd = 2_i32
+    FileStorageTierMediaTypeScm = 4_i32
+    FileStorageTierMediaTypeMax = 5_i32
+  end
+  enum FILE_STORAGE_TIER_CLASS
+    FileStorageTierClassUnspecified = 0_i32
+    FileStorageTierClassCapacity = 1_i32
+    FileStorageTierClassPerformance = 2_i32
+    FileStorageTierClassMax = 3_i32
+  end
+  enum DUPLICATE_EXTENTS_STATE
+    FileSnapStateInactive = 0_i32
+    FileSnapStateSource = 1_i32
+    FileSnapStateTarget = 2_i32
+  end
+  enum REFS_SMR_VOLUME_GC_STATE
+    SmrGcStateInactive = 0_i32
+    SmrGcStatePaused = 1_i32
+    SmrGcStateActive = 2_i32
+    SmrGcStateActiveFullSpeed = 3_i32
+  end
+  enum REFS_SMR_VOLUME_GC_ACTION
+    SmrGcActionStart = 1_i32
+    SmrGcActionStartFullSpeed = 2_i32
+    SmrGcActionPause = 3_i32
+    SmrGcActionStop = 4_i32
+  end
+  enum REFS_SMR_VOLUME_GC_METHOD
+    SmrGcMethodCompaction = 1_i32
+    SmrGcMethodCompression = 2_i32
+    SmrGcMethodRotation = 3_i32
+  end
+  enum VIRTUAL_STORAGE_BEHAVIOR_CODE
+    VirtualStorageBehaviorUndefined = 0_i32
+    VirtualStorageBehaviorCacheWriteThrough = 1_i32
+    VirtualStorageBehaviorCacheWriteBack = 2_i32
+    VirtualStorageBehaviorStopIoProcessing = 3_i32
+    VirtualStorageBehaviorRestartIoProcessing = 4_i32
+  end
+  enum FS_BPIO_OPERATIONS
+    FS_BPIO_OP_ENABLE = 1_i32
+    FS_BPIO_OP_DISABLE = 2_i32
+    FS_BPIO_OP_QUERY = 3_i32
+    FS_BPIO_OP_VOLUME_STACK_PAUSE = 4_i32
+    FS_BPIO_OP_VOLUME_STACK_RESUME = 5_i32
+    FS_BPIO_OP_STREAM_PAUSE = 6_i32
+    FS_BPIO_OP_STREAM_RESUME = 7_i32
+    FS_BPIO_OP_GET_INFO = 8_i32
+    FS_BPIO_OP_MAX_OPERATION = 9_i32
+  end
+  enum FS_BPIO_INFLAGS
+    FSBPIO_INFL_None = 0_i32
+    FSBPIO_INFL_SKIP_STORAGE_STACK_QUERY = 1_i32
+  end
+  enum FS_BPIO_OUTFLAGS
+    FSBPIO_OUTFL_None = 0_i32
+    FSBPIO_OUTFL_VOLUME_STACK_BYPASS_PAUSED = 1_i32
+    FSBPIO_OUTFL_STREAM_BYPASS_PAUSED = 2_i32
+    FSBPIO_OUTFL_FILTER_ATTACH_BLOCKED = 4_i32
+    FSBPIO_OUTFL_COMPATIBLE_STORAGE_DRIVER = 8_i32
+  end
+
+  @[Extern]
+  record STORAGE_HOTPLUG_INFO,
+    size : UInt32,
+    media_removable : Win32cr::Foundation::BOOLEAN,
+    media_hotplug : Win32cr::Foundation::BOOLEAN,
+    device_hotplug : Win32cr::Foundation::BOOLEAN,
+    write_cache_enable_override : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record STORAGE_DEVICE_NUMBER,
+    device_type : UInt32,
+    device_number : UInt32,
     partition_number : UInt32
-  end
-  struct STORAGE_DEVICE_NUMBERS
-    version : UInt32
-    size : UInt32
-    number_of_devices : UInt32
-    devices : STORAGE_DEVICE_NUMBER[0]*
-  end
-  struct STORAGE_DEVICE_NUMBER_EX
-    version : UInt32
-    size : UInt32
-    flags : UInt32
-    device_type : UInt32
-    device_number : UInt32
-    device_guid : Guid
+
+  @[Extern]
+  record STORAGE_DEVICE_NUMBERS,
+    version : UInt32,
+    size : UInt32,
+    number_of_devices : UInt32,
+    devices : Win32cr::System::Ioctl::STORAGE_DEVICE_NUMBER*
+
+  @[Extern]
+  record STORAGE_DEVICE_NUMBER_EX,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
+    device_type : UInt32,
+    device_number : UInt32,
+    device_guid : LibC::GUID,
     partition_number : UInt32
-  end
-  struct STORAGE_BUS_RESET_REQUEST
+
+  @[Extern]
+  record STORAGE_BUS_RESET_REQUEST,
     path_id : UInt8
-  end
-  struct STORAGE_BREAK_RESERVATION_REQUEST
-    length : UInt32
-    _unused : UInt8
-    path_id : UInt8
-    target_id : UInt8
+
+  @[Extern]
+  record STORAGE_BREAK_RESERVATION_REQUEST,
+    length : UInt32,
+    _unused : UInt8,
+    path_id : UInt8,
+    target_id : UInt8,
     lun : UInt8
-  end
-  struct PREVENT_MEDIA_REMOVAL
-    prevent_media_removal : BOOLEAN
-  end
-  struct CLASS_MEDIA_CHANGE_CONTEXT
-    media_change_count : UInt32
+
+  @[Extern]
+  record PREVENT_MEDIA_REMOVAL,
+    prevent_media_removal : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record CLASS_MEDIA_CHANGE_CONTEXT,
+    media_change_count : UInt32,
     new_state : UInt32
-  end
-  struct TAPE_STATISTICS
-    version : UInt32
-    flags : UInt32
-    recovered_writes : LARGE_INTEGER
-    unrecovered_writes : LARGE_INTEGER
-    recovered_reads : LARGE_INTEGER
-    unrecovered_reads : LARGE_INTEGER
-    compression_ratio_reads : UInt8
+
+  @[Extern]
+  record TAPE_STATISTICS,
+    version : UInt32,
+    flags : UInt32,
+    recovered_writes : Win32cr::Foundation::LARGE_INTEGER,
+    unrecovered_writes : Win32cr::Foundation::LARGE_INTEGER,
+    recovered_reads : Win32cr::Foundation::LARGE_INTEGER,
+    unrecovered_reads : Win32cr::Foundation::LARGE_INTEGER,
+    compression_ratio_reads : UInt8,
     compression_ratio_writes : UInt8
-  end
-  struct TAPE_GET_STATISTICS
+
+  @[Extern]
+  record TAPE_GET_STATISTICS,
     operation : UInt32
+
+  @[Extern]
+  record DEVICE_MEDIA_INFO,
+    device_specific : DeviceSpecific_e__Union do
+
+    # Nested Type DeviceSpecific_e__Union
+    @[Extern(union: true)]
+    record DeviceSpecific_e__Union,
+      disk_info : DiskInfo_e__Struct,
+      removable_disk_info : RemovableDiskInfo_e__Struct,
+      tape_info : TapeInfo_e__Struct do
+
+      # Nested Type TapeInfo_e__Struct
+      @[Extern]
+      record TapeInfo_e__Struct,
+        media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE,
+        media_characteristics : UInt32,
+        current_block_size : UInt32,
+        bus_type : Win32cr::Storage::FileSystem::STORAGE_BUS_TYPE,
+        bus_specific_data : BusSpecificData_e__Union do
+
+        # Nested Type BusSpecificData_e__Union
+        @[Extern(union: true)]
+        record BusSpecificData_e__Union,
+          scsi_information : ScsiInformation_e__Struct do
+
+          # Nested Type ScsiInformation_e__Struct
+          @[Extern]
+          record ScsiInformation_e__Struct,
+            medium_type : UInt8,
+            density_code : UInt8
+
+        end
+
+      end
+
+
+      # Nested Type DiskInfo_e__Struct
+      @[Extern]
+      record DiskInfo_e__Struct,
+        cylinders : Win32cr::Foundation::LARGE_INTEGER,
+        media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE,
+        tracks_per_cylinder : UInt32,
+        sectors_per_track : UInt32,
+        bytes_per_sector : UInt32,
+        number_media_sides : UInt32,
+        media_characteristics : UInt32
+
+
+      # Nested Type RemovableDiskInfo_e__Struct
+      @[Extern]
+      record RemovableDiskInfo_e__Struct,
+        cylinders : Win32cr::Foundation::LARGE_INTEGER,
+        media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE,
+        tracks_per_cylinder : UInt32,
+        sectors_per_track : UInt32,
+        bytes_per_sector : UInt32,
+        number_media_sides : UInt32,
+        media_characteristics : UInt32
+
+    end
+
   end
-  struct DEVICE_MEDIA_INFO
-    device_specific : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union
-  end
-  struct DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct
-    media_type : STORAGE_MEDIA_TYPE
-    media_characteristics : UInt32
-    current_block_size : UInt32
-    bus_type : STORAGE_BUS_TYPE
-    bus_specific_data : DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union
-  end
-  struct DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_TapeInfo_e__Struct_BusSpecificData_e__Union_ScsiInformation_e__Struct
-    medium_type : UInt8
-    density_code : UInt8
-  end
-  struct DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_DiskInfo_e__Struct
-    cylinders : LARGE_INTEGER
-    media_type : STORAGE_MEDIA_TYPE
-    tracks_per_cylinder : UInt32
-    sectors_per_track : UInt32
-    bytes_per_sector : UInt32
-    number_media_sides : UInt32
-    media_characteristics : UInt32
-  end
-  struct DEVICE_MEDIA_INFO_DeviceSpecific_e__Union_RemovableDiskInfo_e__Struct
-    cylinders : LARGE_INTEGER
-    media_type : STORAGE_MEDIA_TYPE
-    tracks_per_cylinder : UInt32
-    sectors_per_track : UInt32
-    bytes_per_sector : UInt32
-    number_media_sides : UInt32
-    media_characteristics : UInt32
-  end
-  struct GET_MEDIA_TYPES
-    device_type : UInt32
-    media_info_count : UInt32
-    media_info : DEVICE_MEDIA_INFO[0]*
-  end
-  struct STORAGE_PREDICT_FAILURE
-    predict_failure : UInt32
-    vendor_specific : UInt8[512]*
-  end
-  struct STORAGE_FAILURE_PREDICTION_CONFIG
-    version : UInt32
-    size : UInt32
-    set : BOOLEAN
-    enabled : BOOLEAN
+
+  @[Extern]
+  record GET_MEDIA_TYPES,
+    device_type : UInt32,
+    media_info_count : UInt32,
+    media_info : Win32cr::System::Ioctl::DEVICE_MEDIA_INFO*
+
+  @[Extern]
+  record STORAGE_PREDICT_FAILURE,
+    predict_failure : UInt32,
+    vendor_specific : UInt8[512]
+
+  @[Extern]
+  record STORAGE_FAILURE_PREDICTION_CONFIG,
+    version : UInt32,
+    size : UInt32,
+    set : Win32cr::Foundation::BOOLEAN,
+    enabled : Win32cr::Foundation::BOOLEAN,
     reserved : UInt16
-  end
-  struct STORAGE_PROPERTY_QUERY
-    property_id : STORAGE_PROPERTY_ID
-    query_type : STORAGE_QUERY_TYPE
-    additional_parameters : UInt8[0]*
-  end
-  struct STORAGE_PROPERTY_SET
-    property_id : STORAGE_PROPERTY_ID
-    set_type : STORAGE_SET_TYPE
-    additional_parameters : UInt8[0]*
-  end
-  struct STORAGE_DESCRIPTOR_HEADER
-    version : UInt32
+
+  @[Extern]
+  record STORAGE_PROPERTY_QUERY,
+    property_id : Win32cr::System::Ioctl::STORAGE_PROPERTY_ID,
+    query_type : Win32cr::System::Ioctl::STORAGE_QUERY_TYPE,
+    additional_parameters : UInt8*
+
+  @[Extern]
+  record STORAGE_PROPERTY_SET,
+    property_id : Win32cr::System::Ioctl::STORAGE_PROPERTY_ID,
+    set_type : Win32cr::System::Ioctl::STORAGE_SET_TYPE,
+    additional_parameters : UInt8*
+
+  @[Extern]
+  record STORAGE_DESCRIPTOR_HEADER,
+    version : UInt32,
     size : UInt32
-  end
-  struct STORAGE_DEVICE_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    device_type : UInt8
-    device_type_modifier : UInt8
-    removable_media : BOOLEAN
-    command_queueing : BOOLEAN
-    vendor_id_offset : UInt32
-    product_id_offset : UInt32
-    product_revision_offset : UInt32
-    serial_number_offset : UInt32
-    bus_type : STORAGE_BUS_TYPE
-    raw_properties_length : UInt32
-    raw_device_properties : UInt8[0]*
-  end
-  struct STORAGE_ADAPTER_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    maximum_transfer_length : UInt32
-    maximum_physical_pages : UInt32
-    alignment_mask : UInt32
-    adapter_uses_pio : BOOLEAN
-    adapter_scans_down : BOOLEAN
-    command_queueing : BOOLEAN
-    accelerated_transfer : BOOLEAN
-    bus_type : UInt8
-    bus_major_version : UInt16
-    bus_minor_version : UInt16
-    srb_type : UInt8
+
+  @[Extern]
+  record STORAGE_DEVICE_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    device_type : UInt8,
+    device_type_modifier : UInt8,
+    removable_media : Win32cr::Foundation::BOOLEAN,
+    command_queueing : Win32cr::Foundation::BOOLEAN,
+    vendor_id_offset : UInt32,
+    product_id_offset : UInt32,
+    product_revision_offset : UInt32,
+    serial_number_offset : UInt32,
+    bus_type : Win32cr::Storage::FileSystem::STORAGE_BUS_TYPE,
+    raw_properties_length : UInt32,
+    raw_device_properties : UInt8*
+
+  @[Extern]
+  record STORAGE_ADAPTER_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    maximum_transfer_length : UInt32,
+    maximum_physical_pages : UInt32,
+    alignment_mask : UInt32,
+    adapter_uses_pio : Win32cr::Foundation::BOOLEAN,
+    adapter_scans_down : Win32cr::Foundation::BOOLEAN,
+    command_queueing : Win32cr::Foundation::BOOLEAN,
+    accelerated_transfer : Win32cr::Foundation::BOOLEAN,
+    bus_type : UInt8,
+    bus_major_version : UInt16,
+    bus_minor_version : UInt16,
+    srb_type : UInt8,
     address_type : UInt8
-  end
-  struct STORAGE_ACCESS_ALIGNMENT_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    bytes_per_cache_line : UInt32
-    bytes_offset_for_cache_alignment : UInt32
-    bytes_per_logical_sector : UInt32
-    bytes_per_physical_sector : UInt32
+
+  @[Extern]
+  record STORAGE_ACCESS_ALIGNMENT_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    bytes_per_cache_line : UInt32,
+    bytes_offset_for_cache_alignment : UInt32,
+    bytes_per_logical_sector : UInt32,
+    bytes_per_physical_sector : UInt32,
     bytes_offset_for_sector_alignment : UInt32
-  end
-  struct STORAGE_MEDIUM_PRODUCT_TYPE_DESCRIPTOR
-    version : UInt32
-    size : UInt32
+
+  @[Extern]
+  record STORAGE_MEDIUM_PRODUCT_TYPE_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
     medium_product_type : UInt32
+
+  @[Extern]
+  record STORAGE_MINIPORT_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    portdriver : Win32cr::System::Ioctl::STORAGE_PORT_CODE_SET,
+    lun_reset_supported : Win32cr::Foundation::BOOLEAN,
+    target_reset_supported : Win32cr::Foundation::BOOLEAN,
+    io_timeout_value : UInt16,
+    extra_io_info_supported : Win32cr::Foundation::BOOLEAN,
+    flags : Flags_e__Union,
+    reserved0 : UInt8[2],
+    reserved1 : UInt32 do
+
+    # Nested Type Flags_e__Union
+    @[Extern(union: true)]
+    record Flags_e__Union,
+      anonymous : Anonymous_e__Struct,
+      as_byte : UInt8 do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt8
+
+    end
+
   end
-  struct STORAGE_MINIPORT_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    portdriver : STORAGE_PORT_CODE_SET
-    lun_reset_supported : BOOLEAN
-    target_reset_supported : BOOLEAN
-    io_timeout_value : UInt16
-    extra_io_info_supported : BOOLEAN
-    flags : STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union
-    reserved0 : UInt8[2]*
-    reserved1 : UInt32
-  end
-  struct STORAGE_MINIPORT_DESCRIPTOR_Flags_e__Union_Anonymous_e__Struct
-    _bitfield : UInt8
-  end
-  struct STORAGE_IDENTIFIER
-    code_set : STORAGE_IDENTIFIER_CODE_SET
-    type : STORAGE_IDENTIFIER_TYPE
-    identifier_size : UInt16
-    next_offset : UInt16
-    association : STORAGE_ASSOCIATION_TYPE
-    identifier : UInt8[0]*
-  end
-  struct STORAGE_DEVICE_ID_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    number_of_identifiers : UInt32
-    identifiers : UInt8[0]*
-  end
-  struct DEVICE_SEEK_PENALTY_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    incurs_seek_penalty : BOOLEAN
-  end
-  struct DEVICE_WRITE_AGGREGATION_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    benefits_from_write_aggregation : BOOLEAN
-  end
-  struct DEVICE_TRIM_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    trim_enabled : BOOLEAN
-  end
-  struct DEVICE_LB_PROVISIONING_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    _bitfield : UInt8
-    reserved1 : UInt8[7]*
-    optimal_unmap_granularity : UInt64
-    unmap_granularity_alignment : UInt64
-    max_unmap_lba_count : UInt32
+
+  @[Extern]
+  record STORAGE_IDENTIFIER,
+    code_set : Win32cr::System::Ioctl::STORAGE_IDENTIFIER_CODE_SET,
+    type__ : Win32cr::System::Ioctl::STORAGE_IDENTIFIER_TYPE,
+    identifier_size : UInt16,
+    next_offset : UInt16,
+    association : Win32cr::System::Ioctl::STORAGE_ASSOCIATION_TYPE,
+    identifier : UInt8*
+
+  @[Extern]
+  record STORAGE_DEVICE_ID_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    number_of_identifiers : UInt32,
+    identifiers : UInt8*
+
+  @[Extern]
+  record DEVICE_SEEK_PENALTY_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    incurs_seek_penalty : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record DEVICE_WRITE_AGGREGATION_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    benefits_from_write_aggregation : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record DEVICE_TRIM_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    trim_enabled : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record DEVICE_LB_PROVISIONING_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    _bitfield : UInt8,
+    reserved1 : UInt8[7],
+    optimal_unmap_granularity : UInt64,
+    unmap_granularity_alignment : UInt64,
+    max_unmap_lba_count : UInt32,
     max_unmap_block_descriptor_count : UInt32
-  end
-  struct STORAGE_LB_PROVISIONING_MAP_RESOURCES
-    size : UInt32
-    version : UInt32
-    _bitfield1 : UInt8
-    reserved1 : UInt8[3]*
-    _bitfield2 : UInt8
-    reserved3 : UInt8[3]*
-    available_mapping_resources : UInt64
+
+  @[Extern]
+  record STORAGE_LB_PROVISIONING_MAP_RESOURCES,
+    size : UInt32,
+    version : UInt32,
+    _bitfield1 : UInt8,
+    reserved1 : UInt8[3],
+    _bitfield2 : UInt8,
+    reserved3 : UInt8[3],
+    available_mapping_resources : UInt64,
     used_mapping_resources : UInt64
-  end
-  struct DEVICE_POWER_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    device_attention_supported : BOOLEAN
-    asynchronous_notification_supported : BOOLEAN
-    idle_power_management_enabled : BOOLEAN
-    d3_cold_enabled : BOOLEAN
-    d3_cold_supported : BOOLEAN
-    no_verify_during_idle_power : BOOLEAN
-    reserved : UInt8[2]*
+
+  @[Extern]
+  record DEVICE_POWER_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    device_attention_supported : Win32cr::Foundation::BOOLEAN,
+    asynchronous_notification_supported : Win32cr::Foundation::BOOLEAN,
+    idle_power_management_enabled : Win32cr::Foundation::BOOLEAN,
+    d3_cold_enabled : Win32cr::Foundation::BOOLEAN,
+    d3_cold_supported : Win32cr::Foundation::BOOLEAN,
+    no_verify_during_idle_power : Win32cr::Foundation::BOOLEAN,
+    reserved : UInt8[2],
     idle_timeout_in_ms : UInt32
-  end
-  struct DEVICE_COPY_OFFLOAD_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    maximum_token_lifetime : UInt32
-    default_token_lifetime : UInt32
-    maximum_transfer_size : UInt64
-    optimal_transfer_count : UInt64
-    maximum_data_descriptors : UInt32
-    maximum_transfer_length_per_descriptor : UInt32
-    optimal_transfer_length_per_descriptor : UInt32
-    optimal_transfer_length_granularity : UInt16
-    reserved : UInt8[2]*
-  end
-  struct STORAGE_DEVICE_RESILIENCY_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    name_offset : UInt32
-    number_of_logical_copies : UInt32
-    number_of_physical_copies : UInt32
-    physical_disk_redundancy : UInt32
-    number_of_columns : UInt32
+
+  @[Extern]
+  record DEVICE_COPY_OFFLOAD_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    maximum_token_lifetime : UInt32,
+    default_token_lifetime : UInt32,
+    maximum_transfer_size : UInt64,
+    optimal_transfer_count : UInt64,
+    maximum_data_descriptors : UInt32,
+    maximum_transfer_length_per_descriptor : UInt32,
+    optimal_transfer_length_per_descriptor : UInt32,
+    optimal_transfer_length_granularity : UInt16,
+    reserved : UInt8[2]
+
+  @[Extern]
+  record STORAGE_DEVICE_RESILIENCY_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    name_offset : UInt32,
+    number_of_logical_copies : UInt32,
+    number_of_physical_copies : UInt32,
+    physical_disk_redundancy : UInt32,
+    number_of_columns : UInt32,
     interleave : UInt32
-  end
-  struct STORAGE_RPMB_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    size_in_bytes : UInt32
-    max_reliable_write_size_in_bytes : UInt32
-    frame_format : STORAGE_RPMB_FRAME_TYPE
-  end
-  struct STORAGE_CRYPTO_CAPABILITY
-    version : UInt32
-    size : UInt32
-    crypto_capability_index : UInt32
-    algorithm_id : STORAGE_CRYPTO_ALGORITHM_ID
-    key_size : STORAGE_CRYPTO_KEY_SIZE
+
+  @[Extern]
+  record STORAGE_RPMB_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    size_in_bytes : UInt32,
+    max_reliable_write_size_in_bytes : UInt32,
+    frame_format : Win32cr::System::Ioctl::STORAGE_RPMB_FRAME_TYPE
+
+  @[Extern]
+  record STORAGE_CRYPTO_CAPABILITY,
+    version : UInt32,
+    size : UInt32,
+    crypto_capability_index : UInt32,
+    algorithm_id : Win32cr::System::Ioctl::STORAGE_CRYPTO_ALGORITHM_ID,
+    key_size : Win32cr::System::Ioctl::STORAGE_CRYPTO_KEY_SIZE,
     data_unit_size_bitmask : UInt32
+
+  @[Extern]
+  record STORAGE_CRYPTO_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    num_keys_supported : UInt32,
+    num_crypto_capabilities : UInt32,
+    crypto_capabilities : Win32cr::System::Ioctl::STORAGE_CRYPTO_CAPABILITY*
+
+  @[Extern]
+  record STORAGE_TIER,
+    id : LibC::GUID,
+    name : UInt16[256],
+    description : UInt16[256],
+    flags : UInt64,
+    provisioned_capacity : UInt64,
+    media_type : Win32cr::System::Ioctl::STORAGE_TIER_MEDIA_TYPE,
+    class__ : Win32cr::System::Ioctl::STORAGE_TIER_CLASS
+
+  @[Extern]
+  record STORAGE_DEVICE_TIERING_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
+    total_number_of_tiers : UInt32,
+    number_of_tiers_returned : UInt32,
+    tiers : Win32cr::System::Ioctl::STORAGE_TIER*
+
+  @[Extern]
+  record STORAGE_DEVICE_FAULT_DOMAIN_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    number_of_fault_domains : UInt32,
+    fault_domain_ids : LibC::GUID*
+
+  @[Extern(union: true)]
+  record STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE,
+    anonymous : Anonymous_e__Struct,
+    as_ulong : UInt32 do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      _bitfield : UInt32
+
   end
-  struct STORAGE_CRYPTO_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    num_keys_supported : UInt32
-    num_crypto_capabilities : UInt32
-    crypto_capabilities : STORAGE_CRYPTO_CAPABILITY[0]*
-  end
-  struct STORAGE_TIER
-    id : Guid
-    name : Char[256]*
-    description : Char[256]*
-    flags : UInt64
-    provisioned_capacity : UInt64
-    media_type : STORAGE_TIER_MEDIA_TYPE
-    class_ : STORAGE_TIER_CLASS
-  end
-  struct STORAGE_DEVICE_TIERING_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    flags : UInt32
-    total_number_of_tiers : UInt32
-    number_of_tiers_returned : UInt32
-    tiers : STORAGE_TIER[0]*
-  end
-  struct STORAGE_DEVICE_FAULT_DOMAIN_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    number_of_fault_domains : UInt32
-    fault_domain_ids : Guid[0]*
-  end
-  struct STORAGE_PROTOCOL_DATA_SUBVALUE_GET_LOG_PAGE_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct STORAGE_PROTOCOL_SPECIFIC_DATA
-    protocol_type : STORAGE_PROTOCOL_TYPE
-    data_type : UInt32
-    protocol_data_request_value : UInt32
-    protocol_data_request_sub_value : UInt32
-    protocol_data_offset : UInt32
-    protocol_data_length : UInt32
-    fixed_protocol_return_data : UInt32
-    protocol_data_request_sub_value2 : UInt32
-    protocol_data_request_sub_value3 : UInt32
+
+  @[Extern]
+  record STORAGE_PROTOCOL_SPECIFIC_DATA,
+    protocol_type : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE,
+    data_type : UInt32,
+    protocol_data_request_value : UInt32,
+    protocol_data_request_sub_value : UInt32,
+    protocol_data_offset : UInt32,
+    protocol_data_length : UInt32,
+    fixed_protocol_return_data : UInt32,
+    protocol_data_request_sub_value2 : UInt32,
+    protocol_data_request_sub_value3 : UInt32,
     protocol_data_request_sub_value4 : UInt32
-  end
-  struct STORAGE_PROTOCOL_SPECIFIC_DATA_EXT
-    protocol_type : STORAGE_PROTOCOL_TYPE
-    data_type : UInt32
-    protocol_data_value : UInt32
-    protocol_data_sub_value : UInt32
-    protocol_data_offset : UInt32
-    protocol_data_length : UInt32
-    fixed_protocol_return_data : UInt32
-    protocol_data_sub_value2 : UInt32
-    protocol_data_sub_value3 : UInt32
-    protocol_data_sub_value4 : UInt32
-    protocol_data_sub_value5 : UInt32
-    reserved : UInt32[5]*
-  end
-  struct STORAGE_PROTOCOL_DATA_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    protocol_specific_data : STORAGE_PROTOCOL_SPECIFIC_DATA
-  end
-  struct STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT
-    version : UInt32
-    size : UInt32
-    protocol_specific_data : STORAGE_PROTOCOL_SPECIFIC_DATA_EXT
-  end
-  struct STORAGE_TEMPERATURE_INFO
-    index : UInt16
-    temperature : Int16
-    over_threshold : Int16
-    under_threshold : Int16
-    over_threshold_changable : BOOLEAN
-    under_threshold_changable : BOOLEAN
-    event_generated : BOOLEAN
-    reserved0 : UInt8
+
+  @[Extern]
+  record STORAGE_PROTOCOL_SPECIFIC_DATA_EXT,
+    protocol_type : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE,
+    data_type : UInt32,
+    protocol_data_value : UInt32,
+    protocol_data_sub_value : UInt32,
+    protocol_data_offset : UInt32,
+    protocol_data_length : UInt32,
+    fixed_protocol_return_data : UInt32,
+    protocol_data_sub_value2 : UInt32,
+    protocol_data_sub_value3 : UInt32,
+    protocol_data_sub_value4 : UInt32,
+    protocol_data_sub_value5 : UInt32,
+    reserved : UInt32[5]
+
+  @[Extern]
+  record STORAGE_PROTOCOL_DATA_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    protocol_specific_data : Win32cr::System::Ioctl::STORAGE_PROTOCOL_SPECIFIC_DATA
+
+  @[Extern]
+  record STORAGE_PROTOCOL_DATA_DESCRIPTOR_EXT,
+    version : UInt32,
+    size : UInt32,
+    protocol_specific_data : Win32cr::System::Ioctl::STORAGE_PROTOCOL_SPECIFIC_DATA_EXT
+
+  @[Extern]
+  record STORAGE_TEMPERATURE_INFO,
+    index : UInt16,
+    temperature : Int16,
+    over_threshold : Int16,
+    under_threshold : Int16,
+    over_threshold_changable : Win32cr::Foundation::BOOLEAN,
+    under_threshold_changable : Win32cr::Foundation::BOOLEAN,
+    event_generated : Win32cr::Foundation::BOOLEAN,
+    reserved0 : UInt8,
     reserved1 : UInt32
-  end
-  struct STORAGE_TEMPERATURE_DATA_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    critical_temperature : Int16
-    warning_temperature : Int16
-    info_count : UInt16
-    reserved0 : UInt8[2]*
-    reserved1 : UInt32[2]*
-    temperature_info : STORAGE_TEMPERATURE_INFO[0]*
-  end
-  struct STORAGE_TEMPERATURE_THRESHOLD
-    version : UInt32
-    size : UInt32
-    flags : UInt16
-    index : UInt16
-    threshold : Int16
-    over_threshold : BOOLEAN
+
+  @[Extern]
+  record STORAGE_TEMPERATURE_DATA_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    critical_temperature : Int16,
+    warning_temperature : Int16,
+    info_count : UInt16,
+    reserved0 : UInt8[2],
+    reserved1 : UInt32[2],
+    temperature_info : Win32cr::System::Ioctl::STORAGE_TEMPERATURE_INFO*
+
+  @[Extern]
+  record STORAGE_TEMPERATURE_THRESHOLD,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt16,
+    index : UInt16,
+    threshold : Int16,
+    over_threshold : Win32cr::Foundation::BOOLEAN,
     reserved : UInt8
+
+  @[Extern(union: true)]
+  record STORAGE_SPEC_VERSION,
+    anonymous : Anonymous_e__Struct,
+    as_ulong : UInt32 do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      minor_version : MinorVersion_e__Union,
+      major_version : UInt16 do
+
+      # Nested Type MinorVersion_e__Union
+      @[Extern(union: true)]
+      record MinorVersion_e__Union,
+        anonymous : Anonymous_e__Struct,
+        as_ushort : UInt16 do
+
+        # Nested Type Anonymous_e__Struct
+        @[Extern]
+        record Anonymous_e__Struct,
+          sub_minor : UInt8,
+          minor : UInt8
+
+      end
+
+    end
+
   end
-  struct STORAGE_SPEC_VERSION_Anonymous_e__Struct
-    minor_version : STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union
-    major_version : UInt16
-  end
-  struct STORAGE_SPEC_VERSION_Anonymous_e__Struct_MinorVersion_e__Union_Anonymous_e__Struct
-    sub_minor : UInt8
-    minor : UInt8
-  end
-  struct STORAGE_PHYSICAL_DEVICE_DATA
-    device_id : UInt32
-    role : UInt32
-    health_status : STORAGE_COMPONENT_HEALTH_STATUS
-    command_protocol : STORAGE_PROTOCOL_TYPE
-    spec_version : STORAGE_SPEC_VERSION
-    form_factor : STORAGE_DEVICE_FORM_FACTOR
-    vendor : UInt8[8]*
-    model : UInt8[40]*
-    firmware_revision : UInt8[16]*
-    capacity : UInt64
-    physical_location : UInt8[32]*
-    reserved : UInt32[2]*
-  end
-  struct STORAGE_PHYSICAL_ADAPTER_DATA
-    adapter_id : UInt32
-    health_status : STORAGE_COMPONENT_HEALTH_STATUS
-    command_protocol : STORAGE_PROTOCOL_TYPE
-    spec_version : STORAGE_SPEC_VERSION
-    vendor : UInt8[8]*
-    model : UInt8[40]*
-    firmware_revision : UInt8[16]*
-    physical_location : UInt8[32]*
-    expander_connected : BOOLEAN
-    reserved0 : UInt8[3]*
-    reserved1 : UInt32[3]*
-  end
-  struct STORAGE_PHYSICAL_NODE_DATA
-    node_id : UInt32
-    adapter_count : UInt32
-    adapter_data_length : UInt32
-    adapter_data_offset : UInt32
-    device_count : UInt32
-    device_data_length : UInt32
-    device_data_offset : UInt32
-    reserved : UInt32[3]*
-  end
-  struct STORAGE_PHYSICAL_TOPOLOGY_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    node_count : UInt32
-    reserved : UInt32
-    node : STORAGE_PHYSICAL_NODE_DATA[0]*
-  end
-  struct STORAGE_DEVICE_IO_CAPABILITY_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    lun_max_io_count : UInt32
+
+  @[Extern]
+  record STORAGE_PHYSICAL_DEVICE_DATA,
+    device_id : UInt32,
+    role : UInt32,
+    health_status : Win32cr::System::Ioctl::STORAGE_COMPONENT_HEALTH_STATUS,
+    command_protocol : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE,
+    spec_version : Win32cr::System::Ioctl::STORAGE_SPEC_VERSION,
+    form_factor : Win32cr::System::Ioctl::STORAGE_DEVICE_FORM_FACTOR,
+    vendor : UInt8[8],
+    model : UInt8[40],
+    firmware_revision : UInt8[16],
+    capacity : UInt64,
+    physical_location : UInt8[32],
+    reserved : UInt32[2]
+
+  @[Extern]
+  record STORAGE_PHYSICAL_ADAPTER_DATA,
+    adapter_id : UInt32,
+    health_status : Win32cr::System::Ioctl::STORAGE_COMPONENT_HEALTH_STATUS,
+    command_protocol : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE,
+    spec_version : Win32cr::System::Ioctl::STORAGE_SPEC_VERSION,
+    vendor : UInt8[8],
+    model : UInt8[40],
+    firmware_revision : UInt8[16],
+    physical_location : UInt8[32],
+    expander_connected : Win32cr::Foundation::BOOLEAN,
+    reserved0 : UInt8[3],
+    reserved1 : UInt32[3]
+
+  @[Extern]
+  record STORAGE_PHYSICAL_NODE_DATA,
+    node_id : UInt32,
+    adapter_count : UInt32,
+    adapter_data_length : UInt32,
+    adapter_data_offset : UInt32,
+    device_count : UInt32,
+    device_data_length : UInt32,
+    device_data_offset : UInt32,
+    reserved : UInt32[3]
+
+  @[Extern]
+  record STORAGE_PHYSICAL_TOPOLOGY_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    node_count : UInt32,
+    reserved : UInt32,
+    node : Win32cr::System::Ioctl::STORAGE_PHYSICAL_NODE_DATA*
+
+  @[Extern]
+  record STORAGE_DEVICE_IO_CAPABILITY_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    lun_max_io_count : UInt32,
     adapter_max_io_count : UInt32
-  end
-  struct STORAGE_DEVICE_ATTRIBUTES_DESCRIPTOR
-    version : UInt32
-    size : UInt32
+
+  @[Extern]
+  record STORAGE_DEVICE_ATTRIBUTES_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
     attributes : UInt64
+
+  @[Extern]
+  record STORAGE_OPERATIONAL_REASON,
+    version : UInt32,
+    size : UInt32,
+    reason : Win32cr::System::Ioctl::STORAGE_OPERATIONAL_STATUS_REASON,
+    raw_bytes : RawBytes_e__Union do
+
+    # Nested Type RawBytes_e__Union
+    @[Extern(union: true)]
+    record RawBytes_e__Union,
+      scsi_sense_key : ScsiSenseKey_e__Struct,
+      nvdimm_n : NVDIMM_N_e__Struct,
+      as_ulong : UInt32 do
+
+      # Nested Type ScsiSenseKey_e__Struct
+      @[Extern]
+      record ScsiSenseKey_e__Struct,
+        sense_key : UInt8,
+        asc : UInt8,
+        ascq : UInt8,
+        reserved : UInt8
+
+
+      # Nested Type NVDIMM_N_e__Struct
+      @[Extern]
+      record NVDIMM_N_e__Struct,
+        critical_health : UInt8,
+        module_health : UInt8[2],
+        error_threshold_status : UInt8
+
+    end
+
   end
-  struct STORAGE_OPERATIONAL_REASON
-    version : UInt32
-    size : UInt32
-    reason : STORAGE_OPERATIONAL_STATUS_REASON
-    raw_bytes : STORAGE_OPERATIONAL_REASON_RawBytes_e__Union
-  end
-  struct STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_ScsiSenseKey_e__Struct
-    sense_key : UInt8
-    asc : UInt8
-    ascq : UInt8
-    reserved : UInt8
-  end
-  struct STORAGE_OPERATIONAL_REASON_RawBytes_e__Union_NVDIMM_N_e__Struct
-    critical_health : UInt8
-    module_health : UInt8[2]*
-    error_threshold_status : UInt8
-  end
-  struct STORAGE_DEVICE_MANAGEMENT_STATUS
-    version : UInt32
-    size : UInt32
-    health : STORAGE_DISK_HEALTH_STATUS
-    number_of_operational_status : UInt32
-    number_of_additional_reasons : UInt32
-    operational_status : STORAGE_DISK_OPERATIONAL_STATUS[16]*
-    additional_reasons : STORAGE_OPERATIONAL_REASON[0]*
-  end
-  struct STORAGE_ADAPTER_SERIAL_NUMBER
-    version : UInt32
-    size : UInt32
-    serial_number : Char[128]*
-  end
-  struct STORAGE_ZONE_GROUP
-    zone_count : UInt32
-    zone_type : STORAGE_ZONE_TYPES
+
+  @[Extern]
+  record STORAGE_DEVICE_MANAGEMENT_STATUS,
+    version : UInt32,
+    size : UInt32,
+    health : Win32cr::System::Ioctl::STORAGE_DISK_HEALTH_STATUS,
+    number_of_operational_status : UInt32,
+    number_of_additional_reasons : UInt32,
+    operational_status : Win32cr::System::Ioctl::STORAGE_DISK_OPERATIONAL_STATUS[16],
+    additional_reasons : Win32cr::System::Ioctl::STORAGE_OPERATIONAL_REASON*
+
+  @[Extern]
+  record STORAGE_ADAPTER_SERIAL_NUMBER,
+    version : UInt32,
+    size : UInt32,
+    serial_number : UInt16[128]
+
+  @[Extern]
+  record STORAGE_ZONE_GROUP,
+    zone_count : UInt32,
+    zone_type : Win32cr::System::Ioctl::STORAGE_ZONE_TYPES,
     zone_size : UInt64
+
+  @[Extern]
+  record STORAGE_ZONED_DEVICE_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    device_type : Win32cr::System::Ioctl::STORAGE_ZONED_DEVICE_TYPES,
+    zone_count : UInt32,
+    zone_attributes : ZoneAttributes_e__Union,
+    zone_group_count : UInt32,
+    zone_group : Win32cr::System::Ioctl::STORAGE_ZONE_GROUP* do
+
+    # Nested Type ZoneAttributes_e__Union
+    @[Extern(union: true)]
+    record ZoneAttributes_e__Union,
+      sequential_required_zone : SequentialRequiredZone_e__Struct,
+      sequential_preferred_zone : SequentialPreferredZone_e__Struct do
+
+      # Nested Type SequentialRequiredZone_e__Struct
+      @[Extern]
+      record SequentialRequiredZone_e__Struct,
+        max_open_zone_count : UInt32,
+        unrestricted_read : Win32cr::Foundation::BOOLEAN,
+        reserved : UInt8[3]
+
+
+      # Nested Type SequentialPreferredZone_e__Struct
+      @[Extern]
+      record SequentialPreferredZone_e__Struct,
+        optimal_open_zone_count : UInt32,
+        reserved : UInt32
+
+    end
+
   end
-  struct STORAGE_ZONED_DEVICE_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    device_type : STORAGE_ZONED_DEVICE_TYPES
-    zone_count : UInt32
-    zone_attributes : STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union
-    zone_group_count : UInt32
-    zone_group : STORAGE_ZONE_GROUP[0]*
+
+  @[Extern]
+  record DEVICE_LOCATION,
+    socket : UInt32,
+    slot : UInt32,
+    adapter : UInt32,
+    port : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous1 : Anonymous1_e__Struct,
+      anonymous2 : Anonymous2_e__Struct do
+
+      # Nested Type Anonymous1_e__Struct
+      @[Extern]
+      record Anonymous1_e__Struct,
+        channel : UInt32,
+        device : UInt32
+
+
+      # Nested Type Anonymous2_e__Struct
+      @[Extern]
+      record Anonymous2_e__Struct,
+        target : UInt32,
+        lun : UInt32
+
+    end
+
   end
-  struct STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialRequiredZone_e__Struct
-    max_open_zone_count : UInt32
-    unrestricted_read : BOOLEAN
-    reserved : UInt8[3]*
-  end
-  struct STORAGE_ZONED_DEVICE_DESCRIPTOR_ZoneAttributes_e__Union_SequentialPreferredZone_e__Struct
-    optimal_open_zone_count : UInt32
-    reserved : UInt32
-  end
-  struct DEVICE_LOCATION
-    socket : UInt32
-    slot : UInt32
-    adapter : UInt32
-    port : UInt32
-    anonymous : DEVICE_LOCATION_Anonymous_e__Union
-  end
-  struct DEVICE_LOCATION_Anonymous_e__Union_Anonymous1_e__Struct
-    channel : UInt32
-    device : UInt32
-  end
-  struct DEVICE_LOCATION_Anonymous_e__Union_Anonymous2_e__Struct
-    target : UInt32
-    lun : UInt32
-  end
-  struct STORAGE_DEVICE_LOCATION_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    location : DEVICE_LOCATION
+
+  @[Extern]
+  record STORAGE_DEVICE_LOCATION_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    location : Win32cr::System::Ioctl::DEVICE_LOCATION,
     string_offset : UInt32
-  end
-  struct STORAGE_DEVICE_NUMA_PROPERTY
-    version : UInt32
-    size : UInt32
+
+  @[Extern]
+  record STORAGE_DEVICE_NUMA_PROPERTY,
+    version : UInt32,
+    size : UInt32,
     numa_node : UInt32
-  end
-  struct STORAGE_DEVICE_UNSAFE_SHUTDOWN_COUNT
-    version : UInt32
-    size : UInt32
+
+  @[Extern]
+  record STORAGE_DEVICE_UNSAFE_SHUTDOWN_COUNT,
+    version : UInt32,
+    size : UInt32,
     unsafe_shutdown_count : UInt32
+
+  @[Extern]
+  record STORAGE_HW_ENDURANCE_INFO,
+    valid_fields : UInt32,
+    group_id : UInt32,
+    flags : Flags_e__Struct,
+    life_percentage : UInt32,
+    bytes_read_count : UInt8[16],
+    byte_write_count : UInt8[16] do
+
+    # Nested Type Flags_e__Struct
+    @[Extern]
+    record Flags_e__Struct,
+      _bitfield : UInt32
+
   end
-  struct STORAGE_HW_ENDURANCE_INFO
-    valid_fields : UInt32
-    group_id : UInt32
-    flags : STORAGE_HW_ENDURANCE_INFO_Flags_e__Struct
-    life_percentage : UInt32
-    bytes_read_count : UInt8[16]*
-    byte_write_count : UInt8[16]*
-  end
-  struct STORAGE_HW_ENDURANCE_INFO_Flags_e__Struct
-    _bitfield : UInt32
-  end
-  struct STORAGE_HW_ENDURANCE_DATA_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    endurance_info : STORAGE_HW_ENDURANCE_INFO
-  end
-  struct STORAGE_DEVICE_LED_STATE_DESCRIPTOR
-    version : UInt32
-    size : UInt32
+
+  @[Extern]
+  record STORAGE_HW_ENDURANCE_DATA_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    endurance_info : Win32cr::System::Ioctl::STORAGE_HW_ENDURANCE_INFO
+
+  @[Extern]
+  record STORAGE_DEVICE_LED_STATE_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
     state : UInt64
-  end
-  struct STORAGE_DEVICE_SELF_ENCRYPTION_PROPERTY
-    version : UInt32
-    size : UInt32
-    supports_self_encryption : BOOLEAN
-  end
-  struct STORAGE_FRU_ID_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    identifier_size : UInt32
-    identifier : UInt8[0]*
-  end
-  struct DEVICE_DATA_SET_RANGE
-    starting_offset : Int64
+
+  @[Extern]
+  record STORAGE_DEVICE_SELF_ENCRYPTION_PROPERTY,
+    version : UInt32,
+    size : UInt32,
+    supports_self_encryption : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record STORAGE_FRU_ID_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    identifier_size : UInt32,
+    identifier : UInt8*
+
+  @[Extern]
+  record DEVICE_DATA_SET_RANGE,
+    starting_offset : Int64,
     length_in_bytes : UInt64
-  end
-  struct DEVICE_MANAGE_DATA_SET_ATTRIBUTES
-    size : UInt32
-    action : UInt32
-    flags : UInt32
-    parameter_block_offset : UInt32
-    parameter_block_length : UInt32
-    data_set_ranges_offset : UInt32
+
+  @[Extern]
+  record DEVICE_MANAGE_DATA_SET_ATTRIBUTES,
+    size : UInt32,
+    action : UInt32,
+    flags : UInt32,
+    parameter_block_offset : UInt32,
+    parameter_block_length : UInt32,
+    data_set_ranges_offset : UInt32,
     data_set_ranges_length : UInt32
-  end
-  struct DEVICE_MANAGE_DATA_SET_ATTRIBUTES_OUTPUT
-    size : UInt32
-    action : UInt32
-    flags : UInt32
-    operation_status : UInt32
-    extended_error : UInt32
-    target_detailed_error : UInt32
-    reserved_status : UInt32
-    output_block_offset : UInt32
+
+  @[Extern]
+  record DEVICE_MANAGE_DATA_SET_ATTRIBUTES_OUTPUT,
+    size : UInt32,
+    action : UInt32,
+    flags : UInt32,
+    operation_status : UInt32,
+    extended_error : UInt32,
+    target_detailed_error : UInt32,
+    reserved_status : UInt32,
+    output_block_offset : UInt32,
     output_block_length : UInt32
-  end
-  struct DEVICE_DSM_DEFINITION
-    action : UInt32
-    single_range : BOOLEAN
-    parameter_block_alignment : UInt32
-    parameter_block_length : UInt32
-    has_output : BOOLEAN
-    output_block_alignment : UInt32
+
+  @[Extern]
+  record DEVICE_DSM_DEFINITION,
+    action : UInt32,
+    single_range : Win32cr::Foundation::BOOLEAN,
+    parameter_block_alignment : UInt32,
+    parameter_block_length : UInt32,
+    has_output : Win32cr::Foundation::BOOLEAN,
+    output_block_alignment : UInt32,
     output_block_length : UInt32
+
+  @[Extern]
+  record DEVICE_DSM_NOTIFICATION_PARAMETERS,
+    size : UInt32,
+    flags : UInt32,
+    num_file_type_i_ds : UInt32,
+    file_type_id : LibC::GUID*
+
+  @[Extern]
+  record STORAGE_OFFLOAD_TOKEN,
+    token_type : UInt8[4],
+    reserved : UInt8[2],
+    token_id_length : UInt8[2],
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      storage_offload_zero_data_token : StorageOffloadZeroDataToken_e__Struct,
+      token : UInt8[504] do
+
+      # Nested Type StorageOffloadZeroDataToken_e__Struct
+      @[Extern]
+      record StorageOffloadZeroDataToken_e__Struct,
+        reserved2 : UInt8[504]
+
+    end
+
   end
-  struct DEVICE_DSM_NOTIFICATION_PARAMETERS
-    size : UInt32
-    flags : UInt32
-    num_file_type_i_ds : UInt32
-    file_type_id : Guid[0]*
-  end
-  struct STORAGE_OFFLOAD_TOKEN
-    token_type : UInt8[4]*
-    reserved : UInt8[2]*
-    token_id_length : UInt8[2]*
-    anonymous : STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union
-  end
-  struct STORAGE_OFFLOAD_TOKEN_Anonymous_e__Union_StorageOffloadZeroDataToken_e__Struct
-    reserved2 : UInt8[504]*
-  end
-  struct DEVICE_DSM_OFFLOAD_READ_PARAMETERS
-    flags : UInt32
-    time_to_live : UInt32
-    reserved : UInt32[2]*
-  end
-  struct STORAGE_OFFLOAD_READ_OUTPUT
-    offload_read_flags : UInt32
-    reserved : UInt32
-    length_protected : UInt64
-    token_length : UInt32
-    token : STORAGE_OFFLOAD_TOKEN
-  end
-  struct DEVICE_DSM_OFFLOAD_WRITE_PARAMETERS
-    flags : UInt32
-    reserved : UInt32
-    token_offset : UInt64
-    token : STORAGE_OFFLOAD_TOKEN
-  end
-  struct STORAGE_OFFLOAD_WRITE_OUTPUT
-    offload_write_flags : UInt32
-    reserved : UInt32
+
+  @[Extern]
+  record DEVICE_DSM_OFFLOAD_READ_PARAMETERS,
+    flags : UInt32,
+    time_to_live : UInt32,
+    reserved : UInt32[2]
+
+  @[Extern]
+  record STORAGE_OFFLOAD_READ_OUTPUT,
+    offload_read_flags : UInt32,
+    reserved : UInt32,
+    length_protected : UInt64,
+    token_length : UInt32,
+    token : Win32cr::System::Ioctl::STORAGE_OFFLOAD_TOKEN
+
+  @[Extern]
+  record DEVICE_DSM_OFFLOAD_WRITE_PARAMETERS,
+    flags : UInt32,
+    reserved : UInt32,
+    token_offset : UInt64,
+    token : Win32cr::System::Ioctl::STORAGE_OFFLOAD_TOKEN
+
+  @[Extern]
+  record STORAGE_OFFLOAD_WRITE_OUTPUT,
+    offload_write_flags : UInt32,
+    reserved : UInt32,
     length_copied : UInt64
-  end
-  struct DEVICE_DATA_SET_LBP_STATE_PARAMETERS
-    version : UInt32
-    size : UInt32
-    flags : UInt32
+
+  @[Extern]
+  record DEVICE_DATA_SET_LBP_STATE_PARAMETERS,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
     output_version : UInt32
-  end
-  struct DEVICE_DATA_SET_LB_PROVISIONING_STATE
-    size : UInt32
-    version : UInt32
-    slab_size_in_bytes : UInt64
-    slab_offset_delta_in_bytes : UInt32
-    slab_allocation_bit_map_bit_count : UInt32
-    slab_allocation_bit_map_length : UInt32
-    slab_allocation_bit_map : UInt32[0]*
-  end
-  struct DEVICE_DATA_SET_LB_PROVISIONING_STATE_V2
-    size : UInt32
-    version : UInt32
-    slab_size_in_bytes : UInt64
-    slab_offset_delta_in_bytes : UInt64
-    slab_allocation_bit_map_bit_count : UInt32
-    slab_allocation_bit_map_length : UInt32
-    slab_allocation_bit_map : UInt32[0]*
-  end
-  struct DEVICE_DATA_SET_REPAIR_PARAMETERS
-    number_of_repair_copies : UInt32
-    source_copy : UInt32
-    repair_copies : UInt32[0]*
-  end
-  struct DEVICE_DATA_SET_REPAIR_OUTPUT
-    parity_extent : DEVICE_DATA_SET_RANGE
-  end
-  struct DEVICE_DATA_SET_SCRUB_OUTPUT
-    bytes_processed : UInt64
-    bytes_repaired : UInt64
+
+  @[Extern]
+  record DEVICE_DATA_SET_LB_PROVISIONING_STATE,
+    size : UInt32,
+    version : UInt32,
+    slab_size_in_bytes : UInt64,
+    slab_offset_delta_in_bytes : UInt32,
+    slab_allocation_bit_map_bit_count : UInt32,
+    slab_allocation_bit_map_length : UInt32,
+    slab_allocation_bit_map : UInt32*
+
+  @[Extern]
+  record DEVICE_DATA_SET_LB_PROVISIONING_STATE_V2,
+    size : UInt32,
+    version : UInt32,
+    slab_size_in_bytes : UInt64,
+    slab_offset_delta_in_bytes : UInt64,
+    slab_allocation_bit_map_bit_count : UInt32,
+    slab_allocation_bit_map_length : UInt32,
+    slab_allocation_bit_map : UInt32*
+
+  @[Extern]
+  record DEVICE_DATA_SET_REPAIR_PARAMETERS,
+    number_of_repair_copies : UInt32,
+    source_copy : UInt32,
+    repair_copies : UInt32*
+
+  @[Extern]
+  record DEVICE_DATA_SET_REPAIR_OUTPUT,
+    parity_extent : Win32cr::System::Ioctl::DEVICE_DATA_SET_RANGE
+
+  @[Extern]
+  record DEVICE_DATA_SET_SCRUB_OUTPUT,
+    bytes_processed : UInt64,
+    bytes_repaired : UInt64,
     bytes_failed : UInt64
-  end
-  struct DEVICE_DATA_SET_SCRUB_EX_OUTPUT
-    bytes_processed : UInt64
-    bytes_repaired : UInt64
-    bytes_failed : UInt64
-    parity_extent : DEVICE_DATA_SET_RANGE
+
+  @[Extern]
+  record DEVICE_DATA_SET_SCRUB_EX_OUTPUT,
+    bytes_processed : UInt64,
+    bytes_repaired : UInt64,
+    bytes_failed : UInt64,
+    parity_extent : Win32cr::System::Ioctl::DEVICE_DATA_SET_RANGE,
     bytes_scrubbed : UInt64
-  end
-  struct DEVICE_DSM_TIERING_QUERY_INPUT
-    version : UInt32
-    size : UInt32
-    flags : UInt32
-    number_of_tier_ids : UInt32
-    tier_ids : Guid[0]*
-  end
-  struct STORAGE_TIER_REGION
-    tier_id : Guid
-    offset : UInt64
+
+  @[Extern]
+  record DEVICE_DSM_TIERING_QUERY_INPUT,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
+    number_of_tier_ids : UInt32,
+    tier_ids : LibC::GUID*
+
+  @[Extern]
+  record STORAGE_TIER_REGION,
+    tier_id : LibC::GUID,
+    offset : UInt64,
     length : UInt64
-  end
-  struct DEVICE_DSM_TIERING_QUERY_OUTPUT
-    version : UInt32
-    size : UInt32
-    flags : UInt32
-    reserved : UInt32
-    alignment : UInt64
-    total_number_of_regions : UInt32
-    number_of_regions_returned : UInt32
-    regions : STORAGE_TIER_REGION[0]*
-  end
-  struct DEVICE_DSM_NVCACHE_CHANGE_PRIORITY_PARAMETERS
-    size : UInt32
-    target_priority : UInt8
-    reserved : UInt8[3]*
-  end
-  struct DEVICE_DATA_SET_TOPOLOGY_ID_QUERY_OUTPUT
-    topology_range_bytes : UInt64
-    topology_id : UInt8[16]*
-  end
-  struct DEVICE_STORAGE_ADDRESS_RANGE
-    start_address : Int64
+
+  @[Extern]
+  record DEVICE_DSM_TIERING_QUERY_OUTPUT,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
+    reserved : UInt32,
+    alignment : UInt64,
+    total_number_of_regions : UInt32,
+    number_of_regions_returned : UInt32,
+    regions : Win32cr::System::Ioctl::STORAGE_TIER_REGION*
+
+  @[Extern]
+  record DEVICE_DSM_NVCACHE_CHANGE_PRIORITY_PARAMETERS,
+    size : UInt32,
+    target_priority : UInt8,
+    reserved : UInt8[3]
+
+  @[Extern]
+  record DEVICE_DATA_SET_TOPOLOGY_ID_QUERY_OUTPUT,
+    topology_range_bytes : UInt64,
+    topology_id : UInt8[16]
+
+  @[Extern]
+  record DEVICE_STORAGE_ADDRESS_RANGE,
+    start_address : Int64,
     length_in_bytes : UInt64
-  end
-  struct DEVICE_DSM_PHYSICAL_ADDRESSES_OUTPUT
-    version : UInt32
-    flags : UInt32
-    total_number_of_ranges : UInt32
-    number_of_ranges_returned : UInt32
-    ranges : DEVICE_STORAGE_ADDRESS_RANGE[0]*
-  end
-  struct DEVICE_DSM_REPORT_ZONES_PARAMETERS
-    size : UInt32
-    report_option : UInt8
-    partial : UInt8
-    reserved : UInt8[2]*
-  end
-  struct STORAGE_ZONE_DESCRIPTOR
-    size : UInt32
-    zone_type : STORAGE_ZONE_TYPES
-    zone_condition : STORAGE_ZONE_CONDITION
-    reset_write_pointer_recommend : BOOLEAN
-    reserved0 : UInt8[3]*
-    zone_size : UInt64
+
+  @[Extern]
+  record DEVICE_DSM_PHYSICAL_ADDRESSES_OUTPUT,
+    version : UInt32,
+    flags : UInt32,
+    total_number_of_ranges : UInt32,
+    number_of_ranges_returned : UInt32,
+    ranges : Win32cr::System::Ioctl::DEVICE_STORAGE_ADDRESS_RANGE*
+
+  @[Extern]
+  record DEVICE_DSM_REPORT_ZONES_PARAMETERS,
+    size : UInt32,
+    report_option : UInt8,
+    partial : UInt8,
+    reserved : UInt8[2]
+
+  @[Extern]
+  record STORAGE_ZONE_DESCRIPTOR,
+    size : UInt32,
+    zone_type : Win32cr::System::Ioctl::STORAGE_ZONE_TYPES,
+    zone_condition : Win32cr::System::Ioctl::STORAGE_ZONE_CONDITION,
+    reset_write_pointer_recommend : Win32cr::Foundation::BOOLEAN,
+    reserved0 : UInt8[3],
+    zone_size : UInt64,
     write_pointer_offset : UInt64
+
+  @[Extern]
+  record DEVICE_DSM_REPORT_ZONES_DATA,
+    size : UInt32,
+    zone_count : UInt32,
+    attributes : Win32cr::System::Ioctl::STORAGE_ZONES_ATTRIBUTES,
+    reserved0 : UInt32,
+    zone_descriptors : Win32cr::System::Ioctl::STORAGE_ZONE_DESCRIPTOR*
+
+  @[Extern]
+  record DEVICE_STORAGE_RANGE_ATTRIBUTES,
+    length_in_bytes : UInt64,
+    anonymous : Anonymous_e__Union,
+    reserved : UInt32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      all_flags : UInt32,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        _bitfield : UInt32
+
+    end
+
   end
-  struct DEVICE_DSM_REPORT_ZONES_DATA
-    size : UInt32
-    zone_count : UInt32
-    attributes : STORAGE_ZONES_ATTRIBUTES
-    reserved0 : UInt32
-    zone_descriptors : STORAGE_ZONE_DESCRIPTOR[0]*
-  end
-  struct DEVICE_STORAGE_RANGE_ATTRIBUTES
-    length_in_bytes : UInt64
-    anonymous : DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union
-    reserved : UInt32
-  end
-  struct DEVICE_STORAGE_RANGE_ATTRIBUTES_Anonymous_e__Union_Anonymous_e__Struct
-    _bitfield : UInt32
-  end
-  struct DEVICE_DSM_RANGE_ERROR_INFO
-    version : UInt32
-    flags : UInt32
-    total_number_of_ranges : UInt32
-    number_of_ranges_returned : UInt32
-    ranges : DEVICE_STORAGE_RANGE_ATTRIBUTES[0]*
-  end
-  struct DEVICE_DSM_LOST_QUERY_PARAMETERS
-    version : UInt32
+
+  @[Extern]
+  record DEVICE_DSM_RANGE_ERROR_INFO,
+    version : UInt32,
+    flags : UInt32,
+    total_number_of_ranges : UInt32,
+    number_of_ranges_returned : UInt32,
+    ranges : Win32cr::System::Ioctl::DEVICE_STORAGE_RANGE_ATTRIBUTES*
+
+  @[Extern]
+  record DEVICE_DSM_LOST_QUERY_PARAMETERS,
+    version : UInt32,
     granularity : UInt64
-  end
-  struct DEVICE_DSM_LOST_QUERY_OUTPUT
-    version : UInt32
-    size : UInt32
-    alignment : UInt64
-    number_of_bits : UInt32
-    bit_map : UInt32[0]*
-  end
-  struct DEVICE_DSM_FREE_SPACE_OUTPUT
-    version : UInt32
+
+  @[Extern]
+  record DEVICE_DSM_LOST_QUERY_OUTPUT,
+    version : UInt32,
+    size : UInt32,
+    alignment : UInt64,
+    number_of_bits : UInt32,
+    bit_map : UInt32*
+
+  @[Extern]
+  record DEVICE_DSM_FREE_SPACE_OUTPUT,
+    version : UInt32,
     free_space : UInt64
-  end
-  struct DEVICE_DSM_CONVERSION_OUTPUT
-    version : UInt32
-    source : Guid
-  end
-  struct STORAGE_GET_BC_PROPERTIES_OUTPUT
-    maximum_requests_per_period : UInt32
-    minimum_period : UInt32
-    maximum_request_size : UInt64
-    estimated_time_per_request : UInt32
-    num_out_standing_requests : UInt32
+
+  @[Extern]
+  record DEVICE_DSM_CONVERSION_OUTPUT,
+    version : UInt32,
+    source : LibC::GUID
+
+  @[Extern]
+  record STORAGE_GET_BC_PROPERTIES_OUTPUT,
+    maximum_requests_per_period : UInt32,
+    minimum_period : UInt32,
+    maximum_request_size : UInt64,
+    estimated_time_per_request : UInt32,
+    num_out_standing_requests : UInt32,
     request_size : UInt64
-  end
-  struct STORAGE_ALLOCATE_BC_STREAM_INPUT
-    version : UInt32
-    requests_per_period : UInt32
-    period : UInt32
-    retry_failures : BOOLEAN
-    discardable : BOOLEAN
-    reserved1 : BOOLEAN[2]*
-    access_type : UInt32
+
+  @[Extern]
+  record STORAGE_ALLOCATE_BC_STREAM_INPUT,
+    version : UInt32,
+    requests_per_period : UInt32,
+    period : UInt32,
+    retry_failures : Win32cr::Foundation::BOOLEAN,
+    discardable : Win32cr::Foundation::BOOLEAN,
+    reserved1 : Win32cr::Foundation::BOOLEAN[2],
+    access_type : UInt32,
     access_mode : UInt32
-  end
-  struct STORAGE_ALLOCATE_BC_STREAM_OUTPUT
-    request_size : UInt64
+
+  @[Extern]
+  record STORAGE_ALLOCATE_BC_STREAM_OUTPUT,
+    request_size : UInt64,
     num_out_standing_requests : UInt32
-  end
-  struct STORAGE_PRIORITY_HINT_SUPPORT
+
+  @[Extern]
+  record STORAGE_PRIORITY_HINT_SUPPORT,
     support_flags : UInt32
-  end
-  struct STORAGE_DIAGNOSTIC_REQUEST
-    version : UInt32
-    size : UInt32
-    flags : UInt32
-    target_type : STORAGE_DIAGNOSTIC_TARGET_TYPE
-    level : STORAGE_DIAGNOSTIC_LEVEL
-  end
-  struct STORAGE_DIAGNOSTIC_DATA
-    version : UInt32
-    size : UInt32
-    provider_id : Guid
-    buffer_size : UInt32
+
+  @[Extern]
+  record STORAGE_DIAGNOSTIC_REQUEST,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
+    target_type : Win32cr::System::Ioctl::STORAGE_DIAGNOSTIC_TARGET_TYPE,
+    level : Win32cr::System::Ioctl::STORAGE_DIAGNOSTIC_LEVEL
+
+  @[Extern]
+  record STORAGE_DIAGNOSTIC_DATA,
+    version : UInt32,
+    size : UInt32,
+    provider_id : LibC::GUID,
+    buffer_size : UInt32,
+    reserved : UInt32,
+    diagnostic_data_buffer : UInt8*
+
+  @[Extern]
+  record PHYSICAL_ELEMENT_STATUS_REQUEST,
+    version : UInt32,
+    size : UInt32,
+    starting_element : UInt32,
+    filter : UInt8,
+    report_type : UInt8,
+    reserved : UInt8[2]
+
+  @[Extern]
+  record PHYSICAL_ELEMENT_STATUS_DESCRIPTOR,
+    version : UInt32,
+    size : UInt32,
+    element_identifier : UInt32,
+    physical_element_type : UInt8,
+    physical_element_health : UInt8,
+    reserved1 : UInt8[2],
+    associated_capacity : UInt64,
+    reserved2 : UInt32[4]
+
+  @[Extern]
+  record PHYSICAL_ELEMENT_STATUS,
+    version : UInt32,
+    size : UInt32,
+    descriptor_count : UInt32,
+    returned_descriptor_count : UInt32,
+    element_identifier_being_depoped : UInt32,
+    reserved : UInt32,
+    descriptors : Win32cr::System::Ioctl::PHYSICAL_ELEMENT_STATUS_DESCRIPTOR*
+
+  @[Extern]
+  record REMOVE_ELEMENT_AND_TRUNCATE_REQUEST,
+    version : UInt32,
+    size : UInt32,
+    request_capacity : UInt64,
+    element_identifier : UInt32,
     reserved : UInt32
-    diagnostic_data_buffer : UInt8[0]*
+
+  @[Extern]
+  record GET_DEVICE_INTERNAL_STATUS_DATA_REQUEST,
+    version : UInt32,
+    size : UInt32,
+    request_data_type : Win32cr::System::Ioctl::DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE,
+    request_data_set : Win32cr::System::Ioctl::DEVICE_INTERNAL_STATUS_DATA_SET
+
+  @[Extern]
+  record DEVICE_INTERNAL_STATUS_DATA,
+    version : UInt32,
+    size : UInt32,
+    t10_vendor_id : UInt64,
+    data_set1_length : UInt32,
+    data_set2_length : UInt32,
+    data_set3_length : UInt32,
+    data_set4_length : UInt32,
+    status_data_version : UInt8,
+    reserved : UInt8[3],
+    reason_identifier : UInt8[128],
+    status_data_length : UInt32,
+    status_data : UInt8*
+
+  @[Extern]
+  record STORAGE_REINITIALIZE_MEDIA,
+    version : UInt32,
+    size : UInt32,
+    timeout_in_seconds : UInt32,
+    sanitize_option : SanitizeOption_e__Struct do
+
+    # Nested Type SanitizeOption_e__Struct
+    @[Extern]
+    record SanitizeOption_e__Struct,
+      _bitfield : UInt32
+
   end
-  struct PHYSICAL_ELEMENT_STATUS_REQUEST
-    version : UInt32
-    size : UInt32
-    starting_element : UInt32
-    filter : UInt8
-    report_type : UInt8
-    reserved : UInt8[2]*
+
+  @[Extern]
+  record STORAGE_MEDIA_SERIAL_NUMBER_DATA,
+    reserved : UInt16,
+    serial_number_length : UInt16,
+    serial_number : UInt8*
+
+  @[Extern]
+  record STORAGE_READ_CAPACITY,
+    version : UInt32,
+    size : UInt32,
+    block_length : UInt32,
+    number_of_blocks : Win32cr::Foundation::LARGE_INTEGER,
+    disk_length : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record STORAGE_WRITE_CACHE_PROPERTY,
+    version : UInt32,
+    size : UInt32,
+    write_cache_type : Win32cr::System::Ioctl::WRITE_CACHE_TYPE,
+    write_cache_enabled : Win32cr::System::Ioctl::WRITE_CACHE_ENABLE,
+    write_cache_changeable : Win32cr::System::Ioctl::WRITE_CACHE_CHANGE,
+    write_through_supported : Win32cr::System::Ioctl::WRITE_THROUGH,
+    flush_cache_supported : Win32cr::Foundation::BOOLEAN,
+    user_defined_power_protection : Win32cr::Foundation::BOOLEAN,
+    nv_cache_enabled : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record PERSISTENT_RESERVE_COMMAND,
+    version : UInt32,
+    size : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      pr_in : PR_IN_e__Struct,
+      pr_out : PR_OUT_e__Struct do
+
+      # Nested Type PR_IN_e__Struct
+      @[Extern]
+      record PR_IN_e__Struct,
+        _bitfield : UInt8,
+        allocation_length : UInt16
+
+
+      # Nested Type PR_OUT_e__Struct
+      @[Extern]
+      record PR_OUT_e__Struct,
+        _bitfield1 : UInt8,
+        _bitfield2 : UInt8,
+        parameter_list : UInt8*
+
+    end
+
   end
-  struct PHYSICAL_ELEMENT_STATUS_DESCRIPTOR
-    version : UInt32
-    size : UInt32
-    element_identifier : UInt32
-    physical_element_type : UInt8
-    physical_element_health : UInt8
-    reserved1 : UInt8[2]*
-    associated_capacity : UInt64
-    reserved2 : UInt32[4]*
-  end
-  struct PHYSICAL_ELEMENT_STATUS
-    version : UInt32
-    size : UInt32
-    descriptor_count : UInt32
-    returned_descriptor_count : UInt32
-    element_identifier_being_depoped : UInt32
-    reserved : UInt32
-    descriptors : PHYSICAL_ELEMENT_STATUS_DESCRIPTOR[0]*
-  end
-  struct REMOVE_ELEMENT_AND_TRUNCATE_REQUEST
-    version : UInt32
-    size : UInt32
-    request_capacity : UInt64
-    element_identifier : UInt32
-    reserved : UInt32
-  end
-  struct GET_DEVICE_INTERNAL_STATUS_DATA_REQUEST
-    version : UInt32
-    size : UInt32
-    request_data_type : DEVICE_INTERNAL_STATUS_DATA_REQUEST_TYPE
-    request_data_set : DEVICE_INTERNAL_STATUS_DATA_SET
-  end
-  struct DEVICE_INTERNAL_STATUS_DATA
-    version : UInt32
-    size : UInt32
-    t10_vendor_id : UInt64
-    data_set1_length : UInt32
-    data_set2_length : UInt32
-    data_set3_length : UInt32
-    data_set4_length : UInt32
-    status_data_version : UInt8
-    reserved : UInt8[3]*
-    reason_identifier : UInt8[128]*
-    status_data_length : UInt32
-    status_data : UInt8[0]*
-  end
-  struct STORAGE_REINITIALIZE_MEDIA
-    version : UInt32
-    size : UInt32
-    timeout_in_seconds : UInt32
-    sanitize_option : STORAGE_REINITIALIZE_MEDIA_SanitizeOption_e__Struct
-  end
-  struct STORAGE_REINITIALIZE_MEDIA_SanitizeOption_e__Struct
-    _bitfield : UInt32
-  end
-  struct STORAGE_MEDIA_SERIAL_NUMBER_DATA
-    reserved : UInt16
-    serial_number_length : UInt16
-    serial_number : UInt8[0]*
-  end
-  struct STORAGE_READ_CAPACITY
-    version : UInt32
-    size : UInt32
-    block_length : UInt32
-    number_of_blocks : LARGE_INTEGER
-    disk_length : LARGE_INTEGER
-  end
-  struct STORAGE_WRITE_CACHE_PROPERTY
-    version : UInt32
-    size : UInt32
-    write_cache_type : WRITE_CACHE_TYPE
-    write_cache_enabled : WRITE_CACHE_ENABLE
-    write_cache_changeable : WRITE_CACHE_CHANGE
-    write_through_supported : WRITE_THROUGH
-    flush_cache_supported : BOOLEAN
-    user_defined_power_protection : BOOLEAN
-    nv_cache_enabled : BOOLEAN
-  end
-  struct PERSISTENT_RESERVE_COMMAND
-    version : UInt32
-    size : UInt32
-    anonymous : PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union
-  end
-  struct PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_IN_e__Struct
-    _bitfield : UInt8
-    allocation_length : UInt16
-  end
-  struct PERSISTENT_RESERVE_COMMAND_Anonymous_e__Union_PR_OUT_e__Struct
-    _bitfield1 : UInt8
-    _bitfield2 : UInt8
-    parameter_list : UInt8[0]*
-  end
-  struct DEVICEDUMP_SUBSECTION_POINTER
-    dw_size : UInt32
-    dw_flags : UInt32
-    dw_offset : UInt32
-  end
-  struct DEVICEDUMP_STRUCTURE_VERSION
-    dw_signature : UInt32
-    dw_version : UInt32
-    dw_size : UInt32
-  end
-  struct DEVICEDUMP_SECTION_HEADER
-    guid_device_data_id : Guid
-    s_organization_id : UInt8[16]*
-    dw_firmware_revision : UInt32
-    s_model_number : UInt8[32]*
-    sz_device_manufacturing_id : UInt8[32]*
-    dw_flags : UInt32
-    b_restricted_private_data_version : UInt32
-    dw_firmware_issue_id : UInt32
-    sz_issue_description_string : UInt8[132]*
-  end
-  struct GP_LOG_PAGE_DESCRIPTOR
-    log_address : UInt16
+
+  @[Extern]
+  record DEVICEDUMP_SUBSECTION_POINTER,
+    dwSize : UInt32,
+    dwFlags : UInt32,
+    dwOffset : UInt32
+
+  @[Extern]
+  record DEVICEDUMP_STRUCTURE_VERSION,
+    dwSignature : UInt32,
+    dwVersion : UInt32,
+    dwSize : UInt32
+
+  @[Extern]
+  record DEVICEDUMP_SECTION_HEADER,
+    guidDeviceDataId : LibC::GUID,
+    sOrganizationID : UInt8[16],
+    dwFirmwareRevision : UInt32,
+    sModelNumber : UInt8[32],
+    szDeviceManufacturingID : UInt8[32],
+    dwFlags : UInt32,
+    bRestrictedPrivateDataVersion : UInt32,
+    dwFirmwareIssueId : UInt32,
+    szIssueDescriptionString : UInt8[132]
+
+  @[Extern]
+  record GP_LOG_PAGE_DESCRIPTOR,
+    log_address : UInt16,
     log_sectors : UInt16
+
+  @[Extern]
+  record DEVICEDUMP_PUBLIC_SUBSECTION,
+    dwFlags : UInt32,
+    gp_log_table : Win32cr::System::Ioctl::GP_LOG_PAGE_DESCRIPTOR[16],
+    szDescription : Win32cr::Foundation::CHAR[16],
+    bData : UInt8*
+
+  @[Extern]
+  record DEVICEDUMP_RESTRICTED_SUBSECTION,
+    bData : UInt8*
+
+  @[Extern]
+  record DEVICEDUMP_PRIVATE_SUBSECTION,
+    dwFlags : UInt32,
+    gp_log_id : Win32cr::System::Ioctl::GP_LOG_PAGE_DESCRIPTOR,
+    bData : UInt8*
+
+  @[Extern]
+  record DEVICEDUMP_STORAGEDEVICE_DATA,
+    descriptor : Win32cr::System::Ioctl::DEVICEDUMP_STRUCTURE_VERSION,
+    section_header : Win32cr::System::Ioctl::DEVICEDUMP_SECTION_HEADER,
+    dwBufferSize : UInt32,
+    dwReasonForCollection : UInt32,
+    public_data : Win32cr::System::Ioctl::DEVICEDUMP_SUBSECTION_POINTER,
+    restricted_data : Win32cr::System::Ioctl::DEVICEDUMP_SUBSECTION_POINTER,
+    private_data : Win32cr::System::Ioctl::DEVICEDUMP_SUBSECTION_POINTER
+
+  @[Extern]
+  record DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD,
+    cdb : UInt8[16],
+    command : UInt8[16],
+    start_time : UInt64,
+    end_time : UInt64,
+    operation_status : UInt32,
+    operation_error : UInt32,
+    stack_specific : StackSpecific_e__Union do
+
+    # Nested Type StackSpecific_e__Union
+    @[Extern(union: true)]
+    record StackSpecific_e__Union,
+      external_stack : ExternalStack_e__Struct,
+      ata_port : AtaPort_e__Struct,
+      stor_port : StorPort_e__Struct do
+
+      # Nested Type StorPort_e__Struct
+      @[Extern]
+      record StorPort_e__Struct,
+        srb_tag : UInt32
+
+
+      # Nested Type ExternalStack_e__Struct
+      @[Extern]
+      record ExternalStack_e__Struct,
+        dwReserved : UInt32
+
+
+      # Nested Type AtaPort_e__Struct
+      @[Extern]
+      record AtaPort_e__Struct,
+        dwAtaPortSpecific : UInt32
+
+    end
+
   end
-  struct DEVICEDUMP_PUBLIC_SUBSECTION
-    dw_flags : UInt32
-    gp_log_table : GP_LOG_PAGE_DESCRIPTOR[16]*
-    sz_description : CHAR[16]*
-    b_data : UInt8[0]*
-  end
-  struct DEVICEDUMP_RESTRICTED_SUBSECTION
-    b_data : UInt8[0]*
-  end
-  struct DEVICEDUMP_PRIVATE_SUBSECTION
-    dw_flags : UInt32
-    gp_log_id : GP_LOG_PAGE_DESCRIPTOR
-    b_data : UInt8[0]*
-  end
-  struct DEVICEDUMP_STORAGEDEVICE_DATA
-    descriptor : DEVICEDUMP_STRUCTURE_VERSION
-    section_header : DEVICEDUMP_SECTION_HEADER
-    dw_buffer_size : UInt32
-    dw_reason_for_collection : UInt32
-    public_data : DEVICEDUMP_SUBSECTION_POINTER
-    restricted_data : DEVICEDUMP_SUBSECTION_POINTER
-    private_data : DEVICEDUMP_SUBSECTION_POINTER
-  end
-  struct DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD
-    cdb : UInt8[16]*
-    command : UInt8[16]*
-    start_time : UInt64
-    end_time : UInt64
-    operation_status : UInt32
-    operation_error : UInt32
-    stack_specific : DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union
-  end
-  struct DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union_StorPort_e__Struct
-    srb_tag : UInt32
-  end
-  struct DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union_ExternalStack_e__Struct
-    dw_reserved : UInt32
-  end
-  struct DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD_StackSpecific_e__Union_AtaPort_e__Struct
-    dw_ata_port_specific : UInt32
-  end
-  struct DEVICEDUMP_STORAGESTACK_PUBLIC_DUMP
-    descriptor : DEVICEDUMP_STRUCTURE_VERSION
-    dw_reason_for_collection : UInt32
-    c_driver_name : UInt8[16]*
-    ui_num_records : UInt32
-    record_array : DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD[0]*
-  end
-  struct STORAGE_IDLE_POWER
-    version : UInt32
-    size : UInt32
-    _bitfield : UInt32
+
+  @[Extern]
+  record DEVICEDUMP_STORAGESTACK_PUBLIC_DUMP,
+    descriptor : Win32cr::System::Ioctl::DEVICEDUMP_STRUCTURE_VERSION,
+    dwReasonForCollection : UInt32,
+    cDriverName : UInt8[16],
+    uiNumRecords : UInt32,
+    record_array : Win32cr::System::Ioctl::DEVICEDUMP_STORAGESTACK_PUBLIC_STATE_RECORD*
+
+  @[Extern]
+  record STORAGE_IDLE_POWER,
+    version : UInt32,
+    size : UInt32,
+    _bitfield : UInt32,
     d3_idle_timeout : UInt32
-  end
-  struct STORAGE_IDLE_POWERUP_REASON
-    version : UInt32
-    size : UInt32
-    powerup_reason : STORAGE_POWERUP_REASON_TYPE
-  end
-  struct STORAGE_DEVICE_POWER_CAP
-    version : UInt32
-    size : UInt32
-    units : STORAGE_DEVICE_POWER_CAP_UNITS
+
+  @[Extern]
+  record STORAGE_IDLE_POWERUP_REASON,
+    version : UInt32,
+    size : UInt32,
+    powerup_reason : Win32cr::System::Ioctl::STORAGE_POWERUP_REASON_TYPE
+
+  @[Extern]
+  record STORAGE_DEVICE_POWER_CAP,
+    version : UInt32,
+    size : UInt32,
+    units : Win32cr::System::Ioctl::STORAGE_DEVICE_POWER_CAP_UNITS,
     max_power : UInt64
-  end
-  struct STORAGE_RPMB_DATA_FRAME
-    stuff : UInt8[196]*
-    key_or_mac : UInt8[32]*
-    data : UInt8[256]*
-    nonce : UInt8[16]*
-    write_counter : UInt8[4]*
-    address : UInt8[2]*
-    block_count : UInt8[2]*
-    operation_result : UInt8[2]*
-    request_or_response_type : UInt8[2]*
-  end
-  struct STORAGE_EVENT_NOTIFICATION
-    version : UInt32
-    size : UInt32
+
+  @[Extern]
+  record STORAGE_RPMB_DATA_FRAME,
+    stuff : UInt8[196],
+    key_or_mac : UInt8[32],
+    data : UInt8[256],
+    nonce : UInt8[16],
+    write_counter : UInt8[4],
+    address : UInt8[2],
+    block_count : UInt8[2],
+    operation_result : UInt8[2],
+    request_or_response_type : UInt8[2]
+
+  @[Extern]
+  record STORAGE_EVENT_NOTIFICATION,
+    version : UInt32,
+    size : UInt32,
     events : UInt64
+
+  @[Extern]
+  record STORAGE_COUNTER,
+    type__ : Win32cr::System::Ioctl::STORAGE_COUNTER_TYPE,
+    value : Value_e__Union do
+
+    # Nested Type Value_e__Union
+    @[Extern(union: true)]
+    record Value_e__Union,
+      manufacture_date : ManufactureDate_e__Struct,
+      as_ulonglong : UInt64 do
+
+      # Nested Type ManufactureDate_e__Struct
+      @[Extern]
+      record ManufactureDate_e__Struct,
+        week : UInt32,
+        year : UInt32
+
+    end
+
   end
-  struct STORAGE_COUNTER
-    type : STORAGE_COUNTER_TYPE
-    value : STORAGE_COUNTER_Value_e__Union
-  end
-  struct STORAGE_COUNTER_Value_e__Union_ManufactureDate_e__Struct
-    week : UInt32
-    year : UInt32
-  end
-  struct STORAGE_COUNTERS
-    version : UInt32
-    size : UInt32
-    number_of_counters : UInt32
-    counters : STORAGE_COUNTER[0]*
-  end
-  struct STORAGE_HW_FIRMWARE_INFO_QUERY
-    version : UInt32
-    size : UInt32
-    flags : UInt32
+
+  @[Extern]
+  record STORAGE_COUNTERS,
+    version : UInt32,
+    size : UInt32,
+    number_of_counters : UInt32,
+    counters : Win32cr::System::Ioctl::STORAGE_COUNTER*
+
+  @[Extern]
+  record STORAGE_HW_FIRMWARE_INFO_QUERY,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
     reserved : UInt32
-  end
-  struct STORAGE_HW_FIRMWARE_SLOT_INFO
-    version : UInt32
-    size : UInt32
-    slot_number : UInt8
-    _bitfield : UInt8
-    reserved1 : UInt8[6]*
-    revision : UInt8[16]*
-  end
-  struct STORAGE_HW_FIRMWARE_INFO
-    version : UInt32
-    size : UInt32
-    _bitfield : UInt8
-    slot_count : UInt8
-    active_slot : UInt8
-    pending_activate_slot : UInt8
-    firmware_shared : BOOLEAN
-    reserved : UInt8[3]*
-    image_payload_alignment : UInt32
-    image_payload_max_size : UInt32
-    slot : STORAGE_HW_FIRMWARE_SLOT_INFO[0]*
-  end
-  struct STORAGE_HW_FIRMWARE_DOWNLOAD
-    version : UInt32
-    size : UInt32
-    flags : UInt32
-    slot : UInt8
-    reserved : UInt8[3]*
-    offset : UInt64
-    buffer_size : UInt64
-    image_buffer : UInt8[0]*
-  end
-  struct STORAGE_HW_FIRMWARE_DOWNLOAD_V2
-    version : UInt32
-    size : UInt32
-    flags : UInt32
-    slot : UInt8
-    reserved : UInt8[3]*
-    offset : UInt64
-    buffer_size : UInt64
-    image_size : UInt32
-    reserved2 : UInt32
-    image_buffer : UInt8[0]*
-  end
-  struct STORAGE_HW_FIRMWARE_ACTIVATE
-    version : UInt32
-    size : UInt32
-    flags : UInt32
-    slot : UInt8
-    reserved0 : UInt8[3]*
-  end
-  struct STORAGE_PROTOCOL_COMMAND
-    version : UInt32
-    length : UInt32
-    protocol_type : STORAGE_PROTOCOL_TYPE
-    flags : UInt32
-    return_status : UInt32
-    error_code : UInt32
-    command_length : UInt32
-    error_info_length : UInt32
-    data_to_device_transfer_length : UInt32
-    data_from_device_transfer_length : UInt32
-    time_out_value : UInt32
-    error_info_offset : UInt32
-    data_to_device_buffer_offset : UInt32
-    data_from_device_buffer_offset : UInt32
-    command_specific : UInt32
-    reserved0 : UInt32
-    fixed_protocol_return_data : UInt32
-    reserved1 : UInt32[3]*
-    command : UInt8[0]*
-  end
-  struct STORAGE_ATTRIBUTE_MGMT
-    version : UInt32
-    size : UInt32
-    action : STORAGE_ATTRIBUTE_MGMT_ACTION
+
+  @[Extern]
+  record STORAGE_HW_FIRMWARE_SLOT_INFO,
+    version : UInt32,
+    size : UInt32,
+    slot_number : UInt8,
+    _bitfield : UInt8,
+    reserved1 : UInt8[6],
+    revision : UInt8[16]
+
+  @[Extern]
+  record STORAGE_HW_FIRMWARE_INFO,
+    version : UInt32,
+    size : UInt32,
+    _bitfield : UInt8,
+    slot_count : UInt8,
+    active_slot : UInt8,
+    pending_activate_slot : UInt8,
+    firmware_shared : Win32cr::Foundation::BOOLEAN,
+    reserved : UInt8[3],
+    image_payload_alignment : UInt32,
+    image_payload_max_size : UInt32,
+    slot : Win32cr::System::Ioctl::STORAGE_HW_FIRMWARE_SLOT_INFO*
+
+  @[Extern]
+  record STORAGE_HW_FIRMWARE_DOWNLOAD,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
+    slot : UInt8,
+    reserved : UInt8[3],
+    offset : UInt64,
+    buffer_size : UInt64,
+    image_buffer : UInt8*
+
+  @[Extern]
+  record STORAGE_HW_FIRMWARE_DOWNLOAD_V2,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
+    slot : UInt8,
+    reserved : UInt8[3],
+    offset : UInt64,
+    buffer_size : UInt64,
+    image_size : UInt32,
+    reserved2 : UInt32,
+    image_buffer : UInt8*
+
+  @[Extern]
+  record STORAGE_HW_FIRMWARE_ACTIVATE,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
+    slot : UInt8,
+    reserved0 : UInt8[3]
+
+  @[Extern]
+  record STORAGE_PROTOCOL_COMMAND,
+    version : UInt32,
+    length : UInt32,
+    protocol_type : Win32cr::System::Ioctl::STORAGE_PROTOCOL_TYPE,
+    flags : UInt32,
+    return_status : UInt32,
+    error_code : UInt32,
+    command_length : UInt32,
+    error_info_length : UInt32,
+    data_to_device_transfer_length : UInt32,
+    data_from_device_transfer_length : UInt32,
+    time_out_value : UInt32,
+    error_info_offset : UInt32,
+    data_to_device_buffer_offset : UInt32,
+    data_from_device_buffer_offset : UInt32,
+    command_specific : UInt32,
+    reserved0 : UInt32,
+    fixed_protocol_return_data : UInt32,
+    reserved1 : UInt32[3],
+    command : UInt8*
+
+  @[Extern]
+  record STORAGE_ATTRIBUTE_MGMT,
+    version : UInt32,
+    size : UInt32,
+    action : Win32cr::System::Ioctl::STORAGE_ATTRIBUTE_MGMT_ACTION,
     attribute : UInt32
-  end
-  struct SCM_PD_HEALTH_NOTIFICATION_DATA
-    device_guid : Guid
-  end
-  struct SCM_LOGICAL_DEVICE_INSTANCE
-    version : UInt32
-    size : UInt32
-    device_guid : Guid
-    symbolic_link : Char[256]*
-  end
-  struct SCM_LOGICAL_DEVICES
-    version : UInt32
-    size : UInt32
-    device_count : UInt32
-    devices : SCM_LOGICAL_DEVICE_INSTANCE[0]*
-  end
-  struct SCM_PHYSICAL_DEVICE_INSTANCE
-    version : UInt32
-    size : UInt32
-    nfit_handle : UInt32
-    symbolic_link : Char[256]*
-  end
-  struct SCM_PHYSICAL_DEVICES
-    version : UInt32
-    size : UInt32
-    device_count : UInt32
-    devices : SCM_PHYSICAL_DEVICE_INSTANCE[0]*
-  end
-  struct SCM_REGION
-    version : UInt32
-    size : UInt32
-    flags : UInt32
-    nfit_handle : UInt32
-    logical_device_guid : Guid
-    address_range_type : Guid
-    associated_id : UInt32
-    length : UInt64
-    starting_dpa : UInt64
-    base_spa : UInt64
-    spa_offset : UInt64
+
+  @[Extern]
+  record SCM_PD_HEALTH_NOTIFICATION_DATA,
+    device_guid : LibC::GUID
+
+  @[Extern]
+  record SCM_LOGICAL_DEVICE_INSTANCE,
+    version : UInt32,
+    size : UInt32,
+    device_guid : LibC::GUID,
+    symbolic_link : UInt16[256]
+
+  @[Extern]
+  record SCM_LOGICAL_DEVICES,
+    version : UInt32,
+    size : UInt32,
+    device_count : UInt32,
+    devices : Win32cr::System::Ioctl::SCM_LOGICAL_DEVICE_INSTANCE*
+
+  @[Extern]
+  record SCM_PHYSICAL_DEVICE_INSTANCE,
+    version : UInt32,
+    size : UInt32,
+    nfit_handle : UInt32,
+    symbolic_link : UInt16[256]
+
+  @[Extern]
+  record SCM_PHYSICAL_DEVICES,
+    version : UInt32,
+    size : UInt32,
+    device_count : UInt32,
+    devices : Win32cr::System::Ioctl::SCM_PHYSICAL_DEVICE_INSTANCE*
+
+  @[Extern]
+  record SCM_REGION,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
+    nfit_handle : UInt32,
+    logical_device_guid : LibC::GUID,
+    address_range_type : LibC::GUID,
+    associated_id : UInt32,
+    length : UInt64,
+    starting_dpa : UInt64,
+    base_spa : UInt64,
+    spa_offset : UInt64,
     region_offset : UInt64
+
+  @[Extern]
+  record SCM_REGIONS,
+    version : UInt32,
+    size : UInt32,
+    region_count : UInt32,
+    regions : Win32cr::System::Ioctl::SCM_REGION*
+
+  @[Extern]
+  record SCM_BUS_PROPERTY_QUERY,
+    version : UInt32,
+    size : UInt32,
+    property_id : Win32cr::System::Ioctl::SCM_BUS_PROPERTY_ID,
+    query_type : Win32cr::System::Ioctl::SCM_BUS_QUERY_TYPE,
+    additional_parameters : UInt8*
+
+  @[Extern]
+  record SCM_BUS_RUNTIME_FW_ACTIVATION_INFO,
+    version : UInt32,
+    size : UInt32,
+    runtime_fw_activation_supported : Win32cr::Foundation::BOOLEAN,
+    firmware_activation_state : Win32cr::System::Ioctl::SCM_BUS_FIRMWARE_ACTIVATION_STATE,
+    firmware_activation_capability : FirmwareActivationCapability_e__Struct,
+    estimated_firmware_activation_time_in_u_secs : UInt64,
+    estimated_processor_access_quiesce_time_in_u_secs : UInt64,
+    estimated_io_access_quiesce_time_in_u_secs : UInt64,
+    platform_supported_max_io_access_quiesce_time_in_u_secs : UInt64 do
+
+    # Nested Type FirmwareActivationCapability_e__Struct
+    @[Extern]
+    record FirmwareActivationCapability_e__Struct,
+      _bitfield : UInt32
+
   end
-  struct SCM_REGIONS
-    version : UInt32
+
+  @[Extern]
+  record SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO,
+    device_guid : LibC::GUID,
+    device_number : UInt32,
+    flags : Flags_e__Struct,
+    device_size : UInt64 do
+
+    # Nested Type Flags_e__Struct
+    @[Extern]
+    record Flags_e__Struct,
+      _bitfield : UInt32
+
+  end
+
+  @[Extern]
+  record SCM_BUS_DEDICATED_MEMORY_DEVICES_INFO,
+    version : UInt32,
+    size : UInt32,
+    device_count : UInt32,
+    devices : Win32cr::System::Ioctl::SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO*
+
+  @[Extern]
+  record SCM_BUS_PROPERTY_SET,
+    version : UInt32,
+    size : UInt32,
+    property_id : Win32cr::System::Ioctl::SCM_BUS_PROPERTY_ID,
+    set_type : Win32cr::System::Ioctl::SCM_BUS_SET_TYPE,
+    additional_parameters : UInt8*
+
+  @[Extern]
+  record SCM_BUS_DEDICATED_MEMORY_STATE,
+    activate_state : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record SCM_INTERLEAVED_PD_INFO,
+    device_handle : UInt32,
+    device_guid : LibC::GUID
+
+  @[Extern]
+  record SCM_LD_INTERLEAVE_SET_INFO,
+    version : UInt32,
+    size : UInt32,
+    interleave_set_size : UInt32,
+    interleave_set : Win32cr::System::Ioctl::SCM_INTERLEAVED_PD_INFO*
+
+  @[Extern]
+  record SCM_PD_PROPERTY_QUERY,
+    version : UInt32,
+    size : UInt32,
+    property_id : Win32cr::System::Ioctl::SCM_PD_PROPERTY_ID,
+    query_type : Win32cr::System::Ioctl::SCM_PD_QUERY_TYPE,
+    additional_parameters : UInt8*
+
+  @[Extern]
+  record SCM_PD_PROPERTY_SET,
+    version : UInt32,
+    size : UInt32,
+    property_id : Win32cr::System::Ioctl::SCM_PD_PROPERTY_ID,
+    set_type : Win32cr::System::Ioctl::SCM_PD_SET_TYPE,
+    additional_parameters : UInt8*
+
+  @[Extern]
+  record SCM_PD_RUNTIME_FW_ACTIVATION_ARM_STATE,
+    arm_state : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record SCM_PD_DESCRIPTOR_HEADER,
+    version : UInt32,
     size : UInt32
-    region_count : UInt32
-    regions : SCM_REGION[0]*
-  end
-  struct SCM_BUS_PROPERTY_QUERY
-    version : UInt32
-    size : UInt32
-    property_id : SCM_BUS_PROPERTY_ID
-    query_type : SCM_BUS_QUERY_TYPE
-    additional_parameters : UInt8[0]*
-  end
-  struct SCM_BUS_RUNTIME_FW_ACTIVATION_INFO
-    version : UInt32
-    size : UInt32
-    runtime_fw_activation_supported : BOOLEAN
-    firmware_activation_state : SCM_BUS_FIRMWARE_ACTIVATION_STATE
-    firmware_activation_capability : SCM_BUS_RUNTIME_FW_ACTIVATION_INFO_FirmwareActivationCapability_e__Struct
-    estimated_firmware_activation_time_in_u_secs : UInt64
-    estimated_processor_access_quiesce_time_in_u_secs : UInt64
-    estimated_io_access_quiesce_time_in_u_secs : UInt64
-    platform_supported_max_io_access_quiesce_time_in_u_secs : UInt64
-  end
-  struct SCM_BUS_RUNTIME_FW_ACTIVATION_INFO_FirmwareActivationCapability_e__Struct
-    _bitfield : UInt32
-  end
-  struct SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO
-    device_guid : Guid
-    device_number : UInt32
-    flags : SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO_Flags_e__Struct
-    device_size : UInt64
-  end
-  struct SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO_Flags_e__Struct
-    _bitfield : UInt32
-  end
-  struct SCM_BUS_DEDICATED_MEMORY_DEVICES_INFO
-    version : UInt32
-    size : UInt32
-    device_count : UInt32
-    devices : SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO[0]*
-  end
-  struct SCM_BUS_PROPERTY_SET
-    version : UInt32
-    size : UInt32
-    property_id : SCM_BUS_PROPERTY_ID
-    set_type : SCM_BUS_SET_TYPE
-    additional_parameters : UInt8[0]*
-  end
-  struct SCM_BUS_DEDICATED_MEMORY_STATE
-    activate_state : BOOLEAN
-  end
-  struct SCM_INTERLEAVED_PD_INFO
+
+  @[Extern]
+  record SCM_PD_DEVICE_HANDLE,
+    version : UInt32,
+    size : UInt32,
+    device_guid : LibC::GUID,
     device_handle : UInt32
-    device_guid : Guid
-  end
-  struct SCM_LD_INTERLEAVE_SET_INFO
-    version : UInt32
-    size : UInt32
-    interleave_set_size : UInt32
-    interleave_set : SCM_INTERLEAVED_PD_INFO[0]*
-  end
-  struct SCM_PD_PROPERTY_QUERY
-    version : UInt32
-    size : UInt32
-    property_id : SCM_PD_PROPERTY_ID
-    query_type : SCM_PD_QUERY_TYPE
-    additional_parameters : UInt8[0]*
-  end
-  struct SCM_PD_PROPERTY_SET
-    version : UInt32
-    size : UInt32
-    property_id : SCM_PD_PROPERTY_ID
-    set_type : SCM_PD_SET_TYPE
-    additional_parameters : UInt8[0]*
-  end
-  struct SCM_PD_RUNTIME_FW_ACTIVATION_ARM_STATE
-    arm_state : BOOLEAN
-  end
-  struct SCM_PD_DESCRIPTOR_HEADER
-    version : UInt32
-    size : UInt32
-  end
-  struct SCM_PD_DEVICE_HANDLE
-    version : UInt32
-    size : UInt32
-    device_guid : Guid
-    device_handle : UInt32
-  end
-  struct SCM_PD_DEVICE_INFO
-    version : UInt32
-    size : UInt32
-    device_guid : Guid
-    unsafe_shutdown_count : UInt32
-    persistent_memory_size_in_bytes : UInt64
-    volatile_memory_size_in_bytes : UInt64
-    total_memory_size_in_bytes : UInt64
-    slot_number : UInt32
-    device_handle : UInt32
-    physical_id : UInt16
-    number_of_format_interface_codes : UInt8
-    format_interface_codes : UInt16[8]*
-    vendor_id : UInt32
-    product_id : UInt32
-    subsystem_device_id : UInt32
-    subsystem_vendor_id : UInt32
-    manufacturing_location : UInt8
-    manufacturing_week : UInt8
-    manufacturing_year : UInt8
-    serial_number4_byte : UInt32
-    serial_number_length_in_chars : UInt32
-    serial_number : CHAR[0]*
-  end
-  struct SCM_PD_DEVICE_SPECIFIC_PROPERTY
-    name : Char[128]*
+
+  @[Extern]
+  record SCM_PD_DEVICE_INFO,
+    version : UInt32,
+    size : UInt32,
+    device_guid : LibC::GUID,
+    unsafe_shutdown_count : UInt32,
+    persistent_memory_size_in_bytes : UInt64,
+    volatile_memory_size_in_bytes : UInt64,
+    total_memory_size_in_bytes : UInt64,
+    slot_number : UInt32,
+    device_handle : UInt32,
+    physical_id : UInt16,
+    number_of_format_interface_codes : UInt8,
+    format_interface_codes : UInt16[8],
+    vendor_id : UInt32,
+    product_id : UInt32,
+    subsystem_device_id : UInt32,
+    subsystem_vendor_id : UInt32,
+    manufacturing_location : UInt8,
+    manufacturing_week : UInt8,
+    manufacturing_year : UInt8,
+    serial_number4_byte : UInt32,
+    serial_number_length_in_chars : UInt32,
+    serial_number : Win32cr::Foundation::CHAR*
+
+  @[Extern]
+  record SCM_PD_DEVICE_SPECIFIC_PROPERTY,
+    name : UInt16[128],
     value : Int64
-  end
-  struct SCM_PD_DEVICE_SPECIFIC_INFO
-    version : UInt32
-    size : UInt32
-    number_of_properties : UInt32
-    device_specific_properties : SCM_PD_DEVICE_SPECIFIC_PROPERTY[0]*
-  end
-  struct SCM_PD_FIRMWARE_SLOT_INFO
-    version : UInt32
-    size : UInt32
-    slot_number : UInt8
-    _bitfield : UInt8
-    reserved1 : UInt8[6]*
-    revision : UInt8[32]*
-  end
-  struct SCM_PD_FIRMWARE_INFO
-    version : UInt32
-    size : UInt32
-    active_slot : UInt8
-    next_active_slot : UInt8
-    slot_count : UInt8
-    slots : SCM_PD_FIRMWARE_SLOT_INFO[0]*
-  end
-  struct SCM_PD_MANAGEMENT_STATUS
-    version : UInt32
-    size : UInt32
-    health : SCM_PD_HEALTH_STATUS
-    number_of_operational_status : UInt32
-    number_of_additional_reasons : UInt32
-    operational_status : SCM_PD_OPERATIONAL_STATUS[16]*
-    additional_reasons : SCM_PD_OPERATIONAL_STATUS_REASON[0]*
-  end
-  struct SCM_PD_LOCATION_STRING
-    version : UInt32
-    size : UInt32
-    location : Char[0]*
-  end
-  struct SCM_PD_FRU_ID_STRING
-    version : UInt32
-    size : UInt32
-    identifier_size : UInt32
-    identifier : UInt8[0]*
-  end
-  struct SCM_PD_FIRMWARE_DOWNLOAD
-    version : UInt32
-    size : UInt32
-    flags : UInt32
+
+  @[Extern]
+  record SCM_PD_DEVICE_SPECIFIC_INFO,
+    version : UInt32,
+    size : UInt32,
+    number_of_properties : UInt32,
+    device_specific_properties : Win32cr::System::Ioctl::SCM_PD_DEVICE_SPECIFIC_PROPERTY*
+
+  @[Extern]
+  record SCM_PD_FIRMWARE_SLOT_INFO,
+    version : UInt32,
+    size : UInt32,
+    slot_number : UInt8,
+    _bitfield : UInt8,
+    reserved1 : UInt8[6],
+    revision : UInt8[32]
+
+  @[Extern]
+  record SCM_PD_FIRMWARE_INFO,
+    version : UInt32,
+    size : UInt32,
+    active_slot : UInt8,
+    next_active_slot : UInt8,
+    slot_count : UInt8,
+    slots : Win32cr::System::Ioctl::SCM_PD_FIRMWARE_SLOT_INFO*
+
+  @[Extern]
+  record SCM_PD_MANAGEMENT_STATUS,
+    version : UInt32,
+    size : UInt32,
+    health : Win32cr::System::Ioctl::SCM_PD_HEALTH_STATUS,
+    number_of_operational_status : UInt32,
+    number_of_additional_reasons : UInt32,
+    operational_status : Win32cr::System::Ioctl::SCM_PD_OPERATIONAL_STATUS[16],
+    additional_reasons : Win32cr::System::Ioctl::SCM_PD_OPERATIONAL_STATUS_REASON*
+
+  @[Extern]
+  record SCM_PD_LOCATION_STRING,
+    version : UInt32,
+    size : UInt32,
+    location : UInt16*
+
+  @[Extern]
+  record SCM_PD_FRU_ID_STRING,
+    version : UInt32,
+    size : UInt32,
+    identifier_size : UInt32,
+    identifier : UInt8*
+
+  @[Extern]
+  record SCM_PD_FIRMWARE_DOWNLOAD,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
+    slot : UInt8,
+    reserved : UInt8[3],
+    offset : UInt64,
+    firmware_image_size_in_bytes : UInt32,
+    firmware_image : UInt8*
+
+  @[Extern]
+  record SCM_PD_FIRMWARE_ACTIVATE,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
     slot : UInt8
-    reserved : UInt8[3]*
-    offset : UInt64
-    firmware_image_size_in_bytes : UInt32
-    firmware_image : UInt8[0]*
+
+  @[Extern]
+  record SCM_PD_RUNTIME_FW_ACTIVATION_INFO,
+    version : UInt32,
+    size : UInt32,
+    last_firmware_activation_status : Win32cr::System::Ioctl::SCM_PD_LAST_FW_ACTIVATION_STATUS,
+    firmware_activation_state : Win32cr::System::Ioctl::SCM_PD_FIRMWARE_ACTIVATION_STATE
+
+  @[Extern]
+  record SCM_PD_PASSTHROUGH_INPUT,
+    version : UInt32,
+    size : UInt32,
+    protocol_guid : LibC::GUID,
+    data_size : UInt32,
+    data : UInt8*
+
+  @[Extern]
+  record SCM_PD_PASSTHROUGH_OUTPUT,
+    version : UInt32,
+    size : UInt32,
+    protocol_guid : LibC::GUID,
+    data_size : UInt32,
+    data : UInt8*
+
+  @[Extern]
+  record SCM_PD_PASSTHROUGH_INVDIMM_INPUT,
+    opcode : UInt32,
+    opcode_parameters_length : UInt32,
+    opcode_parameters : UInt8*
+
+  @[Extern]
+  record SCM_PD_PASSTHROUGH_INVDIMM_OUTPUT,
+    general_status : UInt16,
+    extended_status : UInt16,
+    output_data_length : UInt32,
+    output_data : UInt8*
+
+  @[Extern]
+  record SCM_PD_REINITIALIZE_MEDIA_INPUT,
+    version : UInt32,
+    size : UInt32,
+    options : Options_e__Struct do
+
+    # Nested Type Options_e__Struct
+    @[Extern]
+    record Options_e__Struct,
+      _bitfield : UInt32
+
   end
-  struct SCM_PD_FIRMWARE_ACTIVATE
-    version : UInt32
-    size : UInt32
-    flags : UInt32
-    slot : UInt8
-  end
-  struct SCM_PD_RUNTIME_FW_ACTIVATION_INFO
-    version : UInt32
-    size : UInt32
-    last_firmware_activation_status : SCM_PD_LAST_FW_ACTIVATION_STATUS
-    firmware_activation_state : SCM_PD_FIRMWARE_ACTIVATION_STATE
-  end
-  struct SCM_PD_PASSTHROUGH_INPUT
-    version : UInt32
-    size : UInt32
-    protocol_guid : Guid
-    data_size : UInt32
-    data : UInt8[0]*
-  end
-  struct SCM_PD_PASSTHROUGH_OUTPUT
-    version : UInt32
-    size : UInt32
-    protocol_guid : Guid
-    data_size : UInt32
-    data : UInt8[0]*
-  end
-  struct SCM_PD_PASSTHROUGH_INVDIMM_INPUT
-    opcode : UInt32
-    opcode_parameters_length : UInt32
-    opcode_parameters : UInt8[0]*
-  end
-  struct SCM_PD_PASSTHROUGH_INVDIMM_OUTPUT
-    general_status : UInt16
-    extended_status : UInt16
-    output_data_length : UInt32
-    output_data : UInt8[0]*
-  end
-  struct SCM_PD_REINITIALIZE_MEDIA_INPUT
-    version : UInt32
-    size : UInt32
-    options : SCM_PD_REINITIALIZE_MEDIA_INPUT_Options_e__Struct
-  end
-  struct SCM_PD_REINITIALIZE_MEDIA_INPUT_Options_e__Struct
-    _bitfield : UInt32
-  end
-  struct SCM_PD_REINITIALIZE_MEDIA_OUTPUT
-    version : UInt32
-    size : UInt32
-    status : SCM_PD_MEDIA_REINITIALIZATION_STATUS
-  end
-  struct FORMAT_PARAMETERS
-    media_type : MEDIA_TYPE
-    start_cylinder_number : UInt32
-    end_cylinder_number : UInt32
-    start_head_number : UInt32
+
+  @[Extern]
+  record SCM_PD_REINITIALIZE_MEDIA_OUTPUT,
+    version : UInt32,
+    size : UInt32,
+    status : Win32cr::System::Ioctl::SCM_PD_MEDIA_REINITIALIZATION_STATUS
+
+  @[Extern]
+  record FORMAT_PARAMETERS,
+    media_type : Win32cr::System::Ioctl::MEDIA_TYPE,
+    start_cylinder_number : UInt32,
+    end_cylinder_number : UInt32,
+    start_head_number : UInt32,
     end_head_number : UInt32
-  end
-  struct FORMAT_EX_PARAMETERS
-    media_type : MEDIA_TYPE
-    start_cylinder_number : UInt32
-    end_cylinder_number : UInt32
-    start_head_number : UInt32
-    end_head_number : UInt32
-    format_gap_length : UInt16
-    sectors_per_track : UInt16
-    sector_number : UInt16[0]*
-  end
-  struct DISK_GEOMETRY
-    cylinders : LARGE_INTEGER
-    media_type : MEDIA_TYPE
-    tracks_per_cylinder : UInt32
-    sectors_per_track : UInt32
+
+  @[Extern]
+  record FORMAT_EX_PARAMETERS,
+    media_type : Win32cr::System::Ioctl::MEDIA_TYPE,
+    start_cylinder_number : UInt32,
+    end_cylinder_number : UInt32,
+    start_head_number : UInt32,
+    end_head_number : UInt32,
+    format_gap_length : UInt16,
+    sectors_per_track : UInt16,
+    sector_number : UInt16*
+
+  @[Extern]
+  record DISK_GEOMETRY,
+    cylinders : Win32cr::Foundation::LARGE_INTEGER,
+    media_type : Win32cr::System::Ioctl::MEDIA_TYPE,
+    tracks_per_cylinder : UInt32,
+    sectors_per_track : UInt32,
     bytes_per_sector : UInt32
-  end
-  struct PARTITION_INFORMATION
-    starting_offset : LARGE_INTEGER
-    partition_length : LARGE_INTEGER
-    hidden_sectors : UInt32
-    partition_number : UInt32
+
+  @[Extern]
+  record PARTITION_INFORMATION,
+    starting_offset : Win32cr::Foundation::LARGE_INTEGER,
+    partition_length : Win32cr::Foundation::LARGE_INTEGER,
+    hidden_sectors : UInt32,
+    partition_number : UInt32,
+    partition_type : UInt8,
+    boot_indicator : Win32cr::Foundation::BOOLEAN,
+    recognized_partition : Win32cr::Foundation::BOOLEAN,
+    rewrite_partition : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record SET_PARTITION_INFORMATION,
     partition_type : UInt8
-    boot_indicator : BOOLEAN
-    recognized_partition : BOOLEAN
-    rewrite_partition : BOOLEAN
-  end
-  struct SET_PARTITION_INFORMATION
-    partition_type : UInt8
-  end
-  struct DRIVE_LAYOUT_INFORMATION
-    partition_count : UInt32
-    signature : UInt32
-    partition_entry : PARTITION_INFORMATION[0]*
-  end
-  struct VERIFY_INFORMATION
-    starting_offset : LARGE_INTEGER
+
+  @[Extern]
+  record DRIVE_LAYOUT_INFORMATION,
+    partition_count : UInt32,
+    signature : UInt32,
+    partition_entry : Win32cr::System::Ioctl::PARTITION_INFORMATION*
+
+  @[Extern]
+  record VERIFY_INFORMATION,
+    starting_offset : Win32cr::Foundation::LARGE_INTEGER,
     length : UInt32
+
+  @[Extern]
+  record REASSIGN_BLOCKS,
+    reserved : UInt16,
+    count : UInt16,
+    block_number : UInt32*
+
+  @[Extern]
+  record REASSIGN_BLOCKS_EX,
+    reserved : UInt16,
+    count : UInt16,
+    block_number : Win32cr::Foundation::LARGE_INTEGER*
+
+  @[Extern]
+  record PARTITION_INFORMATION_GPT,
+    partition_type : LibC::GUID,
+    partition_id : LibC::GUID,
+    attributes : Win32cr::System::Ioctl::GPT_ATTRIBUTES,
+    name : UInt16[36]
+
+  @[Extern]
+  record PARTITION_INFORMATION_MBR,
+    partition_type : UInt8,
+    boot_indicator : Win32cr::Foundation::BOOLEAN,
+    recognized_partition : Win32cr::Foundation::BOOLEAN,
+    hidden_sectors : UInt32,
+    partition_id : LibC::GUID
+
+  @[Extern]
+  record SET_PARTITION_INFORMATION_EX,
+    partition_style : Win32cr::System::Ioctl::PARTITION_STYLE,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      mbr : Win32cr::System::Ioctl::SET_PARTITION_INFORMATION,
+      gpt : Win32cr::System::Ioctl::PARTITION_INFORMATION_GPT
+
   end
-  struct REASSIGN_BLOCKS
-    reserved : UInt16
-    count : UInt16
-    block_number : UInt32[0]*
-  end
-  struct REASSIGN_BLOCKS_EX
-    reserved : UInt16
-    count : UInt16
-    block_number : LARGE_INTEGER[0]*
-  end
-  struct PARTITION_INFORMATION_GPT
-    partition_type : Guid
-    partition_id : Guid
-    attributes : GPT_ATTRIBUTES
-    name : Char[36]*
-  end
-  struct PARTITION_INFORMATION_MBR
-    partition_type : UInt8
-    boot_indicator : BOOLEAN
-    recognized_partition : BOOLEAN
-    hidden_sectors : UInt32
-    partition_id : Guid
-  end
-  struct SET_PARTITION_INFORMATION_EX
-    partition_style : PARTITION_STYLE
-    anonymous : SET_PARTITION_INFORMATION_EX_Anonymous_e__Union
-  end
-  struct CREATE_DISK_GPT
-    disk_id : Guid
+
+  @[Extern]
+  record CREATE_DISK_GPT,
+    disk_id : LibC::GUID,
     max_partition_count : UInt32
-  end
-  struct CREATE_DISK_MBR
+
+  @[Extern]
+  record CREATE_DISK_MBR,
     signature : UInt32
+
+  @[Extern]
+  record CREATE_DISK,
+    partition_style : Win32cr::System::Ioctl::PARTITION_STYLE,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      mbr : Win32cr::System::Ioctl::CREATE_DISK_MBR,
+      gpt : Win32cr::System::Ioctl::CREATE_DISK_GPT
+
   end
-  struct CREATE_DISK
-    partition_style : PARTITION_STYLE
-    anonymous : CREATE_DISK_Anonymous_e__Union
+
+  @[Extern]
+  record GET_LENGTH_INFORMATION,
+    length : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record PARTITION_INFORMATION_EX,
+    partition_style : Win32cr::System::Ioctl::PARTITION_STYLE,
+    starting_offset : Win32cr::Foundation::LARGE_INTEGER,
+    partition_length : Win32cr::Foundation::LARGE_INTEGER,
+    partition_number : UInt32,
+    rewrite_partition : Win32cr::Foundation::BOOLEAN,
+    is_service_partition : Win32cr::Foundation::BOOLEAN,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      mbr : Win32cr::System::Ioctl::PARTITION_INFORMATION_MBR,
+      gpt : Win32cr::System::Ioctl::PARTITION_INFORMATION_GPT
+
   end
-  struct GET_LENGTH_INFORMATION
-    length : LARGE_INTEGER
-  end
-  struct PARTITION_INFORMATION_EX
-    partition_style : PARTITION_STYLE
-    starting_offset : LARGE_INTEGER
-    partition_length : LARGE_INTEGER
-    partition_number : UInt32
-    rewrite_partition : BOOLEAN
-    is_service_partition : BOOLEAN
-    anonymous : PARTITION_INFORMATION_EX_Anonymous_e__Union
-  end
-  struct DRIVE_LAYOUT_INFORMATION_GPT
-    disk_id : Guid
-    starting_usable_offset : LARGE_INTEGER
-    usable_length : LARGE_INTEGER
+
+  @[Extern]
+  record DRIVE_LAYOUT_INFORMATION_GPT,
+    disk_id : LibC::GUID,
+    starting_usable_offset : Win32cr::Foundation::LARGE_INTEGER,
+    usable_length : Win32cr::Foundation::LARGE_INTEGER,
     max_partition_count : UInt32
-  end
-  struct DRIVE_LAYOUT_INFORMATION_MBR
-    signature : UInt32
+
+  @[Extern]
+  record DRIVE_LAYOUT_INFORMATION_MBR,
+    signature : UInt32,
     check_sum : UInt32
+
+  @[Extern]
+  record DRIVE_LAYOUT_INFORMATION_EX,
+    partition_style : UInt32,
+    partition_count : UInt32,
+    anonymous : Anonymous_e__Union,
+    partition_entry : Win32cr::System::Ioctl::PARTITION_INFORMATION_EX* do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      mbr : Win32cr::System::Ioctl::DRIVE_LAYOUT_INFORMATION_MBR,
+      gpt : Win32cr::System::Ioctl::DRIVE_LAYOUT_INFORMATION_GPT
+
   end
-  struct DRIVE_LAYOUT_INFORMATION_EX
-    partition_style : UInt32
-    partition_count : UInt32
-    anonymous : DRIVE_LAYOUT_INFORMATION_EX_Anonymous_e__Union
-    partition_entry : PARTITION_INFORMATION_EX[0]*
-  end
-  struct DISK_INT13_INFO
-    drive_select : UInt16
-    max_cylinders : UInt32
-    sectors_per_track : UInt16
-    max_heads : UInt16
+
+  @[Extern]
+  record DISK_INT13_INFO,
+    drive_select : UInt16,
+    max_cylinders : UInt32,
+    sectors_per_track : UInt16,
+    max_heads : UInt16,
     number_drives : UInt16
-  end
-  struct DISK_EX_INT13_INFO
-    ex_buffer_size : UInt16
-    ex_flags : UInt16
-    ex_cylinders : UInt32
-    ex_heads : UInt32
-    ex_sectors_per_track : UInt32
-    ex_sectors_per_drive : UInt64
-    ex_sector_size : UInt16
+
+  @[Extern]
+  record DISK_EX_INT13_INFO,
+    ex_buffer_size : UInt16,
+    ex_flags : UInt16,
+    ex_cylinders : UInt32,
+    ex_heads : UInt32,
+    ex_sectors_per_track : UInt32,
+    ex_sectors_per_drive : UInt64,
+    ex_sector_size : UInt16,
     ex_reserved : UInt16
+
+  @[Extern]
+  record DISK_DETECTION_INFO,
+    size_of_detect_info : UInt32,
+    detection_type : Win32cr::System::Ioctl::DETECTION_TYPE,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        int13 : Win32cr::System::Ioctl::DISK_INT13_INFO,
+        ex_int13 : Win32cr::System::Ioctl::DISK_EX_INT13_INFO
+
+    end
+
   end
-  struct DISK_DETECTION_INFO
-    size_of_detect_info : UInt32
-    detection_type : DETECTION_TYPE
-    anonymous : DISK_DETECTION_INFO_Anonymous_e__Union
+
+  @[Extern]
+  record DISK_PARTITION_INFO,
+    size_of_partition_info : UInt32,
+    partition_style : Win32cr::System::Ioctl::PARTITION_STYLE,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      mbr : Mbr_e__Struct,
+      gpt : Gpt_e__Struct do
+
+      # Nested Type Gpt_e__Struct
+      @[Extern]
+      record Gpt_e__Struct,
+        disk_id : LibC::GUID
+
+
+      # Nested Type Mbr_e__Struct
+      @[Extern]
+      record Mbr_e__Struct,
+        signature : UInt32,
+        check_sum : UInt32
+
+    end
+
   end
-  struct DISK_DETECTION_INFO_Anonymous_e__Union_Anonymous_e__Struct
-    int13 : DISK_INT13_INFO
-    ex_int13 : DISK_EX_INT13_INFO
-  end
-  struct DISK_PARTITION_INFO
-    size_of_partition_info : UInt32
-    partition_style : PARTITION_STYLE
-    anonymous : DISK_PARTITION_INFO_Anonymous_e__Union
-  end
-  struct DISK_PARTITION_INFO_Anonymous_e__Union_Gpt_e__Struct
-    disk_id : Guid
-  end
-  struct DISK_PARTITION_INFO_Anonymous_e__Union_Mbr_e__Struct
-    signature : UInt32
-    check_sum : UInt32
-  end
-  struct DISK_GEOMETRY_EX
-    geometry : DISK_GEOMETRY
-    disk_size : LARGE_INTEGER
-    data : UInt8[0]*
-  end
-  struct DISK_CONTROLLER_NUMBER
-    controller_number : UInt32
+
+  @[Extern]
+  record DISK_GEOMETRY_EX,
+    geometry : Win32cr::System::Ioctl::DISK_GEOMETRY,
+    disk_size : Win32cr::Foundation::LARGE_INTEGER,
+    data : UInt8*
+
+  @[Extern]
+  record DISK_CONTROLLER_NUMBER,
+    controller_number : UInt32,
     disk_number : UInt32
+
+  @[Extern]
+  record DISK_CACHE_INFORMATION,
+    parameters_savable : Win32cr::Foundation::BOOLEAN,
+    read_cache_enabled : Win32cr::Foundation::BOOLEAN,
+    write_cache_enabled : Win32cr::Foundation::BOOLEAN,
+    read_retention_priority : Win32cr::System::Ioctl::DISK_CACHE_RETENTION_PRIORITY,
+    write_retention_priority : Win32cr::System::Ioctl::DISK_CACHE_RETENTION_PRIORITY,
+    disable_prefetch_transfer_length : UInt16,
+    prefetch_scalar : Win32cr::Foundation::BOOLEAN,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      scalar_prefetch : ScalarPrefetch_e__Struct,
+      block_prefetch : BlockPrefetch_e__Struct do
+
+      # Nested Type BlockPrefetch_e__Struct
+      @[Extern]
+      record BlockPrefetch_e__Struct,
+        minimum : UInt16,
+        maximum : UInt16
+
+
+      # Nested Type ScalarPrefetch_e__Struct
+      @[Extern]
+      record ScalarPrefetch_e__Struct,
+        minimum : UInt16,
+        maximum : UInt16,
+        maximum_blocks : UInt16
+
+    end
+
   end
-  struct DISK_CACHE_INFORMATION
-    parameters_savable : BOOLEAN
-    read_cache_enabled : BOOLEAN
-    write_cache_enabled : BOOLEAN
-    read_retention_priority : DISK_CACHE_RETENTION_PRIORITY
-    write_retention_priority : DISK_CACHE_RETENTION_PRIORITY
-    disable_prefetch_transfer_length : UInt16
-    prefetch_scalar : BOOLEAN
-    anonymous : DISK_CACHE_INFORMATION_Anonymous_e__Union
-  end
-  struct DISK_CACHE_INFORMATION_Anonymous_e__Union_BlockPrefetch_e__Struct
-    minimum : UInt16
-    maximum : UInt16
-  end
-  struct DISK_CACHE_INFORMATION_Anonymous_e__Union_ScalarPrefetch_e__Struct
-    minimum : UInt16
-    maximum : UInt16
-    maximum_blocks : UInt16
-  end
-  struct DISK_GROW_PARTITION
-    partition_number : UInt32
-    bytes_to_grow : LARGE_INTEGER
-  end
-  struct HISTOGRAM_BUCKET
-    reads : UInt32
+
+  @[Extern]
+  record DISK_GROW_PARTITION,
+    partition_number : UInt32,
+    bytes_to_grow : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record HISTOGRAM_BUCKET,
+    reads : UInt32,
     writes : UInt32
-  end
-  struct DISK_HISTOGRAM
-    disk_size : LARGE_INTEGER
-    start : LARGE_INTEGER
-    end_ : LARGE_INTEGER
-    average : LARGE_INTEGER
-    average_read : LARGE_INTEGER
-    average_write : LARGE_INTEGER
-    granularity : UInt32
-    size : UInt32
-    read_count : UInt32
-    write_count : UInt32
-    histogram : HISTOGRAM_BUCKET*
-  end
-  struct DISK_PERFORMANCE
-    bytes_read : LARGE_INTEGER
-    bytes_written : LARGE_INTEGER
-    read_time : LARGE_INTEGER
-    write_time : LARGE_INTEGER
-    idle_time : LARGE_INTEGER
-    read_count : UInt32
-    write_count : UInt32
-    queue_depth : UInt32
-    split_count : UInt32
-    query_time : LARGE_INTEGER
-    storage_device_number : UInt32
-    storage_manager_name : Char[8]*
-  end
-  struct DISK_RECORD
-    byte_offset : LARGE_INTEGER
-    start_time : LARGE_INTEGER
-    end_time : LARGE_INTEGER
-    virtual_address : Void*
-    number_of_bytes : UInt32
-    device_number : UInt8
-    read_request : BOOLEAN
-  end
-  struct DISK_LOGGING
-    function : UInt8
-    buffer_address : Void*
+
+  @[Extern]
+  record DISK_HISTOGRAM,
+    disk_size : Win32cr::Foundation::LARGE_INTEGER,
+    start : Win32cr::Foundation::LARGE_INTEGER,
+    end__ : Win32cr::Foundation::LARGE_INTEGER,
+    average : Win32cr::Foundation::LARGE_INTEGER,
+    average_read : Win32cr::Foundation::LARGE_INTEGER,
+    average_write : Win32cr::Foundation::LARGE_INTEGER,
+    granularity : UInt32,
+    size : UInt32,
+    read_count : UInt32,
+    write_count : UInt32,
+    histogram : Win32cr::System::Ioctl::HISTOGRAM_BUCKET*
+
+  @[Extern]
+  record DISK_PERFORMANCE,
+    bytes_read : Win32cr::Foundation::LARGE_INTEGER,
+    bytes_written : Win32cr::Foundation::LARGE_INTEGER,
+    read_time : Win32cr::Foundation::LARGE_INTEGER,
+    write_time : Win32cr::Foundation::LARGE_INTEGER,
+    idle_time : Win32cr::Foundation::LARGE_INTEGER,
+    read_count : UInt32,
+    write_count : UInt32,
+    queue_depth : UInt32,
+    split_count : UInt32,
+    query_time : Win32cr::Foundation::LARGE_INTEGER,
+    storage_device_number : UInt32,
+    storage_manager_name : UInt16[8]
+
+  @[Extern]
+  record DISK_RECORD,
+    byte_offset : Win32cr::Foundation::LARGE_INTEGER,
+    start_time : Win32cr::Foundation::LARGE_INTEGER,
+    end_time : Win32cr::Foundation::LARGE_INTEGER,
+    virtual_address : Void*,
+    number_of_bytes : UInt32,
+    device_number : UInt8,
+    read_request : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record DISK_LOGGING,
+    function : UInt8,
+    buffer_address : Void*,
     buffer_size : UInt32
-  end
-  struct BIN_RANGE
-    start_value : LARGE_INTEGER
-    length : LARGE_INTEGER
-  end
-  struct PERF_BIN
-    number_of_bins : UInt32
-    type_of_bin : UInt32
-    bins_ranges : BIN_RANGE[0]*
-  end
-  struct BIN_COUNT
-    bin_range : BIN_RANGE
+
+  @[Extern]
+  record BIN_RANGE,
+    start_value : Win32cr::Foundation::LARGE_INTEGER,
+    length : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record PERF_BIN,
+    number_of_bins : UInt32,
+    type_of_bin : UInt32,
+    bins_ranges : Win32cr::System::Ioctl::BIN_RANGE*
+
+  @[Extern]
+  record BIN_COUNT,
+    bin_range : Win32cr::System::Ioctl::BIN_RANGE,
     bin_count : UInt32
-  end
-  struct BIN_RESULTS
-    number_of_bins : UInt32
-    bin_counts : BIN_COUNT[0]*
-  end
-  struct GETVERSIONINPARAMS
-    b_version : UInt8
-    b_revision : UInt8
-    b_reserved : UInt8
-    b_ide_device_map : UInt8
-    f_capabilities : UInt32
-    dw_reserved : UInt32[4]*
-  end
-  struct IDEREGS
-    b_features_reg : UInt8
-    b_sector_count_reg : UInt8
-    b_sector_number_reg : UInt8
-    b_cyl_low_reg : UInt8
-    b_cyl_high_reg : UInt8
-    b_drive_head_reg : UInt8
-    b_command_reg : UInt8
-    b_reserved : UInt8
-  end
-  struct SENDCMDINPARAMS
-    c_buffer_size : UInt32
-    ir_drive_regs : IDEREGS
-    b_drive_number : UInt8
-    b_reserved : UInt8[3]*
-    dw_reserved : UInt32[4]*
-    b_buffer : UInt8[0]*
-  end
-  struct DRIVERSTATUS
-    b_driver_error : UInt8
-    b_ide_error : UInt8
-    b_reserved : UInt8[2]*
-    dw_reserved : UInt32[2]*
-  end
-  struct SENDCMDOUTPARAMS
-    c_buffer_size : UInt32
-    driver_status : DRIVERSTATUS
-    b_buffer : UInt8[0]*
-  end
-  struct GET_DISK_ATTRIBUTES
-    version : UInt32
-    reserved1 : UInt32
+
+  @[Extern]
+  record BIN_RESULTS,
+    number_of_bins : UInt32,
+    bin_counts : Win32cr::System::Ioctl::BIN_COUNT*
+
+  @[Extern]
+  record GETVERSIONINPARAMS,
+    bVersion : UInt8,
+    bRevision : UInt8,
+    bReserved : UInt8,
+    bIDEDeviceMap : UInt8,
+    fCapabilities : UInt32,
+    dwReserved : UInt32[4]
+
+  @[Extern]
+  record IDEREGS,
+    bFeaturesReg : UInt8,
+    bSectorCountReg : UInt8,
+    bSectorNumberReg : UInt8,
+    bCylLowReg : UInt8,
+    bCylHighReg : UInt8,
+    bDriveHeadReg : UInt8,
+    bCommandReg : UInt8,
+    bReserved : UInt8
+
+  @[Extern]
+  record SENDCMDINPARAMS,
+    cBufferSize : UInt32,
+    irDriveRegs : Win32cr::System::Ioctl::IDEREGS,
+    bDriveNumber : UInt8,
+    bReserved : UInt8[3],
+    dwReserved : UInt32[4],
+    bBuffer : UInt8*
+
+  @[Extern]
+  record DRIVERSTATUS,
+    bDriverError : UInt8,
+    bIDEError : UInt8,
+    bReserved : UInt8[2],
+    dwReserved : UInt32[2]
+
+  @[Extern]
+  record SENDCMDOUTPARAMS,
+    cBufferSize : UInt32,
+    driver_status : Win32cr::System::Ioctl::DRIVERSTATUS,
+    bBuffer : UInt8*
+
+  @[Extern]
+  record GET_DISK_ATTRIBUTES,
+    version : UInt32,
+    reserved1 : UInt32,
     attributes : UInt64
-  end
-  struct SET_DISK_ATTRIBUTES
-    version : UInt32
-    persist : BOOLEAN
-    reserved1 : UInt8[3]*
-    attributes : UInt64
-    attributes_mask : UInt64
-    reserved2 : UInt32[4]*
-  end
-  struct CHANGER_ELEMENT
-    element_type : ELEMENT_TYPE
+
+  @[Extern]
+  record SET_DISK_ATTRIBUTES,
+    version : UInt32,
+    persist : Win32cr::Foundation::BOOLEAN,
+    reserved1 : UInt8[3],
+    attributes : UInt64,
+    attributes_mask : UInt64,
+    reserved2 : UInt32[4]
+
+  @[Extern]
+  record CHANGER_ELEMENT,
+    element_type : Win32cr::System::Ioctl::ELEMENT_TYPE,
     element_address : UInt32
-  end
-  struct CHANGER_ELEMENT_LIST
-    element : CHANGER_ELEMENT
+
+  @[Extern]
+  record CHANGER_ELEMENT_LIST,
+    element : Win32cr::System::Ioctl::CHANGER_ELEMENT,
     number_of_elements : UInt32
-  end
-  struct GET_CHANGER_PARAMETERS
-    size : UInt32
-    number_transport_elements : UInt16
-    number_storage_elements : UInt16
-    number_cleaner_slots : UInt16
-    number_ie_elements : UInt16
-    number_data_transfer_elements : UInt16
-    number_of_doors : UInt16
-    first_slot_number : UInt16
-    first_drive_number : UInt16
-    first_transport_number : UInt16
-    first_ie_port_number : UInt16
-    first_cleaner_slot_address : UInt16
-    magazine_size : UInt16
-    drive_clean_timeout : UInt32
-    features0 : CHANGER_FEATURES
-    features1 : GET_CHANGER_PARAMETERS_FEATURES1
-    move_from_transport : UInt8
-    move_from_slot : UInt8
-    move_from_ie_port : UInt8
-    move_from_drive : UInt8
-    exchange_from_transport : UInt8
-    exchange_from_slot : UInt8
-    exchange_from_ie_port : UInt8
-    exchange_from_drive : UInt8
-    lock_unlock_capabilities : UInt8
-    position_capabilities : UInt8
-    reserved1 : UInt8[2]*
-    reserved2 : UInt32[2]*
-  end
-  struct CHANGER_PRODUCT_DATA
-    vendor_id : UInt8[8]*
-    product_id : UInt8[16]*
-    revision : UInt8[4]*
-    serial_number : UInt8[32]*
+
+  @[Extern]
+  record GET_CHANGER_PARAMETERS,
+    size : UInt32,
+    number_transport_elements : UInt16,
+    number_storage_elements : UInt16,
+    number_cleaner_slots : UInt16,
+    number_ie_elements : UInt16,
+    number_data_transfer_elements : UInt16,
+    number_of_doors : UInt16,
+    first_slot_number : UInt16,
+    first_drive_number : UInt16,
+    first_transport_number : UInt16,
+    first_ie_port_number : UInt16,
+    first_cleaner_slot_address : UInt16,
+    magazine_size : UInt16,
+    drive_clean_timeout : UInt32,
+    features0 : Win32cr::System::Ioctl::CHANGER_FEATURES,
+    features1 : Win32cr::System::Ioctl::GET_CHANGER_PARAMETERS_FEATURES1,
+    move_from_transport : UInt8,
+    move_from_slot : UInt8,
+    move_from_ie_port : UInt8,
+    move_from_drive : UInt8,
+    exchange_from_transport : UInt8,
+    exchange_from_slot : UInt8,
+    exchange_from_ie_port : UInt8,
+    exchange_from_drive : UInt8,
+    lock_unlock_capabilities : UInt8,
+    position_capabilities : UInt8,
+    reserved1 : UInt8[2],
+    reserved2 : UInt32[2]
+
+  @[Extern]
+  record CHANGER_PRODUCT_DATA,
+    vendor_id : UInt8[8],
+    product_id : UInt8[16],
+    revision : UInt8[4],
+    serial_number : UInt8[32],
     device_type : UInt8
-  end
-  struct CHANGER_SET_ACCESS
-    element : CHANGER_ELEMENT
+
+  @[Extern]
+  record CHANGER_SET_ACCESS,
+    element : Win32cr::System::Ioctl::CHANGER_ELEMENT,
     control : UInt32
-  end
-  struct CHANGER_READ_ELEMENT_STATUS
-    element_list : CHANGER_ELEMENT_LIST
-    volume_tag_info : BOOLEAN
-  end
-  struct CHANGER_ELEMENT_STATUS
-    element : CHANGER_ELEMENT
-    src_element_address : CHANGER_ELEMENT
-    flags : CHANGER_ELEMENT_STATUS_FLAGS
-    exception_code : UInt32
-    target_id : UInt8
-    lun : UInt8
-    reserved : UInt16
-    primary_volume_id : UInt8[36]*
-    alternate_volume_id : UInt8[36]*
-  end
-  struct CHANGER_ELEMENT_STATUS_EX
-    element : CHANGER_ELEMENT
-    src_element_address : CHANGER_ELEMENT
-    flags : CHANGER_ELEMENT_STATUS_FLAGS
-    exception_code : UInt32
-    target_id : UInt8
-    lun : UInt8
-    reserved : UInt16
-    primary_volume_id : UInt8[36]*
-    alternate_volume_id : UInt8[36]*
-    vendor_identification : UInt8[8]*
-    product_identification : UInt8[16]*
-    serial_number : UInt8[32]*
-  end
-  struct CHANGER_INITIALIZE_ELEMENT_STATUS
-    element_list : CHANGER_ELEMENT_LIST
-    bar_code_scan : BOOLEAN
-  end
-  struct CHANGER_SET_POSITION
-    transport : CHANGER_ELEMENT
-    destination : CHANGER_ELEMENT
-    flip : BOOLEAN
-  end
-  struct CHANGER_EXCHANGE_MEDIUM
-    transport : CHANGER_ELEMENT
-    source : CHANGER_ELEMENT
-    destination1 : CHANGER_ELEMENT
-    destination2 : CHANGER_ELEMENT
-    flip1 : BOOLEAN
-    flip2 : BOOLEAN
-  end
-  struct CHANGER_MOVE_MEDIUM
-    transport : CHANGER_ELEMENT
-    source : CHANGER_ELEMENT
-    destination : CHANGER_ELEMENT
-    flip : BOOLEAN
-  end
-  struct CHANGER_SEND_VOLUME_TAG_INFORMATION
-    starting_element : CHANGER_ELEMENT
-    action_code : UInt32
-    volume_id_template : UInt8[40]*
-  end
-  struct READ_ELEMENT_ADDRESS_INFO
-    number_of_elements : UInt32
-    element_status : CHANGER_ELEMENT_STATUS[0]*
-  end
-  struct PATHNAME_BUFFER
-    path_name_length : UInt32
-    name : Char[0]*
-  end
-  struct FSCTL_QUERY_FAT_BPB_BUFFER
-    first0x24_bytes_of_boot_sector : UInt8[36]*
-  end
-  struct NTFS_VOLUME_DATA_BUFFER
-    volume_serial_number : LARGE_INTEGER
-    number_sectors : LARGE_INTEGER
-    total_clusters : LARGE_INTEGER
-    free_clusters : LARGE_INTEGER
-    total_reserved : LARGE_INTEGER
-    bytes_per_sector : UInt32
-    bytes_per_cluster : UInt32
-    bytes_per_file_record_segment : UInt32
-    clusters_per_file_record_segment : UInt32
-    mft_valid_data_length : LARGE_INTEGER
-    mft_start_lcn : LARGE_INTEGER
-    mft2_start_lcn : LARGE_INTEGER
-    mft_zone_start : LARGE_INTEGER
-    mft_zone_end : LARGE_INTEGER
-  end
-  struct NTFS_EXTENDED_VOLUME_DATA
-    byte_count : UInt32
-    major_version : UInt16
-    minor_version : UInt16
-    bytes_per_physical_sector : UInt32
-    lfs_major_version : UInt16
-    lfs_minor_version : UInt16
-    max_device_trim_extent_count : UInt32
-    max_device_trim_byte_count : UInt32
-    max_volume_trim_extent_count : UInt32
+
+  @[Extern]
+  record CHANGER_READ_ELEMENT_STATUS,
+    element_list : Win32cr::System::Ioctl::CHANGER_ELEMENT_LIST,
+    volume_tag_info : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record CHANGER_ELEMENT_STATUS,
+    element : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    src_element_address : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    flags : Win32cr::System::Ioctl::CHANGER_ELEMENT_STATUS_FLAGS,
+    exception_code : UInt32,
+    target_id : UInt8,
+    lun : UInt8,
+    reserved : UInt16,
+    primary_volume_id : UInt8[36],
+    alternate_volume_id : UInt8[36]
+
+  @[Extern]
+  record CHANGER_ELEMENT_STATUS_EX,
+    element : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    src_element_address : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    flags : Win32cr::System::Ioctl::CHANGER_ELEMENT_STATUS_FLAGS,
+    exception_code : UInt32,
+    target_id : UInt8,
+    lun : UInt8,
+    reserved : UInt16,
+    primary_volume_id : UInt8[36],
+    alternate_volume_id : UInt8[36],
+    vendor_identification : UInt8[8],
+    product_identification : UInt8[16],
+    serial_number : UInt8[32]
+
+  @[Extern]
+  record CHANGER_INITIALIZE_ELEMENT_STATUS,
+    element_list : Win32cr::System::Ioctl::CHANGER_ELEMENT_LIST,
+    bar_code_scan : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record CHANGER_SET_POSITION,
+    transport : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    destination : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    flip : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record CHANGER_EXCHANGE_MEDIUM,
+    transport : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    source : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    destination1 : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    destination2 : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    flip1 : Win32cr::Foundation::BOOLEAN,
+    flip2 : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record CHANGER_MOVE_MEDIUM,
+    transport : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    source : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    destination : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    flip : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record CHANGER_SEND_VOLUME_TAG_INFORMATION,
+    starting_element : Win32cr::System::Ioctl::CHANGER_ELEMENT,
+    action_code : UInt32,
+    volume_id_template : UInt8[40]
+
+  @[Extern]
+  record READ_ELEMENT_ADDRESS_INFO,
+    number_of_elements : UInt32,
+    element_status : Win32cr::System::Ioctl::CHANGER_ELEMENT_STATUS*
+
+  @[Extern]
+  record PATHNAME_BUFFER,
+    path_name_length : UInt32,
+    name : UInt16*
+
+  @[Extern]
+  record FSCTL_QUERY_FAT_BPB_BUFFER,
+    first0x24_bytes_of_boot_sector : UInt8[36]
+
+  @[Extern]
+  record NTFS_VOLUME_DATA_BUFFER,
+    volume_serial_number : Win32cr::Foundation::LARGE_INTEGER,
+    number_sectors : Win32cr::Foundation::LARGE_INTEGER,
+    total_clusters : Win32cr::Foundation::LARGE_INTEGER,
+    free_clusters : Win32cr::Foundation::LARGE_INTEGER,
+    total_reserved : Win32cr::Foundation::LARGE_INTEGER,
+    bytes_per_sector : UInt32,
+    bytes_per_cluster : UInt32,
+    bytes_per_file_record_segment : UInt32,
+    clusters_per_file_record_segment : UInt32,
+    mft_valid_data_length : Win32cr::Foundation::LARGE_INTEGER,
+    mft_start_lcn : Win32cr::Foundation::LARGE_INTEGER,
+    mft2_start_lcn : Win32cr::Foundation::LARGE_INTEGER,
+    mft_zone_start : Win32cr::Foundation::LARGE_INTEGER,
+    mft_zone_end : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record NTFS_EXTENDED_VOLUME_DATA,
+    byte_count : UInt32,
+    major_version : UInt16,
+    minor_version : UInt16,
+    bytes_per_physical_sector : UInt32,
+    lfs_major_version : UInt16,
+    lfs_minor_version : UInt16,
+    max_device_trim_extent_count : UInt32,
+    max_device_trim_byte_count : UInt32,
+    max_volume_trim_extent_count : UInt32,
     max_volume_trim_byte_count : UInt32
-  end
-  struct REFS_VOLUME_DATA_BUFFER
-    byte_count : UInt32
-    major_version : UInt32
-    minor_version : UInt32
-    bytes_per_physical_sector : UInt32
-    volume_serial_number : LARGE_INTEGER
-    number_sectors : LARGE_INTEGER
-    total_clusters : LARGE_INTEGER
-    free_clusters : LARGE_INTEGER
-    total_reserved : LARGE_INTEGER
-    bytes_per_sector : UInt32
-    bytes_per_cluster : UInt32
-    maximum_size_of_resident_file : LARGE_INTEGER
-    fast_tier_data_fill_ratio : UInt16
-    slow_tier_data_fill_ratio : UInt16
-    destages_fast_tier_to_slow_tier_rate : UInt32
-    reserved : LARGE_INTEGER[9]*
-  end
-  struct STARTING_LCN_INPUT_BUFFER
-    starting_lcn : LARGE_INTEGER
-  end
-  struct STARTING_LCN_INPUT_BUFFER_EX
-    starting_lcn : LARGE_INTEGER
+
+  @[Extern]
+  record REFS_VOLUME_DATA_BUFFER,
+    byte_count : UInt32,
+    major_version : UInt32,
+    minor_version : UInt32,
+    bytes_per_physical_sector : UInt32,
+    volume_serial_number : Win32cr::Foundation::LARGE_INTEGER,
+    number_sectors : Win32cr::Foundation::LARGE_INTEGER,
+    total_clusters : Win32cr::Foundation::LARGE_INTEGER,
+    free_clusters : Win32cr::Foundation::LARGE_INTEGER,
+    total_reserved : Win32cr::Foundation::LARGE_INTEGER,
+    bytes_per_sector : UInt32,
+    bytes_per_cluster : UInt32,
+    maximum_size_of_resident_file : Win32cr::Foundation::LARGE_INTEGER,
+    fast_tier_data_fill_ratio : UInt16,
+    slow_tier_data_fill_ratio : UInt16,
+    destages_fast_tier_to_slow_tier_rate : UInt32,
+    reserved : Win32cr::Foundation::LARGE_INTEGER[9]
+
+  @[Extern]
+  record STARTING_LCN_INPUT_BUFFER,
+    starting_lcn : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record STARTING_LCN_INPUT_BUFFER_EX,
+    starting_lcn : Win32cr::Foundation::LARGE_INTEGER,
     flags : UInt32
+
+  @[Extern]
+  record VOLUME_BITMAP_BUFFER,
+    starting_lcn : Win32cr::Foundation::LARGE_INTEGER,
+    bitmap_size : Win32cr::Foundation::LARGE_INTEGER,
+    buffer : UInt8*
+
+  @[Extern]
+  record STARTING_VCN_INPUT_BUFFER,
+    starting_vcn : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record RETRIEVAL_POINTERS_BUFFER,
+    extent_count : UInt32,
+    starting_vcn : Win32cr::Foundation::LARGE_INTEGER,
+    extents : Anonymous_e__Struct* do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      next_vcn : Win32cr::Foundation::LARGE_INTEGER,
+      lcn : Win32cr::Foundation::LARGE_INTEGER
+
   end
-  struct VOLUME_BITMAP_BUFFER
-    starting_lcn : LARGE_INTEGER
-    bitmap_size : LARGE_INTEGER
-    buffer : UInt8[0]*
+
+  @[Extern]
+  record RETRIEVAL_POINTERS_AND_REFCOUNT_BUFFER,
+    extent_count : UInt32,
+    starting_vcn : Win32cr::Foundation::LARGE_INTEGER,
+    extents : Anonymous_e__Struct* do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      next_vcn : Win32cr::Foundation::LARGE_INTEGER,
+      lcn : Win32cr::Foundation::LARGE_INTEGER,
+      reference_count : UInt32
+
   end
-  struct STARTING_VCN_INPUT_BUFFER
-    starting_vcn : LARGE_INTEGER
-  end
-  struct RETRIEVAL_POINTERS_BUFFER
+
+  @[Extern]
+  record RETRIEVAL_POINTER_COUNT,
     extent_count : UInt32
-    starting_vcn : LARGE_INTEGER
-    extents : RETRIEVAL_POINTERS_BUFFER_Anonymous_e__Struct[0]*
-  end
-  struct RETRIEVAL_POINTERS_BUFFER_Anonymous_e__Struct
-    next_vcn : LARGE_INTEGER
-    lcn : LARGE_INTEGER
-  end
-  struct RETRIEVAL_POINTERS_AND_REFCOUNT_BUFFER
-    extent_count : UInt32
-    starting_vcn : LARGE_INTEGER
-    extents : RETRIEVAL_POINTERS_AND_REFCOUNT_BUFFER_Anonymous_e__Struct[0]*
-  end
-  struct RETRIEVAL_POINTERS_AND_REFCOUNT_BUFFER_Anonymous_e__Struct
-    next_vcn : LARGE_INTEGER
-    lcn : LARGE_INTEGER
-    reference_count : UInt32
-  end
-  struct RETRIEVAL_POINTER_COUNT
-    extent_count : UInt32
-  end
-  struct NTFS_FILE_RECORD_INPUT_BUFFER
-    file_reference_number : LARGE_INTEGER
-  end
-  struct NTFS_FILE_RECORD_OUTPUT_BUFFER
-    file_reference_number : LARGE_INTEGER
-    file_record_length : UInt32
-    file_record_buffer : UInt8[0]*
-  end
-  struct MOVE_FILE_DATA
-    file_handle : LibC::HANDLE
-    starting_vcn : LARGE_INTEGER
-    starting_lcn : LARGE_INTEGER
+
+  @[Extern]
+  record NTFS_FILE_RECORD_INPUT_BUFFER,
+    file_reference_number : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record NTFS_FILE_RECORD_OUTPUT_BUFFER,
+    file_reference_number : Win32cr::Foundation::LARGE_INTEGER,
+    file_record_length : UInt32,
+    file_record_buffer : UInt8*
+
+  @[Extern]
+  record MOVE_FILE_DATA,
+    file_handle : Win32cr::Foundation::HANDLE,
+    starting_vcn : Win32cr::Foundation::LARGE_INTEGER,
+    starting_lcn : Win32cr::Foundation::LARGE_INTEGER,
     cluster_count : UInt32
-  end
-  struct MOVE_FILE_RECORD_DATA
-    file_handle : LibC::HANDLE
-    source_file_record : LARGE_INTEGER
-    target_file_record : LARGE_INTEGER
-  end
-  struct MOVE_FILE_DATA32
-    file_handle : UInt32
-    starting_vcn : LARGE_INTEGER
-    starting_lcn : LARGE_INTEGER
+
+  @[Extern]
+  record MOVE_FILE_RECORD_DATA,
+    file_handle : Win32cr::Foundation::HANDLE,
+    source_file_record : Win32cr::Foundation::LARGE_INTEGER,
+    target_file_record : Win32cr::Foundation::LARGE_INTEGER
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  record MOVE_FILE_DATA32,
+    file_handle : UInt32,
+    starting_vcn : Win32cr::Foundation::LARGE_INTEGER,
+    starting_lcn : Win32cr::Foundation::LARGE_INTEGER,
     cluster_count : UInt32
-  end
-  struct FIND_BY_SID_DATA
-    restart : UInt32
-    sid : SID
-  end
-  struct FIND_BY_SID_OUTPUT
-    next_entry_offset : UInt32
-    file_index : UInt32
-    file_name_length : UInt32
-    file_name : Char[0]*
-  end
-  struct MFT_ENUM_DATA_V0
-    start_file_reference_number : UInt64
-    low_usn : Int64
+  {% end %}
+
+  @[Extern]
+  record FIND_BY_SID_DATA,
+    restart : UInt32,
+    sid : Win32cr::Security::SID
+
+  @[Extern]
+  record FIND_BY_SID_OUTPUT,
+    next_entry_offset : UInt32,
+    file_index : UInt32,
+    file_name_length : UInt32,
+    file_name : UInt16*
+
+  @[Extern]
+  record MFT_ENUM_DATA_V0,
+    start_file_reference_number : UInt64,
+    low_usn : Int64,
     high_usn : Int64
-  end
-  struct MFT_ENUM_DATA_V1
-    start_file_reference_number : UInt64
-    low_usn : Int64
-    high_usn : Int64
-    min_major_version : UInt16
+
+  @[Extern]
+  record MFT_ENUM_DATA_V1,
+    start_file_reference_number : UInt64,
+    low_usn : Int64,
+    high_usn : Int64,
+    min_major_version : UInt16,
     max_major_version : UInt16
-  end
-  struct CREATE_USN_JOURNAL_DATA
-    maximum_size : UInt64
+
+  @[Extern]
+  record CREATE_USN_JOURNAL_DATA,
+    maximum_size : UInt64,
     allocation_delta : UInt64
-  end
-  struct READ_FILE_USN_DATA
-    min_major_version : UInt16
+
+  @[Extern]
+  record READ_FILE_USN_DATA,
+    min_major_version : UInt16,
     max_major_version : UInt16
-  end
-  struct READ_USN_JOURNAL_DATA_V0
-    start_usn : Int64
-    reason_mask : UInt32
-    return_only_on_close : UInt32
-    timeout : UInt64
-    bytes_to_wait_for : UInt64
+
+  @[Extern]
+  record READ_USN_JOURNAL_DATA_V0,
+    start_usn : Int64,
+    reason_mask : UInt32,
+    return_only_on_close : UInt32,
+    timeout : UInt64,
+    bytes_to_wait_for : UInt64,
     usn_journal_id : UInt64
-  end
-  struct READ_USN_JOURNAL_DATA_V1
-    start_usn : Int64
-    reason_mask : UInt32
-    return_only_on_close : UInt32
-    timeout : UInt64
-    bytes_to_wait_for : UInt64
-    usn_journal_id : UInt64
-    min_major_version : UInt16
+
+  @[Extern]
+  record READ_USN_JOURNAL_DATA_V1,
+    start_usn : Int64,
+    reason_mask : UInt32,
+    return_only_on_close : UInt32,
+    timeout : UInt64,
+    bytes_to_wait_for : UInt64,
+    usn_journal_id : UInt64,
+    min_major_version : UInt16,
     max_major_version : UInt16
-  end
-  struct USN_TRACK_MODIFIED_RANGES
-    flags : UInt32
-    unused : UInt32
-    chunk_size : UInt64
+
+  @[Extern]
+  record USN_TRACK_MODIFIED_RANGES,
+    flags : UInt32,
+    unused : UInt32,
+    chunk_size : UInt64,
     file_size_threshold : Int64
-  end
-  struct USN_RANGE_TRACK_OUTPUT
+
+  @[Extern]
+  record USN_RANGE_TRACK_OUTPUT,
     usn : Int64
-  end
-  struct USN_RECORD_V2
-    record_length : UInt32
-    major_version : UInt16
+
+  @[Extern]
+  record USN_RECORD_V2,
+    record_length : UInt32,
+    major_version : UInt16,
+    minor_version : UInt16,
+    file_reference_number : UInt64,
+    parent_file_reference_number : UInt64,
+    usn : Int64,
+    time_stamp : Win32cr::Foundation::LARGE_INTEGER,
+    reason : UInt32,
+    source_info : UInt32,
+    security_id : UInt32,
+    file_attributes : UInt32,
+    file_name_length : UInt16,
+    file_name_offset : UInt16,
+    file_name : UInt16*
+
+  @[Extern]
+  record USN_RECORD_V3,
+    record_length : UInt32,
+    major_version : UInt16,
+    minor_version : UInt16,
+    file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128,
+    parent_file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128,
+    usn : Int64,
+    time_stamp : Win32cr::Foundation::LARGE_INTEGER,
+    reason : UInt32,
+    source_info : UInt32,
+    security_id : UInt32,
+    file_attributes : UInt32,
+    file_name_length : UInt16,
+    file_name_offset : UInt16,
+    file_name : UInt16*
+
+  @[Extern]
+  record USN_RECORD_COMMON_HEADER,
+    record_length : UInt32,
+    major_version : UInt16,
     minor_version : UInt16
-    file_reference_number : UInt64
-    parent_file_reference_number : UInt64
-    usn : Int64
-    time_stamp : LARGE_INTEGER
-    reason : UInt32
-    source_info : UInt32
-    security_id : UInt32
-    file_attributes : UInt32
-    file_name_length : UInt16
-    file_name_offset : UInt16
-    file_name : Char[0]*
-  end
-  struct USN_RECORD_V3
-    record_length : UInt32
-    major_version : UInt16
-    minor_version : UInt16
-    file_reference_number : FILE_ID_128
-    parent_file_reference_number : FILE_ID_128
-    usn : Int64
-    time_stamp : LARGE_INTEGER
-    reason : UInt32
-    source_info : UInt32
-    security_id : UInt32
-    file_attributes : UInt32
-    file_name_length : UInt16
-    file_name_offset : UInt16
-    file_name : Char[0]*
-  end
-  struct USN_RECORD_COMMON_HEADER
-    record_length : UInt32
-    major_version : UInt16
-    minor_version : UInt16
-  end
-  struct USN_RECORD_EXTENT
-    offset : Int64
+
+  @[Extern]
+  record USN_RECORD_EXTENT,
+    offset : Int64,
     length : Int64
-  end
-  struct USN_RECORD_V4
-    header : USN_RECORD_COMMON_HEADER
-    file_reference_number : FILE_ID_128
-    parent_file_reference_number : FILE_ID_128
-    usn : Int64
-    reason : UInt32
-    source_info : USN_SOURCE_INFO_ID
-    remaining_extents : UInt32
-    number_of_extents : UInt16
-    extent_size : UInt16
-    extents : USN_RECORD_EXTENT[0]*
-  end
-  struct USN_JOURNAL_DATA_V0
-    usn_journal_id : UInt64
-    first_usn : Int64
-    next_usn : Int64
-    lowest_valid_usn : Int64
-    max_usn : Int64
-    maximum_size : UInt64
+
+  @[Extern]
+  record USN_RECORD_V4,
+    header : Win32cr::System::Ioctl::USN_RECORD_COMMON_HEADER,
+    file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128,
+    parent_file_reference_number : Win32cr::Storage::FileSystem::FILE_ID_128,
+    usn : Int64,
+    reason : UInt32,
+    source_info : Win32cr::System::Ioctl::USN_SOURCE_INFO_ID,
+    remaining_extents : UInt32,
+    number_of_extents : UInt16,
+    extent_size : UInt16,
+    extents : Win32cr::System::Ioctl::USN_RECORD_EXTENT*
+
+  @[Extern(union: true)]
+  record USN_RECORD_UNION,
+    header : Win32cr::System::Ioctl::USN_RECORD_COMMON_HEADER,
+    v2 : Win32cr::System::Ioctl::USN_RECORD_V2,
+    v3 : Win32cr::System::Ioctl::USN_RECORD_V3,
+    v4 : Win32cr::System::Ioctl::USN_RECORD_V4
+
+  @[Extern]
+  record USN_JOURNAL_DATA_V0,
+    usn_journal_id : UInt64,
+    first_usn : Int64,
+    next_usn : Int64,
+    lowest_valid_usn : Int64,
+    max_usn : Int64,
+    maximum_size : UInt64,
     allocation_delta : UInt64
-  end
-  struct USN_JOURNAL_DATA_V1
-    usn_journal_id : UInt64
-    first_usn : Int64
-    next_usn : Int64
-    lowest_valid_usn : Int64
-    max_usn : Int64
-    maximum_size : UInt64
-    allocation_delta : UInt64
-    min_supported_major_version : UInt16
+
+  @[Extern]
+  record USN_JOURNAL_DATA_V1,
+    usn_journal_id : UInt64,
+    first_usn : Int64,
+    next_usn : Int64,
+    lowest_valid_usn : Int64,
+    max_usn : Int64,
+    maximum_size : UInt64,
+    allocation_delta : UInt64,
+    min_supported_major_version : UInt16,
     max_supported_major_version : UInt16
-  end
-  struct USN_JOURNAL_DATA_V2
-    usn_journal_id : UInt64
-    first_usn : Int64
-    next_usn : Int64
-    lowest_valid_usn : Int64
-    max_usn : Int64
-    maximum_size : UInt64
-    allocation_delta : UInt64
-    min_supported_major_version : UInt16
-    max_supported_major_version : UInt16
-    flags : UInt32
-    range_track_chunk_size : UInt64
+
+  @[Extern]
+  record USN_JOURNAL_DATA_V2,
+    usn_journal_id : UInt64,
+    first_usn : Int64,
+    next_usn : Int64,
+    lowest_valid_usn : Int64,
+    max_usn : Int64,
+    maximum_size : UInt64,
+    allocation_delta : UInt64,
+    min_supported_major_version : UInt16,
+    max_supported_major_version : UInt16,
+    flags : UInt32,
+    range_track_chunk_size : UInt64,
     range_track_file_size_threshold : Int64
+
+  @[Extern]
+  record DELETE_USN_JOURNAL_DATA,
+    usn_journal_id : UInt64,
+    delete_flags : Win32cr::System::Ioctl::USN_DELETE_FLAGS
+
+  @[Extern]
+  record MARK_HANDLE_INFO,
+    anonymous : Anonymous_e__Union,
+    volume_handle : Win32cr::Foundation::HANDLE,
+    handle_info : UInt32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      usn_source_info : UInt32,
+      copy_number : UInt32
+
   end
-  struct DELETE_USN_JOURNAL_DATA
-    usn_journal_id : UInt64
-    delete_flags : USN_DELETE_FLAGS
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  record MARK_HANDLE_INFO32,
+    anonymous : Anonymous_e__Union,
+    volume_handle : UInt32,
+    handle_info : UInt32 do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      usn_source_info : UInt32,
+      copy_number : UInt32
+
   end
-  struct MARK_HANDLE_INFO
-    anonymous : MARK_HANDLE_INFO_Anonymous_e__Union
-    volume_handle : LibC::HANDLE
-    handle_info : UInt32
-  end
-  struct MARK_HANDLE_INFO32
-    anonymous : MARK_HANDLE_INFO32_Anonymous_e__Union
-    volume_handle : UInt32
-    handle_info : UInt32
-  end
-  struct BULK_SECURITY_TEST_DATA
-    desired_access : UInt32
-    security_ids : UInt32[0]*
-  end
-  struct FILE_PREFETCH
-    type : UInt32
-    count : UInt32
-    prefetch : UInt64[0]*
-  end
-  struct FILE_PREFETCH_EX
-    type : UInt32
-    count : UInt32
-    context : Void*
-    prefetch : UInt64[0]*
-  end
-  struct FILESYSTEM_STATISTICS
-    file_system_type : FILESYSTEM_STATISTICS_TYPE
-    version : UInt16
-    size_of_complete_structure : UInt32
-    user_file_reads : UInt32
-    user_file_read_bytes : UInt32
-    user_disk_reads : UInt32
-    user_file_writes : UInt32
-    user_file_write_bytes : UInt32
-    user_disk_writes : UInt32
-    meta_data_reads : UInt32
-    meta_data_read_bytes : UInt32
-    meta_data_disk_reads : UInt32
-    meta_data_writes : UInt32
-    meta_data_write_bytes : UInt32
+  {% end %}
+
+  @[Extern]
+  record BULK_SECURITY_TEST_DATA,
+    desired_access : UInt32,
+    security_ids : UInt32*
+
+  @[Extern]
+  record FILE_PREFETCH,
+    type__ : UInt32,
+    count : UInt32,
+    prefetch : UInt64*
+
+  @[Extern]
+  record FILE_PREFETCH_EX,
+    type__ : UInt32,
+    count : UInt32,
+    context : Void*,
+    prefetch : UInt64*
+
+  @[Extern]
+  record FILESYSTEM_STATISTICS,
+    file_system_type : Win32cr::System::Ioctl::FILESYSTEM_STATISTICS_TYPE,
+    version : UInt16,
+    size_of_complete_structure : UInt32,
+    user_file_reads : UInt32,
+    user_file_read_bytes : UInt32,
+    user_disk_reads : UInt32,
+    user_file_writes : UInt32,
+    user_file_write_bytes : UInt32,
+    user_disk_writes : UInt32,
+    meta_data_reads : UInt32,
+    meta_data_read_bytes : UInt32,
+    meta_data_disk_reads : UInt32,
+    meta_data_writes : UInt32,
+    meta_data_write_bytes : UInt32,
     meta_data_disk_writes : UInt32
-  end
-  struct FAT_STATISTICS
-    create_hits : UInt32
-    successful_creates : UInt32
-    failed_creates : UInt32
-    non_cached_reads : UInt32
-    non_cached_read_bytes : UInt32
-    non_cached_writes : UInt32
-    non_cached_write_bytes : UInt32
-    non_cached_disk_reads : UInt32
+
+  @[Extern]
+  record FAT_STATISTICS,
+    create_hits : UInt32,
+    successful_creates : UInt32,
+    failed_creates : UInt32,
+    non_cached_reads : UInt32,
+    non_cached_read_bytes : UInt32,
+    non_cached_writes : UInt32,
+    non_cached_write_bytes : UInt32,
+    non_cached_disk_reads : UInt32,
     non_cached_disk_writes : UInt32
-  end
-  struct EXFAT_STATISTICS
-    create_hits : UInt32
-    successful_creates : UInt32
-    failed_creates : UInt32
-    non_cached_reads : UInt32
-    non_cached_read_bytes : UInt32
-    non_cached_writes : UInt32
-    non_cached_write_bytes : UInt32
-    non_cached_disk_reads : UInt32
+
+  @[Extern]
+  record EXFAT_STATISTICS,
+    create_hits : UInt32,
+    successful_creates : UInt32,
+    failed_creates : UInt32,
+    non_cached_reads : UInt32,
+    non_cached_read_bytes : UInt32,
+    non_cached_writes : UInt32,
+    non_cached_write_bytes : UInt32,
+    non_cached_disk_reads : UInt32,
     non_cached_disk_writes : UInt32
+
+  @[Extern]
+  record NTFS_STATISTICS,
+    log_file_full_exceptions : UInt32,
+    other_exceptions : UInt32,
+    mft_reads : UInt32,
+    mft_read_bytes : UInt32,
+    mft_writes : UInt32,
+    mft_write_bytes : UInt32,
+    mft_writes_user_level : MftWritesUserLevel_e__Struct,
+    mft_writes_flush_for_log_file_full : UInt16,
+    mft_writes_lazy_writer : UInt16,
+    mft_writes_user_request : UInt16,
+    mft2_writes : UInt32,
+    mft2_write_bytes : UInt32,
+    mft2_writes_user_level : Mft2WritesUserLevel_e__Struct,
+    mft2_writes_flush_for_log_file_full : UInt16,
+    mft2_writes_lazy_writer : UInt16,
+    mft2_writes_user_request : UInt16,
+    root_index_reads : UInt32,
+    root_index_read_bytes : UInt32,
+    root_index_writes : UInt32,
+    root_index_write_bytes : UInt32,
+    bitmap_reads : UInt32,
+    bitmap_read_bytes : UInt32,
+    bitmap_writes : UInt32,
+    bitmap_write_bytes : UInt32,
+    bitmap_writes_flush_for_log_file_full : UInt16,
+    bitmap_writes_lazy_writer : UInt16,
+    bitmap_writes_user_request : UInt16,
+    bitmap_writes_user_level : BitmapWritesUserLevel_e__Struct,
+    mft_bitmap_reads : UInt32,
+    mft_bitmap_read_bytes : UInt32,
+    mft_bitmap_writes : UInt32,
+    mft_bitmap_write_bytes : UInt32,
+    mft_bitmap_writes_flush_for_log_file_full : UInt16,
+    mft_bitmap_writes_lazy_writer : UInt16,
+    mft_bitmap_writes_user_request : UInt16,
+    mft_bitmap_writes_user_level : MftBitmapWritesUserLevel_e__Struct,
+    user_index_reads : UInt32,
+    user_index_read_bytes : UInt32,
+    user_index_writes : UInt32,
+    user_index_write_bytes : UInt32,
+    log_file_reads : UInt32,
+    log_file_read_bytes : UInt32,
+    log_file_writes : UInt32,
+    log_file_write_bytes : UInt32,
+    allocate : Allocate_e__Struct,
+    disk_resources_exhausted : UInt32 do
+
+    # Nested Type Allocate_e__Struct
+    @[Extern]
+    record Allocate_e__Struct,
+      calls : UInt32,
+      clusters : UInt32,
+      hints : UInt32,
+      runs_returned : UInt32,
+      hints_honored : UInt32,
+      hints_clusters : UInt32,
+      cache : UInt32,
+      cache_clusters : UInt32,
+      cache_miss : UInt32,
+      cache_miss_clusters : UInt32
+
+
+    # Nested Type BitmapWritesUserLevel_e__Struct
+    @[Extern]
+    record BitmapWritesUserLevel_e__Struct,
+      write : UInt16,
+      create : UInt16,
+      set_info : UInt16
+
+
+    # Nested Type MftWritesUserLevel_e__Struct
+    @[Extern]
+    record MftWritesUserLevel_e__Struct,
+      write : UInt16,
+      create : UInt16,
+      set_info : UInt16,
+      flush : UInt16
+
+
+    # Nested Type MftBitmapWritesUserLevel_e__Struct
+    @[Extern]
+    record MftBitmapWritesUserLevel_e__Struct,
+      write : UInt16,
+      create : UInt16,
+      set_info : UInt16,
+      flush : UInt16
+
+
+    # Nested Type Mft2WritesUserLevel_e__Struct
+    @[Extern]
+    record Mft2WritesUserLevel_e__Struct,
+      write : UInt16,
+      create : UInt16,
+      set_info : UInt16,
+      flush : UInt16
+
   end
-  struct NTFS_STATISTICS
-    log_file_full_exceptions : UInt32
-    other_exceptions : UInt32
-    mft_reads : UInt32
-    mft_read_bytes : UInt32
-    mft_writes : UInt32
-    mft_write_bytes : UInt32
-    mft_writes_user_level : NTFS_STATISTICS_MftWritesUserLevel_e__Struct
-    mft_writes_flush_for_log_file_full : UInt16
-    mft_writes_lazy_writer : UInt16
-    mft_writes_user_request : UInt16
-    mft2_writes : UInt32
-    mft2_write_bytes : UInt32
-    mft2_writes_user_level : NTFS_STATISTICS_Mft2WritesUserLevel_e__Struct
-    mft2_writes_flush_for_log_file_full : UInt16
-    mft2_writes_lazy_writer : UInt16
-    mft2_writes_user_request : UInt16
-    root_index_reads : UInt32
-    root_index_read_bytes : UInt32
-    root_index_writes : UInt32
-    root_index_write_bytes : UInt32
-    bitmap_reads : UInt32
-    bitmap_read_bytes : UInt32
-    bitmap_writes : UInt32
-    bitmap_write_bytes : UInt32
-    bitmap_writes_flush_for_log_file_full : UInt16
-    bitmap_writes_lazy_writer : UInt16
-    bitmap_writes_user_request : UInt16
-    bitmap_writes_user_level : NTFS_STATISTICS_BitmapWritesUserLevel_e__Struct
-    mft_bitmap_reads : UInt32
-    mft_bitmap_read_bytes : UInt32
-    mft_bitmap_writes : UInt32
-    mft_bitmap_write_bytes : UInt32
-    mft_bitmap_writes_flush_for_log_file_full : UInt16
-    mft_bitmap_writes_lazy_writer : UInt16
-    mft_bitmap_writes_user_request : UInt16
-    mft_bitmap_writes_user_level : NTFS_STATISTICS_MftBitmapWritesUserLevel_e__Struct
-    user_index_reads : UInt32
-    user_index_read_bytes : UInt32
-    user_index_writes : UInt32
-    user_index_write_bytes : UInt32
-    log_file_reads : UInt32
-    log_file_read_bytes : UInt32
-    log_file_writes : UInt32
-    log_file_write_bytes : UInt32
-    allocate : NTFS_STATISTICS_Allocate_e__Struct
-    disk_resources_exhausted : UInt32
-  end
-  struct NTFS_STATISTICS_Allocate_e__Struct
-    calls : UInt32
-    clusters : UInt32
-    hints : UInt32
-    runs_returned : UInt32
-    hints_honored : UInt32
-    hints_clusters : UInt32
-    cache : UInt32
-    cache_clusters : UInt32
-    cache_miss : UInt32
-    cache_miss_clusters : UInt32
-  end
-  struct NTFS_STATISTICS_BitmapWritesUserLevel_e__Struct
-    write : UInt16
-    create : UInt16
-    set_info : UInt16
-  end
-  struct NTFS_STATISTICS_MftWritesUserLevel_e__Struct
-    write : UInt16
-    create : UInt16
-    set_info : UInt16
-    flush : UInt16
-  end
-  struct NTFS_STATISTICS_MftBitmapWritesUserLevel_e__Struct
-    write : UInt16
-    create : UInt16
-    set_info : UInt16
-    flush : UInt16
-  end
-  struct NTFS_STATISTICS_Mft2WritesUserLevel_e__Struct
-    write : UInt16
-    create : UInt16
-    set_info : UInt16
-    flush : UInt16
-  end
-  struct FILESYSTEM_STATISTICS_EX
-    file_system_type : FILESYSTEM_STATISTICS_TYPE
-    version : UInt16
-    size_of_complete_structure : UInt32
-    user_file_reads : UInt64
-    user_file_read_bytes : UInt64
-    user_disk_reads : UInt64
-    user_file_writes : UInt64
-    user_file_write_bytes : UInt64
-    user_disk_writes : UInt64
-    meta_data_reads : UInt64
-    meta_data_read_bytes : UInt64
-    meta_data_disk_reads : UInt64
-    meta_data_writes : UInt64
-    meta_data_write_bytes : UInt64
+
+  @[Extern]
+  record FILESYSTEM_STATISTICS_EX,
+    file_system_type : Win32cr::System::Ioctl::FILESYSTEM_STATISTICS_TYPE,
+    version : UInt16,
+    size_of_complete_structure : UInt32,
+    user_file_reads : UInt64,
+    user_file_read_bytes : UInt64,
+    user_disk_reads : UInt64,
+    user_file_writes : UInt64,
+    user_file_write_bytes : UInt64,
+    user_disk_writes : UInt64,
+    meta_data_reads : UInt64,
+    meta_data_read_bytes : UInt64,
+    meta_data_disk_reads : UInt64,
+    meta_data_writes : UInt64,
+    meta_data_write_bytes : UInt64,
     meta_data_disk_writes : UInt64
+
+  @[Extern]
+  record NTFS_STATISTICS_EX,
+    log_file_full_exceptions : UInt32,
+    other_exceptions : UInt32,
+    mft_reads : UInt64,
+    mft_read_bytes : UInt64,
+    mft_writes : UInt64,
+    mft_write_bytes : UInt64,
+    mft_writes_user_level : MftWritesUserLevel_e__Struct,
+    mft_writes_flush_for_log_file_full : UInt32,
+    mft_writes_lazy_writer : UInt32,
+    mft_writes_user_request : UInt32,
+    mft2_writes : UInt64,
+    mft2_write_bytes : UInt64,
+    mft2_writes_user_level : Mft2WritesUserLevel_e__Struct,
+    mft2_writes_flush_for_log_file_full : UInt32,
+    mft2_writes_lazy_writer : UInt32,
+    mft2_writes_user_request : UInt32,
+    root_index_reads : UInt64,
+    root_index_read_bytes : UInt64,
+    root_index_writes : UInt64,
+    root_index_write_bytes : UInt64,
+    bitmap_reads : UInt64,
+    bitmap_read_bytes : UInt64,
+    bitmap_writes : UInt64,
+    bitmap_write_bytes : UInt64,
+    bitmap_writes_flush_for_log_file_full : UInt32,
+    bitmap_writes_lazy_writer : UInt32,
+    bitmap_writes_user_request : UInt32,
+    bitmap_writes_user_level : BitmapWritesUserLevel_e__Struct,
+    mft_bitmap_reads : UInt64,
+    mft_bitmap_read_bytes : UInt64,
+    mft_bitmap_writes : UInt64,
+    mft_bitmap_write_bytes : UInt64,
+    mft_bitmap_writes_flush_for_log_file_full : UInt32,
+    mft_bitmap_writes_lazy_writer : UInt32,
+    mft_bitmap_writes_user_request : UInt32,
+    mft_bitmap_writes_user_level : MftBitmapWritesUserLevel_e__Struct,
+    user_index_reads : UInt64,
+    user_index_read_bytes : UInt64,
+    user_index_writes : UInt64,
+    user_index_write_bytes : UInt64,
+    log_file_reads : UInt64,
+    log_file_read_bytes : UInt64,
+    log_file_writes : UInt64,
+    log_file_write_bytes : UInt64,
+    allocate : Allocate_e__Struct,
+    disk_resources_exhausted : UInt32,
+    volume_trim_count : UInt64,
+    volume_trim_time : UInt64,
+    volume_trim_byte_count : UInt64,
+    file_level_trim_count : UInt64,
+    file_level_trim_time : UInt64,
+    file_level_trim_byte_count : UInt64,
+    volume_trim_skipped_count : UInt64,
+    volume_trim_skipped_byte_count : UInt64,
+    ntfs_fill_stat_info_from_mft_record_called_count : UInt64,
+    ntfs_fill_stat_info_from_mft_record_bailed_because_of_attribute_list_count : UInt64,
+    ntfs_fill_stat_info_from_mft_record_bailed_because_of_non_res_reparse_point_count : UInt64 do
+
+    # Nested Type MftBitmapWritesUserLevel_e__Struct
+    @[Extern]
+    record MftBitmapWritesUserLevel_e__Struct,
+      write : UInt32,
+      create : UInt32,
+      set_info : UInt32,
+      flush : UInt32
+
+
+    # Nested Type Mft2WritesUserLevel_e__Struct
+    @[Extern]
+    record Mft2WritesUserLevel_e__Struct,
+      write : UInt32,
+      create : UInt32,
+      set_info : UInt32,
+      flush : UInt32
+
+
+    # Nested Type BitmapWritesUserLevel_e__Struct
+    @[Extern]
+    record BitmapWritesUserLevel_e__Struct,
+      write : UInt32,
+      create : UInt32,
+      set_info : UInt32,
+      flush : UInt32
+
+
+    # Nested Type MftWritesUserLevel_e__Struct
+    @[Extern]
+    record MftWritesUserLevel_e__Struct,
+      write : UInt32,
+      create : UInt32,
+      set_info : UInt32,
+      flush : UInt32
+
+
+    # Nested Type Allocate_e__Struct
+    @[Extern]
+    record Allocate_e__Struct,
+      calls : UInt32,
+      runs_returned : UInt32,
+      hints : UInt32,
+      hints_honored : UInt32,
+      cache : UInt32,
+      cache_miss : UInt32,
+      clusters : UInt64,
+      hints_clusters : UInt64,
+      cache_clusters : UInt64,
+      cache_miss_clusters : UInt64
+
   end
-  struct NTFS_STATISTICS_EX
-    log_file_full_exceptions : UInt32
-    other_exceptions : UInt32
-    mft_reads : UInt64
-    mft_read_bytes : UInt64
-    mft_writes : UInt64
-    mft_write_bytes : UInt64
-    mft_writes_user_level : NTFS_STATISTICS_EX_MftWritesUserLevel_e__Struct
-    mft_writes_flush_for_log_file_full : UInt32
-    mft_writes_lazy_writer : UInt32
-    mft_writes_user_request : UInt32
-    mft2_writes : UInt64
-    mft2_write_bytes : UInt64
-    mft2_writes_user_level : NTFS_STATISTICS_EX_Mft2WritesUserLevel_e__Struct
-    mft2_writes_flush_for_log_file_full : UInt32
-    mft2_writes_lazy_writer : UInt32
-    mft2_writes_user_request : UInt32
-    root_index_reads : UInt64
-    root_index_read_bytes : UInt64
-    root_index_writes : UInt64
-    root_index_write_bytes : UInt64
-    bitmap_reads : UInt64
-    bitmap_read_bytes : UInt64
-    bitmap_writes : UInt64
-    bitmap_write_bytes : UInt64
-    bitmap_writes_flush_for_log_file_full : UInt32
-    bitmap_writes_lazy_writer : UInt32
-    bitmap_writes_user_request : UInt32
-    bitmap_writes_user_level : NTFS_STATISTICS_EX_BitmapWritesUserLevel_e__Struct
-    mft_bitmap_reads : UInt64
-    mft_bitmap_read_bytes : UInt64
-    mft_bitmap_writes : UInt64
-    mft_bitmap_write_bytes : UInt64
-    mft_bitmap_writes_flush_for_log_file_full : UInt32
-    mft_bitmap_writes_lazy_writer : UInt32
-    mft_bitmap_writes_user_request : UInt32
-    mft_bitmap_writes_user_level : NTFS_STATISTICS_EX_MftBitmapWritesUserLevel_e__Struct
-    user_index_reads : UInt64
-    user_index_read_bytes : UInt64
-    user_index_writes : UInt64
-    user_index_write_bytes : UInt64
-    log_file_reads : UInt64
-    log_file_read_bytes : UInt64
-    log_file_writes : UInt64
-    log_file_write_bytes : UInt64
-    allocate : NTFS_STATISTICS_EX_Allocate_e__Struct
-    disk_resources_exhausted : UInt32
-    volume_trim_count : UInt64
-    volume_trim_time : UInt64
-    volume_trim_byte_count : UInt64
-    file_level_trim_count : UInt64
-    file_level_trim_time : UInt64
-    file_level_trim_byte_count : UInt64
-    volume_trim_skipped_count : UInt64
-    volume_trim_skipped_byte_count : UInt64
-    ntfs_fill_stat_info_from_mft_record_called_count : UInt64
-    ntfs_fill_stat_info_from_mft_record_bailed_because_of_attribute_list_count : UInt64
-    ntfs_fill_stat_info_from_mft_record_bailed_because_of_non_res_reparse_point_count : UInt64
+
+  @[Extern]
+  record FILE_OBJECTID_BUFFER,
+    object_id : UInt8[16],
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      anonymous : Anonymous_e__Struct,
+      extended_info : UInt8[48] do
+
+      # Nested Type Anonymous_e__Struct
+      @[Extern]
+      record Anonymous_e__Struct,
+        birth_volume_id : UInt8[16],
+        birth_object_id : UInt8[16],
+        domain_id : UInt8[16]
+
+    end
+
   end
-  struct NTFS_STATISTICS_EX_MftBitmapWritesUserLevel_e__Struct
-    write : UInt32
-    create : UInt32
-    set_info : UInt32
-    flush : UInt32
-  end
-  struct NTFS_STATISTICS_EX_Mft2WritesUserLevel_e__Struct
-    write : UInt32
-    create : UInt32
-    set_info : UInt32
-    flush : UInt32
-  end
-  struct NTFS_STATISTICS_EX_BitmapWritesUserLevel_e__Struct
-    write : UInt32
-    create : UInt32
-    set_info : UInt32
-    flush : UInt32
-  end
-  struct NTFS_STATISTICS_EX_Allocate_e__Struct
-    calls : UInt32
-    runs_returned : UInt32
-    hints : UInt32
-    hints_honored : UInt32
-    cache : UInt32
-    cache_miss : UInt32
-    clusters : UInt64
-    hints_clusters : UInt64
-    cache_clusters : UInt64
-    cache_miss_clusters : UInt64
-  end
-  struct NTFS_STATISTICS_EX_MftWritesUserLevel_e__Struct
-    write : UInt32
-    create : UInt32
-    set_info : UInt32
-    flush : UInt32
-  end
-  struct FILE_OBJECTID_BUFFER
-    object_id : UInt8[16]*
-    anonymous : FILE_OBJECTID_BUFFER_Anonymous_e__Union
-  end
-  struct FILE_OBJECTID_BUFFER_Anonymous_e__Union_Anonymous_e__Struct
-    birth_volume_id : UInt8[16]*
-    birth_object_id : UInt8[16]*
-    domain_id : UInt8[16]*
-  end
-  struct FILE_SET_SPARSE_BUFFER
-    set_sparse : BOOLEAN
-  end
-  struct FILE_ZERO_DATA_INFORMATION
-    file_offset : LARGE_INTEGER
-    beyond_final_zero : LARGE_INTEGER
-  end
-  struct FILE_ZERO_DATA_INFORMATION_EX
-    file_offset : LARGE_INTEGER
-    beyond_final_zero : LARGE_INTEGER
+
+  @[Extern]
+  record FILE_SET_SPARSE_BUFFER,
+    set_sparse : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record FILE_ZERO_DATA_INFORMATION,
+    file_offset : Win32cr::Foundation::LARGE_INTEGER,
+    beyond_final_zero : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record FILE_ZERO_DATA_INFORMATION_EX,
+    file_offset : Win32cr::Foundation::LARGE_INTEGER,
+    beyond_final_zero : Win32cr::Foundation::LARGE_INTEGER,
     flags : UInt32
-  end
-  struct FILE_ALLOCATED_RANGE_BUFFER
-    file_offset : LARGE_INTEGER
-    length : LARGE_INTEGER
-  end
-  struct ENCRYPTION_BUFFER
-    encryption_operation : UInt32
-    private : UInt8[0]*
-  end
-  struct DECRYPTION_STATUS_BUFFER
-    no_encrypted_streams : BOOLEAN
-  end
-  struct REQUEST_RAW_ENCRYPTED_DATA
-    file_offset : Int64
+
+  @[Extern]
+  record FILE_ALLOCATED_RANGE_BUFFER,
+    file_offset : Win32cr::Foundation::LARGE_INTEGER,
+    length : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record ENCRYPTION_BUFFER,
+    encryption_operation : UInt32,
+    private__ : UInt8*
+
+  @[Extern]
+  record DECRYPTION_STATUS_BUFFER,
+    no_encrypted_streams : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record REQUEST_RAW_ENCRYPTED_DATA,
+    file_offset : Int64,
     length : UInt32
-  end
-  struct ENCRYPTED_DATA_INFO
-    starting_file_offset : UInt64
-    output_buffer_offset : UInt32
-    bytes_within_file_size : UInt32
-    bytes_within_valid_data_length : UInt32
-    compression_format : UInt16
-    data_unit_shift : UInt8
-    chunk_shift : UInt8
-    cluster_shift : UInt8
-    encryption_format : UInt8
-    number_of_data_blocks : UInt16
-    data_block_size : UInt32[0]*
-  end
-  struct EXTENDED_ENCRYPTED_DATA_INFO
-    extended_code : UInt32
-    length : UInt32
-    flags : UInt32
+
+  @[Extern]
+  record ENCRYPTED_DATA_INFO,
+    starting_file_offset : UInt64,
+    output_buffer_offset : UInt32,
+    bytes_within_file_size : UInt32,
+    bytes_within_valid_data_length : UInt32,
+    compression_format : UInt16,
+    data_unit_shift : UInt8,
+    chunk_shift : UInt8,
+    cluster_shift : UInt8,
+    encryption_format : UInt8,
+    number_of_data_blocks : UInt16,
+    data_block_size : UInt32*
+
+  @[Extern]
+  record EXTENDED_ENCRYPTED_DATA_INFO,
+    extended_code : UInt32,
+    length : UInt32,
+    flags : UInt32,
     reserved : UInt32
-  end
-  struct PLEX_READ_DATA_REQUEST
-    byte_offset : LARGE_INTEGER
-    byte_length : UInt32
+
+  @[Extern]
+  record PLEX_READ_DATA_REQUEST,
+    byte_offset : Win32cr::Foundation::LARGE_INTEGER,
+    byte_length : UInt32,
     plex_number : UInt32
-  end
-  struct SI_COPYFILE
-    source_file_name_length : UInt32
-    destination_file_name_length : UInt32
-    flags : UInt32
-    file_name_buffer : Char[0]*
-  end
-  struct FILE_MAKE_COMPATIBLE_BUFFER
-    close_disc : BOOLEAN
-  end
-  struct FILE_SET_DEFECT_MGMT_BUFFER
-    disable : BOOLEAN
-  end
-  struct FILE_QUERY_SPARING_BUFFER
-    sparing_unit_bytes : UInt32
-    software_sparing : BOOLEAN
-    total_spare_blocks : UInt32
+
+  @[Extern]
+  record SI_COPYFILE,
+    source_file_name_length : UInt32,
+    destination_file_name_length : UInt32,
+    flags : UInt32,
+    file_name_buffer : UInt16*
+
+  @[Extern]
+  record FILE_MAKE_COMPATIBLE_BUFFER,
+    close_disc : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record FILE_SET_DEFECT_MGMT_BUFFER,
+    disable : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record FILE_QUERY_SPARING_BUFFER,
+    sparing_unit_bytes : UInt32,
+    software_sparing : Win32cr::Foundation::BOOLEAN,
+    total_spare_blocks : UInt32,
     free_spare_blocks : UInt32
-  end
-  struct FILE_QUERY_ON_DISK_VOL_INFO_BUFFER
-    directory_count : LARGE_INTEGER
-    file_count : LARGE_INTEGER
-    fs_format_maj_version : UInt16
-    fs_format_min_version : UInt16
-    fs_format_name : Char[12]*
-    format_time : LARGE_INTEGER
-    last_update_time : LARGE_INTEGER
-    copyright_info : Char[34]*
-    abstract_info : Char[34]*
-    formatting_implementation_info : Char[34]*
-    last_modifying_implementation_info : Char[34]*
-  end
-  struct FILE_INITIATE_REPAIR_OUTPUT_BUFFER
-    hint1 : UInt64
-    hint2 : UInt64
-    clsn : UInt64
+
+  @[Extern]
+  record FILE_QUERY_ON_DISK_VOL_INFO_BUFFER,
+    directory_count : Win32cr::Foundation::LARGE_INTEGER,
+    file_count : Win32cr::Foundation::LARGE_INTEGER,
+    fs_format_maj_version : UInt16,
+    fs_format_min_version : UInt16,
+    fs_format_name : UInt16[12],
+    format_time : Win32cr::Foundation::LARGE_INTEGER,
+    last_update_time : Win32cr::Foundation::LARGE_INTEGER,
+    copyright_info : UInt16[34],
+    abstract_info : UInt16[34],
+    formatting_implementation_info : UInt16[34],
+    last_modifying_implementation_info : UInt16[34]
+
+  @[Extern]
+  record FILE_INITIATE_REPAIR_OUTPUT_BUFFER,
+    hint1 : UInt64,
+    hint2 : UInt64,
+    clsn : UInt64,
     status : UInt32
-  end
-  struct SHRINK_VOLUME_INFORMATION
-    shrink_request_type : SHRINK_VOLUME_REQUEST_TYPES
-    flags : UInt64
+
+  @[Extern]
+  record SHRINK_VOLUME_INFORMATION,
+    shrink_request_type : Win32cr::System::Ioctl::SHRINK_VOLUME_REQUEST_TYPES,
+    flags : UInt64,
     new_number_of_sectors : Int64
-  end
-  struct TXFS_MODIFY_RM
-    flags : TXFS_RMF_LAGS
-    log_container_count_max : UInt32
-    log_container_count_min : UInt32
-    log_container_count : UInt32
-    log_growth_increment : UInt32
-    log_auto_shrink_percentage : UInt32
-    reserved : UInt64
+
+  @[Extern]
+  record TXFS_MODIFY_RM,
+    flags : Win32cr::System::Ioctl::TXFS_RMF_LAGS,
+    log_container_count_max : UInt32,
+    log_container_count_min : UInt32,
+    log_container_count : UInt32,
+    log_growth_increment : UInt32,
+    log_auto_shrink_percentage : UInt32,
+    reserved : UInt64,
     logging_mode : UInt16
-  end
-  struct TXFS_QUERY_RM_INFORMATION
-    bytes_required : UInt32
-    tail_lsn : UInt64
-    current_lsn : UInt64
-    archive_tail_lsn : UInt64
-    log_container_size : UInt64
-    highest_virtual_clock : LARGE_INTEGER
-    log_container_count : UInt32
-    log_container_count_max : UInt32
-    log_container_count_min : UInt32
-    log_growth_increment : UInt32
-    log_auto_shrink_percentage : UInt32
-    flags : TXFS_RMF_LAGS
-    logging_mode : UInt16
-    reserved : UInt16
-    rm_state : UInt32
-    log_capacity : UInt64
-    log_free : UInt64
-    tops_size : UInt64
-    tops_used : UInt64
-    transaction_count : UInt64
-    one_pc_count : UInt64
-    two_pc_count : UInt64
-    number_log_file_full : UInt64
-    oldest_transaction_age : UInt64
-    rm_name : Guid
+
+  @[Extern]
+  record TXFS_QUERY_RM_INFORMATION,
+    bytes_required : UInt32,
+    tail_lsn : UInt64,
+    current_lsn : UInt64,
+    archive_tail_lsn : UInt64,
+    log_container_size : UInt64,
+    highest_virtual_clock : Win32cr::Foundation::LARGE_INTEGER,
+    log_container_count : UInt32,
+    log_container_count_max : UInt32,
+    log_container_count_min : UInt32,
+    log_growth_increment : UInt32,
+    log_auto_shrink_percentage : UInt32,
+    flags : Win32cr::System::Ioctl::TXFS_RMF_LAGS,
+    logging_mode : UInt16,
+    reserved : UInt16,
+    rm_state : UInt32,
+    log_capacity : UInt64,
+    log_free : UInt64,
+    tops_size : UInt64,
+    tops_used : UInt64,
+    transaction_count : UInt64,
+    one_pc_count : UInt64,
+    two_pc_count : UInt64,
+    number_log_file_full : UInt64,
+    oldest_transaction_age : UInt64,
+    rm_name : LibC::GUID,
     tm_log_path_offset : UInt32
-  end
-  struct TXFS_ROLLFORWARD_REDO_INFORMATION
-    last_virtual_clock : LARGE_INTEGER
-    last_redo_lsn : UInt64
-    highest_recovery_lsn : UInt64
+
+  @[Extern]
+  record TXFS_ROLLFORWARD_REDO_INFORMATION,
+    last_virtual_clock : Win32cr::Foundation::LARGE_INTEGER,
+    last_redo_lsn : UInt64,
+    highest_recovery_lsn : UInt64,
     flags : UInt32
+
+  @[Extern]
+  record TXFS_START_RM_INFORMATION,
+    flags : UInt32,
+    log_container_size : UInt64,
+    log_container_count_min : UInt32,
+    log_container_count_max : UInt32,
+    log_growth_increment : UInt32,
+    log_auto_shrink_percentage : UInt32,
+    tm_log_path_offset : UInt32,
+    tm_log_path_length : UInt16,
+    logging_mode : UInt16,
+    log_path_length : UInt16,
+    reserved : UInt16,
+    log_path : UInt16*
+
+  @[Extern]
+  record TXFS_GET_METADATA_INFO_OUT,
+    txf_file_id : TxfFileId_e__Struct,
+    locking_transaction : LibC::GUID,
+    last_lsn : UInt64,
+    transaction_state : UInt32 do
+
+    # Nested Type TxfFileId_e__Struct
+    @[Extern]
+    record TxfFileId_e__Struct,
+      low_part : Int64,
+      high_part : Int64
+
   end
-  struct TXFS_START_RM_INFORMATION
-    flags : UInt32
-    log_container_size : UInt64
-    log_container_count_min : UInt32
-    log_container_count_max : UInt32
-    log_growth_increment : UInt32
-    log_auto_shrink_percentage : UInt32
-    tm_log_path_offset : UInt32
-    tm_log_path_length : UInt16
-    logging_mode : UInt16
-    log_path_length : UInt16
-    reserved : UInt16
-    log_path : Char[0]*
-  end
-  struct TXFS_GET_METADATA_INFO_OUT
-    txf_file_id : TXFS_GET_METADATA_INFO_OUT_TxfFileId_e__Struct
-    locking_transaction : Guid
-    last_lsn : UInt64
-    transaction_state : UInt32
-  end
-  struct TXFS_GET_METADATA_INFO_OUT_TxfFileId_e__Struct
-    low_part : Int64
-    high_part : Int64
-  end
-  struct TXFS_LIST_TRANSACTION_LOCKED_FILES_ENTRY
+
+  @[Extern]
+  record TXFS_LIST_TRANSACTION_LOCKED_FILES_ENTRY,
+    offset : UInt64,
+    name_flags : UInt32,
+    file_id : Int64,
+    reserved1 : UInt32,
+    reserved2 : UInt32,
+    reserved3 : Int64,
+    file_name : UInt16*
+
+  @[Extern]
+  record TXFS_LIST_TRANSACTION_LOCKED_FILES,
+    ktm_transaction : LibC::GUID,
+    number_of_files : UInt64,
+    buffer_size_required : UInt64,
     offset : UInt64
-    name_flags : UInt32
-    file_id : Int64
-    reserved1 : UInt32
-    reserved2 : UInt32
+
+  @[Extern]
+  record TXFS_LIST_TRANSACTIONS_ENTRY,
+    transaction_id : LibC::GUID,
+    transaction_state : UInt32,
+    reserved1 : UInt32,
+    reserved2 : UInt32,
     reserved3 : Int64
-    file_name : Char[0]*
-  end
-  struct TXFS_LIST_TRANSACTION_LOCKED_FILES
-    ktm_transaction : Guid
-    number_of_files : UInt64
+
+  @[Extern]
+  record TXFS_LIST_TRANSACTIONS,
+    number_of_transactions : UInt64,
     buffer_size_required : UInt64
-    offset : UInt64
+
+  @[Extern]
+  record TXFS_READ_BACKUP_INFORMATION_OUT,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      buffer_length : UInt32,
+      buffer : UInt8*
+
   end
-  struct TXFS_LIST_TRANSACTIONS_ENTRY
-    transaction_id : Guid
-    transaction_state : UInt32
-    reserved1 : UInt32
-    reserved2 : UInt32
-    reserved3 : Int64
-  end
-  struct TXFS_LIST_TRANSACTIONS
-    number_of_transactions : UInt64
-    buffer_size_required : UInt64
-  end
-  struct TXFS_READ_BACKUP_INFORMATION_OUT
-    anonymous : TXFS_READ_BACKUP_INFORMATION_OUT_Anonymous_e__Union
-  end
-  struct TXFS_WRITE_BACKUP_INFORMATION
-    buffer : UInt8[0]*
-  end
-  struct TXFS_GET_TRANSACTED_VERSION
-    this_base_version : UInt32
-    latest_version : UInt32
-    this_mini_version : UInt16
-    first_mini_version : UInt16
+
+  @[Extern]
+  record TXFS_WRITE_BACKUP_INFORMATION,
+    buffer : UInt8*
+
+  @[Extern]
+  record TXFS_GET_TRANSACTED_VERSION,
+    this_base_version : UInt32,
+    latest_version : UInt32,
+    this_mini_version : UInt16,
+    first_mini_version : UInt16,
     latest_mini_version : UInt16
-  end
-  struct TXFS_SAVEPOINT_INFORMATION
-    ktm_transaction : LibC::HANDLE
-    action_code : UInt32
+
+  @[Extern]
+  record TXFS_SAVEPOINT_INFORMATION,
+    ktm_transaction : Win32cr::Foundation::HANDLE,
+    action_code : UInt32,
     savepoint_id : UInt32
-  end
-  struct TXFS_CREATE_MINIVERSION_INFO
-    structure_version : UInt16
-    structure_length : UInt16
-    base_version : UInt32
+
+  @[Extern]
+  record TXFS_CREATE_MINIVERSION_INFO,
+    structure_version : UInt16,
+    structure_length : UInt16,
+    base_version : UInt32,
     mini_version : UInt16
+
+  @[Extern]
+  record TXFS_TRANSACTION_ACTIVE_INFO,
+    transactions_active_at_snapshot : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record BOOT_AREA_INFO,
+    boot_sector_count : UInt32,
+    boot_sectors : Anonymous_e__Struct[2] do
+
+    # Nested Type Anonymous_e__Struct
+    @[Extern]
+    record Anonymous_e__Struct,
+      offset : Win32cr::Foundation::LARGE_INTEGER
+
   end
-  struct TXFS_TRANSACTION_ACTIVE_INFO
-    transactions_active_at_snapshot : BOOLEAN
-  end
-  struct BOOT_AREA_INFO
-    boot_sector_count : UInt32
-    boot_sectors : BOOT_AREA_INFO_Anonymous_e__Struct[2]*
-  end
-  struct BOOT_AREA_INFO_Anonymous_e__Struct
-    offset : LARGE_INTEGER
-  end
-  struct RETRIEVAL_POINTER_BASE
-    file_area_offset : LARGE_INTEGER
-  end
-  struct FILE_FS_PERSISTENT_VOLUME_INFORMATION
-    volume_flags : UInt32
-    flag_mask : UInt32
-    version : UInt32
+
+  @[Extern]
+  record RETRIEVAL_POINTER_BASE,
+    file_area_offset : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record FILE_FS_PERSISTENT_VOLUME_INFORMATION,
+    volume_flags : UInt32,
+    flag_mask : UInt32,
+    version : UInt32,
     reserved : UInt32
-  end
-  struct FILE_SYSTEM_RECOGNITION_INFORMATION
-    file_system : CHAR[9]*
-  end
-  struct REQUEST_OPLOCK_INPUT_BUFFER
-    structure_version : UInt16
-    structure_length : UInt16
-    requested_oplock_level : UInt32
+
+  @[Extern]
+  record FILE_SYSTEM_RECOGNITION_INFORMATION,
+    file_system : Win32cr::Foundation::CHAR[9]
+
+  @[Extern]
+  record REQUEST_OPLOCK_INPUT_BUFFER,
+    structure_version : UInt16,
+    structure_length : UInt16,
+    requested_oplock_level : UInt32,
     flags : UInt32
-  end
-  struct REQUEST_OPLOCK_OUTPUT_BUFFER
-    structure_version : UInt16
-    structure_length : UInt16
-    original_oplock_level : UInt32
-    new_oplock_level : UInt32
-    flags : UInt32
-    access_mode : UInt32
+
+  @[Extern]
+  record REQUEST_OPLOCK_OUTPUT_BUFFER,
+    structure_version : UInt16,
+    structure_length : UInt16,
+    original_oplock_level : UInt32,
+    new_oplock_level : UInt32,
+    flags : UInt32,
+    access_mode : UInt32,
     share_mode : UInt16
-  end
-  struct STORAGE_QUERY_DEPENDENT_VOLUME_REQUEST
-    request_level : UInt32
+
+  @[Extern]
+  record STORAGE_QUERY_DEPENDENT_VOLUME_REQUEST,
+    request_level : UInt32,
     request_flags : UInt32
-  end
-  struct STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY
-    entry_length : UInt32
-    dependency_type_flags : UInt32
-    provider_specific_flags : UInt32
-    virtual_storage_type : VIRTUAL_STORAGE_TYPE
-  end
-  struct STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY
-    entry_length : UInt32
-    dependency_type_flags : UInt32
-    provider_specific_flags : UInt32
-    virtual_storage_type : VIRTUAL_STORAGE_TYPE
-    ancestor_level : UInt32
-    host_volume_name_offset : UInt32
-    host_volume_name_size : UInt32
-    dependent_volume_name_offset : UInt32
-    dependent_volume_name_size : UInt32
-    relative_path_offset : UInt32
-    relative_path_size : UInt32
-    dependent_device_name_offset : UInt32
+
+  @[Extern]
+  record STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY,
+    entry_length : UInt32,
+    dependency_type_flags : UInt32,
+    provider_specific_flags : UInt32,
+    virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+
+  @[Extern]
+  record STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY,
+    entry_length : UInt32,
+    dependency_type_flags : UInt32,
+    provider_specific_flags : UInt32,
+    virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE,
+    ancestor_level : UInt32,
+    host_volume_name_offset : UInt32,
+    host_volume_name_size : UInt32,
+    dependent_volume_name_offset : UInt32,
+    dependent_volume_name_size : UInt32,
+    relative_path_offset : UInt32,
+    relative_path_size : UInt32,
+    dependent_device_name_offset : UInt32,
     dependent_device_name_size : UInt32
+
+  @[Extern]
+  record STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE,
+    response_level : UInt32,
+    number_entries : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      lev1_depends : Win32cr::System::Ioctl::STORAGE_QUERY_DEPENDENT_VOLUME_LEV1_ENTRY*,
+      lev2_depends : Win32cr::System::Ioctl::STORAGE_QUERY_DEPENDENT_VOLUME_LEV2_ENTRY*
+
   end
-  struct STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE
-    response_level : UInt32
-    number_entries : UInt32
-    anonymous : STORAGE_QUERY_DEPENDENT_VOLUME_RESPONSE_Anonymous_e__Union
-  end
-  struct SD_CHANGE_MACHINE_SID_INPUT
-    current_machine_sid_offset : UInt16
-    current_machine_sid_length : UInt16
-    new_machine_sid_offset : UInt16
+
+  @[Extern]
+  record SD_CHANGE_MACHINE_SID_INPUT,
+    current_machine_sid_offset : UInt16,
+    current_machine_sid_length : UInt16,
+    new_machine_sid_offset : UInt16,
     new_machine_sid_length : UInt16
-  end
-  struct SD_CHANGE_MACHINE_SID_OUTPUT
-    num_sd_changed_success : UInt64
-    num_sd_changed_fail : UInt64
-    num_sd_unused : UInt64
-    num_sd_total : UInt64
-    num_mft_sd_changed_success : UInt64
-    num_mft_sd_changed_fail : UInt64
+
+  @[Extern]
+  record SD_CHANGE_MACHINE_SID_OUTPUT,
+    num_sd_changed_success : UInt64,
+    num_sd_changed_fail : UInt64,
+    num_sd_unused : UInt64,
+    num_sd_total : UInt64,
+    num_mft_sd_changed_success : UInt64,
+    num_mft_sd_changed_fail : UInt64,
     num_mft_sd_total : UInt64
-  end
-  struct SD_QUERY_STATS_INPUT
+
+  @[Extern]
+  record SD_QUERY_STATS_INPUT,
     reserved : UInt32
-  end
-  struct SD_QUERY_STATS_OUTPUT
-    sds_stream_size : UInt64
-    sds_allocation_size : UInt64
-    sii_stream_size : UInt64
-    sii_allocation_size : UInt64
-    sdh_stream_size : UInt64
-    sdh_allocation_size : UInt64
-    num_sd_total : UInt64
+
+  @[Extern]
+  record SD_QUERY_STATS_OUTPUT,
+    sds_stream_size : UInt64,
+    sds_allocation_size : UInt64,
+    sii_stream_size : UInt64,
+    sii_allocation_size : UInt64,
+    sdh_stream_size : UInt64,
+    sdh_allocation_size : UInt64,
+    num_sd_total : UInt64,
     num_sd_unused : UInt64
-  end
-  struct SD_ENUM_SDS_INPUT
-    starting_offset : UInt64
+
+  @[Extern]
+  record SD_ENUM_SDS_INPUT,
+    starting_offset : UInt64,
     max_sd_entries_to_return : UInt64
+
+  @[Extern]
+  record SD_ENUM_SDS_ENTRY,
+    hash : UInt32,
+    security_id : UInt32,
+    offset : UInt64,
+    length : UInt32,
+    descriptor : UInt8*
+
+  @[Extern]
+  record SD_ENUM_SDS_OUTPUT,
+    next_offset : UInt64,
+    num_sd_entries_returned : UInt64,
+    num_sd_bytes_returned : UInt64,
+    sd_entry : Win32cr::System::Ioctl::SD_ENUM_SDS_ENTRY*
+
+  @[Extern]
+  record SD_GLOBAL_CHANGE_INPUT,
+    flags : UInt32,
+    change_type : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      sd_change : Win32cr::System::Ioctl::SD_CHANGE_MACHINE_SID_INPUT,
+      sd_query_stats : Win32cr::System::Ioctl::SD_QUERY_STATS_INPUT,
+      sd_enum_sds : Win32cr::System::Ioctl::SD_ENUM_SDS_INPUT
+
   end
-  struct SD_ENUM_SDS_ENTRY
-    hash : UInt32
-    security_id : UInt32
-    offset : UInt64
-    length : UInt32
-    descriptor : UInt8[0]*
+
+  @[Extern]
+  record SD_GLOBAL_CHANGE_OUTPUT,
+    flags : UInt32,
+    change_type : UInt32,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      sd_change : Win32cr::System::Ioctl::SD_CHANGE_MACHINE_SID_OUTPUT,
+      sd_query_stats : Win32cr::System::Ioctl::SD_QUERY_STATS_OUTPUT,
+      sd_enum_sds : Win32cr::System::Ioctl::SD_ENUM_SDS_OUTPUT
+
   end
-  struct SD_ENUM_SDS_OUTPUT
-    next_offset : UInt64
-    num_sd_entries_returned : UInt64
-    num_sd_bytes_returned : UInt64
-    sd_entry : SD_ENUM_SDS_ENTRY[0]*
-  end
-  struct SD_GLOBAL_CHANGE_INPUT
-    flags : UInt32
-    change_type : UInt32
-    anonymous : SD_GLOBAL_CHANGE_INPUT_Anonymous_e__Union
-  end
-  struct SD_GLOBAL_CHANGE_OUTPUT
-    flags : UInt32
-    change_type : UInt32
-    anonymous : SD_GLOBAL_CHANGE_OUTPUT_Anonymous_e__Union
-  end
-  struct LOOKUP_STREAM_FROM_CLUSTER_INPUT
-    flags : UInt32
-    number_of_clusters : UInt32
-    cluster : LARGE_INTEGER[0]*
-  end
-  struct LOOKUP_STREAM_FROM_CLUSTER_OUTPUT
-    offset : UInt32
-    number_of_matches : UInt32
+
+  @[Extern]
+  record LOOKUP_STREAM_FROM_CLUSTER_INPUT,
+    flags : UInt32,
+    number_of_clusters : UInt32,
+    cluster : Win32cr::Foundation::LARGE_INTEGER*
+
+  @[Extern]
+  record LOOKUP_STREAM_FROM_CLUSTER_OUTPUT,
+    offset : UInt32,
+    number_of_matches : UInt32,
     buffer_size_required : UInt32
-  end
-  struct LOOKUP_STREAM_FROM_CLUSTER_ENTRY
-    offset_to_next : UInt32
+
+  @[Extern]
+  record LOOKUP_STREAM_FROM_CLUSTER_ENTRY,
+    offset_to_next : UInt32,
+    flags : UInt32,
+    reserved : Win32cr::Foundation::LARGE_INTEGER,
+    cluster : Win32cr::Foundation::LARGE_INTEGER,
+    file_name : UInt16*
+
+  @[Extern]
+  record FILE_TYPE_NOTIFICATION_INPUT,
+    flags : UInt32,
+    num_file_type_i_ds : UInt32,
+    file_type_id : LibC::GUID*
+
+  @[Extern]
+  record CSV_MGMT_LOCK,
     flags : UInt32
-    reserved : LARGE_INTEGER
-    cluster : LARGE_INTEGER
-    file_name : Char[0]*
-  end
-  struct FILE_TYPE_NOTIFICATION_INPUT
-    flags : UInt32
-    num_file_type_i_ds : UInt32
-    file_type_id : Guid[0]*
-  end
-  struct CSV_MGMT_LOCK
-    flags : UInt32
-  end
-  struct CSV_NAMESPACE_INFO
-    version : UInt32
-    device_number : UInt32
-    starting_offset : LARGE_INTEGER
+
+  @[Extern]
+  record CSV_NAMESPACE_INFO,
+    version : UInt32,
+    device_number : UInt32,
+    starting_offset : Win32cr::Foundation::LARGE_INTEGER,
     sector_size : UInt32
-  end
-  struct CSV_CONTROL_PARAM
-    operation : CSV_CONTROL_OP
+
+  @[Extern]
+  record CSV_CONTROL_PARAM,
+    operation : Win32cr::System::Ioctl::CSV_CONTROL_OP,
     unused : Int64
-  end
-  struct CSV_QUERY_REDIRECT_STATE
-    mds_node_id : UInt32
-    ds_node_id : UInt32
-    file_redirected : BOOLEAN
-  end
-  struct CSV_QUERY_FILE_REVISION
-    file_id : Int64
-    file_revision : Int64[3]*
-  end
-  struct CSV_QUERY_FILE_REVISION_FILE_ID_128
-    file_id : FILE_ID_128
-    file_revision : Int64[3]*
-  end
-  struct CSV_QUERY_MDS_PATH
-    mds_node_id : UInt32
-    ds_node_id : UInt32
+
+  @[Extern]
+  record CSV_QUERY_REDIRECT_STATE,
+    mds_node_id : UInt32,
+    ds_node_id : UInt32,
+    file_redirected : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record CSV_QUERY_FILE_REVISION,
+    file_id : Int64,
+    file_revision : Int64[3]
+
+  @[Extern]
+  record CSV_QUERY_FILE_REVISION_FILE_ID_128,
+    file_id : Win32cr::Storage::FileSystem::FILE_ID_128,
+    file_revision : Int64[3]
+
+  @[Extern]
+  record CSV_QUERY_MDS_PATH,
+    mds_node_id : UInt32,
+    ds_node_id : UInt32,
+    path_length : UInt32,
+    path : UInt16*
+
+  @[Extern]
+  record CSV_QUERY_VOLUME_REDIRECT_STATE,
+    mds_node_id : UInt32,
+    ds_node_id : UInt32,
+    is_disk_connected : Win32cr::Foundation::BOOLEAN,
+    cluster_enable_direct_io : Win32cr::Foundation::BOOLEAN,
+    disk_connectivity : Win32cr::System::Ioctl::CSVFS_DISK_CONNECTIVITY
+
+  @[Extern]
+  record CSV_QUERY_MDS_PATH_V2,
+    version : Int64,
+    required_size : UInt32,
+    mds_node_id : UInt32,
+    ds_node_id : UInt32,
+    flags : UInt32,
+    disk_connectivity : Win32cr::System::Ioctl::CSVFS_DISK_CONNECTIVITY,
+    volume_id : LibC::GUID,
+    ip_address_offset : UInt32,
+    ip_address_length : UInt32,
+    path_offset : UInt32,
     path_length : UInt32
-    path : Char[0]*
-  end
-  struct CSV_QUERY_VOLUME_REDIRECT_STATE
-    mds_node_id : UInt32
-    ds_node_id : UInt32
-    is_disk_connected : BOOLEAN
-    cluster_enable_direct_io : BOOLEAN
-    disk_connectivity : CSVFS_DISK_CONNECTIVITY
-  end
-  struct CSV_QUERY_MDS_PATH_V2
-    version : Int64
-    required_size : UInt32
-    mds_node_id : UInt32
-    ds_node_id : UInt32
-    flags : UInt32
-    disk_connectivity : CSVFS_DISK_CONNECTIVITY
-    volume_id : Guid
-    ip_address_offset : UInt32
-    ip_address_length : UInt32
-    path_offset : UInt32
-    path_length : UInt32
-  end
-  struct CSV_SET_VOLUME_ID
-    volume_id : Guid
-  end
-  struct CSV_QUERY_VOLUME_ID
-    volume_id : Guid
-  end
-  struct CSV_QUERY_VETO_FILE_DIRECT_IO_OUTPUT
-    vetoed_from_altitude_integral : UInt64
-    vetoed_from_altitude_decimal : UInt64
-    reason : Char[256]*
-  end
-  struct CSV_IS_OWNED_BY_CSVFS
-    owned_by_csvfs : BOOLEAN
-  end
-  struct FILE_LEVEL_TRIM_RANGE
-    offset : UInt64
+
+  @[Extern]
+  record CSV_SET_VOLUME_ID,
+    volume_id : LibC::GUID
+
+  @[Extern]
+  record CSV_QUERY_VOLUME_ID,
+    volume_id : LibC::GUID
+
+  @[Extern]
+  record CSV_QUERY_VETO_FILE_DIRECT_IO_OUTPUT,
+    vetoed_from_altitude_integral : UInt64,
+    vetoed_from_altitude_decimal : UInt64,
+    reason : UInt16[256]
+
+  @[Extern]
+  record CSV_IS_OWNED_BY_CSVFS,
+    owned_by_csvfs : Win32cr::Foundation::BOOLEAN
+
+  @[Extern]
+  record FILE_LEVEL_TRIM_RANGE,
+    offset : UInt64,
     length : UInt64
-  end
-  struct FILE_LEVEL_TRIM
-    key : UInt32
-    num_ranges : UInt32
-    ranges : FILE_LEVEL_TRIM_RANGE[0]*
-  end
-  struct FILE_LEVEL_TRIM_OUTPUT
+
+  @[Extern]
+  record FILE_LEVEL_TRIM,
+    key : UInt32,
+    num_ranges : UInt32,
+    ranges : Win32cr::System::Ioctl::FILE_LEVEL_TRIM_RANGE*
+
+  @[Extern]
+  record FILE_LEVEL_TRIM_OUTPUT,
     num_ranges_processed : UInt32
-  end
-  struct CLUSTER_RANGE
-    starting_cluster : LARGE_INTEGER
-    cluster_count : LARGE_INTEGER
-  end
-  struct FILE_REFERENCE_RANGE
-    starting_file_reference_number : UInt64
+
+  @[Extern]
+  record CLUSTER_RANGE,
+    starting_cluster : Win32cr::Foundation::LARGE_INTEGER,
+    cluster_count : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record FILE_REFERENCE_RANGE,
+    starting_file_reference_number : UInt64,
     ending_file_reference_number : UInt64
+
+  @[Extern]
+  record QUERY_FILE_LAYOUT_INPUT,
+    anonymous : Anonymous_e__Union,
+    flags : UInt32,
+    filter_type : Win32cr::System::Ioctl::QUERY_FILE_LAYOUT_FILTER_TYPE,
+    reserved : UInt32,
+    filter : Filter_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      filter_entry_count : UInt32,
+      number_of_pairs : UInt32
+
+
+    # Nested Type Filter_e__Union
+    @[Extern(union: true)]
+    record Filter_e__Union,
+      cluster_ranges : Win32cr::System::Ioctl::CLUSTER_RANGE*,
+      file_reference_ranges : Win32cr::System::Ioctl::FILE_REFERENCE_RANGE*,
+      storage_reserve_ids : Win32cr::System::Ioctl::STORAGE_RESERVE_ID*
+
   end
-  struct QUERY_FILE_LAYOUT_INPUT
-    anonymous : QUERY_FILE_LAYOUT_INPUT_Anonymous_e__Union
-    flags : UInt32
-    filter_type : QUERY_FILE_LAYOUT_FILTER_TYPE
+
+  @[Extern]
+  record QUERY_FILE_LAYOUT_OUTPUT,
+    file_entry_count : UInt32,
+    first_file_offset : UInt32,
+    flags : UInt32,
     reserved : UInt32
-    filter : QUERY_FILE_LAYOUT_INPUT_Filter_e__Union
-  end
-  struct QUERY_FILE_LAYOUT_OUTPUT
-    file_entry_count : UInt32
-    first_file_offset : UInt32
-    flags : UInt32
-    reserved : UInt32
-  end
-  struct FILE_LAYOUT_ENTRY
-    version : UInt32
-    next_file_offset : UInt32
-    flags : UInt32
-    file_attributes : UInt32
-    file_reference_number : UInt64
-    first_name_offset : UInt32
-    first_stream_offset : UInt32
-    extra_info_offset : UInt32
+
+  @[Extern]
+  record FILE_LAYOUT_ENTRY,
+    version : UInt32,
+    next_file_offset : UInt32,
+    flags : UInt32,
+    file_attributes : UInt32,
+    file_reference_number : UInt64,
+    first_name_offset : UInt32,
+    first_stream_offset : UInt32,
+    extra_info_offset : UInt32,
     extra_info_length : UInt32
+
+  @[Extern]
+  record FILE_LAYOUT_NAME_ENTRY,
+    next_name_offset : UInt32,
+    flags : UInt32,
+    parent_file_reference_number : UInt64,
+    file_name_length : UInt32,
+    reserved : UInt32,
+    file_name : UInt16*
+
+  @[Extern]
+  record FILE_LAYOUT_INFO_ENTRY,
+    basic_information : BasicInformation_e__Struct,
+    owner_id : UInt32,
+    security_id : UInt32,
+    usn : Int64,
+    storage_reserve_id : Win32cr::System::Ioctl::STORAGE_RESERVE_ID do
+
+    # Nested Type BasicInformation_e__Struct
+    @[Extern]
+    record BasicInformation_e__Struct,
+      creation_time : Win32cr::Foundation::LARGE_INTEGER,
+      last_access_time : Win32cr::Foundation::LARGE_INTEGER,
+      last_write_time : Win32cr::Foundation::LARGE_INTEGER,
+      change_time : Win32cr::Foundation::LARGE_INTEGER,
+      file_attributes : UInt32
+
   end
-  struct FILE_LAYOUT_NAME_ENTRY
-    next_name_offset : UInt32
-    flags : UInt32
-    parent_file_reference_number : UInt64
-    file_name_length : UInt32
-    reserved : UInt32
-    file_name : Char[0]*
+
+  @[Extern]
+  record STREAM_LAYOUT_ENTRY,
+    version : UInt32,
+    next_stream_offset : UInt32,
+    flags : UInt32,
+    extent_information_offset : UInt32,
+    allocation_size : Win32cr::Foundation::LARGE_INTEGER,
+    end_of_file : Win32cr::Foundation::LARGE_INTEGER,
+    stream_information_offset : UInt32,
+    attribute_type_code : UInt32,
+    attribute_flags : UInt32,
+    stream_identifier_length : UInt32,
+    stream_identifier : UInt16*
+
+  @[Extern]
+  record STREAM_EXTENT_ENTRY,
+    flags : UInt32,
+    extent_information : ExtentInformation_e__Union do
+
+    # Nested Type ExtentInformation_e__Union
+    @[Extern(union: true)]
+    record ExtentInformation_e__Union,
+      retrieval_pointers : Win32cr::System::Ioctl::RETRIEVAL_POINTERS_BUFFER
+
   end
-  struct FILE_LAYOUT_INFO_ENTRY
-    basic_information : FILE_LAYOUT_INFO_ENTRY_BasicInformation_e__Struct
-    owner_id : UInt32
-    security_id : UInt32
-    usn : Int64
-    storage_reserve_id : STORAGE_RESERVE_ID
-  end
-  struct FILE_LAYOUT_INFO_ENTRY_BasicInformation_e__Struct
-    creation_time : LARGE_INTEGER
-    last_access_time : LARGE_INTEGER
-    last_write_time : LARGE_INTEGER
-    change_time : LARGE_INTEGER
-    file_attributes : UInt32
-  end
-  struct STREAM_LAYOUT_ENTRY
-    version : UInt32
-    next_stream_offset : UInt32
-    flags : UInt32
-    extent_information_offset : UInt32
-    allocation_size : LARGE_INTEGER
-    end_of_file : LARGE_INTEGER
-    stream_information_offset : UInt32
-    attribute_type_code : UInt32
-    attribute_flags : UInt32
-    stream_identifier_length : UInt32
-    stream_identifier : Char[0]*
-  end
-  struct STREAM_EXTENT_ENTRY
-    flags : UInt32
-    extent_information : STREAM_EXTENT_ENTRY_ExtentInformation_e__Union
-  end
-  struct FSCTL_GET_INTEGRITY_INFORMATION_BUFFER
-    checksum_algorithm : UInt16
-    reserved : UInt16
-    flags : UInt32
-    checksum_chunk_size_in_bytes : UInt32
+
+  @[Extern]
+  record FSCTL_GET_INTEGRITY_INFORMATION_BUFFER,
+    checksum_algorithm : UInt16,
+    reserved : UInt16,
+    flags : UInt32,
+    checksum_chunk_size_in_bytes : UInt32,
     cluster_size_in_bytes : UInt32
-  end
-  struct FSCTL_SET_INTEGRITY_INFORMATION_BUFFER
-    checksum_algorithm : UInt16
-    reserved : UInt16
+
+  @[Extern]
+  record FSCTL_SET_INTEGRITY_INFORMATION_BUFFER,
+    checksum_algorithm : UInt16,
+    reserved : UInt16,
     flags : UInt32
-  end
-  struct FSCTL_SET_INTEGRITY_INFORMATION_BUFFER_EX
-    enable_integrity : UInt8
-    keep_integrity_state_unchanged : UInt8
-    reserved : UInt16
-    flags : UInt32
-    version : UInt8
-    reserved2 : UInt8[7]*
-  end
-  struct FSCTL_OFFLOAD_READ_INPUT
-    size : UInt32
-    flags : UInt32
-    token_time_to_live : UInt32
-    reserved : UInt32
-    file_offset : UInt64
+
+  @[Extern]
+  record FSCTL_SET_INTEGRITY_INFORMATION_BUFFER_EX,
+    enable_integrity : UInt8,
+    keep_integrity_state_unchanged : UInt8,
+    reserved : UInt16,
+    flags : UInt32,
+    version : UInt8,
+    reserved2 : UInt8[7]
+
+  @[Extern]
+  record FSCTL_OFFLOAD_READ_INPUT,
+    size : UInt32,
+    flags : UInt32,
+    token_time_to_live : UInt32,
+    reserved : UInt32,
+    file_offset : UInt64,
     copy_length : UInt64
-  end
-  struct FSCTL_OFFLOAD_READ_OUTPUT
-    size : UInt32
-    flags : UInt32
-    transfer_length : UInt64
-    token : UInt8[512]*
-  end
-  struct FSCTL_OFFLOAD_WRITE_INPUT
-    size : UInt32
-    flags : UInt32
-    file_offset : UInt64
-    copy_length : UInt64
-    transfer_offset : UInt64
-    token : UInt8[512]*
-  end
-  struct FSCTL_OFFLOAD_WRITE_OUTPUT
-    size : UInt32
-    flags : UInt32
+
+  @[Extern]
+  record FSCTL_OFFLOAD_READ_OUTPUT,
+    size : UInt32,
+    flags : UInt32,
+    transfer_length : UInt64,
+    token : UInt8[512]
+
+  @[Extern]
+  record FSCTL_OFFLOAD_WRITE_INPUT,
+    size : UInt32,
+    flags : UInt32,
+    file_offset : UInt64,
+    copy_length : UInt64,
+    transfer_offset : UInt64,
+    token : UInt8[512]
+
+  @[Extern]
+  record FSCTL_OFFLOAD_WRITE_OUTPUT,
+    size : UInt32,
+    flags : UInt32,
     length_written : UInt64
-  end
-  struct SET_PURGE_FAILURE_MODE_INPUT
+
+  @[Extern]
+  record SET_PURGE_FAILURE_MODE_INPUT,
     flags : UInt32
-  end
-  struct REPAIR_COPIES_INPUT
-    size : UInt32
-    flags : UInt32
-    file_offset : LARGE_INTEGER
-    length : UInt32
-    source_copy : UInt32
-    number_of_repair_copies : UInt32
-    repair_copies : UInt32[0]*
-  end
-  struct REPAIR_COPIES_OUTPUT
-    size : UInt32
-    status : UInt32
-    resume_file_offset : LARGE_INTEGER
-  end
-  struct FILE_REGION_INFO
-    file_offset : Int64
-    length : Int64
-    usage : UInt32
+
+  @[Extern]
+  record REPAIR_COPIES_INPUT,
+    size : UInt32,
+    flags : UInt32,
+    file_offset : Win32cr::Foundation::LARGE_INTEGER,
+    length : UInt32,
+    source_copy : UInt32,
+    number_of_repair_copies : UInt32,
+    repair_copies : UInt32*
+
+  @[Extern]
+  record REPAIR_COPIES_OUTPUT,
+    size : UInt32,
+    status : UInt32,
+    resume_file_offset : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record FILE_REGION_INFO,
+    file_offset : Int64,
+    length : Int64,
+    usage : UInt32,
     reserved : UInt32
-  end
-  struct FILE_REGION_OUTPUT
-    flags : UInt32
-    total_region_entry_count : UInt32
-    region_entry_count : UInt32
-    reserved : UInt32
-    region : FILE_REGION_INFO[0]*
-  end
-  struct FILE_REGION_INPUT
-    file_offset : Int64
-    length : Int64
+
+  @[Extern]
+  record FILE_REGION_OUTPUT,
+    flags : UInt32,
+    total_region_entry_count : UInt32,
+    region_entry_count : UInt32,
+    reserved : UInt32,
+    region : Win32cr::System::Ioctl::FILE_REGION_INFO*
+
+  @[Extern]
+  record FILE_REGION_INPUT,
+    file_offset : Int64,
+    length : Int64,
     desired_usage : UInt32
-  end
-  struct WRITE_USN_REASON_INPUT
-    flags : UInt32
+
+  @[Extern]
+  record WRITE_USN_REASON_INPUT,
+    flags : UInt32,
     usn_reason_to_write : UInt32
+
+  @[Extern]
+  record FILE_STORAGE_TIER,
+    id : LibC::GUID,
+    name : UInt16[256],
+    description : UInt16[256],
+    flags : Win32cr::System::Ioctl::FILE_STORAGE_TIER_FLAGS,
+    provisioned_capacity : UInt64,
+    media_type : Win32cr::System::Ioctl::FILE_STORAGE_TIER_MEDIA_TYPE,
+    class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS
+
+  @[Extern]
+  record FSCTL_QUERY_STORAGE_CLASSES_OUTPUT,
+    version : UInt32,
+    size : UInt32,
+    flags : Win32cr::System::Ioctl::FILE_STORAGE_TIER_FLAGS,
+    total_number_of_tiers : UInt32,
+    number_of_tiers_returned : UInt32,
+    tiers : Win32cr::System::Ioctl::FILE_STORAGE_TIER*
+
+  @[Extern]
+  record STREAM_INFORMATION_ENTRY,
+    version : UInt32,
+    flags : UInt32,
+    stream_information : StreamInformation do
+
+    # Nested Type StreamInformation
+    @[Extern(union: true)]
+    record StreamInformation,
+      desired_storage_class : DesiredStorageClass,
+      data_stream : DataStream,
+      reparse : Reparse,
+      ea : Ea do
+
+      # Nested Type Reparse
+      @[Extern]
+      record Reparse,
+        length : UInt16,
+        flags : UInt16,
+        reparse_data_size : UInt32,
+        reparse_data_offset : UInt32
+
+
+      # Nested Type DesiredStorageClass
+      @[Extern]
+      record DesiredStorageClass,
+        class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS,
+        flags : UInt32
+
+
+      # Nested Type Ea
+      @[Extern]
+      record Ea,
+        length : UInt16,
+        flags : UInt16,
+        ea_size : UInt32,
+        ea_information_offset : UInt32
+
+
+      # Nested Type DataStream
+      @[Extern]
+      record DataStream,
+        length : UInt16,
+        flags : UInt16,
+        reserved : UInt32,
+        vdl : UInt64
+
+    end
+
   end
-  struct FILE_STORAGE_TIER
-    id : Guid
-    name : Char[256]*
-    description : Char[256]*
-    flags : FILE_STORAGE_TIER_FLAGS
-    provisioned_capacity : UInt64
-    media_type : FILE_STORAGE_TIER_MEDIA_TYPE
-    class_ : FILE_STORAGE_TIER_CLASS
-  end
-  struct FSCTL_QUERY_STORAGE_CLASSES_OUTPUT
-    version : UInt32
-    size : UInt32
-    flags : FILE_STORAGE_TIER_FLAGS
-    total_number_of_tiers : UInt32
-    number_of_tiers_returned : UInt32
-    tiers : FILE_STORAGE_TIER[0]*
-  end
-  struct STREAM_INFORMATION_ENTRY
-    version : UInt32
-    flags : UInt32
-    stream_information : STREAM_INFORMATION_ENTRY_StreamInformation
-  end
-  struct STREAM_INFORMATION_ENTRY_StreamInformation_Reparse
-    length : UInt16
-    flags : UInt16
-    reparse_data_size : UInt32
-    reparse_data_offset : UInt32
-  end
-  struct STREAM_INFORMATION_ENTRY_StreamInformation_DesiredStorageClass
-    class_ : FILE_STORAGE_TIER_CLASS
-    flags : UInt32
-  end
-  struct STREAM_INFORMATION_ENTRY_StreamInformation_DataStream
-    length : UInt16
-    flags : UInt16
-    reserved : UInt32
-    vdl : UInt64
-  end
-  struct STREAM_INFORMATION_ENTRY_StreamInformation_Ea
-    length : UInt16
-    flags : UInt16
-    ea_size : UInt32
-    ea_information_offset : UInt32
-  end
-  struct FSCTL_QUERY_REGION_INFO_INPUT
-    version : UInt32
-    size : UInt32
-    flags : UInt32
-    number_of_tier_ids : UInt32
-    tier_ids : Guid[0]*
-  end
-  struct FILE_STORAGE_TIER_REGION
-    tier_id : Guid
-    offset : UInt64
+
+  @[Extern]
+  record FSCTL_QUERY_REGION_INFO_INPUT,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
+    number_of_tier_ids : UInt32,
+    tier_ids : LibC::GUID*
+
+  @[Extern]
+  record FILE_STORAGE_TIER_REGION,
+    tier_id : LibC::GUID,
+    offset : UInt64,
     length : UInt64
-  end
-  struct FSCTL_QUERY_REGION_INFO_OUTPUT
-    version : UInt32
-    size : UInt32
+
+  @[Extern]
+  record FSCTL_QUERY_REGION_INFO_OUTPUT,
+    version : UInt32,
+    size : UInt32,
+    flags : UInt32,
+    reserved : UInt32,
+    alignment : UInt64,
+    total_number_of_regions : UInt32,
+    number_of_regions_returned : UInt32,
+    regions : Win32cr::System::Ioctl::FILE_STORAGE_TIER_REGION*
+
+  @[Extern]
+  record FILE_DESIRED_STORAGE_CLASS_INFORMATION,
+    class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS,
     flags : UInt32
-    reserved : UInt32
-    alignment : UInt64
-    total_number_of_regions : UInt32
-    number_of_regions_returned : UInt32
-    regions : FILE_STORAGE_TIER_REGION[0]*
-  end
-  struct FILE_DESIRED_STORAGE_CLASS_INFORMATION
-    class_ : FILE_STORAGE_TIER_CLASS
+
+  @[Extern]
+  record DUPLICATE_EXTENTS_DATA,
+    file_handle : Win32cr::Foundation::HANDLE,
+    source_file_offset : Win32cr::Foundation::LARGE_INTEGER,
+    target_file_offset : Win32cr::Foundation::LARGE_INTEGER,
+    byte_count : Win32cr::Foundation::LARGE_INTEGER
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  record DUPLICATE_EXTENTS_DATA32,
+    file_handle : UInt32,
+    source_file_offset : Win32cr::Foundation::LARGE_INTEGER,
+    target_file_offset : Win32cr::Foundation::LARGE_INTEGER,
+    byte_count : Win32cr::Foundation::LARGE_INTEGER
+  {% end %}
+
+  @[Extern]
+  record DUPLICATE_EXTENTS_DATA_EX,
+    size : LibC::UIntPtrT,
+    file_handle : Win32cr::Foundation::HANDLE,
+    source_file_offset : Win32cr::Foundation::LARGE_INTEGER,
+    target_file_offset : Win32cr::Foundation::LARGE_INTEGER,
+    byte_count : Win32cr::Foundation::LARGE_INTEGER,
     flags : UInt32
-  end
-  struct DUPLICATE_EXTENTS_DATA
-    file_handle : LibC::HANDLE
-    source_file_offset : LARGE_INTEGER
-    target_file_offset : LARGE_INTEGER
-    byte_count : LARGE_INTEGER
-  end
-  struct DUPLICATE_EXTENTS_DATA32
-    file_handle : UInt32
-    source_file_offset : LARGE_INTEGER
-    target_file_offset : LARGE_INTEGER
-    byte_count : LARGE_INTEGER
-  end
-  struct DUPLICATE_EXTENTS_DATA_EX
-    size : LibC::UINT_PTR
-    file_handle : LibC::HANDLE
-    source_file_offset : LARGE_INTEGER
-    target_file_offset : LARGE_INTEGER
-    byte_count : LARGE_INTEGER
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  record DUPLICATE_EXTENTS_DATA_EX32,
+    size : UInt32,
+    file_handle : UInt32,
+    source_file_offset : Win32cr::Foundation::LARGE_INTEGER,
+    target_file_offset : Win32cr::Foundation::LARGE_INTEGER,
+    byte_count : Win32cr::Foundation::LARGE_INTEGER,
     flags : UInt32
-  end
-  struct DUPLICATE_EXTENTS_DATA_EX32
-    size : UInt32
-    file_handle : UInt32
-    source_file_offset : LARGE_INTEGER
-    target_file_offset : LARGE_INTEGER
-    byte_count : LARGE_INTEGER
-    flags : UInt32
-  end
-  struct ASYNC_DUPLICATE_EXTENTS_STATUS
-    version : UInt32
-    state : DUPLICATE_EXTENTS_STATE
-    source_file_offset : UInt64
-    target_file_offset : UInt64
-    byte_count : UInt64
+  {% end %}
+
+  @[Extern]
+  record ASYNC_DUPLICATE_EXTENTS_STATUS,
+    version : UInt32,
+    state : Win32cr::System::Ioctl::DUPLICATE_EXTENTS_STATE,
+    source_file_offset : UInt64,
+    target_file_offset : UInt64,
+    byte_count : UInt64,
     bytes_duplicated : UInt64
-  end
-  struct REFS_SMR_VOLUME_INFO_OUTPUT
-    version : UInt32
-    flags : UInt32
-    size_of_randomly_writable_tier : LARGE_INTEGER
-    free_space_in_randomly_writable_tier : LARGE_INTEGER
-    sizeof_smr_tier : LARGE_INTEGER
-    free_space_in_smr_tier : LARGE_INTEGER
-    usable_free_space_in_smr_tier : LARGE_INTEGER
-    volume_gc_state : REFS_SMR_VOLUME_GC_STATE
-    volume_gc_last_status : UInt32
-    current_gc_band_fill_percentage : UInt32
-    unused : UInt64[6]*
-  end
-  struct REFS_SMR_VOLUME_GC_PARAMETERS
-    version : UInt32
-    flags : UInt32
-    action : REFS_SMR_VOLUME_GC_ACTION
-    method : REFS_SMR_VOLUME_GC_METHOD
-    io_granularity : UInt32
-    compression_format : UInt32
-    unused : UInt64[8]*
-  end
-  struct STREAMS_QUERY_PARAMETERS_OUTPUT_BUFFER
-    optimal_write_size : UInt32
-    stream_granularity_size : UInt32
-    stream_id_min : UInt32
+
+  @[Extern]
+  record REFS_SMR_VOLUME_INFO_OUTPUT,
+    version : UInt32,
+    flags : UInt32,
+    size_of_randomly_writable_tier : Win32cr::Foundation::LARGE_INTEGER,
+    free_space_in_randomly_writable_tier : Win32cr::Foundation::LARGE_INTEGER,
+    sizeof_smr_tier : Win32cr::Foundation::LARGE_INTEGER,
+    free_space_in_smr_tier : Win32cr::Foundation::LARGE_INTEGER,
+    usable_free_space_in_smr_tier : Win32cr::Foundation::LARGE_INTEGER,
+    volume_gc_state : Win32cr::System::Ioctl::REFS_SMR_VOLUME_GC_STATE,
+    volume_gc_last_status : UInt32,
+    current_gc_band_fill_percentage : UInt32,
+    unused : UInt64[6]
+
+  @[Extern]
+  record REFS_SMR_VOLUME_GC_PARAMETERS,
+    version : UInt32,
+    flags : UInt32,
+    action : Win32cr::System::Ioctl::REFS_SMR_VOLUME_GC_ACTION,
+    method : Win32cr::System::Ioctl::REFS_SMR_VOLUME_GC_METHOD,
+    io_granularity : UInt32,
+    compression_format : UInt32,
+    unused : UInt64[8]
+
+  @[Extern]
+  record STREAMS_QUERY_PARAMETERS_OUTPUT_BUFFER,
+    optimal_write_size : UInt32,
+    stream_granularity_size : UInt32,
+    stream_id_min : UInt32,
     stream_id_max : UInt32
-  end
-  struct STREAMS_ASSOCIATE_ID_INPUT_BUFFER
-    flags : UInt32
+
+  @[Extern]
+  record STREAMS_ASSOCIATE_ID_INPUT_BUFFER,
+    flags : UInt32,
     stream_id : UInt32
-  end
-  struct STREAMS_QUERY_ID_OUTPUT_BUFFER
+
+  @[Extern]
+  record STREAMS_QUERY_ID_OUTPUT_BUFFER,
     stream_id : UInt32
-  end
-  struct QUERY_BAD_RANGES_INPUT_RANGE
-    start_offset : UInt64
+
+  @[Extern]
+  record QUERY_BAD_RANGES_INPUT_RANGE,
+    start_offset : UInt64,
     length_in_bytes : UInt64
-  end
-  struct QUERY_BAD_RANGES_INPUT
-    flags : UInt32
-    num_ranges : UInt32
-    ranges : QUERY_BAD_RANGES_INPUT_RANGE[0]*
-  end
-  struct QUERY_BAD_RANGES_OUTPUT_RANGE
-    flags : UInt32
-    reserved : UInt32
-    start_offset : UInt64
+
+  @[Extern]
+  record QUERY_BAD_RANGES_INPUT,
+    flags : UInt32,
+    num_ranges : UInt32,
+    ranges : Win32cr::System::Ioctl::QUERY_BAD_RANGES_INPUT_RANGE*
+
+  @[Extern]
+  record QUERY_BAD_RANGES_OUTPUT_RANGE,
+    flags : UInt32,
+    reserved : UInt32,
+    start_offset : UInt64,
     length_in_bytes : UInt64
-  end
-  struct QUERY_BAD_RANGES_OUTPUT
-    flags : UInt32
-    num_bad_ranges : UInt32
-    next_offset_to_look_up : UInt64
-    bad_ranges : QUERY_BAD_RANGES_OUTPUT_RANGE[0]*
-  end
-  struct SET_DAX_ALLOC_ALIGNMENT_HINT_INPUT
-    flags : UInt32
-    alignment_shift : UInt32
-    file_offset_to_align : UInt64
+
+  @[Extern]
+  record QUERY_BAD_RANGES_OUTPUT,
+    flags : UInt32,
+    num_bad_ranges : UInt32,
+    next_offset_to_look_up : UInt64,
+    bad_ranges : Win32cr::System::Ioctl::QUERY_BAD_RANGES_OUTPUT_RANGE*
+
+  @[Extern]
+  record SET_DAX_ALLOC_ALIGNMENT_HINT_INPUT,
+    flags : UInt32,
+    alignment_shift : UInt32,
+    file_offset_to_align : UInt64,
     fallback_alignment_shift : UInt32
-  end
-  struct VIRTUAL_STORAGE_SET_BEHAVIOR_INPUT
-    size : UInt32
-    behavior_code : VIRTUAL_STORAGE_BEHAVIOR_CODE
-  end
-  struct ENCRYPTION_KEY_CTRL_INPUT
-    header_size : UInt32
-    structure_size : UInt32
-    key_offset : UInt16
-    key_size : UInt16
-    dpl_lock : UInt32
-    dpl_user_id : UInt64
+
+  @[Extern]
+  record VIRTUAL_STORAGE_SET_BEHAVIOR_INPUT,
+    size : UInt32,
+    behavior_code : Win32cr::System::Ioctl::VIRTUAL_STORAGE_BEHAVIOR_CODE
+
+  @[Extern]
+  record ENCRYPTION_KEY_CTRL_INPUT,
+    header_size : UInt32,
+    structure_size : UInt32,
+    key_offset : UInt16,
+    key_size : UInt16,
+    dpl_lock : UInt32,
+    dpl_user_id : UInt64,
     dpl_credential_id : UInt64
-  end
-  struct WOF_EXTERNAL_INFO
-    version : UInt32
+
+  @[Extern]
+  record WOF_EXTERNAL_INFO,
+    version : UInt32,
     provider : UInt32
-  end
-  struct WOF_EXTERNAL_FILE_ID
-    file_id : FILE_ID_128
-  end
-  struct WOF_VERSION_INFO
+
+  @[Extern]
+  record WOF_EXTERNAL_FILE_ID,
+    file_id : Win32cr::Storage::FileSystem::FILE_ID_128
+
+  @[Extern]
+  record WOF_VERSION_INFO,
     wof_version : UInt32
-  end
-  struct WIM_PROVIDER_EXTERNAL_INFO
-    version : UInt32
-    flags : UInt32
-    data_source_id : LARGE_INTEGER
-    resource_hash : UInt8[20]*
-  end
-  struct WIM_PROVIDER_ADD_OVERLAY_INPUT
-    wim_type : UInt32
-    wim_index : UInt32
-    wim_file_name_offset : UInt32
+
+  @[Extern]
+  record WIM_PROVIDER_EXTERNAL_INFO,
+    version : UInt32,
+    flags : UInt32,
+    data_source_id : Win32cr::Foundation::LARGE_INTEGER,
+    resource_hash : UInt8[20]
+
+  @[Extern]
+  record WIM_PROVIDER_ADD_OVERLAY_INPUT,
+    wim_type : UInt32,
+    wim_index : UInt32,
+    wim_file_name_offset : UInt32,
     wim_file_name_length : UInt32
-  end
-  struct WIM_PROVIDER_UPDATE_OVERLAY_INPUT
-    data_source_id : LARGE_INTEGER
-    wim_file_name_offset : UInt32
+
+  @[Extern]
+  record WIM_PROVIDER_UPDATE_OVERLAY_INPUT,
+    data_source_id : Win32cr::Foundation::LARGE_INTEGER,
+    wim_file_name_offset : UInt32,
     wim_file_name_length : UInt32
-  end
-  struct WIM_PROVIDER_REMOVE_OVERLAY_INPUT
-    data_source_id : LARGE_INTEGER
-  end
-  struct WIM_PROVIDER_SUSPEND_OVERLAY_INPUT
-    data_source_id : LARGE_INTEGER
-  end
-  struct WIM_PROVIDER_OVERLAY_ENTRY
-    next_entry_offset : UInt32
-    data_source_id : LARGE_INTEGER
-    wim_guid : Guid
-    wim_file_name_offset : UInt32
-    wim_type : UInt32
-    wim_index : UInt32
+
+  @[Extern]
+  record WIM_PROVIDER_REMOVE_OVERLAY_INPUT,
+    data_source_id : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record WIM_PROVIDER_SUSPEND_OVERLAY_INPUT,
+    data_source_id : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record WIM_PROVIDER_OVERLAY_ENTRY,
+    next_entry_offset : UInt32,
+    data_source_id : Win32cr::Foundation::LARGE_INTEGER,
+    wim_guid : LibC::GUID,
+    wim_file_name_offset : UInt32,
+    wim_type : UInt32,
+    wim_index : UInt32,
     flags : UInt32
-  end
-  struct FILE_PROVIDER_EXTERNAL_INFO_V0
-    version : UInt32
+
+  @[Extern]
+  record FILE_PROVIDER_EXTERNAL_INFO_V0,
+    version : UInt32,
     algorithm : UInt32
-  end
-  struct FILE_PROVIDER_EXTERNAL_INFO_V1
-    version : UInt32
-    algorithm : UInt32
+
+  @[Extern]
+  record FILE_PROVIDER_EXTERNAL_INFO_V1,
+    version : UInt32,
+    algorithm : UInt32,
     flags : UInt32
-  end
-  struct CONTAINER_VOLUME_STATE
+
+  @[Extern]
+  record CONTAINER_VOLUME_STATE,
     flags : UInt32
-  end
-  struct CONTAINER_ROOT_INFO_INPUT
+
+  @[Extern]
+  record CONTAINER_ROOT_INFO_INPUT,
     flags : UInt32
-  end
-  struct CONTAINER_ROOT_INFO_OUTPUT
-    container_root_id_length : UInt16
-    container_root_id : UInt8[0]*
-  end
-  struct VIRTUALIZATION_INSTANCE_INFO_INPUT
-    number_of_worker_threads : UInt32
+
+  @[Extern]
+  record CONTAINER_ROOT_INFO_OUTPUT,
+    container_root_id_length : UInt16,
+    container_root_id : UInt8*
+
+  @[Extern]
+  record VIRTUALIZATION_INSTANCE_INFO_INPUT,
+    number_of_worker_threads : UInt32,
     flags : UInt32
-  end
-  struct VIRTUALIZATION_INSTANCE_INFO_INPUT_EX
-    header_size : UInt16
-    flags : UInt32
-    notification_info_size : UInt32
-    notification_info_offset : UInt16
+
+  @[Extern]
+  record VIRTUALIZATION_INSTANCE_INFO_INPUT_EX,
+    header_size : UInt16,
+    flags : UInt32,
+    notification_info_size : UInt32,
+    notification_info_offset : UInt16,
     provider_major_version : UInt16
-  end
-  struct VIRTUALIZATION_INSTANCE_INFO_OUTPUT
-    virtualization_instance_id : Guid
-  end
-  struct GET_FILTER_FILE_IDENTIFIER_INPUT
-    altitude_length : UInt16
-    altitude : Char[0]*
-  end
-  struct GET_FILTER_FILE_IDENTIFIER_OUTPUT
-    filter_file_identifier_length : UInt16
-    filter_file_identifier : UInt8[0]*
-  end
-  struct FS_BPIO_INPUT
-    operation : FS_BPIO_OPERATIONS
-    in_flags : FS_BPIO_INFLAGS
-    reserved1 : UInt64
+
+  @[Extern]
+  record VIRTUALIZATION_INSTANCE_INFO_OUTPUT,
+    virtualization_instance_id : LibC::GUID
+
+  @[Extern]
+  record GET_FILTER_FILE_IDENTIFIER_INPUT,
+    altitude_length : UInt16,
+    altitude : UInt16*
+
+  @[Extern]
+  record GET_FILTER_FILE_IDENTIFIER_OUTPUT,
+    filter_file_identifier_length : UInt16,
+    filter_file_identifier : UInt8*
+
+  @[Extern]
+  record FS_BPIO_INPUT,
+    operation : Win32cr::System::Ioctl::FS_BPIO_OPERATIONS,
+    in_flags : Win32cr::System::Ioctl::FS_BPIO_INFLAGS,
+    reserved1 : UInt64,
     reserved2 : UInt64
+
+  @[Extern]
+  record FS_BPIO_RESULTS,
+    op_status : UInt32,
+    failing_driver_name_len : UInt16,
+    failing_driver_name : UInt16[32],
+    failure_reason_len : UInt16,
+    failure_reason : UInt16[128]
+
+  @[Extern]
+  record FS_BPIO_INFO,
+    active_bypass_io_count : UInt32,
+    storage_driver_name_len : UInt16,
+    storage_driver_name : UInt16[32]
+
+  @[Extern]
+  record FS_BPIO_OUTPUT,
+    operation : Win32cr::System::Ioctl::FS_BPIO_OPERATIONS,
+    out_flags : Win32cr::System::Ioctl::FS_BPIO_OUTFLAGS,
+    reserved1 : UInt64,
+    reserved2 : UInt64,
+    anonymous : Anonymous_e__Union do
+
+    # Nested Type Anonymous_e__Union
+    @[Extern(union: true)]
+    record Anonymous_e__Union,
+      enable : Win32cr::System::Ioctl::FS_BPIO_RESULTS,
+      query : Win32cr::System::Ioctl::FS_BPIO_RESULTS,
+      volume_stack_resume : Win32cr::System::Ioctl::FS_BPIO_RESULTS,
+      stream_resume : Win32cr::System::Ioctl::FS_BPIO_RESULTS,
+      get_info : Win32cr::System::Ioctl::FS_BPIO_INFO
+
   end
-  struct FS_BPIO_RESULTS
-    op_status : UInt32
-    failing_driver_name_len : UInt16
-    failing_driver_name : Char[32]*
-    failure_reason_len : UInt16
-    failure_reason : Char[128]*
-  end
-  struct FS_BPIO_INFO
-    active_bypass_io_count : UInt32
-    storage_driver_name_len : UInt16
-    storage_driver_name : Char[32]*
-  end
-  struct FS_BPIO_OUTPUT
-    operation : FS_BPIO_OPERATIONS
-    out_flags : FS_BPIO_OUTFLAGS
-    reserved1 : UInt64
-    reserved2 : UInt64
-    anonymous : FS_BPIO_OUTPUT_Anonymous_e__Union
-  end
-  struct SMB_SHARE_FLUSH_AND_PURGE_INPUT
+
+  @[Extern]
+  record SMB_SHARE_FLUSH_AND_PURGE_INPUT,
     version : UInt16
-  end
-  struct SMB_SHARE_FLUSH_AND_PURGE_OUTPUT
-    c_entries_purged : UInt32
-  end
-  struct DISK_EXTENT
-    disk_number : UInt32
-    starting_offset : LARGE_INTEGER
-    extent_length : LARGE_INTEGER
-  end
-  struct VOLUME_DISK_EXTENTS
-    number_of_disk_extents : UInt32
-    extents : DISK_EXTENT[0]*
-  end
-  struct VOLUME_GET_GPT_ATTRIBUTES_INFORMATION
+
+  @[Extern]
+  record SMB_SHARE_FLUSH_AND_PURGE_OUTPUT,
+    cEntriesPurged : UInt32
+
+  @[Extern]
+  record DISK_EXTENT,
+    disk_number : UInt32,
+    starting_offset : Win32cr::Foundation::LARGE_INTEGER,
+    extent_length : Win32cr::Foundation::LARGE_INTEGER
+
+  @[Extern]
+  record VOLUME_DISK_EXTENTS,
+    number_of_disk_extents : UInt32,
+    extents : Win32cr::System::Ioctl::DISK_EXTENT*
+
+  @[Extern]
+  record VOLUME_GET_GPT_ATTRIBUTES_INFORMATION,
     gpt_attributes : UInt64
-  end
-  struct IO_IRP_EXT_TRACK_OFFSET_HEADER
-    validation : UInt16
-    flags : UInt16
-    tracked_offset_callback : PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK
-  end
+
+  @[Extern]
+  record IO_IRP_EXT_TRACK_OFFSET_HEADER,
+    validation : UInt16,
+    flags : UInt16,
+    tracked_offset_callback : Win32cr::System::Ioctl::PIO_IRP_EXT_PROCESS_TRACKED_OFFSET_CALLBACK
 
 end
