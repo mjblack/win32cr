@@ -20,7 +20,7 @@ jobs:
   build:
     runs-on: windows-2019
     steps:
-    - name: Install Crystal 1.13.2
+    - name: Install Crystal 1.15.0
       shell: pwsh
       run: |
         (New-Object Net.WebClient).DownloadFile("https://github.com/crystal-lang/crystal/releases/download/1.15.0/crystal-1.15.0-windows-x86_64-msvc-unsupported.exe", "$PWD\crystal-1.15.0-windows-x86_64-msvc-unsupported.exe")
@@ -30,7 +30,15 @@ jobs:
       shell: pwsh
       run: |
         & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" version
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+    - name: Create json directory
+      shell: pwsh
+      run: |
+        mkdir json
+    - uses: actions/checkout@v4
+      with:
+        repository: marlersoft/win32json
+        path: json/win32json
     - name: Install dependencies
       shell: pwsh
       run: |
