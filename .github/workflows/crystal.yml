@@ -43,10 +43,13 @@ jobs:
       shell: pwsh
       run: |
         & "$env:LOCALAPPDATA\Programs\Crystal\shards.exe" install
-    - name: Generate bindings
+    - name: Cleanup src directory
       shell: pwsh
       run: |
         if (Test-Path -Path .\src\win32cr) { Remove-Item -Path src/win32cr -Force -Recurse }
+    - name: Generate bindings
+      shell: pwsh
+      run: |
         & .\bin\winmd.exe generate --debug json\win32json\api .
     - name: Run tests
       shell: pwsh
