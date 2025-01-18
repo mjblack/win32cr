@@ -43,6 +43,10 @@ jobs:
       shell: pwsh
       run: |
         & "$env:LOCALAPPDATA\Programs\Crystal\shards.exe" install
+    - name: List bin dir
+      shell: pwsh
+      run: |
+        dir .\bin
     - name: Cleanup src directory
       shell: pwsh
       run: |
