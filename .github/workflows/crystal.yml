@@ -23,7 +23,7 @@ jobs:
     - name: Install Crystal 1.13.2
       shell: pwsh
       run: |
-        (New-Object Net.WebClient).DownloadFile("https://github.com/crystal-lang/crystal/releases/download/1.13.2/crystal-1.13.2-windows-x86_64-msvc-unsupported.exe", "$PWD\crystal-1.13.2-windows-x86_64-msvc-unsupported.exe")
+        (New-Object Net.WebClient).DownloadFile("https://github.com/crystal-lang/crystal/releases/download/1.15.0/crystal-1.13.2-windows-x86_64-msvc-unsupported.exe", "$PWD\crystal-1.13.2-windows-x86_64-msvc-unsupported.exe")
         $code = Start-Process .\crystal-1.13.2-windows-x86_64-msvc-unsupported.exe -Wait -ArgumentList "/VERYSILENT","/SP-","/SUPPRESSMSGBOXES","/LOG=$PWD\OUTPUT.LOG" -Verb RunAs
         dir $env:LOCALAPPDATA\Programs\Crystal
     - name: crystal version
@@ -35,6 +35,10 @@ jobs:
       shell: pwsh
       run: |
         & "$env:LOCALAPPDATA\Programs\Crystal\shards.exe" install
+    - name: Generate bindings
+      shell: pwsh
+      run: |
+        & ".\build.ps1"
     - name: Run tests
       shell: pwsh
       run: |

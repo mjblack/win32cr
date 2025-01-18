@@ -1,10 +1,10 @@
 name: win32cr
-version: 1.0.0-rc1
+version: 1.0.0
 
 authors:
   - Matthew J. Black <mjblack@gmail.com>
 
-crystal: ">= 1.14.0"
+crystal: ">= 1.15.0"
 
 license: MIT
 

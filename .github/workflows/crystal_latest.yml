@@ -38,6 +38,10 @@ jobs:
         shell: pwsh
         run: |
           & "$env:LOCALAPPDATA\Programs\Crystal\shards.exe" install
+      - name: Generate bindings
+        shell: pwsh
+        run: |
+          & ".\build.ps1"
       - name: Run tests
         shell: pwsh
         run: |
