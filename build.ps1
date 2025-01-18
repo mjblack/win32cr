@@ -2,7 +2,7 @@ $WINMD_PARAMS = ""
 
 function DownloadJSON {
     mkdir json
-    git clone https://github.com/marlersoft/win32json .\json\win32json
+    git clone -v --depth 1 https://github.com/marlersoft/win32json .\json\win32json
 }
 
 function CleanUpJSON {
