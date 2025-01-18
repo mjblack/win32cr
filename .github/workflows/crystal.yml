@@ -47,7 +47,7 @@ jobs:
       shell: pwsh
       run: |
         if (Test-Path -Path .\src\win32cr) { Remove-Item -Path src/win32cr -Force -Recurse }
-        & .\bin\winmd.exe generate $WINMD_PARAMS json\win32json\api .
+        & .\bin\winmd.exe generate --debug json\win32json\api .
     - name: Run tests
       shell: pwsh
       run: |
