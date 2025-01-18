@@ -51,10 +51,13 @@ jobs:
       shell: pwsh
       run: |
         if (Test-Path -Path .\src\win32cr) { Remove-Item -Path src/win32cr -Force -Recurse }
-    - name: Generate bindings
+    - name: WinMD version
       shell: pwsh
       run: |
         & .\bin\winmd.exe --version
+    - name: Generate bindings
+      shell: pwsh
+      run: |
         & .\bin\winmd.exe generate -d json\win32json\api .
     - name: Run tests
       shell: pwsh
