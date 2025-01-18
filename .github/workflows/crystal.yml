@@ -52,9 +52,8 @@ jobs:
       run: |
         if (Test-Path -Path .\src\win32cr) { Remove-Item -Path src/win32cr -Force -Recurse }
     - name: WinMD version
-      shell: pwsh
-      run: |
-        & .\bin\winmd.exe --version
+      shell: cmd
+      run: bin\winmd.exe --version
     - name: Generate bindings
       shell: pwsh
       run: |
