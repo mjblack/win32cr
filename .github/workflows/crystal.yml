@@ -54,7 +54,8 @@ jobs:
     - name: Generate bindings
       shell: pwsh
       run: |
-        & .\bin\winmd.exe generate --debug json\win32json\api .
+        & .\bin\winmd.exe --version
+        & .\bin\winmd.exe generate -d json\win32json\api .
     - name: Run tests
       shell: pwsh
       run: |
