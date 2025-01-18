@@ -19,7 +19,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-latest
     steps:
     - name: Install Crystal 1.15.0
       shell: pwsh
