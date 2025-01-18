@@ -2,15 +2,16 @@ name: Crystal CI
 
 on:
   workflow_dispatch:
-    logLevel:
-      description: 'Log level'
-      required: true
-      default: 'warning'
-      type: choice
-      options:
-        - info
-        - warning
-        - debug
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
   push:
     branches: [ "master" ]
   pull_request:
