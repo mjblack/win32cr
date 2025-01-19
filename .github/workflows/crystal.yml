@@ -21,12 +21,6 @@ jobs:
   build:
     runs-on: ["self-hosted", "Windows"]
     steps:
-    - name: Install Crystal 1.15.0
-      shell: pwsh
-      run: |
-        (New-Object Net.WebClient).DownloadFile("https://github.com/crystal-lang/crystal/releases/download/1.15.0/crystal-1.15.0-windows-x86_64-msvc-unsupported.exe", "$PWD\crystal-1.15.0-windows-x86_64-msvc-unsupported.exe")
-        $code = Start-Process .\crystal-1.15.0-windows-x86_64-msvc-unsupported.exe -Wait -ArgumentList "/VERYSILENT","/SP-","/SUPPRESSMSGBOXES","/LOG=$PWD\OUTPUT.LOG" -Verb RunAs
-        dir $env:LOCALAPPDATA\Programs\Crystal
     - name: crystal version
       shell: pwsh
       run: |
