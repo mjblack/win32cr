@@ -19,11 +19,13 @@ on:
 
 jobs:
   build:
-    runs-on: ["self-hosted", "Windows"]
+    runs-on: windows-2019
     steps:
     - name: crystal version
       shell: pwsh
       run: |
+        (New-Object Net.WebClient).DownloadFile("https://github.com/crystal-lang/crystal/releases/download/1.15.0/crystal-1.15.0-windows-x86_64-msvc-unsupported.exe", "$PWD\crystal-1.15.0-windows-x86_64-msvc-unsupported.exe")
+        $code = Start-Process .\crystal-1.15.0-windows-x86_64-msvc-unsupported.exe -Wait -ArgumentList "/VERYSILENT","/CURRENTUSER","/SP-","/SUPPRESSMSGBOXES","/LOG=$PWD\OUTPUT.LOG" -Verb RunAs
         & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" version
     - uses: actions/checkout@v4
     - name: Create json directory

@@ -6,3 +6,4 @@
 /.idea/
 winmd.log
 /json/
+/shard.lock
