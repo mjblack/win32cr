@@ -19,7 +19,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ["self-hosted", "Windows"]
     steps:
     - name: Install Crystal 1.15.0
       shell: pwsh
@@ -44,10 +44,6 @@ jobs:
       shell: pwsh
       run: |
         & "$env:LOCALAPPDATA\Programs\Crystal\shards.exe" install
-    - name: List bin dir
-      shell: pwsh
-      run: |
-        dir .\bin
     - name: Cleanup src directory
       shell: pwsh
       run: |
@@ -55,9 +51,6 @@ jobs:
     - name: WinMD version
       shell: cmd
       run: |
-        dir
-        dir bin
-        bin\winmd.exe
         bin\winmd.exe --version
     - name: Generate bindings
       shell: pwsh
