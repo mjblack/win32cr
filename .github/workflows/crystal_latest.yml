@@ -2,15 +2,16 @@ name: Crystal Latest CI
 
 on:
   workflow_dispatch:
-    logLevel:
-      description: 'Log level'
-      required: true
-      default: 'warning'
-      type: choice
-      options:
-        - info
-        - warning
-        - debug
+    inputs: 
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
   schedule:
     - cron: "0 0 * * *"
 
@@ -33,11 +34,36 @@ jobs:
         shell: pwsh
         run: |
           & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" version
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Create json directory
+        shell: pwsh
+        run: |
+          mkdir json
+      - uses: actions/checkout@v4
+        with:
+          repository: marlersoft/win32json
+          path: json/win32json
       - name: Install dependencies
         shell: pwsh
         run: |
           & "$env:LOCALAPPDATA\Programs\Crystal\shards.exe" install
+      - name: Cleanup src directory
+        shell: pwsh
+        run: |
+          if (Test-Path -Path .\src\win32cr) { Remove-Item -Path src/win32cr -Force -Recurse }
+      - name: Build WinMD
+        shell: pwsh
+        run: |
+          echo $pwd
+          & .\scripts\build_winmd.ps1
+      - name: WinMD version
+        shell: cmd
+        run: |
+          bin\winmd.exe --version
+      - name: Generate bindings
+        shell: pwsh
+        run: |
+          & .\bin\winmd.exe generate -d json\win32json\api .
       - name: Run tests
         shell: pwsh
         run: |

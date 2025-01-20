@@ -1,9 +1,13 @@
 name: win32cr
-version: 0.3.7
+version: 1.0.0
 
 authors:
   - Matthew J. Black <mjblack@gmail.com>
 
-crystal: 1.13.2
+crystal: ">= 1.15.0"
 
 license: MIT
+
+development_dependencies:
+  winmd:
+    github: mjblack/winmd

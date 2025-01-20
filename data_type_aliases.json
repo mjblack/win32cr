@@ -1,0 +1,14 @@
+{
+    "Char":"UInt16",
+    "Single":"Float32",
+    "Double":"Float64",
+    "SByte":"Int8",
+    "Byte":"UInt8",
+    "Guid":"LibC::GUID",
+    "UIntPtr":"LibC::UIntPtrT",
+    "IntPtr":"LibC::IntPtrT",
+    "Boolean":"Bool",
+    "HANDLE": "LibC::HANDLE",
+    "HWND": "LibC::HANDLE",
+    "HINSTANCE": "LibC::HANDLE"
+}

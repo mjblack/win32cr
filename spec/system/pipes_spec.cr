@@ -1,22 +1,24 @@
 require "../spec_helper"
 require "../../src/win32cr/system/pipes"
+require "log"
 
 MAX_BUF = 4096
 
 module Win32cr::System
   describe "Win32::System::Environment" do
     describe "Pipes" do
-      readSide = Pointer(Void).null
       writeSide = Pointer(Void).null
+      readSide = Pointer(Void).null
       teststr = "test string"
       dwWritten = 0_u32
       dwRead = 0_u32
       chbuf = Pointer(UInt8).malloc(MAX_BUF)
 
       describe "Create Pipes" do
-        result = LibWin32.CreatePipe(pointerof(readSide), pointerof(writeSide), nil, 0)
+        result = Win32cr::System::Pipes::C.CreatePipe(pointerof(readSide), pointerof(writeSide), nil, 0)
 
         it "Pipe create result should be greater than zero" do
+          Log.info { result.to_s }
           result.should be > 0
         end
       end
