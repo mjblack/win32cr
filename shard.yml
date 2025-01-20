@@ -8,6 +8,6 @@ crystal: ">= 1.15.0"
 
 license: MIT
 
-development_dependencies:
+dependencies:
   winmd:
     github: mjblack/winmd
