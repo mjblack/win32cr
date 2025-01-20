@@ -44,6 +44,11 @@ jobs:
       shell: pwsh
       run: |
         if (Test-Path -Path .\src\win32cr) { Remove-Item -Path src/win32cr -Force -Recurse }
+    - name: Build WinMD
+      shell: pwsh
+      run: |
+        echo $pwd
+        & .\scripts\build_winmd.ps1
     - name: WinMD version
       shell: cmd
       run: |
