@@ -14,6 +14,12 @@ dependencies:
     github: mjblack/win32cr
 ```
 
+Build WinMD by executing the script `build.ps1` in the location where the shard `win32cr` is installed.
+
+```
+C:\Projects\SomeCrystalApp\lib\win32cr> & .\build.ps1
+```
+
 ## Usage
 
 For more examples, please see the [examples](https://github.com/mjblack/win32cr/tree/master/examples) directory.
