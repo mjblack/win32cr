@@ -13,9 +13,14 @@ on:
           - warning
           - debug
   push:
-    branches: [ "master" ]
+    branches:
+      - master
+      - 'development/**'
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
+      - 'development/**'
+    types: [opened, reopened, ready_for_review, review_requested]
 
 jobs:
   build:
