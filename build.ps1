@@ -36,12 +36,20 @@ function Run {
     if ($env:WINMD_TRACE) {
         $WINMD_PARAMS = $WINMD_PARAMS + " -t"
     }
-    
-    & .\bin\winmd.exe generate $WINMD_PARAMS json\win32json\api .
+    mkdir src/win32cr
+    Start-Process -Wait -NoNewWindow -FilePath .\bin\winmd.exe -ArgumentList "generate","${WINMD_PARAMS}","json\\win32json\\api","."
+}
+
+function BuildWinMD {
+
+    if (!(Test-Path .\bin\winmd.exe)) {
+        & .\scripts\build_winmd.ps1
+    }
 }
 
 
 PrepSrcDir
 PrepJSON
+BuildWinMD
 Run
 CleanUp
