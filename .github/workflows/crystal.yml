@@ -3,6 +3,11 @@ name: Crystal CI
 on:
   workflow_dispatch:
     inputs:
+      debug:
+        description: 'Debug mode'
+        required: true
+        default: false
+        type: boolean
       logLevel:
         description: 'Log level'
         required: true
@@ -15,16 +20,14 @@ on:
   push:
     branches:
       - master
-      - 'development/**'
   pull_request:
     branches:
       - master
-      - 'development/**'
     types: [opened, reopened, ready_for_review, review_requested]
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-latest
     steps:
     - name: crystal version
       shell: pwsh
@@ -66,3 +69,8 @@ jobs:
       shell: pwsh
       run: |
         & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" spec --error-trace --debug
+    - name: Debug tmate session
+      if: ${{ github.event.inputs.debug == true && failure() }}
+      uses: mxschmitt/action-tmate@v3
+      with:
+        limit-access-to-actor: true

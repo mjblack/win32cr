@@ -2,7 +2,12 @@ name: Crystal Latest CI
 
 on:
   workflow_dispatch:
-    inputs: 
+    inputs:
+      debug:
+        description: 'Debug mode'
+        required: true
+        default: false
+        type: boolean
       logLevel:
         description: 'Log level'
         required: true
@@ -68,3 +73,8 @@ jobs:
         shell: pwsh
         run: |
           & "$env:LOCALAPPDATA\Programs\Crystal\crystal.exe" spec --error-trace --debug
+      - name: Debug tmate session
+        if: ${{ github.event.inputs.debug == true && failure() }}
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
